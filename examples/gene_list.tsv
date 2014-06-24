@@ -1,0 +1,72 @@
+tax_id	Org_name	GeneID	CurrentID	Status	Symbol	Aliases	description	other_designations	map_location	chromosome	genomic_nucleotide_accession.version	start_position_on_the_genomic_accession	end_position_on_the_genomic_accession	orientation	exon_count	OMIM	
+9606	Homo sapiens	10482	0	live			nuclear RNA export factor 1	mRNA export factor TAP|tip associating protein|tip-associated protein|tip-associating protein	11q12-q13	11	NC_000011.10	62792124	62805492	minus	21	602647	
+7227	Drosophila melanogaster	43944	0	live			small bristles	CG1664-PA|locus 1|nuclear export factor 1|sbr-PA|shorter-bristles	9F4-9F5	X	NC_004354.3	10726785	10741125	minus	10		
+10090	Mus musculus	53319	0	live			nuclear RNA export factor 1	Mex 67 homolog|mRNA export factor TAP|modifier of vibrator 1|nuclear RNA export factor 1 homolog|tip associated protein|tip associating protein|tip-associated protein|tip-associating protein	19 5.5 cM	19	NC_000085.6	8757103	8770910	plus	20		
+6239	Caenorhabditis elegans	191736	0	live	nxf-1		Protein NXF-1			V	NC_003283.10	14412606	14415777	minus	12		
+10116	Rattus norvegicus	59087	0	live			nuclear RNA export factor 1	mRNA export factor TAP|nuclear RNA export factor 1 homolog|tip associating protein|tip-associated protein|tip-associating protein	1q43	1	NC_005100.3	231895708	231908901	plus	21		
+7955	Danio rerio	323865	0	live			nuclear RNA export factor 1			21	NC_007132.5	26058499	26071397	minus	21		
+8364	Xenopus (Silurana) tropicalis	734058	0	live			nuclear RNA export factor 1			Un	NW_004668293.1	63289	100659	minus	21		
+9598	Pan troglodytes	451267	0	live	NXF1		nuclear RNA export factor 1			11	NC_006478.3	60709430	60730115	minus	23		
+9913	Bos taurus	512136	0	live			nuclear RNA export factor 1			29	AC_000186.1	41796852	41808165	minus	21		
+9544	Macaca mulatta	718420	0	live	NXF1		nuclear RNA export factor 1			14	NC_007871.1	11278659	11294093	plus	21		
+9615	Canis lupus familiaris	483780	0	live	NXF1		nuclear RNA export factor 1			18	NC_006600.3	53884485	53895163	plus	21		
+9823	Sus scrofa	100628213	0	live	NXF1		nuclear RNA export factor 1			2	NC_010444.3	8315196	8327226	plus	21				
+9483	Callithrix jacchus	100399719	0	live	NXF1		nuclear RNA export factor 1	nuclear RNA export factor 1-like protein		11	NC_013906.1	118487320	118503208	minus	21		
+9685	Felis catus	101092292	0	live	NXF1		nuclear RNA export factor 1			D1	NC_018732.1	107996265	108006780	minus	21				
+9402	Pteropus alecto	102887246	0	live	NXF1		nuclear RNA export factor 1			Un	NW_006435764.1	7215258	7224996	plus	21		
+10181	Heterocephalus glaber	101699957	0	live	Nxf1		nuclear RNA export factor 1			Un	NW_004624926.1	1247940	1268950	minus	21		
+118797	Lipotes vexillifer	103072768	0	live	NXF1		nuclear RNA export factor 1			Un	NW_006789022.1	3282136	3294013	plus	21		
+176946	Python bivittatus	103063999	0	live	NXF1		nuclear RNA export factor 1			Un	NW_006537775.1	18933	35709	plus	21		
+310752	Balaenoptera acutorostrata scammoni	103020946	0	live	NXF1		nuclear RNA export factor 1			Un	NW_006726043.1	1813775	1826688	plus	22		
+9755	Physeter catodon	102977911	0	live	NXF1		nuclear RNA export factor 1			Un	NW_006713829.1	199648	211568	minus	21		
+74533	Panthera tigris altaica	102965633	0	live	NXF1		nuclear RNA export factor 1			Un	NW_006712076.1	3634974	3643911	plus	20		
+8469	Chelonia mydas	102929361	0	live	NXF1		nuclear RNA export factor 1			Un	NW_006687820.1	3057371	3066165	minus	21		
+230844	Peromyscus maniculatus bairdii	102928288	0	live	Nxf1		nuclear RNA export factor 1			Un	NW_006501905.1	310186	324941	plus	21		
+28737	Elephantulus edwardii	102871050	0	live	NXF1		nuclear RNA export factor 1			Un	NW_006400018.1	53344	64391	plus	21		
+185453	Chrysochloris asiatica	102811984	0	live	NXF1		nuclear RNA export factor 1			Un	NW_006408828.1	2713309	2724861	minus	21		
+225400	Myotis davidii	102754287	0	live	NXF1		nuclear RNA export factor 1			Un	NW_006297142.1	1266494	1275389	minus	20		
+9713	Leptonychotes weddellii	102746652	0	live	NXF1		nuclear RNA export factor 1			Un	NW_006383257.1	1631326	1642472	minus	21		
+8496	Alligator mississippiensis	102564521	0	live	NXF1		nuclear RNA export factor 1			Un	NW_006231360.1	181615	188756	plus	21		
+30538	Vicugna pacos	102535701	0	live	NXF1		nuclear RNA export factor 1			Un	NW_005882903.1	421464	432884	plus	21		
+419612	Camelus ferus	102522387	0	live	NXF1		nuclear RNA export factor 1			Un	NW_006210746.1	189863	198451	minus	20		
+246437	Tupaia chinensis	102488446	0	live	NXF1		nuclear RNA export factor 1			Un	NW_006160014.1	577632	595804	plus	21		
+13735	Pelodiscus sinensis	102446109	0	live	NXF1		nuclear RNA export factor 1			Un	NW_005853743.1	321471	334117	plus	21		
+59463	Myotis lucifugus	102432813	0	live	NXF1		nuclear RNA export factor 1			Un	NW_005871779.1	34511	44758	plus	21		
+89462	Bubalus bubalis	102414369	0	live	NXF1		nuclear RNA export factor 1			Un	NW_005785136.1	497401	510081	plus	22		
+38654	Alligator sinensis	102374093	0	live	NXF1		nuclear RNA export factor 1			Un	NW_005842612.1	617042	625217	minus	20		
+7897	Latimeria chalumnae	102357219	0	live	NXF1		nuclear RNA export factor 1			Un	NW_005819042.1	3971	40443	minus	22		
+59538	Pantholops hodgsonii	102328115	0	live	NXF1		nuclear RNA export factor 1			Un	NW_005811253.1	1733168	1744733	minus	21		
+72004	Bos mutus	102273945	0	live	NXF1		nuclear RNA export factor 1			Un	NW_005394947.1	258449	269616	minus	22		
+109478	Myotis brandtii	102256432	0	live	NXF1		nuclear RNA export factor 1			Un	NW_005353800.1	351300	360355	minus	20		
+9925	Capra hircus	102186192	0	live	NXF1		nuclear RNA export factor 1			29	NC_022321.1	39015333	39023173	minus	20			
+34839	Chinchilla lanigera	102006848	0	live	Nxf1		nuclear RNA export factor 1			Un	NW_004955599.1	439746	450834	plus	21		
+79684	Microtus ochrogaster	101998970	0	live	Nxf1		nuclear RNA export factor 1			8	NC_022015.1	42827803	42842050	plus	21		
+43179	Ictidomys tridecemlineatus	101961073	0	live	Nxf1		nuclear RNA export factor 1			Un	NW_004936581.1	488718	501318	plus	21		
+8479	Chrysemys picta	101933834	0	live	NXF1		nuclear RNA export factor 1			Un	NW_004848756.1	2188072	2197709	minus	21		
+10036	Mesocricetus auratus	101827368	0	live	Nxf1		nuclear RNA export factor 1			Un	NW_004801604.1	49174369	49188939	minus	22		
+9669	Mustela putorius furo	101684398	0	live	NXF1		nuclear RNA export factor 1			Un	NW_004569294.1	2701715	2712209	plus	21		
+9371	Echinops telfairi	101652766	0	live	NXF1		nuclear RNA export factor 1			Un	NW_004558777.1	950078	958533	minus	21		
+143302	Condylura cristata	101637380	0	live	NXF1		nuclear RNA export factor 1			Un	NW_004567116.1	3483448	3493194	plus	21		
+51337	Jaculus jaculus	101617012	0	live	Nxf1		nuclear RNA export factor 1			Un	NW_004504332.1	559364	580527	minus	21		
+10160	Octodon degus	101590322	0	live	Nxf1		nuclear RNA export factor 1			Un	NW_004524855.1	363308	393590	plus	22		
+42254	Sorex araneus	101540443	0	live	NXF1		nuclear RNA export factor 1			Un	NW_004546051.1	647380	658198	minus	21		
+9978	Ochotona princeps	101527757	0	live	NXF1		nuclear RNA export factor 1			Un	NW_004535521.1	4552204	4563038	plus	21		
+9361	Dasypus novemcinctus	101437617	0	live	NXF1		nuclear RNA export factor 1			Un	NW_004463163.1	286901	301807	plus	21		
+73337	Ceratotherium simum simum	101402633	0	live	NXF1		nuclear RNA export factor 1			Un	NW_004454224.1	7300980	7321687	minus	21		
+9708	Odobenus rosmarus divergens	101378805	0	live	NXF1		nuclear RNA export factor 1			Un	NW_004451047.1	331242	341598	minus	21		
+127582	Trichechus manatus latirostris	101362056	0	live	NXF1		nuclear RNA export factor 1			Un	NW_004444049.1	8251593	8263985	plus	21		
+9739	Tursiops truncatus	101330122	0	live	NXF1		nuclear RNA export factor 1			Un	NW_004199738.1	162352	174827	minus	21		
+9733	Orcinus orca	101284211	0	live	NXF1		nuclear RNA export factor 1			Un	NW_004438421.1	29219661	29231562	minus	21		
+9593	Gorilla gorilla	101128539	0	live	NXF1		nuclear RNA export factor 1			11	NC_018435.1	59574292	59594545	minus	23		
+9940	Ovis aries	101115327	0	live	NXF1		nuclear RNA export factor 1			21	NC_019478.1	40491487	40503073	minus	21		
+27679	Saimiri boliviensis	101037624	0	live	NXF1		nuclear RNA export factor 1			Un	NW_003943604.1	56608184	56624501	minus	22		
+9555	Papio anubis	101004738	0	live	NXF1		nuclear RNA export factor 1			14	NC_018165.1	10922903	10937403	plus	22		
+9597	Pan paniscus	100995719	0	live	NXF1		nuclear RNA export factor 1			Un	NW_003870591.1	1599307	1612722	minus	22		
+30611	Otolemur garnettii	100943914	0	live	NXF1		nuclear RNA export factor 1			Un	NW_003852535.1	3554708	3572498	plus	20		
+9305	Sarcophilus harrisii	100918153	0	live	NXF1		nuclear RNA export factor 1			6	NW_003846916.1	228054	243251	minus	21		
+10141	Cavia porcellus	100728879	0	live	Nxf1		nuclear RNA export factor 1			Un	NT_176375.1	15013521	15023892	plus	21		
+8128	Oreochromis niloticus	100704151	0	live	nxf1		nuclear RNA export factor 1			LG2	NC_022200.1	14408641	14423100	minus	25		
+9785	Loxodonta africana	100675234	0	live	NXF1		nuclear RNA export factor 1			Un	NW_003573491.1	6717374	6727950	plus	21		
+61853	Nomascus leucogenys	100582874	0	live	NXF1		nuclear RNA export factor 1			4	NC_019819.1	83240439	83257172	minus	22			
+9796	Equus caballus	100049009	0	live	NXF1		nuclear RNA export factor 1	Nuclear RNA export factor 1-like protein		12	NC_009155.2	23023212	23033278	minus	21		
+13616	Monodelphis domestica	100010859	0	live	NXF1		nuclear RNA export factor 1			5	NC_008805.1	300723017	300736645	minus	21			
