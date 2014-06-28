@@ -1,0 +1,8 @@
+gene_name,locus_tag,gene_id,start,end,strand,feature_id,uniprotdb,description
+APB,se01,NC_00897,56,894,plus,FR55434,UD9083,"tratrasd"
+APB1,se09,NC_0045897,156,1894,plus,FRE55434,UD908563,"fadsftratrasd"
+APB2,se014,NC_0086697,546,3894,minus,AAFR55434,UD9081233,"faftfratrasd"
+APB3,se0155,NC_008dr97,596,8494,plus,GGKKFR55434,UD9088793,"fawsftratrasd"
+APB4,se011,NC_0089fsd7,756,8954,minus,FR5L5434,UD90841243,"tratrasedrsd"
+APB5,se021,NC_00as897,596,8946,plus,FR55434,UD908133,"tratrafsadfsd"
+APB6,se051,NC_008dfd97,1156,13894,plus,FR5DXC5434,UD4149083,"trafasfatrasd"

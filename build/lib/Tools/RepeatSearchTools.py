@@ -77,15 +77,24 @@ def rmout2gff3(rmoutfile, outfile, RepeatMaskerUtils_dir=""):
 
 def windowmasker_search(windowmasker_dir):
     winmask_dir = check_path(windowmasker_dir)
+    #TODO: write this function
     pass
 
 if __name__ == "__main__":
-    workdir = "/home/mahajrod/genetics/desaminases/data/LAN210_v0.5m/masking"
-    """
+    reference_name = "LAN210_v0.3m"
+    #reference_name = "LAN210_v0.4m"
+    #reference_name = "LAN210_v0.5m"
+    reference_file = reference_name + ".fasta"
+
+
+    workdir = "/home/mahajrod/genetics/desaminases/data/%s/masking" % reference_name
+    os.system("mkdir -p %s" % workdir)
     os.chdir(workdir)
+
+    os.system("ln -fs ../%s %s" % (reference_file, reference_file))
     os.system("mkdir -p repeatmodeler")
     os.chdir("repeatmodeler")
-    RepeatModeler_search("../LAN210_v0.5m.fasta", "LAN210_v0.5m",
+    RepeatModeler_search("../%s" % reference_file, reference_name,
                          RepeatModeler_dir="/home/mahajrod/Repositories/genetic/NGS_tools/RepeatModeler")
     os.chdir(workdir)
     os.system("mkdir -p custom_lib")
@@ -93,13 +102,18 @@ if __name__ == "__main__":
     extract_repbase("fungi", output_file="custom_lib/RepBase_fungi.fasta",
                     RepeatMaskerUtils_dir="/home/mahajrod/Repositories/genetic/NGS_tools/RepeatMasker/util")
     """
-    #non continuos pipeline because of repeatmodeler - it creates diretory with data in name
+    #noncontinuos pipeline because of repeatmodeler - it creates diretory with data in name
+    #put output of repeatmodeler (consensi.fa.classified) to custom_lib dir and combine it with repbase into custom_lib.fasta
     os.chdir(workdir)
     os.system("mkdir -p repeatmasker")
     os.chdir("repeatmasker")
-    os.system("ln -fs ../LAN210_v0.5m.fasta LAN210_v0.5m.fasta")
+    os.system("ln -fs ../%s %s" % (reference_file, reference_file))
     os.system("ln -fs ../custom_lib/custom_lib.fasta custom_lib.fasta")
-    #RepeatMasker_search("LAN210_v0.5m.fasta", "fungi", custom_lib_path="custom_lib.fasta")
-    rmout2gff3("LAN210_v0.5m.fasta.out", "LAN210_v0.5m.fasta.out.gff3",
-               RepeatMaskerUtils_dir="/home/mahajrod/Repositories/genetic/NGS_tools/RepeatMasker/util")
-    gff32gtf("LAN210_v0.5m.fasta.out.gff3", "LAN210_v0.5m.fasta.out.gtf")
+    RepeatMasker_search(reference_file, "fungi", custom_lib_path="custom_lib.fasta")
+
+    os.chdir(workdir)
+    os.system("mkdir -p TRF")
+    os.chdir("TRF")
+    os.system("ln -fs ../repeatmasker/%s.masked %s_masked_repeatmasker.fasta" % (reference_file, reference_name))
+    TRF_search("%s_masked_repeatmasker.fasta" % reference_name)
+    """

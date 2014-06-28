@@ -1,0 +1,2 @@
+
+SELECT gene_list.gene_name, gene_list.locus_tag, gene_list.gene_id, gene_list.start, gene_list.end, gene_list.strand, tuberculist.protein_function, gene_func_cat.function_name FROM gene_list, tuberculist,gene_func_cat WHERE gene_list.locus_tag=tuberculist.locus_tag AND tuberculist.func_cat=gene_func_cat.function_id;

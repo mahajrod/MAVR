@@ -29,5 +29,6 @@ SeqAnalysis/SeqAnalysis.py
 SeqAnalysis/__init__.py
 Tools/BLAST.py
 Tools/GlimerHMM.py
+Tools/Picard.py
 Tools/RepeatSearchTools.py
 Tools/__init__.py

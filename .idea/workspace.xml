@@ -12,10 +12,12 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/MAVR$Picard.coverage" NAME="Picard Coverage Results" MODIFIED="1403733673958" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Tools" />
+    <SUITE FILE_PATH="coverage/MAVR$testMySQL.coverage" NAME="testMySQL Coverage Results" MODIFIED="1403703783137" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SQL/MySQL" />
     <SUITE FILE_PATH="coverage/MAVR$RepeatSearch.coverage" NAME="RepeatSearch Coverage Results" MODIFIED="1398344031335" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Pipelines" />
     <SUITE FILE_PATH="coverage/MAVR$Mutation.coverage" NAME="Mutation Coverage Results" MODIFIED="1396792090579" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/MutAnalysis" />
-    <SUITE FILE_PATH="coverage/MAVR$SNPCall.coverage" NAME="SNPCall Coverage Results" MODIFIED="1403617530311" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Pipelines" />
-    <SUITE FILE_PATH="coverage/MAVR$RepeatSearchTools.coverage" NAME="RepeatSearchTools Coverage Results" MODIFIED="1403608254037" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Tools" />
+    <SUITE FILE_PATH="coverage/MAVR$SNPCall.coverage" NAME="SNPCall Coverage Results" MODIFIED="1403863751177" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Pipelines" />
+    <SUITE FILE_PATH="coverage/MAVR$RepeatSearchTools.coverage" NAME="RepeatSearchTools Coverage Results" MODIFIED="1403662437354" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Tools" />
     <SUITE FILE_PATH="coverage/MAVR$GlimerHMM.coverage" NAME="GlimerHMM Coverage Results" MODIFIED="1403317026814" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Tools" />
     <SUITE FILE_PATH="coverage/MAVR$test.coverage" NAME="test Coverage Results" MODIFIED="1397153348162" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MAVR$ParseR.coverage" NAME="ParseR Coverage Results" MODIFIED="1399908315739" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Parse" />
@@ -43,45 +45,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SeqAnalysis.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SeqAnalysis/SeqAnalysis.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="121" column="21" selection-start="4808" selection-end="4808" vertical-scroll-proportion="0.0" vertical-offset="16202" max-vertical-offset="17064">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GlimerHMM.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/GlimerHMM.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="0" selection-start="353" selection-end="353" vertical-scroll-proportion="0.0" vertical-offset="596" max-vertical-offset="1260">
-              <folding>
-                <element signature="e#24#37#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="RepeatSearch.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Pipelines/RepeatSearch.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="0" selection-start="54" selection-end="54" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="468">
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RepeatSearchTools.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/RepeatSearchTools.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="102" column="4" selection-start="4424" selection-end="4424" vertical-scroll-proportion="-18.925926" vertical-offset="1325" max-vertical-offset="1980">
-              <folding>
-                <element signature="e#24#33#0" expanded="true" />
-                <marker date="1403608156516" expanded="true" signature="3107:3246" placeholder="..." />
-              </folding>
+            <state line="3" column="0" selection-start="54" selection-end="54" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -89,7 +57,7 @@
       <file leaf-file-name="SNPCall.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Pipelines/SNPCall.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="111" selection-start="1347" selection-end="1347" vertical-scroll-proportion="-2.5210843" vertical-offset="2214" max-vertical-offset="4068">
+            <state line="189" column="0" selection-start="8238" selection-end="8238" vertical-scroll-proportion="-1.6933334" vertical-offset="4545" max-vertical-offset="6408">
               <folding>
                 <element signature="e#21#30#0" expanded="true" />
               </folding>
@@ -97,23 +65,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ParseGVF.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Parse/ParseGVF.py">
+      <file leaf-file-name="GenePrediction.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Pipelines/GenePrediction.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="71" selection-start="862" selection-end="863" vertical-scroll-proportion="-12.0" vertical-offset="0" max-vertical-offset="4482">
-              <folding />
+            <state line="16" column="0" selection-start="507" selection-end="507" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1638">
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Converters.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Converters/Converters.py">
+      <file leaf-file-name="Picard.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tools/Picard.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="107" column="10" selection-start="3467" selection-end="3470" vertical-scroll-proportion="-15.592592" vertical-offset="1505" max-vertical-offset="2142">
+            <state line="22" column="39" selection-start="953" selection-end="1036" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="522">
               <folding>
-                <element signature="e#23#41#0" expanded="true" />
-                <marker date="1403607577569" expanded="true" signature="2124:2299" placeholder="..." />
-                <marker date="1403607577569" expanded="true" signature="2340:2405" placeholder="..." />
+                <element signature="e#24#33#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -122,23 +90,8 @@
       <file leaf-file-name="General.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/General/General.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="144" column="12" selection-start="5740" selection-end="5750" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="504">
-              <folding>
-                <element signature="e#143#939#0" expanded="false" />
-                <element signature="e#973#5733#0" expanded="false" />
-                <marker date="1403598016299" expanded="true" signature="5766:5941" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BLAST.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/BLAST.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="26" selection-start="651" selection-end="651" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="522">
-              <folding>
-                <marker date="1403596911175" expanded="true" signature="583:623" placeholder="..." />
-              </folding>
+            <state line="16" column="54" selection-start="297" selection-end="761" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2808">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -153,30 +106,29 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/MutAnalysis/Mutation.py" />
-        <option value="$PROJECT_DIR$/Graphics/Plots.py" />
         <option value="$PROJECT_DIR$/Pipelines/Phylogeny.py" />
         <option value="$PROJECT_DIR$/Parse/ParseR.py" />
         <option value="$PROJECT_DIR$/examples/distances.py" />
         <option value="$PROJECT_DIR$/SeqAnalysis/SeqAnalysis.py" />
         <option value="$PROJECT_DIR$/examples/distances_new.py" />
         <option value="$PROJECT_DIR$/Parse/ParseGVF.py" />
-        <option value="$PROJECT_DIR$/Pipelines/GenePrediction.py" />
         <option value="$PROJECT_DIR$/Tools/GlimerHMM.py" />
         <option value="$PROJECT_DIR$/Tools/BLAST.py" />
         <option value="$PROJECT_DIR$/Pipelines/RepeatSearch.py" />
         <option value="$PROJECT_DIR$/General/General.py" />
         <option value="$PROJECT_DIR$/Converters/Converters.py" />
         <option value="$PROJECT_DIR$/Tools/RepeatSearchTools.py" />
+        <option value="$PROJECT_DIR$/SQL/MySQL/testMySQL.py" />
+        <option value="$PROJECT_DIR$/Tools/Picard.py" />
+        <option value="$PROJECT_DIR$/Pipelines/GenePrediction.py" />
         <option value="$PROJECT_DIR$/Pipelines/SNPCall.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1" />
-    <option name="y" value="26" />
-    <option name="width" value="1922" />
-    <option name="height" value="1058" />
+    <option name="y" value="27" />
+    <option name="width" value="1920" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -275,7 +227,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Pipelines" />
+              <option name="myItemId" value="SQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MySQL" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -289,7 +245,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Parse" />
+              <option name="myItemId" value="Pipelines" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -326,11 +282,15 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="FullScreen" value="false" />
+    <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -347,44 +307,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.SNPCall">
-    <configuration default="false" name="GenePrediction" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="/usr/bin/python2" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Pipelines" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="MAVR" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Pipelines/GenePrediction.py" />
-      <option name="PARAMETERS" value="" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="BLAST" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="/usr/bin/python2" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Tools" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="MAVR" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Tools/BLAST.py" />
-      <option name="PARAMETERS" value="" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
     <configuration default="false" name="GlimerHMM" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -437,6 +359,46 @@
       <module name="MAVR" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Pipelines/SNPCall.py" />
+      <option name="PARAMETERS" value="" />
+      <RunnerSettings RunnerId="PyDebugRunner" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PyDebugRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="testMySQL" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SQL/MySQL" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MAVR" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SQL/MySQL/testMySQL.py" />
+      <option name="PARAMETERS" value="--host bioinfinst07.db.8193575.hostedresource.com -u bioinfinst07 -p Bioinfinst123! -d bioinfinst07" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Picard" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python2" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Tools" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MAVR" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Tools/Picard.py" />
       <option name="PARAMETERS" value="" />
       <RunnerSettings RunnerId="PythonRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
@@ -615,19 +577,19 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Python.ParseGVF" />
-      <item index="1" class="java.lang.String" itemvalue="Python.GenePrediction" />
-      <item index="2" class="java.lang.String" itemvalue="Python.BLAST" />
-      <item index="3" class="java.lang.String" itemvalue="Python.GlimerHMM" />
-      <item index="4" class="java.lang.String" itemvalue="Python.RepeatSearchTools" />
-      <item index="5" class="java.lang.String" itemvalue="Python.SNPCall" />
+      <item index="1" class="java.lang.String" itemvalue="Python.GlimerHMM" />
+      <item index="2" class="java.lang.String" itemvalue="Python.RepeatSearchTools" />
+      <item index="3" class="java.lang.String" itemvalue="Python.SNPCall" />
+      <item index="4" class="java.lang.String" itemvalue="Python.testMySQL" />
+      <item index="5" class="java.lang.String" itemvalue="Python.Picard" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.SNPCall" />
-        <item index="1" class="java.lang.String" itemvalue="Python.RepeatSearchTools" />
-        <item index="2" class="java.lang.String" itemvalue="Python.GlimerHMM" />
-        <item index="3" class="java.lang.String" itemvalue="Python.BLAST" />
-        <item index="4" class="java.lang.String" itemvalue="Python.GenePrediction" />
+        <item index="1" class="java.lang.String" itemvalue="Python.Picard" />
+        <item index="2" class="java.lang.String" itemvalue="Python.testMySQL" />
+        <item index="3" class="java.lang.String" itemvalue="Python.RepeatSearchTools" />
+        <item index="4" class="java.lang.String" itemvalue="Python.GlimerHMM" />
       </list>
     </recent_temporary>
   </component>
@@ -678,19 +640,19 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="26" width="1922" height="1058" extended-state="6" />
-    <editor active="false" />
+    <frame x="0" y="27" width="1920" height="1056" extended-state="1" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.088495575" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32896176" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973261" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2099359" sideWeight="0.7836065" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3989011" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14491978" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39868566" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32896176" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21639344" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21467689" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -728,128 +690,102 @@
           <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="16" />
+      <option name="time" value="21" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Parse/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="857">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parse/ParseVCF.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="10" selection-start="277" selection-end="279" vertical-scroll-proportion="0.0" vertical-offset="432" max-vertical-offset="1098">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MutAnalysis/Mutation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="505" column="77" selection-start="20860" selection-end="20860" vertical-scroll-proportion="0.0" vertical-offset="9218" max-vertical-offset="18900">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Pipelines/GenePrediction.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="41" selection-start="724" selection-end="734" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1530">
-          <folding />
-        </state>
+        <state line="505" column="77" selection-start="20860" selection-end="20860" vertical-scroll-proportion="0.0" vertical-offset="9218" max-vertical-offset="18900" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/distances_new.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="105" column="16" selection-start="3351" selection-end="3385" vertical-scroll-proportion="0.0" vertical-offset="1830" max-vertical-offset="2502">
-          <folding />
-        </state>
+        <state line="105" column="16" selection-start="3351" selection-end="3385" vertical-scroll-proportion="0.0" vertical-offset="1830" max-vertical-offset="2502" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Pipelines/Phylogeny.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="53" selection-start="895" selection-end="895" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2844">
-          <folding />
-        </state>
+        <state line="20" column="53" selection-start="895" selection-end="895" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2844" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SeqAnalysis/SeqAnalysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="121" column="21" selection-start="4808" selection-end="4808" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="17064">
+        <state line="121" column="21" selection-start="4808" selection-end="4808" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="17064" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/GlimerHMM.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="0" selection-start="353" selection-end="353" vertical-scroll-proportion="0.0" vertical-offset="128" max-vertical-offset="1260" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Converters/Converters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="107" column="10" selection-start="3467" selection-end="3470" vertical-scroll-proportion="0.0" vertical-offset="1505" max-vertical-offset="2142">
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/SQL/MySQL/testMySQL.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="0" selection-start="220" selection-end="220" vertical-scroll-proportion="0.22119816" vertical-offset="0" max-vertical-offset="1872" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/RepeatSearchTools.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="79" column="30" selection-start="3369" selection-end="3369" vertical-scroll-proportion="0.0" vertical-offset="36" max-vertical-offset="2232" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Parse/ParseGVF.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="71" selection-start="862" selection-end="863" vertical-scroll-proportion="0.0" vertical-offset="414" max-vertical-offset="4572" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/BLAST.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="26" selection-start="651" selection-end="651" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="522">
-          <folding>
-            <marker date="1403596911175" expanded="true" signature="583:623" placeholder="..." />
-          </folding>
+        <state line="19" column="26" selection-start="651" selection-end="651" vertical-scroll-proportion="0.39675173" vertical-offset="0" max-vertical-offset="862" />
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python2.7/site-packages/MySQLdb/connections.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="0" selection-start="1083" selection-end="1083" vertical-scroll-proportion="-0.101580136" vertical-offset="630" max-vertical-offset="6336" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/General/General.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="54" selection-start="297" selection-end="761" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Pipelines/RepeatSearch.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="0" selection-start="54" selection-end="54" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="468">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Picard.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="39" selection-start="953" selection-end="1036" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="522">
+          <folding>
+            <element signature="e#24#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pipelines/GenePrediction.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="0" selection-start="507" selection-end="507" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1638">
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/General/General.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="144" column="12" selection-start="5740" selection-end="5750" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="504">
-          <folding>
-            <element signature="e#143#939#0" expanded="false" />
-            <element signature="e#973#5733#0" expanded="false" />
-            <marker date="1403598016299" expanded="true" signature="5766:5941" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/RepeatSearchTools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="4" selection-start="4424" selection-end="4424" vertical-scroll-proportion="-18.925926" vertical-offset="1325" max-vertical-offset="1980">
-          <folding>
-            <element signature="e#24#33#0" expanded="true" />
-            <marker date="1403608156516" expanded="true" signature="3107:3246" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/GlimerHMM.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="353" selection-end="353" vertical-scroll-proportion="0.0" vertical-offset="128" max-vertical-offset="1260">
-          <folding>
-            <element signature="e#24#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parse/ParseGVF.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="71" selection-start="862" selection-end="863" vertical-scroll-proportion="-12.0" vertical-offset="0" max-vertical-offset="4482">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Converters/Converters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="107" column="10" selection-start="3467" selection-end="3470" vertical-scroll-proportion="-15.592592" vertical-offset="1505" max-vertical-offset="2142">
-          <folding>
-            <element signature="e#23#41#0" expanded="true" />
-            <marker date="1403607577569" expanded="true" signature="2124:2299" placeholder="..." />
-            <marker date="1403607577569" expanded="true" signature="2340:2405" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Pipelines/SNPCall.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="111" selection-start="1347" selection-end="1347" vertical-scroll-proportion="-2.5210843" vertical-offset="2214" max-vertical-offset="4068">
+        <state line="189" column="0" selection-start="8238" selection-end="8238" vertical-scroll-proportion="-1.6933334" vertical-offset="4545" max-vertical-offset="6408">
           <folding>
             <element signature="e#21#30#0" expanded="true" />
           </folding>

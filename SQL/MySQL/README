@@ -1,0 +1,9 @@
+example of usage
+./testMySQL.py --host bioinfinst07.db.8193575.hostedresource.com -u bioinfinst07 -p Bioinfinst123! -d bioinfinst07
+
+Files:
+gene_func_cat.csv
+gene_list.csv
+tuberculist.csv
+
+should be in same directory with script

@@ -2,6 +2,9 @@
 import os
 import collections
 from Bio import SeqIO
+from General.General import check_path
+from Tools.Picard import add_header2bam
+from MutAnalysis.Mutation import *
 
 
 def get_chromosomes_bed(reference, reference_index, mitochondrial_region_name="mt",
@@ -167,6 +170,57 @@ def snp_call(alignment,
               % (sample_name, sample_name, snp_quality))
 
 
+def snp_call_GATK(alignment,
+                 sample_name,
+                 reference_file,
+                 known_sites_vcf,
+                 stand_emit_conf=40,
+                 stand_call_conf=100,
+                 QD=2.0,
+                 FS=60.0,
+                 MQ=40.0,
+                 HaplotypeScore=13.0,
+                 MappingQualityRankSum=-12.5,
+                 ReadPosRankSum=-8.0,
+                 GATK_dir="",
+                 num_of_threads=5):
+    #default filter expression
+    #"QD < 2.0 || FS > 60.0 || MQ < 40.0 || HaplotypeScore > 13.0 || MappingQualityRankSum < -12.5 || ReadPosRankSum < -8.0"
+    gatk_dir = check_path(GATK_dir)
+
+    #Analyze patterns of covariation in the sequence dataset
+    os.system("java -jar %sGenomeAnalysisTK.jar -nct %i  -T BaseRecalibrator -R %s -I %s -knownSites %s -o %s_recal_data.table"
+              % (gatk_dir, num_of_threads, reference_file, alignment, known_sites_vcf, sample_name))
+    #Do a second pass to analyze covariation remaining after recalibration
+    os.system("java -jar %sGenomeAnalysisTK.jar -nct %i  -T BaseRecalibrator -R %s -I %s -knownSites %s  -BQSR %s_recal_data.table -o %s_post_recal_data.table"
+              % (gatk_dir, num_of_threads, reference_file, alignment, known_sites_vcf, sample_name, sample_name))
+
+    #Generate before/after plots
+    #os.system("java -jar %sGenomeAnalysisTK.jar -T AnalyzeCovariates -R %s -before %s_recal_data.table -after %s_post_recal_data.table -plots %s_recalibration_plots.pdf"
+    #          % (gatk_dir, reference_file, sample_name, sample_name, sample_name))
+
+    #Apply the recalibration to your sequence data
+    os.system("java -jar %sGenomeAnalysisTK.jar -nct %i -T PrintReads -R %s -I %s -BQSR %s_recal_data.table -o %s_recal_reads.bam"
+              % (gatk_dir, num_of_threads, reference_file, alignment, sample_name, sample_name))
+    #SNP call
+    os.system(" java -jar %sGenomeAnalysisTK.jar -nt %i -l INFO -R %s -T UnifiedGenotyper -I %s_recal_reads.bam -stand_call_conf %i -stand_emit_conf %i  -o %s_GATK_raw.vcf --output_mode EMIT_VARIANTS_ONLY"
+              % (gatk_dir, num_of_threads, reference_file, sample_name, stand_call_conf, stand_emit_conf, sample_name))
+    #extract SNP
+    os.system("java -jar %sGenomeAnalysisTK.jar -T SelectVariants -R %s -V %s_GATK_raw.vcf -selectType SNP -o %s_GATK_raw_no_indel.vcf"
+              % (gatk_dir, reference_file, sample_name,  sample_name))
+
+    #filtering
+    os.system("java -jar %sGenomeAnalysisTK.jar -T VariantFiltration -R %s -V %s_GATK_raw_no_indel.vcf --filterExpression 'QD < %f || FS > %f || MQ < %f || HaplotypeScore > %f || MappingQualityRankSum < %f || ReadPosRankSum < %f' --filterName 'ambigious_snp' -o %s_GATK_filtered_snps.vcf "
+             % (gatk_dir, reference_file, sample_name, QD, FS, MQ, HaplotypeScore, MappingQualityRankSum, ReadPosRankSum, sample_name))
+    os.system("vcftools --vcf %s_GATK_filtered_snps.vcf --remove-filtered-all --out %s_GATK_best_snps.vcf --recode --recode-INFO-all"
+              % (sample_name, sample_name ))
+
+    """
+    os.system("java -jar %sGenomeAnalysisTK.jar -nt %i -T HaplotypeCaller -R %s -I recal_reads.bam --genotyping_mode DISCOVERY --min_base_quality_score %i -stand_emit_conf %i -stand_call_conf %i -o %s"
+              % (gatk_dir, num_of_threads, reference_file, min_base_quality_score, stand_emit_conf, stand_call_conf, raw_vcf_outfile))
+    """
+
+
 def snp_call_pipeline(bowtie2_index,
                       sample_name,
                       min_length,
@@ -211,11 +265,86 @@ def snp_call_pipeline(bowtie2_index,
 
 
 if __name__ == "__main__":
-    sample_name = "210-L1"
-    workdir = "/run/media/mahajrod/Data/data/LAN210/all/%s/trimmed" % sample_name
-    os.chdir(workdir)
+    samples_list =      [
+                        "210-AID_Can1", #
+                        "210-AID_Can2",    #
+                        "210-Can1",  #
+                        "210-Can2",   #
+                        "210-FOA1",   #
+                        "210-FOA2",
+                        "210-Glu-Can2",    #1
+                        "210-Glu-FOA2",    #
+                        "210-Glu-FOA3",    #
+                        "210-L1",   #
+                        "210-L2",    #
+                        "210-L3",   #
+                        "210-L4",   #
+                        "210-L5",  #
+                        "210-L6",   #
+                        "Sample_1",
+                        "Sample_2",
+                        "Sample_3",
+                        "Sample_4",
+                        "Sample_5",
+                        "Sample_6",
+                        "Sample_7",
+                        "Sample_8",
+                        "Sample_9",
+                        "Sample_10",
+                        "Sample_11",
+                        "Sample_12",
+                        "Sample_13",
+                        "Sample_14",
+                        "Sample_15",
+                        "Sample_16",
+                        "Sample_17",
+                        "Sample_18",
+                        "Sample_19",
+                        "Sample_20",
+                        ]
     reference = "/home/mahajrod/genetics/desaminases/data/LAN210_v0.6m/LAN210_v0.6m.fasta"
     reference_index = "/home/mahajrod/genetics/desaminases/data/LAN210_v0.6m/LAN210_v0.6m.idx"
-    get_chromosomes_bed(reference, reference_index, mitochondrial_region_name="mt",
-                        chrom_out_file="chromosomes.bed", mito_out_file="mt.bed", reference_filetype="fasta")
-    alignment_sorting_and_filtering(sample_name, "chromosomes.bed", "mt.bed")
+    known_sites_vcf = "/run/media/mahajrod/Data/data/LAN210/fastq/210/check/reference_filtered.recode.vcf"
+    run_name = "GATK"
+    run_dir = "/run/media/mahajrod/Data/data/LAN210/all"
+    """
+    for sample_name in samples_list:
+        workdir = "/run/media/mahajrod/Data/data/LAN210/all/%s/trimmed/new_alignment" % sample_name
+        os.chdir(workdir)
+        print("\nHandling %s...\n" % sample_name)
+
+        add_header2bam("%s_trimmed_sorted_rm_pcr_chrom.bam" % sample_name,
+                       "%s_trimmed_sorted_rm_pcr_chrom_with_header.bam" % sample_name,
+                       sample_name,
+                       sample_name,
+                       "Illumina",
+                       sample_name,
+                       sample_name,
+                       PICARD_dir="/home/mahajrod/Repositories/genetic/NGS_tools/picard-tools-1.115/picard-tools-1.115")
+
+        snp_call_GATK("%s_trimmed_sorted_rm_pcr_chrom_with_header.bam" % sample_name,
+                      sample_name,
+                      reference,
+                      known_sites_vcf,
+                      stand_call_conf=100,
+                      GATK_dir="/home/mahajrod/Repositories/genetic/NGS_tools/GenomeAnalysisTK-3.1-1")
+
+        os.system("vcftools --vcf %s_GATK_filtered_snps.vcf --remove-filtered-all --out %s_GATK_best_snps --recode --recode-INFO-all"
+                  % (sample_name, sample_name ))
+        vcf_file = "/run/media/mahajrod/Data/data/LAN210/all/%s/trimmed/new_alignment/%s_GATK_best_snps.recode.vcf" \
+                   % (sample_name, sample_name)
+
+        mutations_vcf = MutationsVcf(vcf_file, from_file=True)
+        filtered_mutations, filtered_out_mutations = mutations_vcf.filter_by_reference_and_alt([("G", ["A"]), ("C", ["T"])])
+        filtered_mutations.write(vcf_file[:-4] + "_filtered.vcf")
+        filtered_out_mutations.write(vcf_file[:-4] + "_filtered_out.vcf")
+    """
+    os.chdir(run_dir)
+    os.system("mkdir -p %s_vcf" % run_name)
+    os.chdir("%s_vcf" % run_name)
+    sub_folder_list = ["raw", "filtered_snps", "best_snps", "best_snp_only_desaminase", "best_snp_nondesaminase"]
+    suffix_list = ["raw.vcf", "filtered_snps.vcf", "best_snps.recode.vcf", "best_snps.recode_filtered.vcf",	"best_snps.recode_filtered_out.vcf"]
+    os.system("mkdir -p %s" % (" ".join(sub_folder_list)))
+    os.chdir(run_dir)
+    for subfolder, suffix in zip(sub_folder_list, suffix_list):
+        os.system("cp */trimmed/new_alignment/*_GATK_%s %s_vcf/%s" % (suffix, run_name, subfolder))

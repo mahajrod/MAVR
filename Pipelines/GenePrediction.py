@@ -4,6 +4,8 @@ from multiprocessing import Pool
 from Tools.BLAST import *
 
 #TODO: write and rewrite!!!
+
+
 def transfer_annotations_splign(work_dir,
                                 cdna_file,
                                 genome_file,
@@ -42,6 +44,7 @@ def transfer_annotations_prosplign(work_dir,
     os.system("tblastn -query %s -db %s -outfmt 6 | sort -k 2,2 -k 1,1 > tblastn.hit")
     os.system("compart -f blast.hit -add 10000 > comp")
     #prosplign -two_stages -pfa p.fa -nfa n.fa -f comp -inf pro.inf -out pro.out
+
 
 def arg_splitter(args):
     return transfer_annotations_splign(*args)
