@@ -41,6 +41,7 @@ class RecordVCF():
 
 
 class CollectionVCF():
+    #TODO: rewrite metadata as class
     def __add_record(self, line):
         line_list = line.strip().split("\t")
         #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	Sample_1
@@ -99,13 +100,14 @@ class CollectionVCF():
             if string[i] == ",":
                 index_list.append(i)
             i += 1
-        index_list.append(len(string) - 1)
+        index_list.append(len(string))
         return [string[index_list[j] + 1: index_list[j + 1]] for j in range(0, len(index_list) - 1)]
 
     def __add_metadata(self, line):
         key, value = self.__split_by_equal_sign(line[2:].strip())
         if value[0] == "<" and value[-1] == ">":
             #checking is value a list or no
+            #print(value)
             value = self.__split_by_comma_sign(value[1:-1])
             #print(value)
             #parse in suppose that first parameter in value list is ID
@@ -114,8 +116,9 @@ class CollectionVCF():
             value = dict(self.__split_by_equal_sign(entry) for entry in value[1:])
             #print(value_id, value)
             if key not in self.metadata:
-                self.metadata[key] = {}
+                self.metadata[key] = OrderedDict({})
             self.metadata[key][value_id] = value
+
         else:
             self.metadata[key] = value
 
@@ -137,8 +140,26 @@ class CollectionVCF():
             self.metadata = metadata
             self.records = record_list
 
+    def metadata2str(self):
+        metadata_string = ""
+        for key in self.metadata:
+            if not isinstance(self.metadata[key], dict):
+                metadata_string += "##%s=%s\n" % (key, self.metadata[key])
+            else:
+                prefix = "##%s=<" % key
+                suffix = ">\n"
+                for att_id in self.metadata[key]:
+                    middle = "ID=%s," % att_id + ",".join(["%s=%s" % (param, self.metadata[key][att_id][param])
+                                                           for param in self.metadata[key][att_id]])
+                    metadata_string += prefix + middle + suffix
+        return metadata_string
+
     def write(self, output_file):
-        pass
+        with open(output_file, "w") as out_fd:
+            out_fd.write(self.metadata2str())
+            out_fd.write("#" + "\t".join(self.header_list) + "\n")
+            for record in self.records:
+                out_fd.write(str(record) + "\n")
 
     def __len__(self):
         return len(self.records)
@@ -248,4 +269,6 @@ if __name__ == "__main__":
                               from_file=True)
     print(Mutations.metadata)
     print(len(Mutations))
+    fg = Mutations.metadata2str()
+    Mutations.write("tra.vcf")
     #print(Mutations.records[9])

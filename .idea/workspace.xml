@@ -82,15 +82,10 @@
       <file leaf-file-name="ParseVCF.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Parse/ParseVCF.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5185185" vertical-offset="1512" max-vertical-offset="3060">
-              <caret line="191" column="29" selection-start-line="191" selection-start-column="29" selection-end-line="191" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.30864197" vertical-offset="1485" max-vertical-offset="5022">
+              <caret line="95" column="33" selection-start-line="95" selection-start-column="33" selection-end-line="95" selection-end-column="33" />
               <folding>
                 <element signature="e#20#55#0" expanded="true" />
-                <element signature="e#2209#4188#0" expanded="false" />
-                <element signature="e#4243#4316#0" expanded="false" />
-                <element signature="e#4371#4793#0" expanded="false" />
-                <element signature="e#4839#5541#0" expanded="false" />
-                <element signature="e#5639#6250#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -679,13 +674,8 @@
           <line>2</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/Parse/ParseVCF.py</url>
-          <line>81</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="25" />
+      <option name="time" value="27" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -981,17 +971,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Parse/tra.vcf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.45251396" vertical-offset="324" max-vertical-offset="38538">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Parse/ParseVCF.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5185185" vertical-offset="1512" max-vertical-offset="3060">
-          <caret line="191" column="29" selection-start-line="191" selection-start-column="29" selection-end-line="191" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.30864197" vertical-offset="1485" max-vertical-offset="5022">
+          <caret line="95" column="33" selection-start-line="95" selection-start-column="33" selection-end-line="95" selection-end-column="33" />
           <folding>
             <element signature="e#20#55#0" expanded="true" />
-            <element signature="e#2209#4188#0" expanded="false" />
-            <element signature="e#4243#4316#0" expanded="false" />
-            <element signature="e#4371#4793#0" expanded="false" />
-            <element signature="e#4839#5541#0" expanded="false" />
-            <element signature="e#5639#6250#0" expanded="false" />
           </folding>
         </state>
       </provider>
