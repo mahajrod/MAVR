@@ -1,7 +1,7 @@
 #!/usr/bin/python2
 
 from collections import OrderedDict
-
+from General.General import check_path
 import numpy as np
 
 
@@ -15,12 +15,11 @@ class RecordVCF():
         self.qual = qual                                #real or "."
         self.filter_list = sorted(filter_list)          #list, entries are strings
         self.info_dict = info_dict                      #dict
-        #self.format_list = format_list                  #list, enties are strings
         self.samples_list = samples_list                #list entries are dicts with keys from format_list and
                                                         #values are lists
-
         #TODO: add data check
         #TODO: check parsing of files with several samples
+
     def __str__(self):
         #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	Sample_1
         return self.string_form()
@@ -42,6 +41,28 @@ class RecordVCF():
 
 class CollectionVCF():
     #TODO: rewrite metadata as class
+
+    def __init__(self, metadata=None, record_list=None, vcf_file=None, from_file=True):
+        if from_file:
+            self.metadata = OrderedDict({})
+            self.records = []
+            with open(vcf_file, "r") as fd:
+                for line in fd:
+                    if line[:2] != "##":
+                        self.header_list = line[1:].strip().split("\t")
+                        self.samples = self.header_list[8:]
+                        break
+                    #print(line)
+                    self.__add_metadata(line)
+                for line in fd:
+                    self.__add_record(line)
+        else:
+            self.metadata = metadata
+            self.records = record_list
+
+    def __len__(self):
+        return len(self.records)
+
     def __add_record(self, line):
         line_list = line.strip().split("\t")
         #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	Sample_1
@@ -78,12 +99,8 @@ class CollectionVCF():
             #print(sample_dict)
             samples_list.append(sample_dict)
         #print(samples_list)
-
-
         self.records.append(RecordVCF(line_list[0], position, line_list[2], line_list[3], alt_list, quality, filter_list,
                                       info_dict, samples_list))
-
-        pass
 
     def __split_by_equal_sign(self, string):
         index = string.index("=")
@@ -108,6 +125,7 @@ class CollectionVCF():
         if value[0] == "<" and value[-1] == ">":
             #checking is value a list or no
             #print(value)
+            print(key, value)
             value = self.__split_by_comma_sign(value[1:-1])
             #print(value)
             #parse in suppose that first parameter in value list is ID
@@ -121,24 +139,6 @@ class CollectionVCF():
 
         else:
             self.metadata[key] = value
-
-    def __init__(self, metadata=None, record_list=None, vcf_file=None, from_file=True):
-        if from_file:
-            self.metadata = OrderedDict({})
-            self.records = []
-            with open(vcf_file, "r") as fd:
-                for line in fd:
-                    if line[:2] != "##":
-                        self.header_list = line[1:].strip().split("\t")
-                        self.samples = self.header_list[8:]
-                        break
-                    #print(line)
-                    self.__add_metadata(line)
-                for line in fd:
-                    self.__add_record(line)
-        else:
-            self.metadata = metadata
-            self.records = record_list
 
     def metadata2str(self):
         metadata_string = ""
@@ -161,11 +161,8 @@ class CollectionVCF():
             for record in self.records:
                 out_fd.write(str(record) + "\n")
 
-    def __len__(self):
-        return len(self.records)
-
     def record_coordinates(self, black_list=[], white_list=[]):
-        #return dictionary, where keys are seqids and values numpy arrays of SNV coordinates
+        #return dictionary, where keys are chromosomes and values numpy arrays of SNV coordinates
         sequence_varcoord_dict = {}
         for record in self.records:
             if black_list and (record.chrom in black_list):
@@ -265,6 +262,60 @@ def parse_vcf(vcf_filename):
 """
 
 if __name__ == "__main__":
+    samples_list =      [
+                        "210-AID_Can1", #
+                        "210-AID_Can2",    #
+                        "210-Can1",  #
+                        "210-Can2",   #
+                        "210-FOA1",   #
+                        "210-FOA2",
+                        "210-Glu-Can2",    #
+                        "210-Glu-FOA2",    #
+                        "210-Glu-FOA3",    #
+                        "210-L1",   #
+                        "210-L2",    #
+                        "210-L3",   #
+                        "210-L4",   #
+                        "210-L5",  #
+                        "210-L6",   #
+                        "Sample_1",
+                        "Sample_2",
+                        "Sample_3",
+                        "Sample_4",
+                        "Sample_5",
+                        "Sample_6",
+                        "Sample_7",
+                        "Sample_8",
+                        "Sample_9",
+                        "Sample_10",
+                        "Sample_11",
+                        "Sample_12",
+                        "Sample_13",
+                        "Sample_14",
+                        "Sample_15",
+                        "Sample_16",
+                        "Sample_17",
+                        "Sample_18",
+                        "Sample_19",
+                        "Sample_20",
+                        ]
+    """
+    file_suffix = "_GATK_best_snps.recode.vcf"
+    sample_dir = "/home/winstorage/old/GATK_vcf/best_snps/"
+    output_file = "count_mutations_file_best_snps.t"
+    """
+    file_suffix = "_GATK_best_snps.recode_filtered.vcf"
+    sample_dir = "/home/winstorage/old/GATK_vcf/best_snp_only_desaminase/"
+    output_file = "count_mutations_file_best_snp_only_desaminase.t"
+
+    mutation_dict = OrderedDict((sample, CollectionVCF(vcf_file=sample_dir + sample + file_suffix, from_file=True))
+                         for sample in samples_list)
+    with open(output_file, "w") as out_fd:
+        out_fd.write("#sample_name\tnumber_of_mutations\n")
+        for sample in mutation_dict:
+            out_fd.write("%s\t%i\n" % (sample, len(mutation_dict[sample])))
+
+    """
     Mutations = CollectionVCF(vcf_file="/home/winstorage/old/GATK_vcf/filtered_snps/Sample_1_GATK_filtered_snps.vcf",
                               from_file=True)
     print(Mutations.metadata)
@@ -272,3 +323,4 @@ if __name__ == "__main__":
     fg = Mutations.metadata2str()
     Mutations.write("tra.vcf")
     #print(Mutations.records[9])
+    """

@@ -1,7 +1,7 @@
 __author__ = 'mahajrod'
 import os
 from General.General import check_path
-from Converters.Converters import gff22gff3, gff32gtf
+#from Converters.Converters import gff22gff3, gff32gtf
 
 
 def RepeatModeler_search(query_file, db_name, output_file="run.out",
@@ -90,7 +90,7 @@ if __name__ == "__main__":
     workdir = "/home/mahajrod/genetics/desaminases/data/%s/masking" % reference_name
     os.system("mkdir -p %s" % workdir)
     os.chdir(workdir)
-
+    """
     os.system("ln -fs ../%s %s" % (reference_file, reference_file))
     os.system("mkdir -p repeatmodeler")
     os.chdir("repeatmodeler")
@@ -116,4 +116,3 @@ if __name__ == "__main__":
     os.chdir("TRF")
     os.system("ln -fs ../repeatmasker/%s.masked %s_masked_repeatmasker.fasta" % (reference_file, reference_name))
     TRF_search("%s_masked_repeatmasker.fasta" % reference_name)
-    """

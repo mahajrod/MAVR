@@ -5,6 +5,9 @@ from Bio import SeqIO
 from General.General import check_path
 from Tools.Picard import add_header2bam
 from MutAnalysis.Mutation import *
+from Tools.AssemblyTools import spades
+from Tools.FilterTools import trim_galore
+from Tools.AlignmentTools import bowtie2
 
 
 def get_chromosomes_bed(reference, reference_index, mitochondrial_region_name="mt",
@@ -28,9 +31,9 @@ def get_chromosomes_bed(reference, reference_index, mitochondrial_region_name="m
             in_fd.write(record_id + "\t1\t" + str(lengthes_dict[record_id]) + "\n")
 
 
-def alignment_sorting_and_filtering(sample_name, chromosomes_bed_file, mitochondrial_bed_file):
+def alignment_sorting_and_filtering(sample_name, alignment_file, chromosomes_bed_file, mitochondrial_bed_file):
     #-F 4 - skip UNaligned reads
-    os.system("samtools view -Sb %s_trimmed.sam | samtools sort - %s_trimmed_sorted" % (sample_name, sample_name))
+    os.system("samtools view -Sb %s | samtools sort - %s_trimmed_sorted" % (alignment_file, sample_name))
     os.system("samtools rmdup %s_trimmed_sorted.bam %s_trimmed_sorted_rm_pcr.bam" % (sample_name, sample_name))
     os.system("samtools view -b -F 4 -L %s %s_trimmed_sorted_rm_pcr.bam  > %s_trimmed_sorted_rm_pcr_chrom.bam"
               % (chromosomes_bed_file, sample_name, sample_name))
@@ -46,24 +49,143 @@ def alignment_sorting_and_filtering(sample_name, chromosomes_bed_file, mitochond
     os.system("qualimap bamqc -bam %s_trimmed_sorted_rm_pcr_chrom.bam " % sample_name)
 
 
-def get_alignment_without_trim(bowtie2_index,
-                              sample_name,
-                              forward_reads,
-                              chromosomes_bed_file,
-                              mitochondrial_bed_file,
-                              reverse_reads=None,
-                              max_threads=5):
+def get_alignment(bowtie2_index,
+                  sample_name,
+                  forward_reads,
+                  chromosomes_bed_file,
+                  mitochondrial_bed_file,
+                  reverse_reads=None,
+                  max_threads=5,
+                  quality_score="phred33",
+                  aligner="bowtie2"):
 
     print("Handling %s sample..." % sample_name)
+    output_file = "%s_trimmed.sam" % sample_name
+    if aligner == "bowtie2":
+        bowtie2(bowtie2_index, forward_reads, reverse_reads,
+                max_threads=max_threads, quality_score=quality_score,
+                alignment_mode="very-sensitive", output_file=output_file)
+    """
+    if reverse_reads:
+        os.system("bowtie2 --very-sensitive --%s -p %i -x %s -1 %s -2 %s > %s_trimmed.sam"
+                  % (quality_score, max_threads, bowtie2_index, forward_reads, reverse_reads, sample_name))
+    else:
+        os.system("bowtie2 --very-sensitive --%s -p %i -x %s -U %s > %s_trimmed.sam"
+                  % (quality_score, max_threads, bowtie2_index, forward_reads, sample_name))
+    """
+    alignment_sorting_and_filtering(sample_name, output_file, chromosomes_bed_file, mitochondrial_bed_file)
+
+
+def filter_data(sample_name,
+                min_length,
+                forward_reads,
+                forward_trim,
+                reverse_reads=None,
+                reverse_trim=None,
+                quality_score="phred33",
+                adapter="AGATCGGAAGAGC",
+                quality_treshold=20,
+                output_folder="trimmed",
+                filter_tool="trim_galore"):
+    print("Handling %s sample..." % sample_name)
+    os.system("mkdir -p %s" % output_folder)
+
+    if filter_tool == "trim_galore":
+        trim_galore(min_length,
+                    forward_reads,
+                    forward_trim,
+                    reverse_reads=reverse_reads,
+                    reverse_trim=reverse_trim,
+                    quality_score=quality_score,
+                    adapter=adapter,
+                    quality_treshold=quality_treshold,
+                    output_folder=output_folder)
+"""
+def correct_reads(forward_reads,
+                  reverse_reads=None,
+                  max_threads=4,
+                  ion_torrent=False):
+    #print("Handling %s sample..." % sample_name)
+    os.system("mkdir -p spades")
+    platform = ""
+    if ion_torrent:
+        platform = "--iontorrent"
+    if reverse_reads:
+        os.system("spades.py -t %i %s --only-error-correction --disable-gzip-output -1 %s -2 %s -o spades"
+                  % (max_threads, platform, forward_reads, reverse_reads))
+    else:
+        os.system("spades.py -t %i %s --only-error-correction --disable-gzip-output -s %s -o spades"
+                  % (max_threads, platform, forward_reads))
+    os.chdir("spades/corrected")
+    os.system("fastqc -t 2 --nogroup *.f*q")
+
+def assembly_reads(forward_reads,
+                  reverse_reads=None,
+                  max_threads=4,
+                  ion_torrent=False):
+    #print("Handling %s sample..." % sample_name)
+    os.system("mkdir -p spades")
+    platform = ""
+    if ion_torrent:
+        platform = "--iontorrent"
+    if reverse_reads:
+        os.system("spades.py -t %i %s --disable-gzip-output -1 %s -2 %s -o spades"
+                  % (max_threads, platform, forward_reads, reverse_reads))
+    else:
+        os.system("spades.py -t %i %s --disable-gzip-output -s %s -o spades"
+                  % (max_threads, platform, forward_reads))
+    os.chdir("spades/corrected")
+    os.system("fastqc -t 2 --nogroup *.f*q")
+
+def filter_data(sample_name,
+                min_length,
+                forward_reads,
+                forward_trim,
+                reverse_reads=None,
+                reverse_trim=None,
+                quality_score="phred33",
+                adapter="AGATCGGAAGAGC",
+                quality_treshold=20):
+    print("Handling %s sample..." % sample_name)
+    os.system("mkdir -p trimmed")
+    # if forward_trim == None skip 5' trimming
+    trim_str = ""
 
     if reverse_reads:
-        os.system("bowtie2 --very-sensitive --phred33 -p %i -x %s -1 %s -2 %s > %s_trimmed.sam"
-                  % (max_threads, bowtie2_index, forward_reads, reverse_reads, sample_name))
+        if forward_trim:
+            trim_str = "--clip_R1 %i --clip_R2 %i" % (forward_trim, reverse_trim)
+        os.system("trim_galore -a %s  --length %i --%s --dont_gzip %s --paired -q %i -o trimmed %s %s"
+                  % (adapter, min_length, quality_score, trim_str, quality_treshold, forward_reads, reverse_reads))
     else:
-        os.system("bowtie2 --very-sensitive --phred33 -p %i -x %s -U %s > %s_trimmed.sam"
-                  % (max_threads, bowtie2_index, forward_reads, sample_name))
+        if forward_trim:
+            trim_str = "--clip_R1 %i" % forward_trim
+        os.system("trim_galore -a %s  --length %i --%s --dont_gzip %s -q %i -o trimmed %s"
+                  % (adapter, min_length, quality_score, trim_str, quality_treshold, forward_reads))
+    os.chdir("trimmed")
+    os.system("fastqc -t 2 --nogroup *.fq")
+"""
 
-    alignment_sorting_and_filtering(sample_name, chromosomes_bed_file, mitochondrial_bed_file)
+
+def correct_reads(forward_reads,
+                  reverse_reads=None,
+                  max_threads=4,
+                  platform="illumina",
+                  output_dir="spades"):
+    #print("Handling %s sample..." % sample_name)
+    spades(forward_reads, reverse_reads=reverse_reads, only_correction=True,
+           max_threads=max_threads, platform=platform,
+           gzip_corrected_reads=False, output_dir=output_dir)
+
+
+def assembly_reads(forward_reads,
+                  reverse_reads=None,
+                  max_threads=4,
+                  platform="illumina",
+                  output_dir="spades"):
+    #print("Handling %s sample..." % sample_name)
+    spades(forward_reads, reverse_reads=reverse_reads,
+           max_threads=max_threads, platform=platform,
+           gzip_corrected_reads=False, output_dir=output_dir)
 
 
 def get_alignment(bowtie2_index,
@@ -77,15 +199,17 @@ def get_alignment(bowtie2_index,
                   reverse_trim=None,
                   skip_correction=False,
                   max_threads=5,
+                  quality_score="phred33",
                   adapter="AGATCGGAAGAGC"):
     #Illumina standard adapter AGATCGGAAGAGC
     #Nextera adapter CTGTCTCTTATACACATCT
+    #Ion torrent adapter P1 CCACTACGCCTCCGC
     print("Handling %s sample..." % sample_name)
     os.system("mkdir -p trimmed")
 
     if reverse_reads:
-        os.system("trim_galore -a %s  --length %i --phred33 --dont_gzip --clip_R1 %i --clip_R2 %i --paired -q 20 -t -o trimmed %s %s"
-                  % (adapter, min_length, forward_trim, reverse_trim, forward_reads, reverse_reads))
+        os.system("trim_galore -a %s  --length %i --%s --dont_gzip --clip_R1 %i --clip_R2 %i --paired -q 20 -t -o trimmed %s %s"
+                  % (adapter, min_length, quality_score, forward_trim, reverse_trim, forward_reads, reverse_reads))
         os.chdir("trimmed")
         os.system("fastqc -t 2 --nogroup %s_1_val_1.fq %s_2_val_2.fq" % (sample_name, sample_name))
 
@@ -99,11 +223,11 @@ def get_alignment(bowtie2_index,
             os.system("spades.py -t %i --only-error-correction --disable-gzip-output -1 %s_1_val_1.fq -2 %s_2_val_2.fq -o spades"
                       % (max_threads,sample_name, sample_name))
 
-        os.system("bowtie2 --phred33 -p %i -x %s -1 %s -2 %s > %s_trimmed.sam"
-                  % (max_threads, bowtie2_index, left_r, right_r, sample_name))
+        os.system("bowtie2 --%s -p %i -x %s -1 %s -2 %s > %s_trimmed.sam"
+                  % (quality_score, max_threads, bowtie2_index, left_r, right_r, sample_name))
     else:
-        os.system("trim_galore  --length %i --phred33 --dont_gzip --clip_R1 %i -q 20 -t -o trimmed %s"
-                  % (min_length, forward_trim, forward_reads))
+        os.system("trim_galore  --length %i --%s --dont_gzip --clip_R1 %i -q 20 -t -o trimmed %s"
+                  % (min_length, quality_score, forward_trim, forward_reads))
         os.chdir("trimmed")
         os.system("fastqc -t 2 --nogroup %s_trimmed.fq" % (sample_name))
 
@@ -114,8 +238,8 @@ def get_alignment(bowtie2_index,
             os.system("spades.py -t %i --only-error-correction --disable-gzip-output -s %s_trimmed.fq -o spades"
                       % (max_threads, sample_name))
 
-        os.system("bowtie2 --phred33 -p %i -x %s -U %s > %s_trimmed.sam"
-                  % (max_threads, bowtie2_index, unpaired_r, sample_name))
+        os.system("bowtie2 --%s -p %i -x %s -U %s > %s_trimmed.sam"
+                  % (quality_score, max_threads, bowtie2_index, unpaired_r, sample_name))
 
     alignment_sorting_and_filtering(sample_name, chromosomes_bed_file, mitochondrial_bed_file)
 
@@ -183,37 +307,45 @@ def snp_call_GATK(alignment,
                  MappingQualityRankSum=-12.5,
                  ReadPosRankSum=-8.0,
                  GATK_dir="",
-                 num_of_threads=5):
+                 num_of_threads=5,
+                 skip_base_recalibration=False):
     #default filter expression
     #"QD < 2.0 || FS > 60.0 || MQ < 40.0 || HaplotypeScore > 13.0 || MappingQualityRankSum < -12.5 || ReadPosRankSum < -8.0"
     gatk_dir = check_path(GATK_dir)
+    intermediate_alignment = alignment
+    if not skip_base_recalibration:
+        intermediate_alignment = alignment + "_recal_reads.bam"
+        #Analyze patterns of covariation in the sequence dataset
+        os.system("java -jar %sGenomeAnalysisTK.jar -nct %i  -T BaseRecalibrator -R %s -I %s -knownSites %s -o %s_recal_data.table"
+                  % (gatk_dir, num_of_threads, reference_file, alignment, known_sites_vcf, sample_name))
+        #Do a second pass to analyze covariation remaining after recalibration
+        os.system("java -jar %sGenomeAnalysisTK.jar -nct %i  -T BaseRecalibrator -R %s -I %s -knownSites %s  -BQSR %s_recal_data.table -o %s_post_recal_data.table"
+                  % (gatk_dir, num_of_threads, reference_file, alignment, known_sites_vcf, sample_name, sample_name))
 
-    #Analyze patterns of covariation in the sequence dataset
-    os.system("java -jar %sGenomeAnalysisTK.jar -nct %i  -T BaseRecalibrator -R %s -I %s -knownSites %s -o %s_recal_data.table"
-              % (gatk_dir, num_of_threads, reference_file, alignment, known_sites_vcf, sample_name))
-    #Do a second pass to analyze covariation remaining after recalibration
-    os.system("java -jar %sGenomeAnalysisTK.jar -nct %i  -T BaseRecalibrator -R %s -I %s -knownSites %s  -BQSR %s_recal_data.table -o %s_post_recal_data.table"
-              % (gatk_dir, num_of_threads, reference_file, alignment, known_sites_vcf, sample_name, sample_name))
+        #Generate before/after plots
+        #os.system("java -jar %sGenomeAnalysisTK.jar -T AnalyzeCovariates -R %s -before %s_recal_data.table -after %s_post_recal_data.table -plots %s_recalibration_plots.pdf"
+        #          % (gatk_dir, reference_file, sample_name, sample_name, sample_name))
 
-    #Generate before/after plots
-    #os.system("java -jar %sGenomeAnalysisTK.jar -T AnalyzeCovariates -R %s -before %s_recal_data.table -after %s_post_recal_data.table -plots %s_recalibration_plots.pdf"
-    #          % (gatk_dir, reference_file, sample_name, sample_name, sample_name))
-
-    #Apply the recalibration to your sequence data
-    os.system("java -jar %sGenomeAnalysisTK.jar -nct %i -T PrintReads -R %s -I %s -BQSR %s_recal_data.table -o %s_recal_reads.bam"
-              % (gatk_dir, num_of_threads, reference_file, alignment, sample_name, sample_name))
+        #Apply the recalibration to your sequence data
+        os.system("java -jar %sGenomeAnalysisTK.jar -nct %i -T PrintReads -R %s -I %s -BQSR %s_recal_data.table -o %s"
+                  % (gatk_dir, num_of_threads, reference_file, alignment, sample_name, intermediate_alignment))
+    print("\nSNP call...\n")
     #SNP call
-    os.system(" java -jar %sGenomeAnalysisTK.jar -nt %i -l INFO -R %s -T UnifiedGenotyper -I %s_recal_reads.bam -stand_call_conf %i -stand_emit_conf %i  -o %s_GATK_raw.vcf --output_mode EMIT_VARIANTS_ONLY"
-              % (gatk_dir, num_of_threads, reference_file, sample_name, stand_call_conf, stand_emit_conf, sample_name))
+    os.system(" java -jar %sGenomeAnalysisTK.jar -nt %i -l INFO -R %s -T UnifiedGenotyper -I %s -stand_call_conf %i -stand_emit_conf %i  -o %s_GATK_raw.vcf --output_mode EMIT_VARIANTS_ONLY"
+              % (gatk_dir, num_of_threads, reference_file, intermediate_alignment, stand_call_conf, stand_emit_conf, sample_name))
     #extract SNP
     os.system("java -jar %sGenomeAnalysisTK.jar -T SelectVariants -R %s -V %s_GATK_raw.vcf -selectType SNP -o %s_GATK_raw_no_indel.vcf"
               % (gatk_dir, reference_file, sample_name,  sample_name))
+    #extract indels
+    os.system("java -jar %sGenomeAnalysisTK.jar -T SelectVariants -R %s -V %s_GATK_raw.vcf -selectType INDEL -o %s_GATK_raw_only_indel.vcf"
+              % (gatk_dir, reference_file, sample_name,  sample_name))
 
     #filtering
+    print("\nFiltering SNP...\n")
     os.system("java -jar %sGenomeAnalysisTK.jar -T VariantFiltration -R %s -V %s_GATK_raw_no_indel.vcf --filterExpression 'QD < %f || FS > %f || MQ < %f || HaplotypeScore > %f || MappingQualityRankSum < %f || ReadPosRankSum < %f' --filterName 'ambigious_snp' -o %s_GATK_filtered_snps.vcf "
              % (gatk_dir, reference_file, sample_name, QD, FS, MQ, HaplotypeScore, MappingQualityRankSum, ReadPosRankSum, sample_name))
-    os.system("vcftools --vcf %s_GATK_filtered_snps.vcf --remove-filtered-all --out %s_GATK_best_snps.vcf --recode --recode-INFO-all"
-              % (sample_name, sample_name ))
+    #os.system("vcftools --vcf %s_GATK_filtered_snps.vcf --remove-filtered-all --out %s_GATK_best_snps.vcf --recode --recode-INFO-all"
+    #          % (sample_name, sample_name ))
 
     """
     os.system("java -jar %sGenomeAnalysisTK.jar -nt %i -T HaplotypeCaller -R %s -I recal_reads.bam --genotyping_mode DISCOVERY --min_base_quality_score %i -stand_emit_conf %i -stand_call_conf %i -o %s"
@@ -328,7 +460,7 @@ if __name__ == "__main__":
                       known_sites_vcf,
                       stand_call_conf=100,
                       GATK_dir="/home/mahajrod/Repositories/genetic/NGS_tools/GenomeAnalysisTK-3.1-1")
-
+        #vcftools badly parses metadata of GATK output
         os.system("vcftools --vcf %s_GATK_filtered_snps.vcf --remove-filtered-all --out %s_GATK_best_snps --recode --recode-INFO-all"
                   % (sample_name, sample_name ))
         vcf_file = "/run/media/mahajrod/Data/data/LAN210/all/%s/trimmed/new_alignment/%s_GATK_best_snps.recode.vcf" \

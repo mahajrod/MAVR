@@ -15,6 +15,7 @@ MAVR.egg-info/dependency_links.txt
 MAVR.egg-info/top_level.txt
 MutAnalysis/Mutation.py
 MutAnalysis/__init__.py
+Parse/ParseFastQC.py
 Parse/ParseGVF.py
 Parse/ParseGeneral.py
 Parse/ParseR.py
@@ -27,8 +28,13 @@ Pipelines/SNPCall.py
 Pipelines/__init__.py
 SeqAnalysis/SeqAnalysis.py
 SeqAnalysis/__init__.py
+Tools/AlignmentTools.py
+Tools/AssemblyTools.py
 Tools/BLAST.py
+Tools/FilterTools.py
+Tools/GATK.py
 Tools/GlimerHMM.py
 Tools/Picard.py
 Tools/RepeatSearchTools.py
+Tools/Samtools.py
 Tools/__init__.py
