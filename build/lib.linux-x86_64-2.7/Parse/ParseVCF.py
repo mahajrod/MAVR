@@ -27,8 +27,15 @@ class RecordVCF():
     def string_form(self):
         alt_string = ",".join(self.alt_list)
         filter_string = ";".join(self.filter_list)
-        info_string = ";".join([key + "=" + ",". join(map(lambda x: str(x), self.info_dict[key]))
-                                for key in sorted(list(self.info_dict.keys()))])
+        key_string_list = []
+        for key in sorted(list(self.info_dict.keys())):
+            if self.info_dict[key]:
+                key_string_list.append(key + "=" + ",". join(map(lambda x: str(x), self.info_dict[key])))
+            else:
+                key_string_list.append(key)
+
+        #[key + "=" + ",". join(map(lambda x: str(x), self.info_dict[key])) for key in sorted(list(self.info_dict.keys()))]
+        info_string = ";".join(key_string_list)
         #format_string = ":".join(self.format_list)
         format_string = ":".join(self.samples_list[0].keys())
         samples_string = "\t".join([":".join([",".join(map(lambda x: str(x), sample[key])) for key in sample.keys()]) for sample in self.samples_list])
@@ -42,7 +49,7 @@ class RecordVCF():
 class CollectionVCF():
     #TODO: rewrite metadata as class
 
-    def __init__(self, metadata=None, record_list=None, vcf_file=None, from_file=True):
+    def __init__(self, metadata=None, record_list=None, header_list=None, vcf_file=None, from_file=True):
         if from_file:
             self.metadata = OrderedDict({})
             self.records = []
@@ -59,6 +66,7 @@ class CollectionVCF():
         else:
             self.metadata = metadata
             self.records = record_list
+            self.header_list = header_list
 
     def __len__(self):
         return len(self.records)
@@ -103,7 +111,11 @@ class CollectionVCF():
                                       info_dict, samples_list))
 
     def __split_by_equal_sign(self, string):
-        index = string.index("=")
+        try:
+            index = string.index("=")
+        except ValueError:
+            #if "=" is not present in string (case of flag type in INFO field)
+            return string, None
         return string[:index], string[index+1:]
 
     def __split_by_comma_sign(self, string):
@@ -125,13 +137,13 @@ class CollectionVCF():
         if value[0] == "<" and value[-1] == ">":
             #checking is value a list or no
             #print(value)
-            print(key, value)
+            #print(key, value)
             value = self.__split_by_comma_sign(value[1:-1])
             #print(value)
             #parse in suppose that first parameter in value list is ID
             value_id = self.__split_by_equal_sign(value[0])[1]
             #print(value[1:])
-            value = dict(self.__split_by_equal_sign(entry) for entry in value[1:])
+            value = OrderedDict(self.__split_by_equal_sign(entry) for entry in value[1:])
             #print(value_id, value)
             if key not in self.metadata:
                 self.metadata[key] = OrderedDict({})
@@ -160,6 +172,24 @@ class CollectionVCF():
             out_fd.write("#" + "\t".join(self.header_list) + "\n")
             for record in self.records:
                 out_fd.write(str(record) + "\n")
+
+    def split_by_zygoty(self):
+        #splits sites by zygoty, site counts as heterozygote if even in one sample it it hetorozygote
+        homo_sites = []
+        hetero_sites = []
+        for site in self.records:
+            for sample_dict in site.samples_list:
+                zyg = sample_dict["GT"][0].split("/")
+                if zyg[0] != zyg[1]:
+                    hetero_sites.append(site)
+                    break
+            else:
+                homo_sites.append(site)
+        homozygotes = CollectionVCF(metadata=self.metadata, record_list=homo_sites,
+                                    header_list=self.header_list, from_file=False)
+        heterozygotes = CollectionVCF(metadata=self.metadata, record_list=hetero_sites,
+                                      header_list=self.header_list, from_file=False)
+        return homozygotes, heterozygotes
 
     def record_coordinates(self, black_list=[], white_list=[]):
         #return dictionary, where keys are chromosomes and values numpy arrays of SNV coordinates

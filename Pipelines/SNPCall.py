@@ -7,7 +7,10 @@ from Tools.Picard import add_header2bam
 from MutAnalysis.Mutation import *
 from Tools.AssemblyTools import spades
 from Tools.FilterTools import trim_galore
-from Tools.AlignmentTools import bowtie2
+from Tools.AlignmentTools import Bowtie2
+
+
+# TODO: refactor, remove absolete functions and so on
 
 
 def get_chromosomes_bed(reference, reference_index, mitochondrial_region_name="mt",
@@ -62,9 +65,9 @@ def get_alignment(bowtie2_index,
     print("Handling %s sample..." % sample_name)
     output_file = "%s_trimmed.sam" % sample_name
     if aligner == "bowtie2":
-        bowtie2(bowtie2_index, forward_reads, reverse_reads,
-                max_threads=max_threads, quality_score=quality_score,
-                alignment_mode="very-sensitive", output_file=output_file)
+        Bowtie2.align(bowtie2_index, forward_reads, reverse_reads,
+                      max_threads=max_threads, quality_score=quality_score,
+                      alignment_mode="very-sensitive", output_file=output_file)
     """
     if reverse_reads:
         os.system("bowtie2 --very-sensitive --%s -p %i -x %s -1 %s -2 %s > %s_trimmed.sam"
@@ -181,13 +184,15 @@ def assembly_reads(forward_reads,
                   reverse_reads=None,
                   max_threads=4,
                   platform="illumina",
-                  output_dir="spades"):
+                  output_dir="spades",
+                  kmer_length_list=[]):
     #print("Handling %s sample..." % sample_name)
     spades(forward_reads, reverse_reads=reverse_reads,
            max_threads=max_threads, platform=platform,
-           gzip_corrected_reads=False, output_dir=output_dir)
+           gzip_corrected_reads=False, output_dir=output_dir,
+           kmer_length_list=kmer_length_list)
 
-
+"""
 def get_alignment(bowtie2_index,
                   sample_name,
                   min_length,
@@ -242,7 +247,7 @@ def get_alignment(bowtie2_index,
                   % (quality_score, max_threads, bowtie2_index, unpaired_r, sample_name))
 
     alignment_sorting_and_filtering(sample_name, chromosomes_bed_file, mitochondrial_bed_file)
-
+"""
 
 def get_coverage_thresholds(coverage_dist_file, one_side_base_threshold=0.025, minimum_threshold=5):
     #coverage_dist_file - is file like qualimap coverage_histogram.txt derived from alignment statistics

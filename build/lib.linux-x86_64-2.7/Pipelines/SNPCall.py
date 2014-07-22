@@ -181,13 +181,15 @@ def assembly_reads(forward_reads,
                   reverse_reads=None,
                   max_threads=4,
                   platform="illumina",
-                  output_dir="spades"):
+                  output_dir="spades",
+                  kmer_length_list=[]):
     #print("Handling %s sample..." % sample_name)
     spades(forward_reads, reverse_reads=reverse_reads,
            max_threads=max_threads, platform=platform,
-           gzip_corrected_reads=False, output_dir=output_dir)
+           gzip_corrected_reads=False, output_dir=output_dir,
+           kmer_length_list=kmer_length_list)
 
-
+"""
 def get_alignment(bowtie2_index,
                   sample_name,
                   min_length,
@@ -242,7 +244,7 @@ def get_alignment(bowtie2_index,
                   % (quality_score, max_threads, bowtie2_index, unpaired_r, sample_name))
 
     alignment_sorting_and_filtering(sample_name, chromosomes_bed_file, mitochondrial_bed_file)
-
+"""
 
 def get_coverage_thresholds(coverage_dist_file, one_side_base_threshold=0.025, minimum_threshold=5):
     #coverage_dist_file - is file like qualimap coverage_histogram.txt derived from alignment statistics

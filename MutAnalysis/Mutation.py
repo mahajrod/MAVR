@@ -1033,7 +1033,7 @@ class ReferenceGenome(object):
                                                      feature.strand])
                 #print feature.type,feature.location.start,feature.location.end, feature.location.strand
     def find_gaps (self):
-        gap_reg_exp = re.compile("N+",re.IGNORECASE)
+        gap_reg_exp = re.compile("N+", re.IGNORECASE)
         for entry in  self.reference_genome:
             entry_name = self.chr_dict[self.reference_genome[entry].description.split(" ")[1]]
             self.gaps_dict[entry_name] = []

@@ -1,16 +1,22 @@
 <component name="ProjectDictionaryState">
   <dictionary name="mahajrod">
     <words>
+      <w>bowtie</w>
+      <w>broadinstitute</w>
       <w>chrom</w>
+      <w>coeff</w>
       <w>desaminases</w>
       <w>descr</w>
       <w>dirname</w>
       <w>extention</w>
+      <w>facecolor</w>
       <w>fastqc</w>
+      <w>figsize</w>
       <w>filelist</w>
       <w>filetype</w>
       <w>filetypes</w>
       <w>ftype</w>
+      <w>gatk</w>
       <w>homozygotes</w>
       <w>indel</w>
       <w>mavr</w>
@@ -21,6 +27,9 @@
       <w>nogroup</w>
       <w>refgenome</w>
       <w>snps</w>
+      <w>variantutils</w>
+      <w>vartype</w>
+      <w>workdir</w>
     </words>
   </dictionary>
 </component>

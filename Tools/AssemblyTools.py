@@ -10,7 +10,8 @@ def spades(forward_reads,
            max_threads=4,
            platform="illumina",
            gzip_corrected_reads=True,
-           output_dir="spades"):
+           output_dir="spades",
+           kmer_length_list=[]):
     #suitable for spades v3.0.0
     """
     SPAdes genome assembler v.3.0.0
@@ -77,7 +78,7 @@ def spades(forward_reads,
     if reverse_reads:
         reads = "-1 %s -2 %s" % (forward_reads, reverse_reads)
     else:
-        reads = "-s" % forward_reads
+        reads = "-s %s" % forward_reads
 
     if sanger_reads:
         reads += " --sanger %s" % sanger_reads
@@ -94,8 +95,12 @@ def spades(forward_reads,
     else:
         gzip_output = "--disable-gzip-output"
 
-    os.system("spades.py -t %i %s %s %s %s -o %s"
-              % (max_threads, mode, platform, gzip_output, reads, output_dir))
+    kmers = ""
+    if kmer_length_list:
+        kmers = "-k " + ",".join(map(lambda x: str(x), kmer_length_list))
+
+    os.system("spades.py -t %i %s %s %s %s --careful %s -o %s"
+              % (max_threads, mode, platform, gzip_output, reads, kmers, output_dir))
 
     if not gzip_corrected_reads:
         os.chdir("%s/corrected" % output_dir)
