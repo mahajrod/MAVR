@@ -4,7 +4,13 @@ import collections
 from Bio import SeqIO
 from General.General import check_path
 from Tools.Picard import add_header2bam
-from MutAnalysis.Mutation import *
+#from MutAnalysis.Mutation import *
+from Tools.AssemblyTools import spades
+from Tools.FilterTools import trim_galore
+from Tools.AlignmentTools import Bowtie2, BWA
+
+
+# TODO: refactor, remove absolete functions and so on
 
 
 def get_chromosomes_bed(reference, reference_index, mitochondrial_region_name="mt",
@@ -28,44 +34,149 @@ def get_chromosomes_bed(reference, reference_index, mitochondrial_region_name="m
             in_fd.write(record_id + "\t1\t" + str(lengthes_dict[record_id]) + "\n")
 
 
-def alignment_sorting_and_filtering(sample_name, chromosomes_bed_file, mitochondrial_bed_file):
+def alignment_sorting_and_filtering(sample_name,
+                                    alignment_file,
+                                    chromosomes_bed_file=None,
+                                    mitochondrial_bed_file=None,
+                                    input_alignment_type="sam",
+                                    remove_SA=False,
+                                    remove_nonPA=False):
+    unaligned = 4
+    supplementary_alignment = 2048
+    non_primary_alignment = 256
     #-F 4 - skip UNaligned reads
-    os.system("samtools view -Sb %s_trimmed.sam | samtools sort - %s_trimmed_sorted" % (sample_name, sample_name))
+    if input_alignment_type == "sam":
+        input_type = "-S"
+    elif input_alignment_type == "bam":
+        input_type = ""
+
+    os.system("samtools view %s -b %s | samtools sort - %s_trimmed_sorted" % (input_type, alignment_file, sample_name))
     os.system("samtools rmdup %s_trimmed_sorted.bam %s_trimmed_sorted_rm_pcr.bam" % (sample_name, sample_name))
-    os.system("samtools view -b -F 4 -L %s %s_trimmed_sorted_rm_pcr.bam  > %s_trimmed_sorted_rm_pcr_chrom.bam"
-              % (chromosomes_bed_file, sample_name, sample_name))
-    os.system("samtools index %s_trimmed_sorted_rm_pcr_chrom.bam" % sample_name)
-    os.system("samtools view -b -F 4 -L %s %s_trimmed_sorted_rm_pcr.bam  > %s_trimmed_sorted_rm_pcr_mt.bam"
-              % (mitochondrial_bed_file, sample_name, sample_name))
-    os.system("samtools index %s_trimmed_sorted_rm_pcr_mt.bam" % sample_name)
+
     os.system("samtools view -b -f 4  %s_trimmed_sorted_rm_pcr.bam  > %s_trimmed_sorted_rm_pcr_unaligned.bam"
               % (sample_name, sample_name))
-    os.system("rm -rf %s_trimmed.sam %s_trimmed_sorted.bam %s_trimmed_sorted_rm_pcr.bam"
-              % (sample_name, sample_name, sample_name))
-    os.system("qualimap bamqc -bam %s_trimmed_sorted_rm_pcr_mt.bam " % sample_name)
+
+    extract_chromosomes = ""
+    if chromosomes_bed_file:
+        extract_chromosomes = "-L %s" % chromosomes_bed_file
+
+    # -F 256 remove non primary alignment
+    # -F 2048 remove supplementary alignment
+    filter_parameter = unaligned
+    if remove_SA:
+        filter_parameter += supplementary_alignment
+    if remove_nonPA:
+        filter_parameter += non_primary_alignment
+
+    os.system("samtools view -b -F %i %s %s_trimmed_sorted_rm_pcr.bam  > %s_trimmed_sorted_rm_pcr_chrom.bam"
+              % (filter_parameter, extract_chromosomes, sample_name, sample_name))
+    os.system("samtools index %s_trimmed_sorted_rm_pcr_chrom.bam" % sample_name)
     os.system("qualimap bamqc -bam %s_trimmed_sorted_rm_pcr_chrom.bam " % sample_name)
 
+    if mitochondrial_bed_file:
+        os.system("samtools view -b -F %i -L %s %s_trimmed_sorted_rm_pcr.bam  > %s_trimmed_sorted_rm_pcr_mt.bam"
+              % (filter_parameter, mitochondrial_bed_file, sample_name, sample_name))
+        os.system("samtools index %s_trimmed_sorted_rm_pcr_mt.bam" % sample_name)
+        os.system("qualimap bamqc -bam %s_trimmed_sorted_rm_pcr_mt.bam " % sample_name)
 
-def get_alignment_without_trim(bowtie2_index,
-                              sample_name,
-                              forward_reads,
-                              chromosomes_bed_file,
-                              mitochondrial_bed_file,
-                              reverse_reads=None,
-                              max_threads=5,
-                              quality_score="phred33"):
+    os.system("rm -rf %s_trimmed.sam %s_trimmed_sorted.bam %s_trimmed_sorted_rm_pcr.bam"
+              % (sample_name, sample_name, sample_name))
+
+
+def get_alignment(index,
+                  sample_name,
+                  forward_reads,
+                  chromosomes_bed_file=None,
+                  mitochondrial_bed_file=None,
+                  reverse_reads=None,
+                  max_threads=5,
+                  quality_score="phred33",
+                  aligner="bowtie2",
+                  remove_SA=False,
+                  remove_nonPA=False):
 
     print("Handling %s sample..." % sample_name)
-
+    output_file = "%s_trimmed.sam" % sample_name
+    if aligner == "bowtie2":
+        bowtie2 = Bowtie2()
+        bowtie2.align(index, forward_reads, reverse_reads,
+                      max_threads=max_threads, quality_score=quality_score,
+                      alignment_mode="very-sensitive", output_file=output_file)
+    elif aligner == "bwa-mem":
+        bwa = BWA()
+        bwa.align_mem(index, forward_reads, reverse_reads, output_file=output_file, max_threads=max_threads)
+    """
     if reverse_reads:
         os.system("bowtie2 --very-sensitive --%s -p %i -x %s -1 %s -2 %s > %s_trimmed.sam"
                   % (quality_score, max_threads, bowtie2_index, forward_reads, reverse_reads, sample_name))
     else:
         os.system("bowtie2 --very-sensitive --%s -p %i -x %s -U %s > %s_trimmed.sam"
                   % (quality_score, max_threads, bowtie2_index, forward_reads, sample_name))
+    """
+    alignment_sorting_and_filtering(sample_name, output_file, chromosomes_bed_file, mitochondrial_bed_file,
+                                    remove_SA=remove_SA, remove_nonPA=remove_nonPA)
 
-    alignment_sorting_and_filtering(sample_name, chromosomes_bed_file, mitochondrial_bed_file)
 
+def filter_data(sample_name,
+                min_length,
+                forward_reads,
+                forward_trim,
+                reverse_reads=None,
+                reverse_trim=None,
+                quality_score="phred33",
+                adapter="AGATCGGAAGAGC",
+                quality_treshold=20,
+                output_folder="trimmed",
+                filter_tool="trim_galore"):
+    print("Handling %s sample..." % sample_name)
+    os.system("mkdir -p %s" % output_folder)
+
+    if filter_tool == "trim_galore":
+        trim_galore(min_length,
+                    forward_reads,
+                    forward_trim,
+                    reverse_reads=reverse_reads,
+                    reverse_trim=reverse_trim,
+                    quality_score=quality_score,
+                    adapter=adapter,
+                    quality_treshold=quality_treshold,
+                    output_folder=output_folder)
+"""
+def correct_reads(forward_reads,
+                  reverse_reads=None,
+                  max_threads=4,
+                  ion_torrent=False):
+    #print("Handling %s sample..." % sample_name)
+    os.system("mkdir -p spades")
+    platform = ""
+    if ion_torrent:
+        platform = "--iontorrent"
+    if reverse_reads:
+        os.system("spades.py -t %i %s --only-error-correction --disable-gzip-output -1 %s -2 %s -o spades"
+                  % (max_threads, platform, forward_reads, reverse_reads))
+    else:
+        os.system("spades.py -t %i %s --only-error-correction --disable-gzip-output -s %s -o spades"
+                  % (max_threads, platform, forward_reads))
+    os.chdir("spades/corrected")
+    os.system("fastqc -t 2 --nogroup *.f*q")
+
+def assembly_reads(forward_reads,
+                  reverse_reads=None,
+                  max_threads=4,
+                  ion_torrent=False):
+    #print("Handling %s sample..." % sample_name)
+    os.system("mkdir -p spades")
+    platform = ""
+    if ion_torrent:
+        platform = "--iontorrent"
+    if reverse_reads:
+        os.system("spades.py -t %i %s --disable-gzip-output -1 %s -2 %s -o spades"
+                  % (max_threads, platform, forward_reads, reverse_reads))
+    else:
+        os.system("spades.py -t %i %s --disable-gzip-output -s %s -o spades"
+                  % (max_threads, platform, forward_reads))
+    os.chdir("spades/corrected")
+    os.system("fastqc -t 2 --nogroup *.f*q")
 
 def filter_data(sample_name,
                 min_length,
@@ -89,29 +200,37 @@ def filter_data(sample_name,
     else:
         if forward_trim:
             trim_str = "--clip_R1 %i" % forward_trim
-        os.system("trim_galore  --length %i --%s --dont_gzip %s -q %i -o trimmed %s"
-                  % (min_length, quality_score, trim_str, quality_treshold, forward_reads))
+        os.system("trim_galore -a %s  --length %i --%s --dont_gzip %s -q %i -o trimmed %s"
+                  % (adapter, min_length, quality_score, trim_str, quality_treshold, forward_reads))
     os.chdir("trimmed")
     os.system("fastqc -t 2 --nogroup *.fq")
+"""
 
 
 def correct_reads(forward_reads,
                   reverse_reads=None,
-                  max_threads=4):
+                  max_threads=4,
+                  platform="illumina",
+                  output_dir="spades"):
     #print("Handling %s sample..." % sample_name)
-    os.system("mkdir -p spades")
-
-    if reverse_reads:
-        os.system("spades.py -t %i --only-error-correction --disable-gzip-output -1 %s -2 %s -o spades"
-                  % (max_threads, forward_reads, reverse_reads))
-    else:
-
-        os.system("spades.py -t %i --only-error-correction --disable-gzip-output -s %s -o spades"
-                  % (max_threads, forward_reads))
-    os.chdir("spades")
-    os.system("fastqc -t 2 --nogroup *.f*q")
+    spades(forward_reads, reverse_reads=reverse_reads, only_correction=True,
+           max_threads=max_threads, platform=platform,
+           gzip_corrected_reads=False, output_dir=output_dir)
 
 
+def assembly_reads(forward_reads,
+                  reverse_reads=None,
+                  max_threads=4,
+                  platform="illumina",
+                  output_dir="spades",
+                  kmer_length_list=[]):
+    #print("Handling %s sample..." % sample_name)
+    spades(forward_reads, reverse_reads=reverse_reads,
+           max_threads=max_threads, platform=platform,
+           gzip_corrected_reads=False, output_dir=output_dir,
+           kmer_length_list=kmer_length_list)
+
+"""
 def get_alignment(bowtie2_index,
                   sample_name,
                   min_length,
@@ -127,6 +246,7 @@ def get_alignment(bowtie2_index,
                   adapter="AGATCGGAAGAGC"):
     #Illumina standard adapter AGATCGGAAGAGC
     #Nextera adapter CTGTCTCTTATACACATCT
+    #Ion torrent adapter P1 CCACTACGCCTCCGC
     print("Handling %s sample..." % sample_name)
     os.system("mkdir -p trimmed")
 
@@ -165,7 +285,7 @@ def get_alignment(bowtie2_index,
                   % (quality_score, max_threads, bowtie2_index, unpaired_r, sample_name))
 
     alignment_sorting_and_filtering(sample_name, chromosomes_bed_file, mitochondrial_bed_file)
-
+"""
 
 def get_coverage_thresholds(coverage_dist_file, one_side_base_threshold=0.025, minimum_threshold=5):
     #coverage_dist_file - is file like qualimap coverage_histogram.txt derived from alignment statistics

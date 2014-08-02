@@ -1,12 +1,15 @@
 #!/usr/bin/python2
-import os, re
+import os
+import re
 from collections import OrderedDict
+from math import sqrt
 
 import numpy as np
 from scipy.spatial.distance import pdist
 from scipy.cluster.hierarchy import linkage, dendrogram, inconsistent, cophenet, fcluster
 
 import matplotlib.pyplot as plt
+
 from Bio import SeqIO
 from Bio.SeqFeature import SeqFeature, FeatureLocation
 from General.General import check_path
@@ -53,10 +56,42 @@ class RecordVCF():
                                                 self.qual, filter_string, info_string, format_string, samples_string]))
 
 
+class MutCluster():
+
+    def _check_chrom(self, vcf_records_list):
+        chrom = vcf_records_list[0].chrom
+        for record in vcf_records_list:
+            if record.chrom != chrom:
+                raise ValueError("Records from different regions in same cluster")
+        return chrom
+
+    def __init__(self, chrom=None, size=None, start=None, end=None, description={},
+                 vcf_records_list=None, from_records=True):
+        if from_records:
+            self.chrom = self._check_chrom(vcf_records_list)
+            self.size = len(vcf_records_list)
+            self.start = vcf_records_list[0].pos
+            self.end = vcf_records_list[0].pos
+            self.mut_records = vcf_records_list
+        else:
+            self.chrom = chrom
+            self.size = size
+            self.start = start
+            self.end = end
+            self.descr = description
+            self.mean_dist = None
+        self.len = self.end - self.start + 1
+
+    def __len__(self):
+        return self.len
+
+
+
 class CollectionVCF():
     #TODO: rewrite metadata as class
 
     def __init__(self, metadata=None, record_list=None, header_list=None, vcf_file=None, from_file=True):
+        self.linkage_dict = None
         if from_file:
             self.metadata = OrderedDict({})
             self.records = []
@@ -324,7 +359,8 @@ class CollectionVCF():
         region_reference_dict = {}
         os.system("mkdir -p %s" % plot_dir)
         if single_fig:
-            plt.figure(1, dpi=dpi, figsize=figsize, facecolor=facecolor)
+            fig = plt.figure(1, dpi=dpi, figsize=figsize, facecolor=facecolor)
+            fig.suptitle("Rainfall plot", fontsize=14)
             sub_plot_dict = OrderedDict({})
         index = 1
         for region in regions_dict:
@@ -413,7 +449,7 @@ class CollectionVCF():
                 savefig("rainplot/" + outputf+"/"+ outputf +"_all_chr_log_scaled"+'.svg', facecolor = "#D6D6D6")
                 """
 
-    def hierarchical_clustering(self, method='average', dendrogramm_max_y=2000, sample_name=None):
+    def hierarchical_clustering(self, method='average', dendrogramm_max_y=2000, sample_name=None, save=False):
         # IMPORTANT! Use only for one-sample vcf
         # http://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html#scipy.cluster.hierarchy.linkage
         region_dict = self._split_regions()
@@ -441,7 +477,7 @@ class CollectionVCF():
             plt.figure(1, dpi=150, figsize=(50, 20))
             dendrogram(linkage_dict[region],
                        color_threshold=500,
-                       leaf_font_size=5,
+                       leaf_font_size=4,
                        distance_sort=True)
             plt.ylim(ymax=dendrogramm_max_y)
             plt.axhline(y=500, color="purple")
@@ -459,18 +495,102 @@ class CollectionVCF():
             inconsistent_dict[region] = inconsistent(linkage_dict[region])
             np.savetxt("clustering/inconsistent_coefficient_%s.t" % region, inconsistent_dict[region])
 
-            # http://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.fcluster.html#scipy.cluster.hierarchy.fcluster
-            #
-            clusters_dict[region] = fcluster(linkage_dict[region], 1)
-            np.savetxt("clustering/clusters_%s.t" % region, clusters_dict[region], fmt="%i")
+            #clusters_dict[region] = fcluster(linkage_dict[region], 1)
+            #np.savetxt("clustering/clusters_%s.t" % region, clusters_dict[region], fmt="%i")
         sample = sample_name
         if not sample:
             sample = self.samples[0]
         with open("clustering/correlation.t", "w") as cor_fd:
             cor_fd.write("sample\t%s\n" % ("\t".join(list(region_dict.keys()))))
             cor_fd.write("%s\t%s\n" % (sample, "\t".join([str(correlation_dict[region]) for region in region_dict])))
+
+        if save:
+            self.linkage_dict = linkage_dict
+
         return region_dict, linkage_dict
 
+    def test_thresholds(self,
+                        extracting_method="inconsistent",
+                        threshold=None,
+                        cluster_distance='average',
+                        dendrogramm_max_y=2000,
+                        sample_name=None,
+                        save_clustering=False):
+
+        # threshold is tuple(list) of three variables: min, max, number
+
+        # extracting_method possible values
+        #   inconsistent
+        #   distance
+        #   maxclust
+        #   monocrit
+        #   monocrit
+
+        if self.linkage_dict:
+            linkage_dict = self.linkage_dict
+        else:
+            region_dict, linkage_dict = self.hierarchical_clustering(method=cluster_distance,
+                                                                     dendrogramm_max_y=dendrogramm_max_y,
+                                                                     sample_name=sample_name,
+                                                                     save=save_clustering)
+
+        num_of_regions = len(list(linkage_dict.keys()))
+
+        side = int(sqrt(num_of_regions))
+        if side*side != num_of_regions:
+            side += 1
+        sub_plot_dict = OrderedDict({})
+        fig = plt.figure(2, dpi=150, figsize=(30, 30))
+        fig.suptitle("Relashionship between number of clusters and threshold of %s" % extracting_method, fontsize=20)
+
+        thresholds = threshold
+        if extracting_method == "inconsistent":
+            if not threshold:
+                thresholds = (0.5, 1.5, 21)
+
+        index = 1
+        for region in linkage_dict:
+            # http://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.fcluster.html#scipy.cluster.hierarchy.fcluster
+            n_clusters_list = []
+            n_nonsingleton_clusters = []
+            n_multiclusters = []
+            coef_threshold_list = np.linspace(*thresholds)  # best variant 0.5, 1.5, 21
+            for i in coef_threshold_list:
+                clusters = fcluster(linkage_dict[region], i, criterion=extracting_method)
+                n_clusters_list.append(max(clusters))
+
+                # counting clusters with 2+ and 3+ clusters
+                ua, uind = np.unique(clusters, return_inverse=True)
+                counted = np.bincount(uind)
+                #j = 0
+                nonsingleton = 0
+                multicluster = 0  # 3+
+                for k in counted:
+                    if k > 1:
+                        nonsingleton += 1
+                    if k > 2:
+                        multicluster += 1
+                n_nonsingleton_clusters.append(nonsingleton)
+                n_multiclusters.append(multicluster)
+            sub_plot_dict[region] = plt.subplot(side, side, index, axisbg="#D6D6D6")
+            #ax = plt.gca()
+            #ax.set_xticks(np.arange(0.5, 2.2, 0.1))
+
+            plt.grid()
+            plt.plot(coef_threshold_list, n_clusters_list, label="all")
+            plt.plot(coef_threshold_list, n_nonsingleton_clusters, "green", label="2+")
+            plt.plot(coef_threshold_list, n_multiclusters, "red", label="3+")
+            plt.title("Region %s" % region)
+            plt.legend(loc='upper right')
+            plt.ylabel("Number of clusters")
+            plt.xlabel("Threshold")
+            #plt.axvline(x=0.8, color="purple")
+            #plt.axvline(x=1.1, color="purple")
+
+            plt.ylim(ymin=0)
+            index += 1
+        plt.savefig("clustering/clusters_%s.svg" % extracting_method)
+        plt.close()
 
 
 class ReferenceGenome(object):
@@ -522,6 +642,7 @@ class ReferenceGenome(object):
                 self.gaps_dict[region].append(SeqFeature(FeatureLocation(match.start(), match.end()),
                                                          type="gap", strand=None))
         #print(self.gaps_dict)
+
 if __name__ == "__main__":
     workdir = "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/all"
 
@@ -547,5 +668,6 @@ if __name__ == "__main__":
                                   from_file=True)
         print("Totaly %s mutations" % len(mutations))
 
-        mutations.hierarchical_clustering()
+        mutations.test_thresholds(save_clustering=True)
+        mutations.test_thresholds(extracting_method='distance', threshold=(50, 5000, 100))
         #mutations.rainfall_plot(sample + suffix, ref_genome=reference, draw_gaps=True)

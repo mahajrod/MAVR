@@ -1,8 +1,18 @@
 #!/usr/bin/python2
-
+import os
+import re
 from collections import OrderedDict
-from General.General import check_path
+from math import sqrt
+
 import numpy as np
+from scipy.spatial.distance import pdist
+from scipy.cluster.hierarchy import linkage, dendrogram, inconsistent, cophenet, fcluster
+
+import matplotlib.pyplot as plt
+
+from Bio import SeqIO
+from Bio.SeqFeature import SeqFeature, FeatureLocation
+from General.General import check_path
 
 
 class RecordVCF():
@@ -46,10 +56,42 @@ class RecordVCF():
                                                 self.qual, filter_string, info_string, format_string, samples_string]))
 
 
+class MutCluster():
+
+    def _check_chrom(self, vcf_records_list):
+        chrom = vcf_records_list[0].chrom
+        for record in vcf_records_list:
+            if record.chrom != chrom:
+                raise ValueError("Records from different regions in same cluster")
+        return chrom
+
+    def __init__(self, chrom=None, size=None, start=None, end=None, description={},
+                 vcf_records_list=None, from_records=True):
+        if from_records:
+            self.chrom = self._check_chrom(vcf_records_list)
+            self.size = len(vcf_records_list)
+            self.start = vcf_records_list[0].pos
+            self.end = vcf_records_list[0].pos
+            self.mut_records = vcf_records_list
+        else:
+            self.chrom = chrom
+            self.size = size
+            self.start = start
+            self.end = end
+            self.descr = description
+            self.mean_dist = None
+        self.len = self.end - self.start + 1
+
+    def __len__(self):
+        return self.len
+
+
+
 class CollectionVCF():
     #TODO: rewrite metadata as class
 
     def __init__(self, metadata=None, record_list=None, header_list=None, vcf_file=None, from_file=True):
+        self.linkage_dict = None
         if from_file:
             self.metadata = OrderedDict({})
             self.records = []
@@ -57,12 +99,12 @@ class CollectionVCF():
                 for line in fd:
                     if line[:2] != "##":
                         self.header_list = line[1:].strip().split("\t")
-                        self.samples = self.header_list[8:]
+                        self.samples = self.header_list[9:]
                         break
                     #print(line)
-                    self.__add_metadata(line)
+                    self._add_metadata(line)
                 for line in fd:
-                    self.__add_record(line)
+                    self._add_record(line)
         else:
             self.metadata = metadata
             self.records = record_list
@@ -71,7 +113,7 @@ class CollectionVCF():
     def __len__(self):
         return len(self.records)
 
-    def __add_record(self, line):
+    def _add_record(self, line):
         line_list = line.strip().split("\t")
         #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	Sample_1
         position = int(line_list[1])
@@ -81,7 +123,7 @@ class CollectionVCF():
         alt_list = line_list[4].split(",")
         filter_list = line_list[6].split(",")          #list, entries are strings
 
-        info_tuple_list = [self.__split_by_equal_sign(entry) for entry in line_list[7].split(";")]
+        info_tuple_list = [self._split_by_equal_sign(entry) for entry in line_list[7].split(";")]
         info_dict = {}
         for entry in info_tuple_list:
             if self.metadata["INFO"][entry[0]]["Type"] == "Flag":
@@ -110,7 +152,7 @@ class CollectionVCF():
         self.records.append(RecordVCF(line_list[0], position, line_list[2], line_list[3], alt_list, quality, filter_list,
                                       info_dict, samples_list))
 
-    def __split_by_equal_sign(self, string):
+    def _split_by_equal_sign(self, string):
         try:
             index = string.index("=")
         except ValueError:
@@ -118,7 +160,7 @@ class CollectionVCF():
             return string, None
         return string[:index], string[index+1:]
 
-    def __split_by_comma_sign(self, string):
+    def _split_by_comma_sign(self, string):
         index_list = [-1]
         i = 1
         while (i < len(string)):
@@ -132,18 +174,18 @@ class CollectionVCF():
         index_list.append(len(string))
         return [string[index_list[j] + 1: index_list[j + 1]] for j in range(0, len(index_list) - 1)]
 
-    def __add_metadata(self, line):
-        key, value = self.__split_by_equal_sign(line[2:].strip())
+    def _add_metadata(self, line):
+        key, value = self._split_by_equal_sign(line[2:].strip())
         if value[0] == "<" and value[-1] == ">":
             #checking is value a list or no
             #print(value)
             #print(key, value)
-            value = self.__split_by_comma_sign(value[1:-1])
+            value = self._split_by_comma_sign(value[1:-1])
             #print(value)
             #parse in suppose that first parameter in value list is ID
-            value_id = self.__split_by_equal_sign(value[0])[1]
+            value_id = self._split_by_equal_sign(value[0])[1]
             #print(value[1:])
-            value = OrderedDict(self.__split_by_equal_sign(entry) for entry in value[1:])
+            value = OrderedDict(self._split_by_equal_sign(entry) for entry in value[1:])
             #print(value_id, value)
             if key not in self.metadata:
                 self.metadata[key] = OrderedDict({})
@@ -231,126 +273,401 @@ class CollectionVCF():
         return {"All": staked}, shift_dict
         """
 
-    def rainfall_plot(self, output_file):
-        #TODO: write rainfall plot
-        pass
+    def split_by_ref_and_alt(self, ref_alt_list):
+        #TODO: check
+        # structure of ref_alt_list:  [[ref1,[alt1.1, alt1.M1]], ..., [refN,[altN.1, ..., altN.MN]]]
+        found_records = []
+        filtered_out_records = []
+        for record in self.records:
+            #print (record.ALT)
+            if (record.ref, record.alt_list) in ref_alt_list:
+                found_records.append(record)
+            else:
+                filtered_out_records.append(record)
+        found = CollectionVCF(metadata=self.metadata, record_list=found_records,
+                                    header_list=self.header_list, from_file=False)
+        filtered_out = CollectionVCF(metadata=self.metadata, record_list=filtered_out_records,
+                                      header_list=self.header_list, from_file=False)
+        return found, filtered_out
 
-"""
-class MutRecord(object):
-    'docstring for MutRecord'
-    def __init__(self, chrom=None, pos=None, identificator=None, ref=None, alt=None, qual=None,
-                 filter_list=[], info_dict={}, format_list=[], sample_list=[], strand=None):
-        super(MutRecord, self).__init__()
-        self.chrom = chrom
-        self.pos = pos
-        self.id = identificator
-        self.ref = ref
-        self.alt = alt
-        self.qual = qual
-        self.filter = filter_list
-        self.info = info_dict
-        self.format = format_list
-        self.samples = sample_list
-        self.strand = strand
-        self.frequency = None
-        self.distance = None
+    def _split_regions(self):
+        #TODO: check
+        splited_dict = OrderedDict({})
+        for record in self.records:
+            if record.chrom not in splited_dict:
+                splited_dict[record.chrom] = [record]
+            else:
+                splited_dict[record.chrom].append(record)
+        return splited_dict
 
-    def calc_freq(self):
-        self.frequency = 0
-        for sample in self.samples:
-            gentype = sample.data.GT.split("|")
-            self.frequency += int(gentype[0]) + int(gentype[1])
+    def _split_ref(self, records):
+        splited_dict = OrderedDict({"A": [], "C": [], "G": [], "T": [], "INDEL": []})
+        nucleotides = ["A", "C", "G", "T"]
+        for record in records:
+            if record.ref in nucleotides:
+                splited_dict[record.ref].append(record)
+            else:
+                splited_dict["INDEL"].append(record)
+        return splited_dict
+
+    def split_by_regions(self):
+        #TODO: check
+        regions_dict = self._split_regions()
+        return [CollectionVCF(metadata=self.metadata, record_list=regions_dict[region],
+                              header_list=self.header_list, from_file=False)
+                for region in regions_dict]
+
+    def _reference(self, record):
+        nucleotides = ["A", "C", "G", "T"]
+        if record.ref in nucleotides:
+            return record.ref
+        return "INDEL"
+
+    def write_splited_regions(self, prefix):
+        #TODO: check
+        regions_dict = self._split_regions()
+
+        for region in regions_dict:
+            CollectionVCF(metadata=self.metadata, record_list=regions_dict[region],
+                          header_list=self.header_list, from_file=False).write(prefix + "_" + region + ".vcf")
+
+    def get_positions(self):
+        regions_dict = self._split_regions()
+        positions_dict = {}
+        for region in regions_dict:
+            positions_dict[region] = np.array([record.pos for record in regions_dict[region]])
+        return positions_dict
+
+    def rainfall_plot(self, plot_name, base_colors=[], single_fig=True, dpi=150, figsize=(55, 70), facecolor="#D6D6D6",
+                      ref_genome=None, min_gap_length=10, draw_gaps=False):
+        print("Drawing rainfall plot...")
+        plot_dir = "rainfall_plot"
+        reference_colors = {"A": "#FBFD2B",    # yellow
+                            "C": "#FF000F",     # red
+                            "G": "#000FFF",     # blue
+                            "T": "#4ED53F",     # green
+                            "INDEL": "#000000"  # black
+                            }
+        if base_colors:
+            reference_colors = base_colors
 
 
-def parse_vcf(vcf_filename):
-    fd = open(vcf_filename, "w")
-    format = fd.readline().strip()[2:].split("=")
-    source = fd.readline().strip()[2:].split("=")
-    reference = fd.readline().strip()[2:].split("=")
+        regions_dict = self._split_regions()
+        num_of_regions = len(regions_dict)
+        positions_dict = {}
+        distances_dict = {}
+        region_reference_dict = {}
+        os.system("mkdir -p %s" % plot_dir)
+        if single_fig:
+            fig = plt.figure(1, dpi=dpi, figsize=figsize, facecolor=facecolor)
+            fig.suptitle("Rainfall plot", fontsize=14)
+            sub_plot_dict = OrderedDict({})
+        index = 1
+        for region in regions_dict:
+            positions_dict[region] = np.array([record.pos for record in regions_dict[region]])
+            #np.ediff1d return differences between consecutive elements in array, then 0 is added to the beginning
+            distances_dict[region] = np.insert(np.ediff1d(positions_dict[region]),
+                                               0, 0)
+            region_reference_dict[region] = OrderedDict({"A": [[], []],
+                                                         "C": [[], []],
+                                                         "G": [[], []],
+                                                         "T": [[], []],
+                                                         "INDEL": [[], []]})
+            for i in range(0, len(regions_dict[region])):
+                region_reference_dict[region][self._reference(regions_dict[region][i])][0].append(positions_dict[region][i])
+                region_reference_dict[region][self._reference(regions_dict[region][i])][1].append(distances_dict[region][i])
+            if single_fig:
+                if not sub_plot_dict:
+                    sub_plot_dict[region] = plt.subplot(num_of_regions, 1, index, axisbg=facecolor)
+                else:
+                    keys = list(sub_plot_dict.keys())
+                    sub_plot_dict[region] = plt.subplot(num_of_regions, 1, index,
+                                                        sharex=sub_plot_dict[keys[0]],
+                                                        sharey=sub_plot_dict[keys[0]],
+                                                        axisbg=facecolor)
 
-    rest_of_metadata = []
-    for line in fd:
-        if line[:6] == "#CHROM":
-            columns_names = line.strip()[1:].split("\t")
-            break
-        rest_of_metadata.append(line.strip())
-    if "FORMAT" in columns_names:
-        samples_names = columns_names[9:]
-        info_list = columns_names[7].split(";")
-        for line in fd:
-            splited = line.strip().split("\t")
-            yield MutRecord(chrom=splited[0],
-                            pos=splited[1],
-                            identificator=splited[2],
-                            ref=splited[3],
-                            alt=splited[4],
-                            qual=splited[5],
-                            filter_list=splited[6],
-                            )
+                index += 1
+                for reference in region_reference_dict[region]:
+                    plt.plot(region_reference_dict[region][reference][0],
+                             region_reference_dict[region][reference][1],
+                             color=reference_colors[reference],
+                             marker='.', linestyle='None', label=reference)
 
-    fd.close()
-"""
+                plt.title("Region %s" % region)
+                #xlabel("Position")
+                plt.ylabel("Distanse")
+                plt.ylim(ymin=0)
+                plt.axhline(y=100, color="#000000")
+                plt.axhline(y=1000, color="#000000")
+                plt.axhline(y=500, color="purple")
+                plt.axhline(y=10, color="#000000")
+                if ref_genome:
+                    if draw_gaps:
+                        for gap in ref_genome.gaps_dict[region]:
+                            plt.gca().add_patch(plt.Rectangle((gap.location.start, 1),
+                                                              gap.location.end - gap.location.start,
+                                                              1024*32, facecolor="#aaaaaa", edgecolor='none'))
+        if single_fig:
+
+            plt.savefig("%s/%s.svg" % (plot_dir, plot_name))
+            for region in sub_plot_dict:
+                sub_plot_dict[region].set_yscale('log', basey=2)
+                    #yscale ('log', basey = 2)
+            plt.savefig("%s/%s_log_scale.svg" % (plot_dir, plot_name))
+            plt.close()
+            """
+                else:
+                    figure(self.figure_counter,dpi = 150, figsize = (6, 4), facecolor = "#D6D6D6")
+                    self.figure_counter += 1
+                    subplot(1,1, 1, axisbg = "#D6D6D6")
+                for reference in data[chromosome]:
+                    for frequency in data[chromosome][reference]:
+                        frequency_color = reference_color[reference]
+                    #    print 'color #%06x' % frequency_color
+                        plot(data[chromosome][reference][frequency][1],data[chromosome][reference][frequency][2], color =  '#%06x' % frequency_color, \
+                            marker = '.', linestyle  = 'None' ,label = 'Freq %i' % frequency)
+
+
+                if ref_genome:
+                    for gap in ref_genome.gaps_dict[chromosome]:
+                        gca().add_patch(Rectangle((gap.location.start, 1),gap.location.end - gap.location.start, 1024*32,
+                                                 facecolor="#aaaaaa", edgecolor = 'none'))
+
+
+
+
+                chr_counter += 1
+
+                if not single_fig:
+                    savefig("rainplot/" + outputf+"/"+ outputf +"_chr"+ chromosome + '.svg', facecolor = "#D6D6D6")
+
+            if single_fig:
+                savefig("rainplot/" + outputf+"/"+ outputf +"_all_chr"+'.svg', facecolor = "#D6D6D6")
+                for sub_plot_entry in sub_plot_list:
+                    sub_plot_entry.set_yscale('log',basey = 2)
+                    yscale ('log', basey = 2)
+                savefig("rainplot/" + outputf+"/"+ outputf +"_all_chr_log_scaled"+'.svg', facecolor = "#D6D6D6")
+                """
+
+    def hierarchical_clustering(self, method='average', dendrogramm_max_y=2000, sample_name=None, save=False):
+        # IMPORTANT! Use only for one-sample vcf
+        # http://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html#scipy.cluster.hierarchy.linkage
+        region_dict = self._split_regions()
+        positions_dict = OrderedDict({})
+        correlation_dict = OrderedDict({})
+        linkage_dict = OrderedDict({})
+        inconsistent_dict = OrderedDict({})
+        clusters_dict = OrderedDict({})
+        os.system("mkdir -p clustering")
+        for region in region_dict:
+            positions_dict[region] = np.array([[record.pos] for record in region_dict[region]])
+
+            # allowed methods(used to calculate distance between clusters):
+            # 'complete'    -   Farthest Point Algorithm
+            # 'single'      -   Nearest Point Algorithm
+            # 'average'     -   UPGMA algorithm, distance between clusters is calculated as average from pairwise
+            #                   distances between elements of clusters
+            # 'weighted     -   WPGMA algorithm
+            # 'centroid'    -   UPGMC algorithm
+            # 'median'      -   WPGMC algorithm
+            # 'ward'        -   incremental algorithm
+
+            distance_matrix = pdist(positions_dict[region])
+            linkage_dict[region] = linkage(distance_matrix, method=method)
+            plt.figure(1, dpi=150, figsize=(50, 20))
+            dendrogram(linkage_dict[region],
+                       color_threshold=500,
+                       leaf_font_size=4,
+                       distance_sort=True)
+            plt.ylim(ymax=dendrogramm_max_y)
+            plt.axhline(y=500, color="purple")
+            plt.axhline(y=1000, color="black")
+            plt.savefig("clustering/clustering_%s.svg" % region)
+            plt.close()
+
+            # http://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.cophenet.html#scipy.cluster.hierarchy.cophenet
+            # calculates cophenetic correlation coefficient to estimate accuracy of clustering
+            correlation_dict[region] = cophenet(linkage_dict[region], distance_matrix)[0]
+
+            # http://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.inconsistent.html#scipy.cluster.hierarchy.inconsistent
+            # calculates inconsistent coeff
+
+            inconsistent_dict[region] = inconsistent(linkage_dict[region])
+            np.savetxt("clustering/inconsistent_coefficient_%s.t" % region, inconsistent_dict[region])
+
+            #clusters_dict[region] = fcluster(linkage_dict[region], 1)
+            #np.savetxt("clustering/clusters_%s.t" % region, clusters_dict[region], fmt="%i")
+        sample = sample_name
+        if not sample:
+            sample = self.samples[0]
+        with open("clustering/correlation.t", "w") as cor_fd:
+            cor_fd.write("sample\t%s\n" % ("\t".join(list(region_dict.keys()))))
+            cor_fd.write("%s\t%s\n" % (sample, "\t".join([str(correlation_dict[region]) for region in region_dict])))
+
+        if save:
+            self.linkage_dict = linkage_dict
+
+        return region_dict, linkage_dict
+
+    def test_thresholds(self,
+                        extracting_method="inconsistent",
+                        threshold=None,
+                        cluster_distance='average',
+                        dendrogramm_max_y=2000,
+                        sample_name=None,
+                        save_clustering=False):
+
+        # threshold is tuple(list) of three variables: min, max, number
+
+        # extracting_method possible values
+        #   inconsistent
+        #   distance
+        #   maxclust
+        #   monocrit
+        #   monocrit
+
+        if self.linkage_dict:
+            linkage_dict = self.linkage_dict
+        else:
+            region_dict, linkage_dict = self.hierarchical_clustering(method=cluster_distance,
+                                                                     dendrogramm_max_y=dendrogramm_max_y,
+                                                                     sample_name=sample_name,
+                                                                     save=save_clustering)
+
+        num_of_regions = len(list(linkage_dict.keys()))
+
+        side = int(sqrt(num_of_regions))
+        if side*side != num_of_regions:
+            side += 1
+        sub_plot_dict = OrderedDict({})
+        fig = plt.figure(2, dpi=150, figsize=(30, 30))
+        fig.suptitle("Relashionship between number of clusters and threshold of %s" % extracting_method, fontsize=20)
+
+        thresholds = threshold
+        if extracting_method == "inconsistent":
+            if not threshold:
+                thresholds = (0.5, 1.5, 21)
+
+        index = 1
+        for region in linkage_dict:
+            # http://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.fcluster.html#scipy.cluster.hierarchy.fcluster
+            n_clusters_list = []
+            n_nonsingleton_clusters = []
+            n_multiclusters = []
+            coef_threshold_list = np.linspace(*thresholds)  # best variant 0.5, 1.5, 21
+            for i in coef_threshold_list:
+                clusters = fcluster(linkage_dict[region], i, criterion=extracting_method)
+                n_clusters_list.append(max(clusters))
+
+                # counting clusters with 2+ and 3+ clusters
+                ua, uind = np.unique(clusters, return_inverse=True)
+                counted = np.bincount(uind)
+                #j = 0
+                nonsingleton = 0
+                multicluster = 0  # 3+
+                for k in counted:
+                    if k > 1:
+                        nonsingleton += 1
+                    if k > 2:
+                        multicluster += 1
+                n_nonsingleton_clusters.append(nonsingleton)
+                n_multiclusters.append(multicluster)
+            sub_plot_dict[region] = plt.subplot(side, side, index, axisbg="#D6D6D6")
+            #ax = plt.gca()
+            #ax.set_xticks(np.arange(0.5, 2.2, 0.1))
+
+            plt.grid()
+            plt.plot(coef_threshold_list, n_clusters_list, label="all")
+            plt.plot(coef_threshold_list, n_nonsingleton_clusters, "green", label="2+")
+            plt.plot(coef_threshold_list, n_multiclusters, "red", label="3+")
+            plt.title("Region %s" % region)
+            plt.legend(loc='upper right')
+            plt.ylabel("Number of clusters")
+            plt.xlabel("Threshold")
+            #plt.axvline(x=0.8, color="purple")
+            #plt.axvline(x=1.1, color="purple")
+
+            plt.ylim(ymin=0)
+            index += 1
+        plt.savefig("clustering/clusters_%s.svg" % extracting_method)
+        plt.close()
+
+
+class ReferenceGenome(object):
+    # TODO: rewrite
+    """docstring for ReferenceGenome"""
+    chr_dict = {"chrI": "1",
+                "chrII": "2",
+                "chrIII": "3",
+                "chrIV": "4",
+                "chrV": "5",
+                "chrVI": "6",
+                "chrVII": "7",
+                "chrVIII": "8",
+                "chrIX": "9",
+                "chrX": "10",
+                "chrXI": "11",
+                "chrXII": "12",
+                "chrXIII": "13",
+                "chrXIV": "14",
+                "chrXV": "15",
+                "chrXVI": "16",
+                }
+    feature_dict = {}
+    gaps_dict = {}
+
+    def __init__(self, ref_gen_file, index_file="refgen.idx", filetype="fasta"):
+        self.ref_gen_file = ref_gen_file
+        self.reference_genome = SeqIO.index_db(index_file, [ref_gen_file], filetype)
+        """
+        for entry in self.reference_genome:
+            entry_name = self.chr_dict[self.reference_genome[entry].description.split(" ")[1]]
+            self.feature_dict[entry_name] = []
+            for feature in self.reference_genome[entry].features:
+                if not (feature.type == "CDS" or feature.type == "source" or feature.type == "gene" or
+                        feature.type == "rep_origin" or feature.type == "misc_feature"):
+                    self.feature_dict[entry_name].append([feature.type,
+                                                         [feature.location.start, feature.location.end,
+                                                          feature.location.strand], feature.strand])
+                #print feature.type,feature.location.start,feature.location.end, feature.location.strand
+        """
+    def find_gaps(self):
+        gap_reg_exp = re.compile("N+", re.IGNORECASE)
+        for region in self.reference_genome:
+            self.gaps_dict[region] = []
+            #print self.reference_genome[entry].seq
+            gaps = gap_reg_exp.finditer(str(self.reference_genome[region].seq))  # iterator with
+            for match in gaps:
+                #print(match)
+                self.gaps_dict[region].append(SeqFeature(FeatureLocation(match.start(), match.end()),
+                                                         type="gap", strand=None))
+        #print(self.gaps_dict)
 
 if __name__ == "__main__":
-    samples_list =      [
-                        "210-AID_Can1", #
-                        "210-AID_Can2",    #
-                        "210-Can1",  #
-                        "210-Can2",   #
-                        "210-FOA1",   #
-                        "210-FOA2",
-                        "210-Glu-Can2",    #
-                        "210-Glu-FOA2",    #
-                        "210-Glu-FOA3",    #
-                        "210-L1",   #
-                        "210-L2",    #
-                        "210-L3",   #
-                        "210-L4",   #
-                        "210-L5",  #
-                        "210-L6",   #
-                        "Sample_1",
-                        "Sample_2",
-                        "Sample_3",
-                        "Sample_4",
-                        "Sample_5",
-                        "Sample_6",
-                        "Sample_7",
-                        "Sample_8",
-                        "Sample_9",
-                        "Sample_10",
-                        "Sample_11",
-                        "Sample_12",
-                        "Sample_13",
-                        "Sample_14",
-                        "Sample_15",
-                        "Sample_16",
-                        "Sample_17",
-                        "Sample_18",
-                        "Sample_19",
-                        "Sample_20",
-                        ]
-    """
-    file_suffix = "_GATK_best_snps.recode.vcf"
-    sample_dir = "/home/winstorage/old/GATK_vcf/best_snps/"
-    output_file = "count_mutations_file_best_snps.t"
-    """
-    file_suffix = "_GATK_best_snps.recode_filtered.vcf"
-    sample_dir = "/home/winstorage/old/GATK_vcf/best_snp_only_desaminase/"
-    output_file = "count_mutations_file_best_snp_only_desaminase.t"
+    workdir = "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/all"
 
-    mutation_dict = OrderedDict((sample, CollectionVCF(vcf_file=sample_dir + sample + file_suffix, from_file=True))
-                         for sample in samples_list)
-    with open(output_file, "w") as out_fd:
-        out_fd.write("#sample_name\tnumber_of_mutations\n")
-        for sample in mutation_dict:
-            out_fd.write("%s\t%i\n" % (sample, len(mutation_dict[sample])))
+    reference = ReferenceGenome("/home/mahajrod/genetics/desaminases/data/LAN210_v0.8m/LAN210_v0.8m.fasta",
+                                index_file="/home/mahajrod/genetics/desaminases/data/LAN210_v0.8m/LAN210_v0.8m.idx")
+    #print(reference.reference_genome)
+    reference.find_gaps()
+    os.chdir(workdir)
+    samples_list = sorted(os.listdir("."))
 
-    """
-    Mutations = CollectionVCF(vcf_file="/home/winstorage/old/GATK_vcf/filtered_snps/Sample_1_GATK_filtered_snps.vcf",
-                              from_file=True)
-    print(Mutations.metadata)
-    print(len(Mutations))
-    fg = Mutations.metadata2str()
-    Mutations.write("tra.vcf")
-    #print(Mutations.records[9])
-    """
+    suffix = "_GATK_best_merged.vcf"
+
+    for sample in samples_list:
+        print("Handling %s" % sample)
+
+        os.chdir(workdir)
+        os.chdir(sample)
+        if "alignment" not in os.listdir("."):
+            continue
+        os.chdir("alignment")
+
+        mutations = CollectionVCF(vcf_file=sample + suffix,
+                                  from_file=True)
+        print("Totaly %s mutations" % len(mutations))
+
+        mutations.test_thresholds(save_clustering=True)
+        mutations.test_thresholds(extracting_method='distance', threshold=(50, 5000, 100))
+        #mutations.rainfall_plot(sample + suffix, ref_genome=reference, draw_gaps=True)

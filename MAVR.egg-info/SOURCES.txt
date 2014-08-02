@@ -19,9 +19,11 @@ Parse/ParseFastQC.py
 Parse/ParseGVF.py
 Parse/ParseGeneral.py
 Parse/ParseR.py
+Parse/ParseTRF.py
 Parse/ParseVCF.py
 Parse/__init__.py
 Pipelines/GenePrediction.py
+Pipelines/GenomeAssembly.py
 Pipelines/Phylogeny.py
 Pipelines/RepeatSearch.py
 Pipelines/SNPCall.py
@@ -31,6 +33,7 @@ SeqAnalysis/__init__.py
 Tools/AlignmentTools.py
 Tools/AssemblyTools.py
 Tools/BLAST.py
+Tools/Bedtools.py
 Tools/FilterTools.py
 Tools/GATK.py
 Tools/GlimerHMM.py

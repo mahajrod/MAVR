@@ -4,10 +4,13 @@ import collections
 from Bio import SeqIO
 from General.General import check_path
 from Tools.Picard import add_header2bam
-from MutAnalysis.Mutation import *
+#from MutAnalysis.Mutation import *
 from Tools.AssemblyTools import spades
 from Tools.FilterTools import trim_galore
-from Tools.AlignmentTools import bowtie2
+from Tools.AlignmentTools import Bowtie2, BWA
+
+
+# TODO: refactor, remove absolete functions and so on
 
 
 def get_chromosomes_bed(reference, reference_index, mitochondrial_region_name="mt",
@@ -31,40 +34,77 @@ def get_chromosomes_bed(reference, reference_index, mitochondrial_region_name="m
             in_fd.write(record_id + "\t1\t" + str(lengthes_dict[record_id]) + "\n")
 
 
-def alignment_sorting_and_filtering(sample_name, alignment_file, chromosomes_bed_file, mitochondrial_bed_file):
+def alignment_sorting_and_filtering(sample_name,
+                                    alignment_file,
+                                    chromosomes_bed_file=None,
+                                    mitochondrial_bed_file=None,
+                                    input_alignment_type="sam",
+                                    remove_SA=False,
+                                    remove_nonPA=False):
+    unaligned = 4
+    supplementary_alignment = 2048
+    non_primary_alignment = 256
     #-F 4 - skip UNaligned reads
-    os.system("samtools view -Sb %s | samtools sort - %s_trimmed_sorted" % (alignment_file, sample_name))
+    if input_alignment_type == "sam":
+        input_type = "-S"
+    elif input_alignment_type == "bam":
+        input_type = ""
+
+    os.system("samtools view %s -b %s | samtools sort - %s_trimmed_sorted" % (input_type, alignment_file, sample_name))
     os.system("samtools rmdup %s_trimmed_sorted.bam %s_trimmed_sorted_rm_pcr.bam" % (sample_name, sample_name))
-    os.system("samtools view -b -F 4 -L %s %s_trimmed_sorted_rm_pcr.bam  > %s_trimmed_sorted_rm_pcr_chrom.bam"
-              % (chromosomes_bed_file, sample_name, sample_name))
-    os.system("samtools index %s_trimmed_sorted_rm_pcr_chrom.bam" % sample_name)
-    os.system("samtools view -b -F 4 -L %s %s_trimmed_sorted_rm_pcr.bam  > %s_trimmed_sorted_rm_pcr_mt.bam"
-              % (mitochondrial_bed_file, sample_name, sample_name))
-    os.system("samtools index %s_trimmed_sorted_rm_pcr_mt.bam" % sample_name)
+
     os.system("samtools view -b -f 4  %s_trimmed_sorted_rm_pcr.bam  > %s_trimmed_sorted_rm_pcr_unaligned.bam"
               % (sample_name, sample_name))
-    os.system("rm -rf %s_trimmed.sam %s_trimmed_sorted.bam %s_trimmed_sorted_rm_pcr.bam"
-              % (sample_name, sample_name, sample_name))
-    os.system("qualimap bamqc -bam %s_trimmed_sorted_rm_pcr_mt.bam " % sample_name)
+
+    extract_chromosomes = ""
+    if chromosomes_bed_file:
+        extract_chromosomes = "-L %s" % chromosomes_bed_file
+
+    # -F 256 remove non primary alignment
+    # -F 2048 remove supplementary alignment
+    filter_parameter = unaligned
+    if remove_SA:
+        filter_parameter += supplementary_alignment
+    if remove_nonPA:
+        filter_parameter += non_primary_alignment
+
+    os.system("samtools view -b -F %i %s %s_trimmed_sorted_rm_pcr.bam  > %s_trimmed_sorted_rm_pcr_chrom.bam"
+              % (filter_parameter, extract_chromosomes, sample_name, sample_name))
+    os.system("samtools index %s_trimmed_sorted_rm_pcr_chrom.bam" % sample_name)
     os.system("qualimap bamqc -bam %s_trimmed_sorted_rm_pcr_chrom.bam " % sample_name)
 
+    if mitochondrial_bed_file:
+        os.system("samtools view -b -F %i -L %s %s_trimmed_sorted_rm_pcr.bam  > %s_trimmed_sorted_rm_pcr_mt.bam"
+              % (filter_parameter, mitochondrial_bed_file, sample_name, sample_name))
+        os.system("samtools index %s_trimmed_sorted_rm_pcr_mt.bam" % sample_name)
+        os.system("qualimap bamqc -bam %s_trimmed_sorted_rm_pcr_mt.bam " % sample_name)
 
-def get_alignment(bowtie2_index,
+    os.system("rm -rf %s_trimmed.sam %s_trimmed_sorted.bam %s_trimmed_sorted_rm_pcr.bam"
+              % (sample_name, sample_name, sample_name))
+
+
+def get_alignment(index,
                   sample_name,
                   forward_reads,
-                  chromosomes_bed_file,
-                  mitochondrial_bed_file,
+                  chromosomes_bed_file=None,
+                  mitochondrial_bed_file=None,
                   reverse_reads=None,
                   max_threads=5,
                   quality_score="phred33",
-                  aligner="bowtie2"):
+                  aligner="bowtie2",
+                  remove_SA=False,
+                  remove_nonPA=False):
 
     print("Handling %s sample..." % sample_name)
     output_file = "%s_trimmed.sam" % sample_name
     if aligner == "bowtie2":
-        bowtie2(bowtie2_index, forward_reads, reverse_reads,
-                max_threads=max_threads, quality_score=quality_score,
-                alignment_mode="very-sensitive", output_file=output_file)
+        bowtie2 = Bowtie2()
+        bowtie2.align(index, forward_reads, reverse_reads,
+                      max_threads=max_threads, quality_score=quality_score,
+                      alignment_mode="very-sensitive", output_file=output_file)
+    elif aligner == "bwa-mem":
+        bwa = BWA()
+        bwa.align_mem(index, forward_reads, reverse_reads, output_file=output_file, max_threads=max_threads)
     """
     if reverse_reads:
         os.system("bowtie2 --very-sensitive --%s -p %i -x %s -1 %s -2 %s > %s_trimmed.sam"
@@ -73,7 +113,8 @@ def get_alignment(bowtie2_index,
         os.system("bowtie2 --very-sensitive --%s -p %i -x %s -U %s > %s_trimmed.sam"
                   % (quality_score, max_threads, bowtie2_index, forward_reads, sample_name))
     """
-    alignment_sorting_and_filtering(sample_name, output_file, chromosomes_bed_file, mitochondrial_bed_file)
+    alignment_sorting_and_filtering(sample_name, output_file, chromosomes_bed_file, mitochondrial_bed_file,
+                                    remove_SA=remove_SA, remove_nonPA=remove_nonPA)
 
 
 def filter_data(sample_name,

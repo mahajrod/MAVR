@@ -22,12 +22,16 @@ def get_read_filenames(sample_name, read_type, sample_dir="."):
             right_reads = filename
     return left_reads, right_reads
 
-
+"""
 reference_dir = "/home/mahajrod/genetics/desaminases/data/LAN210_v0.8m/"
 reference = "%sLAN210_v0.8m.fasta" % reference_dir
 reference_dict = "%sLAN210_v0.8m.dict" % reference_dir
 reference_index = "%sLAN210_v0.8m" % reference_dir
-
+"""
+reference_dir = "/home/mahajrod/genetics/desaminases/data/LAN210_v0.9m/"
+reference = "%sLAN210_v0.9m.fasta" % reference_dir
+reference_dict = "%sLAN210_v0.9m.dict" % reference_dir
+reference_index = "%sLAN210_v0.9m" % reference_dir
 workdir = "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/all"
 
 gatk_dir = check_path("/home/mahajrod/Repositories/genetic/NGS_tools/GenomeAnalysisTK-3.2-0/")
@@ -89,7 +93,10 @@ samples_list = ["N006-LAN211-Can-HAP-NA-RUN1",
                 "N083-LAN210_sub1KanMX-Can-UV-NA-RUN6",
                 "N084-LAN210_sub1KanMX-Can-UV-NA-RUN6"]
 """
+#samples_file = "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/samples_nonwt.t"
 samples_file = "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/samples_nonwt.t"
+#alignment_dir = "alignment"
+alignment_dir = "alignment_LAN210_v0.9m"
 samples_list = []
 with open(samples_file, "r") as in_fd:
     in_fd.readline()
@@ -113,13 +120,13 @@ with open(samples_file, "r") as in_fd:
 for sample_name, platform, library, read_type, read_length, n_of_reads, left_trim, right_trim, adapter in samples_list:
     os.chdir(workdir)
     os.chdir(sample_name)
-    os.system("mkdir -p alignment")
+    os.system("mkdir -p %s" % alignment_dir)
     left_reads, right_reads = get_read_filenames(sample_name, read_type, sample_dir=read_subdir)
     forward_reads = "../" + read_subdir + left_reads
     reverse_reads = None
     if right_reads:
         reverse_reads = "../" + read_subdir + right_reads
-    os.chdir("alignment")
+    os.chdir(alignment_dir)
     get_alignment(reference_index,
                   sample_name,
                   forward_reads,
@@ -127,7 +134,9 @@ for sample_name, platform, library, read_type, read_length, n_of_reads, left_tri
                   "%smt.bed" % reference_dir,
                   reverse_reads=reverse_reads,
                   max_threads=5,
-                  quality_score="phred33")
+                  quality_score="phred33",
+                  remove_SA=True,
+                  remove_nonPA=True)
 
     add_header2bam("%s_trimmed_sorted_rm_pcr_chrom.bam" % sample_name,
                 "%s_trimmed_sorted_rm_pcr_chrom_with_header.bam" % sample_name,

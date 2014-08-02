@@ -2,11 +2,13 @@
 
 import os
 import pickle
+import re
 import matplotlib.pyplot as pyplot
 from random import randint
 
 from Bio import SeqIO
 from Bio.Seq import Seq
+from Bio.SeqFeature import SeqFeature, FeatureLocation
 from Bio.SeqRecord import SeqRecord
 from Bio.Alphabet import IUPAC
 
@@ -951,3 +953,20 @@ def get_random_species_genomes(record_dict,
 def slice_alignment(input_file, output_file, start, end):
     alignment = parse_alignment(input_file)
     SeqIO.write(alignment[start:end], output_file, "fasta")
+
+
+def replace_ambigious_nucleotides(input_file, output_file, index_file="index.idx", format="fasta"):
+    record_dict = SeqIO.index_db(index_file, [input_file], format)
+    corrected_dict = {}
+    ambigious_reg_exp = re.compile("[^AGTCN]+", re.IGNORECASE)
+    ambigious_dict = {}
+    for record in record_dict:
+        ambigious_dict[record] = []
+        corrected_dict[record] = record_dict[record]
+        #print self.reference_genome[entry].seq
+        ambigious = ambigious_reg_exp.finditer(str(record_dict[record].seq))  # iterator with
+        for match in ambigious:
+            #print(match)
+            ambigious_dict[record].append(SeqFeature(FeatureLocation(match.start(), match.end()),
+                                                         type="gap", strand=None))
+            co
