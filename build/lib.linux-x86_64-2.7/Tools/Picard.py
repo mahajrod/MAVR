@@ -1,6 +1,6 @@
 __author__ = 'mahajrod'
 import os
-from General.General import check_path
+from General import check_path
 
 
 def make_fasta_dict(fasta_file, dict_name, PICARD_dir=""):

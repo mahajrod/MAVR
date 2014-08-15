@@ -2,7 +2,7 @@
 import os
 import collections
 from Bio import SeqIO
-from General.General import check_path
+from General import check_path
 from Tools.Picard import add_header2bam
 #from MutAnalysis.Mutation import *
 from Tools.AssemblyTools import spades
@@ -93,7 +93,9 @@ def get_alignment(index,
                   quality_score="phred33",
                   aligner="bowtie2",
                   remove_SA=False,
-                  remove_nonPA=False):
+                  remove_nonPA=False,
+                  find_discordant_alignments=True,
+                  find_separated_alignments=True):
 
     print("Handling %s sample..." % sample_name)
     output_file = "%s_trimmed.sam" % sample_name
@@ -101,7 +103,9 @@ def get_alignment(index,
         bowtie2 = Bowtie2()
         bowtie2.align(index, forward_reads, reverse_reads,
                       max_threads=max_threads, quality_score=quality_score,
-                      alignment_mode="very-sensitive", output_file=output_file)
+                      alignment_mode="very-sensitive", output_file=output_file,
+                      find_discordant_alignments=find_discordant_alignments,
+                      find_separated_alignments=find_separated_alignments)
     elif aligner == "bwa-mem":
         bwa = BWA()
         bwa.align_mem(index, forward_reads, reverse_reads, output_file=output_file, max_threads=max_threads)

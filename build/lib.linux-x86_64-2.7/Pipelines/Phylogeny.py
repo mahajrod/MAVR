@@ -4,7 +4,7 @@ import numpy as np
 from Bio.Alphabet import IUPAC, Gapped
 
 from Converters.Converters import convert_alignment, convert_tree
-from Parse.ParseR import get_indices_from_names
+from Parser.R import get_indices_from_names
 
 
 def generate_partition_finder_control_file(alignment_file_name,

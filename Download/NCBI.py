@@ -1,7 +1,7 @@
 #/usr/bin/env python
 
 from Bio import Entrez
-from Parse.ParseGeneral import parse_sv
+from Parser.General import parse_sv
 """
 def download_genes_by_name(email, gene_name, output_filename, output_type):
     Entrez.email = email

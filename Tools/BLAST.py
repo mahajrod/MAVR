@@ -28,13 +28,13 @@ if __name__ == "__main__":
                   "assembly_v7")
     """
     #os.chdir("/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/Alsu/reference")
-    os.chdir("/home/mahajrod/genetics/desaminases/data/LAN210_v0.9m/")
+    os.chdir("/home/mahajrod/genetics/desaminases/data/LAN210_v0.10m/")
     blast = BLAST_plus()
     """
     blast.make_blast_plus_db("/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/Alsu/reference/Alsu24s.fasta",
                             "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/Alsu/reference/Alsu24s.asnb",
                             "Alsu24s")
     """
-    blast.make_blast_plus_db("/home/mahajrod/genetics/desaminases/data/LAN210_v0.9m/LAN210_v0.9m.fasta",
-                            "/home/mahajrod/genetics/desaminases/data/LAN210_v0.9m/LAN210_v0.9m.asnb",
-                            "LAN210_v0.9m")
+    blast.make_blast_plus_db("/home/mahajrod/genetics/desaminases/data/LAN210_v0.10m/LAN210_v0.10m.fasta",
+                            "/home/mahajrod/genetics/desaminases/data/LAN210_v0.10m/LAN210_v0.10m.asnb",
+                            "LAN210_v0.10m")

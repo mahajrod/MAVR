@@ -16,15 +16,23 @@ class Bowtie2():
               max_threads=5,
               quality_score="phred33",
               alignment_mode="very-sensitive",
-              output_file="alignment.sam"):
+              output_file="alignment.sam",
+              find_discordant_alignments=True,
+              find_separated_alignments=True):
 
         if reverse_reads:
             reads = "-1 %s -2 %s" % (forward_reads, reverse_reads)
         else:
             reads = "-U %s" % forward_reads
 
-        os.system("bowtie2 --%s --%s -p %i -x %s %s > %s"
-                  % (alignment_mode, quality_score, max_threads, bowtie2_index, reads, output_file))
+        options = ""
+        if not find_discordant_alignments:
+            options += " --no-discordant"
+        if not find_separated_alignments:
+            options += " --no-mixed"
+
+        os.system("bowtie2 --%s --%s -p %i %s -x %s %s > %s"
+                  % (alignment_mode, quality_score, max_threads, options, bowtie2_index, reads, output_file))
 
 
 class BWA():

@@ -2,7 +2,7 @@
 from Pipelines.SNPCall import *
 from Tools.Picard import *
 from Tools.GATK import UnifiedGenotyper, SelectVariants, VariantFiltration, FastaAlternateReferenceMaker, CombineVariants
-from Parse.ParseVCF import CollectionVCF
+from Parser.VCF import CollectionVCF
 #in case reads are already trimmed and corrected
 
 reference = "/home/mahajrod/genetics/desaminases/data/LAN210_v0.3m/LAN210_v0.3m.fasta"

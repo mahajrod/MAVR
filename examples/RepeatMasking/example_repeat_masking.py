@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import os
-from General.General import check_path
 from Tools.RepeatSearchTools import RepeatModeler_search, RepeatMasker_search, TRF_search, extract_repbase
 
 

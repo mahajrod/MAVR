@@ -2,7 +2,7 @@
 
 import os
 
-from General.General import check_path
+from General import check_path
 
 
 class BedtoolsIntersect():

@@ -5,6 +5,7 @@
       <w>broadinstitute</w>
       <w>chrom</w>
       <w>coeff</w>
+      <w>collectiontype</w>
       <w>desaminases</w>
       <w>descr</w>
       <w>dirname</w>
@@ -17,8 +18,11 @@
       <w>filetypes</w>
       <w>ftype</w>
       <w>gatk</w>
+      <w>genotyper</w>
       <w>homozygotes</w>
       <w>indel</w>
+      <w>intergenic</w>
+      <w>iter</w>
       <w>mavr</w>
       <w>mkdir</w>
       <w>mutdict</w>
@@ -27,6 +31,7 @@
       <w>nogroup</w>
       <w>refgenome</w>
       <w>snps</w>
+      <w>splited</w>
       <w>variantutils</w>
       <w>vartype</w>
       <w>workdir</w>
