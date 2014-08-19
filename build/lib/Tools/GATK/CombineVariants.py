@@ -3,6 +3,7 @@ import os
 
 
 class CombineVariants():
+    # TODO: rewrite more clear
     # http://www.broadinstitute.org/gatk/gatkdocs/org_broadinstitute_sting_gatk_walkers_variantutils_CombineVariants.html
 
     def combine_from_same_source(self, gatk_dir, reference, input_filelist, output_file, num_threads=4):

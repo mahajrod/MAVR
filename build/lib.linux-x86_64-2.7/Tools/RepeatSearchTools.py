@@ -1,6 +1,6 @@
 __author__ = 'mahajrod'
 import os
-from General import check_path
+from Routines.Functions import check_path
 #from Converters.Converters import gff22gff3, gff32gtf
 
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from collections import Iterable
-from Parser.Abstract import Record, Collection
+from Parser.Abstract import Record, Collection, Metadata
 
 
 class RecordCCF(Record, Iterable):
@@ -13,8 +13,8 @@ class RecordCCF(Record, Iterable):
                 raise ValueError("Records from different regions in same cluster")
         return chrom
 
-    def __init__(self, id=None, chrom=None, size=None, start=None, end=None, description=None, flag_list=[],
-                 vcf_records_list=None, bad_vcf_records=0, from_records=True):
+    def __init__(self, id=None, chrom=None, size=None, start=None, end=None, description=None, flags=None,
+                 vcf_records_list=None, bad_vcf_records=0, from_records=True, from_records_flag_mode="all"):
         # possible flags:
         # IP - indel(s) are present in record
         # BR - record is located in bad region
@@ -25,7 +25,21 @@ class RecordCCF(Record, Iterable):
             self.start = vcf_records_list[0].pos
             self.end = vcf_records_list[-1].pos - 1 + \
                        max(map(lambda x: len(x), vcf_records_list[-1].alt_list + [vcf_records_list[-1].ref]))
-            self.flags = set(flag_list)
+
+            self.flags = set([])
+            # possible from_records_flag_mode:
+            # all - record to be counted as 'with flag' must have all flags from flags_list
+            # one - record to be counted as 'with flag' must have at least one flag from flags_list
+            if from_records_flag_mode == "one":
+                for record in self:
+                    self.flags |= record.flags
+            elif from_records_flag_mode == "all":
+                tmp_set = self.records[0].flags
+                for record in self:
+                    #print(tmp_set)
+                    tmp_set &= record.flags
+                self.flags |= tmp_set
+
             for record in self.records:
                 if record.check_indel():
                     self.flags.add("IP")
@@ -47,7 +61,7 @@ class RecordCCF(Record, Iterable):
             self.end = end
             self.description = description
             self.mean_dist = None
-            self.flags = set(flag_list)
+            self.flags = set(flags)
         self.len = self.end - self.start + 1
         self.bad_records = bad_vcf_records
         if bad_vcf_records > 0:
@@ -101,6 +115,19 @@ class RecordCCF(Record, Iterable):
                 for sub_feature in feature.sub_features:
                     if (variant.pos - 1) in sub_feature:
                         self.description["Loc"].add(sub_feature.type)
+
+
+class MetadataCCF(Metadata):
+
+    def __init__(self, samples, metadata={}):
+        self.samples = samples      #list
+        self.metadata = metadata
+
+    def __str__(self):
+        metadata_string = "##Samples=" + ",".join(self.samples)
+        if self.metadata:
+            metadata_string += "\n##" + "\n##".join(["%s=%s" % (key, self.metadata[key]) for key in self.metadata])
+        return metadata_string
 
 
 class CollectionCCF(Collection):

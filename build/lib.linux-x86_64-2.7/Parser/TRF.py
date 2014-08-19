@@ -86,5 +86,5 @@ class CollectionTRF():
 
 
 if __name__ == "__main__":
-    trf_coll = CollectionTRF(trf_file="/home/mahajrod/genetics/desaminases/data/LAN210_v0.9m/masking/TRF/LAN210_v0.9m_masked_repeatmasker.fasta.2.7.7.80.10.50.500.dat", from_file=True)
-    trf_coll.write_gff("/home/mahajrod/genetics/desaminases/data/LAN210_v0.9m/masking/TRF/trf.gff")
+    trf_coll = CollectionTRF(trf_file="/home/mahajrod/genetics/desaminases/data/LAN210_v0.10m/masking/TRF/LAN210_v0.10m_masked_repeatmasker.fasta.2.7.7.80.10.50.500.dat", from_file=True)
+    trf_coll.write_gff("/home/mahajrod/genetics/desaminases/data/LAN210_v0.10m/masking/TRF/trf.gff")

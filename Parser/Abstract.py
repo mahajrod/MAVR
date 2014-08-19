@@ -8,12 +8,18 @@ import numpy as np
 
 from Collections.GeneralCollections import TwoLvlDict
 
+built_in_flags = {"DA": "desaminase-like",
+                  "BR": "location in bad region (masked and so on)",
+                  "IP": "indel presence"
+                  }
+
 
 class Record():
-    def __init__(self, chrom, pos, description=None):
+    def __init__(self, chrom, pos, description=None, flags=None):
         self.chrom = chrom
         self.pos = pos
         self.description = description
+        self.flags = flags
 
     def __str__(self):
         pass
@@ -35,6 +41,8 @@ class Record():
             for sub_feature in feature.sub_features:
                 if (self.pos - 1) in sub_feature:
                     self.description["Loc"].add(sub_feature.type)
+        if not self.description["Loc"]:
+            self.description["Loc"].add("intergenic")
         #print(self.description)
         #print(self.description["Loc"], self.pos)
 
@@ -42,7 +50,6 @@ class Record():
 class Metadata():
     def __init__(self, metadata=[]):
         self.metadata = metadata
-        pass
 
     def add_metadata(self):
         pass
@@ -113,6 +120,28 @@ class Collection(Iterable):
             else:
                 filtered_out_records.append(record)
 
+    def split_records_by_flags(self, flag_set, mode="all"):
+        # possible modes:
+        # all - record to be counted as 'with flag' must have all flags from flags_list
+        # one - record to be counted as 'with flag' must have at least one flag from flags_list
+        flags = set(flag_set)
+        with_flags_records = []
+        without_flags_records = []
+        if mode == "all":
+            for record in self:
+                if flags & record.flags == flags:
+                    with_flags_records.append(record)
+                else:
+                    without_flags_records.append(record)
+        elif mode == "one":
+            for record in self:
+                if flags & record.flags:
+                    with_flags_records.append(record)
+                else:
+                    without_flags_records.append(record)
+
+        return with_flags_records, without_flags_records
+
     def write(self, output_file):
         with open(output_file, "w") as out_fd:
             if self.metadata:
@@ -148,7 +177,7 @@ class Collection(Iterable):
 
             for record in regions_dict[region]:
                 if (not record.description["Loc"]) or ("Loc" not in record.description):
-                    count_locations_dict["intergenic"] += 1
+                    count_locations_dict["unknown"] += 1
                     continue
                 #print(record.description["Loc"])
                 if allow_several_counts_of_record:
@@ -188,7 +217,7 @@ class Collection(Iterable):
         return region_counts_dict
 
     def location_pie(self, pie_name="Location of variants", annotation_colors=[],
-                     dpi=150, figsize=(40, 40), facecolor="#D6D6D6",
+                     dpi=150, figsize=(30, 30), facecolor="#D6D6D6",
                      ref_genome=None, explode=True, annotation_black_list=[],
                      allow_several_counts_of_record=False,
                      pie_filename="variant_location_pie.svg",

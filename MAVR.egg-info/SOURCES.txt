@@ -38,13 +38,14 @@ SeqAnalysis/__init__.py
 Tools/AlignmentTools.py
 Tools/AssemblyTools.py
 Tools/BLAST.py
-Tools/Bedtools.py
 Tools/FilterTools.py
 Tools/GlimerHMM.py
 Tools/Picard.py
 Tools/RepeatSearchTools.py
 Tools/Samtools.py
 Tools/__init__.py
+Tools/Bedtools/Intersect.py
+Tools/Bedtools/__init__.py
 Tools/GATK/ApplyRecalibration.py
 Tools/GATK/CombineVariants.py
 Tools/GATK/FastaAlternateReferenceMaker.py

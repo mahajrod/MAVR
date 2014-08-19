@@ -2,7 +2,7 @@
 import os
 import collections
 from Bio import SeqIO
-from General import check_path
+from Routines.Functions import check_path
 from Tools.Picard import add_header2bam
 #from MutAnalysis.Mutation import *
 from Tools.AssemblyTools import spades

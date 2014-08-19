@@ -14,12 +14,16 @@ from Bio import SeqIO
 from Bio.SeqFeature import SeqFeature, FeatureLocation
 
 #from General import check_path
-from Parser.Abstract import Record, Collection
-from Parser.CCF import RecordCCF, CollectionCCF
+from Parser.Abstract import Record, Collection, Metadata, Header
+from Parser.CCF import RecordCCF, CollectionCCF, MetadataCCF
+
+ref_alt_variants = {"desaminases": [("C", ["T"]), ("G", ["A"])]
+                    }
 
 
 class RecordVCF(Record):
-    def __init__(self, chrom, pos, id, ref, alt_list, qual, filter_list, info_dict, samples_list, description={}):
+    def __init__(self, chrom, pos, id, ref, alt_list, qual, filter_list, info_dict, samples_list,
+                 description={}, flags=None):
         self.chrom = chrom                              #str
         self.pos = pos                                  #int
         self.id = id                                    #str
@@ -31,6 +35,7 @@ class RecordVCF(Record):
         self.samples_list = samples_list                #list entries are dicts with keys from format_list and
                                                         #values are lists
         self.description = description
+        self.flags = flags
         #TODO: add data check
         #TODO: check parsing of files with several samples
 
@@ -65,12 +70,42 @@ class RecordVCF(Record):
             return True
         return False
 
+    def check_ref_alt_list(self, ref_alt_list, flag):
+        if not self.flags:
+            self.flags = set([])
+        # structure of ref_alt_list:  [[ref1,[alt1.1, alt1.M1]], ..., [refN,[altN.1, ..., altN.MN]]]
+        #print(ref_alt_list)
+        #print ((self.ref, self.alt_list))
+        if (self.ref, self.alt_list) in ref_alt_list:
+            self.flags.add(flag)
+            #print ("aaa")
+
     def gff_str(self, parent=None):
         # TODO: think how to rewrite, maybe remove
         attributes_string = "ID=Var%s%i" % (self.chrom, self.start)
         if parent:
             attributes_string += ";Parent=%s" % parent
         return "%s\tvariant_call\tvariant\t%i\t%i\t.\t.\t.\t%s" % (self.chrom, self.start, self.end, attributes_string)
+
+
+class MetadataVCF(Metadata):
+    def __str__(self):
+        metadata_string = ""
+        for key in self.metadata:
+            if not isinstance(self.metadata[key], dict):
+                metadata_string += "##%s=%s\n" % (key, self.metadata[key])
+            else:
+                prefix = "##%s=<" % key
+                suffix = ">\n"
+                for att_id in self.metadata[key]:
+                    middle = "ID=%s," % att_id + ",".join(["%s=%s" % (param, self.metadata[key][att_id][param])
+                                                           for param in self.metadata[key][att_id]])
+                    metadata_string += prefix + middle + suffix
+        return metadata_string
+
+
+class HeaderVCF(Header):
+    pass
 
 
 class CollectionVCF(Collection):
@@ -264,6 +299,21 @@ class CollectionVCF(Collection):
         return {"All": staked}, shift_dict
         """
 
+    def check_by_ref_and_alt(self, ref_alt_list, flag):
+        for record in self:
+            record.check_ref_alt_list(ref_alt_list, flag)
+
+    def split_by_flags(self, flag_set, mode="all"):
+        # possible modes:
+        # all - record to be counted as 'with flag' must have all flags from flags_list
+        # one - record to be counted as 'with flag' must have at least one flag from flags_list
+        with_flag_records, without_flag_records = self.split_records_by_flags(flag_set, mode=mode)
+        with_flag = CollectionVCF(metadata=self.metadata, record_list=with_flag_records,
+                                  header_list=self.header_list, from_file=False)
+        without_flag = CollectionVCF(metadata=self.metadata, record_list=without_flag_records,
+                                     header_list=self.header_list, from_file=False)
+        return with_flag, without_flag
+
     def split_by_ref_and_alt(self, ref_alt_list):
         #TODO: check
         # structure of ref_alt_list:  [[ref1,[alt1.1, alt1.M1]], ..., [refN,[altN.1, ..., altN.MN]]]
@@ -276,9 +326,9 @@ class CollectionVCF(Collection):
             else:
                 filtered_out_records.append(record)
         found = CollectionVCF(metadata=self.metadata, record_list=found_records,
-                                    header_list=self.header_list, from_file=False)
+                              header_list=self.header_list, from_file=False)
         filtered_out = CollectionVCF(metadata=self.metadata, record_list=filtered_out_records,
-                                      header_list=self.header_list, from_file=False)
+                                     header_list=self.header_list, from_file=False)
         return found, filtered_out
 
     def _split_ref(self, records):
@@ -501,7 +551,7 @@ class CollectionVCF(Collection):
                                       for cluster in clusters_dict]
         if split_by_regions:
             return mut_clusters_dict
-        return CollectionCCF(record_list=mut_clusters_list)
+        return CollectionCCF(record_list=mut_clusters_list, metadata=MetadataCCF(self.samples))
 
     def test_thresholds(self,
                         extracting_method="inconsistent",

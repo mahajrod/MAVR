@@ -15,11 +15,15 @@ from Bio.SeqFeature import SeqFeature, FeatureLocation
 
 #from General import check_path
 from Parser.Abstract import Record, Collection
-from Parser.CCF import RecordCCF, CollectionCCF
+from Parser.CCF import RecordCCF, CollectionCCF, MetadataCCF
+
+ref_alt_variants = {"desaminases": [("C", ["T"]), ("G", ["A"])]
+                    }
 
 
 class RecordVCF(Record):
-    def __init__(self, chrom, pos, id, ref, alt_list, qual, filter_list, info_dict, samples_list, description={}):
+    def __init__(self, chrom, pos, id, ref, alt_list, qual, filter_list, info_dict, samples_list,
+                 description={}, flags=None):
         self.chrom = chrom                              #str
         self.pos = pos                                  #int
         self.id = id                                    #str
@@ -31,6 +35,7 @@ class RecordVCF(Record):
         self.samples_list = samples_list                #list entries are dicts with keys from format_list and
                                                         #values are lists
         self.description = description
+        self.flags = flags
         #TODO: add data check
         #TODO: check parsing of files with several samples
 
@@ -64,6 +69,16 @@ class RecordVCF(Record):
         if len(self.ref) > 1 or len("".join(self.alt_list)) > len(self.alt_list):
             return True
         return False
+
+    def check_ref_alt_list(self, ref_alt_list, flag):
+        if not self.flags:
+            self.flags = set([])
+        # structure of ref_alt_list:  [[ref1,[alt1.1, alt1.M1]], ..., [refN,[altN.1, ..., altN.MN]]]
+        #print(ref_alt_list)
+        #print ((self.ref, self.alt_list))
+        if (self.ref, self.alt_list) in ref_alt_list:
+            self.flags.add(flag)
+            #print ("aaa")
 
     def gff_str(self, parent=None):
         # TODO: think how to rewrite, maybe remove
@@ -124,8 +139,9 @@ class CollectionVCF(Collection):
 
         for sample_string in line_list[9:]:
             sample_dict = OrderedDict({})
-            #if sample_string == "./.":
-            #    sample_dict["GT"] = None
+            if sample_string == "./.":
+                sample_dict["GT"] = "./."
+                continue
             #else:
             for key, value_list in zip(line_list[8].split(":"), sample_string.split(":")):
                 #print (key, value_list)
@@ -262,6 +278,21 @@ class CollectionVCF(Collection):
             pass
         return {"All": staked}, shift_dict
         """
+
+    def check_by_ref_and_alt(self, ref_alt_list, flag):
+        for record in self:
+            record.check_ref_alt_list(ref_alt_list, flag)
+
+    def split_by_flags(self, flag_set, mode="all"):
+        # possible modes:
+        # all - record to be counted as 'with flag' must have all flags from flags_list
+        # one - record to be counted as 'with flag' must have at least one flag from flags_list
+        with_flag_records, without_flag_records = self.split_records_by_flags(flag_set, mode=mode)
+        with_flag = CollectionVCF(metadata=self.metadata, record_list=with_flag_records,
+                                  header_list=self.header_list, from_file=False)
+        without_flag = CollectionVCF(metadata=self.metadata, record_list=without_flag_records,
+                                     header_list=self.header_list, from_file=False)
+        return with_flag, without_flag
 
     def split_by_ref_and_alt(self, ref_alt_list):
         #TODO: check
@@ -500,7 +531,7 @@ class CollectionVCF(Collection):
                                       for cluster in clusters_dict]
         if split_by_regions:
             return mut_clusters_dict
-        return CollectionCCF(record_list=mut_clusters_list)
+        return CollectionCCF(record_list=mut_clusters_list, metadata=MetadataCCF(self.samples))
 
     def test_thresholds(self,
                         extracting_method="inconsistent",
