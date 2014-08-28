@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import os
-
+from Tools.Abstract import Tool
 
 class VariantFiltration():
     # http://www.broadinstitute.org/gatk/gatkdocs/org_broadinstitute_sting_gatk_walkers_filters_VariantFiltration.html

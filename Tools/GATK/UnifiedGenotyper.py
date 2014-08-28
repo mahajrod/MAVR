@@ -1,6 +1,6 @@
 import os
 from Routines.Functions import check_path
-
+from Tools.Abstract import Tool
 
 class UnifiedGenotyper():
 
