@@ -71,14 +71,11 @@ class RecordCCF(Record, Iterable):
     def __len__(self):
         return self.len
 
-    def __str__(self):
-        return self.ccf_str()
-
     def __iter__(self):
         for record in self.records:
             yield record
 
-    def ccf_str(self):
+    def __str__(self):
         attributes_string = "Size=%i;Bad_records=%i" % (self.size, self.bad_records)
         if self.flags:
             attributes_string += ";" + ";".join(self.flags)

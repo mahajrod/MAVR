@@ -2,6 +2,7 @@
 import os
 from Tools.Abstract import Tool
 
+
 class VariantFiltration():
     # http://www.broadinstitute.org/gatk/gatkdocs/org_broadinstitute_sting_gatk_walkers_filters_VariantFiltration.html
     # default filters for indel and snp filtration were taken from GATK BestPractice

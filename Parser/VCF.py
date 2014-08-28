@@ -15,7 +15,7 @@ from Bio.SeqFeature import SeqFeature, FeatureLocation
 
 #from General import check_path
 from Parser.Abstract import Record, Collection, Metadata, Header
-from Parser.CCF import RecordCCF, CollectionCCF, MetadataCCF
+
 
 ref_alt_variants = {"desaminases": [("C", ["T"]), ("G", ["A"])]
                     }
@@ -37,13 +37,8 @@ class RecordVCF(Record):
         self.description = description
         self.flags = flags
         #TODO: add data check
-        #TODO: check parsing of files with several samples
 
     def __str__(self):
-        #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	Sample_1
-        return self.string_form()
-
-    def string_form(self):
         alt_string = ",".join(self.alt_list)
         filter_string = ";".join(self.filter_list)
         key_string_list = []
@@ -56,11 +51,16 @@ class RecordVCF(Record):
         #[key + "=" + ",". join(map(lambda x: str(x), self.info_dict[key])) for key in sorted(list(self.info_dict.keys()))]
         info_string = ";".join(key_string_list)
         #format_string = ":".join(self.format_list)
-        format_string = ":".join(self.samples_list[0].keys())
+        for sample in self.samples_list:
+            if len(sample.keys()) > 1:
+                format_string = ":".join(sample.keys())
+                break
+
         samples_string = "\t".join([":".join([",".join(map(lambda x: str(x), sample[key])) for key in sample.keys()]) for sample in self.samples_list])
 
         #samples_string = "\t".join([":".join([",".join(str(sample[key])) for key in sample.keys()]) for sample in self.samples_list])
 
+        #print(self.samples_list)
         return '\t'.join(map(lambda x: str(x), [self.chrom, self.pos, self.id, self.ref, alt_string,
                                                 self.qual, filter_string, info_string, format_string, samples_string]))
 
@@ -158,19 +158,19 @@ class CollectionVCF(Collection):
         samples_list = []
 
         for sample_string in line_list[9:]:
+            #print (sample_string)
             sample_dict = OrderedDict({})
             if sample_string == "./.":
-                sample_dict["GT"] = "./."
-                continue
-            #else:
-            for key, value_list in zip(line_list[8].split(":"), sample_string.split(":")):
-                #print (key, value_list)
-                if self.metadata["FORMAT"][key]["Type"] == "Integer":
-                    sample_dict[key] = list(map(lambda x: int(x), value_list.split(",")))
-                elif self.metadata["FORMAT"][key]["Type"] == "Float":
-                    sample_dict[key] = list(map(lambda x: float(x), value_list.split(",")))
-                else:
-                    sample_dict[key] = value_list.split(",")
+                sample_dict["GT"] = ["./."]
+            else:
+                for key, value_list in zip(line_list[8].split(":"), sample_string.split(":")):
+                    #print (key, value_list)
+                    if self.metadata["FORMAT"][key]["Type"] == "Integer":
+                        sample_dict[key] = list(map(lambda x: int(x), value_list.split(",")))
+                    elif self.metadata["FORMAT"][key]["Type"] == "Float":
+                        sample_dict[key] = list(map(lambda x: float(x), value_list.split(",")))
+                    else:
+                        sample_dict[key] = value_list.split(",")
             #print(sample_dict)
             samples_list.append(sample_dict)
         #print(samples_list)
@@ -519,6 +519,7 @@ class CollectionVCF(Collection):
                      clustering_dir="clustering",
                      split_by_regions=False,
                      dendrogramm_color_threshold=1000):
+        from Parser.CCF import RecordCCF, CollectionCCF, MetadataCCF
         if self.linkage_dict:
             linkage_dict = self.linkage_dict
         else:

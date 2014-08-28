@@ -4,19 +4,18 @@ from Tools.Abstract import Tool
 
 
 class Bowtie2(Tool):
-    def __init__(self, path=""):
-        super(Tool).__init__("bowtie2", path=path)
+    def __init__(self, path="", max_threads=4):
+        super(Tool).__init__("bowtie2", path=path, max_threads=max_threads)
 
     def index(self, reference, index_name):
         options = "%s %s" % (reference, index_name)
-        self.execute(options, command="bowtie2-build")
+        self.execute(options, cmd="bowtie2-build")
         #os.system("bowtie2-build %s %s" % (reference, index_name))
 
     def align(self,
               bowtie2_index,
               forward_reads,
               reverse_reads=None,
-              max_threads=5,
               quality_score="phred33",
               alignment_mode="very-sensitive",
               output_file="alignment.sam",
@@ -35,7 +34,7 @@ class Bowtie2(Tool):
             options += " --no-mixed"
 
         options = "--%s --%s -p %i %s -x %s %s > %s" %\
-                  (alignment_mode, quality_score, max_threads, options, bowtie2_index, reads, output_file)
+                  (alignment_mode, quality_score, self.threads, options, bowtie2_index, reads, output_file)
 
         self.execute(options)
 

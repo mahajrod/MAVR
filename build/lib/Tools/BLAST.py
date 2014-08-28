@@ -1,6 +1,6 @@
 __author__ = 'mahajrod'
 import os
-
+from Tools.Abstract import Tool
 
 class BLAST_plus():
 

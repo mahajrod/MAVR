@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 
-
+#TODO: rewrite as package
 def spades(forward_reads,
            reverse_reads=None,
            sanger_reads=None,

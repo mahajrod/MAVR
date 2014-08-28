@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from collections import Iterable
 from Parser.Abstract import Record, Collection, Metadata
+from Parser.VCF import CollectionVCF
 
 
 class RecordCCF(Record, Iterable):
@@ -169,3 +170,9 @@ class CollectionCCF(Collection):
     def check_record_location(self, bad_region_collection_gff):
         for record in self:
             record.check_location(bad_region_collection_gff)
+
+    def get_collection_vcf(self, metadata, header):
+        vcf_records = []
+        for cluster in self:
+            vcf_records += cluster.records
+        return CollectionVCF(metadata=metadata, header_list=header, record_list=vcf_records)

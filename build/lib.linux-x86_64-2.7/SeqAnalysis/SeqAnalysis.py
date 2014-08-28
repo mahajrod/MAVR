@@ -969,4 +969,3 @@ def replace_ambigious_nucleotides(input_file, output_file, index_file="index.idx
             #print(match)
             ambigious_dict[record].append(SeqFeature(FeatureLocation(match.start(), match.end()),
                                                          type="gap", strand=None))
-            co

@@ -2,7 +2,7 @@ __author__ = 'mahajrod'
 import os
 from Routines.Functions import check_path
 #from Converters.Converters import gff22gff3, gff32gtf
-
+from Tools.Abstract import Tool
 
 def RepeatModeler_search(query_file, db_name, output_file="run.out",
                          num_of_threads=5, RepeatModeler_dir=""):

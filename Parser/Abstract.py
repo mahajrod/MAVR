@@ -221,6 +221,7 @@ class Collection(Iterable):
                      ref_genome=None, explode=True, annotation_black_list=[],
                      allow_several_counts_of_record=False,
                      pie_filename="variant_location_pie.svg",
+                     full_genome_pie_filename="variant_location_pie_full_genome.svg",
                      counts_filename="location_counts.t",
                      plot_dir="variant_location_pie",
                      counts_dir="location_counts"):
@@ -252,6 +253,9 @@ class Collection(Iterable):
         fig.suptitle(pie_name, fontsize=20)
 
         index = 1
+        all_labels = []
+        all_counts = []
+        all_colors = []
 
         for region in count_locations_dict:
             sub_plot_dict[region] = plt.subplot(side, side, index, axisbg="#D6D6D6")
@@ -281,93 +285,32 @@ class Collection(Iterable):
             # Set aspect ratio to be equal so that pie is drawn as a circle.
             plt.axis('equal')
             index += 1
+            for i in range(0, len(labels)):
+                if labels[i] not in all_labels:
+                    all_labels.append(labels[i])
+                    all_counts.append(counts[i])
+                    all_colors.append(colors[i])
+                else:
+                    label_index = all_labels.index(labels[i])
+                    all_counts[label_index] += counts[i]
+
         plt.savefig("%s/%s" % (plot_dir, pie_filename))
         plt.close()
 
-        """
-                print("Drawing location pie...")
-        plot_dir = "variant_location_pie"
-        os.system("mkdir -p %s" % plot_dir)
-        reference_colors = {"CDS": "#FBFD2B",    # yellow
-                            "five_prime_UTR": "#FF000F",     # red
-                            "three_prime_UTR": "#000FFF",     # blue
-                            "intergenic": "#4ED53F",     # green
-                            "other": "#ADB696"
-                            }
-
-        if annotation_colors:
-            reference_colors = annotation_colors
-            reference_colors["other"] = "#ADB696"
-        count_locations_dict = self.count_locations()
-        regions_dict = self._split_regions()
-        num_of_regions = len(regions_dict)
-        side = int(sqrt(num_of_regions))
-        if side*side != num_of_regions:
-            side += 1
-        sub_plot_dict = OrderedDict({})
-        fig = plt.figure(2, dpi=dpi, figsize=figsize)
+        fig = plt.figure(3, dpi=dpi, figsize=(8, 8))
         fig.suptitle(pie_name, fontsize=20)
-
-        index = 1
-        region_counts_dict = OrderedDict({})
-        for region in regions_dict:
-            sub_plot_dict[region] = plt.subplot(side, side, index, axisbg="#D6D6D6")
-            count_locations_dict = {"intergenic": 0}
-
-            for record in regions_dict[region]:
-                if (not record.description["Loc"]) or ("Loc" not in record.description):
-                    count_locations_dict["intergenic"] += 1
-                    continue
-
-                if allow_several_counts_of_record:
-                    for location in record.description["Loc"]:
-                        if location in annotation_black_list:
-                            continue
-                        if location not in count_locations_dict:
-                            count_locations_dict[location] = 1
-                        else:
-                            count_locations_dict[location] += 1
-                else:
-                    full_location = []
-                    #print(record.description["Loc"])
-                    for location in record.description["Loc"]:
-                        if location in annotation_black_list:
-                            continue
-                        full_location.append(location)
-                    full_location = "/".join(full_location)
-                    #print(full_location)
-                    if full_location not in count_locations_dict:
-                        count_locations_dict[full_location] = 1
-                    else:
-                        count_locations_dict[full_location] += 1
-            labels = []
-            counts = []
-            colors = []
-            for location in count_locations_dict:
-                if count_locations_dict[location] == 0 or location in annotation_black_list:
-                    continue
-                labels.append(location)
-                counts.append(count_locations_dict[location])
-                if location not in reference_colors:
-                    colors.append(reference_colors["other"])
-                else:
-                    colors.append(reference_colors[location])
-
-            explodes = np.zeros(len(counts))
-            if explode:
-                max_count_index = counts.index(max(counts))
-                explodes[max_count_index] = 0.1
-            plt.pie(counts, explode=explodes, labels=labels, colors=colors,
-                    autopct='%1.1f%%', shadow=True, startangle=90)
-            plt.title("Region %s" % region, y=1.08)
+        plt.subplot(1, 3, 2, axisbg="#D6D6D6")
+        all_explodes = np.zeros(len(all_counts))
+        if explode and all_counts:
+            max_count_index = all_counts.index(max(all_counts))
+            all_explodes[max_count_index] = 0.1
+        plt.pie(all_counts, explode=all_explodes, labels=all_labels, colors=all_colors,
+                autopct='%1.1f%%', shadow=True, startangle=90)
+        plt.title("Full genome", y=1.08)
             # Set aspect ratio to be equal so that pie is drawn as a circle.
-            plt.axis('equal')
-            index += 1
-            region_counts_dict[region] = dict([(label, count) for label, count in zip(labels, counts)])
-        plt.savefig("%s/%s" % (plot_dir, out_file_name))
+        plt.axis('equal')
+        plt.savefig("%s/%s" % (plot_dir, full_genome_pie_filename))
         plt.close()
-        return region_counts_dict
-        """
 
 if __name__ == "__main__":
     fg= Collection()

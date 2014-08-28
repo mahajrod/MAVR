@@ -1,5 +1,5 @@
 import os
-
+from Tools.Abstract import Tool
 
 
 class SelectVariants():

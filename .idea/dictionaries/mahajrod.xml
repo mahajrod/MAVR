@@ -12,6 +12,7 @@
       <w>dirname</w>
       <w>extention</w>
       <w>facecolor</w>
+      <w>fasta</w>
       <w>fastqc</w>
       <w>figsize</w>
       <w>filelist</w>

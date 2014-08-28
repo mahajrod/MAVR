@@ -1,4 +1,4 @@
-#!/usr/bin/env python2s
+#!/usr/bin/env python2
 import os
 
 from BCBio import GFF
@@ -52,8 +52,12 @@ if __name__ == "__main__":
         mutations.check_by_ref_and_alt(ref_alt_variants["desaminases"], "DA")
         #for record in mutations:
         #    print(record.description)
-        mutations.location_pie(annotation_black_list=["gene", "region", "ARS", "long_terminal_repeat"], figsize=(30, 30),
+        annotation_black_list = ["gene", "region", "ARS", "long_terminal_repeat",
+                                 "noncoding_exon", ]
+        mutations.location_pie(annotation_black_list=annotation_black_list,
+                               figsize=(30, 30),
                                pie_filename="variant_location_pie.svg",
+                               full_genome_pie_filename="variant_location_full_genome_pie.svg",
                                counts_filename="variant_location_counts.t")
         print("Totaly %s mutations" % len(mutations))
 
@@ -70,25 +74,24 @@ if __name__ == "__main__":
 
         filtered_clusters, filtered_out_clusters = clusters.filter_by_size(min_size=min_cluster_size)
         filtered_clusters.write("%s/%s_size_3+.ccf" % (clustering_dir, sample_set_name))
-        filtered_clusters.location_pie(annotation_black_list=["gene", "region", "ARS", "long_terminal_repeat"],
+        filtered_clusters.location_pie(annotation_black_list=annotation_black_list,
                                        pie_filename="3+_cluster_location_pie.svg",
-                                       counts_filename="3+_cluster_location_counts.t")
+                                       counts_filename="3+_cluster_location_counts.t",
+                                       full_genome_pie_filename="3+_cluster_location_full_genome_pie.svg",)
         filtered_out_clusters.write("%s/%s_size_less_3.ccf" % (clustering_dir, sample_set_name))
 
         filtered_clusters, filtered_out_clusters = filtered_clusters.filter_by_flags(black_flag_list=["IP", "BR"])
         filtered_clusters.write("%s/%s_size_3+_not_in_br_no_id.ccf" % (clustering_dir, sample_set_name))
-        filtered_clusters.location_pie(annotation_black_list=["gene", "region", "ARS", "long_terminal_repeat"],
+        filtered_clusters.location_pie(annotation_black_list=annotation_black_list,
                                        pie_filename="3+_good_cluster_location_pie.svg",
-                                       counts_filename="3+_good__cluster_location_counts.t")
+                                       full_genome_pie_filename="3+_good_cluster_full_genome_pie.svg",
+                                       counts_filename="3+_good_cluster_location_counts.t")
         filtered_out_clusters.write("%s/%s_size_3+_in_br_id.ccf" % (clustering_dir, sample_set_name))
 
         filtered_clusters, filtered_out_clusters = filtered_clusters.filter_by_flags(white_flag_list=["DA"])
         filtered_clusters.write("%s/%s_size_3+_not_in_br_no_id_da.ccf" % (clustering_dir, sample_set_name))
-        filtered_clusters.location_pie(annotation_black_list=["gene", "region", "ARS", "long_terminal_repeat"],
+        filtered_clusters.location_pie(annotation_black_list=annotation_black_list,
                                        pie_filename="3+_good_cluster_desaminase_location_pie.svg",
+                                       full_genome_pie_filename="3+_good_cluster_desaminase_full_genome_pie.svg",
                                        counts_filename="3+_good_cluster_desaminase_location_counts.t")
         filtered_out_clusters.write("%s/%s_size_3+_nont_in_br_no_id_non_da.ccf" % (clustering_dir, sample_set_name))
-
-        #mutations.test_thresholds(save_clustering=True, testing_dir="testing_theshold_inconsistent")
-        #mutations.test_thresholds(extracting_method='distance', threshold=(50, 5000, 100),
-        #                          testing_dir="testing_threshold")

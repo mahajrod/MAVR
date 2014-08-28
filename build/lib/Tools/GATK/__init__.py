@@ -8,6 +8,8 @@ from Tools.GATK.UnifiedGenotyper import UnifiedGenotyper
 from Tools.GATK.VariantFiltration import VariantFiltration
 from Tools.GATK.VariantRecalibrator import VariantRecalibrator
 
+#TODO: think how to rewrite to comfortably use general for all subtools options
+
 ApplyRecalibration = ApplyRecalibration()
 CombineVariants = CombineVariants()
 FastaAlternateReferenceMaker = FastaAlternateReferenceMaker()

@@ -32,9 +32,11 @@ Pipelines/RepeatSearch.py
 Pipelines/SNPCall.py
 Pipelines/__init__.py
 Routines/Functions.py
+Routines/Sequence.py
 Routines/__init__.py
 SeqAnalysis/SeqAnalysis.py
 SeqAnalysis/__init__.py
+Tools/Abstract.py
 Tools/AlignmentTools.py
 Tools/AssemblyTools.py
 Tools/BLAST.py
@@ -44,6 +46,9 @@ Tools/Picard.py
 Tools/RepeatSearchTools.py
 Tools/Samtools.py
 Tools/__init__.py
+Tools/Alignment/BWA.py
+Tools/Alignment/Bowtie2.py
+Tools/Alignment/__init__.py
 Tools/Bedtools/Intersect.py
 Tools/Bedtools/__init__.py
 Tools/GATK/ApplyRecalibration.py
@@ -54,3 +59,6 @@ Tools/GATK/UnifiedGenotyper.py
 Tools/GATK/VariantFiltration.py
 Tools/GATK/VariantRecalibrator.py
 Tools/GATK/__init__.py
+Tools/Tuxedo/Cufflinks.py
+Tools/Tuxedo/Tophat.py
+Tools/Tuxedo/__init__.py

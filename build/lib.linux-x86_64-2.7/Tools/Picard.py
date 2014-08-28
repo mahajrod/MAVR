@@ -1,7 +1,7 @@
 __author__ = 'mahajrod'
 import os
-from General import check_path
-
+from Routines.Functions import check_path
+from Tools.Abstract import Tool
 
 def make_fasta_dict(fasta_file, dict_name, PICARD_dir=""):
     picard_dir = check_path(PICARD_dir)

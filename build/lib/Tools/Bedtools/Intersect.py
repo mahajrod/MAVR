@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
 import os
-
+from Tools.Abstract import Tool
 from Routines.Functions import check_path
 
 
-class Intersect():
+class Intersect(Tool):
     """
     Tool:    bedtools intersect (aka intersectBed)
     Version: v2.17.0

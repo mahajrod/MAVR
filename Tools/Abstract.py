@@ -6,15 +6,16 @@ from Routines.Functions import check_path
 
 class Tool():
 
-    def __init__(self, cmd, path=""):
+    def __init__(self, cmd, path="", max_threads=4):
         self.path = check_path(path)
         self.cmd = cmd
+        self.threads = max_threads
 
-    def execute(self, options, command=None):
-        if command:
-            cmd = command
+    def execute(self, options, cmd=None):
+        if cmd:
+            command = cmd
         else:
-            cmd = self.cmd
-        exe_string = self.path + cmd + " " + options
+            command = self.cmd
+        exe_string = self.path + command + " " + options
         print("Executing:\n\t%s" % exe_string)
         os.system(exe_string)

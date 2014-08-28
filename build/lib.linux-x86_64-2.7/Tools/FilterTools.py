@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import os
-
+from Tools.Abstract import Tool
 
 def trim_galore(min_length,
                 forward_reads,

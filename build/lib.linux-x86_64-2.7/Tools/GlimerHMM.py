@@ -4,7 +4,7 @@ from BCBio import GFF
 from BCBio.GFF import GFFExaminer
 from Bio.SeqRecord import SeqRecord
 from Bio import SeqIO
-
+from Tools.Abstract import Tool
 
 #TODO: finish code
 def examine_gff(gff_file):

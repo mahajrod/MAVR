@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import os
-
+from Tools.Abstract import Tool
 
 class CombineVariants():
     # TODO: rewrite more clear
