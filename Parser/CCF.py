@@ -15,17 +15,19 @@ class RecordCCF(Record, Iterable):
         return chrom
 
     def __init__(self, id=None, chrom=None, size=None, start=None, end=None, description=None, flags=None,
-                 vcf_records_list=None, bad_vcf_records=0, from_records=True, from_records_flag_mode="all"):
+                 collection_vcf=None, bad_vcf_records=0, from_records=True, subclusters=None,
+                 from_records_flag_mode="all"):
         # possible flags:
         # IP - indel(s) are present in record
         # BR - record is located in bad region
-        self.records = vcf_records_list
+        self.records = collection_vcf
+        self.subclusters = subclusters
         if from_records:
-            self.chrom = self._check_chrom(vcf_records_list)
-            self.size = len(vcf_records_list)
-            self.start = vcf_records_list[0].pos
-            self.end = vcf_records_list[-1].pos - 1 + \
-                       max(map(lambda x: len(x), vcf_records_list[-1].alt_list + [vcf_records_list[-1].ref]))
+            self.chrom = self._check_chrom(collection_vcf)
+            self.size = len(collection_vcf)
+            self.start = collection_vcf[0].pos
+            self.end = collection_vcf[-1].pos - 1 + \
+                       max(map(lambda x: len(x), collection_vcf[-1].alt_list + [collection_vcf[-1].ref]))
 
             self.flags = set([])
             # possible from_records_flag_mode:
@@ -69,7 +71,7 @@ class RecordCCF(Record, Iterable):
             self.flags.add("BR")
 
     def __len__(self):
-        return self.len
+        return self.size
 
     def __iter__(self):
         for record in self.records:
@@ -80,19 +82,24 @@ class RecordCCF(Record, Iterable):
         if self.flags:
             attributes_string += ";" + ";".join(self.flags)
         if self.description:
-            attributes_string += ";" + ";".join(["%s=%s" % (key, str(self.description[key]))
+            attributes_string += ";" + ";".join(["%s=%s" % (key, ",".join(self.description[key]))
                                                  for key in self.description])
+        if self.subclusters != None:
+            #print(self.subclusters)
+            attributes_string += ";Subclusters=" + ",".join(map(lambda x: str(x), self.subclusters))
 
         cluster_string = ">%s\t%s\t%i\t%i\t%s" % (self.id, self.chrom, self.start, self.end, attributes_string)
-        return cluster_string + "\n\t" + "\n\t".join([str(record) for record in self.records])
+        return cluster_string + "\nVariants\n\t" + "\n\t".join([str(record) for record in self.records])
 
     def check_location(self, bad_region_collection_gff):
-        for bad_region in bad_region_collection_gff:
-            for variant in self:
+        self.bad_records = 0
+        for variant in self:
+            for bad_region in bad_region_collection_gff:
                 if variant.chrom != bad_region.chrom:
                     continue
                 if bad_region.start <= variant.pos <= bad_region.end:
                     self.bad_records += 1
+                    break
 
         if self.bad_records > 0:
             self.flags.add("BR")
@@ -113,6 +120,23 @@ class RecordCCF(Record, Iterable):
                 for sub_feature in feature.sub_features:
                     if (variant.pos - 1) in sub_feature:
                         self.description["Loc"].add(sub_feature.type)
+
+    def subclustering(self,
+                      method="inconsistent",
+                      threshold=0.8,
+                      cluster_distance='average'):
+        tmp = self.records.get_clusters(extracting_method=method,
+                                        threshold=threshold,
+                                        cluster_distance=cluster_distance,
+                                        split_by_regions=False,
+                                        draw_dendrogramm=False,
+                                        return_collection=False,
+                                        write_inconsistent=False,
+                                        write_correlation=False)
+        self.subclusters = tmp[tmp.keys()[0]]
+
+    def adjust_cluster(self):
+        pass
 
 
 class MetadataCCF(Metadata):
@@ -167,6 +191,18 @@ class CollectionCCF(Collection):
     def check_record_location(self, bad_region_collection_gff):
         for record in self:
             record.check_location(bad_region_collection_gff)
+
+    def subclustering(self,
+                      method="inconsistent",
+                      threshold=0.8,
+                      cluster_distance='average'):
+        for record in self:
+            if len(record) < 3:
+                continue
+            #print(record)
+            record.subclustering(method=method,
+                                 threshold=threshold,
+                                 cluster_distance=cluster_distance)
 
     def get_collection_vcf(self, metadata, header):
         vcf_records = []

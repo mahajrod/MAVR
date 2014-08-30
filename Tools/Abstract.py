@@ -12,10 +12,7 @@ class Tool():
         self.threads = max_threads
 
     def execute(self, options, cmd=None):
-        if cmd:
-            command = cmd
-        else:
-            command = self.cmd
+        command = cmd if cmd else self.cmd
         exe_string = self.path + command + " " + options
         print("Executing:\n\t%s" % exe_string)
         os.system(exe_string)

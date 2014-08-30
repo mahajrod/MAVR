@@ -70,6 +70,14 @@ class RecordVCF(Record):
             return True
         return False
 
+    def count_samples(self):
+        #counts samples with variants
+        number = 0
+        for sample in self.samples_list:
+            if sample["GT"][0] != "./." and sample["GT"][0] != "0/0":
+                number += 1
+        return number
+
     def check_ref_alt_list(self, ref_alt_list, flag):
         if not self.flags:
             self.flags = set([])
@@ -130,9 +138,6 @@ class CollectionVCF(Collection):
             self.metadata = metadata
             self.records = record_list
             self.header_list = header_list
-
-    def __len__(self):
-        return len(self.records)
 
     def _add_record(self, line):
         line_list = line.strip().split("\t")
@@ -274,30 +279,6 @@ class CollectionVCF(Collection):
         for chrom in sequence_varcoord_dict:
             sequence_varcoord_dict[chrom] = np.array(sequence_varcoord_dict[chrom])
         return sequence_varcoord_dict
-
-    def stack_regions(self):
-        #Not implemented yet
-        #TODO: write
-        pass
-        """
-        #assume that records inside regions are sorted by start coordinate
-        sequence_varcoord_dict = self.record_coordinates()
-        staked = np.array([])
-        if "sequence-region" in self.metadata:
-            shift_dict = {}
-            shift = 0
-            for seqid in sorted(list(self.metadata["sequence-region"].keys())):
-                shift_dict[seqid] = shift
-                sequence_varcoord_dict[seqid] += shift - self.metadata["sequence-region"][seqid][0] + 1
-                staked = np.hstack((staked, sequence_varcoord_dict[seqid]))
-                length = self.metadata["sequence-region"][seqid][1] - \
-                         self.metadata["sequence-region"][seqid][0] + 1
-                shift += length
-        else:
-            #TODO:implement stacking for files without sequence-region metadata
-            pass
-        return {"All": staked}, shift_dict
-        """
 
     def check_by_ref_and_alt(self, ref_alt_list, flag):
         for record in self:
@@ -449,7 +430,10 @@ class CollectionVCF(Collection):
 
     def hierarchical_clustering(self, method='average', dendrogramm_max_y=2000,
                                 sample_name=None, save=False, clustering_dir="clustering",
-                                dendrogramm_color_threshold=1000):
+                                dendrogramm_color_threshold=1000,
+                                draw_dendrogramm=True,
+                                write_inconsistent=True,
+                                write_correlation=True):
         # IMPORTANT! Use only for one-sample vcf
         # http://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html#scipy.cluster.hierarchy.linkage
         region_dict = self._split_regions()
@@ -458,7 +442,8 @@ class CollectionVCF(Collection):
         linkage_dict = OrderedDict({})
         inconsistent_dict = OrderedDict({})
         clusters_dict = OrderedDict({})
-        os.system("mkdir -p %s" % clustering_dir)
+        if draw_dendrogramm or write_correlation or write_inconsistent:
+            os.system("mkdir -p %s" % clustering_dir)
         for region in region_dict:
             positions_dict[region] = np.array([[record.pos] for record in region_dict[region]])
 
@@ -473,17 +458,19 @@ class CollectionVCF(Collection):
             # 'ward'        -   incremental algorithm
 
             distance_matrix = pdist(positions_dict[region])
+            #print(distance_matrix)
             linkage_dict[region] = linkage(distance_matrix, method=method)
-            plt.figure(1, dpi=150, figsize=(50, 20))
-            dendrogram(linkage_dict[region],
-                       color_threshold=dendrogramm_color_threshold,
-                       leaf_font_size=4,
-                       distance_sort=True)
-            plt.ylim(ymax=dendrogramm_max_y)
-            plt.axhline(y=500, color="purple")
-            plt.axhline(y=1000, color="black")
-            plt.savefig("%s/clustering_%s.svg" % (clustering_dir, region))
-            plt.close()
+            if draw_dendrogramm:
+                plt.figure(1, dpi=150, figsize=(50, 20))
+                dendrogram(linkage_dict[region],
+                           color_threshold=dendrogramm_color_threshold,
+                           leaf_font_size=4,
+                           distance_sort=True)
+                plt.ylim(ymax=dendrogramm_max_y)
+                plt.axhline(y=500, color="purple")
+                plt.axhline(y=1000, color="black")
+                plt.savefig("%s/clustering_%s.svg" % (clustering_dir, region))
+                plt.close()
 
             # http://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.cophenet.html#scipy.cluster.hierarchy.cophenet
             # calculates cophenetic correlation coefficient to estimate accuracy of clustering
@@ -493,16 +480,18 @@ class CollectionVCF(Collection):
             # calculates inconsistent coeff
 
             inconsistent_dict[region] = inconsistent(linkage_dict[region])
-            np.savetxt("%s/inconsistent_coefficient_%s.t" % (clustering_dir, region), inconsistent_dict[region])
+            if write_inconsistent:
+                np.savetxt("%s/inconsistent_coefficient_%s.t" % (clustering_dir, region), inconsistent_dict[region])
 
             #clusters_dict[region] = fcluster(linkage_dict[region], 1)
             #np.savetxt("clustering/clusters_%s.t" % region, clusters_dict[region], fmt="%i")
-        sample = sample_name
-        if not sample:
-            sample = self.samples[0]
-        with open("%s/correlation.t" % clustering_dir, "w") as cor_fd:
-            cor_fd.write("sample\t%s\n" % ("\t".join(list(region_dict.keys()))))
-            cor_fd.write("%s\t%s\n" % (sample, "\t".join([str(correlation_dict[region]) for region in region_dict])))
+        if write_correlation:
+            sample = sample_name
+            if not sample:
+                sample = self.samples[0]
+            with open("%s/correlation.t" % clustering_dir, "w") as cor_fd:
+                cor_fd.write("sample\t%s\n" % ("\t".join(list(region_dict.keys()))))
+                cor_fd.write("%s\t%s\n" % (sample, "\t".join([str(correlation_dict[region]) for region in region_dict])))
 
         if save:
             self.linkage_dict = linkage_dict
@@ -518,7 +507,11 @@ class CollectionVCF(Collection):
                      save_clustering=False,
                      clustering_dir="clustering",
                      split_by_regions=False,
-                     dendrogramm_color_threshold=1000):
+                     dendrogramm_color_threshold=1000,
+                     draw_dendrogramm=True,
+                     return_collection=True,
+                     write_inconsistent=True,
+                     write_correlation=True):
         from Parser.CCF import RecordCCF, CollectionCCF, MetadataCCF
         if self.linkage_dict:
             linkage_dict = self.linkage_dict
@@ -528,31 +521,42 @@ class CollectionVCF(Collection):
                                                                      sample_name=sample_name,
                                                                      save=save_clustering,
                                                                      clustering_dir=clustering_dir,
-                                                                     dendrogramm_color_threshold=dendrogramm_color_threshold)
+                                                                     dendrogramm_color_threshold=dendrogramm_color_threshold,
+                                                                     draw_dendrogramm=draw_dendrogramm,
+                                                                     write_correlation=write_correlation,
+                                                                     write_inconsistent=write_inconsistent)
         if split_by_regions:
             mut_clusters_dict = OrderedDict({})
         else:
             mut_clusters_list = []
+
+        clusters = OrderedDict()
         for region in linkage_dict:
-            # http://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.fcluster.html#scipy.cluster.hierarchy.fcluster
-            clusters_dict = OrderedDict({})
-            clusters = fcluster(linkage_dict[region], threshold, criterion=extracting_method)
-            for i in range(0, len(clusters)):
-                if clusters[i] not in clusters_dict:
-                    clusters_dict[clusters[i]] = [region_dict[region][i]]
+            clusters[region] = fcluster(linkage_dict[region], threshold, criterion=extracting_method)
+
+        if return_collection:
+            for region in region_dict:
+                # http://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.fcluster.html#scipy.cluster.hierarchy.fcluster
+                clusters_dict = OrderedDict({})
+
+                for i in range(0, len(clusters[region])):
+                    if clusters[region][i] not in clusters_dict:
+                        clusters_dict[clusters[region][i]] = [region_dict[region][i]]
+                    else:
+                        clusters_dict[clusters[region][i]].append(region_dict[region][i])
+                if split_by_regions:
+                    mut_clusters_dict[region] = \
+                        CollectionCCF(record_list=[RecordCCF(collection_vcf=CollectionVCF(record_list=clusters_dict[cluster], from_file=False),
+                                                             from_records=True)
+                                                   for cluster in clusters_dict], metadata=MetadataCCF(self.samples))
                 else:
-                    clusters_dict[clusters[i]].append(region_dict[region][i])
+                    mut_clusters_list += [RecordCCF(collection_vcf=CollectionVCF(record_list=clusters_dict[cluster], from_file=False), from_records=True)
+                                          for cluster in clusters_dict]
             if split_by_regions:
-                mut_clusters_dict[region] = \
-                    CollectionCCF(record_list=[RecordCCF(vcf_records_list=clusters_dict[cluster],
-                                                         from_records=True)
-                                               for cluster in clusters_dict])
-            else:
-                mut_clusters_list += [RecordCCF(vcf_records_list=clusters_dict[cluster], from_records=True)
-                                      for cluster in clusters_dict]
-        if split_by_regions:
-            return mut_clusters_dict
-        return CollectionCCF(record_list=mut_clusters_list, metadata=MetadataCCF(self.samples))
+                return mut_clusters_dict
+            return CollectionCCF(record_list=mut_clusters_list, metadata=MetadataCCF(self.samples))
+        else:
+            return clusters
 
     def test_thresholds(self,
                         extracting_method="inconsistent",

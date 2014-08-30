@@ -110,15 +110,56 @@ class Collection(Iterable):
         for record in self.records:
             yield record
 
-    def filter_records_by_parameter_value(self, parameter, minimum, maximum):
-        # TODO: fix
+    def __getitem__(self, item):
+        #string-like access
+        return self.records[item]
+
+    def __len__(self):
+        return len(self.records)
+
+    def filter_records_by_parameter_value(self, parameter, minimum=None, maximum=None):
+        # TODO: check
         filtered_records = []
         filtered_out_records = []
+        if (minimum is not None) and (maximum is not None):
+            comparison = lambda par, min_value, max_value: min_value <= par <= max_value
+        elif (minimum is None) and (maximum is None):
+            raise ValueError("Both minimum and maximum thresholds were not set")
+        elif minimum is None:
+            comparison = lambda par, min_value, max_value: par <= max_value
+        else:
+            comparison = lambda par, min_value, max_value: min_value <= par
+
         for record in self.records:
-            if parameter >= minimum and parameter <= maximum:
+            if comparison(getattr(record, parameter), minimum, maximum):
                 filtered_records.append(record)
             else:
                 filtered_out_records.append(record)
+
+        return filtered_records, filtered_out_records
+
+    def filter_records_by_expression(self, expression):
+        #TODO:check
+        filtered_records = []
+        filtered_out_records = []
+        for record in self.records:
+            if eval(expression):
+                filtered_records.append(record)
+            else:
+                filtered_out_records.append(record)
+
+        return filtered_records, filtered_out_records
+
+    def filter_by_expression(self, expression):
+        #TODO:check
+        self_type = self.__class__.__name__
+        filtered_records, filtered_out_records = self.filter_records_by_expression(expression)
+        #TODO: think how to rewrite following damned string!!!!!!!!!!
+        exec("from Parser.%s import %s" % (self_type[10:], self_type))
+        return eval(self_type)(metadata=self.metadata, record_list=filtered_records,
+                               header_list=self.header_list, from_file=False), \
+               eval(self_type)(metadata=self.metadata, record_list=filtered_out_records,
+                               header_list=self.header_list, from_file=False)
 
     def split_records_by_flags(self, flag_set, mode="all"):
         # possible modes:
@@ -299,7 +340,7 @@ class Collection(Iterable):
 
         fig = plt.figure(3, dpi=dpi, figsize=(8, 8))
         fig.suptitle(pie_name, fontsize=20)
-        plt.subplot(1, 1, 1, axisbg="#D6D6D6")
+        plt.subplot(1, 3, 2, axisbg="#D6D6D6")
         all_explodes = np.zeros(len(all_counts))
         if explode and all_counts:
             max_count_index = all_counts.index(max(all_counts))

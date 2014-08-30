@@ -48,6 +48,14 @@ if __name__ == "__main__":
         #os.system("pwd")
         mutations = CollectionVCF(vcf_file="../" + sample_set_name + ".vcf",
                                   from_file=True)
+        #remove indels present only in one sample
+
+        filtered_mutations, filtered_out_mutations = mutations.filter_by_expression("(not record.check_indel() ) or (record.count_samples() > 1)")
+
+        filtered_mutations.write(sample_set_name + "_filtered.vcf")
+        filtered_out_mutations.write(sample_set_name + "_filtered_out.vcf")
+
+
         mutations.get_location(annotations_dict)
         mutations.check_by_ref_and_alt(ref_alt_variants["desaminases"], "DA")
         #for record in mutations:
@@ -68,6 +76,7 @@ if __name__ == "__main__":
                                           threshold=distance_threshold, cluster_distance='average',
                                           dendrogramm_max_y=2000, dendrogramm_color_threshold=1000,
                                           clustering_dir=clustering_dir, split_by_regions=False)
+        clusters.subclustering()
         clusters.check_record_location(bad_regions)
         clusters.get_location(annotations_dict)
         clusters.write("%s/%s.ccf" % (clustering_dir, sample_set_name))
@@ -95,3 +104,4 @@ if __name__ == "__main__":
                                        full_genome_pie_filename="3+_good_cluster_desaminase_full_genome_pie.svg",
                                        counts_filename="3+_good_cluster_desaminase_location_counts.t")
         filtered_out_clusters.write("%s/%s_size_3+_nont_in_br_no_id_non_da.ccf" % (clustering_dir, sample_set_name))
+
