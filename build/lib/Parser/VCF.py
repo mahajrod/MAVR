@@ -16,7 +16,7 @@ from Bio.SeqFeature import SeqFeature, FeatureLocation
 #from General import check_path
 from Parser.Abstract import Record, Collection, Metadata, Header
 
-
+#TODO: refactor whole file
 ref_alt_variants = {"desaminases": [("C", ["T"]), ("G", ["A"])]
                     }
 
@@ -48,19 +48,13 @@ class RecordVCF(Record):
             else:
                 key_string_list.append(key)
 
-        #[key + "=" + ",". join(map(lambda x: str(x), self.info_dict[key])) for key in sorted(list(self.info_dict.keys()))]
         info_string = ";".join(key_string_list)
-        #format_string = ":".join(self.format_list)
         for sample in self.samples_list:
             if len(sample.keys()) > 1:
                 format_string = ":".join(sample.keys())
                 break
 
         samples_string = "\t".join([":".join([",".join(map(lambda x: str(x), sample[key])) for key in sample.keys()]) for sample in self.samples_list])
-
-        #samples_string = "\t".join([":".join([",".join(str(sample[key])) for key in sample.keys()]) for sample in self.samples_list])
-
-        #print(self.samples_list)
         return '\t'.join(map(lambda x: str(x), [self.chrom, self.pos, self.id, self.ref, alt_string,
                                                 self.qual, filter_string, info_string, format_string, samples_string]))
 
@@ -82,11 +76,8 @@ class RecordVCF(Record):
         if not self.flags:
             self.flags = set([])
         # structure of ref_alt_list:  [[ref1,[alt1.1, alt1.M1]], ..., [refN,[altN.1, ..., altN.MN]]]
-        #print(ref_alt_list)
-        #print ((self.ref, self.alt_list))
         if (self.ref, self.alt_list) in ref_alt_list:
             self.flags.add(flag)
-            #print ("aaa")
 
     def gff_str(self, parent=None):
         # TODO: think how to rewrite, maybe remove
@@ -119,7 +110,7 @@ class HeaderVCF(Header):
 class CollectionVCF(Collection):
     #TODO: rewrite metadata and header as classes to be consistent with abstract classes
 
-    def __init__(self, metadata=None, record_list=None, header_list=None, vcf_file=None, from_file=True):
+    def __init__(self, metadata=None, record_list=None, header_list=None, vcf_file=None, samples=None, from_file=True):
         self.linkage_dict = None
         if from_file:
             self.metadata = OrderedDict({})
@@ -138,6 +129,7 @@ class CollectionVCF(Collection):
             self.metadata = metadata
             self.records = record_list
             self.header_list = header_list
+            self.samples = samples
 
     def _add_record(self, line):
         line_list = line.strip().split("\t")
@@ -183,7 +175,8 @@ class CollectionVCF(Collection):
                                       alt_list, quality, filter_list,
                                       info_dict, samples_list))
 
-    def _split_by_equal_sign(self, string):
+    @staticmethod
+    def _split_by_equal_sign(string):
         try:
             index = string.index("=")
         except ValueError:
@@ -191,7 +184,8 @@ class CollectionVCF(Collection):
             return string, None
         return string[:index], string[index+1:]
 
-    def _split_by_comma_sign(self, string):
+    @staticmethod
+    def _split_by_comma_sign(string):
         index_list = [-1]
         i = 1
         while (i < len(string)):
@@ -301,7 +295,6 @@ class CollectionVCF(Collection):
         found_records = []
         filtered_out_records = []
         for record in self.records:
-            #print (record.ALT)
             if (record.ref, record.alt_list) in ref_alt_list:
                 found_records.append(record)
             else:
@@ -642,6 +635,13 @@ class CollectionVCF(Collection):
             index += 1
         plt.savefig("%s/clusters_%s.svg" % (testing_dir, extracting_method))
         plt.close()
+
+    def filter_by_expression(self, expression):
+        filtered_records, filtered_out_records = self.filter_records_by_expression(expression)
+        return CollectionVCF(metadata=self.metadata, record_list=filtered_records,
+                               header_list=self.header_list, samples=self.samples, from_file=False), \
+               CollectionVCF(metadata=self.metadata, record_list=filtered_out_records,
+                               header_list=self.header_list, samples=self.samples, from_file=False)
 
 
 class ReferenceGenome(object):

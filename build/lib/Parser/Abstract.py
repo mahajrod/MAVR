@@ -24,27 +24,34 @@ class Record():
     def __str__(self):
         pass
 
-    def get_location(self, record_dict):
+    def get_location(self, record_dict, key="Loc"):
         # function is written for old variant (with sub_feature)s rather then new (with CompoundLocation)
         # id of one SeqRecord in record_dict must be equal to record.pos
-        #print(self.description)
+        # locations will be written to description dictionary of record using "key" as key 
         if not self.description:
             self.description = {}
 
-        if "Loc" not in self.description:
-            self.description["Loc"] = set([])
+        if key not in self.description:
+            self.description[key] = set([])
         #print(self.chrom, self.pos)
         for feature in record_dict[self.chrom].features:
             if (self.pos - 1) in feature:
-                self.description["Loc"].add(feature.type)
+                self.description[key].add(feature.type)
                 #print(feature)
             for sub_feature in feature.sub_features:
                 if (self.pos - 1) in sub_feature:
-                    self.description["Loc"].add(sub_feature.type)
-        if not self.description["Loc"]:
-            self.description["Loc"].add("intergenic")
-        #print(self.description)
-        #print(self.description["Loc"], self.pos)
+                    self.description[key].add(sub_feature.type)
+        if not self.description[key]:
+            self.description[key].add("intergenic")
+
+    def check_location(self, bad_region_collection_gff):
+        if not self.flags:
+            self.flags = set()
+        for bad_region in bad_region_collection_gff:
+            if self.chrom != bad_region.chrom:
+                continue
+            if bad_region.start <= self.pos <= bad_region.end:
+                self.flags.add("BR")
 
 
 class Metadata():
@@ -139,7 +146,6 @@ class Collection(Iterable):
         return filtered_records, filtered_out_records
 
     def filter_records_by_expression(self, expression):
-        #TODO:check
         filtered_records = []
         filtered_out_records = []
         for record in self.records:
@@ -150,8 +156,11 @@ class Collection(Iterable):
 
         return filtered_records, filtered_out_records
 
+    def check_location(self, bad_region_collection_gff):
+        for record in self:
+            record.check_location(bad_region_collection_gff)
+
     def filter_by_expression(self, expression):
-        #TODO:check
         self_type = self.__class__.__name__
         filtered_records, filtered_out_records = self.filter_records_by_expression(expression)
         #TODO: think how to rewrite following damned string!!!!!!!!!!

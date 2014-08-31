@@ -1,12 +1,16 @@
 #!/usr/bin/env python
+
 from collections import Iterable
+import numpy as np
+import matplotlib.pyplot as plt
+
 from Parser.Abstract import Record, Collection, Metadata
 from Parser.VCF import CollectionVCF
 
 
 class RecordCCF(Record, Iterable):
-
-    def _check_chrom(self, vcf_records_list):
+    @staticmethod
+    def _check_chrom(vcf_records_list):
         #print (vcf_records_list)
         chrom = vcf_records_list[0].chrom
         for record in vcf_records_list:
@@ -15,7 +19,7 @@ class RecordCCF(Record, Iterable):
         return chrom
 
     def __init__(self, id=None, chrom=None, size=None, start=None, end=None, description=None, flags=None,
-                 collection_vcf=None, bad_vcf_records=0, from_records=True, subclusters=None,
+                 collection_vcf=None, bad_vcf_records=0, from_records=True, subclusters=None, features=None,
                  from_records_flag_mode="all"):
         # possible flags:
         # IP - indel(s) are present in record
@@ -48,7 +52,7 @@ class RecordCCF(Record, Iterable):
                     self.flags.add("IP")
                     break
             self.description = description
-
+            self.features = features
             if id:
                 self.id = id
             else:
@@ -62,6 +66,7 @@ class RecordCCF(Record, Iterable):
             self.size = size
             self.start = start
             self.end = end
+            self.features = features
             self.description = description
             self.mean_dist = None
             self.flags = set(flags)
@@ -94,32 +99,30 @@ class RecordCCF(Record, Iterable):
     def check_location(self, bad_region_collection_gff):
         self.bad_records = 0
         for variant in self:
-            for bad_region in bad_region_collection_gff:
-                if variant.chrom != bad_region.chrom:
-                    continue
-                if bad_region.start <= variant.pos <= bad_region.end:
-                    self.bad_records += 1
-                    break
-
+            if "BR" in variant.flags:
+                self.bad_records += 1
         if self.bad_records > 0:
             self.flags.add("BR")
 
-    def get_location(self, record_dict):
+    def get_location(self, record_dict, key="Loc"):
         # function is written for old variant (with sub_feature)s rather then new (with CompoundLocation)
         # id of one SeqRecord in record_dict must be equal to record.pos
         if not self.description:
             self.description = {}
-        if "Loc" not in self.description:
-            self.description["Loc"] = set([])
+        if not self.features:
+            self.features = []
+        if key not in self.description:
+            self.description[key] = set([])
         for variant in self:
-            if "Loc" in variant.description:
-                self.description["Loc"] |= set(variant.description["Loc"])
+            if key in variant.description:
+                self.description[key] |= set(variant.description[key])
             for feature in record_dict[self.chrom].features:
                 if (variant.pos - 1) in feature:
-                    self.description["Loc"].add(feature.type)
+                    self.features.append(feature)
+                    self.description[key].add(feature.type)
                 for sub_feature in feature.sub_features:
                     if (variant.pos - 1) in sub_feature:
-                        self.description["Loc"].add(sub_feature.type)
+                        self.description[key].add(sub_feature.type)
 
     def subclustering(self,
                       method="inconsistent",
@@ -135,8 +138,32 @@ class RecordCCF(Record, Iterable):
                                         write_correlation=False)
         self.subclusters = tmp[tmp.keys()[0]]
 
-    def adjust_cluster(self):
-        pass
+    def adjust(self, border_limit=None, min_size_to_adjust=2, remove_border_subclusters=False, remove_size_limit=1):
+        # skip adjustment for clusters with 3 or less mutations
+        if (self.size < min_size_to_adjust) or (self.subclusters is None):
+            return -1
+        limit = border_limit if border_limit else len(self.subclusters)
+        for i in range(0, limit):
+            if self.subclusters[i] == self.subclusters[0]:
+                left_subcluster_end = i
+            else:
+                break
+        # exit if cluster doesnt have subclusters
+        if left_subcluster_end == len(self.subclusters) - 1:
+            return 1
+
+        for i in range(-1, -limit - 1, -1):
+            if self.subclusters[i] == self.subclusters[-1]:
+                right_subcluster_start = i
+            else:
+                break
+
+        if remove_border_subclusters:
+            start = left_subcluster_end + 1 if left_subcluster_end < remove_size_limit else 0
+            end = right_subcluster_start if right_subcluster_start >= -remove_size_limit else len(self.subclusters)
+
+            self.__init__(collection_vcf=CollectionVCF(record_list=self.records.records[start:end], from_file=False),
+                          subclusters=self.subclusters[start:end], from_records=True)
 
 
 class MetadataCCF(Metadata):
@@ -158,7 +185,16 @@ class CollectionCCF(Collection):
         # TODO: write read from ccf file; possible replace ccf by bed file
         pass
 
+    def filter_by_expression(self, expression):
+        filtered_records, filtered_out_records = self.filter_records_by_expression(expression)
+        return CollectionCCF(metadata=self.metadata, record_list=filtered_records,
+                             from_file=False), \
+               CollectionCCF(metadata=self.metadata, record_list=filtered_out_records,
+                             from_file=False)
+
     def filter_by_size(self, min_size=3):
+        return self.filter_by_expression("record.size >= %i" % min_size)
+        """
         filtered_records = []
         filtered_out_records = []
         for record in self.records:
@@ -168,6 +204,7 @@ class CollectionCCF(Collection):
                 filtered_out_records.append(record)
         return CollectionCCF(record_list=filtered_records), \
                CollectionCCF(record_list=filtered_out_records)
+        """
 
     def filter_by_flags(self, white_flag_list=[], black_flag_list=[]):
         filtered_records = []
@@ -192,6 +229,11 @@ class CollectionCCF(Collection):
         for record in self:
             record.check_location(bad_region_collection_gff)
 
+    def adjust(self, border_limit=None, min_size_to_adjust=2, remove_border_subclusters=False, remove_size_limit=1):
+        for record in self:
+            record.adjust(border_limit=border_limit, min_size_to_adjust=min_size_to_adjust,
+                          remove_border_subclusters=remove_border_subclusters, remove_size_limit=remove_size_limit)
+
     def subclustering(self,
                       method="inconsistent",
                       threshold=0.8,
@@ -209,3 +251,22 @@ class CollectionCCF(Collection):
         for cluster in self:
             vcf_records += cluster.records
         return CollectionVCF(metadata=metadata, header_list=header, record_list=vcf_records)
+
+    def count(self):
+        sizes = []
+        for record in self:
+            sizes.append(record.size)
+        return sizes
+
+    def statistics(self, filename="cluster_size_distribution.svg", title="Distribution of sizes of clusters",
+                   dpi=150, figsize=(10, 10), facecolor="green"):
+        plt.figure(1, dpi=dpi, figsize=figsize)
+        plt.subplot(1, 1, 1)
+        plt.suptitle(title)
+        counts = self.count()
+        maximum = max(counts)
+        bins = np.linspace(0, maximum, maximum)
+        plt.hist(counts, bins, facecolor=facecolor)
+        plt.xticks(np.arange(0, maximum, 1.0))
+        plt.savefig(filename)
+        plt.close()
