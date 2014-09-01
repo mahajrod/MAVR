@@ -85,8 +85,9 @@ if __name__ == "__main__":
         clusters.adjust(border_limit=None, min_size_to_adjust=1, remove_border_subclusters=True, remove_size_limit=1)
         clusters.statistics(filename="%s/%s_cluster_size_distribution.svg" % (clustering_dir, sample_set_name_adjusted))
         clusters.check_location(bad_regions)
+        clusters.check_flags(["DA"], mismatch_list=[1], expression_list=["record.count_samples() <= 1"],
+                             remove_mismatch_list=[True])
         clusters.get_location(annotations_dict)
-
         clusters.write("%s/%s.ccf" % (clustering_dir, sample_set_name_adjusted))
 
         filtered_clusters, filtered_out_clusters = clusters.filter_by_size(min_size=min_cluster_size)
@@ -94,7 +95,7 @@ if __name__ == "__main__":
         filtered_clusters.location_pie(annotation_black_list=annotation_black_list,
                                        pie_filename="%s_3+_cluster_location_pie.svg" % sample_set_name_adjusted,
                                        counts_filename="%s_3+_cluster_location_counts.t" % sample_set_name_adjusted,
-                                       full_genome_pie_filename="3%s_+_cluster_location_full_genome_pie.svg" % sample_set_name_adjusted,)
+                                       full_genome_pie_filename="%s_3+_cluster_location_full_genome_pie.svg" % sample_set_name_adjusted,)
         filtered_out_clusters.write("%s/%s_size_less_3.ccf" % (clustering_dir, sample_set_name_adjusted))
 
         filtered_clusters, filtered_out_clusters = filtered_clusters.filter_by_flags(black_flag_list=["IP", "BR"])
@@ -113,6 +114,6 @@ if __name__ == "__main__":
                                        pie_filename="%s_3+_good_cluster_desaminase_location_pie.svg" % sample_set_name_adjusted,
                                        full_genome_pie_filename="%s_3+_good_cluster_desaminase_full_genome_pie.svg" % sample_set_name_adjusted,
                                        counts_filename="%s_3+_good_cluster_desaminase_location_counts.t" % sample_set_name_adjusted)
-        filtered_out_clusters.write("%s/%s_size_3+_nont_in_br_no_id_non_da.ccf" % (clustering_dir, sample_set_name_adjusted))
+        filtered_out_clusters.write("%s/%s_size_3+_not_in_br_no_id_non_da.ccf" % (clustering_dir, sample_set_name_adjusted))
         filtered_clusters.statistics(filename="%s/%s_size_3+_not_in_br_no_id_da_cluster_size_distribution.svg" % (clustering_dir, sample_set_name_adjusted))
-        filtered_out_clusters.statistics(filename="%s/%s_size_3+_nont_in_br_no_id_non_da_distribution.svg" % (clustering_dir, sample_set_name_adjusted))
+        filtered_out_clusters.statistics(filename="%s/%s_size_3+_not_in_br_no_id_non_da_distribution.svg" % (clustering_dir, sample_set_name_adjusted))

@@ -124,6 +124,9 @@ class Collection(Iterable):
     def __len__(self):
         return len(self.records)
 
+    def pop(self, index=None):
+        return self.records.pop(index) if index else self.records.pop()
+
     def filter_records_by_parameter_value(self, parameter, minimum=None, maximum=None):
         # TODO: check
         filtered_records = []
