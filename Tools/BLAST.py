@@ -35,6 +35,15 @@ if __name__ == "__main__":
                             "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/Alsu/reference/Alsu24s.asnb",
                             "Alsu24s")
     """
-    blast.make_blast_plus_db("/home/mahajrod/genetics/desaminases/data/LAN210_v0.10m/LAN210_v0.10m.fasta",
-                            "/home/mahajrod/genetics/desaminases/data/LAN210_v0.10m/LAN210_v0.10m.asnb",
-                            "LAN210_v0.10m")
+    """
+    fasta_file = "/home/mahajrod/genetics/desaminases/data/LAN210_v0.10m/LAN210_v0.10m.fasta"
+    asnb_file = "/home/mahajrod/genetics/desaminases/data/LAN210_v0.10m/LAN210_v0.10m.asnb"
+    name = "LAN210_v0.10m"
+    """
+    os.chdir("/home/mahajrod/genetics/desaminases/data/S288C_R64/")
+    fasta_file = "/home/mahajrod/genetics/desaminases/data/S288C_R64/S288C_reference_sequence_R64-1-1_20110203_modified.fsa"
+    asnb_file = "/home/mahajrod/genetics/desaminases/data/S288C_R64/S288C_reference_sequence_R64-1-1_20110203_modified.asnb"
+    name = "S288C_R64"
+    blast.make_blast_plus_db(fasta_file,
+                            asnb_file,
+                            name)

@@ -238,12 +238,19 @@ class RecordCCF(Record, Iterable):
 
 class MetadataCCF(Metadata):
 
-    def __init__(self, samples, metadata={}):
+    def __init__(self, samples, vcf_metadata=None, vcf_header=None, metadata={}):
         self.samples = samples      #list
         self.metadata = metadata
+        self.vcf_metadata = vcf_metadata
+        self.vcf_header = vcf_header
 
     def __str__(self):
-        metadata_string = "##Samples=" + ",".join(self.samples)
+        metadata_string = None
+        if self.vcf_metadata:
+            metadata_string = "#VCF_METADATA START\n" + str(self.vcf_metadata) + "\n#VCF_METADATA END"
+        if self.vcf_header:
+            metadata_string = metadata_string + "\n#VCF_HEADER\n" + str(self.vcf_header) \
+                if metadata_string else "#VCF_HEADER\n" + str(self.vcf_header)
         if self.metadata:
             metadata_string += "\n##" + "\n##".join(["%s=%s" % (key, self.metadata[key]) for key in self.metadata])
         return metadata_string
@@ -252,7 +259,7 @@ class MetadataCCF(Metadata):
 class CollectionCCF(Collection):
 
     def read(self, input_file):
-        # TODO: write read from ccf file; possible replace ccf by bed file
+        # TODO: write read from ccf file
         pass
 
     def filter_by_expression(self, expression):
@@ -281,8 +288,8 @@ class CollectionCCF(Collection):
                     filtered_out_records.append(record)
                 else:
                     filtered_records.append(record)
-        return CollectionCCF(record_list=filtered_records), \
-               CollectionCCF(record_list=filtered_out_records)
+        return CollectionCCF(metadata=self.metadata, record_list=filtered_records), \
+               CollectionCCF(metadata=self.metadata, record_list=filtered_out_records)
 
     def check_record_location(self, bad_region_collection_gff):
         for record in self:
@@ -304,13 +311,13 @@ class CollectionCCF(Collection):
             record.subclustering(method=method,
                                  threshold=threshold,
                                  cluster_distance=cluster_distance)
-
+    """
     def get_collection_vcf(self, metadata, header):
         vcf_records = []
         for cluster in self:
             vcf_records += cluster.records
-        return CollectionVCF(metadata=metadata, header_list=header, record_list=vcf_records)
-
+        return CollectionVCF(metadata=metadata, header=header, record_list=vcf_records)
+    """
     def count(self):
         sizes = []
         for record in self:
@@ -336,3 +343,16 @@ class CollectionCCF(Collection):
             record.check_flags(flag_list, mismatch_list=mismatch_list, expression_list=expression_list,
                                remove_mismatch_list=remove_mismatch_list, flags_to_reset=flags_to_reset, mode=mode,
                                min_cluster_size=min_cluster_size)
+
+    def extract_vcf(self):
+        vcf = CollectionVCF(metadata=self.metadata.vcf_metadata, record_list=[], header=self.metadata.vcf_header,
+                            samples=self.metadata.samples, from_file=False)
+        for record in self:
+            """
+            print(record)
+            print(type(record))
+            print(record.records)
+            print(type(record.records))
+            """
+            vcf = vcf + record.records
+        return vcf

@@ -44,6 +44,7 @@ Tools/FilterTools.py
 Tools/GlimerHMM.py
 Tools/Picard.py
 Tools/RepeatSearchTools.py
+Tools/SNPeff.py
 Tools/Samtools.py
 Tools/__init__.py
 Tools/Alignment/BWA.py

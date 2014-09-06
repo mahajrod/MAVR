@@ -87,48 +87,97 @@ class RecordVCF(Record):
         return "%s\tvariant_call\tvariant\t%i\t%i\t.\t.\t.\t%s" % (self.chrom, self.start, self.end, attributes_string)
 
 
-class MetadataVCF(Metadata):
+class MetadataVCF(OrderedDict, Metadata):
+
+    #def __init__(self, metadata=None):
+    #    self.metadata = metadata if metadata is not None else OrderedDict({})
+
+    @staticmethod
+    def _split_by_equal_sign(string):
+        try:
+            index = string.index("=")
+        except ValueError:
+            #if "=" is not present in string (case of flag type in INFO field)
+            return string, None
+        return string[:index], string[index+1:]
+
+    @staticmethod
+    def _split_by_comma_sign(string):
+        index_list = [-1]
+        i = 1
+        while (i < len(string)):
+            if string[i] == "\"":
+                i += 1
+                while string[i] != "\"":
+                    i += 1
+            if string[i] == ",":
+                index_list.append(i)
+            i += 1
+        index_list.append(len(string))
+        return [string[index_list[j] + 1: index_list[j + 1]] for j in range(0, len(index_list) - 1)]
+
+    def add_metadata(self, line):
+        key, value = self._split_by_equal_sign(line[2:].strip())
+        if value[0] == "<" and value[-1] == ">":
+            #checking is value a list or no
+            #print(value)
+            #print(key, value)
+            value = self._split_by_comma_sign(value[1:-1])
+            #print(value)
+            #parse in suppose that first parameter in value list is ID
+            value_id = self._split_by_equal_sign(value[0])[1]
+            #print(value[1:])
+            value = OrderedDict(self._split_by_equal_sign(entry) for entry in value[1:])
+            #print(value_id, value)
+            if key not in self:
+                self[key] = OrderedDict({})
+            self[key][value_id] = value
+
+        else:
+            self[key] = value
+
     def __str__(self):
         metadata_string = ""
-        for key in self.metadata:
-            if not isinstance(self.metadata[key], dict):
-                metadata_string += "##%s=%s\n" % (key, self.metadata[key])
+        for key in self:
+            if not isinstance(self[key], dict):
+                metadata_string += "##%s=%s\n" % (key, self[key])
             else:
                 prefix = "##%s=<" % key
                 suffix = ">\n"
-                for att_id in self.metadata[key]:
-                    middle = "ID=%s," % att_id + ",".join(["%s=%s" % (param, self.metadata[key][att_id][param])
-                                                           for param in self.metadata[key][att_id]])
+                for att_id in self[key]:
+                    middle = "ID=%s," % att_id + ",".join(["%s=%s" % (param, self[key][att_id][param])
+                                                           for param in self[key][att_id]])
                     metadata_string += prefix + middle + suffix
-        return metadata_string
+        return metadata_string[:-1]
 
 
-class HeaderVCF(Header):
-    pass
+class HeaderVCF(list, Header):
+
+    def __str__(self):
+        return "#" + "\t".join(self)
 
 
 class CollectionVCF(Collection):
-    #TODO: rewrite metadata and header as classes to be consistent with abstract classes
 
-    def __init__(self, metadata=None, record_list=None, header_list=None, vcf_file=None, samples=None, from_file=True):
+    def __init__(self, metadata=None, record_list=None, header=None, vcf_file=None, samples=None, from_file=True):
         self.linkage_dict = None
         if from_file:
-            self.metadata = OrderedDict({})
+            self.metadata = MetadataVCF()
             self.records = []
             with open(vcf_file, "r") as fd:
                 for line in fd:
                     if line[:2] != "##":
-                        self.header_list = line[1:].strip().split("\t")
-                        self.samples = self.header_list[9:]
+                        self.header = HeaderVCF(line[1:].strip().split("\t"))   #line[1:].strip().split("\t")
+                        self.samples = self.header[9:]
                         break
                     #print(line)
-                    self._add_metadata(line)
+                    self.metadata.add_metadata(line)
                 for line in fd:
                     self._add_record(line)
         else:
             self.metadata = metadata
             self.records = record_list
-            self.header_list = header_list
+            self.header = header
             self.samples = samples
 
     def _add_record(self, line):
@@ -184,8 +233,12 @@ class CollectionVCF(Collection):
             return string, None
         return string[:index], string[index+1:]
 
+    def _split_by_comma_sign(self, string):
+        return self._split_by_comma_sign(string, sign=",")
+
     @staticmethod
-    def _split_by_comma_sign(string):
+    def _split_by_sign(string, sign=","):
+        # ignores sign in "
         index_list = [-1]
         i = 1
         while (i < len(string)):
@@ -193,52 +246,11 @@ class CollectionVCF(Collection):
                 i += 1
                 while string[i] != "\"":
                     i += 1
-            if string[i] == ",":
+            if string[i] == sign:
                 index_list.append(i)
             i += 1
         index_list.append(len(string))
         return [string[index_list[j] + 1: index_list[j + 1]] for j in range(0, len(index_list) - 1)]
-
-    def _add_metadata(self, line):
-        key, value = self._split_by_equal_sign(line[2:].strip())
-        if value[0] == "<" and value[-1] == ">":
-            #checking is value a list or no
-            #print(value)
-            #print(key, value)
-            value = self._split_by_comma_sign(value[1:-1])
-            #print(value)
-            #parse in suppose that first parameter in value list is ID
-            value_id = self._split_by_equal_sign(value[0])[1]
-            #print(value[1:])
-            value = OrderedDict(self._split_by_equal_sign(entry) for entry in value[1:])
-            #print(value_id, value)
-            if key not in self.metadata:
-                self.metadata[key] = OrderedDict({})
-            self.metadata[key][value_id] = value
-
-        else:
-            self.metadata[key] = value
-
-    def metadata2str(self):
-        metadata_string = ""
-        for key in self.metadata:
-            if not isinstance(self.metadata[key], dict):
-                metadata_string += "##%s=%s\n" % (key, self.metadata[key])
-            else:
-                prefix = "##%s=<" % key
-                suffix = ">\n"
-                for att_id in self.metadata[key]:
-                    middle = "ID=%s," % att_id + ",".join(["%s=%s" % (param, self.metadata[key][att_id][param])
-                                                           for param in self.metadata[key][att_id]])
-                    metadata_string += prefix + middle + suffix
-        return metadata_string
-
-    def write(self, output_file):
-        with open(output_file, "w") as out_fd:
-            out_fd.write(self.metadata2str())
-            out_fd.write("#" + "\t".join(self.header_list) + "\n")
-            for record in self.records:
-                out_fd.write(str(record) + "\n")
 
     def split_by_zygoty(self):
         #splits sites by zygoty, site counts as heterozygote if even in one sample it it hetorozygote
@@ -253,9 +265,9 @@ class CollectionVCF(Collection):
             else:
                 homo_sites.append(site)
         homozygotes = CollectionVCF(metadata=self.metadata, record_list=homo_sites,
-                                    header_list=self.header_list, from_file=False)
+                                    header=self.header, from_file=False)
         heterozygotes = CollectionVCF(metadata=self.metadata, record_list=hetero_sites,
-                                      header_list=self.header_list, from_file=False)
+                                      header=self.header, from_file=False)
         return homozygotes, heterozygotes
 
     def record_coordinates(self, black_list=[], white_list=[]):
@@ -284,13 +296,12 @@ class CollectionVCF(Collection):
         # one - record to be counted as 'with flag' must have at least one flag from flags_list
         with_flag_records, without_flag_records = self.split_records_by_flags(flag_set, mode=mode)
         with_flag = CollectionVCF(metadata=self.metadata, record_list=with_flag_records,
-                                  header_list=self.header_list, from_file=False)
+                                  header=self.header, from_file=False)
         without_flag = CollectionVCF(metadata=self.metadata, record_list=without_flag_records,
-                                     header_list=self.header_list, from_file=False)
+                                     header=self.header, from_file=False)
         return with_flag, without_flag
 
     def split_by_ref_and_alt(self, ref_alt_list):
-        #TODO: check
         # structure of ref_alt_list:  [[ref1,[alt1.1, alt1.M1]], ..., [refN,[altN.1, ..., altN.MN]]]
         found_records = []
         filtered_out_records = []
@@ -300,12 +311,13 @@ class CollectionVCF(Collection):
             else:
                 filtered_out_records.append(record)
         found = CollectionVCF(metadata=self.metadata, record_list=found_records,
-                              header_list=self.header_list, from_file=False)
+                              header=self.header, from_file=False)
         filtered_out = CollectionVCF(metadata=self.metadata, record_list=filtered_out_records,
-                                     header_list=self.header_list, from_file=False)
+                                     header=self.header, from_file=False)
         return found, filtered_out
 
-    def _split_ref(self, records):
+    @staticmethod
+    def _split_ref(records):
         splited_dict = OrderedDict({"A": [], "C": [], "G": [], "T": [], "INDEL": []})
         nucleotides = ["A", "C", "G", "T"]
         for record in records:
@@ -319,7 +331,7 @@ class CollectionVCF(Collection):
         #TODO: check
         regions_dict = self._split_regions()
         return [CollectionVCF(metadata=self.metadata, record_list=regions_dict[region],
-                              header_list=self.header_list, from_file=False)
+                              header=self.header, from_file=False)
                 for region in regions_dict]
 
     def _reference(self, record):
@@ -334,7 +346,7 @@ class CollectionVCF(Collection):
 
         for region in regions_dict:
             CollectionVCF(metadata=self.metadata, record_list=regions_dict[region],
-                          header_list=self.header_list, from_file=False).write(prefix + "_" + region + ".vcf")
+                          header=self.header, from_file=False).write(prefix + "_" + region + ".vcf")
 
     def get_positions(self):
         regions_dict = self._split_regions()
@@ -344,7 +356,7 @@ class CollectionVCF(Collection):
         return positions_dict
 
     def rainfall_plot(self, plot_name, base_colors=[], single_fig=True, dpi=150, figsize=(55, 70), facecolor="#D6D6D6",
-                      ref_genome=None, min_gap_length=10, draw_gaps=False):
+                      ref_genome=None, masked_regions=None, min_gap_length=10, draw_gaps=False):
         print("Drawing rainfall plot...")
         plot_dir = "rainfall_plot"
         reference_colors = {"A": "#FBFD2B",    # yellow
@@ -371,8 +383,7 @@ class CollectionVCF(Collection):
         for region in regions_dict:
             positions_dict[region] = np.array([record.pos for record in regions_dict[region]])
             #np.ediff1d return differences between consecutive elements in array, then 0 is added to the beginning
-            distances_dict[region] = np.insert(np.ediff1d(positions_dict[region]),
-                                               0, 0)
+            distances_dict[region] = np.insert(np.ediff1d(positions_dict[region]), 0, 0)
             region_reference_dict[region] = OrderedDict({"A": [[], []],
                                                          "C": [[], []],
                                                          "G": [[], []],
@@ -392,6 +403,19 @@ class CollectionVCF(Collection):
                                                         axisbg=facecolor)
 
                 index += 1
+                if draw_gaps:
+                    if ref_genome:
+                        for gap in ref_genome.gaps_dict[region]:
+                            plt.gca().add_patch(plt.Rectangle((gap.location.start, 1),
+                                                              gap.location.end - gap.location.start,
+                                                              1024*32, facecolor="#777777", edgecolor='none'))
+                    # masked regions should be SeqRecord dict
+                    if masked_regions:
+                        for feature in masked_regions[region].features:
+                            plt.gca().add_patch(plt.Rectangle((int(feature.location.start)+1, 1),
+                                                              feature.location.end - feature.location.start,
+                                                              1024*32, facecolor="#aaaaaa", edgecolor='none'))
+
                 for reference in region_reference_dict[region]:
                     plt.plot(region_reference_dict[region][reference][0],
                              region_reference_dict[region][reference][1],
@@ -401,19 +425,13 @@ class CollectionVCF(Collection):
                 plt.title("Region %s" % region)
                 #xlabel("Position")
                 plt.ylabel("Distanse")
-                plt.ylim(ymin=0)
+                #plt.ylim(ymin=0)
                 plt.axhline(y=100, color="#000000")
                 plt.axhline(y=1000, color="#000000")
                 plt.axhline(y=500, color="purple")
                 plt.axhline(y=10, color="#000000")
-                if ref_genome:
-                    if draw_gaps:
-                        for gap in ref_genome.gaps_dict[region]:
-                            plt.gca().add_patch(plt.Rectangle((gap.location.start, 1),
-                                                              gap.location.end - gap.location.start,
-                                                              1024*32, facecolor="#aaaaaa", edgecolor='none'))
-        if single_fig:
 
+        if single_fig:
             plt.savefig("%s/%s.svg" % (plot_dir, plot_name))
             for region in sub_plot_dict:
                 sub_plot_dict[region].set_yscale('log', basey=2)
@@ -540,14 +558,14 @@ class CollectionVCF(Collection):
                 if split_by_regions:
                     mut_clusters_dict[region] = \
                         CollectionCCF(record_list=[RecordCCF(collection_vcf=CollectionVCF(record_list=clusters_dict[cluster], from_file=False),
-                                                             from_records=True)
-                                                   for cluster in clusters_dict], metadata=MetadataCCF(self.samples))
+                                                             from_records=True) for cluster in clusters_dict],
+                                      metadata=MetadataCCF(self.samples, vcf_metadata=self.metadata, vcf_header=self.header))
                 else:
                     mut_clusters_list += [RecordCCF(collection_vcf=CollectionVCF(record_list=clusters_dict[cluster], from_file=False), from_records=True)
                                           for cluster in clusters_dict]
             if split_by_regions:
                 return mut_clusters_dict
-            return CollectionCCF(record_list=mut_clusters_list, metadata=MetadataCCF(self.samples))
+            return CollectionCCF(record_list=mut_clusters_list, metadata=MetadataCCF(self.samples, vcf_metadata=self.metadata, vcf_header=self.header))
         else:
             return clusters
 
@@ -639,9 +657,48 @@ class CollectionVCF(Collection):
     def filter_by_expression(self, expression):
         filtered_records, filtered_out_records = self.filter_records_by_expression(expression)
         return CollectionVCF(metadata=self.metadata, record_list=filtered_records,
-                               header_list=self.header_list, samples=self.samples, from_file=False), \
+                               header=self.header, samples=self.samples, from_file=False), \
                CollectionVCF(metadata=self.metadata, record_list=filtered_out_records,
-                               header_list=self.header_list, samples=self.samples, from_file=False)
+                               header=self.header, samples=self.samples, from_file=False)
+
+    # methods for sum of two CollectionsVCF: no check for intersections(!!!!!!!!)
+    def __add__(self, other):
+        return CollectionVCF(metadata=self.metadata, record_list=self.records + other.records,
+                             header=self.header, samples=self.samples, from_file=False)
+
+    def __radd__(self, other):
+        return CollectionVCF(metadata=self.metadata, record_list=self.records + other.records,
+                             header=self.header, samples=self.samples, from_file=False)
+
+    def parse_snpeff_info_record(self, string):
+        effect, parameters = string.split("(")
+        # remove closing bracket and split
+        parameters = parameters[:-1].split("|")
+        return [effect] + parameters
+
+    def extract_snpeff_info(self, output_file):
+        snpeff_info_dict_keys = "EFF", "LOS", "NMD"
+        record_header_list = ["Chrom", "Pos", "Ref", "Alt"]
+        snpeff_header_list = ["Effect", "Effect_Impact", "Functional_Class", "Codon_Change", "Amino_Acid_Change",
+                  "Amino_Acid_Length", "Gene_Name", "Transcript_BioType", "Gene_Coding", "Transcript_ID",
+                  "Exon_Rank", "Genotype_Number", "ERRORS", "WARNINGS"
+                  ]
+
+        #print(output_file)
+        with open(output_file, "w") as out_fd:
+            header_string = "#" + "\t".join(record_header_list + snpeff_header_list) + "\n"
+            out_fd.write(header_string)
+            for record in self:
+                common_part = "%s\t%i\t%s\t%s" % (record.chrom, record.pos, record.ref, ",".join(record.alt_list))
+                for effect in record.info_dict["EFF"]:
+                    effect_parameters = self.parse_snpeff_info_record(effect)
+                    num_parameters = len(effect_parameters)
+                    for i in range(0, num_parameters):
+                        if effect_parameters[i] == "":
+                            effect_parameters[i] = "."
+                    if num_parameters < 14:
+                        effect_parameters += ["." for i in range(num_parameters, 14)]
+                    out_fd.write(common_part + "\t" + "\t".join(effect_parameters) + "\n")
 
 
 class ReferenceGenome(object):

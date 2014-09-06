@@ -23,16 +23,6 @@ def get_read_filenames(sample_name, read_type, sample_dir="."):
             right_reads = filename
     return left_reads, right_reads
 
-"""
-reference_dir = "/home/mahajrod/genetics/desaminases/data/LAN210_v0.8m/"
-reference = "%sLAN210_v0.8m.fasta" % reference_dir
-reference_dict = "%sLAN210_v0.8m.dict" % reference_dir
-reference_index = "%sLAN210_v0.8m" % reference_dir
-"""
-"""
-reference_name = "LAN210_v0.9m"
-reference_dir = "/home/mahajrod/genetics/desaminases/data/LAN210_v0.9m/"
-"""
 reference_name = "LAN210_v0.10m"
 reference_dir = "/home/mahajrod/genetics/desaminases/data/LAN210_v0.10m/"
 reference = "%s%s.fasta" % (reference_dir, reference_name)
@@ -47,9 +37,9 @@ read_subdir = "trimmed/spades/corrected/"
 
 #samples_file = "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/samples_nonwt.t"
 #samples_file = "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/samples_wt.t"
-samples_file = "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/samples_nonHAP.t"
-#alignment_dir = "alignment"
-#alignment_dir = "alignment_LAN210_v0.9m"
+#samples_file = "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/samples_nonHAP.t"
+samples_file = "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/samples_HAP.t"
+
 alignment_dir = "alignment_LAN210_v0.10m"
 os.chdir(reference_dir)
 make_fasta_dict(reference, reference_dict, PICARD_dir="/home/mahajrod/Repositories/genetic/NGS_tools/picard-tools-1.115/picard-tools-1.115/")

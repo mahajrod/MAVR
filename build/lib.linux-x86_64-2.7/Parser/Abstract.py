@@ -24,7 +24,7 @@ class Record():
     def __str__(self):
         pass
 
-    def get_location(self, record_dict, key="Loc"):
+    def get_location(self, record_dict, key="Loc", strand_key="strand", feature_type_black_list=[]):
         # function is written for old variant (with sub_feature)s rather then new (with CompoundLocation)
         # id of one SeqRecord in record_dict must be equal to record.pos
         # locations will be written to description dictionary of record using "key" as key 
@@ -162,7 +162,7 @@ class Collection(Iterable):
     def check_location(self, bad_region_collection_gff):
         for record in self:
             record.check_location(bad_region_collection_gff)
-
+    """
     def filter_by_expression(self, expression):
         self_type = self.__class__.__name__
         filtered_records, filtered_out_records = self.filter_records_by_expression(expression)
@@ -172,7 +172,7 @@ class Collection(Iterable):
                                header_list=self.header_list, from_file=False), \
                eval(self_type)(metadata=self.metadata, record_list=filtered_out_records,
                                header_list=self.header_list, from_file=False)
-
+    """
     def split_records_by_flags(self, flag_set, mode="all"):
         # possible modes:
         # all - record to be counted as 'with flag' must have all flags from flags_list
@@ -249,6 +249,7 @@ class Collection(Iterable):
                         full_location.append(location)
                     if not full_location:
                         continue
+                    full_location.sort()
                     full_location = "/".join(full_location)
                     if full_location not in count_locations_dict:
                         count_locations_dict[full_location] = 1
@@ -277,7 +278,8 @@ class Collection(Iterable):
                      full_genome_pie_filename="variant_location_pie_full_genome.svg",
                      counts_filename="location_counts.t",
                      plot_dir="variant_location_pie",
-                     counts_dir="location_counts"):
+                     counts_dir="location_counts",
+                     radius = 1):
         print("Drawing location pie...")
 
         os.system("mkdir -p %s" % plot_dir)
@@ -350,7 +352,7 @@ class Collection(Iterable):
         plt.savefig("%s/%s" % (plot_dir, pie_filename))
         plt.close()
 
-        fig = plt.figure(3, dpi=dpi, figsize=(8, 8))
+        fig = plt.figure(3, dpi=dpi, figsize=(9, 9))
         fig.suptitle(pie_name, fontsize=20)
         plt.subplot(1, 3, 2, axisbg="#D6D6D6")
         all_explodes = np.zeros(len(all_counts))
@@ -358,8 +360,8 @@ class Collection(Iterable):
             max_count_index = all_counts.index(max(all_counts))
             all_explodes[max_count_index] = 0.1
         plt.pie(all_counts, explode=all_explodes, labels=all_labels, colors=all_colors,
-                autopct='%1.1f%%', shadow=True, startangle=90)
-        plt.title("Full genome", y=1.08)
+                autopct='%1.1f%%', shadow=True, startangle=90, radius=4)
+        plt.title("Full genome")
             # Set aspect ratio to be equal so that pie is drawn as a circle.
         plt.axis('equal')
         plt.savefig("%s/%s" % (plot_dir, full_genome_pie_filename))

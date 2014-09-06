@@ -23,13 +23,14 @@ if __name__ == "__main__":
                              "PmCDA1_sub1_6d"]
 
     clustering_dir = "clustering"
+    rainfall_dir = "rainfall"
     distance_threshold = 1000
     reference.find_gaps()
     os.chdir(workdir)
     samples_list = sorted(os.listdir("."))
     min_cluster_size = 3
-
-    bad_regions = CollectionGFF(input_file="/home/mahajrod/genetics/desaminases/data/LAN210_v0.10m/masked_regions/LAN210_v0.10m_masked_all.gff",
+    bad_regions_file = "/home/mahajrod/genetics/desaminases/data/LAN210_v0.10m/masked_regions/LAN210_v0.10m_masked_all.gff"
+    bad_regions = CollectionGFF(input_file=bad_regions_file,
                                 from_file=True)
     gff_file = "/home/mahajrod/genetics/desaminases/data/LAN210_v0.10m/annotations/merged_annotations_Nagalakshmi_tranf_to_LAN210_v0.10m.gff3"
     annotations_dict = {}
@@ -38,16 +39,23 @@ if __name__ == "__main__":
         for record in GFF.parse(gff_fd):
             annotations_dict[record.id] = record
 
+    bad_region_dict = {}
+    with open(bad_regions_file) as gff_fd:
+        for record in GFF.parse(gff_fd):
+            bad_region_dict[record.id] = record
+
     for sample_set_name in sample_set_names_list:
         print("Handling %s" % sample_set_name)
 
         os.chdir(workdir)
         os.system("mkdir -p %s" % sample_set_name)
         os.chdir(sample_set_name)
-        os.system("mkdir -p %s" % clustering_dir)
+        os.system("mkdir -p %s %s" % (clustering_dir, rainfall_dir))
         #os.system("pwd")
         mutations = CollectionVCF(vcf_file="../" + sample_set_name + ".vcf",
                                   from_file=True)
+        mutations.rainfall_plot("%s_mutations" % (sample_set_name), ref_genome=reference, draw_gaps=True,
+                                masked_regions=bad_region_dict)
         #remove indels present only in one sample
 
         #filtered_mutations, filtered_out_mutations = mutations.filter_by_expression("(not record.check_indel() ) or (record.count_samples() > 1)")
@@ -63,7 +71,7 @@ if __name__ == "__main__":
         #for record in mutations:
         #    print(record.description)
         annotation_black_list = ["gene", "region", "ARS", "long_terminal_repeat",
-                                 "noncoding_exon", ]
+                                 "noncoding_exon", "intron"]
         """
         mutations.location_pie(annotation_black_list=annotation_black_list,
                                figsize=(30, 30),
@@ -117,3 +125,8 @@ if __name__ == "__main__":
         filtered_out_clusters.write("%s/%s_size_3+_not_in_br_no_id_non_da.ccf" % (clustering_dir, sample_set_name_adjusted))
         filtered_clusters.statistics(filename="%s/%s_size_3+_not_in_br_no_id_da_cluster_size_distribution.svg" % (clustering_dir, sample_set_name_adjusted))
         filtered_out_clusters.statistics(filename="%s/%s_size_3+_not_in_br_no_id_non_da_distribution.svg" % (clustering_dir, sample_set_name_adjusted))
+
+        cluster_mutations = filtered_clusters.extract_vcf()
+        cluster_mutations.write("%s/%s_cluster_mutations.vcf" % (clustering_dir, sample_set_name_adjusted))
+        cluster_mutations.rainfall_plot("%s_cluster_mutations" % (sample_set_name_adjusted), ref_genome=reference, draw_gaps=True,
+                                        masked_regions=bad_region_dict)
