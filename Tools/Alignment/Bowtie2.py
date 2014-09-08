@@ -5,7 +5,7 @@ from Tools.Abstract import Tool
 
 class Bowtie2(Tool):
     def __init__(self, path="", max_threads=4):
-        super(Tool).__init__("bowtie2", path=path, max_threads=max_threads)
+        Tool.__init__(self, "bowtie2", path=path, max_threads=max_threads)
 
     def index(self, reference, index_name):
         options = "%s %s" % (reference, index_name)

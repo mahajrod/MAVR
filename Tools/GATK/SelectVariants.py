@@ -2,7 +2,7 @@ import os
 from Tools.Abstract import Tool
 
 
-class SelectVariants():
+class SelectVariants(Tool):
     # http://www.broadinstitute.org/gatk/gatkdocs/org_broadinstitute_sting_gatk_walkers_variantutils_SelectVariants.html
     # selectType
     # INDEL

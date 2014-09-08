@@ -52,13 +52,8 @@ class SNPeff(Tool):
         """
 
         options = "-v -%s" % input_format
-        if build_type:
-            options += " %s" % build_type
-
-        if isinstance(datafiles, list):
-            options += " " + " ".join(datafiles)
-        else:
-            options += " " + datafiles
+        options += " %s" % build_type if build_type else ""
+        options += " " + " ".join(datafiles) if isinstance(datafiles, list) else " " + datafiles
 
         self.execute(options, cmd="build")
 

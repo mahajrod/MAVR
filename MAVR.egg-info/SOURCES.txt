@@ -49,6 +49,8 @@ Tools/Samtools.py
 Tools/__init__.py
 Tools/Alignment/BWA.py
 Tools/Alignment/Bowtie2.py
+Tools/Alignment/Novoalign.py
+Tools/Alignment/TMAP.py
 Tools/Alignment/__init__.py
 Tools/Bedtools/Intersect.py
 Tools/Bedtools/__init__.py

@@ -4,7 +4,7 @@ from Tools.Abstract import Tool
 
 class BWA(Tool):
     def __init__(self, path="", max_threads=4):
-        super(Tool).__init__("bwa", path=path, max_threads=max_threads)
+        Tool.__init__(self, "bwa", path=path, max_threads=max_threads)
 
     def index(self, fasta_file, prefix=None):
         index_prefix = ""

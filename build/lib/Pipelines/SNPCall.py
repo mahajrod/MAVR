@@ -7,8 +7,8 @@ from Tools.Picard import add_header2bam
 #from MutAnalysis.Mutation import *
 from Tools.AssemblyTools import spades
 from Tools.FilterTools import trim_galore
-from Tools.AlignmentTools import Bowtie2, BWA
-
+#from Tools.AlignmentTools import Bowtie2, BWA
+from Tools.Alignment import Bowtie2, BWA, Novoalign, TMAP
 
 # TODO: refactor, remove absolete functions and so on
 
@@ -95,20 +95,38 @@ def get_alignment(index,
                   remove_SA=False,
                   remove_nonPA=False,
                   find_discordant_alignments=True,
-                  find_separated_alignments=True):
+                  find_separated_alignments=True,
+                  reads_filetype="fastq",
+                  reference=None):
 
     print("Handling %s sample..." % sample_name)
     output_file = "%s_trimmed.sam" % sample_name
     if aligner == "bowtie2":
-        bowtie2 = Bowtie2()
-        bowtie2.align(index, forward_reads, reverse_reads,
-                      max_threads=max_threads, quality_score=quality_score,
+        #bowtie2 = Bowtie2()
+        Bowtie2.max_threads = max_threads
+        Bowtie2.align(index, forward_reads, reverse_reads,
+                      quality_score=quality_score,
                       alignment_mode="very-sensitive", output_file=output_file,
                       find_discordant_alignments=find_discordant_alignments,
                       find_separated_alignments=find_separated_alignments)
     elif aligner == "bwa-mem":
-        bwa = BWA()
-        bwa.align_mem(index, forward_reads, reverse_reads, output_file=output_file, max_threads=max_threads)
+        #bwa = BWA()
+        BWA.max_threads = max_threads
+        BWA.mem(index, forward_reads, reverse_reads, output_file=output_file)
+    elif aligner == "novoalign":
+        # TODO: fix format choose
+        #print(reads_filetype)
+        #in_format = "FA" if reads_filetype == "fasta" else "ILM1.8"
+        Novoalign.max_threads = max_threads
+        Novoalign.align([forward_reads, reverse_reads] if reverse_reads else forward_reads,
+                        index,
+                        in_fmt="FA" if reads_filetype == "fasta" else "STDFQ",
+                        output_file=output_file
+                        )
+    elif aligner == "tmap":
+        TMAP.max_threads = max_threads
+        TMAP.mapall(reference, forward_reads, global_options_dict={"output": output_file})
+
     """
     if reverse_reads:
         os.system("bowtie2 --very-sensitive --%s -p %i -x %s -1 %s -2 %s > %s_trimmed.sam"

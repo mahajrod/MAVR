@@ -12,9 +12,12 @@ reference_name = "LAN210_v0.10m"
 reference_file = reference_name + ".fasta"
 workdir = "/home/mahajrod/genetics/desaminases/data/LAN210_v0.10m/masking/"
 """
-reference_name = "S288C_R64"
-reference_file = "S288C_reference_sequence_R64-1-1_20110203_modified.fsa"
-workdir = "/home/mahajrod/genetics/desaminases/data/S288C_R64/masking/"
+reference_name = "Alsu24mc"
+reference_file = "Alsu24mc.fasta"
+reference_dir = "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/Alsu/reference/Alsu24mc/"
+masking_subdir = "masking/"
+workdir = reference_dir + masking_subdir
+
 os.system("mkdir -p %s" % workdir)
 os.chdir(workdir)
 

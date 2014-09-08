@@ -25,17 +25,21 @@
       <w>indel</w>
       <w>intergenic</w>
       <w>iter</w>
+      <w>mapall</w>
+      <w>mapvsw</w>
       <w>mavr</w>
       <w>mkdir</w>
       <w>mutdict</w>
       <w>mutdist</w>
       <w>mutpos</w>
       <w>nogroup</w>
+      <w>novoalign</w>
       <w>refgenome</w>
       <w>snps</w>
       <w>splited</w>
       <w>subclustering</w>
       <w>subclusters</w>
+      <w>tmap</w>
       <w>variantutils</w>
       <w>vartype</w>
       <w>workdir</w>
