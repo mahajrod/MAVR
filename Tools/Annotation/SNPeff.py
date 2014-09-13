@@ -15,7 +15,7 @@ class SNPeff(Tool):
         self.jar = jar
         self.max_memory = max_memory
         self.config_path = config_path
-        #super(Tool).__init__("java -jar %ssnpEff.jar" % path, path, max_threads)
+        #Tool.__init__(self, "java -jar %s%s" % (path, jar), path, max_threads)
 
     def build_db(self, datafiles, input_format="gff3", build_type=None):
         """

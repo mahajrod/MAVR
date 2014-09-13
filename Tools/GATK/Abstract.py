@@ -8,11 +8,8 @@ from Routines.Functions import check_path
 
 class GATKTool(Tool):
 
-    def __init__(self, path="", max_threads=4, jar_path="", jar="GenomeAnalysisTK.jar",
-                 max_memory="1g"):
-        self.cmd = "java"
-        self.path = check_path(path)
-        self.max_threads = max_threads
-        self.jar_path = check_path(jar_path)
-        self.jar = jar
-        self.max_memory = max_memory
+    def __init__(self, java_path="", max_threads=4, jar_path="", max_memory="1g"):
+
+        jar = "GenomeAnalysisTK.jar"
+
+        Tool.__init__(self, "java", path=java_path, max_threads=max_threads, jar_path=jar_path, jar=jar, max_memory=max_memory)

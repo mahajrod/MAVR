@@ -25,6 +25,7 @@
       <w>indel</w>
       <w>intergenic</w>
       <w>iter</w>
+      <w>mahajrod</w>
       <w>mapall</w>
       <w>mapvsw</w>
       <w>mavr</w>
@@ -34,6 +35,8 @@
       <w>mutpos</w>
       <w>nogroup</w>
       <w>novoalign</w>
+      <w>realigner</w>
+      <w>recalibrator</w>
       <w>refgenome</w>
       <w>snps</w>
       <w>splited</w>

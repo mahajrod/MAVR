@@ -86,6 +86,10 @@ class RecordVCF(Record):
             attributes_string += ";Parent=%s" % parent
         return "%s\tvariant_call\tvariant\t%i\t%i\t.\t.\t.\t%s" % (self.chrom, self.start, self.end, attributes_string)
 
+    def set_filter(self, expression, filter_name):
+        if eval(expression):
+            self.filter_list.append(filter_name)
+
 
 class MetadataVCF(OrderedDict, Metadata):
 
@@ -326,6 +330,14 @@ class CollectionVCF(Collection):
             else:
                 splited_dict["INDEL"].append(record)
         return splited_dict
+
+    def set_filter(self, expression, filter_name):
+        for record in self:
+            if eval(expression):
+                if "PASS" in record.filter_list or "." in record.filter_list:
+                    record.filter_list = [filter_name]
+                else:
+                    record.filter_list.append(filter_name)
 
     def split_by_regions(self):
         #TODO: check

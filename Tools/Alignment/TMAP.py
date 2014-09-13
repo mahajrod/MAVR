@@ -44,6 +44,21 @@ class TMAP(Tool):
         options += " -a %i" % aln_output_mode if aln_output_mode else ""
         return options
 
+    def parse_options(self, *args, **kwargs):
+        global_options_names = ["output", "reads_fmt", "output_fmt", "aln_output_mode", "verbose"]
+
+        global_options_keys = []
+        common_options_keys = []
+        for key in kwargs.keys():
+            if key in global_options_names:
+                global_options_keys.append(key)
+            else:
+                common_options_keys.append(key)
+        global_options = self.parse_global_options(*args, **dict([(key, kwargs[key]) for key in global_options_keys]))
+        common_options = self.parse_common_mapping_options(**dict([(key, kwargs[key]) for key in common_options_keys]))
+
+        return global_options, common_options
+
     @staticmethod
     def parse_common_mapping_options(match_score=None, mismatch_penalty=None, gap_open_pen=None,
                                      gap_ext_pen=None, gap_long_pen=None, gap_long_len=None,
@@ -103,28 +118,30 @@ class TMAP(Tool):
 
         return options
 
-    def map1(self, reference, reads, **kwargs):
+    def map1(self, *args, **kwargs):
         # TODO: add parsing of  command specific options
-        options = self.parse_common_mapping_options(reference, reads, **kwargs)
+        options = " ".join(self.parse_options(*args, **kwargs))
         self.execute(options, cmd="tmap map1")
 
-    def map2(self, reference, reads, **kwargs):
+    def map2(self, *args, **kwargs):
         # TODO: add parsing of  command specific options
-        options = self.parse_common_mapping_options(reference, reads, **kwargs)
+        options = " ".join(self.parse_options(*args, **kwargs))
         self.execute(options, cmd="tmap map2")
 
-    def map3(self, reference, reads, **kwargs):
+    def map3(self, *args, **kwargs):
         # TODO: add parsing of  command specific options
-        options = self.parse_common_mapping_options(reference, reads, **kwargs)
+        options = " ".join(self.parse_options(*args, **kwargs))
         self.execute(options, cmd="tmap map3")
 
-    def map4(self, reference, reads, **kwargs):
+    def map4(self, *args, **kwargs):
         # TODO: add parsing of  command specific options
-        options = self.parse_common_mapping_options(reference, reads, **kwargs)
+        print(args, kwargs)
+        options = " ".join(self.parse_options(*args, **kwargs))
+        print(options)
         self.execute(options, cmd="tmap map4")
 
-    def mapvsw(self, reference, reads, **kwargs):
-        options = self.parse_common_mapping_options(reference, reads, **kwargs)
+    def mapvsw(self, *args,  **kwargs):
+        options = " ".join(self.parse_options(*args, **kwargs))
         self.execute(options, cmd="tmap mapvsw")
 
     def mapall(self, reference, reads, global_options_dict={}, map1_options_dict={}, map2_options_dict={}, map3_options_dict={}):

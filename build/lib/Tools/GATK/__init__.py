@@ -7,7 +7,8 @@ from Tools.GATK.SelectVariants import SelectVariants
 from Tools.GATK.UnifiedGenotyper import UnifiedGenotyper
 from Tools.GATK.VariantFiltration import VariantFiltration
 from Tools.GATK.VariantRecalibrator import VariantRecalibrator
-
+from Tools.GATK.IndelRealigner import IndelRealigner
+from Tools.GATK.RealignerTargetCreator import RealignerTargetCreator
 #TODO: think how to rewrite to comfortably use general for all subtools options
 
 ApplyRecalibration = ApplyRecalibration()
@@ -17,3 +18,7 @@ SelectVariants = SelectVariants()
 UnifiedGenotyper = UnifiedGenotyper()
 VariantFiltration = VariantFiltration()
 VariantRecalibrator = VariantRecalibrator()
+
+
+IndelRealigner = IndelRealigner()
+RealignerTargetCreator = RealignerTargetCreator()
