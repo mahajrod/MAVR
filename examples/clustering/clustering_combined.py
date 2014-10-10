@@ -11,7 +11,7 @@ if __name__ == "__main__":
 
     reference = ReferenceGenome("/home/mahajrod/genetics/desaminases/data/LAN210_v0.10m/LAN210_v0.10m.fasta",
                                 index_file="/home/mahajrod/genetics/desaminases/data/LAN210_v0.10m/LAN210_v0.10m.idx")
-
+    """
     sample_set_names_list = ["PmCDA1_3d",
                              "PmCDA1_6d",
                              "A1_3d",
@@ -20,7 +20,14 @@ if __name__ == "__main__":
                              "AID_3d",
                              "AID_6d",
                              "PmCDA1_sub1_3d",
-                             "PmCDA1_sub1_6d"]
+                             "PmCDA1_sub1_6d",
+                             "HAP",
+                             "HAP_sub1"]
+    """
+    sample_set_names_list = ["HAP",
+                             "HAP_sub1"]
+
+
 
     clustering_dir = "clustering"
     rainfall_dir = "rainfall"
