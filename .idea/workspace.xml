@@ -2,33 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0137b4ba-9cb9-4454-8e03-43ff7c136081" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/Bedtools/Flank.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/Bedtools/GetFasta.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/Filter/TrimGalore.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/Filter/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/Samtools/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/get_flanking_regions.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/reverse_complement.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/seq_lengths.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/filtering/trim_galore.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Tools/AlignmentTools.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Tools/GlimerHMM.py" afterPath="$PROJECT_DIR$/Tools/Annotation/GlimerHMM.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Tools/Samtools.py" afterPath="$PROJECT_DIR$/Tools/Samtools/Samtools.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" afterPath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/MAVR-1.0-py3.4.egg" afterPath="$PROJECT_DIR$/dist/MAVR-1.0-py3.4.egg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Tuxedo/Cufflinks.py" afterPath="$PROJECT_DIR$/Tools/Tuxedo/Cufflinks.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Functions.py" afterPath="$PROJECT_DIR$/Routines/Functions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Routines/Functions.py" afterPath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Routines/Functions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/Routines/Functions.py" afterPath="$PROJECT_DIR$/build/lib/Routines/Functions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/SOURCES.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/SOURCES.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Sequence.py" afterPath="$PROJECT_DIR$/Routines/Sequence.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Tuxedo/Tophat.py" afterPath="$PROJECT_DIR$/Tools/Tuxedo/Tophat.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Bedtools/__init__.py" afterPath="$PROJECT_DIR$/Tools/Bedtools/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Tuxedo/__init__.py" afterPath="$PROJECT_DIR$/Tools/Tuxedo/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/Bedtools/__init__.py" afterPath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/Bedtools/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/Tools/Bedtools/__init__.py" afterPath="$PROJECT_DIR$/build/lib/Tools/Bedtools/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/clustering/clustering_combined.py" afterPath="$PROJECT_DIR$/examples/clustering/clustering_combined.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/merge_vcf/example_merge_vcf.py" afterPath="$PROJECT_DIR$/examples/merge_vcf/example_merge_vcf.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -171,9 +144,11 @@
       <file leaf-file-name="reverse_complement.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/reverse_complement.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.08314088" vertical-offset="0" max-vertical-offset="866">
-              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="0.5606557" vertical-offset="0" max-vertical-offset="610">
+              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+              <folding>
+                <element signature="e#47#62#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -689,7 +664,11 @@
       <created>1410641786814</created>
       <updated>1410641786814</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="...">
+      <created>1412984363674</created>
+      <updated>1412984363674</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -716,14 +695,15 @@
     <frame x="-1" y="25" width="1922" height="1055" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32968238" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.088495575" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973261" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2606635" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2606635" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39649507" sideWeight="0.4997353" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27833894" sideWeight="0.099309616" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27820373" sideWeight="0.099309616" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26506025" sideWeight="0.9006904" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -731,7 +711,6 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.49973446" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39978093" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2489339" sideWeight="0.6706783" order="2" side_tool="false" content_ui="combo" />
@@ -1175,9 +1154,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/reverse_complement.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.08314088" vertical-offset="0" max-vertical-offset="866">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.5606557" vertical-offset="0" max-vertical-offset="610">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="e#47#62#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
