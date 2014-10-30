@@ -6,10 +6,12 @@
       <w>chrom</w>
       <w>coeff</w>
       <w>collectiontype</w>
+      <w>cufflinks</w>
       <w>desaminase</w>
       <w>desaminases</w>
       <w>descr</w>
       <w>dirname</w>
+      <w>exon</w>
       <w>extention</w>
       <w>facecolor</w>
       <w>fasta</w>
@@ -24,6 +26,7 @@
       <w>homozygotes</w>
       <w>indel</w>
       <w>intergenic</w>
+      <w>intron</w>
       <w>iter</w>
       <w>mahajrod</w>
       <w>mapall</w>
@@ -43,6 +46,7 @@
       <w>subclustering</w>
       <w>subclusters</w>
       <w>tmap</w>
+      <w>tophat</w>
       <w>variantutils</w>
       <w>vartype</w>
       <w>workdir</w>

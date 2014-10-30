@@ -89,6 +89,78 @@ class RecordVCF(Record):
     def set_filter(self, expression, filter_name):
         if eval(expression):
             self.filter_list.append(filter_name)
+            self.filter_list.sort()
+
+    def add_info(self, info_name, info_value=None):
+        value = info_value if isinstance(info_value, list) else [] if info_value is None else [info_value]
+        if info_name in self.info_dict:
+            self.info_dict[info_name] += value
+        else:
+            self.info_dict[info_name] = value
+
+    def find_location(self, record_dict, key="Ftype", strand_key="Fstrand", genes_key="Genes",
+                      genes_strand_key="Gstrand", feature_type_black_list=[],
+                      use_synonym=False, synonym_dict=None, add_intergenic_label=True):
+        # function is written for old variant (with sub_feature)s rather then new (with CompoundLocation)
+        # id of one SeqRecord in record_dict must be equal to record.pos
+        # locations will be written to description dictionary of record using "key" as key
+
+        if key not in self.info_dict:
+            self.info_dict[key] = set([])
+
+        # strandness values:
+        # N - not defined
+        # B - both
+        # P - plus
+        # M - minus
+        strands = ["B", "P", "M"]
+        if strand_key not in self.info_dict:
+            # by default
+            self.info_dict[strand_key] = ["N"]
+        for flag_key in (genes_key, genes_strand_key):
+            if flag_key not in self.info_dict:
+                self.info_dict[flag_key] = []
+
+        #print(self.chrom, self.pos)
+        for feature in record_dict[self.chrom].features:
+
+            if feature.type in feature_type_black_list:
+                continue
+
+            if (self.pos - 1) in feature:
+                if feature.type == "gene" or feature.type == "ncRNA":
+                    #print(feature.qualifiers)
+                    self.info_dict[genes_key].append(feature.qualifiers["Name"][0])
+                    self.info_dict[genes_strand_key].append(strands[feature.strand])
+
+                self.info_dict[key].add(self.get_synonym(feature.type, use_synonym=use_synonym,
+                                                           synonym_dict=synonym_dict))
+                if self.info_dict[strand_key][0] == "N":
+                    self.info_dict[strand_key][0] = strands[feature.strand]
+                elif strands[feature.strand] != self.info_dict[strand_key][0]:
+                    self.info_dict[strand_key][0] = "B"
+            else:
+                continue
+
+                #print(feature)
+            for sub_feature in feature.sub_features:
+                if sub_feature.type in feature_type_black_list:
+                    continue
+                if (self.pos - 1) in sub_feature:
+                    self.info_dict[key].add(self.get_synonym(sub_feature.type, use_synonym=use_synonym,
+                                                           synonym_dict=synonym_dict))
+                    if self.info_dict[strand_key][0] == "N":
+                        self.info_dict[strand_key][0] = strands[sub_feature.strand]
+                    elif strands[sub_feature.strand] != self.info_dict[strand_key][0]:
+                        self.info_dict[strand_key][0] = "B"
+
+        if not self.info_dict[genes_key]:
+            self.info_dict.pop(genes_key)
+            self.info_dict.pop(genes_strand_key)
+
+        if add_intergenic_label and (not self.info_dict[key]): # or ("gene" not in self.info_dict[key])):
+            # igc == intergenic
+            self.info_dict[key].add("igc")
 
 
 class MetadataVCF(OrderedDict, Metadata):
@@ -673,6 +745,16 @@ class CollectionVCF(Collection):
                CollectionVCF(metadata=self.metadata, record_list=filtered_out_records,
                                header=self.header, samples=self.samples, from_file=False)
 
+    def add_info(self, metadata_line, expression, info_name, info_value=None):
+        self.metadata.add_metadata(metadata_line)
+        for record in self:
+            if eval(expression):
+                value = info_value if isinstance(info_value, list) else [] if info_value is None else [info_value]
+                if info_name in record.info_dict:
+                    record.info_dict[info_name] += value
+                else:
+                    record.info_dict[info_name] = value
+
     # methods for sum of two CollectionsVCF: no check for intersections(!!!!!!!!)
     def __add__(self, other):
         return CollectionVCF(metadata=self.metadata, record_list=self.records + other.records,
@@ -711,6 +793,21 @@ class CollectionVCF(Collection):
                     if num_parameters < 14:
                         effect_parameters += ["." for i in range(num_parameters, 14)]
                     out_fd.write(common_part + "\t" + "\t".join(effect_parameters) + "\n")
+
+    def find_location(self, record_dict, key="Ftype", strand_key="Fstrand", genes_key="Genes", genes_strand_key="Gstrand",
+                      feature_type_black_list=[],
+                      use_synonym=False, synonym_dict=None, add_intergenic_label=True):
+
+        self.metadata.add_metadata("##INFO=<ID=%s,Number=.,Type=String,Description=\"Types of features\">" % key)
+        self.metadata.add_metadata("##INFO=<ID=%s,Number=1,Type=String,Description=\"Strand of features\">" % strand_key)
+        self.metadata.add_metadata("##INFO=<ID=%s,Number=.,Type=String,Description=\"Names of genes\">" % genes_key)
+        self.metadata.add_metadata("##INFO=<ID=%s,Number=.,Type=String,Description=\"Strands of genes\">" % genes_strand_key)
+        for record in self:
+            record.find_location(record_dict, key=key, strand_key=strand_key,
+                                 genes_key=genes_key, genes_strand_key=genes_strand_key,
+                                 feature_type_black_list=feature_type_black_list,
+                                 use_synonym=use_synonym, synonym_dict=synonym_dict,
+                                 add_intergenic_label=add_intergenic_label)
 
 
 class ReferenceGenome(object):

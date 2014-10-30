@@ -17,6 +17,7 @@ MAVR.egg-info/top_level.txt
 MutAnalysis/__init__.py
 Parser/Abstract.py
 Parser/CCF.py
+Parser/Cufflinks.py
 Parser/FastQC.py
 Parser/GFF.py
 Parser/GVF.py
@@ -25,6 +26,10 @@ Parser/R.py
 Parser/TRF.py
 Parser/VCF.py
 Parser/__init__.py
+Pictures/Draw.py
+Pictures/__init__.py
+Pictures/Styles/Features.py
+Pictures/Styles/__init__.py
 Pipelines/GenePrediction.py
 Pipelines/GenomeAssembly.py
 Pipelines/Phylogeny.py

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+import numpy as np
 from collections import OrderedDict
 
 
@@ -26,3 +26,4 @@ class TwoLvlDict(OrderedDict):
     def write(self, out_filename, absent_symbol="0"):
         with open(out_filename, "w") as out_fd:
             out_fd.write(self.table_form(absent_symbol=absent_symbol))
+

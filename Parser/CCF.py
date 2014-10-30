@@ -3,7 +3,7 @@
 from collections import Iterable
 import numpy as np
 import matplotlib.pyplot as plt
-
+from matplotlib import colors
 from Parser.Abstract import Record, Collection, Metadata
 from Parser.VCF import CollectionVCF
 
@@ -69,6 +69,14 @@ class RecordCCF(Record, Iterable):
         else:
             self.flags - set(["BR"])
 
+        distances = self.distances()
+        if self.description is None:
+            self.description = {}
+
+        if self.size > 1:
+            self.description["Mean"] = np.mean(distances)
+            self.description["Median"] = np.median(distances)
+
     def __len__(self):
         return self.size
 
@@ -81,7 +89,7 @@ class RecordCCF(Record, Iterable):
         if self.flags:
             attributes_string += ";" + ";".join(self.flags)
         if self.description:
-            attributes_string += ";" + ";".join(["%s=%s" % (key, ",".join(map(lambda x: str(x), self.description[key])))
+            attributes_string += ";" + ";".join(["%s=%s" % (key, ",".join(map(lambda x: str(x), self.description[key])) if isinstance(self.description[key], list) else str(self.description[key]))
                                                  for key in self.description])
         if self.subclusters != None:
             #print(self.subclusters)
@@ -89,6 +97,11 @@ class RecordCCF(Record, Iterable):
 
         cluster_string = ">%s\t%s\t%i\t%i\t%s" % (self.id, self.chrom, self.start, self.end, attributes_string)
         return cluster_string + "\nVariants\n\t" + "\n\t".join([str(record) for record in self.records])
+
+    def distances(self):
+        #returns distances between variants in cluster
+        positions = np.array([record.pos for record in self])
+        return np.ediff1d(positions)
 
     def reset_flags(self, flags_to_reset='all'):
         # flags_to_reset can take values 'all', set or list, or None
@@ -131,20 +144,27 @@ class RecordCCF(Record, Iterable):
                 expressions = [eval(expression) for expression in expression_list] \
                     if expression_list else [True for flag in flag_list]
                 for flag, expression, min_size in zip(flag_list, expressions, min_cluster):
-                    if self.size < min_size:
-                        continue
+                    #if self.size < min_size:
+                    #    continue
                     if flag not in record.flags:
                         if mismatch_count_dict[flag] is not None:
                             mismatch_count_dict[flag] += 1
-                        if expression:
+                        if expression and self.size >= min_size:# expression to reconsider cluster with mismatch as good
                             record_to_remove_dict[flag].add(index)
                         else:
                             # if expression is not True flag will not be set, None is used to indicate it
                             mismatch_count_dict[flag] = None
                 index += 1
-            for flag, mismatch in zip(flag_list, mismatches):
+            for flag, mismatch, min_size in zip(flag_list, mismatches, min_cluster):
+                """
+                if self.size < min_size and mismatch_count_dict[flag] > 0:
+                    #if cluster_size is less then min_size dont allow any mismatch
+                    record_to_remove_dict[flag].clear()
+                    continue
+                """
                 #print(mismatch_count_dict, record_to_remove_dict)
                 if (mismatch_count_dict[flag] is not None) and mismatch_count_dict[flag] <= mismatch:
+
                     self.flags.add(flag)
                     if mismatch_count_dict[flag] > 0:
                         self.description["N%sR" % flag] = [mismatch_count_dict[flag]]
@@ -159,14 +179,14 @@ class RecordCCF(Record, Iterable):
             if records_to_remove:
                 #print(self)
                 for index in records_to_remove:
-                    self.records.pop(index)
+                    self.records.records.pop(index)
                     self.subclusters = np.delete(self.subclusters, index)
 
                 self.__init__(collection_vcf=self.records, description=self.description,
                               flags=self.flags, subclusters=self.subclusters,
                               from_records=True)
 
-    def check_location(self, bad_region_collection_gff):
+    def check_location(self, bad_region_collection_gff, expression="bad_region.start <= self.pos <= bad_region.end"):
         self.bad_records = 0
         for variant in self:
             if "BR" in variant.flags:
@@ -174,7 +194,7 @@ class RecordCCF(Record, Iterable):
         if self.bad_records > 0:
             self.flags.add("BR")
 
-    def get_location(self, record_dict, key="Loc"):
+    def get_location(self, record_dict, key="Loc", use_synonym=False, synonym_dict=None):
         # function is written for old variant (with sub_feature)s rather then new (with CompoundLocation)
         # id of one SeqRecord in record_dict must be equal to record.pos
         if not self.description:
@@ -189,10 +209,12 @@ class RecordCCF(Record, Iterable):
             for feature in record_dict[self.chrom].features:
                 if (variant.pos - 1) in feature:
                     self.features.append(feature)
-                    self.description[key].add(feature.type)
+                    self.description[key].add(self.get_synonym(feature.type, use_synonym=use_synonym,
+                                                               synonym_dict=synonym_dict))
                 for sub_feature in feature.sub_features:
                     if (variant.pos - 1) in sub_feature:
-                        self.description[key].add(sub_feature.type)
+                        self.description[key].add(self.get_synonym(sub_feature.type, use_synonym=use_synonym,
+                                                                   synonym_dict=synonym_dict))
 
     def subclustering(self,
                       method="inconsistent",
@@ -234,6 +256,21 @@ class RecordCCF(Record, Iterable):
 
             self.__init__(collection_vcf=CollectionVCF(record_list=self.records.records[start:end], from_file=False),
                           subclusters=self.subclusters[start:end], from_records=True)
+
+    def add_description(self, descr_name, value):
+        if not self.description:
+            self.description = {}
+        self.description[descr_name] = value
+
+    def check_strandness(self):
+        #for desaminases only
+        count_C = 0.
+        for record in self:
+            if record.ref == "C":
+                count_C += 1.
+        homogenity = count_C / self.size
+        self.add_description("SHom", homogenity if homogenity >= 0.5 else 1.0 - homogenity)
+        self.add_description("Strand", "P" if homogenity >= 0.5 else "N")
 
 
 class MetadataCCF(Metadata):
@@ -356,3 +393,146 @@ class CollectionCCF(Collection):
             """
             vcf = vcf + record.records
         return vcf
+
+    def check_strandness(self):
+        for record in self:
+            record.check_strandness()
+
+    def get_data_for_stat(self):
+        data = []
+        for record in self:
+            if record.size == 1:
+                continue
+            data.append([record.len, record.size, record.description["Median"],
+                         record.description["Mean"], record.description["SHom"]])
+        return np.array(data)
+
+    def heatmap_statistics(self, filename="heatmap_statistics.svg", suptitle="Heatmap_statistics",
+                           dpi=150, figsize=(25, 25), facecolor="green", n_bins_default=20):
+
+        names = ["Length", "Size", "Median distance", "Mean distance", "Strandness"]
+        data = [self.get_data_for_stat()[:, i] for i in range(0, len(names))]
+
+        plt.figure(1, dpi=dpi, figsize=figsize)
+        plt.suptitle(suptitle)
+
+        if len(data[0]) == 0:
+            return 0
+
+        for i in range(0, len(names)):
+            for j in range(0, len(names)):
+                if i == j:
+                    continue
+                plt.subplot(5, 5, i * len(names) + j + 1)
+                plt.xlabel(names[i])
+                plt.ylabel(names[j])
+                n_x_bins = 10 if names[i] == "Strandness" else int(max(data[i])) if names[i] == "Size" else n_bins_default
+                n_y_bins = 10 if names[j] == "Strandness" else int(max(data[j])) if names[j] == "Size" else n_bins_default
+                #print(names[i])
+                #print(data[i])
+                #print(names[j])
+                #print(data[j])
+                #print(n_x_bins, n_y_bins)
+
+                #cmap = colors.ListedColormap(['white', 'red'])
+                #bounds = [0, 5, 10]
+                #norm = colors.BoundaryNorm(bounds, cmap.N)
+
+                plt.hist2d(data[i], data[j], (n_x_bins, n_y_bins))
+                plt.colorbar()
+        plt.savefig(filename)
+        plt.close()
+
+    def get_data_for_strand_stat(self):
+        num_of_P_clusters = 0
+        num_of_N_clusters = 0
+        strandness_P_clusters = []
+        strandness_N_clusters = []
+        size_P_clusters = []
+        size_N_clusters = []
+        length_P_clusters = []
+        length_N_clusters = []
+
+        for record in self:
+            if "Strand" not in record.description:
+                print(record)
+            if record.description["Strand"] == "P":
+                num_of_P_clusters += 1
+                strandness_P_clusters.append(record.description["SHom"])
+                size_P_clusters.append(record.size)
+                length_P_clusters.append(record.len)
+            else:
+                num_of_N_clusters += 1
+                strandness_N_clusters.append(record.description["SHom"])
+                size_N_clusters.append(record.size)
+                length_N_clusters.append(record.len)
+
+        return num_of_P_clusters, strandness_P_clusters, size_P_clusters, length_P_clusters, \
+               num_of_N_clusters,  strandness_N_clusters, size_N_clusters, length_N_clusters,
+
+    def strandness_statistics(self, filename="Strandness_statistics.svg", suptitle="Cluster strandness_statistics",
+                   dpi=150, figsize=(20, 20), facecolor="green"):
+        num_of_P_clusters, strandness_P_clusters, size_P_clusters, length_P_clusters, \
+        num_of_N_clusters,  strandness_N_clusters, size_N_clusters, length_N_clusters = \
+                                                                                     self.get_data_for_strand_stat()
+
+        plt.figure(1, dpi=dpi, figsize=figsize)
+        plt.subplot(3, 4, 1)
+        points = np.arange(2)
+        bar_width = 0.55
+
+        rects1 = plt.bar(points, [num_of_P_clusters, num_of_N_clusters], bar_width,
+                         color='b')
+
+        plt.xlabel('Strandness')
+        plt.ylabel('Counts')
+        plt.title("Distribution of clusters in strands")
+        plt.xticks(points + bar_width, ('P', 'M'))
+
+        for subplot_index, counts, title in zip([5, 9], [strandness_P_clusters, strandness_N_clusters], ["P", "N"]):
+            plt.subplot(3, 4, subplot_index)
+            if len(counts) == 0:
+                continue
+            bins = np.linspace(0.5, 1.0, 11)
+            plt.hist(counts, bins, facecolor=facecolor)
+            plt.xticks(np.arange(0.5, 1.0, 0.1))
+            plt.title("Strandness coefficient of clusters in %s strand" % title)
+
+        for subplot_index, coeff, size, title in zip([6, 10], [strandness_P_clusters, strandness_N_clusters],
+                                                     [size_P_clusters, size_N_clusters], ["P", "N"]):
+            plt.subplot(3, 4, subplot_index)
+            if len(coeff) == 0:
+                continue
+            #plt.plot(size, coeff, "b.")
+            #heatmap, xedges, yedges = np.histogram2d(size, coeff, bins=(10, max(size)))
+            #extent = [xedges[0], xedges[-1], yedges[0], yedges[-1]]
+            #plt.imshow(heatmap)#, extent=extent)
+            plt.hist2d(size, coeff, (max(size), 10))
+            #plt.yticks(np.arange(0.5, 1.0, 0.1))
+            plt.title("Coefficient and size of clusters in %s strand" % title)
+            plt.xlabel("Size of cluster")
+            plt.ylabel("Strandness")
+
+        for subplot_index, coeff, length, title in zip([7, 11], [strandness_P_clusters, strandness_N_clusters],
+                                                     [length_P_clusters, length_N_clusters], ["P", "N"]):
+            plt.subplot(3, 4, subplot_index)
+            if len(coeff) == 0:
+                continue
+            plt.plot(length, coeff, "b.")
+            plt.title("Coefficient and length of clusters in %s strand" % title)
+            plt.xlabel("Length of cluster")
+            plt.ylabel("Strandness")
+
+        for subplot_index, size, length, title in zip([8, 12], [size_P_clusters, size_N_clusters],
+                                                     [length_P_clusters, length_N_clusters], ["P", "N"]):
+            plt.subplot(3, 4, subplot_index)
+            if len(size) == 0:
+                continue
+            plt.plot(length, size, "b.")
+            plt.title("Length and size of clusters in %s strand" % title)
+            plt.xlabel("Length of cluster")
+            plt.ylabel("Size of cluster")
+
+        plt.suptitle(suptitle)
+        plt.savefig(filename)
+        plt.close()

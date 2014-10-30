@@ -24,7 +24,17 @@ class Record():
     def __str__(self):
         pass
 
-    def get_location(self, record_dict, key="Loc", strand_key="strand", feature_type_black_list=[]):
+    @staticmethod
+    def get_synonym(name, use_synonym=False, synonym_dict=None):
+        if (not use_synonym) or (not synonym_dict):
+            return name
+
+        if name not in synonym_dict:
+            return name
+        return synonym_dict[name]
+
+    def get_location(self, record_dict, key="Loc", strand_key="strand", feature_type_black_list=[],
+                    use_synonym=False, synonym_dict=None):
         # function is written for old variant (with sub_feature)s rather then new (with CompoundLocation)
         # id of one SeqRecord in record_dict must be equal to record.pos
         # locations will be written to description dictionary of record using "key" as key 
@@ -33,24 +43,41 @@ class Record():
 
         if key not in self.description:
             self.description[key] = set([])
+
+        if strand_key not in self.description:
+            # by default
+            self.description[strand_key] = None
         #print(self.chrom, self.pos)
         for feature in record_dict[self.chrom].features:
             if (self.pos - 1) in feature:
-                self.description[key].add(feature.type)
+                self.description[key].add(self.get_synonym(feature.type, use_synonym=use_synonym,
+                                                           synonym_dict=synonym_dict))
+                if self.description[strand_key] is None:
+                    self.description[strand_key] = feature.strand
+                elif feature.strand != self.description[strand_key]:
+                    self.description[strand_key] = 0
+
                 #print(feature)
             for sub_feature in feature.sub_features:
                 if (self.pos - 1) in sub_feature:
-                    self.description[key].add(sub_feature.type)
-        if not self.description[key]:
-            self.description[key].add("intergenic")
+                    self.description[key].add(self.get_synonym(sub_feature.type, use_synonym=use_synonym,
+                                                               synonym_dict=synonym_dict))
+                    if self.description[strand_key] is None:
+                        self.description[strand_key] = sub_feature.strand
+                    elif sub_feature.strand != self.description[strand_key]:
+                        self.description[strand_key] = 0
 
-    def check_location(self, bad_region_collection_gff):
+        if not self.description[key]:
+            # igc == intergenic
+            self.description[key].add("igc")
+
+    def check_location(self, bad_region_collection_gff, expression="bad_region.start <= self.pos <= bad_region.end"):
         if not self.flags:
             self.flags = set()
         for bad_region in bad_region_collection_gff:
             if self.chrom != bad_region.chrom:
                 continue
-            if bad_region.start <= self.pos <= bad_region.end:
+            if eval(expression):
                 self.flags.add("BR")
 
 
@@ -125,7 +152,9 @@ class Collection(Iterable):
         return len(self.records)
 
     def pop(self, index=None):
-        return self.records.pop(index) if index else self.records.pop()
+        # i am a fairy idiot - forgot that 0 is equal to False in python.
+        # What to do? Everywhere make direct check if variable is None
+        return self.records.pop() if index is None else self.records.pop(index)
 
     def filter_records_by_parameter_value(self, parameter, minimum=None, maximum=None):
         # TODO: check
@@ -159,9 +188,9 @@ class Collection(Iterable):
 
         return filtered_records, filtered_out_records
 
-    def check_location(self, bad_region_collection_gff):
+    def check_location(self, bad_region_collection_gff, expression="bad_region.start <= self.pos <= bad_region.end"):
         for record in self:
-            record.check_location(bad_region_collection_gff)
+            record.check_location(bad_region_collection_gff, expression=expression)
     """
     def filter_by_expression(self, expression):
         self_type = self.__class__.__name__
@@ -204,9 +233,9 @@ class Collection(Iterable):
             for record in self.records:
                 out_fd.write(str(record) + "\n")
 
-    def get_location(self, record_dict):
+    def get_location(self, record_dict, key="Loc", use_synonym=False, synonym_dict=None):
         for record in self.records:
-            record.get_location(record_dict)
+            record.get_location(record_dict, key=key, use_synonym=use_synonym, synonym_dict=synonym_dict)
 
     def _split_regions(self):
         splited_dict = OrderedDict({})
@@ -226,7 +255,7 @@ class Collection(Iterable):
         regions_dict = self._split_regions()
         region_counts_dict = TwoLvlDict({})
         for region in regions_dict:
-            count_locations_dict = {"intergenic": 0}
+            count_locations_dict = {"igc": 0}
 
             for record in regions_dict[region]:
                 if (not record.description["Loc"]) or ("Loc" not in record.description):
@@ -284,9 +313,12 @@ class Collection(Iterable):
 
         os.system("mkdir -p %s" % plot_dir)
         reference_colors = {"CDS": "#FBFD2B",    # yellow
+                            "5'_UTR": "#FF000F",
                             "five_prime_UTR": "#FF000F",     # red
+                            "3'_UTR": "#000FFF",
                             "three_prime_UTR": "#000FFF",     # blue
-                            "intergenic": "#4ED53F",     # green
+                            "igc": "#4ED53F",     # green
+                            "ncRNA": 'cyan',
                             "other": "#ADB696"
                             }
 
@@ -352,20 +384,44 @@ class Collection(Iterable):
         plt.savefig("%s/%s" % (plot_dir, pie_filename))
         plt.close()
 
-        fig = plt.figure(3, dpi=dpi, figsize=(9, 9))
+        fig = plt.figure(3, dpi=dpi, figsize=(6, 6))
         fig.suptitle(pie_name, fontsize=20)
-        plt.subplot(1, 3, 2, axisbg="#D6D6D6")
+        plt.subplot(1, 1, 1, axisbg="#D6D6D6")
         all_explodes = np.zeros(len(all_counts))
         if explode and all_counts:
             max_count_index = all_counts.index(max(all_counts))
             all_explodes[max_count_index] = 0.1
-        plt.pie(all_counts, explode=all_explodes, labels=all_labels, colors=all_colors,
-                autopct='%1.1f%%', shadow=True, startangle=90, radius=4)
+        if len(all_labels) > 0:
+            max_label_length = max([len(x) for x in all_labels])
+            max_count = max(all_counts)
+            max_letters = 1
+            while int(max_count / 10**max_letters) != 0:
+                max_letters += 1
+
+        patches, texts = plt.pie(all_counts, explode=all_explodes, colors=all_colors,
+                                            shadow=True, startangle=90, radius=2) #labels=all_labels,
+
+        #patches, texts, autotexts = plt.pie(all_counts, explode=all_explodes, colors=all_colors,
+        #                                    shadow=True, startangle=90, autopct='%1.1f%%', radius=4) #labels=all_labels
+
+        #colors = ['yellowgreen','red','gold','lightskyblue','white','lightcoral','blue','pink', 'darkgreen','yellow','grey','violet','magenta','cyan']
+        porcent = 100 * np.array(all_counts)/sum(all_counts)
+
+        labels = ['{0}  -  {1} ({2:1.2f}%)'.format(i.ljust(max_label_length), str(j).ljust(max_letters), k) for i, j, k in zip(all_labels, all_counts, porcent)]
+
+        if len(all_labels) > 0:
+            sort_legend = True
+            if sort_legend:
+                patches, labels, dummy = zip(*sorted(zip(patches, labels, all_counts),
+                                                     key=lambda x: x[2],
+                                                     reverse=True))
+
+        plt.legend(patches, labels, loc='center left',  fontsize=13, bbox_to_anchor=(-1.0, 0.5)) # bbox_to_anchor=(-0.1, 1.),
         plt.title("Full genome")
             # Set aspect ratio to be equal so that pie is drawn as a circle.
         plt.axis('equal')
-        plt.savefig("%s/%s" % (plot_dir, full_genome_pie_filename))
+        plt.savefig("%s/%s" % (plot_dir, full_genome_pie_filename), bbox_inches='tight')
         plt.close()
 
 if __name__ == "__main__":
-    fg= Collection()
+    fg = Collection()
