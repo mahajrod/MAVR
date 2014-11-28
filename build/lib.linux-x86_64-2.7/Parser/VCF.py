@@ -13,6 +13,8 @@ import matplotlib.pyplot as plt
 from Bio import SeqIO
 from Bio.SeqFeature import SeqFeature, FeatureLocation
 
+
+
 #from General import check_path
 from Parser.Abstract import Record, Collection, Metadata, Header
 
@@ -235,7 +237,7 @@ class HeaderVCF(list, Header):
 
 class CollectionVCF(Collection):
 
-    def __init__(self, metadata=None, record_list=None, header=None, vcf_file=None, samples=None, from_file=True):
+    def __init__(self, metadata=None, record_list=None, header=None, vcf_file=None, samples=None, from_file=True, external_metadata=None):
         self.linkage_dict = None
         if from_file:
             self.metadata = MetadataVCF()
@@ -249,14 +251,14 @@ class CollectionVCF(Collection):
                     #print(line)
                     self.metadata.add_metadata(line)
                 for line in fd:
-                    self._add_record(line)
+                    self.records.append(self.add_record(line, external_metadata=external_metadata))
         else:
             self.metadata = metadata
-            self.records = record_list
+            self.records = [] if record_list is None else record_list
             self.header = header
             self.samples = samples
 
-    def _add_record(self, line):
+    def add_record(self, line, external_metadata=None):
         line_list = line.strip().split("\t")
         #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	Sample_1
         position = int(line_list[1])
@@ -269,14 +271,24 @@ class CollectionVCF(Collection):
         info_tuple_list = [self._split_by_equal_sign(entry) for entry in line_list[7].split(";")]
         info_dict = {}
         for entry in info_tuple_list:
-            if self.metadata["INFO"][entry[0]]["Type"] == "Flag":
-                info_dict[entry[0]] = []
-            elif self.metadata["INFO"][entry[0]]["Type"] == "Integer":
-                info_dict[entry[0]] = list(map(lambda x: int(x), entry[1].split(",")))
-            elif self.metadata["INFO"][entry[0]]["Type"] == "Float":
-                info_dict[entry[0]] = list(map(lambda x: float(x), entry[1].split(",")))
+            if self.metadata:
+                if self.metadata["INFO"][entry[0]]["Type"] == "Flag":
+                    info_dict[entry[0]] = []
+                elif self.metadata["INFO"][entry[0]]["Type"] == "Integer":
+                    info_dict[entry[0]] = list(map(lambda x: int(x), entry[1].split(",")))
+                elif self.metadata["INFO"][entry[0]]["Type"] == "Float":
+                    info_dict[entry[0]] = list(map(lambda x: float(x), entry[1].split(",")))
+                else:
+                    info_dict[entry[0]] = entry[1].split(",")
             else:
-                info_dict[entry[0]] = entry[1].split(",")
+                if external_metadata["INFO"][entry[0]]["Type"] == "Flag":
+                    info_dict[entry[0]] = []
+                elif external_metadata["INFO"][entry[0]]["Type"] == "Integer":
+                    info_dict[entry[0]] = list(map(lambda x: int(x), entry[1].split(",")))
+                elif external_metadata["INFO"][entry[0]]["Type"] == "Float":
+                    info_dict[entry[0]] = list(map(lambda x: float(x), entry[1].split(",")))
+                else:
+                    info_dict[entry[0]] = entry[1].split(",")
         samples_list = []
 
         for sample_string in line_list[9:]:
@@ -287,18 +299,26 @@ class CollectionVCF(Collection):
             else:
                 for key, value_list in zip(line_list[8].split(":"), sample_string.split(":")):
                     #print (key, value_list)
-                    if self.metadata["FORMAT"][key]["Type"] == "Integer":
-                        sample_dict[key] = list(map(lambda x: int(x), value_list.split(",")))
-                    elif self.metadata["FORMAT"][key]["Type"] == "Float":
-                        sample_dict[key] = list(map(lambda x: float(x), value_list.split(",")))
+                    if self.metadata:
+                        if self.metadata["FORMAT"][key]["Type"] == "Integer":
+                            sample_dict[key] = list(map(lambda x: int(x), value_list.split(",")))
+                        elif self.metadata["FORMAT"][key]["Type"] == "Float":
+                            sample_dict[key] = list(map(lambda x: float(x), value_list.split(",")))
+                        else:
+                            sample_dict[key] = value_list.split(",")
                     else:
-                        sample_dict[key] = value_list.split(",")
+                        if external_metadata["FORMAT"][key]["Type"] == "Integer":
+                            sample_dict[key] = list(map(lambda x: int(x), value_list.split(",")))
+                        elif external_metadata["FORMAT"][key]["Type"] == "Float":
+                            sample_dict[key] = list(map(lambda x: float(x), value_list.split(",")))
+                        else:
+                            sample_dict[key] = value_list.split(",")
             #print(sample_dict)
             samples_list.append(sample_dict)
         #print(samples_list)
-        self.records.append(RecordVCF(line_list[0], position, line_list[2], line_list[3],
+        return RecordVCF(line_list[0], position, line_list[2], line_list[3],
                                       alt_list, quality, filter_list,
-                                      info_dict, samples_list))
+                                      info_dict, samples_list)
 
     @staticmethod
     def _split_by_equal_sign(string):
@@ -514,6 +534,8 @@ class CollectionVCF(Collection):
                 plt.axhline(y=1000, color="#000000")
                 plt.axhline(y=500, color="purple")
                 plt.axhline(y=10, color="#000000")
+                #if ref_genome:
+                #    plt.xlim(xmax=len(ref_genome.reference_genome[region]))
 
         if single_fig:
             plt.savefig("%s/%s.svg" % (plot_dir, plot_name))
@@ -607,7 +629,7 @@ class CollectionVCF(Collection):
                      return_collection=True,
                      write_inconsistent=True,
                      write_correlation=True):
-        from Parser.CCF import RecordCCF, CollectionCCF, MetadataCCF
+        from Parser.CCF import RecordCCF, CollectionCCF, MetadataCCF, HeaderCCF
         if self.linkage_dict:
             linkage_dict = self.linkage_dict
         else:
@@ -643,13 +665,15 @@ class CollectionVCF(Collection):
                     mut_clusters_dict[region] = \
                         CollectionCCF(record_list=[RecordCCF(collection_vcf=CollectionVCF(record_list=clusters_dict[cluster], from_file=False),
                                                              from_records=True) for cluster in clusters_dict],
-                                      metadata=MetadataCCF(self.samples, vcf_metadata=self.metadata, vcf_header=self.header))
+                                      metadata=MetadataCCF(self.samples, vcf_metadata=self.metadata, vcf_header=self.header),
+                                      header=HeaderCCF("CLUSTER_ID\tCHROM\tSTART\tEND\tDESCRIPTION".split("\t")))
                 else:
                     mut_clusters_list += [RecordCCF(collection_vcf=CollectionVCF(record_list=clusters_dict[cluster], from_file=False), from_records=True)
                                           for cluster in clusters_dict]
             if split_by_regions:
                 return mut_clusters_dict
-            return CollectionCCF(record_list=mut_clusters_list, metadata=MetadataCCF(self.samples, vcf_metadata=self.metadata, vcf_header=self.header))
+            return CollectionCCF(record_list=mut_clusters_list, metadata=MetadataCCF(self.samples, vcf_metadata=self.metadata, vcf_header=self.header),
+                                 header=HeaderCCF("CLUSTER_ID\tCHROM\tSTART\tEND\tDESCRIPTION".split("\t")))
         else:
             return clusters
 
@@ -808,6 +832,81 @@ class CollectionVCF(Collection):
                                  feature_type_black_list=feature_type_black_list,
                                  use_synonym=use_synonym, synonym_dict=synonym_dict,
                                  add_intergenic_label=add_intergenic_label)
+
+    def count_strandness(self, prefix):
+        count_dict = OrderedDict({})
+
+        hor_coord_dict = {"C": 0, "G": 1}
+        ver_coord_dict = {"N": 0, "P": 1, "M": 2, "B": 3}
+        for record in self:
+            if record.chrom not in count_dict:
+                count_dict[record.chrom] = np.zeros((2, 4), dtype=int)
+            count_dict[record.chrom][hor_coord_dict[record.ref]][ver_coord_dict[record.info_dict["Fstrand"][0]]] += 1
+
+        count_dict["all"] = sum(count_dict.values())
+
+        for chromosome in count_dict:
+            with open("%s_%s.t" % (prefix, chromosome), "w") as out_fd:
+                out_list = count_dict[chromosome].tolist()
+                for index, name in zip(range(0, len(out_list)), ["C", "G"]):
+                    out_list[index].insert(0, name)
+                out_list.insert(0, [".", "N", "P", "M", "B"])
+                for string_list in out_list:
+                    out_fd.write("\t".join([str(x) for x in string_list]) + "\n")
+
+        return count_dict
+
+    def variants_start_end(self, left, right, record_dict, skip_genes_without_five_utr=False,
+                           min_five_utr_len=10):
+
+        gene_variants_positions = []
+        all_variant_start_positions = []
+        all_variant_end_positions = []
+
+        for record_id in record_dict:
+            for feature in record_dict[record_id].features:
+                if feature.type != "gene":
+                    continue
+                if skip_genes_without_five_utr:
+                    for sub_feature in feature.sub_features:
+                        if sub_feature.type == "five_prime_UTR" and len(sub_feature) >= min_five_utr_len:
+                            break
+                    else:
+                        continue
+                #print(feature.sub_features)
+                for sub_feature in feature.sub_features:
+                    if sub_feature.type != "CDS":
+                        continue
+                    chrom = record_id
+                    strand = sub_feature.strand
+                    CDS_start = sub_feature.location.start + 1 if strand == +1 else sub_feature.location.end
+                    CDS_end = sub_feature.location.end if strand == +1 else sub_feature.location.start + 1
+                    #region_start = CDS_start - (args.left * strand)
+                    #region_end = CDS_start + (args.right * strand)
+
+                    region_start_start = CDS_start - left if strand == +1 else CDS_start - right
+                    region_start_end = CDS_start + right if strand == +1 else CDS_start + left
+
+                    region_end_start = CDS_end - left if strand == +1 else CDS_end - right
+                    region_end_end = CDS_end + right if strand == +1 else CDS_end + left
+                    #print("aaa")
+                    start_coordinates = []
+                    end_coordinates = []
+                    for variant in self:
+                        if record_id != variant.chrom:
+                            continue
+                        if region_start_start <= variant.pos <= region_start_end:
+                            start_coordinates.append((variant.pos - CDS_start) * strand)
+                        if region_end_start <= variant.pos <= region_end_end:
+                            end_coordinates.append((variant.pos - CDS_end) * strand)
+                    all_variant_start_positions += start_coordinates
+                    all_variant_end_positions += end_coordinates
+                    #print(feature.qualifiers)
+                    gene_variants_positions.append([feature.qualifiers["Name"], strand, chrom, region_start_start,
+                                                    region_start_end, start_coordinates,
+                                                    region_end_start, region_end_end,
+                                                    end_coordinates])
+        return all_variant_start_positions, all_variant_end_positions, gene_variants_positions
 
 
 class ReferenceGenome(object):

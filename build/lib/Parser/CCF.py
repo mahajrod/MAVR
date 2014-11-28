@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
-from collections import Iterable
+from collections import Iterable, OrderedDict
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import colors
-from Parser.Abstract import Record, Collection, Metadata
-from Parser.VCF import CollectionVCF
+from Parser.Abstract import Record, Collection, Metadata, Header
+from Parser.VCF import CollectionVCF, MetadataVCF, HeaderVCF
 
 
 class RecordCCF(Record, Iterable):
@@ -76,6 +76,7 @@ class RecordCCF(Record, Iterable):
         if self.size > 1:
             self.description["Mean"] = np.mean(distances)
             self.description["Median"] = np.median(distances)
+            self.description["Power"] = self.size / np.median(distances)
 
     def __len__(self):
         return self.size
@@ -89,7 +90,7 @@ class RecordCCF(Record, Iterable):
         if self.flags:
             attributes_string += ";" + ";".join(self.flags)
         if self.description:
-            attributes_string += ";" + ";".join(["%s=%s" % (key, ",".join(map(lambda x: str(x), self.description[key])) if isinstance(self.description[key], list) else str(self.description[key]))
+            attributes_string += ";" + ";".join(["%s=%s" % (key, ",".join(map(lambda x: str(x), self.description[key])) if isinstance(self.description[key], list) or isinstance(self.description[key], set)  else str(self.description[key]))
                                                  for key in self.description])
         if self.subclusters != None:
             #print(self.subclusters)
@@ -231,9 +232,11 @@ class RecordCCF(Record, Iterable):
         self.subclusters = tmp[tmp.keys()[0]]
 
     def adjust(self, border_limit=None, min_size_to_adjust=2, remove_border_subclusters=False, remove_size_limit=1):
+        # adjusts cluster borders, returns list of new cluster records
         # skip adjustment for clusters with 3 or less mutations
         if (self.size < min_size_to_adjust) or (self.subclusters is None):
-            return -1
+            #return -1
+            return [self]
         limit = border_limit if border_limit else len(self.subclusters)
         for i in range(0, limit):
             if self.subclusters[i] == self.subclusters[0]:
@@ -242,7 +245,8 @@ class RecordCCF(Record, Iterable):
                 break
         # exit if cluster doesnt have subclusters
         if left_subcluster_end == len(self.subclusters) - 1:
-            return 1
+            #return 1
+            return [self]
 
         for i in range(-1, -limit - 1, -1):
             if self.subclusters[i] == self.subclusters[-1]:
@@ -254,8 +258,34 @@ class RecordCCF(Record, Iterable):
             start = left_subcluster_end + 1 if left_subcluster_end < remove_size_limit else 0
             end = right_subcluster_start if right_subcluster_start >= -remove_size_limit else len(self.subclusters)
 
+            new_left_cluster, new_right_cluster = None, None
+
+            if start > 0:
+                new_left_cluster = RecordCCF(collection_vcf=CollectionVCF(record_list=self.records.records[:start], from_file=False),
+                                             subclusters=self.subclusters[:start], from_records=True)
+
+            if end < len(self.subclusters):
+                new_right_cluster = RecordCCF(collection_vcf=CollectionVCF(record_list=self.records.records[end:], from_file=False),
+                                              subclusters=self.subclusters[end:], from_records=True)
+            """
             self.__init__(collection_vcf=CollectionVCF(record_list=self.records.records[start:end], from_file=False),
                           subclusters=self.subclusters[start:end], from_records=True)
+            """
+            new_middle_cluster = RecordCCF(collection_vcf=CollectionVCF(record_list=self.records.records[start:end], from_file=False),
+                                           subclusters=self.subclusters[start:end], from_records=True)
+            """
+            if new_left_cluster or new_right_cluster:
+                print("original")
+                print(self)
+                print("adjusted")
+                print(new_left_cluster)
+                print(new_middle_cluster)
+                print(new_right_cluster)
+            """
+            cluster_list = [new_left_cluster] if new_left_cluster else []
+            cluster_list += [new_middle_cluster]
+            cluster_list += [new_right_cluster] if new_right_cluster else []
+            return cluster_list
 
     def add_description(self, descr_name, value):
         if not self.description:
@@ -269,7 +299,7 @@ class RecordCCF(Record, Iterable):
             if record.ref == "C":
                 count_C += 1.
         homogenity = count_C / self.size
-        self.add_description("SHom", homogenity if homogenity >= 0.5 else 1.0 - homogenity)
+        self.add_description("Homogeneity", homogenity if homogenity >= 0.5 else 1.0 - homogenity)
         self.add_description("Strand", "P" if homogenity >= 0.5 else "N")
 
 
@@ -293,18 +323,101 @@ class MetadataCCF(Metadata):
         return metadata_string
 
 
+class HeaderCCF(list, Header):
+    def __str__(self):
+        return "#CCF_HEADER\n#" + "\t".join(self)
+
+
 class CollectionCCF(Collection):
 
     def read(self, input_file):
         # TODO: write read from ccf file
-        pass
+        with open(input_file, "r") as in_fd:
+
+                stripped_line = in_fd.readline().strip()
+                if stripped_line == "#VCF_METADATA START":
+                    vcf_metadata = MetadataVCF()
+                    stripped_line = in_fd.readline().strip()
+                    while (stripped_line != "#VCF_METADATA END"):
+                        vcf_metadata.add_metadata(stripped_line)
+                        stripped_line = in_fd.readline().strip()
+                stripped_line = in_fd.readline().strip()
+                if stripped_line == "#VCF_HEADER":
+                    header_line = in_fd.readline().strip()
+                    vcf_header = HeaderVCF(header_line[1:].split("\t"))
+                    #print("a\na\na\na\na\n")
+                    #print(vcf_header)
+                    self.metadata = MetadataCCF(vcf_header[9:], vcf_metadata=vcf_metadata, vcf_header=vcf_header)
+                stripped_line = in_fd.readline().strip()
+                if stripped_line == "#CCF_HEADER":
+                    header_line = in_fd.readline().strip()
+                    self.header = HeaderCCF(header_line[1:].split("\t"))
+                flag = 0
+                self.records = []
+                while True:
+                    data_line = in_fd.readline()
+
+                    if data_line == "" or data_line == "\n":
+                        break
+                    stripped_line = data_line.strip()
+                    if data_line[0] == "\t":
+                        #stripped_line = stripped_line[1:]
+                        #print(collection_vcf)
+                        collection_vcf.records.append(collection_vcf.add_record(stripped_line, external_metadata=self.metadata.vcf_metadata))
+                        flag = 1
+                        #print("aaaa")
+                        continue
+
+                    if flag != 0:
+                        self.records.append(RecordCCF(id=cluster_id, chrom=chrom, size=size, start=start, end=end,
+                                                      description=description, flags=flags,
+                                                      collection_vcf=collection_vcf, bad_vcf_records=bad_records,
+                                                      from_records=False, subclusters=subclusters))
+                        #collection_vcf = None
+
+                    if stripped_line[0] == ">":
+                        flag = 0
+                        cluster_id, chrom, start, end, description_and_flags = stripped_line[1:].split("\t")
+                        start = int(start)
+                        end = int(end)
+                        description_and_flags = description_and_flags.split(";")
+                        description = OrderedDict({})
+                        flags = set([])
+                        subclusters = None
+                        for descr_entry in description_and_flags:
+                            descr_entry_splited = descr_entry.split("=")
+                            if len(descr_entry_splited) == 1:
+                                flags.add(descr_entry_splited[0])
+                                continue
+                            if descr_entry_splited[0] == "Size":
+                                size = int(descr_entry_splited[1])
+                            elif descr_entry_splited[0] == "Bad_records":
+                                bad_records = int(descr_entry_splited[1])
+                            elif descr_entry_splited[0] == "Mean" or descr_entry_splited[0] == "Median" or descr_entry_splited[0] == "Power" or descr_entry_splited[0] == "Homogeneity":
+                                description[descr_entry_splited[0]] = float(descr_entry_splited[1])
+                            elif descr_entry_splited[0] == "Loc":
+                                description[descr_entry_splited[0]] = descr_entry_splited[1].split(",")
+                            elif descr_entry_splited[0] == "Subclusters":
+                                subclusters = [int(x) for x in descr_entry_splited[1].split(",")]
+                            else:
+                                description[descr_entry_splited[0]] = descr_entry_splited[1].split(",")
+                                if len(description[descr_entry_splited[0]]) == 1:
+                                    description[descr_entry_splited[0]] = description[descr_entry_splited[0]][0]
+                        collection_vcf = CollectionVCF(metadata=None, record_list=None, header=None, vcf_file=None, samples=None, from_file=False, external_metadata=None)
+                        continue
+                self.records.append(RecordCCF(id=cluster_id, chrom=chrom, size=size, start=start, end=end,
+                                              description=description, flags=flags,
+                                              collection_vcf=collection_vcf, bad_vcf_records=bad_records,
+                                              from_records=False, subclusters=subclusters))
 
     def filter_by_expression(self, expression):
         filtered_records, filtered_out_records = self.filter_records_by_expression(expression)
         return CollectionCCF(metadata=self.metadata, record_list=filtered_records,
-                             from_file=False), \
+                             from_file=False,
+                             header=self.header), \
                CollectionCCF(metadata=self.metadata, record_list=filtered_out_records,
-                             from_file=False)
+                             from_file=False,
+                             header=self.header)
 
     def filter_by_size(self, min_size=3):
         return self.filter_by_expression("record.size >= %i" % min_size)
@@ -325,17 +438,22 @@ class CollectionCCF(Collection):
                     filtered_out_records.append(record)
                 else:
                     filtered_records.append(record)
-        return CollectionCCF(metadata=self.metadata, record_list=filtered_records), \
-               CollectionCCF(metadata=self.metadata, record_list=filtered_out_records)
+        return CollectionCCF(metadata=self.metadata, record_list=filtered_records,
+                             header=self.header), \
+               CollectionCCF(metadata=self.metadata, record_list=filtered_out_records,
+                             header=self.header)
 
     def check_record_location(self, bad_region_collection_gff):
         for record in self:
             record.check_location(bad_region_collection_gff)
 
     def adjust(self, border_limit=None, min_size_to_adjust=2, remove_border_subclusters=False, remove_size_limit=1):
+        new_records = []
         for record in self:
-            record.adjust(border_limit=border_limit, min_size_to_adjust=min_size_to_adjust,
-                          remove_border_subclusters=remove_border_subclusters, remove_size_limit=remove_size_limit)
+            new_records += record.adjust(border_limit=border_limit, min_size_to_adjust=min_size_to_adjust,
+                                         remove_border_subclusters=remove_border_subclusters,
+                                         remove_size_limit=remove_size_limit)
+        self.records = new_records
 
     def subclustering(self,
                       method="inconsistent",
@@ -398,22 +516,30 @@ class CollectionCCF(Collection):
         for record in self:
             record.check_strandness()
 
-    def get_data_for_stat(self):
+    def get_data_for_stat(self, additional_data=("Median", "Mean", "Power")):
         data = []
         for record in self:
             if record.size == 1:
                 continue
-            data.append([record.len, record.size, record.description["Median"],
-                         record.description["Mean"], record.description["SHom"]])
+            data.append([record.len, record.size] + [record.description[add_data] for add_data in additional_data])
         return np.array(data)
 
     def heatmap_statistics(self, filename="heatmap_statistics.svg", suptitle="Heatmap_statistics",
-                           dpi=150, figsize=(25, 25), facecolor="green", n_bins_default=20):
-
-        names = ["Length", "Size", "Median distance", "Mean distance", "Strandness"]
-        data = [self.get_data_for_stat()[:, i] for i in range(0, len(names))]
-
-        plt.figure(1, dpi=dpi, figsize=figsize)
+                           dpi=150, facecolor="green", n_bins_default=20,
+                           additional_data=("Median", "Mean", "Power")):
+        labels_dict = {"Median": "Median distance",
+                       "Mean": "Mean distance",
+                       "Power": "Power(Size/median dist.)",
+                       "Homogeneity": "Strand specificity"}
+        names = ("Length", "Size")
+        if additional_data is not None:
+            names += additional_data
+        data = [self.get_data_for_stat(additional_data=additional_data)[:, i]
+                for i in range(0, 2 if additional_data is None else 2 + len(additional_data))]
+        data.append(data[1] / data[2])
+        data.append((data[1]**2) / data[2])
+        size = 6 * len(names)
+        plt.figure(1, dpi=dpi, figsize=(size, size))
         plt.suptitle(suptitle)
 
         if len(data[0]) == 0:
@@ -423,11 +549,13 @@ class CollectionCCF(Collection):
             for j in range(0, len(names)):
                 if i == j:
                     continue
-                plt.subplot(5, 5, i * len(names) + j + 1)
-                plt.xlabel(names[i])
-                plt.ylabel(names[j])
-                n_x_bins = 10 if names[i] == "Strandness" else int(max(data[i])) if names[i] == "Size" else n_bins_default
-                n_y_bins = 10 if names[j] == "Strandness" else int(max(data[j])) if names[j] == "Size" else n_bins_default
+                plt.subplot(len(names), len(names), i * len(names) + j + 1)
+                plt.xlabel(labels_dict[names[i]] if names[i] in labels_dict else names[i])
+                plt.ylabel(labels_dict[names[j]] if names[j] in labels_dict else names[j])
+                n_x_bins = 10 if names[i] == "Homogeneity" else int(max(data[i])) if names[i] == "Size" else \
+                    int(max(data[i]) * 20) if names[i] == "Power" else n_bins_default
+                n_y_bins = 10 if names[j] == "Homogeneity" else int(max(data[j])) if names[j] == "Size" else \
+                    int(max(data[j]) * 20) if names[j] == "Power" else n_bins_default
                 #print(names[i])
                 #print(data[i])
                 #print(names[j])
@@ -438,7 +566,7 @@ class CollectionCCF(Collection):
                 #bounds = [0, 5, 10]
                 #norm = colors.BoundaryNorm(bounds, cmap.N)
 
-                plt.hist2d(data[i], data[j], (n_x_bins, n_y_bins))
+                plt.hist2d(data[i], data[j], (n_x_bins, n_y_bins), cmin=1)  # normed=True)
                 plt.colorbar()
         plt.savefig(filename)
         plt.close()
@@ -536,3 +664,13 @@ class CollectionCCF(Collection):
         plt.suptitle(suptitle)
         plt.savefig(filename)
         plt.close()
+
+
+if __name__ == "__main__":
+    """
+    col = CollectionCCF(from_file=True, input_file="/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/combined_vcf/PmCDA1_3d/clustering/PmCDA1_3d_adjusted_not_in_br_no_id.ccf")
+    #for record in col:
+    print(col.records[0])
+    #print(col.records)
+    col.write("test.ccf")
+    """

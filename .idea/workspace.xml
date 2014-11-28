@@ -2,41 +2,43 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0137b4ba-9cb9-4454-8e03-43ff7c136081" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Parser/Cufflinks.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pictures/Draw.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pictures/Styles/Features.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pictures/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pictures/Styles/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/assembly_transcriptome.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/draw_genes.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/expression_correlation.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/filter_expression_data.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/gff_examine.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/mut_locations.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/mut_strandness.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/examples/clustering/clustering.py" afterPath="$PROJECT_DIR$/examples/desaminases/clustering.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/examples/clustering/clustering_combined.py" afterPath="$PROJECT_DIR$/examples/desaminases/clustering_combined.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/CDS_region_variants.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/CDS_region_vars.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/CDS_region_vars_2.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/TSS_UTR_CDS_histogram.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/clustering_final.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/convert_TSS_to_gff.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/filter_clusters_by_size_and_power.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/get_variants_near_TSS.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/heatmap_article.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/hist_3d_power_size.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/histogramms.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/homogeneity_article.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/homogeneity_article_pre_UTR.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/homogenity_size_heatmap.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/power_heatmap.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/power_size_plot.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/rainfall.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/restore_per_sample_vcf.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/strandness_histogramms.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/variant_location_pies.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" afterPath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/MAVR-1.0-py3.4.egg" afterPath="$PROJECT_DIR$/dist/MAVR-1.0-py3.4.egg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parser/Abstract.py" afterPath="$PROJECT_DIR$/Parser/Abstract.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Parser/Abstract.py" afterPath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Parser/Abstract.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/Parser/Abstract.py" afterPath="$PROJECT_DIR$/build/lib/Parser/Abstract.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/BLAST.py" afterPath="$PROJECT_DIR$/Tools/BLAST.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/BLAST.py" afterPath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/BLAST.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/Tools/BLAST.py" afterPath="$PROJECT_DIR$/build/lib/Tools/BLAST.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parser/CCF.py" afterPath="$PROJECT_DIR$/Parser/CCF.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Parser/CCF.py" afterPath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Parser/CCF.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/Parser/CCF.py" afterPath="$PROJECT_DIR$/build/lib/Parser/CCF.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Tuxedo/Cufflinks.py" afterPath="$PROJECT_DIR$/Tools/Tuxedo/Cufflinks.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Collections/GeneralCollections.py" afterPath="$PROJECT_DIR$/Collections/GeneralCollections.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Collections/GeneralCollections.py" afterPath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Collections/GeneralCollections.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/Collections/GeneralCollections.py" afterPath="$PROJECT_DIR$/build/lib/Collections/GeneralCollections.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/SOURCES.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/SOURCES.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Tuxedo/Tophat.py" afterPath="$PROJECT_DIR$/Tools/Tuxedo/Tophat.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Sequence.py" afterPath="$PROJECT_DIR$/Routines/Sequence.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parser/VCF.py" afterPath="$PROJECT_DIR$/Parser/VCF.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Parser/VCF.py" afterPath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Parser/VCF.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/Parser/VCF.py" afterPath="$PROJECT_DIR$/build/lib/Parser/VCF.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/mahajrod.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/mahajrod.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/clustering_combined.py" afterPath="$PROJECT_DIR$/examples/desaminases/clustering_combined.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/gff_examine.py" afterPath="$PROJECT_DIR$/scripts/gff_examine.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -83,101 +85,61 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="clustering_combined.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/desaminases/clustering_combined.py">
+      <file leaf-file-name="get_variants_near_TSS.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/desaminases/get_variants_near_TSS.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1896" max-vertical-offset="3474">
-              <caret line="115" column="17" selection-start-line="115" selection-start-column="17" selection-end-line="115" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="3240">
+              <caret line="37" column="25" selection-start-line="37" selection-start-column="24" selection-end-line="38" selection-end-column="36" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BLAST.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/BLAST.py">
+      <file leaf-file-name="strandness_histogramms.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/desaminases/strandness_histogramms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="2070">
-              <caret line="11" column="16" selection-start-line="9" selection-start-column="0" selection-end-line="15" selection-end-column="54" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="792" max-vertical-offset="1872">
+              <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="expression_correlation.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/desaminases/expression_correlation.py">
+      <file leaf-file-name="homogeneity_article.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/desaminases/homogeneity_article.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1440" max-vertical-offset="2196">
-              <caret line="80" column="53" selection-start-line="80" selection-start-column="53" selection-end-line="80" selection-end-column="53" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="4842">
+              <caret line="34" column="30" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Abstract.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Parser/Abstract.py">
+      <file leaf-file-name="TSS_UTR_CDS_histogram.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/desaminases/TSS_UTR_CDS_histogram.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2700" max-vertical-offset="7776">
-              <caret line="150" column="0" selection-start-line="150" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3312">
+              <caret line="114" column="15" selection-start-line="114" selection-start-column="15" selection-end-line="114" selection-end-column="15" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VCF.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Parser/VCF.py">
+      <file leaf-file-name="homogeneity_article_pre_UTR.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/examples/desaminases/homogeneity_article_pre_UTR.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="16146">
-              <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.972973" vertical-offset="0" max-vertical-offset="972">
+              <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CCF.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Parser/CCF.py">
+      <file leaf-file-name="clustering_final.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/desaminases/clustering_final.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="7548" max-vertical-offset="9774">
-              <caret line="423" column="26" selection-start-line="423" selection-start-column="26" selection-end-line="423" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mut_strandness.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/desaminases/mut_strandness.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="2232">
-              <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="filter_expression_data.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/desaminases/filter_expression_data.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="666" max-vertical-offset="1152">
-              <caret line="37" column="55" selection-start-line="37" selection-start-column="55" selection-end-line="37" selection-end-column="55" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="gff_examine.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/gff_examine.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.40063593" vertical-offset="0" max-vertical-offset="629">
-              <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="get_flanking_regions.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/get_flanking_regions.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="234" max-vertical-offset="1044">
-              <caret line="13" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="15" selection-end-column="53" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1746" max-vertical-offset="3312">
+              <caret line="97" column="25" selection-start-line="97" selection-start-column="21" selection-end-line="97" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -196,28 +158,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/Tools/Alignment/__init__.py" />
-        <option value="$PROJECT_DIR$/Tools/GATK/GATKAbstact.py" />
-        <option value="$PROJECT_DIR$/Tools/GATK/Abstact.py" />
-        <option value="$PROJECT_DIR$/Tools/GATK/SelectVariants.py" />
-        <option value="$PROJECT_DIR$/Tools/SNPeff.py" />
-        <option value="$PROJECT_DIR$/Tools/GATK/Abstract.py" />
-        <option value="$PROJECT_DIR$/Tools/GATK/__init__.py" />
-        <option value="$PROJECT_DIR$/Tools/GATK/PrintReads.py" />
-        <option value="$PROJECT_DIR$/Tools/GATK/BaseRecalibrator.py" />
-        <option value="$PROJECT_DIR$/Tools/Alignment/Bowtie2.py" />
-        <option value="$PROJECT_DIR$/Tools/Abstract.py" />
-        <option value="$PROJECT_DIR$/Tools/Alignment/TMAP.py" />
-        <option value="$PROJECT_DIR$/Tools/TVC.py" />
-        <option value="$PROJECT_DIR$/Tools/GATK/RealignerTargetCreator.py" />
-        <option value="$PROJECT_DIR$/Tools/GATK/IndelRealigner.py" />
-        <option value="$PROJECT_DIR$/Pipelines/SNPCall.py" />
-        <option value="$PROJECT_DIR$/Tools/Bedtools/Annotation/__init__.py" />
-        <option value="$PROJECT_DIR$/Tools/Annotation/__init__.py" />
-        <option value="$PROJECT_DIR$/Tools/Tuxedo/__init__.py" />
-        <option value="$PROJECT_DIR$/examples/merge_vcf/example_merge_vcf.py" />
-        <option value="$PROJECT_DIR$/Tools/Filter/__init__.py" />
-        <option value="$PROJECT_DIR$/Tools/Filter/TrimGalore.py" />
         <option value="$PROJECT_DIR$/examples/filtering/trim_galore.py" />
         <option value="$PROJECT_DIR$/scripts/seq_lengths.py" />
         <option value="$PROJECT_DIR$/Routines/Functions.py" />
@@ -225,35 +165,56 @@
         <option value="$PROJECT_DIR$/Tools/Bedtools/GetFasta.py" />
         <option value="$PROJECT_DIR$/Tools/Bedtools/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/get_flanking_regions.py" />
-        <option value="$PROJECT_DIR$/Routines/Sequence.py" />
         <option value="$PROJECT_DIR$/scripts/reverse_complement.py" />
         <option value="$PROJECT_DIR$/Tools/Tuxedo/Tophat.py" />
         <option value="$PROJECT_DIR$/Tools/Tuxedo/Cufflinks.py" />
         <option value="$PROJECT_DIR$/scripts/assembly_transcriptome.py" />
         <option value="$PROJECT_DIR$/examples/mut_locations/mut_locations.py" />
         <option value="$PROJECT_DIR$/examples/clustering/clustering_combined.py" />
-        <option value="$PROJECT_DIR$/Collections/GeneralCollections.py" />
-        <option value="$PROJECT_DIR$/Parser/VCF.py" />
         <option value="$PROJECT_DIR$/examples/desaminases/mut_strandness.py" />
         <option value="$PROJECT_DIR$/Parser/Cufflinks.py" />
-        <option value="$PROJECT_DIR$/scripts/gff_examine.py" />
         <option value="$PROJECT_DIR$/Pictures/draw_picture.py" />
         <option value="$PROJECT_DIR$/Pictures/Draw.py" />
         <option value="$PROJECT_DIR$/Pictures/Styles/Features.py" />
         <option value="$PROJECT_DIR$/scripts/draw_genes.py" />
         <option value="$PROJECT_DIR$/Tools/BLAST.py" />
-        <option value="$PROJECT_DIR$/Parser/Abstract.py" />
         <option value="$PROJECT_DIR$/examples/desaminases/filter_expression_data.py" />
         <option value="$PROJECT_DIR$/examples/desaminases/expression_correlation.py" />
         <option value="$PROJECT_DIR$/examples/desaminases/clustering_combined.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/restore_per_sample_vcf.py" />
         <option value="$PROJECT_DIR$/Parser/CCF.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/power_heatmap.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/strandness_histogramms.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/homogenity_size_heatmap.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/power_size_plot.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/histogramms.py" />
+        <option value="$PROJECT_DIR$/Routines/Sequence.py" />
+        <option value="$PROJECT_DIR$/Parser/convert_to_gff.py" />
+        <option value="$PROJECT_DIR$/Parser/convert_TSS_to_gff.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/convert_TSS_to_gff.py" />
+        <option value="$PROJECT_DIR$/scripts/gff_examine.py" />
+        <option value="$PROJECT_DIR$/Collections/GeneralCollections.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/hist_3d_power_size.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/rainfall.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/clustering_final.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/filter_clusters_by_size_and_power.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/heatmap_article.py" />
+        <option value="$PROJECT_DIR$/scripts/CDS_region_variants.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/CDS_region_vars.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/homogeneity_article.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/variant_location_pies.py" />
+        <option value="$PROJECT_DIR$/Parser/Abstract.py" />
+        <option value="$PROJECT_DIR$/Parser/VCF.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/CDS_region_vars_2.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/get_variants_near_TSS.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/TSS_UTR_CDS_histogram.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/homogeneity_article_pre_UTR.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1" />
     <option name="y" value="25" />
-    <option name="width" value="1922" />
+    <option name="width" value="1920" />
     <option name="height" value="1055" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -329,6 +290,94 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="examples" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="desaminases" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Pictures" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Parser" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Download" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Converters" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Collections" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -373,14 +422,14 @@
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/examples/desaminases" />
+      <recent name="$PROJECT_DIR$/Tools/Tuxedo" />
       <recent name="$PROJECT_DIR$/Tools/Annotation" />
       <recent name="$PROJECT_DIR$/Tools/Samtools" />
       <recent name="$PROJECT_DIR$/Tools" />
-      <recent name="$PROJECT_DIR$/Tools/Bedtools/Annotation" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.clustering_combined">
-    <configuration default="false" name="clustering_combined" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.homogeneity_article_pre_UTR">
+    <configuration default="false" name="CDS_region_vars_2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -393,13 +442,13 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="MAVR" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/desaminases/clustering_combined.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/desaminases/CDS_region_vars_2.py" />
       <option name="PARAMETERS" value="" />
       <RunnerSettings RunnerId="PythonRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
       <method />
     </configuration>
-    <configuration default="false" name="mut_strandness" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration default="false" name="variant_location_pies" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -412,64 +461,64 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="MAVR" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/desaminases/mut_strandness.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/desaminases/variant_location_pies.py" />
       <option name="PARAMETERS" value="" />
       <RunnerSettings RunnerId="PythonRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
       <method />
     </configuration>
-    <configuration default="false" name="Abstract" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration default="false" name="TSS_UTR_CDS_histogram" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples/desaminases" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MAVR" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/desaminases/TSS_UTR_CDS_histogram.py" />
+      <option name="PARAMETERS" value="" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="get_variants_near_TSS" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples/desaminases" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MAVR" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/desaminases/get_variants_near_TSS.py" />
+      <option name="PARAMETERS" value="" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="homogeneity_article_pre_UTR" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="/usr/bin/python2" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Parser" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples/desaminases" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="MAVR" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Parser/Abstract.py" />
-      <option name="PARAMETERS" value="" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="filter_expression_data" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="/usr/bin/python" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples/desaminases" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="MAVR" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/desaminases/filter_expression_data.py" />
-      <option name="PARAMETERS" value="" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="expression_correlation" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="/usr/bin/python" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples/desaminases" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="MAVR" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/desaminases/expression_correlation.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/desaminases/homogeneity_article_pre_UTR.py" />
       <option name="PARAMETERS" value="" />
       <RunnerSettings RunnerId="PythonRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
@@ -625,19 +674,19 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Python.ParseGVF" />
-      <item index="1" class="java.lang.String" itemvalue="Python.clustering_combined" />
-      <item index="2" class="java.lang.String" itemvalue="Python.mut_strandness" />
-      <item index="3" class="java.lang.String" itemvalue="Python.Abstract" />
-      <item index="4" class="java.lang.String" itemvalue="Python.filter_expression_data" />
-      <item index="5" class="java.lang.String" itemvalue="Python.expression_correlation" />
+      <item index="1" class="java.lang.String" itemvalue="Python.CDS_region_vars_2" />
+      <item index="2" class="java.lang.String" itemvalue="Python.variant_location_pies" />
+      <item index="3" class="java.lang.String" itemvalue="Python.TSS_UTR_CDS_histogram" />
+      <item index="4" class="java.lang.String" itemvalue="Python.get_variants_near_TSS" />
+      <item index="5" class="java.lang.String" itemvalue="Python.homogeneity_article_pre_UTR" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.clustering_combined" />
-        <item index="1" class="java.lang.String" itemvalue="Python.expression_correlation" />
-        <item index="2" class="java.lang.String" itemvalue="Python.filter_expression_data" />
-        <item index="3" class="java.lang.String" itemvalue="Python.mut_strandness" />
-        <item index="4" class="java.lang.String" itemvalue="Python.Abstract" />
+        <item index="0" class="java.lang.String" itemvalue="Python.homogeneity_article_pre_UTR" />
+        <item index="1" class="java.lang.String" itemvalue="Python.get_variants_near_TSS" />
+        <item index="2" class="java.lang.String" itemvalue="Python.CDS_region_vars_2" />
+        <item index="3" class="java.lang.String" itemvalue="Python.TSS_UTR_CDS_histogram" />
+        <item index="4" class="java.lang.String" itemvalue="Python.variant_location_pies" />
       </list>
     </recent_temporary>
   </component>
@@ -707,7 +756,11 @@
       <created>1412985540742</created>
       <updated>1412985540742</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="A lot of changes">
+      <created>1414703133902</created>
+      <updated>1414703133903</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -731,50 +784,29 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="25" width="1922" height="1055" extended-state="6" />
+    <frame x="0" y="25" width="1920" height="1055" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32968238" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.088495575" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973261" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25961033" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39649507" sideWeight="0.4997353" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17290458" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39539978" sideWeight="0.6719326" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2590164" sideWeight="0.09952607" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26068377" sideWeight="0.89994735" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2595838" sideWeight="0.10005266" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25301206" sideWeight="0.89994735" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.49920928" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2489339" sideWeight="0.6706783" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39978093" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2489339" sideWeight="0.6706783" order="2" side_tool="false" content_ui="combo" />
     </layout>
-    <layout-to-restore>
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32968238" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.088495575" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.49920928" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39649507" sideWeight="0.4997353" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26286966" sideWeight="0.099631" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973261" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26041117" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39978093" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2489339" sideWeight="0.6706783" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26286966" sideWeight="0.900369" order="2" side_tool="false" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -797,7 +829,8 @@
     <MESSAGE value="Added snpeff" />
     <MESSAGE value="added aligners and some GATK utilkities" />
     <MESSAGE value="..." />
-    <option name="LAST_COMMIT_MESSAGE" value="..." />
+    <MESSAGE value="A lot of changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="A lot of changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -822,228 +855,21 @@
           <line>111</line>
           <option name="timeStamp" value="27" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/Collections/GeneralCollections.py</url>
+          <line>1</line>
+          <option name="timeStamp" value="56" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/Parser/CCF.py</url>
+          <line>405</line>
+          <option name="timeStamp" value="63" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="56" />
+      <option name="time" value="71" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Tools/Annotation/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="198">
-          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Annotation/SNPeff.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="819" max-vertical-offset="1728">
-          <caret line="75" column="7" selection-start-line="75" selection-start-column="7" selection-end-line="75" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Samtools/Samtools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="864">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/merge_vcf/example_merge_vcf.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="864" max-vertical-offset="2304">
-          <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Annotation/GlimerHMM.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1170">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/TVC.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1857" max-vertical-offset="4680">
-          <caret line="2" column="11" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SQL/MySQL/testMySQL.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1854">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parser/General.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1134">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Filter/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180">
-          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/filtering/trim_galore.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="504">
-          <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/FilterTools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="666">
-          <caret line="26" column="44" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/General/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="866">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Alignment/BWA.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="389" max-vertical-offset="1242">
-          <caret line="56" column="11" selection-start-line="1" selection-start-column="0" selection-end-line="63" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Alignment/Novoalign.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1278">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Bedtools/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="252">
-          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Bedtools/Flank.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="70" max-vertical-offset="1494">
-          <caret line="24" column="15" selection-start-line="24" selection-start-column="12" selection-end-line="26" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Bedtools/GetFasta.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="900">
-          <caret line="30" column="26" selection-start-line="30" selection-start-column="18" selection-end-line="31" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Bedtools/Intersect.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="934" max-vertical-offset="1800">
-          <caret line="95" column="79" selection-start-line="95" selection-start-column="79" selection-end-line="95" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/seq_lengths.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="504">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/reverse_complement.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="522">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/assembly_transcriptome.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="864">
-          <caret line="42" column="1" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Tuxedo/Tophat.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1257" max-vertical-offset="1944">
-          <caret line="156" column="93" selection-start-line="156" selection-start-column="93" selection-end-line="156" selection-end-column="93" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Tuxedo/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13157895" vertical-offset="0" max-vertical-offset="684">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Tuxedo/Cufflinks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.8421053" vertical-offset="0" max-vertical-offset="2682">
-          <caret line="70" column="112" selection-start-line="70" selection-start-column="112" selection-end-line="70" selection-end-column="112" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/rainfall_plot/rainfall_plot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16744186" vertical-offset="0" max-vertical-offset="645">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Collections/GeneralCollections.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15957446" vertical-offset="0" max-vertical-offset="594">
-          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Filter/TrimGalore.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="792">
-          <caret line="17" column="30" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="576">
-          <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Collections/GeneralCollections.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/Functions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5860465" vertical-offset="0" max-vertical-offset="645">
-          <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/mut_locations.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="1224">
-          <caret line="44" column="77" selection-start-line="54" selection-start-column="0" selection-end-line="58" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Parser/GFF.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1098">
@@ -1058,13 +884,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Parser/Cufflinks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="810" max-vertical-offset="1602">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="24" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Pipelines/SNPCall.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="7974" max-vertical-offset="9954">
@@ -1076,13 +895,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180">
           <caret line="4" column="26" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/SNP_call/example_SNP_call.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1296" max-vertical-offset="2574">
-          <caret line="83" column="30" selection-start-line="83" selection-start-column="30" selection-end-line="83" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -1118,7 +930,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="20" max-vertical-offset="954">
           <caret line="13" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="15" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1126,55 +937,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="64" max-vertical-offset="1008">
           <caret line="37" column="55" selection-start-line="37" selection-start-column="55" selection-end-line="37" selection-end-column="55" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Parser/Abstract.py">
+    <entry file="file://$PROJECT_DIR$/scripts/seq_lengths.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="379" max-vertical-offset="1782">
-          <caret line="150" column="0" selection-start-line="150" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.17252396" vertical-offset="0" max-vertical-offset="626">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/expression_correlation.py">
+    <entry file="file://$PROJECT_DIR$/SeqAnalysis/SeqAnalysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1306" max-vertical-offset="2196">
-          <caret line="80" column="53" selection-start-line="80" selection-start-column="53" selection-end-line="80" selection-end-column="53" />
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="17370">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/mut_strandness.py">
+    <entry file="file://$PROJECT_DIR$/Parser/Cufflinks.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="2124">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parser/VCF.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1" max-vertical-offset="1440">
-          <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parser/CCF.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="7548" max-vertical-offset="9774">
-          <caret line="423" column="26" selection-start-line="423" selection-start-column="26" selection-end-line="423" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/clustering_combined.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1896" max-vertical-offset="3474">
-          <caret line="115" column="17" selection-start-line="115" selection-start-column="17" selection-end-line="115" selection-end-column="17" />
-          <folding />
+        <state vertical-scroll-proportion="-0.55791193" vertical-offset="540" max-vertical-offset="1584">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="24" selection-end-column="61" />
         </state>
       </provider>
     </entry>
@@ -1182,14 +965,272 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="2070">
           <caret line="11" column="16" selection-start-line="9" selection-start-column="0" selection-end-line="15" selection-end-column="54" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.78571427" vertical-offset="270" max-vertical-offset="774">
+          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/local/lib/python3.4/dist-packages/MAVR-1.0-py3.4.egg!/Parser/VCF.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4224" max-vertical-offset="16290">
+          <caret line="256" column="0" selection-start-line="256" selection-start-column="0" selection-end-line="256" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/SNP_call/example_SNP_call.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2574">
+          <caret line="117" column="52" selection-start-line="117" selection-start-column="52" selection-end-line="117" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Bedtools/Intersect.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1297" max-vertical-offset="1800">
+          <caret line="87" column="73" selection-start-line="87" selection-start-column="73" selection-end-line="87" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/merge_vcf/example_merge_vcf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54704946" vertical-offset="1655" max-vertical-offset="2304">
+          <caret line="111" column="9" selection-start-line="111" selection-start-column="9" selection-end-line="111" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/local/lib/python3.4/dist-packages/MAVR-1.0-py3.4.egg!/Parser/CCF.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="9107" max-vertical-offset="12168">
+          <caret line="523" column="1" selection-start-line="523" selection-start-column="1" selection-end-line="523" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1115" max-vertical-offset="1764">
+          <caret line="39" column="49" selection-start-line="38" selection-start-column="0" selection-end-line="39" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/gff_examine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40063593" vertical-offset="0" max-vertical-offset="629">
-          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="927" max-vertical-offset="1836">
+          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/power_size_plot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="847" max-vertical-offset="1494">
+          <caret line="49" column="47" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Collections/GeneralCollections.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="666">
+          <caret line="8" column="44" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/power_heatmap.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4426" max-vertical-offset="5292">
+          <caret line="277" column="38" selection-start-line="0" selection-start-column="0" selection-end-line="294" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/hist_3d_power_size.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1224">
+          <caret line="16" column="6" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/filter_clusters_by_size_and_power.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="918">
+          <caret line="16" column="41" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/histogramms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18735892" vertical-offset="554" max-vertical-offset="1530">
+          <caret line="45" column="12" selection-start-line="45" selection-start-column="12" selection-end-line="45" selection-end-column="111" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/homogenity_size_heatmap.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="1404">
+          <caret line="28" column="43" selection-start-line="28" selection-start-column="43" selection-end-line="28" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Parser/CCF.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="9018" max-vertical-offset="12258">
+          <caret line="501" column="16" selection-start-line="501" selection-start-column="8" selection-end-line="501" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/expression_correlation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1186" max-vertical-offset="2052">
+          <caret line="80" column="53" selection-start-line="80" selection-start-column="53" selection-end-line="80" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/convert_TSS_to_gff.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="88" max-vertical-offset="954">
+          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/rainfall.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="16" max-vertical-offset="882">
+          <caret line="33" column="47" selection-start-line="33" selection-start-column="47" selection-end-line="33" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/mut_strandness.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="2124">
+          <caret line="39" column="29" selection-start-line="20" selection-start-column="4" selection-end-line="44" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/mut_locations.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1116">
+          <caret line="44" column="77" selection-start-line="54" selection-start-column="0" selection-end-line="58" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/clustering_combined.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3618">
+          <caret line="3" column="2" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/CDS_region_variants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1350" max-vertical-offset="2394">
+          <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/restore_per_sample_vcf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1512" max-vertical-offset="2574">
+          <caret line="90" column="33" selection-start-line="90" selection-start-column="33" selection-end-line="90" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/heatmap_article.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1078" max-vertical-offset="2754">
+          <caret line="95" column="51" selection-start-line="95" selection-start-column="38" selection-end-line="95" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Parser/VCF.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1944" max-vertical-offset="3636">
+          <caret line="874" column="24" selection-start-line="874" selection-start-column="24" selection-end-line="874" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/clustering.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1602">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/variant_location_pies.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1492" max-vertical-offset="3042">
+          <caret line="98" column="49" selection-start-line="98" selection-start-column="44" selection-end-line="98" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/CDS_region_vars.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
+          <caret line="26" column="79" selection-start-line="23" selection-start-column="7" selection-end-line="26" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/CDS_region_vars_2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.101580136" vertical-offset="378" max-vertical-offset="1548">
+          <caret line="24" column="23" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/strandness_histogramms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="1782">
+          <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/homogeneity_article.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4734">
+          <caret line="34" column="30" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/clustering_final.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1746" max-vertical-offset="3312">
+          <caret line="97" column="25" selection-start-line="97" selection-start-column="21" selection-end-line="97" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Parser/Abstract.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2536" max-vertical-offset="4464">
+          <caret line="350" column="0" selection-start-line="350" selection-start-column="0" selection-end-line="350" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/get_variants_near_TSS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="3240">
+          <caret line="37" column="25" selection-start-line="37" selection-start-column="24" selection-end-line="38" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/TSS_UTR_CDS_histogram.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3312">
+          <caret line="114" column="15" selection-start-line="114" selection-start-column="15" selection-end-line="114" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/homogeneity_article_pre_UTR.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.972973" vertical-offset="0" max-vertical-offset="972">
+          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding />
         </state>
       </provider>

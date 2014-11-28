@@ -181,6 +181,8 @@ class Collection(Iterable):
         filtered_records = []
         filtered_out_records = []
         for record in self.records:
+            #print("a\na\na\na\na\na\na\na")
+            #print(record.description["Power"])
             if eval(expression):
                 filtered_records.append(record)
             else:
@@ -405,7 +407,7 @@ class Collection(Iterable):
         #                                    shadow=True, startangle=90, autopct='%1.1f%%', radius=4) #labels=all_labels
 
         #colors = ['yellowgreen','red','gold','lightskyblue','white','lightcoral','blue','pink', 'darkgreen','yellow','grey','violet','magenta','cyan']
-        porcent = 100 * np.array(all_counts)/sum(all_counts)
+        porcent = 100 * np.array(all_counts).astype(np.float32, copy=False)/sum(all_counts)
 
         labels = ['{0}  -  {1} ({2:1.2f}%)'.format(i.ljust(max_label_length), str(j).ljust(max_letters), k) for i, j, k in zip(all_labels, all_counts, porcent)]
 
