@@ -107,7 +107,7 @@ def location_pie(self, annotation_colors=[],
                                                      key=lambda x: x[2],
                                                      reverse=True))
 
-        plt.legend(patches, labels, loc='center left',  fontsize=legend_font, bbox_to_anchor=(-0.4, 0.5)) # bbox_to_anchor=(-0.1, 1.),
+        plt.legend(patches, labels, loc='center left',  fontsize=legend_font, bbox_to_anchor=(-0.25, 0.5)) # bbox_to_anchor=(-0.1, 1.),
             # Set aspect ratio to be equal so that pie is drawn as a circle.
         plt.axis('equal')
         #plt.savefig("%s/%s" % (plot_dir, full_genome_pie_filename), bbox_inches='tight')
@@ -157,7 +157,7 @@ if __name__ == "__main__":
         plt.title("%s. %s" % (letter, sample), fontweight='bold')
 
         index += 1
-    plt.savefig("good_mutation_pie_mixed_combined.svg", bbox_inches='tight')
-    plt.savefig("good_mutation_pie_mixed_combined.eps", bbox_inches='tight')
+    for format_ext in ["svg", "eps", "pdf", "png"]:
+        plt.savefig("good_mutation_pie_mixed_combined.%s" % format_ext, bbox_inches='tight')
     plt.close()
 

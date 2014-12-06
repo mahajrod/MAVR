@@ -459,8 +459,8 @@ class CollectionVCF(Collection):
             positions_dict[region] = np.array([record.pos for record in regions_dict[region]])
         return positions_dict
 
-    def rainfall_plot(self, plot_name, base_colors=[], single_fig=True, dpi=150, figsize=(55, 70), facecolor="#D6D6D6",
-                      ref_genome=None, masked_regions=None, min_gap_length=10, draw_gaps=False):
+    def rainfall_plot(self, plot_name, base_colors=[], single_fig=True, dpi=300, figsize=(40, 40), facecolor="#D6D6D6",
+                      ref_genome=None, masked_regions=None, min_gap_length=10, draw_gaps=False, suptitle=None):
         print("Drawing rainfall plot...")
         plot_dir = "rainfall_plot"
         reference_colors = {"A": "#FBFD2B",    # yellow
@@ -481,7 +481,7 @@ class CollectionVCF(Collection):
         os.system("mkdir -p %s" % plot_dir)
         if single_fig:
             fig = plt.figure(1, dpi=dpi, figsize=figsize, facecolor=facecolor)
-            fig.suptitle("Rainfall plot", fontsize=14)
+            fig.suptitle(suptitle if suptitle else "Rainfall plot", fontsize=40, fontweight='bold', y=0.94)
             sub_plot_dict = OrderedDict({})
         index = 1
         for region in regions_dict:
@@ -526,8 +526,11 @@ class CollectionVCF(Collection):
                              color=reference_colors[reference],
                              marker='.', linestyle='None', label=reference)
 
-                plt.title("Region %s" % region)
+                #plt.title("Region %s" % region)
                 #xlabel("Position")
+                plt.text(-0.08, 0.5, region, rotation=0, fontweight="bold", transform=sub_plot_dict[region].transAxes, fontsize=30,
+                         horizontalalignment='center',
+                         verticalalignment='center')
                 plt.ylabel("Distanse")
                 #plt.ylim(ymin=0)
                 plt.axhline(y=100, color="#000000")
@@ -538,11 +541,14 @@ class CollectionVCF(Collection):
                 #    plt.xlim(xmax=len(ref_genome.reference_genome[region]))
 
         if single_fig:
-            plt.savefig("%s/%s.svg" % (plot_dir, plot_name))
+            #plt.savefig("%s/%s.svg" % (plot_dir, plot_name))
             for region in sub_plot_dict:
                 sub_plot_dict[region].set_yscale('log', basey=2)
                     #yscale ('log', basey = 2)
             plt.savefig("%s/%s_log_scale.svg" % (plot_dir, plot_name))
+            plt.savefig("%s/%s_log_scale.pdf" % (plot_dir, plot_name))
+            plt.savefig("%s/%s_log_scale.eps" % (plot_dir, plot_name))
+            #plt.tight_layout()
             plt.close()
 
     def hierarchical_clustering(self, method='average', dendrogramm_max_y=2000,

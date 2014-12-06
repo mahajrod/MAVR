@@ -44,4 +44,4 @@ os.chdir(workdir)
 for sample_set in sample_set_names_list:
     mutations = CollectionVCF(from_file=True, vcf_file=sample_set + sample_suffix)
     mutations.rainfall_plot("%s_adjusted_cluster_mutations" % (sample_set), ref_genome=reference, draw_gaps=True,
-                                        masked_regions=bad_region_dict)
+                                        masked_regions=bad_region_dict, suptitle="%s" % sample_set, figsize=(36, 45))

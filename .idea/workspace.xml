@@ -2,44 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0137b4ba-9cb9-4454-8e03-43ff7c136081" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/CDS_region_variants.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/CDS_region_vars.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/CDS_region_vars_2.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/TSS_UTR_CDS_histogram.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/clustering_final.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/convert_TSS_to_gff.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/filter_clusters_by_size_and_power.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/get_variants_near_TSS.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/heatmap_article.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/hist_3d_power_size.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/histogramms.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/homogeneity_article.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/homogeneity_article_pre_UTR.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/homogenity_size_heatmap.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/power_heatmap.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/power_size_plot.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/rainfall.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/restore_per_sample_vcf.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/strandness_histogramms.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/variant_location_pies.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/get_variants_in_UTR.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/homogeneity_article_5_UTR.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/homogeneity_article_all.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/rainfall_one_chromosome.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" afterPath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/MAVR-1.0-py3.4.egg" afterPath="$PROJECT_DIR$/dist/MAVR-1.0-py3.4.egg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parser/Abstract.py" afterPath="$PROJECT_DIR$/Parser/Abstract.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Parser/Abstract.py" afterPath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Parser/Abstract.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/Parser/Abstract.py" afterPath="$PROJECT_DIR$/build/lib/Parser/Abstract.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parser/CCF.py" afterPath="$PROJECT_DIR$/Parser/CCF.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Parser/CCF.py" afterPath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Parser/CCF.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/Parser/CCF.py" afterPath="$PROJECT_DIR$/build/lib/Parser/CCF.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Collections/GeneralCollections.py" afterPath="$PROJECT_DIR$/Collections/GeneralCollections.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Collections/GeneralCollections.py" afterPath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Collections/GeneralCollections.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/Collections/GeneralCollections.py" afterPath="$PROJECT_DIR$/build/lib/Collections/GeneralCollections.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Sequence.py" afterPath="$PROJECT_DIR$/Routines/Sequence.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/CDS_region_vars_2.py" afterPath="$PROJECT_DIR$/examples/desaminases/CDS_region_vars_2.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/TSS_UTR_CDS_histogram.py" afterPath="$PROJECT_DIR$/examples/desaminases/TSS_UTR_CDS_histogram.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parser/VCF.py" afterPath="$PROJECT_DIR$/Parser/VCF.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Parser/VCF.py" afterPath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Parser/VCF.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/Parser/VCF.py" afterPath="$PROJECT_DIR$/build/lib/Parser/VCF.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/clustering_combined.py" afterPath="$PROJECT_DIR$/examples/desaminases/clustering_combined.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/gff_examine.py" afterPath="$PROJECT_DIR$/scripts/gff_examine.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/heatmap_article.py" afterPath="$PROJECT_DIR$/examples/desaminases/heatmap_article.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/homogenity_size_heatmap.py" afterPath="$PROJECT_DIR$/examples/desaminases/homogenity_size_heatmap.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/rainfall.py" afterPath="$PROJECT_DIR$/examples/desaminases/rainfall.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/variant_location_pies.py" afterPath="$PROJECT_DIR$/examples/desaminases/variant_location_pies.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -85,51 +63,91 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="get_variants_near_TSS.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/desaminases/get_variants_near_TSS.py">
+      <file leaf-file-name="homogeneity_article_all.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/desaminases/homogeneity_article_all.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="3240">
-              <caret line="37" column="25" selection-start-line="37" selection-start-column="24" selection-end-line="38" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1836" max-vertical-offset="2016">
+              <caret line="102" column="70" selection-start-line="102" selection-start-column="70" selection-end-line="102" selection-end-column="70" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="strandness_histogramms.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/desaminases/strandness_histogramms.py">
+      <file leaf-file-name="mut_locations.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/desaminases/mut_locations.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="792" max-vertical-offset="1872">
-              <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="792" max-vertical-offset="1224">
+              <caret line="44" column="77" selection-start-line="54" selection-start-column="0" selection-end-line="58" selection-end-column="49" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="homogeneity_article.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/desaminases/homogeneity_article.py">
+      <file leaf-file-name="filter_expression_data.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/desaminases/filter_expression_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="4842">
-              <caret line="34" column="30" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="666" max-vertical-offset="1152">
+              <caret line="37" column="55" selection-start-line="37" selection-start-column="55" selection-end-line="37" selection-end-column="55" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TSS_UTR_CDS_histogram.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/desaminases/TSS_UTR_CDS_histogram.py">
+      <file leaf-file-name="variant_location_pies.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/examples/desaminases/variant_location_pies.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3312">
-              <caret line="114" column="15" selection-start-line="114" selection-start-column="15" selection-end-line="114" selection-end-column="15" />
+            <state vertical-scroll-proportion="0.81639725" vertical-offset="2029" max-vertical-offset="2916">
+              <caret line="159" column="9" selection-start-line="159" selection-start-column="4" selection-end-line="159" selection-end-column="51" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="homogeneity_article_pre_UTR.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/examples/desaminases/homogeneity_article_pre_UTR.py">
+      <file leaf-file-name="SNPCall.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Pipelines/SNPCall.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.972973" vertical-offset="0" max-vertical-offset="972">
-              <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="10026">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="example_SNP_call.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/SNP_call/example_SNP_call.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2232" max-vertical-offset="2646">
+              <caret line="124" column="0" selection-start-line="124" selection-start-column="0" selection-end-line="136" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="homogenity_size_heatmap.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/desaminases/homogenity_size_heatmap.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1368" max-vertical-offset="1512">
+              <caret line="76" column="42" selection-start-line="76" selection-start-column="42" selection-end-line="76" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="heatmap_article.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/desaminases/heatmap_article.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2646" max-vertical-offset="2880">
+              <caret line="147" column="0" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UnifiedGenotyper.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tools/GATK/UnifiedGenotyper.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="738">
+              <caret line="34" column="171" selection-start-line="34" selection-start-column="171" selection-end-line="34" selection-end-column="171" />
               <folding />
             </state>
           </provider>
@@ -158,10 +176,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/examples/filtering/trim_galore.py" />
-        <option value="$PROJECT_DIR$/scripts/seq_lengths.py" />
-        <option value="$PROJECT_DIR$/Routines/Functions.py" />
-        <option value="$PROJECT_DIR$/Tools/Bedtools/Flank.py" />
         <option value="$PROJECT_DIR$/Tools/Bedtools/GetFasta.py" />
         <option value="$PROJECT_DIR$/Tools/Bedtools/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/get_flanking_regions.py" />
@@ -185,7 +199,6 @@
         <option value="$PROJECT_DIR$/Parser/CCF.py" />
         <option value="$PROJECT_DIR$/examples/desaminases/power_heatmap.py" />
         <option value="$PROJECT_DIR$/examples/desaminases/strandness_histogramms.py" />
-        <option value="$PROJECT_DIR$/examples/desaminases/homogenity_size_heatmap.py" />
         <option value="$PROJECT_DIR$/examples/desaminases/power_size_plot.py" />
         <option value="$PROJECT_DIR$/examples/desaminases/histogramms.py" />
         <option value="$PROJECT_DIR$/Routines/Sequence.py" />
@@ -195,20 +208,25 @@
         <option value="$PROJECT_DIR$/scripts/gff_examine.py" />
         <option value="$PROJECT_DIR$/Collections/GeneralCollections.py" />
         <option value="$PROJECT_DIR$/examples/desaminases/hist_3d_power_size.py" />
-        <option value="$PROJECT_DIR$/examples/desaminases/rainfall.py" />
         <option value="$PROJECT_DIR$/examples/desaminases/clustering_final.py" />
         <option value="$PROJECT_DIR$/examples/desaminases/filter_clusters_by_size_and_power.py" />
-        <option value="$PROJECT_DIR$/examples/desaminases/heatmap_article.py" />
         <option value="$PROJECT_DIR$/scripts/CDS_region_variants.py" />
         <option value="$PROJECT_DIR$/examples/desaminases/CDS_region_vars.py" />
         <option value="$PROJECT_DIR$/examples/desaminases/homogeneity_article.py" />
-        <option value="$PROJECT_DIR$/examples/desaminases/variant_location_pies.py" />
         <option value="$PROJECT_DIR$/Parser/Abstract.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/get_variants_near_TSS.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/homogeneity_article_pre_UTR.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/TSS_UTR_CDS_histogram.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/rainfall_one_chromosome.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/get_variants_in_UTR.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/homogeneity_article_5_UTR.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/rainfall.py" />
         <option value="$PROJECT_DIR$/Parser/VCF.py" />
         <option value="$PROJECT_DIR$/examples/desaminases/CDS_region_vars_2.py" />
-        <option value="$PROJECT_DIR$/examples/desaminases/get_variants_near_TSS.py" />
-        <option value="$PROJECT_DIR$/examples/desaminases/TSS_UTR_CDS_histogram.py" />
-        <option value="$PROJECT_DIR$/examples/desaminases/homogeneity_article_pre_UTR.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/homogenity_size_heatmap.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/heatmap_article.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/homogeneity_article_all.py" />
+        <option value="$PROJECT_DIR$/examples/desaminases/variant_location_pies.py" />
       </list>
     </option>
   </component>
@@ -243,7 +261,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -259,20 +276,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -318,7 +321,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Pictures" />
+              <option name="myItemId" value="Tools" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -332,7 +335,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Parser" />
+              <option name="myItemId" value="Tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GATK" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Pictures" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -380,6 +401,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -428,7 +450,45 @@
       <recent name="$PROJECT_DIR$/Tools" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.homogeneity_article_pre_UTR">
+  <component name="RunManager" selected="Python.variant_location_pies">
+    <configuration default="false" name="homogeneity_article_all" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python2" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples/desaminases" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MAVR" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/desaminases/homogeneity_article_all.py" />
+      <option name="PARAMETERS" value="" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="rainfall" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples/desaminases" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MAVR" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/desaminases/rainfall.py" />
+      <option name="PARAMETERS" value="" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
     <configuration default="false" name="CDS_region_vars_2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -448,6 +508,25 @@
       <ConfigurationWrapper RunnerId="PythonRunner" />
       <method />
     </configuration>
+    <configuration default="false" name="heatmap_article" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python2" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples/desaminases" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MAVR" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/desaminases/heatmap_article.py" />
+      <option name="PARAMETERS" value="" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
     <configuration default="false" name="variant_location_pies" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -462,63 +541,6 @@
       <module name="MAVR" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/desaminases/variant_location_pies.py" />
-      <option name="PARAMETERS" value="" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="TSS_UTR_CDS_histogram" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="/usr/bin/python" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples/desaminases" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="MAVR" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/desaminases/TSS_UTR_CDS_histogram.py" />
-      <option name="PARAMETERS" value="" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="get_variants_near_TSS" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="/usr/bin/python" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples/desaminases" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="MAVR" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/desaminases/get_variants_near_TSS.py" />
-      <option name="PARAMETERS" value="" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="homogeneity_article_pre_UTR" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="/usr/bin/python2" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples/desaminases" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="MAVR" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/desaminases/homogeneity_article_pre_UTR.py" />
       <option name="PARAMETERS" value="" />
       <RunnerSettings RunnerId="PythonRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
@@ -577,7 +599,7 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="/usr/bin/python2" />
+      <option name="SDK_HOME" value="/usr/bin/python" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -674,19 +696,19 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Python.ParseGVF" />
-      <item index="1" class="java.lang.String" itemvalue="Python.CDS_region_vars_2" />
-      <item index="2" class="java.lang.String" itemvalue="Python.variant_location_pies" />
-      <item index="3" class="java.lang.String" itemvalue="Python.TSS_UTR_CDS_histogram" />
-      <item index="4" class="java.lang.String" itemvalue="Python.get_variants_near_TSS" />
-      <item index="5" class="java.lang.String" itemvalue="Python.homogeneity_article_pre_UTR" />
+      <item index="1" class="java.lang.String" itemvalue="Python.homogeneity_article_all" />
+      <item index="2" class="java.lang.String" itemvalue="Python.rainfall" />
+      <item index="3" class="java.lang.String" itemvalue="Python.CDS_region_vars_2" />
+      <item index="4" class="java.lang.String" itemvalue="Python.heatmap_article" />
+      <item index="5" class="java.lang.String" itemvalue="Python.variant_location_pies" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.homogeneity_article_pre_UTR" />
-        <item index="1" class="java.lang.String" itemvalue="Python.get_variants_near_TSS" />
-        <item index="2" class="java.lang.String" itemvalue="Python.CDS_region_vars_2" />
-        <item index="3" class="java.lang.String" itemvalue="Python.TSS_UTR_CDS_histogram" />
-        <item index="4" class="java.lang.String" itemvalue="Python.variant_location_pies" />
+        <item index="0" class="java.lang.String" itemvalue="Python.variant_location_pies" />
+        <item index="1" class="java.lang.String" itemvalue="Python.homogeneity_article_all" />
+        <item index="2" class="java.lang.String" itemvalue="Python.heatmap_article" />
+        <item index="3" class="java.lang.String" itemvalue="Python.CDS_region_vars_2" />
+        <item index="4" class="java.lang.String" itemvalue="Python.rainfall" />
       </list>
     </recent_temporary>
   </component>
@@ -760,7 +782,11 @@
       <created>1414703133902</created>
       <updated>1414703133903</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="A lot of changes">
+      <created>1417134421236</created>
+      <updated>1417134421236</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -791,21 +817,21 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.088495575" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973261" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17290458" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17290458" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39539978" sideWeight="0.6719326" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2595838" sideWeight="0.10005266" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25301206" sideWeight="0.89994735" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25082147" sideWeight="0.89994735" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.49920928" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.49920928" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39978093" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2489339" sideWeight="0.6706783" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39978093" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -870,48 +896,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Parser/GFF.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1098">
-          <caret line="14" column="14" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/RepeatSearchTools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="835" max-vertical-offset="2214">
-          <caret line="44" column="79" selection-start-line="44" selection-start-column="79" selection-end-line="44" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Pipelines/SNPCall.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="7974" max-vertical-offset="9954">
-          <caret line="169" column="3" selection-start-line="169" selection-start-column="3" selection-end-line="169" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Pictures/Draw.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180">
-          <caret line="4" column="26" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Pictures/Styles/Features.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="43" max-vertical-offset="738">
-          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.66346157" vertical-offset="0" max-vertical-offset="624">
-          <caret line="24" column="46" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Alignment/TMAP.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="3618">
@@ -930,13 +914,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="20" max-vertical-offset="954">
           <caret line="13" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="15" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/filter_expression_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="64" max-vertical-offset="1008">
-          <caret line="37" column="55" selection-start-line="37" selection-start-column="55" selection-end-line="37" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -979,13 +956,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="4224" max-vertical-offset="16290">
           <caret line="256" column="0" selection-start-line="256" selection-start-column="0" selection-end-line="256" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/SNP_call/example_SNP_call.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2574">
-          <caret line="117" column="52" selection-start-line="117" selection-start-column="52" selection-end-line="117" selection-end-column="52" />
         </state>
       </provider>
     </entry>
@@ -1067,13 +1037,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/homogenity_size_heatmap.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="1404">
-          <caret line="28" column="43" selection-start-line="28" selection-start-column="43" selection-end-line="28" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Parser/CCF.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="9018" max-vertical-offset="12258">
@@ -1096,31 +1059,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/rainfall.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="16" max-vertical-offset="882">
-          <caret line="33" column="47" selection-start-line="33" selection-start-column="47" selection-end-line="33" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/examples/desaminases/mut_strandness.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="2124">
           <caret line="39" column="29" selection-start-line="20" selection-start-column="4" selection-end-line="44" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/mut_locations.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1116">
-          <caret line="44" column="77" selection-start-line="54" selection-start-column="0" selection-end-line="58" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/clustering_combined.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3618">
-          <caret line="3" column="2" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -1138,31 +1080,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/heatmap_article.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1078" max-vertical-offset="2754">
-          <caret line="95" column="51" selection-start-line="95" selection-start-column="38" selection-end-line="95" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parser/VCF.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1944" max-vertical-offset="3636">
-          <caret line="874" column="24" selection-start-line="874" selection-start-column="24" selection-end-line="874" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/examples/desaminases/clustering.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1602">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/variant_location_pies.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1492" max-vertical-offset="3042">
-          <caret line="98" column="49" selection-start-line="98" selection-start-column="44" selection-end-line="98" selection-end-column="75" />
         </state>
       </provider>
     </entry>
@@ -1173,34 +1094,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/CDS_region_vars_2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.101580136" vertical-offset="378" max-vertical-offset="1548">
-          <caret line="24" column="23" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/examples/desaminases/strandness_histogramms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="1782">
           <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/homogeneity_article.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4734">
-          <caret line="34" column="30" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/clustering_final.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1746" max-vertical-offset="3312">
-          <caret line="97" column="25" selection-start-line="97" selection-start-column="21" selection-end-line="97" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1215,22 +1112,155 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="3240">
           <caret line="37" column="25" selection-start-line="37" selection-start-column="24" selection-end-line="38" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/TSS_UTR_CDS_histogram.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3312">
-          <caret line="114" column="15" selection-start-line="114" selection-start-column="15" selection-end-line="114" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/desaminases/homogeneity_article_pre_UTR.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.972973" vertical-offset="0" max-vertical-offset="972">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="972">
           <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/homogeneity_article_5_UTR.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1350">
+          <caret line="12" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/get_variants_in_UTR.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="792">
+          <caret line="16" column="126" selection-start-line="16" selection-start-column="126" selection-end-line="16" selection-end-column="126" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/rainfall_one_chromosome.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2012" max-vertical-offset="4158">
+          <caret line="159" column="85" selection-start-line="159" selection-start-column="85" selection-end-line="159" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/homogeneity_article.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4734">
+          <caret line="34" column="30" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/clustering_combined.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="432" max-vertical-offset="3510">
+          <caret line="72" column="71" selection-start-line="72" selection-start-column="68" selection-end-line="73" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/rainfall.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="49" max-vertical-offset="936">
+          <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/TSS_UTR_CDS_histogram.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1530" max-vertical-offset="3384">
+          <caret line="116" column="29" selection-start-line="116" selection-start-column="29" selection-end-line="116" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Parser/VCF.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="8550" max-vertical-offset="18036">
+          <caret line="475" column="44" selection-start-line="475" selection-start-column="44" selection-end-line="475" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/CDS_region_vars_2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="1710">
+          <caret line="37" column="37" selection-start-line="37" selection-start-column="37" selection-end-line="37" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/GATK/UnifiedGenotyper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="738">
+          <caret line="34" column="171" selection-start-line="34" selection-start-column="171" selection-end-line="34" selection-end-column="171" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pipelines/SNPCall.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="8939" max-vertical-offset="9954">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/SNP_call/example_SNP_call.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1600" max-vertical-offset="2574">
+          <caret line="124" column="0" selection-start-line="124" selection-start-column="0" selection-end-line="136" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/homogenity_size_heatmap.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="1422">
+          <caret line="76" column="42" selection-start-line="76" selection-start-column="42" selection-end-line="76" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/heatmap_article.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1906" max-vertical-offset="2772">
+          <caret line="147" column="0" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/homogeneity_article_all.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1235" max-vertical-offset="1872">
+          <caret line="102" column="70" selection-start-line="102" selection-start-column="70" selection-end-line="102" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/mut_locations.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="481" max-vertical-offset="1116">
+          <caret line="44" column="77" selection-start-line="54" selection-start-column="0" selection-end-line="58" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/filter_expression_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="36" max-vertical-offset="1008">
+          <caret line="37" column="55" selection-start-line="37" selection-start-column="55" selection-end-line="37" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/clustering_final.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3168">
+          <caret line="97" column="25" selection-start-line="97" selection-start-column="21" selection-end-line="97" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/variant_location_pies.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.81639725" vertical-offset="2029" max-vertical-offset="2916">
+          <caret line="159" column="9" selection-start-line="159" selection-start-column="4" selection-end-line="159" selection-end-column="51" />
           <folding />
         </state>
       </provider>

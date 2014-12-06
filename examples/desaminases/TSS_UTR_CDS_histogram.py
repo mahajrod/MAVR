@@ -113,6 +113,7 @@ if __name__ == "__main__":
     normed = True
     max_start = 0
     max_end = 0
+    skip_nonintergenic_variants = True
     for sample_set in sample_set_names_list:
         vcf_file = "%s_good.vcf" % sample_set
         #start_hist_prefix = "%s_start_hist_r_%i_l_%i" % (sample_set, right, left)
@@ -120,7 +121,8 @@ if __name__ == "__main__":
         #gene_variants = "%s_gene_variants_r_%i_l_%i.t" % (sample_set, right, left)
         variants = CollectionVCF(from_file=True, vcf_file=vcf_file)
         pre_UTR_positions[sample_set], UTR_positions[sample_set], CDS_positions[sample_set] = \
-            variants_start_end(variants, left, right, record_dict, min_five_utr_len=10)
+            variants_start_end(variants, left, right, record_dict, min_five_utr_len=10,
+                               skip_nonintergenic_variants=skip_nonintergenic_variants)
         length_dict[sample_set] = len(variants)
         #print(start_dict[sample_set])
         pre_UTR_hist_dict[sample_set] = list(np.histogram(pre_UTR_positions[sample_set], bins=pre_UTR_bins))
@@ -183,5 +185,7 @@ if __name__ == "__main__":
         plt.title(sample_set + " CDS")
         index += 1
 
-    plt.savefig("TSS_UTR_CDS_start_all_r_%i_l_%i_bin_width_%i.svg" % (right, left, bin_width))
+    suffix = "pre_five_UTR_only_intergenic" if skip_nonintergenic_variants else "all"
+    plt.savefig("TSS_UTR_CDS_start_all_r_%i_l_%i_bin_width_%i_%s.svg" % (right, left, bin_width, suffix))
+    plt.savefig("TSS_UTR_CDS_start_all_r_%i_l_%i_bin_width_%i_%s.eps" % (right, left, bin_width, suffix))
     plt.close()

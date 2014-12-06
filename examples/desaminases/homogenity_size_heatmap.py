@@ -74,4 +74,5 @@ if __name__ == "__main__":
 
     plt.savefig("Homogewneity_size_3x4.svg")
     plt.savefig("Homogewneity_size_3x4.eps")
+    plt.savefig("Homogewneity_size_3x4.pdf")
     plt.close()

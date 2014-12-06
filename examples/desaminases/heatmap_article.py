@@ -148,6 +148,7 @@ if __name__ == "__main__":
 
             plt.savefig("heatmap_%s+_power_%s+.svg" % (size, power))
             plt.savefig("heatmap_%s+_power_%s+.eps" % (size, power))
+            plt.savefig("heatmap_%s+_power_%s+.pdf" % (size, power))
             plt.close()
 
 

@@ -20,11 +20,11 @@ if __name__ == "__main__":
                              "PmCDA1_6d",
                              "HAP_sub1",
                              "PmCDA1_sub1_6d",
-                             #"A1_3d",
-                             #"A1_6d",
-                             #"A3G_3d",
-                             #"AID_3d",
-                             #"AID_6d"
+                             "A1_3d",
+                             "A1_6d",
+                             "A3G_3d",
+                             "AID_3d",
+                             "AID_6d"
                              ]
 
     annotations = "/home/mahajrod/genetics/desaminases/data/LAN210_v0.10m/annotations/merged_annotations_Nagalakshmi_tranf_to_LAN210_v0.10m.gff3"
@@ -43,7 +43,7 @@ if __name__ == "__main__":
     skip_genes_without_five_utr = False
     left = 300
     right = 300
-    bin_width = 5
+    bin_width = 10
     bins = np.linspace(-left, right, ((left+right)/bin_width) + 1)
     normed = True
     max_start = 0
@@ -85,5 +85,6 @@ if __name__ == "__main__":
         plt.title(sample_set)
         index += 1
     skip = "_skipped_non_five_utr_genes" if skip_genes_without_five_utr else ""
-    plt.savefig("CDS_start_all_r_%i_l_%i_bin_width_%i%s.svg" % (right, left, bin_width, skip))
+    plt.savefig("all_DA_CDS_start_all_r_%i_l_%i_bin_width_%i%s.svg" % (right, left, bin_width, skip))
+    plt.savefig("all_DA_CDS_start_all_r_%i_l_%i_bin_width_%i%s.eps" % (right, left, bin_width, skip))
     plt.close()
