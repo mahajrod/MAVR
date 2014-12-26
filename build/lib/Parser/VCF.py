@@ -730,6 +730,7 @@ class CollectionVCF(Collection):
             n_clusters_list = []
             n_nonsingleton_clusters = []
             n_multiclusters = []
+            n_five_plus_clusters = []
             coef_threshold_list = np.linspace(*thresholds)  # best variant 0.5, 1.5, 21
             for i in coef_threshold_list:
                 clusters = fcluster(linkage_dict[region], i, criterion=extracting_method)
@@ -741,13 +742,17 @@ class CollectionVCF(Collection):
                 #j = 0
                 nonsingleton = 0
                 multicluster = 0  # 3+
+                five_plus_clusters = 0 # 5+
                 for k in counted:
                     if k > 1:
                         nonsingleton += 1
                     if k > 2:
                         multicluster += 1
+                    if k > 4:
+                        five_plus_clusters += 1
                 n_nonsingleton_clusters.append(nonsingleton)
                 n_multiclusters.append(multicluster)
+                n_five_plus_clusters.append(five_plus_clusters)
             sub_plot_dict[region] = plt.subplot(side, side, index, axisbg="#D6D6D6")
             #ax = plt.gca()
             #ax.set_xticks(np.arange(0.5, 2.2, 0.1))
@@ -756,6 +761,7 @@ class CollectionVCF(Collection):
             plt.plot(coef_threshold_list, n_clusters_list, label="all")
             plt.plot(coef_threshold_list, n_nonsingleton_clusters, "green", label="2+")
             plt.plot(coef_threshold_list, n_multiclusters, "red", label="3+")
+            plt.plot(coef_threshold_list, n_five_plus_clusters, "black", label="5+")
             plt.title("Region %s" % region)
             plt.legend(loc='upper right')
             plt.ylabel("Number of clusters")

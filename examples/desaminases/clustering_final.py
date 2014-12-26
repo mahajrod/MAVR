@@ -65,7 +65,7 @@ if __name__ == "__main__":
         os.chdir(workdir)
         os.system("mkdir -p %s" % sample_set_name)
         os.chdir(sample_set_name)
-        os.system("mkdir -p %s %s" % (clustering_dir, rainfall_dir))
+        os.system("mkdir -p %s" % clustering_dir)
         #os.system("pwd")
         mutations = CollectionVCF(vcf_file="../SNP_annotated_raw_vcf/%s_SNP.vcf" % sample_set_name,
                                   from_file=True)
@@ -93,8 +93,9 @@ if __name__ == "__main__":
         clusters.statistics(filename="%s/%s_cluster_size_distribution.svg" % (clustering_dir, sample_set_name_adjusted))
 
         clusters.check_location(bad_regions)
-        clusters.check_flags(["DA"], mismatch_list=[1], expression_list=["record.count_samples() <= 1"],
-                             remove_mismatch_list=[True])
+        if "HAP" not in sample_set_name:
+            clusters.check_flags(["DA"], mismatch_list=[1], expression_list=["record.count_samples() <= 1"],
+                                 remove_mismatch_list=[True])
         clusters.get_location(annotations_dict, use_synonym=True, synonym_dict=annotation_synonym_dict)
         clusters.write("%s/%s.ccf" % (clustering_dir, sample_set_name_adjusted))
 
@@ -176,4 +177,4 @@ if __name__ == "__main__":
             #filtered_out.heatmap_statistics(filename="%s/%s_3+_power_0.05+_less_0.1_heatmap_statistics.svg" % (clustering_dir, sample_set_name_adjusted),
             #                                         additional_data=("Median", "Mean", "Power"))
 
-    statistics_dict.write(out_filename=workdir + "mutation_count_statistics.t")
+    #statistics_dict.write(out_filename=workdir + "mutation_count_statistics.t")

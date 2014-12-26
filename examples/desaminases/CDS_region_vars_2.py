@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
     os.chdir(workdir)
 
-    skip_genes_without_five_utr = False
+    skip_genes_without_five_utr = True
     left = 300
     right = 300
     bin_width = 10

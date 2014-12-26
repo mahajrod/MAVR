@@ -521,7 +521,7 @@ class CollectionCCF(Collection):
         for record in self:
             if record.size == 1:
                 continue
-            data.append([record.len, record.size] + [record.description[add_data] for add_data in additional_data])
+            data.append([record.len, record.size] + ([record.description[add_data] for add_data in additional_data] if additional_data else []))
         return np.array(data)
 
     def heatmap_statistics(self, filename="heatmap_statistics.svg", suptitle="Heatmap_statistics",

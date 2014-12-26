@@ -8,17 +8,17 @@ from BCBio import GFF
 
 workdir = "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/combined_vcf/filtered/"
 
-sample_set_names_list   =   ["PmCDA1_3d",
+sample_set_names_list   =   [#"PmCDA1_3d",
                              "HAP",
-                             "PmCDA1_sub1_3d",
-                             "PmCDA1_6d",
+                             #"PmCDA1_sub1_3d",
+                             #"PmCDA1_6d",
                              "HAP_sub1",
-                             "PmCDA1_sub1_6d",
-                             "A1_3d",
-                             "A1_6d",
-                             "A3G_3d",
-                             "AID_3d",
-                             "AID_6d"
+                             #"PmCDA1_sub1_6d",
+                             #"A1_3d",
+                             #"A1_6d",
+                             #"A3G_3d",
+                             #"AID_3d",
+                             #"AID_6d"
                              ]
 sample_suffix = "_adjusted_cluster_mutations.vcf"
 rainfall_subdir = "rainfall_plot/"
