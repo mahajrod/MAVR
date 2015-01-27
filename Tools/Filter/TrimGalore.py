@@ -31,7 +31,7 @@ class TrimGalore(Tool):
         options += " --length %i" % min_length
         options += " --%s" % quality_score
         options += " --%s" % quality_score
-        options += "" if compess else "--dont_gzip"
+        options += "" if compess else " --dont_gzip"
         options += " -q %i" % quality_treshold
         options += " -o %s" % output_folder
 

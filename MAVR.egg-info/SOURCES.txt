@@ -14,7 +14,6 @@ MAVR.egg-info/PKG-INFO
 MAVR.egg-info/SOURCES.txt
 MAVR.egg-info/dependency_links.txt
 MAVR.egg-info/top_level.txt
-MutAnalysis/__init__.py
 Parser/Abstract.py
 Parser/CCF.py
 Parser/Cufflinks.py
@@ -38,6 +37,7 @@ Pipelines/SNPCall.py
 Pipelines/__init__.py
 Routines/Functions.py
 Routines/Sequence.py
+Routines/Tree.py
 Routines/__init__.py
 SeqAnalysis/SeqAnalysis.py
 SeqAnalysis/__init__.py
@@ -61,6 +61,7 @@ Tools/Bedtools/Flank.py
 Tools/Bedtools/GetFasta.py
 Tools/Bedtools/Intersect.py
 Tools/Bedtools/__init__.py
+Tools/Filter/Adapters.py
 Tools/Filter/TrimGalore.py
 Tools/Filter/__init__.py
 Tools/GATK/Abstract.py
