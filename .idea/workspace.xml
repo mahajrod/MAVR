@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0137b4ba-9cb9-4454-8e03-43ff7c136081" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" afterPath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/MAVR-1.0-py3.4.egg" afterPath="$PROJECT_DIR$/dist/MAVR-1.0-py3.4.egg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/SOURCES.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/SOURCES.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Filter/TrimGalore.py" afterPath="$PROJECT_DIR$/Tools/Filter/TrimGalore.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -105,8 +100,8 @@
       <file leaf-file-name="TrimGalore.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Tools/Filter/TrimGalore.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6875" vertical-offset="0" max-vertical-offset="882">
-              <caret line="33" column="40" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.7291667" vertical-offset="0" max-vertical-offset="882">
+              <caret line="35" column="43" selection-start-line="35" selection-start-column="43" selection-end-line="35" selection-end-column="43" />
               <folding>
                 <element signature="e#24#33#0" expanded="true" />
               </folding>
@@ -713,7 +708,11 @@
       <created>1422400865063</created>
       <updated>1422400865063</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="A lot of changes">
+      <created>1422402094352</created>
+      <updated>1422402094352</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1187,8 +1186,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Filter/TrimGalore.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6875" vertical-offset="0" max-vertical-offset="882">
-          <caret line="33" column="40" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.7291667" vertical-offset="0" max-vertical-offset="882">
+          <caret line="35" column="43" selection-start-line="35" selection-start-column="43" selection-end-line="35" selection-end-column="43" />
           <folding>
             <element signature="e#24#33#0" expanded="true" />
           </folding>
