@@ -1,4 +1,5 @@
 __author__ = 'mahajrod'
+import os
 
 from Tools.Abstract import Tool
 
@@ -39,5 +40,5 @@ class TrimGalore(Tool):
 
         options += " %s" % forward_reads
         options += " %s" % reverse_reads if reverse_reads else ""
-
+        os.system("mkdir -p %s" % output_folder)
         self.execute(options)
