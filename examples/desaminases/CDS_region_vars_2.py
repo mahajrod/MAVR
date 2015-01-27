@@ -40,10 +40,10 @@ if __name__ == "__main__":
 
     os.chdir(workdir)
 
-    skip_genes_without_five_utr = True
+    skip_genes_without_five_utr = False
     left = 300
     right = 300
-    bin_width = 10
+    bin_width = 5
     bins = np.linspace(-left, right, ((left+right)/bin_width) + 1)
     normed = True
     max_start = 0
@@ -72,12 +72,14 @@ if __name__ == "__main__":
         max_start = max(max_start, np.amax(start_hist_dict[sample_set][0]))
     plt.figure(1, dpi=300, figsize=(16, 8*len(sample_set_names_list)))
 
+
     index = 1
     for sample_set in sample_set_names_list:
         plt.subplot(len(sample_set_names_list), 1, index)
         plt.bar(start_hist_dict[sample_set][1][:-1], start_hist_dict[sample_set][0], width=bin_width)
         plt.xlim(xmin=-left, xmax=right)
-        plt.ylim(ymax=max_start)
+        #plt.ylim(ymax=max_start)
+        plt.ylim(ymax=0.02)
         plt.axhline(0.02, color='y')
         plt.axhline(0.01, color='k')
         plt.axhline(0.005, color='r')

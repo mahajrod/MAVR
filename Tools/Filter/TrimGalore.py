@@ -14,14 +14,18 @@ class TrimGalore(Tool):
                reverse_trim=None,
                quality_score="phred33",
                adapter="AGATCGGAAGAGC",
+               adapter2=None,
                quality_treshold=20,
                output_folder="trimmed",
+               stringency=None,
                compess=False):
         #TODO: check and add rest of options
 
         options = ""
         options += " --paired" if reverse_reads else ""
         options += " -a %s" % adapter
+        options += " -a2 %s" % adapter2 if adapter2 is not None else ""
+        options += " -s %i" % stringency if stringency is not None else ""
         options += " --%s" % quality_score
         options += " --length %i" % min_length
         options += " --%s" % quality_score

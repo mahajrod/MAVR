@@ -8,12 +8,15 @@ from copy import deepcopy
 
 import numpy as np
 
+from Bio import SeqIO
+from BCBio import GFF
+
 from Parser.VCF import CollectionVCF
 from Parser.Cufflinks import CollectionFPKMTracking
 from Parser.GFF import CollectionGFF
 
 
-def prepare_data(mutations, prefix, expression_data_dir):
+def prepare_data(mutations, prefix, expression_data_dir, sequence_dict, annotation_dict):
     count_dict = OrderedDict({})
     for record in mutations:
         mutation_strand = mutation_strand_dict[record.ref]
@@ -27,6 +30,8 @@ def prepare_data(mutations, prefix, expression_data_dir):
                     count_dict[gene_name][values_names[mut_gene_strand]] += 1
         except KeyError:
             print(record)
+
+
 
     print("Totaly %s genes with mutations" % len(count_dict))
     os.system("mkdir -p %s" % expression_cor_dir)
@@ -57,7 +62,7 @@ def prepare_data(mutations, prefix, expression_data_dir):
             out_fd.write("gene\tLen\tP\tN\tExp\n")
             for gene_name in temp_dict:
                 out_fd.write("%s\t%s\n" % (gene_name, "\t".join([str(x) for x in temp_dict[gene_name]])))
-    
+
 
 if __name__ == "__main__":
     workdir = "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/combined_vcf/"
@@ -97,6 +102,17 @@ if __name__ == "__main__":
                                    "S6_Nagal_clout/",
                                    "S6_Yassour_clout/"]
     expression_cor_dir = "stranded_expression_correlation/"
+
+
+    annotations_file = "/home/mahajrod/genetics/desaminases/data/LAN210_v0.10m/annotations/merged_annotations_Nagalakshmi_tranf_to_LAN210_v0.10m.gff3"
+    sequence_file = "/home/mahajrod/genetics/desaminases/data/LAN210_v0.10m/LAN210_v0.10m.fasta"
+    workdir = "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/combined_vcf"
+    sequence_dict = SeqIO.to_dict(SeqIO.parse(sequence_file, "fasta"))
+    #print(sequence_dict)
+
+    with open(annotations_file, "r") as in_fd:
+        annotation_dict = dict([(record.id, record) for record in GFF.parse(in_fd)])
+
 
 
     mutation_strand_dict = {"C": "P", "G": "M"}
