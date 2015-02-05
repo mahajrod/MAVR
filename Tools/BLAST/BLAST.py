@@ -1,19 +1,7 @@
+#!/usr/bin/env python
 __author__ = 'mahajrod'
-import os
+
 from Tools.Abstract import Tool
-
-
-class BLAST_plus():
-
-    def make_blast_plus_db(self, input_file, mask_output_file, db_name):
-        #makes BLAST database from fasta file
-        os.system("dustmasker -in %s -infmt fasta -parse_seqids -outfmt maskinfo_asn1_bin -out %s"
-                  % (input_file, mask_output_file))
-        #creating database
-        os.system("makeblastdb -in %s -input_type fasta -dbtype nucl -parse_seqids -mask_data %s -out %s -title '%s'"
-                  % (input_file, mask_output_file, db_name, db_name))
-        #cheking dqatabase
-        os.system("blastdbcmd -db %s -info" % db_name)
 
 
 class BLAST(Tool):
@@ -77,12 +65,8 @@ class BLAST(Tool):
 
 
 if __name__ == "__main__":
+    pass
 
-    blast_plus = BLAST_plus()
-    workdir = "/home/mahajrod/genetics/nxf/annotation/test/Dmel/nxf1/"
-    os.chdir(workdir)
-    blast_plus.make_blast_plus_db("/home/mahajrod/genetics/nxf/annotation/test/Dmel/nxf1/dmel-all-chromosome-r5.54.fasta",
-                                  "dmel_all_chromosome.asnb", "dmel_all_chromosome")
     """
     workdir = "/home/mahajrod/genetics/reference/"
     blast = BLAST()

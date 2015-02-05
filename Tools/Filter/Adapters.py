@@ -7,5 +7,6 @@ Format of adapters_PE:
 
 adapters_PE = {"ScriptSeq_v2": ["AGATCGGAAGAG",
                                 "AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC",
-                                "AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTA"]
-            }
+                                "AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTA"],
+               "TrueSeq": ["AGATCGGAAGAGC"]
+               }

@@ -43,8 +43,6 @@ SeqAnalysis/SeqAnalysis.py
 SeqAnalysis/__init__.py
 Tools/Abstract.py
 Tools/AssemblyTools.py
-Tools/BLAST.py
-Tools/FilterTools.py
 Tools/Picard.py
 Tools/RepeatSearchTools.py
 Tools/TVC.py
@@ -57,6 +55,9 @@ Tools/Alignment/__init__.py
 Tools/Annotation/GlimerHMM.py
 Tools/Annotation/SNPeff.py
 Tools/Annotation/__init__.py
+Tools/BLAST/BLAST.py
+Tools/BLAST/BLASTPlus.py
+Tools/BLAST/__init__.py
 Tools/Bedtools/Flank.py
 Tools/Bedtools/GetFasta.py
 Tools/Bedtools/Intersect.py
