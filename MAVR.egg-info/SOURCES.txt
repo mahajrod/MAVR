@@ -6,7 +6,6 @@ Converters/Converters.py
 Converters/__init__.py
 Download/NCBI.py
 Download/__init__.py
-GUI/__init__.py
 General/__init__.py
 Graphics/Plots.py
 Graphics/__init__.py
@@ -15,6 +14,7 @@ MAVR.egg-info/SOURCES.txt
 MAVR.egg-info/dependency_links.txt
 MAVR.egg-info/top_level.txt
 Parser/Abstract.py
+Parser/CAFE.py
 Parser/CCF.py
 Parser/Cufflinks.py
 Parser/FastQC.py
