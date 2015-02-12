@@ -129,7 +129,7 @@ def find_homopolymer_end(seq, nucleotide, seq_length, start, search_type="perfec
 
 def find_homopolymers(seq, nucleotide, min_size=5, search_type="perfect",
                       max_single_insert_size=1, max_total_insert_length=None, max_number_of_insertions=2):
-    #searh types:
+    # search types:
     #   perfect - search only for perfect homopolymers, all options other than min_size are ignored
     #   non_perfect - search for non_perfect homopolymers with max_single_insert_size, max_total_insert_length
     #                 and max_number_of_insertions
@@ -142,10 +142,10 @@ def find_homopolymers(seq, nucleotide, min_size=5, search_type="perfect",
     while i < seq_length:
         if seq[i] == nucleotide:
             end, new_start = find_homopolymer_end(seq, nucleotide, seq_length, i, search_type=search_type,
-                                                       max_single_insert_size=max_single_insert_size,
-                                                       max_total_insert_length=max_total_insert_length,
-                                                       max_number_of_insertions=max_number_of_insertions)
-            #print(end, i)
+                                                  max_single_insert_size=max_single_insert_size,
+                                                  max_total_insert_length=max_total_insert_length,
+                                                  max_number_of_insertions=max_number_of_insertions)
+            # print(end, i)
             length = end - i
             if homopolymers_coords:
                 prev_end = homopolymers_coords[-1][1]
@@ -163,8 +163,7 @@ def find_homopolymers(seq, nucleotide, min_size=5, search_type="perfect",
     homopolymers_lengthes = np.array(homopolymers_lengthes)
     return homopolymers_coords, homopolymers_lengthes
 
-
-#--------------------Generators----------------------
+# --------------------Generators----------------------
 
 
 def rev_com_generator(record_dict):
