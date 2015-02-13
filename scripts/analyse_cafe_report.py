@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 from numpy import linspace
 
 from collections import OrderedDict
-from Collections.GeneralCollections import TwoLvlDict
-from Parser.CAFE import ReportCAFE
+from CustomCollections.GeneralCollections import TwoLvlDict
+from Parsers.CAFE import ReportCAFE
 
 
 parser = argparse.ArgumentParser()

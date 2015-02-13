@@ -10,9 +10,9 @@ import os
 from collections import OrderedDict
 import numpy as np
 
-from Parser.VCF import ReferenceGenome, CollectionVCF, ref_alt_variants
+from Parsers.VCF import ReferenceGenome, CollectionVCF, ref_alt_variants
 
-from Parser.GFF import CollectionGFF
+from Parsers.GFF import CollectionGFF
 from BCBio import GFF
 
 def connect_bbox(bbox1, bbox2,

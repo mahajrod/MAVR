@@ -1,6 +1,6 @@
 __author__ = 'mahajrod'
 import os
-from Parser.VCF import CollectionVCF
+from Parsers.VCF import CollectionVCF
 
 if __name__ == "__main__":
     workdir = "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/all"

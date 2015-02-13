@@ -1,7 +1,7 @@
 import os
 
 from Tools.Bedtools import  Intersect
-from  Parser.VCF import CollectionVCF, HeaderVCF, RecordVCF
+from  Parsers.VCF import CollectionVCF, HeaderVCF, RecordVCF
 
 
 

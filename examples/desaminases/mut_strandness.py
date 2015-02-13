@@ -5,7 +5,7 @@ from collections import OrderedDict
 from math import sqrt
 import matplotlib.pyplot as plt
 
-from Parser.VCF import ReferenceGenome, CollectionVCF
+from Parsers.VCF import ReferenceGenome, CollectionVCF
 
 
 def draw_bar_diagram(count_dict, out_file, figsize=(10, 10)):

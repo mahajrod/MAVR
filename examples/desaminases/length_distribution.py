@@ -2,7 +2,7 @@
 __author__ = 'mahajrod'
 
 import os
-from Parser.CCF import CollectionCCF
+from Parsers.CCF import CollectionCCF
 import matplotlib.pyplot as plt
 import numpy as np
 

@@ -10,7 +10,7 @@ import numpy as np
 
 from BCBio.GFF import GFFExaminer
 from BCBio import GFF
-from Collections.GeneralCollections import TwoLvlDict
+from CustomCollections.GeneralCollections import TwoLvlDict
 from Routines.Sequence import get_feature_lengths, get_total_feature_lengths, feature_lengths_collapse_records
 
 parser = argparse.ArgumentParser()

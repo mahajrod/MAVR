@@ -5,7 +5,7 @@ from collections import OrderedDict
 
 import numpy as np
 
-from Collections.GeneralCollections import TwoLvlDict
+from CustomCollections.GeneralCollections import TwoLvlDict
 from Routines.Functions import output_dict
 
 

@@ -2,7 +2,7 @@
 from Pipelines.SNPCall import *
 from Tools.Picard import *
 from Tools.GATK import UnifiedGenotyper, SelectVariants, VariantFiltration, CombineVariants
-from Parser.VCF import CollectionVCF
+from Parsers.VCF import CollectionVCF
 from Routines.Functions import check_path
 #in case reads are already trimmed and corrected
 

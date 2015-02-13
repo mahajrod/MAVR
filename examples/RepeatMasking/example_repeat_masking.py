@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 from Tools.RepeatSearchTools import RepeatModeler_search, RepeatMasker_search, TRF_search, extract_repbase
-from Parser.TRF import CollectionTRF
+from Parsers.TRF import CollectionTRF
 
 #reference_name = "LAN210_v0.7m"
 #reference_name = "Alsu24m_no_ambigious"

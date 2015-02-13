@@ -1,6 +1,6 @@
 __author__ = 'mahajrod'
 import os
-from Parser.VCF import CollectionVCF
+from Parsers.VCF import CollectionVCF
 
 if __name__ == "__main__":
     """

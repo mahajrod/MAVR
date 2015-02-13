@@ -3,7 +3,7 @@ __author__ = 'Sergei F. Kliver'
 
 import argparse
 
-from ete2 import Tree
+from ete2 import Tree, TreeStyle
 
 
 parser = argparse.ArgumentParser()
@@ -26,7 +26,7 @@ parser.add_argument("-f", "--input_tree_format", action="store", dest="input_tre
 9 	leaf names
 100 	topology only""")
 
-parser.add_argument("-w", "--width", action="store", dest="width",
+parser.add_argument("-w", "--width", action="store", dest="width", type=int,
                     help="Tree image width")
 
 parser.add_argument("-u", "--width_units", action="store", dest="width_units", default="mm",
@@ -36,14 +36,17 @@ parser.add_argument("-m", "--draw_mode", action="store", dest="draw_mode", defau
 
 args = parser.parse_args()
 
+
+#ts.show_branch_support = True
 tree_index = 1
 with open(args.input_tree_file, "r") as in_fd:
     for line in in_fd:
         tree_line = line.strip()
         tree = Tree(tree_line, format=args.input_tree_format)
-
+        for node in tree.traverse():
+            node.img_style["size"] = 0
         if args.draw_mode == "render":
-            tree.render("%s_%i.svg" % (args.output_tree_file_prefix, tree_index), w=args.width, units=args.width_units)
+            tree.render("%s_%i.png" % (args.output_tree_file_prefix, tree_index), w=args.width, units=args.width_unitss)
         else:
             tree.show()
 

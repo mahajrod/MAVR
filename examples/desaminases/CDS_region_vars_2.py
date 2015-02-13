@@ -3,7 +3,7 @@ __author__ = 'mahajrod'
 
 import os
 from collections import OrderedDict
-from Parser.VCF import CollectionVCF
+from Parsers.VCF import CollectionVCF
 import numpy as np
 import matplotlib.pyplot as plt
 

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 import os
-from Parser.VCF import CollectionVCF, ReferenceGenome
-from Parser.GFF import CollectionGFF
+from Parsers.VCF import CollectionVCF, ReferenceGenome
+from Parsers.GFF import CollectionGFF
 from BCBio import GFF
 
 

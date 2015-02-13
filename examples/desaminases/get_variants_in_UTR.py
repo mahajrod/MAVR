@@ -2,7 +2,7 @@
 __author__ = 'mahajrod'
 
 import os
-from Parser.VCF import CollectionVCF
+from Parsers.VCF import CollectionVCF
 
 
 def variants_in_UTR(collection, feature_type="5'_UTR"):

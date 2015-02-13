@@ -3,7 +3,7 @@ __author__ = 'mahajrod'
 import argparse
 from subprocess import PIPE, Popen
 
-from Parser.FastQC import FastQCReport
+from Parsers.FastQC import FastQCReport
 from Tools.Bedtools import Intersect
 
 parser = argparse.ArgumentParser()

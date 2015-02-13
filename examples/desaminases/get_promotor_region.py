@@ -11,7 +11,7 @@ import numpy as np
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
-from Parser.VCF import CollectionVCF
+from Parsers.VCF import CollectionVCF
 
 
 def count_mutations(mutations):

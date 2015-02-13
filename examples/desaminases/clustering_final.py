@@ -4,10 +4,10 @@ from collections import OrderedDict
 
 from BCBio import GFF
 
-from Parser.VCF import ReferenceGenome, CollectionVCF, ref_alt_variants
-from Parser.CCF import CollectionCCF
-from Parser.GFF import CollectionGFF
-from Collections.GeneralCollections import TwoLvlDict
+from Parsers.VCF import ReferenceGenome, CollectionVCF, ref_alt_variants
+from Parsers.CCF import CollectionCCF
+from Parsers.GFF import CollectionGFF
+from CustomCollections.GeneralCollections import TwoLvlDict
 if __name__ == "__main__":
     workdir = "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/combined_vcf/"
 

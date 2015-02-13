@@ -4,8 +4,8 @@ __author__ = 'mahajrod'
 import os
 import numpy as np
 
-from Parser.VCF import CollectionVCF
-from Parser.CCF import CollectionCCF
+from Parsers.VCF import CollectionVCF
+from Parsers.CCF import CollectionCCF
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
 

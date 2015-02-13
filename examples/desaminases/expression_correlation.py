@@ -11,9 +11,9 @@ import numpy as np
 from Bio import SeqIO
 from BCBio import GFF
 
-from Parser.VCF import CollectionVCF
-from Parser.Cufflinks import CollectionFPKMTracking
-from Parser.GFF import CollectionGFF
+from Parsers.VCF import CollectionVCF
+from Parsers.Cufflinks import CollectionFPKMTracking
+from Parsers.GFF import CollectionGFF
 
 
 def prepare_data(mutations, prefix, expression_data_dir, sequence_dict, annotation_dict):

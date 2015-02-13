@@ -12,7 +12,7 @@ from Bio.SeqFeature import SeqFeature, FeatureLocation
 from Bio.SeqRecord import SeqRecord
 from Bio.Alphabet import IUPAC
 
-from Parser.General import parse_alignment
+from Parsers.General import parse_alignment
 
 
 def record_generator(record_dict):

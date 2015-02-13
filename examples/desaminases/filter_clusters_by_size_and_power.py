@@ -2,10 +2,10 @@
 
 import os
 
-from Parser.CCF import CollectionCCF
-from Parser.VCF import CollectionVCF
+from Parsers.CCF import CollectionCCF
+from Parsers.VCF import CollectionVCF
 
-from Collections.GeneralCollections import TwoLvlDict
+from CustomCollections.GeneralCollections import TwoLvlDict
 from collections import OrderedDict
 
 workdir = "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/combined_vcf/clusters/"

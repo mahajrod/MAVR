@@ -7,7 +7,7 @@ from BCBio.GFF import GFFExaminer
 from BCBio import GFF
 import matplotlib.pyplot as plt
 
-from Parser.VCF import CollectionVCF
+from Parsers.VCF import CollectionVCF
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-f", "--gff", action="store", dest="gff",

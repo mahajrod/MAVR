@@ -8,7 +8,7 @@ from Bio import AlignIO
 from Bio import Phylo
 from Bio.Alphabet import IUPAC, Gapped
 from BCBio import GFF
-from Parser.General import parse_metamiga_fasta
+from Parsers.General import parse_metamiga_fasta
 
 
 def fastq2fasta(input_file, output_file):

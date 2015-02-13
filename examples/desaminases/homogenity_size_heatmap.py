@@ -3,8 +3,8 @@
 import os
 import numpy as np
 from collections import OrderedDict
-from Parser.VCF import ReferenceGenome, CollectionVCF, ref_alt_variants
-from Parser.CCF import CollectionCCF
+from Parsers.VCF import ReferenceGenome, CollectionVCF, ref_alt_variants
+from Parsers.CCF import CollectionCCF
 import matplotlib.pyplot as plt
 
 
