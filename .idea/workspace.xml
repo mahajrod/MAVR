@@ -5,182 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0137b4ba-9cb9-4454-8e03-43ff7c136081" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Collections/GeneralCollections.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Collections/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Converters/Converters.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Converters/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Download/NCBI.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Download/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/GUI/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/General/Collections.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/General/CustomCollections.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/General/General.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/General/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Graphics/Plots.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Graphics/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/MutAnalysis/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Parser/Abstract.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Parser/CCF.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Parser/CustomCollections.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Parser/FastQC.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Parser/GFF.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Parser/GVF.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Parser/General.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Parser/R.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Parser/TRF.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Parser/VCF.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Parser/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Pipelines/GenePrediction.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Pipelines/GenomeAssembly.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Pipelines/Phylogeny.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Pipelines/RepeatSearch.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Pipelines/SNPCall.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Pipelines/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Routines/Functions.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Routines/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/SeqAnalysis/SeqAnalysis.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/SeqAnalysis/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/AlignmentTools.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/AssemblyTools.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/BLAST.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/Bedtools.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/Bedtools/Intersect.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/Bedtools/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/FilterTools.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/GATK/ApplyRecalibration.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/GATK/CombineVariants.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/GATK/FastaAlternateReferenceMaker.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/GATK/SelectVariants.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/GATK/UnifiedGenotyper.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/GATK/VariantFiltration.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/GATK/VariantRecalibrator.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/GATK/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/GlimerHMM.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/Picard.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/RepeatSearchTools.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/Samtools.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib.linux-x86_64-2.7/Tools/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Collections/GeneralCollections.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Collections/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Converters/Converters.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Converters/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Download/NCBI.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Download/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/GUI/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/General/Collections.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/General/CustomCollections.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/General/General.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/General/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Graphics/Plots.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Graphics/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/MutAnalysis/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Parser/Abstract.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Parser/CCF.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Parser/CustomCollections.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Parser/FastQC.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Parser/GFF.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Parser/GVF.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Parser/General.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Parser/R.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Parser/TRF.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Parser/VCF.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Parser/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Pipelines/GenePrediction.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Pipelines/GenomeAssembly.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Pipelines/Phylogeny.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Pipelines/RepeatSearch.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Pipelines/SNPCall.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Pipelines/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Routines/Functions.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Routines/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/SeqAnalysis/SeqAnalysis.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/SeqAnalysis/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Tools/AlignmentTools.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Tools/AssemblyTools.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Tools/BLAST.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Tools/Bedtools.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Tools/Bedtools/Intersect.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Tools/Bedtools/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Tools/FilterTools.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Tools/GATK/ApplyRecalibration.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Tools/GATK/CombineVariants.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Tools/GATK/FastaAlternateReferenceMaker.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Tools/GATK/SelectVariants.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Tools/GATK/UnifiedGenotyper.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Tools/GATK/VariantFiltration.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Tools/GATK/VariantRecalibrator.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Tools/GATK/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Tools/GlimerHMM.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Tools/Picard.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Tools/RepeatSearchTools.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Tools/Samtools.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Tools/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/MAVR-1.0-py3.4.egg" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Collections/GeneralCollections.py" afterPath="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Collections/__init__.py" afterPath="$PROJECT_DIR$/CustomCollections/__init__.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Parser/Abstract.py" afterPath="$PROJECT_DIR$/Parsers/Abstract.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Parser/CAFE.py" afterPath="$PROJECT_DIR$/Parsers/CAFE.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Parser/CCF.py" afterPath="$PROJECT_DIR$/Parsers/CCF.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Parser/Cufflinks.py" afterPath="$PROJECT_DIR$/Parsers/Cufflinks.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Parser/FastQC.py" afterPath="$PROJECT_DIR$/Parsers/FastQC.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Parser/GFF.py" afterPath="$PROJECT_DIR$/Parsers/GFF.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Parser/GVF.py" afterPath="$PROJECT_DIR$/Parsers/GVF.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Parser/General.py" afterPath="$PROJECT_DIR$/Parsers/General.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Parser/R.py" afterPath="$PROJECT_DIR$/Parsers/R.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Parser/TRF.py" afterPath="$PROJECT_DIR$/Parsers/TRF.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Parser/VCF.py" afterPath="$PROJECT_DIR$/Parsers/VCF.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Parser/__init__.py" afterPath="$PROJECT_DIR$/Parsers/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" afterPath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/CDS_region_variants.py" afterPath="$PROJECT_DIR$/scripts/CDS_region_variants.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/CDS_region_vars_2.py" afterPath="$PROJECT_DIR$/examples/desaminases/CDS_region_vars_2.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Converters/Converters.py" afterPath="$PROJECT_DIR$/Converters/Converters.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Download/NCBI.py" afterPath="$PROJECT_DIR$/Download/NCBI.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/PKG-INFO" afterPath="$PROJECT_DIR$/MAVR.egg-info/PKG-INFO" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pipelines/Phylogeny.py" afterPath="$PROJECT_DIR$/Pipelines/Phylogeny.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parsers/CAFE.py" afterPath="$PROJECT_DIR$/Parsers/CAFE.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/MAVR.iml" afterPath="$PROJECT_DIR$/.idea/MAVR.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/SOURCES.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/SOURCES.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SeqAnalysis/SeqAnalysis.py" afterPath="$PROJECT_DIR$/SeqAnalysis/SeqAnalysis.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Sequence.py" afterPath="$PROJECT_DIR$/Routines/Sequence.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/TSS_UTR_CDS_histogram.py" afterPath="$PROJECT_DIR$/examples/desaminases/TSS_UTR_CDS_histogram.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/analyse_cafe_report.py" afterPath="$PROJECT_DIR$/scripts/analyse_cafe_report.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/blast_fastqc.py" afterPath="$PROJECT_DIR$/scripts/blast_fastqc.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/clustering.py" afterPath="$PROJECT_DIR$/examples/desaminases/clustering.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/clustering_combined.py" afterPath="$PROJECT_DIR$/examples/desaminases/clustering_combined.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/clustering_final.py" afterPath="$PROJECT_DIR$/examples/desaminases/clustering_final.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/distances.py" afterPath="$PROJECT_DIR$/examples/distances.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/distances_new.py" afterPath="$PROJECT_DIR$/examples/distances_new.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/phylogenetics/draw_tree.py" afterPath="$PROJECT_DIR$/scripts/phylogenetics/draw_tree.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/SNP_call/example_SNP_call.py" afterPath="$PROJECT_DIR$/examples/SNP_call/example_SNP_call.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/reference_correction/example_reference_correction.py" afterPath="$PROJECT_DIR$/examples/reference_correction/example_reference_correction.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/RepeatMasking/example_repeat_masking.py" afterPath="$PROJECT_DIR$/examples/RepeatMasking/example_repeat_masking.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/expression_correlation.py" afterPath="$PROJECT_DIR$/examples/desaminases/expression_correlation.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/filter_clusters_by_size_and_power.py" afterPath="$PROJECT_DIR$/examples/desaminases/filter_clusters_by_size_and_power.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/filter_expression_data.py" afterPath="$PROJECT_DIR$/examples/desaminases/filter_expression_data.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/get_promotor_region.py" afterPath="$PROJECT_DIR$/examples/desaminases/get_promotor_region.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/get_variants_in_UTR.py" afterPath="$PROJECT_DIR$/examples/desaminases/get_variants_in_UTR.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/get_variants_near_TSS.py" afterPath="$PROJECT_DIR$/examples/desaminases/get_variants_near_TSS.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/gff_examine.py" afterPath="$PROJECT_DIR$/scripts/gff_examine.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/heatmap_article.py" afterPath="$PROJECT_DIR$/examples/desaminases/heatmap_article.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/hist_3d_power_size.py" afterPath="$PROJECT_DIR$/examples/desaminases/hist_3d_power_size.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/histogramms.py" afterPath="$PROJECT_DIR$/examples/desaminases/histogramms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/homogeneity_article.py" afterPath="$PROJECT_DIR$/examples/desaminases/homogeneity_article.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/homogeneity_article_5_UTR.py" afterPath="$PROJECT_DIR$/examples/desaminases/homogeneity_article_5_UTR.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/homogeneity_article_all.py" afterPath="$PROJECT_DIR$/examples/desaminases/homogeneity_article_all.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/homogeneity_article_pre_UTR.py" afterPath="$PROJECT_DIR$/examples/desaminases/homogeneity_article_pre_UTR.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/homogenity_size_heatmap.py" afterPath="$PROJECT_DIR$/examples/desaminases/homogenity_size_heatmap.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/length_distribution.py" afterPath="$PROJECT_DIR$/examples/desaminases/length_distribution.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/mut_locations.py" afterPath="$PROJECT_DIR$/examples/desaminases/mut_locations.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/mut_strandness.py" afterPath="$PROJECT_DIR$/examples/desaminases/mut_strandness.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/power_heatmap.py" afterPath="$PROJECT_DIR$/examples/desaminases/power_heatmap.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/power_size_plot.py" afterPath="$PROJECT_DIR$/examples/desaminases/power_size_plot.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/rainfall.py" afterPath="$PROJECT_DIR$/examples/desaminases/rainfall.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/rainfall_one_chromosome.py" afterPath="$PROJECT_DIR$/examples/desaminases/rainfall_one_chromosome.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/restore_per_sample_vcf.py" afterPath="$PROJECT_DIR$/examples/desaminases/restore_per_sample_vcf.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup.py" afterPath="$PROJECT_DIR$/setup.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/strandness_histogramms.py" afterPath="$PROJECT_DIR$/examples/desaminases/strandness_histogramms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/test_clustering_thresholds/test_distance_thresholds.py" afterPath="$PROJECT_DIR$/examples/test_clustering_thresholds/test_distance_thresholds.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/test_clustering_thresholds/test_inconsistence_thresholds.py" afterPath="$PROJECT_DIR$/examples/test_clustering_thresholds/test_inconsistence_thresholds.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/variant_location_pies.py" afterPath="$PROJECT_DIR$/examples/desaminases/variant_location_pies.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -230,7 +60,7 @@
       <file leaf-file-name="draw_tree.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/phylogenetics/draw_tree.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="305" max-vertical-offset="1044">
+            <state vertical-scroll-proportion="0.0" vertical-offset="720" max-vertical-offset="870">
               <caret line="48" column="119" selection-start-line="48" selection-start-column="119" selection-end-line="48" selection-end-column="119" />
               <folding>
                 <element signature="e#55#70#0" expanded="true" />
@@ -239,11 +69,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="analyse_cafe_report.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="analyse_cafe_report.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/analyse_cafe_report.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2970">
-              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.9230769" vertical-offset="1275" max-vertical-offset="2475">
+              <caret line="121" column="0" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
               <folding>
                 <element signature="e#46#55#0" expanded="true" />
               </folding>
@@ -251,11 +81,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="setup.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="setup.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/setup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.30508474" vertical-offset="0" max-vertical-offset="649">
-              <caret line="11" column="59" selection-start-line="11" selection-start-column="53" selection-end-line="11" selection-end-column="59" />
+            <state vertical-scroll-proportion="-6.6" vertical-offset="0" max-vertical-offset="255">
+              <caret line="11" column="62" selection-start-line="11" selection-start-column="62" selection-end-line="11" selection-end-column="62" />
               <folding>
                 <element signature="e#25#68#0" expanded="true" />
               </folding>
@@ -266,7 +96,7 @@
       <file leaf-file-name="GeneralCollections.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CustomCollections/GeneralCollections.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="684">
+            <state vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="570">
               <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
               <folding>
                 <element signature="e#22#40#0" expanded="true" />
@@ -278,8 +108,8 @@
       <file leaf-file-name="CAFE.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Parsers/CAFE.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="3888">
-              <caret line="33" column="20" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="20" />
+            <state vertical-scroll-proportion="2.7777777" vertical-offset="570" max-vertical-offset="3240">
+              <caret line="33" column="63" selection-start-line="33" selection-start-column="63" selection-end-line="33" selection-end-column="63" />
               <folding>
                 <element signature="e#47#65#0" expanded="true" />
               </folding>
@@ -290,7 +120,7 @@
       <file leaf-file-name="split_by_children.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/phylogenetics/split_by_children.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="1206">
+            <state vertical-scroll-proportion="0.0" vertical-offset="645" max-vertical-offset="1005">
               <caret line="43" column="61" selection-start-line="43" selection-start-column="61" selection-end-line="43" selection-end-column="61" />
               <folding>
                 <element signature="e#55#70#0" expanded="true" />
@@ -302,7 +132,7 @@
       <file leaf-file-name="filter_alignment.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/examples/alignment/filter_alignment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="197" max-vertical-offset="846">
+            <state vertical-scroll-proportion="0.0" vertical-offset="570" max-vertical-offset="705">
               <caret line="38" column="84" selection-start-line="38" selection-start-column="84" selection-end-line="38" selection-end-column="84" />
               <folding />
             </state>
@@ -312,7 +142,7 @@
       <file leaf-file-name="distances.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/examples/distances.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="2448">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2040">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -322,7 +152,7 @@
       <file leaf-file-name="distances_new.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/examples/distances_new.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2466">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2055">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -332,7 +162,7 @@
       <file leaf-file-name="NCBI.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Download/NCBI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="882">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="735">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -361,13 +191,14 @@
         <option value="$PROJECT_DIR$/Parser/CAFE.py" />
         <option value="$PROJECT_DIR$/scripts/analyse_cafe_report.py" />
         <option value="$PROJECT_DIR$/setup.py" />
+        <option value="$PROJECT_DIR$/Parsers/CAFE.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="25" />
+    <option name="y" value="23" />
     <option name="width" value="1280" />
-    <option name="height" value="775" />
+    <option name="height" value="709" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -429,6 +260,48 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SeqAnalysis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Parsers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -437,7 +310,7 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.Console Colors" />
     <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="true" />
@@ -927,7 +800,13 @@
       <option name="project" value="LOCAL" />
       <updated>1423721539282</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="added CAFE parser">
+      <created>1423827120082</created>
+      <option name="number" value="00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1423827120082</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -951,7 +830,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="25" width="1280" height="775" extended-state="0" />
+    <frame x="0" y="23" width="1280" height="709" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32968238" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -959,7 +838,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24960506" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17214398" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.171875" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2595838" sideWeight="0.10005266" order="9" side_tool="true" content_ui="tabs" />
@@ -967,14 +846,14 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32743362" sideWeight="0.49920928" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39539978" sideWeight="0.6719326" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2489339" sideWeight="0.6706783" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39978093" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21517672" sideWeight="0.89994735" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39978093" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2489339" sideWeight="0.6706783" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1327,7 +1206,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="630" max-vertical-offset="1602">
           <caret line="40" column="24" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1335,7 +1213,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2286">
           <caret line="1" column="7" selection-start-line="0" selection-start-column="0" selection-end-line="33" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1391,16 +1268,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Parsers/CAFE.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="3888">
-          <caret line="33" column="20" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="20" />
-          <folding>
-            <element signature="e#47#65#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CustomCollections/GeneralCollections.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="684">
@@ -1411,22 +1278,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/analyse_cafe_report.py">
+    <entry file="file://$PROJECT_DIR$/setup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2970">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        <state vertical-scroll-proportion="-6.6" vertical-offset="0" max-vertical-offset="255">
+          <caret line="11" column="62" selection-start-line="11" selection-start-column="62" selection-end-line="11" selection-end-column="62" />
           <folding>
-            <element signature="e#46#55#0" expanded="true" />
+            <element signature="e#25#68#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
+    <entry file="file://$PROJECT_DIR$/Parsers/CAFE.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30508474" vertical-offset="0" max-vertical-offset="649">
-          <caret line="11" column="59" selection-start-line="11" selection-start-column="53" selection-end-line="11" selection-end-column="59" />
+        <state vertical-scroll-proportion="2.7777777" vertical-offset="570" max-vertical-offset="3240">
+          <caret line="33" column="63" selection-start-line="33" selection-start-column="63" selection-end-line="33" selection-end-column="63" />
           <folding>
-            <element signature="e#25#68#0" expanded="true" />
+            <element signature="e#47#65#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/analyse_cafe_report.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9230769" vertical-offset="1275" max-vertical-offset="2475">
+          <caret line="121" column="0" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+          <folding>
+            <element signature="e#46#55#0" expanded="true" />
           </folding>
         </state>
       </provider>

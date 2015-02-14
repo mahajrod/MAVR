@@ -31,7 +31,7 @@ class RecordCAFE():
                                                format_root_node=True))
 
     def node_str(self):
-        node_strings = "%s\t%f" % (self.id, self.family_p_value)
+        node_string = "%s\t%f" % (self.id, self.family_p_value)
         features = self.tree.features - set(["support", "name", "dist"])
         for node in self.tree.traverse():
             list_of_features = [eval("node.%s" % feature) for feature in features]

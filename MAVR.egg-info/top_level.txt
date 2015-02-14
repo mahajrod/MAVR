@@ -1,1 +1,11 @@
+Converters
+CustomCollections
+Download
+General
+Graphics
 Parsers
+Pictures
+Pipelines
+Routines
+SeqAnalysis
+Tools
