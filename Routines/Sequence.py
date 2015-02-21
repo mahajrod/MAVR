@@ -174,6 +174,11 @@ def rev_com_generator(record_dict):
         yield record
 
 
+def record_by_id_generator(record_dict, id_list):
+    for record_id in id_list:
+        yield record_dict[record_id]
+
+
 if __name__ == "__main__":
     sequence = "CTGGCAAAGACCCAAACATCGACCACATCGAACAGCCACACCACCACCAACACTGTGCACCACTTCCGATTTCCAGCACCCCTTTTTGCCACTCTTTTTACGTAGTTTTGGCCATGCCTAGTTGTTTCCCAGTAGTCAACTTAAACGTATTTATTTTAATAAATTTCCACAAGGTTC"
     coords, length = find_homopolymers(sequence, "T", min_size=2, search_type="non_perfect",
