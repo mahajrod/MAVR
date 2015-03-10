@@ -5,6 +5,8 @@ from collections import OrderedDict
 
 import numpy as np
 
+from Bio.SeqRecord import SeqRecord
+
 from CustomCollections.GeneralCollections import TwoLvlDict
 from Routines.Functions import output_dict
 
@@ -166,11 +168,14 @@ def find_homopolymers(seq, nucleotide, min_size=5, search_type="perfect",
 # --------------------Generators----------------------
 
 
-def rev_com_generator(record_dict):
+def rev_com_generator(record_dict, yield_original_record=False, rc_suffix="_rc", add_rc_suffix="False"):
     for record_id in record_dict:
         reverse_seq = record_dict[record_id].seq.reverse_complement()
         record = deepcopy(record_dict[record_id])
         record.seq = reverse_seq
+        record.id = record_id + rc_suffix if yield_original_record or add_rc_suffix else record.id
+        if yield_original_record:
+            yield record_dict[record_id]
         yield record
 
 
@@ -181,6 +186,16 @@ def record_by_id_generator(record_dict, id_list):
         else:
             print (record_id)
 
+
+def record_generator(annotations_dict, sequence_dict, feature_types_list):
+    for record_id in annotations_dict:
+        for feature in annotations_dict[record_id].features:
+            if feature.type in feature_types_list:
+                sequence = feature.extract(sequence_dict[record_id].seq)
+                #record = SeqRecord(sequence, id=feature.id)
+                #print(record)
+                yield SeqRecord(sequence, id=feature.id, description=feature.qualifiers["Name"][0] \
+                      if "Name" in feature.qualifiers else "")
 
 if __name__ == "__main__":
     sequence = "CTGGCAAAGACCCAAACATCGACCACATCGAACAGCCACACCACCACCAACACTGTGCACCACTTCCGATTTCCAGCACCCCTTTTTGCCACTCTTTTTACGTAGTTTTGGCCATGCCTAGTTGTTTCCCAGTAGTCAACTTAAACGTATTTATTTTAATAAATTTCCACAAGGTTC"
