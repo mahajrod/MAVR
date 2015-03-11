@@ -56,6 +56,6 @@ with open(args.input_tree_file, "r") as in_fd:
                     #print node
                     node.delete()
         #print(tree.write())
-        out_fd.write(tree.write(format=args.input_tree_format))
-        out_fd.write("\n")
-        tree_index += 1
+            out_fd.write(tree.write(format=args.input_tree_format))
+            out_fd.write("\n")
+            tree_index += 1
