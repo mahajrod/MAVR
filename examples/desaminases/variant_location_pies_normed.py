@@ -30,11 +30,19 @@ def location_pie(self, annotation_colors=[],
                             }
 
         normalization_dict = \
+            {"3'_UTR": 0.0564967073,
+             "CDS": 0.7595934337,
+             "5'_UTR": 0.030784463781048,
+             "ncRNA": 0.00225848250068046,
+             "igc": 0.150866912710285}
+        """
+        normalization_dict = \
             {"3'_UTR": 0.0501453333,
              "CDS": 0.67419975,
              "5'_UTR": 0.0273236667,
              "ncRNA": 0.0020045833,
              "igc": 0.2429901667}
+        """
 
         if annotation_colors:
             reference_colors = annotation_colors
