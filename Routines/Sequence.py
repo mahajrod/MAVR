@@ -1,11 +1,13 @@
 __author__ = 'mahajrod'
 
+import re
 from copy import deepcopy
 from collections import OrderedDict
 
 import numpy as np
 
 from Bio.SeqRecord import SeqRecord
+from Bio.SeqFeature import SeqFeature, FeatureLocation
 
 from CustomCollections.GeneralCollections import TwoLvlDict
 from Routines.Functions import output_dict
@@ -177,6 +179,20 @@ def rev_com_generator(record_dict, yield_original_record=False, rc_suffix="_rc",
         if yield_original_record:
             yield record_dict[record_id]
         yield record
+
+
+def find_gaps(record_dict):
+    gap_reg_exp = re.compile("N+", re.IGNORECASE)
+    gaps_dict = {}
+    for region in record_dict:
+        gaps_dict[region] = SeqRecord(record_dict[region].seq,
+                                      id=record_dict[region].id,
+                                      description=record_dict[region].description)
+        gaps = gap_reg_exp.finditer(str(record_dict[region].seq))  # iterator with
+        for match in gaps:
+            gaps_dict[region].features.append(SeqFeature(FeatureLocation(match.start(), match.end()),
+                                              type="gap", strand=None))
+    return gaps_dict
 
 
 def record_by_id_generator(record_dict, id_list):
