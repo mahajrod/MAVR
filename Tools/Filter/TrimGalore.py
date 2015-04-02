@@ -27,9 +27,7 @@ class TrimGalore(Tool):
         options += " -a %s" % adapter
         options += " -a2 %s" % adapter2 if adapter2 is not None else ""
         options += " -s %i" % stringency if stringency is not None else ""
-        options += " --%s" % quality_score
         options += " --length %i" % min_length
-        options += " --%s" % quality_score
         options += " --%s" % quality_score
         options += "" if compess else " --dont_gzip"
         options += " -q %i" % quality_treshold
