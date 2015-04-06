@@ -5,8 +5,6 @@ import argparse
 
 from ete2 import Tree
 
-from Routines.File import read_ids
-
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_tree_file", action="store", dest="input_tree_file",
