@@ -34,7 +34,7 @@ def fastq2fasta(input_file, output_file):
     output_fd.close()
 
 
-def fasta2phylip(input_file, output_file):
+def fasta2phylip(input_file, output_file, mode="name_in_same"):
     alignment = AlignIO.read(input_file, "fasta")
     number_of_sequences = len(alignment)
     length_of_alignment = alignment.get_alignment_length()
@@ -45,8 +45,12 @@ def fasta2phylip(input_file, output_file):
     fd = open(output_file, "w")
     fd.write("%i %i\n" % (number_of_sequences, length_of_alignment))
     for record in alignment:
-        spaces = " " * (1 + max_id_length - len(record.id))
-        fd.write(record.id + spaces + str(record.seq) + "\n")
+        if mode == "name_in_same":
+            spaces = " " * (2 + max_id_length - len(record.id))
+            fd.write(record.id + spaces + str(record.seq) + "\n")
+        else:
+            fd.write(record.id + "\n")
+            fd.write(str(record.seq) + "\n")
     fd.close()
 
 
