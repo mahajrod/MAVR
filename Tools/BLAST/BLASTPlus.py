@@ -11,13 +11,13 @@ class BLASTPlus(Tool):
     def __init__(self, path="", max_threads=4):
         Tool.__init__(self, "blastn", path=path, max_threads=max_threads)
 
-    def make_blast_plus_db(self, input_file, mask_output_file, db_name):
+    def make_blast_plus_db(self, input_file, mask_output_file, db_name, format="fasta"):
         #makes BLAST database from fasta file
-        os.system("dustmasker -in %s -infmt fasta -parse_seqids -outfmt maskinfo_asn1_bin -out %s"
-                  % (input_file, mask_output_file))
+        os.system("dustmasker -in %s -infmt %s -parse_seqids -outfmt maskinfo_asn1_bin -out %s"
+                  % (input_file, format, mask_output_file))
         #creating database
-        os.system("makeblastdb -in %s -input_type fasta -dbtype nucl -parse_seqids -mask_data %s -out %s -title '%s'"
-                  % (input_file, mask_output_file, db_name, db_name))
+        os.system("makeblastdb -in %s -input_type %s -dbtype nucl -parse_seqids -mask_data %s -out %s -title '%s'"
+                  % (input_file, format, mask_output_file, db_name, db_name))
         #cheking dqatabase
         os.system("blastdbcmd -db %s -info" % db_name)
 

@@ -35,7 +35,7 @@ Pipelines/Phylogeny.py
 Pipelines/RepeatSearch.py
 Pipelines/SNPCall.py
 Pipelines/__init__.py
-Routines/File.py
+Routines/Files.py
 Routines/Functions.py
 Routines/Sequence.py
 Routines/Tree.py
