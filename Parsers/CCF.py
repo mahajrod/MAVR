@@ -302,6 +302,17 @@ class RecordCCF(Record, Iterable):
         self.add_description("Homogeneity", homogenity if homogenity >= 0.5 else 1.0 - homogenity)
         self.add_description("Strand", "P" if homogenity >= 0.5 else "N")
 
+    def gff_string(self):
+        attributes_string = "Size=%i;Bad_records=%i" % (self.size, self.bad_records)
+        if self.flags:
+            attributes_string += ";" + ";".join(self.flags)
+        if self.description:
+            attributes_string += ";" + ";".join(["%s=%s" % (key, ",".join(map(lambda x: str(x), self.description[key])) if isinstance(self.description[key], list) or isinstance(self.description[key], set)  else str(self.description[key]))
+                                                 for key in self.description])
+        if self.subclusters != None:
+            #print(self.subclusters)
+            attributes_string += ";Subclusters=" + ",".join(map(lambda x: str(x), self.subclusters))
+        return "%s\t%s\t%s\t%i\t%i\t.\t.\t.\t%s" % (self.chrom, "custom", "cluster", self.start, self.end, attributes_string)
 
 class MetadataCCF(Metadata):
 
@@ -664,6 +675,11 @@ class CollectionCCF(Collection):
         plt.suptitle(suptitle)
         plt.savefig(filename)
         plt.close()
+
+    def write_gff(self, outfile):
+        with open(outfile, "w") as out_fd:
+            for record in self:
+                out_fd.write(record.gff_string() + "\n")
 
 
 if __name__ == "__main__":
