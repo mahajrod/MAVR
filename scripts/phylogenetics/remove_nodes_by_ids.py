@@ -5,6 +5,7 @@ import argparse
 
 from ete2 import Tree
 
+from Routines.File import read_ids
 
 parser = argparse.ArgumentParser()
 
@@ -26,36 +27,31 @@ parser.add_argument("-f", "--input_tree_format", action="store", dest="input_tre
 9 	leaf names
 100 	topology only""")
 
-parser.add_argument("-s", "--support_threshold", action="store", dest="minimum_support", default=50,
-                    help="Minimun support value for nodes to retain")
-parser.add_argument("-y", "--support_type", action="store", dest="support_type", default="int",
-                    help="Type of support values - 'int' or 'float'. Default - 'int'")
+parser.add_argument("-d", "--id_file", action="store", dest="id_file",
+                    help="File with ids of nodes to remove")
 
 args = parser.parse_args()
 
-threshold_value = int(args.minimum_support) if args.support_type == "int" else float(args.minimum_support) \
-    if args.support_type == "float" else None
+id_list = read_ids(args.id_file)
 
-print("Nodes with support less than %s will be collapsed" % str(threshold_value))
-if threshold_value is None:
-    raise ValueError("Wrong support type is set")
+print("Nodes with ids present in %s file will be removed" % args.id_file)
+
 tree_index = 1
 with open(args.input_tree_file, "r") as in_fd:
     with open(args.output_tree_file, "w") as out_fd:
         for line in in_fd:
             tree_line = line.strip()
-            tree = Tree(tree_line, format=args.input_tree_format, support=100 if args.support_type == "int" else 1.0)
+            tree = Tree(tree_line, format=args.input_tree_format)
             print("Totaly %i leaves in tree %i" % (len(tree), tree_index))
             #print(tree.write())
             for node in tree.traverse():
-                if node.is_root() or node.is_leaf():
-                    #print(node.support)
-                    #print(tree.write())
-                    continue
-                if node.support < threshold_value:
-                    #print node
+                #if node.is_leaf():
+                #    print node.features
+                # node.name
+                if node.name in id_list:
                     node.delete()
-        #print(tree.write())
+            #print(tree.write())
+            print("Totaly %i leaves were retained in tree %i" % (len(tree), tree_index))
             out_fd.write(tree.write(format=args.input_tree_format))
             out_fd.write("\n")
             tree_index += 1
