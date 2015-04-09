@@ -8,6 +8,7 @@ import numpy as np
 
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
+from Bio.Seq import Seq
 
 from CustomCollections.GeneralCollections import TwoLvlDict
 from Routines.Functions import output_dict
@@ -185,7 +186,7 @@ def find_gaps(record_dict):
     gap_reg_exp = re.compile("N+", re.IGNORECASE)
     gaps_dict = {}
     for region in record_dict:
-        gaps_dict[region] = SeqRecord(record_dict[region].seq,
+        gaps_dict[region] = SeqRecord(seq=record_dict[region].seq,
                                       id=record_dict[region].id,
                                       description=record_dict[region].description)
         gaps = gap_reg_exp.finditer(str(record_dict[region].seq))  # iterator with
