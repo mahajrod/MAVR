@@ -3,6 +3,7 @@ __author__ = 'mahajrod'
 
 from collections import Iterable
 
+
 def read_ids(filename, header=False):
     #reads ids from file with one id per line
     id_list = []
