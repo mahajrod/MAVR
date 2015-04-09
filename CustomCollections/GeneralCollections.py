@@ -5,7 +5,7 @@ from collections import OrderedDict
 
 class TwoLvlDict(OrderedDict):
 
-    def table_form(self, absent_symbol="0", sort=True):
+    def table_form(self, absent_symbol="0", sort=True, column_sep="\t", list_sep=","):
         first_level_keys = list(self.keys())
         second_level_keys = set([])
         for fl_key in first_level_keys:
@@ -14,7 +14,7 @@ class TwoLvlDict(OrderedDict):
         if sort:
             first_level_keys.sort()
             second_level_keys = sorted(list(second_level_keys))
-        string = ".\t" + "\t".join([str(x) for x in first_level_keys]) + "\n"
+        string = "." + column_sep + column_sep.join([str(x) for x in first_level_keys]) + "\n"
 
         for sl_key in second_level_keys:
             key_counts_list = []
@@ -22,8 +22,11 @@ class TwoLvlDict(OrderedDict):
                 if sl_key not in self[fl_key]:
                     key_counts_list.append(absent_symbol)
                 else:
-                    key_counts_list.append(str(self[fl_key][sl_key]))
-            string += str(sl_key) + "\t" + "\t".join(key_counts_list) + "\n"
+                    list_or_tuple_type = isinstance(self[fl_key][sl_key], list) \
+                                         or isinstance(self[fl_key][sl_key], tuple)
+                    key_counts_list.append(list_sep.join(map(lambda y: str(y), self[fl_key][sl_key]))
+                                           if list_or_tuple_type else str(self[fl_key][sl_key]))
+            string += str(sl_key) + column_sep + column_sep.join(key_counts_list) + "\n"
         return string
 
     def write(self, out_filename, absent_symbol="0"):

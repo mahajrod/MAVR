@@ -18,8 +18,10 @@ def variants_start_end(collection, left, right, record_dict, min_five_utr_len=10
     UTR_positions = []
     CDS_positions = []
 
+    variants_list = []
     for record_id in record_dict:
         for feature in record_dict[record_id].features:
+            feature_strand = feature.location.strand
             if feature.type != "gene":
                 continue
 
@@ -35,13 +37,20 @@ def variants_start_end(collection, left, right, record_dict, min_five_utr_len=10
                     five_UTR_start = sub_feature.location.start + 1 if strand == +1 else sub_feature.location.end
                     pre_UTR_start = five_UTR_start - left if strand == +1 else five_UTR_start + 1
                     pre_UTR_end = five_UTR_start - 1 if strand == +1 else five_UTR_start + left
-
+                    #print(sub_feature)
                     for variant in collection:
                         if record_id != variant.chrom:
                             continue
+
+                        if (feature_strand == 1 and variant.ref != "C") or (feature_strand == -1 and variant.ref != "G"): #select mutations in untranscribed thread
+                            continue
+                        """
+                        if (feature_strand == 1 and variant.ref != "G") or (feature_strand == -1 and variant.ref != "C"): #select mutations in transcribed thread
+                            continue
+                        """
                         if variant.pos - 1 in sub_feature:
                             #print(five_UTR_start)
-                            #print(variant)
+                            print(str(sub_feature.location) + "\t" + str(variant) + "\tUTR")
                             relative_position = float((variant.pos - five_UTR_start) * strand) * 100 / len(sub_feature)
                             if relative_position < 0:
                                 print(variant)
@@ -50,12 +59,12 @@ def variants_start_end(collection, left, right, record_dict, min_five_utr_len=10
                         elif pre_UTR_start <= variant.pos <= pre_UTR_end:
                             if skip_nonintergenic_variants and variant.info_dict["Ftype"] != ["igc"]:
                                 continue
-
+                            print(str(sub_feature.location) + "\t" + str(variant) + "\tpre_UTR")
                             relative_position = (variant.pos - five_UTR_start) * strand
                             if relative_position > 0:
                                 print(pre_UTR_start, pre_UTR_end, five_UTR_start)
                                 print(variant)
-                                print(sub_feature)
+                                print(sub_feature.location)
                             pre_UTR_positions.append(relative_position)
 
                     continue
@@ -70,19 +79,27 @@ def variants_start_end(collection, left, right, record_dict, min_five_utr_len=10
                 for variant in collection:
                     if record_id != variant.chrom:
                         continue
+
+                    if (feature_strand == 1 and variant.ref != "C") or (feature_strand == -1 and variant.ref != "G"): #select mutations in untranscribed thread
+                            continue
+                    """
+
+                    if (feature_strand == 1 and variant.ref != "G") or (feature_strand == -1 and variant.ref != "C"): #select mutations in transcribed thread
+                        continue
+                    """
                     if region_start_start <= variant.pos <= region_start_end:
                         CDS_positions.append((variant.pos - CDS_start) * strand)
-
+                        print(str(sub_feature.location) + "\t" + str(variant) + "\tCDS")
     return pre_UTR_positions, UTR_positions, CDS_positions
 
 if __name__ == "__main__":
     workdir = "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/combined_vcf/clusters/all/all/"
 
     sample_set_names_list = ["PmCDA1_3d",
-                             "HAP",
+                             #"HAP",
                              "PmCDA1_sub1_3d",
                              "PmCDA1_6d",
-                             "HAP_sub1",
+                             #"HAP_sub1",
                              "PmCDA1_sub1_6d",
                              #"A1_3d",
                              #"A1_6d",
@@ -115,11 +132,14 @@ if __name__ == "__main__":
     max_end = 0
     skip_nonintergenic_variants = True
     for sample_set in sample_set_names_list:
+        print("Handling %s" % sample_set)
         vcf_file = "%s_good.vcf" % sample_set
         #start_hist_prefix = "%s_start_hist_r_%i_l_%i" % (sample_set, right, left)
         #end_hist_prefix = "%s_end_hist_r_%i_l_%i" % (sample_set, right, left)
         #gene_variants = "%s_gene_variants_r_%i_l_%i.t" % (sample_set, right, left)
-        variants = CollectionVCF(from_file=True, vcf_file=vcf_file)
+        #variants, minus_variants = CollectionVCF(from_file=True, vcf_file=vcf_file).filter_by_expression("record.ref == 'C'") # C -> T variants
+        #variants, minus_variants = CollectionVCF(from_file=True, vcf_file=vcf_file).filter_by_expression("(record.ref == 'C' and record.info_dict['Fstrand'][0] == 'P') or (record.ref == 'G' and record.info_dict['Fstrand'][0] == 'M')") # nontranscribed thread
+        variants= CollectionVCF(from_file=True, vcf_file=vcf_file)
         pre_UTR_positions[sample_set], UTR_positions[sample_set], CDS_positions[sample_set] = \
             variants_start_end(variants, left, right, record_dict, min_five_utr_len=10,
                                skip_nonintergenic_variants=skip_nonintergenic_variants)
@@ -151,7 +171,9 @@ if __name__ == "__main__":
                         np.amax(UTR_hist_dict[sample_set][0]),
                         np.amax(CDS_hist_dict[sample_set][0]) )
     plt.figure(1, dpi=300, figsize=(24, 8*len(sample_set_names_list)))
+
     max_start = 0.0225
+
     index = 0
     for sample_set in sample_set_names_list:
         plt.subplot(len(sample_set_names_list), 3, index * 3 + 1)
@@ -186,6 +208,6 @@ if __name__ == "__main__":
         index += 1
 
     suffix = "pre_five_UTR_only_intergenic" if skip_nonintergenic_variants else "all"
-    plt.savefig("TSS_UTR_CDS_start_all_r_%i_l_%i_bin_width_%i_%s.svg" % (right, left, bin_width, suffix))
-    plt.savefig("TSS_UTR_CDS_start_all_r_%i_l_%i_bin_width_%i_%s.eps" % (right, left, bin_width, suffix))
+    plt.savefig("TSS_UTR_CDS_start_all_r_%i_l_%i_bin_width_%i_%s_untranscribed_variants.svg" % (right, left, bin_width, suffix))
+    plt.savefig("TSS_UTR_CDS_start_all_r_%i_l_%i_bin_width_%i_%s_untranscribed_variants.eps" % (right, left, bin_width, suffix))
     plt.close()

@@ -1,5 +1,5 @@
 __author__ = 'mahajrod'
-
+import re
 import sys
 
 
@@ -20,3 +20,10 @@ def output_dict(dictionary, out_file="out.t", write=False):
 
     if out_fd is not sys.stdout:
         out_fd.close()
+
+
+def get_cigar_str_len(cigar_str):
+    len_list = re.split("M|I|N|S|D", cigar_str)
+    if len_list[-1] == "":
+        len_list = len_list[:-1]
+    return sum(map(lambda x: int(x), len_list))
