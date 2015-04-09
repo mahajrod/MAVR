@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 __author__ = 'mahajrod'
-
+import os
 import argparse
 
 from Bio import SeqIO
@@ -22,3 +22,5 @@ args = parser.parse_args()
 record_dict = SeqIO.index_db("temp_index.idx", [args.input], format="fasta")
 
 SeqIO.write(rev_com_generator(record_dict, yield_original_record=True), args.output, "fasta")
+
+os.remove("temp_index.idx")
