@@ -317,17 +317,188 @@ class BLASTp(Tool):
 
 class DustMasker(Tool):
     def __init__(self, path="", max_threads=4):
+        """
+        USAGE
+          dustmasker [-h] [-help] [-xmlhelp] [-in input_file_name]
+            [-out output_file_name] [-window window_size] [-level level]
+            [-linker linker] [-infmt input_format] [-outfmt output_format]
+            [-parse_seqids] [-version-full]
+
+        DESCRIPTION
+           Low complexity region masker based on Symmetric DUST algorithm
+
+        OPTIONAL ARGUMENTS
+         -h
+           Print USAGE and DESCRIPTION;  ignore all other parameters
+         -help
+           Print USAGE, DESCRIPTION and ARGUMENTS; ignore all other parameters
+         -xmlhelp
+           Print USAGE, DESCRIPTION and ARGUMENTS in XML format; ignore all other
+           parameters
+         -in <File_In>
+           input file name
+           Default = `-'
+         -out <File_Out>
+           output file name
+           Default = `-'
+         -window <Integer>
+           DUST window length
+           Default = `64'
+         -level <Integer>
+           DUST level (score threshold for subwindows)
+           Default = `20'
+         -linker <Integer>
+           DUST linker (how close masked intervals should be to get merged together).
+           Default = `1'
+         -infmt <String>
+           input format (possible values: fasta, blastdb)
+           Default = `fasta'
+         -outfmt <String, `acclist', `fasta', `interval', `maskinfo_asn1_bin',
+                          `maskinfo_asn1_text', `maskinfo_xml', `seqloc_asn1_bin',
+                          `seqloc_asn1_text', `seqloc_xml'>
+           output format
+           Default = `interval'
+         -parse_seqids
+           Parse Seq-ids in FASTA input
+         -version-full
+           Print extended version data;  ignore other arguments
+        """
         Tool.__init__(self, "dustmasker", path=path, max_threads=max_threads)
+
+    def mask(self, input_file, output_file, output_format="maskinfo_asn1_bin", input_format="fasta", parse_seqids=True):
+        options = " "
+        options += " -in %s" % input_file
+        options += " -infmt %s" % input_format
+        options += " -outfmt %s" % output_format
+        options += " -parse_seqids" if parse_seqids else ""
+        options += " -out %s" % output_file
+
+        self.execute(options)
 
 
 class MakeBLASTDb(Tool):
     def __init__(self, path="", max_threads=4):
+        """
+        USAGE
+          makeblastdb [-h] [-help] [-in input_file] [-input_type type]
+            -dbtype molecule_type [-title database_title] [-parse_seqids]
+            [-hash_index] [-mask_data mask_data_files] [-mask_id mask_algo_ids]
+            [-mask_desc mask_algo_descriptions] [-gi_mask]
+            [-gi_mask_name gi_based_mask_names] [-out database_name]
+            [-max_file_sz number_of_bytes] [-logfile File_Name] [-taxid TaxID]
+            [-taxid_map TaxIDMapFile] [-version]
+
+        DESCRIPTION
+           Application to create BLAST databases, version 2.2.30+
+
+        REQUIRED ARGUMENTS
+         -dbtype <String, `nucl', `prot'>
+           Molecule type of target db
+
+        OPTIONAL ARGUMENTS
+         -h
+           Print USAGE and DESCRIPTION;  ignore all other parameters
+         -help
+           Print USAGE, DESCRIPTION and ARGUMENTS; ignore all other parameters
+         -version
+           Print version number;  ignore other arguments
+
+         *** Input options
+         -in <File_In>
+           Input file/database name
+           Default = `-'
+         -input_type <String, `asn1_bin', `asn1_txt', `blastdb', `fasta'>
+           Type of the data specified in input_file
+           Default = `fasta'
+
+         *** Configuration options
+         -title <String>
+           Title for BLAST database
+           Default = input file name provided to -in argument
+         -parse_seqids
+           Option to parse seqid for FASTA input if set, for all other input types
+           seqids are parsed automatically
+         -hash_index
+           Create index of sequence hash values.
+
+         *** Sequence masking options
+         -mask_data <String>
+           Comma-separated list of input files containing masking data as produced by
+           NCBI masking applications (e.g. dustmasker, segmasker, windowmasker)
+         -mask_id <String>
+           Comma-separated list of strings to uniquely identify the masking algorithm
+            * Requires:  mask_data
+            * Incompatible with:  gi_mask
+         -mask_desc <String>
+           Comma-separated list of free form strings to describe the masking algorithm
+           details
+            * Requires:  mask_id
+         -gi_mask
+           Create GI indexed masking data.
+            * Requires:  parse_seqids
+            * Incompatible with:  mask_id
+         -gi_mask_name <String>
+           Comma-separated list of masking data output files.
+            * Requires:  mask_data, gi_mask
+
+         *** Output options
+         -out <String>
+           Name of BLAST database to be created
+           Default = input file name provided to -in argumentRequired if multiple
+           file(s)/database(s) are provided as input
+         -max_file_sz <String>
+           Maximum file size for BLAST database files
+           Default = `1GB'
+         -logfile <File_Out>
+           File to which the program log should be redirected
+
+         *** Taxonomy options
+         -taxid <Integer, >=0>
+           Taxonomy ID to assign to all sequences
+            * Incompatible with:  taxid_map
+         -taxid_map <File_In>
+           Text file mapping sequence IDs to taxonomy IDs.
+           Format:<SequenceId> <TaxonomyId><newline>
+            * Requires:  parse_seqids
+            * Incompatible with:  taxid
+
+        """
         Tool.__init__(self, "makeblastdb", path=path, max_threads=max_threads)
 
+        #makes BLAST database from fasta file
+
+    def make_db(self, input_file, db_title, mask_data, db_type, output_file=None, input_format="fasta", parse_seqids=True):
+        # mask_data can be either string or list of strings
+        options = " -dbtype %s" % db_type
+        options += " -in %s" % input_file
+        options += " -input_type %s" % input_format
+        options += " -parse_seqids" if parse_seqids else ""
+        options += " -title %s" % db_title
+        options += " -out %s" % output_file if None else " -out %s" % db_title
+        options += " -mask_data %s" % (mask_data if isinstance(mask_data, str) else ",".join(mask_data))
+
+        self.execute(options)
+
+    def make_protein_db(self, input_file, db_title, mask_data, output_file=None, input_format="fasta", parse_seqids=True):
+        # mask_data can be either string or list of strings
+        self.make_db(input_file, db_title, mask_data, "prot", output_file=output_file,
+                     input_format=input_format, parse_seqids=parse_seqids)
+
+    def make_nucleotide_db(self, input_file, db_title, mask_data, output_file=None, input_format="fasta", parse_seqids=True):
+        # mask_data can be either string or list of strings
+        self.make_db(input_file, db_title, mask_data, "nucl", output_file=output_file,
+                     input_format=input_format, parse_seqids=parse_seqids)
 
 class BLASTDbCmd(Tool):
     def __init__(self, path="", max_threads=4):
         Tool.__init__(self, "blastdbcmd", path=path, max_threads=max_threads)
+
+    def db_info(self, db_name):
+        options = " -info"
+        options += " -db %s" % db_name
+
+        self.execute(options)
+
 
 if __name__ == "__main__":
 
