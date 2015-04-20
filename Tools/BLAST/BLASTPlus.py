@@ -475,7 +475,8 @@ class MakeBLASTDb(Tool):
         options += " -parse_seqids" if parse_seqids else ""
         options += " -title %s" % db_title
         options += " -out %s" % output_file if None else " -out %s" % db_title
-        options += " -mask_data %s" % (mask_data if isinstance(mask_data, str) else ",".join(mask_data))
+        options += " -mask_data %s" % (mask_data if isinstance(mask_data, str) else ",".join(mask_data)) \
+            if mask_data is not None else ""
 
         self.execute(options)
 
@@ -488,6 +489,7 @@ class MakeBLASTDb(Tool):
         # mask_data can be either string or list of strings
         self.make_db(input_file, db_title, mask_data, "nucl", output_file=output_file,
                      input_format=input_format, parse_seqids=parse_seqids)
+
 
 class BLASTDbCmd(Tool):
     def __init__(self, path="", max_threads=4):
