@@ -81,13 +81,17 @@ def cart_sites(sequence, restrictase_sites_dict):
     return sorted_sites_dictionary, sites_sequence
 
 sites_fd = open(args.output_prefix, "w")
-sites_fd.write("#sequence\tsites\tsites_map\treverse_map\tsites_seq\n")
+sites_fd.write("#sequence\tlength\tmap_length\tsites\tsites_map\treverse_map\tsites_seq\tpresense\n")
 for record_id in sequence_dict:
     sites_dict, sites_string = cart_sites(str(sequence_dict[record_id].seq), restrictase_sites_dict)
     sites = "".join([str(position) + sites_dict[position] for position in sites_dict])
     sites_seq = ",".join([str(sequence_dict[record_id].seq[entry: entry+6]) for entry in sites_dict])
-    sites_fd.write("%s\t%s\t%s\t%s\t%s\n" % (record_id, sites, sites_string if sites_string != "" else ".",
-                                         sites_string[::-1] if sites_string != "" else ".", sites_seq))
+    rev_sites_string = sites_string[::-1]
+    presense = "yes" if sites_string in unisexualis_map or rev_sites_string in unisexualis_map else "no"
+    presense = "no" if sites_string == "" else presense
+    sites_fd.write("%s\t%i\t%i\t%s\t%s\t%s\t%s\t%s\n" % (record_id, len(sequence_dict[record_id].seq), len(sites_string),
+                                                         sites if sites else ".", sites_string if sites_string != "" else ".",
+                                         sites_string[::-1] if sites_string != "" else ".", sites_seq, presense))
 
 sites_fd.close()
 os.remove("temp.idx")

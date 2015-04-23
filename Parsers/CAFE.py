@@ -202,7 +202,7 @@ class ReportCAFE():
 if __name__ == "__main__":
     cafe_report_file = "/home/mahajrod/genetics/Dobrzhansky/project/gene_families/data/pashas/resultfilereport.cafe"
     cafe_report = ReportCAFE(cafe_report_file)
-    #print(cafe_report.general_data.tree.write(features=["id", "remain", "expansion", "decrease", "average_expansion"]))
+    #print(cafe_report.general_data.tree.write(features=["id", "remain", "Expansion", "decrease", "average_expansion"]))
     #print(cafe_report.general_data.lambda_value)
     #print(cafe_report.records[3].tree.write(features=["N", "delta", "p_value"], format=8, format_root_node=True))
 

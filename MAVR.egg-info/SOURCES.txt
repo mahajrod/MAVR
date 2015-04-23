@@ -35,7 +35,7 @@ Pipelines/Phylogeny.py
 Pipelines/RepeatSearch.py
 Pipelines/SNPCall.py
 Pipelines/__init__.py
-Routines/Files.py
+Routines/File.py
 Routines/Functions.py
 Routines/Sequence.py
 Routines/Tree.py
@@ -65,6 +65,7 @@ Tools/Bedtools/Intersect.py
 Tools/Bedtools/__init__.py
 Tools/Filter/Adapters.py
 Tools/Filter/TrimGalore.py
+Tools/Filter/Trimmomatic.py
 Tools/Filter/__init__.py
 Tools/GATK/Abstract.py
 Tools/GATK/ApplyRecalibration.py

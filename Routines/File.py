@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'mahajrod'
 
-from collections import Iterable
+from collections import Iterable, OrderedDict
 
 
 def read_ids(filename, header=False):
@@ -15,9 +15,32 @@ def read_ids(filename, header=False):
     return id_list
 
 
+def read_tsv_as_rows_list(filename, header=False, header_prefix="#", separator="\t"):
+    tsv_list = []
+    with open(filename, "r") as tsv_fd:
+        if header:
+            header_list = tsv_fd.readline().strip()[len(header_prefix):].split(separator)
+        for line in tsv_fd:
+            tsv_list.append(line.strip().split(separator))
+    return header_list, tsv_list if header else tsv_list
+
+
+def read_tsv_as_columns_dict(filename, header_prefix="#", separator="\t"):
+    tsv_dict = OrderedDict()
+    with open(filename, "r") as tsv_fd:
+        header_list = tsv_fd.readline().strip()[len(header_prefix):].split(separator)
+        number_of_columns = len(header_list)
+        for column_name in header_list:
+            tsv_dict[column_name] = []
+        for line in tsv_fd:
+            tmp_line = line.strip().split(separator)
+            for i in range(0, number_of_columns):
+                tsv_dict[header_list[i]].append(tmp_line[i])
+    return tsv_dict
+
+
 def tsv_split_by_column(tsv_file, column_number, separator="\t", header=False, outfile_prefix=None):
     # column number should start from 0
-
     header_string = None
     splited_name = tsv_file.split(".")
     extension = splited_name[-1] if len(splited_name) > 1 else ""
