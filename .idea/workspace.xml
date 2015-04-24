@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0137b4ba-9cb9-4454-8e03-43ff7c136081" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Sequence.py" afterPath="$PROJECT_DIR$/Routines/Sequence.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence/histogram_length.py" afterPath="$PROJECT_DIR$/scripts/sequence/histogram_length.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -110,8 +108,8 @@
       <file leaf-file-name="histogram_length.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/sequence/histogram_length.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.11392405" vertical-offset="567" max-vertical-offset="1332">
-              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.46835443" vertical-offset="135" max-vertical-offset="1332">
+              <caret line="26" column="23" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
               <folding>
                 <element signature="e#55#64#0" expanded="true" />
               </folding>
@@ -965,12 +963,6 @@
       <option name="number" value="Default" />
       <updated>1396791476390</updated>
     </task>
-    <task id="LOCAL-00001" summary="Modified Tools subpackage, Abstract class was added">
-      <created>1409225885404</created>
-      <option name="number" value="00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1409225885404</updated>
-    </task>
     <task id="LOCAL-00002" summary="Modified Tools subpackage, Abstract class was added">
       <created>1409225974352</created>
       <option name="number" value="00002" />
@@ -1253,7 +1245,19 @@
       <option name="project" value="LOCAL" />
       <updated>1429842813319</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="a">
+      <created>1429845836480</created>
+      <option name="number" value="00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1429845836480</updated>
+    </task>
+    <task id="LOCAL-00050" summary="a">
+      <created>1429846258927</created>
+      <option name="number" value="00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1429846258999</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1745,8 +1749,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence/histogram_length.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11392405" vertical-offset="567" max-vertical-offset="1332">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.46835443" vertical-offset="135" max-vertical-offset="1332">
+          <caret line="26" column="23" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
           <folding>
             <element signature="e#55#64#0" expanded="true" />
           </folding>
