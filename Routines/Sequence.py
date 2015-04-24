@@ -168,6 +168,16 @@ def find_homopolymers(seq, nucleotide, min_size=5, search_type="perfect",
     homopolymers_lengthes = np.array(homopolymers_lengthes)
     return homopolymers_coords, homopolymers_lengthes
 
+# ----------------------Filters-----------------------
+
+
+def filter(record_dict, expresion):
+    record_id_list = []
+    for record_id in record_dict:
+        if expresion(record_id):
+            record_id_list.append(record_id)
+    return record_id_list
+
 # --------------------Generators----------------------
 
 
