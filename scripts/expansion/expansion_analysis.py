@@ -16,8 +16,6 @@ parser.add_argument("-g", "--hcluster_sg_path", action="store", dest="hcluster_s
                     help="Path to hcluster_sg binary. Default: hcluster_sg")
 parser.add_argument("-l", "--solar_output_file", action="store", dest="solar_output_file", default="solar_output.t",
                     help="File with solar output. Default: solar_output.t")
-parser.add_argument("-m", "--modified_solar_output_file", action="store", dest="modified_solar_output_file", default="modified_solar_output.t",
-                    help="File with modified solar output. Default: modified_solar_output.t")
 parser.add_argument("-b", "--bit_score_file", action="store", dest="bit_score_file", default="bit_score.t",
                     help="File with solar bitscores. Default: bit_score.t")
 parser.add_argument("-e", "--self_alignment_score_file", action="store", dest="self_alignment_score_file", default="self_alignment_score.t",
@@ -36,62 +34,83 @@ out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
 solar_options = " -a prot2prot -c -f m8"
 
 solar_string = "%s %s %s > %s" % (args.solar_script_path, solar_options, args.input, args.solar_output_file)
-print(solar_string)
+print("Clustering segments...\n\t" + solar_string)
 os.system(solar_string)
 
+print("Extracting bit scores...")
+nodes_dict = {}
+length_dict = {}
 with open(args.solar_output_file, "r") as solar_fd:
-    with open(args.modified_solar_output_file, "w") as filtered_fd:
-        for line in solar_fd:
-            line_list = line.strip().split("\t")
-            query_id = line_list[0]
-            query_len = int(line_list[1])
-            seq_id = line_list[5]
-            seq_len = int(line_list[6])
-            num_of_blocks = int(line_list[9])
-            alignment_total_score = line_list[10]
-            query_entries = [map(int, entry.split(",")) for entry in line_list[11][:-1].split(";")]
-            total_query = sum(map(lambda x: x[1] - x[0] + 1, query_entries))
-            sequence_entries = [map(int, entry.split(",")) for entry in line_list[12][:-1].split(";")]
-            sequence_query = sum(map(lambda x: x[1] - x[0] + 1, sequence_entries))
-            score_entries = line_list[13][:-1].split(";")
-            length_ratio = min(float(total_query)/float(query_len), float(sequence_query)/float(seq_len))
-            if length_ratio >= 0.33:
-                filtered_fd.write("%s\t%i\t%s\t%i\t%s\t%i\t%i\t%f\n" %
-                                  (query_id, query_len, seq_id, seq_len, alignment_total_score, total_query,
-                                   sequence_query, length_ratio))
+    with open(args.bit_score_file, "w") as filtered_fd:
+        with open(args.self_alignment_score_file, "w") as self_aligned_fd:
+            for line in solar_fd:
+                line_list = line.strip().split("\t")
+                query_id = line_list[0]
+                query_len = int(line_list[1])
+                seq_id = line_list[5]
+                #seq_len = int(line_list[6])
+                #num_of_blocks = int(line_list[9])
+                alignment_total_score = line_list[10]
+                if query_id == seq_id:
+                    self_aligned_fd.write("%s\t%i\t%s\n" % (query_id, query_len, alignment_total_score))
+                    nodes_dict[query_id] = int(alignment_total_score)
+                    length_dict[query_id] = query_len
+                else:
+                    query_entries = [map(int, entry.split(",")) for entry in line_list[11][:-1].split(";")]
+                    total_query = sum(map(lambda x: x[1] - x[0] + 1, query_entries)) # total length of alignned segments of query
+                    sequence_entries = [map(int, entry.split(",")) for entry in line_list[12][:-1].split(";")]
+                    sequence_query = sum(map(lambda x: x[1] - x[0] + 1, sequence_entries)) # total length of sequence segments corresponding to alignment
+                    alignment_length = min((total_query, sequence_query))
+                    f, s = sorted([query_id, seq_id])
+                    filtered_fd.write("%s\t%s\t%s\t%i\n" %
+                                      (f, s, alignment_total_score, alignment_length))
+
+print("Sorting...")
+sort_string = "sort %s > %s" % (args.bit_score_file, args.temp_file)
+os.system(sort_string)
 """
 get_bit_score_string = "awk -F'\\t' '{printf \"%%s\\t%%s\\t%%s\\n\",$1,$6,$11}' %s > %s" % \
                        (args.solar_output_file, args.bit_score_file)
-"""
 
-get_bit_score_string = "awk -F'\\t' '{printf \"%%s\\t%%s\\t%%s\\n\",$1,$3,$5}' %s > %s" % \
+get_bit_score_string = "awk -F'\\t' '{printf \"%%s\\t%%s\\t%%s\\t%%s\\n\",$1,$3,$5,$8}' %s > %s" % \
                        (args.modified_solar_output_file, args.bit_score_file)
 
 os.system(get_bit_score_string)
+
+
 self_alignment_score_string = "awk -F'\\t' '{if ($1 == $2) {printf \"%%s\\t%%s\\n\",$1,$3}}' %s > %s" % \
                               (args.bit_score_file, args.self_alignment_score_file)
-os.system((self_alignment_score_string))
-nodes_dict = {}
+os.system(self_alignment_score_string)
 
 with open(args.self_alignment_score_file, "r") as node_fd:
     for line in node_fd:
         name, weight = line.strip().split("\t")
         nodes_dict[name] = int(weight)
+"""
 
-with open(args.bit_score_file, "r") as input_fd:
-    with open(args.temp_file, "w") as temp_fd:
+print("Calculating hscore...")
+with open(args.temp_file, "r") as input_fd:
+    with open(args.hscore_file, "w") as hscore_fd:
         #with open(args.output_file, "w") as out_fd:
         for line in input_fd:
-            first, second, weight = line.strip().split("\t")
-            f, s = sorted([first, second])
-            if first == second:
-                continue
-                #out_fd.write("%s\t%s\t%s\n" % (f, s,  int(100 * float(weight)/ float(max(nodes_dict[first], nodes_dict[second])))))
-            temp_fd.write("%s\t%s\t%s\n" % (f, s,  int(100 * float(weight)/float(max(nodes_dict[first], nodes_dict[second])))))
-
-sort_string = "sort -u %s > %s" % (args.temp_file, args.hscore_file)
-os.system(sort_string)
-
+            fl_first, fl_second, fl_weight, fl_alignment_len = line.strip().split("\t")
+            fl_alignment_len = float(fl_alignment_len)
+            sl_first, sl_second, sl_weight, sl_alignment_len = input_fd.next().strip().split("\t")
+            sl_alignment_len = float(sl_alignment_len)
+            length_ratio = min([fl_alignment_len, sl_alignment_len]) / max([length_dict[fl_first],
+                                                                            length_dict[fl_second]])
+            """
+            print(fl_first, fl_second, fl_weight, fl_alignment_len)
+            print(sl_first, sl_second, sl_weight, sl_alignment_len)
+            print(length_dict[fl_first], length_dict[fl_second])
+            print(length_ratio)
+            """
+            if length_ratio > 0.33:
+                fl_score = int(100 * float(fl_weight)/float(max([nodes_dict[fl_first], nodes_dict[fl_second]])))
+                sl_score = int(100 * float(sl_weight)/float(max([nodes_dict[sl_first], nodes_dict[sl_second]])))
+                hscore = min([fl_score, sl_score])
+                hscore_fd.write("%s\t%s\t%s\n" % (fl_first, fl_second, hscore))
+print("Clustering...")
 hcluster_options = " -w 5 -s 0.33"
 hcluster_string = "%s %s %s > %s" % (args.hcluster_sg_path, hcluster_options, args.hscore_file, args.output)
 
@@ -100,3 +119,4 @@ if args.output != "output":
     out_fd.close()
 if args.input != "stdin":
     in_fd.close()
+os.remove(args.temp_file)
