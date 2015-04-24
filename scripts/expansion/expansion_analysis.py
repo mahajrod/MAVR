@@ -97,6 +97,8 @@ with open(args.temp_file, "r") as input_fd:
             fl_alignment_len = float(fl_alignment_len)
             sl_first, sl_second, sl_weight, sl_alignment_len = input_fd.next().strip().split("\t")
             sl_alignment_len = float(sl_alignment_len)
+            if fl_first not in length_dict or fl_second not in length_dict:
+                continue
             length_ratio = min([fl_alignment_len, sl_alignment_len]) / max([length_dict[fl_first],
                                                                             length_dict[fl_second]])
             """
