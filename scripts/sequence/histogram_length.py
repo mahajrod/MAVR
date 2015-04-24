@@ -22,9 +22,9 @@ parser.add_argument("-b", "--number_of_bins", action="store", dest="number_of_bi
                     help="Number of bins in histogram. Incompatible with -w/--width_of_bins option. Default - 30")
 parser.add_argument("-w", "--width_of_bins", action="store", dest="width_of_bins", type=int,
                     help="Width of bins in histogram. Incompatible with -b/--number_of_bins option. Not set by default")
-parser.add_argument("-i", "--min_length", action="store", dest="min_length", type=int, default=1,
+parser.add_argument("-n", "--min_length", action="store", dest="min_length", type=int, default=1,
                     help="Minimum length of sequence to count. Default - 1")
-parser.add_argument("-a", "--max_length", action="store", dest="max_length", type=int,
+parser.add_argument("-x", "--max_length", action="store", dest="max_length", type=int,
                     help="Maximum length of sequence to count. Default - length of longest sequence")
 args = parser.parse_args()
 
