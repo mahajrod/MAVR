@@ -4,8 +4,6 @@ import os
 import sys
 import argparse
 
-from copy import deepcopy
-
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_file", action="store", dest="input", default="stdin",
@@ -100,7 +98,7 @@ with open(args.temp_file, "r") as input_fd:
             sl_first, sl_second, sl_weight, sl_alignment_len = input_fd.next().strip().split("\t")
             sl_alignment_len = float(sl_alignment_len)
             while ((fl_first != sl_first) or (fl_second != sl_second)):
-                fl_first, fl_second, fl_weight, fl_alignment_len = deepcopy(sl_first, sl_second, sl_weight, sl_alignment_len)
+                fl_first, fl_second, fl_weight, fl_alignment_len = sl_first, sl_second, sl_weight, sl_alignment_len
                 sl_first, sl_second, sl_weight, sl_alignment_len = input_fd.next().strip().split("\t")
                 sl_alignment_len = float(sl_alignment_len)
             if (fl_first not in length_dict) or (fl_second not in length_dict):
