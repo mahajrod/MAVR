@@ -171,10 +171,10 @@ def find_homopolymers(seq, nucleotide, min_size=5, search_type="perfect",
 # ----------------------Filters-----------------------
 
 
-def filter(record_dict, expresion):
+def filter_sequences(record_dict, expression):
     record_id_list = []
     for record_id in record_dict:
-        if expresion(record_dict[record_id]):
+        if expression(record_dict[record_id]):
             record_id_list.append(record_id)
     return record_id_list
 

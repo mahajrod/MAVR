@@ -1,11 +1,11 @@
-General
-Download
+SeqAnalysis
 Pipelines
 Converters
-SeqAnalysis
 Tools
+General
 Routines
 Parsers
-Graphics
-Pictures
 CustomCollections
+Download
+Pictures
+Graphics

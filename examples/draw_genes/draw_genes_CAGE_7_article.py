@@ -32,19 +32,20 @@ with open(annotation_file, "r") as ann_fd:
     annotations_dict = SeqIO.to_dict(GFF.parse(ann_fd))
 
 samples_description_dict = {"sample": ["SRR488285",
-                                       "SRR488282",
-                                       "SRR488271",
+                                       #"SRR488282",
+                                       #"SRR488271",
                                        "SRR488272"],
                             "description": ["Adult Mated Male 4 days Post-eclosion Testes",
-                                            "Adult Mated Female 4 days Post-eclosion Ovaries",
-                                            "Adult Mated Female 1 day Post-eclosion Heads",
+                                            #"Adult Mated Female 4 days Post-eclosion Ovaries",
+                                            #"Adult Mated Female 1 day Post-eclosion Heads",
                                             "Adult Mated Male 1 day Post-eclosion Heads"]
                             }
 
 description_dict = {"SRR488285": "Testes\n(4 days male)",
-                    "SRR488282": "Ovaries\n(4 days female)",
-                    "SRR488271": "Heads\n(1 day female)",
-                    "SRR488272": "Heads\n(1 day male)"}
+                    #"SRR488282": "Ovaries\n(4 days female)",
+                    #"SRR488271": "Heads\n(1 day female)",
+                    "SRR488272": "Heads\n(1 day male)"
+                    }
 
 number_of_samples = len(samples_description_dict["sample"])
 samples_sizes_dict = OrderedDict()
@@ -83,7 +84,7 @@ borders = [(10846450, 10847350), (10836650, 10837550)]
 
 ymax = max([max(samples_dict[sample][1]) for sample in samples_dict])
 
-figure = plt.figure(1, (7, 7), dpi=300)
+figure = plt.figure(1, (5, 5), dpi=300)
 subplot_index = 1
 for sample in samples_dict:
     for region_index in [0, 1]:
@@ -100,13 +101,13 @@ for sample in samples_dict:
             plt.ylabel("TPM", fontsize=8)
             #axes.yaxis.set_ticks([0, 20, 40])
             plt.yticks(fontsize=7)
-            plt.text(-0.25, 0.5, description_dict[sample], rotation=90, fontweight="bold",
+            plt.text(-0.35, 0.5, description_dict[sample], rotation=90, fontweight="bold",
                      transform=subplot.transAxes, fontsize=9,
                      horizontalalignment='center',
                      verticalalignment='center')
         plt.bar(samples_dict[sample][0], samples_dict[sample][1], width=1)
         plt.xlim(xmin=borders[region_index][0], xmax=borders[region_index][1])
-        plt.ylim(ymin=0, ymax=ymax)
+        plt.ylim(ymin=0)
         axes.xaxis.set_ticks([])
 
         axes.yaxis.tick_left()
@@ -183,7 +184,7 @@ for subplot_index, limits in zip([9, 10], borders):
             left_coord = exon_location_list[0][0] if left_coord is None else min(left_coord, exon_location_list[0][0])
             right_coord = exon_location_list[-1][-1] if right_coord is None else max(right_coord, exon_location_list[-1][-1])
 
-            vertical_shift = (vertical_distance + cds_height) * strand * line + 2 * cds_height
+            vertical_shift = 50 + (vertical_distance + cds_height) * strand * line + 2 * cds_height
 
             cds_vertical_pos = - 2*vertical_distance - cds_height if strand == -1 else vertical_distance
             utr_vertical_pos = - 2*vertical_distance - (cds_height+utr_height)/2 if strand == -1 else vertical_distance + (cds_height-utr_height)/2
@@ -268,5 +269,6 @@ for subplot_index, limits in zip([9, 10], borders):
         plt.text(0.65, 0.35, "Exon 4", rotation=0, fontweight="bold", transform=subplot.transAxes, fontsize=9,
                          horizontalalignment='center',
                          verticalalignment='center')
+plt.subplots_adjust(hspace=0.15, wspace=0.10, top=0.95, left=0.19, right=0.99, bottom=0.01)
 for extension in ".jpg", ".svg", ".png":
-    plt.savefig("CAGE_sbr_locus_TPM_article_same_scale%s" % extension)
+    plt.savefig("CAGE_sbr_locus_TPM_article_2_samples_diff_scale%s" % extension)

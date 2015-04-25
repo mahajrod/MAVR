@@ -12,6 +12,7 @@ Graphics/__init__.py
 MAVR.egg-info/PKG-INFO
 MAVR.egg-info/SOURCES.txt
 MAVR.egg-info/dependency_links.txt
+MAVR.egg-info/requires.txt
 MAVR.egg-info/top_level.txt
 Parsers/Abstract.py
 Parsers/CAFE.py
@@ -35,6 +36,7 @@ Pipelines/Phylogeny.py
 Pipelines/RepeatSearch.py
 Pipelines/SNPCall.py
 Pipelines/__init__.py
+Pipelines/Expansion/__init__.py
 Routines/File.py
 Routines/Functions.py
 Routines/Sequence.py

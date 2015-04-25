@@ -52,11 +52,12 @@ plt.subplot(1, 1, 1)
 if args.number_of_bins:
     bins = args.number_of_bins
 elif args.width_of_bins:
-    bins = arange(args.min_length, args.max_length, args.width_of_bins, dtype=int32)
+    bins = arange(args.min_length - 1, args.max_length, args.width_of_bins, dtype=int32)
+    bins[0] += 1
     bins = append(bins, [args.max_length])
 else:
     bins = 30
-
+print(bins)
 plt.hist(lengths, bins=bins)
 plt.xlim(xmin=args.min_length, xmax=args.max_length)
 plt.xlabel("Length")
