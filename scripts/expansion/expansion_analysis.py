@@ -24,8 +24,22 @@ parser.add_argument("-t", "--temp_file", action="store", dest="temp_file", defau
                     help="Temp file. Default: temp_file.t")
 parser.add_argument("-c", "--hscore_file", action="store", dest="hscore_file", default="hscore_file.t",
                     help="file with hscore. Default: hscore_file.t")
+parser.add_argument("-s", "--size_of_common_fragment", action="store", dest="size_of_common_fragment", type=float,
+                    default=0.33, help="Minimum threshold of size of fragment mapped to both compared genes. Should be between 0 and 1.00 Default: 0.33")
+parser.add_argument("-w", "--minimum_weight_of_edge", action="store", dest="minimum_weight_of_edge", type=int,
+                    default=5, help="Minimum weight of edge. Should be between 0 and 100. Default: 5")
+parser.add_argument("-d", "--minimum_density_of_edge", action="store", dest="minimum_density_of_edge", type=float,
+                    default=0.33, help="Minimum density of edge. Should be between 0 and 1.00 Default: 0.33")
+
 
 args = parser.parse_args()
+
+if args.size_of_common_fragment > 1:
+    raise ValueError("Size of common fragment should between 0 and 1.00")
+elif (not isinstance(args.minimum_weight_of_edge, int)) or (args.minimum_density_of_edge > 100):
+    raise ValueError("Minimum weight of edge should be integer and less then 100")
+elif args.minimum_density_of_edge > 1:
+    raise ValueError("Minimum density of edge should between 0 and 1.00")
 
 in_fd = sys.stdin if args.input == "stdin" else open(args.input, "r")
 out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
@@ -111,13 +125,13 @@ with open(args.temp_file, "r") as input_fd:
             print(length_dict[fl_first], length_dict[fl_second])
             print(length_ratio)
             """
-            if length_ratio > 0.33:
+            if length_ratio > args.size_of_common_fragment:
                 fl_score = int(100 * float(fl_weight)/float(max([nodes_dict[fl_first], nodes_dict[fl_second]])))
                 sl_score = int(100 * float(sl_weight)/float(max([nodes_dict[sl_first], nodes_dict[sl_second]])))
                 hscore = min([fl_score, sl_score])
                 hscore_fd.write("%s\t%s\t%s\n" % (fl_first, fl_second, hscore))
 print("Clustering...")
-hcluster_options = " -w 5 -s 0.33"
+hcluster_options = " -w %i -s %f" % (args.minimum_weight_of_edge, args.minimum_density_of_edge)
 hcluster_string = "%s %s %s > %s" % (args.hcluster_sg_path, hcluster_options, args.hscore_file, args.output)
 
 os.system(hcluster_string)

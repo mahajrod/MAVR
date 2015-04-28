@@ -57,7 +57,6 @@ elif args.width_of_bins:
     bins = append(bins, [args.max_length])
 else:
     bins = 30
-print(bins)
 plt.hist(lengths, bins=bins)
 plt.xlim(xmin=args.min_length, xmax=args.max_length)
 plt.xlabel("Length")
