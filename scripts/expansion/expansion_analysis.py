@@ -8,8 +8,8 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_file", action="store", dest="input", default="stdin",
                     help="Input file with blast alignment. Default: stdin")
-parser.add_argument("-o", "--output_file", action="store", dest="output", default="gene_clusters.t",
-                    help="Output file with genes clustered in families. Default: gene_clusters.t")
+parser.add_argument("-o", "--output_prefix", action="store", dest="output", default="gene_clusters",
+                    help="Prefix of output file with clustered genes. Default: gene_clusters")
 parser.add_argument("-a", "--solar_script_path", action="store", dest="solar_script_path", default="solar.pl",
                     help="Path to solar script. Default: solar.pl")
 parser.add_argument("-g", "--hcluster_sg_path", action="store", dest="hcluster_sg_path", default="hcluster_sg",
@@ -132,7 +132,9 @@ with open(args.temp_file, "r") as input_fd:
                 hscore_fd.write("%s\t%s\t%s\n" % (fl_first, fl_second, hscore))
 print("Clustering...")
 hcluster_options = " -w %i -s %f" % (args.minimum_weight_of_edge, args.minimum_density_of_edge)
-hcluster_string = "%s %s %s > %s" % (args.hcluster_sg_path, hcluster_options, args.hscore_file, args.output)
+hcluster_string = "%s %s %s > %s" % (args.hcluster_sg_path, hcluster_options, args.hscore_file,
+                                     "%s_w_%i_d_%f.t" % (args.output, args.minimum_weight_of_edge,
+                                                         args.minimum_density_of_edge))
 
 os.system(hcluster_string)
 if args.output != "output":
