@@ -45,7 +45,7 @@ in_fd = sys.stdin if args.input == "stdin" else open(args.input, "r")
 out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
 
 # solar options: protein to protein, construct multiblocks, input format m8 (blast tabular)
-solar_options = " -a prot2prot -c -f m8 -z"
+solar_options = " -a prot2prot -f m8 -z"
 
 solar_string = "%s %s %s > %s" % (args.solar_script_path, solar_options, args.input, args.solar_output_file)
 print("Clustering segments...\n\t" + solar_string)
@@ -79,8 +79,9 @@ with open(args.solar_output_file, "r") as solar_fd:
                     filtered_fd.write("%s\t%s\t%s\t%i\n" %
                                       (f, s, alignment_total_score, alignment_length))
 
-print("Sorting...")
+
 sort_string = "sort %s > %s" % (args.bit_score_file, args.temp_file)
+print("Sorting...\n\t%s" % sort_string)
 os.system(sort_string)
 """
 get_bit_score_string = "awk -F'\\t' '{printf \"%%s\\t%%s\\t%%s\\n\",$1,$6,$11}' %s > %s" % \
@@ -130,12 +131,12 @@ with open(args.temp_file, "r") as input_fd:
                 sl_score = int(100 * float(sl_weight)/float(max([nodes_dict[sl_first], nodes_dict[sl_second]])))
                 hscore = min([fl_score, sl_score])
                 hscore_fd.write("%s\t%s\t%s\n" % (fl_first, fl_second, hscore))
-print("Clustering...")
+
 hcluster_options = " -w %i -s %f" % (args.minimum_weight_of_edge, args.minimum_density_of_edge)
 hcluster_string = "%s %s %s > %s" % (args.hcluster_sg_path, hcluster_options, args.hscore_file,
                                      "%s_w_%i_d_%f.t" % (args.output, args.minimum_weight_of_edge,
                                                          args.minimum_density_of_edge))
-
+print("Clustering...\n\t%s" % hcluster_string)
 os.system(hcluster_string)
 if args.output != "output":
     out_fd.close()

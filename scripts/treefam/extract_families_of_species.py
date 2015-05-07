@@ -19,8 +19,9 @@ def extract_species_genes(family_file_name, queue):
         line_list = line.strip().split()
         protein_list.append(line_list[2])
         gene_list.append(line_list[7])
-    queue.put(family_name, gene_list, protein_list)
-    return family_name, gene_list, protein_list
+    if gene_list:
+        queue.put((family_name, gene_list, protein_list))
+        return family_name, gene_list, protein_list
 
 
 def listener(queue):
@@ -30,7 +31,7 @@ def listener(queue):
     genes_fd = open(args.prefix + "_genes.fam", "w")
     while 1:
         m = queue.get()
-        print "aaa"
+        #print m
         if m == 'kill':
             break
         #print m
@@ -79,18 +80,18 @@ manager = mp.Manager()
 queue = manager.Queue()
 process_pool = mp.Pool(args.threads)
 
-watcher = process_pool.apply_async(listener, (queue))
+watcher = process_pool.apply_async(listener, (queue, ))
 
 jobs = []
 
-for entry in nhx_files[:55]:
+for entry in nhx_files:
     #print entry
-    job = process_pool.apply_async(extract_species_genes, [entry, queue])
+    job = process_pool.apply_async(extract_species_genes, (entry, queue))
     jobs.append(job)
 
 for job in jobs:
     #print job
-    print(job.get())
+    job.get()
 
     #now we are done, kill the listener
 queue.put('kill')
