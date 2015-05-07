@@ -104,7 +104,7 @@ else:
                     if entry_hits:
                         yield QueryResult(hits=entry_hits, id=entry)
 
-blast_results = SearchIO.index(args.input, 'blast-tab')
+blast_results = SearchIO.index(args.input, args.format)
 
 SearchIO.write(iterator(blast_results), args.output, args.format)
 if args.output != "output":
