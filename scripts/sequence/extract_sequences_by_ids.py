@@ -28,6 +28,7 @@ tmp_index_file = "temp.idx"
 id_list = read_ids(args.id_file)
 
 print("Parsing %s..." % args.input_file)
+print("Not found:")
 sequence_dict = SeqIO.index_db(tmp_index_file, args.input_file, format=args.format)
 SeqIO.write(record_by_id_generator(sequence_dict, id_list), args.output_file, format=args.format)
 os.remove(tmp_index_file)

@@ -41,10 +41,7 @@ elif (not isinstance(args.minimum_weight_of_edge, int)) or (args.minimum_density
 elif args.minimum_density_of_edge > 1:
     raise ValueError("Minimum density of edge should between 0 and 1.00")
 
-in_fd = sys.stdin if args.input == "stdin" else open(args.input, "r")
-out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
-
-# solar options: protein to protein, construct multiblocks, input format m8 (blast tabular)
+# solar options: protein to protein, nput format m8 (blast tabular)
 solar_options = " -a prot2prot -f m8 -z"
 
 solar_string = "%s %s %s > %s" % (args.solar_script_path, solar_options, args.input, args.solar_output_file)
@@ -79,29 +76,9 @@ with open(args.solar_output_file, "r") as solar_fd:
                     filtered_fd.write("%s\t%s\t%s\t%i\n" %
                                       (f, s, alignment_total_score, alignment_length))
 
-
 sort_string = "sort %s > %s" % (args.bit_score_file, args.temp_file)
 print("Sorting...\n\t%s" % sort_string)
 os.system(sort_string)
-"""
-get_bit_score_string = "awk -F'\\t' '{printf \"%%s\\t%%s\\t%%s\\n\",$1,$6,$11}' %s > %s" % \
-                       (args.solar_output_file, args.bit_score_file)
-
-get_bit_score_string = "awk -F'\\t' '{printf \"%%s\\t%%s\\t%%s\\t%%s\\n\",$1,$3,$5,$8}' %s > %s" % \
-                       (args.modified_solar_output_file, args.bit_score_file)
-
-os.system(get_bit_score_string)
-
-
-self_alignment_score_string = "awk -F'\\t' '{if ($1 == $2) {printf \"%%s\\t%%s\\n\",$1,$3}}' %s > %s" % \
-                              (args.bit_score_file, args.self_alignment_score_file)
-os.system(self_alignment_score_string)
-
-with open(args.self_alignment_score_file, "r") as node_fd:
-    for line in node_fd:
-        name, weight = line.strip().split("\t")
-        nodes_dict[name] = int(weight)
-"""
 
 print("Calculating hscore...")
 with open(args.temp_file, "r") as input_fd:
@@ -138,8 +115,5 @@ hcluster_string = "%s %s %s > %s" % (args.hcluster_sg_path, hcluster_options, ar
                                                          args.minimum_density_of_edge))
 print("Clustering...\n\t%s" % hcluster_string)
 os.system(hcluster_string)
-if args.output != "output":
-    out_fd.close()
-if args.input != "stdin":
-    in_fd.close()
+
 os.remove(args.temp_file)

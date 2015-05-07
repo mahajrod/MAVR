@@ -29,6 +29,8 @@ def listener(queue):
     #print (queue, prot_fd, gene_fd)
     protein_fd = open(args.prefix + "_proteins.fam", "w")
     genes_fd = open(args.prefix + "_genes.fam", "w")
+    protein_ids_fd = open(args.prefix + "_in_treefam_families_protein.ids", "w")
+    gene_ids_fd = open(args.prefix + "_in_treefam_families_genes.ids", "w")
     while 1:
         m = queue.get()
         #print m
@@ -37,10 +39,19 @@ def listener(queue):
         #print m
         protein_fd.write("%s\t%s\n" % (m[0], ",".join(m[2])))
         genes_fd.write("%s\t%s\n" % (m[0], ",".join(m[1])))
+        for protein_id in m[2]:
+            protein_ids_fd.write(protein_id + "\n")
+        for gene_id in m[1]:
+            gene_ids_fd.write(gene_id + "\n")
         protein_fd.flush()
         genes_fd.flush()
+        protein_ids_fd.flush()
+        gene_ids_fd.flush()
+
     protein_fd.close()
     genes_fd.close()
+    protein_ids_fd.close()
+    gene_ids_fd.close()
 
 parser = argparse.ArgumentParser()
 
