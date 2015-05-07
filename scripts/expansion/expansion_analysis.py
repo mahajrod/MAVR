@@ -45,7 +45,7 @@ in_fd = sys.stdin if args.input == "stdin" else open(args.input, "r")
 out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
 
 # solar options: protein to protein, construct multiblocks, input format m8 (blast tabular)
-solar_options = " -a prot2prot -c -f m8"
+solar_options = " -a prot2prot -c -f m8 -z"
 
 solar_string = "%s %s %s > %s" % (args.solar_script_path, solar_options, args.input, args.solar_output_file)
 print("Clustering segments...\n\t" + solar_string)
