@@ -40,14 +40,16 @@ if args.count_both_strands and args.add_rev_com:
     raise ValueError("Options -b/--count_both_strands and -r/--add_reverse_complement are not compatible")
 
 file_prefix = ".".join(os.path.basename(args.input).split(".")[:-1])
-base_file = "%s_%i_mer.jf" % (file_prefix, args.kmer_length)
-kmer_table_file = "%s_%i_mer.counts" % (file_prefix, args.kmer_length)
-kmer_file = "%s_%i_mer.kmer" % (file_prefix, args.kmer_length)
 
 if args.add_rev_com:
     file_with_rev_com = file_prefix + "_with_rev_com.fasta"
     record_dict = SeqIO.index_db("temp_index.idx", [args.input], format="fasta")
     SeqIO.write(rev_com_generator(record_dict, yield_original_record=True), file_with_rev_com, "fasta")
+    file_prefix += "_with_rev_com"
+
+base_file = "%s_%i_mer.jf" % (file_prefix, args.kmer_length)
+kmer_table_file = "%s_%i_mer.counts" % (file_prefix, args.kmer_length)
+kmer_file = "%s_%i_mer.kmer" % (file_prefix, args.kmer_length)
 
 Jellyfish.threads = args.threads
 Jellyfish.count(args.input if not args.add_rev_com else file_with_rev_com, base_file,
