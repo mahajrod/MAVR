@@ -85,3 +85,6 @@ if args.draw_distribution:
     subplot.set_xscale('log', basex=10)
     for extension in ["png", "svg"]:
         plt.savefig("%s.%s" % (picture_prefix, extension))
+
+if args.add_rev_com:
+    os.remove("temp_index.idx")
