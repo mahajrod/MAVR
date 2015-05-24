@@ -75,8 +75,8 @@ exon_type = "exon"
 cds_type = "CDS"
 
 
-cds_height = 14
-utr_height = 8
+cds_height = 28
+utr_height = 16
 print (samples_dict)
 vertical_distance = 14
 
@@ -86,6 +86,14 @@ ymax = max([max(samples_dict[sample][1]) for sample in samples_dict])
 
 figure = plt.figure(1, (5, 5), dpi=300)
 subplot_index = 1
+gene_start = 10847092
+cage_peaks_dict = {"SRR488272": [10846888, 10847111],
+                   "SRR488285": [10837480, 10846888, 10847093]}
+
+
+def calc_relative_coordinate_label(peak_coord):
+    return str(gene_start - peak_coord + 1) if gene_start - peak_coord >= 0 else str(gene_start - peak_coord)
+
 for sample in samples_dict:
     for region_index in [0, 1]:
         subplot = plt.subplot(number_of_samples + 1, 2, subplot_index)
@@ -98,40 +106,45 @@ for sample in samples_dict:
             axes.spines['left'].set_color('none')
             axes.yaxis.set_ticks([])
         if region_index == 0:
-            plt.ylabel("TPM", fontsize=8)
+            plt.ylabel("TPM", fontsize=9)
             #axes.yaxis.set_ticks([0, 20, 40])
-            plt.yticks(fontsize=7)
-            plt.text(-0.35, 0.5, description_dict[sample], rotation=90, fontweight="bold",
-                     transform=subplot.transAxes, fontsize=9,
+            plt.yticks(fontsize=9)
+            plt.text(-0.30, 0.5, description_dict[sample], rotation=90, fontweight="bold",
+                     transform=subplot.transAxes, fontsize=10,
                      horizontalalignment='center',
                      verticalalignment='center')
         plt.bar(samples_dict[sample][0], samples_dict[sample][1], width=1)
         plt.xlim(xmin=borders[region_index][0], xmax=borders[region_index][1])
         plt.ylim(ymin=0, ymax=ymax)
-        axes.xaxis.set_ticks([])
-
+        axes.xaxis.set_ticks_position('bottom')
+        axes.xaxis.set_ticks(cage_peaks_dict[sample])
+        axes.xaxis.set_ticklabels(map(calc_relative_coordinate_label, cage_peaks_dict[sample]), fontsize=9)
+        axes.xaxis.set_tick_params(direction='out')
         axes.yaxis.tick_left()
+        plt.xlim(xmin=borders[region_index][0], xmax=borders[region_index][1])
+        plt.ylim(ymin=0, ymax=ymax)
         ax = plt.gca()
         ax.invert_xaxis()
         subplot_index += 1
 for subplot_index, limits in zip([9, 10], borders):
-    subplot = plt.subplot(5, 2, subplot_index)
+    subplot = plt.subplot((number_of_samples + 1)*2, 2, subplot_index)
 
     x_formatter = tck.ScalarFormatter(useOffset=False)
     x_formatter.set_scientific(False)
 
-    axes = figure.add_subplot(5, 2, subplot_index)
+    axes = figure.add_subplot((number_of_samples + 1)*2, 2, subplot_index)
 
     axes.get_yaxis().set_visible(False)
-    axes.get_xaxis().set_visible(False)
+    axes.get_xaxis().set_visible(True)
+    axes.xaxis.set_ticks_position('bottom')
     #axes.xaxis.set_major_formatter(x_formatter)
 
-    axes.spines['bottom'].set_color('none')
+    #axes.spines['bottom'].set_color('none')
     axes.spines['right'].set_color('none')
     axes.spines['left'].set_color('none')
     axes.spines['top'].set_color('none')
     """
-    axes.xaxis.set_ticks_position('bottom')
+
     axes.xaxis.set_major_formatter(tck.FuncFormatter(lambda x, p: format(int(x), ',')))
     """
     left_coord = None
@@ -188,8 +201,8 @@ for subplot_index, limits in zip([9, 10], borders):
 
             cds_vertical_pos = - 2*vertical_distance - cds_height if strand == -1 else vertical_distance
             utr_vertical_pos = - 2*vertical_distance - (cds_height+utr_height)/2 if strand == -1 else vertical_distance + (cds_height-utr_height)/2
-            cds_vertical_pos += vertical_shift
-            utr_vertical_pos += vertical_shift
+            #cds_vertical_pos += vertical_shift
+            #utr_vertical_pos += vertical_shift
 
             intron_line_y = cds_vertical_pos + cds_height/2
 
@@ -221,9 +234,7 @@ for subplot_index, limits in zip([9, 10], borders):
 
 
 
-
-
-    axes.xaxis.set_ticks([])
+    #axes.xaxis.set_ticks([])
     axes.invert_xaxis()
     dps = figure.dpi_scale_trans.inverted()
     bbox = axes.get_window_extent().transformed(dps)
@@ -255,20 +266,26 @@ for subplot_index, limits in zip([9, 10], borders):
     """
     #axes.text(xmin, cds_height/2, "chr %s" % annotations_dict.keys()[0], fontsize=10, fontweight='bold')
     #plt.xticks(fontsize=10)
-    plt.xlim(xmin=limits[0], xmax=limits[1])
-    plt.ylim(ymin=ymin, ymax=ymax)
+
 
     ax = plt.gca()
-    ax.invert_xaxis()
+    ax.set_xticks([10836693, 10837214, 10846492, 10847092])
+    ax.set_xticklabels(["10400", "9879", "601", "1"], fontsize=9)
+    ax.xaxis.set_tick_params(direction='out')
+    #ax.xaxis.set_ticks([10847092], [1])
+
 
     if subplot_index == 9:
-        plt.text(0.6, 0.35, "Exon 1", rotation=0, fontweight="bold", transform=subplot.transAxes, fontsize=9,
+        plt.text(0.6, 0.15, "Exon 1", rotation=0, fontweight="bold", transform=subplot.transAxes, fontsize=9,
                          horizontalalignment='center',
                          verticalalignment='center')
     if subplot_index == 10:
-        plt.text(0.65, 0.35, "Exon 4", rotation=0, fontweight="bold", transform=subplot.transAxes, fontsize=9,
+        plt.text(0.65, 0.15, "Exon 4", rotation=0, fontweight="bold", transform=subplot.transAxes, fontsize=9,
                          horizontalalignment='center',
                          verticalalignment='center')
-plt.subplots_adjust(hspace=0.15, wspace=0.10, top=0.95, left=0.19, right=0.99, bottom=0.01)
+    plt.xlim(xmin=limits[0], xmax=limits[1])
+    plt.ylim(ymin=ymin, ymax=ymax)
+    ax.invert_xaxis()
+plt.subplots_adjust(hspace=0.25, wspace=0.10, top=0.95, left=0.17, right=0.97, bottom=0.01)
 for extension in ".jpg", ".svg", ".png":
     plt.savefig("CAGE_sbr_locus_TPM_article_2_samples_same_scale%s" % extension)

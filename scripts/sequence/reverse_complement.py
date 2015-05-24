@@ -21,6 +21,6 @@ args = parser.parse_args()
 
 record_dict = SeqIO.index_db("temp_index.idx", [args.input], format="fasta")
 
-SeqIO.write(rev_com_generator(record_dict, yield_original_record=True), args.output, "fasta")
+SeqIO.write(rev_com_generator(record_dict, yield_original_record=args.write_original), args.output, "fasta")
 
 os.remove("temp_index.idx")

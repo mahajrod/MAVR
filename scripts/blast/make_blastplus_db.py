@@ -9,8 +9,6 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_file", action="store", dest="input_file",
                     help="Input file")
-parser.add_argument("-o", "--output_file", action="store", dest="output_file",
-                    help="Output file")
 parser.add_argument("-m", "--mask", action="store_true", dest="mask",
                     help="Mask sequences with dustmasker")
 parser.add_argument("-t", "--database_title", action="store", dest="db_title",

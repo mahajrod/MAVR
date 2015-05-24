@@ -15,6 +15,7 @@
       <w>extention</w>
       <w>facecolor</w>
       <w>fasta</w>
+      <w>fastq</w>
       <w>fastqc</w>
       <w>figsize</w>
       <w>filelist</w>
@@ -23,12 +24,16 @@
       <w>ftype</w>
       <w>gatk</w>
       <w>genotyper</w>
+      <w>histo</w>
       <w>homopolymers</w>
       <w>homozygotes</w>
       <w>indel</w>
       <w>intergenic</w>
       <w>intron</w>
       <w>iter</w>
+      <w>kmer</w>
+      <w>kmers</w>
+      <w>logscale</w>
       <w>mahajrod</w>
       <w>mapall</w>
       <w>mapvsw</w>

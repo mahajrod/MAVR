@@ -82,6 +82,8 @@ Tools/GATK/UnifiedGenotyper.py
 Tools/GATK/VariantFiltration.py
 Tools/GATK/VariantRecalibrator.py
 Tools/GATK/__init__.py
+Tools/Kmers/Jellyfish.py
+Tools/Kmers/__init__.py
 Tools/Samtools/Samtools.py
 Tools/Samtools/__init__.py
 Tools/Tuxedo/Cufflinks.py
