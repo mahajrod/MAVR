@@ -5,6 +5,8 @@ import os
 import argparse
 
 from Bio import SeqIO
+import matplotlib.pyplot as plt
+
 from Tools.Kmers import Jellyfish
 from Routines.Sequence import rev_com_generator
 
@@ -30,6 +32,8 @@ parser.add_argument("-r", "--add_reverse_complement", action="store_true", dest=
                     help="Add reverse-complement sequences before counting kmers. "
                          "Works only for fasta sequences. "
                          "Not compatible with -b/--count_both_strands option")
+parser.add_argument("-d", "--draw_distribution", action="store_true", dest="draw_distribution",
+                    help="Draw distribution of kmers")
 args = parser.parse_args()
 
 if args.count_both_strands and args.add_rev_com:
@@ -53,3 +57,29 @@ Jellyfish.dump(base_file, kmer_table_file)
 sed_string = 'sed -e "s/\t.*//" %s > %s' % (kmer_table_file, kmer_file)
 os.system(sed_string)
 
+if args.draw_distribution:
+    histo_file = "%s_%i_mer.histo" % (file_prefix, args.kmer_length)
+    picture_prefix = "%s_%i_mer_histogram" % (file_prefix, args.kmer_length)
+    Jellyfish.histo(base_file, histo_file, upper_count=10000000)
+
+    counts = []
+    bins = []
+
+    with open(histo_file, "r") as histo_fd:
+        for line in histo_fd:
+            entry = line.strip().split()
+            counts.append(entry[1])
+            bins.append(entry[0])
+
+    figure = plt.figure(1, figsize=(8, 8), dpi=300)
+    subplot = plt.subplot(1, 1, 1)
+    plt.suptitle("Distribution of %i-mers" % args.kmer_length,
+                 fontweight='bold')
+    plt.plot(bins, counts)
+
+    plt.xlabel("Multiplicity")
+    plt.ylabel("Number of distinct kmers")
+    subplot.set_yscale('log', basey=10)
+    subplot.set_xscale('log', basex=10)
+    for extension in ["png", "svg"]:
+        plt.savefig("%s.%s" % (picture_prefix, extension))

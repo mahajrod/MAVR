@@ -5,20 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0137b4ba-9cb9-4454-8e03-43ff7c136081" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/Kmers/Jellyfish.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/Kmers/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/blast/filter_blast_output_by_parameters.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/kmer/get_kmer_list.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/blast/filter_blast_output.py" afterPath="$PROJECT_DIR$/scripts/blast/filter_blast_output_by_ids.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" afterPath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/SOURCES.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/SOURCES.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/draw_genes/draw_genes_CAGE_6_article.py" afterPath="$PROJECT_DIR$/examples/draw_genes/draw_genes_CAGE_6_article.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/mahajrod.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/mahajrod.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/blast/make_blastplus_db.py" afterPath="$PROJECT_DIR$/scripts/blast/make_blastplus_db.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence/reverse_complement.py" afterPath="$PROJECT_DIR$/scripts/sequence/reverse_complement.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/file/split_file_by_column.py" afterPath="$PROJECT_DIR$/scripts/file/split_file_by_column.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/kmer/get_kmer_list.py" afterPath="$PROJECT_DIR$/scripts/kmer/get_kmer_list.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -111,11 +98,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="get_kmer_list.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="get_kmer_list.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/kmer/get_kmer_list.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="1098">
-              <caret line="53" column="20" selection-start-line="53" selection-start-column="20" selection-end-line="53" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.9237288" vertical-offset="840" max-vertical-offset="1620">
+              <caret line="83" column="36" selection-start-line="83" selection-start-column="36" selection-end-line="83" selection-end-column="36" />
               <folding>
                 <element signature="e#55#64#0" expanded="true" />
               </folding>
@@ -123,11 +110,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="draw_kmer_distribution.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="draw_kmer_distribution.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.59322035" vertical-offset="714" max-vertical-offset="1422">
-              <caret line="63" column="38" selection-start-line="63" selection-start-column="38" selection-end-line="63" selection-end-column="38" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="174" max-vertical-offset="1422">
+              <caret line="14" column="79" selection-start-line="14" selection-start-column="79" selection-end-line="14" selection-end-column="79" />
               <folding>
                 <element signature="e#55#64#0" expanded="true" />
               </folding>
@@ -197,8 +184,8 @@
         <option value="$PROJECT_DIR$/Tools/Kmers/Jellyfish.py" />
         <option value="$PROJECT_DIR$/Tools/Kmers/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/reverse_complement.py" />
-        <option value="$PROJECT_DIR$/scripts/kmer/get_kmer_list.py" />
         <option value="$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution.py" />
+        <option value="$PROJECT_DIR$/scripts/kmer/get_kmer_list.py" />
       </list>
     </option>
   </component>
@@ -1022,12 +1009,6 @@
       <option name="number" value="Default" />
       <updated>1396791476390</updated>
     </task>
-    <task id="LOCAL-00013" summary="...">
-      <created>1412985526710</created>
-      <option name="number" value="00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1412985526710</updated>
-    </task>
     <task id="LOCAL-00014" summary="...">
       <created>1412985540742</created>
       <option name="number" value="00014" />
@@ -1316,7 +1297,13 @@
       <option name="project" value="LOCAL" />
       <updated>1431016571124</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="a">
+      <created>1432493312313</created>
+      <option name="number" value="00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1432493312529</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1343,12 +1330,13 @@
     <frame x="1" y="25" width="1920" height="1055" extended-state="0" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32968238" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.088495575" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24960506" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25882974" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25882974" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2172524" sideWeight="0.10068529" order="9" side_tool="true" content_ui="tabs" />
@@ -1359,7 +1347,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36634716" sideWeight="0.49868214" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39510116" sideWeight="0.6715867" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2489339" sideWeight="0.6706783" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399361" sideWeight="0.49973643" order="5" side_tool="false" content_ui="tabs" />
@@ -1804,20 +1791,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/kmer/get_kmer_list.py">
+    <entry file="file://$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="1098">
-          <caret line="53" column="20" selection-start-line="53" selection-start-column="20" selection-end-line="53" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="174" max-vertical-offset="1422">
+          <caret line="14" column="79" selection-start-line="14" selection-start-column="79" selection-end-line="14" selection-end-column="79" />
           <folding>
             <element signature="e#55#64#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution.py">
+    <entry file="file://$PROJECT_DIR$/scripts/kmer/get_kmer_list.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.59322035" vertical-offset="714" max-vertical-offset="1422">
-          <caret line="63" column="38" selection-start-line="63" selection-start-column="38" selection-end-line="63" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.9237288" vertical-offset="840" max-vertical-offset="1620">
+          <caret line="83" column="36" selection-start-line="83" selection-start-column="36" selection-end-line="83" selection-end-column="36" />
           <folding>
             <element signature="e#55#64#0" expanded="true" />
           </folding>
