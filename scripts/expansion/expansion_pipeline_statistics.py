@@ -13,10 +13,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def split_gene_names(genes_list, name_first=True):
+def split_gene_names(genes_list, name_first=True, separator="_"):
     species_dict = OrderedDict()
     for gene in genes_list:
-        gene_name, species = gene.split("_")
+        gene_name, species = gene.split(separator)
         if name_first:
             gene_name, species = species, gene_name
         if species not in species_dict:
@@ -38,6 +38,8 @@ parser.add_argument("-s", "--species_set", action="store", dest="species_set",
                     help="Comma separated set of species.")
 parser.add_argument("-l", "--name_last", action="store_false", dest="name_first", default=True,
                     help="Position of name of species in gene_id")
+parser.add_argument("-e", "--name_separator", action="store", dest="name_separator", default="_",
+                    help="Separator between species name and gene name. Default: '_'")
 args = parser.parse_args()
 
 args.species_set = set(args.species_set.split(","))
@@ -56,10 +58,9 @@ for species in args.species_set:
 for line in in_fd:
     gene_list = line.strip().split("\t")[6][:-1].split(",")
     number_of_genes_in_family_list.append(int(line.strip().split("\t")[5]))
-    species_dict = split_gene_names(gene_list, name_first=args.name_first)
+    species_dict = split_gene_names(gene_list, name_first=args.name_first, separator=args.name_separator)
     families_list.append(species_dict)
     species_in_family_list.append(len(species_dict))
-    #print(species_dict)
     for species in args.species_set:
         if species in species_dict:
             species_families_dict[species].append(len(species_dict[species]))

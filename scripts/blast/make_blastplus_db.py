@@ -16,7 +16,7 @@ parser.add_argument("-t", "--database_title", action="store", dest="db_title",
 parser.add_argument("-n", "--name", action="store", dest="name",
                     help="Database name")
 parser.add_argument("-y", "--database_type", action="store", dest="database_type", default="nucleotide",
-                    help="Database type")
+                    help="Database type. Allowed types: protein and nucleotide. Default: nucleotide")
 args = parser.parse_args()
 
 if args.mask:

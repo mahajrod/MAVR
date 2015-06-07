@@ -1,5 +1,24 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
+"""
+Tested on treefam database 9.
+Species with problems during extracting:
+    UNSOLVED: uncommon format in treefam database(even ids were not extracted), solution - write custom scripts for extraction
+        bursaphelenchus_xylophilus
+        capitella_teleta
+        helobdella_robusta
+        heterorhabditis_bacteriophora
+        lottia_gigantea
+        meloidogyne_hapla
+        monosiga_brevicollis
+        proterospongia_sp
+        strongyloides_ratti
+    SOLVED: different ids in sequence and families (presence ":" in ids in files with families - in sequence files is replaced by "_"), solved by replacement in files with extracted ids
+        tribolium_castaneum
+        amphimedon_queenslandica
+        schizosaccharomyces_pombe
+"""
+
 import os
 import sys
 import argparse
@@ -25,18 +44,15 @@ def extract_species_genes(family_file_name, queue):
 
 
 def listener(queue):
-    '''listens for messages on the q, writes to file. '''
-    #print (queue, prot_fd, gene_fd)
+    """listens for messages on the queue, writes to file."""
     protein_fd = open(args.prefix + "_proteins.fam", "w")
     genes_fd = open(args.prefix + "_genes.fam", "w")
     protein_ids_fd = open(args.prefix + "_in_treefam_families_protein.ids", "w")
     gene_ids_fd = open(args.prefix + "_in_treefam_families_genes.ids", "w")
     while 1:
         m = queue.get()
-        #print m
         if m == 'kill':
             break
-        #print m
         protein_fd.write("%s\t%s\n" % (m[0], ",".join(m[2])))
         genes_fd.write("%s\t%s\n" % (m[0], ",".join(m[1])))
         for protein_id in m[2]:
