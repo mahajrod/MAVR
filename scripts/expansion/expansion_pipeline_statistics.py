@@ -85,7 +85,7 @@ hist_out = plt.hist(species_in_family_list, bins=bins, align='left', color='gree
 
 plt.xlabel("Species with genes in cluster")
 plt.ylabel("N of clusters")
-plt.xlim(xmin=0.5, xmax=8.5)
+plt.xlim(xmin=0.5, xmax=args.number_of_species + 0.5)
 
 
 ax3 = plt.subplot(2, 1, 2)
