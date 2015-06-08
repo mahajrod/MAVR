@@ -5,12 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0137b4ba-9cb9-4454-8e03-43ff7c136081" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/Assemblers/Fermi.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/Assemblers/Platanus.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/Assemblers/Quast.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/Assemblers/Spades.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/Assemblers/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/expansion/expansion_pipeline_statistics.py" afterPath="$PROJECT_DIR$/scripts/expansion/expansion_pipeline_statistics.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/expansion/compare_clusters.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/assembly_transcriptome.py" afterPath="$PROJECT_DIR$/scripts/assembly_transcriptome.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/treefam/check_coherence.py" afterPath="$PROJECT_DIR$/scripts/treefam/check_coherence.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence/check_selenocystein_presence.py" afterPath="$PROJECT_DIR$/scripts/sequence/check_selenocystein_presence.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/phylogenetics/convert_trees.py" afterPath="$PROJECT_DIR$/scripts/phylogenetics/convert_trees.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/draw_genes.py" afterPath="$PROJECT_DIR$/scripts/draw_genes.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/phylogenetics/draw_tree.py" afterPath="$PROJECT_DIR$/scripts/phylogenetics/draw_tree.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/file/extract_by_column_value.py" afterPath="$PROJECT_DIR$/scripts/file/extract_by_column_value.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/extract_genes_from_treefam_output.py" afterPath="$PROJECT_DIR$/scripts/extract_genes_from_treefam_output.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/phylogenetics/extract_node_names.py" afterPath="$PROJECT_DIR$/scripts/phylogenetics/extract_node_names.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence/histogram_GC_content.py" afterPath="$PROJECT_DIR$/scripts/sequence/histogram_GC_content.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/alignment/make_blast_plus_db.py" afterPath="$PROJECT_DIR$/scripts/alignment/make_blast_plus_db.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/blast/make_blastplus_db.py" afterPath="$PROJECT_DIR$/scripts/blast/make_blastplus_db.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/blast/parallel_blast_commands.py" afterPath="$PROJECT_DIR$/scripts/blast/parallel_blast_commands.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/phylogenetics/remove_nodes_by_ids.py" afterPath="$PROJECT_DIR$/scripts/phylogenetics/remove_nodes_by_ids.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/alignment/slice_multiple_alignment.py" afterPath="$PROJECT_DIR$/scripts/alignment/slice_multiple_alignment.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -59,34 +69,76 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="expansion_pipeline_statistics.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="expansion_pipeline_statistics.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/expansion/expansion_pipeline_statistics.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8320373" vertical-offset="167" max-vertical-offset="2160">
-              <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="2178">
+              <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="make_blastplus_db.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/blast/make_blastplus_db.py">
+      <file leaf-file-name="split_hclust_output.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/expansion/split_hclust_output.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="738">
-              <caret line="18" column="99" selection-start-line="18" selection-start-column="99" selection-end-line="18" selection-end-column="99" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="756" max-vertical-offset="1440">
+              <caret line="75" column="30" selection-start-line="75" selection-start-column="30" selection-end-line="75" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BLASTPlus.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/BLAST/BLASTPlus.py">
+      <file leaf-file-name="test_hcluster_options.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/expansion/test_hcluster_options.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="185" max-vertical-offset="4158">
-              <caret line="310" column="0" selection-start-line="310" selection-start-column="0" selection-end-line="310" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="728" max-vertical-offset="1494">
+              <caret line="45" column="22" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="histogram_GC_content.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/sequence/histogram_GC_content.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="95" max-vertical-offset="756">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
-                <element signature="e#892#12864#1" expanded="false" />
+                <element signature="e#55#74#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="histogram_length.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/sequence/histogram_length.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="1206">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="compare_clusters.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/expansion/compare_clusters.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.62632376" vertical-offset="810" max-vertical-offset="2106">
+              <caret line="68" column="31" selection-start-line="68" selection-start-column="31" selection-end-line="68" selection-end-column="31" />
+              <folding>
+                <element signature="e#54#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="draw_genes_CAGE_7_article.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/draw_genes/draw_genes_CAGE_7_article.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="4026" max-vertical-offset="4896">
+              <caret line="271" column="2" selection-start-line="271" selection-start-column="0" selection-end-line="271" selection-end-column="91" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -103,51 +155,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Spades.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/Assemblers/Spades.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Platanus.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/Assemblers/Platanus.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="558">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Fermi.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/Assemblers/Fermi.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="558">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Quast.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/Assemblers/Quast.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="558">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="check_selenocystein_presence.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/sequence/check_selenocystein_presence.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="684">
-              <caret line="11" column="7" selection-start-line="9" selection-start-column="0" selection-end-line="20" selection-end-column="26" />
+              <caret line="29" column="28" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -156,7 +168,7 @@
       <file leaf-file-name="extract_sequences_by_ids.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/sequence/extract_sequences_by_ids.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="774">
+            <state vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="774">
               <caret line="9" column="2" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="52" />
               <folding />
             </state>
@@ -176,8 +188,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/file/split_file_by_column.py" />
-        <option value="$PROJECT_DIR$/scripts/extract_genes_from_treefam_output.py" />
         <option value="$PROJECT_DIR$/scripts/file/extract_by_column_value.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/check_selenocystein_presence.py" />
         <option value="$PROJECT_DIR$/scripts/alignment/slice_alignment.py" />
@@ -201,7 +211,6 @@
         <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/Pictures/Draw.py" />
         <option value="$PROJECT_DIR$/examples/draw_genes/draw_genes_CAGE_4_article.py" />
-        <option value="$PROJECT_DIR$/examples/draw_genes/draw_genes_CAGE_7_article.py" />
         <option value="$PROJECT_DIR$/Routines/Sequence.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/extract_sequences_by_length.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/histogram_length.py" />
@@ -227,11 +236,15 @@
         <option value="$PROJECT_DIR$/scripts/parallel_blast_commands.py" />
         <option value="$PROJECT_DIR$/scripts/blast/parallel_blast_commands.py" />
         <option value="$PROJECT_DIR$/scripts/expansion/expansion_pipeline_statistics.py" />
+        <option value="$PROJECT_DIR$/examples/draw_genes/draw_genes_CAGE_7_article.py" />
+        <option value="$PROJECT_DIR$/scripts/expansion/split_hclust_output.py" />
+        <option value="$PROJECT_DIR$/scripts/expansion/compare_clusters.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="34" />
+    <option name="x" value="59" />
+    <option name="y" value="26" />
     <option name="width" value="1920" />
     <option name="height" value="990" />
   </component>
@@ -277,6 +290,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -645,13 +659,12 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="options.lastSelected" value="editor.preferences.appearance" />
     <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="/usr/bin/python" />
     <property name="restartRequiresConfirmation" value="true" />
@@ -685,9 +698,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts/expansion" />
       <recent name="$PROJECT_DIR$/Tools/Kmers" />
       <recent name="$PROJECT_DIR$/scripts/blast" />
-      <recent name="$PROJECT_DIR$/scripts/expansion" />
       <recent name="$PROJECT_DIR$/examples/draw_genes" />
       <recent name="$PROJECT_DIR$/examples/desaminases" />
     </key>
@@ -981,24 +994,6 @@
       <option name="number" value="Default" />
       <updated>1396791476390</updated>
     </task>
-    <task id="LOCAL-00018" summary="A lot of changes">
-      <created>1419626871967</created>
-      <option name="number" value="00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1419626871967</updated>
-    </task>
-    <task id="LOCAL-00019" summary="A lot of changes">
-      <created>1422399682375</created>
-      <option name="number" value="00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1422399682375</updated>
-    </task>
-    <task id="LOCAL-00020" summary="A lot of changes">
-      <created>1422399855108</created>
-      <option name="number" value="00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1422399855108</updated>
-    </task>
     <task id="LOCAL-00021" summary="A lot of changes">
       <created>1422400857101</created>
       <option name="number" value="00021" />
@@ -1275,7 +1270,25 @@
       <option name="project" value="LOCAL" />
       <updated>1433692038522</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="a">
+      <created>1433714177764</created>
+      <option name="number" value="00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1433714177764</updated>
+    </task>
+    <task id="LOCAL-00068" summary="a">
+      <created>1433714733619</created>
+      <option name="number" value="00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1433714733619</updated>
+    </task>
+    <task id="LOCAL-00069" summary="a">
+      <created>1433772645672</created>
+      <option name="number" value="00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1433772645673</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1299,7 +1312,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="34" width="1920" height="990" extended-state="0" />
+    <frame x="59" y="26" width="1920" height="990" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1308,10 +1321,10 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24960506" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25882974" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2586027" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23340961" sideWeight="0.10068529" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23299888" sideWeight="0.10068529" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1395,6 +1408,14 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/scripts/sequence/extract_sequences_by_ids.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="774">
+          <caret line="9" column="2" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/examples/draw_genes/CAGE_sbr_locus_TPM_article_2_samples_diff_scale.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1403,13 +1424,6 @@
     <entry file="file://$PROJECT_DIR$/examples/draw_genes/CAGE_sbr_locus_TPM_article_2_samples_same_scale.png">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/draw_genes/draw_genes_CAGE_7_article.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26966292" vertical-offset="4182" max-vertical-offset="4896">
-          <caret line="251" column="61" selection-start-line="251" selection-start-column="61" selection-end-line="251" selection-end-column="61" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/blast/filter_blast_output_by_parameters.py">
@@ -1444,13 +1458,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="224" max-vertical-offset="936">
           <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="39" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/expansion/test_hcluster_options.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="728" max-vertical-offset="1494">
-          <caret line="45" column="22" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -1584,7 +1591,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="948" max-vertical-offset="3186">
           <caret line="73" column="23" selection-start-line="73" selection-start-column="18" selection-end-line="73" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1602,7 +1608,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2016">
           <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1610,7 +1615,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="708">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1650,7 +1654,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="2916">
           <caret line="117" column="21" selection-start-line="117" selection-start-column="21" selection-end-line="117" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1658,7 +1661,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="432" max-vertical-offset="1764">
           <caret line="6" column="9" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1666,7 +1668,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="774">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1674,15 +1675,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="936">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/sequence/histogram_length.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="1206">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1690,9 +1682,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="486">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding>
-            <element signature="e#54#63#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1700,9 +1689,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2412">
           <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
-          <folding>
-            <element signature="e#800#809#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1710,9 +1696,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1589" max-vertical-offset="2232">
           <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
-          <folding>
-            <element signature="e#54#63#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1720,7 +1703,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="738">
           <caret line="18" column="99" selection-start-line="18" selection-start-column="99" selection-end-line="18" selection-end-column="99" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1752,34 +1734,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Assemblers/Spades.py">
+    <entry file="file://$PROJECT_DIR$/examples/draw_genes/draw_genes_CAGE_7_article.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="643">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Assemblers/Platanus.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="643">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Assemblers/Fermi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="643">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Assemblers/Quast.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="643">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="4026" max-vertical-offset="4896">
+          <caret line="271" column="2" selection-start-line="271" selection-start-column="0" selection-end-line="271" selection-end-column="91" />
           <folding />
         </state>
       </provider>
@@ -1787,16 +1745,60 @@
     <entry file="file://$PROJECT_DIR$/scripts/sequence/check_selenocystein_presence.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="684">
-          <caret line="11" column="7" selection-start-line="9" selection-start-column="0" selection-end-line="20" selection-end-column="26" />
+          <caret line="29" column="28" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/expansion/expansion_pipeline_statistics.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8320373" vertical-offset="167" max-vertical-offset="2160">
-          <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1296" max-vertical-offset="2178">
+          <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/expansion/split_hclust_output.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="756" max-vertical-offset="1440">
+          <caret line="75" column="30" selection-start-line="75" selection-start-column="30" selection-end-line="75" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/expansion/test_hcluster_options.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="728" max-vertical-offset="1494">
+          <caret line="45" column="22" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence/histogram_GC_content.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="95" max-vertical-offset="756">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#55#74#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence/histogram_length.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="1206">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/expansion/compare_clusters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.62632376" vertical-offset="810" max-vertical-offset="2106">
+          <caret line="68" column="31" selection-start-line="68" selection-start-column="31" selection-end-line="68" selection-end-column="31" />
+          <folding>
+            <element signature="e#54#63#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
