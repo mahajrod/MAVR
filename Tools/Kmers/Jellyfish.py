@@ -27,7 +27,7 @@ class Jellyfish(Tool):
         options += " -C" if count_both_strands else ""
         options += " -L %i" % lower_count if lower_count is not None else ""
         options += " -U %i" % upper_count if upper_count is not None else ""
-        options += " %s" % in_file
+        options += " %s" % (" ".join(in_file) if (isinstance(in_file, list)) or (isinstance(in_file, tuple)) else in_file)
 
         self.execute(options, cmd="jellyfish count")
 

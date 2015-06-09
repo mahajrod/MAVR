@@ -37,6 +37,7 @@ Pipelines/RepeatSearch.py
 Pipelines/SNPCall.py
 Pipelines/__init__.py
 Pipelines/Expansion/__init__.py
+Routines/Alignment.py
 Routines/File.py
 Routines/Functions.py
 Routines/Sequence.py

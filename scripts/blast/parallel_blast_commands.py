@@ -25,7 +25,8 @@ parser.add_argument("-m", "--common_options", action="store", dest="common_optio
                     help="Options common to all threads")
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=1, type=int,
                     help="Number of threads")
-
+parser.add_argument("-r", "--retain_temp_dirs", action="store_true", dest="retain_temp_dirs", default=False,
+                    help="Store temporary directories")
 args = parser.parse_args()
 
 sequence_dict = SeqIO.index_db("temp.idx", args.input, format="fasta")
@@ -69,4 +70,8 @@ os.system(xargs_string)
 merge_string = "cat %s/* > %s.hits" % (args.output_directory, args.output_prefix)
 
 os.system(merge_string)
+
+if not args.retain_temp_dirs:
+    os.remove(args.output_directory)
+    os.remove(args.splited_directory)
 
