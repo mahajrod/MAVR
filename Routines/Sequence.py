@@ -214,6 +214,17 @@ def record_by_id_generator(record_dict, id_list):
             print (record_id)
 
 
+def record_by_expression_generator(record_dict, expression):
+    """
+    :param record_dict: dictinory containing Biopython SeqRecords as values
+    :param expression: function to apply to all records in record_dict. If it returns True record will be yielded
+    :return: None
+    """
+    for record_id in record_dict:
+        if expression(record_dict[record_id]):
+            yield record_dict[record_id]
+
+
 def record_generator(annotations_dict, sequence_dict, feature_types_list):
     for record_id in annotations_dict:
         for feature in annotations_dict[record_id].features:

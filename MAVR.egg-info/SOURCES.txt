@@ -58,6 +58,11 @@ Tools/Alignment/__init__.py
 Tools/Annotation/GlimerHMM.py
 Tools/Annotation/SNPeff.py
 Tools/Annotation/__init__.py
+Tools/Assemblers/Fermi.py
+Tools/Assemblers/Platanus.py
+Tools/Assemblers/Quast.py
+Tools/Assemblers/Spades.py
+Tools/Assemblers/__init__.py
 Tools/BLAST/BLAST.py
 Tools/BLAST/BLASTPlus.py
 Tools/BLAST/__init__.py
