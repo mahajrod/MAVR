@@ -6,6 +6,7 @@ import argparse
 
 import os
 
+from collections import  OrderedDict
 samples_dict = {"Sample_1": "N085-LAN210-Can-PmCDA1-NA-RUN7-D1",
                 "Sample_2": "N086-LAN210-Can-PmCDA1-NA-RUN7-D1",
                 "Sample_3": "N087-LAN210-Can-PmCDA1-NA-RUN7-D1",
@@ -51,6 +52,7 @@ raw_dir = "raw_names/"
 workdir = "./"
 
 for sample in samples_dict:
+    print("Handling %s..." % sample)
     os.system("mkdir -p %s" % samples_dict[sample])
     sample_files = os.listdir(raw_dir + sample)
     for filename in sample_files:
