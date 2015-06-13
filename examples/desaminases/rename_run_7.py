@@ -55,8 +55,8 @@ for sample in samples_dict:
     sample_files = os.listdir(raw_dir + sample)
     for filename in sample_files:
         if "R1" in filename:
-            os.system("cp %s%s %s/%s_1.fastq" % (raw_dir, filename, samples_dict[sample], samples_dict[sample]))
+            os.system("cp %s%s/%s %s/%s_1.fastq" % (raw_dir, sample, filename, samples_dict[sample], samples_dict[sample]))
         elif "R2" in filename:
-            os.system("cp %s%s/%s %s/%s_2.fastq" % (raw_dir,sample, filename, samples_dict[sample], samples_dict[sample]))
+            os.system("cp %s%s/%s %s/%s_2.fastq" % (raw_dir, sample, filename, samples_dict[sample], samples_dict[sample]))
         else:
-            os.system("cp %s%s %s/" % (raw_dir, filename, samples_dict[sample]))
+            os.system("cp %s%s/%s %s/" % (raw_dir, sample, filename, samples_dict[sample]))
