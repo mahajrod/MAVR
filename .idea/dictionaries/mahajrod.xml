@@ -6,6 +6,8 @@
       <w>chrom</w>
       <w>coeff</w>
       <w>collectiontype</w>
+      <w>contig</w>
+      <w>contigs</w>
       <w>cufflinks</w>
       <w>desaminase</w>
       <w>desaminases</w>
@@ -31,6 +33,7 @@
       <w>indel</w>
       <w>intergenic</w>
       <w>intron</w>
+      <w>iontorrent</w>
       <w>iter</w>
       <w>kmer</w>
       <w>kmers</w>
@@ -45,6 +48,8 @@
       <w>mutpos</w>
       <w>nogroup</w>
       <w>novoalign</w>
+      <w>pacbio</w>
+      <w>quast</w>
       <w>realigner</w>
       <w>recalibrator</w>
       <w>refgenome</w>
