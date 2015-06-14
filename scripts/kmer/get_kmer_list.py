@@ -14,14 +14,16 @@ from Routines.Sequence import rev_com_generator
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", "--input_file", action="store", dest="input",
-                    help="Input fasta or fastq file.")
+parser.add_argument("-i", "--input_file", action="store", dest="input", type=lambda s: s.split(","),
+                    help="Comma-separated list of fasta or fastq files.")
 parser.add_argument("-m", "--kmer_length", action="store", dest="kmer_length", type=int, default=23,
                     help="Length of kmers")
 parser.add_argument("-s", "--hash_size", action="store", dest="hash_size", type=int, default=1000000,
                     help="Size of hash. Estimation of hash size: for short reads S=(G + k*n)/0.8, "
                     "G - genome size, k - kmer length, n - number of reads, for assembled sequences "
                     "S=Sum(L)")
+parser.add_argument("-a", "--base_prefix", action="store", dest="base_prefix", default="jellyfish_db",
+                    help="Name of kmer database. Default: jellyfish_db")
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
                     help="Number of threads")
 parser.add_argument("-b", "--count_both_strands", action="store_true", dest="count_both_strands",
@@ -43,17 +45,15 @@ args = parser.parse_args()
 if args.count_both_strands and args.add_rev_com:
     raise ValueError("Options -b/--count_both_strands and -r/--add_reverse_complement are not compatible")
 
-file_prefix = ".".join(os.path.basename(args.input).split(".")[:-1])
-
 if args.add_rev_com:
-    file_with_rev_com = file_prefix + "_with_rev_com.fasta"
-    record_dict = SeqIO.index_db("temp_index.idx", [args.input], format="fasta")
+    file_with_rev_com = args.base_prefix + "_with_rev_com.fasta"
+    record_dict = SeqIO.index_db("temp_index.idx", args.input, format="fasta")
     SeqIO.write(rev_com_generator(record_dict, yield_original_record=True), file_with_rev_com, "fasta")
-    file_prefix += "_with_rev_com"
+    args.base_prefix += "_with_rev_com"
 
-base_file = "%s_%i_mer.jf" % (file_prefix, args.kmer_length)
-kmer_table_file = "%s_%i_mer.counts" % (file_prefix, args.kmer_length)
-kmer_file = "%s_%i_mer.kmer" % (file_prefix, args.kmer_length)
+base_file = "%s_%i_mer.jf" % (args.base_prefix, args.kmer_length)
+kmer_table_file = "%s_%i_mer.counts" % (args.base_prefix, args.kmer_length)
+kmer_file = "%s_%i_mer.kmer" % (args.base_prefix, args.kmer_length)
 
 Jellyfish.threads = args.threads
 Jellyfish.path = args.jellyfish_path if args.jellyfish_path else ""
@@ -65,8 +65,8 @@ sed_string = 'sed -e "s/\t.*//" %s > %s' % (kmer_table_file, kmer_file)
 os.system(sed_string)
 
 if args.draw_distribution:
-    histo_file = "%s_%i_mer.histo" % (file_prefix, args.kmer_length)
-    picture_prefix = "%s_%i_mer_histogram" % (file_prefix, args.kmer_length)
+    histo_file = "%s_%i_mer.histo" % (args.base_prefix, args.kmer_length)
+    picture_prefix = "%s_%i_mer_histogram" % (args.base_prefix, args.kmer_length)
     Jellyfish.histo(base_file, histo_file, upper_count=10000000)
 
     counts = []
