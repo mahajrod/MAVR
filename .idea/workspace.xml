@@ -5,56 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0137b4ba-9cb9-4454-8e03-43ff7c136081" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parsers/Abstract.py" afterPath="$PROJECT_DIR$/Parsers/Abstract.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parsers/CCF.py" afterPath="$PROJECT_DIR$/Parsers/CCF.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/CDS_region_variants.py" afterPath="$PROJECT_DIR$/scripts/CDS_region_variants.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/CDS_region_vars_2.py" afterPath="$PROJECT_DIR$/examples/desaminases/CDS_region_vars_2.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parsers/GVF.py" afterPath="$PROJECT_DIR$/Parsers/GVF.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Graphics/Plots.py" afterPath="$PROJECT_DIR$/Graphics/Plots.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/TSS_UTR_CDS_histogram.py" afterPath="$PROJECT_DIR$/examples/desaminases/TSS_UTR_CDS_histogram.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/TSS_UTR_CDS_histogram_transcribed.py" afterPath="$PROJECT_DIR$/examples/desaminases/TSS_UTR_CDS_histogram_transcribed.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/TSS_UTR_CDS_histogram_untranscribed.py" afterPath="$PROJECT_DIR$/examples/desaminases/TSS_UTR_CDS_histogram_untranscribed.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parsers/VCF.py" afterPath="$PROJECT_DIR$/Parsers/VCF.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/analyse_cafe_report.py" afterPath="$PROJECT_DIR$/scripts/analyse_cafe_report.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/compare_sub_plus_and_sub_minus.py" afterPath="$PROJECT_DIR$/examples/desaminases/compare_sub_plus_and_sub_minus.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/compare_sub_plus_and_sub_minus_by_genes.py" afterPath="$PROJECT_DIR$/examples/desaminases/compare_sub_plus_and_sub_minus_by_genes.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/distances.py" afterPath="$PROJECT_DIR$/examples/distances.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/distances_new.py" afterPath="$PROJECT_DIR$/examples/distances_new.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/draw_genes/draw_genes.py" afterPath="$PROJECT_DIR$/examples/draw_genes/draw_genes.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/draw_genes/draw_genes_CAGE.py" afterPath="$PROJECT_DIR$/examples/draw_genes/draw_genes_CAGE.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/draw_genes/draw_genes_CAGE_2.py" afterPath="$PROJECT_DIR$/examples/draw_genes/draw_genes_CAGE_2.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/draw_genes/draw_genes_CAGE_3.py" afterPath="$PROJECT_DIR$/examples/draw_genes/draw_genes_CAGE_3.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/draw_genes/draw_genes_CAGE_4_article.py" afterPath="$PROJECT_DIR$/examples/draw_genes/draw_genes_CAGE_4_article.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/draw_genes/draw_genes_CAGE_5_article.py" afterPath="$PROJECT_DIR$/examples/draw_genes/draw_genes_CAGE_5_article.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/draw_genes/draw_genes_CAGE_6_article.py" afterPath="$PROJECT_DIR$/examples/draw_genes/draw_genes_CAGE_6_article.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/draw_genes/draw_genes_CAGE_7_article.py" afterPath="$PROJECT_DIR$/examples/draw_genes/draw_genes_CAGE_7_article.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution.py" afterPath="$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/expansion/expansion_pipeline_statistics.py" afterPath="$PROJECT_DIR$/scripts/expansion/expansion_pipeline_statistics.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/find_homopolymers.py" afterPath="$PROJECT_DIR$/scripts/find_homopolymers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/find_homopolymers_ver2.py" afterPath="$PROJECT_DIR$/scripts/find_homopolymers_ver2.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/kmer/get_kmer_list.py" afterPath="$PROJECT_DIR$/scripts/kmer/get_kmer_list.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/get_variants_near_TSS.py" afterPath="$PROJECT_DIR$/examples/desaminases/get_variants_near_TSS.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/gff_examine.py" afterPath="$PROJECT_DIR$/scripts/gff_examine.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/heatmap_article.py" afterPath="$PROJECT_DIR$/examples/desaminases/heatmap_article.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/hist_3d_power_size.py" afterPath="$PROJECT_DIR$/examples/desaminases/hist_3d_power_size.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence/histogram_GC_content.py" afterPath="$PROJECT_DIR$/scripts/sequence/histogram_GC_content.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence/histogram_length.py" afterPath="$PROJECT_DIR$/scripts/sequence/histogram_length.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/histogramms.py" afterPath="$PROJECT_DIR$/examples/desaminases/histogramms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/homogeneity_article.py" afterPath="$PROJECT_DIR$/examples/desaminases/homogeneity_article.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/homogeneity_article_3d_plos_editionl.py" afterPath="$PROJECT_DIR$/examples/desaminases/homogeneity_article_3d_plos_editionl.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/homogeneity_article_5_UTR.py" afterPath="$PROJECT_DIR$/examples/desaminases/homogeneity_article_5_UTR.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/homogeneity_article_all.py" afterPath="$PROJECT_DIR$/examples/desaminases/homogeneity_article_all.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/homogeneity_article_pre_UTR.py" afterPath="$PROJECT_DIR$/examples/desaminases/homogeneity_article_pre_UTR.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/homogenity_size_heatmap.py" afterPath="$PROJECT_DIR$/examples/desaminases/homogenity_size_heatmap.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/length_distribution.py" afterPath="$PROJECT_DIR$/examples/desaminases/length_distribution.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/mut_strandness.py" afterPath="$PROJECT_DIR$/examples/desaminases/mut_strandness.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/power_heatmap.py" afterPath="$PROJECT_DIR$/examples/desaminases/power_heatmap.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/power_size_plot.py" afterPath="$PROJECT_DIR$/examples/desaminases/power_size_plot.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/rainfall_one_chromosome.py" afterPath="$PROJECT_DIR$/examples/desaminases/rainfall_one_chromosome.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/expansion/split_hclust_output.py" afterPath="$PROJECT_DIR$/scripts/expansion/split_hclust_output.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/strandness_histogramms.py" afterPath="$PROJECT_DIR$/examples/desaminases/strandness_histogramms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/variant_location_pies.py" afterPath="$PROJECT_DIR$/examples/desaminases/variant_location_pies.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/variant_location_pies_normed.py" afterPath="$PROJECT_DIR$/examples/desaminases/variant_location_pies_normed.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -178,10 +129,10 @@
       <file leaf-file-name="get_kmer_list.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/kmer/get_kmer_list.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.58064514" vertical-offset="432" max-vertical-offset="1854">
-              <caret line="41" column="59" selection-start-line="41" selection-start-column="59" selection-end-line="41" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.85388994" vertical-offset="864" max-vertical-offset="1800">
+              <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
               <folding>
-                <element signature="e#118#127#0" expanded="true" />
+                <element signature="e#55#64#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -190,7 +141,7 @@
       <file leaf-file-name="draw_kmer_distribution.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="1512">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1512">
               <caret line="36" column="59" selection-start-line="36" selection-start-column="59" selection-end-line="36" selection-end-column="59" />
               <folding>
                 <element signature="e#55#64#0" expanded="true" />
@@ -1113,12 +1064,6 @@
       <option name="number" value="Default" />
       <updated>1396791476390</updated>
     </task>
-    <task id="LOCAL-00031" summary="added CAFE parser">
-      <created>1424540148666</created>
-      <option name="number" value="00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1424540148666</updated>
-    </task>
     <task id="LOCAL-00032" summary="added CAFE parser">
       <created>1424558401599</created>
       <option name="number" value="00032" />
@@ -1407,7 +1352,13 @@
       <option name="project" value="LOCAL" />
       <updated>1434213417600</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="a">
+      <created>1434254904483</created>
+      <option name="number" value="00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1434254904483</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1441,7 +1392,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36613274" sideWeight="0.49868214" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24960506" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25724828" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25724828" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36613274" sideWeight="0.50131786" order="9" side_tool="true" content_ui="tabs" />
@@ -1908,7 +1859,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="1512">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1512">
           <caret line="36" column="59" selection-start-line="36" selection-start-column="59" selection-end-line="36" selection-end-column="59" />
           <folding>
             <element signature="e#55#64#0" expanded="true" />
@@ -1918,10 +1869,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/kmer/get_kmer_list.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.58064514" vertical-offset="432" max-vertical-offset="1854">
-          <caret line="41" column="59" selection-start-line="41" selection-start-column="59" selection-end-line="41" selection-end-column="59" />
+        <state vertical-scroll-proportion="0.85388994" vertical-offset="864" max-vertical-offset="1800">
+          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
           <folding>
-            <element signature="e#118#127#0" expanded="true" />
+            <element signature="e#55#64#0" expanded="true" />
           </folding>
         </state>
       </provider>

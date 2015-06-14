@@ -1,6 +1,3 @@
-"""
-This module contains CollectionVCF and related classes
-"""
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 
