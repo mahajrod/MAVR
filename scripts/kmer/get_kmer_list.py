@@ -8,6 +8,8 @@ import os
 import argparse
 
 from Bio import SeqIO
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 from Tools.Kmers import Jellyfish
@@ -37,6 +39,8 @@ parser.add_argument("-r", "--add_reverse_complement", action="store_true", dest=
                          "Not compatible with -b/--count_both_strands option")
 parser.add_argument("-d", "--draw_distribution", action="store_true", dest="draw_distribution",
                     help="Draw distribution of kmers")
+parser.add_argument("-j", "--jellyfish_path", action="store", dest="jellyfish_path",
+                    help="Path to jellyfish")
 args = parser.parse_args()
 
 if args.count_both_strands and args.add_rev_com:
@@ -55,6 +59,7 @@ kmer_table_file = "%s_%i_mer.counts" % (file_prefix, args.kmer_length)
 kmer_file = "%s_%i_mer.kmer" % (file_prefix, args.kmer_length)
 
 Jellyfish.threads = args.threads
+Jellyfish.path = args.jellyfish_path if args.jellyfish_path else ""
 Jellyfish.count(args.input if not args.add_rev_com else file_with_rev_com, base_file,
                 kmer_length=args.kmer_length, hash_size=args.hash_size,
                 count_both_strands=args.count_both_strands)

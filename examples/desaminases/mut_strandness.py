@@ -3,6 +3,8 @@ import os
 import numpy as np
 from collections import OrderedDict
 from math import sqrt
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 from Parsers.VCF import ReferenceGenome, CollectionVCF

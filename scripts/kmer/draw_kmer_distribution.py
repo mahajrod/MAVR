@@ -4,6 +4,8 @@ __author__ = 'Sergei F. Kliver'
 import os
 import argparse
 
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 from Tools.Kmers import Jellyfish
@@ -32,6 +34,8 @@ parser.add_argument("-a", "--logbase", action="store", dest="logbase", type=int,
                     help="Base of logarithm")
 parser.add_argument("-k", "--kmer_size", action="store", dest="kmer_size", type=int,
                     help="Size of kmers in base. Used in suptitle of figure.")
+parser.add_argument("-j", "--jellyfish_path", action="store", dest="jellyfish_path",
+                    help="Path to jellyfish")
 args = parser.parse_args()
 
 file_prefix = ".".join(os.path.basename(args.input).split(".")[:-1])
@@ -40,6 +44,7 @@ histo_file = "%s.histo" % file_prefix
 if args.out_prefix is None:
     args.out_prefix = file_prefix + "_histogram"
 
+Jellyfish.path = args.jellyfish_path if args.jellyfish_path else ""
 Jellyfish.threads = args.threads
 Jellyfish.histo(args.input, histo_file, bin_width=args.bin_width,
                 lower_count=args.low_limit, upper_count=args.high_limit)

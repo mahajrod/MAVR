@@ -5,6 +5,8 @@ import numpy as np
 
 from Parsers.VCF import CollectionVCF
 from Parsers.CCF import CollectionCCF
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
 

@@ -8,6 +8,8 @@ from numpy import arange, int32, append
 
 from Bio import SeqIO
 
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 parser = argparse.ArgumentParser()

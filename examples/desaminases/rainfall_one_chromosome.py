@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.transforms import Bbox, TransformedBbox, \
      blended_transform_factory

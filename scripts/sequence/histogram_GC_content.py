@@ -6,6 +6,8 @@ import argparse, os
 from Bio import SeqIO
 from Bio.SeqUtils import GC
 
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 parser = argparse.ArgumentParser()

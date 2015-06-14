@@ -3,6 +3,8 @@ import os
 from collections import Iterable, OrderedDict
 from math import sqrt
 
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 

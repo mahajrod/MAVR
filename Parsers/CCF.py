@@ -2,6 +2,8 @@
 
 from collections import Iterable, OrderedDict
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib import colors
 from Parsers.Abstract import Record, Collection, Metadata, Header

@@ -4,6 +4,8 @@ import os
 import argparse
 from random import choice
 
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from numpy import linspace
 

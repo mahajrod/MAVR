@@ -2,6 +2,8 @@
 __author__ = 'Sergei F. Kliver'
 import os
 from collections import OrderedDict
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import scipy.stats as ss
 

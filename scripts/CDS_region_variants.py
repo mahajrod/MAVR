@@ -5,6 +5,8 @@ import argparse
 import pprint
 from BCBio.GFF import GFFExaminer
 from BCBio import GFF
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 from Parsers.VCF import CollectionVCF

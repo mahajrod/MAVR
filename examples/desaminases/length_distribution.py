@@ -3,6 +3,8 @@ __author__ = 'mahajrod'
 
 import os
 from Parsers.CCF import CollectionCCF
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 

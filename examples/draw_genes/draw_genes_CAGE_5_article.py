@@ -4,6 +4,8 @@ from collections import OrderedDict
 from Bio import SeqIO
 from BCBio import GFF
 
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.ticker as tck
 

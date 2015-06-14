@@ -3,6 +3,8 @@ __author__ = 'mahajrod'
 import argparse
 
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 from Routines.Sequence import find_homopolymers

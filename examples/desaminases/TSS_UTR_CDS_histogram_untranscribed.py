@@ -5,6 +5,8 @@ import os
 from collections import OrderedDict
 from Parsers.VCF import CollectionVCF
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 import pprint
