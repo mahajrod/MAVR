@@ -33,8 +33,8 @@ with open(args.description, "r") as desr_fd:
         else:
             left_reads = "%s.fastq" % sample_name
             right_reads = None
-        left_reads_trim = None if left_reads_trim == "." else left_reads_trim
-        right_reads_trim = None if right_reads_trim == "." else right_reads_trim
+        left_reads_trim = None if left_reads_trim == "." else int(left_reads_trim)
+        right_reads_trim = None if right_reads_trim == "." else int(right_reads_trim)
         TrimGalore.filter(args.min_len, left_reads, left_reads_trim,
                           reverse_reads=right_reads, reverse_trim=right_reads_trim,
                           quality_score=quality_type, adapter=seq_to_trim,
