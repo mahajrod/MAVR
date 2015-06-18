@@ -14,8 +14,8 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_file", action="store", dest="input", default="stdin",
                     help="Input file with BLAST results. Default: stdin")
-parser.add_argument("-o", "--output_file", action="store", dest="output", default="stdout",
-                    help="Output file with filtered BLAST results. Default: stdout")
+parser.add_argument("-o", "--output_file_prefix", action="store", dest="out_prefix", default="stdout",
+                    help="Prefix of output file")
 parser.add_argument("-f", "--format", action="store", dest="format", default="blast-tab",
                     help="Format of BLAST file. Allowed: blast-tab, blast-xml, blat-psl, hmmer3-tab, hmmer3-domtab. Default: blast-tab")
 
@@ -63,8 +63,29 @@ def iterator(blast_results):
         if filtered_query:
             yield filtered_query
 """
-
+print("Parsing input file...")
 blast_results = SearchIO.index(args.input, args.format)
 
-print(get_db_ids(blast_results))
-#SearchIO.write(iterator(blast_results), args.output, args.format)
+gi_ids_list = map(lambda x: x.split("|")[1], get_db_ids(blast_results))
+#print(gi_ids_list)
+print("Downloading sequence summaries...")
+handle = Entrez.esummary(db=args.db, id=",".join(gi_ids_list))
+summaries_list = Entrez.read(handle)
+tax_id_list = set()
+with open(args.out_prefix + ".taxid", "w") as out_fd:
+    for record in summaries_list:
+        if "TaxId" in record:
+            tax_id_list.add(str(record["TaxId"]))
+            out_fd.write(str(record["TaxId"]) + "\n")
+print("Downloading species names...")
+taxa_handle = Entrez.esummary(db="taxonomy", id=",".join(tax_id_list))
+taxa_list = Entrez.read(taxa_handle)
+with open(args.out_prefix + ".sciname", "w") as taxa_fd:
+    with open(args.out_prefix + ".commonname", "w") as com_fd:
+        for record in taxa_list:
+            if ("ScientificName" in record) and (record["ScientificName"] != ""):
+                #tax_id_list.add(str(record["TaxId"]))
+                taxa_fd.write(str(record["ScientificName"]) + "\n")
+            if ("CommonName" in record) and (record["CommonName"] != ""):
+                #tax_id_list.add(str(record["TaxId"]))
+                com_fd.write(str(record["CommonName"]) + "\n")

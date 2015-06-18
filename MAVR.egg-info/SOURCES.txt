@@ -72,6 +72,8 @@ Tools/Bedtools/GetFasta.py
 Tools/Bedtools/Intersect.py
 Tools/Bedtools/__init__.py
 Tools/Filter/Adapters.py
+Tools/Filter/Cookiecutter.py
+Tools/Filter/FastQC.py
 Tools/Filter/TrimGalore.py
 Tools/Filter/Trimmomatic.py
 Tools/Filter/__init__.py
