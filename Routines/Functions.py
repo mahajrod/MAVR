@@ -11,11 +11,13 @@ def check_path(path_to_check):
     return path_to_check
 
 
-def output_dict(dictionary, out_file="out.t", write=False):
+def output_dict(dictionary, out_file="out.t", write=False, header_tuple=None):
 
     out_fd = open(out_file, "w") if write else sys.stdout
 
     for key in dictionary:
+        if header_tuple:
+            out_fd.write("#%s\t%s\n" % (str(header_tuple[0]), str(header_tuple[1])))
         out_fd.write("%s\t%s\n" % (key, str(dictionary[key])))
 
     if out_fd is not sys.stdout:

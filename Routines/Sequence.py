@@ -14,13 +14,14 @@ from CustomCollections.GeneralCollections import TwoLvlDict
 from Routines.Functions import output_dict
 
 
-def get_lengths(record_dict, out_file="lengths.t", write=False):
+def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
     lengths_dict = OrderedDict({})
     for record_id in record_dict:
         lengths_dict[record_id] = len(record_dict[record_id])
 
     if write:
-        output_dict(lengths_dict, out_file=out_file, write=write)
+        output_dict(lengths_dict, out_file=out_file, write=write,
+                    header_tuple=("record", "length") if write_header else None)
 
     return lengths_dict
 
