@@ -2,6 +2,7 @@
 __author__ = 'mahajrod'
 
 import argparse
+import os
 
 from Bio import SeqIO
 
@@ -21,3 +22,4 @@ args = parser.parse_args()
 record_dict = SeqIO.index_db("temp_index.idx", [args.input], format=args.format)
 get_lengths(record_dict, out_file=args.output, write=True, write_header=args.write_header)
 
+os.remove("temp_index.idx")

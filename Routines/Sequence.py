@@ -1,6 +1,7 @@
 __author__ = 'mahajrod'
 
 import re
+import sys
 from copy import deepcopy
 from collections import OrderedDict
 
@@ -212,7 +213,7 @@ def record_by_id_generator(record_dict, id_list):
         if record_id in record_dict:
             yield record_dict[record_id]
         else:
-            print (record_id)
+            sys.stderr.write("Not found: %s\n" % record_id)
 
 
 def record_by_expression_generator(record_dict, expression):
