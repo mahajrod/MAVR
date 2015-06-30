@@ -18,6 +18,7 @@
       <w>exon</w>
       <w>extention</w>
       <w>facecolor</w>
+      <w>faidx</w>
       <w>fasta</w>
       <w>fastq</w>
       <w>fastqc</w>
@@ -50,14 +51,18 @@
       <w>nogroup</w>
       <w>novoalign</w>
       <w>pacbio</w>
+      <w>phred</w>
       <w>quast</w>
       <w>realigner</w>
       <w>recalibrator</w>
       <w>refgenome</w>
+      <w>rmdup</w>
+      <w>samtools</w>
       <w>snps</w>
       <w>splited</w>
       <w>subclustering</w>
       <w>subclusters</w>
+      <w>subcommands</w>
       <w>taxa</w>
       <w>tmap</w>
       <w>tophat</w>
