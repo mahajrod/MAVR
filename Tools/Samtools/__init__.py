@@ -1,5 +1,5 @@
 __author__ = 'mahajrod'
 
-from Tools.Samtools import Samtools
+from Tools.Samtools.Samtools import Samtools
 
 Samtools = Samtools()
