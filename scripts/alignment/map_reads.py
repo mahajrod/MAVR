@@ -57,7 +57,7 @@ if args.aligner == "bowtie2":
 
 aligner.threads = args.threads
 Samtools.threads = args.threads
-aligner.align(args.aligner_index, right_reads_list=args.right_reads, left_reads_list=args.left_reads,
+aligner.align(args.index, right_reads_list=args.right_reads, left_reads_list=args.left_reads,
               unpaired_reads_list=args.unpaired_reads, quality_score=args.quality, output_file=raw_alignment)
 
 Samtools.view(args.raw_alignment, output_file=filtered_alignment, include_header_in_output=True,
