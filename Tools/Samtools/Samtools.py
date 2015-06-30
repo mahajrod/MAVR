@@ -62,7 +62,7 @@ class SamtoolsV1(Tool):
         self.execute(options, cmd="samtools index")
 
 
-class SamtoolsV0(Tool, SamtoolsV1):
+class SamtoolsV0(SamtoolsV1, Tool):
     """
     Class for samtools 0.1.19+
     Several subcommands are not implemented
