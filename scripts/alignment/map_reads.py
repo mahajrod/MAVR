@@ -59,10 +59,10 @@ if args.aligner == "bowtie2":
 
 aligner.threads = args.threads
 
-"""
+
 aligner.align(args.index, right_reads_list=args.right_reads, left_reads_list=args.left_reads,
               unpaired_reads_list=args.unpaired_reads, quality_score=args.quality, output_file=raw_alignment)
-"""
+
 
 """
 # Samtools version 1+.  Rmdup doesnt work with bams containing reads from several libraries
