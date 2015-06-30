@@ -5,7 +5,7 @@ import sys
 import argparse
 
 from Tools.Alignment import *
-from Tools.Samtools import Samtools
+from Tools.Samtools import SamtoolsV1, SamtoolsV0
 
 
 def make_list_from_comma_sep_string(s):
@@ -46,26 +46,43 @@ parser.add_argument("-n", "--retain_intermediate_files", action="store_true", de
 args = parser.parse_args()
 
 black_flag_value = args.black_flag_value if args.black_flag_value else \
-    Samtools.bam_flag_values["unaligned"] + Samtools.bam_flag_values["supplementary_alignment"] + Samtools.bam_flag_values["non_primary_alignment"]
+    SamtoolsV0.bam_flag_values["unaligned"] + SamtoolsV0.bam_flag_values["supplementary_alignment"] \
+    + SamtoolsV0.bam_flag_values["non_primary_alignment"]
 
 raw_alignment = "%s_raw_alignment.sam" % args.prefix
 filtered_alignment = "%s_filtered.bam" % args.prefix
+sorted_filtered_alignment_prefix = "%s_filtered_sorted" % args.prefix
 sorted_filtered_alignment = "%s_filtered_sorted.bam" % args.prefix
 rmdup_sorted_filtered_alignment = "%s_final.bam" % args.prefix
 if args.aligner == "bowtie2":
     aligner = Bowtie2
 
 aligner.threads = args.threads
-Samtools.threads = args.threads
+
 """
 aligner.align(args.index, right_reads_list=args.right_reads, left_reads_list=args.left_reads,
               unpaired_reads_list=args.unpaired_reads, quality_score=args.quality, output_file=raw_alignment)
 """
-Samtools.view(raw_alignment, output_file=filtered_alignment, include_header_in_output=True,
+
+"""
+# Samtools version 1+.  Rmdup doesnt work with bams containing reads from several libraries
+SamtoolsV1.threads = args.threads
+SamtoolsV1.view(raw_alignment, output_file=filtered_alignment, include_header_in_output=True,
               output_uncompressed_bam=True, output_bam=True, white_flag_value=args.white_flag_value,
               black_flag_value=black_flag_value, bed_file_with_regions_to_output=args.bed)
-Samtools.sort(filtered_alignment, sorted_filtered_alignment, temp_file_prefix="temp_bam")
-Samtools.rmdup(sorted_filtered_alignment, rmdup_sorted_filtered_alignment, treat_both_pe_and_se_reads=False)
+SamtoolsV1.sort(filtered_alignment, sorted_filtered_alignment, temp_file_prefix="temp_bam")
+SamtoolsV1.rmdup(sorted_filtered_alignment, rmdup_sorted_filtered_alignment, treat_both_pe_and_se_reads=False)
+"""
+
+# Samtools v 0.1.19
+
+SamtoolsV0.view(raw_alignment, output_file=filtered_alignment, include_header_in_output=True,
+                output_uncompressed_bam=True, output_bam=True, white_flag_value=args.white_flag_value,
+                black_flag_value=black_flag_value, bed_file_with_regions_to_output=args.bed,
+                sam_input=True)
+SamtoolsV0.sort(filtered_alignment, sorted_filtered_alignment_prefix )
+SamtoolsV0.rmdup(sorted_filtered_alignment, rmdup_sorted_filtered_alignment, treat_both_pe_and_se_reads=False)
+SamtoolsV0.index(rmdup_sorted_filtered_alignment)
 
 if not args.retain_temp:
     os.remove(raw_alignment)
