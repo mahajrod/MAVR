@@ -44,7 +44,7 @@ class Samtools(Tool):
     def sort(self, input_bam, output_bam, temp_file_prefix="temp_bam"):
 
         options = " -@ %i" % self.threads
-        options += " -o %i" % output_bam
+        options += " -o %s" % output_bam
         options += " -T %s" % temp_file_prefix
         options += " %s" % input_bam
         self.execute(options, "samtools sort")
