@@ -84,10 +84,11 @@ class SamtoolsV0(SamtoolsV1, Tool):
 
         self.execute(options, "samtools view")
 
-    def sort(self, input_bam, output_prefix):
+    def sort(self, input_bam, output_prefix, max_memory=3000000000):
 
         options = " %s" % input_bam
         options += " %s" % output_prefix
+        options += " -m %i" % max_memory
 
         self.execute(options, "samtools sort")
 
