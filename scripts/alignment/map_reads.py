@@ -94,7 +94,7 @@ if not args.dont_add_read_groups:
     AddOrReplaceReadGroups.add_read_groups(rmdup_sorted_filtered_alignment, "temp.bam",
                                            RGID=args.prefix, RGLB=args.prefix, RGPL=args.prefix,
                                            RGSM=args.prefix, RGPU=args.prefix)
-    os.remove(rmdup_sorted_filtered_alignment)
+    #os.remove(rmdup_sorted_filtered_alignment)
     os.rename("temp.bam", rmdup_sorted_filtered_alignment)
 
 #SamtoolsV0.index(rmdup_sorted_filtered_alignment)
