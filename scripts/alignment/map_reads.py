@@ -8,6 +8,7 @@ from Tools.Alignment import *
 from Tools.Samtools import SamtoolsV1, SamtoolsV0
 from Tools.Picard import AddOrReplaceReadGroups
 
+
 def make_list_from_comma_sep_string(s):
     return s.split(",")
 
@@ -42,7 +43,8 @@ parser.add_argument("-e", "--white_flag_value", action="store", dest="white_flag
                     help="White flag value")
 parser.add_argument("-g", "--dont_add_read_groups", action="store_false", dest="dont_add_read_groups", default=True,
                     help="Don't add read groups to final bam")
-
+parser.add_argument("-d", "--picard_dir", action="store", dest="picard_dir",
+                    help="Path to Picard directory. Required to add read groups")
 parser.add_argument("-n", "--retain_intermediate_files", action="store_true", dest="retain_temp", default=False,
                     help="Retain intermediate files")
 args = parser.parse_args()
@@ -87,6 +89,7 @@ SamtoolsV0.rmdup(sorted_filtered_alignment, rmdup_sorted_filtered_alignment, tre
 """
 
 if not args.dont_add_read_groups:
+    AddOrReplaceReadGroups.jar_path = args.picard_dir
     AddOrReplaceReadGroups.add_read_groups(rmdup_sorted_filtered_alignment, "temp.bam",
                                            RGID=args.prefix, RGLB=args.prefix, RGPL=args.prefix,
                                            RGSM=args.prefix, RGPU=args.prefix)
