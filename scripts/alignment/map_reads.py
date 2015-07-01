@@ -6,7 +6,7 @@ import argparse
 
 from Tools.Alignment import *
 from Tools.Samtools import SamtoolsV1, SamtoolsV0
-
+from Tools.Picard import AddOrReplaceReadGroups
 
 def make_list_from_comma_sep_string(s):
     return s.split(",")
@@ -40,6 +40,8 @@ parser.add_argument("-c", "--black_flag_value", action="store", dest="black_flag
                          "nonprimary alignments will be removed")
 parser.add_argument("-e", "--white_flag_value", action="store", dest="white_flag_value", type=int,
                     help="White flag value")
+parser.add_argument("-g", "--dont_add_read_groups", action="store_false", dest="dont_add_read_groups", default=True,
+                    help="Don't add read groups to final bam")
 
 parser.add_argument("-n", "--retain_intermediate_files", action="store_true", dest="retain_temp", default=False,
                     help="Retain intermediate files")
@@ -59,10 +61,10 @@ if args.aligner == "bowtie2":
 
 aligner.threads = args.threads
 
-
+"""
 aligner.align(args.index, right_reads_list=args.right_reads, left_reads_list=args.left_reads,
               unpaired_reads_list=args.unpaired_reads, quality_score=args.quality, output_file=raw_alignment)
-
+"""
 
 """
 # Samtools version 1+.  Rmdup doesnt work with bams containing reads from several libraries
@@ -75,13 +77,22 @@ SamtoolsV1.rmdup(sorted_filtered_alignment, rmdup_sorted_filtered_alignment, tre
 """
 
 # Samtools v 0.1.19
-
+""""
 SamtoolsV0.view(raw_alignment, output_file=filtered_alignment, include_header_in_output=True,
                 output_uncompressed_bam=True, output_bam=True, white_flag_value=args.white_flag_value,
                 black_flag_value=black_flag_value, bed_file_with_regions_to_output=args.bed,
                 sam_input=True)
-SamtoolsV0.sort(filtered_alignment, sorted_filtered_alignment_prefix )
+SamtoolsV0.sort(filtered_alignment, sorted_filtered_alignment_prefix)
 SamtoolsV0.rmdup(sorted_filtered_alignment, rmdup_sorted_filtered_alignment, treat_both_pe_and_se_reads=False)
+"""
+
+if not args.dont_add_read_groups:
+    AddOrReplaceReadGroups.add_read_groups(rmdup_sorted_filtered_alignment, "temp.bam",
+                                           RGID=args.prefix, RGLB=args.prefix, RGPL=args.prefix,
+                                           RGSM=args.prefix, RGPU=args.prefix)
+    os.remove(rmdup_sorted_filtered_alignment)
+    os.rename("temp.bam", rmdup_sorted_filtered_alignment)
+
 SamtoolsV0.index(rmdup_sorted_filtered_alignment)
 
 if not args.retain_temp:

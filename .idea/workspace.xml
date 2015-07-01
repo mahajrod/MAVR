@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0137b4ba-9cb9-4454-8e03-43ff7c136081" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Samtools/Samtools.py" afterPath="$PROJECT_DIR$/Tools/Samtools/Samtools.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Samtools/__init__.py" afterPath="$PROJECT_DIR$/Tools/Samtools/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/Picard/AddOrReplaceReadGroups.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/Picard/CreateSequenceDictionary.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/Picard/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Abstract.py" afterPath="$PROJECT_DIR$/Tools/Abstract.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/alignment/map_reads.py" afterPath="$PROJECT_DIR$/scripts/alignment/map_reads.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -56,78 +58,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="example_SNP_call.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/SNP_call/example_SNP_call.py">
+      <file leaf-file-name="AddOrReplaceReadGroups.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tools/Picard/AddOrReplaceReadGroups.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1134" max-vertical-offset="2646">
-              <caret line="42" column="41" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
-              <folding>
-                <element signature="e#22#53#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SNPCall.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Pipelines/SNPCall.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="864" max-vertical-offset="7578">
-              <caret line="46" column="31" selection-start-line="46" selection-start-column="31" selection-end-line="46" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
+              <caret line="13" column="55" selection-start-line="13" selection-start-column="53" selection-end-line="13" selection-end-column="81" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/Samtools/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="216">
-              <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Samtools.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/Samtools/Samtools.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="632" max-vertical-offset="1782">
-              <caret line="72" column="31" selection-start-line="72" selection-start-column="31" selection-end-line="72" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Jellyfish.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/Kmers/Jellyfish.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1566">
-              <caret line="7" column="7" selection-start-line="6" selection-start-column="0" selection-end-line="13" selection-end-column="76" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RepeatSearch.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Pipelines/RepeatSearch.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="468">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GenePrediction.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Pipelines/GenePrediction.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1028" max-vertical-offset="1638">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -135,8 +71,8 @@
       <file leaf-file-name="map_reads.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/alignment/map_reads.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.590164" vertical-offset="542" max-vertical-offset="1746">
-              <caret line="84" column="48" selection-start-line="84" selection-start-column="48" selection-end-line="84" selection-end-column="48" />
+            <state vertical-scroll-proportion="0.852459" vertical-offset="1154" max-vertical-offset="1944">
+              <caret line="93" column="57" selection-start-line="93" selection-start-column="57" selection-end-line="93" selection-end-column="57" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
@@ -144,22 +80,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BWA.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/Alignment/BWA.py">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tools/Picard/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
-              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Bowtie2.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/Alignment/Bowtie2.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="159" max-vertical-offset="756">
-              <caret line="27" column="43" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="234">
+              <caret line="7" column="49" selection-start-line="7" selection-start-column="49" selection-end-line="7" selection-end-column="49" />
+              <folding>
+                <element signature="e#55#125#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -177,16 +105,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/expansion/treefam_out_statistics.py" />
-        <option value="$PROJECT_DIR$/scripts/expansion/test_hcluster_options.py" />
-        <option value="$PROJECT_DIR$/scripts/expansion/get_species_gene_ids.py" />
-        <option value="$PROJECT_DIR$/scripts/expansion/expansion_analysis.py" />
-        <option value="$PROJECT_DIR$/scripts/blast/filter_blast_output.py" />
-        <option value="$PROJECT_DIR$/scripts/blast/filter_blast_output_by_parameters.py" />
         <option value="$PROJECT_DIR$/examples/draw_genes/draw_genes_CAGE_6_article.py" />
         <option value="$PROJECT_DIR$/Tools/Kmers/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/reverse_complement.py" />
-        <option value="$PROJECT_DIR$/Tools/Abstract.py" />
         <option value="$PROJECT_DIR$/Parsers/VCF.py" />
         <option value="$PROJECT_DIR$/scripts/treefam/check_coherence.py" />
         <option value="$PROJECT_DIR$/scripts/treefam/extract_families_of_species.py" />
@@ -227,6 +148,13 @@
         <option value="$PROJECT_DIR$/Tools/Alignment/BWA.py" />
         <option value="$PROJECT_DIR$/Tools/Samtools/__init__.py" />
         <option value="$PROJECT_DIR$/Tools/Samtools/Samtools.py" />
+        <option value="$PROJECT_DIR$/scripts/snpcall/snpcall.py" />
+        <option value="$PROJECT_DIR$/Tools/Abstract.py" />
+        <option value="$PROJECT_DIR$/Tools/Samtools/Picard/Picard.py" />
+        <option value="$PROJECT_DIR$/Tools/Samtools/Picard/AddOrReplaceReadGroups.py" />
+        <option value="$PROJECT_DIR$/Tools/Picard/CreateSequenceDictionary.py" />
+        <option value="$PROJECT_DIR$/Tools/Picard/AddOrReplaceReadGroups.py" />
+        <option value="$PROJECT_DIR$/Tools/Picard/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/alignment/map_reads.py" />
       </list>
     </option>
@@ -278,7 +206,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -330,6 +257,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="treefam" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="snpcall" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -541,7 +486,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Samtools" />
+              <option name="myItemId" value="Picard" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -577,7 +522,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Alignment" />
+              <option name="myItemId" value="GATK" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -639,6 +584,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -678,18 +624,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Tools/Picard" />
+      <recent name="$PROJECT_DIR$/scripts/snpcall" />
       <recent name="$PROJECT_DIR$/scripts/entrez/taxonomy" />
       <recent name="$PROJECT_DIR$/scripts/blast" />
       <recent name="$PROJECT_DIR$/scripts/sequence" />
-      <recent name="$PROJECT_DIR$/scripts/expansion" />
-      <recent name="$PROJECT_DIR$/Tools/Kmers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Tools" />
       <recent name="$PROJECT_DIR$/scripts/expansion" />
       <recent name="$PROJECT_DIR$/scripts/sequence" />
       <recent name="$PROJECT_DIR$/scripts/filter" />
       <recent name="$PROJECT_DIR$/scripts/blast" />
-      <recent name="$PROJECT_DIR$/scripts" />
     </key>
   </component>
   <component name="RunManager" selected="Python.get_consensus">
@@ -974,36 +920,6 @@
       <option name="number" value="Default" />
       <updated>1396791476390</updated>
     </task>
-    <task id="LOCAL-00052" summary="a">
-      <created>1429847754035</created>
-      <option name="number" value="00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1429847754035</updated>
-    </task>
-    <task id="LOCAL-00053" summary="a">
-      <created>1429849325348</created>
-      <option name="number" value="00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1429849325348</updated>
-    </task>
-    <task id="LOCAL-00054" summary="a">
-      <created>1429849336072</created>
-      <option name="number" value="00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1429849336072</updated>
-    </task>
-    <task id="LOCAL-00055" summary="a">
-      <created>1429936102701</created>
-      <option name="number" value="00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1429936102731</updated>
-    </task>
-    <task id="LOCAL-00056" summary="a">
-      <created>1430229240599</created>
-      <option name="number" value="00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1430229240600</updated>
-    </task>
     <task id="LOCAL-00057" summary="a">
       <created>1430900045547</created>
       <option name="number" value="00057" />
@@ -1268,7 +1184,37 @@
       <option name="project" value="LOCAL" />
       <updated>1435637469631</updated>
     </task>
-    <option name="localTasksCounter" value="101" />
+    <task id="LOCAL-00101" summary="bwa">
+      <created>1435638705453</created>
+      <option name="number" value="00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1435638705453</updated>
+    </task>
+    <task id="LOCAL-00102" summary="bwa">
+      <created>1435638817995</created>
+      <option name="number" value="00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1435638817995</updated>
+    </task>
+    <task id="LOCAL-00103" summary="samtools">
+      <created>1435639154132</created>
+      <option name="number" value="00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1435639154132</updated>
+    </task>
+    <task id="LOCAL-00104" summary="snpcall">
+      <created>1435640286532</created>
+      <option name="number" value="00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1435640286532</updated>
+    </task>
+    <task id="LOCAL-00105" summary="map_reads">
+      <created>1435640807519</created>
+      <option name="number" value="00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1435640807519</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1295,7 +1241,6 @@
     <frame x="0" y="38" width="1920" height="973" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32968238" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.088495575" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1309,13 +1254,14 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36613274" sideWeight="0.49868214" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39510116" sideWeight="0.6715867" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2489339" sideWeight="0.6706783" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399361" sideWeight="0.49973643" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25670946" sideWeight="0.8993147" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399361" sideWeight="0.49973643" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2489339" sideWeight="0.6706783" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1345,7 +1291,10 @@
     <MESSAGE value="Added OrderedSet implementation" />
     <MESSAGE value="changes in seq_length.py script" />
     <MESSAGE value="bwa" />
-    <option name="LAST_COMMIT_MESSAGE" value="bwa" />
+    <MESSAGE value="samtools" />
+    <MESSAGE value="snpcall" />
+    <MESSAGE value="map_reads" />
+    <option name="LAST_COMMIT_MESSAGE" value="map_reads" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1391,90 +1340,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/kmer/get_kmer_list.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1296" max-vertical-offset="1836">
-          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/sequence/find_gaps.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2296015" vertical-offset="0" max-vertical-offset="1512">
-          <caret line="36" column="59" selection-start-line="36" selection-start-column="59" selection-end-line="36" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parsers/FastQC.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1242">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Filter/Trimmomatic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Assemblers/Spades.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="702">
-          <caret line="12" column="89" selection-start-line="12" selection-start-column="89" selection-end-line="12" selection-end-column="89" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Assemblers/Platanus.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2556">
-          <caret line="65" column="98" selection-start-line="65" selection-start-column="98" selection-end-line="65" selection-end-column="98" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MAVR.egg-info/requires.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Filter/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
-          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="13" max-vertical-offset="540">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/restriction_map/map_restriction_map.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1062" max-vertical-offset="1782">
-          <caret line="23" column="40" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/File.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1674">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Alignment.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
@@ -1629,7 +1494,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
           <caret line="4" column="9" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1637,9 +1501,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="164" max-vertical-offset="774">
           <caret line="30" column="1" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
-          <folding>
-            <element signature="e#55#70#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1647,9 +1508,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3878" max-vertical-offset="4536">
           <caret line="246" column="42" selection-start-line="246" selection-start-column="42" selection-end-line="246" selection-end-column="42" />
-          <folding>
-            <element signature="e#25#34#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1657,7 +1515,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="610">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1665,7 +1522,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="610">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1673,7 +1529,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="610">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1681,7 +1536,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="486">
           <caret line="25" column="1" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1689,7 +1543,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="610">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1697,19 +1550,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1638">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/SNP_call/example_SNP_call.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="2574">
-          <caret line="42" column="41" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
-          <folding>
-            <element signature="e#22#53#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1717,7 +1557,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="756">
           <caret line="27" column="43" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1726,16 +1565,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="597">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Kmers/Jellyfish.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1566">
-          <caret line="7" column="7" selection-start-line="6" selection-start-column="0" selection-end-line="13" selection-end-column="76" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1747,11 +1578,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Samtools/Samtools.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1172" max-vertical-offset="1800">
+          <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Samtools/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="216">
+        <state vertical-scroll-proportion="0.17704917" vertical-offset="0" max-vertical-offset="610">
           <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/snpcall/snpcall.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1116">
+          <caret line="28" column="37" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="47" />
+          <folding>
+            <element signature="e#54#63#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1763,18 +1612,120 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Samtools/Samtools.py">
+    <entry file="file://$PROJECT_DIR$/examples/SNP_call/example_SNP_call.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1172" max-vertical-offset="1782">
-          <caret line="72" column="31" selection-start-line="72" selection-start-column="31" selection-end-line="72" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="702" max-vertical-offset="2646">
+          <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="100" selection-end-column="113" />
+          <folding>
+            <element signature="e#22#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="38" max-vertical-offset="666">
+          <caret line="30" column="8" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/GATK/BaseRecalibrator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="666">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/GATK/VariantRecalibrator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="666">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/GATK/SelectVariants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="846">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Kmers/Jellyfish.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20655738" vertical-offset="0" max-vertical-offset="1566">
+          <caret line="7" column="7" selection-start-line="6" selection-start-column="0" selection-end-line="13" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/GATK/ApplyRecalibration.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="610">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/GATK/Abstract.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
+          <caret line="8" column="2" selection-start-line="8" selection-start-column="0" selection-end-line="14" selection-end-column="127" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/GATK/VariantFiltration.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Picard.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12060302" vertical-offset="0" max-vertical-offset="597">
+          <caret line="6" column="17" selection-start-line="5" selection-start-column="0" selection-end-line="8" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Picard/CreateSequenceDictionary.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41311476" vertical-offset="0" max-vertical-offset="610">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Picard/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="234">
+          <caret line="7" column="49" selection-start-line="7" selection-start-column="49" selection-end-line="7" selection-end-column="49" />
+          <folding>
+            <element signature="e#55#125#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Picard/AddOrReplaceReadGroups.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
+          <caret line="13" column="55" selection-start-line="13" selection-start-column="53" selection-end-line="13" selection-end-column="81" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/alignment/map_reads.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.590164" vertical-offset="542" max-vertical-offset="1746">
-          <caret line="84" column="48" selection-start-line="84" selection-start-column="48" selection-end-line="84" selection-end-column="48" />
+        <state vertical-scroll-proportion="0.852459" vertical-offset="1154" max-vertical-offset="1944">
+          <caret line="93" column="57" selection-start-line="93" selection-start-column="57" selection-end-line="93" selection-end-column="57" />
           <folding>
             <element signature="e#54#63#0" expanded="true" />
           </folding>

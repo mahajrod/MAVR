@@ -24,3 +24,10 @@ class Tool():
             exe_string = self.path + command + " " + options
         print("Executing:\n\t%s" % exe_string)
         os.system(exe_string)
+
+
+class JavaTool(Tool):
+
+    def __init__(self, jar, java_path="", max_threads=4, jar_path="", max_memory="1g"):
+        Tool.__init__(self, "java", path=java_path, max_threads=max_threads, jar_path=jar_path,
+                      jar=jar, max_memory=max_memory)
