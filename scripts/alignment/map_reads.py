@@ -88,14 +88,15 @@ SamtoolsV0.view(raw_alignment, output_file=filtered_alignment, include_header_in
 SamtoolsV0.sort(filtered_alignment, sorted_filtered_alignment_prefix)
 
 """
-SamtoolsV0.rmdup(sorted_filtered_alignment, rmdup_sorted_filtered_alignment, treat_both_pe_and_se_reads=False)
+#SamtoolsV0.rmdup(sorted_filtered_alignment, rmdup_sorted_filtered_alignment, treat_both_pe_and_se_reads=False)
+#SamtoolsV0.rmdup(sorted_filtered_alignment, rmdup_sorted_filtered_alignment, treat_both_pe_and_se_reads=False)
 if not args.dont_add_read_groups:
     AddOrReplaceReadGroups.jar_path = args.picard_dir
     AddOrReplaceReadGroups.add_read_groups(rmdup_sorted_filtered_alignment, "temp.bam",
                                            RGID=args.prefix, RGLB=args.prefix, RGPL=args.prefix,
                                            RGSM=args.prefix, RGPU=args.prefix)
     #os.remove(rmdup_sorted_filtered_alignment)
-    os.rename("temp.bam", rmdup_sorted_filtered_alignment)
+    #os.rename("temp.bam", rmdup_sorted_filtered_alignment)
 
 #SamtoolsV0.index(rmdup_sorted_filtered_alignment)
 
