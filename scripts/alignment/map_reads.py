@@ -65,10 +65,10 @@ if args.aligner == "bowtie2":
 
 aligner.threads = args.threads
 
-"""
+
 aligner.align(args.index, right_reads_list=args.right_reads, left_reads_list=args.left_reads,
               unpaired_reads_list=args.unpaired_reads, quality_score=args.quality, output_file=raw_alignment)
-"""
+
 
 """
 # Samtools version 1+.  Rmdup doesnt work with bams containing reads from several libraries
@@ -81,16 +81,16 @@ SamtoolsV1.rmdup(sorted_filtered_alignment, rmdup_sorted_filtered_alignment, tre
 """
 
 # Samtools v 0.1.19
-"""
+
 SamtoolsV0.view(raw_alignment, output_file=filtered_alignment, include_header_in_output=True,
                 output_uncompressed_bam=True, output_bam=True, white_flag_value=args.white_flag_value,
                 black_flag_value=black_flag_value, bed_file_with_regions_to_output=args.bed,
                 sam_input=True)
 SamtoolsV0.sort(filtered_alignment, sorted_filtered_alignment_prefix)
 
-"""
-#SamtoolsV0.rmdup(sorted_filtered_alignment, rmdup_sorted_filtered_alignment, treat_both_pe_and_se_reads=False)
+
 SamtoolsV0.rmdup(sorted_filtered_alignment, rmdup_sorted_filtered_alignment, treat_both_pe_and_se_reads=False)
+
 if not args.dont_add_read_groups:
     AddOrReplaceReadGroups.jar_path = args.picard_dir
     AddOrReplaceReadGroups.add_read_groups(rmdup_sorted_filtered_alignment, rmdup_sorted_filtered_alignment_with_groups,
@@ -99,7 +99,7 @@ if not args.dont_add_read_groups:
     #os.remove(rmdup_sorted_filtered_alignment)
     #os.rename("temp.bam", rmdup_sorted_filtered_alignment)
 
-#SamtoolsV0.index(rmdup_sorted_filtered_alignment)
+SamtoolsV0.index(rmdup_sorted_filtered_alignment_with_groups)
 
 if not args.retain_temp:
     os.remove(raw_alignment)
