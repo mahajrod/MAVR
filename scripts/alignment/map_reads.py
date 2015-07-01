@@ -41,7 +41,7 @@ parser.add_argument("-c", "--black_flag_value", action="store", dest="black_flag
                          "nonprimary alignments will be removed")
 parser.add_argument("-e", "--white_flag_value", action="store", dest="white_flag_value", type=int,
                     help="White flag value")
-parser.add_argument("-g", "--dont_add_read_groups", action="store_false", dest="dont_add_read_groups", default=True,
+parser.add_argument("-g", "--dont_add_read_groups", action="store_false", dest="dont_add_read_groups", default=False,
                     help="Don't add read groups to final bam")
 parser.add_argument("-d", "--picard_dir", action="store", dest="picard_dir",
                     help="Path to Picard directory. Required to add read groups")
@@ -79,7 +79,7 @@ SamtoolsV1.rmdup(sorted_filtered_alignment, rmdup_sorted_filtered_alignment, tre
 """
 
 # Samtools v 0.1.19
-""""
+"""
 SamtoolsV0.view(raw_alignment, output_file=filtered_alignment, include_header_in_output=True,
                 output_uncompressed_bam=True, output_bam=True, white_flag_value=args.white_flag_value,
                 black_flag_value=black_flag_value, bed_file_with_regions_to_output=args.bed,
@@ -96,7 +96,7 @@ if not args.dont_add_read_groups:
     os.remove(rmdup_sorted_filtered_alignment)
     os.rename("temp.bam", rmdup_sorted_filtered_alignment)
 
-SamtoolsV0.index(rmdup_sorted_filtered_alignment)
+#SamtoolsV0.index(rmdup_sorted_filtered_alignment)
 
 if not args.retain_temp:
     os.remove(raw_alignment)
