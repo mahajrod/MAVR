@@ -59,6 +59,7 @@ filtered_alignment = "%s_filtered.bam" % args.prefix
 sorted_filtered_alignment_prefix = "%s_filtered_sorted" % args.prefix
 sorted_filtered_alignment = "%s_filtered_sorted.bam" % args.prefix
 rmdup_sorted_filtered_alignment = "%s_final.bam" % args.prefix
+rmdup_sorted_filtered_alignment_with_groups = "%s_final_with_groups.bam" % args.prefix
 if args.aligner == "bowtie2":
     aligner = Bowtie2
 
@@ -92,7 +93,7 @@ SamtoolsV0.sort(filtered_alignment, sorted_filtered_alignment_prefix)
 SamtoolsV0.rmdup(sorted_filtered_alignment, rmdup_sorted_filtered_alignment, treat_both_pe_and_se_reads=False)
 if not args.dont_add_read_groups:
     AddOrReplaceReadGroups.jar_path = args.picard_dir
-    AddOrReplaceReadGroups.add_read_groups(rmdup_sorted_filtered_alignment, "temp.bam",
+    AddOrReplaceReadGroups.add_read_groups(rmdup_sorted_filtered_alignment, rmdup_sorted_filtered_alignment_with_groups,
                                            RGID=args.prefix, RGLB=args.prefix, RGPL=args.prefix,
                                            RGSM=args.prefix, RGPU=args.prefix)
     #os.remove(rmdup_sorted_filtered_alignment)
