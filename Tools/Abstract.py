@@ -18,10 +18,10 @@ class Tool():
         command = cmd if cmd is not None else self.cmd
         #print(self.jar_path)
         if self.jar_path is not None:
-            exe_string = self.path + "java -Xmx%s -jar %s%s %s" % (self.max_memory, self.jar_path, self.jar, command) \
+            exe_string = check_path(self.path) + "java -Xmx%s -jar %s%s %s" % (self.max_memory, check_path(self.jar_path), self.jar, command) \
                          + " " + options
         else:
-            exe_string = self.path + command + " " + options
+            exe_string = check_path(self.path) + command + " " + options
         print("Executing:\n\t%s" % exe_string)
         os.system(exe_string)
 
