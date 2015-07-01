@@ -30,6 +30,6 @@ class JavaTool(Tool):
 
     def __init__(self, jar, java_path="", max_threads=4, jar_path="", max_memory="1g"):
 
-        Tool.__init__(self, "java", path=check_path(java_path) if java_path != "" else "", max_threads=max_threads,
-                      jar_path=check_path(jar_path) if jar_path != "" else "",
+        Tool.__init__(self, "java", path=check_path(java_path), max_threads=max_threads,
+                      jar_path=check_path(jar_path),
                       jar=jar, max_memory=max_memory)
