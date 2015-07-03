@@ -14,7 +14,7 @@ class Tool():
         self.jar = jar
         self.max_memory = max_memory
 
-    def execute(self, options, cmd=None):
+    def execute(self, options="", cmd=None):
 
         command = cmd if cmd is not None else self.cmd
         exe_string = check_path(self.path) + command + " " + options
@@ -31,13 +31,12 @@ class JavaTool(Tool):
                       jar_path=check_path(jar_path),
                       jar=jar, max_memory=max_memory)
 
-    def execute(self, options, cmd=None):
+    def execute(self, options="", cmd=None):
         command = cmd if cmd is not None else ""
         exe_string = check_path(self.path) + "java -Xmx%s -jar %s%s %s %s" % (self.max_memory,
                                                                               check_path(self.jar_path),
                                                                               self.jar, command, options)
         print("Executing:\n\t%s" % exe_string)
-
 
         os.system(exe_string)
 

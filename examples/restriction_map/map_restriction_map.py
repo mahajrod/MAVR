@@ -9,8 +9,8 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_file", action="store", dest="input_file",
                     help="Input file with sequences")
-parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix",
-                    help="Prefix of output files")
+parser.add_argument("-o", "--output_file", action="store", dest="output",
+                    help="Output")
 parser.add_argument("-f", "--format", action="store", dest="format", default="fasta",
                     help="Format of input file. Default - fasta")
 
@@ -80,7 +80,7 @@ def cart_sites(sequence, restrictase_sites_dict):
         sites_sequence += sites_dictionary[position]
     return sorted_sites_dictionary, sites_sequence
 
-sites_fd = open(args.output_prefix, "w")
+sites_fd = open(args.output, "w")
 sites_fd.write("#sequence\tlength\tmap_length\tsites\tsites_map\treverse_map\tsites_seq\tpresense\n")
 for record_id in sequence_dict:
     sites_dict, sites_string = cart_sites(str(sequence_dict[record_id].seq), restrictase_sites_dict)

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-
+import os
 from Tools.Abstract import Tool
 
 
@@ -76,6 +76,18 @@ class Jellyfish(Tool):
         options += " %s" % in_file
 
         self.execute(options, cmd="jellyfish dump")
+
+    def get_kmer_list(self, in_file, out_prefix, kmer_length=23, hash_size=1000000, count_both_strands=False,
+                      lower_count=None, upper_count=None):
+        base_file = "%s_%i_mer.jf" % (out_prefix, kmer_length)
+        kmer_table_file = "%s_%i_mer.counts" % (out_prefix, kmer_length)
+        kmer_file = "%s_%i_mer.kmer" % (out_prefix, kmer_length)
+        self.count(in_file, base_file, kmer_length=kmer_length, hash_size=hash_size,
+                   count_both_strands=count_both_strands,
+                   lower_count=lower_count, upper_count=upper_count)
+        self.dump(base_file, kmer_table_file)
+        sed_string = 'sed -e "s/\t.*//" %s > %s' % (kmer_table_file, kmer_file)
+        os.system(sed_string)
 
 
 if __name__ == "__main__":
