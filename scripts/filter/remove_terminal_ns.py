@@ -98,7 +98,7 @@ elif args.input_left and args.input_right:
             left_out_fd.write("%s\n%s\n%s\n%s\n") % (left_name,
                                                      left_sequence if (left_match is None) else left_sequence[:left_match.start()],
                                                      left_separator,
-                                                     left_quality if (left_match is None) else left_quality[:left_match.start()])
+                                                     str(left_quality if (left_match is None) else left_quality[:left_match.start()]))
             right_out_fd.write("%s\n%s\n%s\n%s\n") % (right_name,
                                                       right_sequence if right_match is None else right_sequence[:right_match.start()],
                                                       right_separator,
