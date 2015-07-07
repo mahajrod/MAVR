@@ -82,7 +82,7 @@ elif args.input_left and args.input_right:
         left_match = n_regexp.search(left_sequence)
         right_match = n_regexp.search(right_sequence)
 
-        if ((left_match is None) or ((left_match.start() + 1) >= args.min_len)) and ((right_match is None) or ((right_match.start() + 1) >= args.min_len)):
+        if ((left_match == None) or ((left_match.start() + 1) >= args.min_len)) and ((right_match == None) or ((right_match.start() + 1) >= args.min_len)):
             print(left_match)
             try:
                 print(left_match.start())
@@ -90,15 +90,15 @@ elif args.input_left and args.input_right:
                 pass
             print(left_name)
             print(left_sequence)
-            print(type(left_sequence if left_match is None else left_sequence[:left_match.start()]))
+            print(type(left_sequence if left_match == None else left_sequence[:left_match.start()]))
             print(left_separator)
             print(left_quality)
             print(left_match.start())
-            print(type(left_quality if left_match is None else left_quality[:left_match.start()]))
+            print(type(left_quality if left_match == None else left_quality[:left_match.start()]))
             left_out_fd.write("%s\n%s\n%s\n%s\n") % (left_name,
-                                                     left_sequence if (left_match is None) else left_sequence[:left_match.start()],
+                                                     left_sequence if (left_match == None) else left_sequence[:left_match.start()],
                                                      left_separator,
-                                                     str(left_quality if (left_match is None) else left_quality[:left_match.start()]))
+                                                     left_quality if (left_match == None) else left_quality[:left_match.start()])
             right_out_fd.write("%s\n%s\n%s\n%s\n") % (right_name,
                                                       right_sequence if right_match is None else right_sequence[:right_match.start()],
                                                       right_separator,
