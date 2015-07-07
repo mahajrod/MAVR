@@ -49,9 +49,9 @@ if args.input_se:
             break
         match = n_regexp.search(sequence)
         if match is None:
-            se_out_fd.write("%s\n%s\n%s\n%s\n") % (name, sequence, separator, quality)
+            se_out_fd.write("%s\n%s\n%s\n%s\n" % (name, sequence, separator, quality))
         elif (match.start() + 1) >= args.min_len:
-            se_out_fd.write("%s\n%s\n%s\n%s\n") % (name, sequence[:match.start()+1], separator, quality[:match.start()+1])
+            se_out_fd.write("%s\n%s\n%s\n%s\n" % (name, sequence[:match.start()+1], separator, quality[:match.start()+1]))
         else:
             continue
 
@@ -82,37 +82,37 @@ elif args.input_left and args.input_right:
         left_match = n_regexp.search(left_sequence)
         right_match = n_regexp.search(right_sequence)
 
-        if ((left_match == None) or ((left_match.start() + 1) >= args.min_len)) and ((right_match == None) or ((right_match.start() + 1) >= args.min_len)):
+        if ((left_match is None) or ((left_match.start() + 1) >= args.min_len)) and ((right_match is None) or ((right_match.start() + 1) >= args.min_len)):
             print(left_match)
             try:
                 print(left_match.start())
             except:
                 pass
-            print(left_name)
-            print(left_sequence)
-            print(type(left_sequence if left_match == None else left_sequence[:left_match.start()]))
-            print(left_separator)
-            print(left_quality)
-            print(left_match.start())
-            print(type(left_quality if left_match == None else left_quality[:left_match.start()]))
-            left_out_fd.write("%s\n%s\n%s\n%s\n") % (left_name,
-                                                     left_sequence if (left_match == None) else left_sequence[:left_match.start()],
+            #print(left_name)
+            #print(left_sequence)
+            #print(type(left_sequence if left_match is None else left_sequence[:left_match.start()]))
+            #print(left_separator)
+            #print(left_quality)
+            #print(left_match.start())
+            #print(left_quality if left_match is None else left_quality[:left_match.start()])
+            left_out_fd.write("%s\n%s\n%s\n%s\n" % (left_name,
+                                                     left_sequence if (left_match is None) else left_sequence[:left_match.start()],
                                                      left_separator,
-                                                     left_quality if (left_match == None) else left_quality[:left_match.start()])
-            right_out_fd.write("%s\n%s\n%s\n%s\n") % (right_name,
+                                                     left_quality if (left_match is None) else left_quality[:left_match.start()]))
+            right_out_fd.write("%s\n%s\n%s\n%s\n" % (right_name,
                                                       right_sequence if right_match is None else right_sequence[:right_match.start()],
                                                       right_separator,
-                                                      right_quality if right_match is None else right_quality[:right_match.start()])
+                                                      right_quality if right_match is None else right_quality[:right_match.start()]))
         elif (left_match is None) or ((left_match.start() + 1) >= args.min_len):
-            left_out_se_fd.write("%s\n%s\n%s\n%s\n") % (left_name,
+            left_out_se_fd.write("%s\n%s\n%s\n%s\n" % (left_name,
                                                         left_sequence if left_match is None else left_sequence[:left_match.start()],
                                                         left_separator,
-                                                        left_quality if left_match is None else left_quality[:left_match.start()])
+                                                        left_quality if left_match is None else left_quality[:left_match.start()]))
         elif (right_match is None) or ((right_match.start() + 1) >= args.min_len):
-            right_out_se_fd.write("%s\n%s\n%s\n%s\n") % (right_name,
+            right_out_se_fd.write("%s\n%s\n%s\n%s\n" % (right_name,
                                                          right_sequence if right_match is None else right_sequence[:right_match.start()],
                                                          right_separator,
-                                                         right_quality if right_match is None else right_quality[:right_match.start()])
+                                                         right_quality if right_match is None else right_quality[:right_match.start()]))
         else:
             continue
     left_in_fd.close()
