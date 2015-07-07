@@ -83,6 +83,11 @@ elif args.input_left and args.input_right:
         right_match = n_regexp.search(right_sequence)
 
         if ((left_match is None) or ((left_match.start() + 1) >= args.min_len)) and ((right_match is None) or ((right_match.start() + 1) >= args.min_len)):
+            print(left_match)
+            try:
+                print(left_match.start())
+            except:
+                pass
             print(left_name)
             print(left_sequence)
             print(left_sequence if left_match is None else left_sequence[:left_match.start()+1])
