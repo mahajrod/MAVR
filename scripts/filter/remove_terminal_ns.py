@@ -86,7 +86,7 @@ elif args.input_left and args.input_right:
             print(left_sequence)
             print(left_quality)
             print(left_match.start())
-            print(right_quality if right_match is None else right_quality[:right_match.start()+1])
+            print(left_quality if left_match is None else left_quality[:left_match.start()+1])
             left_out_fd.write("%s\n%s\n%s\n%s\n") % (left_name,
                                                      left_sequence if left_match is None else left_sequence[:left_match.start()+1],
                                                      left_separator,
