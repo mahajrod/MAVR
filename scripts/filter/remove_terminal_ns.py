@@ -90,11 +90,11 @@ elif args.input_left and args.input_right:
                 pass
             print(left_name)
             print(left_sequence)
-            print(left_sequence if left_match is None else left_sequence[:left_match.start()])
+            print(type(left_sequence if left_match is None else left_sequence[:left_match.start()]))
             print(left_separator)
             print(left_quality)
             print(left_match.start())
-            print(left_quality if left_match is None else left_quality[:left_match.start()])
+            print(type(left_quality if left_match is None else left_quality[:left_match.start()]))
             left_out_fd.write("%s\n%s\n%s\n%s\n") % (left_name,
                                                      left_sequence if left_match is None else left_sequence[:left_match.start()],
                                                      left_separator,
