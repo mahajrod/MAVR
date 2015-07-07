@@ -50,7 +50,7 @@ if args.input_se:
         match = n_regexp.search(sequence)
         if match is None:
             se_out_fd.write("%s\n%s\n%s\n%s\n" % (name, sequence, separator, quality))
-        elif (match.start() + 1) >= args.min_len:
+        elif match.start() >= args.min_len:
             se_out_fd.write("%s\n%s\n%s\n%s\n" % (name, sequence[:match.start()+1], separator, quality[:match.start()+1]))
         else:
             continue
@@ -82,7 +82,7 @@ elif args.input_left and args.input_right:
         left_match = n_regexp.search(left_sequence)
         right_match = n_regexp.search(right_sequence)
 
-        if ((left_match is None) or ((left_match.start() + 1) >= args.min_len)) and ((right_match is None) or ((right_match.start() + 1) >= args.min_len)):
+        if ((left_match is None) or (left_match.start() >= args.min_len)) and ((right_match is None) or (right_match.start() >= args.min_len)):
             #print(left_match)
             #try:
             #    print(left_match.start())
