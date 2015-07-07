@@ -40,7 +40,7 @@ if args.input_se:
 
     se_directory, se_prefix, se_extension = split_filename(args.input_se)
     se_in_fd = open(args.input_se, "r")
-    se_out_file = "%s%s.filtered.%s" % (check_path(args.out_dir), se_prefix, se_extension)
+    se_out_file = "%s%s.filtered%s" % (check_path(args.out_dir), se_prefix, se_extension)
     se_out_fd = open(se_out_file, "w")
 
     while True:
@@ -64,14 +64,14 @@ elif args.input_left and args.input_right:
     right_directory, right_prefix, right_extension = split_filename(args.input_right)
     left_in_fd = open(args.input_left, "r")
     right_in_fd = open(args.input_right, "r")
-    left_out_file = "%s%s.filtered_1.%s" % (check_path(args.out_dir), left_prefix, left_extension)
+    left_out_file = "%s%s.filtered_1%s" % (check_path(args.out_dir), left_prefix, left_extension)
     left_out_fd = open(left_out_file, "w")
-    right_out_file = "%s%s.filtered_2.%s" % (check_path(args.out_dir), right_prefix, right_extension)
+    right_out_file = "%s%s.filtered_2%s" % (check_path(args.out_dir), right_prefix, right_extension)
     right_out_fd = open(right_out_file, "w")
 
-    left_out_se_file = "%s%s.se.filtered_1.%s" % (check_path(args.out_dir), left_prefix, left_extension)
+    left_out_se_file = "%s%s.se.filtered_1%s" % (check_path(args.out_dir), left_prefix, left_extension)
     left_out_se_fd = open(left_out_se_file, "w")
-    right_out_se_file = "%s%s.se.filtered_2.%s" % (check_path(args.out_dir), right_prefix, right_extension)
+    right_out_se_file = "%s%s.se.filtered_2%s" % (check_path(args.out_dir), right_prefix, right_extension)
     right_out_se_fd = open(right_out_se_file, "w")
 
     while True:
