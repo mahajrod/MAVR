@@ -114,6 +114,7 @@ elif args.input_left and args.input_right:
     right_out_fd.close()
     left_out_se_fd.close()
     right_out_se_fd.close()
+
 else:
     raise IOError("Wrong input")
 
