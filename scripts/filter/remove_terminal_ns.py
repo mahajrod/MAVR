@@ -33,13 +33,8 @@ parser.add_argument("-o", "--out_dir", action="store", dest="out_dir", default="
 parser.add_argument("-m", "--min_len", action="store", dest="min_len", type=int, default=1,
                     help="Minimum length of read to output")
 
-
 args = parser.parse_args()
-
 n_regexp = re.compile("N+$")
-
-in_fd = sys.stdin if args.input == "stdin" else open(args.input, "r")
-out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
 
 if args.input_se:
 
@@ -54,9 +49,9 @@ if args.input_se:
             break
         match = n_regexp.search(sequence)
         if match is None:
-            out_fd.write("%s\n%s\n%s\n%s\n") % (name, sequence, separator, quality)
+            se_out_fd.write("%s\n%s\n%s\n%s\n") % (name, sequence, separator, quality)
         elif (match.start() + 1) >= args.min_len:
-            out_fd.write("%s\n%s\n%s\n%s\n") % (name, sequence[:match.start()+1], separator, quality[:match.start()+1])
+            se_out_fd.write("%s\n%s\n%s\n%s\n") % (name, sequence[:match.start()+1], separator, quality[:match.start()+1])
         else:
             continue
 
