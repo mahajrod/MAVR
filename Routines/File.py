@@ -1,7 +1,21 @@
 #!/usr/bin/env python
 __author__ = 'mahajrod'
 
+import os
 from collections import Iterable, OrderedDict
+
+
+def check_path(path_to_check):
+    #returns path with / at end or blank path
+    if path_to_check != "":
+        if path_to_check[-1] != "/":
+            return path_to_check + "/"
+    return path_to_check
+
+def split_filename(filepath):
+    directory, basename = os.path.split(filepath)
+    prefix, extension = os.path.splitext(basename)
+    return directory, prefix, extension
 
 
 def read_ids(filename, header=False):
