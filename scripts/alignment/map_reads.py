@@ -7,8 +7,10 @@ import argparse
 from Tools.Alignment import *
 from Tools.Samtools import SamtoolsV1, SamtoolsV0
 from Tools.Picard import AddOrReplaceReadGroups
+from Tools.Bedtools import GenomeCov
 
 from Routines.Functions import check_path
+
 
 def make_list_from_comma_sep_string(s):
     return s.split(",")
@@ -48,6 +50,8 @@ parser.add_argument("-d", "--picard_dir", action="store", dest="picard_dir",
                     help="Path to Picard directory. Required to add read groups")
 parser.add_argument("-n", "--retain_intermediate_files", action="store_true", dest="retain_temp", default=False,
                     help="Retain intermediate files")
+parser.add_argument("-y", "--coverage_bed", action="store", dest="coverage_bed", default="coverage.bed",
+                    help="Bed file with coverage")
 args = parser.parse_args()
 
 black_flag_value = args.black_flag_value if args.black_flag_value else \
@@ -100,7 +104,7 @@ if not args.dont_add_read_groups:
     #os.rename("temp.bam", rmdup_sorted_filtered_alignment)
 
 SamtoolsV0.index(rmdup_sorted_filtered_alignment_with_groups)
-
+GenomeCov.get_coverage(rmdup_sorted_filtered_alignment_with_groups, args.coverage_bed)
 if not args.retain_temp:
     os.remove(raw_alignment)
     os.remove(filtered_alignment)

@@ -12,11 +12,11 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-i", "--input_file", action="store", dest="input", required=True,
                     help="Input file.")
 parser.add_argument("-n", "--number_of_sequences", action="store", dest="number_of_sequences", default=5000, type=int,
-                    help="Number of sequences per splited file")
+                    help="Number of sequences per splited file. Default: 5000")
 parser.add_argument("-s", "--splited_directory", action="store", dest="splited_directory", default="splited_dir",
-                    help="Directory with splited files")
+                    help="Directory with splited files. Default: 'splited_dir' ")
 parser.add_argument("-d", "--output_directory", action="store", dest="output_directory", default="output_dir",
-                    help="Directory with output files")
+                    help="Directory with output files. Default: 'output_dir'")
 parser.add_argument("-o", "--output_file_prefix", action="store", dest="output_prefix", required=True,
                     help="Output file prefix")
 parser.add_argument("-c", "--command", action="store", dest="command", required=True,
