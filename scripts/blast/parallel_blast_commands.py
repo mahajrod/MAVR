@@ -2,6 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 import os
 import argparse
+import shutil
 
 from Bio import SeqIO
 
@@ -72,6 +73,6 @@ merge_string = "cat %s/* > %s.hits" % (args.output_directory, args.output_prefix
 os.system(merge_string)
 
 if not args.retain_temp_dirs:
-    os.remove(args.output_directory)
-    os.remove(args.splited_directory)
+    shutil.rmtree(args.output_directory)
+    shutil.rmtree(args.splited_directory)
 

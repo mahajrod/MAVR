@@ -87,7 +87,7 @@ with open(args.temp_file, "r") as input_fd:
         for line in input_fd:
             fl_first, fl_second, fl_weight, fl_alignment_len = line.strip().split("\t")
             fl_alignment_len = float(fl_alignment_len)
-            try: # check for last string in file (Stop Iteration is raised if end of file was reached on .next() method)
+            try:  # check for last string in file (Stop Iteration is raised if end of file was reached on .next() method)
                 sl_first, sl_second, sl_weight, sl_alignment_len = input_fd.next().strip().split("\t")
             except StopIteration:
                 break

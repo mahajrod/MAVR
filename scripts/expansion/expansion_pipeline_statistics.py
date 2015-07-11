@@ -105,7 +105,9 @@ color_list = ["blue",
               "magenta",
               "orange",
               "black",
-              "teal"]
+              "teal",
+              "darkred",
+              "yellowgreen"]
 index = 0
 for species in species_families_dict:
     hist_dict[species] = np.histogram(species_families_dict[species], bins=ax3_bins)
