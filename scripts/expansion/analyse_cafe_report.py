@@ -23,11 +23,11 @@ parser.add_argument("-n", "--convert", action="store_true", dest="convert_flag",
 parser.add_argument("-g", "--general_trees_prefix", action="store", dest="general_trees_prefix", default="general_tree",
                     help="Prefix for general trees")
 parser.add_argument("-o", "--output_prefix", action="store", dest="out_prefix", default="node",
-                    help="Prefix for node specific output")
+                    help="Prefix for node specific output. Default: node")
 parser.add_argument("-f", "--family_pvalue", action="store", dest="family_p_value", type=float, default=0.05,
-                    help="Family p-value cutoff")
+                    help="Family p-value cutoff. Default: 0.05")
 parser.add_argument("-p", "--node_pvalue", action="store", dest="node_p_value", type=float, default=0.05,
-                    help="Node p-value cutoff")
+                    help="Node p-value cutoff. Default: 0.05")
 parser.add_argument("-r", "--ref_species_gene_file", action="store", dest="ref_species_gene_file",
                     help="File with gene of genes families of reference species ")
 args = parser.parse_args()
@@ -75,6 +75,8 @@ with open(args.ref_species_gene_file, "r") as ref_fd:
         reference_genes_dict[gene_family_id] = [genes[:]]
         if genes:
             reference_genes_dict[gene_family_id].append(choice(genes))
+            # print gene_family_id
+            #print reference_genes_dict[gene_family_id]
 
 node_header_list = features_list + ["reference_gene"]
 delta_index = features_list.index("delta")
