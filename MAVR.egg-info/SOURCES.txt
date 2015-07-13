@@ -60,6 +60,7 @@ Tools/Annotation/GlimerHMM.py
 Tools/Annotation/SNPeff.py
 Tools/Annotation/__init__.py
 Tools/Assemblers/Fermi.py
+Tools/Assemblers/MaSuRCA.py
 Tools/Assemblers/Platanus.py
 Tools/Assemblers/Quast.py
 Tools/Assemblers/Spades.py
@@ -68,6 +69,7 @@ Tools/BLAST/BLAST.py
 Tools/BLAST/BLASTPlus.py
 Tools/BLAST/__init__.py
 Tools/Bedtools/Flank.py
+Tools/Bedtools/GenomeCov.py
 Tools/Bedtools/GetFasta.py
 Tools/Bedtools/Intersect.py
 Tools/Bedtools/__init__.py
@@ -92,6 +94,9 @@ Tools/GATK/VariantRecalibrator.py
 Tools/GATK/__init__.py
 Tools/Kmers/Jellyfish.py
 Tools/Kmers/__init__.py
+Tools/Picard/AddOrReplaceReadGroups.py
+Tools/Picard/CreateSequenceDictionary.py
+Tools/Picard/__init__.py
 Tools/Samtools/Samtools.py
 Tools/Samtools/__init__.py
 Tools/Tuxedo/Cufflinks.py

@@ -61,6 +61,7 @@ if args.convert_flag:
         print("Converting report to %s format" % output_type)
         cafe_report.convert(converted_dir + "converted_report_mode_%s.t" % output_type, output_type=output_type)
 cafe_report.general_data.draw(general_trees_dir + args.general_trees_prefix)
+cafe_report.write_general_tree(general_trees_dir + "general_tree.nwk")
 
 filtered_report, filtered_out_report = cafe_report.filter_by_family_p_value(args.family_p_value)
 node_values, features_list = filtered_report.get_per_node_values(filter_by_p_value=True,

@@ -162,6 +162,13 @@ class ReportCAFE():
                     out_fd.write(record.node_str())
                     out_fd.write("\n")
 
+    def write_general_tree(self, out_file):
+        with open(out_file, "w") as out_fd:
+            out_fd.write(self.general_data.tree.write(format=8,
+                                                      features=self.tree.features - set(["support", "name"]),
+                                                      format_root_node=True))
+            out_fd.write("\n")
+
     def get_per_node_values(self, filter_by_p_value=False, p_value_cutoff=0.05):
         node_values_dict = dict((node_id, []) for node_id in self.general_data.node_id_list)
         feature_names_list = ["family_id"] + [feature for feature in self.records[0].tree.features - set(["support", "name", "dist"])]

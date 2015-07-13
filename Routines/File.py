@@ -12,10 +12,26 @@ def check_path(path_to_check):
             return path_to_check + "/"
     return path_to_check
 
+
 def split_filename(filepath):
     directory, basename = os.path.split(filepath)
     prefix, extension = os.path.splitext(basename)
     return directory, prefix, extension
+
+
+def read_synonyms_dict(filename, header=False, separator="\t",
+                       split_values=False, values_separator=","):
+    # reads synonyms from file
+    synonyms_dict = OrderedDict()
+    with open(filename, "r") as in_fd:
+        if header:
+            header_str = in_fd.readline().strip()
+        for line in in_fd:
+            key, value = line.strip().split(separator)
+            if split_values:
+                value = value.split(values_separator)
+            synonyms_dict[key] = value
+    return synonyms_dict
 
 
 def read_ids(filename, header=False):
