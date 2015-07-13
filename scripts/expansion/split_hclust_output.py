@@ -44,6 +44,10 @@ parser.add_argument("-e", "--name_separator", action="store", dest="name_separat
 parser.add_argument("-a", "--family_count_file", action="store", dest="family_count_file",
                     default="family_count_file.t",
                     help="File to output family counts")
+parser.add_argument("-w", "--include_families_without_genes", action="store_true", dest="include_without_genes",
+                    help="Include famalies without genes in species")
+parser.add_argument("-c", "--count_genes", action="store_true", dest="count_genes",
+                    help="Count genes in families")
 args = parser.parse_args()
 
 try:
@@ -67,8 +71,17 @@ with open(args.input, "r") as in_fd:
 
         genes = split_gene_names(genes, name_first=args.name_first, separator=args.name_separator)
 
+        if args.include_without_genes:
+            for species in args.species_set:
+                if species not in genes:
+                    genes[species] = ["."]
+
         for species in genes:
-            species_fd_dict[species].write("%s\t%i\t%s\n" % (family_id, len(genes[species]), ",".join(genes[species])))
+            if args.count_genes:
+                species_fd_dict[species].write("%s\t%i\t%s\n" % (family_id, len(genes[species]),
+                                                                 ",".join(genes[species])))
+            else:
+                species_fd_dict[species].write("%s\t%s\n" % (family_id, ",".join(genes[species])))
             family_count_dict[species] += 1
 for species in species_fd_dict:
     species_fd_dict[species].close()
