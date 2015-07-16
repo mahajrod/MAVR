@@ -13,10 +13,10 @@ parser.add_argument("-r", "--reference", action="store", dest="reference", requi
                     help="Fasta with reference genome")
 parser.add_argument("-g", "--gatk_directory", action="store", dest="gatk_dir", default="",
                     help="Directory with GATK jar")
-parser.add_argument("-i", "--input_vcf", action="store", dest="input_vcf", type=lambda s: s.split(","),
+parser.add_argument("-i", "--input_vcf_list", action="store", dest="input_vcf_list", type=lambda s: s.split(","),
                     help="Comma-separated list of vcf files to combine",  required=True,)
 
 args = parser.parse_args()
 
 
-CombineVariants.combine_from_same_source(args.gatk_dir, args.reference, args.input_vcf, args.output)
+CombineVariants.combine_from_same_source(args.gatk_dir, args.reference, args.input_vcf_list, args.output)

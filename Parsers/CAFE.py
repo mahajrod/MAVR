@@ -70,7 +70,12 @@ class GeneralDataCAFE():
             ts.layout_fn = layout_arg
             self.tree.render("%s_%s.png" % (out_file_prefix, feature), w=w, units=units, tree_style=ts)
 
-
+    def write_general_tree(self, out_file):
+        with open(out_file, "w") as out_fd:
+            out_fd.write(self.tree.write(format=8,
+                                         features=self.tree.features - set(["support", "name"]),
+                                         format_root_node=True))
+            out_fd.write("\n")
 class ReportCAFE():
     def __init__(self, report_file=None, from_file=True, records=None, metadata=None, general_data=None, header=None):
         if from_file:
@@ -161,13 +166,6 @@ class ReportCAFE():
                 for record in self:
                     out_fd.write(record.node_str())
                     out_fd.write("\n")
-
-    def write_general_tree(self, out_file):
-        with open(out_file, "w") as out_fd:
-            out_fd.write(self.general_data.tree.write(format=8,
-                                                      features=self.tree.features - set(["support", "name"]),
-                                                      format_root_node=True))
-            out_fd.write("\n")
 
     def get_per_node_values(self, filter_by_p_value=False, p_value_cutoff=0.05):
         node_values_dict = dict((node_id, []) for node_id in self.general_data.node_id_list)

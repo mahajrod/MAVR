@@ -42,7 +42,7 @@ with open(args.input_tree_file, "r") as in_fd:
     for line in in_fd:
         children_index = 1
         tree_line = line.strip()
-        tree = Tree(tree_line, format=args.input_tree_format)
+        tree = Tree(tree_line, format=args.tree_format)
 
         print("Handling tree %i" % tree_index)
 
@@ -50,7 +50,7 @@ with open(args.input_tree_file, "r") as in_fd:
             if node.name in synonyms_dict:
                 node.name = synonyms_dict[node.name]
 
-        out_fd.write(tree.write(format=args.input_tree_format))
+        out_fd.write(tree.write(format=args.tree_format, features=tree.features - set(["support", "name"])))
 
         tree_index += 1
 
