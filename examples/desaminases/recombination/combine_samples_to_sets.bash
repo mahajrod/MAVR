@@ -12,15 +12,19 @@ function make_set_file_string
             result=${result},${SAMPLE}.vcf
         fi
         done
-    echo "${result}"
+    #echo "${result}"
+    CMD="${ABS_SCRIPT_PATH} -g ${GATK_DIR} -i ${result} -o ${OUTPUT_DIR}${2} -r ${REFERENCE}"
+    echo ${CMD}
+    ${CMD}
     }
 
-
-MAVR_DIR=/work/pavlov/okochenova/soft/MAVR/
-SCRIPT_PATH=scripts/snpcall/compare_vcf.py
+OUTPUT_DIR="../combined_sets/"
+GATK_DIR="/work/pavlov/okochenova/soft/GATK/"
+MAVR_DIR="/work/pavlov/okochenova/soft/MAVR/"
+SCRIPT_PATH="scripts/snpcall/compare_vcf.py"
 ABS_SCRIPT_PATH=${MAVR_DIR}${SCRIPT_PATH}
 
-
+REFERENCE="/work/pavlov/okochenova/reference/LAN210/LAN210_v0.10m/LAN210_v0.10m.fasta"
 
 PmCDA1_D1=(N085-LAN210-Can-PmCDA1-NA-RUN7-D1_GATK_best_SNP N086-LAN210-Can-PmCDA1-NA-RUN7-D1_GATK_best_SNP N087-LAN210-Can-PmCDA1-NA-RUN7-D1_GATK_best_SNP N088-LAN210-Can-PmCDA1-NA-RUN7-D1_GATK_best_SNP N089-LAN210-Can-PmCDA1-NA-RUN7-D1_GATK_best_SNP N090-LAN210-Can-PmCDA1-NA-RUN7-D1_GATK_best_SNP)
 PmCDA1_D3=(N010-LAN210-Can-PmCDA1-NA-RUN2-D3_GATK_best_SNP N011-LAN210-Can-PmCDA1-NA-RUN2-D3_GATK_best_SNP N012-LAN210-Can-PmCDA1-NA-RUN2-D3_GATK_best_SNP N013-LAN210-Can-PmCDA1-NA-RUN2-D3_GATK_best_SNP N058-LAN210-Can-PmCDA1-Feb13-RUN5-D3_GATK_best_SNP N059-LAN210-FOA-PmCDA1-Feb13-RUN5-D3_GATK_best_SNP N091-LAN210-Can-PmCDA1-NA-RUN7-D3_GATK_best_SNP N060-LAN210-FOA-PmCDA1-Feb13-RUN5-D3_GATK_best_SNP N061-LAN210-Can-PmCDA1-NA-RUN5-D3_GATK_best_SNP N062-LAN210-Can-PmCDA1-NA-RUN5-D3_GATK_best_SNP N065-LAN210-Can-PmCDA1-NA-RUN6-D3_GATK_best_SNP N066-LAN210-Can-PmCDA1-NA-RUN6-D3_GATK_best_SNP)
@@ -34,14 +38,16 @@ AID_D1=(N097-LAN210-Can-AID-NA-RUN7-D1_GATK_best_SNP N098-LAN210-Can-AID-NA-RUN7
 AID_D3=(N040-LAN210-Can-AID-Oct12-RUN4-D3_GATK_best_SNP N041-LAN210-Can-AID-Oct12-RUN4-D3_GATK_best_SNP N100-LAN210-Can-AID-NA-RUN7-D3_GATK_best_SNP N101-LAN210-Can-AID-NA-RUN7-D3_GATK_best_SNP N102-LAN210-Can-AID-NA-RUN7-D3_GATK_best_SNP)
 AID_D6=(N103-LAN210-Can-AID-NA-RUN7-D6_GATK_best_SNP N104-LAN210-Can-AID-NA-RUN7-D6_GATK_best_SNP N105-LAN210-Can-AID-NA-RUN7-D6_GATK_best_SNP N106-LAN210-Can-AID-NA-RUN7-D6_GATK_best_SNP N077-LAN210-Can-AID-NA-RUN6-D6_GATK_best_SNP N078-LAN210-Can-AID-NA-RUN6-D6_GATK_best_SNP)
 
-PmCDA1_D1_STR=`make_set_file_string PmCDA1_D1`
-PmCDA1_D3_STR=`make_set_file_string PmCDA1_D3`
-PmCDA1_D6_STR=`make_set_file_string PmCDA1_D6`
+mkdir -p ${OUTPUT_DIR}
+make_set_file_string PmCDA1_D1 PmCDA1_D1_raw.vcf
+make_set_file_string PmCDA1_D3 PmCDA1_D3_raw.vcf
+make_set_file_string PmCDA1_D6 PmCDA1_D6_raw.vcf
 
-A1_D1_STR=`make_set_file_string A1_D1`
-A1_D3_STR=`make_set_file_string A1_D3`
-A1_D6_STR=`make_set_file_string A1_D6`
+make_set_file_string A1_D1 A1_D1_raw.vcf
+make_set_file_string A1_D3 A1_D3_raw.vcf
+make_set_file_string A1_D6 A1_D6_raw.vcf
 
-AID_D1_STR=`make_set_file_string AID_D1`
-AID_D3_STR=`make_set_file_string AID_D3`
-AID_D6_STR=`make_set_file_string AID_D6`
+make_set_file_string AID_D1 AID_D1_raw.vcf
+make_set_file_string AID_D3 AID_D3_raw.vcf
+make_set_file_string AID_D6 AID_D6_raw.vcf
+
