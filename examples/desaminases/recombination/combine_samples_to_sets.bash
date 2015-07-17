@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+module load java/1.8 python/2.7
+source /work/pavlov/okochenova/profile
+
 function make_set_file_string
     {
     local array=$1[@]
