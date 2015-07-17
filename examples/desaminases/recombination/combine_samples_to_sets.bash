@@ -21,7 +21,7 @@ function make_set_file_string
 OUTPUT_DIR="../combined_sets/"
 GATK_DIR="/work/pavlov/okochenova/soft/GATK/"
 MAVR_DIR="/work/pavlov/okochenova/soft/MAVR/"
-SCRIPT_PATH="scripts/snpcall/compare_vcf.py"
+SCRIPT_PATH="scripts/snpcall/combine_vcf.py"
 ABS_SCRIPT_PATH=${MAVR_DIR}${SCRIPT_PATH}
 
 REFERENCE="/work/pavlov/okochenova/reference/LAN210/LAN210_v0.10m/LAN210_v0.10m.fasta"
@@ -46,7 +46,6 @@ make_set_file_string PmCDA1_D6 PmCDA1_D6_raw.vcf
 make_set_file_string A1_D1 A1_D1_raw.vcf
 make_set_file_string A1_D3 A1_D3_raw.vcf
 make_set_file_string A1_D6 A1_D6_raw.vcf
-
 
 make_set_file_string AID_D1 AID_D1_raw.vcf
 make_set_file_string AID_D3 AID_D3_raw.vcf
