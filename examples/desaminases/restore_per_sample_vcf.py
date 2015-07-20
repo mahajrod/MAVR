@@ -1,6 +1,5 @@
 import os
 
-from Tools.Bedtools import  Intersect
 from  Parsers.VCF import CollectionVCF, HeaderVCF, RecordVCF
 
 
@@ -135,6 +134,6 @@ for sample_set in sample_set_names_list:
                 if sample_set_record.samples_list[sample_index]["GT"] != "./.":
                     per_sample_mutations[sample].records.append(sample_record)
 
-        per_sample_mutations[sample].write(workdir + sample_set  + "/per_sample_vcf/" + sample + ".vcf")
+        per_sample_mutations[sample].write(workdir + sample_set + "/per_sample_vcf/" + sample + ".vcf")
 
 

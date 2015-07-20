@@ -76,6 +76,8 @@ class GeneralDataCAFE():
                                          features=self.tree.features - set(["support", "name"]),
                                          format_root_node=True))
             out_fd.write("\n")
+
+
 class ReportCAFE():
     def __init__(self, report_file=None, from_file=True, records=None, metadata=None, general_data=None, header=None):
         if from_file:

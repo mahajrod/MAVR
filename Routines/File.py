@@ -35,7 +35,6 @@ def make_list_of_path_to_files(list_of_dirs_and_files, expression):
     return pathes_list
 
 
-
 def read_synonyms_dict(filename, header=False, separator="\t",
                        split_values=False, values_separator=","):
     # reads synonyms from file

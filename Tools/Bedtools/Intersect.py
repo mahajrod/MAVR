@@ -80,12 +80,17 @@ class Intersect(Tool):
         reported, as we are only testing for one or more overlaps.
     """
 
-    def __init__(self, bedtools_dir=''):
-        self.bedtools_dir = check_path(bedtools_dir)
+    def __init__(self, path="", max_threads=1):
+        Tool.__init__(self, "bedtools intersect", path=path, max_threads=max_threads)
 
     def intersect(self, a_file, b_file, out_file, method="-v"):
-        os.system("%sbedtools intersect %s -a %s -b %s > %s"
-                  % (self.bedtools_dir, method, a_file, b_file, out_file))
+
+        options = " -a %s" % a_file
+        options += " -b %s" % b_file
+        options += " %s" % method
+        options += " > %s" % out_file
+
+        self.execute(options)
 
     def intersect_set(self, file_list, outfile, method="-v"):
         os.system("cat %s > temp0" % (file_list[0]))

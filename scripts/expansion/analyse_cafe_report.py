@@ -12,7 +12,7 @@ from numpy import linspace
 from collections import OrderedDict
 from CustomCollections.GeneralCollections import TwoLvlDict
 from Parsers.CAFE import ReportCAFE
-
+from Routines.File import read_synonyms_dict
 
 parser = argparse.ArgumentParser()
 
@@ -30,6 +30,8 @@ parser.add_argument("-p", "--node_pvalue", action="store", dest="node_p_value", 
                     help="Node p-value cutoff. Default: 0.05")
 parser.add_argument("-r", "--ref_species_gene_file", action="store", dest="ref_species_gene_file",
                     help="File with gene of genes families of reference species ")
+parser.add_argument("-s", "--species_synonym_file", action="store", dest="species_synonym_file",
+                    help="File with synonyms of species name")
 args = parser.parse_args()
 
 general_trees_dir = "general_trees/"
@@ -60,12 +62,12 @@ if args.convert_flag:
     for output_type in "tree", "node":
         print("Converting report to %s format" % output_type)
         cafe_report.convert(converted_dir + "converted_report_mode_%s.t" % output_type, output_type=output_type)
-cafe_report.general_data.draw(general_trees_dir + args.general_trees_prefix)
-cafe_report.general_data.write_general_tree(general_trees_dir + "general_tree.nwk")
+
 
 filtered_report, filtered_out_report = cafe_report.filter_by_family_p_value(args.family_p_value)
 node_values, features_list = filtered_report.get_per_node_values(filter_by_p_value=True,
                                                                  p_value_cutoff=args.node_p_value)
+print("Totally %i gene families" % len(cafe_report.records))
 print("Totally %i gene families without statistically significant changes" % len(filtered_out_report.records))
 
 reference_genes_dict = {}
@@ -144,6 +146,20 @@ for node_id in node_values:
     plt.close()
     for fd in fd_list:
         fd.close()
+
+for node in cafe_report.general_data.tree.traverse():
+    node.add_feature("significant_expansion", statistics_dict[node.id]["new"])
+    node.add_feature("significant_contraction", statistics_dict[node.id]["lost"])
+
+cafe_report.general_data.draw(general_trees_dir + args.general_trees_prefix)
+cafe_report.general_data.write_general_tree(general_trees_dir + "general_tree.nwk")
+
+if args.species_synonym_file:
+    synonyms_dict = read_synonyms_dict(args.species_synonym_file, header=False, separator="\t", split_values=False)
+    for node in cafe_report.general_data.tree.traverse():
+        if node.name in synonyms_dict:
+            node.name = synonyms_dict[node.name]
+    cafe_report.general_data.write_general_tree(general_trees_dir + "general_tree_latin.nwk")
 
 with open(background_genes_dir + "background_genes.t", "w") as back_fd:
     with open(background_genes_dir + "background_genes_list.txt", "w") as back_list_fd:
