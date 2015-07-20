@@ -5,16 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0137b4ba-9cb9-4454-8e03-43ff7c136081" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/recombination/restore_per_sample_vcf.bash" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/snpcall/vcf_length.py" afterPath="$PROJECT_DIR$/scripts/snpcall/intersect_vcf.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" afterPath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parsers/CAFE.py" afterPath="$PROJECT_DIR$/Parsers/CAFE.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/File.py" afterPath="$PROJECT_DIR$/Routines/File.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Bedtools/Intersect.py" afterPath="$PROJECT_DIR$/Tools/Bedtools/Intersect.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/expansion/analyse_cafe_report.py" afterPath="$PROJECT_DIR$/scripts/expansion/analyse_cafe_report.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/expansion/draw_general_tree.py" afterPath="$PROJECT_DIR$/scripts/expansion/draw_general_tree.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/restore_per_sample_vcf.py" afterPath="$PROJECT_DIR$/examples/desaminases/restore_per_sample_vcf.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/recombination/cluster_combined_sets.bash" afterPath="$PROJECT_DIR$/examples/desaminases/recombination/cluster_combined_sets.bash" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/recombination/compare_raw_snp_sets.R" afterPath="$PROJECT_DIR$/examples/desaminases/recombination/compare_raw_snp_sets.R" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/recombination/filter_map_snpcall_cluster_each_sample_RUN7.bash" afterPath="$PROJECT_DIR$/examples/desaminases/recombination/filter_map_snpcall_cluster_each_sample_RUN7.bash" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/snpcall/intersect_vcf.py" afterPath="$PROJECT_DIR$/scripts/snpcall/intersect_vcf.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/desaminases/recombination/strict_filter_map_snpcall_cluster_each_sample_RUN7.bash" afterPath="$PROJECT_DIR$/examples/desaminases/recombination/strict_filter_map_snpcall_cluster_each_sample_RUN7.bash" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -76,8 +71,8 @@
       <file leaf-file-name="restore_per_sample_vcf.bash" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/examples/desaminases/recombination/restore_per_sample_vcf.bash">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.19911012" vertical-offset="1" max-vertical-offset="936">
-              <caret line="10" column="42" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.12013348" vertical-offset="0" max-vertical-offset="936">
+              <caret line="6" column="34" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -107,7 +102,7 @@
         <entry file="file://$PROJECT_DIR$/examples/desaminases/recombination/cluster_combined_sets.bash">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="666">
-              <caret line="17" column="120" selection-start-line="17" selection-start-column="120" selection-end-line="17" selection-end-column="120" />
+              <caret line="6" column="82" selection-start-line="6" selection-start-column="82" selection-end-line="6" selection-end-column="82" />
               <folding />
             </state>
           </provider>
@@ -127,7 +122,7 @@
         <entry file="file://$PROJECT_DIR$/scripts/snpcall/intersect_vcf.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
-              <caret line="28" column="59" selection-start-line="28" selection-start-column="59" selection-end-line="28" selection-end-column="59" />
+              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
@@ -857,30 +852,6 @@
       <option name="number" value="Default" />
       <updated>1396791476390</updated>
     </task>
-    <task id="LOCAL-00104" summary="snpcall">
-      <created>1435640286532</created>
-      <option name="number" value="00104" />
-      <option name="project" value="LOCAL" />
-      <updated>1435640286532</updated>
-    </task>
-    <task id="LOCAL-00105" summary="map_reads">
-      <created>1435640807519</created>
-      <option name="number" value="00105" />
-      <option name="project" value="LOCAL" />
-      <updated>1435640807519</updated>
-    </task>
-    <task id="LOCAL-00106" summary="map_reads">
-      <created>1435737558617</created>
-      <option name="number" value="00106" />
-      <option name="project" value="LOCAL" />
-      <updated>1435737558618</updated>
-    </task>
-    <task id="LOCAL-00107" summary="map_reads">
-      <created>1435738081769</created>
-      <option name="number" value="00107" />
-      <option name="project" value="LOCAL" />
-      <updated>1435738081769</updated>
-    </task>
     <task id="LOCAL-00108" summary="map_reads">
       <created>1435738876456</created>
       <option name="number" value="00108" />
@@ -1151,7 +1122,31 @@
       <option name="project" value="LOCAL" />
       <updated>1437100199285</updated>
     </task>
-    <option name="localTasksCounter" value="153" />
+    <task id="LOCAL-00153" summary="small changes">
+      <created>1437367817857</created>
+      <option name="number" value="00153" />
+      <option name="project" value="LOCAL" />
+      <updated>1437367817872</updated>
+    </task>
+    <task id="LOCAL-00154" summary="small changes">
+      <created>1437367902330</created>
+      <option name="number" value="00154" />
+      <option name="project" value="LOCAL" />
+      <updated>1437367902330</updated>
+    </task>
+    <task id="LOCAL-00155" summary="small changes">
+      <created>1437368079935</created>
+      <option name="number" value="00155" />
+      <option name="project" value="LOCAL" />
+      <updated>1437368079935</updated>
+    </task>
+    <task id="LOCAL-00156" summary="small changes">
+      <created>1437368178829</created>
+      <option name="number" value="00156" />
+      <option name="project" value="LOCAL" />
+      <updated>1437368178830</updated>
+    </task>
+    <option name="localTasksCounter" value="157" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1178,6 +1173,7 @@
     <frame x="0" y="25" width="1920" height="1055" extended-state="0" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32968238" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.088495575" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1194,7 +1190,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36613274" sideWeight="0.49868214" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39510116" sideWeight="0.6715867" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2489339" sideWeight="0.6706783" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399361" sideWeight="0.49973643" order="5" side_tool="false" content_ui="tabs" />
@@ -1573,6 +1568,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.47858196" vertical-offset="324" max-vertical-offset="2484">
           <caret line="37" column="6" selection-start-line="37" selection-start-column="4" selection-end-line="38" selection-end-column="64" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1630,24 +1626,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/recombination/cluster_combined_sets.bash">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="666">
-          <caret line="17" column="120" selection-start-line="17" selection-start-column="120" selection-end-line="17" selection-end-column="120" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/snpcall/intersect_vcf.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
-          <caret line="28" column="59" selection-start-line="28" selection-start-column="59" selection-end-line="28" selection-end-column="59" />
-          <folding>
-            <element signature="e#54#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/examples/desaminases/recombination/compare_raw_snp_sets.R">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="486">
@@ -1664,10 +1642,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/snpcall/intersect_vcf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding>
+            <element signature="e#54#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/recombination/cluster_combined_sets.bash">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="666">
+          <caret line="6" column="82" selection-start-line="6" selection-start-column="82" selection-end-line="6" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/examples/desaminases/recombination/restore_per_sample_vcf.bash">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19911012" vertical-offset="1" max-vertical-offset="936">
-          <caret line="10" column="42" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
+        <state vertical-scroll-proportion="0.12013348" vertical-offset="0" max-vertical-offset="936">
+          <caret line="6" column="34" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
           <folding />
         </state>
       </provider>

@@ -25,6 +25,5 @@ with open(args.first_vcf, "r") as in_fd:
                 break
             h_fd.write(line)
 
-
 Intersect.intersect(args.first_vcf, args.second_vcf, "data.vcf", method="-wa")  # entries from a which intersect with entries from b
 os.system("cat %s %s > %s" % ("header.tmp", "data.vcf", args.output_vcf))
