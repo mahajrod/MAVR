@@ -11,6 +11,7 @@ COMBINED_DIR=${WORKDIR}"filtered/"
 PER_SAMPLE_DIR=${WORKDIR}"per_sample_vcf/"
 RAW_VCF_DIR=${WORKDIR}"best_SNP/"
 
+
 MAVR_DIR="/work/pavlov/okochenova/soft/MAVR/"
 SCRIPT_PATH="scripts/snpcall/intersect_vcf.py"
 ABS_SCRIPT_PATH=${MAVR_DIR}${SCRIPT_PATH}
