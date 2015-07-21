@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 __author__ = 'mahajrod'
-
-import argparse
 import os
+import sys
+import argparse
 
 from Bio import SeqIO
 
@@ -19,7 +19,11 @@ parser.add_argument("-w", "--write_header", action="store_true", dest="write_hea
                     default=False, help="Write header. Default: False")
 args = parser.parse_args()
 
+#out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
+
 record_dict = SeqIO.index_db("temp_index.idx", [args.input], format=args.format)
-get_lengths(record_dict, out_file=args.output, write=True, write_header=args.write_header)
+lengths_dict = get_lengths(record_dict, out_file=args.output, write=True, write_header=args.write_header)
+print("Longest sequence: %i" % max(lengths_dict.values()))
+print("Shortest sequence: %i" % min(lengths_dict.values()))
 
 os.remove("temp_index.idx")
