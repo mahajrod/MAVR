@@ -4,6 +4,19 @@ __author__ = 'mahajrod'
 import os
 from collections import Iterable, OrderedDict
 
+filetypes_dict = {"fasta": [".fa", ".fasta", ".fa", ".pep", ".cds"],
+                  "fastq": [".fastq", ".fq"],
+                  "genbank": [".gb", ".genbank"],
+                  "newick": [".nwk"]}
+
+
+def detect_filetype_by_extension(filename, filetypes_dict=filetypes_dict):
+    directory, prefix, extension = split_filename(filename)
+    for filetype in filetypes_dict:
+        if extension in filetypes_dict[filetype]:
+            return filetype
+    return None
+
 
 def check_path(path_to_check):
     #returns path with / at end or blank path

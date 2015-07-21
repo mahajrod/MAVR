@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
 
-module load java/1.8 python/2.7
-source /work/pavlov/okochenova/profile
+#module load java/1.8 python/2.7
+#source /work/pavlov/okochenova/profile
 
-USERDIR="/work/pavlov/okochenova/"
-WORKDIR=${USERDIR}"combined_sets/"
+USERDIR="/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/"
+WORKDIR=${USERDIR}"combined_with_RUN7/"
 
 COMBINED_DIR=${WORKDIR}"filtered/"
 PER_SAMPLE_DIR=${WORKDIR}"per_sample_vcf/"
-RAW_VCF_DIR=${USERDIR}"best_SNP/"
+RAW_VCF_DIR=${USERDIR}"raw_vcf/"
 
-MAVR_DIR="/work/pavlov/okochenova/soft/MAVR/"
+MAVR_DIR="/home/mahajrod/Genetics/MAVR/"
 SCRIPT_PATH="scripts/snpcall/intersect_vcf.py"
 ABS_SCRIPT_PATH=${MAVR_DIR}${SCRIPT_PATH}
 
