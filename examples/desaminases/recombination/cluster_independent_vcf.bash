@@ -14,8 +14,9 @@ source /work/pavlov/okochenova/profile
 WORK=/work/pavlov/okochenova/
 CLUSTERING_SCRIPT=${WORK}soft/MACE/scripts/clustering_pipeline.py
 THRESHOLD_SCRIPT=${WORK}soft/MACE/scripts/test_clustering_thresholds.py
+
 WORKDIR=${WORK}clustering_per_sample/
-VCF_DIR=${WORK}combined_sets/per_sample_vcf/
+VCF_DIR=${WORK}/per_sample_vcf/
 
 
 REFERENCE=/work/pavlov/okochenova/reference/LAN210/LAN210_v0.10m/LAN210_v0.10m.fasta
@@ -35,6 +36,9 @@ echo ${CURRENT_SAMPLE_SET}
 
 CURRENT_VCF=${VCF_DIR}${CURRENT_SAMPLE_SET}.vcf
 
-${THRESHOLD_SCRIPT} -i ${CURRENT_VCF} -s ${CURRENT_SAMPLE_SET} -e distance -d average -n 50 -x 5000 -u 100
-
-${CLUSTERING_SCRIPT} -r ${REFERENCE} -a ${REFERENCE_ANNOTATIONS} -m ${REFERENCE_MASKING} -f ${CURRENT_VCF} -s ${CURRENT_SAMPLE_SET} -y clustering/
+THRESHOLD_STR="${THRESHOLD_SCRIPT} -i ${CURRENT_VCF} -s ${CURRENT_SAMPLE_SET} -e distance -d average -n 50 -x 5000 -u 100"
+echo ${THRESHOLD_STR}
+${THRESHOLD_STR}
+CLUSTERING_STR="${CLUSTERING_SCRIPT} -r ${REFERENCE} -a ${REFERENCE_ANNOTATIONS} -m ${REFERENCE_MASKING} -f ${CURRENT_VCF} -s ${CURRENT_SAMPLE_SET} -y clustering/"
+echo ${CLUSTERING_STR}
+${CLUSTERING_STR}
