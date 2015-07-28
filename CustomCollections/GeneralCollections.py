@@ -30,8 +30,11 @@ class TwoLvlDict(OrderedDict):
         return string
 
     def write(self, out_filename, absent_symbol="0"):
-        with open(out_filename, "w") as out_fd:
-            out_fd.write(self.table_form(absent_symbol=absent_symbol))
+        if isinstance(out_filename, file):
+            out_filename.write(self.table_form(absent_symbol=absent_symbol))
+        else:
+            with open(out_filename, "w") as out_fd:
+                out_fd.write(self.table_form(absent_symbol=absent_symbol))
 
 
 class OrderedSet(MutableSet):
@@ -101,3 +104,12 @@ class OrderedSet(MutableSet):
     def union(self, *sets):
         for set in sets:
             self |= set
+
+
+class WDict(OrderedDict):
+    def write(self, outfile, header=None, separator="\t"):
+        with open(outfile, "w") as out_fd:
+            if header:
+                out_fd.write(header + "\n")
+            for key in self:
+                out_fd.write("%s%s%s\n" % (key, separator, self[key]))
