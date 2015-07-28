@@ -106,6 +106,7 @@ with open("%s/%s" % (args.out_dir, contained_fully_in_file), "w") as syn_fd:
         #syn_fd.write("%s\t%s\t%i\t%i\n" % (fam_id, contained_fully_in_dict[fam_id][0], contained_fully_in_dict[fam_id][1], contained_fully_in_dict[fam_id][2]))
         syn_fd.write("%s\t%s\n" % (fam_id, contained_fully_in_dict[fam_id][0]))
 
+
 with open("%s/%s" % (args.out_dir, contained_in_file), "w") as syn_fd:
     for fam_id in contained_in_dict:
         syn_fd.write("%s\t%s\n" % (fam_id, ",".join(contained_in_dict[fam_id])))
