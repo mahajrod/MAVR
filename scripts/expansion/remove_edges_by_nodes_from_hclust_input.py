@@ -18,8 +18,6 @@ parser.add_argument("-m", "--mode", action="store", dest="mode", default="one",
                     help="Removal mode. Possible variants: both, one. Default: one")
 args = parser.parse_args()
 
-out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
-
 id_list = IdList()
 id_list = id_list.read(args.id_file)
 
@@ -49,7 +47,5 @@ with open(args.hclust_input, "r") as in_fd:
         else:
             filtered_out_fd.write(line)
 
-if args.output != "output":
-    out_fd.close()
 filtered_out_fd.close()
 filtered_fd.close()
