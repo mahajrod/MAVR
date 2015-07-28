@@ -21,7 +21,10 @@ def read_cluster_file(filename, with_counts=False):
                 except IndexError:
                     tmp = ["Noname_fam_%i" % noname_family_index, set(tmp[0].split(","))]
                     noname_family_index += 1
+
                 cluster_dict[tmp[0]] = (len(tmp[1]), tmp[1])
+                if tmp[0] == "TF105540":
+                    print(cluster_dict[tmp[0]])
     return cluster_dict
 
 parser = argparse.ArgumentParser()
