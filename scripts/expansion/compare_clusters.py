@@ -9,6 +9,7 @@ from collections import OrderedDict
 
 def read_cluster_file(filename, with_counts=False):
     cluster_dict = OrderedDict()
+    noname_family_index = 1
     with open(filename, "r") as in_fd:
         for line in in_fd:
             tmp = line.strip().split("\t")
@@ -17,8 +18,9 @@ def read_cluster_file(filename, with_counts=False):
             else:
                 try:
                     tmp[1] = set(tmp[1].split(","))
-                except:
-                    print line
+                except IndexError:
+                    tmp = ["Noname_fam_%i" % noname_family_index, set(tmp[0].split(","))]
+                    noname_family_index += 1
                 cluster_dict[tmp[0]] = (len(tmp[1]), tmp[1])
     return cluster_dict
 
