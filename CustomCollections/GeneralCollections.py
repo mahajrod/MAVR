@@ -29,6 +29,19 @@ class TwoLvlDict(OrderedDict):
             string += str(sl_key) + column_sep + column_sep.join(key_counts_list) + "\n"
         return string
 
+    def sl_keys(self):
+        sl_key_set = set()
+        for fl_key in self:
+            for sl_key in self[fl_key]:
+                sl_key_set.add(sl_key)
+        return sl_key_set
+
+    def all_values(self):
+        # iterate over table by columns
+        for fl_key in self:
+            for sl_key in self[fl_key]:
+                yield self[fl_key][sl_key]
+
     def filter_by_value(self, expression):
         for fl_key in self:
             for sl_key in self[fl_key]:
@@ -37,12 +50,61 @@ class TwoLvlDict(OrderedDict):
                     if not self[fl_key]:
                         self.pop(fl_key, None)
 
+    def filter_by_line(self, expression):
+        filtered_out = TwoLvlDict()
+        for sl_key in self.sl_keys():
+            line_list = []
+            for fl_key in self:
+                if sl_key in self[fl_key]:
+                    line_list.append(self[fl_key][sl_key])
+            if not expression(line_list):
+                for fl_key in self:
+                    if sl_key not in self[fl_key]:
+                        continue
+                    if fl_key not in filtered_out:
+                        filtered_out[fl_key] = OrderedDict()
+                    filtered_out[fl_key][sl_key] = self[fl_key].pop(sl_key, None)
+        return filtered_out
+
     def write(self, out_filename, absent_symbol="0"):
         if isinstance(out_filename, file):
             out_filename.write(self.table_form(absent_symbol=absent_symbol))
         else:
             with open(out_filename, "w") as out_fd:
                 out_fd.write(self.table_form(absent_symbol=absent_symbol))
+
+    def read(self, filename, absent_symbol="0", column_sep="\t", value_handler=None):
+        with open(filename, "r") as in_fd:
+            fl_keys = in_fd.readline().strip().split(column_sep)
+            for fl_key in fl_keys[1:]:
+                self[fl_key] = OrderedDict()
+            for line in in_fd:
+                line_list = line.strip().split(column_sep)
+                sl_key = line_list[0]
+                for index in range(1, len(line_list)):
+                    if line_list[index] != absent_symbol:
+                        fl_key = fl_keys[index]
+                        self[fl_key][sl_key] = value_handler[line_list[index]] if value_handler is not None else line_list[index]
+
+
+class IdList(list):
+
+    def read(self, filename, header=False):
+        #reads ids from file with one id per line
+        id_list = []
+        with open(filename, "r") as in_fd:
+            if header:
+                self.header = in_fd.readline().strip()
+            for line in in_fd:
+                id_list.append(line.strip())
+        return id_list
+
+    def write(self, filename, header=False):
+        with open(filename, "w") as out_fd:
+            if header and self.header:
+                out_fd.write(header + "\n")
+            for entry in self:
+                out_fd.write(entry + "\n")
 
 
 class OrderedSet(MutableSet):

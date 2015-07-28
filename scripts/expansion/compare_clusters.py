@@ -71,10 +71,6 @@ for ref_cluster_id in ref_clusters_dict:
         common_clusters_len = len(common_clusters)
         if not common_clusters:
             continue
-        if ref_cluster_id == "TF105540":
-            print(ref_clusters_dict[ref_cluster_id][1])
-            print(check_clusters_dict[check_cluster_id][1])
-            print(common_clusters)
         if (common_clusters_len == ref_clusters_dict[ref_cluster_id][0]) and (common_clusters_len == check_clusters_dict[check_cluster_id][0]):
             synonym_dict[ref_cluster_id] = [check_cluster_id, ref_clusters_dict[ref_cluster_id][0], check_clusters_dict[check_cluster_id][0]]
             check_clusters_dict.pop(check_cluster_id, None)  # remove check_cluster_id from corresponding dict

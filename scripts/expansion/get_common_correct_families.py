@@ -5,14 +5,19 @@ import sys
 import argparse
 
 from collections import OrderedDict
-from CustomCollections.GeneralCollections import TwoLvlDict
+from CustomCollections.GeneralCollections import TwoLvlDict, IdList
 
 from Routines.File import check_path
 from Routines.File import read_synonyms_dict
 
 
-def filter_nonassembled(value):
-    return False if value == "NA" else True
+def filter_nonassembled(families):
+    return False if "NA" in set(families) else True
+
+
+def filter_different_assembly(families):
+    return False if len(set(families)) > 1 else True
+
 
 parser = argparse.ArgumentParser()
 
@@ -35,8 +40,17 @@ for species in args.species_list:
 
 species_syn_dict.write("families_all_species.t", absent_symbol=".")
 
-species_syn_dict.filter_by_value(filter_nonassembled)
-species_syn_dict.write("correctly_assembled_families_all_species.t", absent_symbol=".")
+species_syn_dict.filter_by_line(filter_nonassembled)
+species_syn_dict.write("correctly_assembled_families_species.t", absent_symbol=".")
 
+assemled_to_different_families = species_syn_dict.filter_by_line(filter_different_assembly)
+species_syn_dict.write("correctly_assembled_families_in_all_species.t", absent_symbol=".")
+assemled_to_different_families.write("assembled_to_different_families_in_all_species.t", absent_symbol=".")
+
+correctly_assembled_families_synonym = IdList(set(species_syn_dict.all_values()))
+assemled_to_different_families_synonym = IdList(set(assemled_to_different_families.all_values()))
+
+correctly_assembled_families_synonym.write("correctly_assembled_families_syn_in_all_species.ids")
+assemled_to_different_families_synonym.write("assembled_to_different_families_syn_in_all_species.ids")
 if args.output != "output":
     out_fd.close()
