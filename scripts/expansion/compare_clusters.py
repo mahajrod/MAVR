@@ -25,6 +25,7 @@ def read_cluster_file(filename, with_counts=False):
                 cluster_dict[tmp[0]] = (len(tmp[1]), tmp[1])
                 if tmp[0] == "TF105540":
                     print(cluster_dict[tmp[0]])
+                    print(tmp)
     return cluster_dict
 
 parser = argparse.ArgumentParser()
