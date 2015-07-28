@@ -1,0 +1,55 @@
+#!/usr/bin/env python
+__author__ = 'Sergei F. Kliver'
+import sys
+import argparse
+
+from CustomCollections.GeneralCollections import IdList
+from Routines.File import read_synonyms_dict
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument("-i", "--hclust_input_file", action="store", dest="hclust_input", required=True,
+                    help="File with input graph for hclust")
+parser.add_argument("-d", "--id_file", action="store", dest="id_file", required=True,
+                    help="File with ids of genes(nodes) to remove from graph")
+parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix",
+                    help="Prefix of output files")
+parser.add_argument("-m", "--mode", action="store", dest="mode", default="one",
+                    help="Removal mode. Possible variants: both, one. Default: one")
+args = parser.parse_args()
+
+out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
+
+id_list = IdList()
+id_list = id_list.read(args.id_file)
+
+families = read_synonyms_dict(args.input, separator="\t", split_values=True, values_separator=",")
+
+filtered_fd = open("%s_filtered.t" % args.output_prefix, "w")
+filtered_out_fd = open("%s_filtered_out.t" % args.output_prefix, "w")
+
+if args.mode == "one":
+    def expression(nodes_list):
+        for node in nodes_list:
+            if node in id_list:
+                return False
+        return True
+elif args.mode == "both":
+    def expression(nodes_list):
+        for node in nodes_list:
+            if node not in id_list:
+                return True
+        return False
+
+with open(args.hclust_input, "r") as in_fd:
+    for line in in_fd:
+        edge_nodes = line.split("\t")[:2]
+        if expression(edge_nodes):
+            filtered_fd.write(line)
+        else:
+            filtered_out_fd.write(line)
+
+if args.output != "output":
+    out_fd.close()
+filtered_out_fd.close()
+filtered_fd.close()
