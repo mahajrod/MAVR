@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_file", action="store", dest="input", required=True,
                     help="Input file with families")
-parser.add_argument("-id", "--id_file", action="store", dest="id_file", required=True,
+parser.add_argument("-d", "--id_file", action="store", dest="id_file", required=True,
                     help="File with ids of families.")
 parser.add_argument("-o", "--output_file", action="store", dest="output",
                     help="Output file")
