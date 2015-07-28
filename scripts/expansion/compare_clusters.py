@@ -73,14 +73,18 @@ for ref_cluster_id in ref_clusters_dict:
             check_clusters_dict.pop(check_cluster_id, None)  # remove check_cluster_id from corresponding dict
             break
         if len(common_clusters) == ref_clusters_dict[ref_cluster_id][0]:
+            # reference family is fully contained in checked cluster
             contained_fully_in_dict[ref_cluster_id] = [check_cluster_id, ref_clusters_dict[ref_cluster_id][0], check_clusters_dict[check_cluster_id][0]]
             break
         if len(common_clusters) == check_clusters_dict[check_cluster_id][0]:
+            # reference family includes checked cluster
             if ref_cluster_id not in include_dict:
                 include_dict[ref_cluster_id] = [check_cluster_id]
             else:
                 include_dict[ref_cluster_id].append(check_cluster_id)
             continue
+
+        # reference family is contained in checked clusters
         if ref_cluster_id not in contained_in_dict:
             contained_in_dict[ref_cluster_id] = [check_cluster_id]
         else:
@@ -94,8 +98,8 @@ include_number = len(include_dict)
 
 with open("%s/%s" % (args.out_dir, synonym_file), "w") as syn_fd:
     for fam_id in synonym_dict:
-        syn_fd.write("%s\t%s\t%i\t%i\n" % (fam_id, synonym_dict[fam_id][0], synonym_dict[fam_id][1], synonym_dict[fam_id][2]))
-
+        #syn_fd.write("%s\t%s\t%i\t%i\n" % (fam_id, synonym_dict[fam_id][0], synonym_dict[fam_id][1], synonym_dict[fam_id][2]))
+        syn_fd.write("%s\t%s\n" % (fam_id, synonym_dict[fam_id][0]))
 with open("%s/%s" % (args.out_dir, contained_fully_in_file), "w") as syn_fd:
     for fam_id in contained_fully_in_dict:
         syn_fd.write("%s\t%s\t%i\t%i\n" % (fam_id, contained_fully_in_dict[fam_id][0], contained_fully_in_dict[fam_id][1], contained_fully_in_dict[fam_id][2]))
@@ -106,11 +110,11 @@ with open("%s/%s" % (args.out_dir, contained_in_file), "w") as syn_fd:
 
 with open("%s/%s" % (args.out_dir, include_file), "w") as syn_fd:
     for fam_id in include_dict:
-        syn_fd.write("%s\t%s\n" % (fam_id, include_dict[fam_id]))
+        syn_fd.write("%s\t%s\n" % (fam_id, ",".join(include_dict[fam_id])))
 
 with open("%s/%s" % (args.out_dir, "stat.t"), "w") as syn_fd:
-    syn_fd.write("Totaly_in_ref\t%i\n" % totally_in_ref)
-    syn_fd.write("Totaly\t%i\n" % totally)
+    syn_fd.write("Total_ref\t%i\n" % totally_in_ref)
+    syn_fd.write("Total\t%i\n" % totally)
     syn_fd.write("Synonyms\t%i\nContains_fully_in\t%i\nContains_in\t%i\nIncludes_fully\t%i\n" % (number_of_common_families,
                                                                                     contained_fully_in_number,
                                                                                     contained_in_number,
