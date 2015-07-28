@@ -43,7 +43,7 @@ args = parser.parse_args()
 
 try:
     os.mkdir(args.out_dir)
-except:
+except OSError:
     pass
 
 ref_clusters_dict = read_cluster_file(args.ref_file, with_counts=args.ref_with_counts)
@@ -85,7 +85,6 @@ for ref_cluster_id in ref_clusters_dict:
             contained_in_dict[ref_cluster_id].append(check_cluster_id)
 
 
-
 number_of_common_families = len(synonym_dict)
 contained_fully_in_number = len(contained_fully_in_dict)
 contained_in_number = len(contained_in_dict)
@@ -108,6 +107,8 @@ with open("%s/%s" % (args.out_dir, include_file), "w") as syn_fd:
         syn_fd.write("%s\t%s\n" % (fam_id, include_dict[fam_id]))
 
 with open("%s/%s" % (args.out_dir, "stat.t"), "w") as syn_fd:
+    syn_fd.write("Totaly_in_ref\t%i\n" % len(ref_clusters_dict))
+    syn_fd.write("Totaly\t%i\n" % len(check_clusters_dict))
     syn_fd.write("Synonyms\t%i\nContains_fully_in\t%i\nContains_in\t%i\nIncludes_fully\t%i\n" % (number_of_common_families,
                                                                                     contained_fully_in_number,
                                                                                     contained_in_number,
