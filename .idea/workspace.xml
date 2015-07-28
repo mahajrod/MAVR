@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0137b4ba-9cb9-4454-8e03-43ff7c136081" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/recombination/extract_homozygous_chains.bash" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/expansion/gather_statistics_from_comparison.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/expansion/get_common_correct_families.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" afterPath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" afterPath="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/expansion/get_common_correct_families.py" afterPath="$PROJECT_DIR$/scripts/expansion/get_common_correct_families.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -122,8 +120,8 @@
       <file leaf-file-name="compare_clusters.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/expansion/compare_clusters.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1375" max-vertical-offset="2268">
-              <caret line="82" column="17" selection-start-line="82" selection-start-column="17" selection-end-line="82" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1123" max-vertical-offset="2448">
+              <caret line="102" column="49" selection-start-line="102" selection-start-column="49" selection-end-line="102" selection-end-column="49" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
@@ -131,11 +129,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="get_common_correct_families.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="get_common_correct_families.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/expansion/get_common_correct_families.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.68533033" vertical-offset="0" max-vertical-offset="893">
-              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="864">
+              <caret line="38" column="44" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
@@ -155,14 +153,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GeneralCollections.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GeneralCollections.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CustomCollections/GeneralCollections.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="954">
-              <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="36" selection-end-column="74" />
+            <state vertical-scroll-proportion="0.04031355" vertical-offset="0" max-vertical-offset="1098">
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding>
-                <element signature="e#1704#3480#0" expanded="false" />
-                <element signature="e#1747#1975#0" expanded="false" />
+                <element signature="e#2012#3788#0" expanded="false" />
+                <element signature="e#2055#2283#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -229,9 +227,9 @@
         <option value="$PROJECT_DIR$/examples/desaminases/recombination/extract_homozygous_chains.py" />
         <option value="$PROJECT_DIR$/examples/desaminases/recombination/extract_homozygous_chains.bash" />
         <option value="$PROJECT_DIR$/scripts/expansion/gather_statistics_from_comparison.py" />
-        <option value="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" />
         <option value="$PROJECT_DIR$/scripts/expansion/compare_clusters.py" />
         <option value="$PROJECT_DIR$/scripts/expansion/get_common_correct_families.py" />
+        <option value="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" />
       </list>
     </option>
   </component>
@@ -760,30 +758,6 @@
       <option name="number" value="Default" />
       <updated>1396791476390</updated>
     </task>
-    <task id="LOCAL-00116" summary="map_reads">
-      <created>1435742195194</created>
-      <option name="number" value="00116" />
-      <option name="project" value="LOCAL" />
-      <updated>1435742195194</updated>
-    </task>
-    <task id="LOCAL-00117" summary="map_reads">
-      <created>1435742525143</created>
-      <option name="number" value="00117" />
-      <option name="project" value="LOCAL" />
-      <updated>1435742525143</updated>
-    </task>
-    <task id="LOCAL-00118" summary="map_reads">
-      <created>1435742933042</created>
-      <option name="number" value="00118" />
-      <option name="project" value="LOCAL" />
-      <updated>1435742933042</updated>
-    </task>
-    <task id="LOCAL-00119" summary="map_reads">
-      <created>1435936963480</created>
-      <option name="number" value="00119" />
-      <option name="project" value="LOCAL" />
-      <updated>1435936963481</updated>
-    </task>
     <task id="LOCAL-00120" summary="map_reads">
       <created>1436260419837</created>
       <option name="number" value="00120" />
@@ -1054,7 +1028,31 @@
       <option name="project" value="LOCAL" />
       <updated>1438056607121</updated>
     </task>
-    <option name="localTasksCounter" value="165" />
+    <task id="LOCAL-00165" summary="small changes in compare_clusters.py">
+      <created>1438056944868</created>
+      <option name="number" value="00165" />
+      <option name="project" value="LOCAL" />
+      <updated>1438056944868</updated>
+    </task>
+    <task id="LOCAL-00166" summary="small changes in compare_clusters.py">
+      <created>1438057490533</created>
+      <option name="number" value="00166" />
+      <option name="project" value="LOCAL" />
+      <updated>1438057490533</updated>
+    </task>
+    <task id="LOCAL-00167" summary="small changes in compare_clusters.py">
+      <created>1438057500362</created>
+      <option name="number" value="00167" />
+      <option name="project" value="LOCAL" />
+      <updated>1438057500362</updated>
+    </task>
+    <task id="LOCAL-00168" summary="small changes in compare_clusters.py">
+      <created>1438061108593</created>
+      <option name="number" value="00168" />
+      <option name="project" value="LOCAL" />
+      <updated>1438061108593</updated>
+    </task>
+    <option name="localTasksCounter" value="169" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1547,17 +1545,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CustomCollections/GeneralCollections.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="954">
-          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="36" selection-end-column="74" />
-          <folding>
-            <element signature="e#1704#3480#0" expanded="false" />
-            <element signature="e#1747#1975#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/expansion/gather_statistics_from_comparison.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="738">
@@ -1570,8 +1557,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/expansion/compare_clusters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1375" max-vertical-offset="2268">
-          <caret line="82" column="17" selection-start-line="82" selection-start-column="17" selection-end-line="82" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1393" max-vertical-offset="2448">
+          <caret line="102" column="49" selection-start-line="102" selection-start-column="49" selection-end-line="102" selection-end-column="49" />
           <folding>
             <element signature="e#54#63#0" expanded="true" />
           </folding>
@@ -1580,10 +1567,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/expansion/get_common_correct_families.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.68533033" vertical-offset="0" max-vertical-offset="893">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="864">
+          <caret line="38" column="44" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
           <folding>
             <element signature="e#54#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CustomCollections/GeneralCollections.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04031355" vertical-offset="0" max-vertical-offset="1098">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding>
+            <element signature="e#2012#3788#0" expanded="false" />
+            <element signature="e#2055#2283#0" expanded="false" />
           </folding>
         </state>
       </provider>

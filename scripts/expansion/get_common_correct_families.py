@@ -10,6 +10,10 @@ from CustomCollections.GeneralCollections import TwoLvlDict
 from Routines.File import check_path
 from Routines.File import read_synonyms_dict
 
+
+def filter_nonassembled(value):
+    return False if value == "NA" else True
+
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-s", "--species_list", action="store", dest="species_list", type=lambda s: s.split(","),
@@ -27,8 +31,12 @@ out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
 species_syn_dict = TwoLvlDict()
 
 for species in args.species_list:
-    species_syn_dict[species] = read_synonyms_dict("%s%s/synonym.t" % (args.species_dir, species))
+    species_syn_dict[species] = read_synonyms_dict("%s%s/all.t" % (args.species_dir, species))
 
 species_syn_dict.write("families_all_species.t", absent_symbol=".")
+
+species_syn_dict.filter_by_value(filter_nonassembled)
+species_syn_dict.write("correctly_assembled_families_all_species.t", absent_symbol=".")
+
 if args.output != "output":
     out_fd.close()

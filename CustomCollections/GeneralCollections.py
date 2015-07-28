@@ -29,6 +29,14 @@ class TwoLvlDict(OrderedDict):
             string += str(sl_key) + column_sep + column_sep.join(key_counts_list) + "\n"
         return string
 
+    def filter_by_value(self, expression):
+        for fl_key in self:
+            for sl_key in self[fl_key]:
+                if not expression(self[fl_key][sl_key]):
+                    self[fl_key].pop(sl_key, None)
+                    if not self[fl_key]:
+                        self.pop(fl_key, None)
+
     def write(self, out_filename, absent_symbol="0"):
         if isinstance(out_filename, file):
             out_filename.write(self.table_form(absent_symbol=absent_symbol))
