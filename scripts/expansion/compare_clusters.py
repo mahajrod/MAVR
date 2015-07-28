@@ -55,6 +55,7 @@ synonym_file = "synonym.t"
 contained_fully_in_file = "contained_fully_in.t"
 contained_in_file = "contained_in.t"
 include_file = "include.t"
+all_file = "all.t"
 
 synonym_dict = OrderedDict()
 contained_fully_in_dict = OrderedDict()
@@ -101,11 +102,17 @@ with open("%s/%s" % (args.out_dir, synonym_file), "w") as syn_fd:
         #syn_fd.write("%s\t%s\t%i\t%i\n" % (fam_id, synonym_dict[fam_id][0], synonym_dict[fam_id][1], synonym_dict[fam_id][2]))
         syn_fd.write("%s\t%s\n" % (fam_id, synonym_dict[fam_id][0]))
 
+with open("%s/%s" % (args.out_dir, all_file), "w") as syn_fd:
+    for fam_id in synonym_dict:
+        #syn_fd.write("%s\t%s\t%i\t%i\n" % (fam_id, synonym_dict[fam_id][0], synonym_dict[fam_id][1], synonym_dict[fam_id][2]))
+        syn_fd.write("%s\t%s\n" % (fam_id, synonym_dict[fam_id][0]))
+    for fam_id in check_clusters_dict:
+        syn_fd.write("%s\t%s\n" % (fam_id, "NA"))
+
 with open("%s/%s" % (args.out_dir, contained_fully_in_file), "w") as syn_fd:
     for fam_id in contained_fully_in_dict:
         #syn_fd.write("%s\t%s\t%i\t%i\n" % (fam_id, contained_fully_in_dict[fam_id][0], contained_fully_in_dict[fam_id][1], contained_fully_in_dict[fam_id][2]))
         syn_fd.write("%s\t%s\n" % (fam_id, contained_fully_in_dict[fam_id][0]))
-
 
 with open("%s/%s" % (args.out_dir, contained_in_file), "w") as syn_fd:
     for fam_id in contained_in_dict:
