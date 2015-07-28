@@ -21,8 +21,6 @@ args = parser.parse_args()
 id_list = IdList()
 id_list = id_list.read(args.id_file)
 
-families = read_synonyms_dict(args.input, separator="\t", split_values=True, values_separator=",")
-
 filtered_fd = open("%s_filtered.t" % args.output_prefix, "w")
 filtered_out_fd = open("%s_filtered_out.t" % args.output_prefix, "w")
 
