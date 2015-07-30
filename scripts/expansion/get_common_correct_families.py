@@ -75,7 +75,7 @@ for sl_key in sl_keys:
             for syn_id in tmp[i]:
                 complicated_families_syn_ids.add(syn_id)
                 sp_set.add(syn_id)
-    complicated_families_dict[sl_key] = sp_set
+    complicated_families_syn_dict[sl_key] = sp_set
 complicated_families_syn_dict.write("complicated_families_synonym.t")
 
 for entry in complicated_families_dict.all_values():
