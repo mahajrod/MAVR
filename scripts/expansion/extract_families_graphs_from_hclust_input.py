@@ -58,6 +58,7 @@ except OSError:
 
 
 def extract_fam_graph(family_name):
+    print("Started extraction for family %s" % family_name)
     family_genes_ids = families_dict[family_name]
     try:
         os.mkdir("%s%s" % (args.output_dir, family_name))
