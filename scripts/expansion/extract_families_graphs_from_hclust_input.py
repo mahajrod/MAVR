@@ -64,7 +64,7 @@ def extract_fam_graph(family_name):
     except OSError:
         pass
 
-    fam_soft_fd = open("%s%s/%s_with_outer_edges.graph", "w")
+    fam_soft_fd = open("%s%s/%s_with_outer_edges.graph" % (args.output_dir, family_name), "w")
     with open(args.hclust_input, "r") as in_fd:
         for line in in_fd:
             edge_nodes = line.split("\t")[:2]
