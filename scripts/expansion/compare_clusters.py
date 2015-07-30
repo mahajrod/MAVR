@@ -107,7 +107,15 @@ with open("%s/%s" % (args.out_dir, synonym_file), "w") as syn_fd:
 with open("%s/%s" % (args.out_dir, all_file), "w") as syn_fd:
     for fam_id in ref_clusters_dict:
         #syn_fd.write("%s\t%s\t%i\t%i\n" % (fam_id, synonym_dict[fam_id][0], synonym_dict[fam_id][1], synonym_dict[fam_id][2]))
-        syn_fd.write("%s\t%s\n" % (fam_id, synonym_dict[fam_id][0] if fam_id in synonym_dict else "NA"))
+        if fam_id in synonym_dict:
+            value = synonym_dict[fam_id][0]
+        elif fam_id in contained_fully_in_dict:
+            value = "C_%s" % contained_fully_in_dict[fam_id][0]
+        elif fam_id in include_dict:
+            value = "I_%s" % ",".join(contained_in_dict[fam_id])
+        elif fam_id in contained_in_dict:
+            value = "M_%s" % ",".join(contained_in_dict[fam_id])
+        syn_fd.write("%s\t%s\n" % (fam_id, value))
 
 with open("%s/%s" % (args.out_dir, contained_fully_in_file), "w") as syn_fd:
     for fam_id in contained_fully_in_dict:
