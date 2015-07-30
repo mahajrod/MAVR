@@ -5,7 +5,7 @@ import sys
 import argparse
 
 from collections import OrderedDict
-from CustomCollections.GeneralCollections import TwoLvlDict, IdList
+from CustomCollections.GeneralCollections import TwoLvlDict, IdList, IdSet
 
 from Routines.File import check_path
 from Routines.File import read_synonyms_dict
@@ -56,8 +56,21 @@ species_syn_dict.write("correctly_assembled_families_species.t", absent_symbol="
 
 
 nonassembled.write("not_assembled_families_in_all_species.t", absent_symbol=".")
-complicated_families = nonassembled.filter_by_line(filter_splited_to_several_fam)
-complicated_families.write("complicated_families.t", absent_symbol=".")
+complicated_families_dict = nonassembled.filter_by_line(filter_splited_to_several_fam)
+complicated_families_dict.write("complicated_families.t", absent_symbol=".")
+
+
+complicated_families_syn_ids = IdSet()
+for entry in complicated_families_dict.all_values():
+    tmp = entry.split(";")
+    for i in range(0, len(tmp)):
+        if "_" in tmp[i]:
+            tmp[i] = tmp[i][2]
+        tmp[i] = tmp[i].split(",")
+        for syn_id in tmp[i]:
+            complicated_families_syn_ids.add(syn_id)
+complicated_families_syn_ids.write("complicated_families_check.ids")
+
 nonassembled.write("splited_to_several_families.t", absent_symbol=".")
 
 assemled_to_different_families = species_syn_dict.filter_by_line(filter_different_assembly)
