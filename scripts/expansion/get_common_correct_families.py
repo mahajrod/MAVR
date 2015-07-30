@@ -5,7 +5,7 @@ import sys
 import argparse
 
 from collections import OrderedDict
-from CustomCollections.GeneralCollections import TwoLvlDict, IdList, IdSet
+from CustomCollections.GeneralCollections import TwoLvlDict, IdList, IdSet, SynDict
 
 from Routines.File import check_path
 from Routines.File import read_synonyms_dict
@@ -59,8 +59,25 @@ nonassembled.write("not_assembled_families_in_all_species.t", absent_symbol=".")
 complicated_families_dict = nonassembled.filter_by_line(filter_splited_to_several_fam)
 complicated_families_dict.write("complicated_families.t", absent_symbol=".")
 
-
+complicated_families_syn_dict = SynDict()
 complicated_families_syn_ids = IdSet()
+sl_keys = list(complicated_families_dict.sl_keys())
+for sl_key in sl_keys:
+    sp_set = set()
+    for species in complicated_families_dict:
+        if sl_key not in complicated_families_dict[species]:
+            continue
+        tmp = complicated_families_dict[species][sl_key].split(";")
+        for i in range(0, len(tmp)):
+            if "_" in tmp[i]:
+                tmp[i] = tmp[i][2]
+            tmp[i] = tmp[i].split(",")
+            for syn_id in tmp[i]:
+                complicated_families_syn_ids.add(syn_id)
+                sp_set.add(syn_id)
+    complicated_families_dict[sl_key] = sp_set
+complicated_families_syn_dict.write("complicated_families_synonym.t")
+
 for entry in complicated_families_dict.all_values():
     tmp = entry.split(";")
     for i in range(0, len(tmp)):
