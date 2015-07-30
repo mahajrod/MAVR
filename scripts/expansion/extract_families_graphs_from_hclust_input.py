@@ -49,7 +49,7 @@ def check_edge_soft(nodes_list, id_list):
     return False
 
 families_dict = SynDict()
-SynDict.read(args.fam_file, separator="\t", split_values=True, values_separator=",")
+families_dict.read(args.fam_file, separator="\t", split_values=True, values_separator=",")
 
 try:
     os.mkdir(args.output_dir)
