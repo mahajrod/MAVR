@@ -96,7 +96,7 @@ for ref_cluster_id in ref_clusters_dict:
         if ref_cluster_id in include_dict:
             # checks in part of genes from reference cluster were not included in analysis
             if len(include_dict[ref_cluster_id]) == 1 and (ref_cluster_id not in contained_in_dict):
-                synonym_dict[ref_cluster_id] == include_dict.pop(ref_cluster_id)
+                synonym_dict[ref_cluster_id] = include_dict.pop(ref_cluster_id)
 
 number_of_common_families = len(synonym_dict)
 contained_fully_in_number = len(contained_fully_in_dict)
