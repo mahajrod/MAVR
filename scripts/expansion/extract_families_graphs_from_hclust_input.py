@@ -56,6 +56,10 @@ try:
 except OSError:
     pass
 
+graph_list = []
+with open(args.hclust_input, "r") as in_fd:
+    for line in in_fd:
+        graph_list.append(line.strip().split("\t"))
 
 def extract_fam_graph(family_name):
     print("Started extraction for family %s" % family_name)
@@ -66,11 +70,16 @@ def extract_fam_graph(family_name):
         pass
 
     fam_soft_fd = open("%s%s/%s_with_outer_edges.graph" % (args.output_dir, family_name, family_name), "w")
+    """
     with open(args.hclust_input, "r") as in_fd:
         for line in in_fd:
             edge_nodes = line.split("\t")[:2]
             if check_edge_soft(edge_nodes, family_genes_ids):
                 fam_soft_fd.write(line)
+    """
+    for edge in graph_list:
+        if check_edge_soft(edge[:-1], family_genes_ids):
+            fam_soft_fd.write("\t".join(edge) + "\n")
     fam_soft_fd.close()
     fam_strict_fd = open("%s%s/%s.graph" % (args.output_dir, family_name, family_name), "w")
     with open("%s%s/%s_with_outer_edges.graph" % (args.output_dir, family_name, family_name), "r") as in_fd:
