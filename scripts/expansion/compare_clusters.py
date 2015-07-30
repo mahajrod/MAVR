@@ -112,7 +112,7 @@ with open("%s/%s" % (args.out_dir, all_file), "w") as syn_fd:
         elif fam_id in contained_fully_in_dict:
             value = "C_%s" % contained_fully_in_dict[fam_id][0]
         elif fam_id in include_dict:
-            value = "I_%s" % ",".join(contained_in_dict[fam_id])
+            value = "I_%s" % ",".join(include_dict[fam_id])
         elif fam_id in contained_in_dict:
             value = "M_%s" % ",".join(contained_in_dict[fam_id])
         syn_fd.write("%s\t%s\n" % (fam_id, value))
