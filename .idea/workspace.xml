@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0137b4ba-9cb9-4454-8e03-43ff7c136081" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/graph/draw_graph.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" afterPath="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/expansion/compare_clusters.py" afterPath="$PROJECT_DIR$/scripts/expansion/compare_clusters.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -59,8 +57,8 @@
       <file leaf-file-name="compare_clusters.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/expansion/compare_clusters.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1811" max-vertical-offset="2664">
-              <caret line="115" column="118" selection-start-line="115" selection-start-column="118" selection-end-line="115" selection-end-column="118" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1703" max-vertical-offset="2772">
+              <caret line="84" column="65" selection-start-line="84" selection-start-column="65" selection-end-line="84" selection-end-column="65" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
@@ -93,8 +91,8 @@
       <file leaf-file-name="get_common_correct_families.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/expansion/get_common_correct_families.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4157044" vertical-offset="612" max-vertical-offset="1656">
-              <caret line="54" column="49" selection-start-line="54" selection-start-column="49" selection-end-line="54" selection-end-column="49" />
+            <state vertical-scroll-proportion="0.63608086" vertical-offset="1211" max-vertical-offset="1962">
+              <caret line="90" column="64" selection-start-line="90" selection-start-column="64" selection-end-line="90" selection-end-column="64" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
@@ -105,12 +103,9 @@
       <file leaf-file-name="GeneralCollections.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CustomCollections/GeneralCollections.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1456" max-vertical-offset="2448">
-              <caret line="180" column="52" selection-start-line="180" selection-start-column="52" selection-end-line="180" selection-end-column="52" />
-              <folding>
-                <element signature="e#22#40#0" expanded="true" />
-                <element signature="e#258#3827#0" expanded="false" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="3767" max-vertical-offset="4428">
+              <caret line="236" column="24" selection-start-line="236" selection-start-column="24" selection-end-line="236" selection-end-column="24" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -120,6 +115,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="21" max-vertical-offset="900">
               <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="File.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Routines/File.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="2718">
+              <caret line="52" column="16" selection-start-line="50" selection-start-column="0" selection-end-line="62" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -767,60 +772,6 @@
       <option name="number" value="Default" />
       <updated>1396791476390</updated>
     </task>
-    <task id="LOCAL-00140" summary="map_reads">
-      <created>1436607264478</created>
-      <option name="number" value="00140" />
-      <option name="project" value="LOCAL" />
-      <updated>1436607264479</updated>
-    </task>
-    <task id="LOCAL-00141" summary="map_reads">
-      <created>1436607373031</created>
-      <option name="number" value="00141" />
-      <option name="project" value="LOCAL" />
-      <updated>1436607373031</updated>
-    </task>
-    <task id="LOCAL-00142" summary="map_reads">
-      <created>1436608756198</created>
-      <option name="number" value="00142" />
-      <option name="project" value="LOCAL" />
-      <updated>1436608756198</updated>
-    </task>
-    <task id="LOCAL-00143" summary="map_reads">
-      <created>1436787973161</created>
-      <option name="number" value="00143" />
-      <option name="project" value="LOCAL" />
-      <updated>1436787973209</updated>
-    </task>
-    <task id="LOCAL-00144" summary="map_reads">
-      <created>1436794125738</created>
-      <option name="number" value="00144" />
-      <option name="project" value="LOCAL" />
-      <updated>1436794125739</updated>
-    </task>
-    <task id="LOCAL-00145" summary="map_reads">
-      <created>1436794277359</created>
-      <option name="number" value="00145" />
-      <option name="project" value="LOCAL" />
-      <updated>1436794277359</updated>
-    </task>
-    <task id="LOCAL-00146" summary="map_reads">
-      <created>1436805857654</created>
-      <option name="number" value="00146" />
-      <option name="project" value="LOCAL" />
-      <updated>1436805857654</updated>
-    </task>
-    <task id="LOCAL-00147" summary="small changes">
-      <created>1437082295744</created>
-      <option name="number" value="00147" />
-      <option name="project" value="LOCAL" />
-      <updated>1437082295745</updated>
-    </task>
-    <task id="LOCAL-00148" summary="small changes">
-      <created>1437093912434</created>
-      <option name="number" value="00148" />
-      <option name="project" value="LOCAL" />
-      <updated>1437093912435</updated>
-    </task>
     <task id="LOCAL-00149" summary="small changes">
       <created>1437094551128</created>
       <option name="number" value="00149" />
@@ -1061,7 +1012,61 @@
       <option name="project" value="LOCAL" />
       <updated>1438228263029</updated>
     </task>
-    <option name="localTasksCounter" value="189" />
+    <task id="LOCAL-00189" summary="small changes in compare_clusters.py">
+      <created>1438228286968</created>
+      <option name="number" value="00189" />
+      <option name="project" value="LOCAL" />
+      <updated>1438228286968</updated>
+    </task>
+    <task id="LOCAL-00190" summary="small changes in compare_clusters.py">
+      <created>1438228335818</created>
+      <option name="number" value="00190" />
+      <option name="project" value="LOCAL" />
+      <updated>1438228335818</updated>
+    </task>
+    <task id="LOCAL-00191" summary="small changes in compare_clusters.py">
+      <created>1438231488621</created>
+      <option name="number" value="00191" />
+      <option name="project" value="LOCAL" />
+      <updated>1438231488621</updated>
+    </task>
+    <task id="LOCAL-00192" summary="small changes in compare_clusters.py">
+      <created>1438231559671</created>
+      <option name="number" value="00192" />
+      <option name="project" value="LOCAL" />
+      <updated>1438231559671</updated>
+    </task>
+    <task id="LOCAL-00193" summary="small changes in compare_clusters.py">
+      <created>1438231744609</created>
+      <option name="number" value="00193" />
+      <option name="project" value="LOCAL" />
+      <updated>1438231744609</updated>
+    </task>
+    <task id="LOCAL-00194" summary="small changes in compare_clusters.py">
+      <created>1438231801341</created>
+      <option name="number" value="00194" />
+      <option name="project" value="LOCAL" />
+      <updated>1438231801341</updated>
+    </task>
+    <task id="LOCAL-00195" summary="small changes in compare_clusters.py">
+      <created>1438231984920</created>
+      <option name="number" value="00195" />
+      <option name="project" value="LOCAL" />
+      <updated>1438231984920</updated>
+    </task>
+    <task id="LOCAL-00196" summary="small changes in compare_clusters.py">
+      <created>1438232509838</created>
+      <option name="number" value="00196" />
+      <option name="project" value="LOCAL" />
+      <updated>1438232509838</updated>
+    </task>
+    <task id="LOCAL-00197" summary="small changes in compare_clusters.py">
+      <created>1438234229767</created>
+      <option name="number" value="00197" />
+      <option name="project" value="LOCAL" />
+      <updated>1438234229767</updated>
+    </task>
+    <option name="localTasksCounter" value="198" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1088,27 +1093,27 @@
     <frame x="15" y="25" width="1685" height="1009" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32968238" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.088495575" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39510116" sideWeight="0.6715867" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24972005" sideWeight="0.10094451" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24960506" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2635379" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25026625" sideWeight="0.10094451" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25767544" sideWeight="0.8990555" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36613274" sideWeight="0.49868214" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39510116" sideWeight="0.6715867" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2489339" sideWeight="0.6706783" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399361" sideWeight="0.49973643" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25767544" sideWeight="0.8990555" order="2" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1486,14 +1491,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/File.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="2718">
-          <caret line="50" column="5" selection-start-line="50" selection-start-column="4" selection-end-line="51" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/expansion/split_hclust_output.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="399" max-vertical-offset="1710">
@@ -1564,29 +1561,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/expansion/compare_clusters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1098" max-vertical-offset="2664">
-          <caret line="115" column="118" selection-start-line="115" selection-start-column="118" selection-end-line="115" selection-end-column="118" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1703" max-vertical-offset="2772">
+          <caret line="84" column="65" selection-start-line="84" selection-start-column="65" selection-end-line="84" selection-end-column="65" />
           <folding>
             <element signature="e#54#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/File.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="2718">
+          <caret line="52" column="16" selection-start-line="50" selection-start-column="0" selection-end-line="62" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CustomCollections/GeneralCollections.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1456" max-vertical-offset="2448">
-          <caret line="180" column="52" selection-start-line="180" selection-start-column="52" selection-end-line="180" selection-end-column="52" />
-          <folding>
-            <element signature="e#22#40#0" expanded="true" />
-            <element signature="e#258#3827#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="3767" max-vertical-offset="4428">
+          <caret line="236" column="24" selection-start-line="236" selection-start-column="24" selection-end-line="236" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/expansion/get_common_correct_families.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4157044" vertical-offset="612" max-vertical-offset="1656">
-          <caret line="54" column="49" selection-start-line="54" selection-start-column="49" selection-end-line="54" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.63608086" vertical-offset="1211" max-vertical-offset="1962">
+          <caret line="90" column="64" selection-start-line="90" selection-start-column="64" selection-end-line="90" selection-end-column="64" />
           <folding>
             <element signature="e#54#63#0" expanded="true" />
           </folding>

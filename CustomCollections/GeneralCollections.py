@@ -210,3 +210,32 @@ class WDict(OrderedDict):
                 out_fd.write(header + "\n")
             for key in self:
                 out_fd.write("%s%s%s\n" % (key, separator, self[key]))
+
+
+class SynDict(OrderedDict):
+    def read(self, filename, header=False, separator="\t",
+                       split_values=False, values_separator=","):
+        # reads synonyms from file
+        with open(filename, "r") as in_fd:
+            self.header = in_fd.readline().strip() if header else None
+
+            for line in in_fd:
+                key, value = line.strip().split(separator)
+                if split_values:
+                    value = value.split(values_separator)
+                self[key] = value
+        return self
+
+    def write(self, filename, header=False, separator="\t",
+                       splited_values=False, values_separator=","):
+
+        # reads synonyms from file
+        with open(filename, "w") as out_fd:
+            if header:
+                if header:
+                    if header is True and self.header:
+                        out_fd.write(self.header + "\n")
+
+            for entry in self:
+                out_fd.write("%s%s%s\n" % (entry, separator,
+                                           values_separator.join(self[entry]) if splited_values else self[entry]))
