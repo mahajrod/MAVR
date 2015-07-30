@@ -64,15 +64,15 @@ def extract_fam_graph(family_name):
     except OSError:
         pass
 
-    fam_soft_fd = open("%s%s/%s_with_outer_edges.graph" % (args.output_dir, family_name), "w")
+    fam_soft_fd = open("%s%s/%s_with_outer_edges.graph" % (args.output_dir, family_name, family_name), "w")
     with open(args.hclust_input, "r") as in_fd:
         for line in in_fd:
             edge_nodes = line.split("\t")[:2]
             if check_edge_soft(edge_nodes, family_genes_ids):
                 fam_soft_fd.write(line)
     fam_soft_fd.close()
-    fam_strict_fd = open("%s%s/%s.graph", "w")
-    with open("%s%s/%s_with_outer_edges.graph", "r") as in_fd:
+    fam_strict_fd = open("%s%s/%s.graph" % (args.output_dir, family_name, family_name), "w")
+    with open("%s%s/%s_with_outer_edges.graph" % (args.output_dir, family_name, family_name), "r") as in_fd:
         for line in in_fd:
             edge_nodes = line.split("\t")[:2]
             if check_edge_strict(edge_nodes, family_genes_ids):
