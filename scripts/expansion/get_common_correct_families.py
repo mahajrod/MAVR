@@ -12,7 +12,10 @@ from Routines.File import read_synonyms_dict
 
 
 def filter_nonassembled(families):
-    return False if "NA" in set(families) else True
+    for entry in set(families):
+        if entry[0] == "C" or entry[0] == "I" or entry[0] == "M":
+            return False
+    return True
 
 
 def filter_different_assembly(families):
