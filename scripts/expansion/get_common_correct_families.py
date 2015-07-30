@@ -43,9 +43,9 @@ for species in args.species_list:
 
 species_syn_dict.write("families_all_species.t", absent_symbol=".")
 
-species_syn_dict.filter_by_line(filter_nonassembled)
+nonassembled = species_syn_dict.filter_by_line(filter_nonassembled)
 species_syn_dict.write("correctly_assembled_families_species.t", absent_symbol=".")
-
+nonassembled.write("not_assembled_families_in_all_species.t", absent_symbol=".")
 assemled_to_different_families = species_syn_dict.filter_by_line(filter_different_assembly)
 species_syn_dict.write("correctly_assembled_families_in_all_species.t", absent_symbol=".")
 assemled_to_different_families.write("assembled_to_different_families_in_all_species.t", absent_symbol=".")
