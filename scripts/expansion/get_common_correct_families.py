@@ -70,7 +70,7 @@ for sl_key in sl_keys:
         tmp = complicated_families_dict[species][sl_key].split(";")
         for i in range(0, len(tmp)):
             if "_" in tmp[i]:
-                tmp[i] = tmp[i][2]
+                tmp[i] = tmp[i][2:]
             tmp[i] = tmp[i].split(",")
             for syn_id in tmp[i]:
                 complicated_families_syn_ids.add(syn_id)
