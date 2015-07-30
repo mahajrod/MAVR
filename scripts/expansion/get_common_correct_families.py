@@ -22,7 +22,7 @@ def filter_splited_to_several_fam(families):
     for entry in set(families):
         if ";" in entry:
             return False
-        if entry[0] != "I":
+        if entry[0] != "I" and "_" in entry:
             return False
     return True
 
