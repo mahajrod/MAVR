@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
+import os
 import sys
 import argparse
 
@@ -25,3 +26,5 @@ for family in hmm_dict:
             out_fd.write("%s\t%s\t%s\t%s\n" % (family, hit.id, hit.evalue, hit.bitscore))
 if args.output != "stdout":
     out_fd.close()
+
+os.remove("temp.idx")
