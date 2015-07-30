@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 import numpy as np
+import igraph as ig
 from collections import OrderedDict, MutableSet
+
+
+class Graph(ig.Graph):
+    def read(self, in_file, format="ncol"):
+        self.Read(in_file, format=format)
 
 
 class TwoLvlDict(OrderedDict):
@@ -87,25 +93,6 @@ class TwoLvlDict(OrderedDict):
                         self[fl_key][sl_key] = value_handler[line_list[index]] if value_handler is not None else line_list[index]
 
 
-class IdList(list):
-
-    def read(self, filename, header=False):
-        #reads ids from file with one id per line
-        id_list = []
-        with open(filename, "r") as in_fd:
-            if header:
-                self.header = in_fd.readline().strip()
-            for line in in_fd:
-                id_list.append(line.strip())
-        return id_list
-
-    def write(self, filename, header=False):
-        with open(filename, "w") as out_fd:
-            if header and self.header:
-                out_fd.write(header + "\n")
-            for entry in self:
-                out_fd.write(entry + "\n")
-
 
 class OrderedSet(MutableSet):
 
@@ -174,6 +161,46 @@ class OrderedSet(MutableSet):
     def union(self, *sets):
         for set in sets:
             self |= set
+
+
+class IdList(list):
+
+    def read(self, filename, header=False):
+        #reads ids from file with one id per line
+        with open(filename, "r") as in_fd:
+            if header:
+                self.header = in_fd.readline().strip()
+            for line in in_fd:
+                self.append(line.strip())
+        return self
+
+    def write(self, filename, header=False):
+        with open(filename, "w") as out_fd:
+            if header:
+                if header is True and self.header:
+                    out_fd.write(self.header + "\n")
+            for entry in self:
+                out_fd.write(entry + "\n")
+
+
+class IdSet(OrderedSet):
+
+    def read(self, filename, header=False):
+        #reads ids from file with one id per line
+        with open(filename, "r") as in_fd:
+            if header:
+                self.header = in_fd.readline().strip()
+            for line in in_fd:
+                self.add(line.strip())
+        return self
+
+    def write(self, filename, header=False):
+        with open(filename, "w") as out_fd:
+            if header:
+                if header is True and self.header:
+                    out_fd.write(self.header + "\n")
+            for entry in self:
+                out_fd.write(entry + "\n")
 
 
 class WDict(OrderedDict):

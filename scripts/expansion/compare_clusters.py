@@ -110,8 +110,10 @@ with open("%s/%s" % (args.out_dir, all_file), "w") as syn_fd:
         if fam_id in synonym_dict:
             value = synonym_dict[fam_id][0]
         elif fam_id in contained_fully_in_dict:
+            # reference families fully contained in check families
             value = "C_%s" % contained_fully_in_dict[fam_id][0]
         elif fam_id in include_dict:
+            # reference families that includes whole  several check families and in some cases parts of check families
             value = "I_%s" % ",".join(include_dict[fam_id])
             if fam_id in contained_in_dict:
                 value += ";M_%s" % ",".join(contained_in_dict[fam_id])
