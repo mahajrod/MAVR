@@ -17,7 +17,7 @@ parser.add_argument("-o", "--output_file", action="store", dest="output", defaul
                     help="Output file")
 parser.add_argument("-n", "--not_found", action="store", dest="not_found", default="not_found.ids",
                     help="File to write ids of not found queries")
-parser.add_argument("-i", "--not_significant", action="store", dest="not_significant", default="not_significant.hits",
+parser.add_argument("-g", "--not_significant", action="store", dest="not_significant", default="not_significant.hits",
                     help="File to write ids of quaries with not significant hits")
 args = parser.parse_args()
 
