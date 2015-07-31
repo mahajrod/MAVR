@@ -37,6 +37,7 @@ for query in hmm_dict:
             ns_fd.write("%s\t%s\t%s\t%s\n" % (query, hmm_dict[query][0].id, hmm_dict[query][0].evalue,
                                                hmm_dict[query][0].bitscore))
     else:
+        print(hmm_dict[query])
         out_fd.write("%s\n" % query)
 
 if args.output != "stdout":
