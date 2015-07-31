@@ -31,5 +31,5 @@ for species in args.species_list:
     species_stat_dict[species] = OrderedDict(statistics)
 
 species_stat_dict.write(out_fd)
-if args.output != "output":
+if args.output != "stdout":
     out_fd.close()
