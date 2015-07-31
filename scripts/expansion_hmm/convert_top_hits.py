@@ -14,7 +14,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_file", action="store", dest="input", required=True,
                     help="Input file with top hits")
-parser.add_argument("-h", "--header", action="store_true", dest="header",
+parser.add_argument("-e", "--header", action="store_true", dest="header",
                     help="Header is present in input file")
 parser.add_argument("-o", "--output_file", action="store", dest="output", default="stdout",
                     help="Output file")
