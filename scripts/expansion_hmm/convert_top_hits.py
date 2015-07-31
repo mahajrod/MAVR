@@ -30,4 +30,4 @@ for query in syn_dict:
     else:
         hit_dict[hit].append(query)
 
-SynDict.write(args.output)
+SynDict.write(args.output,splited_values=True)
