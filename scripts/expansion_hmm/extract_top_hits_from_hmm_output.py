@@ -21,9 +21,13 @@ out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
 out_fd.write("#query\thit\tevalue\tbitscore\n")
 for family in hmm_dict:
     #print hmm_dict[key]
-    if hmm_dict[family][0].is_included:
-        out_fd.write("%s\t%s\t%s\t%s\n" % (family, hmm_dict[family][0].id, hmm_dict[family][0].evalue,
-                                           hmm_dict[family][0].bitscore))
+    try:
+        if hmm_dict[family][0].is_included:
+            out_fd.write("%s\t%s\t%s\t%s\n" % (family, hmm_dict[family][0].id, hmm_dict[family][0].evalue,
+                                               hmm_dict[family][0].bitscore))
+    except:
+        print hmm_dict[family]    
+
 if args.output != "stdout":
     out_fd.close()
 
