@@ -49,14 +49,15 @@ def make_list_of_path_to_files(list_of_dirs_and_files, expression):
 
 
 def read_synonyms_dict(filename, header=False, separator="\t",
-                       split_values=False, values_separator=","):
+                       split_values=False, values_separator=",", key_index=0, value_index=1):
     # reads synonyms from file
     synonyms_dict = OrderedDict()
     with open(filename, "r") as in_fd:
         if header:
             header_str = in_fd.readline().strip()
         for line in in_fd:
-            key, value = line.strip().split(separator)
+            tmp = line.strip().split(separator)
+            key, value = tmp[key_index], tmp[value_index]
             if split_values:
                 value = value.split(values_separator)
             synonyms_dict[key] = value

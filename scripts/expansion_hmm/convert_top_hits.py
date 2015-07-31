@@ -19,7 +19,7 @@ parser.add_argument("-e", "--header", action="store_true", dest="header",
 parser.add_argument("-o", "--output_file", action="store", dest="output", default="stdout",
                     help="Output file")
 args = parser.parse_args()
-
+with open()
 syn_dict = read_synonyms_dict(args.input, header=args.header, split_values=False)
 
 hit_dict = SynDict()
