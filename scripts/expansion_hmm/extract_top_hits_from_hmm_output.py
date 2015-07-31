@@ -29,8 +29,7 @@ nf_fd = open(args.not_found, "w")
 ns_fd = open(args.not_significant, "w")
 for query in hmm_dict:
     #print hmm_dict[key]
-    print hmm_dict[query].hits
-    if hmm_dict[query]:
+    if hmm_dict[query].hits:
         if hmm_dict[query][0].is_included:
             out_fd.write("%s\t%s\t%s\t%s\n" % (query, hmm_dict[query][0].id, hmm_dict[query][0].evalue,
                                                hmm_dict[query][0].bitscore))
