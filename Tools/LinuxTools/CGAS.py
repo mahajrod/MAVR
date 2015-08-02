@@ -25,7 +25,7 @@ class CGAS(Tool):
         options = " %s" % self._check_input(input_files)
         options += " > %s" % output if output else ""
 
-        self.execute(options, cmd="cat", capture_output=capture_output)
+        return self.execute(options, cmd="cat", capture_output=capture_output)
 
     @staticmethod
     def _parse_grep_options(pattern, count_mode=False, use_regexp=False, num_lines_after_match=None,
@@ -59,7 +59,7 @@ class CGAS(Tool):
         options += " %s" % self._check_input(input_files)
         options += " > %s" % output if output else ""
 
-        self.execute(options, cmd="grep", capture_output=capture_output)
+        return self.execute(options, cmd="grep", capture_output=capture_output)
 
     @staticmethod
     def _parse_awk_options(awk_code, separator=None):
@@ -75,7 +75,7 @@ class CGAS(Tool):
         options += " %s" % self._check_input(input_files)
         options += " > %s" % output if output else ""
 
-        self.execute(options, cmd="awk", capture_output=capture_output)
+        return self.execute(options, cmd="awk", capture_output=capture_output)
 
     @staticmethod
     def _parse_sed_options(sed_string, use_regexp=False, disable_print_of_each_line=False):
@@ -95,7 +95,7 @@ class CGAS(Tool):
         options += " %s" % self._check_input(input_files)
         options += " > %s" % output if output else ""
 
-        self.execute(options, cmd="sed", capture_output=capture_output)
+        return self.execute(options, cmd="sed", capture_output=capture_output)
 
     def cgas(self, input_files, grep_pattern=None, awk_code=None, sed_string=None, output=None, count_mode=False,
              grep_use_regexp=False, num_lines_after_match=None, num_lines_before_match=None, invert_match=False,
@@ -126,7 +126,7 @@ class CGAS(Tool):
         options += " "
 
         options += " > %s" % output if output else ""
-        self.execute(options, cmd="cat", capture_output=capture_output)
+        return self.execute(options, cmd="cat", capture_output=capture_output)
 
 
 if __name__ == "__main__":
