@@ -4,6 +4,7 @@ import os
 
 from Bio import SearchIO
 
+from CustomCollections.GeneralCollections import IdList
 from Routines.File import check_path, split_filename, read_ids
 from Tools.Abstract import Tool
 from Tools.LinuxTools import CGAS
@@ -80,13 +81,15 @@ class HMMER3(Tool):
             pass
 
         id_fd = CGAS.cgas(hmmfile, grep_pattern="NAME", whole_word_match=True, awk_code="{print $2}",
-                                capture_output=True)
+                          capture_output=True)
 
         split_index = 1
         ids_written = 0
-        ids_list = read_ids(id_fd, close_after_if_file_object=False)
+        ids_list = IdList()
+        #ids_list = read_ids(id_fd, close_after_if_file_object=False)
+        ids_list.read(id_fd, close_after_if_file_object=True)
         number_of_ids = len(ids_list)
-        out_prefix = split_filename(hmmfile)[1] if output_prefix is not None else output_prefix
+        out_prefix = split_filename(hmmfile)[1] if output_prefix is None else output_prefix
 
         num_of_ids = int(number_of_ids/num_of_files) + 1 if num_of_files else num_of_recs_per_file
 
@@ -94,20 +97,24 @@ class HMMER3(Tool):
         common_options += " %s" % hmmfile
         options_list = []
         while (ids_written + num_of_ids) <= number_of_ids:
-            options = common_options
-            options += " %s" % hmmfile
-            options += " > %s" % ("%s/%s_%i.hmm" % (output_dir, out_prefix, split_index))
+            tmp_id_list = IdList(ids_list[ids_written:ids_written+num_of_ids])
+            tmp_id_list.write("%s/%s_%i.ids" % (output_dir, out_prefix, split_index))
 
+            options = common_options
+            options += " %s/%s_%i.ids" % (output_dir, out_prefix, split_index)
+            options += " > %s" % ("%s/%s_%i.hmm" % (output_dir, out_prefix, split_index))
             options_list.append(options)
 
             split_index += 1
             ids_written += num_of_ids
 
         if ids_written != number_of_ids:
-            options = common_options
-            options += " %s" % hmmfile
-            options += " > %s" % ("%s/%s_%i.hmm" % (output_dir, out_prefix, split_index))
+            tmp_id_list = IdList(ids_list[ids_written:])
+            tmp_id_list.write("%s/%s_%i.ids" % (output_dir, out_prefix, split_index))
 
+            options = common_options
+            options += " %s/%s_%i.ids" % (output_dir, out_prefix, split_index)
+            options += " > %s" % ("%s/%s_%i.hmm" % (output_dir, out_prefix, split_index))
             options_list.append(options)
 
             split_index += 1

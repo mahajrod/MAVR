@@ -54,7 +54,7 @@ class Tool():
             os.mkdir(output_dir)
         except OSError:
             pass
-        out_prefix = split_filename(input_fasta)[1] if output_prefix is not None else output_prefix
+        out_prefix = split_filename(input_fasta)[1] if output_prefix is None else output_prefix
         sequence_dict = SeqIO.index_db("temp.idx", input_fasta, "fasta")
 
         split_index = 1

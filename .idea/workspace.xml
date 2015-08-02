@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0137b4ba-9cb9-4454-8e03-43ff7c136081" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Abstract.py" afterPath="$PROJECT_DIR$/Tools/Abstract.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" afterPath="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/HMMER/HMMER3.py" afterPath="$PROJECT_DIR$/Tools/HMMER/HMMER3.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -55,11 +56,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Abstract.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Abstract.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="810" max-vertical-offset="1854">
-              <caret line="53" column="9" selection-start-line="52" selection-start-column="0" selection-end-line="55" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.5084746" vertical-offset="648" max-vertical-offset="1854">
+              <caret line="56" column="71" selection-start-line="56" selection-start-column="71" selection-end-line="56" selection-end-column="71" />
               <folding>
                 <element signature="e#22#31#0" expanded="true" />
               </folding>
@@ -129,7 +130,7 @@
         <entry file="file://$PROJECT_DIR$/Routines/File.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="1134" max-vertical-offset="2826">
-              <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+              <caret line="76" column="30" selection-start-line="76" selection-start-column="0" selection-end-line="77" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -147,23 +148,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="check_coherence.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/treefam/check_coherence.py">
+      <file leaf-file-name="HMMER3.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tools/HMMER/HMMER3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1242" max-vertical-offset="5418">
+              <caret line="91" column="67" selection-start-line="91" selection-start-column="67" selection-end-line="91" selection-end-column="67" />
+              <folding>
+                <element signature="e#54#63#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HMMER3.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Tools/HMMER/HMMER3.py">
+      <file leaf-file-name="GeneralCollections.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CustomCollections/GeneralCollections.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.10169491" vertical-offset="1296" max-vertical-offset="5292">
-              <caret line="76" column="8" selection-start-line="76" selection-start-column="8" selection-end-line="76" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1650" max-vertical-offset="3600">
+              <caret line="166" column="43" selection-start-line="166" selection-start-column="43" selection-end-line="166" selection-end-column="70" />
               <folding>
-                <element signature="e#54#63#0" expanded="true" />
+                <element signature="e#3872#5648#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -221,7 +224,6 @@
         <option value="$PROJECT_DIR$/scripts/expansion/gather_statistics_from_comparison.py" />
         <option value="$PROJECT_DIR$/scripts/expansion_hmm/extract_hits_from_hmm_output.py" />
         <option value="$PROJECT_DIR$/scripts/expansion_hmm/extract_top_hits_from_hmm_output.py" />
-        <option value="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" />
         <option value="$PROJECT_DIR$/scripts/expansion_hmm/convert_top_hits.py" />
         <option value="$PROJECT_DIR$/scripts/blast/parallel_blast_commands.py" />
         <option value="$PROJECT_DIR$/Tools/LinuxTools/GAS.py" />
@@ -231,8 +233,9 @@
         <option value="$PROJECT_DIR$/Tools/HMMER3/__init__.py" />
         <option value="$PROJECT_DIR$/Tools/HMMER/__init__.py" />
         <option value="$PROJECT_DIR$/Tools/LinuxTools/CGAS.py" />
-        <option value="$PROJECT_DIR$/Tools/Abstract.py" />
+        <option value="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" />
         <option value="$PROJECT_DIR$/Tools/HMMER/HMMER3.py" />
+        <option value="$PROJECT_DIR$/Tools/Abstract.py" />
       </list>
     </option>
   </component>
@@ -969,12 +972,6 @@
       <option name="number" value="Default" />
       <updated>1396791476390</updated>
     </task>
-    <task id="LOCAL-00188" summary="small changes in compare_clusters.py">
-      <created>1438228263029</created>
-      <option name="number" value="00188" />
-      <option name="project" value="LOCAL" />
-      <updated>1438228263029</updated>
-    </task>
     <task id="LOCAL-00189" summary="small changes in compare_clusters.py">
       <created>1438228286968</created>
       <option name="number" value="00189" />
@@ -1263,7 +1260,13 @@
       <option name="project" value="LOCAL" />
       <updated>1438510047819</updated>
     </task>
-    <option name="localTasksCounter" value="237" />
+    <task id="LOCAL-00237" summary="changes in Routine.File, Tools.Abstract&#10;added HMMER3 to Tools">
+      <created>1438510161406</created>
+      <option name="number" value="00237" />
+      <option name="project" value="LOCAL" />
+      <updated>1438510161407</updated>
+    </task>
+    <option name="localTasksCounter" value="238" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1676,14 +1679,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CustomCollections/GeneralCollections.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9907407" vertical-offset="3749" max-vertical-offset="4464">
-          <caret line="238" column="24" selection-start-line="238" selection-start-column="24" selection-end-line="238" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/expansion/remove_edges_by_nodes_from_hclust_input.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="11" max-vertical-offset="900">
@@ -1713,7 +1708,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="756" max-vertical-offset="2322">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#800#809#0" expanded="true" />
+            <element signature="e#800#809#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1746,14 +1741,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/File.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1134" max-vertical-offset="2826">
-          <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/BLAST/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="586">
@@ -1782,6 +1769,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/HMMER/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="198">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/LinuxTools/CGAS.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="439" max-vertical-offset="2484">
@@ -1792,30 +1787,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
+    <entry file="file://$PROJECT_DIR$/Routines/File.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="810" max-vertical-offset="1854">
-          <caret line="53" column="9" selection-start-line="52" selection-start-column="0" selection-end-line="55" selection-end-column="16" />
-          <folding>
-            <element signature="e#22#31#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="1134" max-vertical-offset="2826">
+          <caret line="76" column="30" selection-start-line="76" selection-start-column="0" selection-end-line="77" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/HMMER/__init__.py">
+    <entry file="file://$PROJECT_DIR$/CustomCollections/GeneralCollections.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="198">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1650" max-vertical-offset="3600">
+          <caret line="166" column="43" selection-start-line="166" selection-start-column="43" selection-end-line="166" selection-end-column="70" />
+          <folding>
+            <element signature="e#3872#5648#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/HMMER/HMMER3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10169491" vertical-offset="1296" max-vertical-offset="5292">
-          <caret line="76" column="8" selection-start-line="76" selection-start-column="8" selection-end-line="76" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1242" max-vertical-offset="5418">
+          <caret line="91" column="67" selection-start-line="91" selection-start-column="67" selection-end-line="91" selection-end-column="67" />
           <folding>
             <element signature="e#54#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5084746" vertical-offset="648" max-vertical-offset="1854">
+          <caret line="56" column="71" selection-start-line="56" selection-start-column="71" selection-end-line="56" selection-end-column="71" />
+          <folding>
+            <element signature="e#22#31#0" expanded="true" />
           </folding>
         </state>
       </provider>

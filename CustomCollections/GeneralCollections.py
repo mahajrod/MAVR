@@ -93,7 +93,6 @@ class TwoLvlDict(OrderedDict):
                         self[fl_key][sl_key] = value_handler[line_list[index]] if value_handler is not None else line_list[index]
 
 
-
 class OrderedSet(MutableSet):
 
     def __init__(self, iterable=None):
@@ -165,51 +164,70 @@ class OrderedSet(MutableSet):
 
 class IdList(list):
 
-    def read(self, filename, header=False):
+    def read(self, filename, header=False, close_after_if_file_object=False):
         #reads ids from file with one id per line
-        with open(filename, "r") as in_fd:
-            if header:
-                self.header = in_fd.readline().strip()
-            for line in in_fd:
-                self.append(line.strip())
+        
+        in_fd = filename if isinstance(filename, file) else open(filename, "r") 
+        if header:
+            self.header = in_fd.readline().strip()
+        for line in in_fd:
+            self.append(line.strip())
+        if (not isinstance(filename, file)) or close_after_if_file_object:
+            in_fd.close()
         return self
+    
+    def write(self, filename, header=False, close_after_if_file_object=False):
+        out_fd = filename if isinstance(filename, file) else open(filename, "r") 
 
-    def write(self, filename, header=False):
-        with open(filename, "w") as out_fd:
-            if header:
-                if header is True and self.header:
-                    out_fd.write(self.header + "\n")
-            for entry in self:
-                out_fd.write(entry + "\n")
+        if header:
+            if header is True and self.header:
+                out_fd.write(self.header + "\n")
+        for entry in self:
+            out_fd.write(entry + "\n")
 
-
+        if (not isinstance(filename, file)) or close_after_if_file_object:
+            out_fd.close()
+            
+            
 class IdSet(OrderedSet):
 
-    def read(self, filename, header=False):
+    def read(self, filename, header=False, close_after_if_file_object=False):
         #reads ids from file with one id per line
-        with open(filename, "r") as in_fd:
-            if header:
-                self.header = in_fd.readline().strip()
-            for line in in_fd:
-                self.add(line.strip())
+        
+        in_fd = filename if isinstance(filename, file) else open(filename, "r") 
+        if header:
+            self.header = in_fd.readline().strip()
+        for line in in_fd:
+            self.add(line.strip())
+        if (not isinstance(filename, file)) or close_after_if_file_object:
+            in_fd.close()
         return self
 
-    def write(self, filename, header=False):
-        with open(filename, "w") as out_fd:
-            if header:
-                if header is True and self.header:
-                    out_fd.write(self.header + "\n")
-            for entry in self:
-                out_fd.write(entry + "\n")
+    def write(self, filename, header=False, close_after_if_file_object=False):
+        
+        out_fd = filename if isinstance(filename, file) else open(filename, "r") 
+        if header:
+            if header is True and self.header:
+                out_fd.write(self.header + "\n")
+        for entry in self:
+            out_fd.write(entry + "\n")
 
+        if (not isinstance(filename, file)) or close_after_if_file_object:
+            out_fd.close()
+            
 
 class WDict(OrderedDict):
-    def write(self, outfile, header=None, separator="\t"):
-        with open(outfile, "w") as out_fd:
-            if header:
-                out_fd.write(header + "\n")
-            for key in self:
-                out_fd.write("%s%s%s\n" % (key, separator, self[key]))
+    def write(self, outfile, header=None, separator="\t", close_after_if_file_object=False):
+        
+        out_fd = outfile if isinstance(outfile, file) else open(outfile, "r") 
+        if header:
+            if header is True and self.header:
+                out_fd.write(self.header + "\n")
+        for key in self:
+            out_fd.write("%s%s%s\n" % (key, separator, self[key]))
+
+        if (not isinstance(outfile, file)) or close_after_if_file_object:
+            out_fd.close()
 
 
 class SynDict(OrderedDict):
