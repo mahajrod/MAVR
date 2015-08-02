@@ -50,7 +50,10 @@ class Tool():
         by default splits input files into files with num_of_recs_per_file.
         if num_of_files is set num_of_recs_per_file is ignored.
         """
-        
+        try:
+            os.mkdir(output_dir)
+        except OSError:
+            pass
         out_prefix = split_filename(input_fasta)[1] if output_prefix is not None else output_prefix
         sequence_dict = SeqIO.index_db("temp.idx", input_fasta, "fasta")
 

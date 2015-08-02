@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0137b4ba-9cb9-4454-8e03-43ff7c136081" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Tools/HMMER3/HMMER3.py" afterPath="$PROJECT_DIR$/Tools/HMMER/HMMER3.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Tools/HMMER3/__init__.py" afterPath="$PROJECT_DIR$/Tools/HMMER/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Abstract.py" afterPath="$PROJECT_DIR$/Tools/Abstract.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/HMMER/HMMER3.py" afterPath="$PROJECT_DIR$/Tools/HMMER/HMMER3.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -58,8 +58,8 @@
       <file leaf-file-name="Abstract.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="1800">
-              <caret line="53" column="11" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="99" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="810" max-vertical-offset="1854">
+              <caret line="53" column="9" selection-start-line="52" selection-start-column="0" selection-end-line="55" selection-end-column="16" />
               <folding>
                 <element signature="e#22#31#0" expanded="true" />
               </folding>
@@ -81,24 +81,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools/HMMER/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.12711865" vertical-offset="0" max-vertical-offset="708">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="198">
               <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HMMER3.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/HMMER/HMMER3.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="5202">
-              <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
-              <folding>
-                <element signature="e#54#63#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -119,7 +107,7 @@
         <entry file="file://$PROJECT_DIR$/Tools/LinuxTools/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="162">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -128,8 +116,8 @@
       <file leaf-file-name="CGAS.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools/LinuxTools/CGAS.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1789" max-vertical-offset="2484">
-              <caret line="118" column="20" selection-start-line="118" selection-start-column="20" selection-end-line="118" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="439" max-vertical-offset="2484">
+              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding>
                 <element signature="e#55#64#0" expanded="true" />
               </folding>
@@ -169,6 +157,18 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="HMMER3.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Tools/HMMER/HMMER3.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.10169491" vertical-offset="1296" max-vertical-offset="5292">
+              <caret line="76" column="8" selection-start-line="76" selection-start-column="8" selection-end-line="76" selection-end-column="8" />
+              <folding>
+                <element signature="e#54#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="FindManager">
@@ -182,7 +182,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Tools/Bedtools/__init__.py" />
         <option value="$PROJECT_DIR$/Tools/Bedtools/GenomeCov.py" />
         <option value="$PROJECT_DIR$/scripts/alignment/map_reads.py" />
         <option value="$PROJECT_DIR$/scripts/snpcall/compare_vcf.py" />
@@ -227,12 +226,13 @@
         <option value="$PROJECT_DIR$/scripts/blast/parallel_blast_commands.py" />
         <option value="$PROJECT_DIR$/Tools/LinuxTools/GAS.py" />
         <option value="$PROJECT_DIR$/Tools/LinuxTools/__init__.py" />
-        <option value="$PROJECT_DIR$/Tools/LinuxTools/CGAS.py" />
         <option value="$PROJECT_DIR$/Routines/File.py" />
-        <option value="$PROJECT_DIR$/Tools/Abstract.py" />
         <option value="$PROJECT_DIR$/Tools/HMMER3/HMMER3.py" />
         <option value="$PROJECT_DIR$/Tools/HMMER3/__init__.py" />
         <option value="$PROJECT_DIR$/Tools/HMMER/__init__.py" />
+        <option value="$PROJECT_DIR$/Tools/LinuxTools/CGAS.py" />
+        <option value="$PROJECT_DIR$/Tools/Abstract.py" />
+        <option value="$PROJECT_DIR$/Tools/HMMER/HMMER3.py" />
       </list>
     </option>
   </component>
@@ -969,48 +969,6 @@
       <option name="number" value="Default" />
       <updated>1396791476390</updated>
     </task>
-    <task id="LOCAL-00181" summary="small changes in compare_clusters.py">
-      <created>1438223417426</created>
-      <option name="number" value="00181" />
-      <option name="project" value="LOCAL" />
-      <updated>1438223417427</updated>
-    </task>
-    <task id="LOCAL-00182" summary="small changes in compare_clusters.py">
-      <created>1438223651204</created>
-      <option name="number" value="00182" />
-      <option name="project" value="LOCAL" />
-      <updated>1438223651204</updated>
-    </task>
-    <task id="LOCAL-00183" summary="small changes in compare_clusters.py">
-      <created>1438223949988</created>
-      <option name="number" value="00183" />
-      <option name="project" value="LOCAL" />
-      <updated>1438223949988</updated>
-    </task>
-    <task id="LOCAL-00184" summary="small changes in compare_clusters.py">
-      <created>1438224501288</created>
-      <option name="number" value="00184" />
-      <option name="project" value="LOCAL" />
-      <updated>1438224501288</updated>
-    </task>
-    <task id="LOCAL-00185" summary="small changes in compare_clusters.py">
-      <created>1438225079394</created>
-      <option name="number" value="00185" />
-      <option name="project" value="LOCAL" />
-      <updated>1438225079394</updated>
-    </task>
-    <task id="LOCAL-00186" summary="small changes in compare_clusters.py">
-      <created>1438225804474</created>
-      <option name="number" value="00186" />
-      <option name="project" value="LOCAL" />
-      <updated>1438225804474</updated>
-    </task>
-    <task id="LOCAL-00187" summary="small changes in compare_clusters.py">
-      <created>1438226013170</created>
-      <option name="number" value="00187" />
-      <option name="project" value="LOCAL" />
-      <updated>1438226013170</updated>
-    </task>
     <task id="LOCAL-00188" summary="small changes in compare_clusters.py">
       <created>1438228263029</created>
       <option name="number" value="00188" />
@@ -1263,7 +1221,49 @@
       <option name="project" value="LOCAL" />
       <updated>1438507530480</updated>
     </task>
-    <option name="localTasksCounter" value="230" />
+    <task id="LOCAL-00230" summary="changes in Routine.File, Tools.Abstract&#10;added HMMER3 to Tools">
+      <created>1438507561182</created>
+      <option name="number" value="00230" />
+      <option name="project" value="LOCAL" />
+      <updated>1438507561182</updated>
+    </task>
+    <task id="LOCAL-00231" summary="changes in Routine.File, Tools.Abstract&#10;added HMMER3 to Tools">
+      <created>1438507891642</created>
+      <option name="number" value="00231" />
+      <option name="project" value="LOCAL" />
+      <updated>1438507891642</updated>
+    </task>
+    <task id="LOCAL-00232" summary="changes in Routine.File, Tools.Abstract&#10;added HMMER3 to Tools">
+      <created>1438507934771</created>
+      <option name="number" value="00232" />
+      <option name="project" value="LOCAL" />
+      <updated>1438507934771</updated>
+    </task>
+    <task id="LOCAL-00233" summary="changes in Routine.File, Tools.Abstract&#10;added HMMER3 to Tools">
+      <created>1438508545043</created>
+      <option name="number" value="00233" />
+      <option name="project" value="LOCAL" />
+      <updated>1438508545043</updated>
+    </task>
+    <task id="LOCAL-00234" summary="changes in Routine.File, Tools.Abstract&#10;added HMMER3 to Tools">
+      <created>1438509179253</created>
+      <option name="number" value="00234" />
+      <option name="project" value="LOCAL" />
+      <updated>1438509179253</updated>
+    </task>
+    <task id="LOCAL-00235" summary="changes in Routine.File, Tools.Abstract&#10;added HMMER3 to Tools">
+      <created>1438509405644</created>
+      <option name="number" value="00235" />
+      <option name="project" value="LOCAL" />
+      <updated>1438509405644</updated>
+    </task>
+    <task id="LOCAL-00236" summary="changes in Routine.File, Tools.Abstract&#10;added HMMER3 to Tools">
+      <created>1438510047819</created>
+      <option name="number" value="00236" />
+      <option name="project" value="LOCAL" />
+      <updated>1438510047819</updated>
+    </task>
+    <option name="localTasksCounter" value="237" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1297,7 +1297,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2172524" sideWeight="0.49815693" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24960506" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23064771" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23064771" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2172524" sideWeight="0.5018431" order="9" side_tool="true" content_ui="tabs" />
@@ -1746,59 +1746,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/blast_fastqc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="1674">
-          <caret line="55" column="47" selection-start-line="55" selection-start-column="47" selection-end-line="55" selection-end-column="47" />
-          <folding>
-            <element signature="e#47#62#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/LinuxTools/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="586">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Routines/File.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1134" max-vertical-offset="2826">
           <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/LinuxTools/CGAS.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1789" max-vertical-offset="2484">
-          <caret line="118" column="20" selection-start-line="118" selection-start-column="20" selection-end-line="118" selection-end-column="20" />
-          <folding>
-            <element signature="e#55#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="1800">
-          <caret line="53" column="11" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="99" />
-          <folding>
-            <element signature="e#22#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/HMMER/HMMER3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="5202">
-          <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
-          <folding>
-            <element signature="e#54#63#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1812,11 +1764,59 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/LinuxTools/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="162">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/blast_fastqc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="1674">
+          <caret line="55" column="47" selection-start-line="55" selection-start-column="47" selection-end-line="55" selection-end-column="47" />
+          <folding>
+            <element signature="e#47#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/LinuxTools/CGAS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="439" max-vertical-offset="2484">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding>
+            <element signature="e#55#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="810" max-vertical-offset="1854">
+          <caret line="53" column="9" selection-start-line="52" selection-start-column="0" selection-end-line="55" selection-end-column="16" />
+          <folding>
+            <element signature="e#22#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/HMMER/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12711865" vertical-offset="0" max-vertical-offset="708">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="198">
           <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/HMMER/HMMER3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10169491" vertical-offset="1296" max-vertical-offset="5292">
+          <caret line="76" column="8" selection-start-line="76" selection-start-column="8" selection-end-line="76" selection-end-column="8" />
+          <folding>
+            <element signature="e#54#63#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

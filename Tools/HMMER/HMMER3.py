@@ -74,6 +74,11 @@ class HMMER3(Tool):
 
     def split_hmm(self, hmmfile, output_dir, num_of_recs_per_file, num_of_files=None, output_prefix=None, threads=4):
 
+        try:
+            os.mkdir(output_dir)
+        except OSError:
+            pass
+
         id_fd = CGAS.cgas(hmmfile, grep_pattern="NAME", whole_word_match=True, awk_code="{print $2}",
                                 capture_output=True)
 
