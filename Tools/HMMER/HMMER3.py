@@ -79,7 +79,7 @@ class HMMER3(Tool):
 
         split_index = 1
         ids_written = 0
-        ids_list = read_ids(id_fd, close_after_if_file_object=True)
+        ids_list = read_ids(id_fd, close_after_if_file_object=False)
         number_of_ids = len(ids_list)
         out_prefix = split_filename(hmmfile)[1] if output_prefix is not None else output_prefix
 
