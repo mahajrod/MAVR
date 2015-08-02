@@ -34,12 +34,12 @@ sequence_dict = SeqIO.index_db("temp.idx", args.input, format="fasta")
 
 try:
     os.mkdir(args.splited_directory)
-except:
+except OSError:
     pass
 
 try:
     os.mkdir(args.output_directory)
-except:
+except OSError:
     pass
 
 split_index = 1
@@ -52,14 +52,14 @@ while (records_written + args.number_of_sequences) <= number_of_records:
 
     SeqIO.write(record_by_id_generator(sequence_dict,
                                        record_ids_list[records_written:records_written+args.number_of_sequences]),
-                "%s/%s_%i" % (args.splited_directory, args.output_prefix, split_index), format="fasta")
+                "%s/%s_%i.fasta" % (args.splited_directory, args.output_prefix, split_index), format="fasta")
     split_index += 1
     records_written += args.number_of_sequences
 
 if records_written != number_of_records:
     SeqIO.write(record_by_id_generator(sequence_dict,
                                        record_ids_list[records_written:]),
-                "%s/%s_%i" % (args.splited_directory, args.output_prefix, split_index), format="fasta")
+                "%s/%s_%i.fasta" % (args.splited_directory, args.output_prefix, split_index), format="fasta")
 
 os.remove("temp.idx")
 
