@@ -11,7 +11,7 @@ from Routines.Sequence import record_by_id_generator
 
 class Tool():
 
-    def __init__(self, cmd, path=None, max_threads=4, jar_path=None, jar=None, max_memory="500m"):
+    def __init__(self, cmd, path="", max_threads=4, jar_path=None, jar=None, max_memory="500m"):
         self.path = check_path(path)
         self.cmd = cmd
         self.threads = max_threads
