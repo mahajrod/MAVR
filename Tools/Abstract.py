@@ -9,6 +9,11 @@ from Routines.File import check_path, split_filename
 from Routines.Sequence import record_by_id_generator
 
 
+def execute(exe_string):
+    print("Executing:\n\t%s" % exe_string)
+    os.system(exe_string)
+
+
 class Tool():
 
     def __init__(self, cmd, path="", max_threads=4, jar_path=None, jar=None, max_memory="500m"):
@@ -35,10 +40,6 @@ class Tool():
         exe_string_list = [check_path(self.path) + command + " " + options for options in options_list]
 
         process_pool = mp.Pool(threads if threads else self.threads)
-
-        def execute(exe_string):
-            print("Executing:\n\t%s" % exe_string)
-            os.system(exe_string)
 
         results = process_pool.map(execute, exe_string_list)
         process_pool.close()
