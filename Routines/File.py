@@ -64,14 +64,19 @@ def read_synonyms_dict(filename, header=False, separator="\t",
     return synonyms_dict
 
 
-def read_ids(filename, header=False):
-    #reads ids from file with one id per line
+def read_ids(filename, header=False, close_after_if_file_object=False):
+    #reads ids from file or file object with one id per line
     id_list = []
-    with open(filename, "r") as in_fd:
-        if header:
-            header_str = in_fd.readline().strip()
-        for line in in_fd:
-            id_list.append(line.strip())
+
+    in_fd = filename if isinstance(filename, file) else open(filename, "r")
+
+    if header:
+        header_str = in_fd.readline().strip()
+    for line in in_fd:
+        id_list.append(line.strip())
+    if (not isinstance(filename, file)) or close_after_if_file_object:
+        in_fd.close()
+
     return id_list
 
 

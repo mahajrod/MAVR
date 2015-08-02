@@ -655,6 +655,7 @@
       <w>cch</w>
       <w>cdplot</w>
       <w>ceiling</w>
+      <w>cgas</w>
       <w>changedFiles</w>
       <w>char.expand</w>
       <w>charToRaw</w>
@@ -994,6 +995,7 @@
       <w>do.breaks</w>
       <w>do.call</w>
       <w>doPrimitiveMethod</w>
+      <w>dont</w>
       <w>dontCheck</w>
       <w>dotchart</w>
       <w>dotplot</w>
@@ -1081,6 +1083,7 @@
       <w>evalSource</w>
       <w>evalq</w>
       <w>evalqOnLoad</w>
+      <w>evalue</w>
       <w>example</w>
       <w>exclude.too.far</w>
       <w>exists</w>
@@ -1502,6 +1505,14 @@
       <w>histo</w>
       <w>histogram</w>
       <w>history</w>
+      <w>hmmbuild</w>
+      <w>hmmer</w>
+      <w>hmmfetch</w>
+      <w>hmmfile</w>
+      <w>hmmpress</w>
+      <w>hmmscan</w>
+      <w>hmmsearch</w>
+      <w>hmmstat</w>
       <w>homopolymers</w>
       <w>homozygotes</w>
       <w>hsearch_db</w>
@@ -2677,6 +2688,7 @@
       <w>seq.int</w>
       <w>seq_along</w>
       <w>seq_len</w>
+      <w>seqfile</w>
       <w>sequence</w>
       <w>serialize</w>
       <w>sessionInfo</w>
