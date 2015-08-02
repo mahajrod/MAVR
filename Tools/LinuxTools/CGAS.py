@@ -64,7 +64,7 @@ class CGAS(Tool):
     @staticmethod
     def _parse_awk_options(awk_code, separator=None):
 
-        options = " -F'%s'" % separator
+        options = " -F'%s'" % separator if separator else None
         options += " '%s'" % awk_code
 
         return options
