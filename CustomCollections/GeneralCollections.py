@@ -177,7 +177,7 @@ class IdList(list):
         return self
     
     def write(self, filename, header=False, close_after_if_file_object=False):
-        out_fd = filename if isinstance(filename, file) else open(filename, "r") 
+        out_fd = filename if isinstance(filename, file) else open(filename, "w")
 
         if header:
             if header is True and self.header:
@@ -205,7 +205,7 @@ class IdSet(OrderedSet):
 
     def write(self, filename, header=False, close_after_if_file_object=False):
         
-        out_fd = filename if isinstance(filename, file) else open(filename, "r") 
+        out_fd = filename if isinstance(filename, file) else open(filename, "w")
         if header:
             if header is True and self.header:
                 out_fd.write(self.header + "\n")
@@ -219,7 +219,7 @@ class IdSet(OrderedSet):
 class WDict(OrderedDict):
     def write(self, outfile, header=None, separator="\t", close_after_if_file_object=False):
         
-        out_fd = outfile if isinstance(outfile, file) else open(outfile, "r") 
+        out_fd = outfile if isinstance(outfile, file) else open(outfile, "w")
         if header:
             if header is True and self.header:
                 out_fd.write(self.header + "\n")
