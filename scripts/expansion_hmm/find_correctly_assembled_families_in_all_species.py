@@ -38,7 +38,7 @@ for species in args.species_list:
 
 species_syn_dict.write("families_all_species.t", absent_symbol=".")
 
-not_assembled = species_syn_dict.filter_by_line(is_assembled())
+not_assembled = species_syn_dict.filter_by_line(is_assembled)
 species_syn_dict.write("correctly_assembled_families_species.t", absent_symbol=".")
 
 assembled_ids = IdSet(species_syn_dict.sl_keys())
