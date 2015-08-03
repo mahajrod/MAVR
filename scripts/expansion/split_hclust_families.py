@@ -66,11 +66,12 @@ with open(args.input, "r") as in_fd:
     for line in in_fd:
         temp = line.strip().split("\t")
         family_id = temp[0]
-        all_fam_fd.write("%s\t%s\n" % (family_id, temp[-1][:-1]))
+        all_fam_fd.write("%s\t%s\n" % (family_id, temp[-1]))
         genes = temp[-1][:-1].split(",")
-
-        genes = split_gene_names(genes, name_first=args.name_first, separator=args.name_separator)
-
+        try :
+            genes = split_gene_names(genes, name_first=args.name_first, separator=args.name_separator)
+        except:
+            print genes
         if args.include_without_genes:
             for species in args.species_set:
                 if species not in genes:
