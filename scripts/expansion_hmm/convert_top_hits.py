@@ -1,11 +1,6 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
-import sys
 import argparse
-
-
-from collections import OrderedDict
 
 from CustomCollections.GeneralCollections import SynDict
 from Routines.File import read_synonyms_dict
@@ -18,16 +13,23 @@ parser.add_argument("-e", "--header", action="store_true", dest="header",
                     help="Header is present in input file")
 parser.add_argument("-o", "--output_file", action="store", dest="output", default="stdout",
                     help="Output file")
+parser.add_argument("-k", "--family_column", action="store", dest="fam_col", default=0, type=int,
+                    help="Family column position(0-based). Default: 0")
+parser.add_argument("-a", "--genes_column", action="store", dest="gen_col", default=1, type=int,
+                    help="Genes column position(0-based). Default: 1")
+
 args = parser.parse_args()
 
-syn_dict = read_synonyms_dict(args.input, header=args.header, split_values=False)
-
 hit_dict = SynDict()
+"""
+syn_dict = read_synonyms_dict(args.input, header=args.header, split_values=False)
 for query in syn_dict:
     hit = syn_dict[query]
     if hit not in hit_dict:
         hit_dict[hit] = [query]
     else:
         hit_dict[hit].append(query)
+"""
+hit_dict.read(args.input, header=args.header, allow_repeats_of_key=True, key_index=args.fam_col, value_index=args.gen_col)
 
 hit_dict.write(args.output, splited_values=True)

@@ -10,6 +10,7 @@ from Routines.Sequence import record_by_id_generator
 
 
 def execute(exe_string):
+    # this function is global because of stutid damned pickle mode in python!!!!!
     print("Executing:\n\t%s" % exe_string)
     os.system(exe_string)
 

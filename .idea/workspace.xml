@@ -8,6 +8,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Abstract.py" afterPath="$PROJECT_DIR$/Tools/Abstract.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" afterPath="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/HMMER/HMMER3.py" afterPath="$PROJECT_DIR$/Tools/HMMER/HMMER3.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/expansion_hmm/convert_top_hits.py" afterPath="$PROJECT_DIR$/scripts/expansion_hmm/convert_top_hits.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -56,11 +57,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Abstract.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Abstract.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5084746" vertical-offset="648" max-vertical-offset="1854">
-              <caret line="56" column="71" selection-start-line="56" selection-start-column="71" selection-end-line="56" selection-end-column="71" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="1890">
+              <caret line="36" column="23" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
               <folding>
                 <element signature="e#22#31#0" expanded="true" />
               </folding>
@@ -68,15 +69,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BLASTPlus.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/BLAST/BLASTPlus.py">
+      <file leaf-file-name="convert_top_hits.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/expansion_hmm/convert_top_hits.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1764">
-              <caret line="473" column="44" selection-start-line="473" selection-start-column="44" selection-end-line="473" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.5084746" vertical-offset="0" max-vertical-offset="720">
+              <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
               <folding>
-                <element signature="e#892#12864#1" expanded="false" />
-                <element signature="e#13213#14943#1" expanded="false" />
-                <element signature="e#15522#18962#0" expanded="false" />
+                <element signature="e#54#69#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -129,7 +128,7 @@
       <file leaf-file-name="File.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Routines/File.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1134" max-vertical-offset="2826">
+            <state vertical-scroll-proportion="0.0" vertical-offset="768" max-vertical-offset="2826">
               <caret line="76" column="30" selection-start-line="76" selection-start-column="0" selection-end-line="77" selection-end-column="21" />
               <folding />
             </state>
@@ -151,8 +150,8 @@
       <file leaf-file-name="HMMER3.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools/HMMER/HMMER3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1242" max-vertical-offset="5418">
-              <caret line="91" column="67" selection-start-line="91" selection-start-column="67" selection-end-line="91" selection-end-column="67" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5418">
+              <caret line="120" column="9" selection-start-line="120" selection-start-column="9" selection-end-line="120" selection-end-column="9" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
@@ -163,10 +162,15 @@
       <file leaf-file-name="GeneralCollections.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CustomCollections/GeneralCollections.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1650" max-vertical-offset="3600">
-              <caret line="166" column="43" selection-start-line="166" selection-start-column="43" selection-end-line="166" selection-end-column="70" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2064" max-vertical-offset="3024">
+              <caret line="257" column="21" selection-start-line="257" selection-start-column="21" selection-end-line="257" selection-end-column="21" />
               <folding>
-                <element signature="e#3872#5648#0" expanded="false" />
+                <element signature="e#357#1489#0" expanded="false" />
+                <element signature="e#1522#1673#0" expanded="false" />
+                <element signature="e#1709#1851#0" expanded="false" />
+                <element signature="e#1904#2159#0" expanded="false" />
+                <element signature="e#2211#2821#0" expanded="false" />
+                <element signature="e#3987#5763#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -224,7 +228,6 @@
         <option value="$PROJECT_DIR$/scripts/expansion/gather_statistics_from_comparison.py" />
         <option value="$PROJECT_DIR$/scripts/expansion_hmm/extract_hits_from_hmm_output.py" />
         <option value="$PROJECT_DIR$/scripts/expansion_hmm/extract_top_hits_from_hmm_output.py" />
-        <option value="$PROJECT_DIR$/scripts/expansion_hmm/convert_top_hits.py" />
         <option value="$PROJECT_DIR$/scripts/blast/parallel_blast_commands.py" />
         <option value="$PROJECT_DIR$/Tools/LinuxTools/GAS.py" />
         <option value="$PROJECT_DIR$/Tools/LinuxTools/__init__.py" />
@@ -233,9 +236,10 @@
         <option value="$PROJECT_DIR$/Tools/HMMER3/__init__.py" />
         <option value="$PROJECT_DIR$/Tools/HMMER/__init__.py" />
         <option value="$PROJECT_DIR$/Tools/LinuxTools/CGAS.py" />
-        <option value="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" />
         <option value="$PROJECT_DIR$/Tools/HMMER/HMMER3.py" />
         <option value="$PROJECT_DIR$/Tools/Abstract.py" />
+        <option value="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" />
+        <option value="$PROJECT_DIR$/scripts/expansion_hmm/convert_top_hits.py" />
       </list>
     </option>
   </component>
@@ -445,6 +449,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="expansion_hmm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="expansion" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -482,56 +504,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="alignment" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="examples" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="examples" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="new_data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="examples" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="desaminases" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -972,24 +944,6 @@
       <option name="number" value="Default" />
       <updated>1396791476390</updated>
     </task>
-    <task id="LOCAL-00189" summary="small changes in compare_clusters.py">
-      <created>1438228286968</created>
-      <option name="number" value="00189" />
-      <option name="project" value="LOCAL" />
-      <updated>1438228286968</updated>
-    </task>
-    <task id="LOCAL-00190" summary="small changes in compare_clusters.py">
-      <created>1438228335818</created>
-      <option name="number" value="00190" />
-      <option name="project" value="LOCAL" />
-      <updated>1438228335818</updated>
-    </task>
-    <task id="LOCAL-00191" summary="small changes in compare_clusters.py">
-      <created>1438231488621</created>
-      <option name="number" value="00191" />
-      <option name="project" value="LOCAL" />
-      <updated>1438231488621</updated>
-    </task>
     <task id="LOCAL-00192" summary="small changes in compare_clusters.py">
       <created>1438231559671</created>
       <option name="number" value="00192" />
@@ -1266,7 +1220,25 @@
       <option name="project" value="LOCAL" />
       <updated>1438510161407</updated>
     </task>
-    <option name="localTasksCounter" value="238" />
+    <task id="LOCAL-00238" summary="changes in Routine.File, Tools.Abstract&#10;added HMMER3 to Tools">
+      <created>1438511466778</created>
+      <option name="number" value="00238" />
+      <option name="project" value="LOCAL" />
+      <updated>1438511466778</updated>
+    </task>
+    <task id="LOCAL-00239" summary="changes in Routine.File, Tools.Abstract&#10;added HMMER3 to Tools">
+      <created>1438511628094</created>
+      <option name="number" value="00239" />
+      <option name="project" value="LOCAL" />
+      <updated>1438511628094</updated>
+    </task>
+    <task id="LOCAL-00240" summary="changes in Routine.File, Tools.Abstract&#10;added HMMER3 to Tools">
+      <created>1438512286923</created>
+      <option name="number" value="00240" />
+      <option name="project" value="LOCAL" />
+      <updated>1438512286924</updated>
+    </task>
+    <option name="localTasksCounter" value="241" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1300,7 +1272,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2172524" sideWeight="0.49815693" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24960506" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23064771" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23064771" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2172524" sideWeight="0.5018431" order="9" side_tool="true" content_ui="tabs" />
@@ -1430,13 +1402,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/treefam/label_pep_with_species_name.bash">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="707">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/GATK/CombineVariants.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="651">
@@ -1787,28 +1752,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/File.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1134" max-vertical-offset="2826">
-          <caret line="76" column="30" selection-start-line="76" selection-start-column="0" selection-end-line="77" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CustomCollections/GeneralCollections.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1650" max-vertical-offset="3600">
-          <caret line="166" column="43" selection-start-line="166" selection-start-column="43" selection-end-line="166" selection-end-column="70" />
-          <folding>
-            <element signature="e#3872#5648#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/HMMER/HMMER3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1242" max-vertical-offset="5418">
-          <caret line="91" column="67" selection-start-line="91" selection-start-column="67" selection-end-line="91" selection-end-column="67" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5418">
+          <caret line="120" column="9" selection-start-line="120" selection-start-column="9" selection-end-line="120" selection-end-column="9" />
           <folding>
             <element signature="e#54#63#0" expanded="true" />
           </folding>
@@ -1817,10 +1764,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5084746" vertical-offset="648" max-vertical-offset="1854">
-          <caret line="56" column="71" selection-start-line="56" selection-start-column="71" selection-end-line="56" selection-end-column="71" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="1890">
+          <caret line="36" column="23" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
           <folding>
             <element signature="e#22#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/File.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="768" max-vertical-offset="2826">
+          <caret line="76" column="30" selection-start-line="76" selection-start-column="0" selection-end-line="77" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CustomCollections/GeneralCollections.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2064" max-vertical-offset="3024">
+          <caret line="257" column="21" selection-start-line="257" selection-start-column="21" selection-end-line="257" selection-end-column="21" />
+          <folding>
+            <element signature="e#357#1489#0" expanded="false" />
+            <element signature="e#1522#1673#0" expanded="false" />
+            <element signature="e#1709#1851#0" expanded="false" />
+            <element signature="e#1904#2159#0" expanded="false" />
+            <element signature="e#2211#2821#0" expanded="false" />
+            <element signature="e#3987#5763#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/expansion_hmm/convert_top_hits.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5084746" vertical-offset="0" max-vertical-offset="720">
+          <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+          <folding>
+            <element signature="e#54#69#0" expanded="true" />
           </folding>
         </state>
       </provider>

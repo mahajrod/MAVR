@@ -118,7 +118,7 @@ class HMMER3(Tool):
             options_list.append(options)
 
             split_index += 1
-        print options_list
+        #print options_list
         self.parallel_execute(options_list, cmd="hmmfetch", threads=threads)
 
     def __parse_hmmsxxx_common_options(self, outfile, tblout=None, domtblout=None, pfamtblout=None,

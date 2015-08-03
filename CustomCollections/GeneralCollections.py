@@ -9,6 +9,7 @@ class Graph(ig.Graph):
         self.Read(in_file, format=format)
 """
 
+
 class TwoLvlDict(OrderedDict):
 
     def table_form(self, absent_symbol="0", sort=True, column_sep="\t", list_sep=","):
@@ -72,9 +73,11 @@ class TwoLvlDict(OrderedDict):
                     filtered_out[fl_key][sl_key] = self[fl_key].pop(sl_key, None)
         return filtered_out
 
-    def write(self, out_filename, absent_symbol="0"):
+    def write(self, out_filename, absent_symbol="0", close_after_if_file_object=False):
         if isinstance(out_filename, file):
             out_filename.write(self.table_form(absent_symbol=absent_symbol))
+            if close_after_if_file_object:
+                out_filename.close()
         else:
             with open(out_filename, "w") as out_fd:
                 out_fd.write(self.table_form(absent_symbol=absent_symbol))
@@ -231,31 +234,47 @@ class WDict(OrderedDict):
 
 
 class SynDict(OrderedDict):
-    def read(self, filename, header=False, separator="\t",
-                       split_values=False, values_separator=",", key_index=0, value_index=1):
+    def read(self, filename, header=False, separator="\t", allow_repeats_of_key=False,
+             split_values=False, values_separator=",", key_index=0, value_index=1,
+             close_after_if_file_object=False):
+        """
+        IMPORTANT!!! Option allow_repeats_of_keys forces split_values.
+        """
         # reads synonyms from file
-        with open(filename, "r") as in_fd:
-            self.header = in_fd.readline().strip() if header else None
 
-            for line in in_fd:
-                #key, value = line.strip().split(separator)
-                tmp = line.strip().split(separator)
-                key, value = tmp[key_index], tmp[value_index]
-                if split_values:
-                    value = value.split(values_separator)
+        in_fd = filename if isinstance(filename, file) else open(filename, "r")
+        self.header = in_fd.readline().strip() if header else None
+        for line in in_fd:
+            #key, value = line.strip().split(separator)
+            tmp = line.strip().split(separator)
+            key, value = tmp[key_index], tmp[value_index]
+            if split_values or allow_repeats_of_key:
+                value = value.split(values_separator)
+            if key not in self:
                 self[key] = value
+            else:
+                if allow_repeats_of_key:
+                    self[key] += value
+                else:
+                    raise ValueError("Error while reading to SynDit: key is repeated")
+
+        if (not isinstance(filename, file)) or close_after_if_file_object:
+            in_fd.close()
         return self
 
     def write(self, filename, header=False, separator="\t",
-                       splited_values=False, values_separator=","):
+              splited_values=False, values_separator=",",
+              close_after_if_file_object=False):
 
         # reads synonyms from file
-        with open(filename, "w") as out_fd:
+        out_fd = filename if isinstance(filename, file) else open(filename, "w")
+        if header:
             if header:
-                if header:
-                    if header is True and self.header:
-                        out_fd.write(self.header + "\n")
+                if header is True and self.header:
+                    out_fd.write(self.header + "\n")
 
-            for entry in self:
-                out_fd.write("%s%s%s\n" % (entry, separator,
-                                           values_separator.join(self[entry]) if splited_values else self[entry]))
+        for entry in self:
+            out_fd.write("%s%s%s\n" % (entry, separator,
+                                       values_separator.join(self[entry]) if splited_values else self[entry]))
+        if (not isinstance(filename, file)) or close_after_if_file_object:
+            out_fd.close()
