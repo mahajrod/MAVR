@@ -18,6 +18,7 @@ import matplotlib.pyplot as plt
 def split_gene_names(genes_list, name_first=True, separator="_"):
     species_dict = OrderedDict()
     for gene in genes_list:
+        print gene
         gene_name, species = gene.split(separator)
         if name_first:
             gene_name, species = species, gene_name
@@ -52,7 +53,7 @@ args = parser.parse_args()
 
 try:
     os.mkdir(args.species_fam_dir)
-except:
+except OSError:
     pass
 
 species_fd_dict = OrderedDict()
@@ -68,10 +69,9 @@ with open(args.input, "r") as in_fd:
         family_id = temp[0]
         all_fam_fd.write("%s\t%s\n" % (family_id, temp[-1]))
         genes = temp[-1][:-1].split(",")
-        try :
-            genes = split_gene_names(genes, name_first=args.name_first, separator=args.name_separator)
-        except:
-            print genes
+
+        genes = split_gene_names(genes, name_first=args.name_first, separator=args.name_separator)
+
         if args.include_without_genes:
             for species in args.species_set:
                 if species not in genes:
