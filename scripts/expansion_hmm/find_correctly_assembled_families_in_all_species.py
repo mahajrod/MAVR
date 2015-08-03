@@ -12,7 +12,7 @@ from Routines.File import read_synonyms_dict
 
 
 def is_assembled(families):
-    fam_set = set(families)
+    fam_set = list(set(families))
     if len(fam_set) > 1 or "_" in fam_set[0]:
         return False
     return True
