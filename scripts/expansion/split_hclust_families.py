@@ -50,6 +50,9 @@ parser.add_argument("-c", "--count_genes", action="store_true", dest="count_gene
                     help="Count genes in families")
 args = parser.parse_args()
 
+if len(args.name_separator) > 1:
+    raise ValueError("Length of name separator is not equal 1.")
+
 try:
     os.mkdir(args.species_fam_dir)
 except OSError:
