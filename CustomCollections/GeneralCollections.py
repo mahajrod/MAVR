@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import numpy as np
 #import igraph as ig
-from collections import OrderedDict, MutableSet
+from collections import OrderedDict, MutableSet, Iterable
 
 """
 class Graph(ig.Graph):
@@ -234,6 +234,17 @@ class WDict(OrderedDict):
 
 
 class SynDict(OrderedDict):
+
+    def count_synonyms(self):
+        count_dict = OrderedDict()
+        for key in self:
+            if isinstance(self[key], Iterable) and (not isinstance(self[key], str)):
+                count_dict[key] = len(self[key])
+            else:
+                count_dict[key] = 1
+
+        return count_dict
+
     def read(self, filename, header=False, separator="\t", allow_repeats_of_key=False,
              split_values=False, values_separator=",", key_index=0, value_index=1,
              close_after_if_file_object=False):

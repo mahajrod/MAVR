@@ -21,7 +21,7 @@ out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
 id_list = IdList()
 id_list = id_list.read(args.id_file)
 
-families = read_synonyms_dict(args.input,separator="\t", split_values=True, values_separator=",")
+families = read_synonyms_dict(args.input, separator="\t", split_values=True, values_separator=",")
 
 with open(args.output, "w") as out_fd:
     for fam_id in id_list:
