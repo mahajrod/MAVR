@@ -11,12 +11,12 @@ FAMILIES_SCRIPT=${SCRIPTS_DIR}convert_top_hits.py
 for SPECIES in manis_pentadactyla manis_javanica;
     do
     cd ~/workdir/pangolin/${SPECIES}/
-    TOP_HITS_SCRIPT -i ${SPECIES}_hmmscan.report \
+    $TOP_HITS_SCRIPT -i ${SPECIES}_hmmscan.report \
                     -o ${SPECIES}_hmmscan_top_hits.tab \
                     -f hmmer3-text -n ${SPECIES}_hmmscan_not_found.t \
                     -g ${SPECIES}_hmmscan_not_significant.t
 
-    FAMILIES_SCRIPT -i ${SPECIES}_hmmscan_top_hits.tab \
+    $FAMILIES_SCRIPT -i ${SPECIES}_hmmscan_top_hits.tab \
                     -e -k 1 -a 0 \
                     -o ${SPECIES}_hmmscan_families.tab
     done
