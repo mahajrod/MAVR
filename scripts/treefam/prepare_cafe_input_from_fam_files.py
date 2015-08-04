@@ -9,6 +9,8 @@ import sys
 import argparse
 
 from collections import OrderedDict
+
+from Routines.File import check_path
 from CustomCollections.GeneralCollections import SynDict, TwoLvlDict
 
 parser = argparse.ArgumentParser()
@@ -34,7 +36,7 @@ fam_count_dict = TwoLvlDict()
 
 for species in args.species_set:
     species_fam = SynDict()
-    species_fam.read("%s%s" % (species, args.suffix), split_values=True,
+    species_fam.read("%s%s%s" % (check_path(args.input), species, args.suffix), split_values=True,
                      values_separator=",", separator="\t")
     fam_count_dict[species] = species_fam.count_synonyms()
 
