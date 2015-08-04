@@ -39,6 +39,8 @@ for species in args.species_set:
     fam_count_dict[species] = species_fam.count_synonyms()
 
 for family in fam_count_dict.sl_keys():
-    number_str = "\t".join(map(str, [fam_count_dict[species][family] for species in species_list]))
+    number_str = "\t".join(map(str,
+                               [fam_count_dict[species][family] if family in fam_count_dict[species] else 0
+                                for species in species_list]))
     out_fd.write("%s\t%s\t%s\n" % (family, family, number_str))
 
