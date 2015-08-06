@@ -16,6 +16,7 @@ parser.add_argument("-t", "--threads", action="store", dest="threads", type=int,
                     help="Number of threads")
 args = parser.parse_args()
 
+
 HMMER3.threads = 1
 HMMER3.parallel_hmmscan(args.input, args.input_seq, args.output, num_of_seqs_per_scan=None, split_dir="splited_fasta",
                         splited_output_dir="splited_output_dir", threads=args.threads)
