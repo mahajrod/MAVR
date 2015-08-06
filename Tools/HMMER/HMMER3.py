@@ -133,7 +133,7 @@ class HMMER3(Tool):
         #print options_list
         self.parallel_execute(options_list, cmd="hmmfetch", threads=threads)
 
-    def __parse_hmmsxxx_common_options(self, outfile, tblout=None, domtblout=None, pfamtblout=None,
+    def __parse_hmmsxxx_common_options(self, tblout=None, domtblout=None, pfamtblout=None,
                                        dont_output_alignments=False, model_evalue_threshold=None,
                                        model_score_threshold=None,
                                        domain_evalue_threshold=None, domain_score_threshold=None,
@@ -147,7 +147,7 @@ class HMMER3(Tool):
                                        MSV_threshold=None, Vit_threshold=None, Fwd_threshold=None,
                                        turn_off_biased_composition_score_corrections=None):
         options = " --cpu %i" % self.threads
-        options += " -o %s" % outfile
+        #options += " -o %s" % outfile
 
         options += " --tblout %s" % tblout if tblout else ""
         options += " --domtblout %s" % domtblout if domtblout else ""
@@ -185,7 +185,7 @@ class HMMER3(Tool):
                 turn_off_biased_composition_score_corrections=None,
                 input_format=None):
 
-        options = self.__parse_hmmsxxx_common_options(outfile=outfile, tblout=tblout, domtblout=domtblout,
+        options = self.__parse_hmmsxxx_common_options(outfile, tblout=tblout, domtblout=domtblout,
                                                       pfamtblout=pfamtblout,
                                                       dont_output_alignments=dont_output_alignments,
                                                       model_evalue_threshold=model_evalue_threshold,
@@ -205,12 +205,12 @@ class HMMER3(Tool):
                                                       Fwd_threshold=Fwd_threshold,
                                                       turn_off_biased_composition_score_corrections=turn_off_biased_composition_score_corrections)
 
+        options += " -o %s" % outfile
         options += " --qformat %s" if input_format else ""
         options += " %s" % hmmfile
         options += " %s" % seqfile
 
         self.execute(options, cmd="hmmscan")
-
 
     def parallel_hmmscan(self, hmmfile, seqfile, outfile, num_of_seqs_per_scan=None, split_dir="splited_fasta",
                          splited_output_dir="splited_output_dir",
@@ -281,7 +281,7 @@ class HMMER3(Tool):
                   turn_off_biased_composition_score_corrections=None,
                   input_format=None):
 
-        options = self.__parse_hmmsxxx_common_options(outfile=outfile, tblout=tblout, domtblout=domtblout,
+        options = self.__parse_hmmsxxx_common_options(tblout=tblout, domtblout=domtblout,
                                                       pfamtblout=pfamtblout,
                                                       dont_output_alignments=dont_output_alignments,
                                                       model_evalue_threshold=model_evalue_threshold,
@@ -300,6 +300,7 @@ class HMMER3(Tool):
                                                       MSV_threshold=MSV_threshold, Vit_threshold=Vit_threshold,
                                                       Fwd_threshold=Fwd_threshold,
                                                       turn_off_biased_composition_score_corrections=turn_off_biased_composition_score_corrections)
+        options += " -o %s" % outfile
         options += " -A %s" % multialignout
         options += " --tformat %s" if input_format else ""
         options += " %s" % hmmfile
