@@ -6,8 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0137b4ba-9cb9-4454-8e03-43ff7c136081" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/hmmer3/parallel_hmmscan.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Abstract.py" afterPath="$PROJECT_DIR$/Tools/Abstract.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/File.py" afterPath="$PROJECT_DIR$/Routines/File.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/HMMER/HMMER3.py" afterPath="$PROJECT_DIR$/Tools/HMMER/HMMER3.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -57,16 +56,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="extract_families_of_species.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/treefam/extract_families_of_species.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="756" max-vertical-offset="2322">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="prepare_cafe_input.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/expansion/prepare_cafe_input.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -89,14 +78,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HMMER3.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="HMMER3.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Tools/HMMER/HMMER3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3839" max-vertical-offset="5706">
-              <caret line="220" column="74" selection-start-line="220" selection-start-column="74" selection-end-line="220" selection-end-column="74" />
+            <state vertical-scroll-proportion="0.43456164" vertical-offset="3834" max-vertical-offset="5778">
+              <caret line="232" column="35" selection-start-line="232" selection-start-column="35" selection-end-line="232" selection-end-column="35" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="File.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Routines/File.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2952">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -111,11 +110,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parallel_hmmscan.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="parallel_hmmscan.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/hmmer3/parallel_hmmscan.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36594662" vertical-offset="0" max-vertical-offset="787">
-              <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="486">
+              <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
               <folding>
                 <element signature="e#54#69#0" expanded="true" />
               </folding>
@@ -209,7 +208,6 @@
         <option value="$PROJECT_DIR$/scripts/blast/parallel_blast_commands.py" />
         <option value="$PROJECT_DIR$/Tools/LinuxTools/GAS.py" />
         <option value="$PROJECT_DIR$/Tools/LinuxTools/__init__.py" />
-        <option value="$PROJECT_DIR$/Routines/File.py" />
         <option value="$PROJECT_DIR$/Tools/HMMER3/HMMER3.py" />
         <option value="$PROJECT_DIR$/Tools/HMMER3/__init__.py" />
         <option value="$PROJECT_DIR$/Tools/HMMER/__init__.py" />
@@ -224,9 +222,10 @@
         <option value="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" />
         <option value="$PROJECT_DIR$/scripts/treefam/prepare_cafe_input_from_fam_files.py" />
         <option value="$PROJECT_DIR$/scripts/hmmer3/get_ids_from_hmm3.py" />
-        <option value="$PROJECT_DIR$/scripts/hmmer3/parallel_hmmscan.py" />
-        <option value="$PROJECT_DIR$/Tools/HMMER/HMMER3.py" />
         <option value="$PROJECT_DIR$/Tools/Abstract.py" />
+        <option value="$PROJECT_DIR$/scripts/hmmer3/parallel_hmmscan.py" />
+        <option value="$PROJECT_DIR$/Routines/File.py" />
+        <option value="$PROJECT_DIR$/Tools/HMMER/HMMER3.py" />
       </list>
     </option>
   </component>
@@ -841,36 +840,6 @@
       <option name="number" value="Default" />
       <updated>1396791476390</updated>
     </task>
-    <task id="LOCAL-00215" summary="added extract_hits_from_hmm_output.py">
-      <created>1438355326018</created>
-      <option name="number" value="00215" />
-      <option name="project" value="LOCAL" />
-      <updated>1438355326018</updated>
-    </task>
-    <task id="LOCAL-00216" summary="added extract_hits_from_hmm_output.py">
-      <created>1438355670517</created>
-      <option name="number" value="00216" />
-      <option name="project" value="LOCAL" />
-      <updated>1438355670517</updated>
-    </task>
-    <task id="LOCAL-00217" summary="added extract_hits_from_hmm_output.py">
-      <created>1438355741038</created>
-      <option name="number" value="00217" />
-      <option name="project" value="LOCAL" />
-      <updated>1438355741038</updated>
-    </task>
-    <task id="LOCAL-00218" summary="added extract_hits_from_hmm_output.py">
-      <created>1438355780015</created>
-      <option name="number" value="00218" />
-      <option name="project" value="LOCAL" />
-      <updated>1438355780015</updated>
-    </task>
-    <task id="LOCAL-00219" summary="added extract_hits_from_hmm_output.py">
-      <created>1438355834129</created>
-      <option name="number" value="00219" />
-      <option name="project" value="LOCAL" />
-      <updated>1438355834129</updated>
-    </task>
     <task id="LOCAL-00220" summary="added extract_hits_from_hmm_output.py">
       <created>1438360113282</created>
       <option name="number" value="00220" />
@@ -1135,7 +1104,37 @@
       <option name="project" value="LOCAL" />
       <updated>1438837246484</updated>
     </task>
-    <option name="localTasksCounter" value="264" />
+    <task id="LOCAL-00264" summary="additions in scripts">
+      <created>1438860083432</created>
+      <option name="number" value="00264" />
+      <option name="project" value="LOCAL" />
+      <updated>1438860083432</updated>
+    </task>
+    <task id="LOCAL-00265" summary="additions in scripts">
+      <created>1438860145215</created>
+      <option name="number" value="00265" />
+      <option name="project" value="LOCAL" />
+      <updated>1438860145215</updated>
+    </task>
+    <task id="LOCAL-00266" summary="additions in scripts">
+      <created>1438864070744</created>
+      <option name="number" value="00266" />
+      <option name="project" value="LOCAL" />
+      <updated>1438864070744</updated>
+    </task>
+    <task id="LOCAL-00267" summary="additions in scripts">
+      <created>1438864403059</created>
+      <option name="number" value="00267" />
+      <option name="project" value="LOCAL" />
+      <updated>1438864403059</updated>
+    </task>
+    <task id="LOCAL-00268" summary="additions in scripts">
+      <created>1438868306734</created>
+      <option name="number" value="00268" />
+      <option name="project" value="LOCAL" />
+      <updated>1438868306734</updated>
+    </task>
+    <option name="localTasksCounter" value="269" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1162,6 +1161,7 @@
     <frame x="-1" y="25" width="1922" height="1055" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32968238" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.088495575" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1178,7 +1178,6 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2172524" sideWeight="0.49815693" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39510116" sideWeight="0.6715867" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25767544" sideWeight="0.8990555" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399361" sideWeight="0.49973643" order="5" side_tool="false" content_ui="tabs" />
@@ -1490,13 +1489,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/File.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1422" max-vertical-offset="2826">
-          <caret line="80" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="82" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/expansion/split_hclust_output.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="345" max-vertical-offset="1710">
@@ -1656,22 +1648,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/HMMER/HMMER3.py">
+    <entry file="file://$PROJECT_DIR$/scripts/hmmer3/parallel_hmmscan.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3839" max-vertical-offset="5706">
-          <caret line="220" column="74" selection-start-line="220" selection-start-column="74" selection-end-line="220" selection-end-column="74" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="486">
+          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
           <folding>
-            <element signature="e#54#63#0" expanded="true" />
+            <element signature="e#54#69#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/hmmer3/parallel_hmmscan.py">
+    <entry file="file://$PROJECT_DIR$/Routines/File.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36594662" vertical-offset="0" max-vertical-offset="787">
-          <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2952">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/HMMER/HMMER3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43456164" vertical-offset="3834" max-vertical-offset="5778">
+          <caret line="232" column="35" selection-start-line="232" selection-start-column="35" selection-end-line="232" selection-end-column="35" />
           <folding>
-            <element signature="e#54#69#0" expanded="true" />
+            <element signature="e#54#63#0" expanded="true" />
           </folding>
         </state>
       </provider>

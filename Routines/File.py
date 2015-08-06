@@ -10,6 +10,13 @@ filetypes_dict = {"fasta": [".fa", ".fasta", ".fa", ".pep", ".cds"],
                   "newick": [".nwk"]}
 
 
+def save_mkdir(dirname):
+    try:
+        os.mkdir(dirname)
+    except OSError:
+        pass
+
+
 def detect_filetype_by_extension(filename, filetypes_dict=filetypes_dict):
     directory, prefix, extension = split_filename(filename)
     for filetype in filetypes_dict:

@@ -5,7 +5,7 @@ import os
 from Bio import SearchIO
 
 from CustomCollections.GeneralCollections import IdList
-from Routines.File import check_path, split_filename, read_ids
+from Routines.File import check_path, split_filename, read_ids, save_mkdir
 from Tools.Abstract import Tool
 from Tools.LinuxTools import CGAS
 
@@ -229,6 +229,8 @@ class HMMER3(Tool):
 
         splited_dir = check_path(split_dir)
         splited_out_dir = check_path(splited_output_dir)
+        save_mkdir(splited_dir)
+        save_mkdir(splited_out_dir)
         number_of_files = num_of_seqs_per_scan if num_of_seqs_per_scan else 2 * threads if threads else 2 * self.threads
         self.split_fasta(seqfile, splited_dir, num_of_files=number_of_files)
         list_of_files = os.listdir(splited_dir)
