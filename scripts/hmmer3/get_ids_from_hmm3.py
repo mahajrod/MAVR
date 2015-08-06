@@ -13,4 +13,5 @@ parser.add_argument("-o", "--output_file", action="store", dest="output", defaul
 
 args = parser.parse_args()
 
+
 HMMER3.get_ids_from_hmm3(args.input, ids_file=None if args.output == 'stdout' else args.output, return_ids_list=False)
