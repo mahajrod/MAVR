@@ -228,11 +228,11 @@ class HMMER3(Tool):
                          input_format=None, threads=None):
 
         splited_dir = check_path(split_dir)
-        print(splited_dir)
+        splited_out_dir = check_path(splited_output_dir)
         number_of_files = num_of_seqs_per_scan if num_of_seqs_per_scan else 2 * threads if threads else 2 * self.threads
         self.split_fasta(seqfile, splited_dir, num_of_files=number_of_files)
         list_of_files = os.listdir(splited_dir)
-        list_of_files = [("%s%s" % (splited_dir, filename), "%s%s" % (splited_output_dir, filename)) for filename in list_of_files]
+        list_of_files = [("%s%s" % (splited_dir, filename), "%s%s.hits" % (splited_out_dir, split_filename(filename)[1])) for filename in list_of_files]
 
         common_options = self.__parse_hmmsxxx_common_options(tblout=tblout, domtblout=domtblout,
                                                              pfamtblout=pfamtblout,
