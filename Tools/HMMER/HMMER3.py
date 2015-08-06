@@ -73,6 +73,18 @@ class HMMER3(Tool):
 
         self.execute(options, cmd="hmmstat")
 
+    @staticmethod
+    def get_ids_from_hmm3(hmmfile, ids_file=None, return_ids_list=False):
+        """
+        Extracts ids from hmm3 file:
+            return_ids_list == True: captures output and returns ids_list, ids_file is ignored
+            return_ids_list == False and ids_file == None: writes ids to stdout
+            return_ids_list == False and ids_file != None: writes ids to ids_file
+
+        """
+        return CGAS.cgas(hmmfile, grep_pattern="NAME", whole_word_match=True, awk_code="{print $2}",
+                         capture_output=return_ids_list, output=ids_file if not return_ids_list else None)
+
     def split_hmm(self, hmmfile, output_dir, num_of_recs_per_file, num_of_files=None, output_prefix=None, threads=4):
 
         try:
