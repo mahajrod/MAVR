@@ -47,7 +47,7 @@ class Tool():
         return results if capture_output else None
 
     @staticmethod
-    def split_fasta(input_fasta, output_dir, num_of_recs_per_file, num_of_files=None, output_prefix=None):
+    def split_fasta(input_fasta, output_dir, num_of_recs_per_file=None, num_of_files=None, output_prefix=None):
         """
         by default splits input files into files with num_of_recs_per_file.
         if num_of_files is set num_of_recs_per_file is ignored.

@@ -211,6 +211,7 @@ class HMMER3(Tool):
 
         self.execute(options, cmd="hmmscan")
 
+
     def parallel_hmmscan(self, hmmfile, seqfile, outfile, num_of_seqs_per_scan=None, split_dir="splited_fasta",
                          splited_output_dir="splited_output_dir",
                          tblout=None, domtblout=None, pfamtblout=None,
@@ -224,11 +225,11 @@ class HMMER3(Tool):
                          turn_off_all_heruristics=False, turn_off_bias_filter=False,
                          MSV_threshold=None, Vit_threshold=None, Fwd_threshold=None,
                          turn_off_biased_composition_score_corrections=None,
-                         input_format=None):
+                         input_format=None, threads=None):
 
         splited_dir = check_path(split_dir)
         number_of_files = num_of_seqs_per_scan if num_of_seqs_per_scan else 2 * self.threads
-        self.split_fasta(seqfile, splited_dir, number_of_files)
+        self.split_fasta(seqfile, splited_dir, num_of_files=number_of_files)
         list_of_files = os.listdir(splited_dir)
         list_of_files = [("%s%s" % (splited_dir, filename), "%s%s" % (splited_output_dir, filename)) for filename in list_of_files]
 
@@ -254,15 +255,18 @@ class HMMER3(Tool):
 
         common_options += " --qformat %s" if input_format else ""
         options_list = []
-        for in_file, out_file in list_of_files:
+        out_files = []
+        for in_file, out_filename in list_of_files:
             options = common_options
-            options += " -o %s" % out_file
+            options += " -o %s" % out_filename
             options += " %s" % hmmfile
             options += " %s" % in_file
 
             options_list.append(options)
 
-        self.parallel_execute(options_list, cmd="hmmscan")
+            out_files.append(out_filename)
+        self.parallel_execute(options_list, cmd="hmmscan", threads=threads)
+        CGAS.cat(out_files, output=outfile)
 
     def hmmsearch(self, hmmfile, seqfile, outfile, multialignout=None, tblout=None, domtblout=None, pfamtblout=None,
                   dont_output_alignments=False, model_evalue_threshold=None, model_score_threshold=None,
