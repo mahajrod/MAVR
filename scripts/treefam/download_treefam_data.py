@@ -35,6 +35,7 @@ in_fd = sys.stdin if args.input == "stdin" else open(args.input, "r")
 
 family_ids = IdList()
 family_ids.read(in_fd)
+
 if args.input != "stdin":
     in_fd.close()
 
