@@ -23,7 +23,7 @@ parser.add_argument("-r", "--tree", action="store_true", dest="tree", default=Fa
                     help="Download trees")
 parser.add_argument("-m", "--hmm", action="store_true", dest="hmm", default=False,
                     help="Download hmms")
-parser.add_argument("-a", "--alignment", action="store_true", dest="all", default=False,
+parser.add_argument("-a", "--all", action="store_true", dest="all", default=False,
                     help="Download all: alignment, tree, hmm")
 args = parser.parse_args()
 
