@@ -43,10 +43,10 @@ def download_data(fam_id):
     print("Downloading %s family" % fam_id)
     alignment_options = "http://www.treefam.org/family/%s/alignment -o %s%s.fasta" % \
                         (fam_id, args.output_dir, fam_id)
-    tree_options = "http://www.treefam.org/family/%s/tree/ncd S ewick -o %s%s.nwk" % \
+    tree_options = "http://www.treefam.org/family/%s/tree/newick -o %s%s.nwk" % \
                    (fam_id, args.output_dir, fam_id)
     hmm_options = "http://www.treefam.org/family/%s/hmm -o %s%s.hmm" % \
-                   (fam_id, args.output_dir, fam_id)
+                  (fam_id, args.output_dir, fam_id)
 
     if args.all or args.alignment:
         os.system("wget %s" % alignment_options)
