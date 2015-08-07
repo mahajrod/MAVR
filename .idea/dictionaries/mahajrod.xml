@@ -1997,6 +1997,7 @@
       <w>newBasic</w>
       <w>newClassRepresentation</w>
       <w>newEmptyObject</w>
+      <w>newick</w>
       <w>news</w>
       <w>next</w>
       <w>nextRNGStream</w>
@@ -3445,6 +3446,7 @@
       <w>weighted.mean</w>
       <w>weighted.residuals</w>
       <w>weights</w>
+      <w>wget</w>
       <w>which</w>
       <w>which.is.max</w>
       <w>which.max</w>
