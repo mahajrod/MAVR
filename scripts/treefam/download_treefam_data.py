@@ -10,7 +10,7 @@ from Routines.File import check_path
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", "--input_file", action="store", dest="input", default="stdin",
+parser.add_argument("-i", "--id_file", action="store", dest="input", default="stdin",
                     help="Input file with ids of families. Default: stdin")
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=10, type=int,
                     help="Number of threads to download. Default: 10")
