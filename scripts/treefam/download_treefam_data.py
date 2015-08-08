@@ -6,7 +6,7 @@ import argparse
 from multiprocessing import Pool
 
 from CustomCollections.GeneralCollections import IdList
-from Routines.File import check_path
+from Routines.File import check_path, save_mkdir
 
 parser = argparse.ArgumentParser()
 
@@ -14,9 +14,8 @@ parser.add_argument("-i", "--id_file", action="store", dest="input", default="st
                     help="Input file with ids of families. Default: stdin")
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=10, type=int,
                     help="Number of threads to download. Default: 10")
-parser.add_argument("-o", "--output_directory", action="store", dest="output_dir", default="fam_data/",
+parser.add_argument("-o", "--output_directory", action="store", dest="output_dir", default="fam_data/", type=check_path,
                     help="Directory to output files.")
-
 parser.add_argument("-l", "--alignment", action="store_true", dest="alignment", default=False,
                     help="Download alignments")
 parser.add_argument("-r", "--tree", action="store_true", dest="tree", default=False,
@@ -25,9 +24,15 @@ parser.add_argument("-m", "--hmm", action="store_true", dest="hmm", default=Fals
                     help="Download hmms")
 parser.add_argument("-a", "--all", action="store_true", dest="all", default=False,
                     help="Download all: alignment, tree, hmm")
+parser.add_argument("-s", "--store_logs", action="store_true", dest="store_logs", default=False,
+                    help="Store download logs in directory set by -g/--logs_dir option")
+parser.add_argument("-g", "--logs_dir", action="store", dest="logs_dir", default="logs", type=check_path,
+                    help="Directory with logs")
 args = parser.parse_args()
 
-args.output_dir = check_path(args.output_dir)
+save_mkdir(args.output_dir)
+save_mkdir(args.logs_dir)
+
 if (not args.alignment) and (not args.tree) and (not args.hmm):
     args.all = True
 
@@ -42,12 +47,16 @@ if args.input != "stdin":
 
 def download_data(fam_id):
     print("Downloading %s family" % fam_id)
-    alignment_options = " -O %s%s.fasta -qc -t 500 -o /dev/null http://www.treefam.org/family/%s/alignment " % \
-                        (args.output_dir, fam_id, fam_id)
-    tree_options = " -O %s%s.nwk -qc -t 500 -o /dev/null http://www.treefam.org/family/%s/tree/newick" % \
-                   (args.output_dir, fam_id, fam_id)
-    hmm_options = "  -O %s%s.hmm -qc -t 500 -o /dev/nullhttp://www.treefam.org/family/%s/hmm" % \
-                  (args.output_dir, fam_id, fam_id)
+    ali_log_file = "/dev/null" if not args.store_logs else "%s%s_alignment.log" % (args.logs_dir, fam_id)
+    tree_log_file = "/dev/null" if not args.store_logs else "%s%s_tree.log" % (args.logs_dir, fam_id)
+    hmm_log_file = "/dev/null" if not args.store_logs else "%s%s_hmm.log" % (args.logs_dir, fam_id)
+
+    alignment_options = " -O %s%s.fasta -qc -t 500 -o %s http://www.treefam.org/family/%s/alignment " % \
+                        (args.output_dir, fam_id, ali_log_file, fam_id)
+    tree_options = " -O %s%s.nwk -qc -t 500 -o %s http://www.treefam.org/family/%s/tree/newick" % \
+                   (args.output_dir, fam_id, tree_log_file, fam_id)
+    hmm_options = "  -O %s%s.hmm -qc -t 500 -o %s http://www.treefam.org/family/%s/hmm" % \
+                  (args.output_dir, fam_id, hmm_log_file, fam_id)
 
     if args.all or args.alignment:
         os.system("wget %s" % alignment_options)
