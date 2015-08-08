@@ -51,11 +51,11 @@ def download_data(fam_id):
     tree_log_file = "/dev/null" if not args.store_logs else "%s%s_tree.log" % (args.logs_dir, fam_id)
     hmm_log_file = "/dev/null" if not args.store_logs else "%s%s_hmm.log" % (args.logs_dir, fam_id)
 
-    alignment_options = " -O %s%s.fasta -qc -t 500 -o %s http://www.treefam.org/family/%s/alignment " % \
+    alignment_options = " -O %s%s.fasta -qc -t 2000 -o %s http://www.treefam.org/family/%s/alignment " % \
                         (args.output_dir, fam_id, ali_log_file, fam_id)
-    tree_options = " -O %s%s.nwk -qc -t 500 -o %s http://www.treefam.org/family/%s/tree/newick" % \
+    tree_options = " -O %s%s.nwk -qc -t 2000 -o %s http://www.treefam.org/family/%s/tree/newick" % \
                    (args.output_dir, fam_id, tree_log_file, fam_id)
-    hmm_options = "  -O %s%s.hmm -qc -t 500 -o %s http://www.treefam.org/family/%s/hmm" % \
+    hmm_options = "  -O %s%s.hmm -qc -t 2000 -o %s http://www.treefam.org/family/%s/hmm" % \
                   (args.output_dir, fam_id, hmm_log_file, fam_id)
 
     if args.all or args.alignment:
