@@ -8,8 +8,8 @@ from Bio import SearchIO
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", "--input_file", action="store", dest="input", required=True,
-                    help="Input file with hmm output")
+parser.add_argument("-i", "--input", action="store", dest="input", required=True, type=lambda s: s.split(","),
+                    help="Comma-separated list of files with hmm output")
 parser.add_argument("-f", "--format", action="store", dest="format", required=True,
                     help="Format of input hmm file.")
 parser.add_argument("-o", "--output_file", action="store", dest="output", default="stdout",
