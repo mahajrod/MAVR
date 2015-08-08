@@ -44,6 +44,10 @@ family_ids.read(in_fd)
 if args.input != "stdin":
     in_fd.close()
 
+absent_alignment_list = IdList()
+absent_tree_list = IdList()
+absent_hmm_list = IdList()
+
 
 def download_data(fam_id):
     print("Downloading %s family" % fam_id)
@@ -60,12 +64,30 @@ def download_data(fam_id):
 
     if args.all or args.alignment:
         os.system("wget %s" % alignment_options)
+        if os.path.getsize("%s%s.fasta" % (args.output_dir, fam_id)) == 0:
+            absent_alignment_list.append(fam_id)
     if args.all or args.tree:
         os.system("wget %s" % tree_options)
+        if os.path.getsize("%s%s.nwk" % (args.output_dir, fam_id)) == 0:
+            absent_tree_list.append(fam_id)
     if args.all or args.hmm:
         os.system("wget %s" % hmm_options)
-
+        if os.path.getsize("%s%s.hmm" % (args.output_dir, fam_id)) == 0:
+            absent_hmm_list.append(fam_id)
 
 pool = Pool(args.threads)
 pool.map(download_data, family_ids)
+pool.close()
+
+print()
+
+if absent_alignment_list:
+    absent_alignment_list.write("absent_alignments.ids")
+    print("%i alignments were not downloaded" % len(absent_alignment_list))
+if absent_tree_list:
+    absent_tree_list.write("absent_trees.ids")
+    print("%i trees were not downloaded" % len(absent_tree_list))
+if absent_hmm_list:
+    absent_hmm_list.write("absent_hmms.ids")
+    print("%i hmms were not downloaded" % len(absent_hmm_list))
 
