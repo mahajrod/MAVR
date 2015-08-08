@@ -42,11 +42,11 @@ if args.input != "stdin":
 
 def download_data(fam_id):
     print("Downloading %s family" % fam_id)
-    alignment_options = "http://www.treefam.org/family/%s/alignment -O %s%s.fasta -qc -t 500 -o /dev/null" % \
+    alignment_options = " -O %s%s.fasta -qc -t 500 -o /dev/null http://www.treefam.org/family/%s/alignment " % \
                         (fam_id, args.output_dir, fam_id)
-    tree_options = "http://www.treefam.org/family/%s/tree/newick -O %s%s.nwk -qc -o -t 500 /dev/null" % \
+    tree_options = " -O %s%s.nwk -qc -t 500 -o /dev/null http://www.treefam.org/family/%s/tree/newick" % \
                    (fam_id, args.output_dir, fam_id)
-    hmm_options = "http://www.treefam.org/family/%s/hmm -O %s%s.hmm -qc -o -t 500 /dev/null" % \
+    hmm_options = "  -O %s%s.hmm -qc -t 500 -o /dev/nullhttp://www.treefam.org/family/%s/hmm" % \
                   (fam_id, args.output_dir, fam_id)
 
     if args.all or args.alignment:
