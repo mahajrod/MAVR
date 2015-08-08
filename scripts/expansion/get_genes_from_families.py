@@ -3,8 +3,8 @@ __author__ = 'Sergei F. Kliver'
 import sys
 import argparse
 
-from CustomCollections.GeneralCollections import IdList
-from Routines.File import read_synonyms_dict
+from CustomCollections.GeneralCollections import IdList, SynDict
+# from Routines.File import read_synonyms_dict
 
 parser = argparse.ArgumentParser()
 
@@ -17,8 +17,8 @@ parser.add_argument("-o", "--output_file", action="store", dest="output",
 args = parser.parse_args()
 
 out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
-
-families = read_synonyms_dict(args.input, separator="\t", split_values=True, values_separator=",")
+families = SynDict()
+families.read(args.input, separator="\t", split_values=True, values_separator=",")
 if args.id_file:
     id_list = IdList()
     id_list = id_list.read(args.id_file)

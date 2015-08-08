@@ -76,7 +76,6 @@ pool.close()
 for fam_id in family_ids:
     if args.all or args.alignment:
         if os.path.getsize("%s%s.fasta" % (args.output_dir, fam_id)) == 0:
-            print "aaa"
             absent_alignment_list.append(fam_id)
     if args.all or args.tree:
         if os.path.getsize("%s%s.nwk" % (args.output_dir, fam_id)) == 0:

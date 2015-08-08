@@ -225,13 +225,13 @@ class HMMER3(Tool):
                          turn_off_all_heruristics=False, turn_off_bias_filter=False,
                          MSV_threshold=None, Vit_threshold=None, Fwd_threshold=None,
                          turn_off_biased_composition_score_corrections=None,
-                         input_format=None, threads=None):
+                         input_format=None, threads=None, combine_output_to_single_file=False):
 
         splited_dir = check_path(split_dir)
         splited_out_dir = check_path(splited_output_dir)
         save_mkdir(splited_dir)
         save_mkdir(splited_out_dir)
-        number_of_files = num_of_seqs_per_scan if num_of_seqs_per_scan else 2 * threads if threads else 2 * self.threads
+        number_of_files = num_of_seqs_per_scan if num_of_seqs_per_scan else 5 * threads if threads else 5 * self.threads
         self.split_fasta(seqfile, splited_dir, num_of_files=number_of_files)
         list_of_files = sorted(os.listdir(splited_dir))
         list_of_files = [("%s%s" % (splited_dir, filename), "%s%s.hits" % (splited_out_dir, split_filename(filename)[1])) for filename in list_of_files]
@@ -269,7 +269,8 @@ class HMMER3(Tool):
 
             out_files.append(out_filename)
         self.parallel_execute(options_list, cmd="hmmscan", threads=threads)
-        CGAS.cat(out_files, output=outfile)
+        if combine_output_to_single_file:
+            CGAS.cat(out_files, output=outfile)
 
     def hmmsearch(self, hmmfile, seqfile, outfile, multialignout=None, tblout=None, domtblout=None, pfamtblout=None,
                   dont_output_alignments=False, model_evalue_threshold=None, model_score_threshold=None,

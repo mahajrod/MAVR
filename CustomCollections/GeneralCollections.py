@@ -2,7 +2,7 @@
 import numpy as np
 #import igraph as ig
 from collections import OrderedDict, MutableSet, Iterable
-
+from Routines.File import check_path
 """
 class Graph(ig.Graph):
     def read(self, in_file, format="ncol"):
@@ -81,6 +81,12 @@ class TwoLvlDict(OrderedDict):
         else:
             with open(out_filename, "w") as out_fd:
                 out_fd.write(self.table_form(absent_symbol=absent_symbol))
+
+    def write_splited(self, out_dir="./", extension="t", value_separator=","):
+        for fl_key in self:
+            with open("%s%s.%s" % (check_path(out_dir), fl_key, extension), "w") as out_fd:
+                for sl_key in self[fl_key]:
+                    out_fd.write("%s\t%s\n" % (sl_key, value_separator.join(self[fl_key][sl_key])))
 
     def read(self, filename, absent_symbol="0", column_sep="\t", value_handler=None):
         with open(filename, "r") as in_fd:
