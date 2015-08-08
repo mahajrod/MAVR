@@ -6,16 +6,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0137b4ba-9cb9-4454-8e03-43ff7c136081" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/phylogenetics/get_leave_names_from_trees.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/sequence/get_sequence_ids.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/treefam/check_coherence.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" afterPath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" afterPath="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/HMMER/HMMER3.py" afterPath="$PROJECT_DIR$/Tools/HMMER/HMMER3.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/SOURCES.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/SOURCES.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/treefam/download_treefam_data.py" afterPath="$PROJECT_DIR$/scripts/treefam/download_treefam_data.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/expansion/get_genes_from_families.py" afterPath="$PROJECT_DIR$/scripts/expansion/get_genes_from_families.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/hmmer3/parallel_hmmscan.py" afterPath="$PROJECT_DIR$/scripts/hmmer3/parallel_hmmscan.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -86,11 +78,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HMMER3.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HMMER3.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools/HMMER/HMMER3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6841416" vertical-offset="4374" max-vertical-offset="5796">
-              <caret line="272" column="12" selection-start-line="272" selection-start-column="12" selection-end-line="272" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3834" max-vertical-offset="5796">
+              <caret line="227" column="60" selection-start-line="227" selection-start-column="58" selection-end-line="227" selection-end-column="92" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
@@ -118,24 +110,22 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="parallel_hmmscan.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/hmmer3/parallel_hmmscan.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.56618613" vertical-offset="0" max-vertical-offset="763">
+              <caret line="26" column="115" selection-start-line="26" selection-start-column="115" selection-end-line="26" selection-end-column="115" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="extract_families_of_species.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/treefam/extract_families_of_species.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2322">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="get_leave_names_from_trees.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/phylogenetics/get_leave_names_from_trees.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="828">
-              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-              <folding>
-                <element signature="e#54#63#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -228,7 +218,6 @@
         <option value="$PROJECT_DIR$/scripts/treefam/prepare_cafe_input_from_fam_files.py" />
         <option value="$PROJECT_DIR$/scripts/hmmer3/get_ids_from_hmm3.py" />
         <option value="$PROJECT_DIR$/Tools/Abstract.py" />
-        <option value="$PROJECT_DIR$/scripts/hmmer3/parallel_hmmscan.py" />
         <option value="$PROJECT_DIR$/Routines/File.py" />
         <option value="$PROJECT_DIR$/scripts/treefam/download_treefam_alignments.py" />
         <option value="$PROJECT_DIR$/scripts/treefam/download_treefam_data.py" />
@@ -238,12 +227,13 @@
         <option value="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" />
         <option value="$PROJECT_DIR$/scripts/expansion/get_genes_from_families.py" />
         <option value="$PROJECT_DIR$/Tools/HMMER/HMMER3.py" />
+        <option value="$PROJECT_DIR$/scripts/hmmer3/parallel_hmmscan.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-36" />
-    <option name="y" value="199" />
+    <option name="x" value="51" />
+    <option name="y" value="160" />
     <option name="width" value="1914" />
     <option name="height" value="1050" />
   </component>
@@ -902,12 +892,6 @@
       <option name="number" value="Default" />
       <updated>1396791476390</updated>
     </task>
-    <task id="LOCAL-00242" summary="changes in Routine.File, Tools.Abstract&#10;added HMMER3 to Tools">
-      <created>1438571111901</created>
-      <option name="number" value="00242" />
-      <option name="project" value="LOCAL" />
-      <updated>1438571111902</updated>
-    </task>
     <task id="LOCAL-00243" summary="changes in Routine.File, Tools.Abstract&#10;added HMMER3 to Tools">
       <created>1438571320449</created>
       <option name="number" value="00243" />
@@ -1196,7 +1180,13 @@
       <option name="project" value="LOCAL" />
       <updated>1439061477547</updated>
     </task>
-    <option name="localTasksCounter" value="291" />
+    <task id="LOCAL-00291" summary="additions in scripts">
+      <created>1439064303191</created>
+      <option name="number" value="00291" />
+      <option name="project" value="LOCAL" />
+      <updated>1439064303191</updated>
+    </task>
+    <option name="localTasksCounter" value="292" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1220,7 +1210,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-36" y="199" width="1914" height="1050" extended-state="0" />
+    <frame x="51" y="160" width="1914" height="1050" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1611,16 +1601,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/hmmer3/parallel_hmmscan.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="486">
-          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
-          <folding>
-            <element signature="e#54#69#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Routines/File.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2952">
@@ -1755,11 +1735,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/HMMER/HMMER3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6841416" vertical-offset="4374" max-vertical-offset="5796">
-          <caret line="272" column="12" selection-start-line="272" selection-start-column="12" selection-end-line="272" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3834" max-vertical-offset="5796">
+          <caret line="227" column="60" selection-start-line="227" selection-start-column="58" selection-end-line="227" selection-end-column="92" />
           <folding>
             <element signature="e#54#63#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/hmmer3/parallel_hmmscan.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.56618613" vertical-offset="0" max-vertical-offset="763">
+          <caret line="26" column="115" selection-start-line="26" selection-start-column="115" selection-end-line="26" selection-end-column="115" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -225,7 +225,7 @@ class HMMER3(Tool):
                          turn_off_all_heruristics=False, turn_off_bias_filter=False,
                          MSV_threshold=None, Vit_threshold=None, Fwd_threshold=None,
                          turn_off_biased_composition_score_corrections=None,
-                         input_format=None, threads=None, combine_output_to_single_file=False):
+                         input_format=None, threads=None, combine_output_to_single_file=True):
 
         splited_dir = check_path(split_dir)
         splited_out_dir = check_path(splited_output_dir)
