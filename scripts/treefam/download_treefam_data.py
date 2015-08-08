@@ -64,21 +64,27 @@ def download_data(fam_id):
 
     if args.all or args.alignment:
         os.system("wget %s" % alignment_options)
-        if os.path.getsize("%s%s.fasta" % (args.output_dir, fam_id)) == 0:
-            print "aaa"
-            absent_alignment_list.append(fam_id)
     if args.all or args.tree:
         os.system("wget %s" % tree_options)
-        if os.path.getsize("%s%s.nwk" % (args.output_dir, fam_id)) == 0:
-            absent_tree_list.append(fam_id)
     if args.all or args.hmm:
         os.system("wget %s" % hmm_options)
-        if os.path.getsize("%s%s.hmm" % (args.output_dir, fam_id)) == 0:
-            absent_hmm_list.append(fam_id)
+
 
 pool = Pool(args.threads)
 pool.map(download_data, family_ids)
 pool.close()
+for fam_id in family_ids:
+    if args.all or args.alignment:
+        if os.path.getsize("%s%s.fasta" % (args.output_dir, fam_id)) == 0:
+            print "aaa"
+            absent_alignment_list.append(fam_id)
+    if args.all or args.tree:
+        if os.path.getsize("%s%s.nwk" % (args.output_dir, fam_id)) == 0:
+            absent_tree_list.append(fam_id)
+    if args.all or args.hmm:
+        if os.path.getsize("%s%s.hmm" % (args.output_dir, fam_id)) == 0:
+            absent_hmm_list.append(fam_id)
+
 
 print("")
 print absent_alignment_list
