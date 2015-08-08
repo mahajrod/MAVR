@@ -65,6 +65,7 @@ def download_data(fam_id):
     if args.all or args.alignment:
         os.system("wget %s" % alignment_options)
         if os.path.getsize("%s%s.fasta" % (args.output_dir, fam_id)) == 0:
+            print "aaa"
             absent_alignment_list.append(fam_id)
     if args.all or args.tree:
         os.system("wget %s" % tree_options)
@@ -79,7 +80,7 @@ pool = Pool(args.threads)
 pool.map(download_data, family_ids)
 pool.close()
 
-print()
+print("")
 
 if absent_alignment_list:
     absent_alignment_list.write("absent_alignments.ids")
