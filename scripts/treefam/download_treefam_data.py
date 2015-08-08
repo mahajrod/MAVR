@@ -81,7 +81,7 @@ pool.map(download_data, family_ids)
 pool.close()
 
 print("")
-
+print absent_alignment_list
 if absent_alignment_list:
     absent_alignment_list.write("absent_alignments.ids")
     print("%i alignments were not downloaded" % len(absent_alignment_list))
