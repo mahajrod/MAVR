@@ -37,6 +37,7 @@ save_mkdir(args.top_hits_dir)
 
 
 def handle_input(filename):
+    sys.stdout.write("Handling %s\n" % filename)
     prefix = split_filename(filename)[1]
     index_file = "%s.tmp.idx" % prefix
     hmm_dict = SearchIO.index_db(index_file, filename, args.format)

@@ -18,11 +18,8 @@ import matplotlib.pyplot as plt
 def split_gene_names(genes_list, name_first=True, separator="_"):
     species_dict = OrderedDict()
     for gene in genes_list:
-        try:
-            gene_name, species = gene.split(separator)
-        except:
-            print gene
-            print "AAAAAAAAAAAAAAA"
+        gene_name, species = gene.split(separator)
+
         if name_first:
             gene_name, species = species, gene_name
         if species not in species_dict:

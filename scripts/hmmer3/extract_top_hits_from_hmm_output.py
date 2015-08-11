@@ -8,9 +8,8 @@ from multiprocessing import Pool
 
 from Bio import SearchIO
 
-from Routines.File import make_list_of_path_to_files, split_filename, check_path, save_mkdir
-from Tools.LinuxTools import CGAS
 from CustomCollections.GeneralCollections import IdList
+from Routines.File import make_list_of_path_to_files, split_filename, check_path, save_mkdir
 
 
 def make_list_of_path_to_files_from_comma_sep_string(string):
@@ -44,6 +43,7 @@ save_mkdir(args.top_hits_dir)
 
 
 def handle_input(filename):
+    sys.stdout.write("Handling %s\n" % filename)
     not_significant_ids = IdList()
     not_found_ids = IdList()
 
@@ -79,7 +79,14 @@ process_pool = Pool(args.threads)
 results = process_pool.map(handle_input, args.input)
 
 if args.output != "stdout":
-    CGAS.cat(["%s%s" % (args.top_hits_dir, filename) for filename in os.listdir(args.top_hits_dir)], output=args.output)
+    with open(args.output, "w") as out_fd:
+        out_fd.write("#query\thit\tevalue\tbitscore\n")
+        for file_name in ["%s%s" % (args.top_hits_dir, filename) for filename in os.listdir(args.top_hits_dir)]:
+            with open(file_name, "r") as file_fd:
+                file_fd.readline()
+                for line in file_fd:
+                    out_fd.write(line)
+
 
 nf_fd = open(args.not_found, "w")
 ns_fd = open(args.not_significant, "w")
