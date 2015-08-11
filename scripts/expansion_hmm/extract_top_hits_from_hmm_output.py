@@ -6,10 +6,12 @@ import argparse
 
 from Bio import SearchIO
 
+from Routines.File import make_list_of_path_to_files
+
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", "--input_file", action="store", dest="input", required=True,
-                    help="Input file with hmm output")
+parser.add_argument("-i", "--input_files", action="store", dest="input", required=True, type=make_list_of_path_to_files,
+                    help="Comma-separated list of directories and/or files containing hmm output")
 parser.add_argument("-f", "--format", action="store", dest="format", required=True,
                     help="Format of input hmm file.")
 
@@ -18,7 +20,7 @@ parser.add_argument("-o", "--output_file", action="store", dest="output", defaul
 parser.add_argument("-n", "--not_found", action="store", dest="not_found", default="not_found.ids",
                     help="File to write ids of not found queries")
 parser.add_argument("-g", "--not_significant", action="store", dest="not_significant", default="not_significant.hits",
-                    help="File to write ids of quaries with not significant hits")
+                    help="File to write ids of queries with not significant hits")
 args = parser.parse_args()
 
 hmm_dict = SearchIO.index_db("temp.idx", args.input, args.format)
@@ -45,4 +47,4 @@ if args.output != "stdout":
 os.remove("temp.idx")
 
 nf_fd.close()
-ns_fd.close
+ns_fd.close()
