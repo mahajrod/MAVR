@@ -14,14 +14,14 @@ SPECIES=(rattus_norvegicus macaca_mulatta echinops_telfairi ornithorhynchus_anat
 
 cd ${WORK_DIR}
 mkdir -p compare_dir
-for SP in ${SPECIES[@]};
-    do
+#for SP in ${SPECIES[@]};
+#    do
+#
+#    mkdir -p compare_dir/${SP}
+#    echo "comparing families of ${SP}"
+#    ${COMPARE_SCRIPT} -r ${REFERENCE_FAM_DIR}${SP}.fam -c ${SPECIES_FAM_DIR}${SP}.fam -n -o compare_dir/${SP}
 
-    mkdir -p compare_dir/${SP}
-    echo "comparing families of ${SP}"
-    ${COMPARE_SCRIPT} -r ${REFERENCE_FAM_DIR}${SP}.fam -c ${SPECIES_FAM_DIR}${SP}.fam -n -o compare_dir/${SP}
-
-    done
+#    done
 
 SPECIES_STR=`echo ${SPECIES[@]} | tr " " ","`
 ${GATHER_STAT_SCRIPT} -s ${SCRIPTS_STR} -d compare_dir/ -o mammalia_hmmscan_families.stat
