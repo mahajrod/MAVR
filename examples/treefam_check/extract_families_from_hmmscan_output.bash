@@ -13,7 +13,8 @@ cd ~/data/TreeFam_new/check_ambigious/
 $TOP_HITS_SCRIPT -i ~/data/TreeFam_new/check_ambigious/splited_output_dir/ \
                     -o ${SPECIES}_hmmscan_top_hits.tab \
                     -f hmmer3-text -n ${SPECIES}_hmmscan_not_found.t \
-                    -g ${SPECIES}_hmmscan_not_significant.t
+                    -g ${SPECIES}_hmmscan_not_significant.t \
+                    -t 20
 
 $FAMILIES_SCRIPT -i ${SPECIES}_hmmscan_top_hits.tab \
                     -e -k 1 -a 0 \
