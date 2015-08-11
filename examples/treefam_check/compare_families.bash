@@ -24,5 +24,5 @@ for SP in ${SPECIES[@]};
     done
 
 SPECIES_STR=`echo ${SPECIES[@]} | tr " " ","`
-${GATHER_STAT_SCRIPT} -s ${SCRIPTS_DIR} -d compare_dir/ -o mammalia_hmmscan_families.stat
+${GATHER_STAT_SCRIPT} -s ${SCRIPTS_STR} -d compare_dir/ -o mammalia_hmmscan_families.stat
 ${FIND_CORRECT_FAMS_SCRIPT} -s ${SPECIES_STR} -d compare_dir/
