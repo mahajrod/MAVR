@@ -31,7 +31,7 @@ args = parser.parse_args()
 out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
 
 species_syn_dict = TwoLvlDict()
-out_fd.write("#family\tspecies_with_family\tspecies_with_errors\tspecies_with_correct_fam\n")
+out_fd.write("#family\tspecies_with_family\tspecies_with_errors\tspecies_with_correct_fam\terror_ratio\n")
 with open(args.input, "r") as in_fd:
     if args.header:
         in_fd.readline()
@@ -46,7 +46,9 @@ with open(args.input, "r") as in_fd:
             if "_" in fam:
                 species_with_errors += 1
         species_with_correct_fam = species_with_fam - species_with_errors
-        out_fd.write("%s\t%i\t%i\t%i\n" % (family_name, species_with_fam, species_with_errors, species_with_correct_fam))
+        error_ratio = float(species_with_errors)/float(species_with_fam)
+        out_fd.write("%s\t%i\t%i\t%i\t%.4f\n" %
+                     (family_name, species_with_fam, species_with_errors, species_with_correct_fam, error_ratio))
 
 if args.output != "stdout":
     out_fd.close()
