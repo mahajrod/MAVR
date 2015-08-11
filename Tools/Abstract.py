@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+import sys
 import multiprocessing as mp
 from subprocess import PIPE, Popen
 
@@ -11,7 +12,8 @@ from Routines.Sequence import record_by_id_generator
 
 def execute(exe_string):
     # this function is global because of stutid damned pickle mode in python!!!!!
-    print("Executing:\n\t%s" % exe_string)
+    # use sys.stdout.write instead of print to safe write to stdout from multiple threads
+    sys.stdout.write("Executing:\n\t%s\n" % exe_string)
     os.system(exe_string)
 
 
@@ -29,7 +31,7 @@ class Tool():
 
         command = cmd if cmd is not None else self.cmd
         exe_string = check_path(self.path) + command + " " + options
-        print("Executing:\n\t%s" % exe_string)
+        sys.stdout.write("Executing:\n\t%s\n" % exe_string)
         if capture_output:
             return Popen([exe_string], shell=True, stdout=PIPE).stdout  # returns file object
         else:
@@ -93,7 +95,7 @@ class JavaTool(Tool):
         exe_string = check_path(self.path) + "java -Xmx%s -jar %s%s %s %s" % (self.max_memory,
                                                                               check_path(self.jar_path),
                                                                               self.jar, command, options)
-        print("Executing:\n\t%s" % exe_string)
+        sys.stdout.write("Executing:\n\t%s\n" % exe_string)
 
         os.system(exe_string)
 
