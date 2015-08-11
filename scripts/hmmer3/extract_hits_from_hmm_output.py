@@ -59,7 +59,7 @@ if args.output == "stdout":
     sys.stdout.write("#query\thit\tevalue\tbitscore\n")
 
 process_pool = Pool(args.threads)
-process_pool.map(args.input)
+process_pool.map(handle_input, args.input)
 
 if args.output != "stdout":
     CGAS.cat(["%s%s" % (args.top_hits_dir, filename) for filename in os.listdir(args.top_hits_dir)], output=args.output)
