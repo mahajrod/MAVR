@@ -14,12 +14,12 @@ SPECIES=(rattus_norvegicus macaca_mulatta echinops_telfairi ornithorhynchus_anat
 
 cd ${WORK_DIR}
 mkdir -p compare_dir
-for species in ${SPECIES[@]};
+for SP in ${SPECIES[@]};
     do
 
-    mkdir -p compare_dir/${SPECIES}
-    echo "comparing families of ${species}"
-    ${COMPARE_SCRIPT} -r ${REFERENCE_FAM_DIR}${SPECIES}.fam -c ${SPECIES_FAM_DIR}${SPECIES}.fam -n -o compare_dir/${SPECIES}
+    mkdir -p compare_dir/${SP}
+    echo "comparing families of ${SP}"
+    ${COMPARE_SCRIPT} -r ${REFERENCE_FAM_DIR}${SP}.fam -c ${SPECIES_FAM_DIR}${SP}.fam -n -o compare_dir/${SP}
 
     done
 
