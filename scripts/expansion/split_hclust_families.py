@@ -22,6 +22,7 @@ def split_gene_names(genes_list, name_first=True, separator="_"):
             gene_name, species = gene.split(separator)
         except:
             print gene
+            print "AAAAAAAAAAAAAAA"
         if name_first:
             gene_name, species = species, gene_name
         if species not in species_dict:
@@ -51,6 +52,8 @@ parser.add_argument("-w", "--include_families_without_genes", action="store_true
                     help="Include famalies without genes in species")
 parser.add_argument("-c", "--count_genes", action="store_true", dest="count_genes",
                     help="Count genes in families")
+parser.add_argument("-r", "--header", action="store_true", dest="header",
+                    help="Header is present in input file with families")
 args = parser.parse_args()
 
 if len(args.name_separator) > 1:
@@ -69,6 +72,8 @@ for species in args.species_set:
 
 all_fam_fd = open("all_species.fam", "w")
 with open(args.input, "r") as in_fd:
+    if args.header:
+        in_fd.readline()
     for line in in_fd:
         temp = line.strip().split("\t")
         family_id = temp[0]
