@@ -3,10 +3,10 @@
 # supermicro
 
 MAVR_DIR=~/soft/MAVR/
-SCRIPTS_DIR=${MAVR_DIR}scripts/expansion_hmm/
+SCRIPTS_DIR=${MAVR_DIR}scripts/hmmer3/
 #EXTRACT_HITS_SCRIPT=${SCRIPTS_DIR}extract_hits_from_hmm_output.py
 TOP_HITS_SCRIPT=${SCRIPTS_DIR}extract_top_hits_from_hmm_output.py
-FAMILIES_SCRIPT=${SCRIPTS_DIR}convert_top_hits.py
+FAMILIES_SCRIPT=${SCRIPTS_DIR}convert_top_hits_to_families.py
 
 for SPECIES in manis_pentadactyla manis_javanica;
     do

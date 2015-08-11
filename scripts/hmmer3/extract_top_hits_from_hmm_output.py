@@ -8,9 +8,14 @@ from Bio import SearchIO
 
 from Routines.File import make_list_of_path_to_files
 
+
+def make_list_of_path_to_files_from_comma_sep_string(string):
+    return make_list_of_path_to_files(string.split(","))
+
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", "--input_files", action="store", dest="input", required=True, type=make_list_of_path_to_files,
+parser.add_argument("-i", "--input_files", action="store", dest="input", required=True,
+                    type=make_list_of_path_to_files_from_comma_sep_string,
                     help="Comma-separated list of directories and/or files containing hmm output")
 parser.add_argument("-f", "--format", action="store", dest="format", required=True,
                     help="Format of input hmm file.")
