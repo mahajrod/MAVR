@@ -40,9 +40,11 @@ def handle_input(filename):
     prefix = split_filename(filename)[1]
     index_file = "%s.tmp.idx" % prefix
     hmm_dict = SearchIO.index_db(index_file, filename, args.format)
-
-    out_fd = sys.stdout if args.output == "stdout" else open("%s%s.top_hits" % (args.top_hits_dir, prefix), "w")
-    out_fd.write("#query\thit\tevalue\tbitscore\n")
+    if args.output == "stdout":
+        out_fd = sys.stdout
+    else:
+        out_fd = open("%s%s.top_hits" % (args.top_hits_dir, prefix), "w")
+        out_fd.write("#query\thit\tevalue\tbitscore\n")
     for family in hmm_dict:
         #print hmm_dict[key]
         for hit in hmm_dict[family]:
@@ -52,6 +54,9 @@ def handle_input(filename):
         out_fd.close()
 
     os.remove(index_file)
+
+if args.output == "stdout":
+    sys.stdout.write("#query\thit\tevalue\tbitscore\n")
 
 process_pool = Pool(args.threads)
 process_pool.map(args.input)

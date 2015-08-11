@@ -6,7 +6,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0137b4ba-9cb9-4454-8e03-43ff7c136081" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Abstract.py" afterPath="$PROJECT_DIR$/Tools/Abstract.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/hmmer3/extract_hits_from_hmm_output.py" afterPath="$PROJECT_DIR$/scripts/hmmer3/extract_hits_from_hmm_output.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -71,8 +70,8 @@
       <file leaf-file-name="extract_hits_from_hmm_output.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/hmmer3/extract_hits_from_hmm_output.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.65526676" vertical-offset="529" max-vertical-offset="1494">
-              <caret line="56" column="27" selection-start-line="56" selection-start-column="27" selection-end-line="56" selection-end-column="27" />
+            <state vertical-scroll-proportion="0.35978112" vertical-offset="853" max-vertical-offset="1584">
+              <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
@@ -966,12 +965,6 @@
       <option name="number" value="Default" />
       <updated>1396791476390</updated>
     </task>
-    <task id="LOCAL-00248" summary="changes in Routine.File, Tools.Abstract&#10;added HMMER3 to Tools">
-      <created>1438572367676</created>
-      <option name="number" value="00248" />
-      <option name="project" value="LOCAL" />
-      <updated>1438572367676</updated>
-    </task>
     <task id="LOCAL-00249" summary="changes in Routine.File, Tools.Abstract&#10;added HMMER3 to Tools">
       <created>1438573474340</created>
       <option name="number" value="00249" />
@@ -1260,7 +1253,13 @@
       <option name="project" value="LOCAL" />
       <updated>1439303370318</updated>
     </task>
-    <option name="localTasksCounter" value="297" />
+    <task id="LOCAL-00297" summary="additions in scripts">
+      <created>1439312792454</created>
+      <option name="number" value="00297" />
+      <option name="project" value="LOCAL" />
+      <updated>1439312792454</updated>
+    </task>
+    <option name="localTasksCounter" value="298" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1819,8 +1818,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/hmmer3/extract_hits_from_hmm_output.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.65526676" vertical-offset="529" max-vertical-offset="1494">
-          <caret line="56" column="27" selection-start-line="56" selection-start-column="27" selection-end-line="56" selection-end-column="27" />
+        <state vertical-scroll-proportion="0.35978112" vertical-offset="853" max-vertical-offset="1584">
+          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
           <folding>
             <element signature="e#54#63#0" expanded="true" />
           </folding>
