@@ -6,12 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0137b4ba-9cb9-4454-8e03-43ff7c136081" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/treefam_check/extract_families_from_hmmscan_output.bash" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/expansion_hmm/convert_top_hits.py" afterPath="$PROJECT_DIR$/scripts/hmmer3/convert_top_hits_to_families.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/expansion_hmm/extract_hits_from_hmm_output.py" afterPath="$PROJECT_DIR$/scripts/hmmer3/extract_hits_from_hmm_output.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/expansion_hmm/extract_top_hits_from_hmm_output.py" afterPath="$PROJECT_DIR$/scripts/hmmer3/extract_top_hits_from_hmm_output.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/pangolin_expansion/extract_families_from_hmmscan_output.bash" afterPath="$PROJECT_DIR$/examples/pangolin_expansion/extract_families_from_hmmscan_output.bash" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/sabl_ant_expansion/extract_families_from_hmmscan_output.bash" afterPath="$PROJECT_DIR$/examples/sabl_ant_expansion/extract_families_from_hmmscan_output.bash" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/Acipenser_ruthenus/extract_families_from_hmmscan_output.bash" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -118,41 +113,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="extract_families_from_hmmscan_output.bash" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/sabl_ant_expansion/extract_families_from_hmmscan_output.bash">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
-              <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="convert_top_hits_to_families.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/hmmer3/convert_top_hits_to_families.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="666">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="extract_families_from_hmmscan_output.bash" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/pangolin_expansion/extract_families_from_hmmscan_output.bash">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
-              <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="extract_families_from_hmmscan_output.bash" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/examples/treefam_check/extract_families_from_hmmscan_output.bash">
+        <entry file="file://$PROJECT_DIR$/examples/Acipenser_ruthenus/extract_families_from_hmmscan_output.bash">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.22161423" vertical-offset="0" max-vertical-offset="731">
-              <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+              <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -183,7 +148,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/blast/kl.py" />
         <option value="$PROJECT_DIR$/examples/desaminases/recombination/cluster_combined_sets.bash" />
         <option value="$PROJECT_DIR$/examples/desaminases/restore_per_sample_vcf.py" />
         <option value="$PROJECT_DIR$/Parsers/CAFE.py" />
@@ -234,12 +198,13 @@
         <option value="$PROJECT_DIR$/examples/sabl_ant_expansion/extract_families_from_hmmscan_output.bash" />
         <option value="$PROJECT_DIR$/examples/pangolin_expansion/extract_families_from_hmmscan_output.bash" />
         <option value="$PROJECT_DIR$/examples/treefam_check/extract_families_from_hmmscan_output.bash" />
+        <option value="$PROJECT_DIR$/examples/Acipenser_ruthenus/extract_families_from_hmmscan_output.bash" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="69" />
-    <option name="y" value="62" />
+    <option name="x" value="6" />
+    <option name="y" value="25" />
     <option name="width" value="1914" />
     <option name="height" value="1018" />
   </component>
@@ -490,6 +455,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="examples" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Acipenser_ruthenus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="example_data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -635,11 +618,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/examples/Acipenser_ruthenus" />
       <recent name="$PROJECT_DIR$/examples/treefam_check" />
       <recent name="$PROJECT_DIR$/scripts/sequence" />
       <recent name="$PROJECT_DIR$/scripts/phylogenetics" />
       <recent name="$PROJECT_DIR$/scripts/treefam" />
-      <recent name="$PROJECT_DIR$/examples/sabl_ant_expansion" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/scripts/hmmer3" />
@@ -934,12 +917,6 @@
       <option name="number" value="Default" />
       <updated>1396791476390</updated>
     </task>
-    <task id="LOCAL-00246" summary="changes in Routine.File, Tools.Abstract&#10;added HMMER3 to Tools">
-      <created>1438571566569</created>
-      <option name="number" value="00246" />
-      <option name="project" value="LOCAL" />
-      <updated>1438571566569</updated>
-    </task>
     <task id="LOCAL-00247" summary="changes in Routine.File, Tools.Abstract&#10;added HMMER3 to Tools">
       <created>1438572284411</created>
       <option name="number" value="00247" />
@@ -1228,7 +1205,13 @@
       <option name="project" value="LOCAL" />
       <updated>1439296188413</updated>
     </task>
-    <option name="localTasksCounter" value="295" />
+    <task id="LOCAL-00295" summary="additions in scripts">
+      <created>1439297679842</created>
+      <option name="number" value="00295" />
+      <option name="project" value="LOCAL" />
+      <updated>1439297679842</updated>
+    </task>
+    <option name="localTasksCounter" value="296" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1252,7 +1235,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="69" y="62" width="1914" height="1018" extended-state="0" />
+    <frame x="6" y="25" width="1914" height="1018" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1399,13 +1382,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/sequence/GC_content.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="893">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence/number_of_sequences.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="295" max-vertical-offset="1188">
@@ -1738,16 +1714,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/hmmer3/extract_top_hits_from_hmm_output.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1080">
-          <caret line="11" column="16" selection-start-line="8" selection-start-column="0" selection-end-line="12" selection-end-column="56" />
-          <folding>
-            <element signature="e#54#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/hmmer3/extract_hits_from_hmm_output.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="756">
@@ -1758,9 +1724,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/examples/treefam_check/extract_families_from_hmmscan_output.bash">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="522">
+          <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/pangolin_expansion/extract_families_from_hmmscan_output.bash">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39398086" vertical-offset="0" max-vertical-offset="731">
+          <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/hmmer3/convert_top_hits_to_families.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="666">
+        <state vertical-scroll-proportion="0.12311901" vertical-offset="0" max-vertical-offset="731">
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
         </state>
@@ -1768,24 +1750,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/sabl_ant_expansion/extract_families_from_hmmscan_output.bash">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
+        <state vertical-scroll-proportion="0.24623802" vertical-offset="0" max-vertical-offset="731">
           <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/pangolin_expansion/extract_families_from_hmmscan_output.bash">
+    <entry file="file://$PROJECT_DIR$/scripts/hmmer3/extract_top_hits_from_hmm_output.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
-          <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1080">
+          <caret line="11" column="16" selection-start-line="8" selection-start-column="0" selection-end-line="12" selection-end-column="56" />
+          <folding>
+            <element signature="e#54#63#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/treefam_check/extract_families_from_hmmscan_output.bash">
+    <entry file="file://$PROJECT_DIR$/examples/Acipenser_ruthenus/extract_families_from_hmmscan_output.bash">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.22161423" vertical-offset="0" max-vertical-offset="731">
-          <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+          <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
           <folding />
         </state>
       </provider>
