@@ -11,7 +11,7 @@ import argparse
 from collections import OrderedDict
 
 from Routines.File import check_path
-from CustomCollections.GeneralCollections import SynDict, TwoLvlDict
+from CustomCollections.GeneralCollections import SynDict, TwoLvlDict, IdList
 
 parser = argparse.ArgumentParser()
 
@@ -25,10 +25,16 @@ parser.add_argument("-s", "--species_set", action="store", dest="species_set", t
                     help="Comma separated set of species.")
 parser.add_argument("-u", "--suffix", action="store", dest="suffix", required=True,
                     help="Suffix of fam files")
-
+parser.add_argument("-b", "--black_list_file", action="store", dest="black_list_file",
+                    help="File with family ids from black_list")
+parser.add_argument("-m", "--min_species_number", action="store", dest="min_species_number", default=1, type=int,
+                    help="Minimum number of species with family to retain family. Default: 1")
 args = parser.parse_args()
 
 species_list = sorted(args.species_set)
+black_list = IdList()
+if args.black_list_file:
+    black_list.read(args.black_list_file)
 out_fd = open(args.cafe_file, "w")
 out_fd.write("FAMILYDESC\tFAMILY\t%s\n" % ("\t".join(species_list)))
 
@@ -41,8 +47,17 @@ for species in args.species_set:
     fam_count_dict[species] = species_fam.count_synonyms()
 
 for family in fam_count_dict.sl_keys():
+    if black_list:
+        if family in black_list:
+            continue
+    genes_number_list = []
+    number_of_species = 0
+    for species in species_list:
+        genes_number_list.append(fam_count_dict[species][family] if family in fam_count_dict[species] else 0)
+        number_of_species += 1 if family in fam_count_dict[species] else 0
+    if number_of_species < args.min_species_number:
+        continue
     number_str = "\t".join(map(str,
-                               [fam_count_dict[species][family] if family in fam_count_dict[species] else 0
-                                for species in species_list]))
+                               genes_number_list))
     out_fd.write("%s\t%s\t%s\n" % (family, family, number_str))
 

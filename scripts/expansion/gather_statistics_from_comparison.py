@@ -15,7 +15,7 @@ parser.add_argument("-s", "--species_list", action="store", dest="species_list",
                     required=True,
                     help="Comma-separated list of species")
 parser.add_argument("-d", "--species_dir", action="store", dest="species_dir", default="./", type=check_path,
-                    help="Comma-separated list of species")
+                    help="Directory with per species statistics")
 parser.add_argument("-o", "--output_file", action="store", dest="output", default="stdout",
                     help="Output file. Default: stdout")
 
