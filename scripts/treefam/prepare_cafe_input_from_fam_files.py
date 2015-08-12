@@ -26,15 +26,23 @@ parser.add_argument("-s", "--species_set", action="store", dest="species_set", t
 parser.add_argument("-u", "--suffix", action="store", dest="suffix", required=True,
                     help="Suffix of fam files")
 parser.add_argument("-b", "--black_list_file", action="store", dest="black_list_file",
-                    help="File with family ids from black_list")
+                    help="File with family ids from black list")
+parser.add_argument("-w", "--white_list_file", action="store", dest="white_list_file",
+                    help="File with family ids from white list")
 parser.add_argument("-m", "--min_species_number", action="store", dest="min_species_number", default=1, type=int,
                     help="Minimum number of species with family to retain family. Default: 1")
 args = parser.parse_args()
 
 species_list = sorted(args.species_set)
+if args.white_list_file and args.black_list_file:
+    raise ValueError("Black list and white list cant be set simultaneously")
+
 black_list = IdList()
+white_list = IdList()
 if args.black_list_file:
     black_list.read(args.black_list_file)
+if args.white_list_file:
+    white_list.read(args.white_list_file)
 out_fd = open(args.cafe_file, "w")
 out_fd.write("FAMILYDESC\tFAMILY\t%s\n" % ("\t".join(species_list)))
 
@@ -49,6 +57,9 @@ for species in args.species_set:
 for family in fam_count_dict.sl_keys():
     if black_list:
         if family in black_list:
+            continue
+    if white_list:
+        if family not in white_list:
             continue
     genes_number_list = []
     number_of_species = 0
