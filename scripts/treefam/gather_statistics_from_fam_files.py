@@ -18,7 +18,7 @@ parser.add_argument("-s", "--species_set", action="store", dest="species_set", t
                     help="Comma separated set of species.")
 parser.add_argument("-b", "--use_basename", action="store_true", dest="use_basename",
                     help="Use basenames of files in input directory as species")
-parser.add_argument("-u", "--suffix", action="store", dest="suffix", required=True, default=".fam",
+parser.add_argument("-u", "--suffix", action="store", dest="suffix", default=".fam",
                     help="Suffix of fam files. Default: .fam")
 parser.add_argument("-o", "--output", action="store", dest="output", default="stdout",
                     help="Suffix of fam files")
