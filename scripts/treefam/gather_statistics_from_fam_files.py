@@ -40,7 +40,7 @@ else:
 out_fd.write("#species\tnumber_of_families\tnumber_of_proteins\n")
 for species, suffix in zip(species_list, suffix_list):
     fam_dict = SynDict()
-    fam_dict.read("%s%s%s" % (args.input, species, suffix), separator="\t", split_values=False, values_separator=",",
+    fam_dict.read("%s%s%s" % (args.input, species, suffix), separator="\t", split_values=True, values_separator=",",
                   key_index=0, value_index=1)
     out_fd.write("%s\t%i\t%i\n" % (species, len(fam_dict), fam_dict.count_all_synonyms()))
 
