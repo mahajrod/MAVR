@@ -27,5 +27,5 @@ with open(args.output, "w") as out_fd:
     for fam_id in id_list if args.id_file else families:
         for gene_id in families[fam_id]:
             out_fd.write(gene_id + "\n")
-if args.output != "output":
+if args.output != "stdout":
     out_fd.close()

@@ -70,6 +70,52 @@ class GeneralDataCAFE():
             ts.layout_fn = layout_arg
             self.tree.render("%s_%s.png" % (out_file_prefix, feature), w=w, units=units, tree_style=ts)
 
+    def draw_expansion_contraction(self, outfile_prefix="expansion_contraction_tree.png"):
+
+        tree = self.tree
+        for node in tree.traverse():
+            node.img_style["size"] = 0
+
+        def layout(node):
+            if node.up is not None:
+                attr = AttrFace("expansion", fsize=7, fgcolor="green", text_prefix="+")
+                faces.add_face_to_node(attr, node, 0, position="branch-top")
+                attr = AttrFace("decrease", fsize=7, fgcolor="red", text_prefix="-")
+                faces.add_face_to_node(attr, node, 0, position="branch-bottom")
+            if node.is_leaf():
+                attr = AttrFace("name", fsize=10, fgcolor="black", text_prefix="  ", fstyle="italic")
+                faces.add_face_to_node(attr, node, 0, position="aligned")
+        ts = TreeStyle()
+        ts.layout_fn = layout
+        ts.optimal_scale_level = "full"
+        ts.branch_vertical_margin = 10
+        ts.show_leaf_name = False
+        #ts.allow_face_overlap =True
+        tree.render("%s.png" % outfile_prefix, w=200, units='mm', tree_style=ts, dpi=300)
+
+    def draw_significant_expansion_contraction(self, outfile_prefix="significant_expansion_contraction_tree.png"):
+
+        tree = self.tree
+        for node in tree.traverse():
+            node.img_style["size"] = 0
+
+        def layout(node):
+            if node.up is not None:
+                attr = AttrFace("significant_expansion", fsize=7, fgcolor="green", text_prefix="+")
+                faces.add_face_to_node(attr, node, 0, position="branch-top")
+                attr = AttrFace("significant_contraction", fsize=7, fgcolor="red", text_prefix="-")
+                faces.add_face_to_node(attr, node, 0, position="branch-bottom")
+            if node.is_leaf():
+                attr = AttrFace("name", fsize=10, fgcolor="black", text_prefix="  ", fstyle="italic")
+                faces.add_face_to_node(attr, node, 0, position="aligned")
+        ts = TreeStyle()
+        ts.layout_fn = layout
+        ts.optimal_scale_level = "full"
+        ts.branch_vertical_margin = 10
+        ts.show_leaf_name = False
+        #ts.allow_face_overlap =True
+        tree.render("%s.png" % outfile_prefix, w=200, units='mm', tree_style=ts, dpi=300)
+
     def write_general_tree(self, out_file):
         with open(out_file, "w") as out_fd:
             out_fd.write(self.tree.write(format=8,
@@ -108,7 +154,8 @@ class ReportCAFE():
                 for line in report_fd:
                     id, tree, p_value, vitebri_p_value = line.strip().split()
                     p_value = float(p_value)
-                    tree = Tree(tree + ";", format=8)
+                    #print(tree)
+                    tree = Tree(tree + ";", format=1) # was 8
                     #print(vitebri_p_value)
                     vitebri_p_value = self.split_format1(vitebri_p_value[1:-1], separator=",", data_type=float)
                     for tree_node, id_node in zip(tree.traverse(), self.general_data.tree.traverse()):

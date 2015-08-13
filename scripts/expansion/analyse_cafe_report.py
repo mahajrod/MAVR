@@ -7,7 +7,7 @@ from random import choice
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from numpy import linspace
+from numpy import linspace, arange
 
 from collections import OrderedDict
 from CustomCollections.GeneralCollections import TwoLvlDict
@@ -32,6 +32,8 @@ parser.add_argument("-r", "--ref_species_gene_file", action="store", dest="ref_s
                     help="File with gene of genes families of reference species ")
 parser.add_argument("-s", "--species_synonym_file", action="store", dest="species_synonym_file",
                     help="File with synonyms of species name")
+parser.add_argument("-e", "--treefam_annotations", action="store", dest="treefam_annotations",
+                    help="File with treefam annotations")
 args = parser.parse_args()
 
 general_trees_dir = "general_trees/"
@@ -69,17 +71,17 @@ node_values, features_list = filtered_report.get_per_node_values(filter_by_p_val
                                                                  p_value_cutoff=args.node_p_value)
 print("Totally %i gene families" % len(cafe_report.records))
 print("Totally %i gene families without statistically significant changes" % len(filtered_out_report.records))
-
-reference_genes_dict = {}
-with open(args.ref_species_gene_file, "r") as ref_fd:
-    for line in ref_fd:
-        gene_family_id, genes = line.strip().split("\t")
-        genes = [] if genes == "." else genes.split(",")
-        reference_genes_dict[gene_family_id] = [genes[:]]
-        if genes:
-            reference_genes_dict[gene_family_id].append(choice(genes))
-            # print gene_family_id
-            #print reference_genes_dict[gene_family_id]
+if args.ref_species_gene_file:
+    reference_genes_dict = {}
+    with open(args.ref_species_gene_file, "r") as ref_fd:
+        for line in ref_fd:
+            gene_family_id, genes = line.strip().split("\t")
+            genes = [] if genes == "." else genes.split(",")
+            reference_genes_dict[gene_family_id] = [genes[:]]
+            if genes:
+                reference_genes_dict[gene_family_id].append(choice(genes))
+                # print gene_family_id
+                #print reference_genes_dict[gene_family_id]
 
 node_header_list = features_list + ["reference_gene"]
 delta_index = features_list.index("delta")
@@ -104,28 +106,32 @@ for node_id in node_values:
         if entry[delta_index] is None:
             continue
         node_string = "\t".join(map(lambda x: str(x), entry))
-        node_reference_genes = reference_genes_dict[entry[0]][0]
-        if node_reference_genes:
-            random_reference_gene = reference_genes_dict[entry[0]][1]
-            all_ref_id_fd.write(random_reference_gene + "\n")
-        else:
-            random_reference_gene = "."
-        node_string += "\t%s\n" % random_reference_gene
-        all_fd.write(node_string)
+        if args.ref_species_gene_file:
+            node_reference_genes = reference_genes_dict[entry[0]][0]
+            if node_reference_genes:
+                random_reference_gene = reference_genes_dict[entry[0]][1]
+                all_ref_id_fd.write(random_reference_gene + "\n")
+            else:
+                random_reference_gene = "."
+            node_string += "\t%s" % random_reference_gene
+            all_fd.write(node_string + "\n")
+        node_string += "\n"
         if entry[delta_index] > 0:
             new_fd.write(node_string)
             statistics_dict[node_id]["new"] += 1
             new_values.append(entry[delta_index])
-            if node_reference_genes:
-                new_ref_id_fd.write(random_reference_gene + "\n")
-                statistics_dict[node_id]["new_ref_ann"] += 1
+            if args.ref_species_gene_file:
+                if node_reference_genes:
+                    new_ref_id_fd.write(random_reference_gene + "\n")
+                    statistics_dict[node_id]["new_ref_ann"] += 1
         elif entry[delta_index] < 0:
             lost_fd.write(node_string)
             statistics_dict[node_id]["lost"] += 1
             lost_values.append(-entry[delta_index])
-            if node_reference_genes:
-                lost_ref_id_fd.write(random_reference_gene + "\n")
-                statistics_dict[node_id]["lost_ref_ann"] += 1
+            if args.ref_species_gene_file:
+                if node_reference_genes:
+                    lost_ref_id_fd.write(random_reference_gene + "\n")
+                    statistics_dict[node_id]["lost_ref_ann"] += 1
 
     plt.figure(1, figsize=(5, 10))
     index = 1
@@ -136,9 +142,13 @@ for node_id in node_values:
         maximum = max(values)
         subplot_list.append(plt.subplot(2, 1, index))
         bins = linspace(1, maximum, maximum)
-        plt.hist(values, bins=bins)
+        plt.hist(values, bins=bins, align='left', color="green" if info == "new" else "red")
         plt.xlabel("Number of %s genes in family" % info)
-        plt.xlim(xmin=1)
+        plt.xlim(xmin=0.5)
+        ticks = arange(1, maximum, int(maximum/10) + 1)
+        plt.xticks(ticks)
+        subplot_list[-1].xaxis.tick_bottom()
+        subplot_list[-1].tick_params(direction='out')
         plt.ylabel("Number of families")
         index += 1
     plt.suptitle("Distribution of losses and additions in gene families")
@@ -161,6 +171,9 @@ if args.species_synonym_file:
             node.name = synonyms_dict[node.name]
     cafe_report.general_data.write_general_tree(general_trees_dir + "general_tree_latin.nwk")
 
+cafe_report.general_data.draw_expansion_contraction()
+cafe_report.general_data.draw_significant_expansion_contraction()
+"""
 with open(background_genes_dir + "background_genes.t", "w") as back_fd:
     with open(background_genes_dir + "background_genes_list.txt", "w") as back_list_fd:
         back_fd.write("#id\tfamaliy_p_value\tref_gene\n")
@@ -173,7 +186,7 @@ with open(background_genes_dir + "background_genes.t", "w") as back_fd:
                 random_reference_gene = "."
             back_string = "%s\t%f\t%s\n" % (record.id, record.family_p_value, random_reference_gene)
             back_fd.write(back_string)
-
+"""
 statistics_dict.write(statistics_dir + "node_statistics.t", absent_symbol=".")
 
 

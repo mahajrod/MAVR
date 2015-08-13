@@ -27,7 +27,17 @@ ${MAVR_DIR}scripts/treefam/prepare_cafe_input_from_fam_files.py -i /home/skliver
                                                                 -c 8_sp_2_pangolin_not_filtered.cafe \
                                                                 -s homo_sapiens,mus_musculus,pteropus_vampyrus,bos_taurus,equus_caballus,felis_catus,ailuropoda_melanoleuca,canis_familiaris,manis_javanica,manis_pentadactyla \
                                                                 -u .fam \
+${MAVR_DIR}scripts/treefam/prepare_cafe_input_from_fam_files.py -i /home/skliver/workdir/pangolin/hmmer_expansion/prot_fam_sets \
+                                                                -c 8_sp_2_pangolin_filtered_ambigious_fams.cafe \
+                                                                -s homo_sapiens,mus_musculus,pteropus_vampyrus,bos_taurus,equus_caballus,felis_catus,ailuropoda_melanoleuca,canis_familiaris,manis_javanica,manis_pentadactyla \
+                                                                -u .fam \
+                                                                -w ~/data/TreeFam_new/check_ambigious/families_all_species_histo_errors_less_0.05.ids
+
+${MAVR_DIR}scripts/treefam/prepare_cafe_input_from_fam_files.py -i /home/skliver/workdir/pangolin/hmmer_expansion/prot_fam_sets \
+                                                                -c 8_sp_2_pangolin_filtered_ambigious_fams_and_fams_with_less_then_3_sp.cafe \
+                                                                -s homo_sapiens,mus_musculus,pteropus_vampyrus,bos_taurus,equus_caballus,felis_catus,ailuropoda_melanoleuca,canis_familiaris,manis_javanica,manis_pentadactyla \
+                                                                -u .fam \
                                                                 -m 3 \
-                                                                -b ~/data/TreeFam_new/check_ambigious/families_all_species_histo_errors_less_0.05.ids
+                                                                -w ~/data/TreeFam_new/check_ambigious/families_all_species_histo_errors_less_0.05.ids
 
 

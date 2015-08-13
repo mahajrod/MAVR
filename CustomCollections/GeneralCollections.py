@@ -279,6 +279,17 @@ class SynDict(OrderedDict):
             in_fd.close()
         return self
 
+    def count_all_synonyms(self):
+        number = 0
+
+        for key in self:
+            if isinstance(self[key], Iterable) and (not isinstance(self[key], str)):
+                number += len(self[key])
+            else:
+                number += 1
+
+        return number
+
     def write(self, filename, header=False, separator="\t",
               splited_values=False, values_separator=",",
               close_after_if_file_object=False):
