@@ -30,9 +30,10 @@ species_list = []
 suffix_list = []
 if args.use_basename:
     for filename in sorted(os.listdir(args.input)):
+        print filename
         dir, basename, ext = split_filename(filename)
         species_list.append(basename)
-        suffix_list.append(".%s" % ext)
+        suffix_list.append("%s" % ext)
 else:
     species_list = sorted(args.species_set)
     suffix_list = [args.suffix for i in range(0, len(species_list))]
