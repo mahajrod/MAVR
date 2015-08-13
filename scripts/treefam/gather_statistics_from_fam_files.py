@@ -30,7 +30,6 @@ species_list = []
 suffix_list = []
 if args.use_basename:
     for filename in sorted(os.listdir(args.input)):
-        print filename
         dir, basename, ext = split_filename(filename)
         species_list.append(basename)
         suffix_list.append("%s" % ext)
@@ -38,12 +37,10 @@ else:
     species_list = sorted(args.species_set)
     suffix_list = [args.suffix for i in range(0, len(species_list))]
 
-print (species_list)
-print(suffix_list)
 out_fd.write("#species\tnumber_of_families\tnumber_of_proteins\n")
 for species, suffix in zip(species_list, suffix_list):
     fam_dict = SynDict()
-    fam_dict.read("%s%s" % (species, suffix), separator="\t", split_values=False, values_separator=",",
+    fam_dict.read("%s%s%s" % (args.input, species, suffix), separator="\t", split_values=False, values_separator=",",
                   key_index=0, value_index=1)
     out_fd.write("%s\t%i\t%i\n" % (species, len(fam_dict), fam_dict.count_all_synonyms()))
 
