@@ -24,7 +24,6 @@ parser.add_argument("-o", "--output", action="store", dest="output", default="st
 
 args = parser.parse_args()
 
-
 out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
 species_list = sorted(args.species_set)
 
