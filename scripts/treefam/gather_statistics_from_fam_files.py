@@ -37,6 +37,8 @@ else:
     species_list = sorted(args.species_set)
     suffix_list = [args.suffix for i in range(0, len(species_list))]
 
+print (species_list)
+print(suffix_list)
 out_fd.write("#species\tnumber_of_families\tnumber_of_proteins\n")
 for species, suffix in zip(species_list, suffix_list):
     fam_dict = SynDict()
