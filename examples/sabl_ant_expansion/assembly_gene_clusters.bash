@@ -10,10 +10,9 @@ FAMILIES_SCRIPT=${SCRIPTS_DIR}convert_top_hits_to_families.py
 
 TREEFAM_HMM3_PROFILE=~/data/TreeFam_new/treefam9.hmm3
 
-
 for SPECIES in pantholops_hodgsonii hippotragus_niger ovis_aries;
     do
-    cd ~/workdir/${SPECIES}/
+    cd ~/workdir/sable/${SPECIES}/
     $HMMSCAN_SCRIPT -t ${THREADS} \
                     -s ${SPECIES}.pep \
                     -i ${TREEFAM_HMM3_PROFILE} \
