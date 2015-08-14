@@ -3,6 +3,7 @@ __author__ = 'Sergei F. Kliver'
 import argparse
 
 from Tools.HMMER import HMMER3
+from Routines.File import check_path
 
 parser = argparse.ArgumentParser()
 
@@ -18,10 +19,14 @@ parser.add_argument("--no_ali", action="store_true", dest="no_alignment",
                     help="Dont save alignments to minimize output")
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
                     help="Number of threads")
+parser.add_argument("-d", "--hmmscan_output_dir", action="store", dest="hmmscan_output_dir",
+                    default="hmmscan_output_dir/", type=check_path,
+                    help="Directory to write intermediate(splited) output")
+
 args = parser.parse_args()
 
 
 HMMER3.threads = 1
 HMMER3.parallel_hmmscan(args.input, args.input_seq, args.output, num_of_seqs_per_scan=None, split_dir="splited_fasta",
-                        splited_output_dir="splited_output_dir", threads=args.threads,
+                        splited_output_dir=args.hmmscan_output_dir, threads=args.threads,
                         combine_output_to_single_file=args.combine_output, dont_output_alignments=args.no_alignment)
