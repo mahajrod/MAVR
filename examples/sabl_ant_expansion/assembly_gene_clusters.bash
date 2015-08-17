@@ -22,12 +22,12 @@ for SPECIES in pantholops_hodgsonii hippotragus_niger ovis_aries;
     $TOP_HITS_SCRIPT -t ${THREADS} \
                      -r -d top_hits_dir/ \
                      -i hmmscan_output_dir/ \
-                     -o ${SPECIES}_hmmscan_top_hits.tab \
+                     -o ${SPECIES}_hmmscan_top.hits \
                      -f hmmer3-text -n ${SPECIES}_hmmscan_not_found.t \
                      -g ${SPECIES}_hmmscan_not_significant.t
 
-    $FAMILIES_SCRIPT -i ${SPECIES}_hmmscan_top_hits.tab \
+    $FAMILIES_SCRIPT -i ${SPECIES}_hmmscan_top.hits \
                     -e -k 1 -a 0 \
-                    -o ${SPECIES}_hmmscan_families.tab
+                    -o ${SPECIES}_hmmscan.fam
     done
 

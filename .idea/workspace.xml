@@ -2,12 +2,15 @@
 <project version="4">
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/scripts/phylogenetics/collapse_by_support.py" line="54" />
-    <bookmark url="file://$PROJECT_DIR$/scripts/treefam/prepare_cafe_input_from_fam_files.py" line="74" />
+    <bookmark url="file://$PROJECT_DIR$/scripts/treefam/prepare_cafe_input_from_fam_files.py" line="73" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0137b4ba-9cb9-4454-8e03-43ff7c136081" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/sabl_ant_expansion/assembly_gene_clusters.bash" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/hmmer3/parallel_hmmscan.py" afterPath="$PROJECT_DIR$/scripts/hmmer3/parallel_hmmscan.py" />
+    <list default="true" id="0137b4ba-9cb9-4454-8e03-43ff7c136081" name="Default" comment="additions">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" afterPath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/File.py" afterPath="$PROJECT_DIR$/Routines/File.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/sabl_ant_expansion/assembly_gene_clusters.bash" afterPath="$PROJECT_DIR$/examples/sabl_ant_expansion/assembly_gene_clusters.bash" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/treefam/prepare_cafe_input_from_fam_files.py" afterPath="$PROJECT_DIR$/scripts/treefam/prepare_cafe_input_from_fam_files.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -59,19 +62,43 @@
       <file leaf-file-name="extract_families_from_hmmscan_output.bash" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/examples/pangolin_expansion/extract_families_from_hmmscan_output.bash">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="882">
+            <state vertical-scroll-proportion="0.0" vertical-offset="18" max-vertical-offset="882">
               <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="assembly_gene_clusters.bash" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/examples/sabl_ant_expansion/assembly_gene_clusters.bash">
+      <file leaf-file-name="prepare_cafe_input_from_fam_files.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/treefam/prepare_cafe_input_from_fam_files.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2025" vertical-offset="0" max-vertical-offset="800">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.7525" vertical-offset="784" max-vertical-offset="1638">
+              <caret line="77" column="114" selection-start-line="77" selection-start-column="114" selection-end-line="77" selection-end-column="114" />
+              <folding>
+                <element signature="e#141#150#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="analyse_cafe_report.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/expansion/analyse_cafe_report.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2383" max-vertical-offset="3510">
+              <caret line="140" column="20" selection-start-line="140" selection-start-column="20" selection-end-line="140" selection-end-column="20" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="File.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Routines/File.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="576" max-vertical-offset="2988">
+              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+              <folding>
+                <element signature="e#47#56#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -79,7 +106,7 @@
       <file leaf-file-name="extract_top_hits_from_hmm_output.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/hmmer3/extract_top_hits_from_hmm_output.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2232">
+            <state vertical-scroll-proportion="0.0" vertical-offset="234" max-vertical-offset="2232">
               <caret line="22" column="9" selection-start-line="19" selection-start-column="0" selection-end-line="37" selection-end-column="49" />
               <folding />
             </state>
@@ -109,7 +136,7 @@
       <file leaf-file-name="parallel_hmmscan.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/hmmer3/parallel_hmmscan.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="666">
+            <state vertical-scroll-proportion="0.0" vertical-offset="414" max-vertical-offset="666">
               <caret line="23" column="75" selection-start-line="23" selection-start-column="75" selection-end-line="23" selection-end-column="75" />
               <folding>
                 <element signature="e#54#69#0" expanded="true" />
@@ -157,7 +184,6 @@
         <option value="$PROJECT_DIR$/scripts/phylogenetics/get_leave_names_from_trees.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/get_sequence_ids.py" />
         <option value="$PROJECT_DIR$/Tools/HMMER/HMMER3.py" />
-        <option value="$PROJECT_DIR$/Routines/File.py" />
         <option value="$PROJECT_DIR$/scripts/expansion_hmm/extract_top_hits_from_hmm_output.py" />
         <option value="$PROJECT_DIR$/scripts/expansion_hmm/extract_hits_from_hmm_output.py" />
         <option value="$PROJECT_DIR$/scripts/hmmer3/__init__.py" />
@@ -173,7 +199,6 @@
         <option value="$PROJECT_DIR$/scripts/expansion/gather_statistics_from_comparison.py" />
         <option value="$PROJECT_DIR$/scripts/expansion_hmm/errors_distribution.py" />
         <option value="$PROJECT_DIR$/examples/treefam_check/compare_families.bash" />
-        <option value="$PROJECT_DIR$/scripts/treefam/prepare_cafe_input_from_fam_files.py" />
         <option value="$PROJECT_DIR$/examples/pangolin_expansion/extract_families_from_hmmscan_output.bash" />
         <option value="$PROJECT_DIR$/Parsers/CAFE.py" />
         <option value="$PROJECT_DIR$/scripts/expansion/analyse_cafe_report.py" />
@@ -182,12 +207,14 @@
         <option value="$PROJECT_DIR$/scripts/treefam/gather_statistics_from_fam_files.py" />
         <option value="$PROJECT_DIR$/scripts/hmmer3/parallel_hmmscan.py" />
         <option value="$PROJECT_DIR$/examples/sabl_ant_expansion/assembly_gene_clusters.bash" />
+        <option value="$PROJECT_DIR$/Routines/File.py" />
+        <option value="$PROJECT_DIR$/scripts/treefam/prepare_cafe_input_from_fam_files.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="6" />
-    <option name="y" value="25" />
+    <option name="x" value="51" />
+    <option name="y" value="32" />
     <option name="width" value="1914" />
     <option name="height" value="1018" />
   </component>
@@ -946,24 +973,6 @@
       <option name="number" value="Default" />
       <updated>1396791476390</updated>
     </task>
-    <task id="LOCAL-00276" summary="additions in scripts">
-      <created>1438989205133</created>
-      <option name="number" value="00276" />
-      <option name="project" value="LOCAL" />
-      <updated>1438989205133</updated>
-    </task>
-    <task id="LOCAL-00277" summary="additions in scripts">
-      <created>1438989626069</created>
-      <option name="number" value="00277" />
-      <option name="project" value="LOCAL" />
-      <updated>1438989626069</updated>
-    </task>
-    <task id="LOCAL-00278" summary="additions in scripts">
-      <created>1438993491321</created>
-      <option name="number" value="00278" />
-      <option name="project" value="LOCAL" />
-      <updated>1438993491321</updated>
-    </task>
     <task id="LOCAL-00279" summary="additions in scripts">
       <created>1438993789640</created>
       <option name="number" value="00279" />
@@ -1240,7 +1249,25 @@
       <option name="project" value="LOCAL" />
       <updated>1439468401989</updated>
     </task>
-    <option name="localTasksCounter" value="325" />
+    <task id="LOCAL-00325" summary="additions">
+      <created>1439593801124</created>
+      <option name="number" value="00325" />
+      <option name="project" value="LOCAL" />
+      <updated>1439593801124</updated>
+    </task>
+    <task id="LOCAL-00326" summary="additions">
+      <created>1439594074511</created>
+      <option name="number" value="00326" />
+      <option name="project" value="LOCAL" />
+      <updated>1439594074511</updated>
+    </task>
+    <task id="LOCAL-00327" summary="additions">
+      <created>1439594268829</created>
+      <option name="number" value="00327" />
+      <option name="project" value="LOCAL" />
+      <updated>1439594268829</updated>
+    </task>
+    <option name="localTasksCounter" value="328" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1264,7 +1291,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="6" y="25" width="1914" height="1018" extended-state="0" />
+    <frame x="51" y="32" width="1914" height="1018" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32968238" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1272,7 +1299,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24960506" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15230037" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1835008" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.08314856" sideWeight="0.5023601" order="9" side_tool="true" content_ui="tabs" />
@@ -1280,14 +1307,14 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.49150744" sideWeight="0.49763992" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.49150744" sideWeight="0.49763992" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39510116" sideWeight="0.6715867" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25767544" sideWeight="0.8990555" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399361" sideWeight="0.49973643" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2489339" sideWeight="0.6706783" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399361" sideWeight="0.49973643" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25767544" sideWeight="0.8990555" order="2" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1308,9 +1335,9 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26462835" sideWeight="0.7853231" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2489339" sideWeight="0.6706783" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399361" sideWeight="0.49973643" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25767544" sideWeight="0.8990555" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399361" sideWeight="0.49973643" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2489339" sideWeight="0.6706783" order="2" side_tool="false" content_ui="combo" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1597,7 +1624,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
           <caret line="18" column="39" selection-start-line="18" selection-start-column="39" selection-end-line="18" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1605,9 +1631,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="396" max-vertical-offset="2808">
           <caret line="22" column="34" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
-          <folding>
-            <element signature="e#54#63#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1636,7 +1659,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="41" max-vertical-offset="756">
           <caret line="28" column="89" selection-start-line="28" selection-start-column="89" selection-end-line="28" selection-end-column="89" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1654,18 +1676,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/expansion/analyse_cafe_report.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="655" max-vertical-offset="3510">
-          <caret line="140" column="20" selection-start-line="140" selection-start-column="20" selection-end-line="140" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/treefam/extract_families_of_species.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="2322">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1690,21 +1704,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/File.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="2970">
-          <caret line="24" column="15" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="15" />
-          <folding>
-            <element signature="e#47#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/expansion/get_genes_from_families.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
           <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1720,15 +1723,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="855">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/pangolin_expansion/extract_families_from_hmmscan_output.bash">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="882">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1736,7 +1730,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.1125" vertical-offset="0" max-vertical-offset="800">
           <caret line="5" column="6" selection-start-line="4" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1744,7 +1737,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1746">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1752,17 +1744,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1026">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/treefam/prepare_cafe_input_from_fam_files.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0025" vertical-offset="542" max-vertical-offset="1440">
-          <caret line="30" column="37" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
-          <folding>
-            <element signature="e#141#150#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1792,11 +1773,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/expansion/analyse_cafe_report.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2383" max-vertical-offset="3510">
+          <caret line="140" column="20" selection-start-line="140" selection-start-column="20" selection-end-line="140" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/File.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="576" max-vertical-offset="2988">
+          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding>
+            <element signature="e#47#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/examples/sabl_ant_expansion/assembly_gene_clusters.bash">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2025" vertical-offset="0" max-vertical-offset="800">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.7425" vertical-offset="0" max-vertical-offset="800">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/pangolin_expansion/extract_families_from_hmmscan_output.bash">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="882">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/treefam/prepare_cafe_input_from_fam_files.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7525" vertical-offset="784" max-vertical-offset="1638">
+          <caret line="77" column="114" selection-start-line="77" selection-start-column="114" selection-end-line="77" selection-end-column="114" />
+          <folding>
+            <element signature="e#141#150#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

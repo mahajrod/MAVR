@@ -64,6 +64,7 @@ def read_synonyms_dict(filename, header=False, separator="\t",
             header_str = in_fd.readline().strip()
         for line in in_fd:
             tmp = line.strip().split(separator)
+            #print line
             key, value = tmp[key_index], tmp[value_index]
             if split_values:
                 value = value.split(values_separator)
