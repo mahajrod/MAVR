@@ -53,12 +53,12 @@ out_fd.write("FAMILYDESC\tFAMILY\t%s\n" % ("\t".join(species_list)))
 filtered_fd.write("FAMILYDESC\tFAMILY\t%s\n" % ("\t".join(species_list)))
 species_filtered_fd_list = OrderedDict()
 fam_count_dict = TwoLvlDict()
-
+species_family_dict = TwoLvlDict()
 for species in args.species_set:
-    species_fam = SynDict()
-    species_fam.read("%s%s%s" % (check_path(args.input), species, args.suffix), split_values=True,
-                     values_separator=",", separator="\t")
-    fam_count_dict[species] = species_fam.count_synonyms()
+    species_family_dict[species] = SynDict()
+    species_family_dict[species].read("%s%s%s" % (check_path(args.input), species, args.suffix), split_values=True,
+                                      values_separator=",", separator="\t")
+    fam_count_dict[species] = species_family_dict[species].count_synonyms()
     species_filtered_fd_list[species] = open("%s%s.fam" % (args.filtered_family_dir, species), "w")
 
 for family in fam_count_dict.sl_keys():
@@ -74,8 +74,8 @@ for family in fam_count_dict.sl_keys():
     if (black_list and (family in black_list)) or (white_list and (family not in white_list)) or (number_of_species < args.min_species_number):
         filtered_fd.write("%s\t%s\t%s\n" % (family, family, number_str))
         for species in species_list:
-            if family in species_fam[species]:
-                species_filtered_fd_list[species].write("%s\t%s\n" % (family, ",".join(species_fam[species][family])))
+            if family in species_family_dict[species]:
+                species_filtered_fd_list[species].write("%s\t%s\n" % (family, ",".join(species_family_dict[species][family])))
         continue
 
     out_fd.write("%s\t%s\t%s\n" % (family, family, number_str))
