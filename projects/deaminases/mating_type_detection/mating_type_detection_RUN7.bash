@@ -10,14 +10,14 @@
 module load compiler/gcc/4.8 python/2.7 cutadapt/1.4 samtools/0.1 bowtie/2.2
 
 source /work/pavlov/okochenova/profile
-
-SOFT_DIR="/work/pavlov/okochenova/soft/"
-WORKDIR="/work/pavlov/okochenova/mating_type_detection/"
+OKOCHENOVA_DIR="/work/pavlov/okochenova/"
+SOFT_DIR=${OKOCHENOVA_DIR}"soft/"
+WORKDIR=${OKOCHENOVA_DIR}"/mating_type_detection/"
 MAVR_SCRIPTS_DIR=${SOFT_DIR}"/MAVR/scripts/"
 
 EXTRACTOR_BIN=${SOFT_DIR}"Cookiecutter/src/extract"
 FRAGMENTS_FILE=${WORKDIR}"kmer/mating_rel_seqs_with_rev_com_33_mer.kmer"
-SAMPLES_DIR=${WORKDIR}"fastq/RUN7/"
+SAMPLES_DIR=${OKOCHENOVA_DIR}"fastq/RUN7/"
 
 
 
