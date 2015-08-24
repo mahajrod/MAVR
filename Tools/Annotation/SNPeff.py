@@ -1,21 +1,16 @@
 #!/usr/bin/env python
 
-from Tools.Abstract import Tool
+from Tools.Abstract import JavaTool
 from collections import Iterable
 from Routines.Functions import check_path
 
 
-class SNPeff(Tool):
-    def __init__(self, path="", max_threads=4, jar_path="", jar="snpEff.jar",
+class SNPeff(JavaTool):
+    def __init__(self, max_threads=4, jar_path="", jar="snpEff.jar",
                  max_memory="500m", config_path=""):
-        self.cmd = "java"
-        self.path = check_path(path)
-        self.max_threads = max_threads
-        self.jar_path = check_path(jar_path)
-        self.jar = jar
-        self.max_memory = max_memory
+        JavaTool.__init__(self, jar, java_path="", max_threads=max_threads, jar_path=jar_path, max_memory=max_memory)
         self.config_path = config_path
-        #Tool.__init__(self, "java -jar %s%s" % (path, jar), path, max_threads)
+
 
     def build_db(self, datafiles, input_format="gff3", build_type=None):
         """
@@ -57,8 +52,20 @@ class SNPeff(Tool):
 
         self.execute(options, cmd="build")
 
-    def annotate(self, genome, input_vcf, output_vcf):
-        options = "-v " + genome + " " + input_vcf + " > " + output_vcf
+    def annotate(self, genome, input_vcf, output_vcf, summary_file=None, verbose=True, no_downstream=False,
+                 no_intergenic=False, no_intron=False, no_upstream=False, no_utr=False):
+
+        options = " -v" if verbose else ""
+        options += " -s %s" % summary_file if summary_file else ""
+        options += " -no-downstream" if no_downstream else ""
+        options += " -no-intergenic" if no_intergenic else ""
+        options += " -no-intron" if no_intron else ""
+        options += " -no-upstream" if no_upstream else ""
+        options += " -no-utr" if no_utr else ""
+        options += " %s" % genome
+        options += " %s" % input_vcf
+        options += " > %s" % output_vcf
+
         self.execute(options, cmd="")
 
 

@@ -21,5 +21,4 @@ parser.add_argument("-f", "--format", action="store", dest="format", default="fa
 args = parser.parse_args()
 
 alignment = AlignIO.read(args.input_file, args.format)
-#print (alignment[:, args.start-1:args.end])
 AlignIO.write(alignment[:, args.start-1:args.end], args.output_file, args.format)

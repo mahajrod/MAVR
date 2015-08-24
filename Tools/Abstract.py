@@ -3,10 +3,11 @@ import os
 import sys
 import multiprocessing as mp
 from subprocess import PIPE, Popen
+from collections import OrderedDict
 
 from Bio import SeqIO
 
-from Routines.File import check_path, split_filename
+from Routines.File import check_path, split_filename, save_mkdir
 from Routines.Sequence import record_by_id_generator
 
 
@@ -81,6 +82,34 @@ class Tool():
                         "%s/%s_%i.fasta" % (output_dir, out_prefix, split_index), format="fasta")
         os.remove("temp.idx")
 
+    @staticmethod
+    def extract_common_sequences(list_of_files_with_sequences_of_samples, list_of_names_of_samples,
+                                 output_dir, separator="_", format="fasta"):
+
+        def generator_with_id_correction(samples_seq_dict, common_record_id):
+            for sample in samples_seq_dict:
+                record = samples_seq_dict[sample][common_record_id]
+                record.id = "%s%s%s" % (sample, separator, record.id)
+                yield record
+
+        save_mkdir(output_dir)
+        index = 0
+        samples_seq_dict = OrderedDict()
+        for filename, sample_name in zip(list_of_files_with_sequences_of_samples, list_of_names_of_samples):
+            samples_seq_dict[sample_name] = SeqIO.index_db("tmp_%i.idx" % index, filename, format=format)
+            index += 1
+        common_sequence_ids = set(samples_seq_dict[list_of_names_of_samples[0]].keys())
+
+        for sample_name in list_of_names_of_samples[1:]:
+            common_sequence_ids = common_sequence_ids & set(samples_seq_dict[sample_name].keys())
+
+        for common_id in common_sequence_ids:
+            SeqIO.write(generator_with_id_correction(samples_seq_dict, common_id),
+                        "%s%s.%s" % (check_path(output_dir), common_id, format),
+                        format=format)
+        for i in range(0, index):
+            os.remove("tmp_%i.idx" % i)
+
 
 class JavaTool(Tool):
 
@@ -99,3 +128,8 @@ class JavaTool(Tool):
 
         os.system(exe_string)
 
+
+if __name__ == "__main__":
+    os.chdir("/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/polymorphisms/")
+    Tool.extract_common_sequences(["LAN210_v0.10m_selected_proteins.fasta", "S288C_R64_selected_proteins.fasta"],
+                                  ["LAN210", "S288C"], "proteins")

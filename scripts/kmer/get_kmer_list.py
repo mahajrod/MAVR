@@ -11,13 +11,14 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
+from Routines.File import make_list_of_path_to_files
 from Tools.Kmers import Jellyfish
 from Routines.Sequence import rev_com_generator
 
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_file", action="store", dest="input", type=lambda s: s.split(","),
-                    help="Comma-separated list of fasta or fastq files.")
+                    help="Comma-separated list of fasta or fastq files or directories containing them.")
 parser.add_argument("-m", "--kmer_length", action="store", dest="kmer_length", type=int, default=23,
                     help="Length of kmers")
 parser.add_argument("-s", "--hash_size", action="store", dest="hash_size", type=int, default=1000000,
@@ -44,6 +45,7 @@ parser.add_argument("-j", "--jellyfish_path", action="store", dest="jellyfish_pa
                     help="Path to jellyfish")
 args = parser.parse_args()
 
+args.input = make_list_of_path_to_files(args.input)
 if args.count_both_strands and args.add_rev_com:
     raise ValueError("Options -b/--count_both_strands and -r/--add_reverse_complement are not compatible")
 

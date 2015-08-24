@@ -118,3 +118,6 @@ scripts/find_homopolymers_ver2.py
 scripts/get_flanking_regions.py
 scripts/gff_examine.py
 scripts/remove_duplicates_flybase_UTR.py
+scripts/annotation/__init__.py
+scripts/annotation/annotate_vcf.py
+scripts/annotation/get_summary_table.py

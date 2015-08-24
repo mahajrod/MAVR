@@ -25,7 +25,6 @@ parser.add_argument("-t", "--threads", action="store", dest="threads", default=4
                     help="Number of threads. Default: 4")
 parser.add_argument("-b", "--bed_with_regions", action="store", dest="bed",
                     help="Bed file with regions to output.")
-
 parser.add_argument("-r", "--right_reads", action="store", dest="right_reads",
                     type=make_list_from_comma_sep_string,
                     help="Comma-separated list of files with right reads")

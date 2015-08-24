@@ -43,6 +43,7 @@ def make_list_of_path_to_files(list_of_dirs_and_files, expression=None):
 
     pathes_list = []
     for entry in list_of_dirs_and_files:
+        #print entry
         if os.path.isdir(entry):
             files_in_dir = sorted(filter(expression, os.listdir(entry)) if expression else os.listdir(entry))
             for filename in files_in_dir:
