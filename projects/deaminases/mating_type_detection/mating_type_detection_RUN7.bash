@@ -10,6 +10,7 @@
 module load compiler/gcc/4.8 python/2.7 samtools/0.1 bowtie/2.2 sage/6.3
 
 source /work/pavlov/okochenova/profile
+echo ${PYTONPATH}
 OKOCHENOVA_DIR="/work/pavlov/okochenova/"
 SOFT_DIR=${OKOCHENOVA_DIR}"soft/"
 WORKDIR=${OKOCHENOVA_DIR}"/mating_type_detection/"
