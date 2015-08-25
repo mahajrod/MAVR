@@ -7,34 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0137b4ba-9cb9-4454-8e03-43ff7c136081" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/deaminases/mating_type_detection/DESCRIPTION" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/deaminases/substitutions/DESCRIPTION" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/annotation/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/deaminases/substitutions/annotate_vcf.bash" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/annotation/annotate_vcf.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/recombination/cluster_combined_sets_at_ragnvald.bash" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/recombination/combine_samples_to_sets_at_ragnvald.bash" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/recombination/extract_homozygous_chains_at_ragnvald.bash" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/sequence/extract_region.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/deaminases/substitutions/extract_snps_for_desired_genes.bash" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/multiple_alignment/extract_substitutions.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/deaminases/substitutions/extract_substitutions_from_alignments.bash" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/recombination/filter_FS_clustering_and_homo_chains.bash" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/deaminases/substitutions/get_alignment.bash" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/annotation/get_summary_table.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/deaminases/mating_type_detection/mating_type_detection_RUN7.bash" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/deaminases/mating_type_detection/prepare.bash" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/desaminases/recombination/restore_per_sample_vcf_at_ragnvald.bash" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/alignment/slice_multiple_alignment.py" afterPath="$PROJECT_DIR$/scripts/multiple_alignment/slice_multiple_alignment.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" afterPath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Abstract.py" afterPath="$PROJECT_DIR$/Tools/Abstract.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/File.py" afterPath="$PROJECT_DIR$/Routines/File.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Annotation/SNPeff.py" afterPath="$PROJECT_DIR$/Tools/Annotation/SNPeff.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/SOURCES.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/SOURCES.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence/extract_sequences_by_ids.py" afterPath="$PROJECT_DIR$/scripts/sequence/extract_sequences_by_ids.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/kmer/get_kmer_list.py" afterPath="$PROJECT_DIR$/scripts/kmer/get_kmer_list.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/alignment/map_reads.py" afterPath="$PROJECT_DIR$/scripts/alignment/map_reads.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/projects/deaminases/mating_type_detection/mating_type_detection_RUN7.bash" afterPath="$PROJECT_DIR$/projects/deaminases/mating_type_detection/mating_type_detection_RUN7.bash" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -106,8 +80,18 @@
       <file leaf-file-name="mating_type_detection_RUN7.bash" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/projects/deaminases/mating_type_detection/mating_type_detection_RUN7.bash">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9142857" vertical-offset="144" max-vertical-offset="864">
-              <caret line="40" column="96" selection-start-line="40" selection-start-column="96" selection-end-line="40" selection-end-column="96" />
+            <state vertical-scroll-proportion="0.6" vertical-offset="0" max-vertical-offset="1296">
+              <caret line="21" column="54" selection-start-line="21" selection-start-column="54" selection-end-line="21" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="restore_pairs.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/filter/restore_pairs.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="347" max-vertical-offset="990">
+              <caret line="32" column="47" selection-start-line="32" selection-start-column="47" selection-end-line="32" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -126,8 +110,8 @@
       <file leaf-file-name="map_reads.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/alignment/map_reads.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.785714" vertical-offset="0" max-vertical-offset="1944">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state vertical-scroll-proportion="-5.785714" vertical-offset="1296" max-vertical-offset="1944">
+              <caret line="90" column="12" selection-start-line="90" selection-start-column="12" selection-end-line="90" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -225,14 +209,13 @@
         <option value="$PROJECT_DIR$/projects/deaminases/mating_type_detection/script.bash" />
         <option value="$PROJECT_DIR$/projects/deaminases/mating_type_detection/prepare.bash" />
         <option value="$PROJECT_DIR$/projects/deaminases/mating_type_detection/DESCRIPTION" />
-        <option value="$PROJECT_DIR$/scripts/alignment/map_reads.py" />
         <option value="$PROJECT_DIR$/projects/deaminases/mating_type_detection/mating_type_detection_RUN7.bash" />
+        <option value="$PROJECT_DIR$/scripts/alignment/map_reads.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="9" />
-    <option name="y" value="29" />
+    <option name="y" value="25" />
     <option name="width" value="1911" />
     <option name="height" value="1018" />
   </component>
@@ -496,46 +479,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="examples" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="examples" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="desaminases" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="examples" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="desaminases" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="recombination" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1030,60 +973,6 @@
       <option name="number" value="Default" />
       <updated>1396791476390</updated>
     </task>
-    <task id="LOCAL-00281" summary="additions in scripts">
-      <created>1439032043842</created>
-      <option name="number" value="00281" />
-      <option name="project" value="LOCAL" />
-      <updated>1439032043842</updated>
-    </task>
-    <task id="LOCAL-00282" summary="additions in scripts">
-      <created>1439032106411</created>
-      <option name="number" value="00282" />
-      <option name="project" value="LOCAL" />
-      <updated>1439032106412</updated>
-    </task>
-    <task id="LOCAL-00283" summary="additions in scripts">
-      <created>1439032275712</created>
-      <option name="number" value="00283" />
-      <option name="project" value="LOCAL" />
-      <updated>1439032275713</updated>
-    </task>
-    <task id="LOCAL-00284" summary="additions in scripts">
-      <created>1439034829174</created>
-      <option name="number" value="00284" />
-      <option name="project" value="LOCAL" />
-      <updated>1439034829174</updated>
-    </task>
-    <task id="LOCAL-00285" summary="additions in scripts">
-      <created>1439034971990</created>
-      <option name="number" value="00285" />
-      <option name="project" value="LOCAL" />
-      <updated>1439034971990</updated>
-    </task>
-    <task id="LOCAL-00286" summary="additions in scripts">
-      <created>1439035192816</created>
-      <option name="number" value="00286" />
-      <option name="project" value="LOCAL" />
-      <updated>1439035192816</updated>
-    </task>
-    <task id="LOCAL-00287" summary="additions in scripts">
-      <created>1439035371860</created>
-      <option name="number" value="00287" />
-      <option name="project" value="LOCAL" />
-      <updated>1439035371860</updated>
-    </task>
-    <task id="LOCAL-00288" summary="additions in scripts">
-      <created>1439035442067</created>
-      <option name="number" value="00288" />
-      <option name="project" value="LOCAL" />
-      <updated>1439035442067</updated>
-    </task>
-    <task id="LOCAL-00289" summary="additions in scripts">
-      <created>1439037826358</created>
-      <option name="number" value="00289" />
-      <option name="project" value="LOCAL" />
-      <updated>1439037826358</updated>
-    </task>
     <task id="LOCAL-00290" summary="additions in scripts">
       <created>1439061477547</created>
       <option name="number" value="00290" />
@@ -1324,7 +1213,61 @@
       <option name="project" value="LOCAL" />
       <updated>1439853414958</updated>
     </task>
-    <option name="localTasksCounter" value="330" />
+    <task id="LOCAL-00330" summary="additions">
+      <created>1440458158195</created>
+      <option name="number" value="00330" />
+      <option name="project" value="LOCAL" />
+      <updated>1440458158436</updated>
+    </task>
+    <task id="LOCAL-00331" summary="additions">
+      <created>1440458412002</created>
+      <option name="number" value="00331" />
+      <option name="project" value="LOCAL" />
+      <updated>1440458412002</updated>
+    </task>
+    <task id="LOCAL-00332" summary="additions">
+      <created>1440458481012</created>
+      <option name="number" value="00332" />
+      <option name="project" value="LOCAL" />
+      <updated>1440458481012</updated>
+    </task>
+    <task id="LOCAL-00333" summary="additions">
+      <created>1440458827308</created>
+      <option name="number" value="00333" />
+      <option name="project" value="LOCAL" />
+      <updated>1440458827308</updated>
+    </task>
+    <task id="LOCAL-00334" summary="additions">
+      <created>1440459053691</created>
+      <option name="number" value="00334" />
+      <option name="project" value="LOCAL" />
+      <updated>1440459053691</updated>
+    </task>
+    <task id="LOCAL-00335" summary="additions">
+      <created>1440461851319</created>
+      <option name="number" value="00335" />
+      <option name="project" value="LOCAL" />
+      <updated>1440461851319</updated>
+    </task>
+    <task id="LOCAL-00336" summary="additions">
+      <created>1440461943498</created>
+      <option name="number" value="00336" />
+      <option name="project" value="LOCAL" />
+      <updated>1440461943498</updated>
+    </task>
+    <task id="LOCAL-00337" summary="additions">
+      <created>1440462553589</created>
+      <option name="number" value="00337" />
+      <option name="project" value="LOCAL" />
+      <updated>1440462553589</updated>
+    </task>
+    <task id="LOCAL-00338" summary="additions">
+      <created>1440462830253</created>
+      <option name="number" value="00338" />
+      <option name="project" value="LOCAL" />
+      <updated>1440462830253</updated>
+    </task>
+    <option name="localTasksCounter" value="339" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1348,7 +1291,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="9" y="29" width="1911" height="1018" extended-state="0" />
+    <frame x="0" y="25" width="1911" height="1018" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32968238" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1358,6 +1301,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2572062" sideWeight="0.10116526" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858709" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24960506" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -1368,7 +1312,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399361" sideWeight="0.49973643" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2489339" sideWeight="0.6706783" order="2" side_tool="false" content_ui="combo" />
@@ -1487,14 +1430,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/hmmer3/convert_top_hits_to_families.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="666">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/expansion/analyse_cafe_report.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2383" max-vertical-offset="3510">
@@ -1862,14 +1797,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/projects/deaminases/mating_type_detection/prepare.bash">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="324">
-          <caret line="12" column="85" selection-start-line="12" selection-start-column="85" selection-end-line="12" selection-end-column="85" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Samtools/Samtools.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1800">
@@ -1882,14 +1809,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="643">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/alignment/map_reads.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.785714" vertical-offset="0" max-vertical-offset="1944">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1910,10 +1829,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/filter/restore_pairs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="347" max-vertical-offset="990">
+          <caret line="32" column="47" selection-start-line="32" selection-start-column="47" selection-end-line="32" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/deaminases/mating_type_detection/prepare.bash">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="324">
+          <caret line="12" column="85" selection-start-line="12" selection-start-column="85" selection-end-line="12" selection-end-column="85" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/alignment/map_reads.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.785714" vertical-offset="1296" max-vertical-offset="1944">
+          <caret line="90" column="12" selection-start-line="90" selection-start-column="12" selection-end-line="90" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/projects/deaminases/mating_type_detection/mating_type_detection_RUN7.bash">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9142857" vertical-offset="144" max-vertical-offset="864">
-          <caret line="40" column="96" selection-start-line="40" selection-start-column="96" selection-end-line="40" selection-end-column="96" />
+        <state vertical-scroll-proportion="0.6" vertical-offset="0" max-vertical-offset="1296">
+          <caret line="21" column="54" selection-start-line="21" selection-start-column="54" selection-end-line="21" selection-end-column="54" />
           <folding />
         </state>
       </provider>

@@ -43,7 +43,7 @@ parser.add_argument("-c", "--black_flag_value", action="store", dest="black_flag
                          "nonprimary alignments will be removed")
 parser.add_argument("-e", "--white_flag_value", action="store", dest="white_flag_value", type=int,
                     help="White flag value")
-parser.add_argument("-g", "--dont_add_read_groups", action="store_false", dest="dont_add_read_groups", default=False,
+parser.add_argument("-g", "--dont_add_read_groups", action="store_true", dest="dont_add_read_groups", default=False,
                     help="Don't add read groups to final bam")
 parser.add_argument("-d", "--picard_dir", action="store", dest="picard_dir",
                     help="Path to Picard directory. Required to add read groups")
