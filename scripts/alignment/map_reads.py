@@ -102,8 +102,8 @@ if not args.dont_add_read_groups:
     #os.remove(rmdup_sorted_filtered_alignment)
     #os.rename("temp.bam", rmdup_sorted_filtered_alignment)
 
-SamtoolsV0.index(rmdup_sorted_filtered_alignment_with_groups)
-GenomeCov.get_coverage(rmdup_sorted_filtered_alignment_with_groups, args.coverage_bed)
+SamtoolsV0.index(rmdup_sorted_filtered_alignment_with_groups if not args.dont_add_read_groups else rmdup_sorted_filtered_alignment)
+GenomeCov.get_coverage(rmdup_sorted_filtered_alignment_with_groups if not args.dont_add_read_groups else rmdup_sorted_filtered_alignment, args.coverage_bed)
 if not args.retain_temp:
     os.remove(raw_alignment)
     os.remove(filtered_alignment)
