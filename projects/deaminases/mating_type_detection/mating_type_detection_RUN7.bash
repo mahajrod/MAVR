@@ -17,7 +17,7 @@ WORKDIR=${OKOCHENOVA_DIR}"/mating_type_detection/"
 BOWTIE2_INDEX=${WORKDIR}"index/mating_rel_seqs"
 
 MAVR_SCRIPTS_DIR=${SOFT_DIR}"/MAVR/scripts/"
-RESTORE_PAIRS_SCRIPT=${MAVR_SCRIPTS_DIR}"filter/restore_pair.py"
+RESTORE_PAIRS_SCRIPT=${MAVR_SCRIPTS_DIR}"filter/restore_pairs.py"
 MAP_SCRIPT=${MAVR_SCRIPTS_DIR}"alignment/map_reads.py"
 
 EXTRACTOR_BIN=${SOFT_DIR}"Cookiecutter/src/extract"
