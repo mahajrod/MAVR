@@ -13,7 +13,12 @@ source /work/pavlov/okochenova/profile
 OKOCHENOVA_DIR="/work/pavlov/okochenova/"
 SOFT_DIR=${OKOCHENOVA_DIR}"soft/"
 WORKDIR=${OKOCHENOVA_DIR}"/mating_type_detection/"
+
+BOWTIE2_INDEX=${WORKDIR}"index/mating_rel_seqs"
+
 MAVR_SCRIPTS_DIR=${SOFT_DIR}"/MAVR/scripts/"
+RESTORE_PAIRS_SCRIPT=${MAVR_SCRIPTS_DIR}"filter/restore_pair.py"
+MAP_SCRIPT=${MAVR_SCRIPTS_DIR}"alignment/map_reads.py"
 
 EXTRACTOR_BIN=${SOFT_DIR}"Cookiecutter/src/extract"
 FRAGMENTS_FILE=${WORKDIR}"kmer/mating_rel_seqs_with_rev_com_33_mer.kmer"
@@ -33,13 +38,29 @@ READS_DIR=${SAMPLES_DIR}${CURRENT_SAMPLE}"/filtered_ns/filtered/trimmed/"
 LEFT_READS_FILE=${READS_DIR}${CURRENT_SAMPLE}"_1.ok_val_1.fq"
 RIGHT_READS_FILE=${READS_DIR}${CURRENT_SAMPLE}"_2.ok_val_2.fq"
 
-echo ${LEFT_READS_FILE}
-echo ${RIGHT_READS_FILE}
+echo "Left reads file ${LEFT_READS_FILE}"
+echo "Right reads file ${RIGHT_READS_FILE}"
 mkdir -p ${CURRENT_SAMPLE}
 cd ${CURRENT_SAMPLE}
 echo ${CURRENT_SAMPLE}
+mkdir -p both_reads
+mkdir -p all_reads
 
+#${EXTRACTOR_BIN} --fragments ${FRAGMENTS_FILE} -o ./ -1 ${LEFT_READS_FILE} -2 ${RIGHT_READS_FILE}
 
+EXTRACTED_READS_FILE_LEFT=${CURRENT_SAMPLE}"_1.ok_val_1.filtered.fastq"
+EXTRACTED_READS_FILE_LEFT_SE=${CURRENT_SAMPLE}"_1.ok_val_1.se.fastq"
+EXTRACTED_READS_FILE_RIGHT=${CURRENT_SAMPLE}"_2.ok_val_2.filtered.fastq"
+EXTRACTED_READS_FILE_RIGHT_SE=${CURRENT_SAMPLE}"_2.ok_val_2.se.fastq"
 
-${EXTRACTOR_BIN} --fragments ${FRAGMENTS_FILE} -o ./ -1 ${LEFT_READS_FILE} -2 ${RIGHT_READS_FILE}
+BOTH_PREFIX=./both_reads/${CURRENT_SAMPLE}"_both"
+ALL_PREFIX=./all_reads/${CURRENT_SAMPLE}"_all"
 
+${RESTORE_PAIRS_SCRIPT} -l ${EXTRACTED_READS_FILE_LEFT} -r ${EXTRACTED_READS_FILE_RIGHT} \
+                        -o ${BOTH_PREFIX}
+${RESTORE_PAIRS_SCRIPT} -l ${EXTRACTED_READS_FILE_LEFT},${EXTRACTED_READS_FILE_LEFT_SE} \
+                        -r ${EXTRACTED_READS_FILE_RIGHT},${EXTRACTED_READS_FILE_RIGHT_SE} \
+                        -o ${ALL_PREFIX}
+
+${MAP_SCRIPT} -i ${BOWTIE2_INDEX} -t 4 -r ${BOTH_PREFIX}"_1.fastq" -l ${BOTH_PREFIX}"_2.fastq" -p ${BOTH_PREFIX} -g -y ${BOTH_PREFIX}"_coverage.bed"
+${MAP_SCRIPT} -i ${BOWTIE2_INDEX} -t 4 -r ${ALL_PREFIX}"_1.fastq" -l ${ALL_PREFIX}"_2.fastq" -p ${ALL_PREFIX} -g -y ${ALL_PREFIX}"_coverage.bed"
