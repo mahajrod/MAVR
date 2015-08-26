@@ -253,7 +253,7 @@ class SynDict(OrderedDict):
 
     def read(self, filename, header=False, separator="\t", allow_repeats_of_key=False,
              split_values=False, values_separator=",", key_index=0, value_index=1,
-             close_after_if_file_object=False):
+             close_after_if_file_object=False, expression=None):
         """
         IMPORTANT!!! Option allow_repeats_of_keys forces split_values.
         """
@@ -267,6 +267,11 @@ class SynDict(OrderedDict):
             key, value = tmp[key_index], tmp[value_index]
             if split_values or allow_repeats_of_key:
                 value = value.split(values_separator)
+            if expression:
+                if split_values or allow_repeats_of_key:
+                    value = map(expression, value)
+                else:
+                    value = expression(value)
             if key not in self:
                 self[key] = value
             else:

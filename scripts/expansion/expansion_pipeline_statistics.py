@@ -37,7 +37,7 @@ parser.add_argument("-o", "--output_file", action="store", dest="output", defaul
 parser.add_argument("-n", "--number_of_species", action="store", dest="number_of_species", type=int,
                     help="Number of species in analysis.")
 parser.add_argument("-s", "--species_set", action="store", dest="species_set",
-                    help="Comma separated set of species.")
+                    help="Comma-separated list of species.")
 parser.add_argument("-l", "--name_last", action="store_false", dest="name_first", default=True,
                     help="Position of name of species in gene_id")
 parser.add_argument("-e", "--name_separator", action="store", dest="name_separator", default="_",

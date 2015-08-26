@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 WORKDIR="/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/mating_type_detection/"
-
+MAVR_DIR="/home/mahajrod/Genetics/MAVR/"
 MATING_RELATED_SEQUENCES_DIR=${WORKDIR}"fasta/"
 KMER_DIR=${WORKDIR}"kmer/"
 INDEX_DIR=${WORKDIR}"index/"

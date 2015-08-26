@@ -4,12 +4,14 @@ import os
 import sys
 import argparse
 
+from numpy import mean, median, array
+
 from Tools.Alignment import *
 from Tools.Samtools import SamtoolsV1, SamtoolsV0
 from Tools.Picard import AddOrReplaceReadGroups
 from Tools.Bedtools import GenomeCov
 
-from Routines.Functions import check_path
+from CustomCollections.GeneralCollections import SynDict
 
 
 def make_list_from_comma_sep_string(s):
@@ -51,6 +53,12 @@ parser.add_argument("-n", "--retain_intermediate_files", action="store_true", de
                     help="Retain intermediate files")
 parser.add_argument("-y", "--coverage_bed", action="store", dest="coverage_bed", default="coverage.bed",
                     help="Bed file with coverage")
+parser.add_argument("-z", "--calculate_median_coverage", action="store_true", dest="calculate_median_coverage",
+                    default=False,
+                    help="Calculate median coverage")
+parser.add_argument("-x", "--calculate_mean_coverage", action="store_true", dest="calculate_mean_coverage",
+                    default=False,
+                    help="Calculate mean coverage")
 args = parser.parse_args()
 
 black_flag_value = args.black_flag_value if args.black_flag_value else \
@@ -109,3 +117,15 @@ if not args.retain_temp:
     os.remove(filtered_alignment)
     os.remove(sorted_filtered_alignment)
 
+if args.calculate_median_coverage or args.calculate_mean_coverage:
+    coverage_dict = SynDict()
+    coverage_dict.read(args.coverage_bed, header=False, separator="\t", allow_repeats_of_key=True,
+                       values_separator=",", key_index=0, value_index=2, expression=int)
+    if args.calculate_median_coverage:
+        with open("%s_median_coverage.tab" % args.prefix, "w") as out_fd:
+            for region in coverage_dict:
+                out_fd.write("%s\t%f\n" % (region, median(array(coverage_dict[region]))))
+    if args.calculate_mean_coverage:
+        with open("%s_mean_coverage.tab" % args.prefix, "w") as out_fd:
+            for region in coverage_dict:
+                out_fd.write("%s\t%f\n" % (region, mean(array(coverage_dict[region]))))
