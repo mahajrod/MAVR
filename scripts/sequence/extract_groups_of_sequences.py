@@ -22,11 +22,14 @@ parser.add_argument("-o", "--output_directory", action="store", dest="output", t
                     help="Directory to output groups_of sequences")
 parser.add_argument("-f", "--format", action="store", dest="format", default="fasta",
                     help="Format of input and output files. Allowed formats genbank, fasta(default)")
+parser.add_argument("-e", "--extension", action="store", dest="extension",
+                    help="Extension of output files. Default: equal to -f")
 parser.add_argument("-d", "--id_file", action="store", dest="id_file",
-                    help="File with groups of sequences to extract(.fam file).  ")
+                    help="File with groups of sequences to extract(.fam file).")
 
 args = parser.parse_args()
 
+args.extension = args.extension if args.extension else args.format
 tmp_index_file = "temp.idx"
 
 id_list = read_ids(args.id_file)
@@ -37,7 +40,8 @@ sequence_groups_id.read(args.id_file, split_values=True)
 sequence_dict = SeqIO.index_db(tmp_index_file, args.input, format=args.format)
 for group in sequence_groups_id:
     SeqIO.write(record_by_id_generator(sequence_dict, sequence_groups_id[group]),
-                "%s%s.%s" % (args.output, group, args.format), format=args.format)
+                "%s%s.%s" % (args.output, group, args.extension), format=args.format)
+
 os.remove(tmp_index_file)
 
 
