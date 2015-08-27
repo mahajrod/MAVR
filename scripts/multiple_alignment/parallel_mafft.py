@@ -7,7 +7,7 @@ from Routines.File import check_path, make_list_of_path_to_files, save_mkdir
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", "--input", action="store", dest="input",
+parser.add_argument("-i", "--input", action="store", dest="input", type=lambda x: x.split(","),
                     help="Comma-separated list of files or directory with files containing sequences to be aligned")
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
                     help="Number of threads per alignment")
