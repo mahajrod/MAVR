@@ -7,7 +7,7 @@ import argparse
 from Bio import SeqIO
 
 from CustomCollections.GeneralCollections import SynDict
-from Routines.File import read_ids, make_list_of_path_to_files, check_path
+from Routines.File import read_ids, make_list_of_path_to_files, check_path, save_mkdir
 from Routines.Sequence import record_by_id_generator
 
 def make_list_of_path_to_files_from_comma_sep_string(string):
@@ -29,6 +29,7 @@ parser.add_argument("-d", "--id_file", action="store", dest="id_file",
 
 args = parser.parse_args()
 
+save_mkdir(args.output)
 args.extension = args.extension if args.extension else args.format
 tmp_index_file = "temp.idx"
 

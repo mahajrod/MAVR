@@ -218,7 +218,7 @@ def record_by_id_generator(record_dict, id_list):
 
 def record_by_expression_generator(record_dict, expression):
     """
-    :param record_dict: dictinory containing Biopython SeqRecords as values
+    :param record_dict: dictionary containing Biopython SeqRecords as values
     :param expression: function to apply to all records in record_dict. If it returns True record will be yielded
     :return: None
     """

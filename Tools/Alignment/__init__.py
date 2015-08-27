@@ -10,6 +10,8 @@ bowtie2_path = ""
 bwa_path = ""
 novoalign_path = ""
 tmap_path = ""
+prank_path = ""
+PR
 Bowtie2 = Bowtie2(path=bowtie2_path, max_threads=max_threads)
 BWA = BWA(path=bwa_path, max_threads=max_threads)
 Novoalign = Novoalign(path=novoalign_path, max_threads=max_threads)
