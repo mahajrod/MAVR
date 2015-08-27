@@ -17,7 +17,7 @@ parser.add_argument("-o", "--output_directory", action="store", dest="output",
                     help="Output directory")
 parser.add_argument("-m", "--mode", action="store", dest="mode", default="globalpair",
                     help="Alignment mode. Default: 'globalpair'. Allowed: globalpair, localpair, genafpair")
-parser.add_argument("-q", "--quiet", action="store_true", dest="queit",
+parser.add_argument("-q", "--quiet", action="store_true", dest="quiet",
                     help="Quiet output")
 parser.add_argument("-x", "--maxiterate", action="store", dest="maxiterate", type=float,
                     help="Maximum number of iterations")
