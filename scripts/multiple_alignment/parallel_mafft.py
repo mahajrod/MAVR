@@ -3,7 +3,7 @@ __author__ = 'Sergei F. Kliver'
 import argparse
 
 from Tools.MultipleAlignment import MAFFT
-from Routines.File import check_path, make_list_of_path_to_files
+from Routines.File import check_path, make_list_of_path_to_files, save_mkdir
 
 parser = argparse.ArgumentParser()
 
@@ -26,9 +26,9 @@ parser.add_argument("-f", "--offset", action="store", dest="offset", type=float,
 parser.add_argument("-g", "--gap_open_penalty", action="store", dest="gap_open_penalty", type=float,
                     help="Gap open penalty")
 
-
 args = parser.parse_args()
 
+save_mkdir(args.output)
 
 MAFFT.threads = args.threads
 MAFFT.parallel_align(make_list_of_path_to_files(args.input), args.output, output_suffix="alignment",
