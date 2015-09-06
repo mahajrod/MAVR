@@ -214,7 +214,8 @@ class HMMER3(Tool):
 
     def parallel_hmmscan(self, hmmfile, seqfile, outfile, num_of_seqs_per_scan=None, split_dir="splited_fasta",
                          splited_output_dir="splited_output_dir",
-                         tblout=None, domtblout=None, pfamtblout=None,
+                         tblout_outfile=None, domtblout_outfile=None, pfamtblout_outfile=None,
+                         splited_tblout_dir=None, splited_domtblout_dir=None, splited_pfamtblout_dir=None,
                          dont_output_alignments=False, model_evalue_threshold=None, model_score_threshold=None,
                          domain_evalue_threshold=None, domain_score_threshold=None,
                          model_evalue_significant_threshold=None, model_score_significant_threshold=None,
@@ -233,11 +234,22 @@ class HMMER3(Tool):
         save_mkdir(splited_out_dir)
         number_of_files = num_of_seqs_per_scan if num_of_seqs_per_scan else 5 * threads if threads else 5 * self.threads
         self.split_fasta(seqfile, splited_dir, num_of_files=number_of_files)
-        list_of_files = sorted(os.listdir(splited_dir))
-        list_of_files = [("%s%s" % (splited_dir, filename), "%s%s.hits" % (splited_out_dir, split_filename(filename)[1])) for filename in list_of_files]
+        input_list_of_files = sorted(os.listdir(splited_dir))
+        list_of_files = []
 
-        common_options = self.__parse_hmmsxxx_common_options(tblout=tblout, domtblout=domtblout,
-                                                             pfamtblout=pfamtblout,
+        for filename in input_list_of_files:
+            filename_prefix = split_filename(filename)[1]
+
+            input_file = "%s%s" % (splited_dir, filename)
+            output_file = "%s%s.hits" % (splited_out_dir, filename_prefix)
+            tblout_file = "%s%s.hits" % (splited_tblout_dir, filename_prefix) if splited_tblout_dir else None
+            domtblout_file = "%s%s.hits" % (splited_domtblout_dir, filename_prefix) if splited_domtblout_dir else None
+            pfamtblout_file = "%s%s.hits" % (splited_pfamtblout_dir, filename_prefix) if splited_pfamtblout_dir else None
+
+            list_of_files.append((input_file, output_file, tblout_file, domtblout_file, pfamtblout_file))
+
+        common_options = self.__parse_hmmsxxx_common_options(tblout=None, domtblout=None,
+                                                             pfamtblout=None,
                                                              dont_output_alignments=dont_output_alignments,
                                                              model_evalue_threshold=model_evalue_threshold,
                                                              model_score_threshold=model_score_threshold,
@@ -259,18 +271,37 @@ class HMMER3(Tool):
         common_options += " --qformat %s" if input_format else ""
         options_list = []
         out_files = []
-        for in_file, out_filename in list_of_files:
+        tblout_files = []
+        domtblout_files = []
+        pfamtblout_files = []
+
+        for in_file, out_filename, tblout_file, domtblout_file, pfamtblout_file in list_of_files:
             options = common_options
             options += " -o %s" % out_filename
             options += " %s" % hmmfile
             options += " %s" % in_file
 
+            options += " --tblout %s" % tblout_file if tblout_file else ""
+            options += " --domtblout %s" % domtblout_file if domtblout_file else ""
+            options += " --pfamtblout %s" % pfamtblout_file if pfamtblout_file else ""
+
             options_list.append(options)
 
             out_files.append(out_filename)
+            tblout_files.append(tblout_file)
+            domtblout_files.append(domtblout_file)
+            pfamtblout_files.append(pfamtblout_file)
+
         self.parallel_execute(options_list, cmd="hmmscan", threads=threads)
+
         if combine_output_to_single_file:
             CGAS.cat(out_files, output=outfile)
+        if tblout_outfile:
+            CGAS.cat(tblout_files, output=tblout_outfile)
+        if domtblout_outfile:
+            CGAS.cat(domtblout_files, output=domtblout_outfile)
+        if pfamtblout_outfile:
+            CGAS.cat(pfamtblout_files, output=pfamtblout_outfile)
 
     def hmmsearch(self, hmmfile, seqfile, outfile, multialignout=None, tblout=None, domtblout=None, pfamtblout=None,
                   dont_output_alignments=False, model_evalue_threshold=None, model_score_threshold=None,
