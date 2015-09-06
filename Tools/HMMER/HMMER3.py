@@ -285,13 +285,15 @@ class HMMER3(Tool):
 
         for in_file, out_filename, tblout_file, domtblout_file, pfamtblout_file in list_of_files:
             options = common_options
-            options += " -o %s" % out_filename
-            options += " %s" % hmmfile
-            options += " %s" % in_file
-
             options += " --tblout %s" % tblout_file if tblout_file else ""
             options += " --domtblout %s" % domtblout_file if domtblout_file else ""
             options += " --pfamtblout %s" % pfamtblout_file if pfamtblout_file else ""
+            options += " -o %s" % out_filename
+
+            options += " %s" % hmmfile
+            options += " %s" % in_file
+
+
 
             options_list.append(options)
 
