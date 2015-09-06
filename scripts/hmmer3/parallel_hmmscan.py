@@ -22,8 +22,7 @@ parser.add_argument("-t", "--threads", action="store", dest="threads", type=int,
 parser.add_argument("-d", "--hmmscan_output_dir", action="store", dest="hmmscan_output_dir",
                     default="hmmscan_output_dir/", type=check_path,
                     help="Directory to write intermediate(splited) output")
-parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
-                    help="Number of threads")
+
 
 parser.add_argument("--tblout_dir", action="store", dest="tblout_dir",
                     default="tblout_dir", type=check_path,
