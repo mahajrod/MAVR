@@ -232,6 +232,14 @@ class HMMER3(Tool):
         splited_out_dir = check_path(splited_output_dir)
         save_mkdir(splited_dir)
         save_mkdir(splited_out_dir)
+
+        if splited_tblout_dir:
+            save_mkdir(splited_tblout_dir)
+        if splited_domtblout_dir:
+            save_mkdir(splited_domtblout_dir)
+        if splited_pfamtblout_dir:
+            save_mkdir(splited_pfamtblout_dir)
+
         number_of_files = num_of_seqs_per_scan if num_of_seqs_per_scan else 5 * threads if threads else 5 * self.threads
         self.split_fasta(seqfile, splited_dir, num_of_files=number_of_files)
         input_list_of_files = sorted(os.listdir(splited_dir))
