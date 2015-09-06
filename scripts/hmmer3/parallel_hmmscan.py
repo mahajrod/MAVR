@@ -23,7 +23,6 @@ parser.add_argument("-d", "--hmmscan_output_dir", action="store", dest="hmmscan_
                     default="hmmscan_output_dir/", type=check_path,
                     help="Directory to write intermediate(splited) output")
 
-
 parser.add_argument("--tblout_dir", action="store", dest="tblout_dir",
                     default="tblout_dir", type=check_path,
                     help="Directory to write intermediate(splited) parseable table of per-sequence hits")
