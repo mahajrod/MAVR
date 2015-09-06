@@ -40,11 +40,15 @@ if (args.number_of_bins is not None) and (args.width_of_bins is not None):
     raise AttributeError("Options -w/--width_of_bins and -b/--number_of_bins mustn't be set simultaneously")
 sequence_dict = SeqIO.index_db("temp.idx", args.input_file, args.format)
 length_dict = SynDict()
-length_dict.write("%s.len" % args.output_prefix)
+
 
 for record in sequence_dict:
     length_dict[record] = len(sequence_dict[record].seq)
+
+length_dict.write("%s.len" % args.output_prefix)
+
 lengths = length_dict.values()
+
 
 max_len = max(lengths)
 
