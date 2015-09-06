@@ -12,6 +12,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
+from CustomCollections.GeneralCollections import SynDict
+
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_file", action="store", dest="input_file",
@@ -28,13 +30,22 @@ parser.add_argument("-n", "--min_length", action="store", dest="min_length", typ
                     help="Minimum length of sequence to count. Default - 1")
 parser.add_argument("-x", "--max_length", action="store", dest="max_length", type=int,
                     help="Maximum length of sequence to count. Default - length of longest sequence")
+parser.add_argument("-e", "--extensions", action="store", dest="extensions", type=lambda x: x.split(","),
+                    default=["png", "svg"],
+                    help="Comma-separated list of extensions for histogram files")
+
 args = parser.parse_args()
 
 if (args.number_of_bins is not None) and (args.width_of_bins is not None):
     raise AttributeError("Options -w/--width_of_bins and -b/--number_of_bins mustn't be set simultaneously")
 sequence_dict = SeqIO.index_db("temp.idx", args.input_file, args.format)
+length_dict = SynDict()
+length_dict.write("%s.len" % args.output_prefix)
 
-lengths = [len(sequence_dict[record].seq) for record in sequence_dict]
+for record in sequence_dict:
+    length_dict[record] = len(sequence_dict[record].seq)
+lengths = length_dict.values()
+
 max_len = max(lengths)
 
 if args.max_length is None:
@@ -65,7 +76,7 @@ plt.xlabel("Length")
 plt.ylabel("N")
 plt.title("Distribution of sequence lengths")
 
-for ext in ".png", ".svg", ".eps":
-    plt.savefig(args.output_prefix + ext)
+for ext in args.extensions:
+    plt.savefig("%s.%s" % (args.output_prefix, ext))
 
 os.remove("temp.idx")
