@@ -39,18 +39,21 @@ parser.add_argument("--domtblout", action="store", dest="domtblout",
                     help="File to save parseable table of per-domain hits")
 parser.add_argument("--pfamtblout", action="store", dest="pfamtblout",
                     help="File to save table of hits and domains to file, in Pfam format ")
-
+parser.add_argument("--hmmscan_path", action="store", dest="path", default="",
+                    help="Path to directory with hmmer3.1 binaries")
 args = parser.parse_args()
 
 
 HMMER3.threads = 1
+HMMER3.path = args.path
 HMMER3.parallel_hmmscan(args.input, args.input_seq, args.output, num_of_seqs_per_scan=None, split_dir="splited_fasta",
                         splited_output_dir=args.hmmscan_output_dir, threads=args.threads,
                         combine_output_to_single_file=args.combine_output, dont_output_alignments=args.no_alignment,
                         tblout_outfile=args.tblout, domtblout_outfile=args.domtblout,
                         pfamtblout_outfile=args.pfamtblout,
                         splited_tblout_dir=args.tblout_dir, splited_domtblout_dir=args.domtblout_dir,
-                        splited_pfamtblout_dir=args.pfamtblout_dir)
+                        splited_pfamtblout_dir=args.pfamtblout_dir
+                        )
 
 
 """

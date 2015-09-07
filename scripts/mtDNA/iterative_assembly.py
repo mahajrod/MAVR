@@ -7,7 +7,7 @@ import argparse
 from Bio import SeqIO
 
 from Routines.Sequence import rev_com_generator
-from Routines.File import check_path
+from Routines.File import check_path, split_filename
 from Tools.Kmers import Jellyfish
 from Tools.Filter import Cookiecutter
 from Tools.Assemblers import MaSuRCA, Quast
@@ -37,10 +37,11 @@ parser.add_argument("-s", "--hash_size", action="store", dest="hash_size", type=
                     "S=Sum(L)")
 parser.add_argument("-m", "--kmer_length", action="store", dest="kmer_length", type=int, default=23,
                     help="Length of kmers")
+parser.add_argument("--mean_insert_size", action="store", dest="mean_insert_size", type=int, required=True,
+                    help="Mean insert size")
+parser.add_argument("--std_insert_size", action="store", dest="std_insert_size", type=int, required=True,
+                    help="Standard deviation of insertsize")
 
-
-parser.add_argument("-i", "--input_file", action="store", dest="input", type=lambda s: s.split(","),
-                    help="Comma-separated list of fasta or fastq files.")
 parser.add_argument("-a", "--path_to_mavr", action="store", dest="path_to_mavr", default="./",
                     help="path_to_mavr")
 
@@ -61,8 +62,7 @@ parser.add_argument("-r", "--add_reverse_complement", action="store_true", dest=
                     help="Add reverse-complement sequences before counting kmers. "
                          "Works only for fasta sequences. "
                          "Not compatible with -b/--count_both_strands option")
-parser.add_argument("-d", "--draw_distribution", action="store_true", dest="draw_distribution",
-                    help="Draw distribution of kmers")
+
 
 parser = argparse.ArgumentParser()
 
@@ -77,6 +77,7 @@ iteration_reference_file = args.initial_sequences
 working_dir = os.getcwd()
 abs_path_left_source_reads = os.path.abspath(args.left_source_reads)
 abs_path_right_source_reads = os.path.abspath(args.right_source_reads)
+
 """
 for filename in args.source_reads:
     ab
@@ -88,6 +89,8 @@ for filename in args.source_reads:
 
 for iteration_index in range(1, args.number_of_iterations):
 
+    os.chdir(working_dir)
+
     iteration = "iteration_%i" % iteration_index
     iteration_dir = "%s/%s" % (working_dir, iteration)
     iteration_ref = "%s/%s_reference.fasta" % (iteration_dir, iteration)
@@ -96,12 +99,17 @@ for iteration_index in range(1, args.number_of_iterations):
     iteration_ref_with_rev_com = "%s/%s_reference_with_rev_com.fasta" % (iteration_dir, iteration)
     kmer_file = "%s_%i_mer.kmer" % (base_prefix, args.kmer_length)
     masurca_config_file = "masurca_%s.config" % iteration
-    # left_reads_prefix = os.path.
-    # right_reads_prefix =
+    left_reads_prefix = split_filename(abs_path_left_source_reads)[1]
+    right_reads_prefix = split_filename(abs_path_right_source_reads)[1]
+
+    left_reads_se = "%s.se.fastq" % left_reads_prefix
+    right_reads_se = "%s.se.fastq" % right_reads_prefix
+    left_reads_filtered = "%s.filtered.fastq" % left_reads_prefix
+    right_reads_filtered = "%s.filtered.fastq" % right_reads_prefix
 
     try:
         os.mkdir(iteration_dir)
-    except:
+    except OSError:
         pass
 
     shutil.copyfile(iteration_reference_file, iteration_ref)
@@ -114,11 +122,20 @@ for iteration_index in range(1, args.number_of_iterations):
                             hash_size=args.hash_size)
     Cookiecutter.extract(kmer_file, iteration_dir, abs_path_left_source_reads,
                          right_reads=abs_path_right_source_reads)
-    os.system("%scripts/filter/restore_pairs.py -l %s -r %s -o %s" % (args.path_to_mavr, , , ))
+    os.system("%scripts/filter/restore_pairs.py -l %s -r %s -o %s" % (args.path_to_mavr,
+                                                                      ",".join([left_reads_filtered, left_reads_se]),
+                                                                      ",".join([right_reads_filtered, right_reads_se]),
+                                                                      "iteration_%i_reads" % iteration_index))
+    library = ("PE", args.mean_insert_size,
+               args.std_insert_size,
+               ["iteration_%i_reads_1.fastq" % iteration_index, "iteration_%i_reads_2.fastq" % iteration_index])
 
-    MaSuRCA.generate_config(libraries_list, masurca_config_file, jellyfish_hash_size=args.hash_size, kmer_size="auto",
+    MaSuRCA.generate_config([library], masurca_config_file, jellyfish_hash_size=args.hash_size, kmer_size="auto",
                             illumina_only_assembly=True, limit_jump_coverage=None, source="eukaryota",
                             trim_long_homopolymers=False, cgwErrorRate=0.15, ovlMemory="4GB",
                             minimum_count_kmer_in_error_correction=1)
+    os.system(masurca_config_file)
+    shutil.copyfile("../CA/10-gapclose/genome.scf.fasta", "iteration_%i_assembly.fasta" % iteration_index)
+
 
 

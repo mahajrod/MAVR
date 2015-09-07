@@ -226,7 +226,8 @@ class HMMER3(Tool):
                          turn_off_all_heruristics=False, turn_off_bias_filter=False,
                          MSV_threshold=None, Vit_threshold=None, Fwd_threshold=None,
                          turn_off_biased_composition_score_corrections=None,
-                         input_format=None, threads=None, combine_output_to_single_file=True):
+                         input_format=None, threads=None, combine_output_to_single_file=True
+                         ):
 
         splited_dir = check_path(split_dir)
         splited_out_dir = check_path(splited_output_dir)
@@ -285,6 +286,7 @@ class HMMER3(Tool):
 
         for in_file, out_filename, tblout_file, domtblout_file, pfamtblout_file in list_of_files:
             options = common_options
+
             options += " --tblout %s" % tblout_file if tblout_file else ""
             options += " --domtblout %s" % domtblout_file if domtblout_file else ""
             options += " --pfamtblout %s" % pfamtblout_file if pfamtblout_file else ""
@@ -293,10 +295,7 @@ class HMMER3(Tool):
             options += " %s" % hmmfile
             options += " %s" % in_file
 
-
-
             options_list.append(options)
-
             out_files.append(out_filename)
             tblout_files.append(tblout_file)
             domtblout_files.append(domtblout_file)
