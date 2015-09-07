@@ -39,7 +39,7 @@ parser.add_argument("--domtblout", action="store", dest="domtblout",
                     help="File to save parseable table of per-domain hits")
 parser.add_argument("--pfamtblout", action="store", dest="pfamtblout",
                     help="File to save table of hits and domains to file, in Pfam format ")
-parser.add_argument("--hmmscan_path", action="store", dest="path", default="",
+parser.add_argument("--hmmer_dir", action="store", dest="path", default="",
                     help="Path to directory with hmmer3.1 binaries")
 args = parser.parse_args()
 
