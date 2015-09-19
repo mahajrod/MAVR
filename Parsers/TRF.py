@@ -65,7 +65,7 @@ class CollectionTRF():
                     while tmp == "\n":
                         tmp = next(fd)
                     print tmp
-                    while tmp != "\n" and tmp != "":
+                    while (tmp != "\n") and (tmp != "") and (tmp[0:8] != "Sequence"):
                         self._add_record(tmp, chrom)
                         tmp = next(fd)
         else:
