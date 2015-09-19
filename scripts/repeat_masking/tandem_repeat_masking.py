@@ -32,8 +32,6 @@ parser.add_argument("-c", "--min_score", action="store", dest="min_score", defau
                     help="Minimum alignment score to report. Default: 50")
 parser.add_argument("-e", "--max_period_size", action="store", dest="max_period_size", default=500, type=int,
                     help="Maximum period size to report. Default: 500")
-parser.add_argument("-l", "--indel_penalty", action="store", dest="indel_penalty", default=7, type=int,
-                    help="Indel_penalty. Default: 7")
 parser.add_argument("-f", "--report_flanking_sequence", action="store_true", dest="report_flanking_sequence",
                     help="Report flanking sequence. Default: False")
 args = parser.parse_args()
