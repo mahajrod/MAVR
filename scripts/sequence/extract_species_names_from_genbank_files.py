@@ -26,6 +26,7 @@ tmp_index_file = "temp.idx"
 sequence_dict = SeqIO.index_db(tmp_index_file, args.input, format="genbank")
 
 for record_id in sequence_dict:
+    print sequence_dict[record_id].annotations
     out_fd.write("%s\t%s\t\n" % (record_id, sequence_dict[record_id].annotations["taxonomy"][-1]))
 
 os.remove(tmp_index_file)
