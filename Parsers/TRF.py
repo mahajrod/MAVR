@@ -52,12 +52,12 @@ class CollectionTRF():
                     #line = fd.readline()
                     while tmp[0:8] != "Sequence":
                         tmp = next(fd)
-                        print tmp
+                        #print tmp
                     chrom = tmp.strip().split()[1]
                     while tmp[0:10] != "Parameters":
                         tmp = next(fd)
-                        print tmp
-                    print tmp
+                        #print tmp
+                    #print tmp
                     self.parameters = list(map(lambda x: int(x), tmp.strip().split()[1:]))
                     tmp = next(fd)
                     while tmp == "\n":
