@@ -2,7 +2,7 @@
 
 
 class RecordTRF():
-    def __init__(self, chrom, start, end, period, number_of_copies, consensus_pattern_size,
+    def __init__(self, start, end, period, number_of_copies, consensus_pattern_size,
                  percent_of_matches, percent_of_indels, alignment_score, nucleotide_percent_list, entropy,
                  pattern=None, tandem_repeat=None):
         # TRF repeat string description:
@@ -15,7 +15,6 @@ class RecordTRF():
         # Alignment score.
         # Percent composition for each of the four nucleotides.
         # Entropy measure based on percent composition.
-        self.chrom = chrom                                          # str
         self.start = start                                          # int
         self.end = end                                              # int
         self.period = period                                        # int
@@ -29,15 +28,36 @@ class RecordTRF():
         self.pattern = pattern                                      # str or None
         self.tandem_repeat = tandem_repeat                          # str or None
 
-    def gff_str(self):
-        # seqid	source	type	start	end	score	strand	phase	attributes
+    def attributes_string(self):
         attributes_string = "Period=%i;N_copies=%.1f;Pattern=%s;Cons_pat_size=%i;Pers_matches=%i;Pers_indels=%i;Align_score=%i" \
                             % (self.period, self.number_of_copies, self.pattern, self.consensus_pattern_size,
                                self.percent_of_matches, self.percent_of_indels, self.alignment_score)
         nuc_composition = ",".join(map(lambda x: str(x), self.nucleotide_percent_list))
 
         attributes_string += ";Nuc_composition=%s;Entropy=%.2f" % (nuc_composition, self.entropy)
-        return "%s\tTRF\trepeat\t%i\t%i\t.\t.\t.\t%s" % (self.chrom, self.start, self.end, attributes_string)
+
+        return attributes_string
+
+    def gff_str(self):
+        # seqid	source	type	start	end	score	strand	phase	attributes
+        return "TRF\trepeat\t%i\t%i\t.\t.\t.\t%s" % (self.start, self.end, self.attributes_string())
+
+    def table_str_short(self):
+
+        return "%i\t%i\t%i\t%.1f\t%s\t%s" % (self.start, self.end, self.period, self.number_of_copies,
+                                             self.pattern, self.tandem_repeat)
+
+    def table_str_long(self):
+
+        return "%i\t%i\t%i\t%.1f\t%i\t%i\t%i\t%i\t%s\t%.2f\t%s\t%s" % (self.start, self.end, self.period,
+                                                                       self.number_of_copies,
+                                                                       self.consensus_pattern_size,
+                                                                       self.percent_of_matches,
+                                                                       self.percent_of_indels,
+                                                                       self.alignment_score,
+                                                                       ",".join(map(lambda x: str(x), self.nucleotide_percent_list)),
+                                                                       self.entropy,
+                                                                       self.pattern, self.tandem_repeat)
 
 
 class CollectionTRF():
@@ -45,7 +65,7 @@ class CollectionTRF():
     def __init__(self, parameters=None, record_list=None, trf_file=None, from_file=True):
         self.linkage_dict = None
         if from_file:
-            self.records = []
+            self.records = {}
             with open(trf_file, "r") as fd:
                 chrom = None
                 for line in fd:
@@ -94,17 +114,44 @@ class CollectionTRF():
         consensus_pattern_size, percent_of_matches, percent_of_indels, alignment_score = \
             list(map(lambda x: int(x), line_list[4:8]))
         nucleotide_percent_list = list(map(lambda x: int(x), line_list[8:-3]))
-        record = RecordTRF(chrom, start, end, period, float(line_list[3]), consensus_pattern_size,
+        record = RecordTRF(start, end, period, float(line_list[3]), consensus_pattern_size,
                            percent_of_matches, percent_of_indels, alignment_score,
                            nucleotide_percent_list,
                            float(line_list[-3]),
                            pattern=line_list[-2], tandem_repeat=line_list[-1])
-        self.records.append(record)
+        if chrom not in self.records:
+            self.records[chrom] = []
+        self.records[chrom].append(record)
 
-    def write_gff(self, out_file):
+    def write_gff(self, out_file, write_chr_string=False):
         with open(out_file, "w") as out_fd:
-            for record in self.records:
-                out_fd.write(record.gff_str() + "\n")
+            for chrom in self.records:
+                if write_chr_string:
+                    out_fd.write("#%s\n" % chrom)
+                for record in self.records[chrom]:
+                    out_fd.write("%s\t%s\n" % (chrom, record.gff_str()))
+
+    def write(self, out_file):
+        with open(out_file, "w") as out_fd:
+            for chrom in self.records:
+                out_fd.write("#chrom\n#\tstart\tend\tperiod\tnumber_of_copies\tpattern\ttandem_repeat\n")
+                out_fd.write(">%s\n" % chrom)
+                for record in self.records[chrom]:
+                    out_fd.write("\t%s\n" % record.table_str_short())
+
+    def write_short_table(self, out_file):
+        with open(out_file, "w") as out_fd:
+            out_fd.write("#chrom\tstart\tend\tperiod\tnumber_of_copies\tpattern\ttandem_repeat\n")
+            for chrom in self.records:
+                for record in self.records[chrom]:
+                    out_fd.write("%s\t%s\n" % (chrom, record.table_str_short()))
+
+    def write_wide_table(self, out_file):
+        with open(out_file, "w") as out_fd:
+            out_fd.write("#chrom\tstart\tend\tperiod\tnumber_of_copies\tconsensus_pattern_size\tpercent_of_matches\tpercent_of_indels\talignment_score\tnucleotide_composition\tentropy\tpattern\ttandem_repeat")
+            for chrom in self.records:
+                for record in self.records[chrom]:
+                    out_fd.write("%s\t%s\n" % (chrom, record.table_str_long()))
 
 
 if __name__ == "__main__":

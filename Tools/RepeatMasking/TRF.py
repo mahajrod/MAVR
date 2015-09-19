@@ -31,10 +31,14 @@ class TRF(Tool):
         self.execute(options)
 
     @staticmethod
-    def convert_trf_report_to_gff(trf_report, output_gff):
+    def convert_trf_report(trf_report, output_prefix):
 
         trf_collection = CollectionTRF(trf_file=trf_report, from_file=True)
-        trf_collection.write_gff(output_gff)
+
+        trf_collection.write("%s.rep" % output_prefix)
+        trf_collection.write_gff("%s.gff" % output_prefix)
+        trf_collection.write_short_table("%s.short.tab" % output_prefix)
+        trf_collection.write_wide_table("%s.wide.tab" % output_prefix)
 
 if __name__ == "__main__":
     pass

@@ -16,8 +16,8 @@ parser.add_argument("-i", "--input_file", action="store", dest="input_file", req
 parser.add_argument("-p", "--path_to_trf", action="store", dest="path_to_trf", default=["", "trf", None],
                     type=split_filename,
                     help="Path to TRF")
-parser.add_argument("-o", "--output_file", action="store", dest="output_file", default="trf_report.gff",
-                    help="Output gff file")
+parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", default="trf_report",
+                    help="Prefix of output files")
 parser.add_argument("-m", "--matching_weight", action="store", dest="matching_weight", default=2, type=int,
                     help="Matching weight. Default: 2")
 parser.add_argument("-s", "--mismatching_penalty", action="store", dest="mismatching_penalty", default=7, type=int,
@@ -52,7 +52,7 @@ trf_report = "%s.%i.%i.%i.%i.%i.%i.%i.dat" % (split_filename(args.input_file)[1]
                                               args.matching_weight, args.mismatching_penalty,
                                               args.indel_penalty, args.matching_probability, args.indel_probability,
                                               args.min_score, args.max_period_size)
-TRF.convert_trf_report_to_gff(trf_report, args.output_file)
+TRF.convert_trf_report_to_gff(trf_report, args.output_prefix)
 
 
 
