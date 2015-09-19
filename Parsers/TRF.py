@@ -47,11 +47,13 @@ class CollectionTRF():
         if from_file:
             self.records = []
             with open(trf_file, "r") as fd:
-                #chrom = None
+                chrom = None
                 for line in fd:
                     #tmp = line.strip()
                     if line[0:8] == "Sequence":
                         chrom = line.strip().split()[1]
+                    elif not chrom:
+                        continue
                     elif line[0:10] == "Parameters":
                         self.parameters = list(map(lambda x: int(x), line.strip().split()[1:]))
                     elif line != "\n":
