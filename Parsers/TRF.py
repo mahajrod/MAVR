@@ -47,8 +47,10 @@ class CollectionTRF():
         if from_file:
             self.records = []
             with open(trf_file, "r") as fd:
-                for line in fd:
-                    tmp = line
+                tmp = next(fd)
+                while tmp[0:8] != "Sequence":
+                        tmp = next(fd)
+                while True:
                     #line = fd.readline()
                     while tmp[0:8] != "Sequence":
                         tmp = next(fd)
