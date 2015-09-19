@@ -36,12 +36,14 @@ sequence_dict = SeqIO.index_db("temp.idx", args.input, format=args.format)
 
 left_fragments_dict = OrderedDict()
 right_fragments_dict = OrderedDict()
-
+overlap_counter = 0
+number_of_records = len(sequence_dict)
 for record_id in sequence_dict:
     record_size = len(sequence_dict[record_id])
 
     if (record_size > (args.left_seq_size + args.right_seq_size)) and (not args.allow_overlaps):
         print("%s - terminal fragments overlap" % record_id)
+        overlap_counter += 1
         continue
 
     left_id = "%s_1-%i" % (record_id, args.left_seq_size)
@@ -58,6 +60,6 @@ SeqIO.write(record_by_expression_generator(left_fragments_dict, lambda x: True),
 SeqIO.write(record_by_expression_generator(right_fragments_dict, lambda x: True),
             "%s_right_fragments.fasta" % args.output_prefix, format="fasta")
 
-
+print("Totally %i/%i records with overlaps" % (overlap_counter, number_of_records))
 os.remove("temp.idx")
 
