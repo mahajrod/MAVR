@@ -31,8 +31,8 @@ class RecordTRF():
 
     def gff_str(self):
         # seqid	source	type	start	end	score	strand	phase	attributes
-        attributes_string = "Period=%i;N_copies=%.1f;Cons_pat_size=%i;Pers_matches=%i;Pers_indels=%i;Align_score=%i" \
-                            % (self.period, self.number_of_copies, self.consensus_pattern_size,
+        attributes_string = "Period=%i;N_copies=%.1f;Pattern=%s;Cons_pat_size=%i;Pers_matches=%i;Pers_indels=%i;Align_score=%i" \
+                            % (self.period, self.number_of_copies, self.pattern, self.consensus_pattern_size,
                                self.percent_of_matches, self.percent_of_indels, self.alignment_score)
         nuc_composition = ",".join(map(lambda x: str(x), self.nucleotide_percent_list))
 
