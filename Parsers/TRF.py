@@ -57,7 +57,7 @@ class CollectionTRF():
                     while tmp[0:10] != "Parameters":
                         tmp = next(fd)
                         #print tmp
-                    #print tmp
+                    print tmp
                     self.parameters = list(map(lambda x: int(x), tmp.strip().split()[1:]))
                     tmp = next(fd)
                     while tmp == "\n":
