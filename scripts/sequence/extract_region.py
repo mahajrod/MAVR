@@ -21,6 +21,7 @@ def get_regions_from_string(s):
         elif len(regions_list[i]) == 2:
                 regions_list[i].append(None)
         regions_list[i][1] = map(int, regions_list[i][1].split("-"))
+        regions_list[i].append(None)
     return regions_list
 
 
@@ -30,13 +31,15 @@ def get_regions_from_file(filename):
     with open(filename, "r") as region_fd:
         for line in region_fd:
             tmp = line.strip().split("\t")
-            regions_list.append((tmp[0], (int(tmp[1]), int(tmp[2])), True if tmp[3] == "-" else None))
+            regions_list.append((tmp[0], (int(tmp[1]), int(tmp[2])),
+                                 True if tmp[3] == "-" else None,
+                                 tmp[4] if len(tmp) >= 5 else None))
 
     return regions_list
 
 
 def region_generator(sequence_dict, region_list):
-    for record_id, (start, stop), reverse in region_list:
+    for record_id, (start, stop), reverse, region_name in region_list:
         if record_id not in sequence_dict:
             if args.output != "stdout":
                 print("Record %s is absent" % record_id)
@@ -46,6 +49,8 @@ def region_generator(sequence_dict, region_list):
         if reverse:
             seq = seq.reverse_complement()
             seq_id += "_r"
+        if region_name:
+            seq_id += "_%s" % region_name
 
         yield SeqRecord(seq=seq, id=seq_id)
 
