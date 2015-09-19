@@ -47,6 +47,16 @@ class CollectionTRF():
         if from_file:
             self.records = []
             with open(trf_file, "r") as fd:
+                #chrom = None
+                for line in fd:
+                    #tmp = line.strip()
+                    if line[0:8] == "Sequence":
+                        chrom = line.strip().split()[1]
+                    elif line[0:10] == "Parameters":
+                        self.parameters = list(map(lambda x: int(x), line.strip().split()[1:]))
+                    elif line != "\n":
+                        self._add_record(line, chrom)
+                """
                 tmp = next(fd)
                 while tmp[0:8] != "Sequence":
                         tmp = next(fd)
@@ -67,7 +77,11 @@ class CollectionTRF():
                     print tmp
                     while (tmp != "\n") and (tmp != "") and (tmp[0:8] != "Sequence"):
                         self._add_record(tmp, chrom)
-                        tmp = next(fd)
+                        try:
+                         tmp = next(fd)
+                        except StopIteration:
+                            break
+                """
         else:
             self.records = record_list
             self.parameters = parameters
