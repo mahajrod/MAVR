@@ -22,6 +22,8 @@ parser.add_argument("-m", "--matching_weight", action="store", dest="matching_we
                     help="Matching weight. Default: 2")
 parser.add_argument("-s", "--mismatching_penalty", action="store", dest="mismatching_penalty", default=7, type=int,
                     help="Mismatching penalty. Default: 7")
+parser.add_argument("-l", "--indel_penalty", action="store", dest="indel_penalty", default=7, type=int,
+                    help="Indel_penalty. Default: 7")
 parser.add_argument("-a", "--matching_probability", action="store", dest="matching_probability", default=80, type=int,
                     help="Matching probability. Default: 80")
 parser.add_argument("-d", "--indel_probability", action="store", dest="indel_probability", default=10, type=int,
@@ -35,8 +37,6 @@ parser.add_argument("-l", "--indel_penalty", action="store", dest="indel_penalty
 parser.add_argument("-f", "--report_flanking_sequence", action="store_true", dest="report_flanking_sequence",
                     help="Report flanking sequence. Default: False")
 args = parser.parse_args()
-
-TRF = TRF()
 
 TRF.path = args.path_to_trf[0]
 TRF.cmd = args.path_to_trf[1] + (args.path_to_trf[2] if args.path_to_trf[2] else "")
