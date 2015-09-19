@@ -52,7 +52,7 @@ trf_report = "%s.%i.%i.%i.%i.%i.%i.%i.dat" % (split_filename(args.input_file)[1]
                                               args.matching_weight, args.mismatching_penalty,
                                               args.indel_penalty, args.matching_probability, args.indel_probability,
                                               args.min_score, args.max_period_size)
-TRF.convert_trf_report_to_gff(trf_report, args.output_prefix)
+TRF.convert_trf_report(trf_report, args.output_prefix)
 
 
 
