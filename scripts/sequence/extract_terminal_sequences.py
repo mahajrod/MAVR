@@ -41,7 +41,7 @@ number_of_records = len(sequence_dict)
 for record_id in sequence_dict:
     record_size = len(sequence_dict[record_id].seq)
 
-    if (record_size > (args.left_seq_size + args.right_seq_size)) and (not args.allow_overlaps):
+    if (record_size < (args.left_seq_size + args.right_seq_size)) and (not args.allow_overlaps):
         print("%s - terminal fragments overlap" % record_id)
         overlap_counter += 1
         continue
