@@ -51,17 +51,17 @@ class CollectionTRF():
                     tmp = line
                     #line = fd.readline()
                     while tmp[0:8] != "Sequence":
-                        tmp = fd.readline()
+                        tmp = fd.next()
                     chrom = tmp.strip().split()[1]
                     while tmp[0:10] != "Parameters":
-                        tmp = fd.readline()
+                        tmp = fd.next()
                     self.parameters = list(map(lambda x: int(x), tmp.strip().split()[1:]))
                     tmp = fd.readline()
                     while tmp == "\n":
-                        tmp = fd.readline()
+                        tmp = fd.next()
                     while tmp != "\n" and tmp != "":
                         self._add_record(tmp, chrom)
-                        tmp = fd.readline()
+                        tmp = fd.next()
         else:
             self.records = record_list
             self.parameters = parameters
