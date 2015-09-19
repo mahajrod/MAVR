@@ -41,14 +41,13 @@ args = parser.parse_args()
 TRF.path = args.path_to_trf[0]
 TRF.cmd = args.path_to_trf[1] + (args.path_to_trf[2] if args.path_to_trf[2] else "")
 
-"""
 TRF.search_tandem_repeats(args.input_file, matching_weight=args.matching_weight,
                           mismatching_penalty=args.mismatching_penalty, indel_penalty=args.indel_penalty,
                           match_probability=args.matching_probability, indel_probability=args.indel_probability,
                           min_alignment_score=args.min_score, max_period=args.max_period_size,
                           report_flanking_sequences=args.report_flanking_sequences, make_dat_file=True,
                           disable_html_output=args.enable_html_output)
-"""
+
 trf_report = "%s.%i.%i.%i.%i.%i.%i.%i.dat" % (split_filename(args.input_file)[1] + split_filename(args.input_file)[2],
                                               args.matching_weight, args.mismatching_penalty,
                                               args.indel_penalty, args.matching_probability, args.indel_probability,
