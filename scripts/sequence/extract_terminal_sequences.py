@@ -19,7 +19,7 @@ parser.add_argument("-i", "--input", action="store", dest="input", required=True
                     type=lambda s: make_list_of_path_to_files(s.split(",")),
                     help="Comma-separated list files/directories with sequences")
 
-parser.add_argument("-o", "--output_prefix", action="store", dest="output", required=True,
+parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", required=True,
                     help="Prefix of output files")
 parser.add_argument("-e", "--allow_overlaps", action="store_true", dest="allow_overlaps",
                     help="Allow overlaps of terminal fragments")
