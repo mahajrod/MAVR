@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0137b4ba-9cb9-4454-8e03-43ff7c136081" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/RepeatMasking/TRF.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/RepeatMasking/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/repeats/str/extract_str_data_from_genbank_file.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/repeat_masking/tandem_repeat_masking.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/mahajrod.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/mahajrod.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/RepeatMasking/TRF.py" afterPath="$PROJECT_DIR$/Tools/RepeatMasking/TRF.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/repeat_masking/tandem_repeat_masking.py" afterPath="$PROJECT_DIR$/scripts/repeat_masking/tandem_repeat_masking.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -126,8 +123,10 @@
         <entry file="file://$PROJECT_DIR$/Tools/RepeatMasking/TRF.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-              <folding />
+              <caret line="16" column="83" selection-start-line="16" selection-start-column="83" selection-end-line="16" selection-end-column="102" />
+              <folding>
+                <element signature="e#55#64#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -145,11 +144,21 @@
       <file leaf-file-name="tandem_repeat_masking.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/repeat_masking/tandem_repeat_masking.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.82236844">
-              <caret line="51" column="83" selection-start-line="51" selection-start-column="83" selection-end-line="51" selection-end-column="83" />
+            <state vertical-scroll-proportion="0.7631579">
+              <caret line="48" column="69" selection-start-line="48" selection-start-column="69" selection-end-line="48" selection-end-column="69" />
               <folding>
                 <element signature="e#55#70#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TRF.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Parsers/TRF.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="64" column="13" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -175,7 +184,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/projects/deaminases/substitutions/DESCRIPTION" />
         <option value="$PROJECT_DIR$/Tools/Annotation/SNPeff.py" />
         <option value="$PROJECT_DIR$/projects/deaminases/substitutions/annotate_vcf.bash" />
         <option value="$PROJECT_DIR$/projects/deaminases/substitutions/extract_snps_for_desired genes.bash" />
@@ -224,6 +232,7 @@
         <option value="$PROJECT_DIR$/Pipelines/SNPCall.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/extract_region.py" />
         <option value="$PROJECT_DIR$/Tools/RepeatMasking/__init__.py" />
+        <option value="$PROJECT_DIR$/Parsers/TRF.py" />
         <option value="$PROJECT_DIR$/Tools/RepeatMasking/TRF.py" />
         <option value="$PROJECT_DIR$/scripts/repeat_masking/tandem_repeat_masking.py" />
       </list>
@@ -568,6 +577,34 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="RepeatMasking" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Pictures" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Parsers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -965,48 +1002,6 @@
       <option name="number" value="Default" />
       <updated>1396791476390</updated>
     </task>
-    <task id="LOCAL-00316" summary="additions in scripts">
-      <created>1439339974286</created>
-      <option name="number" value="00316" />
-      <option name="project" value="LOCAL" />
-      <updated>1439339974286</updated>
-    </task>
-    <task id="LOCAL-00317" summary="additions">
-      <created>1439467232380</created>
-      <option name="number" value="00317" />
-      <option name="project" value="LOCAL" />
-      <updated>1439467232381</updated>
-    </task>
-    <task id="LOCAL-00318" summary="additions">
-      <created>1439467315069</created>
-      <option name="number" value="00318" />
-      <option name="project" value="LOCAL" />
-      <updated>1439467315069</updated>
-    </task>
-    <task id="LOCAL-00319" summary="additions">
-      <created>1439467908049</created>
-      <option name="number" value="00319" />
-      <option name="project" value="LOCAL" />
-      <updated>1439467908050</updated>
-    </task>
-    <task id="LOCAL-00320" summary="additions">
-      <created>1439468027732</created>
-      <option name="number" value="00320" />
-      <option name="project" value="LOCAL" />
-      <updated>1439468027732</updated>
-    </task>
-    <task id="LOCAL-00321" summary="additions">
-      <created>1439468168569</created>
-      <option name="number" value="00321" />
-      <option name="project" value="LOCAL" />
-      <updated>1439468168569</updated>
-    </task>
-    <task id="LOCAL-00322" summary="additions">
-      <created>1439468300034</created>
-      <option name="number" value="00322" />
-      <option name="project" value="LOCAL" />
-      <updated>1439468300034</updated>
-    </task>
     <task id="LOCAL-00323" summary="additions">
       <created>1439468371808</created>
       <option name="number" value="00323" />
@@ -1259,7 +1254,49 @@
       <option name="project" value="LOCAL" />
       <updated>1442640219232</updated>
     </task>
-    <option name="localTasksCounter" value="365" />
+    <task id="LOCAL-00365" summary="additions">
+      <created>1442644215185</created>
+      <option name="number" value="00365" />
+      <option name="project" value="LOCAL" />
+      <updated>1442644215185</updated>
+    </task>
+    <task id="LOCAL-00366" summary="additions">
+      <created>1442644333033</created>
+      <option name="number" value="00366" />
+      <option name="project" value="LOCAL" />
+      <updated>1442644333033</updated>
+    </task>
+    <task id="LOCAL-00367" summary="additions">
+      <created>1442644366290</created>
+      <option name="number" value="00367" />
+      <option name="project" value="LOCAL" />
+      <updated>1442644366290</updated>
+    </task>
+    <task id="LOCAL-00368" summary="additions">
+      <created>1442644398141</created>
+      <option name="number" value="00368" />
+      <option name="project" value="LOCAL" />
+      <updated>1442644398141</updated>
+    </task>
+    <task id="LOCAL-00369" summary="additions">
+      <created>1442644481320</created>
+      <option name="number" value="00369" />
+      <option name="project" value="LOCAL" />
+      <updated>1442644481320</updated>
+    </task>
+    <task id="LOCAL-00370" summary="additions">
+      <created>1442644519822</created>
+      <option name="number" value="00370" />
+      <option name="project" value="LOCAL" />
+      <updated>1442644519822</updated>
+    </task>
+    <task id="LOCAL-00371" summary="additions">
+      <created>1442644844736</created>
+      <option name="number" value="00371" />
+      <option name="project" value="LOCAL" />
+      <updated>1442644844736</updated>
+    </task>
+    <option name="localTasksCounter" value="372" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1424,13 +1461,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Tools/Alignment/Bowtie2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Alignment/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1817,18 +1847,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Parsers/TRF.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="64" column="13" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/RepeatMasking/TRF.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
+          <caret line="16" column="83" selection-start-line="16" selection-start-column="83" selection-end-line="16" selection-end-column="102" />
+          <folding>
+            <element signature="e#55#64#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/repeat_masking/tandem_repeat_masking.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.82236844">
-          <caret line="51" column="83" selection-start-line="51" selection-start-column="83" selection-end-line="51" selection-end-column="83" />
+        <state vertical-scroll-proportion="0.7631579">
+          <caret line="48" column="69" selection-start-line="48" selection-start-column="69" selection-end-line="48" selection-end-column="69" />
           <folding>
             <element signature="e#55#70#0" expanded="true" />
           </folding>

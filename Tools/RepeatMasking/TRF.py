@@ -14,7 +14,7 @@ class TRF(Tool):
 
     def search_tandem_repeats(self, query_file, matching_weight=2, mismatching_penalty=7, indel_penalty=7,
                               match_probability=80, indel_probability=10, min_alignment_score=50, max_period=500,
-                              report_flanking_sequences=False, make_dat_file=True):
+                              report_flanking_sequences=False, make_dat_file=True, disable_html_output=True):
 
         options = " %s" % query_file
         options += " %i" % matching_weight
@@ -26,6 +26,7 @@ class TRF(Tool):
         options += " %i" % max_period
         options += " -f" if report_flanking_sequences else ""
         options += " -d" if make_dat_file else ""
+        options += " -h" if disable_html_output else ""
 
         self.execute(options)
 
