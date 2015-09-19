@@ -46,14 +46,14 @@ for record_id in sequence_dict:
         overlap_counter += 1
         continue
 
-    left_id = "%s_1-%i" % (record_id, args.left_seq_size)
-    right_id = "%s_%i-%i" % (record_id, record_size-args.right_seq_size+1, record_size)
+    #left_id = "%s_1-%i" % (record_id, args.left_seq_size)
+    #right_id = "%s_%i-%i" % (record_id, record_size-args.right_seq_size+1, record_size)
 
-    left_record = SeqRecord(seq=sequence_dict[record_id].seq[:args.left_seq_size], id=left_id)
-    right_record = SeqRecord(seq=sequence_dict[record_id].seq[-args.right_seq_size:], id=right_id)
+    left_record = SeqRecord(seq=sequence_dict[record_id].seq[:args.left_seq_size], id=record_id) # id=left_id)
+    right_record = SeqRecord(seq=sequence_dict[record_id].seq[-args.right_seq_size:], id=record_id) # id=right_id)
 
-    left_fragments_dict[left_id] = left_record
-    right_fragments_dict[right_id] = right_record
+    left_fragments_dict[record_id] = left_record
+    right_fragments_dict[record_id] = right_record
 
 SeqIO.write(record_by_expression_generator(left_fragments_dict, lambda x: True),
             "%s_left_fragments.fasta" % args.output_prefix, format="fasta")
