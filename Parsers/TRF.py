@@ -62,6 +62,7 @@ class CollectionTRF():
                     tmp = next(fd)
                     while tmp == "\n":
                         tmp = next(fd)
+                    print tmp
                     while tmp != "\n" and tmp != "":
                         self._add_record(tmp, chrom)
                         tmp = next(fd)
