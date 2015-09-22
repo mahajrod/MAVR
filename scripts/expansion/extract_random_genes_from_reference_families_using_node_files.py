@@ -34,7 +34,7 @@ for family_id in node_family_ids:
     else:
         reference_random_genes[family_id] = choice(reference_families[family_id])
 
-SynDict.write("%s_reference_random_genes.t" % args.output)
+reference_random_genes.write("%s_reference_random_genes.t" % args.output)
 
 with open("%s_reference_random_genes.ids" % args.output, "w") as out_fd:
     for family_id in reference_random_genes:
