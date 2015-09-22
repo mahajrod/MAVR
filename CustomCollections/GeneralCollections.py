@@ -173,14 +173,14 @@ class OrderedSet(MutableSet):
 
 class IdList(list):
 
-    def read(self, filename, header=False, close_after_if_file_object=False):
+    def read(self, filename, header=False, close_after_if_file_object=False, column_number=None, column_separator="\t"):
         #reads ids from file with one id per line
         
         in_fd = filename if isinstance(filename, file) else open(filename, "r") 
         if header:
             self.header = in_fd.readline().strip()
         for line in in_fd:
-            self.append(line.strip())
+            self.append(line.strip().split(column_separator)[column_number] if column_number else line.strip())
         if (not isinstance(filename, file)) or close_after_if_file_object:
             in_fd.close()
         return self

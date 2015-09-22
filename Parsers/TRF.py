@@ -133,7 +133,7 @@ class CollectionTRF():
 
     def write(self, out_file):
         with open(out_file, "w") as out_fd:
-            out_fd.write("#chrom\n#\tstart\tend\tperiod\tnumber_of_copies\tpattern\ttandem_repeat\n")
+            out_fd.write("#>chrom\n#\tstart\tend\tperiod\tnumber_of_copies\tpattern\ttandem_repeat\n")
             for chrom in self.records:
                 out_fd.write(">%s\n" % chrom)
                 for record in self.records[chrom]:
