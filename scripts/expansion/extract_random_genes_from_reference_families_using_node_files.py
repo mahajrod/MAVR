@@ -27,7 +27,7 @@ node_family_ids = IdList()
 node_family_ids.read(args.input, header=True, column_number=0, column_separator="\t")
 
 reference_random_genes = SynDict()
-
+print reference_families
 for family_id in node_family_ids:
     if family_id not in reference_families:
         reference_random_genes[family_id] = "."
