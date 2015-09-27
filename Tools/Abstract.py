@@ -48,7 +48,7 @@ class Tool():
         process_pool = mp.Pool(threads if threads else self.threads)
 
         results = process_pool.map(execute, exe_string_list)
-        process_pool.close()
+        #process_pool.close()
         return results if capture_output else None
 
     @staticmethod
