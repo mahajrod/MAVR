@@ -83,7 +83,7 @@ class TRF(Tool):
         save_mkdir(converted_output_dir)
         os.chdir(splited_result_dir)
 
-        input_dir = splited_fasta_dir if (splited_fasta_dir[0] == "/") or (splited_fasta_dir[0] != "~") \
+        input_dir = splited_fasta_dir if (splited_fasta_dir[0] == "/") or (splited_fasta_dir[0] == "~") \
                     else "../%s" % splited_fasta_dir
 
         for filename in splited_files:
