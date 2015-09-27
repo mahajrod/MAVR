@@ -42,7 +42,9 @@ class Tool():
     def parallel_execute(self, options_list, cmd=None, capture_output=False, threads=None):
         command = cmd if cmd is not None else self.cmd
         exe_string_list = [check_path(self.path) + command + " " + options for options in options_list]
-
+        with open("exe_list.t", "w") as exe_fd:
+            for entry in exe_string_list:
+                exe_fd.write("%s\n" % entry)
         process_pool = mp.Pool(threads if threads else self.threads)
 
         results = process_pool.map(execute, exe_string_list)

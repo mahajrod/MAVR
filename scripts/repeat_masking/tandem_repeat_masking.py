@@ -38,7 +38,7 @@ parser.add_argument("-u", "--enable_html_output", action="store_false", dest="en
                     help="Enable html output")
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int,
                     help="Number of threads")
-parser.add_argument("-x", "--max_seq_len", action="store", dest="max_seq_len", type=int,
+parser.add_argument("-x", "--max_seq_len", action="store", dest="max_seq_len", type=int, default=100000,
                     help="Maximum total length of sequences per file")
 args = parser.parse_args()
 
