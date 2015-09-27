@@ -6,6 +6,8 @@ CustomCollections/GeneralCollections.py
 CustomCollections/__init__.py
 Download/NCBI.py
 Download/__init__.py
+GeneSynonyms/MitoGenesSynonyms.py
+GeneSynonyms/__init__.py
 General/__init__.py
 Graphics/Plots.py
 Graphics/__init__.py
@@ -58,6 +60,7 @@ Tools/Alignment/TMAP.py
 Tools/Alignment/__init__.py
 Tools/Annotation/GlimerHMM.py
 Tools/Annotation/SNPeff.py
+Tools/Annotation/TransDecoder.py
 Tools/Annotation/__init__.py
 Tools/Assemblers/Fermi.py
 Tools/Assemblers/MaSuRCA.py
@@ -98,9 +101,19 @@ Tools/Kmers/Jellyfish.py
 Tools/Kmers/__init__.py
 Tools/LinuxTools/CGAS.py
 Tools/LinuxTools/__init__.py
+Tools/MultipleAlignment/MAFFT.py
+Tools/MultipleAlignment/PRANK.py
+Tools/MultipleAlignment/__init__.py
+Tools/Phylogenetics/ExaBayes.py
+Tools/Phylogenetics/ExaML.py
+Tools/Phylogenetics/MrBayes.py
+Tools/Phylogenetics/RAxML.py
+Tools/Phylogenetics/__init__.py
 Tools/Picard/AddOrReplaceReadGroups.py
 Tools/Picard/CreateSequenceDictionary.py
 Tools/Picard/__init__.py
+Tools/RepeatMasking/TRF.py
+Tools/RepeatMasking/__init__.py
 Tools/Samtools/Samtools.py
 Tools/Samtools/__init__.py
 Tools/Tuxedo/Cufflinks.py
@@ -118,6 +131,5 @@ scripts/find_homopolymers_ver2.py
 scripts/get_flanking_regions.py
 scripts/gff_examine.py
 scripts/remove_duplicates_flybase_UTR.py
-scripts/annotation/__init__.py
 scripts/annotation/annotate_vcf.py
 scripts/annotation/get_summary_table.py

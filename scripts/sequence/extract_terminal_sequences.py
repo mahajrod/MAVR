@@ -32,6 +32,7 @@ parser.add_argument("-f", "--format", action="store", dest="format", default="fa
 
 args = parser.parse_args()
 
+print("Parsing %s" % args.input)
 sequence_dict = SeqIO.index_db("temp.idx", args.input, format=args.format)
 
 left_fragments_dict = OrderedDict()

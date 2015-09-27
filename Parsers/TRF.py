@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from Bio import  SeqRecord, SeqFeature
+
 
 class RecordTRF():
     def __init__(self, start, end, period, number_of_copies, consensus_pattern_size,
@@ -41,6 +43,12 @@ class RecordTRF():
     def gff_str(self):
         # seqid	source	type	start	end	score	strand	phase	attributes
         return "TRF\trepeat\t%i\t%i\t.\t.\t.\t%s" % (self.start, self.end, self.attributes_string())
+
+    def simple_gff_str(self):
+        # seqid	source	type	start	end	score	strand	phase	attributes
+        attributes_string = "Period=%i;N_copies=%.1f;Pattern=%s" % (self.period, self.number_of_copies, self.pattern)
+
+        return "TRF\trepeat\t%i\t%i\t.\t.\t.\t%s" % (self.start, self.end, attributes_string)
 
     def table_str_short(self):
 
@@ -130,6 +138,14 @@ class CollectionTRF():
                     out_fd.write("#%s\n" % chrom)
                 for record in self.records[chrom]:
                     out_fd.write("%s\t%s\n" % (chrom, record.gff_str()))
+
+    def write_simple_gff(self, out_file, write_chr_string=False):
+        with open(out_file, "w") as out_fd:
+            for chrom in self.records:
+                if write_chr_string:
+                    out_fd.write("#%s\n" % chrom)
+                for record in self.records[chrom]:
+                    out_fd.write("%s\t%s\n" % (chrom, record.simple_gff_str()))
 
     def write(self, out_file):
         with open(out_file, "w") as out_fd:

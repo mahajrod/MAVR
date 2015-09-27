@@ -22,6 +22,7 @@ parser.add_argument("-o", "--output_file", action="store", dest="out_file",
 
 args = parser.parse_args()
 
+
 tmp_index_file = "temp.idx"
 
 print("Parsing %s..." % args.input_file)
@@ -46,18 +47,28 @@ with open(args.out_file, "w") as out_fd:
                     gene_name = feature.qualifiers["product"][0]
                 else:
                     gene_name = "unnamed_gene"
-            if feature.type == "rRNA":
+
+                for mt_gene_name in mithochondrioal_genes_syndict:
+                    if gene_name in mithochondrioal_genes_syndict[mt_gene_name]:
+                        gene_name = mt_gene_name
+                        break
+
+                protein_genes_list.append(gene_name)
+            elif feature.type == "rRNA":
                 if "gene" in feature.qualifiers:
                     rRNA_name = feature.qualifiers["gene"][0]
                 elif "product" in feature.qualifiers:
                     rRNA_name = feature.qualifiers["product"][0]
                 else:
                     rRNA_name = "unnamed_rRNA"
-            protein_genes_list.append(gene_name)
-            protein_genes_list.append(rRNA_name)
+                for mt_gene_name in mithochondrioal_genes_syndict:
+                    if rRNA_name in mithochondrioal_genes_syndict[mt_gene_name]:
+                        rRNA_name = mt_gene_name
+                        break
+                rRNA_genes_list.append(rRNA_name)
 
-        out_fd.write("#%s\t%s\t%i\t%s\t%s\t%s\t%s\n" % (record_id, species, length, lineage, references,
-                                                        protein_genes_list, rRNA_genes_list))
+        out_fd.write("%s\t%s\t%i\t%s\t%s\t%s\t%s\n" % (record_id, species, length, ",".join(lineage), references,
+                                                        ",".join(protein_genes_list), ",".join(rRNA_genes_list)))
 
 os.remove(tmp_index_file)
 
