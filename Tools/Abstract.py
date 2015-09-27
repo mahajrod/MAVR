@@ -122,6 +122,10 @@ class Tool():
 
             split_index += 1
 
+        if id_list:
+            SeqIO.write(record_by_id_generator(sequence_dict, id_list),
+                            "%s/%s_%i.fasta" % (output_dir, out_prefix, split_index), format="fasta")
+
         os.remove("temp.idx")
 
     @staticmethod
