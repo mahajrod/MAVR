@@ -62,7 +62,7 @@ if args.threads == 1:
 
 else:
 
-    TRF.parallel_search_tandem_repeat(args.input_file, matching_weight=args.matching_weight,
+    TRF.parallel_search_tandem_repeat(args.input_file, args.output_prefix, matching_weight=args.matching_weight,
                                       mismatching_penalty=args.mismatching_penalty, indel_penalty=args.indel_penalty,
                                       match_probability=args.matching_probability,
                                       indel_probability=args.indel_probability, min_alignment_score=args.min_score,

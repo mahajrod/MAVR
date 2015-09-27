@@ -56,7 +56,8 @@ class TRF(Tool):
         trf_collection.write_short_table("%s.short.tab" % output_prefix)
         trf_collection.write_wide_table("%s.wide.tab" % output_prefix)
 
-    def parallel_search_tandem_repeat(self, query_file, matching_weight=2, mismatching_penalty=7, indel_penalty=7,
+    def parallel_search_tandem_repeat(self, query_file, output_prefix, matching_weight=2, mismatching_penalty=7,
+                                      indel_penalty=7,
                                       match_probability=80, indel_probability=10, min_alignment_score=50, max_period=500,
                                       report_flanking_sequences=False, splited_fasta_dir="splited_fasta_dir",
                                       splited_result_dir="splited_output", converted_output_dir="converted_output",
@@ -105,7 +106,7 @@ class TRF(Tool):
 
         for suffix in (".rep", ".gff", ".simple.gff", ".short.tab", ".wide.tab"):
             file_str = ""
-            merged_file = "%s%s" % (splited_filename[1], suffix)
+            merged_file = "%s%s" % (output_prefix, suffix)
             for filename in splited_files:
                 file_str += " %s/%s%s" % (converted_output_dir, filename, suffix)
             CGAS.cat(file_str, merged_file)
