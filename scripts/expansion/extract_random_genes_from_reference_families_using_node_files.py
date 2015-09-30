@@ -14,11 +14,11 @@ parser.add_argument("-i", "--input_file", action="store", dest="input", required
                     help="Input file with node information")
 parser.add_argument("-r", "--reference_fam", action="store", dest="reference_fam", required=True,
                     help="Reference family file")
-parser.add_argument("-o", "--output_prefix", action="store", dest="output",
+parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix",
                     help="Prefix of output file")
 args = parser.parse_args()
 
-out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
+out_fd = sys.stdout if args.output == "stdout" else open("%s_reference_random_genes.ids" % args.output_prefix, "w")
 
 reference_families = SynDict()
 reference_families.read(args.reference_fam, separator="\t", split_values=True, values_separator=",")
@@ -34,9 +34,8 @@ for family_id in node_family_ids:
     else:
         reference_random_genes[family_id] = choice(reference_families[family_id])
 
-reference_random_genes.write("%s_reference_random_genes.t" % args.output)
+reference_random_genes.write("%s_reference_random_genes.t" % args.output_prefix)
 
-with open("%s_reference_random_genes.ids" % args.output, "w") as out_fd:
-    for family_id in reference_random_genes:
-        if reference_random_genes[family_id] != ".":
-            out_fd.write("%s.ids\n" % reference_random_genes[family_id])
+for family_id in reference_random_genes:
+    if reference_random_genes[family_id] != ".":
+        out_fd.write("%s\n" % reference_random_genes[family_id])
