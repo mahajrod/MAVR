@@ -14,11 +14,11 @@ parser.add_argument("-i", "--input_file", action="store", dest="input", required
                     help="Input file with node information")
 parser.add_argument("-r", "--reference_fam", action="store", dest="reference_fam", required=True,
                     help="Reference family file")
-parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix",
+parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", default="stdout",
                     help="Prefix of output file")
 args = parser.parse_args()
 
-out_fd = sys.stdout if args.output == "stdout" else open("%s_reference_random_genes.ids" % args.output_prefix, "w")
+out_fd = sys.stdout if args.output_prefix == "stdout" else open("%s_reference_random_genes.ids" % args.output_prefix, "w")
 
 reference_families = SynDict()
 reference_families.read(args.reference_fam, separator="\t", split_values=True, values_separator=",")
