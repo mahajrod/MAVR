@@ -23,14 +23,8 @@ out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
 reference_families = SynDict()
 reference_families.read(args.reference_fam, separator="\t", split_values=True, values_separator=",")
 
-print ("aaaaaaaa")
-print (reference_families)
-
 node_family_ids = IdList()
 node_family_ids.read(args.input, header=True, column_number=0, column_separator="\t")
-
-print ("bbbbbbbb")
-print (node_family_ids)
 
 reference_random_genes = SynDict()
 
@@ -45,4 +39,4 @@ reference_random_genes.write("%s_reference_random_genes.t" % args.output)
 with open("%s_reference_random_genes.ids" % args.output, "w") as out_fd:
     for family_id in reference_random_genes:
         if reference_random_genes[family_id] != ".":
-            out_fd.write("%s.ids" % args.output)
+            out_fd.write("%s.ids\n" % reference_random_genes[family_id])
