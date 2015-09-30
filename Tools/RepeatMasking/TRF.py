@@ -2,6 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 
 import os
+import shutil
 
 from Tools.Abstract import Tool
 
@@ -61,7 +62,7 @@ class TRF(Tool):
                                       match_probability=80, indel_probability=10, min_alignment_score=50, max_period=500,
                                       report_flanking_sequences=False, splited_fasta_dir="splited_fasta_dir",
                                       splited_result_dir="splited_output", converted_output_dir="converted_output",
-                                      max_len_per_file=100000):
+                                      max_len_per_file=100000, store_intermediate_files=False):
         work_dir = os.getcwd()
         splited_filename = split_filename(query_file)
         self.split_fasta_by_seq_len(query_file, splited_fasta_dir, max_len_per_file=max_len_per_file,
@@ -111,6 +112,10 @@ class TRF(Tool):
                 file_str += " %s/%s%s" % (converted_output_dir, filename, suffix)
             CGAS.cat(file_str, merged_file)
 
+        if not store_intermediate_files:
+            shutil.rmtree(splited_fasta_dir)
+            shutil.rmtree(splited_result_dir)
+            shutil.rmtree(converted_output_dir)
 
 if __name__ == "__main__":
     pass

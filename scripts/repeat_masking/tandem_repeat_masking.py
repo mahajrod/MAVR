@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 
+import shutil
 import argparse
-import os
 
 from Tools.RepeatMasking import TRF
 
@@ -40,6 +40,8 @@ parser.add_argument("-t", "--threads", action="store", dest="threads", type=int,
                     help="Number of threads")
 parser.add_argument("-x", "--max_seq_len", action="store", dest="max_seq_len", type=int, default=100000,
                     help="Maximum total length of sequences per file")
+parser.add_argument("-r", "--store_intermediate_file", action="store_true", dest="store",
+                    help="Dont remove intermediate files")
 args = parser.parse_args()
 
 TRF.threads = args.threads
@@ -68,5 +70,7 @@ else:
                                       indel_probability=args.indel_probability, min_alignment_score=args.min_score,
                                       max_period=args.max_period_size,
                                       report_flanking_sequences=args.report_flanking_sequences,
-                                      max_len_per_file=args.max_seq_len)
+                                      max_len_per_file=args.max_seq_len, store_intermediate_files=args.store)
+
+
 
