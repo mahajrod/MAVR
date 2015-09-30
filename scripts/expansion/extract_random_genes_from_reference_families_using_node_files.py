@@ -23,11 +23,17 @@ out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
 reference_families = SynDict()
 reference_families.read(args.reference_fam, separator="\t", split_values=True, values_separator=",")
 
+print ("aaaaaaaa")
+print (reference_families)
+
 node_family_ids = IdList()
 node_family_ids.read(args.input, header=True, column_number=0, column_separator="\t")
 
+print ("bbbbbbbb")
+print (node_family_ids)
+
 reference_random_genes = SynDict()
-print reference_families
+
 for family_id in node_family_ids:
     if family_id not in reference_families:
         reference_random_genes[family_id] = "."
