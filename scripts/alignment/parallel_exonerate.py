@@ -26,7 +26,7 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
                     help="Prefix of output files")
 parser.add_argument("-r", "--store_intermediate_file", action="store_true", dest="store",
                     help="Dont remove intermediate files")
-parser.add_argument("--number_of_results_to_report", action="store", dest="num_of_results", type=int,
+parser.add_argument("--results_to_report", action="store", dest="num_of_results", type=int,
                     help="Number of results to report per query")
 
 args = parser.parse_args()
