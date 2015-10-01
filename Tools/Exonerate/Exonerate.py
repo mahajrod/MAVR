@@ -18,7 +18,8 @@ class Exonerate(Tool):
     @staticmethod
     def parse_common_options(model, query_type=None, target_type=None,
                              show_alignment=None, show_sugar=True, show_cigar=None,
-                             show_vulgar=None, show_query_gff=None, show_target_gff=None):
+                             show_vulgar=None, show_query_gff=None, show_target_gff=None,
+                             number_of_results_to_report=None):
 
         options = " --model %s" % model
         options += " --showalignment" if show_alignment else ""
@@ -29,6 +30,8 @@ class Exonerate(Tool):
         options += " --showtargetgff" if show_target_gff else ""
         options += " -Q %s" % query_type if query_type else ""
         options += " -T %s" % target_type if target_type else ""
+        options += " -n %i" % number_of_results_to_report if number_of_results_to_report else ""
+
         return options
 
     def parallel_alignment(self, query_file, database_file, model, num_of_recs_per_file=1000,
@@ -36,6 +39,7 @@ class Exonerate(Tool):
                            show_vulgar=None, show_query_gff=None, show_target_gff=None,
                            store_intermediate_files=False,
                            splited_fasta_dir="splited_fasta_dir", splited_result_dir="splited_output",
+                           number_of_results_to_report=None,
                            converted_output_dir="converted_output"):
         splited_filename = split_filename(query_file)
         self.split_fasta(query_file, splited_fasta_dir, num_of_recs_per_file=num_of_recs_per_file,
@@ -45,7 +49,8 @@ class Exonerate(Tool):
         common_options = self.parse_common_options(model, show_alignment=show_alignment,
                                                    show_sugar=show_sugar, show_cigar=show_cigar,
                                                    show_vulgar=show_vulgar, show_query_gff=show_query_gff,
-                                                   show_target_gff=show_target_gff)
+                                                   show_target_gff=show_target_gff,
+                                                   number_of_results_to_report=number_of_results_to_report)
 
         options_list = []
         splited_files = os.listdir(splited_fasta_dir)

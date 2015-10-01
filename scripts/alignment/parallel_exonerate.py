@@ -26,6 +26,8 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
                     help="Prefix of output files")
 parser.add_argument("-r", "--store_intermediate_file", action="store_true", dest="store",
                     help="Dont remove intermediate files")
+parser.add_argument("--number_of_results_to_report", action="store", dest="num_of_results", type=int,
+                    help="Number of results to report per query")
 
 args = parser.parse_args()
 
@@ -39,7 +41,8 @@ Exonerate.parallel_alignment(args.input_file, args.database_file, args.model,
                              show_vulgar=None, show_query_gff=None, show_target_gff=True,
                              store_intermediate_files=True,
                              splited_fasta_dir="splited_fasta_dir", splited_result_dir="splited_output",
-                             converted_output_dir="converted_output")
+                             converted_output_dir="converted_output",
+                             number_of_results_to_report=args.num_of_results)
 
 
 
