@@ -21,7 +21,7 @@ RESTORE_PAIRS_SCRIPT=${MAVR_SCRIPTS_DIR}"filter/restore_pairs.py"
 MAP_SCRIPT=${MAVR_SCRIPTS_DIR}"alignment/map_reads.py"
 
 EXTRACTOR_BIN=${SOFT_DIR}"Cookiecutter/src/extract"
-FRAGMENTS_FILE=${WORKDIR}"kmer/mating_rel_seqs_with_rev_com_33_mer.kmer"
+FRAGMENTS_FILE=${WORKDIR}"kmer/MatA1_MatAlpha1_with_100_flanks_with_rev_com_33_mer.kmer"
 SAMPLES_DIR=${OKOCHENOVA_DIR}"fastq/RUN7/"
 
 
@@ -62,5 +62,5 @@ ${RESTORE_PAIRS_SCRIPT} -l ${EXTRACTED_READS_FILE_LEFT},${EXTRACTED_READS_FILE_L
                         -r ${EXTRACTED_READS_FILE_RIGHT},${EXTRACTED_READS_FILE_RIGHT_SE} \
                         -o ${ALL_PREFIX}
 
-#${MAP_SCRIPT} -i ${BOWTIE2_INDEX} -t 4 -r ${BOTH_PREFIX}"_1.fastq" -l ${BOTH_PREFIX}"_2.fastq" -p ${BOTH_PREFIX} -g -y ${BOTH_PREFIX}"_coverage.bed"
-${MAP_SCRIPT} -i ${BOWTIE2_INDEX} -t 4 -r ${ALL_PREFIX}"_1.fastq" -l ${ALL_PREFIX}"_2.fastq" -p ${ALL_PREFIX} -g -y ${ALL_PREFIX}"_coverage.bed"
+#${MAP_SCRIPT} -i ${BOWTIE2_INDEX} -t 4 -r ${BOTH_PREFIX}"_1.fastq" -l ${BOTH_PREFIX}"_2.fastq" -p ${BOTH_PREFIX} -g -y ${BOTH_PREFIX}"_coverage.bed" -f 100
+${MAP_SCRIPT} -i ${BOWTIE2_INDEX} -t 4 -r ${ALL_PREFIX}"_1.fastq" -l ${ALL_PREFIX}"_2.fastq" -p ${ALL_PREFIX} -g -y ${ALL_PREFIX}"_coverage.bed" -f 100
