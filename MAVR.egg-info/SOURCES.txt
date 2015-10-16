@@ -76,6 +76,10 @@ Tools/Bedtools/GenomeCov.py
 Tools/Bedtools/GetFasta.py
 Tools/Bedtools/Intersect.py
 Tools/Bedtools/__init__.py
+Tools/BioFormats/BioConvert.py
+Tools/BioFormats/__init__.py
+Tools/Exonerate/Exonerate.py
+Tools/Exonerate/__init__.py
 Tools/Filter/Adapters.py
 Tools/Filter/Cookiecutter.py
 Tools/Filter/FastQC.py
@@ -97,6 +101,8 @@ Tools/GATK/VariantRecalibrator.py
 Tools/GATK/__init__.py
 Tools/HMMER/HMMER3.py
 Tools/HMMER/__init__.py
+Tools/ImageMagick/Convert.py
+Tools/ImageMagick/__init__.py
 Tools/Kmers/Jellyfish.py
 Tools/Kmers/__init__.py
 Tools/LinuxTools/CGAS.py

@@ -19,6 +19,7 @@ for SAMPLE in ${SAMPLES[@]};
     mkdir -p ${CURRENT_SAMPLE}
     cd ${CURRENT_SAMPLE}
     echo ${CURRENT_SAMPLE}
+
     mkdir -p both_reads
     mkdir -p all_reads
 

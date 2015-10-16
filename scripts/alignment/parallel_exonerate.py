@@ -13,8 +13,7 @@ parser.add_argument("-i", "--input_file", action="store", dest="input_file", req
 parser.add_argument("-d", "--database_file", action="store", dest="database_file", required=True,
                     help="File with database")
 parser.add_argument("-p", "--path_to_exonerate", action="store", dest="path_to_exonerate", default=["", "exonerate", None],
-                    type=split_filename,
-                    help="Path to exonerate")
+                    type=split_filename, help="Path to exonerate")
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int,
                     help="Number of threads")
 parser.add_argument("-m", "--model", action="store", dest="model",

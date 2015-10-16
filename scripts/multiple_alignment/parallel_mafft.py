@@ -13,7 +13,7 @@ parser.add_argument("-t", "--threads", action="store", dest="threads", type=int,
                     help="Number of threads per alignment")
 parser.add_argument("-p", "--processes", action="store", dest="processes", type=int, default=1,
                     help="Number of simalteneously running alignments")
-parser.add_argument("-o", "--output_directory", action="store", dest="output",
+parser.add_argument("-o", "--output_directory", action="store", dest="output", type=check_path,
                     help="Output directory")
 parser.add_argument("-m", "--mode", action="store", dest="mode", default="globalpair",
                     help="Alignment mode. Default: 'globalpair'. Allowed: globalpair, localpair, genafpair")
