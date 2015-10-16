@@ -7,7 +7,7 @@
 #SBATCH --error=/work/pavlov/okochenova/job_reports/RUN7/mating_type_detection_RUN7.%A_%a.err
 #SBATCH --output=/work/pavlov/okochenova/job_reports/RUN7/mating_type_detection_RUN7.%A_%a.out
 source /work/pavlov/okochenova/profile
-module load compiler/gcc/4.8 python/2.7 samtools/0.1 bowtie/2.2 sage/6.3 zlib/1.2 cutadapt/1.4
+module load compiler/gcc/4.8 python/2.7 samtools/0.1 bowtie/2.2  zlib/1.2
 
 echo ${PYTHONPATH}
 OKOCHENOVA_DIR="/work/pavlov/okochenova/"
