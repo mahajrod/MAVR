@@ -46,7 +46,7 @@ echo ${CURRENT_SAMPLE}
 #mkdir -p both_reads
 mkdir -p all_reads
 
-#${EXTRACTOR_BIN} --fragments ${FRAGMENTS_FILE} -o ./ -1 ${LEFT_READS_FILE} -2 ${RIGHT_READS_FILE}
+${EXTRACTOR_BIN} --fragments ${FRAGMENTS_FILE} -o ./ -1 ${LEFT_READS_FILE} -2 ${RIGHT_READS_FILE}
 
 EXTRACTED_READS_FILE_LEFT=${CURRENT_SAMPLE}"_1.ok_val_1.filtered.fastq"
 EXTRACTED_READS_FILE_LEFT_SE=${CURRENT_SAMPLE}"_1.ok_val_1.se.fastq"
