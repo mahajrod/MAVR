@@ -2,7 +2,7 @@
 
 source ./DESCRIPTION
 
-BOWTIE2_INDEX=${WORKDIR}"index/mating_rel_seqs"
+BOWTIE2_INDEX=${WORKDIR}"index/MatA1_MatAlpha1_with_100_flanks"
 
 MAVR_SCRIPTS_DIR=${MAVR_DIR}"/scripts/"
 RESTORE_PAIRS_SCRIPT=${MAVR_SCRIPTS_DIR}"filter/restore_pairs.py"
@@ -27,10 +27,10 @@ for SAMPLE in ${SAMPLES[@]};
     READS=(`ls ${SAMPLES_DIR}${SAMPLE}/trimmed/spades/corrected/ | grep -P ".*R1.*.fastq$|.*R2.*.fastq$"`)
     LEFT_READS_FILE=${SAMPLES_DIR}${SAMPLE}/trimmed/spades/corrected/${READS[0]}
     RIGHT_READS_FILE=${SAMPLES_DIR}${SAMPLE}/trimmed/spades/corrected/${READS[1]}
-    #${EXTRACTOR_BIN} --fragments ${FRAGMENTS_FILE} -o ./ -1 ${LEFT_READS_FILE} -2 ${RIGHT_READS_FILE}
+    ${EXTRACTOR_BIN} --fragments ${FRAGMENTS_FILE} -o ./ -1 ${LEFT_READS_FILE} -2 ${RIGHT_READS_FILE}
 
     READ_BASENAME=`basename ${READS[0]} .fastq`
-    mkdir -p both_reads
+
     mkdir -p all_reads
 
     EXTRACTED_READS_FILE_LEFT=${READ_BASENAME}".filtered.fastq"
@@ -38,19 +38,13 @@ for SAMPLE in ${SAMPLES[@]};
     EXTRACTED_READS_FILE_RIGHT=${READ_BASENAME}".filtered.fastq"
     EXTRACTED_READS_FILE_RIGHT_SE=${READ_BASENAME}".se.fastq"
 
-    BOTH_PREFIX=./both_reads/${CURRENT_SAMPLE}"_both"
     ALL_PREFIX=./all_reads/${CURRENT_SAMPLE}"_all"
 
 
-    ${RESTORE_PAIRS_SCRIPT} -l ${EXTRACTED_READS_FILE_LEFT} -r ${EXTRACTED_READS_FILE_RIGHT} \
-                            -o ${BOTH_PREFIX}
     ${RESTORE_PAIRS_SCRIPT} -l ${EXTRACTED_READS_FILE_LEFT},${EXTRACTED_READS_FILE_LEFT_SE} \
                             -r ${EXTRACTED_READS_FILE_RIGHT},${EXTRACTED_READS_FILE_RIGHT_SE} \
                             -o ${ALL_PREFIX}
 
-
-    ${MAP_SCRIPT} -i ${BOWTIE2_INDEX} -t 4 -r ${BOTH_PREFIX}"_1.fastq" -l ${BOTH_PREFIX}"_2.fastq" \
-                  -p ${BOTH_PREFIX} -g -y ${BOTH_PREFIX}"_coverage.bed" -z -x
     ${MAP_SCRIPT} -i ${BOWTIE2_INDEX} -t 4 -r ${ALL_PREFIX}"_1.fastq" -l ${ALL_PREFIX}"_2.fastq" \
                   -p ${ALL_PREFIX} -g -y ${ALL_PREFIX}"_coverage.bed" -z -x
 

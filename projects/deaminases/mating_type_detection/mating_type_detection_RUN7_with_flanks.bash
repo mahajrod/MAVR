@@ -12,7 +12,7 @@ source /work/pavlov/okochenova/profile
 echo ${PYTHONPATH}
 OKOCHENOVA_DIR="/work/pavlov/okochenova/"
 SOFT_DIR=${OKOCHENOVA_DIR}"soft/"
-WORKDIR=${OKOCHENOVA_DIR}"/mating_type_detection/"
+WORKDIR=${OKOCHENOVA_DIR}"/mating_type_detection_with_flanks/"
 
 BOWTIE2_INDEX=${WORKDIR}"index/mating_rel_seqs"
 

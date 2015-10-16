@@ -59,6 +59,9 @@ parser.add_argument("-z", "--calculate_median_coverage", action="store_true", de
 parser.add_argument("-x", "--calculate_mean_coverage", action="store_true", dest="calculate_mean_coverage",
                     default=False,
                     help="Calculate mean coverage")
+parser.add_argument("-f", "--flanks_size", action="store", dest="flanks_size",
+                    default=0, type=int,
+                    help="Size of flanks to remove when calculating mean/median coverage")
 args = parser.parse_args()
 
 black_flag_value = args.black_flag_value if args.black_flag_value else \
@@ -124,8 +127,12 @@ if args.calculate_median_coverage or args.calculate_mean_coverage:
     if args.calculate_median_coverage:
         with open("%s_median_coverage.tab" % args.prefix, "w") as out_fd:
             for region in coverage_dict:
-                out_fd.write("%s\t%f\n" % (region, median(array(coverage_dict[region]))))
+                mediana = median(array(coverage_dict[region] if args.flanks_size == 0
+                                       else coverage_dict[region][args.flanks_size:-args.flanks_size]))
+                out_fd.write("%s\t%f\n" % (region, mediana))
     if args.calculate_mean_coverage:
         with open("%s_mean_coverage.tab" % args.prefix, "w") as out_fd:
             for region in coverage_dict:
-                out_fd.write("%s\t%f\n" % (region, mean(array(coverage_dict[region]))))
+                meana = mean(array(coverage_dict[region] if args.flanks_size == 0
+                                   else coverage_dict[region][args.flanks_size:-args.flanks_size]))
+                out_fd.write("%s\t%f\n" % (region, meana))
