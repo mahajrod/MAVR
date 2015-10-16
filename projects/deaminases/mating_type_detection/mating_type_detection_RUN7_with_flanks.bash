@@ -14,7 +14,7 @@ OKOCHENOVA_DIR="/work/pavlov/okochenova/"
 SOFT_DIR=${OKOCHENOVA_DIR}"soft/"
 WORKDIR=${OKOCHENOVA_DIR}"/mating_type_detection_with_flanks/"
 
-BOWTIE2_INDEX=${WORKDIR}"index/mating_rel_seqs"
+BOWTIE2_INDEX=${WORKDIR}"index/MatA1_MatAlpha1_with_100_flanks"
 
 MAVR_SCRIPTS_DIR=${SOFT_DIR}"/MAVR/scripts/"
 RESTORE_PAIRS_SCRIPT=${MAVR_SCRIPTS_DIR}"filter/restore_pairs.py"
