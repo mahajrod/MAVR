@@ -60,7 +60,7 @@ Tools/Alignment/TMAP.py
 Tools/Alignment/__init__.py
 Tools/Annotation/GlimerHMM.py
 Tools/Annotation/SNPeff.py
-Tools/Annotation/TransDecoder.py
+Tools/Annotation/TransDecoderOld.py
 Tools/Annotation/__init__.py
 Tools/Assemblers/Fermi.py
 Tools/Assemblers/MaSuRCA.py

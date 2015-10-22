@@ -4,11 +4,19 @@ import os
 import sys
 import argparse
 
+from collections import OrderedDict
+
 from Bio import SeqIO
+from BCBio import GFF
 
 from Routines.File import read_ids, make_list_of_path_to_files
 from Routines.Sequence import record_by_id_generator
 
+
+def iterate_gff_parsing_generator(gff_parsing_generator, id_list):
+    for record in gff_parsing_generator:
+        if record.id in id_list:
+            yield record
 
 parser = argparse.ArgumentParser()
 
@@ -30,7 +38,8 @@ tmp_index_file = "temp.idx"
 
 id_list = read_ids(args.id_file)
 
-print("Parsing %s..." % args.input)
+print("Parsing %s..." % (args.input if isinstance(args.input, str) else ",".join(args.input)))
+
 sequence_dict = SeqIO.index_db(tmp_index_file, args.input, format=args.format)
 SeqIO.write(record_by_id_generator(sequence_dict, id_list), out_fd, format=args.format)
 os.remove(tmp_index_file)

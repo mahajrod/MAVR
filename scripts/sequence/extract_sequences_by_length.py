@@ -5,7 +5,7 @@ import sys
 import argparse
 from Bio import SeqIO
 
-from Routines.Sequence import record_by_id_generator
+from Routines.Sequence import record_by_id_generator, record_by_expression_generator
 from Routines.Sequence import filter_sequences
 
 parser = argparse.ArgumentParser()
@@ -21,6 +21,8 @@ parser.add_argument("-n", "--min_length", action="store", dest="min_length", typ
                     help="Minimun length of sequence to store. Default: filter not used")
 parser.add_argument("-x", "--max_length", action="store", dest="max_length", type=int,
                     help="Maximum length of sequence to store. Default: filter not set")
+parser.add_argument("-d", "--id_file", action="store", dest="id_file",
+                    help="File to write ids of extracted peptides. Default - don't write")
 args = parser.parse_args()
 
 if (args.min_length is None) and (args.max_length is None):
@@ -34,14 +36,19 @@ print("Parsing %s..." % args.input_file)
 sequence_dict = SeqIO.index_db(tmp_index_file, args.input_file, format=args.format)
 
 if (args.min_length is not None) and (args.max_length is not None):
-    expression = lambda record: args.min_length <= len(record.seq) <= args.max_length
+    length_expression = lambda record: args.min_length <= len(record.seq) <= args.max_length
 elif args.min_length is not None:
-    expression = lambda record: len(record.seq) >= args.min_length
+    length_expression = lambda record: len(record.seq) >= args.min_length
 else:
-    expression = lambda record: len(record.seq) <= args.max_length
+    length_expression = lambda record: len(record.seq) <= args.max_length
 
-id_list = filter_sequences(sequence_dict, expression)
-SeqIO.write(record_by_id_generator(sequence_dict, id_list), args.output_file, format=args.format)
+#id_list = filter_sequences(sequence_dict, expression)
+
+SeqIO.write(record_by_expression_generator(sequence_dict, expression=length_expression,
+                                           id_file=args.id_file),
+            args.output_file, format=args.format)
+
+#SeqIO.write(record_by_id_generator(sequence_dict, id_list), args.output_file, format=args.format)
 
 os.remove(tmp_index_file)
 

@@ -6,7 +6,7 @@ from Routines.File import split_filename
 from Tools.Abstract import Tool
 
 
-class TransDecoder(Tool):
+class TransDecoderOld(Tool):
     def __init__(self, path="", max_threads=4):
         Tool.__init__(self, "TransDecoder", path=path, max_threads=max_threads)
 
