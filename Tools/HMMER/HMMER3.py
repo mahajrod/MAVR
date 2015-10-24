@@ -49,6 +49,27 @@ class HMMER3(Tool):
 
         self.execute(options, cmd="hmmfetch")
 
+    @staticmethod
+    def extract_hits_by_query_ids(id_list, hit_file, output_file,
+                                  fileformat="tblout", close_after_if_file_object=False):
+        out_fd = output_file if isinstance(output_file, file) else open(output_file, "r")
+        with open(hit_file, "r") as in_fd:
+            if fileformat == "domtblout" or "tblout":
+                if fileformat == "domtblout":
+                    query_pos_in_file = 3
+                elif fileformat == "tblout":
+                    query_pos_in_file = 2
+                for line in in_fd:
+                    if line[0] == "#":
+                        out_fd.write(line)
+                        continue
+                    query_id = line.split("\t")[query_pos_in_file]
+                    if query_id in id_list:
+                        out_fd.write(line)
+
+        if (not isinstance(output_file, file)) or close_after_if_file_object:
+            out_fd.close()
+
     def get_hmms_by_ids(self, hmmfile, id_file, output=None):
 
         options = " -f"
