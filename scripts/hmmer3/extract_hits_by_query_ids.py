@@ -22,8 +22,8 @@ parser.add_argument("-o", "--output_file", action="store", dest="output", defaul
 args = parser.parse_args()
 
 out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
-
-id_list = IdList.read(args.id_file, header=args.header)
+id_list = IdList()
+id_list = id_list.read(args.id_file, header=args.header)
 
 HMMER3.extract_hits_by_query_ids(id_list, args.input, args.output,
                                  fileformat=args.format,
