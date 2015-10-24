@@ -77,16 +77,16 @@ echo -e "Complete peptides\t${COMPLETE_PEP_NUMBER}" >> ${STAT_FILE}
 echo -e "Complete peptides(100+ AA)\t${COMPLETE_PEP_LONGER_100_NUMBER}" >> ${STAT_FILE}
 
 ${MAVR_DIR}/scripts/sequence/extract_sequences_by_ids.py -i ${DATA_PREFIX}.cds \
-                                                            -o ${DATA_PREFIX}.complete.cds \
-                                                            -d ${DATA_PREFIX}.complete.pep.ids
+                                                         -o ${DATA_PREFIX}.complete.cds \
+                                                         -d ${DATA_PREFIX}.complete.pep.ids
 
 ${MAVR_DIR}/scripts/sequence/extract_sequences_by_ids.py -i ${DATA_PREFIX}.cds \
-                                                            -o ${DATA_PREFIX}.100+.cds \
-                                                            -d ${DATA_PREFIX}.100+.pep.ids
+                                                         -o ${DATA_PREFIX}.100+.cds \
+                                                         -d ${DATA_PREFIX}.100+.pep.ids
 
 ${MAVR_DIR}/scripts/sequence/extract_sequences_by_ids.py -i ${DATA_PREFIX}.cds \
-                                                            -o ${DATA_PREFIX}.complete.100+.cds \
-                                                            -d ${DATA_PREFIX}.complete.100+.pep.ids
+                                                         -o ${DATA_PREFIX}.complete.100+.cds \
+                                                         -d ${DATA_PREFIX}.complete.100+.pep.ids
 
 #grep -f ${DATA_PREFIX}.complete.100+.mRNA.ids ${DATA_PREFIX}.gff3 > ${DATA_PREFIX}.complete.100+.gff3
 #grep -f ${DATA_PREFIX}.complete.mRNA.ids ${DATA_PREFIX}.gff3 > ${DATA_PREFIX}.complete.gff3

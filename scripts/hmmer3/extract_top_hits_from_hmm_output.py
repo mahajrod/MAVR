@@ -2,6 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 import os
 import sys
+import shutil
 import argparse
 
 from multiprocessing import Pool
@@ -96,33 +97,7 @@ for not_significant, not_found in results:
     not_found.write(nf_fd)
 
 if not args.retain:
-    os.remove(args.top_hits_dir)
+    shutil.rmtree(args.top_hits_dir)
 
 nf_fd.close()
 ns_fd.close()
-
-"""
-hmm_dict = SearchIO.index_db("temp.idx", args.input, args.format)
-out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
-out_fd.write("#query\thit\tevalue\tbitscore\n")
-
-
-for query in hmm_dict:
-    #print hmm_dict[key]
-    if hmm_dict[query].hits:
-        if hmm_dict[query][0].is_included:
-            out_fd.write("%s\t%s\t%s\t%s\n" % (query, hmm_dict[query][0].id, hmm_dict[query][0].evalue,
-                                               hmm_dict[query][0].bitscore))
-        else:
-            ns_fd.write("%s\t%s\t%s\t%s\n" % (query, hmm_dict[query][0].id, hmm_dict[query][0].evalue,
-                                               hmm_dict[query][0].bitscore))
-    else:
-        nf_fd.write("%s\n" % query)
-
-if args.output != "stdout":
-    out_fd.close()
-
-os.remove("temp.idx")
-
-
-"""
