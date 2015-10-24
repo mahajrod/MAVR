@@ -2,6 +2,9 @@
 
 MAVR_DIR=$1
 DATA_PREFIX=$2
+PFAM_HMMSCAN_TBLOUT_FILE=$3
+SWISSPROT_BLAST_TAB_HIT_FILE=$4
+
 STAT_FILE=${DATA_PREFIX}.stat
 COMPLETE_PEP_DIR="complete/"
 COMPLETE_PEP_100_DIR="complete.100+/"
@@ -35,7 +38,28 @@ ${MAVR_DIR}/scripts/sequence/histogram_length.py -w 50 -e png,svg \
                                                  -i ${DATA_PREFIX}.100+.pep \
                                                  -o ${DATA_PREFIX}.100+.pep
 
+${MAVR_DIR}/scripts/hmmer3/extract_hits_by_query_ids.py -i ${PFAM_HMMSCAN_TBLOUT_FILE} -f tblout \
+                                                        -d ${DATA_PREFIX}.100+.pep.ids \
+                                                        -o ${DATA_PREFIX}.100+.pfam.tblout
+${MAVR_DIR}/scripts/hmmer3/extract_hits_by_query_ids.py -i ${PFAM_HMMSCAN_TBLOUT_FILE} -f tblout \
+                                                        -d ${DATA_PREFIX}.complete.pep.ids \
+                                                        -o ${DATA_PREFIX}.complete.pfam.tblout
+${MAVR_DIR}/scripts/hmmer3/extract_hits_by_query_ids.py -i ${PFAM_HMMSCAN_TBLOUT_FILE} -f tblout \
+                                                        -d ${DATA_PREFIX}.complete.100+.pep.ids \
+                                                        -o ${DATA_PREFIX}.complete.100+.pfam.tblout
 
+${MAVR_DIR}/scripts/blast/filter_blast_output_by_ids.py -m query -f blast-tab \
+                                                        -w ${DATA_PREFIX}.100+.pep.ids  \
+                                                        -i ${SWISSPROT_BLAST_TAB_HIT_FILE} \
+                                                        -o ${DATA_PREFIX}.100+.swissprot.hits
+${MAVR_DIR}/scripts/blast/filter_blast_output_by_ids.py -m query -f blast-tab \
+                                                        -w ${DATA_PREFIX}.complete.pep.ids  \
+                                                        -i ${SWISSPROT_BLAST_TAB_HIT_FILE} \
+                                                        -o ${DATA_PREFIX}.complete.swissprot.hits
+${MAVR_DIR}/scripts/blast/filter_blast_output_by_ids.py -m query -f blast-tab \
+                                                        -w ${DATA_PREFIX}.complete.100+.pep.ids  \
+                                                        -i ${SWISSPROT_BLAST_TAB_HIT_FILE} \
+                                                        -o ${DATA_PREFIX}.complete.100+.swissprot.hits
 
 awk -F'|' '{print "%s|%s\n", $1, $2}' ${DATA_PREFIX}.complete.100+.pep.ids > ${DATA_PREFIX}.complete.100+.mRNA.ids
 awk -F'|' '{print "%s|%s\n", $1, $2}' ${DATA_PREFIX}.complete.pep.ids > ${DATA_PREFIX}.complete.mRNA.ids
