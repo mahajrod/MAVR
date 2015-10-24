@@ -64,7 +64,7 @@ class HMMER3(Tool):
                         out_fd.write(line)
                         continue
                     try:
-                        query_id = line.split("\t")[query_pos_in_file]
+                        query_id = line.split()[query_pos_in_file]
                     except IndexError:
                         print line
                     if query_id in id_list:
