@@ -52,7 +52,7 @@ class HMMER3(Tool):
     @staticmethod
     def extract_hits_by_query_ids(id_list, hit_file, output_file,
                                   fileformat="tblout", close_after_if_file_object=False):
-        out_fd = output_file if isinstance(output_file, file) else open(output_file, "r")
+        out_fd = output_file if isinstance(output_file, file) else open(output_file, "w")
         with open(hit_file, "r") as in_fd:
             if fileformat == "domtblout" or "tblout":
                 if fileformat == "domtblout":
