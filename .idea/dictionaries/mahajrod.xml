@@ -585,6 +585,7 @@
       <w>bitwXor</w>
       <w>bkde2D</w>
       <w>bkfe</w>
+      <w>blastp</w>
       <w>bmp</w>
       <w>body</w>
       <w>body&lt;-</w>
@@ -995,6 +996,7 @@
       <w>do.breaks</w>
       <w>do.call</w>
       <w>doPrimitiveMethod</w>
+      <w>domtblout</w>
       <w>dont</w>
       <w>dontCheck</w>
       <w>dotchart</w>
@@ -2069,6 +2071,7 @@
       <w>order</w>
       <w>order.dendrogram</w>
       <w>ordered</w>
+      <w>orfs</w>
       <w>outer</w>
       <w>p.adjust</w>
       <w>pacbio</w>
@@ -2209,6 +2212,7 @@
       <w>persp</w>
       <w>pexp</w>
       <w>pf</w>
+      <w>pfam</w>
       <w>pgamma</w>
       <w>pgeom</w>
       <w>phenoModel</w>
@@ -2375,6 +2379,7 @@
       <w>prop.table</w>
       <w>prop.test</w>
       <w>prop.trend.test</w>
+      <w>prot</w>
       <w>prototype</w>
       <w>provideDimnames</w>
       <w>prune</w>

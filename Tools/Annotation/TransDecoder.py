@@ -6,7 +6,7 @@ from Routines.File import split_filename
 from Tools.Abstract import Tool
 
 
-class TransDecoderOld(Tool):
+class TransDecoder(Tool):
     def __init__(self, path="", max_threads=4):
         Tool.__init__(self, "TransDecoder", path=path, max_threads=max_threads)
 
@@ -57,7 +57,7 @@ class TransDecoderOld(Tool):
 
     """
     def annotate_pep(self, transcripts_file, genetic_code=None, analyze_only_top_strand=None,
-                     reuse_existing_files=None, minimum_protein_length=100, write_temp__to_current_dir=None):
+                     reuse_existing_files=None, minimum_protein_length=100, write_temp_to_current_dir=None):
 
 
         options = " --CPU %i" % self.threads

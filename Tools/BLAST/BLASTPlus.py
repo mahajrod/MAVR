@@ -5,24 +5,61 @@ import os
 from subprocess import PIPE, Popen
 
 from Tools.Abstract import Tool
+from Tools.LinuxTools import CGAS
+from Routines.File import check_path, save_mkdir, split_filename
 
 
 class BLASTPlus(Tool):
     def __init__(self, path="", max_threads=4):
         Tool.__init__(self, "blastn", path=path, max_threads=max_threads)
 
-    def make_blast_plus_db(self, input_file, mask_output_file, db_name, format="fasta"):
-        #makes BLAST database from fasta file
-        os.system("dustmasker -in %s -infmt %s -parse_seqids -outfmt maskinfo_asn1_bin -out %s"
-                  % (input_file, format, mask_output_file))
-        #creating database
-        os.system("makeblastdb -in %s -input_type %s -dbtype nucl -parse_seqids -mask_data %s -out %s -title '%s'"
-                  % (input_file, format, mask_output_file, db_name, db_name))
-        #cheking dqatabase
-        os.system("blastdbcmd -db %s -info" % db_name)
+    def parallel_blast(self, blast_command, seqfile, database, outfile=None,
+                       blast_options=None, split_dir="splited_fasta",
+                       splited_output_dir="splited_output_dir",
+                       evalue=None, output_format=None,
+                       threads=None, num_of_seqs_per_scan=None,
+                       combine_output_to_single_file=True):
+
+        splited_dir = check_path(split_dir)
+        splited_out_dir = check_path(splited_output_dir)
+        save_mkdir(splited_dir)
+        save_mkdir(splited_out_dir)
+
+        number_of_files = num_of_seqs_per_scan if num_of_seqs_per_scan else 5 * threads if threads else 5 * self.threads
+        self.split_fasta(seqfile, splited_dir, num_of_files=number_of_files)
+        input_list_of_files = sorted(os.listdir(splited_dir))
+        list_of_files = []
+
+        for filename in input_list_of_files:
+            filename_prefix = split_filename(filename)[1]
+
+            input_file = "%s%s" % (splited_dir, filename)
+            output_file = "%s%s.hits" % (splited_out_dir, filename_prefix)
+
+            list_of_files.append((input_file, output_file))
+
+        options_list = []
+        out_files = []
+
+        for in_file, out_filename in list_of_files:
+
+            options = " -out %s" % out_filename
+
+            options += " -db %s" % database
+            options += " -query %s" % seqfile
+            options += " %s" % blast_options
+            options += " -evalue %f" % evalue if evalue else ""
+            options += " -outfmt %i" % output_format if output_format else ""
+            options_list.append(options)
+            out_files.append(out_filename)
+
+        self.parallel_execute(options_list, cmd=blast_command, threads=threads)
+
+        if combine_output_to_single_file:
+            CGAS.cat(out_files, output=outfile)
 
 
-class BLASTn(Tool):
+class BLASTn(Tool, BLASTPlus):
     """
     USAGE
       blastn [-h] [-help] [-import_search_strategy filename]
@@ -309,10 +346,38 @@ class BLASTn(Tool):
     def __init__(self, path="", max_threads=4):
         Tool.__init__(self, "blastn", path=path, max_threads=max_threads)
 
+    def parallel_blastn(self, seqfile, database, outfile=None,
+                        blast_options=None, split_dir="splited_fasta",
+                        splited_output_dir="splited_output_dir",
+                        evalue=None, output_format=None,
+                        threads=None, num_of_seqs_per_scan=None,
+                        combine_output_to_single_file=True):
 
-class BLASTp(Tool):
+        self.parallel_blast("blastn", seqfile, database, outfile=outfile,
+                            blast_options=blast_options, split_dir=split_dir,
+                            splited_output_dir=splited_output_dir,
+                            evalue=evalue, output_format=output_format,
+                            threads=threads, num_of_seqs_per_scan=num_of_seqs_per_scan,
+                            combine_output_to_single_file=combine_output_to_single_file)
+
+
+class BLASTp(Tool, BLASTPlus):
     def __init__(self, path="", max_threads=4):
         Tool.__init__(self, "blastp", path=path, max_threads=max_threads)
+
+    def parallel_blastp(self, seqfile, database, outfile=None,
+                        blast_options=None, split_dir="splited_fasta",
+                        splited_output_dir="splited_output_dir",
+                        evalue=None, output_format=None,
+                        threads=None, num_of_seqs_per_scan=None,
+                        combine_output_to_single_file=True):
+
+        self.parallel_blast("blastp", seqfile, database, outfile=outfile,
+                            blast_options=blast_options, split_dir=split_dir,
+                            splited_output_dir=splited_output_dir,
+                            evalue=evalue, output_format=output_format,
+                            threads=threads, num_of_seqs_per_scan=num_of_seqs_per_scan,
+                            combine_output_to_single_file=combine_output_to_single_file)
 
 
 class DustMasker(Tool):

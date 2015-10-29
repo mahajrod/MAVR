@@ -1,15 +1,10 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import os
-import sys
 import argparse
 
-from collections import OrderedDict
-
 from Bio import SeqIO
-from BCBio import GFF
-
-from Routines.File import read_ids, make_list_of_path_to_files
+from Routines.File import make_list_of_path_to_files
 from Routines.Sequence import record_by_expression_generator
 
 
@@ -34,5 +29,3 @@ print("Parsing %s..." % (args.input if isinstance(args.input, str) else ",".join
 sequence_dict = SeqIO.index_db(tmp_index_file, args.input, format=args.input_format)
 SeqIO.write(record_by_expression_generator(sequence_dict), args.output, format=args.output_format)
 os.remove(tmp_index_file)
-
-
