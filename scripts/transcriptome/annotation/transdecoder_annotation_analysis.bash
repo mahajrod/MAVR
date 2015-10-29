@@ -61,9 +61,9 @@ ${MAVR_DIR}/scripts/blast/filter_blast_output_by_ids.py -m query -f blast-tab \
                                                         -i ${SWISSPROT_BLAST_TAB_HIT_FILE} \
                                                         -o ${DATA_PREFIX}.complete.100+.swissprot.hits
 
-awk -F'|' '{print "%s|%s\n", $1, $2}' ${DATA_PREFIX}.complete.100+.pep.ids > ${DATA_PREFIX}.complete.100+.mRNA.ids
-awk -F'|' '{print "%s|%s\n", $1, $2}' ${DATA_PREFIX}.complete.pep.ids > ${DATA_PREFIX}.complete.mRNA.ids
-awk -F'|' '{print "%s|%s\n", $1, $2}' ${DATA_PREFIX}.100+.pep.ids > ${DATA_PREFIX}.100+.mRNA.ids
+awk -F'|' '{printf "%s|%s\n", $1, $2}' ${DATA_PREFIX}.complete.100+.pep.ids > ${DATA_PREFIX}.complete.100+.mRNA.ids
+awk -F'|' '{printf "%s|%s\n", $1, $2}' ${DATA_PREFIX}.complete.pep.ids > ${DATA_PREFIX}.complete.mRNA.ids
+awk -F'|' '{printf "%s|%s\n", $1, $2}' ${DATA_PREFIX}.100+.pep.ids > ${DATA_PREFIX}.100+.mRNA.ids
 
 
 ALL_PEP_NUMBER=`grep -cP "^>" ${DATA_PREFIX}.pep`

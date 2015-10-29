@@ -90,9 +90,9 @@ def get_total_feature_lengths(lengths_dict, out_filename=None):
     return total_lengths
 
 
-#--------------------Search--------------------------
+# --------------------Search--------------------------
 #              !!!!IMPORTANT!!!!!!
-#in this section python notation for coordinates inside sequence is used
+# in this section python notation for coordinates inside sequence is used
 def find_homopolymer_end(seq, nucleotide, seq_length, start, search_type="perfect",
                        max_single_insert_size=1, max_total_insert_length=None, max_number_of_insertions=2):
     shift_list = []
