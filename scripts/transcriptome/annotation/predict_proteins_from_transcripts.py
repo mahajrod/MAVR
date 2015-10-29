@@ -55,7 +55,8 @@ parser.add_argument("-n", "--number_of_top_orfs_for_training", action="store", t
                     dest="number_of_top_orfs_for_training",
                     help="If no --number_of_top_orfs_for_training, top longest ORFs to train Markov "
                          "Model (hexamer stats) (default: 500)")
-
+parser.add_argument("-c", "--hmmer_dir", action="store", dest="hmmer_dir",
+                    help="Directory with hmmer v3.1 binaries")
 args = parser.parse_args()
 
 input_filename_list = split_filename(args.input)
@@ -78,6 +79,7 @@ domtblout_outfile = "%s%s.pfam.domtblout" % (hmmscan_dir, input_filename) if arg
 blastp_outfile = "%s%s.blastp.hits" % (blastp_dir, input_filename) if args.blast_database else None
 blastp_split_dir = "%ssplited_fasta_dir/" % blastp_dir
 blastp_splited_output_dir = "%ssplited_output_dir" % blastp_dir
+HMMER3.path = args.hmmer_dir
 HMMER3.threads = args.threads
 BLASTp.threads = args.threads
 
