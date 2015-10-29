@@ -8,7 +8,7 @@ from Tools.HMMER import HMMER3
 from Tools.BLAST import BLASTp
 from Tools.Annotation import TransDecoder
 
-from Routines.File import split_filename
+from Routines.File import split_filename, save_mkdir
 
 parser = argparse.ArgumentParser()
 
@@ -67,8 +67,8 @@ pep_from_longest_orfs = "%s/longest_orfs.pep" % workdir_dir
 hmmscan_dir = "hmmscan_vs_pfam/"
 blastp_dir = "blastp_vs_uniref/"
 
-os.mkdir(hmmscan_dir)
-os.mkdir(blastp_dir)
+save_mkdir(hmmscan_dir)
+save_mkdir(blastp_dir)
 
 hmmscan_splited_fasta_dir = "%ssplited_fasta_dir/" % hmmscan_dir
 splited_domtblout_dir = "%ssplited_domtblout_dir/" % hmmscan_dir
