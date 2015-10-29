@@ -34,24 +34,24 @@ parser.add_argument("-g", "--genetic_code", action="store", dest="genetic_code",
                          "\tMitochondrial-Yeasts\n"
                          "\tMitochondrial-Euascomycetes\n"
                          "\tMitochondrial-Protozoans")
-parser.add_argument("-m", "--min_protein_length", action="store", dest="min_prot_len", default=100,
+parser.add_argument("-m", "--min_protein_length", action="store", dest="min_prot_len", default=100, type=int,
                     help="Minimum protein length. Default: 100")
 parser.add_argument("-S", "--analyze_only_top_strand", action="store_true", dest="analyze_only_top_strand",
                     help="Analyze only top strand. Default: False")
-parser.add_argument("-t", "--threads", action="store", dest="threads", default=1,
+parser.add_argument("-t", "--threads", action="store", dest="threads", default=1, type=int,
                     help="Minimum protein length. Default: 100")
 parser.add_argument("-p", "--pfam_database", action="store", dest="pfam_database",
                     help="File with hmm3 profiles from pfam database")
 parser.add_argument("-b", "--blast_database", action="store", dest="blast_database",
                     help="Blast database with domains")
-parser.add_argument("-r", "--min_orf_len_if_no_other_evidence", action="store",
+parser.add_argument("-r", "--min_orf_len_if_no_other_evidence", action="store", type=int,
                     dest="min_orf_len_if_no_other_evidence",
                     help="Retain all ORFs found that are equal or longer than these many nucleotides "
                          "even if no other evidence")
 parser.add_argument("-a", "--file_with_orfs_for_training", action="store", dest="file_with_orfs_for_training",
                     help="FASTA file with ORFs to train Markov Mod for protein identification; "
                          "otherwise longest non-redundant ORFs used")
-parser.add_argument("-n", "--number_of_top_orfs_for_training", action="store",
+parser.add_argument("-n", "--number_of_top_orfs_for_training", action="store", type=int,
                     dest="number_of_top_orfs_for_training",
                     help="If no --number_of_top_orfs_for_training, top longest ORFs to train Markov "
                          "Model (hexamer stats) (default: 500)")
