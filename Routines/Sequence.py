@@ -265,7 +265,7 @@ def get_kmer_dict_as_seq_records(sequence, kmer_length, start=1, end=None, id_pr
         raise ValueError("End position should be less than length")
     stop = length if end is None else end
     for i in range(start-1, stop-kmer_length):
-        record_id = "%s_%i-%i" % (id_prefix, i + 1, i + kmer_length - 1)
+        record_id = "%s_%i-%i" % (id_prefix, i + 1, i + kmer_length)
         kmer_dict[record_id] = SeqRecord(seq=sequence[i:i+kmer_length], id=record_id)
     return kmer_dict
 
