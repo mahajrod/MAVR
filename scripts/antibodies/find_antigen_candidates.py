@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-
+import os
 import argparse
 from os import path
 
 from Bio import SeqIO
 from Tools.BLAST import BLASTp
+from Tools.LinuxTools import CGAS
 from Routines.Sequence import get_kmer_dict_as_seq_records, record_by_expression_generator
 
 
@@ -13,8 +14,9 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_file", action="store", dest="input", required=True,
                     help="Input fasta file with protein sequence")
-parser.add_argument("-r", "--protein_id", action="store", dest="protein_id", required=True,
-                    help="Id of proteins to ignore in species blast search")
+parser.add_argument("-r", "--protein_ids", action="store", dest="protein_ids", required=True,
+                    type=lambda s: s.split(","),
+                    help="Comma-separated list of ids proteins to ignore in species blast search")
 parser.add_argument("-s", "--start", action="store", dest="start", default=1, type=int,
                     help="Start of region of interest in protein(1-based).")
 parser.add_argument("-e", "--end", action="store", dest="end", type=int,
@@ -37,22 +39,42 @@ args = parser.parse_args()
 
 kmer_file = "%s.kmer.fasta" % args.out_prefix
 species_blast_hits = "%s.species.blast.hits" % args.out_prefix
-immune_blast_hits = "%s.immune.blast.hits" % args.out_prefix
+species_blast_hits_no_self_hits = "%s.species.no_self_hits.blast.hits" % args.out_prefix
+species_blast_hits_no_self_hits_ids = "%s.species.no_self_hits.blast.ids" % args.out_prefix
 
+immune_blast_hits = "%s.immune.blast.hits" % args.out_prefix
+immune_blast_hits_ids = "%s.immune.blast.ids" % args.out_prefix
+
+nonspecific_fragments_ids = "%s.fragments_with_hits.ids" % args.out_prefix
 BLASTp.threads = args.threads
 
 sequence = list(SeqIO.parse(args.input, format="fasta"))[0]
 
-print("Constructing kmer list...")
+print("Constructing kmer list...\n")
 #print len(sequence.seq)
 kmer_dict = get_kmer_dict_as_seq_records(sequence.seq, args.length, args.start, args.end)
 kmer_ids = list(kmer_dict.keys())
 
 SeqIO.write(record_by_expression_generator(kmer_dict), kmer_file, format="fasta")
 
-print("Blast of kmers vs species peptides")
+print("Blast of kmers vs species peptides\n")
 BLASTp.search(kmer_file, args.species_db, outfile=species_blast_hits,
               blast_options=None, evalue=args.species_evalue, output_format=6)
-print("Blast of kmers vs immunogenetic species peptides")
+
+species_grep_string = "grep -v %s %s > %s" % ("|".join(args.protein_ids), species_blast_hits,
+                                              species_blast_hits_no_self_hits)
+species_awk_string = "awk '{print$1}' %s | uniq > %s" % (species_blast_hits_no_self_hits,
+                                                         species_blast_hits_no_self_hits_ids)
+
+os.system(species_grep_string)
+os.system(species_awk_string)
+
+print("Blast of kmers vs immunogenetic species peptides\n")
 BLASTp.search(kmer_file, args.immune_db, outfile=immune_blast_hits,
               blast_options=None, evalue=args.immune_evalue, output_format=6)
+immune_awk_string = "awk '{print$1}' %s | uniq > %s" % (immune_blast_hits,
+                                                        immune_blast_hits_ids)
+os.system(immune_awk_string)
+
+cat_string = "cat %s %s > %s" % (species_blast_hits_no_self_hits_ids, immune_blast_hits_ids, nonspecific_fragments_ids)
+os.system(cat_string)
