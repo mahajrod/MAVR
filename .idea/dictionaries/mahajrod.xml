@@ -3298,6 +3298,7 @@
       <w>transform.data.frame</w>
       <w>transform.default</w>
       <w>treefam</w>
+      <w>treefile</w>
       <w>trellis.currentLayout</w>
       <w>trellis.device</w>
       <w>trellis.focus</w>

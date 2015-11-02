@@ -192,7 +192,7 @@ class IdList(list):
             if header is True and self.header:
                 out_fd.write(self.header + "\n")
         for entry in self:
-            out_fd.write(entry + "\n")
+            out_fd.write(str(entry) + "\n")
 
         if (not isinstance(filename, file)) or close_after_if_file_object:
             out_fd.close()

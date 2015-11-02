@@ -246,6 +246,29 @@ def record_generator(annotations_dict, sequence_dict, feature_types_list):
                 yield SeqRecord(sequence, id=feature.id, description=feature.qualifiers["Name"][0] \
                       if "Name" in feature.qualifiers else "")
 
+
+def get_kmer_dict(sequence, kmer_length, start=1, end=None):  # positions are one-based
+    kmer_dict = {}
+    length = len(sequence)
+    if end > length:
+        raise ValueError("End position should be less than length")
+    stop = length if end is None else end
+    for i in range(start-1, stop-kmer_length):
+        kmer_dict[i] = sequence[i, i + 4]
+    return kmer_dict
+
+
+def get_kmer_dict_as_seq_records(sequence, kmer_length, start=1, end=None, id_prefix="id"):  # positions are one-based
+    kmer_dict = {}
+    length = len(sequence)
+    if end > length:
+        raise ValueError("End position should be less than length")
+    stop = length if end is None else end
+    for i in range(start-1, stop-kmer_length):
+        record_id = "%s_%i-%i" % (id_prefix, i, i + 3)
+        kmer_dict[record_id] = SeqRecord(seq=sequence[i, i + 4], id=record_id)
+    return kmer_dict
+
 if __name__ == "__main__":
     sequence = "CTGGCAAAGACCCAAACATCGACCACATCGAACAGCCACACCACCACCAACACTGTGCACCACTTCCGATTTCCAGCACCCCTTTTTGCCACTCTTTTTACGTAGTTTTGGCCATGCCTAGTTGTTTCCCAGTAGTCAACTTAAACGTATTTATTTTAATAAATTTCCACAAGGTTC"
     coords, length = find_homopolymers(sequence, "T", min_size=2, search_type="non_perfect",

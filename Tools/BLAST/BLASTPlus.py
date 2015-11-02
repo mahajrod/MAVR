@@ -13,6 +13,19 @@ class BLASTPlus(Tool):
     def __init__(self, path="", max_threads=4):
         Tool.__init__(self, "blastn", path=path, max_threads=max_threads)
 
+    def blast_search(self, blast_command, seqfile, database, outfile=None,
+               blast_options=None, evalue=None, output_format=None):
+
+        options = " -num_threads %i" % self.threads
+        options += " -out %s" % outfile if outfile else ""
+        options += " -db %s" % database
+        options += " -query %s" % seqfile
+        options += " %s" % blast_options
+        options += " -evalue %f" % evalue if evalue else ""
+        options += " -outfmt %i" % output_format if output_format else ""
+
+        self.execute(options, cmd=blast_command)
+
     def parallel_blast(self, blast_command, seqfile, database, outfile=None,
                        blast_options=None, split_dir="splited_fasta",
                        splited_output_dir="splited_output_dir",
@@ -346,6 +359,12 @@ class BLASTn(Tool, BLASTPlus):
     def __init__(self, path="", max_threads=4):
         Tool.__init__(self, "blastn", path=path, max_threads=max_threads)
 
+    def search(self, seqfile, database, outfile=None,
+               blast_options=None, evalue=None, output_format=None):
+
+        self.blast_search("blastn", seqfile, database, outfile=outfile, blast_options=blast_options,
+                          evalue=evalue, output_format=output_format)
+
     def parallel_blastn(self, seqfile, database, outfile=None,
                         blast_options=None, split_dir="splited_fasta",
                         splited_output_dir="splited_output_dir",
@@ -364,6 +383,12 @@ class BLASTn(Tool, BLASTPlus):
 class BLASTp(Tool, BLASTPlus):
     def __init__(self, path="", max_threads=4):
         Tool.__init__(self, "blastp", path=path, max_threads=max_threads)
+
+    def search(self, seqfile, database, outfile=None,
+               blast_options=None, evalue=None, output_format=None):
+
+        self.blast_search("blastp", seqfile, database, outfile=outfile, blast_options=blast_options,
+                          evalue=evalue, output_format=output_format)
 
     def parallel_blastp(self, seqfile, database, outfile=None,
                         blast_options=None, split_dir="splited_fasta",

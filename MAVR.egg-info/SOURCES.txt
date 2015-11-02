@@ -24,6 +24,7 @@ Parsers/FastQC.py
 Parsers/GFF.py
 Parsers/GVF.py
 Parsers/General.py
+Parsers/PAML.py
 Parsers/R.py
 Parsers/TRF.py
 Parsers/VCF.py
