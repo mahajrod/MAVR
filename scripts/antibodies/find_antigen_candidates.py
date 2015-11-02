@@ -25,9 +25,9 @@ parser.add_argument("-v", "--species_evalue", action="store", dest="species_eval
                     help="E-value cutoff for species blast search")
 parser.add_argument("-u", "--immune_db", action="store", dest="immune_db", required=True,
                     help="Protein blast db of species to be immunized")
-parser.add_argument("-v", "--immune_evalue", action="store", dest="immune_evalue", default=0.01, type=float,
+parser.add_argument("-m", "--immune_evalue", action="store", dest="immune_evalue", default=0.01, type=float,
                     help="E-value cutoff for immune blast search")
-parser.add_argument("-m", "--length", action="store", dest="length", default=15, type=int,
+parser.add_argument("-l", "--length", action="store", dest="length", default=15, type=int,
                     help="Length of antigen")
 parser.add_argument("-o", "--output_prefix", action="store", dest="out_prefix", default="output",
                     help="Prefix of output files")
