@@ -44,7 +44,7 @@ BLASTp.threads = args.threads
 sequence = list(SeqIO.parse(args.input, format="fasta"))[0]
 
 print("Constructing kmer list...")
-kmer_dict = get_kmer_dict_as_seq_records(sequence, args.length, args.start, args.end)
+kmer_dict = get_kmer_dict_as_seq_records(sequence.seq, args.length, args.start, args.end)
 kmer_ids = list(kmer_dict.keys())
 
 SeqIO.write(record_by_expression_generator(kmer_dict), kmer_file, format="fasta")
