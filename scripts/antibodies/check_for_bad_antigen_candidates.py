@@ -46,6 +46,9 @@ immune_blast_hits = "%s.immune.blast.hits" % args.out_prefix
 immune_blast_hits_ids = "%s.immune.blast.ids" % args.out_prefix
 
 nonspecific_fragments_ids = "%s.fragments_with_hits.ids" % args.out_prefix
+bad_antigen_candidates_coordinates = "%s.bad_candidates.coordinates" % args.out_prefix
+bad_antigen_candidates_coordinates_sorted = "%s.bad_candidates.sorted.coordinates" % args.out_prefix
+
 BLASTp.threads = args.threads
 
 sequence = list(SeqIO.parse(args.input, format="fasta"))[0]
@@ -76,5 +79,19 @@ immune_awk_string = "awk '{print$1}' %s | uniq > %s" % (immune_blast_hits,
                                                         immune_blast_hits_ids)
 os.system(immune_awk_string)
 
-cat_string = "cat %s %s | sort -k1 > %s" % (species_blast_hits_no_self_hits_ids, immune_blast_hits_ids, nonspecific_fragments_ids)
+cat_string = "cat %s %s > %s" % (species_blast_hits_no_self_hits_ids, immune_blast_hits_ids, nonspecific_fragments_ids)
 os.system(cat_string)
+
+with open(nonspecific_fragments_ids, "r") as in_fd:
+    with open(bad_antigen_candidates_coordinates, "w") as out_fd:
+        out_fd.write("#start\tend\n")
+        for line in in_fd:
+            start, stop = line.strip().split("_")[-1].split("-")
+            out_fd.write("%s\t%s\n")
+
+sort_string = "awk 'NR == 1; NR > 1 {print $0 | \"sort -k1n -k2n\"}'  %s > %s" % (bad_antigen_candidates_coordinates, bad_antigen_candidates_coordinates_sorted)
+os.system(sort_string)
+
+
+
+
