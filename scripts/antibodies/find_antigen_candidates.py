@@ -15,9 +15,9 @@ parser.add_argument("-i", "--input_file", action="store", dest="input", required
                     help="Input fasta file with protein sequence")
 parser.add_argument("-r", "--protein_id", action="store", dest="protein_id", required=True,
                     help="Id of proteins to ignore in species blast search")
-parser.add_argument("-s", "--start", action="store", dest="start", default=1,
+parser.add_argument("-s", "--start", action="store", dest="start", default=1, type=int,
                     help="Start of region of interest in protein(1-based).")
-parser.add_argument("-e", "--end", action="store", dest="end",
+parser.add_argument("-e", "--end", action="store", dest="end", type=int,
                     help="End of region of interest in protein(1-based).")
 parser.add_argument("-d", "--db", action="store", dest="species_db", required=True,
                     help="Protein blast db of species")
