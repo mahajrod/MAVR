@@ -52,7 +52,7 @@ SeqIO.write(record_by_expression_generator(kmer_dict), kmer_file, format="fasta"
 
 print("Blast of kmers vs species peptides")
 BLASTp.search(kmer_file, args.species_db, outfile=species_blast_hits,
-              blast_options=None, evalue=args.species_evalue, output_format=5)
+              blast_options=None, evalue=args.species_evalue, output_format=6)
 print("Blast of kmers vs immunogenetic species peptides")
 BLASTp.search(kmer_file, args.immune_db, outfile=immune_blast_hits,
-              blast_options=None, evalue=args.immune_evalue, output_format=5)
+              blast_options=None, evalue=args.immune_evalue, output_format=6)
