@@ -248,7 +248,7 @@ def record_generator(annotations_dict, sequence_dict, feature_types_list):
 
 
 def get_kmer_dict(sequence, kmer_length, start=1, end=None):  # positions are one-based
-    kmer_dict = {}
+    kmer_dict = OrderedDict()
     length = len(sequence)
     if end > length:
         raise ValueError("End position should be less than length")
@@ -259,7 +259,7 @@ def get_kmer_dict(sequence, kmer_length, start=1, end=None):  # positions are on
 
 
 def get_kmer_dict_as_seq_records(sequence, kmer_length, start=1, end=None, id_prefix="id"):  # positions are one-based
-    kmer_dict = {}
+    kmer_dict = OrderedDict()
     length = len(sequence)
     if end > length:
         raise ValueError("End position should be less than length")
