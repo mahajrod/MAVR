@@ -87,7 +87,7 @@ with open(nonspecific_fragments_ids, "r") as in_fd:
         out_fd.write("#start\tend\n")
         for line in in_fd:
             start, stop = line.strip().split("_")[-1].split("-")
-            out_fd.write("%s\t%s\n")
+            out_fd.write("%s\t%s\n" % (start, stop))
 
 sort_string = "awk 'NR == 1; NR > 1 {print $0 | \"sort -k1n -k2n\"}'  %s > %s" % (bad_antigen_candidates_coordinates, bad_antigen_candidates_coordinates_sorted)
 os.system(sort_string)
