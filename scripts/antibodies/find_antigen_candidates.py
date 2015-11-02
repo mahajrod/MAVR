@@ -21,11 +21,11 @@ parser.add_argument("-e", "--end", action="store", dest="end", type=int,
                     help="End of region of interest in protein(1-based).")
 parser.add_argument("-d", "--db", action="store", dest="species_db", required=True,
                     help="Protein blast db of species")
-parser.add_argument("-v", "--species_evalue", action="store", dest="species_evalue", default=0.01, type=float,
+parser.add_argument("-v", "--species_evalue", action="store", dest="species_evalue", type=float,
                     help="E-value cutoff for species blast search")
 parser.add_argument("-u", "--immune_db", action="store", dest="immune_db", required=True,
                     help="Protein blast db of species to be immunized")
-parser.add_argument("-m", "--immune_evalue", action="store", dest="immune_evalue", default=0.01, type=float,
+parser.add_argument("-m", "--immune_evalue", action="store", dest="immune_evalue", type=float,
                     help="E-value cutoff for immune blast search")
 parser.add_argument("-l", "--length", action="store", dest="length", default=15, type=int,
                     help="Length of antigen")
