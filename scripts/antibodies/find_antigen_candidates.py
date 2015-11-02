@@ -76,5 +76,5 @@ immune_awk_string = "awk '{print$1}' %s | uniq > %s" % (immune_blast_hits,
                                                         immune_blast_hits_ids)
 os.system(immune_awk_string)
 
-cat_string = "cat %s %s > %s" % (species_blast_hits_no_self_hits_ids, immune_blast_hits_ids, nonspecific_fragments_ids)
+cat_string = "cat %s %s | sort -k1 > %s" % (species_blast_hits_no_self_hits_ids, immune_blast_hits_ids, nonspecific_fragments_ids)
 os.system(cat_string)
