@@ -41,7 +41,7 @@ immune_blast_hits = "%s.immune.blast.hits" % args.out_prefix
 
 BLASTp.threads = args.threads
 
-sequence = list(SeqIO.parse(args.input), format="fasta")[0]
+sequence = list(SeqIO.parse(args.input, format="fasta"))[0]
 
 print("Constructing kmer list...")
 kmer_dict = get_kmer_dict_as_seq_records(sequence, args.length, args.start, args.end)
