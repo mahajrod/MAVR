@@ -20,7 +20,7 @@ class BLASTPlus(Tool):
         options += " -out %s" % outfile if outfile else ""
         options += " -db %s" % database
         options += " -query %s" % seqfile
-        options += " %s" % blast_options
+        options += " %s" % blast_options if blast_options else ""
         options += " -evalue %f" % evalue if evalue else ""
         options += " -outfmt %i" % output_format if output_format else ""
 
@@ -60,7 +60,7 @@ class BLASTPlus(Tool):
 
             options += " -db %s" % database
             options += " -query %s" % seqfile
-            options += " %s" % blast_options
+            options += " %s" % blast_options if blast_options else ""
             options += " -evalue %f" % evalue if evalue else ""
             options += " -outfmt %i" % output_format if output_format else ""
             options_list.append(options)
