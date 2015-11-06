@@ -1,6 +1,9 @@
 #!/usr/bin/env python
+
+from collections import OrderedDict
+
 from ete2 import Tree, TreeStyle, AttrFace, faces, NodeStyle
-from CustomCollections.GeneralCollections import IdList
+from CustomCollections.GeneralCollections import IdList, TwoLvlDict
 
 
 class CodeMLReport():
@@ -62,7 +65,27 @@ class CodeMLReport():
             feature_values_list.append(node.dist)
         return feature_values_list
 
+    @staticmethod
+    def _get_tree_dist_dict(tree):
+        feature_values_dict = OrderedDict()
+        for node in tree.traverse():
+            if not node.is_leaf():
+                continue
+            feature_values_dict[node.name] = node.dist
+        return feature_values_dict
 
+    def get_leaf_values(self):
+        leaf_values_dict = TwoLvlDict()
+        dN_dict = self._get_tree_dist_dict(self.dNtree)
+        dS_dict = self._get_tree_dist_dict(self.dStree)
+        W_fict = self._get_tree_dist_dict(self.Wtree)
+
+        leaf_values_dict["dN"] = dN_dict
+        leaf_values_dict["dS"] = dS_dict
+        leaf_values_dict["W"] = W_fict
+
+        leaf_values_dict.write("leaf_values.t")
+        return leaf_values_dict
 
     def get_feature_values(self, mode="all"):
         if mode == "all":

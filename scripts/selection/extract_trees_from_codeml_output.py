@@ -23,7 +23,7 @@ codeml_report.get_feature_values(mode="all")
 codeml_report.get_feature_values(mode="leaves")
 codeml_report.get_feature_values(mode="internal")
 codeml_report.get_all_values("dN_dS_W.t")
-
+codeml_report.get_leaf_values()
 if codeml_report.branches_with_positive_selection():
     sys.stderr.write("Presence of branches with positive selection\n")
 
