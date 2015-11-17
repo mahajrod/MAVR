@@ -73,7 +73,7 @@ class AUGUSTUS(Tool):
             """
 
         options = ""
-        options += " %s" % other_options
+        options += (" %s" % other_options) if other_options else ""
         options += " --strand=%s" % strand
         options += " --genemodel=%s" % gene_model
         options += " --gff3=%s" % ("on" if output_gff3 else "no")

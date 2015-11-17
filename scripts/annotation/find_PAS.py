@@ -38,3 +38,4 @@ with open(args.output, "w") as out_fd:
     for record_id in sequence_dict:
         record_length = len(sequence_dict[record_id].seq)
         for i in range(0, record_length - 6):
+

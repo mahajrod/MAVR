@@ -2,26 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/RepeatMasking/RepeatMasker.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/blast/blast_all_vs_all.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/cat_genomes/caracal_augustus_cat_model.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/repeat_masking/convert_rm_out_to_gff.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/Gaitway/human_genome/count_repeats.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/Gaitway/human_genome/extract_chromosome_annotations.grep" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/annotation/find_PAS.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/Gaitway/human_genome/rename_chromosomes.sed" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/Gaitway/human_genome/split_human_gff_annotation_by_gene_biotype.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/Gaitway/human_genome/split_human_repeat_masking_by_repeat_type.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" afterPath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Abstract.py" afterPath="$PROJECT_DIR$/Tools/Abstract.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/BLAST/BLASTPlus.py" afterPath="$PROJECT_DIR$/Tools/BLAST/BLASTPlus.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/SOURCES.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/SOURCES.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Sequence.py" afterPath="$PROJECT_DIR$/Routines/Sequence.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/RepeatMasking/TRF.py" afterPath="$PROJECT_DIR$/Tools/RepeatMasking/TRF.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Annotation/__init__.py" afterPath="$PROJECT_DIR$/Tools/Annotation/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/RepeatMasking/__init__.py" afterPath="$PROJECT_DIR$/Tools/RepeatMasking/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" afterPath="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/find_PAS.py" afterPath="$PROJECT_DIR$/scripts/annotation/find_PAS.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -63,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AUGUSTUS.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AUGUSTUS.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1410" max-vertical-offset="2322">
-              <caret line="97" column="65" selection-start-line="97" selection-start-column="65" selection-end-line="97" selection-end-column="65" />
+            <state vertical-scroll-proportion="0.32894737" vertical-offset="1032" max-vertical-offset="2322">
+              <caret line="74" column="20" selection-start-line="74" selection-start-column="20" selection-end-line="74" selection-end-column="20" />
               <folding>
                 <element signature="e#22#31#0" expanded="true" />
               </folding>
@@ -85,10 +67,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parallel_augustus.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="parallel_augustus.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_augustus.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8486842" vertical-offset="0" max-vertical-offset="912">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="882">
               <caret line="43" column="105" selection-start-line="43" selection-start-column="105" selection-end-line="43" selection-end-column="105" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
@@ -112,8 +94,8 @@
       <file leaf-file-name="find_PAS.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/annotation/find_PAS.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="828">
-              <caret line="38" column="56" selection-start-line="38" selection-start-column="56" selection-end-line="38" selection-end-column="56" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="846">
+              <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
@@ -226,12 +208,12 @@
         <option value="$PROJECT_DIR$/projects/Gaitway/human_genome/count_repeats.sh" />
         <option value="$PROJECT_DIR$/scripts/blast/blast_all_vs_all.py" />
         <option value="$PROJECT_DIR$/Tools/BLAST/BLASTPlus.py" />
-        <option value="$PROJECT_DIR$/scripts/annotation/find_PAS.py" />
         <option value="$PROJECT_DIR$/projects/cat_genomes/caracal_augustus_cat_model.sh" />
         <option value="$PROJECT_DIR$/Tools/Abstract.py" />
         <option value="$PROJECT_DIR$/Tools/Annotation/__init__.py" />
-        <option value="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" />
         <option value="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" />
+        <option value="$PROJECT_DIR$/scripts/annotation/find_PAS.py" />
+        <option value="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" />
       </list>
     </option>
   </component>
@@ -870,12 +852,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00009" summary="additions in scripts/expansion&#10;">
-      <created>1443603227278</created>
-      <option name="number" value="00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1443603227278</updated>
-    </task>
     <task id="LOCAL-00010" summary="additions in scripts/expansion&#10;">
       <created>1443604649421</created>
       <option name="number" value="00010" />
@@ -1164,13 +1140,20 @@
       <option name="project" value="LOCAL" />
       <updated>1446771346046</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="added paralleled augustus&#10;">
+      <created>1447773464614</created>
+      <option name="number" value="00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1447773464642</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="25" width="1922" height="1055" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1187,7 +1170,6 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1239,7 +1221,8 @@
     <MESSAGE value="additions in scripts/expansion&#10;" />
     <MESSAGE value="additions in scripts/alignment&#10;" />
     <MESSAGE value="additions&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="additions&#10;" />
+    <MESSAGE value="added paralleled augustus&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="added paralleled augustus&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1566,16 +1549,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/annotation/find_PAS.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="828">
-          <caret line="38" column="56" selection-start-line="38" selection-start-column="56" selection-end-line="38" selection-end-column="56" />
-          <folding>
-            <element signature="e#54#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-22.5" vertical-offset="0" max-vertical-offset="3312">
@@ -1620,22 +1593,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py">
+    <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_augustus.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1410" max-vertical-offset="2322">
-          <caret line="97" column="65" selection-start-line="97" selection-start-column="65" selection-end-line="97" selection-end-column="65" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="882">
+          <caret line="43" column="105" selection-start-line="43" selection-start-column="105" selection-end-line="43" selection-end-column="105" />
           <folding>
-            <element signature="e#22#31#0" expanded="true" />
+            <element signature="e#54#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_augustus.py">
+    <entry file="file://$PROJECT_DIR$/scripts/annotation/find_PAS.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8486842" vertical-offset="0" max-vertical-offset="912">
-          <caret line="43" column="105" selection-start-line="43" selection-start-column="105" selection-end-line="43" selection-end-column="105" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="846">
+          <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
           <folding>
             <element signature="e#54#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32894737" vertical-offset="1032" max-vertical-offset="2322">
+          <caret line="74" column="20" selection-start-line="74" selection-start-column="20" selection-end-line="74" selection-end-column="20" />
+          <folding>
+            <element signature="e#22#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
