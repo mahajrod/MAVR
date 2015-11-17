@@ -59,7 +59,7 @@ class BLASTPlus(Tool):
             options = " -out %s" % out_filename
 
             options += " -db %s" % database
-            options += " -query %s" % seqfile
+            options += " -query %s" % in_file
             options += " %s" % blast_options if blast_options else ""
             options += " -evalue %f" % evalue if evalue else ""
             options += " -outfmt %i" % output_format if output_format else ""

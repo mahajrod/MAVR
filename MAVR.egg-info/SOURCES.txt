@@ -59,6 +59,7 @@ Tools/Alignment/Bowtie2.py
 Tools/Alignment/Novoalign.py
 Tools/Alignment/TMAP.py
 Tools/Alignment/__init__.py
+Tools/Annotation/AUGUSTUS.py
 Tools/Annotation/GlimerHMM.py
 Tools/Annotation/SNPeff.py
 Tools/Annotation/TransDecoder.py
@@ -119,6 +120,7 @@ Tools/Phylogenetics/__init__.py
 Tools/Picard/AddOrReplaceReadGroups.py
 Tools/Picard/CreateSequenceDictionary.py
 Tools/Picard/__init__.py
+Tools/RepeatMasking/RepeatMasker.py
 Tools/RepeatMasking/TRF.py
 Tools/RepeatMasking/__init__.py
 Tools/Samtools/Samtools.py

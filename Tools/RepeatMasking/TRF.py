@@ -10,6 +10,7 @@ from Parsers.TRF import CollectionTRF
 from Routines.File import split_filename, save_mkdir
 from Tools.LinuxTools import CGAS
 
+
 class TRF(Tool):
     def __init__(self, path="", max_threads=4):
         Tool.__init__(self, "trf", path=path, max_threads=max_threads)

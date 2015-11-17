@@ -42,6 +42,7 @@ class Tool():
     def parallel_execute(self, options_list, cmd=None, capture_output=False, threads=None):
         command = cmd if cmd is not None else self.cmd
         exe_string_list = [check_path(self.path) + command + " " + options for options in options_list]
+
         with open("exe_list.t", "w") as exe_fd:
             for entry in exe_string_list:
                 exe_fd.write("%s\n" % entry)
@@ -81,8 +82,7 @@ class Tool():
                         "%s/%s_%i.fasta" % (output_dir, out_prefix, split_index), format="fasta")
         os.remove("temp.idx")
 
-    @staticmethod
-    def split_fasta_by_seq_len(input_fasta, output_dir, max_len_per_file=100000, output_prefix=None):
+    def split_fasta_by_seq_len(self, input_fasta, output_dir, max_len_per_file=None, output_prefix=None):
         """
         by default splits input files into files with num_of_recs_per_file.
         if num_of_files is set num_of_recs_per_file is ignored.
@@ -91,6 +91,12 @@ class Tool():
 
         out_prefix = split_filename(input_fasta)[1] if output_prefix is None else output_prefix
         sequence_dict = SeqIO.index_db("temp.idx", input_fasta, "fasta")
+        length = 0
+
+        for record_id in sequence_dict:
+            length += len(sequence_dict[record_id].seq)
+            
+        max_len = max_len_per_file if max_len_per_file else int(length / self.threads)
 
         split_index = 1
         id_list = []
@@ -98,24 +104,24 @@ class Tool():
 
         for record_id in sequence_dict:
             record_length = len(sequence_dict[record_id].seq)
-            if record_length >= max_len_per_file:
+            if record_length >= max_len:
                 SeqIO.write(sequence_dict[record_id],
                             "%s/%s_%i.fasta" % (output_dir, out_prefix, split_index), format="fasta")
 
-            elif total_length + record_length > max_len_per_file:
+            elif total_length + record_length > max_len:
                 SeqIO.write(record_by_id_generator(sequence_dict, id_list),
                             "%s/%s_%i.fasta" % (output_dir, out_prefix, split_index), format="fasta")
                 total_length = record_length
                 id_list = [record_id]
 
-            elif total_length + record_length == max_len_per_file:
+            elif total_length + record_length == max_len:
                 id_list.append(record_id)
                 SeqIO.write(record_by_id_generator(sequence_dict, id_list),
                             "%s/%s_%i.fasta" % (output_dir, out_prefix, split_index), format="fasta")
                 total_length = 0
                 id_list = []
 
-            elif total_length + record_length < max_len_per_file:
+            elif total_length + record_length < max_len:
                 id_list.append(record_id)
                 total_length += record_length
                 continue

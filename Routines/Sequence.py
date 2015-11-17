@@ -7,9 +7,9 @@ from collections import OrderedDict
 
 import numpy as np
 
+from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
-from Bio.Seq import Seq
 
 from CustomCollections.GeneralCollections import TwoLvlDict
 from Routines.Functions import output_dict
@@ -268,6 +268,22 @@ def get_kmer_dict_as_seq_records(sequence, kmer_length, start=1, end=None, id_pr
         record_id = "%s_%i-%i" % (id_prefix, i + 1, i + kmer_length)
         kmer_dict[record_id] = SeqRecord(seq=sequence[i:i+kmer_length], id=record_id)
     return kmer_dict
+
+
+def split_record_ids_by_expression(sequence_dict, expression):
+    """
+    splits record ids based on parameter of record
+    """
+    id_dict = OrderedDict()
+    for record_id in sequence_dict:
+
+        value = expression(sequence_dict[record_id])
+        if value not in id_dict:
+            id_dict[value] = [record_id]
+        else:
+            id_dict[value].append(record_id)
+
+    return id_dict
 
 if __name__ == "__main__":
     sequence = "CTGGCAAAGACCCAAACATCGACCACATCGAACAGCCACACCACCACCAACACTGTGCACCACTTCCGATTTCCAGCACCCCTTTTTGCCACTCTTTTTACGTAGTTTTGGCCATGCCTAGTTGTTTCCCAGTAGTCAACTTAAACGTATTTATTTTAATAAATTTCCACAAGGTTC"
