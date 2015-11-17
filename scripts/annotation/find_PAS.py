@@ -36,6 +36,8 @@ sequence_dict = SeqIO.index_db("temp.idx", args.input, format="fasta")
 
 with open(args.output, "w") as out_fd:
     for record_id in sequence_dict:
-        record_length = len(sequence_dict[record_id].seq)
+        record_length = len(sequence_dict[record_id])
+        seq = sequence_dict[record_id].seq.upper()
         for i in range(0, record_length - 6):
-
+            if seq[i:i+6] in PAS_sites:
+                out_fd.write("%s\t%i\t%i\t%s\n" % (record_id, i+1, i+6, seq[i:i+6]))
