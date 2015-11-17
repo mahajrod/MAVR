@@ -109,7 +109,7 @@ class AUGUSTUS(Tool):
         options_list = []
         for filename in input_list_of_files:
             input_file = "%s%s" % (splited_dir, filename)
-            output_file = "%s%s.gff" % (splited_output_dir, filename)
+            output_file = "%s%s.gff" % (splited_out_dir, filename)
             list_of_output_files.append(output_file)
             options = common_options
 
