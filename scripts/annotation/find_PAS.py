@@ -41,3 +41,5 @@ with open(args.output, "w") as out_fd:
         for i in range(0, record_length - 6):
             if seq[i:i+6] in PAS_sites:
                 out_fd.write("%s\t%i\t%i\t%s\n" % (record_id, i+1, i+6, seq[i:i+6]))
+
+os.remove("temp.idx")
