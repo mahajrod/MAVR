@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 cd ~/data/genomes
+
 for GENOME in *;
     do
     cd ${GENOME}/masking;
