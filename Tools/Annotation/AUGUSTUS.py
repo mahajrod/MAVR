@@ -72,7 +72,7 @@ class AUGUSTUS(Tool):
         An exhaustive description can be found in the file README.TXT.
             """
 
-        options = ""
+        options = " --uniqueGeneId=true"
         options += (" %s" % other_options) if other_options else ""
         options += " --strand=%s" % strand
         options += " --genemodel=%s" % gene_model
