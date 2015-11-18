@@ -8,4 +8,4 @@ SNPeff_path = ""
 SNPeff = SNPeff(jar_path=SNPeff_path)
 
 TransDecoder = TransDecoder()
-AUGUSTUS =AUGUSTUS()
+AUGUSTUS = AUGUSTUS()

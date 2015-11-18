@@ -8,26 +8,43 @@ from Tools.Abstract import Tool
 
 class Cookiecutter(Tool):
     def __init__(self, path="", max_threads=1):
-        Tool.__init__(self, "rm_reads", path=path, max_threads=max_threads)
+        Tool.__init__(self, "cookiecutter", path=path, max_threads=max_threads)
 
-    def filter(self, adapter_file, left_reads, right_reads=None, out_dir="./"):
-
-        options = " --adapters %s" % adapter_file
+    def parse_common_options(self, adapter_file, left_reads, right_reads=None, out_dir="./"):
+        options = " -t %i" % self.threads
+        options += " --adapters %s" % adapter_file
         options += " -o %s" % out_dir
         options += " -i %s" % left_reads if right_reads is None else ""     # single-end data
         options += " -1 %s -2 %s" % (left_reads, right_reads) if right_reads else ""    # paired-end data
 
-        self.execute(options)
+        return options
 
-    def extract(self, fragments_file, out_dir, left_reads, right_reads=None):
+    def remove(self, adapter_file, left_reads, right_reads=None, out_dir="./"):
+        options = self.parse_common_options(adapter_file, left_reads, right_reads=right_reads, out_dir=out_dir)
+        self.execute(options, cmd="cookiecutter remove")
 
-        options = " --fragments %s" % fragments_file
-        options += " -o %s" % out_dir
-        options += " -i %s" % left_reads if right_reads is None else ""     # single-end data
-        options += " -1 %s -2 %s" % (left_reads, right_reads) if right_reads else ""    # paired-end data
+    def extract(self, adapter_file, left_reads, right_reads=None, out_dir="./"):
+        options = self.parse_common_options(adapter_file, left_reads, right_reads=right_reads, out_dir=out_dir)
+        self.execute(options, cmd="cookiecutter extract")
 
-        self.execute(options, cmd="extractor")
+    def separate(self, adapter_file, left_reads, right_reads=None, out_dir="./"):
+        options = self.parse_common_options(adapter_file, left_reads, right_reads=right_reads, out_dir=out_dir)
+        self.execute(options, cmd="cookiecutter separate")
 
+    def rm_reads(self, adapter_file, left_reads, right_reads=None, out_dir="./", use_dust_filter=False,
+                 dust_cutoff=None, dust_window_size=None, use_N_filter=False,
+                 read_length_cutoff=None, polyGC_length_cutoff=None):
+        options = self.parse_common_options(adapter_file, left_reads, right_reads=right_reads, out_dir=out_dir)
+        options += " -p %i" % polyGC_length_cutoff if polyGC_length_cutoff else ""
+        options += " -l %i" % read_length_cutoff if read_length_cutoff else ""
+        options += " -d" if use_dust_filter else ""
+        options += " -c %i" % dust_cutoff if dust_cutoff else ""
+        options += " -k %i" % dust_window_size if dust_window_size else ""
+        options += " -N" if use_N_filter else ""
+
+        self.execute(options, cmd="cookiecutter rm_reads")
 
 if __name__ == "__main__":
     pass
+
+

@@ -1,0 +1,17 @@
+DNA
+DNA?
+LINE
+LTR
+LTR?
+RC
+RC?
+RNA
+rRNA
+Satellite
+scRNA
+SINE
+SINE?
+snRNA
+srpRNA
+tRNA
+
