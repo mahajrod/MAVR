@@ -6,6 +6,7 @@ from Routines.File import split_filename, check_path, save_mkdir
 from Tools.Abstract import Tool
 from Tools.LinuxTools import CGAS
 
+
 class AUGUSTUS(Tool):
     def __init__(self, path="", max_threads=4):
         Tool.__init__(self, "augustus", path=path, max_threads=max_threads)
@@ -84,7 +85,7 @@ class AUGUSTUS(Tool):
         return options
 
     def predict(self, species, genome_file, output, strand="both", gene_model="complete", output_gff3=True,
-                      other_options=""):
+                other_options=""):
         options = self.parse_options(species, genome_file=genome_file, strand=strand, gene_model=gene_model,
                                      output_gff3=output_gff3, other_options=other_options)
         options += " > %s" % output
@@ -121,3 +122,32 @@ class AUGUSTUS(Tool):
 
         if combine_output_to_single_file:
             CGAS.cat(list_of_output_files, output=output)
+
+    @staticmethod
+    def extract_proteins_from_output(augustus_output, protein_output, id_prefix="p."):
+        with open(protein_output, "w") as out_fd:
+            with open(augustus_output, "r") as in_fd:
+                for line in in_fd:
+                    if line[:12] == "# start gene":
+                        gene = line.strip().split()[-1]
+                        out_fd.write(">%s%s\t gene=%s\n" % (id_prefix, gene, gene))
+                    elif "# protein sequence" in line:
+                        protein = line.strip().split("[")[-1]
+                        if "]" in protein:
+                            protein = protein.split("]")[0]
+                        else:
+                            while True:
+                                part = in_fd.next().split()[-1]
+                                if "]" in part:
+                                    protein += part.split("]")[0]
+                                    break
+                                else:
+                                    protein += part
+
+                        out_fd.write(protein)
+                        out_fd.write("\n")
+
+
+
+
+
