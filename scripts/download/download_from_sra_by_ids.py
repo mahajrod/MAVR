@@ -4,10 +4,7 @@ import os
 import sys
 import argparse
 
-from Bio import SeqIO
-from Tools.Annotation import SNPeff
-from Routines.File import make_list_of_path_to_files
-
+from CustomCollections.GeneralCollections import IdList
 
 def path_from_id(entry_id):
     ncbi_ftp = "ftp://ftp-trace.ncbi.nlm.nih.gov/"
@@ -38,12 +35,19 @@ def path_from_id(entry_id):
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", "--ids", action="store", dest="ids", required=True,
+parser.add_argument("-i", "--ids", action="store", dest="ids",
                     type=lambda s: s.split(","),
                     help="Comma-separated list of SRA ids to download")
-
+parser.add_argument("-f", "--id_file", action="store", dest="id_file",
+                    help="File with SRA ids(one per line) to download")
 args = parser.parse_args()
 
-for entry_id in args.ids:
+if (not args.ids) and (not args.id_file):
+    raise ValueError("Both ids and id file were not set")
+
+loader = IdList()
+id_list = loader.read(args.id_file) if args.id_file else args.ids
+
+for entry_id in id_list:
     ftp_path = path_from_id(entry_id)
     os.system("wget --no-host-directories -rc -t 500 %s" % ftp_path)

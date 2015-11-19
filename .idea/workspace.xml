@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/TemplatesAndManuals/BRAKER/README.braker" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/cat_genomes/cat_gene_model_test.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/cat_genomes/make_tiger_model.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/extract_proteins_from_augustus_output.py" afterPath="$PROJECT_DIR$/scripts/annotation/extract_proteins_from_augustus_output.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" afterPath="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/lizard_genomes/download_anolis_transcriptome_reads.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/lizard_genomes/transcriptomes.info" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/download/download_from_sra_by_ids.py" afterPath="$PROJECT_DIR$/scripts/download/download_from_sra_by_ids.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -76,30 +74,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="download_from_sra_by_ids.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="download_from_sra_by_ids.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/download/download_from_sra_by_ids.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.57236844" vertical-offset="0" max-vertical-offset="912">
-              <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="96" max-vertical-offset="1062">
+              <caret line="50" column="23" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
+              <folding>
+                <element signature="e#54#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="download_anolis_transcriptome_reads.sh" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/projects/lizard_genomes/download_anolis_transcriptome_reads.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.098684214" vertical-offset="0" max-vertical-offset="912">
+              <caret line="5" column="65" selection-start-line="5" selection-start-column="65" selection-end-line="5" selection-end-column="65" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parallel_hmmscan.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/hmmer3/parallel_hmmscan.py">
+      <file leaf-file-name="GeneralCollections.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CustomCollections/GeneralCollections.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="1782">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="extract_hits_from_hmm_output.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/hmmer3/extract_hits_from_hmm_output.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="1440">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2862" max-vertical-offset="5724">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -152,7 +152,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/projects/deaminases/mating_type_detection/mating_type_detection_RUN1-6_SE_samples_ragnvald_with_flanks.bash" />
         <option value="$PROJECT_DIR$/projects/deaminases/mating_type_detection/mating_type_detection_RUN7_with_flanks.bash" />
         <option value="$PROJECT_DIR$/projects/deaminases/mating_type_detection/mating_type_detection_RUN7_ragnvald_with_flanks.bash" />
         <option value="$PROJECT_DIR$/projects/deaminases/mating_type_detection/extract_results_ragnvald_with_flanks.py" />
@@ -203,6 +202,7 @@
         <option value="$PROJECT_DIR$/projects/cat_genomes/make_tiger_model.sh.py" />
         <option value="$PROJECT_DIR$/projects/cat_genomes/make_tiger_model.sh" />
         <option value="$PROJECT_DIR$/scripts/download/download_from_sra_by_ids.py" />
+        <option value="$PROJECT_DIR$/projects/lizard_genomes/download_anolis_transcriptome_reads.sh" />
       </list>
     </option>
   </component>
@@ -375,6 +375,24 @@
               <option name="myItemId" value="projects" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lizard_genomes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="projects" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -405,6 +423,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Routines" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CustomCollections" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -664,12 +696,6 @@
       <created>1443270821851</created>
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
-    </task>
-    <task id="LOCAL-00025" summary="additions&#10;">
-      <created>1445656011319</created>
-      <option name="number" value="00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1445656011319</updated>
     </task>
     <task id="LOCAL-00026" summary="additions&#10;">
       <created>1445656069544</created>
@@ -959,7 +985,13 @@
       <option name="project" value="LOCAL" />
       <updated>1447946706192</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="added paralleled augustus&#10;">
+      <created>1447946740676</created>
+      <option name="number" value="00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1447946740676</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1044,20 +1076,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/repeat_masking/tandem_repeat_masking.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/repeat_masking/convert_rm_out_to_gff.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="9" column="86" selection-start-line="9" selection-start-column="86" selection-end-line="9" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/projects/Gaitway/human_genome/count_repeats.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
@@ -1426,10 +1444,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/CustomCollections/GeneralCollections.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2862" max-vertical-offset="5724">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/download/download_from_sra_by_ids.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.57236844" vertical-offset="0" max-vertical-offset="912">
-          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="96" max-vertical-offset="1062">
+          <caret line="50" column="23" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
+          <folding>
+            <element signature="e#54#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/lizard_genomes/download_anolis_transcriptome_reads.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.098684214" vertical-offset="0" max-vertical-offset="912">
+          <caret line="5" column="65" selection-start-line="5" selection-start-column="65" selection-end-line="5" selection-end-column="65" />
           <folding />
         </state>
       </provider>
