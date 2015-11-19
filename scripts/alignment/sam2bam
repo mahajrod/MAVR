@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-samtools -b -@ 2 $1
+samtools view -b -@ 2 $1
 
