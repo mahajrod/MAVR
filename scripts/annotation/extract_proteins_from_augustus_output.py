@@ -14,4 +14,5 @@ parser.add_argument("-d", "--id_prefix", action="store", dest="id_prefix", defau
                     help="Prefix to use for protein ids")
 args = parser.parse_args()
 
+
 AUGUSTUS.extract_proteins_from_output(args.input, args.output, id_prefix=args.id_prefix)
