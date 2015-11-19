@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+samtools -b -@ 2 $1
+
