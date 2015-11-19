@@ -11,7 +11,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-i", "--input", action="store", dest="input", required=True,
                     help="Input fasta file with sequences")
 parser.add_argument("-o", "--output", action="store", dest="output", required=True,
-                    help="Output file")
+                    help="Prefix of output files")
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
                     help="Number of threads to use")
 
@@ -34,11 +34,13 @@ parser.add_argument("-e", "--other_options", action="store", dest="other_options
 parser.add_argument("-c", "--augustus_config_dir", action="store", dest="config_dir",
                     help="Augustus config dir")
 
-
-
 args = parser.parse_args()
+
+output_pep = "%s.pep" % args.output
+output_gff = "%s.gff" % args.output
 
 AUGUSTUS.threads = args.threads
 
-AUGUSTUS.parallel_predict(args.species, args.input, args.output, strand=args.strand, gene_model=args.gene_model,
+AUGUSTUS.parallel_predict(args.species, args.input, output_gff, strand=args.strand, gene_model=args.gene_model,
                           output_gff3=True, other_options=args.other_options, config_dir=args.config_dir)
+AUGUSTUS.extract_proteins_from_output(args.output, output_pep)
