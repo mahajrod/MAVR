@@ -7,7 +7,7 @@ from subprocess import PIPE, Popen
 from Tools.Abstract import Tool
 from Tools.LinuxTools import CGAS
 from Routines.File import check_path, save_mkdir, split_filename
-
+from CustomCollections.GeneralCollections import SynDict
 
 class BLASTPlus(Tool):
     def __init__(self, path="", max_threads=4):
@@ -70,6 +70,13 @@ class BLASTPlus(Tool):
 
         if combine_output_to_single_file:
             CGAS.cat(out_files, output=outfile)
+
+    @staticmethod
+    def extract_hits_from_tbl_output(blast_hits, output_file):
+        hits = SynDict()
+        hits.read(blast_hits, allow_repeats_of_key=True, key_index=0, value_index=1, separator="\t")
+        hits.write(output_file, splited_values=True, separator="\t", values_separator=",")
+        return hits
 
 
 class BLASTn(Tool, BLASTPlus):

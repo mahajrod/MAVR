@@ -10,6 +10,7 @@ from CustomCollections.GeneralCollections import SynDict
 from Routines.File import read_ids, make_list_of_path_to_files, check_path, save_mkdir
 from Routines.Sequence import record_by_id_generator
 
+
 def make_list_of_path_to_files_from_comma_sep_string(string):
     return make_list_of_path_to_files(string.split(","))
 

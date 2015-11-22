@@ -2,12 +2,10 @@
 __author__ = 'Sergei F. Kliver'
 import os
 
-from Bio import SearchIO
-
-from CustomCollections.GeneralCollections import IdList
-from Routines.File import check_path, split_filename, read_ids, save_mkdir
 from Tools.Abstract import Tool
 from Tools.LinuxTools import CGAS
+from CustomCollections.GeneralCollections import IdList, SynDict
+from Routines.File import check_path, split_filename, read_ids, save_mkdir
 
 
 class HMMER3(Tool):
@@ -376,6 +374,19 @@ class HMMER3(Tool):
 
         self.execute(options, cmd="hmmsearch")
 
+    @staticmethod
+    def extract_dom_ids_hits_from_domtblout(domtblout_file, output_file):
+        hits_dict = SynDict()
+        hits_dict.read(domtblout_file, header=False, separator=None, allow_repeats_of_key=True,
+                       key_index=3, value_index=1, comments_prefix="#")
+        hits_dict.write(output_file, splited_values=True)
+
+    @staticmethod
+    def extract_dom_names_hits_from_domtblout(domtblout_file, output_file):
+        hits_dict = SynDict()
+        hits_dict.read(domtblout_file, header=False, separator=None, allow_repeats_of_key=True,
+                       key_index=3, value_index=0, comments_prefix="#")
+        hits_dict.write(output_file, splited_values=True)
 
 if __name__ == "__main__":
     pass

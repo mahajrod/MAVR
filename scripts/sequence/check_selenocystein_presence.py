@@ -25,7 +25,7 @@ tmp_index_file = "temp.idx"
 print("Parsing %s..." % args.input_file)
 sequence_dict = SeqIO.index_db(tmp_index_file, args.input_file, format=args.format)
 selenocystein_ids = []
-with open(args.out_prefix + "_id.t", "w") as out_fd:
+with open(args.out_prefix + ".ids", "w") as out_fd:
     for record_id in sequence_dict:
         if "U" in sequence_dict[record_id].seq:
             selenocystein_ids.append(record_id)

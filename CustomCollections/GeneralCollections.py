@@ -173,13 +173,19 @@ class OrderedSet(MutableSet):
 
 class IdList(list):
 
-    def read(self, filename, header=False, close_after_if_file_object=False, column_number=None, column_separator="\t"):
+    def read(self, filename, header=False, close_after_if_file_object=False, column_number=None, column_separator="\t",
+             comments_prefix=None):
         #reads ids from file with one id per line
         
-        in_fd = filename if isinstance(filename, file) else open(filename, "r") 
+        in_fd = filename if isinstance(filename, file) else open(filename, "r")
+        if comments_prefix:
+            com_pref_len = len(comments_prefix)
         if header:
             self.header = in_fd.readline().strip()
         for line in in_fd:
+            if comments_prefix:
+                if line[: com_pref_len] == comments_prefix:
+                    continue
             self.append(line.strip().split(column_separator)[column_number] if column_number is not None else line.strip())
         if (not isinstance(filename, file)) or close_after_if_file_object:
             in_fd.close()
@@ -197,16 +203,21 @@ class IdList(list):
         if (not isinstance(filename, file)) or close_after_if_file_object:
             out_fd.close()
             
-            
+
 class IdSet(OrderedSet):
 
-    def read(self, filename, header=False, close_after_if_file_object=False):
+    def read(self, filename, header=False, close_after_if_file_object=False, comments_prefix=None):
         #reads ids from file with one id per line
         
-        in_fd = filename if isinstance(filename, file) else open(filename, "r") 
+        in_fd = filename if isinstance(filename, file) else open(filename, "r")
+        if comments_prefix:
+            com_pref_len = len(comments_prefix)
         if header:
             self.header = in_fd.readline().strip()
         for line in in_fd:
+            if comments_prefix:
+                if line[: com_pref_len] == comments_prefix:
+                    continue
             self.add(line.strip())
         if (not isinstance(filename, file)) or close_after_if_file_object:
             in_fd.close()
@@ -253,17 +264,24 @@ class SynDict(OrderedDict):
 
     def read(self, filename, header=False, separator="\t", allow_repeats_of_key=False,
              split_values=False, values_separator=",", key_index=0, value_index=1,
-             close_after_if_file_object=False, expression=None):
+             close_after_if_file_object=False, expression=None, comments_prefix=None):
+        #reads ids from file with one id per line
+
         """
         IMPORTANT!!! Option allow_repeats_of_keys forces split_values.
         """
         # reads synonyms from file
 
         in_fd = filename if isinstance(filename, file) else open(filename, "r")
+        if comments_prefix:
+            com_pref_len = len(comments_prefix)
         self.header = in_fd.readline().strip() if header else None
         for line in in_fd:
+            if comments_prefix:
+                if line[: com_pref_len] == comments_prefix:
+                    continue
             #key, value = line.strip().split(separator)
-            tmp = line.strip().split(separator)
+            tmp = line.strip().split(separator) if separator else line.strip().split()
             key, value = tmp[key_index], tmp[value_index]
             if split_values or allow_repeats_of_key:
                 value = value.split(values_separator)

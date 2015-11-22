@@ -1079,6 +1079,7 @@
       <w>equal.count</w>
       <w>erase.screen</w>
       <w>estVar</w>
+      <w>eukaryotes</w>
       <w>eval</w>
       <w>eval.parent</w>
       <w>evalOnLoad</w>
@@ -2370,6 +2371,7 @@
       <w>profile</w>
       <w>prohibitGeneric</w>
       <w>proj</w>
+      <w>prokaryotes</w>
       <w>promax</w>
       <w>prompt</w>
       <w>promptClass</w>
@@ -2688,6 +2690,7 @@
       <w>select.list</w>
       <w>selectMethod</w>
       <w>selectSuperClasses</w>
+      <w>selenocystein</w>
       <w>selfStart</w>
       <w>semat</w>
       <w>seq</w>
@@ -2974,6 +2977,7 @@
       <w>svd</w>
       <w>svg</w>
       <w>sweep</w>
+      <w>swissprot</w>
       <w>switch</w>
       <w>symbols</w>
       <w>symmpart</w>
