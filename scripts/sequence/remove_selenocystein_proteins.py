@@ -23,7 +23,8 @@ tmp_index_file = "temp.idx"
 print("Parsing %s..." % args.input_file)
 
 sequence_dict = SeqIO.index_db(tmp_index_file, args.input_file, format=args.format)
-SeqIO.write(record_by_expression_generator(sequence_dict, lambda record: "U" not in record.seq),
+SeqIO.write(record_by_expression_generator(sequence_dict,
+                                           lambda record: ("U" not in record.seq) and ("u" not in record.seq)),
             args.output_file, args.format)
 os.remove(tmp_index_file)
 
