@@ -9,7 +9,7 @@ from Bio import SeqIO
 
 from Routines.File import check_path, split_filename, save_mkdir
 from Routines.Sequence import record_by_id_generator
-
+from CustomCollections.GeneralCollections import IdList
 
 def execute(exe_string):
     # this function is global because of stutid damned pickle mode in python!!!!!
@@ -161,6 +161,16 @@ class Tool():
                         format=format)
         for i in range(0, index):
             os.remove("tmp_%i.idx" % i)
+
+    @staticmethod
+    def extract_ids_from_file(input_file, output_file=None, header=False, column_separator="\t",
+                              comments_prefix="#", column_number=None):
+        id_list = IdList()
+        id_list.read(input_file, column_separator=column_separator, comments_prefix=comments_prefix,
+                     column_number=column_number, header=header)
+        if output_file:
+            id_list.write(output_file, header=header)
+        return id_list
 
 
 class JavaTool(Tool):

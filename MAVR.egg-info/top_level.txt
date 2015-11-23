@@ -1,12 +1,12 @@
 CustomCollections
-Routines
 Pipelines
 Pictures
-Graphics
+Routines
 General
 SeqAnalysis
 Parsers
 scripts
+Graphics
 Download
 Tools
 GeneSynonyms

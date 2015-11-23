@@ -375,18 +375,26 @@ class HMMER3(Tool):
         self.execute(options, cmd="hmmsearch")
 
     @staticmethod
-    def extract_dom_ids_hits_from_domtblout(domtblout_file, output_file):
+    def extract_dom_ids_hits_from_domtblout(domtblout_file, output_file=None):
         hits_dict = SynDict()
         hits_dict.read(domtblout_file, header=False, separator=None, allow_repeats_of_key=True,
                        key_index=3, value_index=1, comments_prefix="#")
-        hits_dict.write(output_file, splited_values=True)
+        if output_file:
+            hits_dict.write(output_file, splited_values=True)
+        return hits_dict
 
     @staticmethod
     def extract_dom_names_hits_from_domtblout(domtblout_file, output_file):
         hits_dict = SynDict()
         hits_dict.read(domtblout_file, header=False, separator=None, allow_repeats_of_key=True,
                        key_index=3, value_index=0, comments_prefix="#")
-        hits_dict.write(output_file, splited_values=True)
+        if output_file:
+            hits_dict.write(output_file, splited_values=True)
+        return hits_dict
+
+    def extract_query_ids_with_hits(self, domtblout_file, output_file):
+        return self.extract_ids_from_file(domtblout_file, output_file=output_file, header=False, column_separator=" ",
+                                          comments_prefix="#", column_number=0)
 
 if __name__ == "__main__":
     pass

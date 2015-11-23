@@ -11,7 +11,7 @@ class AUGUSTUS(Tool):
     def __init__(self, path="", max_threads=4):
         Tool.__init__(self, "augustus", path=path, max_threads=max_threads)
 
-    def parse_options(self, species, genome_file="", strand="both", gene_model="complete", output_gff3=True,
+    def parse_options(self, species, genome_file="", strand="both", gene_model=None, output_gff3=True,
                       other_options="", config_dir=None):
 
         """
@@ -76,7 +76,7 @@ class AUGUSTUS(Tool):
         options = " --uniqueGeneId=true"
         options += (" %s" % other_options) if other_options else ""
         options += " --strand=%s" % strand
-        options += " --genemodel=%s" % gene_model
+        options += (" --genemodel=%s" % gene_model) if gene_model else ""
         options += " --gff3=%s" % ("on" if output_gff3 else "no")
         options += " --species=%s" % species
         options += (" --AUGUSTUS_CONFIG_PATH=%s" % config_dir) if config_dir else ""
@@ -91,7 +91,7 @@ class AUGUSTUS(Tool):
         options += " > %s" % output
         self.execute(options)
 
-    def parallel_predict(self, species, genome_file, output, strand="both", gene_model="complete", output_gff3=True,
+    def parallel_predict(self, species, genome_file, output, strand="both", gene_model=None, output_gff3=True,
                          other_options="", split_dir="splited_input", splited_output_dir="splited_output_dir",
                          config_dir=None, combine_output_to_single_file=True):
         common_options = self.parse_options(species, genome_file="", strand=strand, gene_model=gene_model,
@@ -146,6 +146,11 @@ class AUGUSTUS(Tool):
 
                         out_fd.write(protein)
                         out_fd.write("\n")
+
+    @staticmethod
+    def extract_CDS_annotations_from_output(augustus_output, CDS_output):
+        CGAS.grep("\tCDS\t", augustus_output, output=CDS_output, use_regexp=True)
+
 
 
 
