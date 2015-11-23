@@ -22,8 +22,8 @@ args = parser.parse_args()
 white_lists = []
 black_lists = []
 
-white_set = set()
-black_set = set()
+white_set = IdSet()
+black_set = IdSet()
 
 for filename in args.white_list:
     id_set = IdSet()
