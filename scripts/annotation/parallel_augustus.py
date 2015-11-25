@@ -57,23 +57,28 @@ output_swissprot_supported_ids = "%s.supported.swissprot.ids" % args.output
 output_swissprot_blastp_hits_names = "%s.swissprot.hits_names" % args.output
 output_gff = "%s.gff" % args.output
 
-CDS_gff = "%s.CDS.gff"
-CDS_masked_gff = "%s.CDS.masked.gff"
-genes_masked_ids = "%s.genes.masked.ids"
+CDS_gff = "%s.CDS.gff" % args.output
+CDS_masked_gff = "%s.CDS.masked.gff" % args.output
+genes_masked_ids = "%s.genes.masked.ids" % args.output
 
 AUGUSTUS.threads = args.threads
+
+print("Annotating genes...")
 
 AUGUSTUS.parallel_predict(args.species, args.input, output_gff, strand=args.strand, gene_model=args.gene_model,
                           output_gff3=True, other_options=args.other_options, config_dir=args.config_dir)
 AUGUSTUS.extract_CDS_annotations_from_output(output_gff, CDS_gff)
 if args.masking:
+    print("Intersecting annotations with repeats...")
     Intersect.intersect(CDS_gff, args.masking, CDS_masked_gff, method="-u")
     sed_string = "sed 's/.*=//' %s | sort | uniq > %s" % (CDS_masked_gff, genes_masked_ids)
     os.system(sed_string)
 
-AUGUSTUS.extract_proteins_from_output(args.output, output_pep, id_prefix="")
+print("Extracting peptides...")
+AUGUSTUS.extract_proteins_from_output(output_gff, output_pep, id_prefix="")
 
 if args.pfam_db:
+    print("Annotating domains(Pfam database)...")
     HMMER3.threads = args.threads
     HMMER3.parallel_hmmscan(args.pfam_db, output_pep, num_of_seqs_per_scan=None, split_dir="splited_hmmscan_fasta/",
                             splited_output_dir="splited_hmmscan_output_dir",
@@ -89,6 +94,7 @@ if args.pfam_db:
         shutil.rmtree(directory)
 
 if args.swissprot_db:
+    print("Annotating peptides(Swissprot database)...")
     BLASTp.threads = args.threads
     BLASTp.parallel_blastp(output_pep, args.swissprot_db, evalue=0.0000001, output_format=6,
                            outfile=output_swissprot_blastp_hits, split_dir="splited_blastp_fasta",

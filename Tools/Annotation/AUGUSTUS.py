@@ -149,7 +149,7 @@ class AUGUSTUS(Tool):
 
     @staticmethod
     def extract_CDS_annotations_from_output(augustus_output, CDS_output):
-        CGAS.grep("\tCDS\t", augustus_output, output=CDS_output, use_regexp=True)
+        CGAS.grep("'\\tCDS\\t'", augustus_output, output=CDS_output, use_regexp=True)
 
 
 
