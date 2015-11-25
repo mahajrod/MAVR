@@ -47,6 +47,7 @@ parser.add_argument("-m", "--masking", action="store", dest="masking",
 args = parser.parse_args()
 
 output_pep = "%s.pep" % args.output
+output_hmmscan = "%s.hmmscan.hits" % args.output
 output_domtblout = "%s.domtblout" % args.output
 output_pfam_annotated_dom_ids = "%s.pfam.dom_ids" % args.output
 output_pfam_supported_ids = "%s.supported.pfam.ids" % args.output
@@ -81,7 +82,7 @@ AUGUSTUS.extract_proteins_from_output(output_gff, output_pep, id_prefix="")
 if args.pfam_db:
     print("Annotating domains(Pfam database)...")
     HMMER3.threads = args.threads
-    HMMER3.parallel_hmmscan(args.pfam_db, output_pep, num_of_seqs_per_scan=None, split_dir="splited_hmmscan_fasta/",
+    HMMER3.parallel_hmmscan(args.pfam_db, output_pep, output_hmmscan, num_of_seqs_per_scan=None, split_dir="splited_hmmscan_fasta/",
                             splited_output_dir="splited_hmmscan_output_dir",
                             tblout_outfile=None, domtblout_outfile=output_domtblout, pfamtblout_outfile=None,
                             splited_tblout_dir=None, splited_domtblout_dir="hmmscan_domtblout/")
