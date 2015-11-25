@@ -27,6 +27,7 @@ parser.add_argument("-t", "--annotation_types", action="store", dest="types", de
 
 args = parser.parse_args()
 
+
 for record in GFF.parse(open(args.input_gff)):
     print record.id
 
