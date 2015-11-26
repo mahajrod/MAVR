@@ -168,10 +168,10 @@ class HMMER3(Tool):
                                        turn_off_all_heruristics=False, turn_off_bias_filter=False,
                                        MSV_threshold=None, Vit_threshold=None, Fwd_threshold=None,
                                        turn_off_biased_composition_score_corrections=None):
-        options = " --cpu %i" % self.threads
+        #options = " --cpu %i" % self.threads
         #options += " -o %s" % outfile
 
-        options += " --tblout %s" % tblout if tblout else ""
+        options = " --tblout %s" % tblout if tblout else ""
         options += " --domtblout %s" % domtblout if domtblout else ""
         options += " --pfamtblout %s" % pfamtblout if pfamtblout else ""
         options += " --noali" if dont_output_alignments else ""
@@ -226,7 +226,7 @@ class HMMER3(Tool):
                                                       MSV_threshold=MSV_threshold, Vit_threshold=Vit_threshold,
                                                       Fwd_threshold=Fwd_threshold,
                                                       turn_off_biased_composition_score_corrections=turn_off_biased_composition_score_corrections)
-
+        options += " --cpu %i" % self.threads
         options += " -o %s" % outfile
         options += " --qformat %s" if input_format else ""
         options += " %s" % hmmfile
@@ -366,6 +366,7 @@ class HMMER3(Tool):
                                                       MSV_threshold=MSV_threshold, Vit_threshold=Vit_threshold,
                                                       Fwd_threshold=Fwd_threshold,
                                                       turn_off_biased_composition_score_corrections=turn_off_biased_composition_score_corrections)
+        options += " --cpu %i" % self.threads
         options += " -o %s" % outfile
         options += " -A %s" % multialignout
         options += " --tformat %s" if input_format else ""

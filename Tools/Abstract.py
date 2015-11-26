@@ -9,7 +9,8 @@ from Bio import SeqIO
 
 from Routines.File import check_path, split_filename, save_mkdir
 from Routines.Sequence import record_by_id_generator
-from CustomCollections.GeneralCollections import IdList
+from CustomCollections.GeneralCollections import IdList, IdSet
+
 
 def execute(exe_string):
     # this function is global because of stutid damned pickle mode in python!!!!!
@@ -171,6 +172,25 @@ class Tool():
         if output_file:
             id_list.write(output_file, header=header)
         return id_list
+
+    @staticmethod
+    def intersect_ids_from_files(files_with_ids_from_white_list, files_with_ids_from_black_list, result_file):
+        white_set = IdSet()
+        black_set = IdSet()
+
+        for filename in files_with_ids_from_white_list:
+            id_set = IdSet()
+            id_set.read(filename, comments_prefix="#")
+            white_set = white_set | id_set
+
+        for filename in files_with_ids_from_black_list:
+            id_set = IdSet()
+            id_set.read(filename, comments_prefix="#")
+            black_set = black_set | id_set
+
+        final_set = IdSet(white_set - black_set)
+
+        final_set.write(result_file)
 
 
 class JavaTool(Tool):

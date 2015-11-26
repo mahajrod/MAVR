@@ -29,9 +29,12 @@ args = parser.parse_args()
 
 
 for record in GFF.parse(open(args.input_gff)):
+    new_record = record
+    record.features = []
     for feature in record.features:
-        if feature.type not in args.types:
-            continue
+        if args.types:
+            if feature.type not in args.types:
+                continue
 
         print feature.id
 

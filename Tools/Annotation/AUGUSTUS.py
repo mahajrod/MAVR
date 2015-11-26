@@ -151,6 +151,12 @@ class AUGUSTUS(Tool):
     def extract_CDS_annotations_from_output(augustus_output, CDS_output):
         CGAS.grep("'\\tCDS\\t'", augustus_output, output=CDS_output, use_regexp=True)
 
+    @staticmethod
+    def extract_gene_ids_from_output(augustus_output, all_genes_output):
+        CGAS.cgas(augustus_output, grep_pattern="'\\tgene\\t'", sed_string="'s/.*ID=//'", output=all_genes_output,
+                  grep_use_regexp=True)
+
+
 
 
 

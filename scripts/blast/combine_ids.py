@@ -2,6 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 import argparse
 
+from Tools.Abstract import Tool
 from Routines.File import make_list_of_path_to_files
 from CustomCollections.GeneralCollections import IdSet
 
@@ -19,9 +20,12 @@ parser.add_argument("-o", "--output", action="store", dest="output", required=Tr
 
 args = parser.parse_args()
 
-white_lists = []
-black_lists = []
+#white_lists = []
+#black_lists = []
 
+Tool.intersect_ids_from_files(args.white_list, args.black_list, args.output)
+
+"""
 white_set = IdSet()
 black_set = IdSet()
 
@@ -38,4 +42,4 @@ for filename in args.black_list:
 final_set = IdSet(white_set - black_set)
 
 final_set.write(args.output)
-
+"""

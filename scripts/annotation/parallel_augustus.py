@@ -46,6 +46,7 @@ parser.add_argument("-m", "--masking", action="store", dest="masking",
 
 args = parser.parse_args()
 
+output_gff = "%s.gff" % args.output
 output_pep = "%s.pep" % args.output
 output_hmmscan = "%s.hmmscan.hits" % args.output
 output_domtblout = "%s.domtblout" % args.output
@@ -56,11 +57,14 @@ output_pfam_annotated_dom_names = "%s.pfam.dom_names" % args.output
 output_swissprot_blastp_hits = "%s.swissprot.hits" % args.output
 output_swissprot_supported_ids = "%s.supported.swissprot.ids" % args.output
 output_swissprot_blastp_hits_names = "%s.swissprot.hits_names" % args.output
-output_gff = "%s.gff" % args.output
+
 
 CDS_gff = "%s.CDS.gff" % args.output
 CDS_masked_gff = "%s.CDS.masked.gff" % args.output
+all_annotated_genes_ids = "%s.genes.all.ids" % args.output
 genes_masked_ids = "%s.genes.masked.ids" % args.output
+genes_not_masked_ids = "%s.genes.not.masked.ids" % args.output
+final_genes_ids = "%s.genes.final.ids" % args.output
 
 AUGUSTUS.threads = args.threads
 
@@ -69,11 +73,13 @@ print("Annotating genes...")
 AUGUSTUS.parallel_predict(args.species, args.input, output_gff, strand=args.strand, gene_model=args.gene_model,
                           output_gff3=True, other_options=args.other_options, config_dir=args.config_dir)
 """
+
+AUGUSTUS.extract_gene_ids_from_output(output_gff, all_annotated_genes_ids)
 AUGUSTUS.extract_CDS_annotations_from_output(output_gff, CDS_gff)
 if args.masking:
     print("Intersecting annotations with repeats...")
     Intersect.intersect(CDS_gff, args.masking, CDS_masked_gff, method="-u")
-    sed_string = "sed 's/.*=//' %s | sort | uniq > %s" % (CDS_masked_gff, genes_masked_ids)
+    sed_string = "sed 's/.*=//;s/\.t.*//' %s | sort | uniq > %s" % (CDS_masked_gff, genes_masked_ids)
     os.system(sed_string)
 
 print("Extracting peptides...")
@@ -107,6 +113,18 @@ if args.swissprot_db:
     for directory in ("splited_blastp_fasta", "splited_blastp_output_dir"):
         shutil.rmtree(directory)
 
+gene_ids_black_list = [genes_masked_ids]
+gene_ids_white_list = []
+if args.pfam_db and args.swissprot_db:
+    gene_ids_white_list = [output_pfam_supported_ids, output_swissprot_supported_ids]
+elif args.pfam_db:
+    gene_ids_white_list = [output_pfam_supported_ids]
+elif args.swissprot_db:
+    gene_ids_white_list = [output_swissprot_supported_ids]
+else:
+    gene_ids_white_list = [all_annotated_genes_ids]
 
+HMMER3.intersect_ids_from_files([all_annotated_genes_ids], gene_ids_black_list, genes_not_masked_ids)
+HMMER3.intersect_ids_from_files(gene_ids_white_list, gene_ids_black_list, final_genes_ids)
 
 
