@@ -98,6 +98,7 @@ if args.pfam_db:
     supported_ids.write(output_pfam_supported_ids)
     #HMMER3.extract_query_ids_with_hits(output_domtblout, output_pfam_supported_ids)
 
+
     for directory in ("splited_hmmscan_fasta/", "splited_hmmscan_output_dir", "hmmscan_domtblout/"):
         shutil.rmtree(directory)
 
