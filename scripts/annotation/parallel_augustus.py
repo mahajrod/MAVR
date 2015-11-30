@@ -56,7 +56,7 @@ output_pfam_annotated_dom_names = "%s.pfam.dom_names" % args.output
 
 output_swissprot_blastp_hits = "%s.swissprot.hits" % args.output
 output_swissprot_supported_ids = "%s.supported.swissprot.ids" % args.output
-output_swissprot_blastp_hits_names = "%s.swissprot.hits_names" % args.output
+output_swissprot_blastp_hits_names = "%s.swissprot.hits.names" % args.output
 
 
 CDS_gff = "%s.CDS.gff" % args.output
@@ -83,6 +83,7 @@ if args.masking:
     os.system(sed_string)
 
 print("Extracting peptides...")
+
 AUGUSTUS.extract_proteins_from_output(output_gff, output_pep, id_prefix="")
 
 if args.pfam_db:
@@ -96,8 +97,6 @@ if args.pfam_db:
     hits_dict = HMMER3.extract_dom_names_hits_from_domtblout(output_domtblout, output_pfam_annotated_dom_names)
     supported_ids = IdSet(hits_dict.keys())
     supported_ids.write(output_pfam_supported_ids)
-    #HMMER3.extract_query_ids_with_hits(output_domtblout, output_pfam_supported_ids)
-
 
     for directory in ("splited_hmmscan_fasta/", "splited_hmmscan_output_dir", "hmmscan_domtblout/"):
         shutil.rmtree(directory)

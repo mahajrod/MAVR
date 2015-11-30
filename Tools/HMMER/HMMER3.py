@@ -2,6 +2,8 @@
 __author__ = 'Sergei F. Kliver'
 import os
 
+from Bio import SearchIO
+
 from Tools.Abstract import Tool
 from Tools.LinuxTools import CGAS
 from CustomCollections.GeneralCollections import IdList, SynDict
@@ -396,6 +398,44 @@ class HMMER3(Tool):
     def extract_query_ids_with_hits(self, domtblout_file, output_file):
         return self.extract_ids_from_file(domtblout_file, output_file=output_file, header=False, column_separator=" ",
                                           comments_prefix="#", column_number=0)
+
+    @staticmethod
+    def extract_top_hits(hmmer_hits, top_hits_file, not_significant_ids_file=None, not_found_ids_file=None):
+        not_significant_ids = IdList()
+        not_found_ids = IdList()
+
+        index_file = "hmmer_hits.tmp.idx"
+        hmm_dict = SearchIO.index_db(index_file, hmmer_hits, "hmmer3-text")
+
+        out_fd = open(top_hits_file, "w")
+        out_fd.write("#query\thit\tevalue\tbitscore\n")
+
+        for query in hmm_dict:
+            if hmm_dict[query].hits:
+                if hmm_dict[query][0].is_included:
+                    out_fd.write("%s\t%s\t%s\t%s\n" % (query, hmm_dict[query][0].id, hmm_dict[query][0].evalue,
+                                                       hmm_dict[query][0].bitscore))
+                else:
+                    not_significant_ids.append(query)
+            else:
+                not_found_ids.append(query)
+
+        os.remove(index_file)
+        if not_significant_ids_file:
+            not_significant_ids.write(not_significant_ids_file)
+
+        if not_found_ids_file:
+            not_found_ids.write(not_found_ids_file)
+
+    @staticmethod
+    def get_families_from_top_hits(top_hits_file, fam_file):
+
+        hit_dict = SynDict()
+        hit_dict.read(top_hits_file, allow_repeats_of_key=True, key_index=1, value_index=0)
+        hit_dict.write(fam_file, splited_values=True)
+
+        return hit_dict
+
 
 if __name__ == "__main__":
     pass

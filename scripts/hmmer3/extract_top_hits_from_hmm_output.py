@@ -61,7 +61,7 @@ def handle_input(filename):
         if hmm_dict[query].hits:
             if hmm_dict[query][0].is_included:
                 out_fd.write("%s\t%s\t%s\t%s\n" % (query, hmm_dict[query][0].id, hmm_dict[query][0].evalue,
-                                               hmm_dict[query][0].bitscore))
+                                                   hmm_dict[query][0].bitscore))
             else:
                 not_significant_ids.append(query)
         else:
