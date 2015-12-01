@@ -59,6 +59,7 @@ for species in args.species_set:
     species_family_dict[species].read("%s%s%s" % (check_path(args.input), species, args.suffix), split_values=True,
                                       values_separator=",", separator="\t")
     fam_count_dict[species] = species_family_dict[species].count_synonyms()
+    print fam_count_dict[species]
     species_filtered_fd_list[species] = open("%s%s.fam" % (args.filtered_family_dir, species), "w")
 
 for family in fam_count_dict.sl_keys():

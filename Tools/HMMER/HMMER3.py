@@ -400,7 +400,9 @@ class HMMER3(Tool):
                                           comments_prefix="#", column_number=0)
 
     @staticmethod
-    def extract_top_hits(hmmer_hits, top_hits_file, not_significant_ids_file=None, not_found_ids_file=None):
+    def extract_top_hits(hmmer_hits, top_hits_file, top_hits_ids_file=None,
+                         not_significant_ids_file=None, not_found_ids_file=None):
+        top_hits_ids = IdList()
         not_significant_ids = IdList()
         not_found_ids = IdList()
 
@@ -415,17 +417,22 @@ class HMMER3(Tool):
                 if hmm_dict[query][0].is_included:
                     out_fd.write("%s\t%s\t%s\t%s\n" % (query, hmm_dict[query][0].id, hmm_dict[query][0].evalue,
                                                        hmm_dict[query][0].bitscore))
+                    top_hits_ids.append(query)
                 else:
                     not_significant_ids.append(query)
             else:
                 not_found_ids.append(query)
 
         os.remove(index_file)
+
         if not_significant_ids_file:
             not_significant_ids.write(not_significant_ids_file)
 
         if not_found_ids_file:
             not_found_ids.write(not_found_ids_file)
+
+        if top_hits_ids_file:
+            top_hits_ids.write(top_hits_ids_file)
 
     @staticmethod
     def get_families_from_top_hits(top_hits_file, fam_file):
