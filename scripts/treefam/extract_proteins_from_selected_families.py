@@ -16,7 +16,7 @@ parser.add_argument("-p", "--pep_file", action="store", dest="pep_file", require
                     help="File with proteins")
 parser.add_argument("-r", "--pep_file_format", action="store", dest="pep_file_format", default="fasta",
                     help="Format of file with proteins")
-parser.add_argument("-c", "--create_dir_for_each_family", action="store", dest="create_dir_for_each_family",
+parser.add_argument("-c", "--create_dir_for_each_family", action="store_true", dest="create_dir_for_each_family",
                     help="Create separate directory for each family")
 parser.add_argument("-o", "--output_prefix", action="store", dest="output",
                     help="Output prefix to use")
