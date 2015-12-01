@@ -25,7 +25,6 @@ parser.add_argument("-s", "--suffix", action="store", dest="suffix", default=".g
 parser.add_argument("-f", "--format", action="store", dest="format", default="fasta",
                     help="Format of alignment")
 
-
 args = parser.parse_args()
 
 save_mkdir(args.output)
@@ -34,7 +33,7 @@ for alignment_file in args.input:
     splited_filename = split_filename(alignment_file)
     output_filename = "%s%s%s%s" % (args.output, splited_filename[1], args.suffix, splited_filename[2])
     alignment = AlignIO.read(alignment_file, args.format)
-    filtered_alignment = MultipleAlignmentRoutines.remove_columns_with_gaps(alignment, args.max_gap.number,
+    filtered_alignment = MultipleAlignmentRoutines.remove_columns_with_gaps(alignment, args.max_gap_number,
                                                                             gap_symbol=args.gap_symbol)
     AlignIO.write(filtered_alignment, output_filename, args.format)
 
