@@ -10,7 +10,8 @@ from Routines.File import check_path, make_list_of_path_to_files, save_mkdir, sp
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", "--input", action="store", dest="input", type=lambda x: x.split(","),
+parser.add_argument("-i", "--input", action="store", dest="input",
+                    type=lambda x: make_list_of_path_to_files(x.split(",")),
                     help="Comma-separated list of files or directory with files "
                          "containing alignments(one alignment per file)")
 parser.add_argument("-n", "--max_gap_number", action="store", dest="max_gap_number", default=0, type=int,
