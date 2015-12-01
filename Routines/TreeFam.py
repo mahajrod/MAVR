@@ -37,3 +37,6 @@ class TreeFam:
                     out_file = "%s.pep" % (out_prefix if out_prefix else fam_id)
 
                 SeqIO.write(record_by_id_generator(protein_dict, fam_dict[fam_id]), out_file, format=pep_format)
+
+        os.remove("tmp.idx")
+
