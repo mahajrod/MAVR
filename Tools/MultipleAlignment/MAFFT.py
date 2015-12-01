@@ -12,7 +12,7 @@ class MAFFT(Tool):
 
     def align(self,
               sequence_file, output, gap_open_penalty=None, offset=None, maxiterate=None,
-              quiet=False, mode="globalpair"):
+              quiet=False, mode="globalpair", anysymbol=False):
         # TODO: add rest of options
 
         options = " --thread %i" % self.threads
@@ -21,6 +21,7 @@ class MAFFT(Tool):
         options += " --maxiterate %i" % maxiterate if maxiterate is not None else ""
         options += " --quiet" if quiet else ""
         options += " --%s" % mode
+        options += " --anysymbol" if anysymbol else ""
 
         options += " %s" % sequence_file
         options += " > %s" % output
@@ -28,7 +29,8 @@ class MAFFT(Tool):
         self.execute(options)
 
     def parallel_align(self, list_of_files, output_directory, output_suffix="alignment", gap_open_penalty=None,
-                       offset=None, maxiterate=None, quiet=False, mode="globalpair", number_of_processes=1):
+                       offset=None, maxiterate=None, quiet=False, mode="globalpair", number_of_processes=1,
+                       anysymbol=False):
         # TODO: add rest of options
 
         options = " --thread %i" % self.threads
@@ -37,7 +39,7 @@ class MAFFT(Tool):
         options += " --maxiterate %i" % maxiterate if maxiterate is not None else ""
         options += " --quiet" if quiet else ""
         options += " --%s" % mode
-
+        options += " --anysymbol" if anysymbol else ""
         options_list = []
         for filename in list_of_files:
             basename = split_filename(filename)[1]

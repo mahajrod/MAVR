@@ -33,4 +33,4 @@ save_mkdir(args.output)
 MAFFT.threads = args.threads
 MAFFT.parallel_align(make_list_of_path_to_files(args.input), args.output, output_suffix="alignment",
                      gap_open_penalty=args.gap_open_penalty, offset=args.offset, maxiterate=args.maxiterate,
-                     quiet=args.quiet, mode=args.mode, number_of_processes=args.processes)
+                     quiet=args.quiet, mode=args.mode, number_of_processes=args.processes, anysymbol=True)

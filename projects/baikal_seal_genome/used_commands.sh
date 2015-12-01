@@ -21,3 +21,5 @@ for FAMILY in `ls ./fam_pep/ `;
     echo $FAMILY;
     cat ./fam_pep/${FAMILY}/* > combined_fam_pep/${FAMILY}.pep;
     done
+
+~/soft/MAVR/scripts/multiple_alignment/parallel_mafft.py -p 16 -i combined_fam_pep/ -o fam_alignments/
