@@ -56,12 +56,12 @@ class MultipleAlignmentRoutines:
                 columns_without_gaps_list.append(i)
 
         region_to_retain = self.make_regions_from_columns_to_retain(columns_without_gaps_list)
-        filtered_alignment = alignment[region_to_retain[0][0]: region_to_retain[0][1]]
+        filtered_alignment = alignment[:, region_to_retain[0][0]: region_to_retain[0][1]]
         if len(region_to_retain) == 1:
             return filtered_alignment
 
         for start, end in region_to_retain[1:]:
-            filtered_alignment += alignment[start: end]
+            filtered_alignment += alignment[:, start: end]
 
         return filtered_alignment
 
