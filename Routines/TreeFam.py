@@ -8,7 +8,7 @@ from Routines.Sequence import *
 from CustomCollections.GeneralCollections import *
 
 
-class TreeFam:
+class TreeFamRoutines:
     def __init__(self):
         pass
 
