@@ -19,6 +19,7 @@ class TreeFam:
         fam_id_list = IdList()
         fam_dict = SynDict()
 
+        save_mkdir(output_dir)
         out_dir = check_path(output_dir)
         create_directory_for_each_family = True if out_prefix else create_dir_for_each_family
 
