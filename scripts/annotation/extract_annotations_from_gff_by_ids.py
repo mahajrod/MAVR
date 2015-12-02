@@ -13,9 +13,8 @@ def record_with_extracted_annotations_generator(gff_file, white_list_of_annotati
         new_record = record
         record.features = []
         for feature in record.features:
-            if args.types:
-                if (feature.id in annotation_ids) and (feature.type in white_list_of_annotation_types):
-                    new_record.features.append(feature)
+            if (feature.id in annotation_ids) and (feature.type in white_list_of_annotation_types):
+                new_record.features.append(feature)
         if len(new_record.features) > 0:
             yield new_record
 
