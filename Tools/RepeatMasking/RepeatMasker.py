@@ -25,7 +25,7 @@ class RepeatMasker(Tool):
                     if len(repeat_class_family) == 1:
                         repeat_class_family.append(".")
                     repeat_classes_set.add(repeat_class_family[0])
-                    repeat_families_set.add(repeat_class_family)
+                    repeat_families_set.add("/".join(repeat_class_family))
                     parameters = "Class=%s;Family=%s;Matching_repeat=%s;SW_score=%s;Perc_div=%s;Perc_del=%s;Pers_ins=%s" \
                                  % (repeat_class_family[0], repeat_class_family[1],
                                     tmp[9], tmp[0], tmp[1], tmp[2], tmp[3])
