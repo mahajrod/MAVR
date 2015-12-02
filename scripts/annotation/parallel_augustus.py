@@ -69,10 +69,10 @@ final_genes_ids = "%s.genes.final.ids" % args.output
 AUGUSTUS.threads = args.threads
 
 print("Annotating genes...")
-
+"""
 AUGUSTUS.parallel_predict(args.species, args.input, output_gff, strand=args.strand, gene_model=args.gene_model,
                           output_gff3=True, other_options=args.other_options, config_dir=args.config_dir)
-
+"""
 
 AUGUSTUS.extract_gene_ids_from_output(output_gff, all_annotated_genes_ids)
 AUGUSTUS.extract_CDS_annotations_from_output(output_gff, CDS_gff)
