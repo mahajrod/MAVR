@@ -12,6 +12,7 @@ def record_with_extracted_annotations_generator(gff_file, white_list_of_annotati
         #print("Extracting annotations from %s" % record.id)
         new_record = record
         new_record.features = []
+        print record.features
         for feature in record.features:
             print ("%s\t%s" % record.id, feature.id)
             if (feature.id in annotation_ids) and (feature.type in white_list_of_annotation_types):
@@ -34,5 +35,5 @@ args = parser.parse_args()
 
 annotation_ids = IdList()
 annotation_ids.read(args.ids_file, comments_prefix="#")
-print args.annotation_types
+#print args.annotation_types
 GFF.write(record_with_extracted_annotations_generator(args.input_gff, args.annotation_types), open(args.output_file, "w"))
