@@ -41,10 +41,13 @@ Pipelines/SNPCall.py
 Pipelines/__init__.py
 Pipelines/Expansion/__init__.py
 Routines/Alignment.py
+Routines/Annotations.py
 Routines/File.py
 Routines/Functions.py
+Routines/MultipleAlignment.py
 Routines/Sequence.py
 Routines/Tree.py
+Routines/TreeFam.py
 Routines/__init__.py
 SeqAnalysis/SeqAnalysis.py
 SeqAnalysis/__init__.py
@@ -129,7 +132,6 @@ Tools/Tuxedo/Cufflinks.py
 Tools/Tuxedo/Tophat.py
 Tools/Tuxedo/__init__.py
 scripts/CDS_region_variants.py
-scripts/__init__.py
 scripts/assembly_transcriptome.py
 scripts/blast_fastqc.py
 scripts/draw_genes.py

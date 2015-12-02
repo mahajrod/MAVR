@@ -4,7 +4,7 @@ import os
 from Bio import SeqIO
 
 from Routines.File import save_mkdir, check_path
-from Routines.Sequence import *
+from Routines.Sequence import record_by_id_generator
 from CustomCollections.GeneralCollections import IdList, SynDict
 
 
