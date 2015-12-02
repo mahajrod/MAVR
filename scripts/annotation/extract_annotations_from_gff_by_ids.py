@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-
+from copy import deepcopy
 from BCBio import GFF
 
 from CustomCollections.GeneralCollections import IdList
@@ -9,8 +9,8 @@ from CustomCollections.GeneralCollections import IdList
 
 def record_with_extracted_annotations_generator(gff_file, white_list_of_annotation_types):
     for record in GFF.parse(open(gff_file)):
-        print("Extracting annotations from %s" % record.id)
-        new_record = record
+        #print("Extracting annotations from %s" % record.id)
+        new_record = deepcopy(record)
         record.features = []
         for feature in record.features:
             print ("%s\t%s" % record.id, feature.id)
