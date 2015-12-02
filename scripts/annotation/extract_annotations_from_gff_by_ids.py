@@ -10,8 +10,8 @@ from CustomCollections.GeneralCollections import IdList
 def record_with_extracted_annotations_generator(gff_file, white_list_of_annotation_types):
     for record in GFF.parse(open(gff_file)):
         #print("Extracting annotations from %s" % record.id)
-        new_record = deepcopy(record)
-        record.features = []
+        new_record = record
+        new_record.features = []
         for feature in record.features:
             print ("%s\t%s" % record.id, feature.id)
             if (feature.id in annotation_ids) and (feature.type in white_list_of_annotation_types):
