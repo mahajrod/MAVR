@@ -20,7 +20,6 @@ parser.add_argument("-i", "--input_gff", action="store", dest="input_gff",
                     help="Gff file with annotations to extract")
 parser.add_argument("-o", "--output_file", action="store", dest="output_file",
                     help="Output file with extracted_annotations")
-
 parser.add_argument("-t", "--annotation_types", action="store", dest="types", default="gene",
                     type=lambda s: s.split(),
                     help="Comma-separated list of annotation types to extract")

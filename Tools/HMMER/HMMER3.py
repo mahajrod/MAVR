@@ -438,7 +438,7 @@ class HMMER3(Tool):
     def get_families_from_top_hits(top_hits_file, fam_file):
 
         hit_dict = SynDict()
-        hit_dict.read(top_hits_file, allow_repeats_of_key=True, key_index=1, value_index=0)
+        hit_dict.read(top_hits_file, allow_repeats_of_key=True, key_index=1, value_index=0, comments_prefix="#")
         hit_dict.write(fam_file, splited_values=True)
 
         return hit_dict

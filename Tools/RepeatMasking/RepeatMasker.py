@@ -29,16 +29,10 @@ class RepeatMasker(Tool):
                     parameters = "Class=%s;Family=%s;Matching_repeat=%s;SW_score=%s;Perc_div=%s;Perc_del=%s;Pers_ins=%s" \
                                  % (repeat_class_family[0], repeat_class_family[1],
                                     tmp[9], tmp[0], tmp[1], tmp[2], tmp[3])
-                    out_fd.write("%s\tRepeatMasker\trepeat\t%s\t%s\t.\t%s\t.\t%s\n"
-                                 % (tmp[4], tmp[5], tmp[6], strand, parameters))
+                    out_fd.write("%s\tRepeatMasker\trepeat\t%s\t%s\t.\t%s\t.\t%s\n" % (tmp[4], tmp[5], tmp[6], strand, parameters))
         repeat_classes_set.write(annotated_repeat_classes_file)
         repeat_families_set.write(annotated_repeat_families_file)
-        #if annotated_repeat_types_file:
-        """
-        sed_string = "sed -r 's/.*Class=(.*);Family.*/\1/' %s | sort | uniq > %s" % (output_file,
-                                                                                     annotated_repeat_classes_file)
-        os.system(sed_string)
-        """
+
     @staticmethod
     def extract_annotated_repeat_types_from_gff(gff_file, annotated_repeat_classes_file):
         sed_string = "sed -r 's/.*Class=(.*);Family.*/\1/' %s | sort | uniq > %s" % (gff_file,
