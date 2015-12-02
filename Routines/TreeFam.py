@@ -5,7 +5,7 @@ from Bio import SeqIO
 
 from Routines.File import *
 from Routines.Sequence import *
-from CustomCollections.GeneralCollections import *
+from CustomCollections.GeneralCollections import IdList, SynDict
 
 
 class TreeFamRoutines:
