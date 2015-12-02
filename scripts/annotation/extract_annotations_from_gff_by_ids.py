@@ -35,4 +35,4 @@ args = parser.parse_args()
 annotation_ids = IdList()
 annotation_ids.read(args.ids_file, comments_prefix="#")
 
-GFF.write(record_with_extracted_annotations_generator(args.input_gff), open(args.output_file, "w"))
+GFF.write(record_with_extracted_annotations_generator(args.input_gff, args.annotation_types), open(args.output_file, "w"))
