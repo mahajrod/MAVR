@@ -9,9 +9,9 @@ from CustomCollections.GeneralCollections import IdList
 
 
 def record_with_extracted_annotations_generator(gff_file, white_list_of_annotation_types):
-    for record in SeqIO.to_dict(GFF.parse(open(gff_file))):
+    for record in GFF.parse(open(gff_file)):
         #print("Extracting annotations from %s" % record.id)
-        new_record = record
+        new_record = deepcopy(record)
         new_record.features = []
         print record.features
         for feature in record.features:
