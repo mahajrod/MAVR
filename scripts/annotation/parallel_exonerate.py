@@ -29,7 +29,7 @@ parser.add_argument("-u", "--num_in_seq_per_file", action="store", dest="num_in_
                     type=int, default=1000,
                     help="Number of sequences per splited input")
 parser.add_argument("-n", "--number_of_results_to_report", action="store",
-                    dest="num_of_results_to_report", default=1,
+                    dest="num_of_results_to_report", default=1, type=int,
                     help="Number of results to report for each input sequence")
 """
 parser.add_argument("-r", "--strand", action="store", dest="strand", default="both",
