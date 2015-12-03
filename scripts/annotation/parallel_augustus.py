@@ -9,6 +9,8 @@ from Tools.BLAST import BLASTp
 from Tools.Bedtools import Intersect
 from Tools.Annotation import AUGUSTUS
 
+from Routines import AnnotationsRoutines
+
 from CustomCollections.GeneralCollections import IdSet
 
 parser = argparse.ArgumentParser()
@@ -65,6 +67,9 @@ all_annotated_genes_ids = "%s.genes.all.ids" % args.output
 genes_masked_ids = "%s.genes.masked.ids" % args.output
 genes_not_masked_ids = "%s.genes.not.masked.ids" % args.output
 final_genes_ids = "%s.genes.final.ids" % args.output
+
+final_gff = "%s.final.gff" % args.output
+final_CDS_gff = "%s.final.CDS.gff" % args.output
 
 AUGUSTUS.threads = args.threads
 
@@ -127,4 +132,8 @@ else:
 HMMER3.intersect_ids_from_files([all_annotated_genes_ids], gene_ids_black_list, genes_not_masked_ids)
 HMMER3.intersect_ids_from_files(gene_ids_white_list, gene_ids_black_list, final_genes_ids)
 
+final_ids = IdSet()
+final_ids.read(final_genes_ids)
 
+AnnotationsRoutines.extract_annotation_from_gff(output_gff, final_ids, ["gene"], final_gff)
+AUGUSTUS.extract_CDS_annotations_from_output(final_gff, final_CDS_gff)

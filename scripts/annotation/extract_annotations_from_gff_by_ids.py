@@ -2,7 +2,6 @@
 __author__ = 'Sergei F. Kliver'
 import argparse
 from copy import deepcopy
-from Bio import SeqIO
 from BCBio import GFF
 
 from CustomCollections.GeneralCollections import IdList
@@ -13,10 +12,10 @@ def record_with_extracted_annotations_generator(gff_file, white_list_of_annotati
         #print("Extracting annotations from %s" % record.id)
         new_record = deepcopy(record)
         new_record.features = []
-        print record.features
+        #print record.features
         for feature in record.features:
 
-            print ("%s\t%s" % (record.id, feature.id))
+            #print ("%s\t%s" % (record.id, feature.id))
 
             if (feature.id in annotation_ids) and (feature.type in white_list_of_annotation_types):
                 new_record.features.append(feature)
@@ -40,4 +39,6 @@ args = parser.parse_args()
 annotation_ids = IdList()
 annotation_ids.read(args.ids_file, comments_prefix="#")
 #print args.annotation_types
-GFF.write(record_with_extracted_annotations_generator(args.input_gff, args.annotation_types), open(args.output_file, "w"))
+GFF.write(record_with_extracted_annotations_generator(args.input_gff, args.annotation_types),
+          open(args.output_file, "w"))
+

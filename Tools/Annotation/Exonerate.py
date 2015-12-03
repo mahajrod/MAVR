@@ -19,7 +19,7 @@ class Exonerate(Tool):
     def parse_common_options(model, query_type=None, target_type=None,
                              show_alignment=None, show_sugar=True, show_cigar=None,
                              show_vulgar=None, show_query_gff=None, show_target_gff=None,
-                             number_of_results_to_report=None):
+                             number_of_results_to_report=None, other_options=None):
 
         options = " --model %s" % model
         options += " --showalignment" if show_alignment else ""
@@ -31,26 +31,28 @@ class Exonerate(Tool):
         options += " -Q %s" % query_type if query_type else ""
         options += " -T %s" % target_type if target_type else ""
         options += " -n %i" % number_of_results_to_report if number_of_results_to_report else ""
+        options += " %s" % other_options if other_options else ""
 
         return options
 
-    def parallel_alignment(self, query_file, database_file, model, num_of_recs_per_file=1000,
+    def parallel_alignment(self, query_file, target_file, model, num_of_recs_per_file=1000,
                            show_alignment=None, show_sugar=True, show_cigar=None,
                            show_vulgar=None, show_query_gff=None, show_target_gff=None,
                            store_intermediate_files=False,
                            splited_fasta_dir="splited_fasta_dir", splited_result_dir="splited_output",
                            number_of_results_to_report=None,
+                           other_options=None,
                            converted_output_dir="converted_output"):
         splited_filename = split_filename(query_file)
         self.split_fasta(query_file, splited_fasta_dir, num_of_recs_per_file=num_of_recs_per_file,
                          output_prefix=splited_filename[1])
 
-
         common_options = self.parse_common_options(model, show_alignment=show_alignment,
                                                    show_sugar=show_sugar, show_cigar=show_cigar,
                                                    show_vulgar=show_vulgar, show_query_gff=show_query_gff,
                                                    show_target_gff=show_target_gff,
-                                                   number_of_results_to_report=number_of_results_to_report)
+                                                   number_of_results_to_report=number_of_results_to_report,
+                                                   other_options=other_options)
 
         options_list = []
         splited_files = os.listdir(splited_fasta_dir)
@@ -62,7 +64,7 @@ class Exonerate(Tool):
             filename_list = split_filename(filename)
             options = common_options
             options += " -q %s/%s" % (splited_fasta_dir, filename)
-            options += " -t %s" % database_file
+            options += " -t %s" % target_file
             options += " > %s/%s.output" % (splited_result_dir, filename_list[1])
             options_list.append(options)
 
