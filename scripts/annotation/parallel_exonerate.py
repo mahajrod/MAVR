@@ -55,5 +55,5 @@ Exonerate.parallel_alignment(args.input, args.target, args.model, num_of_recs_pe
                              show_vulgar=None, show_query_gff=True, show_target_gff=True,
                              store_intermediate_files=False,
                              splited_fasta_dir="splited_fasta_dir", splited_result_dir="splited_output",
-                             number_of_results_to_report=args.number_of_results_to_report,
+                             number_of_results_to_report=args.num_of_results_to_report,
                              converted_output_dir="converted_output")
