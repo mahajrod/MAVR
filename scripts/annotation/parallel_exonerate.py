@@ -26,6 +26,7 @@ parser.add_argument("-t", "--threads", action="store", dest="threads", type=int,
 parser.add_argument("-m", "--model", action="store", dest="model", required=True,
                     help="Model to run")
 parser.add_argument("-u", "--num_in_seq_per_file", action="store", dest="num_in_seq_per_file",
+                    type=int, default=1000,
                     help="Number of sequences per splited input")
 parser.add_argument("-n", "--number_of_results_to_report", action="store",
                     dest="num_of_results_to_report", default=1,
