@@ -30,7 +30,7 @@ parser.add_argument("-u", "--num_in_seq_per_file", action="store", dest="num_in_
 parser.add_argument("-n", "--number_of_results_to_report", action="store",
                     dest="num_of_results_to_report", default=1,
                     help="Number of results to report for each input sequence")
-
+"""
 parser.add_argument("-r", "--strand", action="store", dest="strand", default="both",
                     help="Strand to consider. Possible variants: both, forward, backward."
                          "Default: both")
@@ -45,7 +45,7 @@ parser.add_argument("-w", "--swissprot_blast_db", action="store", dest="swisspro
                     help="Blast database of swissprot")
 parser.add_argument("-m", "--masking", action="store", dest="masking",
                     help="Gff of bed file with masking of repeats")
-
+"""
 args = parser.parse_args()
 
 Exonerate.threads = args.threads
