@@ -101,6 +101,12 @@ class Exonerate(Tool):
                       "sugar": "%s.sugar" % output_prefix,
                       "alignment": "%s.alignment" % output_prefix,
                       "gff": "%s.gff" % output_prefix,
+
+                      "splice": "%s.splice.gff" % output_prefix,
+                      "exon": "%s.exon.gff" % output_prefix,
+                      "intron": "%s.intron.gff" % output_prefix,
+                      "cds": "%s.cds.gff" % output_prefix,
+                      "gene": "%s.gene.gff" % output_prefix,
                       }
         fd_dict = {}
         for output_type in names_dict:
@@ -127,6 +133,18 @@ class Exonerate(Tool):
                     while True:
                         tmp = next(in_fd, "")
                         fd_dict["gff"].write(tmp)
+                        if tmp[0] != "#":
+                            if "\tsplice" in tmp:
+                                fd_dict["splice"].write(tmp)
+                            elif "\texon\t" in tmp:
+                                fd_dict["exon"].write(tmp)
+                            elif "\tintron\t" in tmp:
+                                fd_dict["intron"].write(tmp)
+                            elif "\tcds\t" in tmp:
+                                fd_dict["cds"].write(tmp)
+                            elif "\tgene\t" in tmp:
+                                fd_dict["gene"].write(tmp)
+
                         if tmp == "# --- END OF GFF DUMP ---\n":
                             break
                     continue
@@ -141,6 +159,8 @@ class Exonerate(Tool):
                     fd_dict["cigar"].write(tmp[6:])
         for output_type in fd_dict:
             fd_dict[output_type].close()
+
+        #CGAS.grep("\tsplice5\t|\tsplice3\t", names_dict["gff"], output=None, use_regexp=True)
 
 
 if __name__ == "__main__":
