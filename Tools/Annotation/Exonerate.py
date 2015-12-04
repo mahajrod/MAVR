@@ -107,15 +107,17 @@ class Exonerate(Tool):
             fd_dict[output_type] = open(names_dict[output_type], "w")
 
         with open(exonerate_output, "r") as in_fd:
+            #print u
             #tmp = None
             for line in in_fd:
                 tmp = line
                 if tmp[:13] == "C4 Alignment:":
                     tmp = in_fd.next()
+                    fd_dict["alignment"].write(tmp)
                     while True:
+                        tmp = next(in_fd, "")
                         if (tmp[0] == "c") or (tmp[0] == "v") or (tmp[0] == "s") or (tmp[0] == "#"):
                             break
-                        tmp = next(in_fd, "")
                         fd_dict["alignment"].write(tmp)
                         if tmp == "":
                             break
@@ -137,9 +139,6 @@ class Exonerate(Tool):
                     fd_dict["sugar"].write(tmp[6:])
                 elif tmp[:6] == "cigar:":
                     fd_dict["cigar"].write(tmp[6:])
-
-
-
         for output_type in fd_dict:
             fd_dict[output_type].close()
 
