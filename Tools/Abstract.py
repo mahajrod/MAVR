@@ -81,6 +81,7 @@ class Tool():
             SeqIO.write(record_by_id_generator(sequence_dict,
                                                record_ids_list[records_written:]),
                         "%s/%s_%i.fasta" % (output_dir, out_prefix, split_index), format="fasta")
+
         os.remove("temp.idx")
 
     def split_fasta_by_seq_len(self, input_fasta, output_dir, max_len_per_file=None, output_prefix=None):

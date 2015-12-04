@@ -93,5 +93,56 @@ class Exonerate(Tool):
             #shutil.rmtree(splited_result_dir)
             #shutil.rmtree(converted_output_dir)
 
+    @staticmethod
+    def split_output(exonerate_output, output_prefix):
+        names_dict = {
+                      "vulgar": "%s.vulgar" % output_prefix,
+                      "cigar": "%s.cigar" % output_prefix,
+                      "sugar": "%s.sugar" % output_prefix,
+                      "alignment": "%s.alignment" % output_prefix,
+                      "gff": "%s.gff" % output_prefix,
+                      }
+        fd_dict = {}
+        for output_type in names_dict:
+            fd_dict[output_type] = open(names_dict[output_type], "w")
+
+        with open(exonerate_output, "r") as in_fd:
+            #tmp = None
+            for line in in_fd:
+                tmp = line
+                if tmp[:13] == "C4 Alignment:":
+                    tmp = in_fd.next()
+                    while True:
+                        if (tmp[0] == "c") or (tmp[0] == "v") or (tmp[0] == "s") or (tmp[0] == "#"):
+                            break
+                        tmp = next(in_fd, "")
+                        fd_dict["alignment"].write(tmp)
+                        if tmp == "":
+                            break
+
+                if tmp == "# --- START OF GFF DUMP ---\n":
+                    fd_dict["gff"].write(tmp)
+                    while True:
+                        tmp = next(in_fd, "")
+                        fd_dict["gff"].write(tmp)
+                        if tmp == "# --- END OF GFF DUMP ---\n":
+                            break
+                    continue
+
+                if tmp == "":
+                    break
+                if tmp[:7] == "vulgar:":
+                    fd_dict["vulgar"].write(tmp[7:])
+                elif tmp[:6] == "sugar:":
+                    fd_dict["sugar"].write(tmp[6:])
+                elif tmp[:6] == "cigar:":
+                    fd_dict["cigar"].write(tmp[6:])
+
+
+
+        for output_type in fd_dict:
+            fd_dict[output_type].close()
+
+
 if __name__ == "__main__":
     pass
