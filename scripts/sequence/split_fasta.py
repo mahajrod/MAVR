@@ -16,8 +16,10 @@ parser.add_argument("-p", "--prefix", action="store", dest="prefix",
 parser.add_argument("-o", "--output_directory", action="store", dest="output_dir",
                     help="Directory to write output files")
 parser.add_argument("-n", "--num_of_records_per_file", action="store", dest="num_of_records_per_file",
+                    type=int,
                     help="Number of sequences per output file")
 parser.add_argument("-f", "--num_of_out_files", action="store", dest="num_of_out_files",
+                    type=int,
                     help="Number of output files")
 
 args = parser.parse_args()
