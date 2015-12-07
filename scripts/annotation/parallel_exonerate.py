@@ -25,12 +25,20 @@ parser.add_argument("-t", "--threads", action="store", dest="threads", type=int,
                     help="Number of threads to use")
 parser.add_argument("-m", "--model", action="store", dest="model", required=True,
                     help="Model to run")
-parser.add_argument("-u", "--num_in_seq_per_file", action="store", dest="num_in_seq_per_file",
-                    type=int, default=1000,
-                    help="Number of sequences per splited input")
 parser.add_argument("-n", "--number_of_results_to_report", action="store",
                     dest="num_of_results_to_report", default=1, type=int,
                     help="Number of results to report for each input sequence")
+parser.add_argument("-u", "--num_of_seq_per_file", action="store", dest="num_of_seq_per_file",
+                    type=int, default=None,
+                    help="Number of sequences per splited input")
+parser.add_argument("-e", "--num_of_splited_files", action="store", dest="num_of_splited_files",
+                    type=int, default=None,
+                    help="Number of splited files")
+"""
+parser.add_argument("-u", "--num_in_seq_per_file", action="store", dest="num_in_seq_per_file",
+                    type=int, default=1000,
+                    help="Number of sequences per splited input")
+"""
 """
 parser.add_argument("-r", "--strand", action="store", dest="strand", default="both",
                     help="Strand to consider. Possible variants: both, forward, backward."
@@ -49,9 +57,16 @@ parser.add_argument("-m", "--masking", action="store", dest="masking",
 """
 args = parser.parse_args()
 
+if args.args.num_of_seq_per_file and args.num_of_out_files:
+    raise ValueError("Options -u/--num_of_seq_per_file and -e/--num_of_out_files can't be set simultaneously")
+
+if (not args.args.num_of_seq_per_file) and (not args.num_of_out_files):
+    args.num_of_out_files = 10 * args.threads
+
 Exonerate.threads = args.threads
 
-Exonerate.parallel_alignment(args.input, args.target, args.model, num_of_recs_per_file=args.num_in_seq_per_file,
+Exonerate.parallel_alignment(args.input, args.target, args.model, num_of_files=args.num_of_spited_files,
+                             num_of_recs_per_file=args.num_of_seq_per_file,
                              show_alignment=True, show_sugar=None, show_cigar=None,
                              show_vulgar=None, show_query_gff=True, show_target_gff=True,
                              store_intermediate_files=False,

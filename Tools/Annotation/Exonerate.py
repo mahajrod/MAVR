@@ -35,16 +35,18 @@ class Exonerate(Tool):
 
         return options
 
-    def parallel_alignment(self, query_file, target_file, model, num_of_recs_per_file=1000,
+    def parallel_alignment(self, query_file, target_file, model, num_of_recs_per_file=None,
                            show_alignment=None, show_sugar=True, show_cigar=None,
                            show_vulgar=None, show_query_gff=None, show_target_gff=None,
                            store_intermediate_files=False,
                            splited_fasta_dir="splited_fasta_dir", splited_result_dir="splited_output",
                            number_of_results_to_report=None,
                            other_options=None,
+                           num_of_files=None,
                            converted_output_dir="converted_output"):
         splited_filename = split_filename(query_file)
         self.split_fasta(query_file, splited_fasta_dir, num_of_recs_per_file=num_of_recs_per_file,
+                         num_of_files=num_of_files,
                          output_prefix=splited_filename[1])
 
         common_options = self.parse_common_options(model, show_alignment=show_alignment,
@@ -159,9 +161,6 @@ class Exonerate(Tool):
                     fd_dict["cigar"].write(tmp[6:])
         for output_type in fd_dict:
             fd_dict[output_type].close()
-
-        #CGAS.grep("\tsplice5\t|\tsplice3\t", names_dict["gff"], output=None, use_regexp=True)
-
 
 if __name__ == "__main__":
     pass
