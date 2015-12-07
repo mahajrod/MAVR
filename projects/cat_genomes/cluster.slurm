@@ -16,5 +16,4 @@ CARACAL_GENOME="/work/pavlov/okochenova/genomes/caracal/final.assembly.fasta"
 EXONERATE_OUTPUT_FILE="/work/pavlov/okochenova/genomes_workdir/caracal/exonerate_cat_pep/exonerate_cat_pep_${SLURM_ARRAY_TASK_ID}.out"
 
 exonerate  --model protein2genome --showalignment --showquerygff --showtargetgff \
-           -n 10 -q ${SPLITED_PEP_DIR}cat_proteins_${SLURM_ARRAY_TASK_ID}.fasta \
-           -t ${CARACAL_GENOME} > ${EXONERATE_OUTPUT_FILE}
+           -n 10 -q ${PEP_FILE} -t ${CARACAL_GENOME} > ${EXONERATE_OUTPUT_FILE}
