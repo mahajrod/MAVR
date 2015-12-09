@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/annotation/add_len_to_simple_output.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Annotation/Exonerate.py" afterPath="$PROJECT_DIR$/Tools/Annotation/Exonerate.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/split_exonerate_output.py" afterPath="$PROJECT_DIR$/scripts/annotation/split_exonerate_output.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -42,11 +42,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Exonerate.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Exonerate.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools/Annotation/Exonerate.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.13157895">
-              <caret line="123" column="18" selection-start-line="123" selection-start-column="18" selection-end-line="123" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="196" column="11" selection-start-line="196" selection-start-column="8" selection-end-line="196" selection-end-column="69" />
               <folding>
                 <element signature="e#55#64#0" expanded="true" />
               </folding>
@@ -54,31 +54,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parallel_exonerate.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_exonerate.py">
+      <file leaf-file-name="add_len_to_simple_output.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/annotation/add_len_to_simple_output.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="59" selection-start-line="18" selection-start-column="59" selection-end-line="18" selection-end-column="59" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cluster.slurm" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/projects/cat_genomes/cluster.slurm">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="caracal_rerun_pep_set_2.slurm" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/projects/cat_genomes/caracal_rerun_pep_set_2.slurm">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="15" column="123" selection-start-line="15" selection-start-column="123" selection-end-line="15" selection-end-column="123" />
+            <state vertical-scroll-proportion="0.29605263">
+              <caret line="18" column="54" selection-start-line="18" selection-start-column="54" selection-end-line="18" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -154,7 +134,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/projects/lizard_genomes/download_anolis_transcriptome_reads.sh" />
         <option value="$PROJECT_DIR$/scripts/hmmer3/extract_hits_from_hmmer_domtblout.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/check_selenocystein_presence.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/extract_groups_of_sequences.py" />
@@ -205,6 +184,7 @@
         <option value="$PROJECT_DIR$/projects/cat_genomes/leopard_cat_rerun_pep_set_2.slurm" />
         <option value="$PROJECT_DIR$/scripts/annotation/split_exonerate_output.py" />
         <option value="$PROJECT_DIR$/Tools/Annotation/Exonerate.py" />
+        <option value="$PROJECT_DIR$/scripts/annotation/add_len_to_simple_output.py" />
       </list>
     </option>
   </component>
@@ -565,8 +545,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/projects/cat_genomes" />
       <recent name="$PROJECT_DIR$/scripts/annotation" />
+      <recent name="$PROJECT_DIR$/projects/cat_genomes" />
       <recent name="$PROJECT_DIR$/Routines" />
       <recent name="$PROJECT_DIR$/scripts/multiple_alignment" />
       <recent name="$PROJECT_DIR$/scripts/treefam" />
@@ -866,12 +846,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00097" summary="added paralleled augustus&#10;">
-      <created>1448988794738</created>
-      <option name="number" value="00097" />
-      <option name="project" value="LOCAL" />
-      <updated>1448988794739</updated>
-    </task>
     <task id="LOCAL-00098" summary="added paralleled augustus&#10;">
       <created>1448988870591</created>
       <option name="number" value="00098" />
@@ -1160,7 +1134,13 @@
       <option name="project" value="LOCAL" />
       <updated>1449663995414</updated>
     </task>
-    <option name="localTasksCounter" value="146" />
+    <task id="LOCAL-00146" summary="added paralleled exonerate&#10;">
+      <created>1449666617876</created>
+      <option name="number" value="00146" />
+      <option name="project" value="LOCAL" />
+      <updated>1449666617876</updated>
+    </task>
+    <option name="localTasksCounter" value="147" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1250,16 +1230,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Tools/Annotation/Exonerate.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#55#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/LinuxTools/CGAS.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1554,10 +1524,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/projects/cat_genomes/cluster.slurm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/projects/cat_genomes/fishing_cat.slurm">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/cat_genomes/caracal_rerun_pep_set_2.slurm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="123" selection-start-line="15" selection-start-column="123" selection-end-line="15" selection-end-column="123" />
           <folding />
         </state>
       </provider>
@@ -1580,14 +1566,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/projects/cat_genomes/caracal_rerun_pep_set_2.slurm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="123" selection-start-line="15" selection-start-column="123" selection-end-line="15" selection-end-column="123" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/projects/cat_genomes/leopard_cat_rerun_pep_set_2.slurm">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1596,17 +1574,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/projects/cat_genomes/cluster.slurm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_exonerate.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.13815789">
           <caret line="18" column="59" selection-start-line="18" selection-start-column="59" selection-end-line="18" selection-end-column="59" />
           <folding />
         </state>
@@ -1624,11 +1594,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Annotation/Exonerate.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13157895">
-          <caret line="123" column="18" selection-start-line="123" selection-start-column="18" selection-end-line="123" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="196" column="11" selection-start-line="196" selection-start-column="8" selection-end-line="196" selection-end-column="69" />
           <folding>
             <element signature="e#55#64#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/annotation/add_len_to_simple_output.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29605263">
+          <caret line="18" column="54" selection-start-line="18" selection-start-column="54" selection-end-line="18" selection-end-column="54" />
+          <folding />
         </state>
       </provider>
     </entry>

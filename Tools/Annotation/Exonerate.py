@@ -6,9 +6,10 @@ import shutil
 
 from Tools.Abstract import Tool
 
+from Tools.LinuxTools import CGAS
 from Parsers.TRF import CollectionTRF
 from Routines.File import split_filename, save_mkdir
-from Tools.LinuxTools import CGAS
+from CustomCollections.GeneralCollections import SynDict
 
 
 class Exonerate(Tool):
@@ -112,6 +113,13 @@ class Exonerate(Tool):
                       "cds": "%s.cds.gff" % output_prefix,
                       "gene": "%s.gene.gff" % output_prefix,
                       }
+        top_hits_gff = "%s.top_hits.gff" % output_prefix
+        top_hits_vulgar = "%s.top_hits.vulgar" % output_prefix
+        top_hits_sugar = "%s.top_hits.sugar" % output_prefix
+        top_hits_target_gff = "%s.top_hits.target.gff" % output_prefix
+        top_hits_query_gff = "%s.top_hits.query.gff" % output_prefix
+        top_hits_simple = "%s.top_hits.query.simple" % output_prefix
+
         fd_dict = {}
         for output_type in names_dict:
             fd_dict[output_type] = open(names_dict[output_type], "w")
@@ -175,6 +183,26 @@ class Exonerate(Tool):
                         fd_dict["cigar"].write(tmp[6:])
         for output_type in fd_dict:
             fd_dict[output_type].close()
+
+        # extract top hits from vulgar
+        awk_string_prefix = "awk '{if (substr($0,0,1) != \"#\") {if ($1 != SEQ_ID) {print $0}; SEQ_ID=$1}}' "
+        os.system(awk_string_prefix + " %s > %s" % (names_dict["vulgar"], top_hits_vulgar))
+        os.system(awk_string_prefix + " %s > %s" % (names_dict["sugar"], top_hits_sugar))
+        os.system(awk_string_prefix + " %s > %s" % (names_dict["query_gff"], top_hits_query_gff))
+
+        awk_string_prefix = "awk -F'\t' '{printf \"%s\t%s\t%s\n\",$1,$4,$5}' "
+        os.system(awk_string_prefix + " %s > %s" % (top_hits_query_gff, top_hits_simple))
+
+    @staticmethod
+    def add_len_to_simple_output(top_hits_simple, len_file, out_file):
+        len_dict = SynDict()
+        len_dict.read(len_file)
+        with open(top_hits_simple, "r") as in_fd:
+            with open(out_file, "w") as out_fd:
+                for line in in_fd:
+                    tmp_list = line.strip().split("\t")
+                    out_fd.write("%s\t%s\t%s\t%s\t%s\n" % (tmp_list[0], len_dict[tmp_list[0]], tmp_list[3],
+                                                           tmp_list[1], tmp_list[2]))
 
 if __name__ == "__main__":
     pass
