@@ -13,7 +13,7 @@ SPLITED_PEP_DIR="/work/pavlov/okochenova/genomes/cat/splited_pep_group_2/"
 
 PEP_FILE="${SPLITED_PEP_DIR}cat_proteins_2_${SLURM_ARRAY_TASK_ID}.fasta"
 LEOPARD_CAT_GENOME="/work/pavlov/okochenova/genomes/leopard_cat/final.assembly.fasta"
-EXONERATE_OUTPUT_FILE="/work/pavlov/okochenova/genomes_workdir/leopard_cat/exonerate_cat_pep_group_2/exonerate_cat_pep_group_2${SLURM_ARRAY_TASK_ID}.out"
+EXONERATE_OUTPUT_FILE="/work/pavlov/okochenova/genomes_workdir/leopard_cat/exonerate_cat_pep_group_2/exonerate_cat_pep_group_2_${SLURM_ARRAY_TASK_ID}.out"
 
 exonerate  --model protein2genome --showalignment --showquerygff --showtargetgff \
            -n 10 -q ${PEP_FILE} -t ${LEOPARD_CAT_GENOME} > ${EXONERATE_OUTPUT_FILE}

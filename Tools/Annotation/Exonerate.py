@@ -96,7 +96,7 @@ class Exonerate(Tool):
             #shutil.rmtree(converted_output_dir)
 
     @staticmethod
-    def split_output(exonerate_output, output_prefix):
+    def split_output(exonerate_output_files, output_prefix):
         names_dict = {
                       "vulgar": "%s.vulgar" % output_prefix,
                       "cigar": "%s.cigar" % output_prefix,
@@ -114,51 +114,53 @@ class Exonerate(Tool):
         for output_type in names_dict:
             fd_dict[output_type] = open(names_dict[output_type], "w")
 
-        with open(exonerate_output, "r") as in_fd:
-            #print u
-            #tmp = None
-            for line in in_fd:
-                tmp = line
-                if tmp[:13] == "C4 Alignment:":
-                    tmp = in_fd.next()
-                    fd_dict["alignment"].write(tmp)
-                    while True:
-                        tmp = next(in_fd, "")
-                        if (tmp[0] == "c") or (tmp[0] == "v") or (tmp[0] == "s") or (tmp[0] == "#"):
-                            break
+        for filename in exonerate_output_files:
+
+            with open(filename, "r") as in_fd:
+                #print u
+                #tmp = None
+                for line in in_fd:
+                    tmp = line
+                    if tmp[:13] == "C4 Alignment:":
+                        tmp = in_fd.next()
                         fd_dict["alignment"].write(tmp)
-                        if tmp == "":
-                            break
+                        while True:
+                            tmp = next(in_fd, "")
+                            if (tmp[0] == "c") or (tmp[0] == "v") or (tmp[0] == "s") or (tmp[0] == "#"):
+                                break
+                            fd_dict["alignment"].write(tmp)
+                            if tmp == "":
+                                break
 
-                if tmp == "# --- START OF GFF DUMP ---\n":
-                    fd_dict["gff"].write(tmp)
-                    while True:
-                        tmp = next(in_fd, "")
+                    if tmp == "# --- START OF GFF DUMP ---\n":
                         fd_dict["gff"].write(tmp)
-                        if tmp[0] != "#":
-                            if "\tsplice" in tmp:
-                                fd_dict["splice"].write(tmp)
-                            elif "\texon\t" in tmp:
-                                fd_dict["exon"].write(tmp)
-                            elif "\tintron\t" in tmp:
-                                fd_dict["intron"].write(tmp)
-                            elif "\tcds\t" in tmp:
-                                fd_dict["cds"].write(tmp)
-                            elif "\tgene\t" in tmp:
-                                fd_dict["gene"].write(tmp)
+                        while True:
+                            tmp = next(in_fd, "")
+                            fd_dict["gff"].write(tmp)
+                            if tmp[0] != "#":
+                                if "\tsplice" in tmp:
+                                    fd_dict["splice"].write(tmp)
+                                elif "\texon\t" in tmp:
+                                    fd_dict["exon"].write(tmp)
+                                elif "\tintron\t" in tmp:
+                                    fd_dict["intron"].write(tmp)
+                                elif "\tcds\t" in tmp:
+                                    fd_dict["cds"].write(tmp)
+                                elif "\tgene\t" in tmp:
+                                    fd_dict["gene"].write(tmp)
 
-                        if tmp == "# --- END OF GFF DUMP ---\n":
-                            break
-                    continue
+                            if tmp == "# --- END OF GFF DUMP ---\n":
+                                break
+                        continue
 
-                if tmp == "":
-                    break
-                if tmp[:7] == "vulgar:":
-                    fd_dict["vulgar"].write(tmp[7:])
-                elif tmp[:6] == "sugar:":
-                    fd_dict["sugar"].write(tmp[6:])
-                elif tmp[:6] == "cigar:":
-                    fd_dict["cigar"].write(tmp[6:])
+                    if tmp == "":
+                        break
+                    if tmp[:7] == "vulgar:":
+                        fd_dict["vulgar"].write(tmp[7:])
+                    elif tmp[:6] == "sugar:":
+                        fd_dict["sugar"].write(tmp[6:])
+                    elif tmp[:6] == "cigar:":
+                        fd_dict["cigar"].write(tmp[6:])
         for output_type in fd_dict:
             fd_dict[output_type].close()
 
