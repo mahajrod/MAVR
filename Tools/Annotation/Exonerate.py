@@ -103,6 +103,8 @@ class Exonerate(Tool):
                       "sugar": "%s.sugar" % output_prefix,
                       "alignment": "%s.alignment" % output_prefix,
                       "gff": "%s.gff" % output_prefix,
+                      "target_gff": "%s.target.gff" % output_prefix,
+                      "query_gff": "%s.query.gff" % output_prefix,
 
                       "splice": "%s.splice.gff" % output_prefix,
                       "exon": "%s.exon.gff" % output_prefix,
@@ -115,7 +117,7 @@ class Exonerate(Tool):
             fd_dict[output_type] = open(names_dict[output_type], "w")
 
         for filename in exonerate_output_files:
-
+            index = 0
             with open(filename, "r") as in_fd:
                 #print u
                 #tmp = None
@@ -134,9 +136,18 @@ class Exonerate(Tool):
 
                     if tmp == "# --- START OF GFF DUMP ---\n":
                         fd_dict["gff"].write(tmp)
+                        if index == 0:
+                            fd_dict["query_gff"].write(tmp)
+                        else:
+                            fd_dict["target_gff"].write(tmp)
+
                         while True:
                             tmp = next(in_fd, "")
                             fd_dict["gff"].write(tmp)
+                            if index == 0:
+                                fd_dict["query_gff"].write(tmp)
+                            else:
+                                fd_dict["target_gff"].write(tmp)
                             if tmp[0] != "#":
                                 if "\tsplice" in tmp:
                                     fd_dict["splice"].write(tmp)
@@ -151,6 +162,7 @@ class Exonerate(Tool):
 
                             if tmp == "# --- END OF GFF DUMP ---\n":
                                 break
+                        index = 1 if index == 0 else 0
                         continue
 
                     if tmp == "":
