@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Annotation/Exonerate.py" afterPath="$PROJECT_DIR$/Tools/Annotation/Exonerate.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/projects/cat_genomes/caracal_rerun_pep_set_2.slurm" afterPath="$PROJECT_DIR$/projects/cat_genomes/caracal_rerun_pep_set_2.slurm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/projects/cat_genomes/leopard_cat_rerun_pep_set_2.slurm" afterPath="$PROJECT_DIR$/projects/cat_genomes/leopard_cat_rerun_pep_set_2.slurm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/split_exonerate_output.py" afterPath="$PROJECT_DIR$/scripts/annotation/split_exonerate_output.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -868,12 +864,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00095" summary="added paralleled augustus&#10;">
-      <created>1448987759642</created>
-      <option name="number" value="00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1448987759642</updated>
-    </task>
     <task id="LOCAL-00096" summary="added paralleled augustus&#10;">
       <created>1448987927547</created>
       <option name="number" value="00096" />
@@ -1162,7 +1152,13 @@
       <option name="project" value="LOCAL" />
       <updated>1449644592973</updated>
     </task>
-    <option name="localTasksCounter" value="144" />
+    <task id="LOCAL-00144" summary="added paralleled exonerate&#10;">
+      <created>1449663957475</created>
+      <option name="number" value="00144" />
+      <option name="project" value="LOCAL" />
+      <updated>1449663957475</updated>
+    </task>
+    <option name="localTasksCounter" value="145" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1235,7 +1231,8 @@
     <MESSAGE value="additions in scripts/alignment&#10;" />
     <MESSAGE value="additions&#10;" />
     <MESSAGE value="added paralleled augustus&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="added paralleled augustus&#10;" />
+    <MESSAGE value="added paralleled exonerate&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="added paralleled exonerate&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
