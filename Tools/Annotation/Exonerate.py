@@ -201,8 +201,9 @@ class Exonerate(Tool):
             with open(out_file, "w") as out_fd:
                 for line in in_fd:
                     tmp_list = line.strip().split("\t")
-                    out_fd.write("%s\t%s\t%s\t%s\t%s\n" % (tmp_list[0], len_dict[tmp_list[0]], tmp_list[3],
-                                                           tmp_list[1], tmp_list[2]))
+                    out_fd.write("%s\t%s\t%s\t%s\t%s\t%f\n" % (tmp_list[0], len_dict[tmp_list[0]], tmp_list[3],
+                                                               tmp_list[1], tmp_list[2],
+                                                               (float(tmp_list[2]) - float(tmp_list[1]) + 1) / float(len_dict[tmp_list[0]])))
 
 if __name__ == "__main__":
     pass
