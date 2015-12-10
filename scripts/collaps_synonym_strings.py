@@ -27,7 +27,7 @@ args = parser.parse_args()
 out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
 
 syn_dict = SynDict()
-SynDict.read(args.input, header=False, separator=args.column_separator, allow_repeats_of_key=True,
+syn_dict.read(args.input, header=False, separator=args.column_separator, allow_repeats_of_key=True,
              split_values=True, values_separator=args.value_separator,
              key_index=args.key_column, value_index=args.value_column,
              comments_prefix=args.comments_prefix)
