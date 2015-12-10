@@ -1277,6 +1277,7 @@
       <w>gcinfo</w>
       <w>gctorture</w>
       <w>gctorture2</w>
+      <w>genemodel</w>
       <w>generic.skeleton</w>
       <w>genotyper</w>
       <w>get</w>
@@ -1503,6 +1504,7 @@
       <w>help.request</w>
       <w>help.search</w>
       <w>help.start</w>
+      <w>hintsfile</w>
       <w>hist</w>
       <w>hist.default</w>
       <w>histo</w>
@@ -2815,6 +2817,7 @@
       <w>snps</w>
       <w>socketConnection</w>
       <w>socketSelect</w>
+      <w>softmasking</w>
       <w>solve</w>
       <w>solve.default</w>
       <w>solve.qr</w>

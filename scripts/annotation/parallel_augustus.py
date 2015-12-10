@@ -45,6 +45,10 @@ parser.add_argument("-w", "--swissprot_blast_db", action="store", dest="swisspro
                     help="Blast database of swissprot")
 parser.add_argument("-m", "--masking", action="store", dest="masking",
                     help="Gff of bed file with masking of repeats")
+parser.add_argument("--softmasking", action="store_true", dest="softmasking",
+                    help="Use softmasking from genome")
+parser.add_argument("--hintsfile", action="store", dest="hintsfile",
+                    help="File with hints")
 
 args = parser.parse_args()
 
@@ -76,7 +80,8 @@ AUGUSTUS.threads = args.threads
 print("Annotating genes...")
 
 AUGUSTUS.parallel_predict(args.species, args.input, output_gff, strand=args.strand, gene_model=args.gene_model,
-                          output_gff3=True, other_options=args.other_options, config_dir=args.config_dir)
+                          output_gff3=True, other_options=args.other_options, config_dir=args.config_dir,
+                          use_softmasking=args.softmasking, hints_file=args.hintsfile)
 
 
 AUGUSTUS.extract_gene_ids_from_output(output_gff, all_annotated_genes_ids)
