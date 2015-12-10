@@ -194,6 +194,41 @@ class Exonerate(Tool):
         os.system(awk_string_prefix + " %s > %s" % (top_hits_query_gff, top_hits_simple))
 
     @staticmethod
+    def extract_top_hits_from_target_gff(list_of_target_gff, top_hits_gff, secondary_hits_gff):
+        top_hits_gff_fd = open(top_hits_gff, "w")
+        secondary_hits_gff_fd = open(secondary_hits_gff, "w")
+        targets_list = []
+        for filename in list_of_target_gff:
+            index = 0
+            with open(filename, "r") as in_fd:
+                #print u
+                #tmp = None
+                for line in in_fd:
+                    tmp = line
+                    if tmp == "# --- START OF GFF DUMP ---\n":
+                        # read until string with target_name will appear
+                        while tmp[0] == "#":
+                            tmp = next(in_fd, "")
+
+                        target_name = tmp.split("\t")[8].split(";")[1].split()[1]
+                        if target_name not in targets_list:
+                            writing_fd = top_hits_gff_fd
+                            targets_list.append(target_name)
+                        else:
+                            writing_fd = secondary_hits_gff_fd
+                        # print target_name
+                        writing_fd.write(tmp)
+                        while True:
+                            tmp = next(in_fd, "")
+                            if tmp == "# --- END OF GFF DUMP ---\n":
+                                break
+                            writing_fd.write(tmp)
+                    if tmp == "":
+                        break
+        top_hits_gff_fd .close()
+        secondary_hits_gff_fd.close()
+
+    @staticmethod
     def add_len_to_simple_output(top_hits_simple, len_file, out_file):
         len_dict = SynDict()
         len_dict.read(len_file)
