@@ -19,6 +19,4 @@ args = parser.parse_args()
 
 out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
 
-TreeFamRoutines.add_length_to_fam_file(args.fam_file, args.length_file, out_fd)
-
-out_fd.close()
+TreeFamRoutines.add_length_to_fam_file(args.fam_file, args.length_file, out_fd, close_after_if_file_object=True)

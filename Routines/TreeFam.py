@@ -41,17 +41,21 @@ class TreeFamRoutines:
         os.remove("tmp.idx")
 
     @staticmethod
-    def add_length_to_fam_file(fam_file, len_file, out_file):
+    def add_length_to_fam_file(fam_file, len_file, out_file, close_after_if_file_object=False):
         fam_dict = SynDict()
         fam_dict.read(fam_file, split_values=True, comments_prefix="#")
         len_dict = SynDict()
         len_dict.read(len_file, comments_prefix="#")
 
-        with open(out_file, "w") as out_fd:
-            for family in fam_dict:
-                len_list = []
-                for member in fam_dict[family]:
-                    len_list.append(None if member not in len_dict else len_dict[member])
+        out_fd = out_file if isinstance(out_file, file) else open(out_file, "r")
 
-                out_fd.write("%s\t%s\t%s\n" % (family, ",".join(fam_dict[family]), ",".join(len_list)))
+        for family in fam_dict:
+            len_list = []
+            for member in fam_dict[family]:
+                len_list.append(None if member not in len_dict else len_dict[member])
+
+            out_fd.write("%s\t%s\t%s\n" % (family, ",".join(fam_dict[family]), ",".join(len_list)))
+
+        if close_after_if_file_object:
+            out_fd.close()
 
