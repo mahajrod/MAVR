@@ -123,7 +123,7 @@ if args.swissprot_db:
     for directory in ("splited_blastp_fasta", "splited_blastp_output_dir"):
         shutil.rmtree(directory)
 
-gene_ids_black_list = [genes_masked_ids]
+gene_ids_black_list = [genes_masked_ids] if args.masking else []
 gene_ids_white_list = []
 if args.pfam_db and args.swissprot_db:
     gene_ids_white_list = [output_pfam_supported_ids, output_swissprot_supported_ids]

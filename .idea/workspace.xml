@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" afterPath="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/mahajrod.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/mahajrod.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" afterPath="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -34,8 +32,8 @@
       <file leaf-file-name="parallel_augustus.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_augustus.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.5723684">
-              <caret line="83" column="85" selection-start-line="83" selection-start-column="85" selection-end-line="83" selection-end-column="85" />
+            <state vertical-scroll-proportion="2.2828948">
+              <caret line="125" column="64" selection-start-line="125" selection-start-column="64" selection-end-line="125" selection-end-column="64" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
@@ -845,12 +843,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00108" summary="added paralleled augustus&#10;">
-      <created>1449013842504</created>
-      <option name="number" value="00108" />
-      <option name="project" value="LOCAL" />
-      <updated>1449013842504</updated>
-    </task>
     <task id="LOCAL-00109" summary="added paralleled augustus&#10;">
       <created>1449014135916</created>
       <option name="number" value="00109" />
@@ -1139,7 +1131,13 @@
       <option name="project" value="LOCAL" />
       <updated>1449727374376</updated>
     </task>
-    <option name="localTasksCounter" value="157" />
+    <task id="LOCAL-00157" summary="added paralleled exonerate&#10;">
+      <created>1449729825258</created>
+      <option name="number" value="00157" />
+      <option name="project" value="LOCAL" />
+      <updated>1449729825258</updated>
+    </task>
+    <option name="localTasksCounter" value="158" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1617,8 +1615,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_augustus.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.5723684">
-          <caret line="83" column="85" selection-start-line="83" selection-start-column="85" selection-end-line="83" selection-end-column="85" />
+        <state vertical-scroll-proportion="2.2828948">
+          <caret line="125" column="64" selection-start-line="125" selection-start-column="64" selection-end-line="125" selection-end-column="64" />
           <folding>
             <element signature="e#54#63#0" expanded="true" />
           </folding>
