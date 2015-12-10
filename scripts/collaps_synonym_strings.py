@@ -13,9 +13,9 @@ parser.add_argument("-i", "--input_file", action="store", dest="input", required
 parser.add_argument("-o", "--output_file", action="store", dest="output", default="stdout",
                     help="Output file with collapsed strings")
 parser.add_argument("-c", "--column_separator", action="store", dest="column_separator", default="\t",
-                    help="Column separator. Default: \t")
+                    help="Column separator. Default: '\\t'")
 parser.add_argument("-v", "--value_separator", action="store", dest="value_separator", default=",",
-                    help="Value separator. Default: \t")
+                    help="Value separator. Default: ','")
 parser.add_argument("-k", "--key_column", action="store", dest="key_column", default=0, type=int,
                     help="Column to be used as key(0-based). Default: 0")
 parser.add_argument("-a", "--value_column", action="store", dest="value_column", default=1, type=int,
