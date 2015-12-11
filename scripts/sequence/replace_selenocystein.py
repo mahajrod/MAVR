@@ -29,11 +29,15 @@ tmp_index_file = "temp.idx"
 print("Parsing %s..." % args.input_file)
 sequence_dict = SeqIO.index_db(tmp_index_file, args.input_file, format=args.format)
 
-for record_id in sequence_dict:
-    sequence_dict[record_id].seq = Seq(str(sequence_dict[record_id].seq).replace("U", args.char_to_use))
-    sequence_dict[record_id].seq = Seq(str(sequence_dict[record_id].seq).replace("u", args.char_to_use))
 
-SeqIO.write(record_by_expression_generator(sequence_dict), args.output, args.format)
+def record_with_replacenment_generator(sequence_dict):
+    for record_id in sequence_dict:
+        new_record = sequence_dict[record_id]
+        new_record.seq = Seq(str(sequence_dict[record_id].seq).replace("U", args.char_to_use))
+        new_record.seq = Seq(str(sequence_dict[record_id].seq).replace("u", args.char_to_use))
+        yield new_record
+
+SeqIO.write(record_with_replacenment_generator(sequence_dict), args.output, args.format)
 os.remove(tmp_index_file)
 
 
