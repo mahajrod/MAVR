@@ -15,7 +15,7 @@ parser.add_argument("-i", "--input_file", action="store", dest="input_file",
                     help="Input file with sequences")
 parser.add_argument("-c", "--symbol_to_use", action="store", dest="char_to_use",
                     default="X",
-                    help="Symbol to use to replace selenocystein")
+                    help="Symbol to use to replace selenocystein. Default - 'X'")
 parser.add_argument("-o", "--output", action="store", dest="output",
                     help="File to write output")
 parser.add_argument("-f", "--format", action="store", dest="format", default="fasta",
