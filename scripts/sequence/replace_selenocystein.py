@@ -33,18 +33,7 @@ sequence_dict = SeqIO.index_db(tmp_index_file, args.input_file, format=args.form
 def record_with_replacenment_generator(sequence_dict):
     for record_id in sequence_dict:
         new_record = deepcopy(sequence_dict[record_id])
-        new_record.seq = Seq(str(sequence_dict[record_id].seq).replace("U", args.char_to_use))
-        new_record.seq = Seq(str(sequence_dict[record_id].seq).replace("u", args.char_to_use))
-        if "U" in sequence_dict[record_id].seq:
-            print "aaaa"
-            print sequence_dict[record_id].seq
-            print "bbbb"
-            print new_record.seq
-            print "dddd"
-            new_record.seq = Seq("AA")
-            print new_record.seq
-            print "cccc"
-            print Seq(str(sequence_dict[record_id].seq).replace("U", args.char_to_use))
+        new_record.seq = Seq(str(sequence_dict[record_id].seq).replace("U", args.char_to_use).replace("u", args.char_to_use))
         yield new_record
 
 SeqIO.write(record_with_replacenment_generator(sequence_dict), args.output, args.format)
