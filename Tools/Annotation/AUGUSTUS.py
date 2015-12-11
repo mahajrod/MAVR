@@ -12,7 +12,8 @@ class AUGUSTUS(Tool):
         Tool.__init__(self, "augustus", path=path, max_threads=max_threads)
 
     def parse_options(self, species, genome_file="", strand="both", gene_model=None, output_gff3=True,
-                      other_options="", config_dir=None, use_softmasking=None, hints_file=None):
+                      other_options="", config_dir=None, use_softmasking=None, hints_file=None,
+                      extrinsicCfgFile=None):
 
         """
             AUGUSTUS (3.0.2) is a gene prediction tool for eukaryotes
@@ -74,6 +75,7 @@ class AUGUSTUS(Tool):
             """
 
         options = " --uniqueGeneId=true"
+        options += " --extrinsicCfgFile=%s" % extrinsicCfgFile if extrinsicCfgFile else ""
         options += " --softmasking=1" if use_softmasking else ""
         options += " --hintsfile=%s" % hints_file if hints_file else ""
         options += (" %s" % other_options) if other_options else ""
@@ -87,20 +89,22 @@ class AUGUSTUS(Tool):
         return options
 
     def predict(self, species, genome_file, output, strand="both", gene_model="complete", output_gff3=True,
-                other_options="", use_softmasking=None, hints_file=None):
+                other_options="", use_softmasking=None, hints_file=None, extrinsicCfgFile=None):
         options = self.parse_options(species, genome_file=genome_file, strand=strand, gene_model=gene_model,
                                      output_gff3=output_gff3, other_options=other_options,
-                                     use_softmasking=use_softmasking, hints_file=hints_file)
+                                     use_softmasking=use_softmasking, hints_file=hints_file,
+                                     extrinsicCfgFile=extrinsicCfgFile)
         options += " > %s" % output
         self.execute(options)
 
     def parallel_predict(self, species, genome_file, output, strand="both", gene_model=None, output_gff3=True,
                          other_options="", split_dir="splited_input", splited_output_dir="splited_output_dir",
-                         config_dir=None, combine_output_to_single_file=True, use_softmasking=None, hints_file=None):
+                         config_dir=None, combine_output_to_single_file=True, use_softmasking=None, hints_file=None,
+                         extrinsicCfgFile=None):
         common_options = self.parse_options(species, genome_file="", strand=strand, gene_model=gene_model,
                                             output_gff3=output_gff3, other_options=other_options,
                                             config_dir=config_dir, use_softmasking=use_softmasking,
-                                            hints_file=hints_file)
+                                            hints_file=hints_file, extrinsicCfgFile=extrinsicCfgFile)
 
         splited_dir = check_path(split_dir)
         splited_out_dir = check_path(splited_output_dir)

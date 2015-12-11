@@ -49,6 +49,8 @@ parser.add_argument("--softmasking", action="store_true", dest="softmasking",
                     help="Use softmasking from genome")
 parser.add_argument("--hintsfile", action="store", dest="hintsfile",
                     help="File with hints")
+parser.add_argument("--extrinsicCfgFile", action="store", dest="extrinsicCfgFile",
+                    help="Config file with scoring for hints")
 
 args = parser.parse_args()
 
@@ -81,7 +83,8 @@ print("Annotating genes...")
 
 AUGUSTUS.parallel_predict(args.species, args.input, output_gff, strand=args.strand, gene_model=args.gene_model,
                           output_gff3=True, other_options=args.other_options, config_dir=args.config_dir,
-                          use_softmasking=args.softmasking, hints_file=args.hintsfile)
+                          use_softmasking=args.softmasking, hints_file=args.hintsfile,
+                          extrinsicCfgFile=args.extrinsicCfgFile)
 
 
 AUGUSTUS.extract_gene_ids_from_output(output_gff, all_annotated_genes_ids)
