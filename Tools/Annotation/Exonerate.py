@@ -9,7 +9,7 @@ from Tools.Abstract import Tool
 from Tools.LinuxTools import CGAS
 from Parsers.TRF import CollectionTRF
 from Routines.File import split_filename, save_mkdir
-from CustomCollections.GeneralCollections import SynDict
+from CustomCollections.GeneralCollections import SynDict, IdList
 
 
 class Exonerate(Tool):
@@ -225,7 +225,7 @@ class Exonerate(Tool):
                             writing_fd.write(tmp)
                     if tmp == "":
                         break
-        top_hits_gff_fd .close()
+        top_hits_gff_fd.close()
         secondary_hits_gff_fd.close()
 
     @staticmethod
@@ -239,6 +239,39 @@ class Exonerate(Tool):
                     out_fd.write("%s\t%s\t%s\t%s\t%s\t%f\n" % (tmp_list[0], len_dict[tmp_list[0]], tmp_list[3],
                                                                tmp_list[1], tmp_list[2],
                                                                (float(tmp_list[2]) - float(tmp_list[1]) + 1) / float(len_dict[tmp_list[0]])))
+
+    @staticmethod
+    def extract_annotation_by_refence_id(list_of_target_gff, id_file, extracted_gff, filtered_out_gff):
+        ids = IdList()
+        ids.read(id_file)
+        extracted_gff_fd = open(extracted_gff, "w")
+        filtered_out_gff_fd = open(filtered_out_gff, "w")
+        for filename in list_of_target_gff:
+            with open(filename, "r") as in_fd:
+                for line in in_fd:
+                    tmp = line
+                    if tmp == "# --- START OF GFF DUMP ---\n":
+                        # read until string with target_name will appear
+                        while tmp[0] == "#":
+                            tmp = next(in_fd, "")
+
+                        target_name = tmp.split("\t")[8].split(";")[1].split()[1]
+                        if target_name not in ids:
+                            writing_fd = filtered_out_gff_fd
+
+                        else:
+                            writing_fd = extracted_gff_fd
+                        # print target_name
+                        writing_fd.write(tmp)
+                        while True:
+                            tmp = next(in_fd, "")
+                            if tmp == "# --- END OF GFF DUMP ---\n":
+                                break
+                            writing_fd.write(tmp)
+                    if tmp == "":
+                        break
+        extracted_gff_fd.close()
+        filtered_out_gff_fd.close()
 
 if __name__ == "__main__":
     pass

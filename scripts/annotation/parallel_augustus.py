@@ -51,7 +51,8 @@ parser.add_argument("--hintsfile", action="store", dest="hintsfile",
                     help="File with hints")
 parser.add_argument("--extrinsicCfgFile", action="store", dest="extrinsicCfgFile",
                     help="Config file with scoring for hints")
-
+parser.add_argument("-u", "--predict_UTR", action="store_true", dest="predict_UTR",
+                    help="Predict UTR. works not for all species")
 args = parser.parse_args()
 
 output_gff = "%s.gff" % args.output
@@ -84,7 +85,7 @@ print("Annotating genes...")
 AUGUSTUS.parallel_predict(args.species, args.input, output_gff, strand=args.strand, gene_model=args.gene_model,
                           output_gff3=True, other_options=args.other_options, config_dir=args.config_dir,
                           use_softmasking=args.softmasking, hints_file=args.hintsfile,
-                          extrinsicCfgFile=args.extrinsicCfgFile)
+                          extrinsicCfgFile=args.extrinsicCfgFile, predict_UTR=args.predict_UTR)
 
 
 AUGUSTUS.extract_gene_ids_from_output(output_gff, all_annotated_genes_ids)

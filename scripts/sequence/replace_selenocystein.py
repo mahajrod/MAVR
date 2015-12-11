@@ -29,7 +29,6 @@ tmp_index_file = "temp.idx"
 print("Parsing %s..." % args.input_file)
 sequence_dict = SeqIO.index_db(tmp_index_file, args.input_file, format=args.format)
 
-
 def record_with_replacenment_generator(sequence_dict):
     for record_id in sequence_dict:
         new_record = deepcopy(sequence_dict[record_id])
