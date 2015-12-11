@@ -41,7 +41,7 @@ def record_with_replacenment_generator(sequence_dict):
             print "bbbb"
             print new_record.seq
             print "cccc"
-            print str(sequence_dict[record_id].seq).replace("U", args.char_to_use)
+            print Seq(str(sequence_dict[record_id].seq).replace("U", args.char_to_use))
         yield new_record
 
 SeqIO.write(record_with_replacenment_generator(sequence_dict), args.output, args.format)
