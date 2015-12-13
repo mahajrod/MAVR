@@ -19,4 +19,4 @@ args = parser.parse_args()
 extracted_gff = "%s.filtered.gff" % args.output_prefix
 filtered_out_gff = "%s.filtered_out.gff" % args.output_prefix
 
-Exonerate.sextract_annotation_by_refence_id(args.input, args.id_file, extracted_gff, filtered_out_gff)
+Exonerate.extract_annotation_by_refence_id(args.input, args.id_file, extracted_gff, filtered_out_gff)
