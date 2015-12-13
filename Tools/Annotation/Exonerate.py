@@ -194,7 +194,10 @@ class Exonerate(Tool):
         os.system(awk_string_prefix + " %s > %s" % (top_hits_query_gff, top_hits_simple))
 
     @staticmethod
-    def extract_top_hits_from_target_gff(list_of_target_gff, top_hits_gff, secondary_hits_gff):
+    def extract_top_hits_from_target_gff(list_of_target_gff, top_hits_gff, secondary_hits_gff, id_white_list_file=None):
+        if id_white_list_file:
+            white_ids = IdList()
+            white_ids.read(id_white_list_file)
         top_hits_gff_fd = open(top_hits_gff, "w")
         secondary_hits_gff_fd = open(secondary_hits_gff, "w")
         targets_list = []
@@ -211,6 +214,9 @@ class Exonerate(Tool):
                             tmp = next(in_fd, "")
 
                         target_name = tmp.split("\t")[8].split(";")[1].split()[1]
+                        if id_white_list_file:
+                            if target_name not in white_ids:
+                                continue
                         if target_name not in targets_list:
                             writing_fd = top_hits_gff_fd
                             targets_list.append(target_name)

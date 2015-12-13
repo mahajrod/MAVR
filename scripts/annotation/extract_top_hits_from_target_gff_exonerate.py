@@ -12,10 +12,13 @@ parser.add_argument("-i", "--input", action="store", dest="input", required=True
                     help="Input comma-separated list of files/directories with exonerate output")
 parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix",
                     help="Prefix of output files")
+parser.add_argument("-d", "--white_id_file", action="store", dest="white_id_file",
+                    help="File with ids from white list. If set other ids are ignored")
 
 args = parser.parse_args()
 
 top_hits_gff = "%s.target.top_hits.gff" % args.output_prefix
 secondary_hits_gff = "%s.target.secondary_hits.gff" % args.output_prefix
 
-Exonerate.extract_top_hits_from_target_gff(args.input, top_hits_gff, secondary_hits_gff)
+Exonerate.extract_top_hits_from_target_gff(args.input, top_hits_gff, secondary_hits_gff,
+                                           id_white_list_file=args.white_id_file)
