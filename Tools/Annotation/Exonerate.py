@@ -190,7 +190,7 @@ class Exonerate(Tool):
         os.system(awk_string_prefix + " %s > %s" % (names_dict["sugar"], top_hits_sugar))
         os.system(awk_string_prefix + " %s > %s" % (names_dict["query_gff"], top_hits_query_gff))
 
-        awk_string_prefix = "awk -F'\t' '{printf \"%s\t%s\t%s\n\",$1,$4,$5}' "
+        awk_string_prefix = "awk -F'\\t' '{printf \"%s\\t%s\\t%s\\n\",$1,$4,$5}' "
         os.system(awk_string_prefix + " %s > %s" % (top_hits_query_gff, top_hits_simple))
 
     @staticmethod
