@@ -11,7 +11,7 @@ source /work/pavlov/okochenova/profile
 
 SPLITED_PEP_DIR="/work/pavlov/okochenova/genomes/ferret/pep/splited_ncbi_pep/"
 
-PEP_FILE="${SPLITED_PEP_DIR}mustela_putorius_furo_${SLURM_ARRAY_TASK_ID}.fasta"
+PEP_FILE="${SPLITED_PEP_DIR}mustela_putorius_furo.ncbi_${SLURM_ARRAY_TASK_ID}.fasta"
 CARACAL_GENOME="/work/pavlov/okochenova/genomes/caracal/final.assembly.fasta"
 
 mkdir -p /work/pavlov/okochenova/genomes_workdir/caracal/exonerate_ferret_ncbi_pep/
