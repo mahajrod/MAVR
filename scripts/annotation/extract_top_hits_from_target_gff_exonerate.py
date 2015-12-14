@@ -14,7 +14,7 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
                     help="Prefix of output files")
 parser.add_argument("-d", "--white_id_file", action="store", dest="white_id_file",
                     help="File with ids from white list. If set other ids are ignored")
-parser.add_argument("-m", "--max_hits_per_query", action="store", dest="max_hits_per_query",
+parser.add_argument("-m", "--max_hits_per_query", action="store", dest="max_hits_per_query", type=int,
                     help="Maximum hits per query")
 args = parser.parse_args()
 
