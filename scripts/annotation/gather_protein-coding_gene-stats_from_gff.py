@@ -47,7 +47,7 @@ for record in GFF.parse(in_fd):
                     mRNA_CDS_dict[subfeature.id].append(len(subsubfeature))
 
         #mRNA_len_str = ""
-        mRNA_len_str = ";".join(mRNA_length_dict.values())
+        mRNA_len_str = ";".join(map(str, mRNA_length_dict.values()))
         mRNA_N_of_exons = ";".join([str(len(mRNA_exon_dict[mRNA]))for mRNA in mRNA_exon_dict])
         mRNA_length_of_exons = ";".join([",".join(map(str, mRNA_exon_dict[mRNA])) for mRNA in mRNA_exon_dict])
         mRNA_length_of_CDS = ";".join([",".join(map(str, mRNA_CDS_dict[mRNA])) for mRNA in mRNA_CDS_dict])
