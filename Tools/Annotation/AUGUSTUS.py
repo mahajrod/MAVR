@@ -141,6 +141,27 @@ class AUGUSTUS(Tool):
                 for line in in_fd:
                     if line[:12] == "# start gene":
                         gene = line.strip().split()[-1]
+                    if "\ttranscript\t" in line:
+                        transcript_id = line.split("\t")[8].split(";")[0].split("=")[1]
+                        out_fd.write(">%s%s\t gene=%s\n" % (id_prefix, transcript_id, gene))
+                    elif "# protein sequence" in line:
+                        protein = line.strip().split("[")[-1]
+                        if "]" in protein:
+                            protein = protein.split("]")[0]
+                        else:
+                            while True:
+                                part = in_fd.next().split()[-1]
+                                if "]" in part:
+                                    protein += part.split("]")[0]
+                                    break
+                                else:
+                                    protein += part
+
+                        out_fd.write(protein)
+                        out_fd.write("\n")
+                    """
+                    if line[:12] == "# start gene":
+                        gene = line.strip().split()[-1]
                         out_fd.write(">%s%s\t gene=%s\n" % (id_prefix, gene, gene))
                     elif "# protein sequence" in line:
                         protein = line.strip().split("[")[-1]
@@ -157,7 +178,7 @@ class AUGUSTUS(Tool):
 
                         out_fd.write(protein)
                         out_fd.write("\n")
-
+                    """
     @staticmethod
     def extract_CDS_annotations_from_output(augustus_output, CDS_output):
         CGAS.grep("'\\tCDS\\t'", augustus_output, output=CDS_output, use_regexp=True)
