@@ -22,7 +22,7 @@ in_fd = open(args.input_gff, "r")
 out_fd.write("#gene\tN_of_transcripts\tTranscripts_ids\tLength_of_transcripts\tN_of_exons\tLength_of_exons\tLength_of_CDS\n")
 
 for record in GFF.parse(in_fd):
-    for feature in record:
+    for feature in record.features:
         mRNA_exon_dict = OrderedDict()
         mRNA_CDS_dict = OrderedDict()
         mRNA_intron_dict = OrderedDict()
