@@ -53,6 +53,9 @@ parser.add_argument("--extrinsicCfgFile", action="store", dest="extrinsicCfgFile
                     help="Config file with scoring for hints")
 parser.add_argument("-u", "--predict_UTR", action="store_true", dest="predict_UTR",
                     help="Predict UTR. works not for all species")
+parser.add_argument("-a", "--augustus_dir", action="store", dest="augustus_dir", default="",
+                    help="Directory with augustus binary")
+
 args = parser.parse_args()
 
 output_gff = "%s.gff" % args.output
@@ -78,6 +81,7 @@ final_genes_ids = "%s.genes.final.ids" % args.output
 final_gff = "%s.final.gff" % args.output
 final_CDS_gff = "%s.final.CDS.gff" % args.output
 
+AUGUSTUS.path = args.augustus_dir
 AUGUSTUS.threads = args.threads
 
 print("Annotating genes...")
