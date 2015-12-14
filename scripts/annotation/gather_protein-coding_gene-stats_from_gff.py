@@ -31,7 +31,7 @@ for record in GFF.parse(in_fd):
         if feature.type != "gene":
             continue
         print("Handling %s" % feature.id)
-        for subfeature in feature.subfeatures:
+        for subfeature in feature.sub_features:
             if subfeature.type != "mRNA":
                 continue
             mRNA_length_dict[subfeature.id] = 0
