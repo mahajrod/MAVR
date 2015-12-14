@@ -63,11 +63,16 @@ output_pep = "%s.pep" % args.output
 output_hmmscan = "%s.hmmscan.hits" % args.output
 output_domtblout = "%s.domtblout" % args.output
 output_pfam_annotated_dom_ids = "%s.pfam.dom_ids" % args.output
-output_pfam_supported_ids = "%s.supported.pfam.ids" % args.output
+#output_pfam_supported_ids = "%s.supported.pfam.ids" % args.output
+output_pfam_supported_transcripts_ids = "%s.supported.transcripts.pfam.ids" % args.output
+output_pfam_supported_genes_ids = "%s.supported.genes.pfam.ids" % args.output
+
 output_pfam_annotated_dom_names = "%s.pfam.dom_names" % args.output
 
 output_swissprot_blastp_hits = "%s.swissprot.hits" % args.output
-output_swissprot_supported_ids = "%s.supported.swissprot.ids" % args.output
+#output_swissprot_supported_ids = "%s.supported.swissprot.ids" % args.output
+output_swissprot_supported_transcripts_ids = "%s.supported.transcripts.swissprot.ids" % args.output
+output_swissprot_supported_genes_ids = "%s.supported.genes.swissprot.ids" % args.output
 output_swissprot_blastp_hits_names = "%s.swissprot.hits.names" % args.output
 
 
@@ -114,7 +119,10 @@ if args.pfam_db:
     HMMER3.extract_dom_ids_hits_from_domtblout(output_domtblout, output_pfam_annotated_dom_ids)
     hits_dict = HMMER3.extract_dom_names_hits_from_domtblout(output_domtblout, output_pfam_annotated_dom_names)
     supported_ids = IdSet(hits_dict.keys())
-    supported_ids.write(output_pfam_supported_ids)
+    supported_ids.write(output_pfam_supported_transcripts_ids)
+    remove_transcript_ids_str = "sed -re 's/\.t[0123456789]+//' %s | sort -k 1 | uniq > %s" % (output_pfam_supported_transcripts_ids,
+                                                                                              output_pfam_supported_genes_ids)
+    os.system(remove_transcript_ids_str)
 
     for directory in ("splited_hmmscan_fasta/", "splited_hmmscan_output_dir", "hmmscan_domtblout/"):
         shutil.rmtree(directory)
@@ -127,18 +135,23 @@ if args.swissprot_db:
                            splited_output_dir="splited_blastp_output_dir")
     hits_dict = BLASTp.extract_hits_from_tbl_output(output_swissprot_blastp_hits, output_swissprot_blastp_hits_names)
     supported_ids = IdSet(hits_dict.keys())
-    supported_ids.write(output_swissprot_supported_ids)
+    supported_ids.write(output_swissprot_supported_transcripts_ids)
+
+    remove_transcript_ids_str = "sed -re 's/\.t[0123456789]+//' %s | sort -k 1 | uniq > %s" % (output_swissprot_supported_transcripts_ids,
+                                                                                               output_swissprot_supported_genes_ids)
+    os.system(remove_transcript_ids_str)
+
     for directory in ("splited_blastp_fasta", "splited_blastp_output_dir"):
         shutil.rmtree(directory)
 
 gene_ids_black_list = [genes_masked_ids] if args.masking else []
 gene_ids_white_list = []
 if args.pfam_db and args.swissprot_db:
-    gene_ids_white_list = [output_pfam_supported_ids, output_swissprot_supported_ids]
+    gene_ids_white_list = [output_pfam_supported_genes_ids, output_swissprot_supported_genes_ids]
 elif args.pfam_db:
-    gene_ids_white_list = [output_pfam_supported_ids]
+    gene_ids_white_list = [output_pfam_supported_genes_ids]
 elif args.swissprot_db:
-    gene_ids_white_list = [output_swissprot_supported_ids]
+    gene_ids_white_list = [output_swissprot_supported_genes_ids]
 else:
     gene_ids_white_list = [all_annotated_genes_ids]
 

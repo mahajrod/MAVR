@@ -32,7 +32,7 @@ for record in GFF.parse(in_fd):
             continue
         print("Handling %s" % feature.id)
         for subfeature in feature.sub_features:
-            if subfeature.type != "mRNA":
+            if subfeature.type != "mRNA" or subfeature.type != "transcript":
                 continue
             mRNA_length_dict[subfeature.id] = 0
             mRNA_exon_dict[subfeature.id] = []

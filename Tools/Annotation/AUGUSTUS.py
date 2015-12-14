@@ -135,15 +135,19 @@ class AUGUSTUS(Tool):
             CGAS.cat(list_of_output_files, output=output)
 
     @staticmethod
-    def extract_proteins_from_output(augustus_output, protein_output, id_prefix="p."):
+    def extract_proteins_from_output(augustus_output, protein_output, evidence_stats_file=None, id_prefix="p."):
+        ev_fd = open(evidence_stats_file, "w")
+        ev_fd.write("#gene_id\ttranscript_id\tsupported_fraction\tcds_support\tintron_support\t")
+        ev_fd.write("5'UTR_support\t3'UTR_support\tIncompatible_hints_groups\n")
         with open(protein_output, "w") as out_fd:
             with open(augustus_output, "r") as in_fd:
                 for line in in_fd:
                     if line[:12] == "# start gene":
                         gene = line.strip().split()[-1]
-                    if "\ttranscript\t" in line:
+                    elif "\ttranscript\t" in line:
                         transcript_id = line.split("\t")[8].split(";")[0].split("=")[1]
                         out_fd.write(">%s%s\t gene=%s\n" % (id_prefix, transcript_id, gene))
+
                     elif "# protein sequence" in line:
                         protein = line.strip().split("[")[-1]
                         if "]" in protein:
@@ -159,6 +163,27 @@ class AUGUSTUS(Tool):
 
                         out_fd.write(protein)
                         out_fd.write("\n")
+
+                    elif evidence_stats_file:
+                        if line[:17] == "# % of transcript":
+                            supported_fraction = line.strip().split()[-1]
+                            while True:
+                                tmp_line = in_fd.next()
+                                if tmp_line[:12] == "# CDS exons:":
+                                    cds_support = tmp_line.strip().split()[-1]
+                                elif tmp_line[:14] == "# CDS introns:":
+                                    introns_support = tmp_line.strip().split()[-1]
+                                elif tmp_line[:13] == "# 5'UTR exons":
+                                    five_utr_support = tmp_line.strip().split()[-1]
+                                elif tmp_line[:13] == "# 3'UTR exons":
+                                    three_introns_support = tmp_line.strip().split()[-1]
+                                elif tmp_line[:27] == "# incompatible hint groups:":
+                                    incompatible_hint_groups = tmp_line.strip().split()[-1]
+                                    ev_fd.write("%s\t%s\t%s\t" % (gene, transcript_id, supported_fraction))
+                                    ev_fd.write("%s\t%s\t%s\t%s\t%s\n" % (cds_support, introns_support,
+                                                                          five_utr_support, three_introns_support,
+                                                                          incompatible_hint_groups))
+                                    break
                     """
                     if line[:12] == "# start gene":
                         gene = line.strip().split()[-1]
@@ -179,6 +204,8 @@ class AUGUSTUS(Tool):
                         out_fd.write(protein)
                         out_fd.write("\n")
                     """
+
+        ev_fd.close()
     @staticmethod
     def extract_CDS_annotations_from_output(augustus_output, CDS_output):
         CGAS.grep("'\\tCDS\\t'", augustus_output, output=CDS_output, use_regexp=True)
