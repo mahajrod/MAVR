@@ -138,7 +138,7 @@ class AUGUSTUS(Tool):
     def extract_proteins_from_output(augustus_output, protein_output, evidence_stats_file=None, id_prefix="p."):
         ev_fd = open(evidence_stats_file, "w")
         ev_fd.write("#gene_id\ttranscript_id\tsupported_fraction\tcds_support\tintron_support\t")
-        ev_fd.write("5'UTR_support\t3'UTR_support\tIncompatible_hints_groups\n")
+        ev_fd.write("5'UTR_support\t3'UTR_support\tincompatible_hints_groups\n")
         with open(protein_output, "w") as out_fd:
             with open(augustus_output, "r") as in_fd:
                 for line in in_fd:

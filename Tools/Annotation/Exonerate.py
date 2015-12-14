@@ -194,13 +194,15 @@ class Exonerate(Tool):
         os.system(awk_string_prefix + " %s > %s" % (top_hits_query_gff, top_hits_simple))
 
     @staticmethod
-    def extract_top_hits_from_target_gff(list_of_target_gff, top_hits_gff, secondary_hits_gff, id_white_list_file=None):
+    def extract_top_hits_from_target_gff(list_of_target_gff, top_hits_gff, secondary_hits_gff, id_white_list_file=None,
+                                         max_hits_per_query=None):
         if id_white_list_file:
             white_ids = IdList()
             white_ids.read(id_white_list_file)
         top_hits_gff_fd = open(top_hits_gff, "w")
         secondary_hits_gff_fd = open(secondary_hits_gff, "w")
         targets_list = []
+        hit_counter = 0
         for filename in list_of_target_gff:
             index = 0
             with open(filename, "r") as in_fd:
@@ -220,14 +222,19 @@ class Exonerate(Tool):
                         if target_name not in targets_list:
                             writing_fd = top_hits_gff_fd
                             targets_list.append(target_name)
+                            hit_counter = 0
                         else:
                             writing_fd = secondary_hits_gff_fd
                         # print target_name
                         writing_fd.write(tmp)
+                        hit_counter += 1
                         while True:
                             tmp = next(in_fd, "")
                             if tmp == "# --- END OF GFF DUMP ---\n":
                                 break
+                            if max_hits_per_query:
+                                if hit_counter > max_hits_per_query:
+                                    continue
                             writing_fd.write(tmp)
                     if tmp == "":
                         break
@@ -278,6 +285,7 @@ class Exonerate(Tool):
                         break
         extracted_gff_fd.close()
         filtered_out_gff_fd.close()
+
 
 if __name__ == "__main__":
     pass
