@@ -39,7 +39,7 @@ for record in GFF.parse(in_fd):
             mRNA_intron_dict[subfeature.id] = []
             mRNA_CDS_dict[subfeature.id] = []
 
-            for subsubfeature in subfeature:
+            for subsubfeature in subfeature.sub_features:
                 if subsubfeature.type == "exon":
                     mRNA_exon_dict[subfeature.id].append(len(subsubfeature))
                     mRNA_length_dict[subfeature.id] += len(subsubfeature)
