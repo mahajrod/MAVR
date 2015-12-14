@@ -234,6 +234,7 @@ class Exonerate(Tool):
                                 break
                             if max_hits_per_query:
                                 if hit_counter > max_hits_per_query:
+                                    print "aaaaa"
                                     continue
                             writing_fd.write(tmp)
                     if tmp == "":
