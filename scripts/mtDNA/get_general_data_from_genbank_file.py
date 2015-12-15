@@ -70,6 +70,9 @@ with open(args.out_file, "w") as out_fd:
         out_fd.write("%s\t%s\t%i\t%s\t%s\t%s\t%s\n" % (record_id, species, length, ",".join(lineage), references,
                                                         ",".join(protein_genes_list), ",".join(rRNA_genes_list)))
 
+awk_string = "awk -F'\\t' 'NR==1 {}; NR>1 {printf \"%%s\\t%%s\\n\", $2, $3}' %s | sort -t $'\\t' -k 1 -k2n > %s" % (args.out_file,
+                                                                                         args.out_file + ".len")
+
 os.remove(tmp_index_file)
 
 

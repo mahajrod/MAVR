@@ -22,6 +22,8 @@ parser.add_argument("-a", "--value_column", action="store", dest="value_column",
                     help="Column to be used as value(0-based). Default: 1")
 parser.add_argument("-m", "--comments_prefix", action="store", dest="comments_prefix", default="#",
                     help="Prefix of strings(comments) to be ignored. Default: #")
+parser.add_argument("-r", "--remove_value_repeats", action="store_true", dest="remove_value_repeats",
+                    help="Remove repeats of values")
 args = parser.parse_args()
 
 out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
@@ -31,5 +33,12 @@ syn_dict.read(args.input, header=False, separator=args.column_separator, allow_r
               split_values=True, values_separator=args.value_separator,
               key_index=args.key_column, value_index=args.value_column,
               comments_prefix=args.comments_prefix)
-syn_dict.write(out_fd, splited_values=True, values_separator=args.value_separator)
-out_fd.close()
+
+if args.remove_value_repeats:
+    collapsed_dict = syn_dict.remove_value_repeats()
+    collapsed_dict.write(out_fd, splited_values=True, values_separator=args.value_separator,
+                         close_after_if_file_object=True)
+else:
+    syn_dict.write(out_fd, splited_values=True, values_separator=args.value_separator,
+                   close_after_if_file_object=True)
+#out_fd.close()

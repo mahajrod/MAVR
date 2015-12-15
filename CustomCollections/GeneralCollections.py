@@ -330,3 +330,9 @@ class SynDict(OrderedDict):
                                        values_separator.join(self[entry]) if splited_values else self[entry]))
         if (not isinstance(filename, file)) or close_after_if_file_object:
             out_fd.close()
+
+    def remove_value_repeats(self):
+        collapsed_dict = SynDict()
+        for key in self:
+            collapsed_dict[key] = set(self[key])
+        return collapsed_dict
