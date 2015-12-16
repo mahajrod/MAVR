@@ -21,8 +21,11 @@ if not args.output_prefix:
 
 pep_description_file = "%s.pep.description" % args.output_prefix
 pep_uniq_description_file = "%s.pep.description.uniq" % args.output_prefix
+pep_uniq_ids = "%s.pep.description.uniq.ids" % args.output_prefix
 pep_uniq_description_no_isoform_versions = "%s.pep.sorted.description.no_isoform_versions" % args.output_prefix
 pep_description_collapsed_isoforms = "%s.pep.collapsed_isoforms.description" % args.output_prefix
+
+awk_extract_ids_string = "awk -F'\t' '{print $%1}' %s > %s"
 
 if args.remove_predicted:
     get_pep_decription_str = "grep -P '^>' %s | grep -v 'PREDICTED' | sed 's/^>//;s/\[%s\]//;s/ /\\t/' | sort -t '\t' -k 2 -k 1 > %s" % (args.input,
@@ -41,6 +44,7 @@ for exe_string in get_pep_decription_str, get_uniq_descriptions_str, remove_isof
     print(exe_string)
     os.system(exe_string)
 
+os.system(awk_extract_ids_string % (pep_uniq_description_file, pep_uniq_ids))
 
 syn_dict = SynDict()
 syn_dict.read(pep_uniq_description_no_isoform_versions, header=False, separator="\t", allow_repeats_of_key=True,
