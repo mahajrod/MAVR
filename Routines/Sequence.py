@@ -1,5 +1,5 @@
 __author__ = 'mahajrod'
-
+import os
 import re
 import sys
 from copy import deepcopy
@@ -40,7 +40,9 @@ class SequenceRoutines():
             lengths_dict.write(out_file, header=False, separator="\t", splited_values=False, values_separator=",",
                                close_after_if_file_object=close_after_if_file_object)
 
+        os.remove("tmp.idx")
         return lengths_dict
+
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
     lengths_dict = OrderedDict({})
