@@ -8,7 +8,7 @@ RAW_PEP_FILE="GCF_000181335.2_Felis_catus_8.0_protein.faa"
 
 cd ${PEP_DIR}
 
-grep -P "^>" ${RAW_PEP_FILE} | sed 's/^>//;s/\[${SPECIES_NAME}s\]//;s/ /\t/' > ${SPECIES}.pep.description
+grep -P "^>" ${RAW_PEP_FILE} | sed 's/^>//;s/\[${SPECIES_NAME}\]//;s/ /\t/' > ${SPECIES}.pep.description
 
 sort -t $'\t' -k 2 -k 1 ${SPECIES}.pep.description > ${SPECIES}.pep.sorted.description
 

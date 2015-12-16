@@ -203,6 +203,7 @@ class Exonerate(Tool):
         secondary_hits_gff_fd = open(secondary_hits_gff, "w")
         targets_list = []
         hit_counter = 0
+        gene_counter = 0
         for filename in list_of_target_gff:
             index = 0
             with open(filename, "r") as in_fd:
@@ -222,6 +223,7 @@ class Exonerate(Tool):
                         if target_name not in targets_list:
                             writing_fd = top_hits_gff_fd
                             targets_list.append(target_name)
+                            gene_counter += 1
                             hit_counter = 0
                         else:
                             writing_fd = secondary_hits_gff_fd
@@ -230,6 +232,8 @@ class Exonerate(Tool):
                         hit_counter += 1
                         while True:
                             tmp = next(in_fd, "")
+                            if (tmp[0] != "#") and ("\tgene\t" in tmp):
+                                tmp.replace("gene_id 0", "gene_id g%i_h%i" % (gene_counter, hit_counter))
                             if tmp == "# --- END OF GFF DUMP ---\n":
                                 break
                             if max_hits_per_query:
