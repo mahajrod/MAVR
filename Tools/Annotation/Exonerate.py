@@ -230,7 +230,8 @@ class Exonerate(Tool):
                         # print target_name
                         hit_counter += 1
                         tmp = tmp.replace("gene_id 0", "gene_id g%i_h%i" % (gene_counter, hit_counter))
-                        writing_fd.write(tmp)
+                        if hit_counter <= max_hits_per_query:
+                            writing_fd.write(tmp)
 
                         while True:
                             tmp = next(in_fd, "")
