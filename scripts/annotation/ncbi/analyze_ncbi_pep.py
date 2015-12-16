@@ -75,7 +75,7 @@ for gene in syn_dict:
             max_len = length
             longest_isoform = isoform_id
 
-    descr_with_len_fd.write("%s\t%s\t%s\n" % (gene, ",".join(syn_dict[gene]), ",".join(map(int, len_list))))
+    descr_with_len_fd.write("%s\t%s\t%s\n" % (gene, ",".join(syn_dict[gene]), ",".join(map(str, len_list))))
     descr_longest_isoform_fd.write("%s\t%s\t%i\n" % (gene, longest_isoform, max_len))
     descr_longest_isoform_ids_fd.write(longest_isoform)
     descr_longest_isoform_ids_fd.write("\n")
