@@ -1,12 +1,12 @@
-GeneSynonyms
 CustomCollections
-SeqAnalysis
+Pipelines
+Pictures
 Routines
 General
+SeqAnalysis
 Parsers
 Graphics
-Pictures
-Tools
 Download
+Tools
+GeneSynonyms
 Converters
-Pipelines

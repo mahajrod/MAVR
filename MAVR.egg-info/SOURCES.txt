@@ -63,6 +63,7 @@ Tools/Alignment/Novoalign.py
 Tools/Alignment/TMAP.py
 Tools/Alignment/__init__.py
 Tools/Annotation/AUGUSTUS.py
+Tools/Annotation/Exonerate.py
 Tools/Annotation/GlimerHMM.py
 Tools/Annotation/SNPeff.py
 Tools/Annotation/TransDecoder.py
@@ -83,8 +84,6 @@ Tools/Bedtools/Intersect.py
 Tools/Bedtools/__init__.py
 Tools/BioFormats/BioConvert.py
 Tools/BioFormats/__init__.py
-Tools/Exonerate/Exonerate.py
-Tools/Exonerate/__init__.py
 Tools/Filter/Adapters.py
 Tools/Filter/Cookiecutter.py
 Tools/Filter/FastQC.py

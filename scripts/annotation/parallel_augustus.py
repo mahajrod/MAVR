@@ -60,6 +60,7 @@ args = parser.parse_args()
 
 output_gff = "%s.gff" % args.output
 output_pep = "%s.pep" % args.output
+output_evidence_stats = "%s.transcript.evidence" % args.output
 output_hmmscan = "%s.hmmscan.hits" % args.output
 output_domtblout = "%s.domtblout" % args.output
 output_pfam_annotated_dom_ids = "%s.pfam.dom_ids" % args.output
@@ -107,7 +108,7 @@ if args.masking:
 
 print("Extracting peptides...")
 
-AUGUSTUS.extract_proteins_from_output(output_gff, output_pep, id_prefix="")
+AUGUSTUS.extract_proteins_from_output(output_gff, output_pep, id_prefix="", evidence_stats_file=output_evidence_stats)
 
 if args.pfam_db:
     print("Annotating domains(Pfam database)...")

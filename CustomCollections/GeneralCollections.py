@@ -282,7 +282,9 @@ class SynDict(OrderedDict):
                 if line[: com_pref_len] == comments_prefix:
                     continue
             #key, value = line.strip().split(separator)
+            #print line
             tmp = line.strip().split(separator) if separator else line.strip().split()
+            #print tmp
             key, value = tmp[key_index], tmp[value_index]
             if split_values or allow_repeats_of_key:
                 value = value.split(values_separator)
