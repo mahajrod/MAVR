@@ -233,7 +233,8 @@ class Exonerate(Tool):
                         while True:
                             tmp = next(in_fd, "")
                             if (tmp[0] != "#") and ("\tgene\t" in tmp):
-                                tmp.replace("gene_id 0", "gene_id g%i_h%i" % (gene_counter, hit_counter))
+                                #print("aaaaa")
+                                tmp = tmp.replace("gene_id 0", "gene_id g%i_h%i" % (gene_counter, hit_counter))
                             if tmp == "# --- END OF GFF DUMP ---\n":
                                 break
                             if max_hits_per_query:
