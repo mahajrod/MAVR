@@ -232,8 +232,8 @@ class Exonerate(Tool):
                         hit_counter += 1
                         while True:
                             tmp = next(in_fd, "")
-                            print("cccc")
-                            if (tmp[0] != "#") and ("\tgene\t" in tmp):
+                            # print("cccc")
+                            if (tmp[0] != "#") and ("gene_id 0" in tmp):
                                 print("aaaaa")
                                 tmp = tmp.replace("gene_id 0", "gene_id g%i_h%i" % (gene_counter, hit_counter))
                             if tmp == "# --- END OF GFF DUMP ---\n":
