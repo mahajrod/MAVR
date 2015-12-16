@@ -37,5 +37,5 @@ for exe_string in get_pep_decription_str, get_uniq_descriptions_str, remove_isof
 
 syn_dict = SynDict()
 syn_dict.read(pep_uniq_description_no_isoform_versions, header=False, separator="\t", allow_repeats_of_key=True,
-              split_values=True, values_separator=",", key_index=0, value_index=1, comments_prefix="#")
+              split_values=True, values_separator=",", key_index=1, value_index=0, comments_prefix="#")
 syn_dict.write(pep_description_collapsed_isoforms, splited_values=True, values_separator=",")
