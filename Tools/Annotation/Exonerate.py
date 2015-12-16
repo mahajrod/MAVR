@@ -228,9 +228,10 @@ class Exonerate(Tool):
                         else:
                             writing_fd = secondary_hits_gff_fd
                         # print target_name
+                        hit_counter += 1
                         tmp = tmp.replace("gene_id 0", "gene_id g%i_h%i" % (gene_counter, hit_counter))
                         writing_fd.write(tmp)
-                        hit_counter += 1
+
                         while True:
                             tmp = next(in_fd, "")
                             # print("cccc")
