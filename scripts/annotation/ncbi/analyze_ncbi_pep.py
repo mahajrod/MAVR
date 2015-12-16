@@ -34,6 +34,7 @@ for exe_string in get_pep_decription_str, get_uniq_descriptions_str, remove_isof
     print(exe_string)
     os.system(exe_string)
 
+
 syn_dict = SynDict()
 syn_dict.read(pep_uniq_description_no_isoform_versions, header=False, separator="\t", allow_repeats_of_key=True,
               split_values=True, values_separator=",", key_index=0, value_index=1, comments_prefix="#")
