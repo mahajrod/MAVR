@@ -28,7 +28,7 @@ if args.remove_predicted:
     get_pep_decription_str = "grep -P '^>' %s | grep -v 'PREDICTED' | sed 's/^>//;s/\[%s\]//;s/ /\\t/' | sort -t '\t' -k 2 -k 1 > %s" % (args.input,
                                                                                                                                          args.species_name,
                                                                                                                                          pep_description_file)
-else
+else:
     get_pep_decription_str = "grep -P '^>' %s | sed 's/^>//;s/\[%s\]//;s/ /\\t/' | sort -t '\t' -k 2 -k 1 > %s" % (args.input,
                                                                                                                    args.species_name,
                                                                                                                    pep_description_file)
