@@ -3,7 +3,9 @@ __author__ = 'Sergei F. Kliver'
 import os
 import argparse
 
+from Routines import SequenceRoutines
 from CustomCollections.GeneralCollections import SynDict
+
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input", action="store", dest="input", required=True,
@@ -14,16 +16,21 @@ parser.add_argument("-s", "--species_name", action="store", dest="species_name",
                     help="Species name as listed in pep file. Example: 'Felis catus'")
 parser.add_argument("-r", "--remove_predicted", action="store_true", dest="remove_predicted",
                     help="Remove predicted proteins")
+
 args = parser.parse_args()
 
 if not args.output_prefix:
     args.output_prefix = args.species_name.replace(" ", "_")
 
+len_file = "%s.len" % args.input
 pep_description_file = "%s.pep.description" % args.output_prefix
 pep_uniq_description_file = "%s.pep.description.uniq" % args.output_prefix
 pep_uniq_ids = "%s.pep.description.uniq.ids" % args.output_prefix
 pep_uniq_description_no_isoform_versions = "%s.pep.sorted.description.no_isoform_versions" % args.output_prefix
 pep_description_collapsed_isoforms = "%s.pep.collapsed_isoforms.description" % args.output_prefix
+pep_description_collapsed_isoforms_with_len = "%s.pep.collapsed_isoforms.with_len.description" % args.output_prefix
+pep_description_longest_isoform = "%s.pep.longest_isoform" % args.output_prefix
+pep_description_longest_isoform_ids = "%s.pep.longest_isoform.ids" % args.output_prefix
 
 awk_extract_ids_string = "awk -F'\t' '{print $1}' %s > %s"
 
@@ -50,3 +57,32 @@ syn_dict = SynDict()
 syn_dict.read(pep_uniq_description_no_isoform_versions, header=False, separator="\t", allow_repeats_of_key=True,
               split_values=True, values_separator=",", key_index=1, value_index=0, comments_prefix="#")
 syn_dict.write(pep_description_collapsed_isoforms, splited_values=True, values_separator=",")
+
+length_dict = SequenceRoutines.get_lengths_from_seq_file(args.input, format="fasta", out_file=len_file)
+
+descr_with_len_fd = open(pep_description_collapsed_isoforms_with_len, "w")
+descr_longest_isoform_fd = open(pep_description_longest_isoform, "w")
+descr_longest_isoform_ids_fd = open(pep_description_longest_isoform_ids, "w")
+
+for gene in syn_dict:
+    len_list = []
+    longest_isoform = None
+    max_len = 0
+    for isoform_id in syn_dict[gene]:
+        length = length_dict[isoform_id]
+        len_list.append(length)
+        if length > max_len:
+            max_len = length
+            longest_isoform = isoform_id
+
+    descr_with_len_fd.write("%s\t%s\t%s\n" % (gene, ",".join(syn_dict[gene]), ",".join(map(int, len_list))))
+    descr_longest_isoform_fd.write("%s\t%s\t%i\n" % (gene, longest_isoform, max_len))
+    descr_longest_isoform_ids_fd.write(longest_isoform)
+    descr_longest_isoform_ids_fd.write("\n")
+
+for file_descriptor in descr_with_len_fd, descr_longest_isoform_fd, descr_longest_isoform_ids_fd:
+    file_descriptor.close()
+
+
+
+

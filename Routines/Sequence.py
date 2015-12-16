@@ -7,13 +7,40 @@ from collections import OrderedDict
 
 import numpy as np
 
-from Bio.Seq import Seq
+from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
 
-from CustomCollections.GeneralCollections import TwoLvlDict
+from CustomCollections.GeneralCollections import TwoLvlDict, SynDict
 from Routines.Functions import output_dict
 
+
+class SequenceRoutines():
+
+    @staticmethod
+    def get_lengths(record_dict, out_file=None, close_after_if_file_object=False):
+        lengths_dict = SynDict()
+        for record_id in record_dict:
+            lengths_dict[record_id] = len(record_dict[record_id])
+
+        if out_file:
+            lengths_dict.write(out_file, header=False, separator="\t", splited_values=False, values_separator=",",
+                               close_after_if_file_object=close_after_if_file_object)
+
+        return lengths_dict
+
+    @staticmethod
+    def get_lengths_from_seq_file(input_file_list, format="fasta", out_file=None, close_after_if_file_object=False):
+        record_dict = SeqIO.index_db("tmp.idx", input_file_list, format=format)
+        lengths_dict = SynDict()
+        for record_id in record_dict:
+            lengths_dict[record_id] = len(record_dict[record_id])
+
+        if out_file:
+            lengths_dict.write(out_file, header=False, separator="\t", splited_values=False, values_separator=",",
+                               close_after_if_file_object=close_after_if_file_object)
+
+        return lengths_dict
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
     lengths_dict = OrderedDict({})

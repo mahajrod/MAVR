@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="aaaa&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Annotation/Exonerate.py" afterPath="$PROJECT_DIR$/Tools/Annotation/Exonerate.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/projects/cat_genomes/cat_annotation.sh" afterPath="$PROJECT_DIR$/projects/cat_genomes/cat_annotation.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Sequence.py" afterPath="$PROJECT_DIR$/Routines/Sequence.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/__init__.py" afterPath="$PROJECT_DIR$/Routines/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/ncbi/analyze_ncbi_pep.py" afterPath="$PROJECT_DIR$/scripts/annotation/ncbi/analyze_ncbi_pep.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/get_flanking_regions.py" afterPath="$PROJECT_DIR$/scripts/get_flanking_regions.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence/get_sequence_ids.py" afterPath="$PROJECT_DIR$/scripts/sequence/get_sequence_ids.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence/get_sequence_lengths.py" afterPath="$PROJECT_DIR$/scripts/sequence/get_sequence_lengths.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -33,16 +37,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="extract_proteins_from_augustus_output.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/annotation/extract_proteins_from_augustus_output.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="432">
-              <caret line="19" column="64" selection-start-line="19" selection-start-column="64" selection-end-line="19" selection-end-column="64" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="cat_annotation.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/projects/cat_genomes/cat_annotation.sh">
           <provider selected="true" editor-type-id="text-editor">
@@ -53,51 +47,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Exonerate.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Exonerate.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools/Annotation/Exonerate.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.80263156" vertical-offset="3354" max-vertical-offset="5292">
-              <caret line="235" column="103" selection-start-line="235" selection-start-column="103" selection-end-line="235" selection-end-column="103" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3516" max-vertical-offset="5346">
+              <caret line="214" column="72" selection-start-line="214" selection-start-column="72" selection-end-line="214" selection-end-column="72" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="draw_tree.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/phylogenetics/draw_tree.py">
+      <file leaf-file-name="add_len_to_simple_output.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/annotation/add_len_to_simple_output.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="96" max-vertical-offset="1008">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="396">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="get_summary_table.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/annotation/get_summary_table.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="42" max-vertical-offset="1548">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="split_exonerate_output.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/annotation/split_exonerate_output.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="378">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="analyze_ncbi_pep.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="analyze_ncbi_pep.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/annotation/ncbi/analyze_ncbi_pep.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="19" max-vertical-offset="1026">
-              <caret line="29" column="25" selection-start-line="29" selection-start-column="25" selection-end-line="29" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.6338983" vertical-offset="1084" max-vertical-offset="1692">
+              <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
@@ -105,12 +79,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="nerpa_exonerate_human.slurm" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/projects/cat_genomes/nerpa_exonerate_human.slurm">
+      <file leaf-file-name="Sequence.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="468">
-              <caret line="20" column="41" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="5886">
+              <caret line="32" column="18" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="115" />
+              <folding>
+                <element signature="e#25#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GeneralCollections.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CustomCollections/GeneralCollections.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3780" max-vertical-offset="5202">
+              <caret line="318" column="16" selection-start-line="318" selection-start-column="14" selection-end-line="321" selection-end-column="0" />
+              <folding>
+                <element signature="e#7556#8694#0" expanded="false" />
+                <element signature="e#8739#9223#0" expanded="false" />
+                <element signature="e#9293#9559#0" expanded="false" />
+                <element signature="e#11367#11598#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="get_sequence_lengths.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/sequence/get_sequence_lengths.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2" max-vertical-offset="612">
+              <caret line="24" column="72" selection-start-line="24" selection-start-column="72" selection-end-line="24" selection-end-column="72" />
+              <folding>
+                <element signature="e#46#55#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -131,10 +134,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Routines/MultipleAlignment.py" />
-        <option value="$PROJECT_DIR$/Tools/MultipleAlignment/MAFFT.py" />
-        <option value="$PROJECT_DIR$/scripts/multiple_alignment/parallel_mafft.py" />
-        <option value="$PROJECT_DIR$/scripts/multiple_alignment/remove_columns_with_gaps.py" />
         <option value="$PROJECT_DIR$/scripts/hmmer3/assign_proteins_to_families.py" />
         <option value="$PROJECT_DIR$/scripts/repeat_masking/convert_rm_out_to_gff.py" />
         <option value="$PROJECT_DIR$/Tools/RepeatMasking/RepeatMasker.py" />
@@ -142,7 +141,6 @@
         <option value="$PROJECT_DIR$/projects/baikal_seal_genome/used_commands.sh" />
         <option value="$PROJECT_DIR$/scripts/annotation/extract_annotations_from_gff_by_type.py" />
         <option value="$PROJECT_DIR$/Routines/Annotations.py" />
-        <option value="$PROJECT_DIR$/Routines/__init__.py" />
         <option value="$PROJECT_DIR$/Tools/Exonerate/Exonerate.py" />
         <option value="$PROJECT_DIR$/Tools/Annotation/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/annotation/parallel_exonerate.py" />
@@ -179,9 +177,14 @@
         <option value="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" />
         <option value="$PROJECT_DIR$/scripts/annotation/ncbi/analyze-ncbi_pep.py" />
         <option value="$PROJECT_DIR$/projects/cat_genomes/cat_annotation.sh" />
-        <option value="$PROJECT_DIR$/scripts/annotation/ncbi/analyze_ncbi_pep.py" />
         <option value="$PROJECT_DIR$/projects/cat_genomes/nerpa_exonerate_human.slurm" />
         <option value="$PROJECT_DIR$/Tools/Annotation/Exonerate.py" />
+        <option value="$PROJECT_DIR$/Routines/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/get_flanking_regions.py" />
+        <option value="$PROJECT_DIR$/scripts/sequence/get_sequence_ids.py" />
+        <option value="$PROJECT_DIR$/scripts/sequence/get_sequence_lengths.py" />
+        <option value="$PROJECT_DIR$/Routines/Sequence.py" />
+        <option value="$PROJECT_DIR$/scripts/annotation/ncbi/analyze_ncbi_pep.py" />
       </list>
     </option>
   </component>
@@ -190,8 +193,9 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="-1" />
     <option name="y" value="25" />
-    <option name="width" value="1920" />
+    <option name="width" value="1922" />
     <option name="height" value="1055" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -265,6 +269,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="treefam" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sequence" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -747,54 +769,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00163" summary="added paralleled exonerate&#10;">
-      <created>1449840015515</created>
-      <option name="number" value="00163" />
-      <option name="project" value="LOCAL" />
-      <updated>1449840015515</updated>
-    </task>
-    <task id="LOCAL-00164" summary="added paralleled exonerate&#10;">
-      <created>1449840161524</created>
-      <option name="number" value="00164" />
-      <option name="project" value="LOCAL" />
-      <updated>1449840161524</updated>
-    </task>
-    <task id="LOCAL-00165" summary="added paralleled exonerate&#10;">
-      <created>1449840636588</created>
-      <option name="number" value="00165" />
-      <option name="project" value="LOCAL" />
-      <updated>1449840636588</updated>
-    </task>
-    <task id="LOCAL-00166" summary="added paralleled exonerate&#10;">
-      <created>1449840847719</created>
-      <option name="number" value="00166" />
-      <option name="project" value="LOCAL" />
-      <updated>1449840847719</updated>
-    </task>
-    <task id="LOCAL-00167" summary="added paralleled exonerate&#10;">
-      <created>1449840948914</created>
-      <option name="number" value="00167" />
-      <option name="project" value="LOCAL" />
-      <updated>1449840948914</updated>
-    </task>
-    <task id="LOCAL-00168" summary="added paralleled exonerate&#10;">
-      <created>1449841075325</created>
-      <option name="number" value="00168" />
-      <option name="project" value="LOCAL" />
-      <updated>1449841075325</updated>
-    </task>
-    <task id="LOCAL-00169" summary="added paralleled exonerate&#10;">
-      <created>1449841244639</created>
-      <option name="number" value="00169" />
-      <option name="project" value="LOCAL" />
-      <updated>1449841244639</updated>
-    </task>
-    <task id="LOCAL-00170" summary="added paralleled exonerate&#10;">
-      <created>1449841350653</created>
-      <option name="number" value="00170" />
-      <option name="project" value="LOCAL" />
-      <updated>1449841350653</updated>
-    </task>
     <task id="LOCAL-00171" summary="added paralleled exonerate&#10;">
       <created>1449841466237</created>
       <option name="number" value="00171" />
@@ -1041,20 +1015,69 @@
       <option name="project" value="LOCAL" />
       <updated>1450259853626</updated>
     </task>
-    <option name="localTasksCounter" value="212" />
+    <task id="LOCAL-00212" summary="aaaa&#10;">
+      <created>1450266793886</created>
+      <option name="number" value="00212" />
+      <option name="project" value="LOCAL" />
+      <updated>1450266793886</updated>
+    </task>
+    <task id="LOCAL-00213" summary="aaaa&#10;">
+      <created>1450267267397</created>
+      <option name="number" value="00213" />
+      <option name="project" value="LOCAL" />
+      <updated>1450267267397</updated>
+    </task>
+    <task id="LOCAL-00214" summary="aaaa&#10;">
+      <created>1450267563210</created>
+      <option name="number" value="00214" />
+      <option name="project" value="LOCAL" />
+      <updated>1450267563210</updated>
+    </task>
+    <task id="LOCAL-00215" summary="aaaa&#10;">
+      <created>1450267730140</created>
+      <option name="number" value="00215" />
+      <option name="project" value="LOCAL" />
+      <updated>1450267730140</updated>
+    </task>
+    <task id="LOCAL-00216" summary="aaaa&#10;">
+      <created>1450267776146</created>
+      <option name="number" value="00216" />
+      <option name="project" value="LOCAL" />
+      <updated>1450267776146</updated>
+    </task>
+    <task id="LOCAL-00217" summary="aaaa&#10;">
+      <created>1450267874760</created>
+      <option name="number" value="00217" />
+      <option name="project" value="LOCAL" />
+      <updated>1450267874760</updated>
+    </task>
+    <task id="LOCAL-00218" summary="aaaa&#10;">
+      <created>1450267996597</created>
+      <option name="number" value="00218" />
+      <option name="project" value="LOCAL" />
+      <updated>1450267996597</updated>
+    </task>
+    <task id="LOCAL-00219" summary="aaaa&#10;">
+      <created>1450268121014</created>
+      <option name="number" value="00219" />
+      <option name="project" value="LOCAL" />
+      <updated>1450268121014</updated>
+    </task>
+    <option name="localTasksCounter" value="220" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="25" width="1920" height="1055" extended-state="0" />
+    <frame x="-1" y="25" width="1922" height="1055" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3290735" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25777543" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25750396" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -1063,7 +1086,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1123,53 +1145,18 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="6" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/Routines/Sequence.py</url>
+          <line>2</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="8" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/projects/Gaitway/human_genome/get_gene_ids_in windows.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/Gaitway/human_genome/extract_chromosome_annotations.grep">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/Gaitway/human_genome/rename_chromosomes.sed">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/Gaitway/human_genome/split_human_gff_annotation_by_gene_biotype.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/Gaitway/human_genome/split_human_repeat_masking_by_repeat_type.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/cat_genomes/extract_selected_repeats.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="8" column="5" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="113" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/projects/cat_genomes/fishing_cat_augustus_filtering.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
@@ -1381,19 +1368,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CustomCollections/GeneralCollections.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3645" max-vertical-offset="5202">
-          <caret line="286" column="13" selection-start-line="286" selection-start-column="13" selection-end-line="286" selection-end-column="13" />
-          <folding>
-            <element signature="e#7556#8694#0" expanded="false" />
-            <element signature="e#8739#9223#0" expanded="false" />
-            <element signature="e#9293#9559#0" expanded="false" />
-            <element signature="e#11367#11598#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/expansion/analyse_cafe_report.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3510">
@@ -1463,17 +1437,7 @@
         <state vertical-scroll-proportion="0.8618421" vertical-offset="492" max-vertical-offset="1440">
           <caret line="71" column="96" selection-start-line="71" selection-start-column="96" selection-end-line="71" selection-end-column="96" />
           <folding>
-            <element signature="e#55#70#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/annotation/ncbi/analyze_ncbi_pep.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="19" max-vertical-offset="1026">
-          <caret line="29" column="25" selection-start-line="29" selection-start-column="25" selection-end-line="29" selection-end-column="25" />
-          <folding>
-            <element signature="e#54#63#0" expanded="true" />
+            <element signature="e#55#70#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1504,9 +1468,90 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Annotation/Exonerate.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.80263156" vertical-offset="3354" max-vertical-offset="5292">
-          <caret line="235" column="103" selection-start-line="235" selection-start-column="103" selection-end-line="235" selection-end-column="103" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3516" max-vertical-offset="5346">
+          <caret line="214" column="72" selection-start-line="214" selection-start-column="72" selection-end-line="214" selection-end-column="72" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/annotation/add_len_to_simple_output.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="912">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence/get_sequence_ids.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5074627" vertical-offset="0" max-vertical-offset="603">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding>
+            <element signature="e#46#55#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/get_flanking_regions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="972">
+          <caret line="21" column="26" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
+          <folding>
+            <element signature="e#47#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35820895" vertical-offset="0" max-vertical-offset="603">
+          <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+          <folding>
+            <element signature="e#25#69#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="5886">
+          <caret line="32" column="18" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="115" />
+          <folding>
+            <element signature="e#25#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CustomCollections/GeneralCollections.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4374" max-vertical-offset="5202">
+          <caret line="318" column="16" selection-start-line="318" selection-start-column="14" selection-end-line="321" selection-end-column="0" />
+          <folding>
+            <element signature="e#7556#8694#0" expanded="false" />
+            <element signature="e#8739#9223#0" expanded="false" />
+            <element signature="e#9293#9559#0" expanded="false" />
+            <element signature="e#11367#11598#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence/get_sequence_lengths.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2" max-vertical-offset="612">
+          <caret line="24" column="72" selection-start-line="24" selection-start-column="72" selection-end-line="24" selection-end-column="72" />
+          <folding>
+            <element signature="e#46#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/annotation/ncbi/analyze_ncbi_pep.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6338983" vertical-offset="1084" max-vertical-offset="1692">
+          <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+          <folding>
+            <element signature="e#54#63#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
