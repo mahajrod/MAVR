@@ -43,6 +43,9 @@ parser.add_argument("-d", "--draw_distribution", action="store_true", dest="draw
                     help="Draw distribution of kmers")
 parser.add_argument("-j", "--jellyfish_path", action="store", dest="jellyfish_path",
                     help="Path to jellyfish")
+parser.add_argument("-n", "--dont_extract_kmer_list", action="store_true", dest="dont_extract_kmer_list",
+                    help="Don't extract kmer list")
+
 args = parser.parse_args()
 
 args.input = make_list_of_path_to_files(args.input)
@@ -64,9 +67,10 @@ Jellyfish.path = args.jellyfish_path if args.jellyfish_path else ""
 Jellyfish.count(args.input if not args.add_rev_com else file_with_rev_com, base_file,
                 kmer_length=args.kmer_length, hash_size=args.hash_size,
                 count_both_strands=args.count_both_strands)
-Jellyfish.dump(base_file, kmer_table_file)
-sed_string = 'sed -e "s/\t.*//" %s > %s' % (kmer_table_file, kmer_file)
-os.system(sed_string)
+if args.dont_extract_kmer_list:
+    Jellyfish.dump(base_file, kmer_table_file)
+    sed_string = 'sed -e "s/\t.*//" %s > %s' % (kmer_table_file, kmer_file)
+    os.system(sed_string)
 
 if args.draw_distribution:
     histo_file = "%s_%i_mer.histo" % (args.base_prefix, args.kmer_length)
