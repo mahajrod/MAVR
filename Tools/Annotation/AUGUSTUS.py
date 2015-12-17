@@ -213,7 +213,7 @@ class AUGUSTUS(Tool):
     def join_multiple_hints(self, in_file, out_file):
         options = " > %s" % out_file
         # sorting of hints is necessary before merging
-        cmd = "cat h%s | sort -n -k 4,4 | sort -s -n -k 5,5 | sort -s -k 3,3 | sort -s -k 1,1 | join_mult_hints.gff" % in_file
+        cmd = "cat %s | sort -n -k 4,4 | sort -s -n -k 5,5 | sort -s -k 3,3 | sort -s -k 1,1 | join_mult_hints.pl" % in_file
         self.execute(options, cmd=cmd)
 
 
