@@ -39,6 +39,11 @@ parser.add_argument("--source_for_top_hits", action="store", dest="source_for_to
 parser.add_argument("--source_for_secondary_hits", action="store", dest="source_for_secondary_hits", default="EXNS",
                     help="Source for secondary hits. Default - 'EXNS'")
 
+parser.add_argument("--max_intron_len", action="store", dest="max_intron_len", type=int,
+                    help="Maximum length of intron")
+parser.add_argument("--min_intron_len", action="store", dest="min_intron_len", type=int,
+                    help="Minimum length of intron")
+
 args = parser.parse_args()
 
 top_hits_gff = "%s.target.top_hits.gff" % args.output_prefix
