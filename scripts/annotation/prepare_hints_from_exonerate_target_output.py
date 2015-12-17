@@ -48,8 +48,8 @@ args = parser.parse_args()
 
 top_hits_gff = "%s.target.top_hits.gff" % args.output_prefix
 secondary_hits_gff = "%s.target.secondary_hits.gff" % args.output_prefix
-top_hits_gff_hints = "%s.target.top_hits.gff" % args.output_prefix
-secondary_hits_gff_hints = "%s.target.secondary_hits.gff" % args.output_prefix
+top_hits_gff_hints = "%s.target.top_hits.hints.gff" % args.output_prefix
+secondary_hits_gff_hints = "%s.target.secondary_hits.hints.gff" % args.output_prefix
 
 Exonerate.extract_top_hits_from_target_gff(args.input, top_hits_gff, secondary_hits_gff,
                                            id_white_list_file=args.white_id_file,
