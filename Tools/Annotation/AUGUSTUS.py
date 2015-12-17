@@ -185,28 +185,9 @@ class AUGUSTUS(Tool):
                                                                           five_utr_support, three_introns_support,
                                                                           incompatible_hint_groups))
                                     break
-                    """
-                    if line[:12] == "# start gene":
-                        gene = line.strip().split()[-1]
-                        out_fd.write(">%s%s\t gene=%s\n" % (id_prefix, gene, gene))
-                    elif "# protein sequence" in line:
-                        protein = line.strip().split("[")[-1]
-                        if "]" in protein:
-                            protein = protein.split("]")[0]
-                        else:
-                            while True:
-                                part = in_fd.next().split()[-1]
-                                if "]" in part:
-                                    protein += part.split("]")[0]
-                                    break
-                                else:
-                                    protein += part
-
-                        out_fd.write(protein)
-                        out_fd.write("\n")
-                    """
 
         ev_fd.close()
+
     @staticmethod
     def extract_CDS_annotations_from_output(augustus_output, CDS_output):
         CGAS.grep("'\\tCDS\\t'", augustus_output, output=CDS_output, use_regexp=True)
@@ -215,6 +196,26 @@ class AUGUSTUS(Tool):
     def extract_gene_ids_from_output(augustus_output, all_genes_output):
         CGAS.cgas(augustus_output, grep_pattern="'\\tgene\\t'", sed_string="'s/.*ID=//'", output=all_genes_output,
                   grep_use_regexp=True)
+
+    def exonerate_to_hints(self, exonerate_gff, hint_gff, priority=None, min_intron_len=None, max_intron_len=None,
+                           CDS_part_cutoff=None, source=None):
+
+        options = " --in=%s" % exonerate_gff
+        options += " --out=%s" % hint_gff
+        options += " --priority=%i" % priority if priority else ""
+        options += " --minintronlen=%i" % min_intron_len if min_intron_len else ""
+        options += " --maxintronlen=%i" % max_intron_len if max_intron_len else ""
+        options += " --CDSpart_cutoff=%i" % CDS_part_cutoff if CDS_part_cutoff else ""
+        options += " --source=%s" % source if source else ""
+
+        self.cmd(options, cmd="exonerate2hints.pl")
+
+    def join_multiple_hints(self, in_file, out_file):
+        options = " > %s" % out_file
+        # sorting of hints is necessary before merging
+        cmd = "cat h%s | sort -n -k 4,4 | sort -s -n -k 5,5 | sort -s -k 3,3 | sort -s -k 1,1 | join_mult_hints.gff" % in_file
+        self.cmd(options, cmd=cmd)
+
 
 
 
