@@ -208,13 +208,13 @@ class AUGUSTUS(Tool):
         options += " --CDSpart_cutoff=%i" % CDS_part_cutoff if CDS_part_cutoff else ""
         options += " --source=%s" % source if source else ""
 
-        self.cmd(options, cmd="exonerate2hints.pl")
+        self.execute(options, cmd="exonerate2hints.pl")
 
     def join_multiple_hints(self, in_file, out_file):
         options = " > %s" % out_file
         # sorting of hints is necessary before merging
         cmd = "cat h%s | sort -n -k 4,4 | sort -s -n -k 5,5 | sort -s -k 3,3 | sort -s -k 1,1 | join_mult_hints.gff" % in_file
-        self.cmd(options, cmd=cmd)
+        self.execute(options, cmd=cmd)
 
 
 
