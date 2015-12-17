@@ -37,7 +37,7 @@ parser.add_argument("--secondary_hits_CDS_part_cutoff", action="store", dest="se
 parser.add_argument("--source_for_top_hits", action="store", dest="source_for_top_hits", default="EXNT",
                     help="Source for top hits. Default - 'EXNT'")
 parser.add_argument("--source_for_secondary_hits", action="store", dest="source_for_secondary_hits", default="EXNS",
-                    help="Source for secondary hits. Default - 'EXNT'")
+                    help="Source for secondary hits. Default - 'EXNS'")
 
 args = parser.parse_args()
 
