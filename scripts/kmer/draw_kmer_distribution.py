@@ -28,26 +28,29 @@ parser.add_argument("-b", "--bin_width", action="store", dest="bin_width", type=
                     help="Bin width of histogram")
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
                     help="Number of threads")
-parser.add_argument("-d", "--_without_logscale", action="store_true", dest="without_logscale",
-                    help="Dont logsscale axes")
+parser.add_argument("-d", "--without_logscale", action="store_true", dest="without_logscale",
+                    help="Dont logscale axes")
 parser.add_argument("-a", "--logbase", action="store", dest="logbase", type=int, default=10,
                     help="Base of logarithm")
 parser.add_argument("-k", "--kmer_size", action="store", dest="kmer_size", type=int,
                     help="Size of kmers in base. Used in suptitle of figure.")
 parser.add_argument("-j", "--jellyfish_path", action="store", dest="jellyfish_path",
                     help="Path to jellyfish")
+parser.add_argument("-r", "--input_is_histogram", action="store_true", dest="input_is_histo",
+                    help="Input file contains histogram data")
 args = parser.parse_args()
 
 file_prefix = ".".join(os.path.basename(args.input).split(".")[:-1])
-histo_file = "%s.histo" % file_prefix
+histo_file = "%s.histo" % file_prefix if not args.input_is_histo else args.input
 
 if args.out_prefix is None:
     args.out_prefix = file_prefix + "_histogram"
 
 Jellyfish.path = args.jellyfish_path if args.jellyfish_path else ""
 Jellyfish.threads = args.threads
-Jellyfish.histo(args.input, histo_file, bin_width=args.bin_width,
-                lower_count=args.low_limit, upper_count=args.high_limit)
+if not args.input_is_histo:
+    Jellyfish.histo(args.input, histo_file, bin_width=args.bin_width,
+                    lower_count=args.low_limit, upper_count=args.high_limit)
 
 counts = []
 bins = []
