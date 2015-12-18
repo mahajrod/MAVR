@@ -31,6 +31,7 @@ for record in GFF.parse(open(args.input_gff)):
     for feature in record.features:
         if feature.type == "gene":
             for subfeature in feature.sub_features:
+                print subfeature
                 if subfeature.type == "mRNA" or subfeature.type == "transcript":
                     out_fd.write("%s\t%s\t%i\n" % (feature.id, subfeature.id, len(subfeature)))
 
