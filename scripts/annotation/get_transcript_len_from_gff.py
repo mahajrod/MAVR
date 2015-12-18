@@ -29,6 +29,7 @@ for record in GFF.parse(open(args.input_gff)):
     new_record = record
     record.features = []
     for feature in record.features:
+        print feature
         if feature.type == "gene":
             for subfeature in feature.sub_features:
                 print subfeature
