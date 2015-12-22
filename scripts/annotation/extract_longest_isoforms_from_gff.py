@@ -48,7 +48,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_gff", action="store", dest="input_gff",
                     help="Gff file with annotations to extract")
-parser.add_argument("-o", "--output_file", action="store", dest="output_file", default="stdout",
+parser.add_argument("-o", "--output", action="store", dest="output", default="stdout",
                     help="Output file with longest transcripts")
 parser.add_argument("-m", "--mode", action="store", dest="mode", default="longest_CDS",
                     help="Operational mode. Possible variants: 'longest_CDS', 'longest_transcript'. "
@@ -56,7 +56,7 @@ parser.add_argument("-m", "--mode", action="store", dest="mode", default="longes
 
 args = parser.parse_args()
 
-out_fd = sys.stdout if args.output == "stdout" else open(args.output_file, "w")
+out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
 
 GFF.write(record_with_extracted_annotations_generator(args.input_gff, args.mode), out_fd)
 
