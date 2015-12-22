@@ -6,12 +6,11 @@ from copy import deepcopy
 
 from BCBio import GFF
 
-from CustomCollections.GeneralCollections import IdList
-
 
 def record_with_extracted_annotations_generator(gff_file, mode):
 
     for record in GFF.parse(open(gff_file)):
+        print("Handling %s" % record.id)
         new_record = deepcopy(record)
         new_record.features = []
         for feature in record.features:
@@ -31,14 +30,14 @@ def record_with_extracted_annotations_generator(gff_file, mode):
                             if subsubfeature.type == "CDS":
                                 CDS_len += len(subsubfeature)
                         CDS_len_list.append(CDS_len)
-                if mode == "longest_CDS":
-                    max_len = max(CDS_len_list) if CDS_len_list else None
+                if mode == "longest_CDS" and CDS_len_list:
+                    max_len = max(CDS_len_list)
                     longest = transcript_record_list[CDS_len_list.index(max_len)]
-                elif mode == 'longest_transcript':
-                    max_len = max(transcript_len_list) if transcript_len_list else None
-                    longest = transcript_record_list[CDS_len_list.index(max_len)]
-                new_gene_record.sub_features.append(longest)
+                elif mode == 'longest_transcript' and transcript_len_list:
+                    max_len = max(transcript_len_list)
+                    longest = transcript_record_list[transcript_len_list.index(max_len)]
                 if max_len:
+                    new_gene_record.sub_features.append(longest)
                     if max_len > 0:
                         new_record.features.append(new_gene_record)
         if new_record.features:
