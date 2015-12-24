@@ -20,6 +20,8 @@ parser.add_argument("-i", "--input_gff", action="store", dest="input_gff",
                     help="Gff file with annotations to extract")
 parser.add_argument("-o", "--output_file", action="store", dest="output", default="stdout",
                     help="Output file with information about transcripts")
+parser.add_argument("-l", "--longest_isoforms", action="store", dest="longest_isoforms",
+                    help="File to write longest isoforms")
 
 args = parser.parse_args()
 
@@ -43,7 +45,6 @@ for record in GFF.parse(open(args.input_gff)):
                         if subsubfeature.type == "CDS":
                             CDS_len += len(subsubfeature)
                     CDS_len_list.append(CDS_len)
-
 
             out_fd.write("%s\t%s\t%s\t%s\t%s\n" % (feature.id, ",".join(transcript_id_list),
                                                    ",".join(map(str, transcript_len_list)),

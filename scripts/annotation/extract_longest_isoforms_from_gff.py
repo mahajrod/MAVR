@@ -8,9 +8,8 @@ from BCBio import GFF
 
 
 def record_with_extracted_annotations_generator(gff_file, mode):
-
     for record in GFF.parse(open(gff_file)):
-        print("Handling %s" % record.id)
+        print("Handling region '%s'" % record.id)
         new_record = deepcopy(record)
         new_record.features = []
         for feature in record.features:

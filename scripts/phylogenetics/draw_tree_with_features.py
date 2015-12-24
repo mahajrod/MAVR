@@ -3,7 +3,7 @@ __author__ = 'Sergei F. Kliver'
 
 import argparse
 
-from ete2 import Tree, TreeStyle
+from ete2 import Tree, TreeStyle, AttrFace, faces
 
 
 parser = argparse.ArgumentParser()
@@ -33,9 +33,22 @@ parser.add_argument("-u", "--width_units", action="store", dest="width_units", d
                     help="Tree image width units: 'px': pixels, 'mm': millimeters, 'in': inches. Default: 'mm' ")
 parser.add_argument("-m", "--draw_mode", action="store", dest="draw_mode", default="render",
                     help="Draw mode - render to file or show preview. Default - render")
+parser.add_argument("-n", "--feature_name", action="store", dest="feature_name", required=True,
+                    help="Name of feature to show")
 
 args = parser.parse_args()
 
+
+def layout(node):
+    #if node.up is not None:
+
+    #attr = AttrFace("decrease", fsize=7, fgcolor="red", text_prefix="-")
+    #faces.add_face_to_node(attr, node, 0, position="branch-bottom")
+    if node.is_leaf():
+        attr = AttrFace("name", fsize=10, fgcolor="black", text_prefix="  ", fstyle="italic")
+        faces.add_face_to_node(attr, node, 0, position="aligned")
+        attr = AttrFace(args.feature_name, fsize=7, fgcolor="green", text_prefix="")
+        faces.add_face_to_node(attr, node, 0, position="branch-top")
 
 #ts.show_branch_support = True
 tree_index = 1
@@ -45,8 +58,16 @@ with open(args.input_tree_file, "r") as in_fd:
         tree = Tree(tree_line, format=args.input_tree_format)
         for node in tree.traverse():
             node.img_style["size"] = 0
+
+        ts = TreeStyle()
+        ts.layout_fn = layout
+        ts.optimal_scale_level = "full"
+        ts.branch_vertical_margin = 10
+        ts.show_leaf_name = False
+        #print(tree.write(format=args.input_tree_format, features=[args.feature_name]))
         if args.draw_mode == "render":
-            tree.render("%s_%i.png" % (args.output_tree_file_prefix, tree_index), w=args.width, units=args.width_units)
+            tree.render("%s_%i.png" % (args.output_tree_file_prefix, tree_index), tree_style=ts,
+                        w=args.width, units=args.width_units)
         else:
             tree.show()
 

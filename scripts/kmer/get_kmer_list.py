@@ -67,7 +67,7 @@ Jellyfish.path = args.jellyfish_path if args.jellyfish_path else ""
 Jellyfish.count(args.input if not args.add_rev_com else file_with_rev_com, base_file,
                 kmer_length=args.kmer_length, hash_size=args.hash_size,
                 count_both_strands=args.count_both_strands)
-if args.dont_extract_kmer_list:
+if not args.dont_extract_kmer_list:
     Jellyfish.dump(base_file, kmer_table_file)
     sed_string = 'sed -e "s/\t.*//" %s > %s' % (kmer_table_file, kmer_file)
     os.system(sed_string)
