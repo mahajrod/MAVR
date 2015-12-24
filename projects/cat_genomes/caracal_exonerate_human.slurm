@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #SBATCH --array=1-890%333
 #SBATCH --time=100:00:00         # Run time in hh:mm:ss
-#SBATCH --mem-per-cpu=8192       # Minimum memory required per CPU (in megabytes)
-#SBATCH --job-name=nerpa_human
+#SBATCH --mem-per-cpu=4192       # Minimum memory required per CPU (in megabytes)
+#SBATCH --job-name=cara_human
 #SBATCH --error=/work/pavlov/okochenova/genomes_workdir/caracal/logs/exonerate_human.ncbi.%A_%a.err
 #SBATCH --output=/work/pavlov/okochenova/genomes_workdir/caracal/logs/exonerate_human.ncbi.%A_%a.out
 
