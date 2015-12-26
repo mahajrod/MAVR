@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-WORKDIR=""
-MERGED_DIR="${WORKDIR}fastq/"
-FILTERED_DIR="${WORKDIR}filtered/"
-FASTQC_MERGED_DIR="${WORKDIR}fastqc/raw/"
-FASTQC_FILTERED_DIR="${WORKDIR}fastqc/filtered"
+WORKDIR=`pwd`
+MERGED_DIR="${WORKDIR}/fastq/"
+FILTERED_DIR="${WORKDIR}/filtered/"
+FASTQC_MERGED_DIR="${WORKDIR}/fastqc/raw/"
+FASTQC_FILTERED_DIR="${WORKDIR}/fastqc/filtered/"
 
 INPUT_DIR=$1
 

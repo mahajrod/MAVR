@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+WORKDIR=`pwd`
+MERGED_DIR="${WORKDIR}/fastq/"
+
+INPUT_DIR=$1
+
+mkdir -p ${MERGED_DIR} # ${FILTERED_DIR} ${FASTQC_FILTERED_DIR} ${FASTQC_MERGED_DIR}
+
+for SAMPLE_NAME in `ls ${INPUT_DIR}`;
+    do
+
+    RAW_SAMPLE_DIR="${INPUT_DIR}${SAMPLE_NAME}/"
+    echo ${RAW_SAMPLE_DIR}
+    MERGED_SAMPLE_DIR="${MERGED_DIR}${SAMPLE_NAME}/"
+
+    LEFT_MERGED_READS="${MERGED_SAMPLE_DIR}${SAMPLE_NAME}_1.fq"
+    RIGHT_MERGED_READS="${MERGED_SAMPLE_DIR}${SAMPLE_NAME}_2.fq"
+
+    mkdir -p ${MERGED_SAMPLE_DIR}
+    echo "Handling ${SAMPLE_NAME} ..."
+
+    zcat ${RAW_SAMPLE_DIR}/*_1.fq.gz > ${LEFT_MERGED_READS}
+    zcat ${RAW_SAMPLE_DIR}/*_2.fq.gz > ${RIGHT_MERGED_READS}
+
+    done
