@@ -23,4 +23,5 @@ for SAMPLE_NAME in `ls ${INPUT_DIR}`;
     zcat ${RAW_SAMPLE_DIR}/*_1.fq.gz > ${LEFT_MERGED_READS}
     zcat ${RAW_SAMPLE_DIR}/*_2.fq.gz > ${RIGHT_MERGED_READS}
 
+
     done
