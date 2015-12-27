@@ -11,14 +11,15 @@ class Trimmomatic(JavaTool):
         JavaTool.__init__(self, jar, java_path=java_path, max_threads=max_threads,
                           jar_path=jar_path, max_memory=None, timelog="trimmomatic.time.log")
 
-    @staticmethod
-    def parse_options(left_reads, output_prefix, output_extension="fq", right_reads=None, adapters_file=None,
+    def parse_options(self, left_reads, output_prefix, output_extension="fq", right_reads=None, adapters_file=None,
                       mismatch_number=2, pe_reads_score=30, se_read_score=10, min_adapter_len=1,
                       sliding_window_size=None, average_quality_threshold=15,
                       leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
-                      crop_length=None, head_crop_length=None, min_length=50):
+                      crop_length=None, head_crop_length=None, min_length=50, base_quality="phred33"):
 
         options = " PE" if right_reads else " SE"
+        options += " -threads %i" % self.threads
+        options += " -%s" % base_quality
         options += " %s" % left_reads
         options += " %s" % right_reads if right_reads else ""
 
@@ -47,7 +48,8 @@ class Trimmomatic(JavaTool):
                mismatch_number=2, pe_reads_score=30, se_read_score=10, min_adapter_len=1,
                sliding_window_size=None, average_quality_threshold=15,
                leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
-               crop_length=None, head_crop_length=None, min_length=50, logfile="trimmomatic.log"):
+               crop_length=None, head_crop_length=None, min_length=50, logfile="trimmomatic.log",
+               base_quality="phred33"):
 
         options = self.parse_options(left_reads, output_prefix, output_extension=output_extension,
                                      right_reads=right_reads, adapters_file=adapters_file,
@@ -56,7 +58,8 @@ class Trimmomatic(JavaTool):
                                      sliding_window_size=sliding_window_size, average_quality_threshold=average_quality_threshold,
                                      leading_base_quality_threshold=leading_base_quality_threshold,
                                      trailing_base_quality_threshold=trailing_base_quality_threshold,
-                                     crop_length=crop_length, head_crop_length=head_crop_length, min_length=min_length)
+                                     crop_length=crop_length, head_crop_length=head_crop_length, min_length=min_length,
+                                     base_quality=base_quality)
 
         options += " > %s" % logfile if logfile else ""
 

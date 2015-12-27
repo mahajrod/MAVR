@@ -23,24 +23,28 @@ parser.add_argument("-s", "--samples", action="store", dest="samples",
 parser.add_argument("-o", "--output_dir", action="store", dest="out_dir", type=lambda s: check_path(os.path.abspath(s)),
                     default="./", help="Directory to write output. Default: current directory")
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=1, type=int,
-                    help="Number of threads to use in Trimmomatic")
+                    help="Number of threads to use in Trimmomatic. Default - 1.")
 
 parser.add_argument("-a", "--adapters", action="store", dest="adapters",
                     help="File with adapters to trim. If not set - skip this stage")
 parser.add_argument("-m", "--mismatch_number", action="store", dest="mismatch_number", type=int, default=2,
-                    help="Number of mismatches in adapter seed. Works only if -a/--adapters option is set")
+                    help="Number of mismatches in adapter seed. Works only if -a/--adapters option is set. Default - 2.")
 parser.add_argument("-p", "--pe_score", action="store", dest="pe_score", type=int, default=30,
-                    help="PE reads adapter score. Works only if -a/--adapters option is set")
+                    help="PE reads adapter score. Works only if -a/--adapters option is set. Default - 30.")
 parser.add_argument("-e", "--se_score", action="store", dest="se_score", type=int, default=10,
-                    help="SE reads adapter score. Works only if -a/--adapters option is set")
+                    help="SE reads adapter score. Works only if -a/--adapters option is set. Default - 10.")
 parser.add_argument("-n", "--min_adapter_len", action="store", dest="min_adapter_len", type=int, default=1,
-                    help="Minimum length of adapter fragment. Works only if -a/--adapters option is set")
+                    help="Minimum length of adapter fragment. Works only if -a/--adapters option is set. Default - 1.")
 
 parser.add_argument("-g", "--sliding_window_size", action="store", dest="sliding_window_size", type=int,
                     help="Size of sliding window when checking quality. If not set - skip this stage")
 parser.add_argument("-q", "--average_quality_threshold", action="store", dest="average_quality_threshold", default=15,
                     type=int,
-                    help="Quality threshold for sliding window. Works only if -q/--average_quality_threshold is set")
+                    help="Quality threshold for sliding window. Works only if -q/--average_quality_threshold is set"
+                         "Default - 15.")
+parser.add_argument("-b", "--base_quality", action="store", dest="base_quality", default="phred33",
+                    help="Type of base quality. Possible variants: phred33, phred64. Default - phred33 ")
+
 
 parser.add_argument("-l", "--min_length", action="store", dest="min_len", type=int,
                     help="Minimum length of read to retain. If not set - skip this stage")
@@ -99,5 +103,6 @@ for sample in samples:
                        min_adapter_len=args.min_adapter_len, sliding_window_size=args.sliding_window_size,
                        average_quality_threshold=args.average_quality_threshold,
                        leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
-                       crop_length=None, head_crop_length=None, min_length=args.min_len, logfile=trimmomatic_log)
+                       crop_length=None, head_crop_length=None, min_length=args.min_len, logfile=trimmomatic_log,
+                       base_quality=args.base_quality)
 
