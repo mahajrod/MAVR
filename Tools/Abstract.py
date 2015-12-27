@@ -21,19 +21,28 @@ def execute(exe_string):
 
 class Tool():
 
-    def __init__(self, cmd, path="", max_threads=4, jar_path=None, jar=None, max_memory="500m"):
+    def __init__(self, cmd, path="", max_threads=4, jar_path=None, jar=None,
+                 max_memory="500m", timelog="tool_time.log"):
         self.path = check_path(path)
         self.cmd = cmd
         self.threads = max_threads
         self.jar_path = check_path(jar_path) if jar_path else None
         self.jar = jar
         self.max_memory = max_memory
+        self.timelog = timelog
 
     def execute(self, options="", cmd=None, capture_output=False):
-
         command = cmd if cmd is not None else self.cmd
+
         exe_string = check_path(self.path) + command + " " + options
+        exe_string = "time -a -o %s %s" % (self.timelog, exe_string) if self.timelog else exe_string
+
         sys.stdout.write("Executing:\n\t%s\n" % exe_string)
+        if self.timelog:
+            os.system("date >> %s" % self.timelog)
+            with open(self.timelog, "a") as time_fd:
+                time_fd.write(exe_string + "\n")
+
         if capture_output:
             return Popen([exe_string], shell=True, stdout=PIPE).stdout  # returns file object
         else:
@@ -44,7 +53,7 @@ class Tool():
         command = cmd if cmd is not None else self.cmd
         exe_string_list = [check_path(self.path) + command + " " + options for options in options_list]
 
-        with open("exe_list.t", "w") as exe_fd:
+        with open("exe_list.t", "a") as exe_fd:
             for entry in exe_string_list:
                 exe_fd.write("%s\n" % entry)
         process_pool = mp.Pool(threads if threads else self.threads)
@@ -196,20 +205,34 @@ class Tool():
 
 class JavaTool(Tool):
 
-    def __init__(self, jar, java_path="", max_threads=4, jar_path="", max_memory="1g"):
+    def __init__(self, jar, java_path="", max_threads=4, jar_path="", max_memory=None, timelog="tool_time.log"):
 
         Tool.__init__(self, "java", path=check_path(java_path), max_threads=max_threads,
-                      jar_path=check_path(jar_path),
-                      jar=jar, max_memory=max_memory)
+                      jar_path=check_path(jar_path), jar=jar, max_memory=max_memory, timelog=timelog)
 
-    def execute(self, options="", cmd=None):
+    def execute(self, options="", cmd=None, capture_output=False):
         command = cmd if cmd is not None else ""
-        exe_string = check_path(self.path) + "java -Xmx%s -jar %s%s %s %s" % (self.max_memory,
-                                                                              check_path(self.jar_path),
-                                                                              self.jar, command, options)
-        sys.stdout.write("Executing:\n\t%s\n" % exe_string)
 
-        os.system(exe_string)
+        java_string = "java"
+        java_string += " -Xmx%s" if self.max_memory else ""
+        java_string += " -jar %s%s" % (check_path(self.jar_path), self.jar)
+        java_string += " %s" % command
+        java_string += " %s" % options
+
+        exe_string = check_path(self.path) + java_string
+        exe_string = "time -a -o %s %s" % (self.timelog, exe_string) if self.timelog else exe_string
+
+        sys.stdout.write("Executing:\n\t%s\n" % exe_string)
+        if self.timelog:
+            os.system("date >> %s" % self.timelog)
+            with open(self.timelog, "a") as time_fd:
+                time_fd.write(exe_string + "\n")
+
+        if capture_output:
+            return Popen([exe_string], shell=True, stdout=PIPE).stdout  # returns file object
+        else:
+            os.system(exe_string)
+            return None
 
 
 if __name__ == "__main__":
