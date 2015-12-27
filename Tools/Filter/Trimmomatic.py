@@ -40,7 +40,7 @@ class Trimmomatic(JavaTool):
         options += " CROP:%i" % crop_length if crop_length else ""
         options += " HEADCROP:%i" % head_crop_length if head_crop_length else ""
 
-        options += "MINLEN:%i" % min_length if min_length else ""
+        options += " MINLEN:%i" % min_length if min_length else ""
 
         return options
 
