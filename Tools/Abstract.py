@@ -26,7 +26,7 @@ class Tool():
         self.path = check_path(path)
         self.cmd = cmd
         self.threads = max_threads
-        print(jar_path)
+        #print(jar_path)
         self.jar_path = check_path(jar_path) if jar_path else None
         self.jar = jar
         self.max_memory = max_memory
@@ -36,13 +36,14 @@ class Tool():
         command = cmd if cmd is not None else self.cmd
 
         exe_string = check_path(self.path) + command + " " + options
-        exe_string = "time -f '\\t%%E real,\\t%%U user,\\t%%S sys' -a -o %s %s" % (self.timelog, exe_string) if self.timelog else exe_string
 
         sys.stdout.write("Executing:\n\t%s\n" % exe_string)
         if self.timelog:
             os.system("date >> %s" % self.timelog)
             with open(self.timelog, "a") as time_fd:
                 time_fd.write(exe_string + "\n")
+
+        exe_string = "time -f '\\t%%E real,\\t%%U user,\\t%%S sys' -a -o %s %s" % (self.timelog, exe_string) if self.timelog else exe_string
 
         if capture_output:
             return Popen([exe_string], shell=True, stdout=PIPE).stdout  # returns file object
@@ -222,13 +223,16 @@ class JavaTool(Tool):
         java_string += " %s" % options
 
         exe_string = check_path(self.path) + java_string
-        exe_string = "time -f '\\t%%E real,\\t%%U user,\\t%%S sys' -a -o %s %s" % (self.timelog, exe_string) if self.timelog else exe_string
 
         sys.stdout.write("Executing:\n\t%s\n" % exe_string)
         if self.timelog:
             os.system("date >> %s" % self.timelog)
             with open(self.timelog, "a") as time_fd:
-                time_fd.write(exe_string + "\n")
+                time_fd.write("Command\t%s\n" % exe_string)
+
+        exe_string = "time -f 'Time\\t%%E real,\\t%%U user,\\t%%S sys' -a -o %s %s" % (self.timelog, exe_string) if self.timelog else exe_string
+
+
 
         if capture_output:
             return Popen([exe_string], shell=True, stdout=PIPE).stdout  # returns file object
