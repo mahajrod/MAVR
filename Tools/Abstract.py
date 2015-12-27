@@ -36,7 +36,7 @@ class Tool():
         command = cmd if cmd is not None else self.cmd
 
         exe_string = check_path(self.path) + command + " " + options
-        exe_string = "time -a -o %s %s" % (self.timelog, exe_string) if self.timelog else exe_string
+        exe_string = "time -f '\\t%%E real,\\t%%U user,\\t%%S sys' -a -o %s %s" % (self.timelog, exe_string) if self.timelog else exe_string
 
         sys.stdout.write("Executing:\n\t%s\n" % exe_string)
         if self.timelog:
@@ -222,7 +222,7 @@ class JavaTool(Tool):
         java_string += " %s" % options
 
         exe_string = check_path(self.path) + java_string
-        exe_string = "time -a -o %s %s" % (self.timelog, exe_string) if self.timelog else exe_string
+        exe_string = "time -f '\\t%%E real,\\t%%U user,\\t%%S sys' -a -o %s %s" % (self.timelog, exe_string) if self.timelog else exe_string
 
         sys.stdout.write("Executing:\n\t%s\n" % exe_string)
         if self.timelog:
