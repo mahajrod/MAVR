@@ -217,7 +217,7 @@ class JavaTool(Tool):
         java_string = "java"
         java_string += " -Xmx%s" if self.max_memory else ""
         #print (self.jar_path)
-        java_string += " -jar %s%s" % (check_path(self.jar_path), self.jar)
+        java_string += " -jar %s%s" % (self.jar_path, self.jar)
         java_string += " %s" % command
         java_string += " %s" % options
 
