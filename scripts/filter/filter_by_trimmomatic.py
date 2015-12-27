@@ -20,7 +20,7 @@ parser.add_argument("-s", "--samples", action="store", dest="samples",
                          "In sample directory should one(in case SE reads) or two(in case PE reads) files."
                          "Filenames should should contain '_1.fq' or '_1.fastq' for forward(left) reads, "
                          " '_2.fq' or '_2.fastq' for reverse(right) reads and '.fq' or '.fastq' for SE reads")
-parser.add_argument("-o", "--output_dir", action="store", dest="out_dir", type=lambda s: check_path(os.path.abspath(s)),
+parser.add_argument("-o", "--output_dir", action="store", dest="output_dir", type=lambda s: check_path(os.path.abspath(s)),
                     default="./", help="Directory to write output. Default: current directory")
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=1, type=int,
                     help="Number of threads to use in Trimmomatic. Default - 1.")
