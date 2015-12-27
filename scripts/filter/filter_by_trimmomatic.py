@@ -94,7 +94,7 @@ for sample in samples:
     else:
         left_reads_file = "%s%s" % (sample_dir, left_reads_file)
         right_reads_file = "%s%s" % (sample_dir, right_reads_file)
-        print("Found files with PE reads:\n\t%s\n\t" % (left_reads_file, right_reads_file))
+        print("Found files with PE reads:\n\t%s\n\t%s" % (left_reads_file, right_reads_file))
 
     Trimmomatic.timelog = trimmomatic_time_log
     Trimmomatic.filter(left_reads_file, output_prefix, output_extension="fq", right_reads=right_reads_file,
