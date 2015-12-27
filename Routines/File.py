@@ -26,7 +26,7 @@ def detect_filetype_by_extension(filename, filetypes_dict=filetypes_dict):
 
 
 def check_path(path_to_check):
-    print (path_to_check)
+    #print (path_to_check)
     #returns path with / at end or blank path
     if path_to_check != "":
         if path_to_check[-1] != "/":
