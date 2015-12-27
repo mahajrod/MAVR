@@ -61,6 +61,6 @@ class Trimmomatic(JavaTool):
                                      crop_length=crop_length, head_crop_length=head_crop_length, min_length=min_length,
                                      base_quality=base_quality)
 
-        options += " > %s" % logfile if logfile else ""
+        options += " > %s 2>&1" % logfile if logfile else ""
 
         self.execute(options=options)
