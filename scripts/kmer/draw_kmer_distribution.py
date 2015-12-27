@@ -38,6 +38,8 @@ parser.add_argument("-j", "--jellyfish_path", action="store", dest="jellyfish_pa
                     help="Path to jellyfish")
 parser.add_argument("-r", "--input_is_histogram", action="store_true", dest="input_is_histo",
                     help="Input file contains histogram data")
+parser.add_argument("-s", "--skip_ends", action="store_true", dest="skip_ends",
+                    help="Skip first and last values.")
 args = parser.parse_args()
 
 file_prefix = ".".join(os.path.basename(args.input).split(".")[:-1])
@@ -56,11 +58,15 @@ counts = []
 bins = []
 
 with open(histo_file, "r") as histo_fd:
+    if args.skip_ends:
+        histo_fd.next()
     for line in histo_fd:
         entry = line.strip().split()
         counts.append(entry[1])
         bins.append(entry[0])
-
+    if args.skip_ends:
+        counts = counts[:-1]
+        bins = bins[:-1]
 
 figure = plt.figure(1, figsize=(8, 8), dpi=300)
 subplot = plt.subplot(1, 1, 1)
