@@ -26,7 +26,7 @@ class Tool():
         self.path = check_path(path)
         self.cmd = cmd
         self.threads = max_threads
-        self.jar_path = check_path(jar_path) if jar_path else None
+        self.jar_path = check_path(jar_path)
         self.jar = jar
         self.max_memory = max_memory
         self.timelog = timelog
