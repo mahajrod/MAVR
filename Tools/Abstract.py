@@ -26,7 +26,7 @@ class Tool():
         self.path = check_path(path)
         self.cmd = cmd
         self.threads = max_threads
-        self.jar_path = check_path(jar_path)
+        self.jar_path = check_path(jar_path) if jar_path else None
         self.jar = jar
         self.max_memory = max_memory
         self.timelog = timelog
@@ -207,8 +207,8 @@ class JavaTool(Tool):
 
     def __init__(self, jar, java_path="", max_threads=4, jar_path="", max_memory=None, timelog="tool_time.log"):
 
-        Tool.__init__(self, "java", path=check_path(java_path), max_threads=max_threads,
-                      jar_path=check_path(jar_path), jar=jar, max_memory=max_memory, timelog=timelog)
+        Tool.__init__(self, "java", path=java_path, max_threads=max_threads,
+                      jar_path=jar_path, jar=jar, max_memory=max_memory, timelog=timelog)
 
     def execute(self, options="", cmd=None, capture_output=False):
         command = cmd if cmd is not None else ""
