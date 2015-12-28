@@ -25,7 +25,7 @@ parser.add_argument("-e", "--output_formats", action="store", dest="output_forma
                     default=["svg", "eps", "pdf", "png", "jpg"],
                     help="Comma-separated list of formats (supported by matlotlib) "
                          "of output figure.Default: svg,eps,pdf,png,jpg")
-parser.add_argument("-a", "--logbase", action="store", dest="logbase", type=int, default=10,
+parser.add_argument("-l", "--logbase", action="store", dest="logbase", type=int, default=10,
                     help="Base of logarithm")
 parser.add_argument("-m", "--kmer_length", action="store", dest="kmer_length", type=int, default=23,
                     help="Length of kmers")
