@@ -41,7 +41,7 @@ class Tool():
         if self.timelog:
             os.system("date >> %s" % self.timelog)
             with open(self.timelog, "a") as time_fd:
-                time_fd.write(exe_string + "\n")
+                time_fd.write("Command\t%s\n" % exe_string)
 
         exe_string = "time -f '\\t%%E real,\\t%%U user,\\t%%S sys' -a -o %s %s" % (self.timelog, exe_string) if self.timelog else exe_string
 

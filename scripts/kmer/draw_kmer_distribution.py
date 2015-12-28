@@ -73,7 +73,7 @@ subplot = plt.subplot(1, 1, 1)
 plt.suptitle("Distribution of %s-mers" % (str(args.kmer_size) if args.kmer_size else "k"),
              fontweight='bold')
 plt.plot(bins, counts)
-
+plt.xlim(xmin=args.low_limit, xmax=args.high_limit)
 plt.xlabel("Multiplicity")
 plt.ylabel("Number of distinct kmers")
 if not args.without_logscale:

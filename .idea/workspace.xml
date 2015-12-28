@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/kmer/get_kmer_list.py" afterPath="$PROJECT_DIR$/scripts/kmer/get_kmer_list.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Abstract.py" afterPath="$PROJECT_DIR$/Tools/Abstract.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution.py" afterPath="$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -39,15 +40,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Abstract.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Abstract.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="220" column="63" selection-start-line="220" selection-start-column="63" selection-end-line="220" selection-end-column="63" />
+            <state vertical-scroll-proportion="0.5575679">
+              <caret line="43" column="58" selection-start-line="43" selection-start-column="58" selection-end-line="43" selection-end-column="58" />
               <folding>
-                <element signature="e#4036#6066#0" expanded="false" />
-                <element signature="e#6272#7449#0" expanded="false" />
-                <element signature="e#7646#7931#0" expanded="false" />
+                <element signature="e#4047#6077#0" expanded="false" />
+                <element signature="e#6283#7460#0" expanded="false" />
+                <element signature="e#7657#7942#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -67,17 +68,17 @@
         <entry file="file://$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="11" selection-start-line="22" selection-start-column="0" selection-end-line="25" selection-end-column="51" />
+              <caret line="67" column="28" selection-start-line="67" selection-start-column="28" selection-end-line="67" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="draw_kmer_distribution_from_fastq.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="draw_kmer_distribution_from_fastq.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution_from_fastq.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.9106145">
-              <caret line="94" column="26" selection-start-line="94" selection-start-column="26" selection-end-line="94" selection-end-column="26" />
+            <state vertical-scroll-proportion="-4.736842">
+              <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
               <folding>
                 <element signature="e#55#64#0" expanded="true" />
               </folding>
@@ -158,10 +159,10 @@
         <option value="$PROJECT_DIR$/Routines/File.py" />
         <option value="$PROJECT_DIR$/scripts/filter/filter_by_trimmomatic.py" />
         <option value="$PROJECT_DIR$/Tools/Filter/Trimmomatic.py" />
-        <option value="$PROJECT_DIR$/Tools/Abstract.py" />
-        <option value="$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution.py" />
         <option value="$PROJECT_DIR$/scripts/kmer/get_kmer_list.py" />
         <option value="$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution_from_fastq.py" />
+        <option value="$PROJECT_DIR$/Tools/Abstract.py" />
+        <option value="$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution.py" />
       </list>
     </option>
   </component>
@@ -173,8 +174,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2103" />
-    <option name="y" value="77" />
+    <option name="x" value="358" />
+    <option name="y" value="131" />
     <option name="width" value="1920" />
     <option name="height" value="916" />
   </component>
@@ -913,30 +914,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00179" summary="added paralleled exonerate&#10;">
-      <created>1450072041898</created>
-      <option name="number" value="00179" />
-      <option name="project" value="LOCAL" />
-      <updated>1450072041898</updated>
-    </task>
-    <task id="LOCAL-00180" summary="added paralleled exonerate&#10;">
-      <created>1450345475169</created>
-      <option name="number" value="00180" />
-      <option name="project" value="LOCAL" />
-      <updated>1450345475170</updated>
-    </task>
-    <task id="LOCAL-00181" summary="added paralleled exonerate&#10;">
-      <created>1450345662765</created>
-      <option name="number" value="00181" />
-      <option name="project" value="LOCAL" />
-      <updated>1450345662765</updated>
-    </task>
-    <task id="LOCAL-00182" summary="added paralleled exonerate&#10;">
-      <created>1450345682474</created>
-      <option name="number" value="00182" />
-      <option name="project" value="LOCAL" />
-      <updated>1450345682474</updated>
-    </task>
     <task id="LOCAL-00183" summary="added paralleled exonerate&#10;">
       <created>1450345951690</created>
       <option name="number" value="00183" />
@@ -1207,11 +1184,35 @@
       <option name="project" value="LOCAL" />
       <updated>1451268198428</updated>
     </task>
-    <option name="localTasksCounter" value="228" />
+    <task id="LOCAL-00228" summary="added paralleled exonerate&#10;">
+      <created>1451268274881</created>
+      <option name="number" value="00228" />
+      <option name="project" value="LOCAL" />
+      <updated>1451268274881</updated>
+    </task>
+    <task id="LOCAL-00229" summary="added paralleled exonerate&#10;">
+      <created>1451268330234</created>
+      <option name="number" value="00229" />
+      <option name="project" value="LOCAL" />
+      <updated>1451268330234</updated>
+    </task>
+    <task id="LOCAL-00230" summary="added paralleled exonerate&#10;">
+      <created>1451268402193</created>
+      <option name="number" value="00230" />
+      <option name="project" value="LOCAL" />
+      <updated>1451268402193</updated>
+    </task>
+    <task id="LOCAL-00231" summary="added paralleled exonerate&#10;">
+      <created>1451268644993</created>
+      <option name="number" value="00231" />
+      <option name="project" value="LOCAL" />
+      <updated>1451268644994</updated>
+    </task>
+    <option name="localTasksCounter" value="232" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2103" y="77" width="1920" height="916" extended-state="0" />
+    <frame x="358" y="131" width="1920" height="916" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1617,18 +1618,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="220" column="63" selection-start-line="220" selection-start-column="63" selection-end-line="220" selection-end-column="63" />
-          <folding>
-            <element signature="e#4036#6066#0" expanded="false" />
-            <element signature="e#6272#7449#0" expanded="false" />
-            <element signature="e#7646#7931#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/filter/merge_and_filter_reads.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1653,20 +1642,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution_from_fastq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.736842">
+          <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+          <folding>
+            <element signature="e#55#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="11" selection-start-line="22" selection-start-column="0" selection-end-line="25" selection-end-column="51" />
+          <caret line="67" column="28" selection-start-line="67" selection-start-column="28" selection-end-line="67" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution_from_fastq.py">
+    <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.9106145">
-          <caret line="94" column="26" selection-start-line="94" selection-start-column="26" selection-end-line="94" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.5575679">
+          <caret line="43" column="58" selection-start-line="43" selection-start-column="58" selection-end-line="43" selection-end-column="58" />
           <folding>
-            <element signature="e#55#64#0" expanded="true" />
+            <element signature="e#4047#6077#0" expanded="false" />
+            <element signature="e#6283#7460#0" expanded="false" />
+            <element signature="e#7657#7942#0" expanded="false" />
           </folding>
         </state>
       </provider>
