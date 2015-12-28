@@ -22,7 +22,7 @@ parser.add_argument("-i", "--input_file", action="store", dest="input", type=lam
 parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", required=True,
                     help="Output prefix")
 parser.add_argument("-e", "--output_formats", action="store", dest="output_formats", type=lambda s: s.split(","),
-                    default=["svg", "eps", "pdf", "png", "jpg"],
+                    default=["svg", "png", "jpg"],
                     help="Comma-separated list of formats (supported by matlotlib) "
                          "of output figure.Default: svg,eps,pdf,png,jpg")
 parser.add_argument("-l", "--logbase", action="store", dest="logbase", type=int, default=10,
@@ -91,7 +91,7 @@ figure = plt.figure(1, figsize=(8, 8), dpi=300)
 subplot = plt.subplot(1, 1, 1)
 plt.suptitle("Distribution of %i-mers" % args.kmer_length, fontweight='bold')
 plt.plot(bins, counts)
-
+plt.xlim(xmin=1, xmax=10000000)
 plt.xlabel("Multiplicity")
 plt.ylabel("Number of distinct kmers")
 subplot.set_yscale('log', basey=args.logbase)
@@ -106,13 +106,12 @@ bins = bins[args.low_limit-1:args.high_limit]
 
 figure = plt.figure(1, figsize=(8, 8), dpi=300)
 subplot = plt.subplot(1, 1, 1)
-plt.suptitle("Distribution of %s-mers" % (str(args.kmer_size) if args.kmer_size else "k"),
-             fontweight='bold')
+plt.suptitle("Distribution of %s-mers" % args.kmer_length, fontweight='bold')
 plt.plot(bins, counts)
 
 plt.xlabel("Multiplicity")
 plt.ylabel("Number of distinct kmers")
-plt.xlim(xmin=args.low_limit)
+plt.xlim(xmin=args.low_limit, xmax=args.high_limit)
 for extension in args.output_formats:
     plt.savefig("%s.no_logscale.%s" % (args.out_prefix, extension))
 
