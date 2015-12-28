@@ -112,7 +112,7 @@ plt.plot(bins, counts)
 
 plt.xlabel("Multiplicity")
 plt.ylabel("Number of distinct kmers")
-
+plt.xlim(xmin=args.low_limit)
 for extension in args.output_formats:
     plt.savefig("%s.no_logscale.%s" % (args.out_prefix, extension))
 
