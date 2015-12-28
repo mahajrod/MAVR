@@ -19,22 +19,22 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_file", action="store", dest="input", type=lambda s: s.split(","), required=True,
                     help="Comma-separated list of fasta or fastq files or directories containing them.")
-parser.add_argument("-a", "--output_prefix", action="store", dest="output_prefix", required=True,
+parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", required=True,
                     help="Output prefix")
 parser.add_argument("-e", "--output_formats", action="store", dest="output_formats", type=lambda s: s.split(","),
                     default=["svg", "eps", "pdf", "png", "jpg"],
                     help="Comma-separated list of formats (supported by matlotlib) "
                          "of output figure.Default: svg,eps,pdf,png,jpg")
 parser.add_argument("-l", "--logbase", action="store", dest="logbase", type=int, default=10,
-                    help="Base of logarithm")
+                    help="Base of logarithm. Default -10")
 parser.add_argument("-m", "--kmer_length", action="store", dest="kmer_length", type=int, default=23,
-                    help="Length of kmers")
+                    help="Length of kmers. Default - 23")
 parser.add_argument("-s", "--hash_size", action="store", dest="hash_size", type=int, default=1000000,
                     help="Size of hash. Estimation of hash size: for short reads S=(G + k*n)/0.8, "
                     "G - genome size, k - kmer length, n - number of reads, for assembled sequences "
                     "S=Sum(L)")
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
-                    help="Number of threads")
+                    help="Number of threads. Default - 1")
 parser.add_argument("-b", "--count_both_strands", action="store_true", dest="count_both_strands",
                     help="Count kmers in both strands. NOTICE: only mer or its reverse-complement, whichever "
                          "comes first lexicographically, is stored and the count value is the number of "
