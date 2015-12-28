@@ -63,6 +63,7 @@ if args.add_rev_com:
     record_dict = SeqIO.index_db("temp_index.idx", args.input, format="fasta")
     SeqIO.write(rev_com_generator(record_dict, yield_original_record=True), file_with_rev_com, "fasta")
     args.output_prefix += "_with_rev_com"
+    os.remove("temp_index.idx")
 
 base_file = "%s_%i_mer.jf" % (args.output_prefix, args.kmer_length)
 kmer_table_file = "%s_%i_mer.counts" % (args.output_prefix, args.kmer_length)
@@ -96,6 +97,7 @@ plt.xlabel("Multiplicity")
 plt.ylabel("Number of distinct kmers")
 subplot.set_yscale('log', basey=args.logbase)
 subplot.set_xscale('log', basex=args.logbase)
+
 for extension in args.output_formats:
     plt.savefig("%s.logscale.%s" % (picture_prefix, extension))
 
@@ -112,9 +114,9 @@ plt.plot(bins, counts)
 plt.xlabel("Multiplicity")
 plt.ylabel("Number of distinct kmers")
 plt.xlim(xmin=args.low_limit, xmax=args.high_limit)
+
 for extension in args.output_formats:
     plt.savefig("%s.no_logscale.%s" % (picture_prefix, extension))
 
-if args.add_rev_com:
-    os.remove("temp_index.idx")
+
 
