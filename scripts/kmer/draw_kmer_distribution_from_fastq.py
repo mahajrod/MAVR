@@ -113,7 +113,7 @@ plt.xlabel("Multiplicity")
 plt.ylabel("Number of distinct kmers")
 plt.xlim(xmin=args.low_limit, xmax=args.high_limit)
 for extension in args.output_formats:
-    plt.savefig("%s.no_logscale.%s" % (args.picture_prefix, extension))
+    plt.savefig("%s.no_logscale.%s" % (picture_prefix, extension))
 
 if args.add_rev_com:
     os.remove("temp_index.idx")
