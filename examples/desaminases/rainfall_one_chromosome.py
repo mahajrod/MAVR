@@ -79,9 +79,6 @@ def zoom_effect01(ax1, ax2, xmin, xmax, **kwargs):
     return c1, c2, bbox_patch1, bbox_patch2, p
 
 
-
-
-
 def rainfall_plot(self, region, base_colors=[], facecolor="#D6D6D6",
                   ref_genome=None, masked_regions=None, min_gap_length=10, draw_gaps=False):
         print("Drawing rainfall plot...")
