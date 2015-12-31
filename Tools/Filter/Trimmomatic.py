@@ -1,6 +1,6 @@
 __author__ = 'mahajrod'
 import os
-
+import pyparsing as pyp
 from Tools.Abstract import JavaTool
 
 
@@ -64,3 +64,55 @@ class Trimmomatic(JavaTool):
         options += " > %s 2>&1" % logfile if logfile else ""
 
         self.execute(options=options)
+
+    @staticmethod
+    def parse_log(log_file):
+
+        input = pyp.Literal("Input Read Pairs: ")
+        input_number = pyp.Word(pyp.nums)
+        both = pyp.Literal("Both Surviving: ")
+        both_number = pyp.Word(pyp.nums)
+
+        str1 = pyp.Literal("(")
+        both_percent = pyp.Word(pyp.nums + ".-")
+        forward = pyp.Literal("%) Forward Only Surviving: ")
+        forward_number = pyp.Word(pyp.nums)
+        forward_percent = pyp.Word(pyp.nums + ".-")
+        reverse = pyp.Literal("%) Reverse Only Surviving: ")
+        reverse_number = pyp.Word(pyp.nums)
+        reverse_percent = pyp.Word(pyp.nums + ".-")
+        dropped = pyp.Literal("%) Dropped: ")
+        dropped_number = pyp.Word(pyp.nums)
+        dropped_percent = pyp.Word(pyp.nums + ".-")
+        end = pyp.Literal("%)")
+
+        for token in both_number, forward_number, reverse_number, dropped_number, input_number:
+            token.setParseAction(lambda s, l, t: [int(t[0])])
+        for token in both_percent, forward_percent, reverse_percent, dropped_percent:
+            token.setParseAction(lambda s, l, t: [float(t[0])])
+
+        both_number.setParseAction(lambda s, l, t: [int(t[0])])
+
+        pattern = input + input_number + both + both_number + str1 + both_percent + forward + forward_number + str1 + \
+                  forward_percent + reverse + reverse_number + str1 + reverse_percent + dropped + dropped_number + \
+                  str1 + dropped_percent + end
+
+        with open(log_file, "r") as log_fd:
+            for line in log_fd:
+                if line[:17] == "Input Read Pairs:":
+                    parsed_list = pattern.parseString(line.strip())
+
+        return {
+                "input":                parsed_list[1],
+                "both_surviving":       parsed_list[3],
+                "both_surviving,%":     parsed_list[5],
+                "forward_surviving":    parsed_list[7],
+                "forward_surviving,%":  parsed_list[9],
+                "reverse_surviving":    parsed_list[11],
+                "reverse_surviving,%":  parsed_list[13],
+                "dropped_surviving":    parsed_list[15],
+                "dropped_surviving,%":  parsed_list[17]
+                }
+
+
+
