@@ -19,7 +19,7 @@ parser.add_argument("-d", "--sample_directory", action="store", dest="samples_di
 parser.add_argument("-s", "--samples", action="store", dest="samples",
                     help="Comma-separated list of subdirectories(one per sample) to handle. "
                          "If not set all subdirectories will be considered as containing samples.")
-parser.add_argument("-o", "--output", action="store", dest="output_dir", required=True,
+parser.add_argument("-o", "--output", action="store", dest="output", required=True,
                     help="File to write statistics")
 parser.add_argument("-l", "--log_file", action="store", dest="log_file", default="trimmomatic.log",
                     help="Name of files with trimmomatic log")
@@ -37,4 +37,4 @@ for sample in samples:
     trimmomatic_log = "%s/trimmomatic.log" % sample_dir
     reports_dict[sample] = Trimmomatic.parse_log(trimmomatic_log)
 
-reports_dict.write(args.output_dir)
+reports_dict.write(args.output)
