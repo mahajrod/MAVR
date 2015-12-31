@@ -22,10 +22,9 @@ parser.add_argument("-s", "--samples", action="store", dest="samples",
 parser.add_argument("-o", "--output", action="store", dest="output", required=True,
                     help="File to write statistics")
 parser.add_argument("-l", "--log_file", action="store", dest="log_file", default="trimmomatic.log",
-                    help="Name of files with trimmomatic log")
-args = parser.parse_args()
+                    help="Name of files with trimmomatic log. Default - trimmomatic.log")
 
-Trimmomatic.jar_path = args.path_to_trimmomatic_dir
+args = parser.parse_args()
 
 samples = args.samples.split(",") if args.samples else os.listdir(args.samples_dir)
 reports_dict = TwoLvlDict()
