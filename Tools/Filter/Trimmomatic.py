@@ -106,12 +106,12 @@ class Trimmomatic(JavaTool):
                 "input":                parsed_list[1],
                 "both_surviving":       parsed_list[3],
                 "both_surviving,%":     parsed_list[5],
-                "forward_surviving":    parsed_list[7],
-                "forward_surviving,%":  parsed_list[9],
-                "reverse_surviving":    parsed_list[11],
-                "reverse_surviving,%":  parsed_list[13],
-                "dropped_surviving":    parsed_list[15],
-                "dropped_surviving,%":  parsed_list[17]
+                "forward_only_surviving":    parsed_list[7],
+                "forward_only_surviving,%":  parsed_list[9],
+                "reverse_only_surviving":    parsed_list[11],
+                "reverse_only_surviving,%":  parsed_list[13],
+                "dropped_only_surviving":    parsed_list[15],
+                "dropped_only_surviving,%":  parsed_list[17]
                 }
 
 
