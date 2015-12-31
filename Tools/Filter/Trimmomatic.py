@@ -103,15 +103,15 @@ class Trimmomatic(JavaTool):
                     parsed_list = pattern.parseString(line.strip())
 
         return {
-                "input":                parsed_list[1],
-                "both_surviving":       parsed_list[3],
-                "both_surviving,%":     parsed_list[5],
+                "input":                     parsed_list[1],
+                "both_surviving":            parsed_list[3],
+                "both_surviving,%":          parsed_list[5],
                 "forward_only_surviving":    parsed_list[7],
                 "forward_only_surviving,%":  parsed_list[9],
                 "reverse_only_surviving":    parsed_list[11],
                 "reverse_only_surviving,%":  parsed_list[13],
-                "dropped_only_surviving":    parsed_list[15],
-                "dropped_only_surviving,%":  parsed_list[17]
+                "dropped":                   parsed_list[15],
+                "dropped,%":                 parsed_list[17]
                 }
 
 
