@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/filter/gather_trimmomatic_statistics.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Matplotlib.py" afterPath="$PROJECT_DIR$/Routines/Matplotlib.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Filter/Trimmomatic.py" afterPath="$PROJECT_DIR$/Tools/Filter/Trimmomatic.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution_from_fastq.py" afterPath="$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution_from_fastq.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -31,11 +29,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="draw_kmer_distribution_from_fastq.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="draw_kmer_distribution_from_fastq.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution_from_fastq.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="126" column="28" selection-start-line="126" selection-start-column="28" selection-end-line="126" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.58643323">
+              <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
               <folding>
                 <element signature="e#55#64#0" expanded="true" />
               </folding>
@@ -81,10 +79,20 @@
         <entry file="file://$PROJECT_DIR$/Tools/Filter/Trimmomatic.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="105" column="40" selection-start-line="105" selection-start-column="40" selection-end-line="105" selection-end-column="40" />
+              <caret line="101" column="52" selection-start-line="101" selection-start-column="52" selection-end-line="101" selection-end-column="52" />
               <folding>
                 <element signature="e#24#33#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gather_trimmomatic_statistics.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/filter/gather_trimmomatic_statistics.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -93,29 +101,7 @@
         <entry file="file://$PROJECT_DIR$/scripts/filter/filter_by_trimmomatic.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="48" column="83" selection-start-line="48" selection-start-column="83" selection-end-line="48" selection-end-column="83" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="gather_trimmomatic_statistics.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/filter/gather_trimmomatic_statistics.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7697368">
-              <caret line="39" column="34" selection-start-line="39" selection-start-column="34" selection-end-line="39" selection-end-column="34" />
-              <folding>
-                <element signature="e#54#63#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="homogeneity_article_3d_plos_editionl.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/desaminases/homogeneity_article_3d_plos_editionl.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="78" column="16" selection-start-line="78" selection-start-column="16" selection-end-line="80" selection-end-column="52" />
+              <caret line="57" column="24" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -184,10 +170,10 @@
         <option value="$PROJECT_DIR$/Tools/Filter/FastQC.py" />
         <option value="$PROJECT_DIR$/examples/desaminases/rainfall_one_chromosome.py" />
         <option value="$PROJECT_DIR$/Routines/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution_from_fastq.py" />
         <option value="$PROJECT_DIR$/Routines/Matplotlib.py" />
-        <option value="$PROJECT_DIR$/Tools/Filter/Trimmomatic.py" />
         <option value="$PROJECT_DIR$/scripts/filter/gather_trimmomatic_statistics.py" />
+        <option value="$PROJECT_DIR$/Tools/Filter/Trimmomatic.py" />
+        <option value="$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution_from_fastq.py" />
       </list>
     </option>
   </component>
@@ -227,8 +213,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -567,6 +551,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -889,36 +875,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00192" summary="added paralleled exonerate&#10;">
-      <created>1450439942581</created>
-      <option name="number" value="00192" />
-      <option name="project" value="LOCAL" />
-      <updated>1450439942581</updated>
-    </task>
-    <task id="LOCAL-00193" summary="added paralleled exonerate&#10;">
-      <created>1450439980955</created>
-      <option name="number" value="00193" />
-      <option name="project" value="LOCAL" />
-      <updated>1450439980955</updated>
-    </task>
-    <task id="LOCAL-00194" summary="added paralleled exonerate&#10;">
-      <created>1450440039352</created>
-      <option name="number" value="00194" />
-      <option name="project" value="LOCAL" />
-      <updated>1450440039352</updated>
-    </task>
-    <task id="LOCAL-00195" summary="added paralleled exonerate&#10;">
-      <created>1450440088413</created>
-      <option name="number" value="00195" />
-      <option name="project" value="LOCAL" />
-      <updated>1450440088413</updated>
-    </task>
-    <task id="LOCAL-00196" summary="added paralleled exonerate&#10;">
-      <created>1450440119474</created>
-      <option name="number" value="00196" />
-      <option name="project" value="LOCAL" />
-      <updated>1450440119474</updated>
-    </task>
     <task id="LOCAL-00197" summary="added paralleled exonerate&#10;">
       <created>1450443297088</created>
       <option name="number" value="00197" />
@@ -1183,7 +1139,37 @@
       <option name="project" value="LOCAL" />
       <updated>1451490337454</updated>
     </task>
-    <option name="localTasksCounter" value="241" />
+    <task id="LOCAL-00241" summary="added paralleled exonerate&#10;">
+      <created>1451532168983</created>
+      <option name="number" value="00241" />
+      <option name="project" value="LOCAL" />
+      <updated>1451532169046</updated>
+    </task>
+    <task id="LOCAL-00242" summary="added paralleled exonerate&#10;">
+      <created>1451532563478</created>
+      <option name="number" value="00242" />
+      <option name="project" value="LOCAL" />
+      <updated>1451532563478</updated>
+    </task>
+    <task id="LOCAL-00243" summary="added paralleled exonerate&#10;">
+      <created>1451532722749</created>
+      <option name="number" value="00243" />
+      <option name="project" value="LOCAL" />
+      <updated>1451532722749</updated>
+    </task>
+    <task id="LOCAL-00244" summary="added paralleled exonerate&#10;">
+      <created>1451532889469</created>
+      <option name="number" value="00244" />
+      <option name="project" value="LOCAL" />
+      <updated>1451532889469</updated>
+    </task>
+    <task id="LOCAL-00245" summary="added paralleled exonerate&#10;">
+      <created>1451533005190</created>
+      <option name="number" value="00245" />
+      <option name="project" value="LOCAL" />
+      <updated>1451533005190</updated>
+    </task>
+    <option name="localTasksCounter" value="246" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1195,7 +1181,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21884984" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22097977" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
@@ -1203,14 +1189,14 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.4978678" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33990896" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1231,9 +1217,9 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20895523" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33990896" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33990896" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="UnknownFeatures">
@@ -1555,13 +1541,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/desaminases/overlap_clusters_percent.t">
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/desaminases/power_heatmap.py">
@@ -1586,32 +1572,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution_from_fastq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="126" column="28" selection-start-line="126" selection-start-column="28" selection-end-line="126" selection-end-column="28" />
-          <folding>
-            <element signature="e#55#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/homogeneity_article_3d_plos_editionl.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="78" column="16" selection-start-line="78" selection-start-column="16" selection-end-line="80" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/filter/filter_by_trimmomatic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="48" column="83" selection-start-line="48" selection-start-column="83" selection-end-line="48" selection-end-column="83" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Matplotlib.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1632,22 +1592,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/examples/desaminases/homogeneity_article_3d_plos_editionl.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34868422">
+          <caret line="78" column="16" selection-start-line="78" selection-start-column="16" selection-end-line="80" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/filter/gather_trimmomatic_statistics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Filter/Trimmomatic.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="105" column="40" selection-start-line="105" selection-start-column="40" selection-end-line="105" selection-end-column="40" />
+          <caret line="101" column="52" selection-start-line="101" selection-start-column="52" selection-end-line="101" selection-end-column="52" />
           <folding>
             <element signature="e#24#33#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/filter/gather_trimmomatic_statistics.py">
+    <entry file="file://$PROJECT_DIR$/scripts/filter/filter_by_trimmomatic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7697368">
-          <caret line="39" column="34" selection-start-line="39" selection-start-column="34" selection-end-line="39" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="57" column="24" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution_from_fastq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.58643323">
+          <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
           <folding>
-            <element signature="e#54#63#0" expanded="true" />
+            <element signature="e#55#64#0" expanded="true" />
           </folding>
         </state>
       </provider>

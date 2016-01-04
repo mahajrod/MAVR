@@ -74,7 +74,7 @@ kmer_file = "%s_%i_mer.kmer" % (args.output_prefix, args.kmer_length)
 
 histo_file = "%s_%i_mer.histo" % (args.output_prefix, args.kmer_length)
 picture_prefix = "%s_%i_mer_histogram" % (args.output_prefix, args.kmer_length)
-"""
+
 Jellyfish.threads = args.threads
 Jellyfish.timelog = "%s_%i_mer.jellyfish.time.log" % (args.output_prefix, args.kmer_length)
 Jellyfish.path = args.jellyfish_path if args.jellyfish_path else ""
@@ -82,7 +82,7 @@ Jellyfish.count(args.input if not args.add_rev_com else file_with_rev_com, base_
                 kmer_length=args.kmer_length, hash_size=args.hash_size,
                 count_both_strands=args.count_both_strands)
 Jellyfish.histo(base_file, histo_file, upper_count=10000000)
-"""
+
 counts = []
 bins = []
 
