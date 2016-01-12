@@ -26,7 +26,7 @@ parser.add_argument("-l", "--log_file", action="store", dest="log_file", default
 
 args = parser.parse_args()
 
-samples = args.samples.split(",") if args.samples else os.listdir(args.samples_dir)
+samples = sorted(args.samples.split(",") if args.samples else os.listdir(args.samples_dir))
 present_samples = []
 for sample in samples:
     if os.path.isdir(args.samples_dir + sample):
