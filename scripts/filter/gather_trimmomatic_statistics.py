@@ -27,9 +27,14 @@ parser.add_argument("-l", "--log_file", action="store", dest="log_file", default
 args = parser.parse_args()
 
 samples = args.samples.split(",") if args.samples else os.listdir(args.samples_dir)
+present_samples = []
+for sample in samples:
+    if os.path.isdir(args.samples_dir + sample):
+        present_samples.append(sample)
+
 reports_dict = TwoLvlDict()
 
-for sample in samples:
+for sample in present_samples:
     print("Handling report from %s" % sample)
 
     sample_dir = "%s%s/" % (args.samples_dir, sample)

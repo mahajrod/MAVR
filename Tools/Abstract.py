@@ -43,7 +43,7 @@ class Tool():
             with open(self.timelog, "a") as time_fd:
                 time_fd.write("Command\t%s\n" % exe_string)
 
-        exe_string = "time -f '\\t%%E real,\\t%%U user,\\t%%S sys' -a -o %s %s" % (self.timelog, exe_string) if self.timelog else exe_string
+        exe_string = "time -f 'Time\\t%%E real,\\t%%U user,\\t%%S sys' -a -o %s %s" % (self.timelog, exe_string) if self.timelog else exe_string
 
         if capture_output:
             return Popen([exe_string], shell=True, stdout=PIPE).stdout  # returns file object
@@ -231,8 +231,6 @@ class JavaTool(Tool):
                 time_fd.write("Command\t%s\n" % exe_string)
 
         exe_string = "time -f 'Time\\t%%E real,\\t%%U user,\\t%%S sys' -a -o %s %s" % (self.timelog, exe_string) if self.timelog else exe_string
-
-
 
         if capture_output:
             return Popen([exe_string], shell=True, stdout=PIPE).stdout  # returns file object

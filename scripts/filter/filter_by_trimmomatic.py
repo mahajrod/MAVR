@@ -20,12 +20,13 @@ parser.add_argument("-s", "--samples", action="store", dest="samples",
                          "In sample directory should one(in case SE reads) or two(in case PE reads) files."
                          "Filenames should should contain '_1.fq' or '_1.fastq' for forward(left) reads, "
                          " '_2.fq' or '_2.fastq' for reverse(right) reads and '.fq' or '.fastq' for SE reads")
-parser.add_argument("-o", "--output_dir", action="store", dest="output_dir", type=lambda s: check_path(os.path.abspath(s)),
+parser.add_argument("-o", "--output_dir", action="store", dest="output_dir",
+                    type=lambda s: check_path(os.path.abspath(s)),
                     default="./", help="Directory to write output. Default: current directory")
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=1, type=int,
                     help="Number of threads to use in Trimmomatic. Default - 1.")
 
-parser.add_argument("-a", "--adapters", action="store", dest="adapters",
+parser.add_argument("-a", "--adapters", action="store", dest="adapters", type=os.path.abspath,
                     help="File with adapters to trim. If not set - skip this stage")
 parser.add_argument("-m", "--mismatch_number", action="store", dest="mismatch_number", type=int, default=2,
                     help="Number of mismatches in adapter seed. Works only if -a/--adapters option is set. Default - 2.")
