@@ -82,11 +82,11 @@ blastp_splited_output_dir = "%ssplited_output_dir" % blastp_dir
 HMMER3.path = args.hmmer_dir
 HMMER3.threads = args.threads
 BLASTp.threads = args.threads
-"""
+
 TransDecoder.extract_longest_orfs(args.input, genetic_code=args.genetic_code,
                                   analyze_only_top_strand=args.analyze_only_top_strand,
                                   minimum_protein_length=args.min_prot_len)
-"""
+
 if args.pfam_database:
     HMMER3.parallel_hmmscan(args.pfam_database, pep_from_longest_orfs, hmmscan_vs_pfam_output,
                             split_dir=hmmscan_splited_fasta_dir, splited_domtblout_dir=splited_domtblout_dir,
