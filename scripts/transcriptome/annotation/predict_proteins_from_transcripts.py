@@ -55,7 +55,7 @@ parser.add_argument("-n", "--number_of_top_orfs_for_training", action="store", t
                     dest="number_of_top_orfs_for_training",
                     help="If no --number_of_top_orfs_for_training, top longest ORFs to train Markov "
                          "Model (hexamer stats) (default: 500)")
-parser.add_argument("-c", "--hmmer_dir", action="store", dest="hmmer_dir",
+parser.add_argument("-c", "--hmmer_dir", action="store", dest="hmmer_dir", default="",
                     help="Directory with hmmer v3.1 binaries")
 args = parser.parse_args()
 
