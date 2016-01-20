@@ -1,5 +1,6 @@
 __author__ = 'mahajrod'
 
+from Routines.Primer import PrimerRoutines
 from Routines.TreeFam import TreeFamRoutines
 from Routines.Sequence import SequenceRoutines
 from Routines.Alignment import AlignmentRoutines
@@ -7,6 +8,7 @@ from Routines.Matplotlib import MatplotlibRoutines
 from Routines.Annotations import AnnotationsRoutines
 from Routines.MultipleAlignment import MultipleAlignmentRoutines
 
+PrimerRoutines = PrimerRoutines()
 TreeFamRoutines = TreeFamRoutines()
 SequenceRoutines = SequenceRoutines()
 AlignmentRoutines = AlignmentRoutines()

@@ -46,6 +46,7 @@ Routines/File.py
 Routines/Functions.py
 Routines/Matplotlib.py
 Routines/MultipleAlignment.py
+Routines/Primer.py
 Routines/Sequence.py
 Routines/Tree.py
 Routines/TreeFam.py

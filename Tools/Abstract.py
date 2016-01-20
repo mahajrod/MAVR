@@ -35,7 +35,7 @@ class Tool():
     def execute(self, options="", cmd=None, capture_output=False):
         command = cmd if cmd is not None else self.cmd
 
-        exe_string = check_path(self.path) + command + " " + options
+        exe_string = (check_path(self.path) if self.path else "") + command + " " + options
 
         sys.stdout.write("Executing:\n\t%s\n" % exe_string)
         if self.timelog:
@@ -53,7 +53,8 @@ class Tool():
 
     def parallel_execute(self, options_list, cmd=None, capture_output=False, threads=None):
         command = cmd if cmd is not None else self.cmd
-        exe_string_list = [check_path(self.path) + command + " " + options for options in options_list]
+        exe_string_list = [(check_path(self.path) if self.path else "") + command + " " + options
+                           for options in options_list]
 
         with open("exe_list.t", "a") as exe_fd:
             for entry in exe_string_list:
@@ -222,7 +223,7 @@ class JavaTool(Tool):
         java_string += " %s" % command
         java_string += " %s" % options
 
-        exe_string = check_path(self.path) + java_string
+        exe_string = (check_path(self.path) if self.path else "") + java_string
 
         sys.stdout.write("Executing:\n\t%s\n" % exe_string)
         if self.timelog:
