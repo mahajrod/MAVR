@@ -44,7 +44,8 @@ class TransDecoder(Tool):
                     number_of_top_orfs_for_training=None):
 
         options = " -t %s" % transcripts_file
-        options += " --retain_long_orfs %i" % minimum_orf_length_if_no_other_evidence
+        options += " --retain_long_orfs %i" % minimum_orf_length_if_no_other_evidence \
+            if minimum_orf_length_if_no_other_evidence else ""
         options += " --retain_pfam_hits %s" % pfam_hits if pfam_hits else ""
         options += " --retain_blastp_hits %s" % blastp_hits if blastp_hits else ""
         options += " --train %s" % file_with_orfs_for_training if file_with_orfs_for_training else ""
