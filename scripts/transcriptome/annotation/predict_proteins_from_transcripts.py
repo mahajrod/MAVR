@@ -86,7 +86,6 @@ BLASTp.threads = args.threads
 TransDecoder.extract_longest_orfs(args.input, genetic_code=args.genetic_code,
                                   analyze_only_top_strand=args.analyze_only_top_strand,
                                   minimum_protein_length=args.min_prot_len)
-"""
 if args.pfam_database:
     HMMER3.parallel_hmmscan(args.pfam_database, pep_from_longest_orfs, hmmscan_vs_pfam_output,
                             split_dir=hmmscan_splited_fasta_dir, splited_domtblout_dir=splited_domtblout_dir,
@@ -96,7 +95,7 @@ if args.blast_database:
                            evalue=0.00001, output_format=6, blast_options=" -max_target_seqs 1",
                            combine_output_to_single_file=True, split_dir=blastp_split_dir,
                            splited_output_dir=blastp_splited_output_dir)
-
+"""
 TransDecoder.predict_pep(args.input, pfam_hits=domtblout_outfile,
                          blastp_hits=blastp_outfile,
                          minimum_orf_length_if_no_other_evidence=args.min_orf_len_if_no_other_evidence,
