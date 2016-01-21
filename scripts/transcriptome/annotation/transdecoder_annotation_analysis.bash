@@ -38,13 +38,13 @@ ${MAVR_DIR}/scripts/sequence/histogram_length.py -w 50 -e png,svg \
                                                  -i ${DATA_PREFIX}.100+.pep \
                                                  -o ${DATA_PREFIX}.100+.pep
 
-${MAVR_DIR}/scripts/hmmer3/extract_hits_by_query_ids.py -i ${PFAM_HMMSCAN_DOM_TBLOUT_FILE} -f domtblout #-f tblout \
+${MAVR_DIR}/scripts/hmmer3/extract_hits_by_query_ids.py -i ${PFAM_HMMSCAN_DOM_TBLOUT_FILE} -f domtblout \
                                                         -d ${DATA_PREFIX}.100+.pep.ids \
                                                         -o ${DATA_PREFIX}.100+.pfam.domtblout
-${MAVR_DIR}/scripts/hmmer3/extract_hits_by_query_ids.py -i ${PFAM_HMMSCAN_DOM_TBLOUT_FILE} -f domtblout #-f tblout \
+${MAVR_DIR}/scripts/hmmer3/extract_hits_by_query_ids.py -i ${PFAM_HMMSCAN_DOM_TBLOUT_FILE} -f domtblout \
                                                         -d ${DATA_PREFIX}.complete.pep.ids \
                                                         -o ${DATA_PREFIX}.complete.pfam.domtblout
-${MAVR_DIR}/scripts/hmmer3/extract_hits_by_query_ids.py -i ${PFAM_HMMSCAN_DOM_TBLOUT_FILE} -f domtblout #-f tblout \
+${MAVR_DIR}/scripts/hmmer3/extract_hits_by_query_ids.py -i ${PFAM_HMMSCAN_DOM_TBLOUT_FILE} -f domtblout \
                                                         -d ${DATA_PREFIX}.complete.100+.pep.ids \
                                                         -o ${DATA_PREFIX}.complete.100+.pfam.domtblout
 
