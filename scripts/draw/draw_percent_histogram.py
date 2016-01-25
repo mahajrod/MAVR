@@ -24,7 +24,7 @@ parser.add_argument("-l", "--columns_list", action="store", dest="columns_list",
 parser.add_argument("-e", "--extensions", action="store", dest="extensions", type=lambda x: x.split(","),
                     default=["png", "svg"],
                     help="Comma-separated list of extensions for histogram files")
-parser.add_argument("-x", "--xlabel", action="store", dest="xlabel", default="%%",
+parser.add_argument("-x", "--xlabel", action="store", dest="xlabel", default="%",
                     help="X label. Default - '%' ")
 parser.add_argument("-y", "--ylabel", action="store", dest="ylabel", default="Number",
                     help="Y label. Default - 'Number'")
