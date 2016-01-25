@@ -25,7 +25,7 @@ parser.add_argument("-e", "--extensions", action="store", dest="extensions", typ
                     default=["png", "svg"],
                     help="Comma-separated list of extensions for histogram files")
 parser.add_argument("-x", "--xlabel", action="store", dest="xlabel", default="%%",
-                    help="X label. Default - '%%' ")
+                    help="X label. Default - '%' ")
 parser.add_argument("-y", "--ylabel", action="store", dest="ylabel", default="Number",
                     help="Y label. Default - 'Number'")
 parser.add_argument("-t", "--title", action="store", dest="title",
@@ -33,8 +33,6 @@ parser.add_argument("-t", "--title", action="store", dest="title",
 
 args = parser.parse_args()
 
-print(args.columns_list)
-print(args.separator)
 MatplotlibRoutines.percent_histogram_from_file(args.input_file, args.output_prefix, data_type=args.data_type,
                                                column_list=args.columns_list, separator=args.separator,
                                                comments=args.comments_prefix, n_bins=args.number_of_bins,
