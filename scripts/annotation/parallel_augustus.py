@@ -9,7 +9,7 @@ from Tools.BLAST import BLASTp
 from Tools.Bedtools import Intersect
 from Tools.Annotation import AUGUSTUS
 
-from Routines import AnnotationsRoutines
+from Routines import AnnotationsRoutines, MatplotlibRoutines
 
 from CustomCollections.GeneralCollections import IdSet
 
@@ -110,6 +110,11 @@ print("Extracting peptides...")
 
 AUGUSTUS.extract_proteins_from_output(output_gff, output_pep, id_prefix="", evidence_stats_file=output_evidence_stats)
 
+MatplotlibRoutines.percent_histogram_from_file(output_evidence_stats, output_evidence_stats, data_type=None,
+                                               column_list=(2), separator='\t',
+                                               comments="#", n_bins=20,
+                                               title="Transcript support by hints",
+                                               extensions=("png", "svg"))
 if args.pfam_db:
     print("Annotating domains(Pfam database)...")
     HMMER3.threads = args.threads
@@ -122,7 +127,7 @@ if args.pfam_db:
     supported_ids = IdSet(hits_dict.keys())
     supported_ids.write(output_pfam_supported_transcripts_ids)
     remove_transcript_ids_str = "sed -re 's/\.t[0123456789]+//' %s | sort -k 1 | uniq > %s" % (output_pfam_supported_transcripts_ids,
-                                                                                              output_pfam_supported_genes_ids)
+                                                                                               output_pfam_supported_genes_ids)
     os.system(remove_transcript_ids_str)
 
     for directory in ("splited_hmmscan_fasta/", "splited_hmmscan_output_dir", "hmmscan_domtblout/"):

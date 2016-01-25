@@ -139,7 +139,7 @@ class AUGUSTUS(Tool):
         if evidence_stats_file:
             ev_fd = open(evidence_stats_file, "w")
             ev_fd.write("#gene_id\ttranscript_id\tsupported_fraction\tcds_support\tintron_support\t")
-            ev_fd.write("5'UTR_support\t3'UTR_support\tincompatible_hints_groups\n")
+            ev_fd.write("5'UTR_support\t3'UTR_support\tincompatible_hints_groups\tprotein_length\n")
         with open(protein_output, "w") as out_fd:
             with open(augustus_output, "r") as in_fd:
                 for line in in_fd:
@@ -163,6 +163,7 @@ class AUGUSTUS(Tool):
                                     protein += part
 
                         out_fd.write(protein)
+                        protein_len = len(protein)
                         out_fd.write("\n")
 
                     elif evidence_stats_file:
@@ -181,9 +182,9 @@ class AUGUSTUS(Tool):
                                 elif tmp_line[:27] == "# incompatible hint groups:":
                                     incompatible_hint_groups = tmp_line.strip().split()[-1]
                                     ev_fd.write("%s\t%s\t%s\t" % (gene, transcript_id, supported_fraction))
-                                    ev_fd.write("%s\t%s\t%s\t%s\t%s\n" % (cds_support, introns_support,
-                                                                          five_utr_support, three_introns_support,
-                                                                          incompatible_hint_groups))
+                                    ev_fd.write("%s\t%s\t%s\t%s\t%s\n%i\n" % (cds_support, introns_support,
+                                                                              five_utr_support, three_introns_support,
+                                                                              incompatible_hint_groups, protein_len))
                                     break
 
         ev_fd.close()
