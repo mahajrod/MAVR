@@ -205,6 +205,20 @@ class Tool():
 
         final_set.write(result_file)
 
+    @staticmethod
+    def intersect_ids(list_of_white_id_lists, list_of_black_id_list):
+        white_set = IdSet()
+        black_set = IdSet()
+
+        for id_list in list_of_white_id_lists:
+            white_set = white_set | IdSet(id_list)
+
+        for id_list in list_of_black_id_list:
+            black_set = black_set | IdSet(id_list)
+        final_set = IdSet(white_set - black_set)
+
+        return final_set
+
 
 class JavaTool(Tool):
 
@@ -239,8 +253,3 @@ class JavaTool(Tool):
             os.system(exe_string)
             return None
 
-
-if __name__ == "__main__":
-    os.chdir("/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/polymorphisms/")
-    Tool.extract_common_sequences(["LAN210_v0.10m_selected_proteins.fasta", "S288C_R64_selected_proteins.fasta"],
-                                  ["LAN210", "S288C"], "proteins")

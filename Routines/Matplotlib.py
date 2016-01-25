@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 from matplotlib.transforms import Bbox, TransformedBbox, blended_transform_factory
 from mpl_toolkits.axes_grid1.inset_locator import BboxPatch, BboxConnector, BboxConnectorPatch
 
+import numpy as np
+
 
 class MatplotlibRoutines:
     def __init__(self):
@@ -71,3 +73,25 @@ class MatplotlibRoutines:
         ax2.add_patch(p)
 
         return c1, c2, bbox_patch1, bbox_patch2, p
+
+    @staticmethod
+    def percent_histogram(data, output_prefix, n_bins=20, title="", xlabel="%", ylabel="Number",
+                           extensions=("jpg", "png", "svg")):
+
+        figure = plt.figure()
+        subplot = plt.subplot(1, 1, 1)
+
+        plt.hist(data, bins=n_bins)
+        plt.xlim(xmin=0, xmax=100)
+        plt.title(title)
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
+        for ext in extensions:
+            plt.savefig("%s.%s" % (output_prefix, ext))
+
+    def percent_histogram_from_file(self, data_file, output_prefix, data_type=float, column_list=None, separator=None,
+                                    comments="#", n_bins=20, title="", xlabel="%", ylabel="Number",
+                                    extensions=("jpg", "png", "svg")):
+        data = np.loadtxt(data_file, dtype=data_type, comments=comments, delimiter=separator, usecols=column_list)
+        self.percent_histogram(data, output_prefix=output_prefix, n_bins=n_bins, title=title, xlabel=xlabel,
+                               ylabel=ylabel, extensions=extensions)

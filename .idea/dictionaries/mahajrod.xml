@@ -3512,6 +3512,7 @@
       <w>xgettext</w>
       <w>xgettext2pot</w>
       <w>xinch</w>
+      <w>xlabel</w>
       <w>xngettext</w>
       <w>xor</w>
       <w>xor.hexmode</w>
@@ -3544,6 +3545,7 @@
       <w>yDetails</w>
       <w>yaxisGrob</w>
       <w>yinch</w>
+      <w>ylabel</w>
       <w>yscale.components.default</w>
       <w>zapsmall</w>
       <w>ziP</w>
