@@ -16,7 +16,7 @@ parser.add_argument("-s", "--separator", action="store", dest="separator",
 parser.add_argument("-d", "--data_type", action="store", dest="data_type",
                     help="Data type. Default float")
 parser.add_argument("-c", "--comments_prefix", action="store", dest="comments_prefix", default="#",
-                    help="Prefix of lindes with comments. Default - '#'")
+                    help="Prefix of lines with comments. Default - '#'")
 parser.add_argument("-b", "--number_of_bins", action="store", dest="number_of_bins", type=int, default=20,
                     help="Number of bins in histogram. Default - 20")
 parser.add_argument("-l", "--columns_list", action="store", dest="columns_list", type=lambda x: map(int, x.split(",")),
@@ -33,6 +33,8 @@ parser.add_argument("-t", "--title", action="store", dest="title",
 
 args = parser.parse_args()
 
+print(args.columns_list)
+print(args.separator)
 MatplotlibRoutines.percent_histogram_from_file(args.input_file, args.output_prefix, data_type=args.data_type,
                                                column_list=args.columns_list, separator=args.separator,
                                                comments=args.comments_prefix, n_bins=args.number_of_bins,
