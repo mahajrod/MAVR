@@ -182,7 +182,7 @@ class AUGUSTUS(Tool):
                                 elif tmp_line[:27] == "# incompatible hint groups:":
                                     incompatible_hint_groups = tmp_line.strip().split()[-1]
                                     ev_fd.write("%s\t%s\t%s\t" % (gene, transcript_id, supported_fraction))
-                                    ev_fd.write("%s\t%s\t%s\t%s\t%s\n%i\n" % (cds_support, introns_support,
+                                    ev_fd.write("%s\t%s\t%s\t%s\t%s\t%i\n" % (cds_support, introns_support,
                                                                               five_utr_support, three_introns_support,
                                                                               incompatible_hint_groups, protein_len))
                                     break
