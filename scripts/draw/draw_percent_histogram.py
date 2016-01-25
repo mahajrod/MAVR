@@ -19,7 +19,7 @@ parser.add_argument("-c", "--comments_prefix", action="store", dest="comments_pr
                     help="Prefix of lindes with comments. Default - '#'")
 parser.add_argument("-b", "--number_of_bins", action="store", dest="number_of_bins", type=int, default=20,
                     help="Number of bins in histogram. Default - 20")
-parser.add_argument("-l", "--columns_list", action="store", dest="columns_list", type=lambda x: x.split(","),
+parser.add_argument("-l", "--columns_list", action="store", dest="columns_list", type=lambda x: map(int, x.split(",")),
                     help="Comma-separated list of columns with data. Default - all")
 parser.add_argument("-e", "--extensions", action="store", dest="extensions", type=lambda x: x.split(","),
                     default=["png", "svg"],
