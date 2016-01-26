@@ -30,7 +30,7 @@ parser.add_argument("-y", "--ylabel", action="store", dest="ylabel", default="Nu
                     help="Y label. Default - 'Number'")
 parser.add_argument("-t", "--title", action="store", dest="title",
                     help="Title of histogram")
-parser.add_argument("-a", "--legend_location", action="store", dest="legend_location", default="best",
+parser.add_argument("-a", "--legend_location", action="store", dest="legend_location", default="upper center",
                     help="Location of legend on histogram. Default - 'upper center'")
 
 args = parser.parse_args()
