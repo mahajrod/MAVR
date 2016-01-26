@@ -97,7 +97,7 @@ class MatplotlibRoutines:
                                     stats_as_legend=False):
         data = np.loadtxt(data_file, dtype=data_type, comments=comments, delimiter=separator, usecols=column_list)
         n_bins = np.linspace(0, 100, n_bins+1)
-        legenda = "Total: %i\nMean: %.1f%%\nMedian: %.1f%%" % (len(data), np.mean(data), np.median(data)) if stats_as_legend else legend
+        legenda = "Total: %i\nMean: %.1f %%\nMedian: %.1f %%" % (len(data), np.mean(data), np.median(data)) if stats_as_legend else legend
         self.percent_histogram(data, output_prefix=output_prefix, n_bins=n_bins, title=title, xlabel=xlabel,
                                ylabel=ylabel, extensions=extensions, legend=legenda, legend_location=legend_location)
 
