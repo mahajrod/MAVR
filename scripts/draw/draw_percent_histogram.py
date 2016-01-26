@@ -15,7 +15,7 @@ parser.add_argument("-s", "--separator", action="store", dest="separator",
                     help="Separator between values in input file. Default any whitespace")
 parser.add_argument("-d", "--data_type", action="store", dest="data_type",
                     help="Data type. Default float")
-parser.add_argument("-c", "--comments_prefix", action="store", dest="comments_prefix", default="#",
+parser.add_argument("-c", "--comments_prefix", action="store", dest="comments_prefix", default="",
                     help="Prefix of lines with comments. Default - '#'")
 parser.add_argument("-b", "--number_of_bins", action="store", dest="number_of_bins", type=int, default=20,
                     help="Number of bins in histogram. Default - 20")
