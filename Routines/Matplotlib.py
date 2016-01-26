@@ -98,7 +98,7 @@ class MatplotlibRoutines:
         data = np.loadtxt(data_file, dtype=data_type, comments=comments, delimiter=separator, usecols=column_list)
         n_bins = np.linspace(0, 100, n_bins+1)
         if total_number_as_legend:
-            legend = "Total: %i" % len(data)
+            legend ="adadasd" # "Total: %i" % len(data)
         self.percent_histogram(data, output_prefix=output_prefix, n_bins=n_bins, title=title, xlabel=xlabel,
                                ylabel=ylabel, extensions=extensions, legend=legend, legend_location=legend_location)
 
