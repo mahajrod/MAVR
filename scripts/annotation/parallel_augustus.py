@@ -112,11 +112,15 @@ print("Extracting peptides...")
 AUGUSTUS.extract_proteins_from_output(output_gff, output_pep, id_prefix="", evidence_stats_file=output_evidence_stats,
                                       supported_by_hints_file=output_supported_stats)
 
-MatplotlibRoutines.percent_histogram_from_file(output_evidence_stats, output_evidence_stats, data_type=None,
-                                               column_list=(2), separator='\t',
-                                               comments="#", n_bins=20,
-                                               title="Transcript support by hints",
-                                               extensions=("png", "svg"))
+for stat_file in output_evidence_stats, output_supported_stats:
+    MatplotlibRoutines.percent_histogram_from_file(stat_file, stat_file, data_type=None,
+                                                   column_list=(2),
+                                                   comments="#", n_bins=20,
+                                                   title="Transcript support by hints",
+                                                   extensions=("png", "svg"),
+                                                   legend_location="upper center",
+                                                   total_number_as_legend=True)
+
 if args.pfam_db:
     print("Annotating domains(Pfam database)...")
     HMMER3.threads = args.threads

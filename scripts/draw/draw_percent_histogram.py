@@ -30,6 +30,8 @@ parser.add_argument("-y", "--ylabel", action="store", dest="ylabel", default="Nu
                     help="Y label. Default - 'Number'")
 parser.add_argument("-t", "--title", action="store", dest="title",
                     help="Title of histogram")
+parser.add_argument("-a", "--legend_location", action="store", dest="legend_location", default="best",
+                    help="Location of legend on histogram. Default - 'upper center'")
 
 args = parser.parse_args()
 
@@ -37,4 +39,5 @@ MatplotlibRoutines.percent_histogram_from_file(args.input_file, args.output_pref
                                                column_list=args.columns_list, separator=args.separator,
                                                comments=args.comments_prefix, n_bins=args.number_of_bins,
                                                title=args.title, xlabel=args.xlabel, ylabel=args.ylabel,
-                                               extensions=args.extensions)
+                                               extensions=args.extensions, legend_location=args.legend_location,
+                                               total_number_as_legend=True)

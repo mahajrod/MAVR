@@ -76,7 +76,7 @@ class MatplotlibRoutines:
 
     @staticmethod
     def percent_histogram(data, output_prefix, n_bins=20, title="", xlabel="%", ylabel="Number",
-                           extensions=("jpg", "png", "svg")):
+                          extensions=("jpg", "png", "svg"), legend=None, legend_location="best"):
 
         figure = plt.figure()
         subplot = plt.subplot(1, 1, 1)
@@ -86,13 +86,19 @@ class MatplotlibRoutines:
         plt.title(title)
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
+        if legend:
+            plt.legend(legend, loc=legend_location)
         for ext in extensions:
             plt.savefig("%s.%s" % (output_prefix, ext))
 
     def percent_histogram_from_file(self, data_file, output_prefix, data_type=float, column_list=None, separator=None,
                                     comments="#", n_bins=20, title="", xlabel="%", ylabel="Number",
-                                    extensions=("jpg", "png", "svg")):
+                                    extensions=("jpg", "png", "svg"), legend=None, legend_location="best",
+                                    total_number_as_legend=False):
         data = np.loadtxt(data_file, dtype=data_type, comments=comments, delimiter=separator, usecols=column_list)
         n_bins = np.linspace(0, 100, n_bins+1)
+        if total_number_as_legend:
+            legend = "Total: %i" % len(data)
         self.percent_histogram(data, output_prefix=output_prefix, n_bins=n_bins, title=title, xlabel=xlabel,
-                               ylabel=ylabel, extensions=extensions)
+                               ylabel=ylabel, extensions=extensions, legend=legend, legend_location=legend_location)
+
