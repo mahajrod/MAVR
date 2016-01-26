@@ -97,7 +97,7 @@ class MatplotlibRoutines:
                                     total_number_as_legend=False):
         data = np.loadtxt(data_file, dtype=data_type, comments=comments, delimiter=separator, usecols=column_list)
         n_bins = np.linspace(0, 100, n_bins+1)
-        legenda = "fsf s " #Total: %i" % len(data) if total_number_as_legend else legend
+        legenda = " fsf s " #Total: %i" % len(data) if total_number_as_legend else legend
         self.percent_histogram(data, output_prefix=output_prefix, n_bins=n_bins, title=title, xlabel=xlabel,
                                ylabel=ylabel, extensions=extensions, legend=legenda, legend_location=legend_location)
 
