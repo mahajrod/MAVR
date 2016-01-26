@@ -31,11 +31,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="draw_percent_histogram.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="draw_percent_histogram.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/draw/draw_percent_histogram.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7004717">
-              <caret line="33" column="82" selection-start-line="33" selection-start-column="82" selection-end-line="33" selection-end-column="82" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="22" column="84" selection-start-line="22" selection-start-column="84" selection-end-line="22" selection-end-column="84" />
               <folding>
                 <element signature="e#55#70#0" expanded="true" />
               </folding>
@@ -43,11 +43,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Matplotlib.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Matplotlib.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Routines/Matplotlib.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="95" column="77" selection-start-line="95" selection-start-column="70" selection-end-line="96" selection-end-column="64" />
+            <state vertical-scroll-proportion="0.49056605">
+              <caret line="85" column="24" selection-start-line="85" selection-start-column="24" selection-end-line="85" selection-end-column="24" />
               <folding>
                 <element signature="e#24#33#0" expanded="true" />
               </folding>
@@ -91,7 +91,7 @@
         <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_augustus.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="95" column="111" selection-start-line="95" selection-start-column="111" selection-end-line="96" selection-end-column="105" />
+              <caret line="178" column="0" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -171,9 +171,9 @@
         <option value="$PROJECT_DIR$/scripts/filter/merge_and_check_reads.py" />
         <option value="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" />
         <option value="$PROJECT_DIR$/scripts/annotation/extract_proteins_from_augustus_output.py" />
-        <option value="$PROJECT_DIR$/Routines/Matplotlib.py" />
-        <option value="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" />
         <option value="$PROJECT_DIR$/scripts/draw/draw_percent_histogram.py" />
+        <option value="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" />
+        <option value="$PROJECT_DIR$/Routines/Matplotlib.py" />
       </list>
     </option>
   </component>
@@ -977,48 +977,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00222" summary="added paralleled exonerate&#10;">
-      <created>1451206009333</created>
-      <option name="number" value="00222" />
-      <option name="project" value="LOCAL" />
-      <updated>1451206009333</updated>
-    </task>
-    <task id="LOCAL-00223" summary="added paralleled exonerate&#10;">
-      <created>1451206253616</created>
-      <option name="number" value="00223" />
-      <option name="project" value="LOCAL" />
-      <updated>1451206253616</updated>
-    </task>
-    <task id="LOCAL-00224" summary="added paralleled exonerate&#10;">
-      <created>1451206397078</created>
-      <option name="number" value="00224" />
-      <option name="project" value="LOCAL" />
-      <updated>1451206397078</updated>
-    </task>
-    <task id="LOCAL-00225" summary="added paralleled exonerate&#10;">
-      <created>1451249454608</created>
-      <option name="number" value="00225" />
-      <option name="project" value="LOCAL" />
-      <updated>1451249454609</updated>
-    </task>
-    <task id="LOCAL-00226" summary="added paralleled exonerate&#10;">
-      <created>1451250401912</created>
-      <option name="number" value="00226" />
-      <option name="project" value="LOCAL" />
-      <updated>1451250401912</updated>
-    </task>
-    <task id="LOCAL-00227" summary="added paralleled exonerate&#10;">
-      <created>1451268198428</created>
-      <option name="number" value="00227" />
-      <option name="project" value="LOCAL" />
-      <updated>1451268198428</updated>
-    </task>
-    <task id="LOCAL-00228" summary="added paralleled exonerate&#10;">
-      <created>1451268274881</created>
-      <option name="number" value="00228" />
-      <option name="project" value="LOCAL" />
-      <updated>1451268274881</updated>
-    </task>
     <task id="LOCAL-00229" summary="added paralleled exonerate&#10;">
       <created>1451268330234</created>
       <option name="number" value="00229" />
@@ -1271,7 +1229,49 @@
       <option name="project" value="LOCAL" />
       <updated>1453848189665</updated>
     </task>
-    <option name="localTasksCounter" value="271" />
+    <task id="LOCAL-00271" summary="added paralleled exonerate&#10;">
+      <created>1453848918836</created>
+      <option name="number" value="00271" />
+      <option name="project" value="LOCAL" />
+      <updated>1453848918836</updated>
+    </task>
+    <task id="LOCAL-00272" summary="added paralleled exonerate&#10;">
+      <created>1453849065435</created>
+      <option name="number" value="00272" />
+      <option name="project" value="LOCAL" />
+      <updated>1453849065435</updated>
+    </task>
+    <task id="LOCAL-00273" summary="added paralleled exonerate&#10;">
+      <created>1453849744023</created>
+      <option name="number" value="00273" />
+      <option name="project" value="LOCAL" />
+      <updated>1453849744023</updated>
+    </task>
+    <task id="LOCAL-00274" summary="added paralleled exonerate&#10;">
+      <created>1453849812903</created>
+      <option name="number" value="00274" />
+      <option name="project" value="LOCAL" />
+      <updated>1453849812903</updated>
+    </task>
+    <task id="LOCAL-00275" summary="added paralleled exonerate&#10;">
+      <created>1453849908421</created>
+      <option name="number" value="00275" />
+      <option name="project" value="LOCAL" />
+      <updated>1453849908422</updated>
+    </task>
+    <task id="LOCAL-00276" summary="added paralleled exonerate&#10;">
+      <created>1453850073744</created>
+      <option name="number" value="00276" />
+      <option name="project" value="LOCAL" />
+      <updated>1453850073744</updated>
+    </task>
+    <task id="LOCAL-00277" summary="added paralleled exonerate&#10;">
+      <created>1453850164721</created>
+      <option name="number" value="00277" />
+      <option name="project" value="LOCAL" />
+      <updated>1453850164721</updated>
+    </task>
+    <option name="localTasksCounter" value="278" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1284,7 +1284,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31663114" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31663114" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
@@ -1684,22 +1684,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="182" column="71" selection-start-line="182" selection-start-column="71" selection-end-line="182" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_augustus.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="95" column="111" selection-start-line="95" selection-start-column="111" selection-end-line="96" selection-end-column="105" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/filter/filter_by_trimmomatic.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1710,22 +1694,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/Matplotlib.py">
+    <entry file="file://$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="95" column="77" selection-start-line="95" selection-start-column="70" selection-end-line="96" selection-end-column="64" />
-          <folding>
-            <element signature="e#24#33#0" expanded="true" />
-          </folding>
+          <caret line="182" column="71" selection-start-line="182" selection-start-column="71" selection-end-line="182" selection-end-column="71" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/draw/draw_percent_histogram.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7004717">
-          <caret line="33" column="82" selection-start-line="33" selection-start-column="82" selection-end-line="33" selection-end-column="82" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="84" selection-start-line="22" selection-start-column="84" selection-end-line="22" selection-end-column="84" />
           <folding>
             <element signature="e#55#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_augustus.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="178" column="0" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/Matplotlib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49056605">
+          <caret line="85" column="24" selection-start-line="85" selection-start-column="24" selection-end-line="85" selection-end-column="24" />
+          <folding>
+            <element signature="e#24#33#0" expanded="true" />
           </folding>
         </state>
       </provider>

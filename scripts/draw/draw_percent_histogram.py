@@ -40,4 +40,4 @@ MatplotlibRoutines.percent_histogram_from_file(args.input_file, args.output_pref
                                                comments=args.comments_prefix, n_bins=args.number_of_bins,
                                                title=args.title, xlabel=args.xlabel, ylabel=args.ylabel,
                                                extensions=args.extensions, legend_location=args.legend_location,
-                                               total_number_as_legend=True)
+                                               stats_as_legend=True)
