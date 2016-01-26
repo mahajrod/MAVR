@@ -15,7 +15,7 @@ parser.add_argument("-s", "--separator", action="store", dest="separator",
                     help="Separator between values in input file. Default any whitespace")
 parser.add_argument("-d", "--data_type", action="store", dest="data_type",
                     help="Data type. Default float")
-parser.add_argument("-c", "--comments_prefix", action="store", dest="comments_prefix", default="",
+parser.add_argument("-c", "--comments_prefix", action="store", dest="comments_prefix", default="#",
                     help="Prefix of lines with comments. Default - '#'")
 parser.add_argument("-b", "--number_of_bins", action="store", dest="number_of_bins", type=int, default=20,
                     help="Number of bins in histogram. Default - 20")
@@ -25,7 +25,7 @@ parser.add_argument("-e", "--extensions", action="store", dest="extensions", typ
                     default=["png", "svg"],
                     help="Comma-separated list of extensions for histogram files")
 parser.add_argument("-x", "--xlabel", action="store", dest="xlabel", default="%%",
-                    help="X label. Default - '%' ")
+                    help="X label. Default - '%%' ")
 parser.add_argument("-y", "--ylabel", action="store", dest="ylabel", default="Number",
                     help="Y label. Default - 'Number'")
 parser.add_argument("-t", "--title", action="store", dest="title",
