@@ -93,5 +93,6 @@ class MatplotlibRoutines:
                                     comments="#", n_bins=20, title="", xlabel="%", ylabel="Number",
                                     extensions=("jpg", "png", "svg")):
         data = np.loadtxt(data_file, dtype=data_type, comments=comments, delimiter=separator, usecols=column_list)
+        n_bins = np.linspace(0, 100, n_bins+1)
         self.percent_histogram(data, output_prefix=output_prefix, n_bins=n_bins, title=title, xlabel=xlabel,
                                ylabel=ylabel, extensions=extensions)
