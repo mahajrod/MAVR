@@ -61,6 +61,7 @@ args = parser.parse_args()
 output_gff = "%s.gff" % args.output
 output_pep = "%s.pep" % args.output
 output_evidence_stats = "%s.transcript.evidence" % args.output
+output_supported_stats = "%s.transcript.supported" % args.output
 output_hmmscan = "%s.hmmscan.hits" % args.output
 output_domtblout = "%s.domtblout" % args.output
 output_pfam_annotated_dom_ids = "%s.pfam.dom_ids" % args.output
@@ -108,7 +109,8 @@ if args.masking:
 
 print("Extracting peptides...")
 
-AUGUSTUS.extract_proteins_from_output(output_gff, output_pep, id_prefix="", evidence_stats_file=output_evidence_stats)
+AUGUSTUS.extract_proteins_from_output(output_gff, output_pep, id_prefix="", evidence_stats_file=output_evidence_stats,
+                                      supported_by_hints_file=output_supported_stats)
 
 MatplotlibRoutines.percent_histogram_from_file(output_evidence_stats, output_evidence_stats, data_type=None,
                                                column_list=(2), separator='\t',

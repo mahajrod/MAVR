@@ -135,11 +135,18 @@ class AUGUSTUS(Tool):
             CGAS.cat(list_of_output_files, output=output)
 
     @staticmethod
-    def extract_proteins_from_output(augustus_output, protein_output, evidence_stats_file=None, id_prefix="p."):
+    def extract_proteins_from_output(augustus_output, protein_output, evidence_stats_file=None,
+                                     supported_by_hints_file=None, id_prefix="p."):
         if evidence_stats_file:
             ev_fd = open(evidence_stats_file, "w")
             ev_fd.write("#gene_id\ttranscript_id\tsupported_fraction\tcds_support\tintron_support\t")
             ev_fd.write("5'UTR_support\t3'UTR_support\tincompatible_hints_groups\tprotein_length\n")
+
+        if evidence_stats_file:
+            sup_fd = open(supported_by_hints_file, "w")
+            sup_fd.write("#gene_id\ttranscript_id\tsupported_fraction\tcds_support\tintron_support\t")
+            sup_fd.write("5'UTR_support\t3'UTR_support\tincompatible_hints_groups\tprotein_length\n")
+
         with open(protein_output, "w") as out_fd:
             with open(augustus_output, "r") as in_fd:
                 for line in in_fd:
@@ -166,7 +173,7 @@ class AUGUSTUS(Tool):
                         protein_len = len(protein)
                         out_fd.write("\n")
 
-                    elif evidence_stats_file:
+                    elif evidence_stats_file or supported_by_hints_file:
                         if line[:17] == "# % of transcript":
                             supported_fraction = line.strip().split()[-1]
                             while True:
@@ -181,13 +188,25 @@ class AUGUSTUS(Tool):
                                     three_introns_support = tmp_line.strip().split()[-1]
                                 elif tmp_line[:27] == "# incompatible hint groups:":
                                     incompatible_hint_groups = tmp_line.strip().split()[-1]
-                                    ev_fd.write("%s\t%s\t%s\t" % (gene, transcript_id, supported_fraction))
-                                    ev_fd.write("%s\t%s\t%s\t%s\t%s\t%i\n" % (cds_support, introns_support,
-                                                                              five_utr_support, three_introns_support,
-                                                                              incompatible_hint_groups, protein_len))
+                                    if evidence_stats_file:
+                                        ev_fd.write("%s\t%s\t%s\t" % (gene, transcript_id, supported_fraction))
+                                        ev_fd.write("%s\t%s\t%s\t%s\t%s\t%i\n" % (cds_support, introns_support,
+                                                                                  five_utr_support,
+                                                                                  three_introns_support,
+                                                                                  incompatible_hint_groups,
+                                                                                  protein_len))
+                                    if supported_by_hints_file and (float(supported_fraction) > 0):
+                                        sup_fd.write("%s\t%s\t%s\t" % (gene, transcript_id, supported_fraction))
+                                        sup_fd.write("%s\t%s\t%s\t%s\t%s\t%i\n" % (cds_support, introns_support,
+                                                                                   five_utr_support,
+                                                                                   three_introns_support,
+                                                                                   incompatible_hint_groups,
+                                                                                   protein_len))
+
                                     break
 
-        ev_fd.close()
+        if evidence_stats_file:
+            ev_fd.close()
 
     @staticmethod
     def extract_CDS_annotations_from_output(augustus_output, CDS_output):
