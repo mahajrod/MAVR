@@ -224,7 +224,7 @@ class AUGUSTUS(Tool):
                                                      supported_by_hints_longest_pep)
 
         evidence_files = (evidence_stats_file,
-                          supported_by_hints_file) if supported_by_hints_file else \
+                          supported_by_hints_file, "%s.longest_pep" % evidence_stats_file) if supported_by_hints_file else \
                           (evidence_stats_file,)
         for evidence_file in evidence_files:
             print ("Drawing transcript support distribution for %s" % evidence_file)
