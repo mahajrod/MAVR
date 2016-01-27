@@ -264,6 +264,7 @@ class AUGUSTUS(Tool):
                             print filtered_evidence_file
                             print line
                             print line_list
+                            print prev_line
                         gene = line_list[0]
                         transcript = line_list[1]
                         pep_len = line_list[-1]
