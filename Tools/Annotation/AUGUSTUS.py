@@ -213,10 +213,13 @@ class AUGUSTUS(Tool):
                                                  "%s.longest_pep.pep" % evidence_stats_file)
 
         if supported_by_hints_file:
-            self.extract_longest_isoforms(supported_by_hints_file, "%s.longest_pep" % supported_by_hints_file)
+            supported_by_hints_longest_pep_evidence = "%s.longest_pep" % supported_by_hints_file
+            supported_by_hints_longest_pep = "%s.longest_pep.pep" % supported_by_hints_file
+            supported_by_hints_longest_pep_ids = "%s.longest_pep.ids" % supported_by_hints_file
+            self.extract_longest_isoforms(supported_by_hints_file, supported_by_hints_longest_pep_evidence)
             SequenceRoutines.extract_sequence_by_ids(protein_output,
-                                                     "%s.longest_pep.ids" % supported_by_hints_file,
-                                                     "%s.longest_pep.pep" % supported_by_hints_file)
+                                                     supported_by_hints_longest_pep_ids,
+                                                     supported_by_hints_longest_pep)
             MatplotlibRoutines.percent_histogram_from_file("%s.longest_pep" % evidence_stats_file,
                                                            "%s.longest_pep" % evidence_stats_file,
                                                            column_list=2, separator=None,
@@ -255,16 +258,12 @@ class AUGUSTUS(Tool):
                         break
 
                     for line in ev_fd:
+                        print line
                         line_list = line.strip().split("\t")
-                        try:
-                            if float(line_list[2]) < minimum_supported_fraction:
-                                continue
-                        except:
-                            print evidence_file
-                            print filtered_evidence_file
-                            print line
-                            print line_list
-                            print prev_line
+
+                        if float(line_list[2]) < minimum_supported_fraction:
+                            continue
+
                         gene = line_list[0]
                         transcript = line_list[1]
                         pep_len = line_list[-1]
