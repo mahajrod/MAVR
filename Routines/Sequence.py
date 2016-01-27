@@ -62,7 +62,7 @@ class SequenceRoutines():
         if verbose:
             print("Parsing %s..." % (sequence_file if isinstance(id_file, str) else ",".join(id_file)))
 
-        sequence_dict = SeqIO.index_db(tmp_index_file, id_file, format=format)
+        sequence_dict = SeqIO.index_db(tmp_index_file, sequence_file, format=format)
         SeqIO.write(self.record_by_id_generator(sequence_dict, id_list, verbose=verbose),
                     output_file, format=format)
         os.remove(tmp_index_file)
