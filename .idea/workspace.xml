@@ -4,6 +4,7 @@
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Abstract.py" afterPath="$PROJECT_DIR$/Tools/Abstract.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/blast/combine_ids.py" afterPath="$PROJECT_DIR$/scripts/blast/combine_ids.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" afterPath="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -47,7 +48,7 @@
         <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_augustus.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="174" column="66" selection-start-line="174" selection-start-column="66" selection-end-line="174" selection-end-column="66" />
+              <caret line="163" column="103" selection-start-line="163" selection-start-column="103" selection-end-line="163" selection-end-column="103" />
               <folding />
             </state>
           </provider>
@@ -89,21 +90,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="combine_ids.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="combine_ids.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/blast/combine_ids.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2992874">
-              <caret line="18" column="72" selection-start-line="18" selection-start-column="72" selection-end-line="18" selection-end-column="72" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="20" column="111" selection-start-line="20" selection-start-column="111" selection-end-line="20" selection-end-column="111" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Abstract.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Abstract.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="200" column="54" selection-start-line="200" selection-start-column="54" selection-end-line="200" selection-end-column="54" />
+            <state vertical-scroll-proportion="0.8293413">
+              <caret line="222" column="55" selection-start-line="222" selection-start-column="55" selection-end-line="222" selection-end-column="55" />
               <folding>
                 <element signature="e#22#31#0" expanded="true" />
               </folding>
@@ -204,12 +205,12 @@
         <option value="$PROJECT_DIR$/Routines/File.py" />
         <option value="$PROJECT_DIR$/Routines/__init__.py" />
         <option value="$PROJECT_DIR$/Routines/TreeFam.py" />
-        <option value="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" />
         <option value="$PROJECT_DIR$/Routines/Matplotlib.py" />
         <option value="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" />
         <option value="$PROJECT_DIR$/Routines/Sequence.py" />
-        <option value="$PROJECT_DIR$/Tools/Abstract.py" />
+        <option value="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" />
         <option value="$PROJECT_DIR$/scripts/blast/combine_ids.py" />
+        <option value="$PROJECT_DIR$/Tools/Abstract.py" />
       </list>
     </option>
   </component>
@@ -1013,12 +1014,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00258" summary="added paralleled exonerate&#10;">
-      <created>1453724934137</created>
-      <option name="number" value="00258" />
-      <option name="project" value="LOCAL" />
-      <updated>1453724934137</updated>
-    </task>
     <task id="LOCAL-00259" summary="added paralleled exonerate&#10;">
       <created>1453725064993</created>
       <option name="number" value="00259" />
@@ -1307,7 +1302,13 @@
       <option name="project" value="LOCAL" />
       <updated>1453867367403</updated>
     </task>
-    <option name="localTasksCounter" value="307" />
+    <task id="LOCAL-00307" summary="augustus tools&#10;">
+      <created>1453867608959</created>
+      <option name="number" value="00307" />
+      <option name="project" value="LOCAL" />
+      <updated>1453867608959</updated>
+    </task>
+    <option name="localTasksCounter" value="308" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1317,11 +1318,11 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328" sideWeight="0.4978678" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20023015" sideWeight="0.4978678" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31713828" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.07367859" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
@@ -1591,7 +1592,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="82" column="2" selection-start-line="82" selection-start-column="2" selection-end-line="82" selection-end-column="2" />
           <folding>
-            <element signature="e#54#63#0" expanded="true" />
+            <element signature="e#54#63#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1611,7 +1612,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
           <folding>
-            <element signature="e#159#168#0" expanded="true" />
+            <element signature="e#159#168#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1621,7 +1622,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="34" column="52" selection-start-line="34" selection-start-column="52" selection-end-line="34" selection-end-column="52" />
           <folding>
-            <element signature="e#55#70#0" expanded="true" />
+            <element signature="e#55#70#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1631,7 +1632,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="44" column="56" selection-start-line="44" selection-start-column="56" selection-end-line="44" selection-end-column="56" />
           <folding>
-            <element signature="e#54#63#0" expanded="true" />
+            <element signature="e#54#63#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1641,7 +1642,7 @@
         <state vertical-scroll-proportion="0.80748665">
           <caret line="62" column="68" selection-start-line="62" selection-start-column="68" selection-end-line="62" selection-end-column="68" />
           <folding>
-            <element signature="e#54#63#0" expanded="true" />
+            <element signature="e#54#63#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1659,7 +1660,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding>
-            <element signature="e#55#70#0" expanded="true" />
+            <element signature="e#55#70#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1669,7 +1670,7 @@
         <state vertical-scroll-proportion="0.2995283">
           <caret line="19" column="97" selection-start-line="19" selection-start-column="97" selection-end-line="19" selection-end-column="97" />
           <folding>
-            <element signature="e#54#63#0" expanded="true" />
+            <element signature="e#54#63#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1687,7 +1688,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="54" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="113" />
           <folding>
-            <element signature="e#54#69#0" expanded="true" />
+            <element signature="e#54#69#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1733,16 +1734,8 @@
         <state vertical-scroll-proportion="0.2992874">
           <caret line="14" column="74" selection-start-line="14" selection-start-column="74" selection-end-line="14" selection-end-column="74" />
           <folding>
-            <element signature="e#55#70#0" expanded="true" />
+            <element signature="e#55#70#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_augustus.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="174" column="66" selection-start-line="174" selection-start-column="66" selection-end-line="174" selection-end-column="66" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1795,21 +1788,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
+    <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_augustus.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="200" column="54" selection-start-line="200" selection-start-column="54" selection-end-line="200" selection-end-column="54" />
-          <folding>
-            <element signature="e#22#31#0" expanded="true" />
-          </folding>
+          <caret line="163" column="103" selection-start-line="163" selection-start-column="103" selection-end-line="163" selection-end-column="103" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/blast/combine_ids.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2992874">
-          <caret line="18" column="72" selection-start-line="18" selection-start-column="72" selection-end-line="18" selection-end-column="72" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="111" selection-start-line="20" selection-start-column="111" selection-end-line="20" selection-end-column="111" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8293413">
+          <caret line="222" column="55" selection-start-line="222" selection-start-column="55" selection-end-line="222" selection-end-column="55" />
+          <folding>
+            <element signature="e#22#31#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -187,37 +187,71 @@ class Tool():
         return id_list
 
     @staticmethod
-    def intersect_ids_from_files(files_with_ids_from_white_list, files_with_ids_from_black_list, result_file=None):
-        white_set = IdSet()
-        black_set = IdSet()
+    def intersect_ids_from_files(files_with_ids_from_group_a, files_with_ids_from_group_b,
+                                 result_file=None, mode="common"):
+        group_a_set = IdSet()
+        group_b_set = IdSet()
 
-        for filename in files_with_ids_from_white_list:
+        if mode == "common":
+            expression = lambda a, b: a & b
+        elif mode == "only_a":
+            expression = lambda a, b: a - b
+        elif mode == "only_b":
+            expression = lambda a, b: b - a
+        elif mode == "not_common":
+            expression = lambda a, b: a ^ b
+        elif mode == "combine":
+            expression = lambda a, b: a | b
+        elif mode == "count":
+            expression = lambda a, b: (len(a), len(b), len(a & b), len(a - b), len(b - a), len(a ^ b), len(a | b))
+
+        for filename in files_with_ids_from_group_a:
             id_set = IdSet()
             id_set.read(filename, comments_prefix="#")
-            white_set = white_set | id_set
+            group_a_set = group_a_set | id_set
 
-        for filename in files_with_ids_from_black_list:
+        for filename in files_with_ids_from_group_b:
             id_set = IdSet()
             id_set.read(filename, comments_prefix="#")
-            black_set = black_set | id_set
+            group_b_set = group_b_set | id_set
 
-        final_set = IdSet(white_set - black_set)
-
-        final_set.write(result_file if result_file else sys.stdout)
+        result_fd = open(result_file, "w") if result_file else sys.stdout
+        if mode != "count":
+            final_set = IdSet(expression(group_a_set, group_b_set))
+            final_set.write(result_fd)
+        else:
+            stats = expression(group_a_set, group_b_set)
+            result_fd.write("Group_A\t%i\nGroup_B\t%i\nCommon\t%i\nOnly_group_A\t%i\nOnly_group_B\t%i\nNot_common\t%i\nAll\t%i\n") % (stats[0], stats[1], stats[2], stats[3], stats[4], stats[5], stats[6])
 
     @staticmethod
-    def intersect_ids(list_of_white_id_lists, list_of_black_id_list):
-        white_set = IdSet()
-        black_set = IdSet()
+    def intersect_ids(list_of_group_a, list_of_group_b, mode="common"):
+        # possible modes: common, only_a, only_b, not_common,  combine, count
+        group_a_set = IdSet()
+        group_b_set = IdSet()
 
-        for id_list in list_of_white_id_lists:
-            white_set = white_set | IdSet(id_list)
+        if mode == "common":
+            expression = lambda a, b: a & b
+        elif mode == "only_a":
+            expression = lambda a, b: a - b
+        elif mode == "only_b":
+            expression = lambda a, b: b - a
+        elif mode == "not_common":
+            expression = lambda a, b: a ^ b
+        elif mode == "combine":
+            expression = lambda a, b: a | b
+        elif mode == "count":
+            expression = lambda a, b: (len(a), len(b), len(a & b), len(a - b), len(b - a), len(a ^ b), len(a | b))
 
-        for id_list in list_of_black_id_list:
-            black_set = black_set | IdSet(id_list)
-        final_set = IdSet(white_set - black_set)
+        for id_list in list_of_group_a:
+            group_a_set = group_a_set | IdSet(id_list)
 
-        return final_set
+        for id_list in list_of_group_b:
+            group_b_set = group_b_set | IdSet(id_list)
+
+        if mode != "count":
+            return IdSet(expression(group_a_set, group_b_set))
+        else:
+            return expression(group_a_set, group_b_set)
 
 
 class JavaTool(Tool):

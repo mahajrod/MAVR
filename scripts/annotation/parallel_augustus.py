@@ -160,8 +160,8 @@ elif args.swissprot_db:
 else:
     gene_ids_white_list = [all_annotated_genes_ids]
 
-HMMER3.intersect_ids_from_files([all_annotated_genes_ids], gene_ids_black_list, genes_not_masked_ids)
-HMMER3.intersect_ids_from_files(gene_ids_white_list, gene_ids_black_list, final_genes_ids)
+HMMER3.intersect_ids_from_files([all_annotated_genes_ids], gene_ids_black_list, genes_not_masked_ids, mode="only_a")
+HMMER3.intersect_ids_from_files(gene_ids_white_list, gene_ids_black_list, final_genes_ids, mode="only_a")
 
 final_ids = IdSet()
 final_ids.read(final_genes_ids)

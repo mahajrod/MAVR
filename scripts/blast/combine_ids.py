@@ -9,21 +9,24 @@ from CustomCollections.GeneralCollections import IdSet
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-w", "--white_list", action="store", dest="white_list", required=True,
+parser.add_argument("-a", "--group_a_list", action="store", dest="group_a_list", required=True,
                     type=lambda s: make_list_of_path_to_files(s.split(",")),
-                    help="Comma-separated list of files/directories with ids from white list")
-parser.add_argument("-b", "--black_list", action="store", dest="black_list", required=True,
+                    help="Comma-separated list of files/directories with ids from group A")
+parser.add_argument("-b", "--group_b_list", action="store", dest="group_b_list", required=True,
                     type=lambda s: make_list_of_path_to_files(s.split(",")),
-                    help="Comma-separated list of files/directories with ids from black list")
+                    help="Comma-separated list of files/directories with ids from group B")
 parser.add_argument("-o", "--output", action="store", dest="output",
                     help="Output file with allowed ids. Default - stdout")
+parser.add_argument("-m", "--mode", action="store", dest="mode", default="common",
+                    help="Operation mode. Possible variants: common, only_a, only_b, not_common, combine, count"
+                         ". Default - common")
 
 args = parser.parse_args()
 
 #white_lists = []
 #black_lists = []
 
-Tool.intersect_ids_from_files(args.white_list, args.black_list, args.output)
+Tool.intersect_ids_from_files(args.white_list, args.black_list, args.output, mode=args.mode)
 
 """
 white_set = IdSet()
