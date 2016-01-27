@@ -3,18 +3,20 @@ import os
 
 from Bio import SeqIO
 
-from Routines import SequenceRoutines, FileRoutines
+
 from CustomCollections.GeneralCollections import IdList, SynDict
 
 
 class TreeFamRoutines:
     def __init__(self):
+
         pass
 
     @staticmethod
     def extract_proteins_from_selected_families(families_id_file, fam_file, pep_file,
                                                 output_dir="./", pep_format="fasta",
                                                 out_prefix=None, create_dir_for_each_family=False):
+        from Routines import SequenceRoutines, FileRoutines
         fam_id_list = IdList()
         fam_dict = SynDict()
 
