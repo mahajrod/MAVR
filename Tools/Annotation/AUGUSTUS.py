@@ -261,6 +261,7 @@ class AUGUSTUS(Tool):
                                 continue
                         except:
                             print evidence_file
+                            print filtered_evidence_file
                             print line
                             print line_list
                         gene = line_list[0]
