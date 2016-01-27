@@ -179,5 +179,5 @@ for stat_file in output_evidence_stats, output_supported_stats:
                                                    legend_location="upper center",
                                                    stats_as_legend=True)
 
-AUGUSTUS.extract_longest_isoforms(output_supported_stats, output_supported_stats_longest_pep)
-AUGUSTUS.extract_longest_isoforms(output_evidence_stats, output_evidence_stats_longest_pep)
+#AUGUSTUS.extract_longest_isoforms(output_supported_stats, output_supported_stats_longest_pep)
+#AUGUSTUS.extract_longest_isoforms(output_evidence_stats, output_evidence_stats_longest_pep)
