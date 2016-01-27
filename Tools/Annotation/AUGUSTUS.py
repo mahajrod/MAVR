@@ -222,8 +222,13 @@ class AUGUSTUS(Tool):
             SequenceRoutines.extract_sequence_by_ids(protein_output,
                                                      supported_by_hints_longest_pep_ids,
                                                      supported_by_hints_longest_pep)
-            MatplotlibRoutines.percent_histogram_from_file("%s.longest_pep" % evidence_stats_file,
-                                                           "%s.longest_pep" % evidence_stats_file,
+
+        evidence_files = (evidence_stats_file, "%s.longest_pep" % evidence_stats_file,
+                          supported_by_hints_file, "%s.longest_pep" % supported_by_hints_file) if supported_by_hints_file else \
+                          (evidence_stats_file, "%s.longest_pep" % evidence_stats_file)
+        for evidence_file in evidence_files:
+            MatplotlibRoutines.percent_histogram_from_file(evidence_file,
+                                                           evidence_file,
                                                            column_list=(2,), separator=None,
                                                            comments="#", n_bins=20,
                                                            title="Transcript support by hints",
@@ -232,14 +237,7 @@ class AUGUSTUS(Tool):
                                                            legend_location="upper center",
                                                            stats_as_legend=True)
 
-        MatplotlibRoutines.percent_histogram_from_file(evidence_stats_file, evidence_stats_file,
-                                                       column_list=(2,), separator=None,
-                                                       comments="#", n_bins=20,
-                                                       title="Transcript support by hints",
-                                                       xlabel="%%", ylabel="Number",
-                                                       extensions=["svg", "png"],
-                                                       legend_location="upper center",
-                                                       stats_as_legend=True)
+
 
     @staticmethod
     def extract_longest_isoforms(evidence_file, filtered_evidence_file, minimum_supported_fraction=0):
