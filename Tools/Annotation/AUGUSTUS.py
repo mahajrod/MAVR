@@ -223,9 +223,9 @@ class AUGUSTUS(Tool):
                                                      supported_by_hints_longest_pep_ids,
                                                      supported_by_hints_longest_pep)
 
-        evidence_files = (evidence_stats_file, "%s.longest_pep" % evidence_stats_file,
-                          supported_by_hints_file, "%s.longest_pep" % supported_by_hints_file) if supported_by_hints_file else \
-                          (evidence_stats_file, "%s.longest_pep" % evidence_stats_file)
+        evidence_files = (evidence_stats_file,
+                          supported_by_hints_file) if supported_by_hints_file else \
+                          (evidence_stats_file,)
         for evidence_file in evidence_files:
             MatplotlibRoutines.percent_histogram_from_file(evidence_file,
                                                            evidence_file,
