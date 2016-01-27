@@ -256,6 +256,7 @@ class AUGUSTUS(Tool):
 
                     for line in ev_fd:
                         line_list = line.strip().split("\t")
+                        print line_list
                         if line_list[2] < minimum_supported_fraction:
                             continue
                         gene = line_list[0]
