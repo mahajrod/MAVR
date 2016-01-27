@@ -15,8 +15,8 @@ parser.add_argument("-w", "--white_list", action="store", dest="white_list", req
 parser.add_argument("-b", "--black_list", action="store", dest="black_list", required=True,
                     type=lambda s: make_list_of_path_to_files(s.split(",")),
                     help="Comma-separated list of files/directories with ids from black list")
-parser.add_argument("-o", "--output", action="store", dest="output", required=True,
-                    help="Output file with allowed ids")
+parser.add_argument("-o", "--output", action="store", dest="output",
+                    help="Output file with allowed ids. Default - stdout")
 
 args = parser.parse_args()
 

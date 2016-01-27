@@ -187,7 +187,7 @@ class Tool():
         return id_list
 
     @staticmethod
-    def intersect_ids_from_files(files_with_ids_from_white_list, files_with_ids_from_black_list, result_file):
+    def intersect_ids_from_files(files_with_ids_from_white_list, files_with_ids_from_black_list, result_file=None):
         white_set = IdSet()
         black_set = IdSet()
 
@@ -203,7 +203,7 @@ class Tool():
 
         final_set = IdSet(white_set - black_set)
 
-        final_set.write(result_file)
+        final_set.write(result_file if result_file else sys.stdout)
 
     @staticmethod
     def intersect_ids(list_of_white_id_lists, list_of_black_id_list):
