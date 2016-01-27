@@ -2,9 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/annotation/extract_longest_isoforms_from_evidence_file.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" afterPath="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/mahajrod.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/mahajrod.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Abstract.py" afterPath="$PROJECT_DIR$/Tools/Abstract.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/File.py" afterPath="$PROJECT_DIR$/Routines/File.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Sequence.py" afterPath="$PROJECT_DIR$/Routines/Sequence.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/TreeFam.py" afterPath="$PROJECT_DIR$/Routines/TreeFam.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/__init__.py" afterPath="$PROJECT_DIR$/Routines/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence/check_selenocystein_presence.py" afterPath="$PROJECT_DIR$/scripts/sequence/check_selenocystein_presence.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/chemidoc/convert_scn_to_tiff.py" afterPath="$PROJECT_DIR$/scripts/chemidoc/convert_scn_to_tiff.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence/extract_groups_of_sequences.py" afterPath="$PROJECT_DIR$/scripts/sequence/extract_groups_of_sequences.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence/extract_sequences_by_ids.py" afterPath="$PROJECT_DIR$/scripts/sequence/extract_sequences_by_ids.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence/find_gaps.py" afterPath="$PROJECT_DIR$/scripts/sequence/find_gaps.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" afterPath="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/blast/parallel_blast_commands.py" afterPath="$PROJECT_DIR$/scripts/blast/parallel_blast_commands.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/filter/restore_pairs.py" afterPath="$PROJECT_DIR$/scripts/filter/restore_pairs.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -31,75 +42,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="draw_percent_histogram.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/draw/draw_percent_histogram.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="84" selection-start-line="22" selection-start-column="84" selection-end-line="22" selection-end-column="84" />
-              <folding>
-                <element signature="e#55#70#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Matplotlib.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Routines/Matplotlib.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="90" column="30" selection-start-line="90" selection-start-column="30" selection-end-line="90" selection-end-column="30" />
-              <folding>
-                <element signature="e#24#33#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AUGUSTUS.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AUGUSTUS.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="211" column="26" selection-start-line="211" selection-start-column="8" selection-end-line="211" selection-end-column="101" />
-              <folding />
+            <state vertical-scroll-proportion="0.7004717">
+              <caret line="218" column="99" selection-start-line="218" selection-start-column="99" selection-end-line="218" selection-end-column="99" />
+              <folding>
+                <element signature="e#22#31#0" expanded="true" />
+                <element signature="e#573#4508#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="draw_kmer_distribution_from_fastq.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution_from_fastq.py">
+      <file leaf-file-name="extract_sequences_by_ids.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/sequence/extract_sequences_by_ids.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="26" column="35" selection-start-line="22" selection-start-column="0" selection-end-line="55" selection-end-column="68" />
-              <folding />
+              <caret line="22" column="54" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="113" />
+              <folding>
+                <element signature="e#54#69#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parallel_augustus.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_augustus.py">
+      <file leaf-file-name="CGAS.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tools/LinuxTools/CGAS.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="178" column="0" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="extract_proteins_from_augustus_output.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/annotation/extract_proteins_from_augustus_output.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="9" column="64" selection-start-line="9" selection-start-column="64" selection-end-line="9" selection-end-column="64" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="extract_longest_isoforms_from_evidence_file.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/annotation/extract_longest_isoforms_from_evidence_file.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.254717">
-              <caret line="13" column="75" selection-start-line="13" selection-start-column="75" selection-end-line="13" selection-end-column="75" />
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -121,15 +93,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/sequence/replace_selenocystein.py" />
-        <option value="$PROJECT_DIR$/projects/cat_genomes/caracal_exonerate_dog.slurm" />
-        <option value="$PROJECT_DIR$/projects/cat_genomes/cat_annotation.sh" />
-        <option value="$PROJECT_DIR$/scripts/annotation/extract_genes_from_exonerate_output_by_ids.py" />
-        <option value="$PROJECT_DIR$/projects/cat_genomes/caracal_exonerate_ferret.slurm" />
-        <option value="$PROJECT_DIR$/scripts/annotation/extract_top_hits_from_target_gff_exonerate.py" />
-        <option value="$PROJECT_DIR$/projects/cat_genomes/caracal_exonerate_handle.sh" />
-        <option value="$PROJECT_DIR$/scripts/annotation/extract_annotations_from_gff_by_ids.py" />
-        <option value="$PROJECT_DIR$/scripts/annotation/extract_features_with_subfeatures_from_gff.py" />
         <option value="$PROJECT_DIR$/scripts/annotation/prepare_hints_from_exonerate_targrt_output.py" />
         <option value="$PROJECT_DIR$/scripts/annotation/prepare_hints_from_exonerate_target_output.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/GC_content.py" />
@@ -147,7 +110,6 @@
         <option value="$PROJECT_DIR$/projects/nxf_annotations/MEX67_fungi_exonerate.sh" />
         <option value="$PROJECT_DIR$/scripts/filter/merge_reads.sh" />
         <option value="$PROJECT_DIR$/Tools/Filter/__init__.py" />
-        <option value="$PROJECT_DIR$/Routines/File.py" />
         <option value="$PROJECT_DIR$/scripts/kmer/get_kmer_list.py" />
         <option value="$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution.py" />
         <option value="$PROJECT_DIR$/Tools/Filter/FastQC.py" />
@@ -157,21 +119,31 @@
         <option value="$PROJECT_DIR$/scripts/filter/filter_by_trimmomatic.py" />
         <option value="$PROJECT_DIR$/scripts/filter/gather_trimmomatic_statistics.py" />
         <option value="$PROJECT_DIR$/Routines/Primer.py" />
-        <option value="$PROJECT_DIR$/Routines/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/primers/filter_degeprime_output.py" />
         <option value="$PROJECT_DIR$/scripts/general/parallel_md5sum.py" />
         <option value="$PROJECT_DIR$/Tools/Annotation/TransDecoder.py" />
         <option value="$PROJECT_DIR$/scripts/transcriptome/annotation/transdecoder_annotation_analysis.bash" />
         <option value="$PROJECT_DIR$/scripts/transcriptome/annotation/predict_proteins_from_transcripts.py" />
-        <option value="$PROJECT_DIR$/Tools/Abstract.py" />
         <option value="$PROJECT_DIR$/scripts/filter/merge_and_filter_reads.sh" />
         <option value="$PROJECT_DIR$/scripts/filter/merge_and_check_reads.py" />
         <option value="$PROJECT_DIR$/scripts/annotation/extract_proteins_from_augustus_output.py" />
         <option value="$PROJECT_DIR$/scripts/draw/draw_percent_histogram.py" />
-        <option value="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" />
         <option value="$PROJECT_DIR$/Routines/Matplotlib.py" />
-        <option value="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" />
         <option value="$PROJECT_DIR$/scripts/annotation/extract_longest_isoforms_from_evidence_file.py" />
+        <option value="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" />
+        <option value="$PROJECT_DIR$/scripts/sequence/extract_sequences_by_ids.py" />
+        <option value="$PROJECT_DIR$/scripts/blast/parallel_blast_commands.py" />
+        <option value="$PROJECT_DIR$/scripts/filter/restore_pairs.py" />
+        <option value="$PROJECT_DIR$/scripts/sequence/check_selenocystein_presence.py" />
+        <option value="$PROJECT_DIR$/scripts/sequence/extract_groups_of_sequences.py" />
+        <option value="$PROJECT_DIR$/scripts/sequence/find_gaps.py" />
+        <option value="$PROJECT_DIR$/Routines/File.py" />
+        <option value="$PROJECT_DIR$/Routines/__init__.py" />
+        <option value="$PROJECT_DIR$/Tools/Abstract.py" />
+        <option value="$PROJECT_DIR$/Routines/Sequence.py" />
+        <option value="$PROJECT_DIR$/Routines/TreeFam.py" />
+        <option value="$PROJECT_DIR$/scripts/chemidoc/convert_scn_to_tiff.py" />
+        <option value="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" />
       </list>
     </option>
   </component>
@@ -591,6 +563,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="LinuxTools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="HMMER" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -975,18 +965,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00232" summary="added paralleled exonerate&#10;">
-      <created>1451271617430</created>
-      <option name="number" value="00232" />
-      <option name="project" value="LOCAL" />
-      <updated>1451271617430</updated>
-    </task>
-    <task id="LOCAL-00233" summary="added paralleled exonerate&#10;">
-      <created>1451315916752</created>
-      <option name="number" value="00233" />
-      <option name="project" value="LOCAL" />
-      <updated>1451315916752</updated>
-    </task>
     <task id="LOCAL-00234" summary="added paralleled exonerate&#10;">
       <created>1451316042483</created>
       <option name="number" value="00234" />
@@ -1269,7 +1247,19 @@
       <option name="project" value="LOCAL" />
       <updated>1453850718272</updated>
     </task>
-    <option name="localTasksCounter" value="281" />
+    <task id="LOCAL-00281" summary="augustus tools&#10;">
+      <created>1453855009310</created>
+      <option name="number" value="00281" />
+      <option name="project" value="LOCAL" />
+      <updated>1453855009310</updated>
+    </task>
+    <task id="LOCAL-00282" summary="augustus tools&#10;">
+      <created>1453856446516</created>
+      <option name="number" value="00282" />
+      <option name="project" value="LOCAL" />
+      <updated>1453856446516</updated>
+    </task>
+    <option name="localTasksCounter" value="283" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1279,6 +1269,7 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328" sideWeight="0.4978678" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1290,7 +1281,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.328" sideWeight="0.4978678" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1343,64 +1333,16 @@
     <MESSAGE value="additions&#10;" />
     <MESSAGE value="added paralleled augustus&#10;" />
     <MESSAGE value="added paralleled exonerate&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="added paralleled exonerate&#10;" />
+    <MESSAGE value="augustus tools&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="augustus tools&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/strandness_histogramms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/restore_per_sample_vcf.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/rainfall.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/power_size_plot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/homogeneity_article_all.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/homogeneity_article_5_UTR.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/homogeneity_article_pre_UTR.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.125">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/examples/desaminases/homogenity_size_heatmap.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.5986842">
@@ -1485,13 +1427,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19736843">
-          <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence/get_sequence_ids.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1506,21 +1441,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/sequence/extract_groups_of_sequences.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence/convert_sequence_formats.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/sequence/check_selenocystein_presence.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1542,13 +1463,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence/get_general_data_from_genbank_file.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/blast/parallel_blast_commands.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1609,14 +1523,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="255" column="0" selection-start-line="255" selection-start-column="0" selection-end-line="255" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/blast/combine_ids.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1646,13 +1552,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/chemidoc/convert_scn_to_tiff.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/draw/draw_histogram.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1664,6 +1563,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="82" column="2" selection-start-line="82" selection-start-column="2" selection-end-line="82" selection-end-column="2" />
+          <folding>
+            <element signature="e#54#63#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1672,7 +1574,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="60" column="78" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="83" />
           <folding>
-            <element signature="e#54#63#0" expanded="true" />
+            <element signature="e#54#63#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1682,16 +1584,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="84" selection-start-line="22" selection-start-column="84" selection-end-line="22" selection-end-column="84" />
           <folding>
-            <element signature="e#55#70#0" expanded="true" />
+            <element signature="e#55#70#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_augustus.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="178" column="0" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1700,16 +1594,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="90" column="30" selection-start-line="90" selection-start-column="30" selection-end-line="90" selection-end-column="30" />
           <folding>
-            <element signature="e#24#33#0" expanded="true" />
+            <element signature="e#24#33#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="211" column="26" selection-start-line="211" selection-start-column="8" selection-end-line="211" selection-end-column="101" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1721,11 +1607,162 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_augustus.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="154" column="97" selection-start-line="154" selection-start-column="97" selection-end-line="154" selection-end-column="97" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/annotation/extract_longest_isoforms_from_evidence_file.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.254717">
-          <caret line="13" column="75" selection-start-line="13" selection-start-column="75" selection-end-line="13" selection-end-column="75" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="58" selection-start-line="17" selection-start-column="0" selection-end-line="18" selection-end-column="79" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/filter/restore_pairs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding>
+            <element signature="e#159#168#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence/check_selenocystein_presence.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="52" selection-start-line="34" selection-start-column="52" selection-end-line="34" selection-end-column="52" />
+          <folding>
+            <element signature="e#55#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence/extract_groups_of_sequences.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="44" column="56" selection-start-line="44" selection-start-column="56" selection-end-line="44" selection-end-column="56" />
+          <folding>
+            <element signature="e#54#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/blast/parallel_blast_commands.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.80748665">
+          <caret line="62" column="68" selection-start-line="62" selection-start-column="68" selection-end-line="62" selection-end-column="68" />
+          <folding>
+            <element signature="e#54#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2759434">
+          <caret line="13" column="35" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
+          <folding>
+            <element signature="e#25#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/LinuxTools/CGAS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence/find_gaps.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding>
+            <element signature="e#55#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/chemidoc/convert_scn_to_tiff.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2995283">
+          <caret line="19" column="97" selection-start-line="19" selection-start-column="97" selection-end-line="19" selection-end-column="97" />
+          <folding>
+            <element signature="e#54#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/TreeFam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2759434">
+          <caret line="25" column="42" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="42" />
+          <folding>
+            <element signature="e#22#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/File.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4457547">
+          <caret line="174" column="6" selection-start-line="174" selection-start-column="4" selection-end-line="174" selection-end-column="14" />
+          <folding>
+            <element signature="e#47#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="5.0731134">
+          <caret line="239" column="35" selection-start-line="239" selection-start-column="35" selection-end-line="239" selection-end-column="35" />
+          <folding>
+            <element signature="e#22#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.995283">
+          <caret line="273" column="94" selection-start-line="273" selection-start-column="94" selection-end-line="273" selection-end-column="94" />
+          <folding>
+            <element signature="e#24#33#0" expanded="true" />
+            <element signature="e#510#890#0" expanded="false" />
+            <element signature="e#3228#3541#0" expanded="false" />
+            <element signature="e#3586#5107#0" expanded="false" />
+            <element signature="e#5222#5792#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence/extract_sequences_by_ids.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="54" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="113" />
+          <folding>
+            <element signature="e#54#69#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7004717">
+          <caret line="218" column="99" selection-start-line="218" selection-start-column="99" selection-end-line="218" selection-end-column="99" />
+          <folding>
+            <element signature="e#22#31#0" expanded="true" />
+            <element signature="e#573#4508#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

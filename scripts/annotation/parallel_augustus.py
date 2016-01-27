@@ -61,7 +61,9 @@ args = parser.parse_args()
 output_gff = "%s.gff" % args.output
 output_pep = "%s.pep" % args.output
 output_evidence_stats = "%s.transcript.evidence" % args.output
+output_evidence_stats_longest_pep = "%s.transcript.evidence.longest_pep" % args.output
 output_supported_stats = "%s.transcript.supported" % args.output
+output_supported_stats_longest_pep = "%s.transcript.supported.longest_pep" % args.output
 output_hmmscan = "%s.hmmscan.hits" % args.output
 output_domtblout = "%s.domtblout" % args.output
 output_pfam_annotated_dom_ids = "%s.pfam.dom_ids" % args.output
@@ -176,3 +178,6 @@ for stat_file in output_evidence_stats, output_supported_stats:
                                                    extensions=("png", "svg"),
                                                    legend_location="upper center",
                                                    stats_as_legend=True)
+
+AUGUSTUS.extract_longest_isoforms(output_supported_stats, output_supported_stats_longest_pep)
+AUGUSTUS.extract_longest_isoforms(output_evidence_stats, output_evidence_stats_longest_pep)

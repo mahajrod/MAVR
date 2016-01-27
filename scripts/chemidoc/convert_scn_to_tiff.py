@@ -6,18 +6,18 @@ import argparse
 
 from Tools.BioFormats import BioConvert
 from Tools.ImageMagick import Convert
-from Routines.File import check_path, make_list_of_path_to_files, save_mkdir
+from Routines import FileRoutines
 
 
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input", action="store", dest="input",
-                    type=lambda x: make_list_of_path_to_files(x.split(",")),
+                    type=lambda x: FileRoutines.make_list_of_path_to_files(x.split(",")),
                     help="Comma-separated list of scn files")
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
                     help="Number of threads")
 
-parser.add_argument("-o", "--output_directory", action="store", dest="output", type=check_path,
+parser.add_argument("-o", "--output_directory", action="store", dest="output", type=FileRoutines.check_path,
                     help="Output directory")
 #parser.add_argument("-p", "--convert_options", action="store", dest="convert_options",
 #                    help="Options for convert")
@@ -28,7 +28,7 @@ args = parser.parse_args()
 
 temp_dir = "temp/"
 
-save_mkdir(temp_dir)
+FileRoutines.save_mkdir(temp_dir)
 
 BioConvert.threads = args.threads
 Convert.threads = args.threads

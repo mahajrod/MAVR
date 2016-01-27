@@ -6,7 +6,7 @@ import shutil
 
 from Bio import SeqIO
 
-from Routines.Sequence import record_by_id_generator
+from Routines import SequenceRoutines
 
 parser = argparse.ArgumentParser()
 
@@ -50,15 +50,17 @@ number_of_records = len(record_ids_list)
 
 while (records_written + args.number_of_sequences) <= number_of_records:
 
-    SeqIO.write(record_by_id_generator(sequence_dict,
-                                       record_ids_list[records_written:records_written+args.number_of_sequences]),
+    SeqIO.write(SequenceRoutines.record_by_id_generator(sequence_dict,
+                                                        record_ids_list[records_written:records_written+args.number_of_sequences],
+                                                        verbose=True),
                 "%s/%s_%i.fasta" % (args.splited_directory, args.output_prefix, split_index), format="fasta")
     split_index += 1
     records_written += args.number_of_sequences
 
 if records_written != number_of_records:
-    SeqIO.write(record_by_id_generator(sequence_dict,
-                                       record_ids_list[records_written:]),
+    SeqIO.write(SequenceRoutines.record_by_id_generator(sequence_dict,
+                                                        record_ids_list[records_written:],
+                                                        verbose=True),
                 "%s/%s_%i.fasta" % (args.splited_directory, args.output_prefix, split_index), format="fasta")
 
 os.remove("temp.idx")

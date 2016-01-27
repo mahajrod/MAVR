@@ -7,7 +7,8 @@ import os
 from Bio import SeqIO
 from BCBio import GFF
 
-from Routines.Sequence import record_by_id_generator, find_gaps
+from Routines import SequenceRoutines
+
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_file", action="store", dest="input_file",
@@ -17,18 +18,15 @@ parser.add_argument("-o", "--output_file", action="store", dest="out_file",
 parser.add_argument("-f", "--format", action="store", dest="format", default="fasta",
                     help="Format of input. Allowed formats genbank, fasta(default)")
 
-
 args = parser.parse_args()
 
 tmp_index_file = "temp.idx"
 
 print("Parsing %s..." % args.input_file)
 sequence_dict = SeqIO.index_db(tmp_index_file, args.input_file, format=args.format)
-gaps_dict = find_gaps(sequence_dict)
+gaps_dict = SequenceRoutines.find_gaps(sequence_dict)
 
 with open(args.out_file, "w") as out_fd:
-    GFF.write(record_by_id_generator(gaps_dict, gaps_dict.keys()), out_fd)
+    GFF.write(SequenceRoutines.record_by_id_generator(gaps_dict, gaps_dict.keys(),
+                                                      verbose=True), out_fd)
 os.remove(tmp_index_file)
-
-
-

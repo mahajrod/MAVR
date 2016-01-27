@@ -7,8 +7,8 @@ from collections import OrderedDict
 
 from Bio import SeqIO
 
-from Routines.File import check_path, split_filename, save_mkdir
-from Routines.Sequence import record_by_id_generator
+
+from Routines import SequenceRoutines, FileRoutines
 from CustomCollections.GeneralCollections import IdList, IdSet
 
 
@@ -23,11 +23,11 @@ class Tool():
 
     def __init__(self, cmd, path="", max_threads=4, jar_path=None, jar=None,
                  max_memory="500m", timelog="tool_time.log"):
-        self.path = check_path(path)
+        self.path = FileRoutines.check_path(path)
         self.cmd = cmd
         self.threads = max_threads
         #print(jar_path)
-        self.jar_path = check_path(jar_path) if jar_path else None
+        self.jar_path = FileRoutines.check_path(jar_path) if jar_path else None
         self.jar = jar
         self.max_memory = max_memory
         self.timelog = timelog
@@ -35,7 +35,7 @@ class Tool():
     def execute(self, options="", cmd=None, capture_output=False):
         command = cmd if cmd is not None else self.cmd
 
-        exe_string = (check_path(self.path) if self.path else "") + command + " " + options
+        exe_string = (FileRoutines.check_path(self.path) if self.path else "") + command + " " + options
 
         sys.stdout.write("Executing:\n\t%s\n" % exe_string)
         if self.timelog:
@@ -53,7 +53,7 @@ class Tool():
 
     def parallel_execute(self, options_list, cmd=None, capture_output=False, threads=None):
         command = cmd if cmd is not None else self.cmd
-        exe_string_list = [(check_path(self.path) if self.path else "") + command + " " + options
+        exe_string_list = [(FileRoutines.check_path(self.path) if self.path else "") + command + " " + options
                            for options in options_list]
 
         with open("exe_list.t", "a") as exe_fd:
@@ -71,8 +71,8 @@ class Tool():
         by default splits input files into files with num_of_recs_per_file.
         if num_of_files is set num_of_recs_per_file is ignored.
         """
-        save_mkdir(output_dir)
-        out_prefix = split_filename(input_fasta)[1] if output_prefix is None else output_prefix
+        FileRoutines.save_mkdir(output_dir)
+        out_prefix = FileRoutines.split_filename(input_fasta)[1] if output_prefix is None else output_prefix
         sequence_dict = SeqIO.index_db("temp.idx", input_fasta, "fasta")
 
         split_index = 1
@@ -83,15 +83,15 @@ class Tool():
         num_of_recs = int(number_of_records/num_of_files) + 1 if num_of_files else num_of_recs_per_file
         while (records_written + num_of_recs) <= number_of_records:
 
-            SeqIO.write(record_by_id_generator(sequence_dict,
-                                               record_ids_list[records_written:records_written+num_of_recs]),
+            SeqIO.write(SequenceRoutines.record_by_id_generator(sequence_dict,
+                                                                record_ids_list[records_written:records_written+num_of_recs]),
                         "%s/%s_%i.fasta" % (output_dir, out_prefix, split_index), format="fasta")
             split_index += 1
             records_written += num_of_recs
 
         if records_written != number_of_records:
-            SeqIO.write(record_by_id_generator(sequence_dict,
-                                               record_ids_list[records_written:]),
+            SeqIO.write(SequenceRoutines.record_by_id_generator(sequence_dict,
+                                                                record_ids_list[records_written:]),
                         "%s/%s_%i.fasta" % (output_dir, out_prefix, split_index), format="fasta")
 
         os.remove("temp.idx")
@@ -101,9 +101,9 @@ class Tool():
         by default splits input files into files with num_of_recs_per_file.
         if num_of_files is set num_of_recs_per_file is ignored.
         """
-        save_mkdir(output_dir)
+        FileRoutines.save_mkdir(output_dir)
 
-        out_prefix = split_filename(input_fasta)[1] if output_prefix is None else output_prefix
+        out_prefix = FileRoutines.split_filename(input_fasta)[1] if output_prefix is None else output_prefix
         sequence_dict = SeqIO.index_db("temp.idx", input_fasta, "fasta")
         length = 0
 
@@ -123,14 +123,14 @@ class Tool():
                             "%s/%s_%i.fasta" % (output_dir, out_prefix, split_index), format="fasta")
 
             elif total_length + record_length > max_len:
-                SeqIO.write(record_by_id_generator(sequence_dict, id_list),
+                SeqIO.write(SequenceRoutines.record_by_id_generator(sequence_dict, id_list),
                             "%s/%s_%i.fasta" % (output_dir, out_prefix, split_index), format="fasta")
                 total_length = record_length
                 id_list = [record_id]
 
             elif total_length + record_length == max_len:
                 id_list.append(record_id)
-                SeqIO.write(record_by_id_generator(sequence_dict, id_list),
+                SeqIO.write(SequenceRoutines.record_by_id_generator(sequence_dict, id_list),
                             "%s/%s_%i.fasta" % (output_dir, out_prefix, split_index), format="fasta")
                 total_length = 0
                 id_list = []
@@ -143,7 +143,7 @@ class Tool():
             split_index += 1
 
         if id_list:
-            SeqIO.write(record_by_id_generator(sequence_dict, id_list),
+            SeqIO.write(SequenceRoutines.record_by_id_generator(sequence_dict, id_list),
                             "%s/%s_%i.fasta" % (output_dir, out_prefix, split_index), format="fasta")
 
         os.remove("temp.idx")
@@ -158,7 +158,7 @@ class Tool():
                 record.id = "%s%s%s" % (sample, separator, record.id)
                 yield record
 
-        save_mkdir(output_dir)
+        FileRoutines.save_mkdir(output_dir)
         index = 0
         samples_seq_dict = OrderedDict()
         for filename, sample_name in zip(list_of_files_with_sequences_of_samples, list_of_names_of_samples):
@@ -171,7 +171,7 @@ class Tool():
 
         for common_id in common_sequence_ids:
             SeqIO.write(generator_with_id_correction(samples_seq_dict, common_id),
-                        "%s%s.%s" % (check_path(output_dir), common_id, format),
+                        "%s%s.%s" % (FileRoutines.check_path(output_dir), common_id, format),
                         format=format)
         for i in range(0, index):
             os.remove("tmp_%i.idx" % i)
@@ -237,7 +237,7 @@ class JavaTool(Tool):
         java_string += " %s" % command
         java_string += " %s" % options
 
-        exe_string = (check_path(self.path) if self.path else "") + java_string
+        exe_string = (FileRoutines.check_path(self.path) if self.path else "") + java_string
 
         sys.stdout.write("Executing:\n\t%s\n" % exe_string)
         if self.timelog:

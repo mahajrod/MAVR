@@ -1,22 +1,10 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
-import sys
 import argparse
 
-from collections import OrderedDict
+from Routines.File import make_list_of_path_to_files
+from Routines.Sequence import SequenceRoutines
 
-from Bio import SeqIO
-from BCBio import GFF
-
-from Routines.File import read_ids, make_list_of_path_to_files
-from Routines.Sequence import record_by_id_generator
-
-
-def iterate_gff_parsing_generator(gff_parsing_generator, id_list):
-    for record in gff_parsing_generator:
-        if record.id in id_list:
-            yield record
 
 parser = argparse.ArgumentParser()
 
@@ -32,19 +20,7 @@ parser.add_argument("-d", "--id_file", action="store", dest="id_file",
 
 args = parser.parse_args()
 
-out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
+SequenceRoutines.extract_sequence_by_ids(args.input, args.id_file, args.output, format=args.format, verbose=True)
 
-tmp_index_file = "temp.idx"
-
-id_list = read_ids(args.id_file)
-
-print("Parsing %s..." % (args.input if isinstance(args.input, str) else ",".join(args.input)))
-
-sequence_dict = SeqIO.index_db(tmp_index_file, args.input, format=args.format)
-SeqIO.write(record_by_id_generator(sequence_dict, id_list), out_fd, format=args.format)
-os.remove(tmp_index_file)
-
-if args.output != "stdout":
-    out_fd.close()
 
 

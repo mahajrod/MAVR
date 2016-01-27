@@ -3,8 +3,7 @@ import os
 
 from Bio import SeqIO
 
-from Routines.File import save_mkdir, check_path
-from Routines.Sequence import record_by_id_generator
+from Routines import SequenceRoutines, FileRoutines
 from CustomCollections.GeneralCollections import IdList, SynDict
 
 
@@ -19,8 +18,8 @@ class TreeFamRoutines:
         fam_id_list = IdList()
         fam_dict = SynDict()
 
-        save_mkdir(output_dir)
-        out_dir = check_path(output_dir)
+        FileRoutines.save_mkdir(output_dir)
+        out_dir = FileRoutines.check_path(output_dir)
         create_directory_for_each_family = True if out_prefix else create_dir_for_each_family
 
         fam_id_list.read(families_id_file)
@@ -31,12 +30,13 @@ class TreeFamRoutines:
             if fam_id in fam_dict:
                 if create_directory_for_each_family:
                     fam_dir = "%s%s/" % (out_dir, fam_id)
-                    save_mkdir(fam_dir)
+                    FileRoutines.save_mkdir(fam_dir)
                     out_file = "%s%s.pep" % (fam_dir, out_prefix if out_prefix else fam_id)
                 else:
                     out_file = "%s.pep" % (out_prefix if out_prefix else fam_id)
 
-                SeqIO.write(record_by_id_generator(protein_dict, fam_dict[fam_id]), out_file, format=pep_format)
+                SeqIO.write(SequenceRoutines.record_by_id_generator(protein_dict, fam_dict[fam_id], verbose=True),
+                            out_file, format=pep_format)
 
         os.remove("tmp.idx")
 

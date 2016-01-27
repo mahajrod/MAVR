@@ -8,7 +8,7 @@ from Bio import SeqIO
 
 from CustomCollections.GeneralCollections import SynDict
 from Routines.File import read_ids, make_list_of_path_to_files, check_path, save_mkdir
-from Routines.Sequence import record_by_id_generator
+from Routines import SequenceRoutines
 
 
 def make_list_of_path_to_files_from_comma_sep_string(string):
@@ -41,7 +41,8 @@ sequence_groups_id.read(args.id_file, split_values=True)
 #print("Parsing %s..." % args.input_file)
 sequence_dict = SeqIO.index_db(tmp_index_file, args.input, format=args.format)
 for group in sequence_groups_id:
-    SeqIO.write(record_by_id_generator(sequence_dict, sequence_groups_id[group]),
+    SeqIO.write(SequenceRoutines.record_by_id_generator(sequence_dict, sequence_groups_id[group],
+                                                        verbose=True),
                 "%s%s.%s" % (args.output, group, args.extension), format=args.format)
 
 os.remove(tmp_index_file)

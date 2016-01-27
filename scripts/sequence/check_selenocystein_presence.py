@@ -6,7 +6,8 @@ import os
 
 from Bio import SeqIO
 
-from Routines.Sequence import record_by_id_generator
+from Routines import SequenceRoutines
+
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_file", action="store", dest="input_file",
@@ -30,7 +31,8 @@ with open(args.out_prefix + ".ids", "w") as out_fd:
         if "U" in sequence_dict[record_id].seq:
             selenocystein_ids.append(record_id)
             out_fd.write(record_id + "\n")
-SeqIO.write(record_by_id_generator(sequence_dict, selenocystein_ids), "%s_seq.fasta" % args.out_prefix, args.format)
+SeqIO.write(SequenceRoutines.record_by_id_generator(sequence_dict,
+                                                    selenocystein_ids), "%s_seq.fasta" % args.out_prefix, args.format)
 os.remove(tmp_index_file)
 
 

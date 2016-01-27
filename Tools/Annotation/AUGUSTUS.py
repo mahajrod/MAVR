@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 
-from Routines.File import split_filename, check_path, save_mkdir
+from Routines import FileRoutines, SequenceRoutines
 
 from Tools.Abstract import Tool
 from Tools.LinuxTools import CGAS
@@ -109,10 +109,10 @@ class AUGUSTUS(Tool):
                                             hints_file=hints_file, extrinsicCfgFile=extrinsicCfgFile,
                                             predict_UTR=predict_UTR)
 
-        splited_dir = check_path(split_dir)
-        splited_out_dir = check_path(splited_output_dir)
-        save_mkdir(splited_dir)
-        save_mkdir(splited_out_dir)
+        splited_dir = FileRoutines.check_path(split_dir)
+        splited_out_dir = FileRoutines.check_path(splited_output_dir)
+        FileRoutines.save_mkdir(splited_dir)
+        FileRoutines.save_mkdir(splited_out_dir)
 
         self.split_fasta_by_seq_len(genome_file, splited_dir)
 
@@ -134,8 +134,7 @@ class AUGUSTUS(Tool):
         if combine_output_to_single_file:
             CGAS.cat(list_of_output_files, output=output)
 
-    @staticmethod
-    def extract_proteins_from_output(augustus_output, protein_output, evidence_stats_file=None,
+    def extract_proteins_from_output(self, augustus_output, protein_output, evidence_stats_file=None,
                                      supported_by_hints_file=None, id_prefix="p."):
         if evidence_stats_file:
             ev_fd = open(evidence_stats_file, "w")
@@ -208,6 +207,17 @@ class AUGUSTUS(Tool):
         if evidence_stats_file:
             ev_fd.close()
 
+        self.extract_longest_isoforms(evidence_stats_file, "%s.longest_pep" % evidence_stats_file)
+        SequenceRoutines.extract_sequence_by_ids(protein_output,
+                                                 "%s.longest_pep.ids" % evidence_stats_file,
+                                                 "%s.longest_pep.pep" % evidence_stats_file)
+
+        if supported_by_hints_file:
+            self.extract_longest_isoforms(supported_by_hints_file, "%s.longest_pep" % supported_by_hints_file)
+            SequenceRoutines.extract_sequence_by_ids(protein_output,
+                                                     "%s.longest_pep.ids" % supported_by_hints_file,
+                                                     "%s.longest_pep.pep" % supported_by_hints_file)
+
     @staticmethod
     def extract_longest_isoforms(evidence_file, filtered_evidence_file, minimum_supported_fraction=0):
         longest_id_file = "%s.ids" % filtered_evidence_file
@@ -246,7 +256,6 @@ class AUGUSTUS(Tool):
                         prev_gene = gene
                         prev_transcript = transcript
                         prev_pep_len = pep_len
-
 
     @staticmethod
     def extract_CDS_annotations_from_output(augustus_output, CDS_output):

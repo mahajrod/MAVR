@@ -11,7 +11,7 @@ import argparse
 
 from Bio import SeqIO
 
-from Routines.Sequence import record_by_id_generator
+from Routines import SequenceRoutines
 
 
 def get_list_from_string(s):
@@ -45,10 +45,18 @@ left_input_set = set(left_input_reads_dict.keys())
 right_input_set = set(right_input_reads_dict.keys())
 
 
-SeqIO.write(record_by_id_generator(left_input_reads_dict, sorted(left_input_set & right_input_set)), out_left, "fastq")
-SeqIO.write(record_by_id_generator(right_input_reads_dict, sorted(left_input_set & right_input_set)), out_right, "fastq")
-SeqIO.write(record_by_id_generator(left_input_reads_dict, left_input_set - right_input_set), out_left_se, "fastq")
-SeqIO.write(record_by_id_generator(right_input_reads_dict, right_input_set - left_input_set), out_right_se, "fastq")
+SeqIO.write(SequenceRoutines.record_by_id_generator(left_input_reads_dict,
+                                                    sorted(left_input_set & right_input_set),
+                                                    verbose=True), out_left, "fastq")
+SeqIO.write(SequenceRoutines.record_by_id_generator(right_input_reads_dict,
+                                                    sorted(left_input_set & right_input_set),
+                                                    verbose=True), out_right, "fastq")
+SeqIO.write(SequenceRoutines.record_by_id_generator(left_input_reads_dict,
+                                                    left_input_set - right_input_set,
+                                                    verbose=True), out_left_se, "fastq")
+SeqIO.write(SequenceRoutines.record_by_id_generator(right_input_reads_dict,
+                                                    right_input_set - left_input_set,
+                                                    verbose=True), out_right_se, "fastq")
 out_left_fd.close()
 out_right_fd.close()
 out_left_se_fd.close()

@@ -11,7 +11,7 @@ from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
 
-from CustomCollections.GeneralCollections import TwoLvlDict, SynDict
+from CustomCollections.GeneralCollections import TwoLvlDict, SynDict, IdList
 from Routines.Functions import output_dict
 
 
@@ -42,6 +42,41 @@ class SequenceRoutines():
 
         os.remove("tmp.idx")
         return lengths_dict
+
+    @staticmethod
+    def record_by_id_generator(record_dict, id_list, verbose=False):
+        for record_id in id_list:
+            if record_id in record_dict:
+                yield record_dict[record_id]
+            else:
+                if verbose:
+                    sys.stderr.write("Not found: %s\n" % record_id)
+
+    def extract_sequence_by_ids(self, sequence_file, id_file, output_file, format="fasta", verbose=False):
+        tmp_index_file = "tmp.idx"
+        id_list = IdList()
+        id_list.read(id_file)
+        if verbose:
+            print("Parsing %s..." % (sequence_file if isinstance(id_file, str) else ",".join(id_file)))
+
+        sequence_dict = SeqIO.index_db(tmp_index_file, id_file, format=format)
+        SeqIO.write(self.record_by_id_generator(sequence_dict, id_list, verbose=verbose),
+                    output_file, format=format)
+        os.remove(tmp_index_file)
+
+    @staticmethod
+    def find_gaps(record_dict):
+        gap_reg_exp = re.compile("N+", re.IGNORECASE)
+        gaps_dict = {}
+        for region in record_dict:
+            gaps_dict[region] = SeqRecord(seq=record_dict[region].seq,
+                                          id=record_dict[region].id,
+                                          description=record_dict[region].description)
+            gaps = gap_reg_exp.finditer(str(record_dict[region].seq))  # iterator with
+            for match in gaps:
+                gaps_dict[region].features.append(SeqFeature(FeatureLocation(match.start(), match.end()),
+                                                  type="gap", strand=None))
+        return gaps_dict
 
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
@@ -236,6 +271,8 @@ def find_gaps(record_dict):
                                               type="gap", strand=None))
     return gaps_dict
 
+# legacy function, moved to class SequenceRoutines as method, possibly all usages were changed
+"""
 
 def record_by_id_generator(record_dict, id_list):
     for record_id in id_list:
@@ -243,7 +280,7 @@ def record_by_id_generator(record_dict, id_list):
             yield record_dict[record_id]
         else:
             sys.stderr.write("Not found: %s\n" % record_id)
-
+"""
 
 def record_by_expression_generator(record_dict, expression=None, id_file="passed_records.ids"):
     """
