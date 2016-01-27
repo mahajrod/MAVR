@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 
-from Routines import FileRoutines, SequenceRoutines
+from Routines import FileRoutines, SequenceRoutines, MatplotlibRoutines
 
 from Tools.Abstract import Tool
 from Tools.LinuxTools import CGAS
@@ -217,6 +217,24 @@ class AUGUSTUS(Tool):
             SequenceRoutines.extract_sequence_by_ids(protein_output,
                                                      "%s.longest_pep.ids" % supported_by_hints_file,
                                                      "%s.longest_pep.pep" % supported_by_hints_file)
+            MatplotlibRoutines.percent_histogram_from_file("%s.longest_pep" % evidence_stats_file,
+                                                           "%s.longest_pep" % evidence_stats_file,
+                                                           column_list=2, separator=None,
+                                                           comments="#", n_bins=20,
+                                                           title="Transcript support by hints",
+                                                           xlabel="%%", ylabel="Number",
+                                                           extensions=["svg", "png"],
+                                                           legend_location="upper center",
+                                                           stats_as_legend=True)
+
+        MatplotlibRoutines.percent_histogram_from_file(evidence_stats_file, evidence_stats_file,
+                                                       column_list=2, separator=None,
+                                                       comments="#", n_bins=20,
+                                                       title="Transcript support by hints",
+                                                       xlabel="%%", ylabel="Number",
+                                                       extensions=["svg", "png"],
+                                                       legend_location="upper center",
+                                                       stats_as_legend=True)
 
     @staticmethod
     def extract_longest_isoforms(evidence_file, filtered_evidence_file, minimum_supported_fraction=0):
