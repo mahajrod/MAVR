@@ -207,7 +207,8 @@ class AUGUSTUS(Tool):
         if evidence_stats_file:
             ev_fd.close()
 
-        #self.extract_longest_isoforms(evidence_stats_file, "%s.longest_pep" % evidence_stats_file)
+        self.extract_longest_isoforms(evidence_stats_file, "%s.longest_pep" % evidence_stats_file,
+                                      minimum_supported_fraction=0)
         SequenceRoutines.extract_sequence_by_ids(protein_output,
                                                  "%s.longest_pep.ids" % evidence_stats_file,
                                                  "%s.longest_pep.pep" % evidence_stats_file)
@@ -222,7 +223,7 @@ class AUGUSTUS(Tool):
                                                      supported_by_hints_longest_pep)
             MatplotlibRoutines.percent_histogram_from_file("%s.longest_pep" % evidence_stats_file,
                                                            "%s.longest_pep" % evidence_stats_file,
-                                                           column_list=2, separator=None,
+                                                           column_list=(2), separator=None,
                                                            comments="#", n_bins=20,
                                                            title="Transcript support by hints",
                                                            xlabel="%%", ylabel="Number",
@@ -231,7 +232,7 @@ class AUGUSTUS(Tool):
                                                            stats_as_legend=True)
 
         MatplotlibRoutines.percent_histogram_from_file(evidence_stats_file, evidence_stats_file,
-                                                       column_list=2, separator=None,
+                                                       column_list=(2), separator=None,
                                                        comments="#", n_bins=20,
                                                        title="Transcript support by hints",
                                                        xlabel="%%", ylabel="Number",
@@ -240,7 +241,7 @@ class AUGUSTUS(Tool):
                                                        stats_as_legend=True)
 
     @staticmethod
-    def extract_longest_isoforms(evidence_file, filtered_evidence_file, minimum_supported_fraction=0):
+    def extract_longest_isoforms(evidence_file, filtered_evidence_file, minimum_supported_fraction=0.000001):
         longest_id_file = "%s.ids" % filtered_evidence_file
         ev_fd = open(evidence_file, "r")
         with open(longest_id_file, "w") as id_fd:
