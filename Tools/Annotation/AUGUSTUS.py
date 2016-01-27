@@ -246,7 +246,7 @@ class AUGUSTUS(Tool):
                     for line in ev_fd:
                         prev_line = line
                         line_list = prev_line.strip().split("\t")
-                        if line_list[2] < minimum_supported_fraction:
+                        if float(line_list[2]) < minimum_supported_fraction:
                             continue
                         prev_gene = line_list[0]
                         prev_transcript = line_list[1]
@@ -256,9 +256,13 @@ class AUGUSTUS(Tool):
 
                     for line in ev_fd:
                         line_list = line.strip().split("\t")
-                        print line_list
-                        if line_list[2] < minimum_supported_fraction:
-                            continue
+                        try:
+                            if float(line_list[2]) < minimum_supported_fraction:
+                                continue
+                        except:
+                            print evidence_file
+                            print line
+                            print line_list
                         gene = line_list[0]
                         transcript = line_list[1]
                         pep_len = line_list[-1]
