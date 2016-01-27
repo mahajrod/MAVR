@@ -242,8 +242,8 @@ class AUGUSTUS(Tool):
     @staticmethod
     def extract_longest_isoforms(evidence_file, filtered_evidence_file, minimum_supported_fraction=0):
         longest_id_file = "%s.ids" % filtered_evidence_file
-        with open(evidence_file, "r") as ev_fd:
-            with open(longest_id_file, "w") as id_fd:
+        ev_fd = open(evidence_file, "r")
+        with open(longest_id_file, "w") as id_fd:
                 with open(filtered_evidence_file, "w") as filtered_ev_fd:
                     filtered_ev_fd.write(ev_fd.readline())
                     for line in ev_fd:
@@ -282,6 +282,7 @@ class AUGUSTUS(Tool):
                         prev_gene = gene
                         prev_transcript = transcript
                         prev_pep_len = pep_len
+        ev_fd.close()
 
     @staticmethod
     def extract_CDS_annotations_from_output(augustus_output, CDS_output):
