@@ -262,11 +262,7 @@ class AUGUSTUS(Tool):
                     for line in ev_fd:
 
                         line_list = line.strip().split("\t")
-                        try:
-                            if float(line_list[2]) < minimum_supported_fraction:
-                                continue
-                        except:
-                            print line
+                        if float(line_list[2]) < minimum_supported_fraction:
                             continue
                         gene = line_list[0]
                         transcript = line_list[1]

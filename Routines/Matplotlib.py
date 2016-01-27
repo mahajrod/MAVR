@@ -95,6 +95,7 @@ class MatplotlibRoutines:
                                     comments="#", n_bins=20, title="", xlabel="%", ylabel="Number",
                                     extensions=("jpg", "png", "svg"), legend=None, legend_location="best",
                                     stats_as_legend=False):
+        print column_list
         data = np.loadtxt(data_file, dtype=data_type, comments=comments, delimiter=separator, usecols=column_list)
         n_bins = np.linspace(0, 100, n_bins+1)
         legenda = "Total: %i\nMean: %.1f %%\nMedian: %.1f %%" % (len(data), np.mean(data), np.median(data)) if stats_as_legend else legend
