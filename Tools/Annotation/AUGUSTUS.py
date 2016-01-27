@@ -209,6 +209,37 @@ class AUGUSTUS(Tool):
             ev_fd.close()
 
     @staticmethod
+    def extract_longest_isoforms(evidence_file, filtered_evidence_file, minimum_supported_fraction=0):
+        with open(evidence_file, "r") as ev_fd:
+            with open(filtered_evidence_file, "w") as filtered_ev_fd:
+                filtered_ev_fd.write(ev_fd.readline())
+                for line in ev_fd:
+                    prev_line = line
+                    line_list = prev_line.strip().split("\t")
+                    if line_list[2] < minimum_supported_fraction:
+                        continue
+                    prev_gene = prev_line[0]
+                    prev_pep_len = prev_line[-1]
+                    break
+
+                for line in ev_fd:
+                    line_list = line.strip().split("\t")
+                    if line_list[2] < minimum_supported_fraction:
+                        continue
+                    gene = line_list[0]
+                    pep_len = line_list[-1]
+                    if gene == prev_gene:
+                        if pep_len > prev_pep_len:
+                            prev_line = line
+                            prev_gene = gene
+                            prev_pep_len = pep_len
+                        continue
+                    filtered_ev_fd.write(prev_line)
+                    prev_line = line
+                    prev_gene = gene
+                    prev_pep_len = pep_len
+
+    @staticmethod
     def extract_CDS_annotations_from_output(augustus_output, CDS_output):
         CGAS.grep("'\\tCDS\\t'", augustus_output, output=CDS_output, use_regexp=True)
 
