@@ -217,7 +217,8 @@ class AUGUSTUS(Tool):
             supported_by_hints_longest_pep_evidence = "%s.longest_pep" % supported_by_hints_file
             supported_by_hints_longest_pep = "%s.longest_pep.pep" % supported_by_hints_file
             supported_by_hints_longest_pep_ids = "%s.longest_pep.ids" % supported_by_hints_file
-            self.extract_longest_isoforms(supported_by_hints_file, supported_by_hints_longest_pep_evidence)
+            self.extract_longest_isoforms(evidence_stats_file, supported_by_hints_longest_pep_evidence,
+                                          minimum_supported_fraction=0.00001)
             SequenceRoutines.extract_sequence_by_ids(protein_output,
                                                      supported_by_hints_longest_pep_ids,
                                                      supported_by_hints_longest_pep)
@@ -241,7 +242,7 @@ class AUGUSTUS(Tool):
                                                        stats_as_legend=True)
 
     @staticmethod
-    def extract_longest_isoforms(evidence_file, filtered_evidence_file, minimum_supported_fraction=0.000001):
+    def extract_longest_isoforms(evidence_file, filtered_evidence_file, minimum_supported_fraction=0):
         longest_id_file = "%s.ids" % filtered_evidence_file
         ev_fd = open(evidence_file, "r")
         with open(longest_id_file, "w") as id_fd:
