@@ -207,7 +207,7 @@ class AUGUSTUS(Tool):
         if evidence_stats_file:
             ev_fd.close()
 
-        self.extract_longest_isoforms(evidence_stats_file, "%s.longest_pep" % evidence_stats_file)
+        #self.extract_longest_isoforms(evidence_stats_file, "%s.longest_pep" % evidence_stats_file)
         SequenceRoutines.extract_sequence_by_ids(protein_output,
                                                  "%s.longest_pep.ids" % evidence_stats_file,
                                                  "%s.longest_pep.pep" % evidence_stats_file)
