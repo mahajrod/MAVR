@@ -227,6 +227,7 @@ class AUGUSTUS(Tool):
                           supported_by_hints_file) if supported_by_hints_file else \
                           (evidence_stats_file,)
         for evidence_file in evidence_files:
+            print ("Drawing transcript support distribution for %s" % evidence_file)
             MatplotlibRoutines.percent_histogram_from_file(evidence_file,
                                                            evidence_file,
                                                            column_list=(2,), separator=None,
