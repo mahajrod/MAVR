@@ -224,7 +224,7 @@ class AUGUSTUS(Tool):
                                                      supported_by_hints_longest_pep)
             MatplotlibRoutines.percent_histogram_from_file("%s.longest_pep" % evidence_stats_file,
                                                            "%s.longest_pep" % evidence_stats_file,
-                                                           column_list=(2), separator=None,
+                                                           column_list=(2,), separator=None,
                                                            comments="#", n_bins=20,
                                                            title="Transcript support by hints",
                                                            xlabel="%%", ylabel="Number",
@@ -233,7 +233,7 @@ class AUGUSTUS(Tool):
                                                            stats_as_legend=True)
 
         MatplotlibRoutines.percent_histogram_from_file(evidence_stats_file, evidence_stats_file,
-                                                       column_list=(2), separator=None,
+                                                       column_list=(2,), separator=None,
                                                        comments="#", n_bins=20,
                                                        title="Transcript support by hints",
                                                        xlabel="%%", ylabel="Number",
