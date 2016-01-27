@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" afterPath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" afterPath="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Matplotlib.py" afterPath="$PROJECT_DIR$/Routines/Matplotlib.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" afterPath="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -46,7 +44,7 @@
         <entry file="file://$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="265" column="36" selection-start-line="265" selection-start-column="36" selection-end-line="265" selection-end-column="36" />
+              <caret line="235" column="85" selection-start-line="235" selection-start-column="85" selection-end-line="235" selection-end-column="85" />
               <folding>
                 <element signature="e#22#31#0" expanded="true" />
                 <element signature="e#593#4528#0" expanded="false" />
@@ -59,20 +57,8 @@
         <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_augustus.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="161" column="0" selection-start-line="161" selection-start-column="0" selection-end-line="161" selection-end-column="0" />
+              <caret line="174" column="66" selection-start-line="174" selection-start-column="66" selection-end-line="174" selection-end-column="66" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="extract_proteins_from_augustus_output.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/annotation/extract_proteins_from_augustus_output.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="14" column="74" selection-start-line="14" selection-start-column="74" selection-end-line="14" selection-end-column="74" />
-              <folding>
-                <element signature="e#55#70#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -128,8 +114,8 @@
       <file leaf-file-name="Matplotlib.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Routines/Matplotlib.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6152019">
-              <caret line="91" column="55" selection-start-line="91" selection-start-column="55" selection-end-line="91" selection-end-column="55" />
+            <state vertical-scroll-proportion="0.7434679">
+              <caret line="97" column="9" selection-start-line="97" selection-start-column="9" selection-end-line="97" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -195,13 +181,13 @@
         <option value="$PROJECT_DIR$/scripts/sequence/find_gaps.py" />
         <option value="$PROJECT_DIR$/Tools/Abstract.py" />
         <option value="$PROJECT_DIR$/scripts/chemidoc/convert_scn_to_tiff.py" />
-        <option value="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" />
         <option value="$PROJECT_DIR$/Routines/File.py" />
         <option value="$PROJECT_DIR$/Routines/__init__.py" />
         <option value="$PROJECT_DIR$/Routines/Sequence.py" />
         <option value="$PROJECT_DIR$/Routines/TreeFam.py" />
-        <option value="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" />
+        <option value="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" />
         <option value="$PROJECT_DIR$/Routines/Matplotlib.py" />
+        <option value="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" />
       </list>
     </option>
   </component>
@@ -213,8 +199,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="191" />
-    <option name="y" value="81" />
+    <option name="x" value="51" />
+    <option name="y" value="43" />
     <option name="width" value="1917" />
     <option name="height" value="985" />
   </component>
@@ -1023,24 +1009,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00249" summary="added paralleled exonerate&#10;">
-      <created>1453291116338</created>
-      <option name="number" value="00249" />
-      <option name="project" value="LOCAL" />
-      <updated>1453291116338</updated>
-    </task>
-    <task id="LOCAL-00250" summary="added paralleled exonerate&#10;">
-      <created>1453291985410</created>
-      <option name="number" value="00250" />
-      <option name="project" value="LOCAL" />
-      <updated>1453291985411</updated>
-    </task>
-    <task id="LOCAL-00251" summary="added paralleled exonerate&#10;">
-      <created>1453292142266</created>
-      <option name="number" value="00251" />
-      <option name="project" value="LOCAL" />
-      <updated>1453292142266</updated>
-    </task>
     <task id="LOCAL-00252" summary="added paralleled exonerate&#10;">
       <created>1453391209492</created>
       <option name="number" value="00252" />
@@ -1317,11 +1285,29 @@
       <option name="project" value="LOCAL" />
       <updated>1453865374552</updated>
     </task>
-    <option name="localTasksCounter" value="298" />
+    <task id="LOCAL-00298" summary="augustus tools&#10;">
+      <created>1453865609615</created>
+      <option name="number" value="00298" />
+      <option name="project" value="LOCAL" />
+      <updated>1453865609615</updated>
+    </task>
+    <task id="LOCAL-00299" summary="augustus tools&#10;">
+      <created>1453865703322</created>
+      <option name="number" value="00299" />
+      <option name="project" value="LOCAL" />
+      <updated>1453865703322</updated>
+    </task>
+    <task id="LOCAL-00300" summary="augustus tools&#10;">
+      <created>1453866528499</created>
+      <option name="number" value="00300" />
+      <option name="project" value="LOCAL" />
+      <updated>1453866528499</updated>
+    </task>
+    <option name="localTasksCounter" value="301" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="191" y="81" width="1917" height="985" extended-state="0" />
+    <frame x="51" y="43" width="1917" height="985" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1751,6 +1737,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/TreeFam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="93" selection-start-line="24" selection-start-column="93" selection-end-line="24" selection-end-column="93" />
+          <folding>
+            <element signature="e#22#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/annotation/extract_longest_isoforms_from_evidence_file.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="36" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1765,35 +1769,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/TreeFam.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="93" selection-start-line="24" selection-start-column="93" selection-end-line="24" selection-end-column="93" />
-          <folding>
-            <element signature="e#22#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_augustus.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="161" column="0" selection-start-line="161" selection-start-column="0" selection-end-line="161" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/annotation/extract_longest_isoforms_from_evidence_file.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="36" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/annotation/extract_proteins_from_augustus_output.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.2992874">
           <caret line="14" column="74" selection-start-line="14" selection-start-column="74" selection-end-line="14" selection-end-column="74" />
           <folding>
             <element signature="e#55#70#0" expanded="true" />
@@ -1804,7 +1782,7 @@
     <entry file="file://$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="265" column="36" selection-start-line="265" selection-start-column="36" selection-end-line="265" selection-end-column="36" />
+          <caret line="235" column="85" selection-start-line="235" selection-start-column="85" selection-end-line="235" selection-end-column="85" />
           <folding>
             <element signature="e#22#31#0" expanded="true" />
             <element signature="e#593#4528#0" expanded="false" />
@@ -1812,10 +1790,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_augustus.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="174" column="66" selection-start-line="174" selection-start-column="66" selection-end-line="174" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Matplotlib.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6152019">
-          <caret line="91" column="55" selection-start-line="91" selection-start-column="55" selection-end-line="91" selection-end-column="55" />
+        <state vertical-scroll-proportion="0.7434679">
+          <caret line="97" column="9" selection-start-line="97" selection-start-column="9" selection-end-line="97" selection-end-column="9" />
           <folding />
         </state>
       </provider>

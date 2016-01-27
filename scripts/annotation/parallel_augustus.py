@@ -172,7 +172,7 @@ AUGUSTUS.extract_CDS_annotations_from_output(final_gff, final_CDS_gff)
 
 for stat_file in output_evidence_stats, output_supported_stats:
     MatplotlibRoutines.percent_histogram_from_file(stat_file, stat_file, data_type=None,
-                                                   column_list=(2),
+                                                   column_list=(2,),
                                                    comments="#", n_bins=20,
                                                    title="Transcript support by hints",
                                                    extensions=("png", "svg"),
