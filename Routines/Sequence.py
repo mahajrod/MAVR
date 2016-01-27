@@ -17,6 +17,9 @@ from Routines.Functions import output_dict
 
 class SequenceRoutines():
 
+    def __init__(self):
+        pass
+
     @staticmethod
     def get_lengths(record_dict, out_file=None, close_after_if_file_object=False):
         lengths_dict = SynDict()
