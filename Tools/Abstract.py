@@ -218,8 +218,8 @@ class Tool():
             final_set = IdSet(expression(a, b))
             final_set.write(result_fd)
         else:
-            result_fd.write("Group_A\t%i\nGroup_B\t%i\nCommon\t%i\nOnly_group_A\t%i\nOnly_group_B\t%i\nNot_common\t%i\nAll\t%i\n") % \
-            (len(a), len(b), len(a & b), len(a - b), len(b - a), len(a ^ b), len(a | b))
+            result_fd.write("Group_A\t%i\nGroup_B\t%i\nCommon\t%i\nOnly_group_A\t%i\nOnly_group_B\t%i\nNot_common\t%i\nAll\t%i\n" %
+                            (len(a), len(b), len(a & b), len(a - b), len(b - a), len(a ^ b), len(a | b)))
 
     @staticmethod
     def intersect_ids(list_of_group_a, list_of_group_b, mode="common"):
