@@ -26,7 +26,7 @@ args = parser.parse_args()
 #white_lists = []
 #black_lists = []
 
-Tool.intersect_ids_from_files(args.white_list, args.black_list, args.output, mode=args.mode)
+Tool.intersect_ids_from_files(args.group_a_list, args.group_b_list, args.output, mode=args.mode)
 
 """
 white_set = IdSet()
