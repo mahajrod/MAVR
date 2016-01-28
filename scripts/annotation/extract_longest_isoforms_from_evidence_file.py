@@ -10,7 +10,7 @@ parser.add_argument("-i", "--input", action="store", dest="input", required=True
                     help="Input evidence file")
 parser.add_argument("-o", "--output", action="store", dest="output", required=True,
                     help="File to write filtered evidence file")
-parser.add_argument("-m", "--min_fraction", action="store", dest="min_fraction", default=0, type=int,
+parser.add_argument("-m", "--min_fraction", action="store", dest="min_fraction", default=0, type=float,
                     help="Minimum fraction of transcript supported by hints")
 
 args = parser.parse_args()
