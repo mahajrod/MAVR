@@ -184,3 +184,11 @@ for stat_file in output_evidence_stats, output_supported_stats:
 
 #AUGUSTUS.extract_longest_isoforms(output_supported_stats, output_supported_stats_longest_pep)
 #AUGUSTUS.extract_longest_isoforms(output_evidence_stats, output_evidence_stats_longest_pep)
+
+"""
+~/Soft/MAVR/scripts/annotation/extract_evidence_by_ids.py -i augustus_nerpa_human_ferret.transcript.evidence -d augustus_nerpa_human_ferret.supported.transcripts.swissprot_or_pfam_and_by_hints.ids -o augustus_nerpa_human_ferret.supported.transcripts.swissprot_or_pfam_and_by_hints.evidence
+
+~/Soft/MAVR/scripts/annotation/extract_longest_isoforms_from_evidence_file.py -i augustus_nerpa_human_ferret.supported.transcripts.swissprot_or_pfam_and_by_hints.evidence -m 0 -o augustus_nerpa_human_ferret.supported.transcripts.swissprot_or_pfam_and_by_hints.longest_isoform.evidence
+
+~/Soft/MAVR/scripts/sequence/extract_sequences_by_ids.py -d augustus_nerpa_human_ferret.supported.transcripts.swissprot_or_pfam_and_by_hints.longest_isoform.evidence.ids -i augustus_nerpa_human_ferret.pep -o augustus_nerpa_human_ferret.supported.transcripts.swissprot_or_pfam_and_by_hints.longest_isoform.evidence.pep
+"""
