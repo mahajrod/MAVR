@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/annotation/extract_evidence_by_ids.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" afterPath="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" afterPath="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/extract_evidence_by_ids.py" afterPath="$PROJECT_DIR$/scripts/annotation/extract_evidence_by_ids.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence/extract_sequences_by_ids.py" afterPath="$PROJECT_DIR$/scripts/sequence/extract_sequences_by_ids.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -75,11 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="extract_evidence_by_ids.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="extract_evidence_by_ids.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/annotation/extract_evidence_by_ids.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3206651">
-              <caret line="15" column="86" selection-start-line="15" selection-start-column="86" selection-end-line="15" selection-end-column="86" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="14" column="52" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
               <folding>
                 <element signature="e#54#69#0" expanded="true" />
               </folding>
@@ -91,8 +90,20 @@
         <entry file="file://$PROJECT_DIR$/scripts/annotation/extract_longest_isoforms_from_evidence_file.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="36" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="61" />
+              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="extract_sequences_by_ids.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/sequence/extract_sequences_by_ids.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.34204274">
+              <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+              <folding>
+                <element signature="e#54#69#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -115,16 +126,6 @@
               <folding>
                 <element signature="e#22#31#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GeneralCollections.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CustomCollections/GeneralCollections.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -188,8 +189,6 @@
         <option value="$PROJECT_DIR$/scripts/filter/merge_and_check_reads.py" />
         <option value="$PROJECT_DIR$/scripts/annotation/extract_proteins_from_augustus_output.py" />
         <option value="$PROJECT_DIR$/scripts/draw/draw_percent_histogram.py" />
-        <option value="$PROJECT_DIR$/scripts/annotation/extract_longest_isoforms_from_evidence_file.py" />
-        <option value="$PROJECT_DIR$/scripts/sequence/extract_sequences_by_ids.py" />
         <option value="$PROJECT_DIR$/scripts/blast/parallel_blast_commands.py" />
         <option value="$PROJECT_DIR$/scripts/filter/restore_pairs.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/check_selenocystein_presence.py" />
@@ -206,6 +205,8 @@
         <option value="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" />
         <option value="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" />
         <option value="$PROJECT_DIR$/scripts/annotation/extract_evidence_by_ids.py" />
+        <option value="$PROJECT_DIR$/scripts/annotation/extract_longest_isoforms_from_evidence_file.py" />
+        <option value="$PROJECT_DIR$/scripts/sequence/extract_sequences_by_ids.py" />
       </list>
     </option>
   </component>
@@ -1033,18 +1034,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00264" summary="added paralleled exonerate&#10;">
-      <created>1453729150766</created>
-      <option name="number" value="00264" />
-      <option name="project" value="LOCAL" />
-      <updated>1453729150766</updated>
-    </task>
-    <task id="LOCAL-00265" summary="added paralleled exonerate&#10;">
-      <created>1453729553489</created>
-      <option name="number" value="00265" />
-      <option name="project" value="LOCAL" />
-      <updated>1453729553489</updated>
-    </task>
     <task id="LOCAL-00266" summary="added paralleled exonerate&#10;">
       <created>1453847304619</created>
       <option name="number" value="00266" />
@@ -1327,7 +1316,19 @@
       <option name="project" value="LOCAL" />
       <updated>1453941740659</updated>
     </task>
-    <option name="localTasksCounter" value="313" />
+    <task id="LOCAL-00313" summary="augustus tools&#10;">
+      <created>1453955603476</created>
+      <option name="number" value="00313" />
+      <option name="project" value="LOCAL" />
+      <updated>1453955603476</updated>
+    </task>
+    <task id="LOCAL-00314" summary="augustus tools&#10;">
+      <created>1453956463264</created>
+      <option name="number" value="00314" />
+      <option name="project" value="LOCAL" />
+      <updated>1453956463264</updated>
+    </task>
+    <option name="localTasksCounter" value="315" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1655,13 +1656,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/sequence/extract_sequences_by_ids.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="54" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="113" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Routines/File.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1723,14 +1717,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/annotation/extract_longest_isoforms_from_evidence_file.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="36" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="61" />
           <folding />
         </state>
       </provider>
@@ -1799,8 +1785,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/annotation/extract_evidence_by_ids.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3206651">
-          <caret line="15" column="86" selection-start-line="15" selection-start-column="86" selection-end-line="15" selection-end-column="86" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="52" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
+          <folding>
+            <element signature="e#54#69#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/annotation/extract_longest_isoforms_from_evidence_file.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence/extract_sequences_by_ids.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34204274">
+          <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
           <folding>
             <element signature="e#54#69#0" expanded="true" />
           </folding>

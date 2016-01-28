@@ -3,7 +3,7 @@ __author__ = 'Sergei F. Kliver'
 import argparse
 
 from Routines.File import make_list_of_path_to_files
-from Routines.Sequence import SequenceRoutines
+from Routines import SequenceRoutines
 
 
 parser = argparse.ArgumentParser()

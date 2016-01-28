@@ -14,7 +14,7 @@ parser.add_argument("-o", "--output", action="store", dest="output", required=Tr
 parser.add_argument("-d", "--id_file", action="store", dest="id_file", required=True,
                     help="File with ids to extract")
 parser.add_argument("-m", "--mode", action="store", dest="mode", default="transcript",
-                    help="Prefix of output files")
+                    help="Prefix of output files. Default - transcript")
 args = parser.parse_args()
 
 AUGUSTUS.extract_evidence_by_ids(args.input, args.id_file, args.output, mode=args.mode)
