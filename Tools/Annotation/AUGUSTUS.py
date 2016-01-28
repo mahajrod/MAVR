@@ -2,6 +2,7 @@
 import os
 
 from Routines import FileRoutines, SequenceRoutines, MatplotlibRoutines
+from CustomCollections.GeneralCollections import IdList
 
 from Tools.Abstract import Tool
 from Tools.LinuxTools import CGAS
@@ -239,7 +240,24 @@ class AUGUSTUS(Tool):
                                                            legend_location="upper center",
                                                            stats_as_legend=True)
 
+    @staticmethod
+    def extract_evidence_by_ids(evidence_file, id_file, output_evidence_file, mode="transcript"):
+        # possible modes: transcript, gene
+        ids = IdList()
+        ids.read(id_file, comments_prefix="#")
 
+        column_id = 0 if mode == "gene" else 1
+
+        with open(evidence_file, "r") as ev_fd:
+            with open(output_evidence_file, "w") as out_fd:
+                for line in ev_fd:
+                    if line[0] == "#":
+                        out_fd.write(line)
+                        continue
+
+                    entry_id = line.split("\t")[column_id]
+                    if entry_id in ids:
+                        out_fd.write(line)
 
     @staticmethod
     def extract_longest_isoforms(evidence_file, filtered_evidence_file, minimum_supported_fraction=0):

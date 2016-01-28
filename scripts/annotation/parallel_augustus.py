@@ -79,6 +79,7 @@ output_swissprot_supported_transcripts_ids = "%s.supported.transcripts.swissprot
 output_swissprot_supported_genes_ids = "%s.supported.genes.swissprot.ids" % args.output
 output_swissprot_blastp_hits_names = "%s.swissprot.hits.names" % args.output
 
+output_swissprot_pfam_supported_transcripts_ids = "%s.supported.transcripts.swissprot_or_pfam.ids" % args.output
 
 CDS_gff = "%s.CDS.gff" % args.output
 CDS_masked_gff = "%s.CDS.masked.gff" % args.output
@@ -153,6 +154,8 @@ gene_ids_black_list = [genes_masked_ids] if args.masking else []
 gene_ids_white_list = []
 if args.pfam_db and args.swissprot_db:
     gene_ids_white_list = [output_pfam_supported_genes_ids, output_swissprot_supported_genes_ids]
+    HMMER3.intersect_ids_from_files(output_swissprot_supported_transcripts_ids, output_pfam_supported_transcripts_ids,
+                                    output_swissprot_pfam_supported_transcripts_ids, mode="combine")
 elif args.pfam_db:
     gene_ids_white_list = [output_pfam_supported_genes_ids]
 elif args.swissprot_db:
