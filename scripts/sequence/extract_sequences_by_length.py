@@ -5,9 +5,8 @@ import sys
 import argparse
 from Bio import SeqIO
 
-from Routines.Sequence import record_by_id_generator, record_by_expression_generator
-from Routines.Sequence import filter_sequences
-
+#from Routines.Sequence import filter_sequences
+from Routines import SequenceRoutines
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_file", action="store", dest="input_file",
@@ -44,8 +43,8 @@ else:
 
 #id_list = filter_sequences(sequence_dict, expression)
 
-SeqIO.write(record_by_expression_generator(sequence_dict, expression=length_expression,
-                                           id_file=args.id_file),
+SeqIO.write(SequenceRoutines.record_by_expression_generator(sequence_dict, expression=length_expression,
+                                                            id_file=args.id_file),
             args.output_file, format=args.format)
 
 #SeqIO.write(record_by_id_generator(sequence_dict, id_list), args.output_file, format=args.format)

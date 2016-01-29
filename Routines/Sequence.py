@@ -81,6 +81,25 @@ class SequenceRoutines():
                                                   type="gap", strand=None))
         return gaps_dict
 
+    @staticmethod
+    def record_by_expression_generator(record_dict, expression=None, id_file="passed_records.ids"):
+        """
+        :param record_dict: dictionary containing Biopython SeqRecords as values
+        :param expression: function to apply to all records in record_dict. If it returns True record will be yielded
+        :param id_file: file to write ids of records passed expression
+        :return: None
+        """
+        id_fd = open(id_file, "w")
+        if expression is None:
+            for record_id in record_dict:
+                id_fd.write(record_id + "\n")
+                yield record_dict[record_id]
+        else:
+            for record_id in record_dict:
+                if expression(record_dict[record_id]):
+                    id_fd.write(record_id + "\n")
+                    yield record_dict[record_id]
+        id_fd.close()
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
     lengths_dict = OrderedDict({})
@@ -284,6 +303,7 @@ def record_by_id_generator(record_dict, id_list):
         else:
             sys.stderr.write("Not found: %s\n" % record_id)
 """
+
 
 def record_by_expression_generator(record_dict, expression=None, id_file="passed_records.ids"):
     """
