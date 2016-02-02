@@ -35,6 +35,8 @@ for id_entry in id_set:
         if args.verbose:
             print("%s was not found" % id_entry)
 
+extracted_dict.write(out_file, close_after_if_file_object=True)
+
 
 
 
