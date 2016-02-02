@@ -19,7 +19,7 @@ class TreeFamRoutines:
         from Routines import SequenceRoutines, FileRoutines
         fam_id_list = IdList()
         fam_dict = SynDict()
-
+        print(pep_file)
         FileRoutines.save_mkdir(output_dir)
         out_dir = FileRoutines.check_path(output_dir)
         create_directory_for_each_family = True if out_prefix else create_dir_for_each_family
