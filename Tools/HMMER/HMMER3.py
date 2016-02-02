@@ -250,7 +250,8 @@ class HMMER3(Tool):
                          turn_off_all_heruristics=False, turn_off_bias_filter=False,
                          MSV_threshold=None, Vit_threshold=None, Fwd_threshold=None,
                          turn_off_biased_composition_score_corrections=None,
-                         input_format=None, threads=None, combine_output_to_single_file=True
+                         input_format=None, threads=None, combine_output_to_single_file=True,
+                         biopython_165_compartibility=False
                          ):
 
         splited_dir = check_path(split_dir)
@@ -328,7 +329,10 @@ class HMMER3(Tool):
         self.parallel_execute(options_list, cmd="hmmscan", threads=threads)
 
         if combine_output_to_single_file:
-            CGAS.cat(out_files, output=outfile)
+            if biopython_165_compartibility:
+                CGAS.cgas(out_files, sed_string="s/^Description:.*/Description: <unknown description>/", output=outfile)
+            else:
+                CGAS.cat(out_files, output=outfile)
         if tblout_outfile:
             CGAS.cat(tblout_files, output=tblout_outfile)
         if domtblout_outfile:
