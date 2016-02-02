@@ -24,6 +24,8 @@ parser.add_argument("-s", "--suffix", action="store", dest="suffix", default=".g
                     help="Suffix to use in output files. Default: '.gaps_removed'")
 parser.add_argument("-f", "--format", action="store", dest="format", default="fasta",
                     help="Format of alignment")
+parser.add_argument("-v", "--verbose", action="store_true", dest="verbose",
+                    help="Print not found ids. Default - no")
 
 args = parser.parse_args()
 
@@ -31,7 +33,8 @@ save_mkdir(args.output)
 
 for alignment_file in args.input:
     splited_filename = split_filename(alignment_file)
-    print ("Handling %s ..." % alignment_file)
+    if args.verbose:
+        print ("Handling %s ..." % alignment_file)
     output_filename = "%s%s%s%s" % (args.output, splited_filename[1], args.suffix, splited_filename[2])
     alignment = AlignIO.read(alignment_file, args.format)
     filtered_alignment = MultipleAlignmentRoutines.remove_columns_with_gaps(alignment, args.max_gap_number,
