@@ -35,7 +35,7 @@ class TreeFamRoutines:
                     FileRoutines.save_mkdir(fam_dir)
                     out_file = "%s%s.pep" % (fam_dir, out_prefix if out_prefix else fam_id)
                 else:
-                    out_file = "%s.pep" % (out_prefix if out_prefix else fam_id)
+                    out_file = "%s/%s.pep" % (out_dir, out_prefix if out_prefix else fam_id)
 
                 SeqIO.write(SequenceRoutines.record_by_id_generator(protein_dict, fam_dict[fam_id], verbose=True),
                             out_file, format=pep_format)
