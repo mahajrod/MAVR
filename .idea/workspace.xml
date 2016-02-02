@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/multiple_alignment/merge_alignments.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Alignment.py" afterPath="$PROJECT_DIR$/Routines/Alignment.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/multiple_alignment/remove_columns_with_gaps.py" afterPath="$PROJECT_DIR$/scripts/multiple_alignment/remove_columns_with_gaps.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/multiple_alignment/merge_alignments.py" afterPath="$PROJECT_DIR$/scripts/multiple_alignment/merge_alignments.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/multiple_alignment/slice_multiple_alignment.py" afterPath="$PROJECT_DIR$/scripts/multiple_alignment/slice_multiple_alignment.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -66,8 +66,8 @@
       <file leaf-file-name="Alignment.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Routines/Alignment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.67933494">
-              <caret line="53" column="35" selection-start-line="53" selection-start-column="35" selection-end-line="53" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.18764846">
+              <caret line="50" column="9" selection-start-line="50" selection-start-column="9" selection-end-line="50" selection-end-column="9" />
               <folding>
                 <element signature="e#24#33#0" expanded="true" />
               </folding>
@@ -79,7 +79,7 @@
         <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/slice_multiple_alignment.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="0" column="21" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -89,7 +89,7 @@
         <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/merge_alignments.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+              <caret line="22" column="95" selection-start-line="22" selection-start-column="95" selection-end-line="22" selection-end-column="95" />
               <folding>
                 <element signature="e#55#70#0" expanded="true" />
               </folding>
@@ -145,7 +145,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/kmer/get_kmer_list.py" />
         <option value="$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution.py" />
         <option value="$PROJECT_DIR$/Tools/Filter/FastQC.py" />
         <option value="$PROJECT_DIR$/examples/desaminases/rainfall_one_chromosome.py" />
@@ -194,8 +193,9 @@
         <option value="$PROJECT_DIR$/scripts/treefam/extract_proteins_from_selected_families.py" />
         <option value="$PROJECT_DIR$/Routines/TreeFam.py" />
         <option value="$PROJECT_DIR$/scripts/multiple_alignment/remove_columns_with_gaps.py" />
-        <option value="$PROJECT_DIR$/Routines/Alignment.py" />
+        <option value="$PROJECT_DIR$/scripts/multiple_alignment/slice_multiple_alignment.py" />
         <option value="$PROJECT_DIR$/scripts/multiple_alignment/merge_alignments.py" />
+        <option value="$PROJECT_DIR$/Routines/Alignment.py" />
       </list>
     </option>
   </component>
@@ -1049,12 +1049,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00282" summary="augustus tools&#10;">
-      <created>1453856446516</created>
-      <option name="number" value="00282" />
-      <option name="project" value="LOCAL" />
-      <updated>1453856446516</updated>
-    </task>
     <task id="LOCAL-00283" summary="augustus tools&#10;">
       <created>1453861082940</created>
       <option name="number" value="00283" />
@@ -1343,7 +1337,13 @@
       <option name="project" value="LOCAL" />
       <updated>1454449340685</updated>
     </task>
-    <option name="localTasksCounter" value="331" />
+    <task id="LOCAL-00331" summary="augustus tools&#10;">
+      <created>1454452328320</created>
+      <option name="number" value="00331" />
+      <option name="project" value="LOCAL" />
+      <updated>1454452328320</updated>
+    </task>
+    <option name="localTasksCounter" value="332" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1356,7 +1356,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3000534" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3000534" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
@@ -1815,28 +1815,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/slice_multiple_alignment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="21" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/merge_alignments.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <caret line="22" column="95" selection-start-line="22" selection-start-column="95" selection-end-line="22" selection-end-column="95" />
           <folding>
             <element signature="e#55#70#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/slice_multiple_alignment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Alignment.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.67933494">
-          <caret line="53" column="35" selection-start-line="53" selection-start-column="35" selection-end-line="53" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.18764846">
+          <caret line="50" column="9" selection-start-line="50" selection-start-column="9" selection-end-line="50" selection-end-column="9" />
           <folding>
             <element signature="e#24#33#0" expanded="true" />
           </folding>

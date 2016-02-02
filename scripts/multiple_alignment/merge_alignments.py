@@ -13,9 +13,11 @@ parser.add_argument("-i", "--input", action="store", dest="input", required=True
                     help="Comma-separated list of files/directories with alignments")
 parser.add_argument("-o", "--output", action="store", dest="output", required=True,
                     help="File to write merged alignment")
-parser.add_argument("-c", "--coordinates_file", action="store", dest="coords_file",
+parser.add_argument("-c", "--coordinates_file", action="store", dest="coords_file", required=True,
                     help="File to write file with coordinates of alignments in merged alignment")
+parser.add_argument("-f", "--format", action="store", dest="format", default="fasta",
+                    help="Format of alignments")
 
 args = parser.parse_args()
 
-AlignmentRoutines.merge_alignment(args.input, args.output, args.coords_file)
+AlignmentRoutines.merge_alignment(args.input, args.output, args.coords_file, format=args.format)

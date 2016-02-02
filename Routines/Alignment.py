@@ -47,17 +47,17 @@ class AlignmentRoutines:
         os.remove("nuc_tmp.idx")
 
     @staticmethod
-    def merge_alignment(alignment_file_list, merged_alignment_file, coordinates_file):
-        print("Merging alignments...")
+    def merge_alignment(alignment_file_list, merged_alignment_file, coordinates_file, format="fasta"):
+        #print("Merging alignments...")
         alignment_list = []
         sequence_lengthes = []
         #print(alignment_file_list)
 
         alignment_file_list_sorted = sorted(alignment_file_list)
-        print(alignment_file_list_sorted)
+        #print(alignment_file_list_sorted)
         for alignment_file in alignment_file_list_sorted:
             #alignment_file.sort()
-            parsed = AlignIO.read(alignment_file)
+            parsed = AlignIO.read(alignment_file, format=format)
             parsed.sort()
             alignment_list.append(parsed)
         merged_alignment = None
