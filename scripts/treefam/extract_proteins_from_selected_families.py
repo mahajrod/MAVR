@@ -3,8 +3,7 @@ __author__ = 'Sergei F. Kliver'
 
 import argparse
 
-from Routines import TreeFamRoutines
-
+from Routines import TreeFamRoutines, FileRoutines
 
 parser = argparse.ArgumentParser()
 
@@ -13,7 +12,8 @@ parser.add_argument("-i", "--families_id_file", action="store", dest="fam_id_fil
 parser.add_argument("-f", "--families_file", action="store", dest="fam_file", required=True,
                     help="File with families")
 parser.add_argument("-p", "--pep_file", action="store", dest="pep_file", required=True,
-                    help="File with proteins")
+                    type=lambda s: FileRoutines.make_list_of_path_to_files(s.split(",")),
+                    help="List of comma-separated files/directories with proteins")
 parser.add_argument("-r", "--pep_file_format", action="store", dest="pep_file_format", default="fasta",
                     help="Format of file with proteins")
 parser.add_argument("-c", "--create_dir_for_each_family", action="store_true", dest="create_dir_for_each_family",
