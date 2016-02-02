@@ -13,8 +13,8 @@ parser.add_argument("-s", "--input_seq", action="store", dest="input_seq",
                     help="Input file with sequences")
 parser.add_argument("-o", "--output_file", action="store", dest="output",
                     help="Output file")
-parser.add_argument("-c", "--combine_output", action="store_true", dest="combine_output",
-                    help="Combine output files to single")
+#parser.add_argument("-c", "--combine_output", action="store_true", dest="combine_output",
+#                    help="Combine output files to single")
 parser.add_argument("--no_ali", action="store_true", dest="no_alignment",
                     help="Dont save alignments to minimize output")
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
@@ -34,7 +34,6 @@ parser.add_argument("-a", "--not_significant_ids_file", action="store", dest="no
 parser.add_argument("-f", "--fam_file", action="store", dest="fam_file",
                     default="proteins.fam",
                     help="File to write families of proteins")
-
 parser.add_argument("--tblout_dir", action="store", dest="tblout_dir",
                     default="tblout_dir", type=check_path,
                     help="Directory to write intermediate(splited) parseable table of per-sequence hits")
@@ -58,16 +57,17 @@ args = parser.parse_args()
 
 HMMER3.threads = 1
 HMMER3.path = args.path
-
+"""
 HMMER3.parallel_hmmscan(args.input, args.input_seq, args.output, num_of_seqs_per_scan=None, split_dir="splited_fasta",
                         splited_output_dir=args.hmmscan_output_dir, threads=args.threads,
-                        combine_output_to_single_file=args.combine_output, dont_output_alignments=args.no_alignment,
+                        combine_output_to_single_file=True, dont_output_alignments=args.no_alignment,
                         tblout_outfile=args.tblout, domtblout_outfile=args.domtblout,
                         pfamtblout_outfile=args.pfamtblout,
                         splited_tblout_dir=args.tblout_dir, splited_domtblout_dir=args.domtblout_dir,
-                        splited_pfamtblout_dir=args.pfamtblout_dir
+                        splited_pfamtblout_dir=args.pfamtblout_dir,
+                        biopython_165_compartibility=True
                         )
-
+"""
 HMMER3.extract_top_hits(args.output, args.top_hits_file, not_significant_ids_file=args.not_significant_file,
                         not_found_ids_file=args.not_found_file)
 HMMER3.get_families_from_top_hits(args.top_hits_file, args.fam_file)
