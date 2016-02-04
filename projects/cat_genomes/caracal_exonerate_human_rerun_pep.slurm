@@ -21,4 +21,4 @@ EXONERATE_OUTPUT_FILE="${EXONERATE_OUTPUT_DIR}/exonerate_human_pep_rerun_${SLURM
 
 
 exonerate  --model protein2genome --showalignment --showquerygff --showtargetgff \
-           -n 10 -q ${PEP_FILE} -t ${CARACAL_GENOME} > ${EXONERATE_OUTPUT_FILE}
+           -n 10 -q ${PEP_FILE} -t ${GENOME} > ${EXONERATE_OUTPUT_FILE}
