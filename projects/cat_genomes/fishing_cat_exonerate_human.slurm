@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#SBATCH --array=1-890%333
+#SBATCH --array=1-890%890
 #SBATCH --time=100:00:00         # Run time in hh:mm:ss
 #SBATCH --mem-per-cpu=4192       # Minimum memory required per CPU (in megabytes)
 #SBATCH --job-name=fcat_human
@@ -9,8 +9,8 @@
 module load exonerate/2.2
 source /work/pavlov/okochenova/profile
 
-SPLITED_PEP_DIR="/work/pavlov/okochenova/genomes/human/pep/human_ncbi_no_predicted/"
-PEP_FILE="${SPLITED_PEP_DIR}human.ncbi.no_predicted_${SLURM_ARRAY_TASK_ID}.fasta"
+SPLITED_PEP_DIR="/work/pavlov/okochenova/genomes/human/pep/homo_sapiens_no_selenocytein/"
+PEP_FILE="${SPLITED_PEP_DIR}homo_sapiens_no_selenocytein_pep_${SLURM_ARRAY_TASK_ID}.fasta"
 
 
 GENOME="/work/pavlov/okochenova/genomes/fishing_cat/final.assembly.fasta"
