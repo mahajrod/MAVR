@@ -204,12 +204,12 @@ class Tool():
             expression = lambda a, b: a | b
 
         print(files_with_ids_from_group_a)
-        for filename in files_with_ids_from_group_a:
+        for filename in [files_with_ids_from_group_a] if isinstance(files_with_ids_from_group_a, str) else files_with_ids_from_group_a:
             id_set = IdSet()
             id_set.read(filename, comments_prefix="#")
             a = a | id_set
 
-        for filename in files_with_ids_from_group_b:
+        for filename in [files_with_ids_from_group_b] if isinstance(files_with_ids_from_group_b, str) else files_with_ids_from_group_b:
             id_set = IdSet()
             id_set.read(filename, comments_prefix="#")
             b = b | id_set
