@@ -203,6 +203,7 @@ class Tool():
         elif mode == "combine":
             expression = lambda a, b: a | b
 
+        print(files_with_ids_from_group_a)
         for filename in files_with_ids_from_group_a:
             id_set = IdSet()
             id_set.read(filename, comments_prefix="#")
