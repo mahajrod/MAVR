@@ -95,7 +95,7 @@ AUGUSTUS.path = args.augustus_dir
 AUGUSTUS.threads = args.threads
 
 print("Annotating genes...")
-
+"""
 AUGUSTUS.parallel_predict(args.species, args.input, output_gff, strand=args.strand, gene_model=args.gene_model,
                           output_gff3=True, other_options=args.other_options, config_dir=args.config_dir,
                           use_softmasking=args.softmasking, hints_file=args.hintsfile,
@@ -149,7 +149,7 @@ if args.swissprot_db:
 
     for directory in ("splited_blastp_fasta", "splited_blastp_output_dir"):
         shutil.rmtree(directory)
-
+"""
 gene_ids_black_list = [genes_masked_ids] if args.masking else []
 gene_ids_white_list = []
 if args.pfam_db and args.swissprot_db:
@@ -186,9 +186,15 @@ for stat_file in output_evidence_stats, output_supported_stats:
 #AUGUSTUS.extract_longest_isoforms(output_evidence_stats, output_evidence_stats_longest_pep)
 
 """
-~/Soft/MAVR/scripts/annotation/extract_evidence_by_ids.py -i augustus_nerpa_human_ferret.transcript.evidence -d augustus_nerpa_human_ferret.supported.transcripts.swissprot_or_pfam_and_by_hints.ids -o augustus_nerpa_human_ferret.supported.transcripts.swissprot_or_pfam_and_by_hints.evidence
+~/Soft/MAVR/scripts/annotation/extract_evidence_by_ids.py -i augustus_nerpa_human_ferret.transcript.evidence \
+                                                          -d augustus_nerpa_human_ferret.supported.transcripts.swissprot_or_pfam_and_by_hints.ids \
+                                                          -o augustus_nerpa_human_ferret.supported.transcripts.swissprot_or_pfam_and_by_hints.evidence
 
-~/Soft/MAVR/scripts/annotation/extract_longest_isoforms_from_evidence_file.py -i augustus_nerpa_human_ferret.supported.transcripts.swissprot_or_pfam_and_by_hints.evidence -m 0 -o augustus_nerpa_human_ferret.supported.transcripts.swissprot_or_pfam_and_by_hints.longest_isoform.evidence
+~/Soft/MAVR/scripts/annotation/extract_longest_isoforms_from_evidence_file.py -i augustus_nerpa_human_ferret.supported.transcripts.swissprot_or_pfam_and_by_hints.evidence \
+                                                                              -m 0 \
+                                                                              -o augustus_nerpa_human_ferret.supported.transcripts.swissprot_or_pfam_and_by_hints.longest_isoform.evidence
 
-~/Soft/MAVR/scripts/sequence/extract_sequences_by_ids.py -d augustus_nerpa_human_ferret.supported.transcripts.swissprot_or_pfam_and_by_hints.longest_isoform.evidence.ids -i augustus_nerpa_human_ferret.pep -o augustus_nerpa_human_ferret.supported.transcripts.swissprot_or_pfam_and_by_hints.longest_isoform.evidence.pep
+~/Soft/MAVR/scripts/sequence/extract_sequences_by_ids.py -d augustus_nerpa_human_ferret.supported.transcripts.swissprot_or_pfam_and_by_hints.longest_isoform.evidence.ids \
+                                                         -i augustus_nerpa_human_ferret.pep \
+                                                         -o augustus_nerpa_human_ferret.supported.transcripts.swissprot_or_pfam_and_by_hints.longest_isoform.evidence.pep
 """
