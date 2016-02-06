@@ -9,7 +9,7 @@ from Tools.BLAST import BLASTp
 from Tools.Bedtools import Intersect
 from Tools.Annotation import AUGUSTUS
 
-from Routines import AnnotationsRoutines, MatplotlibRoutines
+from Routines import AnnotationsRoutines, MatplotlibRoutines, SequenceRoutines
 
 from CustomCollections.GeneralCollections import IdSet
 
@@ -63,6 +63,7 @@ output_pep = "%s.pep" % args.output
 output_evidence_stats = "%s.transcript.evidence" % args.output
 output_evidence_stats_longest_pep = "%s.transcript.evidence.longest_pep" % args.output
 output_supported_stats = "%s.transcript.supported" % args.output
+output_supported_stats_ids = "%s.transcript.supported.ids" % args.output
 output_supported_stats_longest_pep = "%s.transcript.supported.longest_pep" % args.output
 output_hmmscan = "%s.hmmscan.hits" % args.output
 output_domtblout = "%s.domtblout" % args.output
@@ -80,6 +81,18 @@ output_swissprot_supported_genes_ids = "%s.supported.genes.swissprot.ids" % args
 output_swissprot_blastp_hits_names = "%s.swissprot.hits.names" % args.output
 
 output_swissprot_pfam_supported_transcripts_ids = "%s.supported.transcripts.swissprot_or_pfam.ids" % args.output
+output_swissprot_pfam_or_hints_supported_transcripts_ids = "%s.supported.transcripts.swissprot_or_pfam_or_hints.ids" % args.output
+output_swissprot_pfam_and_hints_supported_transcripts_ids = "%s.supported.transcripts.swissprot_or_pfam_and_hints.ids" % args.output
+output_swissprot_pfam_or_hints_supported_transcripts_evidence = "%s.supported.transcripts.swissprot_or_pfam_or_hints.evidence" % args.output
+output_swissprot_pfam_and_hints_supported_transcripts_evidence = "%s.supported.transcripts.swissprot_or_pfam_and_hints.evidence" % args.output
+output_swissprot_pfam_or_hints_supported_transcripts_pep = "%s.supported.transcripts.swissprot_or_pfam_or_hints.pep" % args.output
+output_swissprot_pfam_and_hints_supported_transcripts_pep = "%s.supported.transcripts.swissprot_or_pfam_and_hints.pep" % args.output
+
+output_swissprot_pfam_or_hints_supported_transcripts_longest_pep_evidence = "%s.supported.transcripts.swissprot_or_pfam_or_hints.longest_pep.evidence" % args.output
+output_swissprot_pfam_and_hints_supported_transcripts_longest_pep_evidence = "%s.supported.transcripts.swissprot_or_pfam_and_hints.longest_pep.evidence" % args.output
+output_swissprot_pfam_or_hints_supported_transcripts_longest_pep = "%s.supported.transcripts.swissprot_or_pfam_or_hints.longest_pep.pep" % args.output
+output_swissprot_pfam_and_hints_supported_transcripts_longest_pep = "%s.supported.transcripts.swissprot_or_pfam_and_hints.longest_pep.pep" % args.output
+
 
 CDS_gff = "%s.CDS.gff" % args.output
 CDS_masked_gff = "%s.CDS.masked.gff" % args.output
@@ -95,7 +108,7 @@ AUGUSTUS.path = args.augustus_dir
 AUGUSTUS.threads = args.threads
 
 print("Annotating genes...")
-
+"""
 AUGUSTUS.parallel_predict(args.species, args.input, output_gff, strand=args.strand, gene_model=args.gene_model,
                           output_gff3=True, other_options=args.other_options, config_dir=args.config_dir,
                           use_softmasking=args.softmasking, hints_file=args.hintsfile,
@@ -114,6 +127,8 @@ print("Extracting peptides...")
 
 AUGUSTUS.extract_proteins_from_output(output_gff, output_pep, id_prefix="", evidence_stats_file=output_evidence_stats,
                                       supported_by_hints_file=output_supported_stats)
+
+os.system("awk -F'\\t' 'NR==1 {}; NR > 1 {print $2}' %s > %s" % (output_supported_stats, output_supported_stats_ids))
 
 if args.pfam_db:
     print("Annotating domains(Pfam database)...")
@@ -149,13 +164,37 @@ if args.swissprot_db:
 
     for directory in ("splited_blastp_fasta", "splited_blastp_output_dir"):
         shutil.rmtree(directory)
-
+"""
 gene_ids_black_list = [genes_masked_ids] if args.masking else []
 gene_ids_white_list = []
 if args.pfam_db and args.swissprot_db:
     gene_ids_white_list = [output_pfam_supported_genes_ids, output_swissprot_supported_genes_ids]
     HMMER3.intersect_ids_from_files(output_swissprot_supported_transcripts_ids, output_pfam_supported_transcripts_ids,
                                     output_swissprot_pfam_supported_transcripts_ids, mode="combine")
+    HMMER3.intersect_ids_from_files(output_swissprot_pfam_supported_transcripts_ids, output_supported_stats_ids,
+                                    output_swissprot_pfam_or_hints_supported_transcripts_ids, mode="combine")
+    HMMER3.intersect_ids_from_files(output_swissprot_pfam_supported_transcripts_ids, output_supported_stats_ids,
+                                    output_swissprot_pfam_and_hints_supported_transcripts_ids, mode="common")
+
+    SequenceRoutines.extract_sequence_by_ids(output_pep, output_swissprot_pfam_or_hints_supported_transcripts_ids,
+                                             output_swissprot_pfam_or_hints_supported_transcripts_pep)
+    SequenceRoutines.extract_sequence_by_ids(output_pep, output_swissprot_pfam_and_hints_supported_transcripts_ids,
+                                             output_swissprot_pfam_and_hints_supported_transcripts_pep)
+
+    AUGUSTUS.extract_evidence_by_ids(output_evidence_stats, output_swissprot_pfam_or_hints_supported_transcripts_ids,
+                                     output_swissprot_pfam_or_hints_supported_transcripts_evidence)
+    AUGUSTUS.extract_evidence_by_ids(output_evidence_stats, output_swissprot_pfam_and_hints_supported_transcripts_ids,
+                                     output_swissprot_pfam_and_hints_supported_transcripts_evidence)
+    AUGUSTUS.extract_longest_isoforms(output_swissprot_pfam_or_hints_supported_transcripts_evidence,
+                                      output_swissprot_pfam_or_hints_supported_transcripts_longest_pep_evidence)
+    AUGUSTUS.extract_longest_isoforms(output_swissprot_pfam_and_hints_supported_transcripts_evidence,
+                                      output_swissprot_pfam_and_hints_supported_transcripts_longest_pep_evidence)
+
+    SequenceRoutines.extract_sequence_by_ids(output_pep, "%s.ids" % output_swissprot_pfam_or_hints_supported_transcripts_longest_pep_evidence,
+                                             output_swissprot_pfam_or_hints_supported_transcripts_longest_pep)
+    SequenceRoutines.extract_sequence_by_ids(output_pep, "%s.ids" % output_swissprot_pfam_and_hints_supported_transcripts_longest_pep_evidence,
+                                             output_swissprot_pfam_and_hints_supported_transcripts_longest_pep)
+
 elif args.pfam_db:
     gene_ids_white_list = [output_pfam_supported_genes_ids]
 elif args.swissprot_db:
