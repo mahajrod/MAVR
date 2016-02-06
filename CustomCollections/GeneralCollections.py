@@ -224,13 +224,13 @@ class IdSet(OrderedSet):
             in_fd.close()
         return self
 
-    def write(self, filename, header=False, close_after_if_file_object=False):
+    def write(self, filename, header=False, close_after_if_file_object=False, sort=True):
         
         out_fd = filename if isinstance(filename, file) else open(filename, "w")
         if header:
             if header is True and self.header:
                 out_fd.write(self.header + "\n")
-        for entry in self:
+        for entry in sorted(self) if sort else self:
             out_fd.write(entry + "\n")
 
         if (not isinstance(filename, file)) or close_after_if_file_object:
