@@ -298,6 +298,7 @@ class AUGUSTUS(Tool):
                         prev_gene = gene
                         prev_transcript = transcript
                         prev_pep_len = pep_len
+                    id_fd.write("%s\n" % prev_transcript)
         ev_fd.close()
 
     @staticmethod
