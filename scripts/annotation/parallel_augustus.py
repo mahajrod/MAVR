@@ -124,12 +124,12 @@ if args.masking:
     os.system(sed_string)
 
 print("Extracting peptides...")
-
+"""
 AUGUSTUS.extract_proteins_from_output(output_gff, output_pep, id_prefix="", evidence_stats_file=output_evidence_stats,
                                       supported_by_hints_file=output_supported_stats)
 
 os.system("awk -F'\\t' 'NR==1 {}; NR > 1 {print $2}' %s > %s" % (output_supported_stats, output_supported_stats_ids))
-
+"""
 if args.pfam_db:
     print("Annotating domains(Pfam database)...")
     HMMER3.threads = args.threads
