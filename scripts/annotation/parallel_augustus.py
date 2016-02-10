@@ -8,6 +8,7 @@ from Tools.HMMER import HMMER3
 from Tools.BLAST import BLASTp
 from Tools.Bedtools import Intersect
 from Tools.Annotation import AUGUSTUS
+from Tools.Expression import Gffread
 
 from Routines import AnnotationsRoutines, MatplotlibRoutines, SequenceRoutines, FileRoutines
 
@@ -108,13 +109,14 @@ AUGUSTUS.path = args.augustus_dir
 AUGUSTUS.threads = args.threads
 
 print("Annotating genes...")
-
+"""
 AUGUSTUS.parallel_predict(args.species, args.input, output_gff, strand=args.strand, gene_model=args.gene_model,
                           output_gff3=True, other_options=args.other_options, config_dir=args.config_dir,
                           use_softmasking=args.softmasking, hints_file=args.hintsfile,
                           extrinsicCfgFile=args.extrinsicCfgFile, predict_UTR=args.predict_UTR)
-
-
+"""
+Gffread.extract_transcript_sequences(output_gff, args.input, args.output)
+"""
 AUGUSTUS.extract_gene_ids_from_output(output_gff, all_annotated_genes_ids)
 AUGUSTUS.extract_CDS_annotations_from_output(output_gff, CDS_gff)
 if args.masking:
@@ -164,7 +166,7 @@ if args.swissprot_db:
 
     for directory in ("splited_blastp_fasta", "splited_blastp_output_dir"):
         shutil.rmtree(directory)
-
+"""
 gene_ids_black_list = [genes_masked_ids] if args.masking else []
 gene_ids_white_list = []
 
@@ -200,8 +202,13 @@ if args.pfam_db and args.swissprot_db:
                    output_swissprot_pfam_and_hints_supported_transcripts_ids, \
                    "%s.ids" % output_swissprot_pfam_or_hints_supported_transcripts_longest_pep_evidence, \
                    "%s.ids" % output_swissprot_pfam_and_hints_supported_transcripts_longest_pep_evidence:
-        out_gff = "%sgff" % id_file[:-3]
-        AnnotationsRoutines.extract_transcripts_by_ids(output_gff, id_file, output_gff)
+        out_pref = id_file[:-4]
+        out_gff = "%s.gff" % out_pref
+        AnnotationsRoutines.extract_transcripts_by_ids(output_gff, id_file, out_gff)
+        for suffix in ".cds", ".transcript":
+            SequenceRoutines.extract_sequence_by_ids("%s%s" % (args.output, suffix),
+                                                     id_file,
+                                                     "%s%s" % (out_pref, suffix))
 
 elif args.pfam_db:
     gene_ids_white_list = [output_pfam_supported_genes_ids]
@@ -241,3 +248,5 @@ if args.pfam_db and args.swissprot_db:
 
     os.system("mv %s.supported.transcripts.swissprot_or_pfam_or_hints* %s" % (args.output, db_or_hints_dir))
     os.system("mv %s.supported.transcripts.swissprot_or_pfam_and_hints* %s" % (args.output, db_and_hints_dir))
+
+#gffread augustus_4_sp_hints.gff -g ~/data/genomes/caracal/final.assembly.fasta -x augustus_4_sp_hints.cds
