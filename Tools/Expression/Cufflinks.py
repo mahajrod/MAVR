@@ -13,9 +13,9 @@ class Gffread(Tool):
                              output_transcripts_file=None):
 
         options = " %s" % input_gff_file
-        options += " -g %s" if genomic_fasta_file else ""
-        options += " -x %s" if output_cds_file else ""
-        options += " -w %s" if output_transcripts_file else ""
+        options += " -g %s" % genomic_fasta_file if genomic_fasta_file else ""
+        options += " -x %s" % output_cds_file if output_cds_file else ""
+        options += " -w %s" % output_transcripts_file if output_transcripts_file else ""
 
         return options
 
