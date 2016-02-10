@@ -23,10 +23,11 @@ class Gffread(Tool):
 
         output_cds_file = "%s.cds" % output_prefix
         output_transcripts_file = "%s.transcript" % output_prefix
-        options = self.parse_common_options(input_gff_file, genomic_fasta_file=genomic_fasta_file,
+        options = self.parse_common_options(input_gff_file,
+                                            genomic_fasta_file=genomic_fasta_file,
                                             output_cds_file=output_cds_file,
                                             output_transcripts_file=output_transcripts_file)
-
+        print options
         self.execute(options=options)
 
 if __name__ == "__main__":
