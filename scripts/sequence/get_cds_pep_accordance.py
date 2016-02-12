@@ -25,11 +25,14 @@ parser.add_argument("-t", "--genetic_code_table", action="store", dest="genetic_
                     help="Genetic code to use for translation of CDS. "
                          "Allowed: table number from http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi"
                          "Default: 1(The standard code)")
+parser.add_argument("-d", "--id_check", action="store_true", dest="id_check",
+                    help="Also use id check - if there is id present in both files consider them as accordance")
 args = parser.parse_args()
 
 SequenceRoutines.get_cds_to_pep_accordance_from_files(args.cds_file, args.pep_file, args.out, verbose=args.verbose,
                                                       parsing_mode=args.parsing_mode,
-                                                      genetic_code_table=args.genetic_code_table)
+                                                      genetic_code_table=args.genetic_code_table,
+                                                      include_id_check=args.id_check)
 if args.parsing_mode == "index_db":
     os.remove("cds_tmp.idx")
     os.remove("pep_tmp.idx")

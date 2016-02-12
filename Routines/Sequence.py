@@ -115,12 +115,20 @@ class SequenceRoutines():
 
     @staticmethod
     def get_cds_to_pep_accordance(cds_dict, pep_dict, verbose=False,
-                                  parsing_mode="index_db", genetic_code_table=1):
+                                  parsing_mode="index_db", genetic_code_table=1,
+                                  include_id_check=False):
         cds_pep_accordance_dict = SynDict()
 
         for cds_id in cds_dict:
             cds_pep = cds_dict[cds_id].seq.translate(to_stop=True, table=genetic_code_table)
             for pep_id in pep_dict:
+                if include_id_check:
+                    if cds_id in pep_dict:
+                        cds_pep_accordance_dict[cds_id] = cds_id
+                        if parsing_mode == "parse":
+                            pep_dict.pop(pep_id, None)
+                            break
+
                 if cds_pep == pep_dict[pep_id].seq:
                     cds_pep_accordance_dict[cds_id] = pep_id
                     #print ("%s\t%s" % (cds_id, pep_id))
@@ -135,7 +143,7 @@ class SequenceRoutines():
 
     def get_cds_to_pep_accordance_from_files(self, cds_file, pep_file, output_file, format="fasta",
                                              verbose=True, parsing_mode="parse", index_file_suffix="tmp.idx",
-                                             genetic_code_table=1):
+                                             genetic_code_table=1, include_id_check=False):
 
         cds_dict = self.parse_seq_file(cds_file, mode=parsing_mode, format=format,
                                        index_file="cds_%s" % index_file_suffix)
@@ -144,7 +152,8 @@ class SequenceRoutines():
 
         cds_pep_accordance_dict = self.get_cds_to_pep_accordance(cds_dict, pep_dict, verbose=verbose,
                                                                  parsing_mode=parsing_mode,
-                                                                 genetic_code_table=genetic_code_table)
+                                                                 genetic_code_table=genetic_code_table,
+                                                                 include_id_check=include_id_check)
         cds_pep_accordance_dict.write(output_file)
 
 
