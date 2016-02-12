@@ -18,9 +18,10 @@ parser.add_argument("-o", "--output_file", action="store", dest="out", required=
                     help="Output file")
 parser.add_argument("-f", "--format", action="store", dest="format", default="fasta",
                     help="Format of input files. Allowed: fasta, genbank. Default: fasta")
-
+parser.add_argument("-v", "--verbose", action="store_true", dest="verbose",
+                    help="Print warning if no protein was found for CDS")
 args = parser.parse_args()
 
-SequenceRoutines.get_cds_to_pep_accordance_from_files(args.cds_file, args.pep_file, args.out)
+SequenceRoutines.get_cds_to_pep_accordance_from_files(args.cds_file, args.pep_file, args.out, verbose=args.verbose)
 
 

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/sequence/get_cds_pep_accordance.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Sequence.py" afterPath="$PROJECT_DIR$/Routines/Sequence.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence/get_cds_pep_accordance.py" afterPath="$PROJECT_DIR$/scripts/sequence/get_cds_pep_accordance.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -120,13 +120,13 @@
       <file leaf-file-name="Sequence.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="574" max-vertical-offset="6336">
-              <caret line="120" column="50" selection-start-line="120" selection-start-column="50" selection-end-line="120" selection-end-column="50" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="700" max-vertical-offset="6570">
+              <caret line="97" column="41" selection-start-line="97" selection-start-column="41" selection-end-line="97" selection-end-column="41" />
               <folding>
+                <element signature="e#548#928#0" expanded="false" />
+                <element signature="e#1073#1562#0" expanded="false" />
                 <element signature="e#1659#1884#0" expanded="false" />
                 <element signature="e#2001#2466#0" expanded="false" />
-                <element signature="e#2526#3181#0" expanded="false" />
-                <element signature="e#3309#4047#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -145,8 +145,8 @@
       <file leaf-file-name="get_cds_pep_accordance.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/sequence/get_cds_pep_accordance.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.375" vertical-offset="0" max-vertical-offset="912">
-              <caret line="19" column="74" selection-start-line="19" selection-start-column="74" selection-end-line="19" selection-end-column="74" />
+            <state vertical-scroll-proportion="0.47368422" vertical-offset="0" max-vertical-offset="912">
+              <caret line="24" column="114" selection-start-line="24" selection-start-column="114" selection-end-line="24" selection-end-column="114" />
               <folding>
                 <element signature="e#55#70#0" expanded="true" />
               </folding>
@@ -661,12 +661,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00320" summary="augustus tools&#10;">
-      <created>1454371011706</created>
-      <option name="number" value="00320" />
-      <option name="project" value="LOCAL" />
-      <updated>1454371011707</updated>
-    </task>
     <task id="LOCAL-00321" summary="augustus tools&#10;">
       <created>1454434193872</created>
       <option name="number" value="00321" />
@@ -955,7 +949,13 @@
       <option name="project" value="LOCAL" />
       <updated>1455274784246</updated>
     </task>
-    <option name="localTasksCounter" value="369" />
+    <task id="LOCAL-00369" summary="augustus tools&#10;">
+      <created>1455282419843</created>
+      <option name="number" value="00369" />
+      <option name="project" value="LOCAL" />
+      <updated>1455282419843</updated>
+    </task>
+    <option name="localTasksCounter" value="370" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1407,21 +1407,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="574" max-vertical-offset="6336">
-          <caret line="120" column="50" selection-start-line="120" selection-start-column="50" selection-end-line="120" selection-end-column="50" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="700" max-vertical-offset="6570">
+          <caret line="97" column="41" selection-start-line="97" selection-start-column="41" selection-end-line="97" selection-end-column="41" />
           <folding>
+            <element signature="e#548#928#0" expanded="false" />
+            <element signature="e#1073#1562#0" expanded="false" />
             <element signature="e#1659#1884#0" expanded="false" />
             <element signature="e#2001#2466#0" expanded="false" />
-            <element signature="e#2526#3181#0" expanded="false" />
-            <element signature="e#3309#4047#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence/get_cds_pep_accordance.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.375" vertical-offset="0" max-vertical-offset="912">
-          <caret line="19" column="74" selection-start-line="19" selection-start-column="74" selection-end-line="19" selection-end-column="74" />
+        <state vertical-scroll-proportion="0.47368422" vertical-offset="0" max-vertical-offset="912">
+          <caret line="24" column="114" selection-start-line="24" selection-start-column="114" selection-end-line="24" selection-end-column="114" />
           <folding>
             <element signature="e#55#70#0" expanded="true" />
           </folding>
