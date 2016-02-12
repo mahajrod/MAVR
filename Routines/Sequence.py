@@ -115,11 +115,11 @@ class SequenceRoutines():
 
     @staticmethod
     def get_cds_to_pep_accordance(cds_dict, pep_dict, verbose=False,
-                                  parsing_mode="index_db"):
+                                  parsing_mode="index_db", genetic_code_table=1):
         cds_pep_accordance_dict = SynDict()
 
         for cds_id in cds_dict:
-            cds_pep = cds_dict[cds_id].seq.translate()
+            cds_pep = cds_dict[cds_id].seq.translate(to_stop=True, table=genetic_code_table)
             for pep_id in pep_dict:
                 if cds_pep == pep_dict[pep_id].seq:
                     cds_pep_accordance_dict[cds_id] = pep_id
@@ -134,7 +134,8 @@ class SequenceRoutines():
         return cds_pep_accordance_dict
 
     def get_cds_to_pep_accordance_from_files(self, cds_file, pep_file, output_file, format="fasta",
-                                             verbose=True, parsing_mode="parse", index_file_suffix="tmp.idx"):
+                                             verbose=True, parsing_mode="parse", index_file_suffix="tmp.idx",
+                                             genetic_code_table=1):
 
         cds_dict = self.parse_seq_file(cds_file, mode=parsing_mode, format=format,
                                        index_file="cds_%s" % index_file_suffix)
@@ -142,7 +143,8 @@ class SequenceRoutines():
                                        index_file="pep_%s" % index_file_suffix)
 
         cds_pep_accordance_dict = self.get_cds_to_pep_accordance(cds_dict, pep_dict, verbose=verbose,
-                                                                 parsing_mode=parsing_mode)
+                                                                 parsing_mode=parsing_mode,
+                                                                 genetic_code_table=genetic_code_table)
         cds_pep_accordance_dict.write(output_file)
 
 
