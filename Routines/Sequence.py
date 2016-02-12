@@ -101,6 +101,25 @@ class SequenceRoutines():
                     yield record_dict[record_id]
         id_fd.close()
 
+    @staticmethod
+    def get_cds_to_pep_accordance(cds_dict, pep_dict):
+        cds_pep_accordance_dict = SynDict()
+
+        for cds_id in cds_dict:
+            cds_pep = cds_dict[cds_id].seq.translate()
+            for pep_id in pep_dict:
+                if cds_pep == pep_dict[pep_id].seq:
+                    cds_pep_accordance_dict[cds_id] = pep_id
+
+        return cds_pep_accordance_dict
+
+    def get_cds_to_pep_accordance_from_files(self, cds_file, pep_file, output_file, format="fasta"):
+        cds_dict = SeqIO.index_db("cds_tmp.idx", cds_file, format=format)
+        pep_dict = SeqIO.index_db("pep_tmp.idx", pep_file, format=format)
+
+        cds_pep_accordance_dict = self.get_cds_to_pep_accordance(cds_dict, pep_dict)
+        cds_pep_accordance_dict.write(output_file)
+
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
     lengths_dict = OrderedDict({})
