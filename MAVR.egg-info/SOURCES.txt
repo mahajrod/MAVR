@@ -34,7 +34,6 @@ Pictures/__init__.py
 Pictures/Styles/Features.py
 Pictures/Styles/__init__.py
 Pipelines/GenePrediction.py
-Pipelines/GenomeAssembly.py
 Pipelines/Phylogeny.py
 Pipelines/RepeatSearch.py
 Pipelines/SNPCall.py
@@ -46,6 +45,7 @@ Routines/File.py
 Routines/Functions.py
 Routines/Matplotlib.py
 Routines/MultipleAlignment.py
+Routines/NCBI.py
 Routines/Primer.py
 Routines/Sequence.py
 Routines/Tree.py
@@ -119,6 +119,7 @@ Tools/MultipleAlignment/__init__.py
 Tools/Phylogenetics/ExaBayes.py
 Tools/Phylogenetics/ExaML.py
 Tools/Phylogenetics/MrBayes.py
+Tools/Phylogenetics/PartitionFinder.py
 Tools/Phylogenetics/RAxML.py
 Tools/Phylogenetics/__init__.py
 Tools/Picard/AddOrReplaceReadGroups.py
@@ -133,6 +134,7 @@ Tools/Tuxedo/Cufflinks.py
 Tools/Tuxedo/Tophat.py
 Tools/Tuxedo/__init__.py
 scripts/CDS_region_variants.py
+scripts/__init__.py
 scripts/assembly_transcriptome.py
 scripts/blast_fastqc.py
 scripts/draw_genes.py

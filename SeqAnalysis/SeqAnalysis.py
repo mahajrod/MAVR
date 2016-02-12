@@ -431,23 +431,8 @@ def sort_by_number(species_count_file, output_filename_prefix, counts_list=[1, 5
     #for fd in fd_list:
     #    fd.close()
 
-
-def get_alignment(input_file,
-                  output_file="alignment.fasta",
-                  aligner_options=None,
-                  aligner="MAFFT",
-                  path_to_aligner="mafft",
-                  threads=6):
-
-    if aligner == "MAFFT":
-        if aligner_options:
-            aligner_string = "%s --thread %i " % (path_to_aligner, threads) + aligner_options + " " + input_file + " > " + output_file
-        else:
-            aligner_string = "%s --thread %i --globalpair --maxiterate 1000 " % (path_to_aligner, threads) + input_file + " > " + output_file
-            print(aligner_string)
-    os.system(aligner_string)
-
-
+#moved to AlignmentRoutines
+"""
 def get_codon_alignment(protein_alignment, nucleotide_seq_dict, codon_alignment_file):
     codon_alignment = {}
     for record in protein_alignment:
@@ -467,6 +452,7 @@ def get_codon_alignment(protein_alignment, nucleotide_seq_dict, codon_alignment_
         #print(record.id, record.seq)
     SeqIO.write(list(codon_alignment.values()), codon_alignment_file, "fasta")
     return codon_alignment
+
 
 
 def merge_alignment(alignment_file_list, merged_alignment_file):
@@ -501,7 +487,7 @@ def merge_alignment(alignment_file_list, merged_alignment_file):
         sequence_coordinates.append((sequence_coordinates[-1][1]+1, sequence_coordinates[-1][1]+seq_length))
     #print(sequence_coordinates)
     return merged_alignment, sequence_lengthes, sequence_coordinates
-
+"""
 
 def write_sequences_coordinates_to_file(seq_coordinates_tuple_list, output_filename):
     fd = open(output_filename, "w")

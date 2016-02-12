@@ -1372,6 +1372,7 @@
       <w>gettext</w>
       <w>gettextf</w>
       <w>getwd</w>
+      <w>gffread</w>
       <w>gl</w>
       <w>glm</w>
       <w>glm.control</w>

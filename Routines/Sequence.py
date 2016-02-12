@@ -101,6 +101,7 @@ class SequenceRoutines():
                     yield record_dict[record_id]
         id_fd.close()
 
+
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
     lengths_dict = OrderedDict({})
     for record_id in record_dict:

@@ -11,7 +11,7 @@ class Trimmomatic(JavaTool):
         JavaTool.__init__(self, jar, java_path=java_path, max_threads=max_threads,
                           jar_path=jar_path, max_memory=None, timelog="trimmomatic.time.log")
 
-    def parse_options(self, left_reads, output_prefix, output_extension="fq", right_reads=None, adapters_file=None,
+    def parse_options(self, left_reads, output_prefix, output_prefix_left=None, output_extension="fq", right_reads=None, adapters_file=None,
                       mismatch_number=2, pe_reads_score=30, se_read_score=10, min_adapter_len=1,
                       sliding_window_size=None, average_quality_threshold=15,
                       leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
@@ -23,10 +23,16 @@ class Trimmomatic(JavaTool):
         options += " %s" % left_reads
         options += " %s" % right_reads if right_reads else ""
 
-        options += " %s_1.pe.%s" % (output_prefix, output_extension)
-        options += " %s_1.se.%s" % (output_prefix, output_extension)
-        options += " %s_2.pe.%s" % (output_prefix, output_extension)
-        options += " %s_2.se.%s" % (output_prefix, output_extension)
+        if output_prefix_left:
+            options += " %s.pe.%s" % (output_prefix, output_extension)
+            options += " %s.se.%s" % (output_prefix, output_extension)
+            options += " %s.pe.%s" % (output_prefix_left, output_extension)
+            options += " %s.se.%s" % (output_prefix_left, output_extension)
+        else:
+            options += " %s_1.pe.%s" % (output_prefix, output_extension)
+            options += " %s_1.se.%s" % (output_prefix, output_extension)
+            options += " %s_2.pe.%s" % (output_prefix, output_extension)
+            options += " %s_2.se.%s" % (output_prefix, output_extension)
 
         options += " ILLUMINACLIP:%s:%i:%i:%i:%i" % (adapters_file, mismatch_number, pe_reads_score,
                                                      se_read_score, min_adapter_len) if adapters_file else ""

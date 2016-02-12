@@ -4,6 +4,7 @@ from Bio import SearchIO, SeqIO, AlignIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
+
 class AlignmentRoutines:
     def __init__(self):
         pass
