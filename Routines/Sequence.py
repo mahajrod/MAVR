@@ -123,7 +123,7 @@ class SequenceRoutines():
             for pep_id in pep_dict:
                 if cds_pep == pep_dict[pep_id].seq:
                     cds_pep_accordance_dict[cds_id] = pep_id
-                    print ("%s\t%s" % (cds_id, pep_id))
+                    #print ("%s\t%s" % (cds_id, pep_id))
                     if parsing_mode == "parse":
                         pep_dict.pop(pep_id, None)
                     break
