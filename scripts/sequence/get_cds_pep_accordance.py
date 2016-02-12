@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 
-import argparse
 import os
-
-from Bio import SeqIO
+import argparse
 
 from Routines import SequenceRoutines
 
@@ -23,10 +21,15 @@ parser.add_argument("-v", "--verbose", action="store_true", dest="verbose",
 parser.add_argument("-m", "--parsing_mode", action="store", dest="parsing_mode", default="parse",
                     help="Parsing mode of sequence files. Allowed: parse, index, index_db."
                          "Default: parse")
+parser.add_argument("-t", "--genetic_code_table", action="store", dest="genetic_code_table", default=1, type=int,
+                    help="Genetic code to use for translation of CDS. "
+                         "Allowed: table number from http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi"
+                         "Default: 1(The standard code)")
 args = parser.parse_args()
 
 SequenceRoutines.get_cds_to_pep_accordance_from_files(args.cds_file, args.pep_file, args.out, verbose=args.verbose,
-                                                      parsing_mode=args.parsing_mode)
+                                                      parsing_mode=args.parsing_mode,
+                                                      genetic_code_table=args.genetic_code_table)
 if args.parsing_mode == "index_db":
     os.remove("cds_tmp.idx")
     os.remove("pep_tmp.idx")
