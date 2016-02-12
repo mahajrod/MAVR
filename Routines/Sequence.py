@@ -133,10 +133,12 @@ class SequenceRoutines():
         return cds_pep_accordance_dict
 
     def get_cds_to_pep_accordance_from_files(self, cds_file, pep_file, output_file, format="fasta",
-                                             verbose=True, parsing_mode="parse", index_file="tmp.idx"):
+                                             verbose=True, parsing_mode="parse", index_file_suffix="tmp.idx"):
 
-        cds_dict = self.parse_seq_file(cds_file, mode=parsing_mode, format=format, index_file=index_file)
-        pep_dict = self.parse_seq_file(pep_file, mode=parsing_mode, format=format, index_file=index_file)
+        cds_dict = self.parse_seq_file(cds_file, mode=parsing_mode, format=format,
+                                       index_file="cds_%s" % index_file_suffix)
+        pep_dict = self.parse_seq_file(pep_file, mode=parsing_mode, format=format,
+                                       index_file="pep_%s" % index_file_suffix)
 
         cds_pep_accordance_dict = self.get_cds_to_pep_accordance(cds_dict, pep_dict, verbose=verbose,
                                                                  parsing_mode=parsing_mode)

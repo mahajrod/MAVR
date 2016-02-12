@@ -28,6 +28,7 @@ args = parser.parse_args()
 SequenceRoutines.get_cds_to_pep_accordance_from_files(args.cds_file, args.pep_file, args.out, verbose=args.verbose,
                                                       parsing_mode=args.parsing_mode)
 if args.parsing_mode == "index_db":
-    os.remove("tmp.idx")
+    os.remove("cds_tmp.idx")
+    os.remove("pep_tmp.idx")
 
 
