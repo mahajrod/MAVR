@@ -78,17 +78,17 @@ for sample in samples:
     prefix_list = []
     for filename in files_from_sample_dir:
         if ".fq" == filename[-3:]:
-            filtered_files_from_sample_dir.append(filename)
-            prefix_list.append(filename[:-3])
+            filtered_files_from_sample_dir.append("%s%s" % (sample_dir, filename))
+            prefix_list.append("%s%s" % (sample_out_dir, filename[:-3]))
         elif ".fastq" == filename[-6:]:
-            filtered_files_from_sample_dir.append(filename)
-            prefix_list.append(filename[:-6])
+            filtered_files_from_sample_dir.append("%s%s" % (sample_dir, filename))
+            prefix_list.append("%s%s" % (sample_out_dir, filename[:-6]))
         elif ".fq.gz" == filename[-6:]:
-            filtered_files_from_sample_dir.append(filename)
-            prefix_list.append(filename[:-6])
+            filtered_files_from_sample_dir.append("%s%s" % (sample_dir, filename))
+            prefix_list.append("%s%s" % (sample_out_dir, filename[:-6]))
         elif ".fastq.gz" == filename[-9:]:
-            filtered_files_from_sample_dir.append(filename)
-            prefix_list.append(filename[:-9])
+            filtered_files_from_sample_dir.append("%s%s" % (sample_dir, filename))
+            prefix_list.append("%s%s" % (sample_out_dir, filename[:-9]))
 
     if len(filtered_files_from_sample_dir) % 2 != 0:
         print("Not all read files are paired for sample %s. Skipping..." % sample)
