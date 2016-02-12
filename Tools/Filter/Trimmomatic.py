@@ -50,14 +50,15 @@ class Trimmomatic(JavaTool):
 
         return options
 
-    def filter(self, left_reads, output_prefix, output_extension="fq", right_reads=None, adapters_file=None,
+    def filter(self, left_reads, output_prefix, output_prefix_left=None, output_extension="fq", right_reads=None, adapters_file=None,
                mismatch_number=2, pe_reads_score=30, se_read_score=10, min_adapter_len=1,
                sliding_window_size=None, average_quality_threshold=15,
                leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
                crop_length=None, head_crop_length=None, min_length=50, logfile="trimmomatic.log",
                base_quality="phred33"):
 
-        options = self.parse_options(left_reads, output_prefix, output_extension=output_extension,
+        options = self.parse_options(left_reads, output_prefix, output_prefix_left=output_prefix_left,
+                                     output_extension=output_extension,
                                      right_reads=right_reads, adapters_file=adapters_file,
                                      mismatch_number=mismatch_number, pe_reads_score=pe_reads_score,
                                      se_read_score=se_read_score, min_adapter_len=min_adapter_len,
