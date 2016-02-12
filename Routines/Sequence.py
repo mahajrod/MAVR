@@ -102,7 +102,20 @@ class SequenceRoutines():
         id_fd.close()
 
     @staticmethod
-    def get_cds_to_pep_accordance(cds_dict, pep_dict, verbose=False):
+    def parse_seq_file(input_file, mode, format="fasta", index_file=None):
+        if mode == "index_db":
+            index = index_file if index_file else "tmp.idx"
+            seq_dict = SeqIO.index_db(index, input_file, format=format)
+        elif mode == "index":
+            seq_dict = SeqIO.index(input_file, format=format)
+        elif mode == "parse":
+            seq_dict = SeqIO.to_dict(SeqIO.parse(input_file, format=format))
+
+        return seq_dict
+
+    @staticmethod
+    def get_cds_to_pep_accordance(cds_dict, pep_dict, verbose=False,
+                                  parsing_mode="index_db"):
         cds_pep_accordance_dict = SynDict()
 
         for cds_id in cds_dict:
@@ -110,6 +123,8 @@ class SequenceRoutines():
             for pep_id in pep_dict:
                 if cds_pep == pep_dict[pep_id].seq:
                     cds_pep_accordance_dict[cds_id] = pep_id
+                    if parsing_mode == "parse":
+                        pep_dict.pop(pep_id, None)
                     break
             else:
                 if verbose:
@@ -118,11 +133,13 @@ class SequenceRoutines():
         return cds_pep_accordance_dict
 
     def get_cds_to_pep_accordance_from_files(self, cds_file, pep_file, output_file, format="fasta",
-                                             verbose=True):
-        cds_dict = SeqIO.index_db("cds_tmp.idx", cds_file, format=format)
-        pep_dict = SeqIO.index_db("pep_tmp.idx", pep_file, format=format)
+                                             verbose=True, parsing_mode="parse", index_file="tmp.idx"):
 
-        cds_pep_accordance_dict = self.get_cds_to_pep_accordance(cds_dict, pep_dict, verbose=verbose)
+        cds_dict = self.parse_seq_file(cds_file, mode=parsing_mode, format=format, index_file=index_file)
+        pep_dict = self.parse_seq_file(pep_file, mode=parsing_mode, format=format, index_file=index_file)
+
+        cds_pep_accordance_dict = self.get_cds_to_pep_accordance(cds_dict, pep_dict, verbose=verbose,
+                                                                 parsing_mode=parsing_mode)
         cds_pep_accordance_dict.write(output_file)
 
 

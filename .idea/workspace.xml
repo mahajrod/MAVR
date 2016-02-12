@@ -110,7 +110,7 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Routines/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="360">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
               <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding />
             </state>
@@ -120,8 +120,8 @@
       <file leaf-file-name="Sequence.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="700" max-vertical-offset="6570">
-              <caret line="97" column="41" selection-start-line="97" selection-start-column="41" selection-end-line="97" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1006" max-vertical-offset="6876">
+              <caret line="126" column="50" selection-start-line="126" selection-start-column="50" selection-end-line="126" selection-end-column="50" />
               <folding>
                 <element signature="e#548#928#0" expanded="false" />
                 <element signature="e#1073#1562#0" expanded="false" />
@@ -145,8 +145,8 @@
       <file leaf-file-name="get_cds_pep_accordance.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/sequence/get_cds_pep_accordance.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.47368422" vertical-offset="0" max-vertical-offset="912">
-              <caret line="24" column="114" selection-start-line="24" selection-start-column="114" selection-end-line="24" selection-end-column="114" />
+            <state vertical-scroll-proportion="0.59210527" vertical-offset="0" max-vertical-offset="912">
+              <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
               <folding>
                 <element signature="e#55#70#0" expanded="true" />
               </folding>
@@ -661,12 +661,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00321" summary="augustus tools&#10;">
-      <created>1454434193872</created>
-      <option name="number" value="00321" />
-      <option name="project" value="LOCAL" />
-      <updated>1454434193872</updated>
-    </task>
     <task id="LOCAL-00322" summary="augustus tools&#10;">
       <created>1454434280123</created>
       <option name="number" value="00322" />
@@ -955,7 +949,13 @@
       <option name="project" value="LOCAL" />
       <updated>1455282419843</updated>
     </task>
-    <option name="localTasksCounter" value="370" />
+    <task id="LOCAL-00370" summary="augustus tools&#10;">
+      <created>1455282617422</created>
+      <option name="number" value="00370" />
+      <option name="project" value="LOCAL" />
+      <updated>1455282617422</updated>
+    </task>
+    <option name="localTasksCounter" value="371" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1324,16 +1324,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
           <caret line="218" column="0" selection-start-line="218" selection-start-column="0" selection-end-line="218" selection-end-column="0" />
           <folding>
-            <element signature="e#54#63#0" expanded="true" />
+            <element signature="e#54#63#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1397,6 +1389,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence/check_selenocystein_presence.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="912">
@@ -1407,8 +1407,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="700" max-vertical-offset="6570">
-          <caret line="97" column="41" selection-start-line="97" selection-start-column="41" selection-end-line="97" selection-end-column="41" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="898" max-vertical-offset="6876">
+          <caret line="126" column="50" selection-start-line="126" selection-start-column="50" selection-end-line="126" selection-end-column="50" />
           <folding>
             <element signature="e#548#928#0" expanded="false" />
             <element signature="e#1073#1562#0" expanded="false" />
@@ -1420,8 +1420,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence/get_cds_pep_accordance.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47368422" vertical-offset="0" max-vertical-offset="912">
-          <caret line="24" column="114" selection-start-line="24" selection-start-column="114" selection-end-line="24" selection-end-column="114" />
+        <state vertical-scroll-proportion="0.59210527" vertical-offset="0" max-vertical-offset="912">
+          <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
           <folding>
             <element signature="e#55#70#0" expanded="true" />
           </folding>
