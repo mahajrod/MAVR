@@ -109,14 +109,14 @@ AUGUSTUS.path = args.augustus_dir
 AUGUSTUS.threads = args.threads
 
 print("Annotating genes...")
-"""
+
 AUGUSTUS.parallel_predict(args.species, args.input, output_gff, strand=args.strand, gene_model=args.gene_model,
                           output_gff3=True, other_options=args.other_options, config_dir=args.config_dir,
                           use_softmasking=args.softmasking, hints_file=args.hintsfile,
                           extrinsicCfgFile=args.extrinsicCfgFile, predict_UTR=args.predict_UTR)
-"""
+
 Gffread.extract_transcript_sequences(output_gff, args.input, args.output)
-"""
+
 AUGUSTUS.extract_gene_ids_from_output(output_gff, all_annotated_genes_ids)
 AUGUSTUS.extract_CDS_annotations_from_output(output_gff, CDS_gff)
 if args.masking:
@@ -166,7 +166,7 @@ if args.swissprot_db:
 
     for directory in ("splited_blastp_fasta", "splited_blastp_output_dir"):
         shutil.rmtree(directory)
-"""
+
 gene_ids_black_list = [genes_masked_ids] if args.masking else []
 gene_ids_white_list = []
 
