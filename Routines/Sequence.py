@@ -156,6 +156,39 @@ class SequenceRoutines():
                                                                  include_id_check=include_id_check)
         cds_pep_accordance_dict.write(output_file)
 
+    @staticmethod
+    def extract_exon_lengths(record_dict):
+        output_list = []
+        for record_id in record_dict:
+            for feature in record_dict[record_id].features:
+                taxonomy = ";".join(record_dict[record_id].annotations["taxonomy"])
+                species = record_dict[record_id].annotations["organism"]
+                if feature.type == "mRNA":
+                    product = ";".join(feature.qualifiers["product"])
+                    strand = feature.location.strand
+                    exon_lengths = []
+                    #print feature.sub_features
+                    #print feature.location
+                    #print feature.location.start
+                    for location in feature.location.parts:
+                        #print location
+                        exon_len = location.end - location.start
+                        exon_lengths.append(exon_len)
+
+                    output_list.append([species, taxonomy, product, strand, exon_lengths])
+        return output_list
+
+    def extract_exon_lengths_from_genbank_file(self, input_file, output_file):
+        record_dict = SeqIO.index_db("tmp.idx", input_file, format="genbank")
+        data_list = self.extract_exon_lengths(record_dict)
+
+        with open(output_file, "w") as out_fd:
+            out_fd.write("#species\ttaxonomy\tproduct\tstrand\texon_length\n")
+            for entry in data_list:
+                out_fd.write("%s\t%s\t%s\t%s\t%s\n" % (entry[0], entry[1], entry[2],
+                                                       str(entry[3]), ",".join(map(str, entry[4]))))
+
+        os.remove("tmp.idx")
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
     lengths_dict = OrderedDict({})
