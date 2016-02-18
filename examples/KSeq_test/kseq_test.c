@@ -1,6 +1,6 @@
 #include <zlib.h>
 #include <stdio.h>
-#include "../../Parsers/KSeq.h"
+#include "../../Parsers/kseq.h"
 KSEQ_INIT(gzFile, gzread)
 
 int main(int argc, char *argv[])

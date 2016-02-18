@@ -175,7 +175,7 @@ class SequenceRoutines():
                         exon_len = location.end - location.start
                         exon_lengths.append(exon_len)
 
-                    output_list.append([species, taxonomy, product, strand, exon_lengths])
+                    output_list.append([species, taxonomy, record_id, product, strand, exon_lengths])
         return output_list
 
     def extract_exon_lengths_from_genbank_file(self, input_file, output_file):
@@ -183,10 +183,10 @@ class SequenceRoutines():
         data_list = self.extract_exon_lengths(record_dict)
 
         with open(output_file, "w") as out_fd:
-            out_fd.write("#species\ttaxonomy\tproduct\tstrand\texon_length\n")
+            out_fd.write("#species\ttaxonomy\trecord_id\tproduct\tstrand\texon_length\n")
             for entry in data_list:
-                out_fd.write("%s\t%s\t%s\t%s\t%s\n" % (entry[0], entry[1], entry[2],
-                                                       str(entry[3]), ",".join(map(str, entry[4]))))
+                out_fd.write("%s\t%s\t%s\t%s\t%s\t%s\n" % (entry[0], entry[1], entry[2], entry[3],
+                                                           str(entry[4]), ",".join(map(str, entry[5]))))
 
         os.remove("tmp.idx")
 

@@ -86,6 +86,8 @@ Tools/Bedtools/Intersect.py
 Tools/Bedtools/__init__.py
 Tools/BioFormats/BioConvert.py
 Tools/BioFormats/__init__.py
+Tools/Expression/Cufflinks.py
+Tools/Expression/__init__.py
 Tools/Filter/Adapters.py
 Tools/Filter/Cookiecutter.py
 Tools/Filter/FastQC.py
@@ -134,7 +136,6 @@ Tools/Tuxedo/Cufflinks.py
 Tools/Tuxedo/Tophat.py
 Tools/Tuxedo/__init__.py
 scripts/CDS_region_variants.py
-scripts/__init__.py
 scripts/assembly_transcriptome.py
 scripts/blast_fastqc.py
 scripts/draw_genes.py
