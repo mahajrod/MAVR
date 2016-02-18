@@ -36,7 +36,7 @@ parser.add_argument("-u", "--score_type", action="store", dest="score_type", def
 args = parser.parse_args()
 
 samples = args.samples.split(",") if args.samples else sorted(os.listdir(args.samples_dir))
-
+save_mkdir(args.output_dir)
 for sample in samples:
     print("Handling %s" % sample)
 
