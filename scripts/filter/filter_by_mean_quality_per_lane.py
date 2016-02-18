@@ -80,9 +80,10 @@ for sample in samples:
         left_reads_file = filtered_files_from_sample_dir[lane_number*2]
         right_reads_file = filtered_files_from_sample_dir[lane_number*2 + 1]
 
-        filter_string = "filter_by_mean_quality -t %i -f %s -r %s -q %s -p %s" % (args.average_quality_threshold,
+        filter_string = "time filter_by_mean_quality -t %i -f %s -r %s -q %s -p %s" % (args.average_quality_threshold,
                                                                                   left_reads_file,
                                                                                   right_reads_file,
                                                                                   args.score_type,
                                                                                   prefix_list[lane_number*2])
+        os.system(filter_string)
 
