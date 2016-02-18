@@ -35,10 +35,6 @@ parser.add_argument("-u", "--score_type", action="store", dest="score_type", def
                     help="Phred quality score type. Allowed: phred33, phred64. Default: phred64")
 args = parser.parse_args()
 
-Trimmomatic.jar_path = args.path_to_trimmomatic_dir
-Trimmomatic.threads = args.threads
-#print(Trimmomatic.path)
-#print(Trimmomatic.jar_path)
 samples = args.samples.split(",") if args.samples else sorted(os.listdir(args.samples_dir))
 
 for sample in samples:
@@ -48,9 +44,6 @@ for sample in samples:
 
     sample_out_dir = "%s%s/" % (args.output_dir, sample)
     save_mkdir(sample_out_dir)
-    trimmomatic_log = "%s/trimmomatic.log" % sample_out_dir
-    trimmomatic_time_log = "%s/trimmomatic.time.log" % sample_out_dir
-
     files_from_sample_dir = sorted(os.listdir(sample_dir))
 
     filtered_files_from_sample_dir = []
@@ -81,9 +74,9 @@ for sample in samples:
         right_reads_file = filtered_files_from_sample_dir[lane_number*2 + 1]
 
         filter_string = "time filter_by_mean_quality -t %i -f %s -r %s -q %s -p %s" % (args.average_quality_threshold,
-                                                                                  left_reads_file,
-                                                                                  right_reads_file,
-                                                                                  args.score_type,
-                                                                                  prefix_list[lane_number*2])
+                                                                                       left_reads_file,
+                                                                                       right_reads_file,
+                                                                                       args.score_type,
+                                                                                       prefix_list[lane_number*2])
         os.system(filter_string)
 
