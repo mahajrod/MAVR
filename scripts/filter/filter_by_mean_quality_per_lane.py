@@ -78,5 +78,12 @@ for sample in samples:
                                                                                        right_reads_file,
                                                                                        args.score_type,
                                                                                        prefix_list[lane_number*2])
+        print(left_reads_file)
+        print(right_reads_file)
+        print(args.score_type)
+        print(args.average_quality_threshold)
+        print(prefix_list[lane_number*2])
+
+        print filter_string
         os.system(filter_string)
 

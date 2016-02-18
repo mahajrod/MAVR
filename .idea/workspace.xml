@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/sequence/extract_exon_lengths_from_genbank_file.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/nxf/extract_nxf_exon_lengthes.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/filter/filter_by_mean_quality_per_lane.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/examples/KSeq_test/head_1.fq" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/examples/KSeq_test/head_2.fq" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" afterPath="$PROJECT_DIR$/dist/MAVR-1.0-py2.7.egg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/KSeq_test/kseq_test" afterPath="$PROJECT_DIR$/examples/KSeq_test/kseq_test" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/NCBI.py" afterPath="$PROJECT_DIR$/Routines/NCBI.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/SOURCES.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/SOURCES.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Sequence.py" afterPath="$PROJECT_DIR$/Routines/Sequence.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/entrez/get_gene_sequences.py" afterPath="$PROJECT_DIR$/scripts/entrez/get_gene_sequences.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/KSeq_test/kseq_test.c" afterPath="$PROJECT_DIR$/examples/KSeq_test/kseq_test.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/mahajrod.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/mahajrod.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/filter/filter_by_mean_quality_per_lane.py" afterPath="$PROJECT_DIR$/scripts/filter/filter_by_mean_quality_per_lane.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -98,8 +85,8 @@
       <file leaf-file-name="filter_by_mean_quality_per_lane.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/filter/filter_by_mean_quality_per_lane.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.5350877">
-              <caret line="86" column="108" selection-start-line="86" selection-start-column="108" selection-end-line="86" selection-end-column="108" />
+            <state vertical-scroll-proportion="0.92105263">
+              <caret line="84" column="40" selection-start-line="84" selection-start-column="40" selection-end-line="84" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -805,24 +792,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00334" summary="augustus tools&#10;">
-      <created>1454547641604</created>
-      <option name="number" value="00334" />
-      <option name="project" value="LOCAL" />
-      <updated>1454547641604</updated>
-    </task>
-    <task id="LOCAL-00335" summary="augustus tools&#10;">
-      <created>1454582225808</created>
-      <option name="number" value="00335" />
-      <option name="project" value="LOCAL" />
-      <updated>1454582225808</updated>
-    </task>
-    <task id="LOCAL-00336" summary="augustus tools&#10;">
-      <created>1454624482576</created>
-      <option name="number" value="00336" />
-      <option name="project" value="LOCAL" />
-      <updated>1454624482576</updated>
-    </task>
     <task id="LOCAL-00337" summary="augustus tools&#10;">
       <created>1454624616392</created>
       <option name="number" value="00337" />
@@ -1099,13 +1068,32 @@
       <option name="project" value="LOCAL" />
       <updated>1455553444223</updated>
     </task>
-    <option name="localTasksCounter" value="383" />
+    <task id="LOCAL-00383" summary="augustus tools&#10;">
+      <created>1455837965855</created>
+      <option name="number" value="00383" />
+      <option name="project" value="LOCAL" />
+      <updated>1455837965856</updated>
+    </task>
+    <task id="LOCAL-00384" summary="augustus tools&#10;">
+      <created>1455838112825</created>
+      <option name="number" value="00384" />
+      <option name="project" value="LOCAL" />
+      <updated>1455838112825</updated>
+    </task>
+    <task id="LOCAL-00385" summary="augustus tools&#10;">
+      <created>1455838280555</created>
+      <option name="number" value="00385" />
+      <option name="project" value="LOCAL" />
+      <updated>1455838280555</updated>
+    </task>
+    <option name="localTasksCounter" value="386" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1920" height="1055" extended-state="0" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1122,7 +1110,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20021299" sideWeight="0.4978678" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1522,7 +1509,7 @@
         <state vertical-scroll-proportion="0.35526314">
           <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding>
-            <element signature="e#55#70#0" expanded="true" />
+            <element signature="e#55#70#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1547,8 +1534,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/filter/filter_by_mean_quality_per_lane.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.5350877">
-          <caret line="86" column="108" selection-start-line="86" selection-start-column="108" selection-end-line="86" selection-end-column="108" />
+        <state vertical-scroll-proportion="0.92105263">
+          <caret line="84" column="40" selection-start-line="84" selection-start-column="40" selection-end-line="84" selection-end-column="40" />
           <folding />
         </state>
       </provider>
