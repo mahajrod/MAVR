@@ -88,7 +88,7 @@ for sample in samples:
 
         #print filter_string
         #os.system(filter_string)
-
+        FaCut.timelog = "%s.timelog" % prefix_list[lane_number*2]
         FaCut.filter_by_mean_quality(args.average_quality_threshold, left_reads_file, right_reads_file,
                                      prefix_list[lane_number*2], quality_type=args.score_type,
                                      stat_file="%s.stat" % prefix_list[lane_number*2])
