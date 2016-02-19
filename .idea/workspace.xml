@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/filter/filter_by_mean_quality_per_lane.py" afterPath="$PROJECT_DIR$/scripts/filter/filter_by_mean_quality_per_lane.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/filter/filter_by_trimmomatic_per_lane.py" afterPath="$PROJECT_DIR$/scripts/filter/filter_by_trimmomatic_per_lane.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -73,21 +72,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="filter_by_trimmomatic_per_lane.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="filter_by_trimmomatic_per_lane.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/filter/filter_by_trimmomatic_per_lane.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4473684">
-              <caret line="63" column="27" selection-start-line="63" selection-start-column="27" selection-end-line="63" selection-end-column="27" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="58" column="51" selection-start-line="58" selection-start-column="51" selection-end-line="58" selection-end-column="51" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="filter_by_mean_quality_per_lane.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="filter_by_mean_quality_per_lane.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/filter/filter_by_mean_quality_per_lane.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="27" />
+            <state vertical-scroll-proportion="0.9605263">
+              <caret line="86" column="9" selection-start-line="86" selection-start-column="9" selection-end-line="86" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -158,8 +157,8 @@
         <option value="$PROJECT_DIR$/projects/nxf/extract_ncf_exon_lengthes.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/extract_exon_lengths_from_genbank_file.py" />
         <option value="$PROJECT_DIR$/Routines/Sequence.py" />
-        <option value="$PROJECT_DIR$/scripts/filter/filter_by_mean_quality_per_lane.py" />
         <option value="$PROJECT_DIR$/scripts/filter/filter_by_trimmomatic_per_lane.py" />
+        <option value="$PROJECT_DIR$/scripts/filter/filter_by_mean_quality_per_lane.py" />
       </list>
     </option>
   </component>
@@ -793,12 +792,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00338" summary="augustus tools&#10;">
-      <created>1454637720659</created>
-      <option name="number" value="00338" />
-      <option name="project" value="LOCAL" />
-      <updated>1454637720659</updated>
-    </task>
     <task id="LOCAL-00339" summary="augustus tools&#10;">
       <created>1454649884127</created>
       <option name="number" value="00339" />
@@ -1087,7 +1080,13 @@
       <option name="project" value="LOCAL" />
       <updated>1455838736105</updated>
     </task>
-    <option name="localTasksCounter" value="387" />
+    <task id="LOCAL-00387" summary="augustus tools&#10;">
+      <created>1455838961536</created>
+      <option name="number" value="00387" />
+      <option name="project" value="LOCAL" />
+      <updated>1455838961536</updated>
+    </task>
+    <option name="localTasksCounter" value="388" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1525,18 +1524,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/filter/filter_by_mean_quality_per_lane.py">
+    <entry file="file://$PROJECT_DIR$/scripts/filter/filter_by_trimmomatic_per_lane.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="27" />
+          <caret line="58" column="51" selection-start-line="58" selection-start-column="51" selection-end-line="58" selection-end-column="51" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/filter/filter_by_trimmomatic_per_lane.py">
+    <entry file="file://$PROJECT_DIR$/scripts/filter/filter_by_mean_quality_per_lane.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4473684">
-          <caret line="63" column="27" selection-start-line="63" selection-start-column="27" selection-end-line="63" selection-end-column="27" />
+        <state vertical-scroll-proportion="0.9605263">
+          <caret line="86" column="9" selection-start-line="86" selection-start-column="9" selection-end-line="86" selection-end-column="9" />
           <folding />
         </state>
       </provider>
