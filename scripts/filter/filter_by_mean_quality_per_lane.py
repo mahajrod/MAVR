@@ -6,7 +6,7 @@ import os
 import sys
 import argparse
 
-from Tools.Filter import Trimmomatic
+from Tools.Filter import FaCut
 #from Tools.Filter import FastQC
 
 from Routines.File import check_path, save_mkdir
@@ -69,15 +69,17 @@ for sample in samples:
     number_of_lanes = len(filtered_files_from_sample_dir) / 2
 
     for lane_number in range(0, number_of_lanes):
-        output_prefix = "%s%s.TMF" % (sample_out_dir, sample)
+        #output_prefix = "%s%s.TMF" % (sample_out_dir, sample)
         left_reads_file = filtered_files_from_sample_dir[lane_number*2]
         right_reads_file = filtered_files_from_sample_dir[lane_number*2 + 1]
 
+        """
         filter_string = "time filter_by_mean_quality -t %i -f %s -r %s -q %s -p %s" % (args.average_quality_threshold,
                                                                                        left_reads_file,
                                                                                        right_reads_file,
                                                                                        args.score_type,
                                                                                        prefix_list[lane_number*2])
+        """
         #print(left_reads_file)
         #print(right_reads_file)
         #print(args.score_type)
@@ -85,5 +87,9 @@ for sample in samples:
         #print(prefix_list[lane_number*2])
 
         #print filter_string
-        os.system(filter_string)
+        #os.system(filter_string)
+
+        FaCut.filter_by_mean_quality(args.average_quality_threshold, left_reads_file, right_reads_file,
+                                     prefix_list[lane_number*2], quality_type=args.score_type,
+                                     stat_file="%s.stat" % prefix_list[lane_number*2])
 
