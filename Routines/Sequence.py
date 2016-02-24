@@ -8,6 +8,7 @@ from collections import OrderedDict
 import numpy as np
 
 from Bio import SeqIO
+from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
 
@@ -189,6 +190,21 @@ class SequenceRoutines():
                                                            str(entry[4]), ",".join(map(str, entry[5]))))
 
         os.remove("tmp.idx")
+
+    @staticmethod
+    def get_degenerate_codon_set(genetic_code_table, type="dna"):
+        if type == "dna":
+            nucleotides = ["A", "T", "G", "C"]
+        elif type == "rna":
+            nucleotides = ["A", "U", "G", "C"]
+        degenerate_codon_set = set()
+        for pos_1 in nucleotides:
+            for pos_2 in nucleotides:
+                codon = pos_1 + pos_2 + "N"
+                if Seq(codon).translate(table=genetic_code_table) != "X":
+                    degenerate_codon_set.add(codon)
+        return degenerate_codon_set
+
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
     lengths_dict = OrderedDict({})

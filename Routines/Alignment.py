@@ -4,6 +4,8 @@ from Bio import SearchIO, SeqIO, AlignIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.Align import MultipleSeqAlignment
+
+from Routines import SequenceRoutines
 from Data.Nucleotides import back_degenerate_nucleotides
 
 
@@ -89,7 +91,7 @@ class AlignmentRoutines:
 
     @staticmethod
     def extract_degenerate_sites_from_codon_alignment(alignment, genetic_code_table=1):
-
+        degenerate_codon_set = SequenceRoutines.get_degenerate_codon_set(genetic_code_table)
         number_of_alignments = len(alignment)
         alignment_length = len(alignment[0])
         if alignment_length % 3 > 0:
@@ -101,18 +103,19 @@ class AlignmentRoutines:
             position_strings = []
             for j in range(0, 3):
                 position_strings.append(list(set(alignment[:, 3*i + j])))
-            #print position_strings
             if (len(position_strings[0]) > 1) or (len(position_strings[1]) > 1):
                 continue
-            #print "aaaa"
-            #print position_strings
             ambigious_codon = position_strings[0][0] + position_strings[1][0] + "N"
-
+            """
             if Seq(ambigious_codon).translate(table=genetic_code_table) == "X":
                 continue
             else:
                 degenerate_columns.append(alignment[:, 3*i + 2])
                 #print(i*3 +3)
+            """
+            if ambigious_codon in degenerate_codon_set:
+                degenerate_columns.append(alignment[:, 3*i + 2])
+
         number_of_degenerate_columns = len(degenerate_columns)
         record_list = []
         for i in range(0, number_of_alignments):
