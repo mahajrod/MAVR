@@ -77,9 +77,4 @@ for family in families_with_errors:
     cds_fam_dict.pop(family, None)
 
 families_with_errors.write(args.fam_error)
-cds_fam_dict.write(args.output)
-
-
-
-
-
+cds_fam_dict.write(args.output, splited_values=True)
