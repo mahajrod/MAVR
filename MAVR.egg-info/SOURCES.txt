@@ -4,6 +4,8 @@ Converters/Converters.py
 Converters/__init__.py
 CustomCollections/GeneralCollections.py
 CustomCollections/__init__.py
+Data/Nucleotides.py
+Data/__init__.py
 Download/NCBI.py
 Download/__init__.py
 GeneSynonyms/MitoGenesSynonyms.py
@@ -90,6 +92,7 @@ Tools/Expression/Cufflinks.py
 Tools/Expression/__init__.py
 Tools/Filter/Adapters.py
 Tools/Filter/Cookiecutter.py
+Tools/Filter/FaCut.py
 Tools/Filter/FastQC.py
 Tools/Filter/TrimGalore.py
 Tools/Filter/Trimmomatic.py

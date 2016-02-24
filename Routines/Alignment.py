@@ -3,6 +3,8 @@ import os
 from Bio import SearchIO, SeqIO, AlignIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
+from Bio.Align import MultipleSeqAlignment
+from Data.Nucleotides import back_degenerate_nucleotides
 
 
 class AlignmentRoutines:
@@ -84,4 +86,52 @@ class AlignmentRoutines:
             for coord_tuple in sequence_coordinates:
                 coord_fd.write("%i\t%i\t%i\n" % (coord_tuple[1] - coord_tuple[0] + 1, coord_tuple[0], coord_tuple[1]))
         return merged_alignment, sequence_lengthes, sequence_coordinates
+
+    @staticmethod
+    def extract_degenerate_sites_from_codon_alignment(alignment, genetic_code_table=1):
+
+        number_of_alignments = len(alignment)
+        alignment_length = len(alignment[0])
+        if alignment_length % 3 > 0:
+            raise(ValueError, "Length of alignment is not divisible by 3")
+        else:
+            number_of_codons = int(alignment_length / 3)
+        degenerate_columns = []
+        for i in range(0, number_of_codons):
+            position_strings = []
+            for j in range(0, 3):
+                position_strings.append(list(set(alignment[:, 3*i + j])))
+            #print position_strings
+            if (len(position_strings[0]) > 1) or (len(position_strings[1]) > 1):
+                continue
+            #print "aaaa"
+            #print position_strings
+            ambigious_codon = position_strings[0][0] + position_strings[1][0] + "N"
+
+            if Seq(ambigious_codon).translate(table=genetic_code_table) == "X":
+                continue
+            else:
+                degenerate_columns.append(alignment[:, 3*i + 2])
+                #print(i*3 +3)
+        number_of_degenerate_columns = len(degenerate_columns)
+        record_list = []
+        for i in range(0, number_of_alignments):
+            string = ""
+            for j in range(0, number_of_degenerate_columns):
+                string += degenerate_columns[j][i]
+            record = SeqRecord(seq=Seq(string), id=alignment[i].id)
+            record_list.append(record)
+
+        #print(number_of_alignments, alignment_length)
+        degenerate_alignment = MultipleSeqAlignment(record_list)
+
+        return degenerate_alignment
+
+    def extract_degenerate_sites_from_codon_alignment_from_file(self, alignment_file, output_alignment_file,
+                                                                genetic_code_table=1, format="fasta"):
+        alignment = AlignIO.read(alignment_file, format=format)
+        degenerate_alignment = self.extract_degenerate_sites_from_codon_alignment(alignment,
+                                                                                  genetic_code_table=genetic_code_table)
+
+        AlignIO.write([degenerate_alignment], output_alignment_file, format=format)
 

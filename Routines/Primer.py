@@ -3,23 +3,11 @@ __author__ = 'mahajrod'
 from Bio import SeqIO
 from Bio import AlignIO
 
+from Data.Nucleotides import degenerated_nucleotides
+
 
 class PrimerRoutines:
-    def __init__(self):
-        self.degenerated_nucleotides = {
-                                        "R": 	["A", "G"],
-                                        "Y": 	["C", "T"],
-                                        "S": 	["G", "C"],
-                                        "W": 	["A", "T"],
-                                        "K": 	["G", "T"],
-                                        "M": 	["A", "C"],
-                                        "B": 	["C", "G", "T"],
-                                        "D": 	["A", "G", "T"],
-                                        "H": 	["A", "C", "T"],
-                                        "V": 	["A", "C", "G"],
-                                        "N": 	["A", "C", "G", "T"]
-                                        }
-
+    
     def count_GC_AT_composition(self, primer_sequence):
         GC_count_min = 0
         GC_count_max = 0
@@ -34,7 +22,7 @@ class PrimerRoutines:
                 AT_count_max += 1
                 AT_count_min += 1
             else:
-                if nucleotide not in self.degenerated_nucleotides:
+                if nucleotide not in degenerated_nucleotides:
                     raise ValueError("Wrong nucleotide")
                 else:
                     if nucleotide == "S":

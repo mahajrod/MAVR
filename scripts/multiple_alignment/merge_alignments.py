@@ -3,13 +3,13 @@ __author__ = 'Sergei F. Kliver'
 
 import argparse
 
-from Routines import AlignmentRoutines, File
+from Routines import AlignmentRoutines, FileRoutines
 
 
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input", action="store", dest="input", required=True,
-                    type=lambda s: File.make_list_of_path_to_files(s.split(",")),
+                    type=lambda s: FileRoutines.make_list_of_path_to_files(s.split(",")),
                     help="Comma-separated list of files/directories with alignments")
 parser.add_argument("-o", "--output", action="store", dest="output", required=True,
                     help="File to write merged alignment")
