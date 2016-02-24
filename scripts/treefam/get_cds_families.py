@@ -20,7 +20,8 @@ parser.add_argument("-o", "--output_file", action="store", dest="output", requir
 #                    help="Directory with cds files. Filenames must look like <species>.cds")
 parser.add_argument("-a", "--accordance_dir", action="store", dest="accordance_dir", required=True,
                     help="Directory with cds-to-pep id accordance files. Filenames must look like <species>.accordance")
-
+parser.add_argument("-f", "--families_with_errors", action="store", dest="fam_error", default="error.fam.ids",
+                    help="File to write ids of families with errors")
 parser.add_argument("-s", "--species_set", action="store", dest="species_set",
                     help="Comma-separated list of species.")
 
@@ -59,6 +60,7 @@ else:
         gene_list = pep_name.split(args.name_separator)
         return gene_list[-1], args.name_separator.join(gene_list[:-1])
 
+families_with_errors = set()
 for family in pep_fam_dict:
     cds_fam_dict[family] = []
     for pep in pep_fam_dict[family]:
@@ -69,6 +71,10 @@ for family in pep_fam_dict:
             cds_fam_dict[family].append(cds_name)
         else:
             print("%s %s %s doesn't have associated cds in accordance file" % (family, species, pep_name))
+            families_with_errors.add(family)
+
+for family in families_with_errors:
+    cds_fam_dict.pop(family, None)
 
 cds_fam_dict.write(args.output)
 
