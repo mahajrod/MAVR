@@ -5,7 +5,7 @@ import argparse
 
 from Bio import SeqIO
 
-from CustomCollections.GeneralCollections import SynDict
+from CustomCollections.GeneralCollections import SynDict, IdSet
 
 
 parser = argparse.ArgumentParser()
@@ -60,7 +60,7 @@ else:
         gene_list = pep_name.split(args.name_separator)
         return gene_list[-1], args.name_separator.join(gene_list[:-1])
 
-families_with_errors = set()
+families_with_errors = IdSet()
 for family in pep_fam_dict:
     cds_fam_dict[family] = []
     for pep in pep_fam_dict[family]:
@@ -76,6 +76,7 @@ for family in pep_fam_dict:
 for family in families_with_errors:
     cds_fam_dict.pop(family, None)
 
+families_with_errors.write(args.fam_error)
 cds_fam_dict.write(args.output)
 
 
