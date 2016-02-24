@@ -68,7 +68,7 @@ for family in pep_fam_dict:
                 "%s%s%s" % (accordance_dict[species][pep_name], args.name_separator, species)
             cds_fam_dict[family].append(cds_name)
         else:
-            print("%s doesn't have associated cds in accordance file" % pep_name)
+            print("%s %s doesn't have associated cds in accordance file" % (species, pep_name))
 
 cds_fam_dict.write(args.output)
 
