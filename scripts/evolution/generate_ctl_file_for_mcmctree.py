@@ -51,6 +51,7 @@ parser.add_argument("--rgene_gamma_beta", action="store", dest="rgene_gamma_beta
 
 args = parser.parse_args()
 
+
 MCMCTree.generate_ctl_file(args.input, args.tree, args.output, args.ctl_file, seed=-1,
                            num_of_partitions=args.num_of_partitions,seq_type=args.seq_type, use_data=1,
                            clock=args.clock_type, root_age=args.root_age,
