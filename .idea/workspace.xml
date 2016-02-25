@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/treefam/get_cds_families.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/multiple_alignment/get_codon_alignment.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Alignment.py" afterPath="$PROJECT_DIR$/Routines/Alignment.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Sequence.py" afterPath="$PROJECT_DIR$/Routines/Sequence.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -32,16 +31,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="merge_fam_files.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/treefam/merge_fam_files.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="compare_clusters.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/expansion/compare_clusters.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -72,14 +61,46 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="get_cds_families.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="get_cds_families.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/treefam/get_cds_families.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.23684211">
-              <caret line="45" column="5" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="66" column="43" selection-start-line="66" selection-start-column="43" selection-end-line="66" selection-end-column="43" />
               <folding>
                 <element signature="e#55#70#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Alignment.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Routines/Alignment.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="46" column="13" selection-start-line="46" selection-start-column="8" selection-end-line="48" selection-end-column="100" />
+              <folding>
+                <element signature="e#24#33#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="extract_substitutions.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/extract_substitutions.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="get_codon_alignment.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_codon_alignment.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.118421055">
+              <caret line="8" column="34" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -94,31 +115,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="extract_selected_families_from_fam_file.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/treefam/extract_selected_families_from_fam_file.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="extract_single_gene_families_from_cafe_input.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/treefam/extract_single_gene_families_from_cafe_input.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="label_pep_with_species_name.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/treefam/label_pep_with_species_name.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="merge_alignments.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/merge_alignments.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="11" column="18" selection-start-line="10" selection-start-column="0" selection-end-line="12" selection-end-column="85" />
               <folding />
             </state>
           </provider>
@@ -140,7 +151,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/examples/KSeq_test/kseq_test.c" />
         <option value="$PROJECT_DIR$/Tools/HMMER/HMMER3.py" />
         <option value="$PROJECT_DIR$/scripts/hmmer3/assign_proteins_to_families.py" />
         <option value="$PROJECT_DIR$/projects/cat_genomes/fishing_cat_exonerate_ferret.slurm" />
@@ -188,9 +198,10 @@
         <option value="$PROJECT_DIR$/scripts/multiple_alignment/merge_alignments.py" />
         <option value="$PROJECT_DIR$/scripts/multiple_alignment/extract_degenerate_sites_from_codon_alignment.py" />
         <option value="$PROJECT_DIR$/Data/Nucleotides.py" />
-        <option value="$PROJECT_DIR$/Routines/Alignment.py" />
         <option value="$PROJECT_DIR$/Routines/Sequence.py" />
         <option value="$PROJECT_DIR$/scripts/treefam/get_cds_families.py" />
+        <option value="$PROJECT_DIR$/Routines/Alignment.py" />
+        <option value="$PROJECT_DIR$/scripts/multiple_alignment/get_codon_alignment.py" />
       </list>
     </option>
   </component>
@@ -202,8 +213,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="44" />
-    <option name="y" value="38" />
+    <option name="x" value="27" />
+    <option name="y" value="25" />
     <option name="width" value="1920" />
     <option name="height" value="1055" />
   </component>
@@ -462,8 +473,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/scripts/treefam" />
       <recent name="$PROJECT_DIR$/scripts/multiple_alignment" />
+      <recent name="$PROJECT_DIR$/scripts/treefam" />
       <recent name="$PROJECT_DIR$/projects/lizard_genomes" />
       <recent name="$PROJECT_DIR$/Tools/Filter" />
       <recent name="$PROJECT_DIR$/scripts/filter" />
@@ -777,42 +788,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00345" summary="augustus tools&#10;">
-      <created>1454750489433</created>
-      <option name="number" value="00345" />
-      <option name="project" value="LOCAL" />
-      <updated>1454750489433</updated>
-    </task>
-    <task id="LOCAL-00346" summary="augustus tools&#10;">
-      <created>1454750509137</created>
-      <option name="number" value="00346" />
-      <option name="project" value="LOCAL" />
-      <updated>1454750509138</updated>
-    </task>
-    <task id="LOCAL-00347" summary="augustus tools&#10;">
-      <created>1454751065042</created>
-      <option name="number" value="00347" />
-      <option name="project" value="LOCAL" />
-      <updated>1454751065042</updated>
-    </task>
-    <task id="LOCAL-00348" summary="augustus tools&#10;">
-      <created>1454810913093</created>
-      <option name="number" value="00348" />
-      <option name="project" value="LOCAL" />
-      <updated>1454810913093</updated>
-    </task>
-    <task id="LOCAL-00349" summary="augustus tools&#10;">
-      <created>1454810988557</created>
-      <option name="number" value="00349" />
-      <option name="project" value="LOCAL" />
-      <updated>1454810988557</updated>
-    </task>
-    <task id="LOCAL-00350" summary="augustus tools&#10;">
-      <created>1454814225444</created>
-      <option name="number" value="00350" />
-      <option name="project" value="LOCAL" />
-      <updated>1454814225445</updated>
-    </task>
     <task id="LOCAL-00351" summary="augustus tools&#10;">
       <created>1454814254493</created>
       <option name="number" value="00351" />
@@ -1071,11 +1046,47 @@
       <option name="project" value="LOCAL" />
       <updated>1456276538560</updated>
     </task>
-    <option name="localTasksCounter" value="394" />
+    <task id="LOCAL-00394" summary="filter tools&#10;">
+      <created>1456354651635</created>
+      <option name="number" value="00394" />
+      <option name="project" value="LOCAL" />
+      <updated>1456354651635</updated>
+    </task>
+    <task id="LOCAL-00395" summary="filter tools&#10;">
+      <created>1456354904183</created>
+      <option name="number" value="00395" />
+      <option name="project" value="LOCAL" />
+      <updated>1456354904183</updated>
+    </task>
+    <task id="LOCAL-00396" summary="filter tools&#10;">
+      <created>1456357298348</created>
+      <option name="number" value="00396" />
+      <option name="project" value="LOCAL" />
+      <updated>1456357298349</updated>
+    </task>
+    <task id="LOCAL-00397" summary="filter tools&#10;">
+      <created>1456357571935</created>
+      <option name="number" value="00397" />
+      <option name="project" value="LOCAL" />
+      <updated>1456357571935</updated>
+    </task>
+    <task id="LOCAL-00398" summary="filter tools&#10;">
+      <created>1456357659722</created>
+      <option name="number" value="00398" />
+      <option name="project" value="LOCAL" />
+      <updated>1456357659722</updated>
+    </task>
+    <task id="LOCAL-00399" summary="filter tools&#10;">
+      <created>1456357793202</created>
+      <option name="number" value="00399" />
+      <option name="project" value="LOCAL" />
+      <updated>1456357793202</updated>
+    </task>
+    <option name="localTasksCounter" value="400" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="44" y="38" width="1920" height="1055" extended-state="0" />
+    <frame x="27" y="25" width="1920" height="1055" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1085,7 +1096,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23933902" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23933902" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
@@ -1163,20 +1174,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/SeqAnalysis/SeqAnalysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="435" column="13" selection-start-line="435" selection-start-column="8" selection-end-line="435" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Filter/Trimmomatic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Routines/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1385,32 +1382,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/merge_alignments.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27631578">
-          <caret line="14" column="58" selection-start-line="14" selection-start-column="58" selection-end-line="14" selection-end-column="58" />
-          <folding>
-            <element signature="e#55#70#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/primers/filter_degeprime_output.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.25657895">
           <caret line="13" column="41" selection-start-line="13" selection-start-column="41" selection-end-line="34" selection-end-column="37" />
           <folding>
             <element signature="e#54#64#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/Alignment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="105" column="2" selection-start-line="105" selection-start-column="2" selection-end-line="105" selection-end-column="2" />
-          <folding>
-            <element signature="e#24#33#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1565,11 +1542,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/treefam/get_cds_families.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23684211">
-          <caret line="45" column="5" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="66" column="43" selection-start-line="66" selection-start-column="43" selection-end-line="66" selection-end-column="43" />
           <folding>
             <element signature="e#55#70#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/Alignment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="13" selection-start-line="46" selection-start-column="8" selection-end-line="48" selection-end-column="100" />
+          <folding>
+            <element signature="e#24#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/extract_substitutions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/merge_alignments.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="18" selection-start-line="10" selection-start-column="0" selection-end-line="12" selection-end-column="85" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_codon_alignment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.118421055">
+          <caret line="8" column="34" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>

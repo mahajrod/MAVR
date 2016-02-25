@@ -7,6 +7,7 @@ from Bio.Align import MultipleSeqAlignment
 
 from Routines import SequenceRoutines
 from Data.Nucleotides import back_degenerate_nucleotides
+from CustomCollections.GeneralCollections import SynDict
 
 
 class AlignmentRoutines:
@@ -22,7 +23,8 @@ class AlignmentRoutines:
         return id_set
 
     @staticmethod
-    def get_codon_alignment(protein_alignment, nucleotide_seq_dict, codon_alignment_file):
+    def get_codon_alignment(protein_alignment, nucleotide_seq_dict, codon_alignment_file,
+                            protein2cds_accordance_dict=None):
         codon_alignment = {}
         for record in protein_alignment:
             nucleotide_seq = ""
@@ -32,7 +34,7 @@ class AlignmentRoutines:
                     nucleotide_seq += "---"
                     continue
                 else:
-                    nucleotide_seq += str(nucleotide_seq_dict[record.id].seq[3*i:3*(i+1)])
+                    nucleotide_seq += str(nucleotide_seq_dict[protein2cds_accordance_dict[record.id] if protein2cds_accordance_dict else record.id].seq[3*i:3*(i+1)])
                     i += 1
             codon_alignment[record.id] = SeqRecord(Seq(nucleotide_seq),
                                                    id=record.id,
@@ -43,11 +45,18 @@ class AlignmentRoutines:
         return codon_alignment
 
     def get_codon_alignment_from_files(self, protein_aln_file, nucleotide_seq_file, codon_alignment_file,
+                                       cds2protein_accordance_file=None,
                                        alignment_format="fasta", nucleotide_sequence_format="fasta"):
         protein_aln_dict = AlignIO.read(protein_aln_file, format=alignment_format)
         nucleotide_seq_dict = SeqIO.index_db("nuc_tmp.idx", nucleotide_seq_file, format=nucleotide_sequence_format)
 
-        self.get_codon_alignment(protein_aln_dict, nucleotide_seq_dict, codon_alignment_file)
+        protein2cds_accordance_dict = None
+        if cds2protein_accordance_file:
+            protein2cds_accordance_dict = SynDict()
+            protein2cds_accordance_dict.read(cds2protein_accordance_file, key_index=1, value_index=0)
+
+        self.get_codon_alignment(protein_aln_dict, nucleotide_seq_dict, codon_alignment_file,
+                                 protein2cds_accordance_dict=protein2cds_accordance_dict)
 
         os.remove("nuc_tmp.idx")
 
