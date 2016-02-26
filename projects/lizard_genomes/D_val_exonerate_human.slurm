@@ -15,7 +15,7 @@ PEP_FILE="${SPLITED_PEP_DIR}homo_sapiens_no_selenocytein_pep_${SLURM_ARRAY_TASK_
 
 GENOME="/work/pavlov/okochenova/genomes/Darevskia/D_val_v1.fa"
 
-EXONERATE_OUTPUT_DIR="/work/pavlov/okochenova/genomes_workdir/Duni/exonerate_human_pep/"
+EXONERATE_OUTPUT_DIR="/work/pavlov/okochenova/genomes_workdir/Dval/exonerate_human_pep/"
 mkdir -p ${EXONERATE_OUTPUT_DIR}
 EXONERATE_OUTPUT_FILE="${EXONERATE_OUTPUT_DIR}/exonerate_human_pep_${SLURM_ARRAY_TASK_ID}.out"
 

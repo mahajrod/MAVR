@@ -88,6 +88,9 @@ Tools/Bedtools/Intersect.py
 Tools/Bedtools/__init__.py
 Tools/BioFormats/BioConvert.py
 Tools/BioFormats/__init__.py
+Tools/Evolution/__init__.py
+Tools/Evolution/PAML/MCMCTree.py
+Tools/Evolution/PAML/__init__.py
 Tools/Expression/Cufflinks.py
 Tools/Expression/__init__.py
 Tools/Filter/Adapters.py

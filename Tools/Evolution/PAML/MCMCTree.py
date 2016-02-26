@@ -52,9 +52,9 @@ class MCMCTree(Tool):
     def generate_ctl_file(seq_file, tree_file, out_file, ctl_file, seed=-1, num_of_partitions=1,
                           seq_type="nucleotides", use_data=1, clock="global", root_age=None,
                           model="HKY85", ncatG=5, alpha_for_gamma_rates_at_sites=0.5,
-                          birth=1, death=1, sampling=0.1,
-                          alpha_gamma_alpha=1, alpha_gamma_beta=1, kappa_gamma_alpha=6, kappa_gamma_beta=2,
-                          rgene_gamma_alpha=2, rgene_gamma_beta=2, sigma2_gamma_alpha=1, sigma2_gamma_beta=10,
+                          birth=1.0, death=1.0, sampling=0.1,
+                          alpha_gamma_alpha=1.0, alpha_gamma_beta=1.0, kappa_gamma_alpha=6.0, kappa_gamma_beta=2.0,
+                          rgene_gamma_alpha=2.0, rgene_gamma_beta=2.0, sigma2_gamma_alpha=1.0, sigma2_gamma_beta=10.0,
                           remove_ambiguity_sites=False,
                           auto_finetune=True, times=0.1, rates=0.1, mixing=0.1, paras=0.1, RateParas=0.1, FossilErr=0.1,
                           num_of_burning=2000, sampling_frequency=2, number_of_samples=20000):
@@ -115,9 +115,9 @@ class MCMCTree(Tool):
 
         options += "\n"
 
-        options += "BDparas = %i %i %f * birth, death, sampling\n" % (birth, death, sampling)
-        options += "kappa_gamma = %i %i * gamma prior for kappa\n" % (kappa_gamma_alpha, kappa_gamma_beta)
-        options += "alpha_gamma = %i %i * gamma prior for alpha\n" % (alpha_gamma_alpha, alpha_gamma_beta)
+        options += "BDparas = %f %f %f * birth, death, sampling\n" % (birth, death, sampling)
+        options += "kappa_gamma = %f %f * gamma prior for kappa\n" % (kappa_gamma_alpha, kappa_gamma_beta)
+        options += "alpha_gamma = %f %f * gamma prior for alpha\n" % (alpha_gamma_alpha, alpha_gamma_beta)
 
         options += "\n"
 
@@ -153,9 +153,9 @@ class MCMCTree(Tool):
         the posterior time and rate estimates.
 
         """
-        options += "rgene_gamma = %i %i * gammaDir prior for rate for genes\n" % (rgene_gamma_alpha, rgene_gamma_beta)
+        options += "rgene_gamma = %f %f * gammaDir prior for rate for genes\n" % (rgene_gamma_alpha, rgene_gamma_beta)
         if clock_type > 1:
-            options += "sigma2_gamma = %i %i * gammaDir prior for sigma^2     (for clock=2 or 3)\n" % \
+            options += "sigma2_gamma = %f %f * gammaDir prior for sigma^2     (for clock=2 or 3)\n" % \
                        (sigma2_gamma_alpha, sigma2_gamma_beta)
 
         options += "\n"
@@ -165,7 +165,7 @@ class MCMCTree(Tool):
 
         options += "\n"
 
-        options += "print = 1\n * write mcmc and summary to disk (mcmc.out)"
+        options += "print = 1 * write mcmc and summary to disk (mcmc.out)\n"
         """
         burnin, sampfreq and nsample: in our example, the program will discard thefirst 2,000 iterations as burn-in,
         and then it will sample every 2 iterations until it has gathered 20,000 samples. In total, the MCMC will run
@@ -191,9 +191,9 @@ class MCMCTree(Tool):
     def run(self, seq_file, tree_file, out_file, ctl_file, seed=-1, num_of_partitions=1,
             seq_type="nucleotides", use_data=1, clock="global", root_age=None,
             model="HKY85", ncatG=5, alpha_for_gamma_rates_at_sites=0.5,
-            birth=1, death=1, sampling=0.1,
-            alpha_gamma_alpha=1, alpha_gamma_beta=1, kappa_gamma_alpha=6, kappa_gamma_beta=2,
-            rgene_gamma_alpha=2, rgene_gamma_beta=2, sigma2_gamma_alpha=1, sigma2_gamma_beta=10,
+            birth=1.0, death=1.0, sampling=0.1,
+            alpha_gamma_alpha=1.0, alpha_gamma_beta=1.0, kappa_gamma_alpha=6.0, kappa_gamma_beta=2.0,
+            rgene_gamma_alpha=2.0, rgene_gamma_beta=2.0, sigma2_gamma_alpha=1.0, sigma2_gamma_beta=10.0,
             remove_ambiguity_sites=False,
             auto_finetune=True, times=0.1, rates=0.1, mixing=0.1, paras=0.1, RateParas=0.1, FossilErr=0.1,
             num_of_burning=2000, sampling_frequency=2, number_of_samples=20000):

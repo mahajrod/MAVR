@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-s", "--input", action="store", dest="input", required=True,
                     help="Input file alignment")
 parser.add_argument("-c", "--ctl_file", action="store", dest="ctl_file", default="mcmctree.ctl",
-                    help="File to write configuration. Default: mcmctree")
+                    help="File to write configuration. Default: mcmctree.ctl")
 parser.add_argument("-t", "--tree_file", action="store", dest="tree",
                     help="File with phylogenetic tree with calibrations")
 parser.add_argument("-o", "--output", action="store", dest="output",
@@ -34,20 +34,22 @@ parser.add_argument("--alpha_for_gamma_rates_at_sites", action="store", dest="al
                          "model, while alpha = 0 means that the model of one rate for all sites will be used. ")
 parser.add_argument("--num_of_burning", action="store", dest="num_of_burning", type=int,
                     default=2000,
-                    help="Number of generation to be counted as burning phase")
+                    help="Number of generation to be counted as burning phase. Default: 2000")
 parser.add_argument("--sampling_frequency", action="store", dest="sampling_frequency", type=int,
                     default=2,
-                    help="Sampling frequency(sample every NUM generations)")
+                    help="Sampling frequency(sample every NUM generations). Default: 2")
 parser.add_argument("--number_of_samples", action="store", dest="number_of_samples", type=int,
                     default=20000,
-                    help="Number of samples retrieved from generations")
+                    help="Number of samples retrieved from generations. Default: 20000")
 parser.add_argument("--remove_ambiguity_sites", action="store_true", dest="remove_ambiguity_sites",
                     default=False,
                     help="Remove ambiguity sites")
-parser.add_argument("--rgene_gamma_alpha", action="store", dest="rgene_gamma_alpha", type=int, default=2,
-                    help="Specifies the shape(alpha) parameter in the gamma prior for the overall rate parameter mu")
-parser.add_argument("--rgene_gamma_beta", action="store", dest="rgene_gamma_beta", type=int, default=2,
-                    help="Specifies the scale(beta) parameterin the gamma prior for the overall rate parameter mu")
+parser.add_argument("--rgene_gamma_alpha", action="store", dest="rgene_gamma_alpha", type=float, default=2.0,
+                    help="Specifies the shape(alpha) parameter in the gamma prior for the overall rate parameter mu"
+                         "Default: 2")
+parser.add_argument("--rgene_gamma_beta", action="store", dest="rgene_gamma_beta", type=float, default=2.0,
+                    help="Specifies the scale(beta) parameterin the gamma prior for the overall rate parameter mu"
+                         "Default: 2")
 
 args = parser.parse_args()
 
