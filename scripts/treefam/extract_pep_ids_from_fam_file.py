@@ -19,3 +19,5 @@ out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
 
 id_list = IdList()
 id_list.read(args.fam_file, close_after_if_file_object=True, column_number=1, id_in_column_separator=",")
+id_list.write(args.output, close_after_if_file_object=True)
+
