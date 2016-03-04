@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#SBATCH --array=1-890%890
+#SBATCH --array=1-914%914
 #SBATCH --time=100:00:00         # Run time in hh:mm:ss
 #SBATCH --mem-per-cpu=4192       # Minimum memory required per CPU (in megabytes)
 #SBATCH --job-name=Dval_anolis
