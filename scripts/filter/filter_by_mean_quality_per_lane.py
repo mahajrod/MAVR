@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 
-# TODO: WORKS only for PE DATA
+# TODO: WORKS only for PE DATA and for illumina data
 import os
 import sys
 import argparse
@@ -33,6 +33,8 @@ parser.add_argument("-q", "--average_quality_threshold", action="store", dest="a
                          "Default - 15.")
 parser.add_argument("-u", "--score_type", action="store", dest="score_type", default="phred64",
                     help="Phred quality score type. Allowed: phred33, phred64. Default: phred64")
+parser.add_argument("-n", "--name_type", action="store", dest="name_type", default="short",
+                    help="Type of read name. Required to gather per tile filtering statistics. Default: short")
 args = parser.parse_args()
 
 samples = args.samples.split(",") if args.samples else sorted(os.listdir(args.samples_dir))
@@ -91,5 +93,6 @@ for sample in samples:
         FaCut.timelog = "%s.timelog" % prefix_list[lane_number*2]
         FaCut.filter_by_mean_quality(args.average_quality_threshold, left_reads_file, right_reads_file,
                                      prefix_list[lane_number*2], quality_type=args.score_type,
-                                     stat_file="%s.stat" % prefix_list[lane_number*2])
+                                     stat_file="%s.stat" % prefix_list[lane_number*2],
+                                     name_type=args.name_type)
 
