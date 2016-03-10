@@ -34,6 +34,8 @@ parser.add_argument("-w", "--low_limit", action="store", dest="low_limit", type=
                     help="Low limit of histogram without logscale")
 parser.add_argument("-g", "-high_limit", action="store", dest="high_limit", type=int, default=100,
                     help="High limit of histogram without logscale")
+parser.add_argument("-m", "--kmer_length", action="store", dest="kmer_length", type=int, default=23,
+                    help="Length of kmers. Default - 23")
 
 args = parser.parse_args()
 
