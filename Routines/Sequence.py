@@ -47,6 +47,7 @@ class SequenceRoutines():
         os.remove("tmp.idx")
         return lengths_dict
 
+
     @staticmethod
     def record_by_id_generator(record_dict, id_list, verbose=False):
         for record_id in id_list:
@@ -55,6 +56,10 @@ class SequenceRoutines():
             else:
                 if verbose:
                     sys.stderr.write("Not found: %s\n" % record_id)
+    @staticmethod
+    def record_from_dict_generator(record_dict):
+        for record_id in record_dict:
+            yield record_dict[record_id]
 
     def extract_sequence_by_ids(self, sequence_file, id_file, output_file, format="fasta", verbose=False):
         tmp_index_file = "tmp.idx"
@@ -164,8 +169,9 @@ class SequenceRoutines():
             for feature in record_dict[record_id].features:
                 taxonomy = ";".join(record_dict[record_id].annotations["taxonomy"])
                 species = record_dict[record_id].annotations["organism"]
-                if feature.type == "mRNA":
-                    product = ";".join(feature.qualifiers["product"])
+                if feature.type == "mRNA" or feature.type == "transcript":
+                    product = ";".join(feature.qualifiers["product"]) if "product" in feature.qualifiers else "."
+                    transcript_id = ",".join(feature.qualifiers["transcript_id"]) if "transcript_id" in feature.qualifiers else "."
                     strand = feature.location.strand
                     exon_lengths = []
                     #print feature.sub_features
@@ -176,7 +182,7 @@ class SequenceRoutines():
                         exon_len = location.end - location.start
                         exon_lengths.append(exon_len)
 
-                    output_list.append([species, taxonomy, record_id, product, strand, exon_lengths])
+                    output_list.append([species, taxonomy, record_id, transcript_id, product, strand, exon_lengths])
         return output_list
 
     def extract_exon_lengths_from_genbank_file(self, input_file, output_file):
@@ -184,10 +190,10 @@ class SequenceRoutines():
         data_list = self.extract_exon_lengths(record_dict)
 
         with open(output_file, "w") as out_fd:
-            out_fd.write("#species\ttaxonomy\trecord_id\tproduct\tstrand\texon_length\n")
+            out_fd.write("#species\ttaxonomy\trecord_id\ttranscript_id\tproduct\tstrand\texon_length\n")
             for entry in data_list:
-                out_fd.write("%s\t%s\t%s\t%s\t%s\t%s\n" % (entry[0], entry[1], entry[2], entry[3],
-                                                           str(entry[4]), ",".join(map(str, entry[5]))))
+                out_fd.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (entry[0], entry[1], entry[2], entry[3], entry[4],
+                                                               str(entry[5]), ",".join(map(str, entry[6]))))
 
         os.remove("tmp.idx")
 
@@ -204,6 +210,75 @@ class SequenceRoutines():
                 if Seq(codon).translate(table=genetic_code_table) != "X":
                     degenerate_codon_set.add(codon)
         return degenerate_codon_set
+
+    @staticmethod
+    def extract_introns_from_transcripts(record_dict, transcript_id_white_list=None, generator_mode=False):
+        intron_dict = {}
+        unknown_transcript_index = 1
+        for record_id in record_dict:
+            for feature in record_dict[record_id].features:
+                used_transcript_id = None
+
+                if feature.type == "mRNA" or feature.type == "transcript":
+                    if transcript_id_white_list:
+                        for transcript_id in feature.qualifiers["transcript_id"]:
+                            if transcript_id in transcript_id_white_list:
+                                used_transcript_id = transcript_id
+                                break
+
+                        if used_transcript_id is None:
+                            continue
+
+                    product = ";".join(feature.qualifiers["product"]) if "product" in feature.qualifiers else "."
+                    transcript_id = used_transcript_id if used_transcript_id else feature.qualifiers["transcript_id"] if "transcript_id" in feature.qualifiers else None
+                    if transcript_id is None:
+                        transcript_id = "unkown_transcript_%i" % unknown_transcript_index
+                        unknown_transcript_index += 1
+
+                    strand = feature.location.strand
+                    exon_lengths = []
+                    #print feature.sub_features
+                    #print feature.location
+                    #print feature.location.start
+
+                    number_of_exons = len(feature.location.parts)
+                    for i in range(0, number_of_exons - 1):
+                        intron_location = FeatureLocation(feature.location.parts[i].end,
+                                                          feature.location.parts[i+1].start-1,
+                                                          strand=strand)
+                        if strand >= 0:
+                            previous_exon_number = i + 1
+                            following_exon_number = i + 2
+                            previous_exon_len = len(feature.location.parts[i])
+                            following_exon_len = len(feature.location.parts[i+1])
+                        else:
+                            previous_exon_number = number_of_exons - i - 1
+                            following_exon_number = number_of_exons - i
+                            previous_exon_len = len(feature.location.parts[i+1])
+                            following_exon_len = len(feature.location.parts[i])
+
+                        intron_id = "%s_intron_%i-%i_between_exons_%i-%i" % (transcript_id, previous_exon_number,
+                                                                             following_exon_number, previous_exon_len,
+                                                                             following_exon_len)
+                        intron_record = SeqRecord(intron_location.extract(record_dict[record_id].seq), id=intron_id,
+                                                  description="")
+
+                        intron_dict[intron_id] = intron_record
+
+                    """
+                    for location in feature.location.parts:
+                        #print location
+                        exon_len = location.end - location.start
+                        exon_lengths.append(exon_len)
+                    """
+        return intron_dict
+
+    def extract_introns_from_transcripts_from_genbank_files(self, list_of_genbank_files, output_file,
+                                                            transcript_id_white_list=None):
+        record_dict = SeqIO.index_db("tmp.idx", list_of_genbank_files, format="genbank")
+        intron_dict = self.extract_introns_from_transcripts(record_dict,
+                                                            transcript_id_white_list=transcript_id_white_list)
+        SeqIO.write(self.record_from_dict_generator(intron_dict), output_file, format="genbank")
 
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
@@ -478,12 +553,3 @@ def split_record_ids_by_expression(sequence_dict, expression):
             id_dict[value].append(record_id)
 
     return id_dict
-
-if __name__ == "__main__":
-    sequence = "CTGGCAAAGACCCAAACATCGACCACATCGAACAGCCACACCACCACCAACACTGTGCACCACTTCCGATTTCCAGCACCCCTTTTTGCCACTCTTTTTACGTAGTTTTGGCCATGCCTAGTTGTTTCCCAGTAGTCAACTTAAACGTATTTATTTTAATAAATTTCCACAAGGTTC"
-    coords, length = find_homopolymers(sequence, "T", min_size=2, search_type="non_perfect",
-                      max_single_insert_size=1, max_total_insert_length=None, max_number_of_insertions=2)
-    print(coords)
-    print(length)
-    for coord in coords:
-        print(sequence[coord[0]:coord[1]])
