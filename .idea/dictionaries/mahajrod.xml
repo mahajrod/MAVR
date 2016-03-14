@@ -1231,6 +1231,7 @@
       <w>formatSpMatrix</w>
       <w>formatSparseM</w>
       <w>formatUL</w>
+      <w>formes</w>
       <w>formula</w>
       <w>formula.gam</w>
       <w>forwardsolve</w>
@@ -3024,6 +3025,7 @@
       <w>tar</w>
       <w>taskCallbackManager</w>
       <w>taxa</w>
+      <w>taxon</w>
       <w>tcl</w>
       <w>tclArray</w>
       <w>tclObj</w>

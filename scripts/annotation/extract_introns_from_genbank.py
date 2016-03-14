@@ -2,13 +2,14 @@
 __author__ = 'Sergei F. Kliver'
 import argparse
 
+from CustomCollections.GeneralCollections import IdList
 from Routines import SequenceRoutines, FileRoutines
 
 
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input", action="store", dest="input", required=True,
-                    type=lambda s: FileRoutines.make_list_of_path_to_files(s),
+                    type=lambda s: FileRoutines.make_list_of_path_to_files(s.split(",")),
                     help="Comma-separated list of  genbank files/directories with transcript annotations")
 parser.add_argument("-o", "--output", action="store", dest="output", required=True,
                     help="Output file")
@@ -17,5 +18,8 @@ parser.add_argument("-d", "--id_file", action="store", dest="id_file",
 
 args = parser.parse_args()
 
+id_list = IdList()
+id_list.read(args.id_file)
+
 SequenceRoutines.extract_introns_from_transcripts_from_genbank_files(args.input, args.output,
-                                                                     transcript_id_white_list=args.id_file)
+                                                                     transcript_id_white_list=id_list)

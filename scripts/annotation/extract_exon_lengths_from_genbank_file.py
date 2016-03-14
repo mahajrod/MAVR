@@ -9,7 +9,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input", action="store", dest="input",
                     type=lambda x: FileRoutines.make_list_of_path_to_files(x.split(",")),
-                    help="Comma-separated list of scn files")
+                    help="Comma-separated list of genbank files/directories")
 parser.add_argument("-o", "--output", action="store", dest="output",
                     help="Output file")
 

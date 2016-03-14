@@ -2,6 +2,8 @@ __author__ = 'mahajrod'
 import os
 import re
 import sys
+import pickle
+
 from copy import deepcopy
 from collections import OrderedDict
 
@@ -47,7 +49,6 @@ class SequenceRoutines():
         os.remove("tmp.idx")
         return lengths_dict
 
-
     @staticmethod
     def record_by_id_generator(record_dict, id_list, verbose=False):
         for record_id in id_list:
@@ -56,6 +57,7 @@ class SequenceRoutines():
             else:
                 if verbose:
                     sys.stderr.write("Not found: %s\n" % record_id)
+                    
     @staticmethod
     def record_from_dict_generator(record_dict):
         for record_id in record_dict:
@@ -137,7 +139,6 @@ class SequenceRoutines():
 
                 if cds_pep == pep_dict[pep_id].seq:
                     cds_pep_accordance_dict[cds_id] = pep_id
-                    #print ("%s\t%s" % (cds_id, pep_id))
                     if parsing_mode == "parse":
                         pep_dict.pop(pep_id, None)
                     break
@@ -212,8 +213,8 @@ class SequenceRoutines():
         return degenerate_codon_set
 
     @staticmethod
-    def extract_introns_from_transcripts(record_dict, transcript_id_white_list=None, generator_mode=False):
-        intron_dict = {}
+    def extract_introns_from_transcripts(record_dict, transcript_id_white_list=None):
+        intron_dict = OrderedDict()
         unknown_transcript_index = 1
         for record_id in record_dict:
             for feature in record_dict[record_id].features:
@@ -228,23 +229,18 @@ class SequenceRoutines():
 
                         if used_transcript_id is None:
                             continue
-
-                    product = ";".join(feature.qualifiers["product"]) if "product" in feature.qualifiers else "."
-                    transcript_id = used_transcript_id if used_transcript_id else feature.qualifiers["transcript_id"] if "transcript_id" in feature.qualifiers else None
+                    #product = ";".join(feature.qualifiers["product"]) if "product" in feature.qualifiers else "."
+                    transcript_id = used_transcript_id if used_transcript_id else feature.qualifiers["transcript_id"][0] if "transcript_id" in feature.qualifiers else None
                     if transcript_id is None:
                         transcript_id = "unkown_transcript_%i" % unknown_transcript_index
                         unknown_transcript_index += 1
 
                     strand = feature.location.strand
-                    exon_lengths = []
-                    #print feature.sub_features
-                    #print feature.location
-                    #print feature.location.start
 
                     number_of_exons = len(feature.location.parts)
                     for i in range(0, number_of_exons - 1):
                         intron_location = FeatureLocation(feature.location.parts[i].end,
-                                                          feature.location.parts[i+1].start-1,
+                                                          feature.location.parts[i+1].start,
                                                           strand=strand)
                         if strand >= 0:
                             previous_exon_number = i + 1
@@ -261,16 +257,10 @@ class SequenceRoutines():
                                                                              following_exon_number, previous_exon_len,
                                                                              following_exon_len)
                         intron_record = SeqRecord(intron_location.extract(record_dict[record_id].seq), id=intron_id,
-                                                  description="")
+                                                  description=record_dict[record_id].annotations["organism"])
 
                         intron_dict[intron_id] = intron_record
 
-                    """
-                    for location in feature.location.parts:
-                        #print location
-                        exon_len = location.end - location.start
-                        exon_lengths.append(exon_len)
-                    """
         return intron_dict
 
     def extract_introns_from_transcripts_from_genbank_files(self, list_of_genbank_files, output_file,
@@ -278,7 +268,347 @@ class SequenceRoutines():
         record_dict = SeqIO.index_db("tmp.idx", list_of_genbank_files, format="genbank")
         intron_dict = self.extract_introns_from_transcripts(record_dict,
                                                             transcript_id_white_list=transcript_id_white_list)
-        SeqIO.write(self.record_from_dict_generator(intron_dict), output_file, format="genbank")
+        SeqIO.write(self.record_from_dict_generator(intron_dict), output_file, format="fasta")
+
+        os.remove("tmp.idx")
+
+    @staticmethod
+    def get_general_statistics(input_file, file_format, output_file="statistics.t", write_to_file=False):
+        record_dict = SeqIO.to_dict(SeqIO.parse(input_file, file_format))
+        statistics_dict = {}
+        for record_id in record_dict:
+            statistics_dict[record_id] = [len(record_dict[record_id].seq), len(record_dict[record_id].features)]
+        if write_to_file:
+            fd = open(output_file, "w")
+            metadata = "#Totaly records\t%i\n" % len(record_dict)
+            fd.write(metadata)
+            for record_id in sorted(list(record_dict.keys())):
+                fd.write("%s\t%i\t%i\n" % (record_id, statistics_dict[record_id][0], statistics_dict[record_id][1]))
+            fd.close()
+        return statistics_dict
+
+    def get_multifile_general_statistics(self, input_file_list, file_format, output_file="statistics.t", 
+                                         output_file2="file_statistics.t", names_list=None, write_to_file=False):
+        statistics_dict = {}
+        names_dict = {}
+        if names_list:
+            for i in range(0, len(input_file_list)):
+                names_dict[input_file_list[i]] = names_list[i]
+        else:
+            for i in range(0, len(input_file_list)):
+                names_dict[input_file_list[i]] = input_file_list[i]
+    
+        for file_entry in input_file_list:
+            print("Gathering statistics from %s" % file_entry)
+            statistics_dict[names_dict[file_entry]] = self.get_general_statistics(file_entry, file_format)
+    
+        if write_to_file:
+            fd_file = open(output_file2, "w")
+            fd = open(output_file, "w")
+            metadata = "#Totaly files\t%i\n" % len(input_file_list)
+            fd.write(metadata)
+            fd_file.write(metadata)
+            for entry in sorted(list(statistics_dict.keys())):
+                fd.write("%s\t%i\n" % (entry, len(statistics_dict[entry])))
+                fd_file.write("%s\t%i\n" % (entry, len(statistics_dict[entry])))
+                for record_id in sorted(list(statistics_dict[entry].keys())):
+                    fd.write("\t%s\t%i\t%i\n" % (record_id, statistics_dict[entry][record_id][0], statistics_dict[entry][record_id][1]))
+            fd.close()
+            fd_file.close()
+        return statistics_dict
+    
+    def get_statistics(self, filelist, index_filename, taxonomy_file_prefix="taxonomy", filetype="genbank"):
+        record_dict = SeqIO.index_db(index_filename, filelist, filetype)
+        number_of_records = len(record_dict)
+        print("Gathering statistics...")
+        print("Total records:\t %i" % number_of_records)
+        taxonomy_dict = {}
+        # constructing nested taxonomy summary as nested dictionary
+        print("Constructing taxonomy distribution...")
+    
+        for record_id in record_dict:
+            temp_dict = taxonomy_dict
+
+            for taxon in record_dict[record_id].annotations["taxonomy"] + [record_dict[record_id].annotations["organism"]]:
+                if taxon not in temp_dict:
+                    temp_dict[taxon] = {"Total": 1}
+                else:
+                    temp_dict[taxon]["Total"] += 1
+    
+                temp_dict = temp_dict[taxon]
+
+        with open(taxonomy_file_prefix + ".pickle", 'wb') as fd:
+            pickle.dump(taxonomy_dict, fd)
+        self.print_formatted_nested_dict(taxonomy_dict, taxonomy_file_prefix + ".tax", indent_type="\t")
+    
+        return record_dict, taxonomy_dict
+    
+    @staticmethod
+    def get_taxonomy(record_dict, output_prefix="taxonomy"):
+        number_of_records = len(record_dict)
+        print("Gathering taxonomy statistics...")
+        print("Total records:\t %i" % number_of_records)
+        genus_dict = {}
+        family_dict = {}
+        order_dict = {}
+        # constructing nested taxonomy summary as nested dictionary
+        print("Constructing taxonomy distribution...")
+    
+        for record_id in record_dict:
+            if record_dict[record_id].annotations["taxonomy"][-1] not in genus_dict:
+                genus_dict[record_dict[record_id].annotations["taxonomy"][-1]] = [record_id]
+            else:
+                genus_dict[record_dict[record_id].annotations["taxonomy"][-1]].append(record_id)
+    
+            for taxon in record_dict[record_id].annotations["taxonomy"]:
+                if taxon[-6:] == "formes":
+                    if taxon not in order_dict:
+                        order_dict[taxon] = [record_id]
+                    else:
+                        order_dict[taxon].append(record_id)
+                if taxon[-4:] == "idae":
+                    if taxon not in family_dict:
+                        family_dict[taxon] = [record_id]
+                    else:
+                        family_dict[taxon].append(record_id)
+    
+        def write_taxa_dict(taxa_dict, taxa_file):
+            with open(taxa_file, "w") as fd:
+                for taxon in taxa_dict:
+                    fd.write("%s\t%i\t" % (taxon, len(taxa_dict[taxon])) + ",".join(taxa_dict[taxon]) + "\n")
+    
+        write_taxa_dict(genus_dict, output_prefix + "_genus.tax")
+        write_taxa_dict(family_dict, output_prefix + "_family.tax")
+        write_taxa_dict(order_dict, output_prefix + "_order.tax")
+    
+        return genus_dict, family_dict, order_dict
+    
+    def get_taxonomy_from_genbank_files(self, filelist, index_filename):
+        record_dict = SeqIO.index_db(index_filename, filelist, "genbank")
+        return self.get_taxonomy(record_dict)
+    
+    @staticmethod
+    def count_species(record_dict, output_filename="count_species.count"):
+        species_count_dict = {}
+        i = 1
+        print("Counting species...")
+        for record_id in record_dict:
+            organism = record_dict[record_id].annotations['organism']
+            if organism not in species_count_dict:
+                species_count_dict[organism] = [1, [record_id]]
+            else:
+                species_count_dict[organism][0] += 1
+                species_count_dict[organism][1].append(record_id)
+            i += 1
+        number_of_species = len(species_count_dict)
+        print ("Total %i species were found" % number_of_species)
+        fd = open(output_filename, "w")
+        fd.write("#Number of species\t%i\n" % number_of_species)
+        for organism in species_count_dict:
+            fd.write(organism + "\t%i\t%s\n" % (species_count_dict[organism][0], 
+                                                ",".join(species_count_dict[organism][1])))
+        return number_of_species, species_count_dict
+    
+    @staticmethod
+    def split_records_by_taxa_level(record_dict, prefix, taxa_level=1, filetype="genbank"):
+        """taxa levels starts from 0"""
+        taxa_dict = {}
+        print("Splitting records by %i taxa level" % taxa_level)
+        for record_id in record_dict:
+            if len(record_dict[record_id].annotations["taxonomy"]) > taxa_level:
+                taxon = record_dict[record_id].annotations["taxonomy"][taxa_level]
+                if taxon not in taxa_dict:
+                    taxa_dict[taxon] = [record_id]
+                else:
+                    taxa_dict[taxon].append(record_id)
+            else:
+                print(record_id,
+                      "Not classified for selected taxa level",
+                      "Taxonomy:",
+                      record_dict[record_id].annotations["taxonomy"],
+                      record_dict[record_id].annotations["organism"])
+    
+        def taxon_generator():
+            for record_id in taxa_dict[taxon]:
+                yield record_dict[record_id]
+    
+        for taxon in taxa_dict:
+            taxon_name = taxon.replace(" ", "_")
+            filename = str(prefix) + "_" + str(taxa_level) + "_" + str(taxon_name) + ".gb"
+            print(filename, len(taxa_dict[taxon]))
+            SeqIO.write(taxon_generator(), filename, filetype)
+    
+        number_of_taxa = len(taxa_dict)
+        print("Totaly %i taxa of %i level were found" % (number_of_taxa, taxa_level))
+        return number_of_taxa
+    
+    @staticmethod
+    def print_formatted_nested_dict(nested_dict, output_file, indent_type="\t"):
+        #at moment only \t indent is supported
+    
+        def fwrite_nested_dict(nested_dict, fd, indent_type, indent_counter):
+            for taxon in nested_dict:
+                if taxon != "Total":
+                    #print(nested_dict[taxon])
+                    fd.write(indent_type*indent_counter + taxon + "\t%i\n" % nested_dict[taxon]["Total"])
+                    fwrite_nested_dict(nested_dict[taxon], fd, indent_type, indent_counter + 1)
+    
+        fd = open(output_file, "w")
+        fwrite_nested_dict(nested_dict, fd, indent_type, 0)
+        fd.close()
+        
+    def filter_by_taxa(self, record_dict,
+                       taxa_list,
+                       filter_type="white_list",
+                       output_filename="filtered_by_taxa.gb",
+                       store_filtered_out=True,
+                       filtered_out_filename="filtered_out_by_taxa.gb",
+                       output_type="genbank",
+                       return_record_generator=False):
+        print("Filtering by taxa...")
+        print("Totaly %i records" % len(record_dict))
+    
+        filtered_id_list = []
+        filtered_out_id_list = []
+        taxa_set = set(taxa_list)
+        if filter_type == "white_list":
+            print("Taxa to be retained: %s" % ", ".join(taxa_list))
+            for record_id in record_dict:
+                #print(record_id)
+                if set(record_dict[record_id].annotations["taxonomy"] + [record_dict[record_id].annotations["organism"]]) & taxa_set:
+                    filtered_id_list.append(record_id)
+                else:
+                    filtered_out_id_list.append(record_id)
+        elif filter_type == "black_list":
+            print("Taxa to be filtered out: %s" % ", ".join(taxa_list))
+            for record_id in record_dict:
+                for filter_entry in taxa_set:
+                    for taxa_entry in record_dict[record_id].annotations["taxonomy"] + [record_dict[record_id].annotations["organism"]]:
+                        if filter_entry in taxa_entry:
+                            filtered_out_id_list.append(record_id)
+                            break
+                    else:
+                        continue
+                    break
+                else:
+                    filtered_id_list.append(record_id)
+        SeqIO.write(self.record_by_id_generator(record_dict, filtered_id_list), output_filename, output_type)
+        if store_filtered_out:
+            SeqIO.write(self.record_by_id_generator(record_dict, filtered_out_id_list), filtered_out_filename, output_type)
+        number_of_retained = len(filtered_id_list)
+        print("Retained %i records" % number_of_retained)
+    
+        if return_record_generator:
+            return self.record_by_id_generator(record_dict, filtered_id_list)
+    
+    def split_by_taxa(self, record_dict, taxa_list, output_suffix, output_type="genbank", outfiltered_name="outfiltered"):
+        print("Spliting taxa...")
+        taxa_dict = {}
+        for taxa in taxa_list:
+            taxa_dict[taxa] = []
+        taxa_dict[outfiltered_name] = []
+    
+        for record_id in record_dict:
+            record_taxa = record_dict[record_id].annotations["taxonomy"] + [record_dict[record_id].annotations["organism"]]
+            for taxa in taxa_list:
+                if taxa in record_taxa:
+                    taxa_dict[taxa].append(record_id)
+                    break
+            else:
+                taxa_dict[outfiltered_name].append(record_id)
+    
+        if output_type == "genbank":
+            out_extension = ".gb"
+    
+        for taxa in taxa_dict:
+            print("Writing %s taxa" % taxa)
+            SeqIO.write(self.record_by_id_generator(record_dict, taxa_dict[taxa]),
+                        taxa + output_suffix + out_extension, output_type)
+        return taxa_dict
+
+    def filter_by_source(self, record_dict,
+                         source_list,
+                         filter_type="white_list",
+                         output_filename="filtered_by_source.gb",
+                         output_type="genbank",
+                         return_record_generator=False):
+        print("Filtering by source")
+        print("Totaly %i records" % len(record_dict))
+        filtered_id_list = []
+        filtered_out_id_list = []
+        source_set = set(source_list)
+        if filter_type == "white_list":
+            print("Sources to be retained: %s" % ", ".join(source_list))
+            for record_id in record_dict:
+                if ("source" not in record_dict[record_id].annotations) or (not (record_dict[record_id].annotations["source"])):
+                    continue
+                """
+                products = ""
+                for feature in record_dict[record_id].features:
+                    if "product" in feature.qualifiers:
+                        products += " " + feature.qualifiers["product"]
+                """
+                if set(record_dict[record_id].annotations["source"].split()) & source_set: # or (product_set & source_set):
+                    filtered_id_list.append(record_id)
+                else:
+                    filtered_out_id_list.append(record_id)
+        elif filter_type == "black_list":
+            print("Sources to be filtered out: %s" % ", ".join(source_list))
+            for record_id in record_dict:
+                if "source" not in record_dict[record_id].annotations:
+                    continue
+                """
+                product_set = set([])
+                for feature in record_dict[record_id].features:
+                    if "product" in feature.qualifiers:
+                        product_set = set(feature.qualifiers["product"])
+                """
+                if not (set(record_dict[record_id].annotations["source"].split()) & source_set):# or (product_set & source_set)):
+                    filtered_id_list.append(record_id)
+                else:
+                    filtered_out_id_list.append(record_id)
+        SeqIO.write(self.record_by_id_generator(record_dict, filtered_id_list), output_filename, output_type)
+        SeqIO.write(self.record_by_id_generator(record_dict, filtered_out_id_list), "filtered_out_by_source.gb", output_type)
+        number_of_retained = len(filtered_id_list)
+        print("Retained %i records" % number_of_retained)
+    
+        if return_record_generator:
+            return self.record_by_id_generator(record_dict, filtered_id_list)
+    
+    @staticmethod
+    def parse_counts_file(species_count_file):
+        fd = open(species_count_file, "r")
+        number_of_species = fd.readline().strip().split("\t")[-1]
+        species_count_dict = {}
+        for line in fd:
+            line_list = line.strip().split("\t")
+            species_count_dict[line_list[0]] = [int(line_list[1]), line_list[2].split(",")]
+        fd.close()
+        return number_of_species, species_count_dict
+
+    def sort_by_number(self, species_count_file, output_filename_prefix, counts_list=[1, 5]):
+        number_of_species, species_count_dict = self.parse_counts_file(species_count_file)
+        length_of_counts = len(counts_list)
+        fd_list = [open(output_filename_prefix + "_%i_%i_species.count" % (counts_list[i], counts_list[i+1] - 1), "w") for i in range(0, length_of_counts-1)]
+        fd_list.append(open(output_filename_prefix + "_%i+_species.count" % (counts_list[-1]), "w"))
+        number_of_species = [0 for i in range(0, length_of_counts)]
+        species_record_list = [[] for i in range(0, length_of_counts)]
+    
+        for species in species_count_dict:
+            for i in range(0, length_of_counts-1):
+                if counts_list[i] <= species_count_dict[species][0] < counts_list[i+1]:
+                    number_of_species[i] += 1
+                    species_record_list[i].append(species)
+                    break
+            else:
+                number_of_species[-1] += 1
+                species_record_list[-1].append(species)
+
+        for i in range(0, length_of_counts):
+            fd_list[i].write("#Number of species\t%i\n" % number_of_species[i])
+            for species in species_record_list[i]:
+                fd_list[i].write(species + "\t%i\t%s\n" % (species_count_dict[species][0], ",".join(species_count_dict[species][1])))
+            fd_list[i].close()
 
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):

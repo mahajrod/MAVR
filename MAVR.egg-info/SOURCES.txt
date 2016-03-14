@@ -142,6 +142,7 @@ Tools/Tuxedo/Cufflinks.py
 Tools/Tuxedo/Tophat.py
 Tools/Tuxedo/__init__.py
 scripts/CDS_region_variants.py
+scripts/__init__.py
 scripts/assembly_transcriptome.py
 scripts/blast_fastqc.py
 scripts/draw_genes.py
