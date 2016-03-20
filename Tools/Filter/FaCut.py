@@ -23,6 +23,12 @@ class FaCut(Tool):
 
         self.execute(options, cmd="filter_by_mean_quality")
 
+    def split_fastq(self, input_file, output_prefix):
+
+        options = " -i %s" % input_file
+        options += " -p %s" % output_prefix
+
+        self.cmd(options, cmd="split_fastq")
 
 if __name__ == "__main__":
     pass
