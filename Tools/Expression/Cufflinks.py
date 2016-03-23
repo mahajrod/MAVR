@@ -27,7 +27,7 @@ class Gffread(Tool):
                                             genomic_fasta_file=genomic_fasta_file,
                                             output_cds_file=output_cds_file,
                                             output_transcripts_file=output_transcripts_file)
-        print options
+        #print options
         self.execute(options=options)
 
 if __name__ == "__main__":
