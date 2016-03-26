@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #SBATCH --array=1-935%935
 #SBATCH --time=100:00:00         # Run time in hh:mm:ss
-#SBATCH --mem-per-cpu=10000       # Minimum memory required per CPU (in megabytes)
+#SBATCH --mem-per-cpu=4096       # Minimum memory required per CPU (in megabytes)
 #SBATCH --job-name=Sol_hedge
 #SBATCH --error=/work/pavlov/okochenova/genomes_workdir/solenodon/logs/exonerate_hedgehog.ncbi.%A_%a.err
 #SBATCH --output=/work/pavlov/okochenova/genomes_workdir/solenodon/logs/exonerate_hedgehog.ncbi.%A_%a.out
