@@ -12,7 +12,7 @@ source /work/pavlov/okochenova/profile
 SPLITED_PEP_DIR="/work/pavlov/okochenova/genomes/mus_musculus/ncbi/pep/splited/"
 PEP_FILE="${SPLITED_PEP_DIR}mus_musculus.ncbi_${SLURM_ARRAY_TASK_ID}.fasta"
 
-GENOME="/work/pavlov/okochenova/genomes/solenodon/scaffolds.fa"
+GENOME="/work/pavlov/okochenova/genomes/solenodon/scaffolds.100+.fa"
 
 EXONERATE_OUTPUT_DIR="/work/pavlov/okochenova/genomes_workdir/solenodon/exonerate_mouse_pep/"
 mkdir -p ${EXONERATE_OUTPUT_DIR}
