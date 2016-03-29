@@ -52,8 +52,6 @@ for sample in samples:
 
     sample_dir = "%s%s/" % (args.samples_dir, sample)
 
-    sample_out_dir = "%s%s/" % (args.output_dir, sample)
-    save_mkdir(sample_out_dir)
     files_from_sample_dir = sorted(os.listdir(sample_dir))
 
     read_files_list = []
