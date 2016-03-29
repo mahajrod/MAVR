@@ -37,7 +37,7 @@ parser.add_argument("-s", "--samples", action="store", dest="samples",
                          "Filenames should should contain '_1.fq' or '_1.fastq' for forward(left) reads, "
                          " '_2.fq' or '_2.fastq' for reverse(right) reads and '.fq' or '.fastq' for SE reads")
 parser.add_argument("-o", "--output", action="store", dest="output",
-                    type=lambda s: check_path(os.path.abspath(s)), requireed=True,
+                    type=lambda s: check_path(os.path.abspath(s)), required=True,
                     help="File to write output.")
 
 args = parser.parse_args()
