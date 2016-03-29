@@ -43,7 +43,7 @@ parser.add_argument("-o", "--output", action="store", dest="output",
 args = parser.parse_args()
 
 samples = args.samples.split(",") if args.samples else sorted(os.listdir(args.samples_dir))
-save_mkdir(args.output_dir)
+
 
 out_fd = open(args.output, "w")
 out_fd.write("#Sample\tNumber_of_files\tNumber_of_paires\tNumber_of_unpaired_files\n")
