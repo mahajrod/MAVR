@@ -24,7 +24,7 @@ def check_if_files_form_pair(first_filename, second_filename, name_type):
         if first_list[-1][1:] != second_list[-1][1:]:
             print "aaaaabbbbbbbb"
             return False
-        if first_list[-1][1] != 1 or second_list[-1][1] != 2:
+        if first_list[-1][0] != 1 or second_list[-1][0] != 2:
             print "aaaaacccccccc"
             return False
         return True
