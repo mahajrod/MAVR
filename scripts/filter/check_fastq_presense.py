@@ -42,18 +42,15 @@ parser.add_argument("-s", "--samples", action="store", dest="samples",
 parser.add_argument("-o", "--output", action="store", dest="output",
                     type=lambda s: check_path(os.path.abspath(s)), requireed=True,
                     help="File to write output.")
-#parser.add_argument("-t", "--threads", action="store", dest="threads", default=1, type=int,
-#                    help="Number of threads to use in Trimmomatic. Default - 1.")
 
-parser.add_argument("-n", "--name_type", action="store", dest="name_type", default="botswana",
-                    help="Type of file name. Allowed: botswana"
-                         "Botswana 121212_I595_FCC1H08ACXX_L8_SZAIPI018897-93_1.fq. Default: botswana")
 args = parser.parse_args()
 
 samples = args.samples.split(",") if args.samples else sorted(os.listdir(args.samples_dir))
 save_mkdir(args.output_dir)
 
-out_fd = open(arg)
+out_fd = open(args.output, "w")
+out_fd.write("#Sample\tNumber_of_files\tNumber_of_paires\tNumber_of_unpaired_files\n")
+
 for sample in samples:
     print("Handling %s" % sample)
 
@@ -87,35 +84,10 @@ for sample in samples:
             number_of_unpaired_files += 1
             i += 1
 
-    if len(read_files_list) % 2 != 0:
+    number_of_files = len(read_files_list)
+    if number_of_files % 2 != 0:
         print("Not all read files are paired for sample %s. Skipping..." % sample)
-        continue
 
-
-
-    for lane_number in range(0, number_of_lanes):
-        #output_prefix = "%s%s.TMF" % (sample_out_dir, sample)
-        left_reads_file = filtered_files_from_sample_dir[lane_number*2]
-        right_reads_file = filtered_files_from_sample_dir[lane_number*2 + 1]
-
-        """
-        filter_string = "time filter_by_mean_quality -t %i -f %s -r %s -q %s -p %s" % (args.average_quality_threshold,
-                                                                                       left_reads_file,
-                                                                                       right_reads_file,
-                                                                                       args.score_type,
-                                                                                       read_files_list[lane_number*2])
-        """
-        #print(left_reads_file)
-        #print(right_reads_file)
-        #print(args.score_type)
-        #print(args.average_quality_threshold)
-        #print(read_files_list[lane_number*2])
-
-        #print filter_string
-        #os.system(filter_string)
-        FaCut.timelog = "%s.timelog" % read_files_list[lane_number*2]
-        FaCut.filter_by_mean_quality(args.average_quality_threshold, left_reads_file, right_reads_file,
-                                     read_files_list[lane_number*2], quality_type=args.score_type,
-                                     stat_file="%s.stat" % read_files_list[lane_number*2],
-                                     name_type=args.name_type)
+    out_fd.write("%s\t%i\t%i\t%i\n" % (sample, number_of_files,
+                                       number_of_paires_of_files, number_of_unpaired_files))
 
