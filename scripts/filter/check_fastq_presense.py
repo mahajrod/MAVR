@@ -1,13 +1,10 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 
-# TODO: WORKS only for PE DATA and for illumina data
 import os
 import sys
 import argparse
 
-from Tools.Filter import FaCut
-#from Tools.Filter import FastQC
 
 from Routines.File import check_path, save_mkdir
 
