@@ -38,6 +38,8 @@ parser.add_argument("-s", "--samples", action="store", dest="samples",
                          " '_2.fq' or '_2.fastq' for reverse(right) reads and '.fq' or '.fastq' for SE reads")
 parser.add_argument("-o", "--output", action="store", dest="output", required=True,
                     help="File to write output.")
+parser.add_argument("-n", "--name_type", action="store", dest="name_type", default="botswana",
+                    help="Type of file name. Default: botswana")
 
 args = parser.parse_args()
 
@@ -68,7 +70,7 @@ for sample in samples:
     number_of_unpaired_files = 0
     while i < number_of_files:
         if i+1 != number_of_files:
-            if check_if_files_form_pair(read_files_list[i], read_files_list[i+1]):
+            if check_if_files_form_pair(read_files_list[i], read_files_list[i+1], args.name_type):
                 number_of_paires_of_files += 1
                 i += 2
             else:
