@@ -14,6 +14,8 @@ def check_if_files_form_pair(first_filename, second_filename, name_type):
     if len(first_list) != len(second_list):
         return False
 
+    print(first_list)
+    print(second_list)
     if name_type == "botswana":
         for j in range(0, len(first_list) - 1):
             if first_list[j] != second_list[j]:
