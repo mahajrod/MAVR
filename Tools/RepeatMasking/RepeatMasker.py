@@ -9,19 +9,19 @@ class RepeatMasker(Tool):
     def __init__(self, path="", max_threads=1):
         Tool.__init__(self, "repeatmasker", path=path, max_threads=max_threads)
         self.repeat_classes_used_for_gene_annotation = ["DNA",
-                                                        "DNA?",
+                                                        "DNA\?",
                                                         "LINE",
-                                                        "LINE?",
+                                                        "LINE\?",
                                                         "LTR",
-                                                        "LTR?",
+                                                        "LTR\?",
                                                         "RC",
-                                                        "RC?",
+                                                        "RC\?",
                                                         "Retroposon",
-                                                        "Retroposon?",
+                                                        "Retroposon\?",
                                                         "SINE",
-                                                        "SINE?",
+                                                        "SINE\?",
                                                         "Helitron",
-                                                        "Helitron?"]
+                                                        "Helitron\?"]
 
     @staticmethod
     def convert_rm_out_to_gff(input_file, output_file, annotated_repeat_classes_file, annotated_repeat_families_file):
