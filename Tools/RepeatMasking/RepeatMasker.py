@@ -55,7 +55,7 @@ class RepeatMasker(Tool):
 
     def extract_repeats_used_for_gene_annotation(self, input_gff, output_gff):
         grep_pattern = "|".join(self.repeat_classes_used_for_gene_annotation)
-        grep_string = "grep -P %s" % grep_pattern
+        grep_string = "grep -P '%s'" % grep_pattern
         grep_string += " %s" % input_gff
         grep_string += " > %s" % output_gff
         self.execute(cmd=grep_string)
