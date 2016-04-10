@@ -58,5 +58,5 @@ class RepeatMasker(Tool):
         grep_string = "grep -P %s" % grep_pattern
         grep_string += " %s" % input_gff
         grep_string += " > %s" % output_gff
-        self.exe(cmd=grep_string)
+        self.execute(cmd=grep_string)
 
