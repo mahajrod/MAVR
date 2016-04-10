@@ -276,7 +276,8 @@ class AUGUSTUS(Tool):
                         prev_pep_len = line_list[-1]
 
                         break
-
+                    print("aaaa")
+                    print(prev_transcript)
                     for line in ev_fd:
 
                         line_list = line.strip().split("\t")
