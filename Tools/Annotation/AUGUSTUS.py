@@ -277,6 +277,9 @@ class AUGUSTUS(Tool):
 
                         break
                     print("aaaa")
+                    print(evidence_file)
+                    print(filtered_evidence_file)
+                    print("\n")
                     print(prev_transcript)
                     for line in ev_fd:
 
@@ -294,7 +297,6 @@ class AUGUSTUS(Tool):
                                 prev_pep_len = pep_len
                             continue
                         id_fd.write("%s\n" % prev_transcript)
-                        print("bbbb")
                         filtered_ev_fd.write(prev_line)
                         prev_line = line
                         prev_gene = gene
