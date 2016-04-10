@@ -19,5 +19,3 @@ parser.add_argument("-f", "--repeat_families", action="store", dest="repeat_fami
 args = parser.parse_args()
 
 RepeatMasker.convert_rm_out_to_gff(args.input, args.output_gff, args.repeat_classes, args.repeat_families)
-
-

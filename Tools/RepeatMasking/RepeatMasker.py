@@ -8,6 +8,20 @@ from CustomCollections.GeneralCollections import IdSet
 class RepeatMasker(Tool):
     def __init__(self, path="", max_threads=1):
         Tool.__init__(self, "repeatmasker", path=path, max_threads=max_threads)
+        self.repeat_classes_used_for_gene_annotation = ["DNA",
+                                                        "DNA?",
+                                                        "LINE",
+                                                        "LINE?",
+                                                        "LTR",
+                                                        "LTR?",
+                                                        "RC",
+                                                        "RC?",
+                                                        "Retroposon",
+                                                        "Retroposon?",
+                                                        "SINE",
+                                                        "SINE?",
+                                                        "Helitron",
+                                                        "Helitron?"]
 
     @staticmethod
     def convert_rm_out_to_gff(input_file, output_file, annotated_repeat_classes_file, annotated_repeat_families_file):
@@ -38,4 +52,11 @@ class RepeatMasker(Tool):
         sed_string = "sed -r 's/.*Class=(.*);Family.*/\1/' %s | sort | uniq > %s" % (gff_file,
                                                                                      annotated_repeat_classes_file)
         os.system(sed_string)
+
+    def extract_repeats_used_for_gene_annotation(self, input_gff, output_gff):
+        grep_pattern = "|".join(self.repeat_classes_used_for_gene_annotation)
+        grep_string = "grep -P %s" % grep_pattern
+        grep_string += " %s" % input_gff
+        grep_string += " > %s" % output_gff
+        self.exe(cmd=grep_string)
 
