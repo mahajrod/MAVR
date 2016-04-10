@@ -276,11 +276,6 @@ class AUGUSTUS(Tool):
                         prev_pep_len = line_list[-1]
 
                         break
-                    print("aaaa")
-                    print(evidence_file)
-                    print(filtered_evidence_file)
-                    print("\n")
-                    print(prev_transcript)
                     for line in ev_fd:
 
                         line_list = line.strip().split("\t")
@@ -302,6 +297,7 @@ class AUGUSTUS(Tool):
                         prev_gene = gene
                         prev_transcript = transcript
                         prev_pep_len = pep_len
+                    # if script breaks here it means that prediction was made without hints or all genes doesnt have hint support
                     id_fd.write("%s\n" % prev_transcript)
         ev_fd.close()
 
