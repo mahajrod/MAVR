@@ -76,13 +76,18 @@ class MatplotlibRoutines:
 
     @staticmethod
     def percent_histogram(data, output_prefix, n_bins=20, title="", xlabel="%", ylabel="Number",
-                          extensions=("jpg", "png", "svg"), legend=None, legend_location="best"):
+                          extensions=("jpg", "png", "svg"), legend=None, legend_location="best", input_mode="percent"):
 
         figure = plt.figure()
         subplot = plt.subplot(1, 1, 1)
 
         plt.hist(data, bins=n_bins)
-        plt.xlim(xmin=0, xmax=100)
+        if input_mode == "percent":
+            plt.xlim(xmin=0, xmax=100)
+        elif input_mode == "fraction":
+            plt.xlim(xmin=0, xmax=1)
+        else:
+            raise ValueError("Unrecognized type of input data(neither percents nor fractions)")
         plt.title(title)
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
@@ -94,11 +99,19 @@ class MatplotlibRoutines:
     def percent_histogram_from_file(self, data_file, output_prefix, data_type=float, column_list=None, separator=None,
                                     comments="#", n_bins=20, title="", xlabel="%", ylabel="Number",
                                     extensions=("jpg", "png", "svg"), legend=None, legend_location="best",
-                                    stats_as_legend=False):
+                                    stats_as_legend=False, input_mode="percent"):
         #print column_list
         data = np.loadtxt(data_file, dtype=data_type, comments=comments, delimiter=separator, usecols=column_list)
-        n_bins = np.linspace(0, 100, n_bins+1)
-        legenda = "Total: %i\nMean: %.1f %%\nMedian: %.1f %%" % (len(data), np.mean(data), np.median(data)) if stats_as_legend else legend
+        if input_mode == "percent":
+            n_bins = np.linspace(0, 100, n_bins+1)
+        elif input_mode == "fraction":
+            n_bins = np.linspace(0, 1.0, n_bins+1)
+        else:
+            raise ValueError("Unrecognized type of input data(neither percents nor fractions)")
+        legenda = "Total: %i\nMean: %.2f %%\nMedian: %.2f %%" if input_mode == "percent" else "Total: %i\nMean: %.2f\nMedian: %.2f"
+        legenda = legenda % (len(data), np.mean(data), np.median(data)) if stats_as_legend else legend
+        
         self.percent_histogram(data, output_prefix=output_prefix, n_bins=n_bins, title=title, xlabel=xlabel,
-                               ylabel=ylabel, extensions=extensions, legend=legenda, legend_location=legend_location)
+                               ylabel=ylabel, extensions=extensions, legend=legenda, legend_location=legend_location,
+                               input_mode=input_mode)
 

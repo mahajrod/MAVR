@@ -20,7 +20,7 @@ parser.add_argument("-c", "--comments_prefix", action="store", dest="comments_pr
 parser.add_argument("-b", "--number_of_bins", action="store", dest="number_of_bins", type=int, default=20,
                     help="Number of bins in histogram. Default - 20")
 parser.add_argument("-l", "--columns_list", action="store", dest="columns_list", type=lambda x: map(int, x.split(",")),
-                    help="Comma-separated list of columns with data. Default - all")
+                    help="Comma-separated list of columns(0-based) with data. Default - all")
 parser.add_argument("-e", "--extensions", action="store", dest="extensions", type=lambda x: x.split(","),
                     default=["png", "svg"],
                     help="Comma-separated list of extensions for histogram files")
@@ -32,7 +32,8 @@ parser.add_argument("-t", "--title", action="store", dest="title",
                     help="Title of histogram")
 parser.add_argument("-a", "--legend_location", action="store", dest="legend_location", default="upper center",
                     help="Location of legend on histogram. Default - 'upper center'")
-
+parser.add_argument("-m", "--input_mode", action="store", dest="input_mode", default="percent",
+                    help="Type of input data. Allowed: fraction, percent. Default - percent")
 args = parser.parse_args()
 
 MatplotlibRoutines.percent_histogram_from_file(args.input_file, args.output_prefix, data_type=args.data_type,
@@ -40,4 +41,4 @@ MatplotlibRoutines.percent_histogram_from_file(args.input_file, args.output_pref
                                                comments=args.comments_prefix, n_bins=args.number_of_bins,
                                                title=args.title, xlabel=args.xlabel, ylabel=args.ylabel,
                                                extensions=args.extensions, legend_location=args.legend_location,
-                                               stats_as_legend=True)
+                                               stats_as_legend=True, input_mode=args.input_mode)

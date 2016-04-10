@@ -4,8 +4,6 @@ Converters/Converters.py
 Converters/__init__.py
 CustomCollections/GeneralCollections.py
 CustomCollections/__init__.py
-Data/Nucleotides.py
-Data/__init__.py
 Download/NCBI.py
 Download/__init__.py
 GeneSynonyms/MitoGenesSynonyms.py
@@ -72,8 +70,10 @@ Tools/Annotation/GlimerHMM.py
 Tools/Annotation/SNPeff.py
 Tools/Annotation/TransDecoder.py
 Tools/Annotation/__init__.py
+Tools/Assemblers/DISCOVAR.py
 Tools/Assemblers/Fermi.py
 Tools/Assemblers/MaSuRCA.py
+Tools/Assemblers/PEAR.py
 Tools/Assemblers/Platanus.py
 Tools/Assemblers/Quast.py
 Tools/Assemblers/Spades.py
@@ -97,6 +97,7 @@ Tools/Filter/Adapters.py
 Tools/Filter/Cookiecutter.py
 Tools/Filter/FaCut.py
 Tools/Filter/FastQC.py
+Tools/Filter/NextClip.py
 Tools/Filter/TrimGalore.py
 Tools/Filter/Trimmomatic.py
 Tools/Filter/__init__.py
@@ -141,8 +142,9 @@ Tools/Samtools/__init__.py
 Tools/Tuxedo/Cufflinks.py
 Tools/Tuxedo/Tophat.py
 Tools/Tuxedo/__init__.py
+dataj/Nucleotides.py
+dataj/__init__.py
 scripts/CDS_region_variants.py
-scripts/__init__.py
 scripts/assembly_transcriptome.py
 scripts/blast_fastqc.py
 scripts/draw_genes.py

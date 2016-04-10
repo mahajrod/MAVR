@@ -60,7 +60,7 @@ args = parser.parse_args()
 if args.args.num_of_seq_per_file and args.num_of_out_files:
     raise ValueError("Options -u/--num_of_seq_per_file and -e/--num_of_out_files can't be set simultaneously")
 
-if (not args.args.num_of_seq_per_file) and (not args.num_of_out_files):
+if (not args.num_of_seq_per_file) and (not args.num_of_out_files):
     args.num_of_out_files = 10 * args.threads
 
 Exonerate.threads = args.threads
