@@ -293,6 +293,7 @@ class AUGUSTUS(Tool):
                                 prev_pep_len = pep_len
                             continue
                         id_fd.write("%s\n" % prev_transcript)
+                        print("bbbb")
                         filtered_ev_fd.write(prev_line)
                         prev_line = line
                         prev_gene = gene
