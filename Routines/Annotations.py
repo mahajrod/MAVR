@@ -5,7 +5,7 @@ from copy import deepcopy
 from Bio import SearchIO
 from BCBio import GFF
 
-from CustomCollections.GeneralCollections import IdSet
+from CustomCollections.GeneralCollections import IdSet, SynDict
 
 
 class AnnotationsRoutines:
@@ -58,3 +58,20 @@ class AnnotationsRoutines:
         transcript_ids.read(transcript_id_file, header=False)
         GFF.write(self.record_with_extracted_transcripts_generator(input_gff, transcript_ids),
                   open(output_gff, "w"))
+
+    @staticmethod
+    def replace_region_names_in_gff(input_gff, synonyms_file, output_gff):
+        syn_dict = SynDict()
+        syn_dict.read(synonyms_file, comments_prefix="#")
+        with open(input_gff, "r") as in_fd:
+            with open(output_gff, "w") as out_fd:
+                for line in in_fd:
+                    if line[0] == "#":
+                        out_fd.write(line)
+                    else:
+                        line_list = line.split("\t")
+                        if line_list[0] in syn_dict:
+                            line_list[0] = syn_dict[line_list[0]]
+                            out_fd.write("\t".join(line_list))
+                        else:
+                            out_fd.write(line)
