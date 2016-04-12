@@ -21,7 +21,7 @@ class Jellyfish(Tool):
                 raise ValueError("Upper limit for kmer counts is less than lower")
 
         options = "-m %i" % kmer_length
-        options += " -s %i" % hash_size
+        options += " -s %s" % hash_size
         options += " -t %i" % self.threads
         options += " -o %s" % out_file
         options += " -C" if count_both_strands else ""

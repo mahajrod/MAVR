@@ -29,7 +29,7 @@ parser.add_argument("-o", "--output_dir", action="store", dest="output_dir",
 #                    help="Number of threads to use in Trimmomatic. Default - 1.")
 parser.add_argument("-q", "--average_quality_threshold", action="store", dest="average_quality_threshold", default=15,
                     type=int,
-                    help="Quality threshold for sliding window. Works only if -q/--average_quality_threshold is set"
+                    help="Mean quality threshold for read. Works only if -q/--average_quality_threshold is set"
                          "Default - 15.")
 parser.add_argument("-u", "--score_type", action="store", dest="score_type", default="phred64",
                     help="Phred quality score type. Allowed: phred33, phred64. Default: phred64")
