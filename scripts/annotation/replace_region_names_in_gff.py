@@ -11,7 +11,7 @@ parser.add_argument("-i", "--input_gff", action="store", dest="input_gff", requi
                     help="Input .gff file")
 parser.add_argument("-o", "--output_gff", action="store", dest="output_gff", required=True,
                     help="Output .gff file")
-parser.add_argument("-d", "--syn_file_file", action="store", dest="syn_file", required=True,
+parser.add_argument("-s", "--syn_file_file", action="store", dest="syn_file", required=True,
                     help="File with synonyms of region names")
 
 args = parser.parse_args()

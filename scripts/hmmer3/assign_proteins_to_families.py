@@ -57,7 +57,7 @@ args = parser.parse_args()
 
 HMMER3.threads = 1
 HMMER3.path = args.path
-"""
+
 HMMER3.parallel_hmmscan(args.input, args.input_seq, args.output, num_of_seqs_per_scan=None, split_dir="splited_fasta",
                         splited_output_dir=args.hmmscan_output_dir, threads=args.threads,
                         combine_output_to_single_file=True, dont_output_alignments=args.no_alignment,
@@ -67,7 +67,7 @@ HMMER3.parallel_hmmscan(args.input, args.input_seq, args.output, num_of_seqs_per
                         splited_pfamtblout_dir=args.pfamtblout_dir,
                         biopython_165_compartibility=True
                         )
-"""
+
 HMMER3.extract_top_hits(args.output, args.top_hits_file, not_significant_ids_file=args.not_significant_file,
                         not_found_ids_file=args.not_found_file)
 HMMER3.get_families_from_top_hits(args.top_hits_file, args.fam_file)

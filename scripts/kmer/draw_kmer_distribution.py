@@ -21,13 +21,13 @@ parser.add_argument("-e", "--output_formats", action="store", dest="output_forma
                     help="Comma-separated list of formats (supported by matlotlib) "
                          "of output figure.Default: svg,eps,pdf,png,jpg")
 parser.add_argument("-w", "--low_limit", action="store", dest="low_limit", type=int, default=1,
-                    help="Low limit of histogram")
+                    help="Low limit of histogram. Default - 1")
 parser.add_argument("-g", "-high_limit", action="store", dest="high_limit", type=int, default=10000,
-                    help="High limit of histogram")
+                    help="High limit of histogram. Default - 10000")
 parser.add_argument("-b", "--bin_width", action="store", dest="bin_width", type=int, default=1,
-                    help="Bin width of histogram")
+                    help="Bin width of histogram. Default - 1")
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
-                    help="Number of threads")
+                    help="Number of threads. Default - 1")
 parser.add_argument("-d", "--without_logscale", action="store_true", dest="without_logscale",
                     help="Dont logscale axes")
 parser.add_argument("-a", "--logbase", action="store", dest="logbase", type=int, default=10,

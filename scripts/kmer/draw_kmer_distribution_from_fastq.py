@@ -29,13 +29,13 @@ parser.add_argument("-e", "--output_formats", action="store", dest="output_forma
                     help="Comma-separated list of formats (supported by matlotlib) "
                          "of output figure.Default: svg,eps,pdf,png,jpg")
 parser.add_argument("-l", "--logbase", action="store", dest="logbase", type=int, default=10,
-                    help="Base of logarithm. Default -10")
+                    help="Base of logarithm. Default - 10")
 parser.add_argument("-m", "--kmer_length", action="store", dest="kmer_length", type=int, default=23,
                     help="Length of kmers. Default - 23")
 parser.add_argument("-s", "--hash_size", action="store", dest="hash_size", type=int, default=1000000,
                     help="Size of hash. Estimation of hash size: for short reads S=(G + k*n)/0.8, "
                     "G - genome size, k - kmer length, n - number of reads, for assembled sequences "
-                    "S=Sum(L)")
+                    "S=Sum(L). Default - 1000000")
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
                     help="Number of threads. Default - 1")
 parser.add_argument("-b", "--count_both_strands", action="store_true", dest="count_both_strands",
@@ -51,9 +51,9 @@ parser.add_argument("-r", "--add_reverse_complement", action="store_true", dest=
 parser.add_argument("-j", "--jellyfish_path", action="store", dest="jellyfish_path",
                     help="Path to jellyfish")
 parser.add_argument("-w", "--low_limit", action="store", dest="low_limit", type=int, default=5,
-                    help="Low limit of histogram without logscale")
+                    help="Low limit of histogram without logscale. Default - 5")
 parser.add_argument("-g", "-high_limit", action="store", dest="high_limit", type=int, default=100,
-                    help="High limit of histogram without logscale")
+                    help="High limit of histogram without logscale. Default - 100")
 
 args = parser.parse_args()
 
