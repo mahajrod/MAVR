@@ -39,7 +39,7 @@ syn_dict.read(args.syn_file, header=args.header, separator=args.separator, key_i
 FileRoutines.save_mkdir(args.output_fam_files_dir)
 input_files = os.listdir(args.input_fam_files_dir)
 for filename in input_files:
-    taxon_id = filename[:-3]
+    taxon_id = filename[:-4]
     if taxon_id not in syn_dict:
         print("Species name was not found for taxon %s" % taxon_id)
         continue
