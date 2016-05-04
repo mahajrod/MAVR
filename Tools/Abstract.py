@@ -16,7 +16,7 @@ print_mutex = mp.Lock()
 
 def execute(exe_string):
     # this function is global because of stutid damned pickle mode in python!!!!!
-    # use sys.stdout.write instead of print to safe write to stdout from multiple threads
+    # use mutex to safe write to stdout from multiple threads
     print_mutex.acquire()
     sys.stdout.write("Executing:\n\t%s\n" % exe_string)
     print_mutex.release()

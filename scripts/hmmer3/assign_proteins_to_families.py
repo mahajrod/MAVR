@@ -69,6 +69,7 @@ pfamtblout_file = "%s.pfamtblout" % args.output_prefix
 
 HMMER3.threads = 1
 HMMER3.path = args.path
+HMMER3.timelog = "%s.timelog" % args.output_prefix
 
 HMMER3.parallel_hmmscan(args.input, args.input_seq, hits_file, num_of_seqs_per_scan=None, split_dir="splited_fasta",
                         splited_output_dir=args.hmmscan_output_dir, threads=args.threads,
