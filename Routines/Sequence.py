@@ -621,7 +621,7 @@ class SequenceRoutines():
                 record = deepcopy(record_dict[record_id])
                 record.id = syn_dict[record_id]
                 #print(record_id)
-                #print(record)
+                print(record)
                 yield record
 
     def rename_records_from_files(self, input_file, output_file, synonyms_file, format="fasta", header=False,
