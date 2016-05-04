@@ -618,9 +618,10 @@ class SequenceRoutines():
                 yield record_dict[record_id]
             else:
                 #print syn_dict[record_id]
+
+                record = deepcopy(record_dict[record_id])
                 print(record)
                 print("\n")
-                record = deepcopy(record_dict[record_id])
                 record.id = syn_dict[record_id]
                 #print(record_id)
                 print(record)
