@@ -614,6 +614,7 @@ class SequenceRoutines():
     def renamed_records_generator(record_dict, syn_dict):
         for record_id in record_dict:
             if record_id not in syn_dict:
+                print("%s was not renamed" % record_id)
                 yield record_dict[record_id]
             else:
                 record = deepcopy(record_dict[record_id])
