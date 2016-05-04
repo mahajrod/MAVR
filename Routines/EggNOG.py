@@ -29,7 +29,7 @@ class EggNOGRoutines:
 
     @staticmethod
     def convert_members_tsv_to_fam(input_file, output_file):
-        cmd = "awk -F'\t' '{printf \"%%s\t%%s\n\",$2,$6 }' %s > %s" % (input_file, output_file)
+        cmd = "awk -F'\t' '{printf \"%%s\\t%%s\\n\",$2,$6 }' %s > %s" % (input_file, output_file)
         os.system(cmd)
 
 
