@@ -31,7 +31,7 @@ pep_description_collapsed_isoforms = "%s.pep.collapsed_isoforms.description" % a
 pep_description_collapsed_isoforms_with_len = "%s.pep.collapsed_isoforms.with_len.description" % args.output_prefix
 pep_description_longest_isoform = "%s.pep.longest_isoform" % args.output_prefix
 pep_description_longest_isoform_ids = "%s.pep.longest_isoform.ids" % args.output_prefix
-
+pep_description_longest_isoform_pep = "%s.pep.longest_isoform.pep" % args.output_prefix
 awk_extract_ids_string = "awk -F'\t' '{print $1}' %s > %s"
 
 if args.remove_predicted:
@@ -83,6 +83,7 @@ for gene in syn_dict:
 for file_descriptor in descr_with_len_fd, descr_longest_isoform_fd, descr_longest_isoform_ids_fd:
     file_descriptor.close()
 
-
+SequenceRoutines.extract_sequence_by_ids(args.input, pep_description_longest_isoform_ids,
+                                         pep_description_longest_isoform_pep, format="fasta", verbose=True)
 
 
