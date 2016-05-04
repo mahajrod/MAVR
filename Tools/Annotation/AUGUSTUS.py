@@ -347,7 +347,7 @@ class AUGUSTUS(Tool):
             cmd = """grep -P "\\t%s\\t" %s | sed 's/.*ID=//;s/;.*//' | awk -F'\\t' 'BEGIN {NUMBER=1};{printf "%%s\\t%s%%0%ii\\n",$1,NUMBER; NUMBER=NUMBER+1;}'""" % (feature, input_gff, feature_prefix, number_of_digits_in_number)
             self.execute(options, cmd=cmd)
 
-        options = " %s.transcript.syn > %s.protein.syn" % output_prefix
+        options = " %s.transcript.syn > %s.protein.syn" % (output_prefix, output_prefix)
 
         cmd = "sed 's/%sT/%sP/'" % (species_prefix, species_prefix)
 
