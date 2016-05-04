@@ -329,9 +329,10 @@ class AUGUSTUS(Tool):
         cmd = "cat %s | sort -n -k 4,4 | sort -s -n -k 5,5 | sort -s -k 3,3 | sort -s -k 1,1 | join_mult_hints.pl" % in_file
         self.execute(options, cmd=cmd)
 
-    def assign_synonyms_to_genes_from_augustus_gff(self, input_gff, output_file, prefix, number_of_digits_in_number=6):
+    def assign_synonyms_to_features_from_augustus_gff(self, input_gff, output_file, prefix,
+                                                      number_of_digits_in_number=6, feature_type="gene"):
         options = " > %s" % output_file
-        cmd = """grep -P "\\tgene\\t" %s | sed 's/.*ID=//' | awk -F'\\t' 'BEGIN {NUMBER=1};{printf "%%s\\t%s%%0%ii\\n",$1,NUMBER; NUMBER=NUMBER+1;}'""" % (input_gff, prefix, number_of_digits_in_number)
+        cmd = """grep -P "\\t%s\\t" %s | sed 's/.*ID=//' | awk -F'\\t' 'BEGIN {NUMBER=1};{printf "%%s\\t%s%%0%ii\\n",$1,NUMBER; NUMBER=NUMBER+1;}'""" % (feature_type, input_gff, prefix, number_of_digits_in_number)
 
         self.execute(options, cmd=cmd)
 

@@ -12,10 +12,13 @@ parser.add_argument("-o", "--output", action="store", dest="output", required=Tr
 parser.add_argument("-p", "--id_prefix", action="store", dest="id_prefix", required=True,
                     help="Prefix of id")
 parser.add_argument("-n", "--number_of_digits_in_number", action="store", dest="number_of_digits_in_number", type=int,
-                    default=6, help="Number of digits in id")
+                    default=6, help="Number of digits in id. Default - 6")
+parser.add_argument("-f", "--feature_type", action="store", dest="feature_type",
+                    default="gene", help="Type of feature to assign synonyms. Default - 'gene'")
 
 args = parser.parse_args()
 
 
-AUGUSTUS.assign_synonyms_to_genes_from_augustus_gff(args.input_gff, args.output, args.id_prefix,
-                                                    number_of_digits_in_number=args.number_of_digits_in_number)
+AUGUSTUS.assign_synonyms_to_features_from_augustus_gff(args.input_gff, args.output, args.id_prefix,
+                                                       number_of_digits_in_number=args.number_of_digits_in_number,
+                                                       feature_type=args.feature_type)
