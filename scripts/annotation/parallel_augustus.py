@@ -22,6 +22,8 @@ parser.add_argument("-o", "--output", action="store", dest="output", required=Tr
                     help="Prefix of output files")
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
                     help="Number of threads to use")
+parser.add_argument("-r", "--species_prefix", action="store", dest="species_prefix", required=True,
+                    help="Species-related prefix to use in IDs")
 
 parser.add_argument("-s", "--species", action="store", dest="species", required=True,
                     help="Species to use as model")
@@ -114,6 +116,9 @@ AUGUSTUS.parallel_predict(args.species, args.input, output_gff, strand=args.stra
                           output_gff3=True, other_options=args.other_options, config_dir=args.config_dir,
                           use_softmasking=args.softmasking, hints_file=args.hintsfile,
                           extrinsicCfgFile=args.extrinsicCfgFile, predict_UTR=args.predict_UTR)
+
+AUGUSTUS.assign_synonyms_to_annotations_from_augustus_gff(output_gff, args.output, args.species_prefix,
+                                                          number_of_digits_in_number=8)
 
 Gffread.extract_transcript_sequences(output_gff, args.input, args.output)
 

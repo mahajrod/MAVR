@@ -351,7 +351,6 @@ class AUGUSTUS(Tool):
 
         cmd = "sed 's/%sT/%sP/'" % (species_prefix, species_prefix)
 
-
         self.execute(options, cmd=cmd)
 
 
