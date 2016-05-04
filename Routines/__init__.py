@@ -3,6 +3,7 @@ __author__ = 'mahajrod'
 from Routines.File import FileRoutines
 from Routines.NCBI import NCBIRoutines
 from Routines.Primer import PrimerRoutines
+from Routines.EggNOG import EggNOGRoutines
 from Routines.TreeFam import TreeFamRoutines
 from Routines.Sequence import SequenceRoutines
 from Routines.Alignment import AlignmentRoutines
@@ -14,6 +15,7 @@ from Routines.MultipleAlignment import MultipleAlignmentRoutines
 FileRoutines = FileRoutines()
 NCBIRoutines = NCBIRoutines()
 PrimerRoutines = PrimerRoutines()
+EggNOGRoutines = EggNOGRoutines()
 TreeFamRoutines = TreeFamRoutines()
 SequenceRoutines = SequenceRoutines()
 AlignmentRoutines = AlignmentRoutines()

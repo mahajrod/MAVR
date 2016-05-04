@@ -85,5 +85,3 @@ for file_descriptor in descr_with_len_fd, descr_longest_isoform_fd, descr_longes
 
 SequenceRoutines.extract_sequence_by_ids(args.input, pep_description_longest_isoform_ids,
                                          pep_description_longest_isoform_pep, format="fasta", verbose=True)
-
-
