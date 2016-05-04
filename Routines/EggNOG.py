@@ -27,5 +27,10 @@ class EggNOGRoutines:
                     fam_name = line_list[0].split(".")[1]
                     out_fd.write("%s\t%s" % (fam_name, line_list[1]))
 
+    @staticmethod
+    def convert_members_tsv_to_fam(input_file, output_file):
+        cmd = "awk -F'\t' '{printf \"%%s\t%%s\",$2,$6 }' %s > %s" % (input_file, output_file)
+        os.system(cmd)
+
 
 

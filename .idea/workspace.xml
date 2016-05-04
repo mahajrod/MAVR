@@ -5,17 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Data/EggNOG/v4.5/General/COG_functional_categories.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Routines/EggNOG.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/eggnog/edit_profile_names_in_fam_file.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Data/EggNOG/v4.5/General/eggnog4.core_species_info.mammalia.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Data/EggNOG/v4.5/General/eggnog4.core_species_info.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Data/EggNOG/v4.5/General/eggnog4.core_species_list.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Data/EggNOG/v4.5/General/eggnog4.functional_categories.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Data/EggNOG/v4.5/General/eggnog4.species_list.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Data/EggNOG/v4.5/General/eggnog4.taxonomic_levels.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/__init__.py" afterPath="$PROJECT_DIR$/Routines/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/ncbi/analyze_ncbi_pep.py" afterPath="$PROJECT_DIR$/scripts/annotation/ncbi/analyze_ncbi_pep.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/eggnog/assign_orthologs.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/eggnog/convert_members_tsv_to_fam.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/EggNOG.py" afterPath="$PROJECT_DIR$/Routines/EggNOG.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -45,21 +37,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="extract_families_of_species.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/treefam/extract_families_of_species.py">
+      <file leaf-file-name="assign_orthologs.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/eggnog/assign_orthologs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="0.84210527">
+              <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+              <folding>
+                <element signature="e#54#69#0" expanded="true" />
+                <element signature="e#2122#3612#1" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TreeFam.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Routines/TreeFam.py">
+      <file leaf-file-name="edit_profile_names_in_fam_file.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/eggnog/edit_profile_names_in_fam_file.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="19" column="4" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="73" />
+              <folding>
+                <element signature="e#54#64#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="convert_members_tsv_to_fam.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/eggnog/convert_members_tsv_to_fam.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="19" column="59" selection-start-line="19" selection-start-column="59" selection-end-line="19" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -69,70 +76,10 @@
         <entry file="file://$PROJECT_DIR$/Routines/EggNOG.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="15" column="9" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="extract_region.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/sequence/extract_region.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add_lengths_to_fam_file.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/treefam/add_lengths_to_fam_file.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="edit_profile_names_in_fam_file.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/eggnog/edit_profile_names_in_fam_file.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.375">
-              <caret line="19" column="73" selection-start-line="19" selection-start-column="73" selection-end-line="19" selection-end-column="73" />
+              <caret line="30" column="10" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="59" />
               <folding>
-                <element signature="e#54#64#0" expanded="true" />
+                <element signature="e#22#31#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HMMER3.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/HMMER/HMMER3.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="411" column="0" selection-start-line="411" selection-start-column="0" selection-end-line="411" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="assign_proteins_to_families.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/hmmer3/assign_proteins_to_families.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="74" column="37" selection-start-line="74" selection-start-column="37" selection-end-line="74" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Routines/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="17" column="33" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -153,10 +100,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Tools/Filter/FaCut.py" />
-        <option value="$PROJECT_DIR$/Tools/Filter/NextClip.py" />
-        <option value="$PROJECT_DIR$/projects/lizard_genomes/D_rad_exonerate_anolis.slurm" />
-        <option value="$PROJECT_DIR$/projects/lizard_genomes/D_rad_exonerate_chicken.slurm" />
         <option value="$PROJECT_DIR$/projects/lizard_genomes/D_rad_exonerate_gekko.slurm" />
         <option value="$PROJECT_DIR$/projects/lizard_genomes/D_rad_exonerate_python.slurm" />
         <option value="$PROJECT_DIR$/projects/lizard_genomes/D_rad_exonerate_xenopus.slurm" />
@@ -202,8 +145,12 @@
         <option value="$PROJECT_DIR$/scripts/annotation/ncbi/analyze_ncbi_pep.py" />
         <option value="$PROJECT_DIR$/scripts/hmmer3/assign_proteins_to_families.py" />
         <option value="$PROJECT_DIR$/Routines/__init__.py" />
-        <option value="$PROJECT_DIR$/Routines/EggNOG.py" />
         <option value="$PROJECT_DIR$/scripts/eggnog/edit_profile_names_in_fam_file.py" />
+        <option value="$PROJECT_DIR$/scripts/hmmer3/assign_orthologs.py" />
+        <option value="$PROJECT_DIR$/scripts/eggnog/assign_orthologs.py" />
+        <option value="$PROJECT_DIR$/Routines/EggNOG.py" />
+        <option value="$PROJECT_DIR$/scripts/eggnog/convet_members_tsv_to_fam.py" />
+        <option value="$PROJECT_DIR$/scripts/eggnog/convert_members_tsv_to_fam.py" />
       </list>
     </option>
   </component>
@@ -289,7 +236,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="treefam" />
+              <option name="myItemId" value="hmmer3" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -457,17 +404,17 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/scripts/eggnog" />
+      <recent name="$PROJECT_DIR$/scripts/hmmer3" />
       <recent name="$PROJECT_DIR$/Routines" />
       <recent name="$PROJECT_DIR$/scripts/sequence" />
       <recent name="$PROJECT_DIR$/scripts/annotation" />
-      <recent name="$PROJECT_DIR$/projects/lizard_genomes" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts/eggnog" />
       <recent name="$PROJECT_DIR$/Data/EggNOG/v4.5" />
       <recent name="$PROJECT_DIR$/scripts/annotation" />
       <recent name="$PROJECT_DIR$/projects/nxf" />
       <recent name="$PROJECT_DIR$/scripts/entrez" />
-      <recent name="$PROJECT_DIR$/examples/KSeq_test" />
     </key>
   </component>
   <component name="RunManager" selected="Python.RepeatMasker">
@@ -779,30 +726,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00435" summary="filter tools&#10;">
-      <created>1459259131956</created>
-      <option name="number" value="00435" />
-      <option name="project" value="LOCAL" />
-      <updated>1459259131956</updated>
-    </task>
-    <task id="LOCAL-00436" summary="filter tools&#10;">
-      <created>1459259470707</created>
-      <option name="number" value="00436" />
-      <option name="project" value="LOCAL" />
-      <updated>1459259470707</updated>
-    </task>
-    <task id="LOCAL-00437" summary="filter tools&#10;">
-      <created>1459259491693</created>
-      <option name="number" value="00437" />
-      <option name="project" value="LOCAL" />
-      <updated>1459259491693</updated>
-    </task>
-    <task id="LOCAL-00438" summary="filter tools&#10;">
-      <created>1459259833361</created>
-      <option name="number" value="00438" />
-      <option name="project" value="LOCAL" />
-      <updated>1459259833361</updated>
-    </task>
     <task id="LOCAL-00439" summary="filter tools&#10;">
       <created>1459259922949</created>
       <option name="number" value="00439" />
@@ -1073,7 +996,31 @@
       <option name="project" value="LOCAL" />
       <updated>1462354660089</updated>
     </task>
-    <option name="localTasksCounter" value="484" />
+    <task id="LOCAL-00484" summary="filter tools&#10;">
+      <created>1462361093467</created>
+      <option name="number" value="00484" />
+      <option name="project" value="LOCAL" />
+      <updated>1462361093467</updated>
+    </task>
+    <task id="LOCAL-00485" summary="filter tools&#10;">
+      <created>1462361112902</created>
+      <option name="number" value="00485" />
+      <option name="project" value="LOCAL" />
+      <updated>1462361112903</updated>
+    </task>
+    <task id="LOCAL-00486" summary="filter tools&#10;">
+      <created>1462366918757</created>
+      <option name="number" value="00486" />
+      <option name="project" value="LOCAL" />
+      <updated>1462366918757</updated>
+    </task>
+    <task id="LOCAL-00487" summary="filter tools&#10;">
+      <created>1462368197068</created>
+      <option name="number" value="00487" />
+      <option name="project" value="LOCAL" />
+      <updated>1462368197068</updated>
+    </task>
+    <option name="localTasksCounter" value="488" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1173,8 +1120,13 @@
           <line>9</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/scripts/eggnog/assign_orthologs.py</url>
+          <line>2</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="8" />
+      <option name="time" value="9" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1486,30 +1438,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/treefam/extract_families_of_species.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/TreeFam.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="33" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/HMMER/HMMER3.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1542,20 +1470,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/EggNOG.py">
+    <entry file="file://$PROJECT_DIR$/Routines/TreeFam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.08552632">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15789473">
+          <caret line="17" column="33" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/treefam/extract_families_of_species.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="9" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="38" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/eggnog/edit_profile_names_in_fam_file.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.375">
-          <caret line="19" column="73" selection-start-line="19" selection-start-column="73" selection-end-line="19" selection-end-column="73" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="4" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="73" />
           <folding>
             <element signature="e#54#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/EggNOG.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="10" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="59" />
+          <folding>
+            <element signature="e#22#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/eggnog/convert_members_tsv_to_fam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="59" selection-start-line="19" selection-start-column="59" selection-end-line="19" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/eggnog/assign_orthologs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.84210527">
+          <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+          <folding>
+            <element signature="e#54#69#0" expanded="true" />
+            <element signature="e#2122#3612#1" expanded="false" />
           </folding>
         </state>
       </provider>
