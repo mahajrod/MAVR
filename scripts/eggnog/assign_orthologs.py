@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
+import shutil
 import argparse
 
 from Tools.HMMER import HMMER3
@@ -88,3 +89,6 @@ HMMER3.extract_top_hits(hits_file, top_hits_file, not_significant_ids_file=not_s
 HMMER3.get_families_from_top_hits(top_hits_file, fam_file)
 
 EggNOGRoutines.edit_profile_names_in_fam_file(fam_file, ortholog_file)
+
+for tmp_dir in args.hmmscan_output_dir, args.tblout_dir, args.domtblout_dir, args.pfamtblout_dir, "splited_fasta":
+    shutil.rmtree(tmp_dir)
