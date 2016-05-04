@@ -23,7 +23,7 @@ parser.add_argument("-v", "--value_index", action="store", dest="value_index", t
                     help="Value column in file with synonyms(0-based)")
 parser.add_argument("-c", "--comments_prefix", action="store", dest="comments_prefix",
                     help="Prefix of comments in synonyms file")
-parser.add_argument("-s", "--columns_separator", action="store", dest="separator", default="\t",
+parser.add_argument("-m", "--columns_separator", action="store", dest="separator", default="\t",
                     help="Column separator in file with synonyms")
 parser.add_argument("-e", "--header", action="store_true", dest="header", default=False,
                     help="Header is present in synonyms file. Default - False")
