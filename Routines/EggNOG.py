@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 import os
 
+from copy import deepcopy
+
 from Bio import SeqIO
 
 from Routines import FileRoutines
@@ -37,11 +39,40 @@ class EggNOGRoutines:
         from Routines import AlignmentRoutines
         input_files = FileRoutines.make_list_of_path_to_files([dir_with_alignments] if isinstance(dir_with_alignments, str) else dir_with_alignments)
         out_dir = FileRoutines.check_path(output_dir)
-        FileRoutines.save_mkdir(output_dir)
+        FileRoutines.save_mkdir(out_dir)
         for filename in input_files:
             filename_list = FileRoutines.split_filename(filename)
             output_file = "%s%s%s" % (out_dir, filename_list[1], filename_list[2])
             AlignmentRoutines.extract_sequences_from_alignment(filename, output_file)
+
+    @staticmethod
+    def split_proteins_per_species(dir_with_proteins, output_dir, input_format="fasta", output_format="fasta"):
+        input_files = FileRoutines.make_list_of_path_to_files([dir_with_proteins] if isinstance(dir_with_proteins, str) else dir_with_proteins)
+
+        out_dir = FileRoutines.check_path(output_dir)
+        FileRoutines.save_mkdir(out_dir)
+
+        protein_dict = SeqIO.index_db("temp.idx", input_files, format=input_format)
+
+        syn_dict = SynDict()
+
+        for protein_id in protein_dict:
+            taxa_id = protein_id.split(".")[0]
+            # pep_id = ".".join(tmp_list[1:])
+            if taxa_id not in syn_dict:
+                syn_dict[taxa_id] = []
+            syn_dict[taxa_id].append(protein_id)
+
+        def renamed_records_generator(record_dict, taxa_id):
+            for record_id in syn_dict[taxa_id]:
+                record = deepcopy(record_dict[record_id])
+                #print(record)
+                record.id = ".".join(record_id.split(".")[1:])
+                yield record
+
+        for taxa_id in syn_dict:
+            out_file = "%s%s.pep" % (out_dir, taxa_id)
+            SeqIO.write(renamed_records_generator(protein_dict, taxa_id), out_file, format=output_format)
 
 
 
