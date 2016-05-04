@@ -30,10 +30,7 @@ parser.add_argument("-m", "--columns_separator", action="store", dest="separator
 parser.add_argument("-e", "--header", action="store_true", dest="header", default=False,
                     help="Header is present in synonyms file. Default - False")
 
-
 args = parser.parse_args()
-
-out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
 
 syn_dict = SynDict()
 syn_dict.read(args.syn_file, header=args.header, separator=args.separator, key_index=args.key_index,
