@@ -3,7 +3,7 @@ import os
 
 from Bio import SeqIO
 
-from Routines import AlignmentRoutines, FileRoutines
+from Routines import FileRoutines
 from CustomCollections.GeneralCollections import IdList, SynDict
 
 
@@ -34,6 +34,7 @@ class EggNOGRoutines:
 
     @staticmethod
     def extract_proteins_from_alignments(dir_with_alignments, output_dir):
+        from Routines import AlignmentRoutines
         input_files = FileRoutines.make_list_of_path_to_files([dir_with_alignments] if isinstance(dir_with_alignments, str) else dir_with_alignments)
         out_dir = FileRoutines.check_path(output_dir)
         FileRoutines.save_mkdir(output_dir)
