@@ -12,7 +12,7 @@ parser.add_argument("-o", "--output", action="store", dest="output", required=Tr
 parser.add_argument("-p", "--id_prefix", action="store", dest="id_prefix", required=True,
                     help="Prefix of id")
 parser.add_argument("-n", "--number_of_digits_in_number", action="store", dest="number_of_digits_in_number", type=int,
-                    default=6, help="Number of digits in id. Default - 6")
+                    default=8, help="Number of digits in id. Default - 8")
 parser.add_argument("-f", "--feature_type", action="store", dest="feature_type",
                     default="gene", help="Type of feature to assign synonyms. Default - 'gene'")
 
