@@ -17,8 +17,8 @@ class EggNOGRoutines:
         if comments_prefix:
             comments_prefix_len = len(comments_prefix)
 
-        with open(input_fam_file) as in_fd:
-            with open(output_fam_file) as out_fd:
+        with open(input_fam_file, "r") as in_fd:
+            with open(output_fam_file, "w") as out_fd:
                 for line in in_fd:
                     if comments_prefix:
                         if line[:comments_prefix_len] == comments_prefix:
