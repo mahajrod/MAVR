@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/eggnog/assign_orthologs.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/eggnog/convert_members_tsv_to_fam.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Data/EggNOG/v4.5/Mammalia/eggnog4.core_species_info.mammalia.taxa.ids" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Data/EggNOG/v4.5/General/eggnog4.core_species_info.mammalia.txt" afterPath="$PROJECT_DIR$/Data/EggNOG/v4.5/Mammalia/eggnog4.core_species_info.mammalia.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/EggNOG.py" afterPath="$PROJECT_DIR$/Routines/EggNOG.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/expansion/compare_clusters.py" afterPath="$PROJECT_DIR$/scripts/expansion/compare_clusters.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/expansion_hmm/find_correctly_assembled_families_in_all_species.py" afterPath="$PROJECT_DIR$/scripts/expansion_hmm/find_correctly_assembled_families_in_all_species.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -37,11 +39,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="assign_orthologs.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="assign_orthologs.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/eggnog/assign_orthologs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.84210527">
-              <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="79" column="28" selection-start-line="79" selection-start-column="28" selection-end-line="79" selection-end-column="28" />
               <folding>
                 <element signature="e#54#69#0" expanded="true" />
                 <element signature="e#2122#3612#1" expanded="false" />
@@ -50,13 +52,77 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="edit_profile_names_in_fam_file.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/eggnog/edit_profile_names_in_fam_file.py">
+      <file leaf-file-name="errors_distribution.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/expansion_hmm/errors_distribution.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="19" column="4" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="73" />
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="find_correctly_assembled_families_in_all_species.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/expansion_hmm/find_correctly_assembled_families_in_all_species.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="32" column="2" selection-start-line="32" selection-start-column="2" selection-end-line="32" selection-end-column="2" />
               <folding>
-                <element signature="e#54#64#0" expanded="true" />
+                <element signature="e#54#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="get_common_correct_families.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/expansion/get_common_correct_families.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="get_genes_from_families.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/expansion/get_genes_from_families.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="split_hclust_families.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/expansion/split_hclust_families.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+              <folding>
+                <element signature="e#141#150#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="eggnog4.core_species_info.mammalia.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Data/EggNOG/v4.5/Mammalia/eggnog4.core_species_info.mammalia.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="compare_clusters.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/expansion/compare_clusters.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
+              <folding>
+                <element signature="e#54#63#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -72,11 +138,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EggNOG.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="EggNOG.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Routines/EggNOG.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="30" column="10" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.21710527">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding>
                 <element signature="e#22#31#0" expanded="true" />
               </folding>
@@ -100,9 +166,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/projects/lizard_genomes/D_rad_exonerate_gekko.slurm" />
-        <option value="$PROJECT_DIR$/projects/lizard_genomes/D_rad_exonerate_python.slurm" />
-        <option value="$PROJECT_DIR$/projects/lizard_genomes/D_rad_exonerate_xenopus.slurm" />
         <option value="$PROJECT_DIR$/Tools/Expression/Cufflinks.py" />
         <option value="$PROJECT_DIR$/projects/solenodon_genome/Solenodon_exonerate_hedgehog.slurm" />
         <option value="$PROJECT_DIR$/projects/solenodon_genome/Solenodon_exonerate_mouse.slurm" />
@@ -148,9 +211,12 @@
         <option value="$PROJECT_DIR$/scripts/eggnog/edit_profile_names_in_fam_file.py" />
         <option value="$PROJECT_DIR$/scripts/hmmer3/assign_orthologs.py" />
         <option value="$PROJECT_DIR$/scripts/eggnog/assign_orthologs.py" />
-        <option value="$PROJECT_DIR$/Routines/EggNOG.py" />
         <option value="$PROJECT_DIR$/scripts/eggnog/convet_members_tsv_to_fam.py" />
         <option value="$PROJECT_DIR$/scripts/eggnog/convert_members_tsv_to_fam.py" />
+        <option value="$PROJECT_DIR$/scripts/expansion/compare_clusters.py" />
+        <option value="$PROJECT_DIR$/scripts/expansion_hmm/find_correctly_assembled_families_in_all_species.py" />
+        <option value="$PROJECT_DIR$/scripts/expansion/split_hclust_families.py" />
+        <option value="$PROJECT_DIR$/Routines/EggNOG.py" />
       </list>
     </option>
   </component>
@@ -236,7 +302,61 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="treefam" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="hmmer3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="expansion_hmm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="expansion" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -375,6 +495,36 @@
               <option name="myItemId" value="v4.5" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Mammalia" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EggNOG" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="v4.5" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="General" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -410,11 +560,11 @@
       <recent name="$PROJECT_DIR$/scripts/annotation" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Data/EggNOG/v4.5/Mammalia" />
       <recent name="$PROJECT_DIR$/scripts/eggnog" />
       <recent name="$PROJECT_DIR$/Data/EggNOG/v4.5" />
       <recent name="$PROJECT_DIR$/scripts/annotation" />
       <recent name="$PROJECT_DIR$/projects/nxf" />
-      <recent name="$PROJECT_DIR$/scripts/entrez" />
     </key>
   </component>
   <component name="RunManager" selected="Python.RepeatMasker">
@@ -726,12 +876,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00439" summary="filter tools&#10;">
-      <created>1459259922949</created>
-      <option name="number" value="00439" />
-      <option name="project" value="LOCAL" />
-      <updated>1459259922949</updated>
-    </task>
     <task id="LOCAL-00440" summary="filter tools&#10;">
       <created>1459266491751</created>
       <option name="number" value="00440" />
@@ -1020,7 +1164,13 @@
       <option name="project" value="LOCAL" />
       <updated>1462368197068</updated>
     </task>
-    <option name="localTasksCounter" value="488" />
+    <task id="LOCAL-00488" summary="filter tools&#10;">
+      <created>1462370164062</created>
+      <option name="number" value="00488" />
+      <option name="project" value="LOCAL" />
+      <updated>1462370164062</updated>
+    </task>
+    <option name="localTasksCounter" value="489" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1131,48 +1281,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/chemidoc/convert_scn_to_tiff.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Data/protein_markers/kaleidoscope.t">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Data/protein_markers/DualColor.t">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/lizard_genomes/D_val_exonerate_anolis.slurm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/lizard_genomes/D_val_exonerate_python.slurm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="7" selection-start-line="1" selection-start-column="0" selection-end-line="12" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/lizard_genomes/D_val_exonerate_gekko.slurm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="18" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/projects/lizard_genomes/D_val_exonerate_chicken.slurm">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1504,16 +1612,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/EggNOG.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="10" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="59" />
-          <folding>
-            <element signature="e#22#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/eggnog/convert_members_tsv_to_fam.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1524,11 +1622,83 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/eggnog/assign_orthologs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.84210527">
-          <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="79" column="28" selection-start-line="79" selection-start-column="28" selection-end-line="79" selection-end-column="28" />
           <folding>
             <element signature="e#54#69#0" expanded="true" />
             <element signature="e#2122#3612#1" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/expansion_hmm/errors_distribution.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/expansion/compare_clusters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
+          <folding>
+            <element signature="e#54#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/expansion_hmm/find_correctly_assembled_families_in_all_species.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="2" selection-start-line="32" selection-start-column="2" selection-end-line="32" selection-end-column="2" />
+          <folding>
+            <element signature="e#54#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/expansion/get_common_correct_families.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/expansion/get_genes_from_families.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Data/EggNOG/v4.5/Mammalia/eggnog4.core_species_info.mammalia.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/expansion/split_hclust_families.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <folding>
+            <element signature="e#141#150#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/EggNOG.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21710527">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <element signature="e#22#31#0" expanded="true" />
           </folding>
         </state>
       </provider>

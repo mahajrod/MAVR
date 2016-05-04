@@ -7,7 +7,7 @@ import argparse
 from collections import OrderedDict
 from CustomCollections.GeneralCollections import TwoLvlDict, IdList, IdSet, SynDict
 
-from Routines.File import check_path
+from Routines import FileRoutines
 from Routines.File import read_synonyms_dict
 
 
@@ -22,12 +22,15 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-s", "--species_list", action="store", dest="species_list", type=lambda s: s.split(","),
                     required=True,
                     help="Comma-separated list of species")
-parser.add_argument("-d", "--species_dir", action="store", dest="species_dir", default="./", type=check_path,
+parser.add_argument("-d", "--species_dir", action="store", dest="species_dir", default="./",
+                    type=FileRoutines.check_path,
                     help="Directory with families of species")
 parser.add_argument("-o", "--output_file", action="store", dest="output", default="stdout",
                     help="Output file. Default: stdout")
 
 args = parser.parse_args()
+
+# run after scripts/expansion/compare_cluster.py
 
 out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
 
