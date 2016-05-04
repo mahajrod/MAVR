@@ -18,3 +18,4 @@ args = parser.parse_args()
 out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
 
 EggNOGRoutines.edit_profile_names_in_fam_file(args.fam_file, args.output)
+
