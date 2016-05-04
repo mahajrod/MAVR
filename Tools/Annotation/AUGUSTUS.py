@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+import shutil
 
 from Routines import FileRoutines, SequenceRoutines, MatplotlibRoutines
 from CustomCollections.GeneralCollections import IdList
@@ -330,11 +331,28 @@ class AUGUSTUS(Tool):
         self.execute(options, cmd=cmd)
 
     def assign_synonyms_to_features_from_augustus_gff(self, input_gff, output_file, prefix,
-                                                      number_of_digits_in_number=6, feature_type="gene"):
+                                                      number_of_digits_in_number=8, feature_type="gene"):
         options = " > %s" % output_file
         cmd = """grep -P "\\t%s\\t" %s | sed 's/.*ID=//;s/;.*//' | awk -F'\\t' 'BEGIN {NUMBER=1};{printf "%%s\\t%s%%0%ii\\n",$1,NUMBER; NUMBER=NUMBER+1;}'""" % (feature_type, input_gff, prefix, number_of_digits_in_number)
 
         self.execute(options, cmd=cmd)
+
+    def assign_synonyms_to_annotations_from_augustus_gff(self, input_gff, output_prefix, species_prefix,
+                                                         number_of_digits_in_number=8):
+
+        for feature in "gene", "transcript":
+            output_file = "%s.%s.syn" % (output_prefix, feature)
+            feature_prefix = "%s%s" % (species_prefix.upper(), "G" if feature == "gene" else "T")
+            options = " > %s" % output_file
+            cmd = """grep -P "\\t%s\\t" %s | sed 's/.*ID=//;s/;.*//' | awk -F'\\t' 'BEGIN {NUMBER=1};{printf "%%s\\t%s%%0%ii\\n",$1,NUMBER; NUMBER=NUMBER+1;}'""" % (feature, input_gff, feature_prefix, number_of_digits_in_number)
+            self.execute(options, cmd=cmd)
+
+        options = " %s.transcript.syn > %s.protein.syn" % output_prefix
+
+        cmd = "sed 's/%sT/%sP/'" % (species_prefix, species_prefix)
+
+        self.execute(options, cmd=cmd)
+
 
 
 
