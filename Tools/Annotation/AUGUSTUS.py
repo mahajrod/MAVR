@@ -332,7 +332,7 @@ class AUGUSTUS(Tool):
     def assign_synonyms_to_features_from_augustus_gff(self, input_gff, output_file, prefix,
                                                       number_of_digits_in_number=6, feature_type="gene"):
         options = " > %s" % output_file
-        cmd = """grep -P "\\t%s\\t" %s | sed 's/.*ID=//' | awk -F'\\t' 'BEGIN {NUMBER=1};{printf "%%s\\t%s%%0%ii\\n",$1,NUMBER; NUMBER=NUMBER+1;}'""" % (feature_type, input_gff, prefix, number_of_digits_in_number)
+        cmd = """grep -P "\\t%s\\t" %s | sed 's/.*ID=//;s/;.*//' | awk -F'\\t' 'BEGIN {NUMBER=1};{printf "%%s\\t%s%%0%ii\\n",$1,NUMBER; NUMBER=NUMBER+1;}'""" % (feature_type, input_gff, prefix, number_of_digits_in_number)
 
         self.execute(options, cmd=cmd)
 
