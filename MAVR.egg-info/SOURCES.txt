@@ -4,6 +4,8 @@ Converters/Converters.py
 Converters/__init__.py
 CustomCollections/GeneralCollections.py
 CustomCollections/__init__.py
+Data/Nucleotides.py
+Data/__init__.py
 Download/NCBI.py
 Download/__init__.py
 GeneSynonyms/MitoGenesSynonyms.py
