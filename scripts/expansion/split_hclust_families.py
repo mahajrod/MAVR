@@ -96,7 +96,7 @@ for species in species_fd_dict:
 all_fam_fd.close()
 
 with open(args.family_count_file, "w") as count_fd:
-    count_fd.write("species\tnumber_of_families\n")
+    count_fd.write("#species\tnumber_of_families\n")
     for species in family_count_dict:
         count_fd.write("%s\t%i\n" % (species, family_count_dict[species]))
 

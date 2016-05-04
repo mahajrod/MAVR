@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Data/EggNOG/v4.5/Mammalia/eggnog4.core_species_info.mammalia.taxa.ids" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Data/EggNOG/v4.5/General/eggnog4.core_species_info.mammalia.txt" afterPath="$PROJECT_DIR$/Data/EggNOG/v4.5/Mammalia/eggnog4.core_species_info.mammalia.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/EggNOG.py" afterPath="$PROJECT_DIR$/Routines/EggNOG.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/expansion/compare_clusters.py" afterPath="$PROJECT_DIR$/scripts/expansion/compare_clusters.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/expansion_hmm/find_correctly_assembled_families_in_all_species.py" afterPath="$PROJECT_DIR$/scripts/expansion_hmm/find_correctly_assembled_families_in_all_species.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Data/EggNOG/v4.5/Mammalia/eggnog4.core_species_info.mammalia.taxa" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/eggnog/rename_fam_file_from_taxaid_to_species_name.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/expansion/split_hclust_families.py" afterPath="$PROJECT_DIR$/scripts/expansion/split_hclust_families.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -52,8 +50,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="errors_distribution.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/expansion_hmm/errors_distribution.py">
+      <file leaf-file-name="replace_selenocystein.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/sequence/replace_selenocystein.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -62,35 +60,38 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="find_correctly_assembled_families_in_all_species.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/expansion_hmm/find_correctly_assembled_families_in_all_species.py">
+      <file leaf-file-name="rename_sequence_ids.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/sequence/rename_sequence_ids.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="32" column="2" selection-start-line="32" selection-start-column="2" selection-end-line="32" selection-end-column="2" />
+              <caret line="34" column="68" selection-start-line="33" selection-start-column="43" selection-end-line="35" selection-end-column="79" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="edit_profile_names_in_fam_file.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/eggnog/edit_profile_names_in_fam_file.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="19" column="4" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="73" />
               <folding>
-                <element signature="e#54#63#0" expanded="true" />
+                <element signature="e#54#64#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="get_common_correct_families.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/expansion/get_common_correct_families.py">
+      <file leaf-file-name="eggnog4.core_species_info.mammalia.taxa" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Data/EggNOG/v4.5/Mammalia/eggnog4.core_species_info.mammalia.taxa">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="-0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="get_genes_from_families.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/expansion/get_genes_from_families.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
+          <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+            <state />
           </provider>
         </entry>
       </file>
@@ -98,7 +99,7 @@
         <entry file="file://$PROJECT_DIR$/scripts/expansion/split_hclust_families.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+              <caret line="98" column="21" selection-start-line="98" selection-start-column="21" selection-end-line="98" selection-end-column="21" />
               <folding>
                 <element signature="e#141#150#0" expanded="true" />
               </folding>
@@ -116,18 +117,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="compare_clusters.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/expansion/compare_clusters.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
-              <folding>
-                <element signature="e#54#63#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="convert_members_tsv_to_fam.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/eggnog/convert_members_tsv_to_fam.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -138,11 +127,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EggNOG.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="rename_fam_file_from_taxaid_to_species_name.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/eggnog/rename_fam_file_from_taxaid_to_species_name.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.70394737">
+              <caret line="39" column="43" selection-start-line="39" selection-start-column="43" selection-end-line="39" selection-end-column="43" />
+              <folding>
+                <element signature="e#54#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EggNOG.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Routines/EggNOG.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.21710527">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="30" column="4" selection-start-line="30" selection-start-column="4" selection-end-line="32" selection-end-column="22" />
               <folding>
                 <element signature="e#22#31#0" expanded="true" />
               </folding>
@@ -166,7 +167,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Tools/Expression/Cufflinks.py" />
         <option value="$PROJECT_DIR$/projects/solenodon_genome/Solenodon_exonerate_hedgehog.slurm" />
         <option value="$PROJECT_DIR$/projects/solenodon_genome/Solenodon_exonerate_mouse.slurm" />
         <option value="$PROJECT_DIR$/projects/solenodon_genome/Solenodon_exonerate_sorex.slurm" />
@@ -215,8 +215,9 @@
         <option value="$PROJECT_DIR$/scripts/eggnog/convert_members_tsv_to_fam.py" />
         <option value="$PROJECT_DIR$/scripts/expansion/compare_clusters.py" />
         <option value="$PROJECT_DIR$/scripts/expansion_hmm/find_correctly_assembled_families_in_all_species.py" />
-        <option value="$PROJECT_DIR$/scripts/expansion/split_hclust_families.py" />
         <option value="$PROJECT_DIR$/Routines/EggNOG.py" />
+        <option value="$PROJECT_DIR$/scripts/expansion/split_hclust_families.py" />
+        <option value="$PROJECT_DIR$/scripts/eggnog/rename_fam_file_from_taxaid_to_species_name.py" />
       </list>
     </option>
   </component>
@@ -303,6 +304,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="treefam" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sequence" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -876,18 +895,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00440" summary="filter tools&#10;">
-      <created>1459266491751</created>
-      <option name="number" value="00440" />
-      <option name="project" value="LOCAL" />
-      <updated>1459266491751</updated>
-    </task>
-    <task id="LOCAL-00441" summary="filter tools&#10;">
-      <created>1460312531129</created>
-      <option name="number" value="00441" />
-      <option name="project" value="LOCAL" />
-      <updated>1460312531130</updated>
-    </task>
     <task id="LOCAL-00442" summary="filter tools&#10;">
       <created>1460315066422</created>
       <option name="number" value="00442" />
@@ -1170,7 +1177,19 @@
       <option name="project" value="LOCAL" />
       <updated>1462370164062</updated>
     </task>
-    <option name="localTasksCounter" value="489" />
+    <task id="LOCAL-00489" summary="filter tools&#10;">
+      <created>1462371680745</created>
+      <option name="number" value="00489" />
+      <option name="project" value="LOCAL" />
+      <updated>1462371680745</updated>
+    </task>
+    <task id="LOCAL-00490" summary="filter tools&#10;">
+      <created>1462371771145</created>
+      <option name="number" value="00490" />
+      <option name="project" value="LOCAL" />
+      <updated>1462371771145</updated>
+    </task>
+    <option name="localTasksCounter" value="491" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1281,27 +1300,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/projects/lizard_genomes/D_val_exonerate_chicken.slurm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="18" selection-start-line="0" selection-start-column="0" selection-end-line="21" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/lizard_genomes/D_val_exonerate_xenopus.slurm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/lizard_genomes/D_uni_exonerate_python.slurm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.74050635">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/projects/lizard_genomes/D_uni_exonerate_xenopus.slurm">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6550633">
@@ -1438,14 +1436,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/sequence/rename_sequence_ids.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="65" selection-start-line="34" selection-start-column="65" selection-end-line="34" selection-end-column="65" />
           <folding />
         </state>
       </provider>
@@ -1602,35 +1592,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/eggnog/edit_profile_names_in_fam_file.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="4" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="73" />
-          <folding>
-            <element signature="e#54#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/eggnog/convert_members_tsv_to_fam.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="59" selection-start-line="19" selection-start-column="59" selection-end-line="19" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/eggnog/assign_orthologs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="79" column="28" selection-start-line="79" selection-start-column="28" selection-end-line="79" selection-end-column="28" />
-          <folding>
-            <element signature="e#54#69#0" expanded="true" />
-            <element signature="e#2122#3612#1" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/expansion_hmm/errors_distribution.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1686,19 +1647,85 @@
     <entry file="file://$PROJECT_DIR$/scripts/expansion/split_hclust_families.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <caret line="98" column="21" selection-start-line="98" selection-start-column="21" selection-end-line="98" selection-end-column="21" />
           <folding>
             <element signature="e#141#150#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Data/EggNOG/v4.5/Mammalia/eggnog4.core_species_info.mammalia.taxa">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Routines/EggNOG.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21710527">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="4" selection-start-line="30" selection-start-column="4" selection-end-line="32" selection-end-column="22" />
           <folding>
             <element signature="e#22#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/eggnog/edit_profile_names_in_fam_file.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="4" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="73" />
+          <folding>
+            <element signature="e#54#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/eggnog/convert_members_tsv_to_fam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="59" selection-start-line="19" selection-start-column="59" selection-end-line="19" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/eggnog/assign_orthologs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="79" column="28" selection-start-line="79" selection-start-column="28" selection-end-line="79" selection-end-column="28" />
+          <folding>
+            <element signature="e#54#69#0" expanded="true" />
+            <element signature="e#2122#3612#1" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence/replace_selenocystein.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence/rename_sequence_ids.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="68" selection-start-line="33" selection-start-column="43" selection-end-line="35" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/eggnog/rename_fam_file_from_taxaid_to_species_name.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.70394737">
+          <caret line="39" column="43" selection-start-line="39" selection-start-column="43" selection-end-line="39" selection-end-column="43" />
+          <folding>
+            <element signature="e#54#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
