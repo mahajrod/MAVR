@@ -25,14 +25,15 @@ parser.add_argument("-s", "--species_list", action="store", dest="species_list",
 parser.add_argument("-d", "--species_dir", action="store", dest="species_dir", default="./",
                     type=FileRoutines.check_path,
                     help="Directory with families of species")
+"""
 parser.add_argument("-o", "--output_file", action="store", dest="output", default="stdout",
                     help="Output file. Default: stdout")
-
+"""
 args = parser.parse_args()
 
 # run after scripts/expansion/compare_cluster.py
 
-out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
+# out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
 
 species_syn_dict = TwoLvlDict()
 
@@ -49,5 +50,7 @@ assembled_ids.write("assembled_families.ids")
 not_assembled_ids = IdSet(not_assembled.sl_keys())
 not_assembled_ids.write("non_assembled_families.ids")
 
+"""
 if args.output != "stdout":
     out_fd.close()
+"""

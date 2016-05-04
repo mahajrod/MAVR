@@ -147,3 +147,14 @@ class AlignmentRoutines:
 
         AlignIO.write([degenerate_alignment], output_alignment_file, format=format)
 
+    @staticmethod
+    def sequences_from_alignment_generator(alignments, gap_symbol="-"):
+        for record in alignments:
+            record.seq = Seq(str(record.seq).replace(gap_symbol, ""))
+            yield record
+
+    def extract_sequences_from_alignment(self, alignment_file, output_file, alignment_format="fasta",
+                                         output_format="fasta", gap_symbol="-"):
+        alignments = AlignIO.read(alignment_file, format=alignment_format)
+        SeqIO.write(self.sequences_from_alignment_generator(alignments, gap_symbol=gap_symbol),
+                    output_file, format=output_format)
