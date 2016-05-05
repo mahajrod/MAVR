@@ -238,6 +238,7 @@ class Jellyfish(Tool):
         nearest_value_to_first_min_idx = MathRoutines.find_nearest_scalar(bins[local_maximums_idx[first_unique_peak_idx_idx]:],
                                                                           bins[local_minimums_idx[0]])
 
+        print peaks_in_checked_area_idx, minimums_in_checked_area_idx
         return [(bins[i], counts[i]) for i in peaks_in_checked_area_idx], \
                [(bins[i], counts[i]) for i in minimums_in_checked_area_idx], \
                (local_minimums_idx, nearest_value_to_first_min_idx)
