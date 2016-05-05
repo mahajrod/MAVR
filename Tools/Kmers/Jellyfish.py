@@ -150,10 +150,10 @@ class Jellyfish(Tool):
             plt.plot(b, c)
 
             for minimum in minimums_to_show:
-                plt.plot([minimum[0], minimum[0]], [0, minimum[1]], 'r-', lw=1)
+                plt.plot([minimum[0], minimum[0]], [0, minimum[1]], 'r--', lw=1)
                 #MatplotlibRoutines.add_line(subplot, (minimum[0], 0), (minimum[0], minimum[1]), color="red")
             for maximum in maximums_to_show:
-                plt.plot([maximum[0], maximum[0]], [0, maximum[1]], 'g-', lw=1)
+                plt.plot([maximum[0], maximum[0]], [0, maximum[1]], 'g--', lw=1)
 
             plt.ylabel("Number of distinct %s-mers" % kmer_length, fontsize=13)
             if i == 1:
