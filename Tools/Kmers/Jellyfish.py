@@ -212,7 +212,7 @@ class Jellyfish(Tool):
 
         max_checked_coverage = check_peaks_coef * first_unique_peak_coverage
         #print max_checked_coverage
-        peaks_in_checked_area_idx = [first_unique_peak_idx_idx]
+        peaks_in_checked_area_idx = [local_maximums_idx[first_unique_peak_idx_idx]]
         minimums_in_checked_area_idx = []
 
         for i in range(first_unique_peak_idx_idx+1, len(local_maximums_idx)):
@@ -235,7 +235,7 @@ class Jellyfish(Tool):
             print "Additional k-mer peaks were detected in coverage (%i, %i]" % (first_unique_peak_coverage,
                                                                                  max_checked_coverage)
 
-        nearest_value_to_first_min_idx = MathRoutines.find_nearest_scalar(bins[first_unique_peak_idx_idx:],
+        nearest_value_to_first_min_idx = MathRoutines.find_nearest_scalar(bins[local_maximums_idx[first_unique_peak_idx_idx]:],
                                                                           bins[local_minimums_idx[0]])
 
         return [(bins[i], counts[i]) for i in peaks_in_checked_area_idx], \
