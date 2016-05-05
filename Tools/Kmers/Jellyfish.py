@@ -178,8 +178,8 @@ class Jellyfish(Tool):
             How the edges of the vector are treated. 'wrap' (wrap around) or 'clip' (treat overflow as the same
             as the last
         """
-        local_maximums_idx = argrelextrema(counts, np.greater, order=order, mode=mode)
-        local_minimums_idx = argrelextrema(counts, np.less, order=order, mode=mode)
+        local_maximums_idx = argrelextrema(counts, np.greater, order=order, mode=mode)[0]
+        local_minimums_idx = argrelextrema(counts, np.less, order=order, mode=mode)[0]
 
         return local_minimums_idx, local_maximums_idx
 
@@ -189,8 +189,8 @@ class Jellyfish(Tool):
         check_peaks_coef:
             histogram is checked for presence of additional peaks in range [first_unique_peak, check_peaks_coef*first_unique_peak]
         """
-        local_maximums_idx = argrelextrema(counts, np.greater, order=order, mode=mode)
-        local_minimums_idx = argrelextrema(counts, np.less, order=order, mode=mode)
+        local_maximums_idx = argrelextrema(counts, np.greater, order=order, mode=mode)[0]
+        local_minimums_idx = argrelextrema(counts, np.less, order=order, mode=mode)[0]
         print local_maximums_idx
         with open("%s.local_maximums" % output_prefix, "w") as out_fd:
             out_fd.write("#multiplicity\tnumber_of_kmers\n")
