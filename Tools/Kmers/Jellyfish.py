@@ -224,7 +224,7 @@ class Jellyfish(Tool):
                                                                                  max_checked_coverage)
 
         nearest_value_to_first_min_idx = MathRoutines.find_nearest_scalar(counts[local_maximums_idx[first_unique_peak_idx_idx]:],
-                                                                          counts[local_minimums_idx[0]])
+                                                                          counts[local_minimums_idx[0]]) + local_maximums_idx[first_unique_peak_idx_idx]
         print counts[local_maximums_idx[first_unique_peak_idx_idx]:]
         print(local_maximums_idx[first_unique_peak_idx_idx])
         print counts[local_minimums_idx[0]], local_minimums_idx[0]
