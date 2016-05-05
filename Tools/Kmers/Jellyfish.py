@@ -211,7 +211,7 @@ class Jellyfish(Tool):
         first_unique_peak_coverage = bins[first_unique_peak_idx]
 
         max_checked_coverage = check_peaks_coef * first_unique_peak_coverage
-
+        print max_checked_coverage
         peaks_in_checked_area_idx = [first_unique_peak_idx]
         minimums_in_checked_area_idx = []
         for i in range(first_unique_peak_idx+1, len(local_maximums_idx)):
