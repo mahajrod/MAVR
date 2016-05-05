@@ -150,10 +150,12 @@ class Jellyfish(Tool):
             plt.plot(b, c)
 
             for minimum in minimums_to_show:
-                plt.plot((minimum[0], 0), (minimum[0], minimum[1]), 'k-', lw=2)
-                #print minimum
+                print "Minimum"
+                plt.plot([minimum[0], 0], [minimum[0], minimum[1]], 'k-', lw=2)
+                print minimum
                 #MatplotlibRoutines.add_line(subplot, (minimum[0], 0), (minimum[0], minimum[1]), color="red")
             for maximum in maximums_to_show:
+                print "Maximum"
                 print maximum
                 MatplotlibRoutines.add_line(subplot, (maximum[0], 0), (maximum[0], maximum[1]), color="green")
 
@@ -214,7 +216,7 @@ class Jellyfish(Tool):
         minimums_in_checked_area_idx = []
         for i in range(first_unique_peak_idx+1, len(local_maximums_idx)):
             if bins[local_maximums_idx[i]] <= max_checked_coverage:
-                peaks_in_checked_area_idx.append(i)
+                peaks_in_checked_area_idx.append(local_maximums_idx[i])
             else:
                 break
 
