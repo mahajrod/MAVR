@@ -6,11 +6,6 @@ from copy import deepcopy
 import numpy as np
 import scipy as scp
 
-from Bio import SeqIO
-
-from Routines import FileRoutines
-from CustomCollections.GeneralCollections import IdList, SynDict
-
 
 class MathRoutines:
     def __init__(self):
