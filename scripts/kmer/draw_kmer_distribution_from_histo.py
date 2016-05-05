@@ -38,11 +38,14 @@ parser.add_argument("-g", "-high_limit", action="store", dest="high_limit", type
 parser.add_argument("-m", "--kmer_length", action="store", dest="kmer_length", type=int, required=True,
                     help="Length of kmers. Default - 23")
 
+#parser.add_argument("-d", "--draw_peaks_and_gaps", action="store_true", dest="draw_peaks_and_gaps",
+#                    help="Draw peaks and gaps")
+
 args = parser.parse_args()
 
 Jellyfish.draw_kmer_distribution(args.input, args.kmer_length, args.output_prefix, output_formats=args.output_formats,
                                  logbase=args.logbase, non_log_low_limit=args.low_limit,
-                                 non_log_high_limit=args.high_limit)
+                                 non_log_high_limit=args.high_limit) #, draw_peaks_and_gaps=args.draw_peaks_and_gaps)
 """
 bins, counts = np.loadtxt(args.input, unpack=True)
 

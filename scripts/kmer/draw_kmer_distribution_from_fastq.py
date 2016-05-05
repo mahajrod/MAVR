@@ -55,6 +55,8 @@ parser.add_argument("-w", "--low_limit", action="store", dest="low_limit", type=
                     help="Low limit of histogram without logscale. Default - 5")
 parser.add_argument("-g", "-high_limit", action="store", dest="high_limit", type=int, default=100,
                     help="High limit of histogram without logscale. Default - 100")
+#parser.add_argument("-d", "--draw_peaks_and_gaps", action="store_true", dest="draw_peaks_and_gaps",
+#                    help="Draw peaks and gaps")
 
 args = parser.parse_args()
 
@@ -85,7 +87,7 @@ Jellyfish.count(args.input if not args.add_rev_com else file_with_rev_com, base_
 Jellyfish.histo(base_file, histo_file, upper_count=10000000)
 Jellyfish.draw_kmer_distribution(args.input, args.kmer_length, args.picture_prefix, output_formats=args.output_formats,
                                  logbase=args.logbase, non_log_low_limit=args.low_limit,
-                                 non_log_high_limit=args.high_limit)
+                                 non_log_high_limit=args.high_limit) #, draw_peaks_and_gaps=args.draw_peaks_and_gaps)
 """
 bins, counts = np.loadtxt(args.input, unpack=True)
 

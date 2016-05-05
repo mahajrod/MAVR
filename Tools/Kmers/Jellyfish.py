@@ -141,34 +141,36 @@ class Jellyfish(Tool):
             plt.savefig("%s.no_logscale.%s" % (output_prefix, extension))
 
         plt.close()
+        for index in range(3, 5):
+            figure = plt.figure(index, figsize=(6, 12), dpi=400)
+            subplot_list = []
+            for i, b, c in zip([1, 2], [bins, selected_bins], [counts, selected_counts]):
+                subplot_list.append(plt.subplot(2, 1, i))
+                plt.suptitle("Distribution of %s-mers" % kmer_length, fontweight='bold', fontsize=13)
+                plt.plot(b, c)
 
-        figure = plt.figure(3, figsize=(6, 12), dpi=400)
-        subplot_list = []
-        for i, b, c in zip([1, 2], [bins, selected_bins], [counts, selected_counts]):
-            subplot_list.append(plt.subplot(2, 1, i))
-            plt.suptitle("Distribution of %s-mers" % kmer_length, fontweight='bold', fontsize=13)
-            plt.plot(b, c)
+                if index == 4:
+                    for minimum in minimums_to_show:
+                        plt.plot([minimum[0], minimum[0]], [0, minimum[1]], 'r--', lw=1)
+                    for maximum in maximums_to_show:
+                        plt.plot([maximum[0], maximum[0]], [0, maximum[1]], 'g--', lw=1)
 
-            for minimum in minimums_to_show:
-                plt.plot([minimum[0], minimum[0]], [0, minimum[1]], 'r--', lw=1)
-                #MatplotlibRoutines.add_line(subplot, (minimum[0], 0), (minimum[0], minimum[1]), color="red")
-            for maximum in maximums_to_show:
-                plt.plot([maximum[0], maximum[0]], [0, maximum[1]], 'g--', lw=1)
+                plt.ylabel("Number of distinct %s-mers" % kmer_length, fontsize=13)
+                if i == 1:
+                    subplot_list[0].set_yscale('log', basey=logbase)
+                    subplot_list[0].set_xscale('log', basex=logbase)
+                    plt.xlim(xmin=1, xmax=10000000)
+                elif i == 2:
+                    plt.xlim(xmin=non_log_low_limit, xmax=non_log_high_limit)
+                    plt.xlabel("Multiplicity", fontsize=15)
 
-            plt.ylabel("Number of distinct %s-mers" % kmer_length, fontsize=13)
-            if i == 1:
-                subplot_list[0].set_yscale('log', basey=logbase)
-                subplot_list[0].set_xscale('log', basex=logbase)
-                plt.xlim(xmin=1, xmax=10000000)
-            elif i == 2:
-                plt.xlim(xmin=non_log_low_limit, xmax=non_log_high_limit)
-                plt.xlabel("Multiplicity", fontsize=15)
+            MatplotlibRoutines.zoom_effect(subplot_list[0], subplot_list[1], non_log_low_limit, non_log_high_limit)
+            plt.subplots_adjust(hspace=0.12, wspace=0.05, top=0.95, bottom=0.05, left=0.14, right=0.95)
 
-        MatplotlibRoutines.zoom_effect(subplot_list[0], subplot_list[1], non_log_low_limit, non_log_high_limit)
-        plt.subplots_adjust(hspace=0.12, wspace=0.05, top=0.95, bottom=0.05, left=0.14, right=0.95)
+            for extension in output_formats:
+                plt.savefig("%s.%s" % ("%s.peaks_and_gaps" % output_prefix if index == 4 else output_prefix, extension))
 
-        for extension in output_formats:
-            plt.savefig("%s.%s" % (output_prefix, extension))
+            plt.close()
 
     @staticmethod
     def find_peak_indexes_from_histo(counts, order=3, mode="wrap"):
@@ -220,14 +222,12 @@ class Jellyfish(Tool):
                 minimums_in_checked_area_idx.append(minimum_index)
 
         if len(peaks_in_checked_area_idx) > 1:
-            print "Additional k-mer peaks were detected in coverage (%i, %i]" % (first_unique_peak_coverage,
+            print "Additional k-mer peaks were detected with multiplicity (%i, %i]" % (first_unique_peak_coverage,
                                                                                  max_checked_coverage)
 
         nearest_value_to_first_min_idx = MathRoutines.find_nearest_scalar(counts[local_maximums_idx[first_unique_peak_idx_idx]:],
                                                                           counts[local_minimums_idx[0]]) + local_maximums_idx[first_unique_peak_idx_idx]
-        print counts[local_maximums_idx[first_unique_peak_idx_idx]:]
-        print(local_maximums_idx[first_unique_peak_idx_idx])
-        print counts[local_minimums_idx[0]], local_minimums_idx[0]
+
         return [(bins[i], counts[i]) for i in peaks_in_checked_area_idx], \
                [(bins[i], counts[i]) for i in minimums_in_checked_area_idx], \
                (local_minimums_idx[0], nearest_value_to_first_min_idx)
