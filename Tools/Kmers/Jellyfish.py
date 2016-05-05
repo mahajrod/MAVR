@@ -206,7 +206,7 @@ class Jellyfish(Tool):
             for idx in local_minimums_idx:
                 out_fd.write("%i\t%i\n" % (bins[idx], counts[idx]))
 
-
+        print local_maximums_idx
         first_unique_peak_idx = 0 if local_maximums_idx[0] != 0 else 1
         first_unique_peak_coverage = bins[local_maximums_idx[first_unique_peak_idx]]
 
