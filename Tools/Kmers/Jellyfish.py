@@ -194,6 +194,7 @@ class Jellyfish(Tool):
 
         with open("%s.local_maximums" % output_prefix, "w") as out_fd:
             out_fd.write("#multiplicity\tnumber_of_kmers\n")
+            print bins
             for idx in local_maximums_idx:
                 print bins[idx]
                 print counts[idx]
