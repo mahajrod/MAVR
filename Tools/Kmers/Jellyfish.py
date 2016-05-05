@@ -150,8 +150,9 @@ class Jellyfish(Tool):
             plt.plot(b, c)
 
             for minimum in minimums_to_show:
-                print minimum
-                MatplotlibRoutines.add_line(subplot, (minimum[0], 0), (minimum[0], minimum[1]), color="red")
+                plt.plot((minimum[0], 0), (minimum[0], minimum[1]), 'k-', lw=2)
+                #print minimum
+                #MatplotlibRoutines.add_line(subplot, (minimum[0], 0), (minimum[0], minimum[1]), color="red")
             for maximum in maximums_to_show:
                 print maximum
                 MatplotlibRoutines.add_line(subplot, (maximum[0], 0), (maximum[0], maximum[1]), color="green")
