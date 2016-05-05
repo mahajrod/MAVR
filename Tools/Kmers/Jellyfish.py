@@ -1,7 +1,16 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import os
+import numpy as np
+from scipy.signal import argrelextrema
+
+import matplotlib
+matplotlib.use('Agg')
+os.environ['MPLCONFIGDIR'] = '/tmp/'
+import matplotlib.pyplot as plt
+
 from Tools.Abstract import Tool
+from Routines import MatplotlibRoutines, MathRoutines
 
 
 class Jellyfish(Tool):
@@ -88,6 +97,139 @@ class Jellyfish(Tool):
         self.dump(base_file, kmer_table_file)
         sed_string = 'sed -e "s/\t.*//" %s > %s' % (kmer_table_file, kmer_file)
         os.system(sed_string)
+
+    def draw_kmer_distribution(self, histo_file, kmer_length, output_prefix, output_formats=["svg", "png", "jpg"],
+                               logbase=10, non_log_low_limit=5, non_log_high_limit=100, order=3, mode="wrap",
+                               check_peaks_coef=10):
+        bins, counts = np.loadtxt(histo_file, unpack=True)
+
+        maximums_to_show, minimums_to_show, unique_peak_borders = self.extract_parameters_from_histo(counts, bins,
+                                                                                                     output_prefix,
+                                                                                                     order=order,
+                                                                                                     mode=mode,
+                                                                                                     check_peaks_coef=check_peaks_coef)
+
+
+        figure = plt.figure(1, figsize=(8, 8), dpi=300)
+        subplot = plt.subplot(1, 1, 1)
+        plt.suptitle("Distribution of %i-mers" % kmer_length, fontweight='bold')
+        plt.plot(bins, counts)
+        plt.xlim(xmin=1, xmax=10000000)
+        plt.xlabel("Multiplicity")
+        plt.ylabel("Number of distinct %s-mers" % kmer_length)
+        subplot.set_yscale('log', basey=logbase)
+        subplot.set_xscale('log', basex=logbase)
+
+        for extension in output_formats:
+            plt.savefig("%s.logscale.%s" % (output_prefix, extension))
+
+        plt.close()
+
+        selected_counts = counts[non_log_low_limit-1:non_log_high_limit]
+        selected_bins = bins[non_log_low_limit-1:non_log_high_limit]
+
+        figure = plt.figure(2, figsize=(8, 8), dpi=300)
+        subplot = plt.subplot(1, 1, 1)
+        plt.suptitle("Distribution of %s-mers" % kmer_length, fontweight='bold')
+        plt.plot(selected_bins, selected_counts)
+
+        plt.xlabel("Multiplicity")
+        plt.ylabel("Number of distinct %s-mers" % kmer_length)
+        plt.xlim(xmin=non_log_low_limit, xmax=non_log_high_limit)
+
+        for extension in output_formats:
+            plt.savefig("%s.no_logscale.%s" % (output_prefix, extension))
+
+        plt.close()
+
+        figure = plt.figure(3, figsize=(6, 12), dpi=400)
+        subplot_list = []
+        for i, b, c in zip([1, 2], [bins, selected_bins], [counts, selected_counts]):
+            subplot_list.append(plt.subplot(2, 1, i))
+            plt.suptitle("Distribution of %s-mers" % kmer_length, fontweight='bold', fontsize=13)
+            plt.plot(b, c)
+
+            for minimum in minimums_to_show:
+                MatplotlibRoutines.add_line(subplot, (minimum[0], 0), (minimum[0], minimum[1]), color="red")
+            for maximum in maximums_to_show:
+                MatplotlibRoutines.add_line(subplot, (maximum[0], 0), (maximum[0], maximum[1]), color="green")
+
+            plt.ylabel("Number of distinct %s-mers" % kmer_length, fontsize=13)
+            if i == 1:
+                subplot_list[0].set_yscale('log', basey=logbase)
+                subplot_list[0].set_xscale('log', basex=logbase)
+                plt.xlim(xmin=1, xmax=10000000)
+            elif i == 2:
+                plt.xlim(xmin=non_log_low_limit, xmax=non_log_high_limit)
+                plt.xlabel("Multiplicity", fontsize=15)
+
+        MatplotlibRoutines.zoom_effect(subplot_list[0], subplot_list[1], non_log_low_limit, non_log_high_limit)
+        plt.subplots_adjust(hspace=0.12, wspace=0.05, top=0.95, bottom=0.05, left=0.14, right=0.95)
+
+        for extension in output_formats:
+            plt.savefig("%s.%s" % (output_prefix, extension))
+
+    @staticmethod
+    def find_peak_indexes_from_histo(counts, order=3, mode="wrap"):
+        """
+        order:
+            How many points on each side to use for the comparison to consider comparator(n, n+x) to be True.
+        mode:
+            How the edges of the vector are treated. 'wrap' (wrap around) or 'clip' (treat overflow as the same
+            as the last
+        """
+        local_maximums_idx = argrelextrema(counts, np.greater, order=order, mode=mode)
+        local_minimums_idx = argrelextrema(counts, np.less, order=order, mode=mode)
+
+        return local_minimums_idx, local_maximums_idx
+
+    @staticmethod
+    def extract_parameters_from_histo(counts, bins, output_prefix, order=3, mode="wrap", check_peaks_coef=10):
+        """
+        check_peaks_coef:
+            histogram is checked for presence of additional peaks in range [first_unique_peak, check_peaks_coef*first_unique_peak]
+        """
+        local_maximums_idx = argrelextrema(counts, np.greater, order=order, mode=mode)
+        local_minimums_idx = argrelextrema(counts, np.less, order=order, mode=mode)
+
+        with open("%s.local_maximums" % output_prefix, "w") as out_fd:
+            out_fd.write("#multiplicity\tnumber_of_kmers\n")
+            for idx in local_maximums_idx:
+                out_fd.write("%i\t%i\n" % (bins[idx], counts[idx]))
+
+        with open("%s.local_minimums" % output_prefix, "w") as out_fd:
+            out_fd.write("#multiplicity\tnumber_of_kmers\n")
+            for idx in local_minimums_idx:
+                out_fd.write("%i\t%i\n" % (bins[idx], counts[idx]))
+
+
+        first_unique_peak_idx = 0 if local_maximums_idx[0] != 0 else 1
+        first_unique_peak_coverage = bins[first_unique_peak_idx]
+
+        max_checked_coverage = check_peaks_coef * first_unique_peak_coverage
+
+        peaks_in_checked_area_idx = [first_unique_peak_idx]
+        minimums_in_checked_area_idx = []
+        for i in range(first_unique_peak_idx+1, len(local_maximums_idx)):
+            if bins[local_maximums_idx[i]] <= max_checked_coverage:
+                peaks_in_checked_area_idx.append(i)
+            else:
+                break
+
+        for minimum_index in local_minimums_idx:
+            if bins[minimum_index] <= max_checked_coverage:
+                minimums_in_checked_area_idx.append(minimum_index)
+
+        if len(peaks_in_checked_area_idx) > 1:
+            print "Additional k-mer peaks were detected in coverage (%i, %i]" % (first_unique_peak_coverage,
+                                                                                 max_checked_coverage)
+
+        nearest_value_to_first_min_idx = MathRoutines.find_nearest_scalar(bins[first_unique_peak_idx:],
+                                                                          bins[local_minimums_idx[0]])
+
+        return [(bins[i], counts[i]) for i in peaks_in_checked_area_idx], \
+               [(bins[i], counts[i]) for i in minimums_in_checked_area_idx], \
+               (local_minimums_idx, nearest_value_to_first_min_idx)
 
 
 if __name__ == "__main__":

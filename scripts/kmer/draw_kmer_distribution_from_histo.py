@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-
 import os
 import argparse
+"""
+import numpy as np
 
 import matplotlib
 matplotlib.use('Agg')
@@ -14,7 +15,7 @@ from Bio import SeqIO
 from Routines import MatplotlibRoutines
 from Routines.Sequence import rev_com_generator
 from Routines.File import make_list_of_path_to_files
-
+"""
 from Tools.Kmers import Jellyfish
 
 
@@ -34,19 +35,16 @@ parser.add_argument("-w", "--low_limit", action="store", dest="low_limit", type=
                     help="Low limit of histogram without logscale")
 parser.add_argument("-g", "-high_limit", action="store", dest="high_limit", type=int, default=100,
                     help="High limit of histogram without logscale")
-parser.add_argument("-m", "--kmer_length", action="store", dest="kmer_length", type=int, default=23,
+parser.add_argument("-m", "--kmer_length", action="store", dest="kmer_length", type=int, required=True,
                     help="Length of kmers. Default - 23")
 
 args = parser.parse_args()
 
-counts = []
-bins = []
-
-with open(args.input, "r") as histo_fd:
-    for line in histo_fd:
-        entry = line.strip().split()
-        counts.append(entry[1])
-        bins.append(entry[0])
+Jellyfish.draw_kmer_distribution(args.input, args.kmer_length, args.output_prefix, output_formats=args.output_formats,
+                                 logbase=args.logbase, non_log_low_limit=args.low_limit,
+                                 non_log_high_limit=args.high_limit)
+"""
+bins, counts = np.loadtxt(args.input, unpack=True)
 
 figure = plt.figure(1, figsize=(8, 8), dpi=300)
 subplot = plt.subplot(1, 1, 1)
@@ -101,3 +99,4 @@ plt.subplots_adjust(hspace=0.12, wspace=0.05, top=0.95, bottom=0.05, left=0.14, 
 
 for extension in args.output_formats:
     plt.savefig("%s.%s" % (args.output_prefix, extension))
+"""

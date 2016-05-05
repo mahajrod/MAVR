@@ -1,7 +1,9 @@
 __author__ = 'mahajrod'
 
+from Routines.Math import MathRoutines
 from Routines.File import FileRoutines
 from Routines.NCBI import NCBIRoutines
+from Routines.Math import SmoothRoutines
 from Routines.Primer import PrimerRoutines
 from Routines.EggNOG import EggNOGRoutines
 from Routines.TreeFam import TreeFamRoutines
@@ -11,9 +13,10 @@ from Routines.Matplotlib import MatplotlibRoutines
 from Routines.Annotations import AnnotationsRoutines
 from Routines.MultipleAlignment import MultipleAlignmentRoutines
 
-
+MathRoutines = MathRoutines()
 FileRoutines = FileRoutines()
 NCBIRoutines = NCBIRoutines()
+SmoothRoutines = SmoothRoutines()
 PrimerRoutines = PrimerRoutines()
 EggNOGRoutines = EggNOGRoutines()
 TreeFamRoutines = TreeFamRoutines()

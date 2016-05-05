@@ -6,6 +6,7 @@ os.environ['MPLCONFIGDIR'] = '/tmp/'
 import matplotlib.pyplot as plt
 from matplotlib.transforms import Bbox, TransformedBbox, blended_transform_factory
 from mpl_toolkits.axes_grid1.inset_locator import BboxPatch, BboxConnector, BboxConnectorPatch
+from matplotlib.lines import Line2D
 
 import numpy as np
 
@@ -115,3 +116,7 @@ class MatplotlibRoutines:
                                ylabel=ylabel, extensions=extensions, legend=legenda, legend_location=legend_location,
                                input_mode=input_mode)
 
+    @staticmethod
+    def add_line(axes, start, end, color):
+        line = Line2D([start[0], end[0]], [start[1], end[1]], color=color)
+        return axes.add_line(line)

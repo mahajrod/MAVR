@@ -3,15 +3,16 @@ __author__ = 'Sergei F. Kliver'
 
 import os
 import argparse
-
+"""
+import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 os.environ['MPLCONFIGDIR'] = '/tmp/'
 import matplotlib.pyplot as plt
-
+"""
 from Bio import SeqIO
 
-from Routines import MatplotlibRoutines
+#from Routines import MatplotlibRoutines
 from Routines.Sequence import rev_com_generator
 from Routines.File import make_list_of_path_to_files
 
@@ -82,15 +83,20 @@ Jellyfish.count(args.input if not args.add_rev_com else file_with_rev_com, base_
                 kmer_length=args.kmer_length, hash_size=args.hash_size,
                 count_both_strands=args.count_both_strands)
 Jellyfish.histo(base_file, histo_file, upper_count=10000000)
+Jellyfish.draw_kmer_distribution(args.input, args.kmer_length, args.picture_prefix, output_formats=args.output_formats,
+                                 logbase=args.logbase, non_log_low_limit=args.low_limit,
+                                 non_log_high_limit=args.high_limit)
+"""
+bins, counts = np.loadtxt(args.input, unpack=True)
 
-counts = []
-bins = []
-
-with open(histo_file, "r") as histo_fd:
-    for line in histo_fd:
-        entry = line.strip().split()
-        counts.append(entry[1])
-        bins.append(entry[0])
+#counts = []
+#bins = []
+#
+#with open(histo_file, "r") as histo_fd:
+#    for line in histo_fd:
+#        entry = line.strip().split()
+#        counts.append(entry[1])
+#        bins.append(entry[0])
 
 figure = plt.figure(1, figsize=(8, 8), dpi=300)
 subplot = plt.subplot(1, 1, 1)
@@ -145,3 +151,4 @@ plt.subplots_adjust(hspace=0.12, wspace=0.05, top=0.95, bottom=0.05, left=0.14, 
 
 for extension in args.output_formats:
     plt.savefig("%s.%s" % (picture_prefix, extension))
+"""
