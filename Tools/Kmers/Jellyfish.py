@@ -109,7 +109,7 @@ class Jellyfish(Tool):
                                                                                                      mode=mode,
                                                                                                      check_peaks_coef=check_peaks_coef)
 
-
+        print unique_peak_borders
         figure = plt.figure(1, figsize=(8, 8), dpi=300)
         subplot = plt.subplot(1, 1, 1)
         plt.suptitle("Distribution of %i-mers" % kmer_length, fontweight='bold')
@@ -150,14 +150,10 @@ class Jellyfish(Tool):
             plt.plot(b, c)
 
             for minimum in minimums_to_show:
-                print "Minimum"
-                plt.plot([minimum[0], minimum[0]], [0, minimum[1]], 'k-', lw=2)
-                print minimum
+                plt.plot([minimum[0], minimum[0]], [0, minimum[1]], 'r-', lw=1)
                 #MatplotlibRoutines.add_line(subplot, (minimum[0], 0), (minimum[0], minimum[1]), color="red")
             for maximum in maximums_to_show:
-                print "Maximum"
-                print maximum
-                MatplotlibRoutines.add_line(subplot, (maximum[0], 0), (maximum[0], maximum[1]), color="green")
+                plt.plot([maximum[0], maximum[0]], [0, maximum[1]], 'g-', lw=1)
 
             plt.ylabel("Number of distinct %s-mers" % kmer_length, fontsize=13)
             if i == 1:
@@ -214,7 +210,6 @@ class Jellyfish(Tool):
         minimums_in_checked_area_idx = []
 
         for i in range(first_unique_peak_idx_idx+1, len(local_maximums_idx)):
-            print i
             if bins[local_maximums_idx[i]] <= max_checked_coverage:
                 peaks_in_checked_area_idx.append(local_maximums_idx[i])
             else:
