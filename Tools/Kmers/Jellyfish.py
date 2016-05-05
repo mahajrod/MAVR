@@ -151,7 +151,7 @@ class Jellyfish(Tool):
 
             for minimum in minimums_to_show:
                 print "Minimum"
-                plt.plot([minimum[0], 0], [minimum[0], minimum[1]], 'k-', lw=2)
+                plt.plot([minimum[0], minimum[0]], [0, minimum[1]], 'k-', lw=2)
                 print minimum
                 #MatplotlibRoutines.add_line(subplot, (minimum[0], 0), (minimum[0], minimum[1]), color="red")
             for maximum in maximums_to_show:
@@ -206,29 +206,22 @@ class Jellyfish(Tool):
             for idx in local_minimums_idx:
                 out_fd.write("%i\t%i\n" % (bins[idx], counts[idx]))
 
-        print local_maximums_idx
         first_unique_peak_idx_idx = 0 if local_maximums_idx[0] != 0 else 1
         first_unique_peak_coverage = bins[local_maximums_idx[first_unique_peak_idx_idx]]
 
         max_checked_coverage = check_peaks_coef * first_unique_peak_coverage
-        #print max_checked_coverage
         peaks_in_checked_area_idx = [local_maximums_idx[first_unique_peak_idx_idx]]
         minimums_in_checked_area_idx = []
 
         for i in range(first_unique_peak_idx_idx+1, len(local_maximums_idx)):
             print i
             if bins[local_maximums_idx[i]] <= max_checked_coverage:
-                print "aaaa"
-                print local_maximums_idx[i]
-                print bins[local_maximums_idx[i]]
-                print "bbbb"
                 peaks_in_checked_area_idx.append(local_maximums_idx[i])
             else:
                 break
 
         for minimum_index in local_minimums_idx:
             if bins[minimum_index] <= max_checked_coverage:
-                print bins[minimum_index]
                 minimums_in_checked_area_idx.append(minimum_index)
 
         if len(peaks_in_checked_area_idx) > 1:
@@ -238,7 +231,6 @@ class Jellyfish(Tool):
         nearest_value_to_first_min_idx = MathRoutines.find_nearest_scalar(bins[local_maximums_idx[first_unique_peak_idx_idx]:],
                                                                           bins[local_minimums_idx[0]])
 
-        print peaks_in_checked_area_idx, minimums_in_checked_area_idx
         return [(bins[i], counts[i]) for i in peaks_in_checked_area_idx], \
                [(bins[i], counts[i]) for i in minimums_in_checked_area_idx], \
                (local_minimums_idx, nearest_value_to_first_min_idx)
