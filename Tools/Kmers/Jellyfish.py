@@ -191,7 +191,7 @@ class Jellyfish(Tool):
         """
         local_maximums_idx = argrelextrema(counts, np.greater, order=order, mode=mode)
         local_minimums_idx = argrelextrema(counts, np.less, order=order, mode=mode)
-
+        print local_maximums_idx
         with open("%s.local_maximums" % output_prefix, "w") as out_fd:
             out_fd.write("#multiplicity\tnumber_of_kmers\n")
             print bins
