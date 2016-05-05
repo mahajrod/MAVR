@@ -150,8 +150,10 @@ class Jellyfish(Tool):
             plt.plot(b, c)
 
             for minimum in minimums_to_show:
+                print minimum
                 MatplotlibRoutines.add_line(subplot, (minimum[0], 0), (minimum[0], minimum[1]), color="red")
             for maximum in maximums_to_show:
+                print maximum
                 MatplotlibRoutines.add_line(subplot, (maximum[0], 0), (maximum[0], maximum[1]), color="green")
 
             plt.ylabel("Number of distinct %s-mers" % kmer_length, fontsize=13)
@@ -191,13 +193,9 @@ class Jellyfish(Tool):
         """
         local_maximums_idx = argrelextrema(counts, np.greater, order=order, mode=mode)[0]
         local_minimums_idx = argrelextrema(counts, np.less, order=order, mode=mode)[0]
-        print local_maximums_idx
         with open("%s.local_maximums" % output_prefix, "w") as out_fd:
             out_fd.write("#multiplicity\tnumber_of_kmers\n")
-            print bins
             for idx in local_maximums_idx:
-                print bins[idx]
-                print counts[idx]
                 out_fd.write("%i\t%i\n" % (bins[idx], counts[idx]))
 
         with open("%s.local_minimums" % output_prefix, "w") as out_fd:
