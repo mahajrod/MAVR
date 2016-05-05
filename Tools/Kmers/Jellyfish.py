@@ -208,7 +208,7 @@ class Jellyfish(Tool):
 
 
         first_unique_peak_idx = 0 if local_maximums_idx[0] != 0 else 1
-        first_unique_peak_coverage = bins[first_unique_peak_idx]
+        first_unique_peak_coverage = bins[local_maximums_idx[first_unique_peak_idx]]
 
         max_checked_coverage = check_peaks_coef * first_unique_peak_coverage
         print max_checked_coverage
