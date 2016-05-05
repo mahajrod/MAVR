@@ -218,7 +218,10 @@ class Jellyfish(Tool):
         for i in range(first_unique_peak_idx+1, len(local_maximums_idx)):
             print i
             if bins[local_maximums_idx[i]] <= max_checked_coverage:
+                print "aaaa"
+                print local_maximums_idx[i]
                 print bins[local_maximums_idx[i]]
+                print "bbbb"
                 peaks_in_checked_area_idx.append(local_maximums_idx[i])
             else:
                 break
