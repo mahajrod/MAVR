@@ -10,7 +10,7 @@ os.environ['MPLCONFIGDIR'] = '/tmp/'
 import matplotlib.pyplot as plt
 
 from Tools.Abstract import Tool
-from Routines import MatplotlibRoutines, MathRoutines
+
 
 
 class Jellyfish(Tool):
@@ -101,6 +101,7 @@ class Jellyfish(Tool):
     def draw_kmer_distribution(self, histo_file, kmer_length, output_prefix, output_formats=["svg", "png", "jpg"],
                                logbase=10, non_log_low_limit=5, non_log_high_limit=100, order=3, mode="wrap",
                                check_peaks_coef=10):
+        from Routines import MatplotlibRoutines
         bins, counts = np.loadtxt(histo_file, unpack=True)
 
         maximums_to_show, minimums_to_show, unique_peak_borders = self.extract_parameters_from_histo(counts, bins,
@@ -189,6 +190,7 @@ class Jellyfish(Tool):
         check_peaks_coef:
             histogram is checked for presence of additional peaks in range [first_unique_peak, check_peaks_coef*first_unique_peak]
         """
+        from Routines import MathRoutines
         local_maximums_idx = argrelextrema(counts, np.greater, order=order, mode=mode)
         local_minimums_idx = argrelextrema(counts, np.less, order=order, mode=mode)
 
