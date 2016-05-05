@@ -207,15 +207,15 @@ class Jellyfish(Tool):
                 out_fd.write("%i\t%i\n" % (bins[idx], counts[idx]))
 
         print local_maximums_idx
-        first_unique_peak_idx = 0 if local_maximums_idx[0] != 0 else 1
-        first_unique_peak_coverage = bins[local_maximums_idx[first_unique_peak_idx]]
+        first_unique_peak_idx_idx = 0 if local_maximums_idx[0] != 0 else 1
+        first_unique_peak_coverage = bins[local_maximums_idx[first_unique_peak_idx_idx]]
 
         max_checked_coverage = check_peaks_coef * first_unique_peak_coverage
         #print max_checked_coverage
-        peaks_in_checked_area_idx = [first_unique_peak_idx]
+        peaks_in_checked_area_idx = [first_unique_peak_idx_idx]
         minimums_in_checked_area_idx = []
 
-        for i in range(first_unique_peak_idx+1, len(local_maximums_idx)):
+        for i in range(first_unique_peak_idx_idx+1, len(local_maximums_idx)):
             print i
             if bins[local_maximums_idx[i]] <= max_checked_coverage:
                 print "aaaa"
@@ -235,7 +235,7 @@ class Jellyfish(Tool):
             print "Additional k-mer peaks were detected in coverage (%i, %i]" % (first_unique_peak_coverage,
                                                                                  max_checked_coverage)
 
-        nearest_value_to_first_min_idx = MathRoutines.find_nearest_scalar(bins[first_unique_peak_idx:],
+        nearest_value_to_first_min_idx = MathRoutines.find_nearest_scalar(bins[first_unique_peak_idx_idx:],
                                                                           bins[local_minimums_idx[0]])
 
         return [(bins[i], counts[i]) for i in peaks_in_checked_area_idx], \
