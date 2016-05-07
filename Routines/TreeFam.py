@@ -3,11 +3,11 @@ import os
 
 from Bio import SeqIO
 
-
 from CustomCollections.GeneralCollections import IdList, SynDict
+from Routines.SequenceCluster import SequenceClusterRoutines
 
 
-class TreeFamRoutines:
+class TreeFamRoutines(SequenceClusterRoutines):
     def __init__(self):
 
         pass
@@ -23,12 +23,12 @@ class TreeFamRoutines:
         FileRoutines.save_mkdir(output_dir)
         out_dir = FileRoutines.check_path(output_dir)
         create_directory_for_each_family = True if out_prefix else create_dir_for_each_family
-
-        fam_id_list.read(families_id_file)
+        if families_id_file:
+            fam_id_list.read(families_id_file)
         fam_dict.read(fam_file, split_values=True, values_separator=",")
         protein_dict = SeqIO.index_db("tmp.idx", pep_file, format=pep_format)
 
-        for fam_id in fam_id_list:
+        for fam_id in fam_id_list if families_id_file else fam_dict:
             if fam_id in fam_dict:
                 if create_directory_for_each_family:
                     fam_dir = "%s%s/" % (out_dir, fam_id)

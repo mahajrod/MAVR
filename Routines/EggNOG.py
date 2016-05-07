@@ -7,9 +7,10 @@ from Bio import SeqIO
 
 from Routines import FileRoutines
 from CustomCollections.GeneralCollections import IdList, SynDict
+from Routines.SequenceCluster import SequenceClusterRoutines
 
 
-class EggNOGRoutines:
+class EggNOGRoutines(SequenceClusterRoutines):
     def __init__(self):
 
         pass
@@ -73,6 +74,9 @@ class EggNOGRoutines:
         for taxa_id in syn_dict:
             out_file = "%s%s.pep" % (out_dir, taxa_id)
             SeqIO.write(renamed_records_generator(protein_dict, taxa_id), out_file, format=output_format)
+
+
+
 
 
 

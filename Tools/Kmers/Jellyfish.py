@@ -222,8 +222,8 @@ class Jellyfish(Tool):
                 minimums_in_checked_area_idx.append(minimum_index)
 
         if len(peaks_in_checked_area_idx) > 1:
-            print "Additional k-mer peaks were detected with multiplicity (%i, %i]" % (first_unique_peak_coverage,
-                                                                                 max_checked_coverage)
+            print "WARNING! Additional k-mer peaks were detected with multiplicity (%i, %i]" % (first_unique_peak_coverage,
+                                                                                                max_checked_coverage)
 
         nearest_value_to_first_min_idx = MathRoutines.find_nearest_scalar(counts[local_maximums_idx[first_unique_peak_idx_idx]:],
                                                                           counts[local_minimums_idx[0]]) + local_maximums_idx[first_unique_peak_idx_idx]

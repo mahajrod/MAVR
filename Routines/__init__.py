@@ -11,7 +11,9 @@ from Routines.Sequence import SequenceRoutines
 from Routines.Alignment import AlignmentRoutines
 from Routines.Matplotlib import MatplotlibRoutines
 from Routines.Annotations import AnnotationsRoutines
+from Routines.SequenceCluster import SequenceClusterRoutines
 from Routines.MultipleAlignment import MultipleAlignmentRoutines
+
 
 MathRoutines = MathRoutines()
 FileRoutines = FileRoutines()
@@ -24,4 +26,5 @@ SequenceRoutines = SequenceRoutines()
 AlignmentRoutines = AlignmentRoutines()
 MatplotlibRoutines = MatplotlibRoutines()
 AnnotationsRoutines = AnnotationsRoutines()
+SequenceClusterRoutines = SequenceClusterRoutines()
 MultipleAlignmentRoutines = MultipleAlignmentRoutines()

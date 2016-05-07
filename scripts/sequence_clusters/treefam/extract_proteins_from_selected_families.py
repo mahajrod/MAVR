@@ -7,8 +7,8 @@ from Routines import TreeFamRoutines, FileRoutines
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", "--families_id_file", action="store", dest="fam_id_file", required=True,
-                    help="File with ids of families to extract")
+parser.add_argument("-i", "--families_id_file", action="store", dest="fam_id_file",
+                    help="File with ids of families to extract. Extract all families if not set")
 parser.add_argument("-f", "--families_file", action="store", dest="fam_file", required=True,
                     help="File with families")
 parser.add_argument("-p", "--pep_file", action="store", dest="pep_file", required=True,
