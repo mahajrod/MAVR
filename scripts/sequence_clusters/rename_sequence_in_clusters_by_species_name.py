@@ -15,7 +15,7 @@ parser.add_argument("-o", "--output_dir", action="store", dest="output_dir", req
                     type=FileRoutines.check_path,
                     help="Directory to write output")
 parser.add_argument("-s", "--separator", action="store", dest="separator", default="@",
-                    help="Separator between species name and sequence id")
+                    help="Separator between species name and sequence id. Default - '@'")
 parser.add_argument("-r", "--label_last", action="store_false", dest="label_first", default=True,
                     help="Place label at the end of id")
 
@@ -32,7 +32,7 @@ else:
 for filename in input_file_list:
     input_file = "%s%s" % (args.input_dir, filename)
     output_file = "%s%s" % (args.output_dir, filename)
-    SequenceRoutines.rename_records_from_files(input_file, output_file, expression=id_expression)
+    SequenceRoutines.rename_records_from_files(input_file, output_file, record_id_expression=id_expression)
 
 
 
