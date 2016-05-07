@@ -640,6 +640,8 @@ class SequenceRoutines():
             syn_dict = SynDict()
             syn_dict.read(synonyms_file, header=header, separator=separator, key_index=key_index, value_index=value_index,
                           expression=syn_expression, comments_prefix=comments_prefix)
+        else:
+            syn_dict = None
 
         record_dict = SeqIO.index_db("temp.idx", input_file, format=format)
 
