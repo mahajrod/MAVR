@@ -35,6 +35,7 @@ parser.add_argument("-r", "--label_last", action="store_false", dest="label_firs
 
 args = parser.parse_args()
 
+FileRoutines.save_mkdir(args.output_dir)
 SequenceClusterRoutines.extract_sequences_by_clusters(args.input_cluster_dir, args.input_seq_dir, args.output_dir,
                                                       file_with_white_list_cluster_ids=args.white_list_ids,
                                                       mode=args.mode, sequence_file_extension=args.seq_extension,
