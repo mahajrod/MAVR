@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-i", "--input_cluster_dir", action="store", dest="input_cluster_dir", required=True,
                     type=FileRoutines.check_path,
                     help="Directory with files with clusters")
-parser.add_argument("-i", "--input_seq_dir", action="store", dest="input_seq_dir", required=True,
+parser.add_argument("-s", "--input_seq_dir", action="store", dest="input_seq_dir", required=True,
                     type=FileRoutines.check_path,
                     help="Directory with files with sequences")
 parser.add_argument("-o", "--output_dir", action="store", dest="output_dir", required=True,
@@ -28,7 +28,7 @@ parser.add_argument("-f", "--format", action="store", dest="format", default="fa
 parser.add_argument("-l", "--label_ids", action="store_true", dest="label_ids",
                     help="Label ids by species names. Default - 'False'")
 
-parser.add_argument("-s", "--separator_for_labeling", action="store", dest="separator_for_labeling", default="@",
+parser.add_argument("-g", "--separator_for_labeling", action="store", dest="separator_for_labeling", default="@",
                     help="Separator to use for labeling. Default - '@'")
 parser.add_argument("-r", "--label_last", action="store_false", dest="label_first", default=True,
                     help="Place label at the end of id")
