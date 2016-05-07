@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import os
+import shutil
 
 from Bio import SearchIO
 
@@ -251,7 +252,8 @@ class HMMER3(Tool):
                          MSV_threshold=None, Vit_threshold=None, Fwd_threshold=None,
                          turn_off_biased_composition_score_corrections=None,
                          input_format=None, threads=None, combine_output_to_single_file=True,
-                         biopython_165_compartibility=False
+                         biopython_165_compartibility=False,
+                         remove_tmp_dirs=True
                          ):
 
         splited_dir = check_path(split_dir)
@@ -339,6 +341,16 @@ class HMMER3(Tool):
             CGAS.cat(domtblout_files, output=domtblout_outfile)
         if pfamtblout_outfile:
             CGAS.cat(pfamtblout_files, output=pfamtblout_outfile)
+
+        if remove_tmp_dirs:
+            if splited_tblout_dir:
+                shutil.rmtree(splited_tblout_dir)
+            if splited_domtblout_dir:
+                shutil.rmtree(splited_domtblout_dir)
+            if splited_pfamtblout_dir:
+                shutil.rmtree(splited_pfamtblout_dir)
+            for tmp_dir in splited_dir, splited_out_dir:
+                shutil.rmtree(tmp_dir)
 
     def hmmsearch(self, hmmfile, seqfile, outfile, multialignout=None, tblout=None, domtblout=None, pfamtblout=None,
                   dont_output_alignments=False, model_evalue_threshold=None, model_score_threshold=None,
