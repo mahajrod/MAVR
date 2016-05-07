@@ -31,30 +31,6 @@ parser.add_argument("--pfamtblout_dir", action="store", dest="pfamtblout_dir",
                     help="Directory to write intermediate(splited) table of hits and domains to file, in Pfam format ")
 parser.add_argument("--hmmer_dir", action="store", dest="path", default="",
                     help="Path to directory with hmmer3.1 binaries")
-"""
-parser.add_argument("-o", "--output_file", action="store", dest="output",
-                    help="Output file")
-parser.add_argument("-p", "--top_hits_file", action="store", dest="top_hits_file",
-                    default="hits.top_hits",
-                    help="File to write top hits")
-parser.add_argument("-n", "--not_found_ids_file", action="store", dest="not_found_file",
-                    default="not_found.ids",
-                    help="Ids of not found proteins")
-parser.add_argument("-a", "--not_significant_ids_file", action="store", dest="not_significant_file",
-                    default="not_significant.ids",
-                    help="Ids of proteins with not_significant hits")
-parser.add_argument("-f", "--fam_file", action="store", dest="fam_file",
-                    default="proteins.fam",
-                    help="File to write families of proteins")
-parser.add_argument("--tblout", action="store", dest="tblout",
-                    help="File to save parseable table of per-sequence hits")
-parser.add_argument("--domtblout", action="store", dest="domtblout",
-                    help="File to save parseable table of per-domain hits")
-parser.add_argument("--pfamtblout", action="store", dest="pfamtblout",
-                    help="File to save table of hits and domains to file, in Pfam format ")
-#parser.add_argument("-c", "--combine_output", action="store_true", dest="combine_output",
-#                    help="Combine output files to single")
-"""
 
 args = parser.parse_args()
 
