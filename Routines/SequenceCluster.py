@@ -213,7 +213,5 @@ class SequenceClusterRoutines:
                 SeqIO.write(per_family_record_generator(sequence_super_dict, clusters_dict, cluster_name),
                             out_file, format=sequence_file_format)
 
-
-
-
-
+        for species in clusters_dict:
+            os.remove("%s_tmp.idx" % species)
