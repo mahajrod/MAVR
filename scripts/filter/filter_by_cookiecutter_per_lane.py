@@ -70,7 +70,7 @@ for sample in samples:
     number_of_lanes = len(filtered_files_from_sample_dir) / 2
 
     for lane_number in range(0, number_of_lanes):
-        stat_file = "%s%s.stats" % (sample_out_dir, prefix_list[lane_number*2])
+        stat_file = "%s.stats" % prefix_list[lane_number*2]
         #output_prefix = "%s%s.TMF" % (sample_out_dir, sample)
         left_reads_file = filtered_files_from_sample_dir[lane_number*2]
         right_reads_file = filtered_files_from_sample_dir[lane_number*2 + 1]
