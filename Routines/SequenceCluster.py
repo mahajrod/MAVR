@@ -67,7 +67,7 @@ class SequenceClusterRoutines:
 
     @staticmethod
     def merge_clusters(clusters_dict, label_species="False", separator_for_labeling="_",
-                                 species_label_first=True):
+                       species_label_first=True):
 
         if species_label_first:
             label_sequence = lambda label, name: "%s%s%s" % (label, separator_for_labeling, name)
@@ -98,7 +98,7 @@ class SequenceClusterRoutines:
         merged_clusters.write(output_file, splited_values=True)
         return merged_clusters
 
-    def extract_monocluster_ids(self, clusters_dict, out_file=None):
+    def extract_monocluster_ids(self, clusters_dict, white_list_ids=None, out_file=None):
         """
         Extracts clusters with only one sequence in all species.
         """
@@ -107,11 +107,13 @@ class SequenceClusterRoutines:
 
         for cluster_name in cluster_names:
             for species in clusters_dict:
+                if white_list_ids:
+                    if cluster_name not in white_list_ids:
+                        break
                 if cluster_name not in clusters_dict[species]:
                     break
                 if len(clusters_dict[species][cluster_name]) > 1:
                     break
-
             else:
                 monocluster_ids.add(cluster_name)
 
@@ -120,10 +122,14 @@ class SequenceClusterRoutines:
 
         return monocluster_ids
 
-    def extract_monocluster_ids_from_file(self, dir_with_cluster_files, out_file):
+    def extract_monocluster_ids_from_file(self, dir_with_cluster_files, out_file, file_with_white_list_ids=None):
         # filenames are counted as species names
+        white_list_ids = None
+        if file_with_white_list_ids:
+            white_list_ids = IdSet()
+            white_list_ids.read(file_with_white_list_ids)
         clusters_dict = self.read_cluster_files_from_dir(dir_with_cluster_files)
-        monoclusters = self.extract_monocluster_ids(clusters_dict, out_file=out_file)
+        monoclusters = self.extract_monocluster_ids(clusters_dict, out_file=out_file, white_list_ids=white_list_ids)
         return monoclusters
 
 

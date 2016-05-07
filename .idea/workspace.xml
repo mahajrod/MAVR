@@ -5,52 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Routines/SequenceCluster.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/extract_monocluster_ids.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/eggnog/assign_orthologs.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/eggnog/assign_orthologs.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/eggnog/convert_members_tsv_to_fam.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/eggnog/convert_members_tsv_to_fam.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/eggnog/edit_profile_names_in_fam_file.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/eggnog/edit_profile_names_in_fam_file.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/eggnog/extract_proteins_from_alignments.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/eggnog/extract_proteins_from_alignments.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/eggnog/rename_files_from_taxaid_to_species_name.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/eggnog/rename_files_from_taxaid_to_species_name.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/eggnog/split_proteins_per_species.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/eggnog/split_proteins_per_species.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/expansion/analyse_cafe_report.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/expansion/analyse_cafe_report.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/expansion/compare_clusters.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/expansion/compare_clusters.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/expansion/draw_general_tree.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/expansion/draw_general_tree.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/expansion/expansion_analysis.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/expansion/expansion_analysis.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/expansion/expansion_pipeline_statistics.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/expansion/expansion_pipeline_statistics.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/expansion/extract_families_graphs_from_hclust_input.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/expansion/extract_families_graphs_from_hclust_input.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/expansion/extract_random_genes_from_reference_families_using_node_files.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/expansion/extract_random_genes_from_reference_families_using_node_files.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/expansion/gather_statistics_from_comparison.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/expansion/gather_statistics_from_comparison.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/expansion/get_common_correct_families.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/expansion/get_common_correct_families.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/expansion/get_families_from_hclust_output.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/expansion/get_families_from_hclust_output.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/expansion/get_genes_from_families.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/expansion/get_genes_from_families.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/expansion/prepare_cafe_input.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/expansion/prepare_cafe_input.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/expansion/remove_edges_by_nodes_from_hclust_input.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/expansion/remove_edges_by_nodes_from_hclust_input.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/expansion/split_hclust_families.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/expansion/split_hclust_families.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/expansion/split_hclust_output.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/expansion/split_hclust_output.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/expansion/test_hcluster_options.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/expansion/test_hcluster_options.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/expansion_hmm/errors_distribution.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/expansion_hmm/errors_distribution.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/expansion_hmm/find_correctly_assembled_families_in_all_species.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/expansion_hmm/find_correctly_assembled_families_in_all_species.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/treefam/add_lengths_to_fam_file.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/treefam/add_lengths_to_fam_file.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/treefam/download_treefam_data.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/treefam/download_treefam_data.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/treefam/extract_families_of_species.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/treefam/extract_families_of_species.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/treefam/extract_pep_ids_from_fam_file.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/treefam/extract_pep_ids_from_fam_file.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/treefam/extract_proteins_from_families.bash" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/treefam/extract_proteins_from_families.bash" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/treefam/extract_proteins_from_selected_families.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/treefam/extract_proteins_from_selected_families.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/treefam/extract_selected_families_from_fam_file.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/treefam/extract_selected_families_from_fam_file.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/treefam/extract_single_gene_families_from_cafe_input.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/treefam/extract_single_gene_families_from_cafe_input.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/treefam/gather_statistics_from_fam_files.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/treefam/gather_statistics_from_fam_files.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/treefam/get_cds_families.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/treefam/get_cds_families.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/treefam/label_fam_file_with_species_name.sh" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/treefam/label_fam_file_with_species_name.sh" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/treefam/label_pep_with_species_name.bash" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/treefam/label_pep_with_species_name.bash" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/treefam/label_pep_with_species_name.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/treefam/label_pep_with_species_name.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/treefam/label_pep_with_species_name.sh" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/treefam/label_pep_with_species_name.sh" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/treefam/merge_fam_files.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/treefam/merge_fam_files.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/treefam/prepare_cafe_input_from_fam_files.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/treefam/prepare_cafe_input_from_fam_files.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/EggNOG.py" afterPath="$PROJECT_DIR$/Routines/EggNOG.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Kmers/Jellyfish.py" afterPath="$PROJECT_DIR$/Tools/Kmers/Jellyfish.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/TreeFam.py" afterPath="$PROJECT_DIR$/Routines/TreeFam.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/__init__.py" afterPath="$PROJECT_DIR$/Routines/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/SequenceCluster.py" afterPath="$PROJECT_DIR$/Routines/SequenceCluster.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence_clusters/extract_monocluster_ids.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/extract_monocluster_ids.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -83,21 +39,11 @@
       <file leaf-file-name="extract_monocluster_ids.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/extract_monocluster_ids.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.21710527">
-              <caret line="11" column="60" selection-start-line="11" selection-start-column="60" selection-end-line="11" selection-end-column="60" />
+            <state vertical-scroll-proportion="0.41447368">
+              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
               <folding>
                 <element signature="e#54#69#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="prepare_cafe_input_from_fam_files.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/treefam/prepare_cafe_input_from_fam_files.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -106,7 +52,7 @@
         <entry file="file://$PROJECT_DIR$/Routines/SequenceCluster.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="122" column="37" selection-start-line="122" selection-start-column="8" selection-end-line="122" selection-end-column="81" />
+              <caret line="124" column="88" selection-start-line="124" selection-start-column="82" selection-end-line="124" selection-end-column="107" />
               <folding>
                 <element signature="e#22#31#0" expanded="true" />
               </folding>
@@ -530,24 +476,6 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="SequenceCluster" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Routines" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="MAVR" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Routines/SequenceCluster.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
     <configuration default="true" type="BashConfigurationType" factoryName="Bash">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="INTERPRETER_PATH" value="/bin/bash" />
@@ -747,20 +675,37 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
+    <configuration default="false" name="SequenceCluster" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Routines" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MAVR" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Routines/SequenceCluster.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.extract_ncf_exon_lengthes" />
-      <item index="1" class="java.lang.String" itemvalue="Python.divergence_time_estimation" />
-      <item index="2" class="java.lang.String" itemvalue="Python.gather_filtering_stats" />
-      <item index="3" class="java.lang.String" itemvalue="Python.RepeatMasker" />
-      <item index="4" class="java.lang.String" itemvalue="Python.SequenceCluster" />
+      <item index="0" class="java.lang.String" itemvalue="Python.SequenceCluster" />
+      <item index="1" class="java.lang.String" itemvalue="Python.extract_ncf_exon_lengthes" />
+      <item index="2" class="java.lang.String" itemvalue="Python.divergence_time_estimation" />
+      <item index="3" class="java.lang.String" itemvalue="Python.gather_filtering_stats" />
+      <item index="4" class="java.lang.String" itemvalue="Python.RepeatMasker" />
     </list>
     <recent_temporary>
-      <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.SequenceCluster" />
-        <item index="1" class="java.lang.String" itemvalue="Python.RepeatMasker" />
-        <item index="2" class="java.lang.String" itemvalue="Python.gather_filtering_stats" />
-        <item index="3" class="java.lang.String" itemvalue="Python.divergence_time_estimation" />
-        <item index="4" class="java.lang.String" itemvalue="Python.extract_ncf_exon_lengthes" />
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="Python.RepeatMasker" />
+        <item index="1" class="java.lang.String" itemvalue="Python.gather_filtering_stats" />
+        <item index="2" class="java.lang.String" itemvalue="Python.divergence_time_estimation" />
+        <item index="3" class="java.lang.String" itemvalue="Python.extract_ncf_exon_lengthes" />
       </list>
     </recent_temporary>
   </component>
@@ -774,18 +719,6 @@
       <created>1443270821851</created>
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
-    </task>
-    <task id="LOCAL-00437" summary="filter tools&#10;">
-      <created>1459259491693</created>
-      <option name="number" value="00437" />
-      <option name="project" value="LOCAL" />
-      <updated>1459259491693</updated>
-    </task>
-    <task id="LOCAL-00438" summary="filter tools&#10;">
-      <created>1459259833361</created>
-      <option name="number" value="00438" />
-      <option name="project" value="LOCAL" />
-      <updated>1459259833361</updated>
     </task>
     <task id="LOCAL-00439" summary="filter tools&#10;">
       <created>1459259922949</created>
@@ -1069,7 +1002,19 @@
       <option name="project" value="LOCAL" />
       <updated>1462466292718</updated>
     </task>
-    <option name="localTasksCounter" value="486" />
+    <task id="LOCAL-00486" summary="sequence clusters">
+      <created>1462621050720</created>
+      <option name="number" value="00486" />
+      <option name="project" value="LOCAL" />
+      <updated>1462621050720</updated>
+    </task>
+    <task id="LOCAL-00487" summary="sequence clusters">
+      <created>1462621707855</created>
+      <option name="number" value="00487" />
+      <option name="project" value="LOCAL" />
+      <updated>1462621707856</updated>
+    </task>
+    <option name="localTasksCounter" value="488" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1085,6 +1030,7 @@
     <frame x="1" y="25" width="1919" height="1055" extended-state="0" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1102,7 +1048,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20085016" sideWeight="0.4978678" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1154,7 +1099,8 @@
     <MESSAGE value="added paralleled exonerate&#10;" />
     <MESSAGE value="augustus tools&#10;" />
     <MESSAGE value="filter tools&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="filter tools&#10;" />
+    <MESSAGE value="sequence clusters" />
+    <option name="LAST_COMMIT_MESSAGE" value="sequence clusters" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1481,14 +1427,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/treefam/prepare_cafe_input_from_fam_files.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/eggnog/assign_orthologs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1545,10 +1483,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/treefam/prepare_cafe_input_from_fam_files.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.71710527">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Routines/SequenceCluster.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="122" column="37" selection-start-line="122" selection-start-column="8" selection-end-line="122" selection-end-column="81" />
+          <caret line="124" column="88" selection-start-line="124" selection-start-column="82" selection-end-line="124" selection-end-column="107" />
           <folding>
             <element signature="e#22#31#0" expanded="true" />
           </folding>
@@ -1557,8 +1503,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/extract_monocluster_ids.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21710527">
-          <caret line="11" column="60" selection-start-line="11" selection-start-column="60" selection-end-line="11" selection-end-column="60" />
+        <state vertical-scroll-proportion="0.41447368">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding>
             <element signature="e#54#69#0" expanded="true" />
           </folding>
