@@ -611,7 +611,7 @@ class SequenceRoutines():
             fd_list[i].close()
 
     @staticmethod
-    def renamed_records_generator(record_dict, syn_dict=None, expression=None):
+    def renamed_records_generator(record_dict, syn_dict=None, expression=None, clear_description=False):
         for record_id in record_dict:
             if syn_dict:
                 if record_id not in syn_dict:
@@ -620,20 +620,32 @@ class SequenceRoutines():
                 else:
                     record = deepcopy(record_dict[record_id])
                     record.id = syn_dict[record_id]
-                    yield record
+
             elif expression:
                 record = deepcopy(record_dict[record_id])
                 record.id = expression(record_id)
-                yield record
 
-    def rename_records_from_files(self, input_file, output_file, synonyms_file, format="fasta", header=False,
-                                  separator="\t", key_index=0, value_index=1, syn_expression=None, comments_prefix=None):
-        syn_dict = SynDict()
-        syn_dict.read(synonyms_file, header=header, separator=separator, key_index=key_index, value_index=value_index,
-                      expression=syn_expression, comments_prefix=comments_prefix)
+            if clear_description:
+                record.description = ""
+            yield record
+
+    def rename_records_from_files(self, input_file, output_file, synonyms_file=None, format="fasta", header=False,
+                                  separator="\t", key_index=0, value_index=1, syn_expression=None, comments_prefix=None,
+                                  clear_description=False, record_id_expression=None):
+        if synonyms_file and record_id_expression:
+            raise ValueError("Both synonyms file and record id expression were set")
+        elif (not synonyms_file) and (not record_id_expression):
+            raise ValueError("Neither synonyms file nor record id expression were set")
+        elif synonyms_file:
+            syn_dict = SynDict()
+            syn_dict.read(synonyms_file, header=header, separator=separator, key_index=key_index, value_index=value_index,
+                          expression=syn_expression, comments_prefix=comments_prefix)
+
         record_dict = SeqIO.index_db("temp.idx", input_file, format=format)
 
-        SeqIO.write(self.renamed_records_generator(record_dict, syn_dict=syn_dict), output_file, format=format)
+        SeqIO.write(self.renamed_records_generator(record_dict, syn_dict=syn_dict, expression=record_id_expression,
+                                                   clear_description=clear_description),
+                    output_file, format=format)
 
         os.remove("temp.idx")
 

@@ -15,7 +15,7 @@ parser.add_argument("-s", "--input_seq_dir", action="store", dest="input_seq_dir
                     help="Directory with files with sequences")
 parser.add_argument("-o", "--output_dir", action="store", dest="output_dir", required=True,
                     type=FileRoutines.check_path,
-                    help="Directory_to_write_output")
+                    help="Directory to write_output")
 parser.add_argument("-m", "--mode", action="store", dest="mode", default="families",
                     help="Extraction mode. Allowed - 'families', 'species'. Default - 'families'")
 parser.add_argument("-w", "--white_list_ids", action="store", dest="white_list_ids",
