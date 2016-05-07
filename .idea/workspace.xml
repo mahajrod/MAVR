@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/extract_sequences_by_clusters.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Sequence.py" afterPath="$PROJECT_DIR$/Routines/Sequence.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/SequenceCluster.py" afterPath="$PROJECT_DIR$/Routines/SequenceCluster.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence_clusters/extract_sequences_by_clusters.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/extract_sequences_by_clusters.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -67,11 +66,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SequenceCluster.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SequenceCluster.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Routines/SequenceCluster.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="112" column="59" selection-start-line="112" selection-start-column="59" selection-end-line="112" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.57236844">
+              <caret line="173" column="91" selection-start-line="173" selection-start-column="91" selection-end-line="173" selection-end-column="91" />
               <folding>
                 <element signature="e#22#31#0" expanded="true" />
               </folding>
@@ -79,12 +78,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="extract_sequences_by_clusters.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="extract_sequences_by_clusters.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/extract_sequences_by_clusters.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.35526314">
-              <caret line="20" column="38" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
-              <folding />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <folding>
+                <element signature="e#54#69#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -186,8 +187,8 @@
         <option value="$PROJECT_DIR$/Routines/TreeFam.py" />
         <option value="$PROJECT_DIR$/scripts/sequence_clusters/extract_monocluster_ids.py" />
         <option value="$PROJECT_DIR$/Routines/Sequence.py" />
-        <option value="$PROJECT_DIR$/Routines/SequenceCluster.py" />
         <option value="$PROJECT_DIR$/scripts/sequence_clusters/extract_sequences_by_clusters.py" />
+        <option value="$PROJECT_DIR$/Routines/SequenceCluster.py" />
       </list>
     </option>
   </component>
@@ -803,30 +804,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00440" summary="filter tools&#10;">
-      <created>1459266491751</created>
-      <option name="number" value="00440" />
-      <option name="project" value="LOCAL" />
-      <updated>1459266491751</updated>
-    </task>
-    <task id="LOCAL-00441" summary="filter tools&#10;">
-      <created>1460312531129</created>
-      <option name="number" value="00441" />
-      <option name="project" value="LOCAL" />
-      <updated>1460312531130</updated>
-    </task>
-    <task id="LOCAL-00442" summary="filter tools&#10;">
-      <created>1460315066422</created>
-      <option name="number" value="00442" />
-      <option name="project" value="LOCAL" />
-      <updated>1460315066422</updated>
-    </task>
-    <task id="LOCAL-00443" summary="filter tools&#10;">
-      <created>1460315506266</created>
-      <option name="number" value="00443" />
-      <option name="project" value="LOCAL" />
-      <updated>1460315506266</updated>
-    </task>
     <task id="LOCAL-00444" summary="filter tools&#10;">
       <created>1460315526954</created>
       <option name="number" value="00444" />
@@ -1097,7 +1074,31 @@
       <option name="project" value="LOCAL" />
       <updated>1462622768766</updated>
     </task>
-    <option name="localTasksCounter" value="489" />
+    <task id="LOCAL-00489" summary="sequence clusters">
+      <created>1462637339483</created>
+      <option name="number" value="00489" />
+      <option name="project" value="LOCAL" />
+      <updated>1462637339483</updated>
+    </task>
+    <task id="LOCAL-00490" summary="sequence clusters">
+      <created>1462637410103</created>
+      <option name="number" value="00490" />
+      <option name="project" value="LOCAL" />
+      <updated>1462637410103</updated>
+    </task>
+    <task id="LOCAL-00491" summary="sequence clusters">
+      <created>1462637468224</created>
+      <option name="number" value="00491" />
+      <option name="project" value="LOCAL" />
+      <updated>1462637468224</updated>
+    </task>
+    <task id="LOCAL-00492" summary="sequence clusters">
+      <created>1462637716061</created>
+      <option name="number" value="00492" />
+      <option name="project" value="LOCAL" />
+      <updated>1462637716061</updated>
+    </task>
+    <option name="localTasksCounter" value="493" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1119,7 +1120,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399361" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3383915" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1583,21 +1584,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/SequenceCluster.py">
+    <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/extract_sequences_by_clusters.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="112" column="59" selection-start-line="112" selection-start-column="59" selection-end-line="112" selection-end-column="59" />
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding>
-            <element signature="e#22#31#0" expanded="true" />
+            <element signature="e#54#69#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/extract_sequences_by_clusters.py">
+    <entry file="file://$PROJECT_DIR$/Routines/SequenceCluster.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35526314">
-          <caret line="20" column="38" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
-          <folding />
+        <state vertical-scroll-proportion="0.57236844">
+          <caret line="173" column="91" selection-start-line="173" selection-start-column="91" selection-end-line="173" selection-end-column="91" />
+          <folding>
+            <element signature="e#22#31#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

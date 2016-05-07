@@ -26,7 +26,7 @@ parser.add_argument("-e", "--seq_extension", action="store", dest="seq_extension
 parser.add_argument("-f", "--format", action="store", dest="format", default="fasta",
                     help="Format of files in sequence directory. Default - 'fasta'")
 parser.add_argument("-l", "--label_ids", action="store_true", dest="label_ids",
-                    help="Label ids by species names. Default - 'False'")
+                    help="Label ids by species names. Default - don't label")
 
 parser.add_argument("-g", "--separator_for_labeling", action="store", dest="separator_for_labeling", default="@",
                     help="Separator to use for labeling. Default - '@'")

@@ -60,14 +60,15 @@ class SequenceClusterRoutines:
         return clusters_dict
 
     @staticmethod
-    def get_cluster_names(clusters_dict, out_file=None):
+    def get_cluster_names(clusters_dict, out_file=None, white_list_ids=None):
         cluster_names = IdSet()
         for species in clusters_dict:
             species_clusters = IdSet(clusters_dict[species].keys())
             cluster_names |= species_clusters
         if out_file:
             cluster_names.write(out_file)
-        return cluster_names
+
+        return cluster_names & IdSet(white_list_ids) if white_list_ids else cluster_names
 
     @staticmethod
     def get_sequence_names(clusters_dict, write_ids=False, out_prefix=None, white_list_ids=None):
@@ -170,7 +171,7 @@ class SequenceClusterRoutines:
             white_list_ids.read(file_with_white_list_cluster_ids)
 
         clusters_dict = self.read_cluster_files_from_dir(dir_with_cluster_files)
-        cluster_names = self.get_cluster_names(clusters_dict)
+        cluster_names = self.get_cluster_names(clusters_dict, white_list_ids=white_list_ids)
 
         sequence_super_dict = OrderedDict()
         out_dir = FileRoutines.check_path(output_dir)
