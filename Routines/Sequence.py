@@ -638,8 +638,8 @@ class SequenceRoutines():
             raise ValueError("Neither synonyms file nor record id expression were set")
         elif synonyms_file:
             syn_dict = SynDict()
-            syn_dict.read(synonyms_file, header=header, separator=separator, key_index=key_index, value_index=value_index,
-                          expression=syn_expression, comments_prefix=comments_prefix)
+            syn_dict.read(synonyms_file, header=header, separator=separator, key_index=key_index,
+                          value_index=value_index, expression=syn_expression, comments_prefix=comments_prefix)
         else:
             syn_dict = None
 

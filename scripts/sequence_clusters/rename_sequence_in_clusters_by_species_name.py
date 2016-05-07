@@ -32,7 +32,8 @@ else:
 for filename in input_file_list:
     input_file = "%s%s" % (args.input_dir, filename)
     output_file = "%s%s" % (args.output_dir, filename)
-    SequenceRoutines.rename_records_from_files(input_file, output_file, record_id_expression=id_expression)
+    SequenceRoutines.rename_records_from_files(input_file, output_file, record_id_expression=id_expression,
+                                               clear_description=True)
 
 
 
