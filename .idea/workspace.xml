@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/filter/filter_by_cookiecutter_per_lane.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Filter/Cookiecutter.py" afterPath="$PROJECT_DIR$/Tools/Filter/Cookiecutter.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Filter/__init__.py" afterPath="$PROJECT_DIR$/Tools/Filter/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/hmmer3/assign_proteins_to_families.py" afterPath="$PROJECT_DIR$/scripts/hmmer3/assign_proteins_to_families.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/filter/filter_by_cookiecutter_per_lane.py" afterPath="$PROJECT_DIR$/scripts/filter/filter_by_cookiecutter_per_lane.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -76,8 +73,8 @@
       <file leaf-file-name="filter_by_cookiecutter_per_lane.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/filter/filter_by_cookiecutter_per_lane.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5131579">
-              <caret line="26" column="95" selection-start-line="26" selection-start-column="95" selection-end-line="26" selection-end-column="95" />
+            <state vertical-scroll-proportion="0.7302632">
+              <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
               <folding>
                 <element signature="e#108#117#0" expanded="true" />
               </folding>
@@ -891,12 +888,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00452" summary="filter tools&#10;">
-      <created>1460330850873</created>
-      <option name="number" value="00452" />
-      <option name="project" value="LOCAL" />
-      <updated>1460330850873</updated>
-    </task>
     <task id="LOCAL-00453" summary="filter tools&#10;">
       <created>1460383128447</created>
       <option name="number" value="00453" />
@@ -1185,7 +1176,13 @@
       <option name="project" value="LOCAL" />
       <updated>1462656688993</updated>
     </task>
-    <option name="localTasksCounter" value="501" />
+    <task id="LOCAL-00501" summary="sequence clusters">
+      <created>1462662796999</created>
+      <option name="number" value="00501" />
+      <option name="project" value="LOCAL" />
+      <updated>1462662796999</updated>
+    </task>
+    <option name="localTasksCounter" value="502" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1207,7 +1204,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399361" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3375932" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1706,8 +1703,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/filter/filter_by_cookiecutter_per_lane.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5131579">
-          <caret line="26" column="95" selection-start-line="26" selection-start-column="95" selection-end-line="26" selection-end-column="95" />
+        <state vertical-scroll-proportion="0.7302632">
+          <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
           <folding>
             <element signature="e#108#117#0" expanded="true" />
           </folding>
