@@ -11,7 +11,6 @@ parser.add_argument("-i", "--input_cluster_dir", action="store", dest="input_clu
                     type=FileRoutines.check_path,
                     help="Directory with files with clusters")
 parser.add_argument("-o", "--output", action="store", dest="output", required=True,
-                    type=FileRoutines.check_path,
                     help="File to write ids of monoclusters")
 
 args = parser.parse_args()
