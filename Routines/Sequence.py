@@ -611,30 +611,29 @@ class SequenceRoutines():
             fd_list[i].close()
 
     @staticmethod
-    def renamed_records_generator(record_dict, syn_dict):
+    def renamed_records_generator(record_dict, syn_dict=None, expression=None):
         for record_id in record_dict:
-            if record_id not in syn_dict:
-                print("%s was not renamed" % record_id)
-                yield record_dict[record_id]
-            else:
-                #print syn_dict[record_id]
-
+            if syn_dict:
+                if record_id not in syn_dict:
+                    print("%s was not renamed" % record_id)
+                    yield record_dict[record_id]
+                else:
+                    record = deepcopy(record_dict[record_id])
+                    record.id = syn_dict[record_id]
+                    yield record
+            elif expression:
                 record = deepcopy(record_dict[record_id])
-                #print(record)
-                record.id = syn_dict[record_id]
-                #print(record_id)
-                #print(record)
-                #print("\n")
+                record.id = expression(record_id)
                 yield record
 
     def rename_records_from_files(self, input_file, output_file, synonyms_file, format="fasta", header=False,
-                                  separator="\t", key_index=0, value_index=1, expression=None, comments_prefix=None):
+                                  separator="\t", key_index=0, value_index=1, syn_expression=None, comments_prefix=None):
         syn_dict = SynDict()
         syn_dict.read(synonyms_file, header=header, separator=separator, key_index=key_index, value_index=value_index,
-                      expression=expression, comments_prefix=comments_prefix)
+                      expression=syn_expression, comments_prefix=comments_prefix)
         record_dict = SeqIO.index_db("temp.idx", input_file, format=format)
 
-        SeqIO.write(self.renamed_records_generator(record_dict, syn_dict), output_file, format=format)
+        SeqIO.write(self.renamed_records_generator(record_dict, syn_dict=syn_dict), output_file, format=format)
 
         os.remove("temp.idx")
 

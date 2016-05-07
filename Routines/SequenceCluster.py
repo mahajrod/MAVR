@@ -1,8 +1,12 @@
 #!/usr/bin/env python
 import os
+from copy import deepcopy
 from collections import OrderedDict
 
+from Bio import SeqIO
+
 from Routines import FileRoutines
+from Routines.Sequence import SequenceRoutines
 from CustomCollections.GeneralCollections import SynDict, IdSet
 
 
@@ -66,6 +70,23 @@ class SequenceClusterRoutines:
         return cluster_names
 
     @staticmethod
+    def get_sequence_names(clusters_dict, write_ids=False, out_prefix=None, white_list_ids=None):
+        sequence_names_dict = SynDict()
+        for species in clusters_dict:
+            sequence_names_dict[species] = IdSet()
+        for species in clusters_dict:
+            for cluster_id in clusters_dict[species]:
+                if white_list_ids:
+                    if cluster_id not in white_list_ids:
+                        continue
+                sequence_names_dict[species] = sequence_names_dict[species] | IdSet(clusters_dict[species][cluster_id])
+        if write_ids:
+            for species in clusters_dict:
+                out_file = "%s_%s.ids" % (out_prefix, species) if out_prefix else "%s.ids" % species
+                sequence_names_dict[species].write(out_file)
+        return sequence_names_dict
+
+    @staticmethod
     def merge_clusters(clusters_dict, label_species="False", separator_for_labeling="_",
                        species_label_first=True):
 
@@ -89,7 +110,7 @@ class SequenceClusterRoutines:
         return merged_clusters
 
     def merge_clusters_from_files(self, dir_with_cluster_files, output_file, label_species="False",
-                                  separator_for_labeling="_", species_label_first=True):
+                                  separator_for_labeling="@", species_label_first=True):
 
         clusters_dict = self.read_cluster_files_from_dir(dir_with_cluster_files)
         merged_clusters = self.merge_clusters(clusters_dict, label_species=label_species,
@@ -131,5 +152,66 @@ class SequenceClusterRoutines:
         clusters_dict = self.read_cluster_files_from_dir(dir_with_cluster_files)
         monoclusters = self.extract_monocluster_ids(clusters_dict, out_file=out_file, white_list_ids=white_list_ids)
         return monoclusters
+
+    def extract_sequences_by_clusters(self, dir_with_cluster_files, dir_with_sequence_files, output_dir,
+                                      file_with_white_list_cluster_ids=None, mode="families",
+                                      sequence_file_extension="fasta", sequence_file_format="fasta",
+                                      label_species=False, separator_for_labeling="@", species_label_first=True):
+        """
+        basenames of cluster and sequence files must be same
+
+        mode:
+            clusters - extract sequences from clusters in separate files,
+            species - extract sequences from species to separate files
+        """
+        white_list_ids = None
+        if file_with_white_list_cluster_ids:
+            white_list_ids = IdSet()
+            white_list_ids.read(file_with_white_list_cluster_ids)
+
+        clusters_dict = self.read_cluster_files_from_dir(dir_with_cluster_files)
+        cluster_names = self.get_cluster_names(clusters_dict)
+
+        sequence_super_dict = OrderedDict()
+        out_dir = FileRoutines.check_path(output_dir)
+
+        for species in clusters_dict:
+            idx_file = "%s_tmp.idx" % species
+            sequence_file = "%s%s.%s" % (FileRoutines.check_path(dir_with_sequence_files), species,
+                                         sequence_file_extension)
+            sequence_super_dict[species] = SeqIO.index_db(idx_file, sequence_file, format=sequence_file_format)
+
+        if mode == "species":
+            seqeuence_names = self.get_sequence_names(clusters_dict, write_ids=False, out_prefix=None,
+                                                      white_list_ids=white_list_ids)
+            for species in seqeuence_names:
+                out_file = "%s%s.%s" % (out_dir, species, sequence_file_extension)
+                SeqIO.write(SequenceRoutines.record_by_id_generator(sequence_super_dict[species],
+                                                                    seqeuence_names[species]),
+                            out_file, format=sequence_file_format)
+        elif mode == "families":
+
+            def per_family_record_generator(seq_super_dict, clust_dict, cluster_id):
+                if species_label_first:
+                    label_sequence = lambda label, name: "%s%s%s" % (label, separator_for_labeling, name)
+                else:
+                    label_sequence = lambda label, name: "%s%s%s" % (name, separator_for_labeling, label)
+
+                for species in seq_super_dict:
+                    for record_id in clust_dict[species][cluster_id]:
+                        if label_species:
+                            record = deepcopy(seq_super_dict[species][record_id])
+                            record.id = label_sequence(species, record_id)
+                            yield record
+                        else:
+                            yield seq_super_dict[species][record_id]
+
+            for cluster_name in cluster_names:
+                out_file = "%s%s.%s" % (out_dir, cluster_name, sequence_file_extension)
+                SeqIO.write(per_family_record_generator(sequence_super_dict, clusters_dict, cluster_name),
+                            out_file, format=sequence_file_format)
+
+
+
 
 
