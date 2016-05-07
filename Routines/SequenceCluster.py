@@ -199,7 +199,7 @@ class SequenceClusterRoutines:
                     label_sequence = lambda label, name: "%s%s%s" % (name, separator_for_labeling, label)
 
                 for species in seq_super_dict:
-                    print species, cluster_id
+                    #print species, cluster_id
                     for record_id in clust_dict[species][cluster_id]:
                         if label_species:
                             record = deepcopy(seq_super_dict[species][record_id])
