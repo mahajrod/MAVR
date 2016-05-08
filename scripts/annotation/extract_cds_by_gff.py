@@ -2,7 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 import argparse
 
-from Tools.Expression import Cufflinks
+from Tools.Expression import Gffread
 
 
 parser = argparse.ArgumentParser()
@@ -16,4 +16,4 @@ parser.add_argument("-o", "--output", action="store", dest="output", required=Tr
 
 args = parser.parse_args()
 
-Cufflinks.extract_cds(args.input, args.genome, args.output)
+Gffread.extract_cds(args.input, args.genome, args.output)
