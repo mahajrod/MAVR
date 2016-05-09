@@ -26,6 +26,11 @@ class AlignmentRoutines:
     def get_codon_alignment(protein_alignment, nucleotide_seq_dict, codon_alignment_file,
                             protein2cds_accordance_dict=None):
         codon_alignment = {}
+        if protein2cds_accordance_dict:
+            for record in protein_alignment:
+                if record.id not in protein2cds_accordance_dict:
+                    print("Corresponding CDS was not found for %s protein" % record.id)
+                    return -1
         for record in protein_alignment:
             nucleotide_seq = ""
             i = 0
