@@ -21,10 +21,15 @@ parser.add_argument("-f", "--alignment_format", action="store", dest="alignment_
                     help="Format of alignments. Default: fasta")
 parser.add_argument("-n", "--cds_seqs_format", action="store", dest="cds_format", default="fasta",
                     help="Format of cds sequences. Default: fasta")
-
+parser.add_argument("-i", "--cds_index_file", action="store", dest="cds_index",
+                    help="Biopython index of cds files. Default - construct new")
+parser.add_argument("-r", "--retain_cds_index", action="store_true", dest="retain_cds_index",
+                    help="Retain constructed index after analysis. Default - False")
 args = parser.parse_args()
 
 AlignmentRoutines.get_codon_alignment_from_files(args.pep_alignment, args.cds_seqs, args.output,
                                                  cds2protein_accordance_file=args.accordance_file,
                                                  alignment_format=args.alignment_format,
-                                                 nucleotide_sequence_format=args.cds_format)
+                                                 nucleotide_sequence_format=args.cds_format,
+                                                 cds_index_file=args.cds_index,
+                                                 retain_cds_index=args.retain_cds_index)

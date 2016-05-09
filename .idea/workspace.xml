@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Alignment.py" afterPath="$PROJECT_DIR$/Routines/Alignment.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/multiple_alignment/get_codon_alignment.py" afterPath="$PROJECT_DIR$/scripts/multiple_alignment/get_codon_alignment.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -46,12 +47,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Alignment.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Alignment.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Routines/Alignment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.80263156">
-              <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="54" column="60" selection-start-line="54" selection-start-column="60" selection-end-line="54" selection-end-column="60" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="get_codon_alignment.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_codon_alignment.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.67105263">
+              <caret line="34" column="88" selection-start-line="34" selection-start-column="88" selection-end-line="34" selection-end-column="88" />
+              <folding>
+                <element signature="e#55#70#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -82,7 +95,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/projects/solenodon_genome/Solenodon_exonerate_sorex.slurm" />
         <option value="$PROJECT_DIR$/Tools/Assemblers/PEAR.py" />
         <option value="$PROJECT_DIR$/Tools/Assemblers/DISCOVAR.py" />
         <option value="$PROJECT_DIR$/scripts/filter/check_fastq_presense.py" />
@@ -133,6 +145,7 @@
         <option value="$PROJECT_DIR$/Tools/Expression/Cufflinks.py" />
         <option value="$PROJECT_DIR$/scripts/annotation/extract_cds_by_gff.py" />
         <option value="$PROJECT_DIR$/Routines/Alignment.py" />
+        <option value="$PROJECT_DIR$/scripts/multiple_alignment/get_codon_alignment.py" />
       </list>
     </option>
   </component>
@@ -912,12 +925,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00457" summary="filter tools&#10;">
-      <created>1461671862060</created>
-      <option name="number" value="00457" />
-      <option name="project" value="LOCAL" />
-      <updated>1461671862061</updated>
-    </task>
     <task id="LOCAL-00458" summary="filter tools&#10;">
       <created>1461675357539</created>
       <option name="number" value="00458" />
@@ -1206,7 +1213,13 @@
       <option name="project" value="LOCAL" />
       <updated>1462716359607</updated>
     </task>
-    <option name="localTasksCounter" value="506" />
+    <task id="LOCAL-00506" summary="sequence clusters">
+      <created>1462793310374</created>
+      <option name="number" value="00506" />
+      <option name="project" value="LOCAL" />
+      <updated>1462793310375</updated>
+    </task>
+    <option name="localTasksCounter" value="507" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1685,16 +1698,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_codon_alignment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding>
-            <element signature="e#55#70#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/annotation/extract_annotations_from_gff_by_ids.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1737,9 +1740,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Alignment.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.80263156">
-          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="54" column="60" selection-start-line="54" selection-start-column="60" selection-end-line="54" selection-end-column="60" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_codon_alignment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.67105263">
+          <caret line="34" column="88" selection-start-line="34" selection-start-column="88" selection-end-line="34" selection-end-column="88" />
+          <folding>
+            <element signature="e#55#70#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

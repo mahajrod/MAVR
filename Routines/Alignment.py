@@ -51,9 +51,11 @@ class AlignmentRoutines:
 
     def get_codon_alignment_from_files(self, protein_aln_file, nucleotide_seq_file, codon_alignment_file,
                                        cds2protein_accordance_file=None,
-                                       alignment_format="fasta", nucleotide_sequence_format="fasta"):
+                                       alignment_format="fasta", nucleotide_sequence_format="fasta",
+                                       cds_index_file=None, retain_cds_index=False):
         protein_aln_dict = AlignIO.read(protein_aln_file, format=alignment_format)
-        nucleotide_seq_dict = SeqIO.index_db("nuc_tmp.idx", nucleotide_seq_file, format=nucleotide_sequence_format)
+        nucleotide_seq_dict = SeqIO.index_db(cds_index_file if cds_index_file else "nuc_tmp.idx", nucleotide_seq_file,
+                                             format=nucleotide_sequence_format)
 
         protein2cds_accordance_dict = None
         if cds2protein_accordance_file:
@@ -62,8 +64,8 @@ class AlignmentRoutines:
 
         self.get_codon_alignment(protein_aln_dict, nucleotide_seq_dict, codon_alignment_file,
                                  protein2cds_accordance_dict=protein2cds_accordance_dict)
-
-        os.remove("nuc_tmp.idx")
+        if (not cds_index_file) and (not retain_cds_index):
+            os.remove("nuc_tmp.idx")
 
     @staticmethod
     def merge_alignment(alignment_file_list, merged_alignment_file, coordinates_file, format="fasta"):
