@@ -39,6 +39,8 @@ class AlignmentRoutines:
                     nucleotide_seq += "---"
                     continue
                 else:
+                    print protein2cds_accordance_dict[record.id]
+                    print record.id
                     nucleotide_seq += str(nucleotide_seq_dict[protein2cds_accordance_dict[record.id] if protein2cds_accordance_dict else record.id].seq[3*i:3*(i+1)])
                     i += 1
             codon_alignment[record.id] = SeqRecord(Seq(nucleotide_seq),
