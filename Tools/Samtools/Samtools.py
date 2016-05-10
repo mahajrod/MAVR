@@ -90,7 +90,8 @@ class SamtoolsV1(Tool):
         info_field = self.get_info_from_flags(black_list_flags)
 
         view_options = " -b -u -F %i %s" % (info_field, input_bam)
-        sort_options = " -n -m %s -T %s -o %s -" % (max_memory_per_thread, temp_file_prefix, output_bam)
+        sort_options = " -@ %i -n -m %s -T %s -o %s -" % (self.threads, max_memory_per_thread,
+                                                          temp_file_prefix, output_bam)
         cmd = "samtools view %s | samtools sort %s" % (view_options, sort_options)
         self.execute(options="", cmd=cmd)
 
