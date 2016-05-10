@@ -80,8 +80,8 @@
       <file leaf-file-name="extract_fastq_from_bam.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/alignment/extract_fastq_from_bam.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.75">
-              <caret line="38" column="68" selection-start-line="38" selection-start-column="68" selection-end-line="38" selection-end-column="68" />
+            <state vertical-scroll-proportion="0.36842105">
+              <caret line="24" column="47" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
               <folding>
                 <element signature="e#55#70#0" expanded="true" />
               </folding>
@@ -125,7 +125,7 @@
         <entry file="file://$PROJECT_DIR$/Tools/Samtools/Samtools.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="43" column="91" selection-start-line="43" selection-start-column="91" selection-end-line="43" selection-end-column="112" />
+              <caret line="86" column="16" selection-start-line="86" selection-start-column="8" selection-end-line="87" selection-end-column="68" />
               <folding />
             </state>
           </provider>
@@ -971,24 +971,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00462" summary="filter tools&#10;">
-      <created>1462460649266</created>
-      <option name="number" value="00462" />
-      <option name="project" value="LOCAL" />
-      <updated>1462460649266</updated>
-    </task>
-    <task id="LOCAL-00463" summary="filter tools&#10;">
-      <created>1462460790207</created>
-      <option name="number" value="00463" />
-      <option name="project" value="LOCAL" />
-      <updated>1462460790208</updated>
-    </task>
-    <task id="LOCAL-00464" summary="filter tools&#10;">
-      <created>1462460852169</created>
-      <option name="number" value="00464" />
-      <option name="project" value="LOCAL" />
-      <updated>1462460852169</updated>
-    </task>
     <task id="LOCAL-00465" summary="filter tools&#10;">
       <created>1462460923446</created>
       <option name="number" value="00465" />
@@ -1265,7 +1247,25 @@
       <option name="project" value="LOCAL" />
       <updated>1462887400295</updated>
     </task>
-    <option name="localTasksCounter" value="511" />
+    <task id="LOCAL-00511" summary="sequence clusters">
+      <created>1462888528756</created>
+      <option name="number" value="00511" />
+      <option name="project" value="LOCAL" />
+      <updated>1462888528756</updated>
+    </task>
+    <task id="LOCAL-00512" summary="sequence clusters">
+      <created>1462888594085</created>
+      <option name="number" value="00512" />
+      <option name="project" value="LOCAL" />
+      <updated>1462888594085</updated>
+    </task>
+    <task id="LOCAL-00513" summary="sequence clusters">
+      <created>1462888657221</created>
+      <option name="number" value="00513" />
+      <option name="project" value="LOCAL" />
+      <updated>1462888657221</updated>
+    </task>
+    <option name="localTasksCounter" value="514" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1784,15 +1784,15 @@
     <entry file="file://$PROJECT_DIR$/Tools/Samtools/Samtools.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="91" selection-start-line="43" selection-start-column="91" selection-end-line="43" selection-end-column="112" />
+          <caret line="86" column="16" selection-start-line="86" selection-start-column="8" selection-end-line="87" selection-end-column="68" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/alignment/extract_fastq_from_bam.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.75">
-          <caret line="38" column="68" selection-start-line="38" selection-start-column="68" selection-end-line="38" selection-end-column="68" />
+        <state vertical-scroll-proportion="0.36842105">
+          <caret line="24" column="47" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
           <folding>
             <element signature="e#55#70#0" expanded="true" />
           </folding>
