@@ -45,7 +45,7 @@ class SamtoolsV1(Tool):
 
         options = " -@ %i" % self.threads
         options += " -n" if sort_by_name else ""
-        options += " -m %s" if max_memory_per_thread else ""
+        options += " -m %s" % max_memory_per_thread if max_memory_per_thread else ""
         options += " -o %s" % output_bam
         options += " -T %s" % temp_file_prefix
         options += " %s" % input_bam
