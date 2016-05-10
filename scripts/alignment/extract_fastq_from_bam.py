@@ -24,7 +24,7 @@ parser.add_argument("-o", "--out_prefix", action="store", dest="out_prefix", req
                     help="Prefix of output fatsq files")
 parser.add_argument("-s", "--single_ends", action="store_false", dest="paired", default=True,
                     help="Reads are SE")
-parser.add_argument("-m", "--max_memory_per_thread", action="store", dest="max_memory_per_thread", defaulte="1G",
+parser.add_argument("-m", "--max_memory_per_thread", action="store", dest="max_memory_per_thread", default="1G",
                     help="Maximum memory per thread. Default - 1G")
 args = parser.parse_args()
 
