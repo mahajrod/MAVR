@@ -85,7 +85,7 @@ Jellyfish.count(args.input if not args.add_rev_com else file_with_rev_com, base_
                 kmer_length=args.kmer_length, hash_size=args.hash_size,
                 count_both_strands=args.count_both_strands)
 Jellyfish.histo(base_file, histo_file, upper_count=10000000)
-Jellyfish.draw_kmer_distribution(args.input, args.kmer_length, picture_prefix, output_formats=args.output_formats,
+Jellyfish.draw_kmer_distribution(histo_file, args.kmer_length, picture_prefix, output_formats=args.output_formats,
                                  logbase=args.logbase, non_log_low_limit=args.low_limit,
                                  non_log_high_limit=args.high_limit) #, draw_peaks_and_gaps=args.draw_peaks_and_gaps)
 """
