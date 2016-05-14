@@ -110,11 +110,12 @@ class Jellyfish(Tool):
                                                                                                      check_peaks_coef=check_peaks_coef)
 
         print unique_peak_borders
+        max_bin = max(bins)
         figure = plt.figure(1, figsize=(8, 8), dpi=300)
         subplot = plt.subplot(1, 1, 1)
         plt.suptitle("Distribution of %i-mers" % kmer_length, fontweight='bold')
         plt.plot(bins, counts)
-        plt.xlim(xmin=1, xmax=max(bins))
+        plt.xlim(xmin=1, xmax=max_bin)
         plt.xlabel("Multiplicity")
         plt.ylabel("Number of distinct %s-mers" % kmer_length)
         subplot.set_yscale('log', basey=logbase)
@@ -159,7 +160,7 @@ class Jellyfish(Tool):
                 if i == 1:
                     subplot_list[0].set_yscale('log', basey=logbase)
                     subplot_list[0].set_xscale('log', basex=logbase)
-                    plt.xlim(xmin=1, xmax=10000000)
+                    plt.xlim(xmin=1, xmax=max_bin)
                 elif i == 2:
                     plt.xlim(xmin=non_log_low_limit, xmax=non_log_high_limit)
                     plt.xlabel("Multiplicity", fontsize=15)
