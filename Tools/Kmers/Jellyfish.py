@@ -114,7 +114,7 @@ class Jellyfish(Tool):
         subplot = plt.subplot(1, 1, 1)
         plt.suptitle("Distribution of %i-mers" % kmer_length, fontweight='bold')
         plt.plot(bins, counts)
-        plt.xlim(xmin=1, xmax=10000000)
+        plt.xlim(xmin=1, xmax=max(bins))
         plt.xlabel("Multiplicity")
         plt.ylabel("Number of distinct %s-mers" % kmer_length)
         subplot.set_yscale('log', basey=logbase)
