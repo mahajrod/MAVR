@@ -127,7 +127,7 @@ class Jellyfish(Tool):
         general_stats += "Kmer multiplicity at first maximum\t%i\n" % maximums_to_show[0][0]
         general_stats += "Mean kmer multiplicity in first peak\t%.2f\n" % unique_peak_borders_mean_multiplicity
         general_stats += "Standard deviation of kmer multiplicity in first peak\t%.2f\n" % std_1
-        general_stats += "Variance coefficient of kmer multiplicity in first peak\t%2f\n" % var_1
+        general_stats += "Variance coefficient of kmer multiplicity in first peak\t%.2f\n" % var_1
 
         print(general_stats)
 
