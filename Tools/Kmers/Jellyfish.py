@@ -111,27 +111,26 @@ class Jellyfish(Tool):
                                                                              check_peaks_coef=check_peaks_coef)
 
         print unique_peak_borders
+
+        unique_peak_borders_mean_multiplicity = MathRoutines.mean_from_bins(bins[unique_peak_borders[0]: unique_peak_borders[1]+1],
+                                                                            counts[unique_peak_borders[0]: unique_peak_borders[1]+1])
+        std_1 = MathRoutines.std_from_bins(bins[unique_peak_borders[0]: unique_peak_borders[1]+1],
+                                           counts[unique_peak_borders[0]: unique_peak_borders[1]+1],
+                                           mean=unique_peak_borders_mean_multiplicity)
+        var_1 = std_1 / unique_peak_borders_mean_multiplicity
+
         fraction_of_error_kmers = float(number_of_kmers_with_errors)/float(number_of_kmers)
         general_stats = "Number of kmers\t%i\n" % number_of_kmers
         general_stats += "Number of kmers with errors\t%i\n" % number_of_kmers_with_errors
         general_stats += "Fraction of kmers with errors\t%.3f\n" % fraction_of_error_kmers
         general_stats += "Kmer multiplicity at first minimum\t%i\n" % minimums_to_show[0][0]
         general_stats += "Kmer multiplicity at first maximum\t%i\n" % maximums_to_show[0][0]
+        general_stats += "Mean kmer multiplicity in first peak\t%.2f\n" % unique_peak_borders_mean_multiplicity
+        general_stats += "Standard deviation of kmer multiplicity in first peak\t%.2f\n" % std_1
+        general_stats += "Variance coefficient of kmer multiplicity in first peak\t%2f\n" % var_1
 
-        unique_peak_borders_mean_multiplicity = MathRoutines.mean_from_bins(bins[unique_peak_borders[0]: unique_peak_borders[1]+1],
-                                                                            counts[unique_peak_borders[0]: unique_peak_borders[1]+1])
-        std_1 = MathRoutines.std_from_bins(bins[unique_peak_borders[0]: unique_peak_borders[1]+1],
-                                                                            counts[unique_peak_borders[0]: unique_peak_borders[1]+1],
-                                                                            mean=unique_peak_borders_mean_multiplicity)
-        var_1 = std_1 / unique_peak_borders_mean_multiplicity
-        std_2 = MathRoutines.std_from_bins(bins[unique_peak_borders[0]: unique_peak_borders[1]+1],
-                                                                            counts[unique_peak_borders[0]: unique_peak_borders[1]+1],
-                                                                            mean=maximums_to_show[0][0])
-        var_2 = std_2 / maximums_to_show[0][0]
         print(general_stats)
-        print unique_peak_borders_mean_multiplicity
-        print std_1, var_1
-        print std_2, var_2
+
         max_bin = max(bins)
         figure = plt.figure(1, figsize=(8, 8), dpi=300)
         subplot = plt.subplot(1, 1, 1)
