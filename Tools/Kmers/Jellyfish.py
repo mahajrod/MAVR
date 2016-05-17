@@ -122,12 +122,12 @@ class Jellyfish(Tool):
         fraction_of_error_kmers = float(number_of_kmers_with_errors)/float(number_of_kmers)
         general_stats = "Number of kmers\t%i\n" % number_of_kmers
         general_stats += "Number of kmers with errors\t%i\n" % number_of_kmers_with_errors
-        general_stats += "Fraction of kmers with errors\t%.3f\n" % fraction_of_error_kmers
+        general_stats += "Fraction of kmers with errors\t%.3f\n" % np.around(fraction_of_error_kmers, decimals=3)
         general_stats += "Kmer multiplicity at first minimum\t%i\n" % minimums_to_show[0][0]
         general_stats += "Kmer multiplicity at first maximum\t%i\n" % maximums_to_show[0][0]
-        general_stats += "Mean kmer multiplicity in first peak\t%.2f\n" % unique_peak_borders_mean_multiplicity
-        general_stats += "Standard deviation of kmer multiplicity in first peak\t%.2f\n" % std_1
-        general_stats += "Variance coefficient of kmer multiplicity in first peak\t%.2f\n" % var_1
+        general_stats += "Mean kmer multiplicity in first peak\t%.2f\n" % np.around(unique_peak_borders_mean_multiplicity, decimals=2)
+        general_stats += "Standard deviation of kmer multiplicity in first peak\t%.2f\n" % np.around(std_1, decimals=2)
+        general_stats += "Variance coefficient of kmer multiplicity in first peak\t%.2f\n" % np.around(var_1, decimals=2)
 
         print(general_stats)
 
