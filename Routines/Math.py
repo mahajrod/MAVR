@@ -29,7 +29,7 @@ class MathRoutines:
     def variance_from_bins(self, bins, counts, mean=None):
         mean_value = mean if mean else self.mean_from_bins(bins, counts)
         deviation = bins - mean_value
-        variance = np.sum(np.power(deviation, 2)) / sum(counts)
+        variance = np.sum(np.multiply(np.power(deviation, 2), counts)) / sum(counts)
         return variance
 
     def std_from_bins(self, bins, counts, mean=None):
