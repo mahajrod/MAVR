@@ -129,7 +129,7 @@ class Jellyfish(Tool):
                                                                             mean=maximums_to_show[0][0])
         var_2 = std_2 / maximums_to_show[0][0]
         print(general_stats)
-
+        print unique_peak_borders_mean_multiplicity
         print std_1, var_1
         print std_2, var_2
         max_bin = max(bins)
