@@ -102,14 +102,21 @@ class Jellyfish(Tool):
                                logbase=10, non_log_low_limit=5, non_log_high_limit=100, order=3, mode="wrap",
                                check_peaks_coef=10):
         bins, counts = np.loadtxt(histo_file, unpack=True)
-
-        maximums_to_show, minimums_to_show, unique_peak_borders = self.extract_parameters_from_histo(counts, bins,
-                                                                                                     output_prefix,
-                                                                                                     order=order,
-                                                                                                     mode=mode,
-                                                                                                     check_peaks_coef=check_peaks_coef)
+        maximums_to_show, minimums_to_show, \
+            unique_peak_borders, number_of_kmers, \
+            number_of_error_kmers = self.extract_parameters_from_histo(counts, bins,
+                                                                       output_prefix,
+                                                                       order=order,
+                                                                       mode=mode,
+                                                                       check_peaks_coef=check_peaks_coef)
 
         print unique_peak_borders
+        fraction_of_error_kmers = float(number_of_error_kmers)/float(number_of_kmers)
+        general_stats = "Number of kmers\t%i\n" % number_of_kmers
+        general_stats += "Number of error kmers\t%i\n" % number_of_error_kmers
+        general_stats += "Fraction of error kmers\t%.3f\n" % fraction_of_error_kmers
+        general_stats += "First minimum\t%i\n" % bins[unique_peak_borders[0]]
+        print(general_stats)
         max_bin = max(bins)
         figure = plt.figure(1, figsize=(8, 8), dpi=300)
         subplot = plt.subplot(1, 1, 1)
@@ -229,9 +236,13 @@ class Jellyfish(Tool):
         nearest_value_to_first_min_idx = MathRoutines.find_nearest_scalar(counts[local_maximums_idx[first_unique_peak_idx_idx]:],
                                                                           counts[local_minimums_idx[0]]) + local_maximums_idx[first_unique_peak_idx_idx]
 
+        number_of_kmers = sum(counts)
+        number_of_erorr_kmers = sum(counts[0:local_minimums_idx[0]])
         return [(bins[i], counts[i]) for i in peaks_in_checked_area_idx], \
                [(bins[i], counts[i]) for i in minimums_in_checked_area_idx], \
-               (local_minimums_idx[0], nearest_value_to_first_min_idx)
+               (local_minimums_idx[0], nearest_value_to_first_min_idx), \
+               number_of_kmers, number_of_erorr_kmers
+
 
 
 if __name__ == "__main__":
