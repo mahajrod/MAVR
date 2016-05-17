@@ -104,19 +104,34 @@ class Jellyfish(Tool):
         bins, counts = np.loadtxt(histo_file, unpack=True)
         maximums_to_show, minimums_to_show, \
             unique_peak_borders, number_of_kmers, \
-            number_of_error_kmers = self.extract_parameters_from_histo(counts, bins,
-                                                                       output_prefix,
-                                                                       order=order,
-                                                                       mode=mode,
-                                                                       check_peaks_coef=check_peaks_coef)
+            number_of_kmers_with_errors = self.extract_parameters_from_histo(counts, bins,
+                                                                             output_prefix,
+                                                                             order=order,
+                                                                             mode=mode,
+                                                                             check_peaks_coef=check_peaks_coef)
 
         print unique_peak_borders
-        fraction_of_error_kmers = float(number_of_error_kmers)/float(number_of_kmers)
+        fraction_of_error_kmers = float(number_of_kmers_with_errors)/float(number_of_kmers)
         general_stats = "Number of kmers\t%i\n" % number_of_kmers
-        general_stats += "Number of error kmers\t%i\n" % number_of_error_kmers
-        general_stats += "Fraction of error kmers\t%.3f\n" % fraction_of_error_kmers
-        general_stats += "First minimum\t%i\n" % bins[unique_peak_borders[0]]
+        general_stats += "Number of kmers with errors\t%i\n" % number_of_kmers_with_errors
+        general_stats += "Fraction of kmers with errors\t%.3f\n" % fraction_of_error_kmers
+        general_stats += "Kmer multiplicity at first minimum\t%i\n" % minimums_to_show[0][0]
+        general_stats += "Kmer multiplicity at first maximum\t%i\n" % maximums_to_show[0][0]
+
+        unique_peak_borders_mean_multiplicity = MathRoutines.mean_from_bins(bins[unique_peak_borders[0]: unique_peak_borders[1]+1],
+                                                                            counts[unique_peak_borders[0]: unique_peak_borders[1]+1])
+        std_1 = MathRoutines.std_from_bins(bins[unique_peak_borders[0]: unique_peak_borders[1]+1],
+                                                                            counts[unique_peak_borders[0]: unique_peak_borders[1]+1],
+                                                                            mean=unique_peak_borders_mean_multiplicity)
+        var_1 = std_1 / unique_peak_borders_mean_multiplicity
+        std_2 = MathRoutines.std_from_bins(bins[unique_peak_borders[0]: unique_peak_borders[1]+1],
+                                                                            counts[unique_peak_borders[0]: unique_peak_borders[1]+1],
+                                                                            mean=maximums_to_show[0][0])
+        var_2 = std_2 / maximums_to_show[0][0]
         print(general_stats)
+
+        print std_1, var_1
+        print std_2, var_2
         max_bin = max(bins)
         figure = plt.figure(1, figsize=(8, 8), dpi=300)
         subplot = plt.subplot(1, 1, 1)
@@ -237,11 +252,11 @@ class Jellyfish(Tool):
                                                                           counts[local_minimums_idx[0]]) + local_maximums_idx[first_unique_peak_idx_idx]
 
         number_of_kmers = sum(counts)
-        number_of_erorr_kmers = sum(counts[0:local_minimums_idx[0]])
+        number_of_kmers_with_errors = sum(counts[0:local_minimums_idx[0]])
         return [(bins[i], counts[i]) for i in peaks_in_checked_area_idx], \
                [(bins[i], counts[i]) for i in minimums_in_checked_area_idx], \
                (local_minimums_idx[0], nearest_value_to_first_min_idx), \
-               number_of_kmers, number_of_erorr_kmers
+               number_of_kmers, number_of_kmers_with_errors
 
 
 

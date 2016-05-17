@@ -22,6 +22,19 @@ class MathRoutines:
         idx = np.array([np.linalg.norm(x+y) for (x, y) in array-value]).argmin()
         return idx if mode == "index" else array[idx]
 
+    @staticmethod
+    def mean_from_bins(bins, counts):
+        return sum(np.multiply(bins, counts))/sum(counts)
+
+    def variance_from_bins(self, bins, counts, mean=None):
+        mean_value = mean if mean else self.mean_from_bins(bins, counts)
+        deviation = bins - mean_value
+        variance = np.sum(np.power(deviation, 2)) / sum(counts)
+        return variance
+
+    def std_from_bins(self, bins, counts, mean=None):
+        return np.sqrt(self.variance_from_bins(bins, counts, mean=mean))
+
 
 class SmoothRoutines:
     def __init__(self):
