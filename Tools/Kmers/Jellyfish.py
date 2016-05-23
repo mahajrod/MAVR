@@ -103,15 +103,17 @@ class Jellyfish(Tool):
                                check_peaks_coef=10):
         bins, counts = np.loadtxt(histo_file, unpack=True)
         maximums_to_show, minimums_to_show, \
-            unique_peak_borders, number_of_kmers, \
-            number_of_kmers_with_errors = self.extract_parameters_from_histo(counts, bins,
+            unique_peak_borders, number_of_distinct_kmers, \
+            number_of_distinct_kmers_with_errors,\
+            total_number_of_kmers, total_number_of_kmers_with_errors = self.extract_parameters_from_histo(counts, bins,
                                                                              output_prefix,
                                                                              order=order,
                                                                              mode=mode,
                                                                              check_peaks_coef=check_peaks_coef)
 
+        unique_peak_width = unique_peak_borders[1] - unique_peak_borders[0] + 1
         print unique_peak_borders
-
+        print unique_peak_width
         unique_peak_borders_mean_multiplicity = MathRoutines.mean_from_bins(bins[unique_peak_borders[0]: unique_peak_borders[1]+1],
                                                                             counts[unique_peak_borders[0]: unique_peak_borders[1]+1])
         std_1 = MathRoutines.std_from_bins(bins[unique_peak_borders[0]: unique_peak_borders[1]+1],
@@ -119,16 +121,22 @@ class Jellyfish(Tool):
                                            mean=unique_peak_borders_mean_multiplicity)
         var_1 = std_1 / unique_peak_borders_mean_multiplicity
 
-        fraction_of_error_kmers = float(number_of_kmers_with_errors)/float(number_of_kmers)
-        general_stats = "Number of kmers\t%i\n" % number_of_kmers
-        general_stats += "Number of kmers with errors\t%i\n" % number_of_kmers_with_errors
-        general_stats += "Fraction of kmers with errors\t%.3f\n" % np.around(fraction_of_error_kmers, decimals=3)
+        fraction_of_distinct_kmers_with_errors = float(number_of_distinct_kmers_with_errors)/float(number_of_distinct_kmers)
+        fraction_of_kmers_with_errors = float(total_number_of_kmers_with_errors)/float(total_number_of_kmers)
+        general_stats = "Number of distinct kmers\t%i\n" % number_of_distinct_kmers
+        general_stats += "Number of distinct kmers with errors\t%i\n" % number_of_distinct_kmers_with_errors
+        general_stats += "Fraction of distinct kmers with errors\t%.3f\n" % np.around(fraction_of_distinct_kmers_with_errors, decimals=3)
+
+        general_stats = "Total number of kmers\t%i\n" % total_number_of_kmers
+        general_stats += "Total number of kmers with errors\t%i\n" % total_number_of_kmers_with_errors
+        general_stats += "Fraction of kmers with errors\t%.3f\n" % np.around(fraction_of_kmers_with_errors, decimals=3)
         general_stats += "Kmer multiplicity at first minimum\t%i\n" % minimums_to_show[0][0]
         general_stats += "Kmer multiplicity at first maximum\t%i\n" % maximums_to_show[0][0]
+        general_stats += "Width of first peak\t%i\n" % unique_peak_width
         general_stats += "Mean kmer multiplicity in first peak\t%.2f\n" % np.around(unique_peak_borders_mean_multiplicity, decimals=2)
         general_stats += "Standard deviation of kmer multiplicity in first peak\t%.2f\n" % np.around(std_1, decimals=2)
-        general_stats += "Variance coefficient of kmer multiplicity in first peak\t%.2f\n" % np.around(var_1, decimals=2)
-
+        general_stats += "Variance coefficient of kmer multiplicity in first peak\t%.2f\n" % np.around(var_1,
+                                                                                                       decimals=2)
         print(general_stats)
 
         max_bin = max(bins)
@@ -250,12 +258,16 @@ class Jellyfish(Tool):
         nearest_value_to_first_min_idx = MathRoutines.find_nearest_scalar(counts[local_maximums_idx[first_unique_peak_idx_idx]:],
                                                                           counts[local_minimums_idx[0]]) + local_maximums_idx[first_unique_peak_idx_idx]
 
-        number_of_kmers = sum(counts)
-        number_of_kmers_with_errors = sum(counts[0:local_minimums_idx[0]])
+        number_of_distinct_kmers = sum(counts)
+        number_of_distinct_kmers_with_errors = sum(counts[0:local_minimums_idx[0]])
+        total_number_of_kmers = sum(np.multiply(counts, bins))
+        total_number_of_kmers_with_errors = sum(np.multiply(counts[0:local_minimums_idx[0]],
+                                                                     bins[0:local_minimums_idx[0]]))
         return [(bins[i], counts[i]) for i in peaks_in_checked_area_idx], \
                [(bins[i], counts[i]) for i in minimums_in_checked_area_idx], \
                (local_minimums_idx[0], nearest_value_to_first_min_idx), \
-               number_of_kmers, number_of_kmers_with_errors
+               number_of_distinct_kmers, number_of_distinct_kmers_with_errors, \
+               total_number_of_kmers, total_number_of_kmers_with_errors
 
 
 
