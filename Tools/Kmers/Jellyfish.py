@@ -127,7 +127,7 @@ class Jellyfish(Tool):
         general_stats += "Number of distinct kmers with errors\t%i\n" % number_of_distinct_kmers_with_errors
         general_stats += "Fraction of distinct kmers with errors\t%.3f\n" % np.around(fraction_of_distinct_kmers_with_errors, decimals=3)
 
-        general_stats = "Total number of kmers\t%i\n" % total_number_of_kmers
+        general_stats += "Total number of kmers\t%i\n" % total_number_of_kmers
         general_stats += "Total number of kmers with errors\t%i\n" % total_number_of_kmers_with_errors
         general_stats += "Fraction of kmers with errors\t%.3f\n" % np.around(fraction_of_kmers_with_errors, decimals=3)
         general_stats += "Kmer multiplicity at first minimum\t%i\n" % minimums_to_show[0][0]
