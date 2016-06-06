@@ -13,8 +13,6 @@ parser.add_argument("-p", "--species_prefix", action="store", dest="species_pref
                     help="Species prefix to use in ids")
 parser.add_argument("-n", "--number_of_digits_in_number", action="store", dest="number_of_digits_in_number", type=int,
                     default=8, help="Number of digits in id. Default - 8")
-parser.add_argument("-f", "--feature_type", action="store", dest="feature_type",
-                    default="gene", help="Type of feature to assign synonyms. Default - 'gene'")
 
 args = parser.parse_args()
 
