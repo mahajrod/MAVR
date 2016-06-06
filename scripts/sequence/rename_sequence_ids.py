@@ -31,6 +31,7 @@ parser.add_argument("-l", "--clear_description", action="store_true", dest="clea
                     help="Clear description. Default - False")
 args = parser.parse_args()
 
+
 SequenceRoutines.rename_records_from_files(args.input, args.output, args.syn_file, format=args.format,
                                            header=args.header, separator=args.separator, key_index=args.key_index,
                                            value_index=args.value_index, clear_description=args.clear_description,
