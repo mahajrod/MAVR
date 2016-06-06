@@ -366,7 +366,7 @@ class AUGUSTUS(Tool):
         transcripts_syn_dict = SynDict()
         transcripts_syn_dict.read(transcripts_syn_file, comments_prefix="#")
         cds_syn_dict = SynDict()
-        if cds_syn_dict:
+        if cds_syn_file:
             cds_syn_dict.read(cds_syn_file, comments_prefix="#")
         with open(augustus_gff, "r") as in_fd:
             with open(output_gff, "w") as out_fd:
