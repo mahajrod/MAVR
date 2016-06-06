@@ -11,10 +11,10 @@ parser.add_argument("-o", "--output_gff", action="store", dest="output_gff", req
                     help="Output gff with replaced ids")
 parser.add_argument("-g", "--gene_syn_file", action="store", dest="gene_syn_file", required=True,
                     help="File with gene synonyms")
-parser.add_argument("-t", "--transcript_syn_file", action="store", dest="transcripts_syn_file", required=True,
+parser.add_argument("-t", "--transcript_syn_file", action="store", dest="transcript_syn_file", required=True,
                     help="File with transcript synonyms")
 
 args = parser.parse_args()
 
-AUGUSTUS.replace_augustus_ids_by_syn(args.input_gff, args.output_gff, args.genes_syn_file,
-                                     args.transcripts_syn_file)
+AUGUSTUS.replace_augustus_ids_by_syn(args.input_gff, args.output_gff, args.gene_syn_file,
+                                     args.transcript_syn_file)
