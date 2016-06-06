@@ -32,7 +32,7 @@ args = parser.parse_args()
 
 SequenceRoutines.rename_records_from_files(args.input, args.output, args.syn_file, format=args.format,
                                            header=args.header, separator=args.separator, key_index=args.key_index,
-                                           value_index=args.value_index, expression=None,
+                                           value_index=args.value_index,
                                            comments_prefix=args.comments_prefix)
 
 
