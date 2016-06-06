@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/annotation/replace_augustus_ids_by_synonyms.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" afterPath="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence_clusters/rename_sequence_in_clusters_by_species_name.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/rename_sequence_in_clusters_by_species_name.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/replace_augustus_ids_by_synonyms.py" afterPath="$PROJECT_DIR$/scripts/annotation/replace_augustus_ids_by_synonyms.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -44,8 +43,8 @@
       <file leaf-file-name="assign_synonyms_to_annotations_from_augustus_gff.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/annotation/assign_synonyms_to_annotations_from_augustus_gff.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="486">
-              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
+              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -54,8 +53,8 @@
       <file leaf-file-name="replace_augustus_ids_by_synonyms.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/annotation/replace_augustus_ids_by_synonyms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36651585" vertical-offset="0" max-vertical-offset="884">
-              <caret line="19" column="63" selection-start-line="19" selection-start-column="63" selection-end-line="19" selection-end-column="63" />
+            <state vertical-scroll-proportion="0.40723982" vertical-offset="0" max-vertical-offset="884">
+              <caret line="21" column="93" selection-start-line="21" selection-start-column="93" selection-end-line="21" selection-end-column="93" />
               <folding />
             </state>
           </provider>
@@ -64,8 +63,8 @@
       <file leaf-file-name="AUGUSTUS.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1019" max-vertical-offset="3096">
-              <caret line="356" column="8" selection-start-line="356" selection-start-column="8" selection-end-line="356" selection-end-column="100" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1865" max-vertical-offset="3258">
+              <caret line="408" column="98" selection-start-line="408" selection-start-column="98" selection-end-line="408" selection-end-column="98" />
               <folding>
                 <element signature="e#22#31#0" expanded="true" />
                 <element signature="e#672#4607#0" expanded="false" />
@@ -76,16 +75,6 @@
                 <element signature="e#14893#16835#0" expanded="false" />
                 <element signature="e#17450#17966#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="extract_selected_families_from_fam_file.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/treefam/extract_selected_families_from_fam_file.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="576" max-vertical-offset="810">
-              <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -106,7 +95,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/annotation/replace_region_names_in_gff.py" />
         <option value="$PROJECT_DIR$/scripts/kmer/draw_kmer_distribution.py" />
         <option value="$PROJECT_DIR$/scripts/filter/filter_by_mean_quality_per_lane.py" />
         <option value="$PROJECT_DIR$/projects/RG/decompress_per_lane_sample.sh" />
@@ -155,6 +143,7 @@
         <option value="$PROJECT_DIR$/projects/begula/Begula_lingula_anatina.slurm" />
         <option value="$PROJECT_DIR$/projects/begula/Begula_lottia_gigantea.slurm" />
         <option value="$PROJECT_DIR$/projects/begula/helobdella_robusta.slurm" />
+        <option value="$PROJECT_DIR$/scripts/annotation/assign_synonyms_to_annotations_from_augustus_gff.py" />
         <option value="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" />
         <option value="$PROJECT_DIR$/scripts/annotation/replace_augustus_ids_by_synonyms.py" />
       </list>
@@ -753,42 +742,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00488" summary="sequence clusters">
-      <created>1462622768766</created>
-      <option name="number" value="00488" />
-      <option name="project" value="LOCAL" />
-      <updated>1462622768766</updated>
-    </task>
-    <task id="LOCAL-00489" summary="sequence clusters">
-      <created>1462637339483</created>
-      <option name="number" value="00489" />
-      <option name="project" value="LOCAL" />
-      <updated>1462637339483</updated>
-    </task>
-    <task id="LOCAL-00490" summary="sequence clusters">
-      <created>1462637410103</created>
-      <option name="number" value="00490" />
-      <option name="project" value="LOCAL" />
-      <updated>1462637410103</updated>
-    </task>
-    <task id="LOCAL-00491" summary="sequence clusters">
-      <created>1462637468224</created>
-      <option name="number" value="00491" />
-      <option name="project" value="LOCAL" />
-      <updated>1462637468224</updated>
-    </task>
-    <task id="LOCAL-00492" summary="sequence clusters">
-      <created>1462637716061</created>
-      <option name="number" value="00492" />
-      <option name="project" value="LOCAL" />
-      <updated>1462637716061</updated>
-    </task>
-    <task id="LOCAL-00493" summary="sequence clusters">
-      <created>1462638053682</created>
-      <option name="number" value="00493" />
-      <option name="project" value="LOCAL" />
-      <updated>1462638053682</updated>
-    </task>
     <task id="LOCAL-00494" summary="sequence clusters">
       <created>1462638087086</created>
       <option name="number" value="00494" />
@@ -1047,7 +1000,43 @@
       <option name="project" value="LOCAL" />
       <updated>1465084586124</updated>
     </task>
-    <option name="localTasksCounter" value="537" />
+    <task id="LOCAL-00537" summary="sequence clusters">
+      <created>1465226949035</created>
+      <option name="number" value="00537" />
+      <option name="project" value="LOCAL" />
+      <updated>1465226949036</updated>
+    </task>
+    <task id="LOCAL-00538" summary="sequence clusters">
+      <created>1465227083526</created>
+      <option name="number" value="00538" />
+      <option name="project" value="LOCAL" />
+      <updated>1465227083526</updated>
+    </task>
+    <task id="LOCAL-00539" summary="sequence clusters">
+      <created>1465227118878</created>
+      <option name="number" value="00539" />
+      <option name="project" value="LOCAL" />
+      <updated>1465227118878</updated>
+    </task>
+    <task id="LOCAL-00540" summary="sequence clusters">
+      <created>1465227391038</created>
+      <option name="number" value="00540" />
+      <option name="project" value="LOCAL" />
+      <updated>1465227391038</updated>
+    </task>
+    <task id="LOCAL-00541" summary="sequence clusters">
+      <created>1465228681029</created>
+      <option name="number" value="00541" />
+      <option name="project" value="LOCAL" />
+      <updated>1465228681029</updated>
+    </task>
+    <task id="LOCAL-00542" summary="sequence clusters">
+      <created>1465228773834</created>
+      <option name="number" value="00542" />
+      <option name="project" value="LOCAL" />
+      <updated>1465228773835</updated>
+    </task>
+    <option name="localTasksCounter" value="543" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1063,6 +1052,7 @@
     <frame x="-1" y="25" width="1922" height="1055" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1079,7 +1069,6 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399361" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1471,14 +1460,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/treefam/extract_selected_families_from_fam_file.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/file/extract_by_column_value.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
@@ -1505,16 +1486,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/annotation/assign_synonyms_to_annotations_from_augustus_gff.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="486">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/treefam/extract_selected_families_from_fam_file.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.65158373" vertical-offset="0" max-vertical-offset="884">
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1019" max-vertical-offset="3096">
-          <caret line="356" column="8" selection-start-line="356" selection-start-column="8" selection-end-line="356" selection-end-column="100" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1865" max-vertical-offset="3258">
+          <caret line="408" column="98" selection-start-line="408" selection-start-column="98" selection-end-line="408" selection-end-column="98" />
           <folding>
             <element signature="e#22#31#0" expanded="true" />
             <element signature="e#672#4607#0" expanded="false" />
@@ -1530,8 +1519,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/annotation/replace_augustus_ids_by_synonyms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36651585" vertical-offset="0" max-vertical-offset="884">
-          <caret line="19" column="63" selection-start-line="19" selection-start-column="63" selection-end-line="19" selection-end-column="63" />
+        <state vertical-scroll-proportion="0.40723982" vertical-offset="0" max-vertical-offset="884">
+          <caret line="21" column="93" selection-start-line="21" selection-start-column="93" selection-end-line="21" selection-end-column="93" />
           <folding />
         </state>
       </provider>

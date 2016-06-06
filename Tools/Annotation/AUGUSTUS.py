@@ -406,7 +406,7 @@ class AUGUSTUS(Tool):
                                 for entry in info_field_list:
                                     if "ID" in entry:
                                         augustus_cds_id = entry.split("=")[-1]
-                                        cds_syn_id = "%s.cds" % transcripts_syn_dict[augustus_cds_id[:-4]]
+                                        cds_syn_id = cds_syn_dict[augustus_cds_id] if cds_syn_dict else "%s.cds" % transcripts_syn_dict[augustus_cds_id[:-4]]
                                     if "Parent" in entry:
                                         augustus_cds_parent = entry.split("=")[-1]
                                         if augustus_cds_parent != augustus_transcript_id:
