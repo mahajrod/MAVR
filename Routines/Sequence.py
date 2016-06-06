@@ -615,12 +615,10 @@ class SequenceRoutines():
         for record_id in record_dict:
             if syn_dict:
                 if record_id not in syn_dict:
-                    print("AAAA")
                     print("%s was not renamed" % record_id)
                     yield record_dict[record_id]
                     continue
                 else:
-                    print("bbbbb")
                     record = deepcopy(record_dict[record_id])
                     record.id = syn_dict[record_id]
 
@@ -630,8 +628,7 @@ class SequenceRoutines():
 
             if clear_description:
                 record.description = ""
-            print len(syn_dict)
-            print record_id
+
             yield record
 
     def rename_records_from_files(self, input_file, output_file, synonyms_file=None, format="fasta", header=False,
