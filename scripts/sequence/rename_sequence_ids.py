@@ -27,12 +27,13 @@ parser.add_argument("-m", "--columns_separator", action="store", dest="separator
                     help="Column separator in file with synonyms")
 parser.add_argument("-e", "--header", action="store_true", dest="header", default=False,
                     help="Header is present in synonyms file. Default - False")
-
+parser.add_argument("-l", "--clear_description", action="store_true", dest="clear_description", default=False,
+                    help="Clear description. Default - False")
 args = parser.parse_args()
 
 SequenceRoutines.rename_records_from_files(args.input, args.output, args.syn_file, format=args.format,
                                            header=args.header, separator=args.separator, key_index=args.key_index,
-                                           value_index=args.value_index,
+                                           value_index=args.value_index, clear_description=args.clear_description,
                                            comments_prefix=args.comments_prefix)
 
 
