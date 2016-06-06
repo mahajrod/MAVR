@@ -353,13 +353,21 @@ class AUGUSTUS(Tool):
 
         self.execute(options, cmd=cmd)
 
+        options = " %s.transcript.syn > %s.cds.syn" % (output_prefix, output_prefix)
+        cmd = "sed 's/%sT/%sC/;s/\\t/.cds\\t/'" % (species_prefix, species_prefix)
+        self.execute(options, cmd=cmd)
+
     @staticmethod
-    def replace_augustus_ids_by_syn(augustus_gff, output_gff, genes_syn_file, transcripts_syn_file):
+    def replace_augustus_ids_by_syn(augustus_gff, output_gff, genes_syn_file, transcripts_syn_file,
+                                    cds_syn_file=None):
 
         genes_syn_dict = SynDict()
         genes_syn_dict.read(genes_syn_file, comments_prefix="#")
         transcripts_syn_dict = SynDict()
         transcripts_syn_dict.read(transcripts_syn_file, comments_prefix="#")
+        cds_syn_dict = SynDict()
+        if cds_syn_dict:
+            cds_syn_dict.read(cds_syn_file, comments_prefix="#")
         with open(augustus_gff, "r") as in_fd:
             with open(output_gff, "w") as out_fd:
                 for line in in_fd:
