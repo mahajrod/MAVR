@@ -630,6 +630,7 @@ class SequenceRoutines():
             if clear_description:
                 record.description = ""
             print len(syn_dict)
+            print record_id
             yield record
 
     def rename_records_from_files(self, input_file, output_file, synonyms_file=None, format="fasta", header=False,
