@@ -366,6 +366,7 @@ class AUGUSTUS(Tool):
                     tmp = line.strip()
                     if len(tmp) < 13:
                         out_fd.write(line)
+                        continue
                     if tmp[:12] != "# start gene":
                         out_fd.write(line)
                         continue
@@ -373,7 +374,7 @@ class AUGUSTUS(Tool):
                     gene_syn_id = genes_syn_dict[augustus_gene_id]
                     augustus_transcript_id = ""
                     augustus_transcript_parent = ""
-                    out_fd.write("# start gene %s" % gene_syn_id)
+                    out_fd.write("# start gene %s\n" % gene_syn_id)
                     tmp = in_fd.next().strip()
                     while True:
                         while tmp[0] != "#":
