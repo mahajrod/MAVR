@@ -618,6 +618,7 @@ class SequenceRoutines():
                     print("AAAA")
                     print("%s was not renamed" % record_id)
                     yield record_dict[record_id]
+                    continue
                 else:
                     print("bbbbb")
                     record = deepcopy(record_dict[record_id])
