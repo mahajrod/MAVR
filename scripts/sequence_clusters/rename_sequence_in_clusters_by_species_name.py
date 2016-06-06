@@ -17,7 +17,7 @@ parser.add_argument("-o", "--output_dir", action="store", dest="output_dir", req
 parser.add_argument("-s", "--separator", action="store", dest="separator", default="@",
                     help="Separator between species name and sequence id. Default - '@'")
 parser.add_argument("-r", "--label_last", action="store_false", dest="label_first", default=True,
-                    help="Place label at the end of id")
+                    help="Species label is at the end of id")
 
 args = parser.parse_args()
 

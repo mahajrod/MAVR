@@ -3,7 +3,7 @@ import os
 import shutil
 
 from Routines import FileRoutines, SequenceRoutines, MatplotlibRoutines
-from CustomCollections.GeneralCollections import IdList
+from CustomCollections.GeneralCollections import IdList, SynDict
 
 from Tools.Abstract import Tool
 from Tools.LinuxTools import CGAS
@@ -352,6 +352,90 @@ class AUGUSTUS(Tool):
         cmd = "sed 's/%sT/%sP/'" % (species_prefix, species_prefix)
 
         self.execute(options, cmd=cmd)
+
+    @staticmethod
+    def replace_augustus_ids_by_syn(augustus_gff, output_gff, genes_syn_file, transcripts_syn_file):
+
+        genes_syn_dict = SynDict()
+        genes_syn_dict.read(genes_syn_file, comments_prefix="#")
+        transcripts_syn_dict = SynDict()
+        transcripts_syn_dict.read(transcripts_syn_file, comments_prefix="#")
+        with open(augustus_gff, "r") as in_fd:
+            with open(output_gff, "r") as out_fd:
+                for line in in_fd:
+                    tmp = line.strip()
+                    if len(tmp) < 13:
+                        out_fd.write(line)
+                    if tmp[:12] != "# start gene":
+                        out_fd.write(line)
+                        continue
+                    augustus_gene_id = tmp.split(" ")[-1]
+                    gene_syn_id = genes_syn_dict[augustus_gene_id]
+                    augustus_transcript_id = ""
+                    augustus_transcript_parent = ""
+                    out_fd.write("# start gene %s" % gene_syn_id)
+                    tmp = in_fd.next().strip()
+                    while True:
+                        while tmp[0] != "#":
+                            tmp_list = tmp.split("\t")
+                            feature_type = tmp_list[2]
+                            edited_str = "\t".join(tmp_list[:-1])
+                            info_field_list = tmp_list[-1].split(";")
+                            if feature_type == "gene":
+                                edited_str += "\tID=%s\n" % gene_syn_id
+                            elif feature_type == "transcript":
+                                for entry in info_field_list:
+                                    if "ID" in entry:
+                                        augustus_transcript_id = entry.split("=")[-1]
+                                        transcript_syn_id = transcripts_syn_dict[augustus_transcript_id]
+                                    if "Parent" in entry:
+                                        augustus_transcript_parent = entry.split("=")[-1]
+                                        if augustus_transcript_parent != augustus_gene_id:
+                                            raise ValueError("Transcript parent id and gene id are not same!")
+                                edited_str += "\tID=%s;Parent=%s\n" % (transcript_syn_id, gene_syn_id)
+                            elif feature_type == "CDS":
+                                for entry in info_field_list:
+                                    if "ID" in entry:
+                                        augustus_cds_id = entry.split("=")[-1]
+                                        cds_syn_id = "%s.cds" % transcripts_syn_dict[augustus_cds_id[:-4]]
+                                    if "Parent" in entry:
+                                        augustus_cds_parent = entry.split("=")[-1]
+                                        if augustus_cds_parent != augustus_transcript_id:
+                                            raise ValueError("CDS parent id and transcript id are not same!")
+                                edited_str += "\tID=%s;Parent=%s\n" % (cds_syn_id, transcript_syn_id)
+                            elif (feature_type == "stop_codon") or (feature_type == "start_codon"):
+                                for entry in info_field_list:
+                                    if "Parent" in entry:
+                                        augustus_feature_parent = entry.split("=")[-1]
+                                        if augustus_feature_parent != augustus_transcript_id:
+                                            raise ValueError("Feature parent id and transcript id are not same!")
+                                edited_str += "\tParent=%s\n" % (transcript_syn_id)
+                            else:
+                                edited_str = tmp
+
+                            out_fd.write(edited_str)
+                            tmp = in_fd.next().strip()
+                        while tmp[0] == "#":
+                            if "# end gene" in tmp:
+                                break
+                            out_fd.write(tmp + "\n")
+                            tmp = in_fd.next().strip()
+                        if "# end gene" in tmp:
+                                break
+                    out_fd.write("# end gene %s\n" % gene_syn_id)
+
+    """
+    def rename_augustus_genes(self, augustus_gff, output_prefix, genes_syn_file=None, transcripts_syn_file=None,
+                              species_prefix=None, number_of_digits_in_number=8):
+        if genes_syn_file is None:
+            if species_prefix is None:
+                raise ValueError("Both species prefix and genes synonym file were no set")
+            self.assign_synonyms_to_annotations_from_augustus_gff(self, augustus_gff, output_prefix, species_prefix,
+                                                                  number_of_digits_in_number=number_of_digits_in_number)
+        output_gff = "%s.renamed.gff" % output_prefix
+        with open(augustus_gff, "r") as in_fd:
+            with open()
+    """
 
 
 
