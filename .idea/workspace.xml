@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py" afterPath="$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/File.py" afterPath="$PROJECT_DIR$/Routines/File.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -85,10 +86,20 @@
         <entry file="file://$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.5065789" vertical-offset="1896" max-vertical-offset="2808">
-              <caret line="131" column="79" selection-start-line="131" selection-start-column="79" selection-end-line="131" selection-end-column="79" />
+              <caret line="131" column="77" selection-start-line="131" selection-start-column="77" selection-end-line="131" selection-end-column="77" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="File.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Routines/File.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="6012">
+              <caret line="33" column="31" selection-start-line="33" selection-start-column="31" selection-end-line="33" selection-end-column="31" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -155,10 +166,10 @@
         <option value="$PROJECT_DIR$/Routines/Sequence.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/rename_sequence_ids.py" />
         <option value="$PROJECT_DIR$/Tools/Evolution/__init__.py" />
-        <option value="$PROJECT_DIR$/Routines/File.py" />
         <option value="$PROJECT_DIR$/Tools/Abstract.py" />
         <option value="$PROJECT_DIR$/Tools/Evolution/PAML/MCMCTree.py" />
         <option value="$PROJECT_DIR$/scripts/evolution/parallel_codeml.py" />
+        <option value="$PROJECT_DIR$/Routines/File.py" />
         <option value="$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py" />
       </list>
     </option>
@@ -356,6 +367,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="PAML" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Routines" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -664,12 +689,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00511" summary="sequence clusters">
-      <created>1462888528756</created>
-      <option name="number" value="00511" />
-      <option name="project" value="LOCAL" />
-      <updated>1462888528756</updated>
-    </task>
     <task id="LOCAL-00512" summary="sequence clusters">
       <created>1462888594085</created>
       <option name="number" value="00512" />
@@ -958,7 +977,13 @@
       <option name="project" value="LOCAL" />
       <updated>1465485255424</updated>
     </task>
-    <option name="localTasksCounter" value="560" />
+    <task id="LOCAL-00560" summary="sequence clusters">
+      <created>1465485433248</created>
+      <option name="number" value="00560" />
+      <option name="project" value="LOCAL" />
+      <updated>1465485433248</updated>
+    </task>
+    <option name="localTasksCounter" value="561" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1286,14 +1311,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/File.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="5940">
-          <caret line="55" column="58" selection-start-line="55" selection-start-column="58" selection-end-line="55" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/treefam/download_treefam_data.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1746">
@@ -1459,10 +1476,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/File.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="6012">
+          <caret line="33" column="31" selection-start-line="33" selection-start-column="31" selection-end-line="33" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5065789" vertical-offset="1896" max-vertical-offset="2808">
-          <caret line="131" column="79" selection-start-line="131" selection-start-column="79" selection-end-line="131" selection-end-column="79" />
+          <caret line="131" column="77" selection-start-line="131" selection-start-column="77" selection-end-line="131" selection-end-column="77" />
           <folding>
             <element signature="e#54#63#0" expanded="true" />
           </folding>

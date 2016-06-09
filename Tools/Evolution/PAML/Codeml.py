@@ -129,7 +129,7 @@ class Codeml(Tool):
                           small_difference=0.00001, clean_data=True, method=0):
 
         FileRoutines.save_mkdir(out_dir)
-        alignment_files_list = FileRoutines.make_list_of_path_to_files([in_dir])
+        alignment_files_list = FileRoutines.make_list_of_path_to_files(in_dir)
         tree_file_abs_path = os.path.abspath(tree_file)
         options_list = []
         dir_list = []

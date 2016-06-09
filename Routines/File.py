@@ -46,7 +46,11 @@ class FileRoutines():
     def make_list_of_path_to_files(list_of_dirs_and_files, expression=None):
 
         pathes_list = []
-        for entry in list_of_dirs_and_files:
+        list_of_objects = [list_of_dirs_and_files] if isinstance(list_of_dirs_and_files, str) else \
+            list_of_dirs_and_files if isinstance(list_of_dirs_and_files, Iterable) else None
+        if not list_of_dirs_and_files:
+            raise ValueError("No input directory or file were set")
+        for entry in list_of_objects:
             #print entry
             if os.path.isdir(entry):
                 files_in_dir = sorted(filter(expression, os.listdir(entry)) if expression else os.listdir(entry))
