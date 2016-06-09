@@ -37,6 +37,7 @@ parser.add_argument("-p", "--path", action="store", dest="path",
 args = parser.parse_args()
 
 Codeml.threads = args.threads
+Codeml.path = args.path
 Codeml.parallel_codeml(args.input_dir, args.tree, args.output_dir, seq_type=args.seq_type,
                        codon_frequency=args.codon_frequency, noisy=3, verbose="concise", runmode=0, clock=0,
                        aminoacid_distance=1, model=args.model, nssites=0,
