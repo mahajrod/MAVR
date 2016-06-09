@@ -143,7 +143,7 @@ class Codeml(Tool):
             options_list.append(ctl_file)
             dir_list.append(filename_out_dir)
             FileRoutines.save_mkdir(filename_out_dir)
-            self.generate_ctl_file(filename, tree_file_abs_path, out_file, ctl_file, seq_type=seq_type,
+            self.generate_ctl_file(os.path.abspath(filename), tree_file_abs_path, out_file, ctl_file, seq_type=seq_type,
                                    codon_frequency=codon_frequency, noisy=noisy, verbose=verbose, runmode=runmode,
                                    clock=clock, aminoacid_distance=aminoacid_distance, model=model, nssites=nssites,
                                    genetic_code=genetic_code, fix_kappa=fix_kappa, kappa=kappa, fix_omega=fix_omega,
