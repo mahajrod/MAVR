@@ -87,4 +87,3 @@ class SequenceConverters:
 
         record_dict = SeqIO.index_db(input_index, input_data, input_filetype)
         SeqIO.write(record_dict.values(), output_file, output_filetype)
-
