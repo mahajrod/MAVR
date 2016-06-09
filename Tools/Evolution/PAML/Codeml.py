@@ -135,7 +135,7 @@ class Codeml(Tool):
         dir_list = []
         for filename in alignment_files_list:
             directory, basename, extension = FileRoutines.split_filename(filename)
-            filename_out_dir = "%s/%s/" % (out_dir, basename)
+            filename_out_dir = os.path.abspath("%s/%s/" % (out_dir, basename))
             out_file = "%s/%s.out" % (filename_out_dir, basename)
             ctl_file = "%s/%s.ctl" % (filename_out_dir, basename)
 
