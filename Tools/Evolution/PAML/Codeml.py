@@ -114,8 +114,9 @@ class Codeml(Tool):
         options += "cleandata = %i  * remove sites with ambiguity data (1:yes, 0:no)?\n" % (1 if clean_data else 0)
         options += "method = %i   * 0: simultaneous; 1: one branch at a time\n" % method
 
-        with open(ctl_file, "w") as ctl_fd:
-            ctl_fd.write(options)
+        ctl_fd = open(ctl_file, "w")
+        ctl_fd.write(options)
+        ctl_fd.close()
 
     def run_codeml(self, ctl_file):
 
