@@ -1,3 +1,4 @@
+__author__ = 'mahajrod'
 import collections
 
 from Bio import SeqIO

@@ -1,4 +1,4 @@
-
+__author__ = 'mahajrod'
 import os
 
 from BCBio import GFF

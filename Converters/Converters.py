@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+__author__ = 'mahajrod'
 
 import collections
 import os

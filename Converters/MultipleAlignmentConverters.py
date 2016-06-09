@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+__author__ = 'mahajrod'
 from Bio import AlignIO
 from Bio.Alphabet import IUPAC, Gapped
 
