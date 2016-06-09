@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py" afterPath="$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/File.py" afterPath="$PROJECT_DIR$/Routines/File.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/evolution/parallel_codeml.py" afterPath="$PROJECT_DIR$/scripts/evolution/parallel_codeml.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -60,11 +59,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parallel_codeml.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="parallel_codeml.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/evolution/parallel_codeml.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="954">
-              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.82894737" vertical-offset="0" max-vertical-offset="990">
+              <caret line="42" column="46" selection-start-line="42" selection-start-column="46" selection-end-line="42" selection-end-column="46" />
               <folding>
                 <element signature="e#54#64#0" expanded="true" />
               </folding>
@@ -82,11 +81,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Codeml.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Codeml.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5065789" vertical-offset="1896" max-vertical-offset="2808">
-              <caret line="131" column="77" selection-start-line="131" selection-start-column="77" selection-end-line="131" selection-end-column="77" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1734" max-vertical-offset="2808">
+              <caret line="133" column="25" selection-start-line="133" selection-start-column="25" selection-end-line="133" selection-end-column="25" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
@@ -168,9 +167,9 @@
         <option value="$PROJECT_DIR$/Tools/Evolution/__init__.py" />
         <option value="$PROJECT_DIR$/Tools/Abstract.py" />
         <option value="$PROJECT_DIR$/Tools/Evolution/PAML/MCMCTree.py" />
-        <option value="$PROJECT_DIR$/scripts/evolution/parallel_codeml.py" />
         <option value="$PROJECT_DIR$/Routines/File.py" />
         <option value="$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py" />
+        <option value="$PROJECT_DIR$/scripts/evolution/parallel_codeml.py" />
       </list>
     </option>
   </component>
@@ -689,36 +688,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00512" summary="sequence clusters">
-      <created>1462888594085</created>
-      <option name="number" value="00512" />
-      <option name="project" value="LOCAL" />
-      <updated>1462888594085</updated>
-    </task>
-    <task id="LOCAL-00513" summary="sequence clusters">
-      <created>1462888657221</created>
-      <option name="number" value="00513" />
-      <option name="project" value="LOCAL" />
-      <updated>1462888657221</updated>
-    </task>
-    <task id="LOCAL-00514" summary="sequence clusters">
-      <created>1462923280992</created>
-      <option name="number" value="00514" />
-      <option name="project" value="LOCAL" />
-      <updated>1462923280992</updated>
-    </task>
-    <task id="LOCAL-00515" summary="sequence clusters">
-      <created>1462923555146</created>
-      <option name="number" value="00515" />
-      <option name="project" value="LOCAL" />
-      <updated>1462923555146</updated>
-    </task>
-    <task id="LOCAL-00516" summary="sequence clusters">
-      <created>1462923786912</created>
-      <option name="number" value="00516" />
-      <option name="project" value="LOCAL" />
-      <updated>1462923786912</updated>
-    </task>
     <task id="LOCAL-00517" summary="sequence clusters">
       <created>1462995408806</created>
       <option name="number" value="00517" />
@@ -983,7 +952,37 @@
       <option name="project" value="LOCAL" />
       <updated>1465485433248</updated>
     </task>
-    <option name="localTasksCounter" value="561" />
+    <task id="LOCAL-00561" summary="sequence clusters">
+      <created>1465485633950</created>
+      <option name="number" value="00561" />
+      <option name="project" value="LOCAL" />
+      <updated>1465485633950</updated>
+    </task>
+    <task id="LOCAL-00562" summary="sequence clusters">
+      <created>1465485759578</created>
+      <option name="number" value="00562" />
+      <option name="project" value="LOCAL" />
+      <updated>1465485759578</updated>
+    </task>
+    <task id="LOCAL-00563" summary="sequence clusters">
+      <created>1465485832477</created>
+      <option name="number" value="00563" />
+      <option name="project" value="LOCAL" />
+      <updated>1465485832477</updated>
+    </task>
+    <task id="LOCAL-00564" summary="sequence clusters">
+      <created>1465486303961</created>
+      <option name="number" value="00564" />
+      <option name="project" value="LOCAL" />
+      <updated>1465486303961</updated>
+    </task>
+    <task id="LOCAL-00565" summary="sequence clusters">
+      <created>1465486449297</created>
+      <option name="number" value="00565" />
+      <option name="project" value="LOCAL" />
+      <updated>1465486449297</updated>
+    </task>
+    <option name="localTasksCounter" value="566" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1466,16 +1465,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/evolution/parallel_codeml.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="954">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding>
-            <element signature="e#54#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Routines/File.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="6012">
@@ -1486,10 +1475,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5065789" vertical-offset="1896" max-vertical-offset="2808">
-          <caret line="131" column="77" selection-start-line="131" selection-start-column="77" selection-end-line="131" selection-end-column="77" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1734" max-vertical-offset="2808">
+          <caret line="133" column="25" selection-start-line="133" selection-start-column="25" selection-end-line="133" selection-end-column="25" />
           <folding>
             <element signature="e#54#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/evolution/parallel_codeml.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.82894737" vertical-offset="0" max-vertical-offset="990">
+          <caret line="42" column="46" selection-start-line="42" selection-start-column="46" selection-end-line="42" selection-end-column="46" />
+          <folding>
+            <element signature="e#54#64#0" expanded="true" />
           </folding>
         </state>
       </provider>
