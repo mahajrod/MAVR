@@ -13,5 +13,5 @@ parser.add_argument("-o", "--output", action="store", dest="output", required=Tr
 
 args = parser.parse_args()
 
-SequenceConverters.fasta2phylip(args.input, args.output, mode="name_in_same")
+SequenceConverters.fasta2phylip(args.input, args.output)
 
