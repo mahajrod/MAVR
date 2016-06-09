@@ -130,20 +130,20 @@ class MCMCTree(Tool):
         sigma2_gamma = 10 100
         * gamma prior for overall rates for genes
         * gamma prior for sigma^2 (for clock=2 or 3)
-        means an overall average rate of 2/20 = 0.1 substitutions per site per 10MY or 10–8 substitutions
+        means an overall average rate of 2/20 = 0.1 substitutions per site per 10MY or 8-10 substitutions
         per site per year, which is reasonable for mammalian mitochondrial genes. The gamma prior
-        here has the shape parameter α = 2, and is fairly diffuse. If you change the time unit, you
-        should keep the shape parameter fixed and change the scale parameter β to have the correct
+        here has the shape parameter alpha = 2, and is fairly diffuse. If you change the time unit, you
+        should keep the shape parameter fixed and change the scale parameter beta to have the correct
         mean. In other words, to use one time unit to represent 100MY, the above should become
         rgene_gamma = 2 2
         sigma2_gamma = 10 100
         * gamma prior for overall rates for genes
         * gamma prior for sigma^2 (for clock=2 or 3)
         Note that under the independent-rates model (clock=2), the change of the time unit should not
-        lead to a change to the prior for σ2, because σ2 is the variance of the log rate: the variance of the
+        lead to a change to the prior for sigma^2, because sigma^2 is the variance of the log rate: the variance of the
         logarithm of the rate does not change when you rescale the rate by a constant. However, for the
-        correlated-rates model (clock=3), the change of the time unit should also lead to a change to σ2:
-        under that model, the variance of the log-normal distribution is tσ2, where t is the time gap
+        correlated-rates model (clock=3), the change of the time unit should also lead to a change to sigma^2:
+        under that model, the variance of the log-normal distribution is tsigma^2, where t is the time gap
         separating the midpoints of the branches.
         When you change the time unit, the fossil calibrations in the tree file should be changed
         accordingly. While ideally one would want the biological results to be unchanged when one
@@ -151,7 +151,6 @@ class MCMCTree(Tool):
         scale: the log normal distribution for rates and the birth-death model for times. Nevertheless,
         tests by Mathieu Groussin did suggest that the choice of time scale has very minimal effects on
         the posterior time and rate estimates.
-
         """
         options += "rgene_gamma = %f %f * gammaDir prior for rate for genes\n" % (rgene_gamma_alpha, rgene_gamma_beta)
         if clock_type > 1:
