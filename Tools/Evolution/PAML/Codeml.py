@@ -148,4 +148,4 @@ class Codeml(Tool):
                                    genetic_code=genetic_code, fix_kappa=fix_kappa, kappa=kappa, fix_omega=fix_omega,
                                    omega=omega, getSE=getSE, RateAncestor=RateAncestor,
                                    small_difference=small_difference, clean_data=clean_data, method=method)
-            self.parallel_execute(options_list, dir_list=dir_list)
+        self.parallel_execute(options_list, dir_list=dir_list)
