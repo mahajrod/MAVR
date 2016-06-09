@@ -26,7 +26,7 @@ parser.add_argument("-d", "--dont_clean_data", action="store_false", dest="clean
                     help="Don't clean input data")
 parser.add_argument("-s", "--small_difference", action="store", dest="small_difference",
                     type=float, default=0.00001,
-                    help="Maximum difference to stop simulations")
+                    help="Maximum difference to stop simulations. Default - 0.00001")
 parser.add_argument("-p", "--threads", action="store", dest="threads", type=int,
                     default=1,
                     help="Number of threads to use")
