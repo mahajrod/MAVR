@@ -20,4 +20,4 @@ class MultipleAlignmentConverters:
         with open(output, "w") as out_fd:
             out_fd.write("%i %i\n" % (number_of_sequences, alignment_length))
             for record_id in sequence_dict:
-                out_fd.write("%s\n%s\n" % (record_id, sequence_dict[record_id]))
+                out_fd.write("%s\n%s\n" % (record_id, str(sequence_dict[record_id].seq)))
