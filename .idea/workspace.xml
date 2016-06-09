@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Converters/AnnotationConverters.py" afterPath="$PROJECT_DIR$/Converters/AnnotationConverters.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Converters/Converters.py" afterPath="$PROJECT_DIR$/Converters/Converters.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Converters/MultipleAlignmentConverters.py" afterPath="$PROJECT_DIR$/Converters/MultipleAlignmentConverters.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Converters/SequenceConverters.py" afterPath="$PROJECT_DIR$/Converters/SequenceConverters.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/BConverters/__init__.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Converters/__init__.py" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Converters/AnnotationConverters.py" afterPath="$PROJECT_DIR$/BConverters/AnnotationConverters.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Converters/Converters.py" afterPath="$PROJECT_DIR$/BConverters/Converters.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Converters/MultipleAlignmentConverters.py" afterPath="$PROJECT_DIR$/BConverters/MultipleAlignmentConverters.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Converters/SequenceConverters.py" afterPath="$PROJECT_DIR$/BConverters/SequenceConverters.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/convert/fasta2phylip.py" afterPath="$PROJECT_DIR$/scripts/convert/fasta2phylip.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -43,7 +46,7 @@
   <component name="FileEditorManager">
     <leaf>
       <file leaf-file-name="Converters.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Converters/Converters.py">
+        <entry file="file://$PROJECT_DIR$/BConverters/Converters.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="990">
               <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
@@ -55,7 +58,7 @@
         </entry>
       </file>
       <file leaf-file-name="MultipleAlignmentConverters.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Converters/MultipleAlignmentConverters.py">
+        <entry file="file://$PROJECT_DIR$/BConverters/MultipleAlignmentConverters.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
               <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
@@ -67,13 +70,11 @@
         </entry>
       </file>
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Converters/__init__.py">
+        <entry file="file://$PROJECT_DIR$/BConverters/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="252">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-              <folding>
-                <element signature="e#1#61#0" expanded="true" />
-              </folding>
+              <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -110,11 +111,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fasta2phylip.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="fasta2phylip.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/convert/fasta2phylip.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="414">
-              <caret line="15" column="55" selection-start-line="15" selection-start-column="55" selection-end-line="15" selection-end-column="55" />
+            <state vertical-scroll-proportion="0.33552632" vertical-offset="0" max-vertical-offset="912">
+              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding>
                 <element signature="e#55#70#0" expanded="true" />
               </folding>
@@ -122,10 +123,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SequenceConverters.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Converters/SequenceConverters.py">
+      <file leaf-file-name="SequenceConverters.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BConverters/SequenceConverters.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1728">
+            <state vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="1728">
               <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
               <folding>
                 <element signature="e#24#42#0" expanded="true" />
@@ -147,7 +148,7 @@
         </entry>
       </file>
       <file leaf-file-name="AnnotationConverters.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Converters/AnnotationConverters.py">
+        <entry file="file://$PROJECT_DIR$/BConverters/AnnotationConverters.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="576">
               <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
@@ -174,7 +175,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/treefam/extract_proteins_from_selected_families.py" />
         <option value="$PROJECT_DIR$/Routines/SequenceClusters.py" />
         <option value="$PROJECT_DIR$/Routines/__init__.py" />
         <option value="$PROJECT_DIR$/Routines/EggNOG.py" />
@@ -219,12 +219,13 @@
         <option value="$PROJECT_DIR$/scripts/evolution/parallel_codeml.py" />
         <option value="$PROJECT_DIR$/Tools/Abstract.py" />
         <option value="$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py" />
-        <option value="$PROJECT_DIR$/Converters/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/convert/fasta2phylip.py" />
         <option value="$PROJECT_DIR$/Converters/AnnotationConverters.py" />
         <option value="$PROJECT_DIR$/Converters/Converters.py" />
         <option value="$PROJECT_DIR$/Converters/MultipleAlignmentConverters.py" />
         <option value="$PROJECT_DIR$/Converters/SequenceConverters.py" />
+        <option value="$PROJECT_DIR$/Converters/__init__.py" />
+        <option value="$PROJECT_DIR$/CCConverters/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/convert/fasta2phylip.py" />
       </list>
     </option>
   </component>
@@ -440,7 +441,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Converters" />
+              <option name="myItemId" value="BConverters" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -749,12 +750,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00524" summary="sequence clusters">
-      <created>1463503523397</created>
-      <option name="number" value="00524" />
-      <option name="project" value="LOCAL" />
-      <updated>1463503523397</updated>
-    </task>
     <task id="LOCAL-00525" summary="sequence clusters">
       <created>1463503780937</created>
       <option name="number" value="00525" />
@@ -1043,7 +1038,13 @@
       <option name="project" value="LOCAL" />
       <updated>1465490484310</updated>
     </task>
-    <option name="localTasksCounter" value="573" />
+    <task id="LOCAL-00573" summary="sequence clusters">
+      <created>1465490664310</created>
+      <option name="number" value="00573" />
+      <option name="project" value="LOCAL" />
+      <updated>1465490664310</updated>
+    </task>
+    <option name="localTasksCounter" value="574" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1503,32 +1504,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/convert/fasta2phylip.py">
+    <entry file="file://$PROJECT_DIR$/BConverters/MultipleAlignmentConverters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="414">
-          <caret line="15" column="55" selection-start-line="15" selection-start-column="55" selection-end-line="15" selection-end-column="55" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
+          <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
           <folding>
-            <element signature="e#55#70#0" expanded="true" />
+            <element signature="e#24#47#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Converters/__init__.py">
+    <entry file="file://$PROJECT_DIR$/BConverters/AnnotationConverters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="252">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="576">
+          <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
           <folding>
-            <element signature="e#1#61#0" expanded="true" />
+            <element signature="e#24#33#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/__init__.py">
+    <entry file="file://$PROJECT_DIR$/BConverters/Converters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="912">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="990">
+          <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
           <folding>
-            <element signature="e#25#63#0" expanded="true" />
+            <element signature="e#25#43#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1543,42 +1544,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Converters/AnnotationConverters.py">
+    <entry file="file://$PROJECT_DIR$/Routines/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="576">
-          <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="912">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#24#33#0" expanded="true" />
+            <element signature="e#25#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Converters/Converters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="990">
-          <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
-          <folding>
-            <element signature="e#25#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Converters/MultipleAlignmentConverters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
-          <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
-          <folding>
-            <element signature="e#24#47#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Converters/SequenceConverters.py">
+    <entry file="file://$PROJECT_DIR$/BConverters/SequenceConverters.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1728">
           <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
           <folding>
             <element signature="e#24#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BConverters/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="252">
+          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/convert/fasta2phylip.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33552632" vertical-offset="0" max-vertical-offset="912">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding>
+            <element signature="e#55#70#0" expanded="true" />
           </folding>
         </state>
       </provider>

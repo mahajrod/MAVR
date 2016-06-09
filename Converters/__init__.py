@@ -1,8 +1,0 @@
-
-from Converters.SequenceConverters import SequenceConverters
-from Converters.AnnotationConverters import AnnotationConverters
-from Converters.MultipleAlignmentConverters import MultipleAlignmentConverters
-
-SequenceConverters = SequenceConverters()
-AnnotationConverters = AnnotationConverters()
-MultipleAlignmentConverters = MultipleAlignmentConverters()

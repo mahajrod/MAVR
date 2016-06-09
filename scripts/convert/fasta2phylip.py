@@ -2,7 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-from Converters import SequenceConverters
+from BConverters import SequenceConverters
 
 parser = argparse.ArgumentParser()
 
