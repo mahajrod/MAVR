@@ -9,7 +9,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_dir", action="store", dest="input_dir", required=True,
                     help="Input directory with codon alignments")
-parser.add_argument("-t", "--tree_file", action="store", dest="tree", required=True,
+parser.add_argument("-r", "--tree_file", action="store", dest="tree", required=True,
                     help="File with phylogenetic tree in Newick format")
 parser.add_argument("-o", "--output_dir", action="store", dest="output_dir", required=True,
                     help="Output directory")
@@ -29,10 +29,11 @@ parser.add_argument("-d", "--dont_clean_data", action="store_false", dest="clean
 parser.add_argument("-s", "--small_difference", action="store", dest="small_difference",
                     type=float, default=0.00001,
                     help="Maximum difference to stop simulations. Default - 0.00001")
-parser.add_argument("-p", "--threads", action="store", dest="threads", type=int,
+parser.add_argument("-t", "--threads", action="store", dest="threads", type=int,
                     default=1,
                     help="Number of threads to use")
-
+parser.add_argument("-p", "--path", action="store", dest="path",
+                    help="Path to directory with PAML binaries")
 args = parser.parse_args()
 
 Codeml.threads = args.threads
