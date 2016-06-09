@@ -16,6 +16,8 @@ parser.add_argument("-o", "--output_dir", action="store", dest="output_dir", req
 parser.add_argument("--seq_type", action="store", dest="seq_type", default="codons",
                     help="Type of input sequences. Allowed: codons, aminoacids, translate."
                          "Default: codons")
+parser.add_argument("-c", "--codon_frequency", action="store", dest="codon_frequency", default="F3X4",
+                    help="Codon frequency. Allowed: equal, F1X4, F3X4, table. Default: F3X4")
 parser.add_argument("-g", "--genetic_code", action="store", dest="genetic_code", default=0,
                     help="Genetic code. Allowed: 0-10. Default: 0 - mammalian.")
 parser.add_argument("-m", "--model", action="store", dest="model", type=int, default=1,
@@ -38,7 +40,7 @@ Codeml.parallel_codeml(args.input_dir, args.tree, args.output_dir, seq_type=args
                        codon_frequency=args.codon_frequency, noisy=3, verbose="concise", runmode=0, clock=0,
                        aminoacid_distance=1, model=args.model, nssites=0,
                        genetic_code=args.genetic_code, fix_kappa=False, kappa=5, fix_omega=False, omega=0.2, getSE=0,
-                       RateAncestor=0, small_difference=args.small_difference, clean_data=args.clean_data, method=0)
+                       RateAncestor=0, small_difference=args.small_difference1, clean_data=args.clean_data, method=0)
 
 
 
