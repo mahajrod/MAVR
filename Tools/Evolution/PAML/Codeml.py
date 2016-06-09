@@ -92,7 +92,7 @@ class Codeml(Tool):
 
         options += "seqtype = %i  * 1:codons; 2:AAs; 3:codons-->AAs\n" % seq_t
         options += "CodonFreq = %i  * 0:1/61 each, 1:F1X4, 2:F3X4, 3:codon table\n" % codon_freq
-        options += "clock = is\n" % clock
+        options += "clock = %s\n" % clock
         options += "aaDist = %i  * 0:equal, +:geometric; -:linear, 1-6:G1974,Miyata,c,p,v,a\n" % aminoacid_distance
         options += """model = %i
                    * models for codons:
@@ -129,7 +129,7 @@ class Codeml(Tool):
                           small_difference=0.00001, clean_data=True, method=0):
 
         FileRoutines.save_mkdir(out_dir)
-        alignment_files_list = FileRoutines.make_list_of_path_to_files(in_dir)
+        alignment_files_list = FileRoutines.make_list_of_path_to_files([in_dir])
         tree_file_abs_path = os.path.abspath(tree_file)
         options_list = []
         dir_list = []
