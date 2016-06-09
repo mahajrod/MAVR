@@ -50,7 +50,7 @@ class Codeml(Tool):
 
     @staticmethod
     def generate_ctl_file(seq_file, tree_file, out_file, ctl_file, seq_type="codons", codon_frequency="F3X4", noisy=3,
-                          verbose="concise", runmode=0, clock=0, aminoacid_distance=1, model=1, nssites=0,
+                          verbose="concise", runmode=0, clock=0, aminoacid_distance=None, model=1, nssites=0,
                           genetic_code=0, fix_kappa=False, kappa=5, fix_omega=False, omega=0.2, getSE=0, RateAncestor=0,
                           small_difference=0.00001, clean_data=True, method=0):
 
@@ -93,7 +93,7 @@ class Codeml(Tool):
         options += "seqtype = %i  * 1:codons; 2:AAs; 3:codons-->AAs\n" % seq_t
         options += "CodonFreq = %i  * 0:1/61 each, 1:F1X4, 2:F3X4, 3:codon table\n" % codon_freq
         options += "clock = %s\n" % clock
-        options += "aaDist = %i  * 0:equal, +:geometric; -:linear, 1-6:G1974,Miyata,c,p,v,a\n" % aminoacid_distance
+        options += "aaDist = %i  * 0:equal, +:geometric; -:linear, 1-6:G1974,Miyata,c,p,v,a\n" % aminoacid_distance if aminoacid_distance else ""
         options += """model = %i
                    * models for codons:
                        * 0:one, 1:b, 2:2 or more dN/dS ratios for branches
@@ -124,7 +124,7 @@ class Codeml(Tool):
         self.execute(options=options)
 
     def parallel_codeml(self, in_dir, tree_file, out_dir, seq_type="codons", codon_frequency="F3X4", noisy=3,
-                          verbose="concise", runmode=0, clock=0, aminoacid_distance=1, model=1, nssites=0,
+                          verbose="concise", runmode=0, clock=0, aminoacid_distance=None, model=1, nssites=0,
                           genetic_code=0, fix_kappa=False, kappa=5, fix_omega=False, omega=0.2, getSE=0, RateAncestor=0,
                           small_difference=0.00001, clean_data=True, method=0):
 
