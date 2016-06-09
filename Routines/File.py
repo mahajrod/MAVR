@@ -19,7 +19,7 @@ class FileRoutines():
         except OSError:
             pass
 
-    def detect_filetype_by_extension(filename, filetypes_dict=None):
+    def detect_filetype_by_extension(self, filename, filetypes_dict=None):
         filetypes = filetypes_dict if filetypes_dict else self.filetypes_dict
         directory, prefix, extension = split_filename(filename)
         for filetype in filetypes_dict:
@@ -53,7 +53,7 @@ class FileRoutines():
                 for filename in files_in_dir:
                     pathes_list.append("%s%s" % (check_path(entry), filename))
             elif os.path.exists(entry):
-                pathes_list.append(entry)
+                pathes_list.append(os.path.abspath(entry))
             else:
                 print("%s does not exist" % entry)
 

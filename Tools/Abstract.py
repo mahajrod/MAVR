@@ -3,7 +3,7 @@ import os
 import sys
 import multiprocessing as mp
 from subprocess import PIPE, Popen
-from collections import OrderedDict
+from collections import OrderedDict, Iterable
 
 from Bio import SeqIO
 
@@ -56,10 +56,22 @@ class Tool():
             os.system(exe_string)
             return None
 
-    def parallel_execute(self, options_list, cmd=None, capture_output=False, threads=None):
+    def parallel_execute(self, options_list, cmd=None, capture_output=False, threads=None, dir_list=None):
         command = cmd if cmd is not None else self.cmd
-        exe_string_list = [(FileRoutines.check_path(self.path) if self.path else "") + command + " " + options
-                           for options in options_list]
+        if dir_list:
+            if isinstance(dir_list, str):
+                exe_string_list = [("cd %s && " % dir_list) + (FileRoutines.check_path(self.path) if self.path else "")
+                                   + command + " " + options for options in options_list]
+            elif isinstance(dir_list, Iterable) and (len(options_list) == len(dir_list)):
+                exe_string_list = [("cd %s && " % directory) + (FileRoutines.check_path(self.path) if self.path else "")
+                                   + command + " " + options for options, directory in zip(options_list, dir_list)]
+            else:
+                raise ValueError("Error during option parsing for parallel execution in different folders. "
+                                 "Length of directory list is not equal to length of option list")
+
+        else:
+            exe_string_list = [(FileRoutines.check_path(self.path) if self.path else "") + command + " " + options
+                               for options in options_list]
 
         with open("exe_list.t", "a") as exe_fd:
             for entry in exe_string_list:
