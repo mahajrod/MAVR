@@ -56,7 +56,8 @@ class Tool():
             os.system(exe_string)
             return None
 
-    def parallel_execute(self, options_list, cmd=None, capture_output=False, threads=None, dir_list=None):
+    def parallel_execute(self, options_list, cmd=None, capture_output=False, threads=None, dir_list=None,
+                         write_output_to_file=None):
         command = cmd if cmd is not None else self.cmd
         if dir_list:
             if isinstance(dir_list, str):
@@ -80,6 +81,9 @@ class Tool():
 
         results = process_pool.map(execute, exe_string_list)
         #process_pool.close()
+        if write_output_to_file:
+            with open(write_output_to_file, "w") as out_fd:
+                out_fd.write(results)
         return results if capture_output else None
 
     @staticmethod
