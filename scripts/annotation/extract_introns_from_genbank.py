@@ -18,8 +18,10 @@ parser.add_argument("-d", "--id_file", action="store", dest="id_file",
 
 args = parser.parse_args()
 
-id_list = IdList()
-id_list.read(args.id_file)
-
+if args.id_file:
+    id_list = IdList()
+    id_list.read(args.id_file)
+else:
+    id_list = None
 SequenceRoutines.extract_introns_from_transcripts_from_genbank_files(args.input, args.output,
                                                                      transcript_id_white_list=id_list)

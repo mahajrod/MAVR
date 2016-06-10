@@ -2,6 +2,7 @@ __author__ = 'mahajrod'
 
 from Routines.Math import MathRoutines
 from Routines.File import FileRoutines
+from Routines.Tree import TreeRoutines
 from Routines.NCBI import NCBIRoutines
 from Routines.Math import SmoothRoutines
 from Routines.Primer import PrimerRoutines
@@ -17,6 +18,7 @@ from Routines.MultipleAlignment import MultipleAlignmentRoutines
 
 MathRoutines = MathRoutines()
 FileRoutines = FileRoutines()
+TreeRoutines = TreeRoutines()
 NCBIRoutines = NCBIRoutines()
 SmoothRoutines = SmoothRoutines()
 PrimerRoutines = PrimerRoutines()
