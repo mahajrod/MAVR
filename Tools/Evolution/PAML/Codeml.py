@@ -52,7 +52,7 @@ class Codeml(Tool):
     def generate_ctl_file(seq_file, tree_file, out_file, ctl_file, seq_type="codons", codon_frequency="F3X4", noisy=3,
                           verbose="concise", runmode=0, clock=0, aminoacid_distance=None, model=1, nssites=0,
                           genetic_code=0, fix_kappa=False, kappa=5, fix_omega=False, omega=0.2, getSE=0, RateAncestor=0,
-                          small_difference=0.00001, clean_data=True, method=0):
+                          small_difference=0.00001, clean_data=True, method=0, Mgene=None):
 
         if verbose == "concise":
             verb = 0
@@ -88,7 +88,7 @@ class Codeml(Tool):
         options += "outfile = %s\n" % out_file
         options += "noisy = %i  * 0,1,2,3,9: how much rubbish on the screen\n" % noisy
         options += "verbose = %i  * 0: concise; 1: detailed, 2: too much\n" % verb
-        options += "runmode = %i\n\n" % runmode
+        options += "runmode = %i * 0: for this mode only unrooted tree is allowed; 1,2: only rooted tree\n\n" % runmode
 
         options += "seqtype = %i  * 1:codons; 2:AAs; 3:codons-->AAs\n" % seq_t
         options += "CodonFreq = %i  * 0:1/61 each, 1:F1X4, 2:F3X4, 3:codon table\n" % codon_freq
@@ -113,6 +113,12 @@ class Codeml(Tool):
         options += "Small_Diff = %f\n" % small_difference
         options += "cleandata = %i  * remove sites with ambiguity data (1:yes, 0:no)?\n" % (1 if clean_data else 0)
         options += "method = %i   * 0: simultaneous; 1: one branch at a time\n" % method
+        options += """Mgene = %i * is used only with G option in sequence file.
+                   * 0: same k and pi, different cs(proportional branch lengths between genes)
+                   * 1: different k, pi and unproportional branch length
+                   * 2: same k, different pi and cs
+                   * 3: same pi, different k and cs
+                   * 4: different k, pi, cs(proportional branch length)\n""" % Mgene
 
         with open(ctl_file, "w") as ctl_fd:
             ctl_fd.write(options)
@@ -126,7 +132,7 @@ class Codeml(Tool):
     def parallel_codeml(self, in_dir, tree_file, out_dir, seq_type="codons", codon_frequency="F3X4", noisy=3,
                           verbose="concise", runmode=0, clock=0, aminoacid_distance=None, model=1, nssites=0,
                           genetic_code=0, fix_kappa=False, kappa=5, fix_omega=False, omega=0.2, getSE=0, RateAncestor=0,
-                          small_difference=0.00001, clean_data=True, method=0):
+                          small_difference=0.00001, clean_data=True, method=0, Mgene=None):
 
         FileRoutines.save_mkdir(out_dir)
         alignment_files_list = FileRoutines.make_list_of_path_to_files(in_dir)
@@ -146,6 +152,6 @@ class Codeml(Tool):
                                    codon_frequency=codon_frequency, noisy=noisy, verbose=verbose, runmode=runmode,
                                    clock=clock, aminoacid_distance=aminoacid_distance, model=model, nssites=nssites,
                                    genetic_code=genetic_code, fix_kappa=fix_kappa, kappa=kappa, fix_omega=fix_omega,
-                                   omega=omega, getSE=getSE, RateAncestor=RateAncestor,
+                                   omega=omega, getSE=getSE, RateAncestor=RateAncestor, Mgene=Mgene,
                                    small_difference=small_difference, clean_data=clean_data, method=method)
         self.parallel_execute(options_list, dir_list=dir_list)

@@ -34,6 +34,14 @@ parser.add_argument("-t", "--threads", action="store", dest="threads", type=int,
                     help="Number of threads to use")
 parser.add_argument("-p", "--path", action="store", dest="path",
                     help="Path to directory with PAML binaries")
+parser.add_argument("--mgene", action="store", dest="mgene",
+                    help="""Mgene option is used only with G option in sequence file.
+                   0: same k and pi, different cs(proportional branch lengths between genes)
+                   1: different k, pi and unproportional branch length
+                   2: same k, different pi and cs
+                   3: same pi, different k and cs
+                   4: different k, pi, cs(proportional branch length)""")
+
 args = parser.parse_args()
 
 Codeml.threads = args.threads
@@ -41,10 +49,7 @@ print Codeml.threads
 Codeml.path = args.path
 Codeml.parallel_codeml(args.input_dir, args.tree, args.output_dir, seq_type=args.seq_type,
                        codon_frequency=args.codon_frequency, noisy=3, verbose="concise", runmode=0, clock=0,
-                       aminoacid_distance=None, model=args.model, nssites=0,
+                       aminoacid_distance=None, model=args.model, nssites=0, Mgene=args.mgene,
                        genetic_code=args.genetic_code, fix_kappa=False, kappa=5, fix_omega=False, omega=0.2, getSE=0,
                        RateAncestor=0, small_difference=args.small_difference, clean_data=args.clean_data, method=0)
-
-
-
 
