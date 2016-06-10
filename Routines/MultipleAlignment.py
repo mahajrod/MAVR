@@ -78,7 +78,7 @@ class MultipleAlignmentRoutines:
         number_of_sequences = len(sequence_dict)
         alignment_length = len(sequence_dict[sequence_dict.keys()[0]])
 
-        gene_lengths_in_codons = loadtxt(coordinates_file, dtype=int, comments='#', usecols=0)/3
+        gene_lengths_in_codons = loadtxt(coordinates_file, dtype=int, comments='#', usecols=(0,))/3
         number_of_genes = len(gene_lengths_in_codons)
         codon_number_string = " ".join(map(str, gene_lengths_in_codons))
         with open(output_file, "w") as out_fd:
