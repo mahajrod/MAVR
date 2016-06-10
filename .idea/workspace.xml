@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/phylogenetics/unroot_tree.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Tree.py" afterPath="$PROJECT_DIR$/Routines/Tree.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/__init__.py" afterPath="$PROJECT_DIR$/Routines/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/phylogenetics/convert_trees.py" afterPath="$PROJECT_DIR$/scripts/phylogenetics/convert_trees.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/extract_introns_from_genbank.py" afterPath="$PROJECT_DIR$/scripts/annotation/extract_introns_from_genbank.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/evolution/prepare_alignment_for_codeml.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/MultipleAlignment.py" afterPath="$PROJECT_DIR$/Routines/MultipleAlignment.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -43,48 +40,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Converters.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BConverters/Converters.py">
+      <file leaf-file-name="MultipleAlignmentConverters.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BConverters/MultipleAlignmentConverters.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="990">
-              <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="504">
+              <caret line="15" column="12" selection-start-line="15" selection-start-column="8" selection-end-line="22" selection-end-column="89" />
               <folding>
-                <element signature="e#25#43#0" expanded="true" />
+                <element signature="e#24#54#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="parallel_codeml.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/evolution/parallel_codeml.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="432" max-vertical-offset="1008">
-              <caret line="24" column="39" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
-              <folding>
-                <element signature="e#54#64#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Codeml.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1914" max-vertical-offset="2826">
-              <caret line="112" column="57" selection-start-line="112" selection-start-column="57" selection-end-line="112" selection-end-column="57" />
-              <folding>
-                <element signature="e#54#63#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="extract_introns_from_genbank.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/annotation/extract_introns_from_genbank.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
-              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -131,13 +94,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="unroot_tree.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="unroot_tree.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/phylogenetics/unroot_tree.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8815789" vertical-offset="6" max-vertical-offset="936">
+            <state vertical-scroll-proportion="0.0" vertical-offset="6" max-vertical-offset="936">
               <caret line="45" column="119" selection-start-line="45" selection-start-column="119" selection-end-line="45" selection-end-column="119" />
               <folding>
                 <element signature="e#55#70#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="prepare_alignment_for_codeml.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/evolution/prepare_alignment_for_codeml.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.39473686" vertical-offset="0" max-vertical-offset="912">
+              <caret line="20" column="65" selection-start-line="20" selection-start-column="65" selection-end-line="20" selection-end-column="65" />
+              <folding>
+                <element signature="e#55#70#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MultipleAlignment.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Routines/MultipleAlignment.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="724" max-vertical-offset="1764">
+              <caret line="75" column="59" selection-start-line="74" selection-start-column="8" selection-end-line="75" selection-end-column="62" />
+              <folding>
+                <element signature="e#25#46#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -171,8 +158,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/sequence_clusters/eggnog/assign_orthologs.py" />
-        <option value="$PROJECT_DIR$/scripts/hmmer3/assign_proteins_to_families.py" />
         <option value="$PROJECT_DIR$/Tools/Filter/__init__.py" />
         <option value="$PROJECT_DIR$/Tools/Filter/Cookiecutter.py" />
         <option value="$PROJECT_DIR$/scripts/filter/filter_by_cookiecutter_per_lane.py" />
@@ -222,6 +207,8 @@
         <option value="$PROJECT_DIR$/Routines/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/phylogenetics/convert_trees.py" />
         <option value="$PROJECT_DIR$/scripts/phylogenetics/unroot_tree.py" />
+        <option value="$PROJECT_DIR$/Routines/MultipleAlignment.py" />
+        <option value="$PROJECT_DIR$/scripts/evolution/prepare_alignment_for_codeml.py" />
       </list>
     </option>
   </component>
@@ -304,6 +291,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="phylogenetics" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="multiple_alignment" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -434,9 +439,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts/evolution" />
       <recent name="$PROJECT_DIR$/scripts/phylogenetics" />
       <recent name="$PROJECT_DIR$/scripts/convert" />
-      <recent name="$PROJECT_DIR$/scripts/evolution" />
       <recent name="$PROJECT_DIR$/Tools/Evolution/PAML" />
       <recent name="$PROJECT_DIR$/scripts/annotation" />
     </key>
@@ -727,12 +732,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00530" summary="sequence clusters">
-      <created>1463984104231</created>
-      <option name="number" value="00530" />
-      <option name="project" value="LOCAL" />
-      <updated>1463984104231</updated>
-    </task>
     <task id="LOCAL-00531" summary="sequence clusters">
       <created>1463984452613</created>
       <option name="number" value="00531" />
@@ -1021,7 +1020,13 @@
       <option name="project" value="LOCAL" />
       <updated>1465494148678</updated>
     </task>
-    <option name="localTasksCounter" value="579" />
+    <task id="LOCAL-00579" summary="sequence clusters">
+      <created>1465569230203</created>
+      <option name="number" value="00579" />
+      <option name="project" value="LOCAL" />
+      <updated>1465569230204</updated>
+    </task>
+    <option name="localTasksCounter" value="580" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1048,6 +1053,7 @@
     <frame x="0" y="25" width="1920" height="1055" extended-state="0" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1064,7 +1070,6 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399361" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1152,27 +1157,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/projects/parrot_genome/A_vittata_taeniopygia_guttata.slurm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="1" column="25" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/file/extract_by_column_value.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/rename_sequence_in_clusters_by_species_name.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33665836" vertical-offset="0" max-vertical-offset="0">
-          <caret line="18" column="97" selection-start-line="18" selection-start-column="97" selection-end-line="18" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/annotation/assign_synonyms_to_annotations_from_augustus_gff.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
@@ -1445,16 +1429,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BConverters/MultipleAlignmentConverters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding>
-            <element signature="e#24#54#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/evolution/parallel_codeml.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
@@ -1539,8 +1513,46 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/phylogenetics/unroot_tree.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8815789" vertical-offset="6" max-vertical-offset="936">
+        <state vertical-scroll-proportion="0.0" vertical-offset="6" max-vertical-offset="936">
           <caret line="45" column="119" selection-start-line="45" selection-start-column="119" selection-end-line="45" selection-end-column="119" />
+          <folding>
+            <element signature="e#55#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/merge_alignments.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="912">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BConverters/MultipleAlignmentConverters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="504">
+          <caret line="15" column="12" selection-start-line="15" selection-start-column="8" selection-end-line="22" selection-end-column="89" />
+          <folding>
+            <element signature="e#24#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/MultipleAlignment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="724" max-vertical-offset="1764">
+          <caret line="75" column="59" selection-start-line="74" selection-start-column="8" selection-end-line="75" selection-end-column="62" />
+          <folding>
+            <element signature="e#25#46#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/evolution/prepare_alignment_for_codeml.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39473686" vertical-offset="0" max-vertical-offset="912">
+          <caret line="20" column="65" selection-start-line="20" selection-start-column="65" selection-end-line="20" selection-end-column="65" />
           <folding>
             <element signature="e#55#70#0" expanded="true" />
           </folding>

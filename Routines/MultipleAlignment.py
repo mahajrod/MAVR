@@ -3,6 +3,7 @@ __author__ = 'mahajrod'
 from Bio import SeqIO
 from Bio import AlignIO
 
+from numpy import loadtxt
 
 class MultipleAlignmentRoutines:
     def __init__(self):
@@ -69,6 +70,22 @@ class MultipleAlignmentRoutines:
     def slice_fasta_alignment(alignment_file, output_file, start, end):
         alignment = AlignIO.read(alignment_file, format="fasta")
         SeqIO.write(alignment[start:end], output_file, "fasta")
+
+    @staticmethod
+    def prepare_multigene_alignment_for_codeml(alignment_file, coordinates_file, output_file,
+                                               format="fasta"):
+        sequence_dict = SeqIO.to_dict(SeqIO.parse(alignment_file, format=format))
+        number_of_sequences = len(sequence_dict)
+        alignment_length = len(sequence_dict[sequence_dict.keys()[0]])
+
+        gene_lengths_in_codons = loadtxt(coordinates_file, int, comments='#', usecols=0)/3
+        number_of_genes = len(gene_lengths_in_codons)
+        codon_number_string = " ".join(map(str, gene_lengths_in_codons))
+        with open(output_file, "w") as out_fd:
+            out_fd.write("%i %i G\n" % (number_of_sequences, alignment_length))
+            out_fd.write("G %i %s\n" % (number_of_genes, codon_number_string))
+            for record_id in sequence_dict:
+                out_fd.write("%s\n%s\n" % (record_id, str(sequence_dict[record_id].seq)))
 
 
 
