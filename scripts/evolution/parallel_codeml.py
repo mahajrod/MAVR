@@ -34,7 +34,7 @@ parser.add_argument("-t", "--threads", action="store", dest="threads", type=int,
                     help="Number of threads to use")
 parser.add_argument("-p", "--path", action="store", dest="path",
                     help="Path to directory with PAML binaries")
-parser.add_argument("--mgene", action="store", dest="mgene",
+parser.add_argument("--mgene", action="store", dest="mgene", type=int,
                     help="""Mgene option is used only with G option in sequence file.
                    0: same k and pi, different cs(proportional branch lengths between genes)
                    1: different k, pi and unproportional branch length
