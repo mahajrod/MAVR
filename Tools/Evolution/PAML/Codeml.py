@@ -113,12 +113,12 @@ class Codeml(Tool):
         options += "Small_Diff = %f\n" % small_difference
         options += "cleandata = %i  * remove sites with ambiguity data (1:yes, 0:no)?\n" % (1 if clean_data else 0)
         options += "method = %i   * 0: simultaneous; 1: one branch at a time\n" % method
-        options += """Mgene = %i * is used only with G option in sequence file.
+        options += ("""Mgene = %i * is used only with G option in sequence file.
                    * 0: same k and pi, different cs(proportional branch lengths between genes)
                    * 1: different k, pi and unproportional branch length
                    * 2: same k, different pi and cs
                    * 3: same pi, different k and cs
-                   * 4: different k, pi, cs(proportional branch length)\n""" % Mgene
+                   * 4: different k, pi, cs(proportional branch length)\n""" % Mgene) if Mgene else ""
 
         with open(ctl_file, "w") as ctl_fd:
             ctl_fd.write(options)
