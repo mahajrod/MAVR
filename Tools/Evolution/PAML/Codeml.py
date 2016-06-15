@@ -59,7 +59,7 @@ def extract_trees_from_codeml_report(list_of_options):
     codeml_report.get_feature_values(mode="leaves")
     os.chdir(work_dir)
 
-    return sample_name, codeml_report.find_leaves_with_positive_selection()
+    return sample_name, str(codeml_report.find_leaves_with_positive_selection())
 
 
 def results_extraction_listener(queue, output_file):
