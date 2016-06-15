@@ -259,6 +259,7 @@ class Codeml(Tool):
         options_list = []
 
         for sample in samples_list:
+            print sample
             sample_dir = "%s/%s/" % (input_directory, sample)
             options_list.append([sample_dir, tree_file_abs_path, report_suffix, output_prefix])
 
