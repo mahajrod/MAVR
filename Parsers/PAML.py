@@ -3,7 +3,7 @@
 from collections import OrderedDict
 
 from ete2 import Tree, TreeStyle, AttrFace, faces, NodeStyle
-from CustomCollections.GeneralCollections import IdList, TwoLvlDict
+from CustomCollections.GeneralCollections import IdList, TwoLvlDict, SynDict
 
 
 class CodeMLReport():
@@ -74,7 +74,7 @@ class CodeMLReport():
             feature_values_dict[node.name] = node.dist
         return feature_values_dict
 
-    def get_leaf_values(self):
+    def get_leaf_values(self, write=True):
         leaf_values_dict = TwoLvlDict()
         dN_dict = self._get_tree_dist_dict(self.dNtree)
         dS_dict = self._get_tree_dist_dict(self.dStree)
@@ -84,8 +84,19 @@ class CodeMLReport():
         leaf_values_dict["dS"] = dS_dict
         leaf_values_dict["W"] = W_fict
 
-        leaf_values_dict.write("leaf_values.t")
+        if write:
+            leaf_values_dict.write("leaf_values.t")
         return leaf_values_dict
+
+    def find_leaves_with_positive_selection(self, write=True):
+        leaf_values_dict = self.get_leaf_values(write=False)
+        positive_selected_leaves_dict = SynDict()
+        for leaf_name in leaf_values_dict["W"]:
+            if leaf_values_dict["W"][leaf_name] > 1:
+                positive_selected_leaves_dict[leaf_name] = leaf_values_dict["W"][leaf_name]
+        if write:
+            positive_selected_leaves_dict.write("leaves_with_positive_selection.t")
+        return positive_selected_leaves_dict
 
     def get_feature_values(self, mode="all"):
         if mode == "all":

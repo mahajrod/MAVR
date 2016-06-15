@@ -4,9 +4,12 @@ import os
 import sys
 
 import multiprocessing as mp
+from Routines import File
 from Tools.Abstract import Tool
 from Parsers.PAML import CodeMLReport
 from Routines import FileRoutines
+
+from CustomCollections.GeneralCollections import TwoLvlDict
 
 print_mutex = mp.Lock()
 
@@ -17,6 +20,7 @@ def extract_trees_from_codeml_report(list_of_options):
     # list of options = [sample_directory, tree_file, report_suffix, output_prefix]
     #sys.stdout.write("Handling %s\n" % list_of_options[0])
     #print list_of_options
+    sample_name = File.split_filename(list_of_options[0])[1]
     work_dir = os.getcwd()
     sample_dir = os.path.abspath(list_of_options[0])
     list_of_files = os.listdir(sample_dir)
@@ -49,14 +53,28 @@ def extract_trees_from_codeml_report(list_of_options):
     os.chdir(sample_dir)
 
     codeml_report = CodeMLReport(report_files_list[0], treefile=list_of_options[1])
-    #print("AAAA")
     codeml_report.write_trees(list_of_options[3])
-    #print("BBBB")
     codeml_report.get_all_values(list_of_options[3] + ".all.values")
-    #print("CCCC")
     codeml_report.get_feature_values(mode="leaves")
-    #print("DDDD")
     os.chdir(work_dir)
+
+    return sample_name, codeml_report.find_leaves_with_positive_selection()
+
+
+def results_extraction_listener(queue, output_file):
+    """listens for messages on the queue, writes to file."""
+
+    positive_selection_dict = TwoLvlDict()
+    while 1:
+        result = queue.get()
+        if result == 'finish':
+            positive_selection_dict.write(output_file)
+            break
+        if result[1]:
+            positive_selection_dict[result[0]] = result[1]
+        #pos_sel_fd.flush()
+
+    #pos_sel_fd.close()
 
 
 class Codeml(Tool):
@@ -210,7 +228,8 @@ class Codeml(Tool):
                                    small_difference=small_difference, clean_data=clean_data, method=method)
         self.parallel_execute(options_list, dir_list=dir_list)
 
-    def parallel_results_extraction(self, in_dir, tree_file, report_suffix, output_prefix):
+    def parallel_results_extraction(self, in_dir, tree_file, report_suffix, output_prefix,
+                                    report_file):
 
         work_dir = os.getcwd()
         input_directory = os.path.abspath(in_dir)
@@ -223,8 +242,15 @@ class Codeml(Tool):
             options_list.append([sample_dir, tree_file_abs_path, report_suffix, output_prefix])
 
         os.chdir(input_directory)
-        pool = mp.Pool(self.threads)
-        #print options_list
-        pool.map(extract_trees_from_codeml_report, options_list)
 
+        manager = mp.Manager()
+        queue = manager.Queue()
+        process_pool = mp.Pool(self.threads + 1)
+        watcher = process_pool.apply_async(results_extraction_listener, (queue, report_file))
+
+        #print options_list
+        process_pool.map(extract_trees_from_codeml_report, options_list)
+        queue.put('finish')
+        process_pool.close()
         os.chdir(work_dir)
+

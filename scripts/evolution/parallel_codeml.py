@@ -42,6 +42,9 @@ parser.add_argument("--mgene", action="store", dest="mgene", type=int,
                    2: same k, different pi and cs
                    3: same pi, different k and cs
                    4: different k, pi, cs(proportional branch length)""")
+parser.add_argument("-e", "--report_file", action="store", dest="report_file", required=True,
+                    help="File to write report about positive selection in leaf nodes")
+
 
 args = parser.parse_args()
 
@@ -54,4 +57,4 @@ Codeml.parallel_codeml(args.input_dir, args.tree, args.output_dir, seq_type=args
                        genetic_code=args.genetic_code, fix_kappa=False, kappa=5, fix_omega=False, omega=0.2, getSE=0,
                        RateAncestor=0, small_difference=args.small_difference, clean_data=args.clean_data, method=0)
 """
-Codeml.parallel_results_extraction(args.output_dir, args.tree, ".out", "results")
+Codeml.parallel_results_extraction(args.output_dir, args.tree, ".out", "results", args.report_file)

@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py" afterPath="$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parsers/PAML.py" afterPath="$PROJECT_DIR$/Parsers/PAML.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/evolution/parallel_codeml.py" afterPath="$PROJECT_DIR$/scripts/evolution/parallel_codeml.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -43,8 +44,8 @@
       <file leaf-file-name="parallel_codeml.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/evolution/parallel_codeml.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.90789473" vertical-offset="162" max-vertical-offset="1116">
-              <caret line="55" column="3" selection-start-line="55" selection-start-column="3" selection-end-line="55" selection-end-column="3" />
+            <state vertical-scroll-proportion="0.8815789" vertical-offset="258" max-vertical-offset="1170">
+              <caret line="59" column="98" selection-start-line="59" selection-start-column="98" selection-end-line="59" selection-end-column="98" />
               <folding>
                 <element signature="e#54#64#0" expanded="true" />
               </folding>
@@ -65,9 +66,11 @@
       <file leaf-file-name="PAML.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Parsers/PAML.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1134" max-vertical-offset="3168">
-              <caret line="89" column="42" selection-start-line="89" selection-start-column="8" selection-end-line="89" selection-end-column="44" />
-              <folding />
+            <state vertical-scroll-proportion="-62.357143" vertical-offset="0" max-vertical-offset="3420">
+              <caret line="97" column="79" selection-start-line="97" selection-start-column="79" selection-end-line="97" selection-end-column="79" />
+              <folding>
+                <element signature="e#23#58#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -75,11 +78,31 @@
       <file leaf-file-name="Codeml.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3960">
-              <caret line="190" column="28" selection-start-line="190" selection-start-column="28" selection-end-line="190" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1302" max-vertical-offset="4716">
+              <caret line="66" column="42" selection-start-line="66" selection-start-column="42" selection-end-line="66" selection-end-column="42" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="File.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Routines/File.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6012">
+              <caret line="39" column="32" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="extract_families_of_species.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/treefam/extract_families_of_species.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="2322">
+              <caret line="45" column="15" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="18" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -100,7 +123,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Tools/Filter/__init__.py" />
         <option value="$PROJECT_DIR$/Tools/Filter/Cookiecutter.py" />
         <option value="$PROJECT_DIR$/scripts/filter/filter_by_cookiecutter_per_lane.py" />
         <option value="$PROJECT_DIR$/Tools/Expression/Cufflinks.py" />
@@ -149,6 +171,7 @@
         <option value="$PROJECT_DIR$/scripts/phylogenetics/unroot_tree.py" />
         <option value="$PROJECT_DIR$/scripts/evolution/prepare_alignment_for_codeml.py" />
         <option value="$PROJECT_DIR$/Routines/MultipleAlignment.py" />
+        <option value="$PROJECT_DIR$/Parsers/PAML.py" />
         <option value="$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py" />
         <option value="$PROJECT_DIR$/scripts/evolution/parallel_codeml.py" />
       </list>
@@ -159,8 +182,9 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="-1" />
     <option name="y" value="25" />
-    <option name="width" value="1920" />
+    <option name="width" value="1922" />
     <option name="height" value="1055" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -233,7 +257,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="phylogenetics" />
+              <option name="myItemId" value="sequence_clusters" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -251,61 +275,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="multiple_alignment" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
+              <option name="myItemId" value="sequence_clusters" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="evolution" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="download" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="convert" />
+              <option name="myItemId" value="treefam" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -410,6 +384,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="SeqAnalysis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Routines" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -746,78 +734,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00537" summary="sequence clusters">
-      <created>1465226949035</created>
-      <option name="number" value="00537" />
-      <option name="project" value="LOCAL" />
-      <updated>1465226949036</updated>
-    </task>
-    <task id="LOCAL-00538" summary="sequence clusters">
-      <created>1465227083526</created>
-      <option name="number" value="00538" />
-      <option name="project" value="LOCAL" />
-      <updated>1465227083526</updated>
-    </task>
-    <task id="LOCAL-00539" summary="sequence clusters">
-      <created>1465227118878</created>
-      <option name="number" value="00539" />
-      <option name="project" value="LOCAL" />
-      <updated>1465227118878</updated>
-    </task>
-    <task id="LOCAL-00540" summary="sequence clusters">
-      <created>1465227391038</created>
-      <option name="number" value="00540" />
-      <option name="project" value="LOCAL" />
-      <updated>1465227391038</updated>
-    </task>
-    <task id="LOCAL-00541" summary="sequence clusters">
-      <created>1465228681029</created>
-      <option name="number" value="00541" />
-      <option name="project" value="LOCAL" />
-      <updated>1465228681029</updated>
-    </task>
-    <task id="LOCAL-00542" summary="sequence clusters">
-      <created>1465228773834</created>
-      <option name="number" value="00542" />
-      <option name="project" value="LOCAL" />
-      <updated>1465228773835</updated>
-    </task>
-    <task id="LOCAL-00543" summary="sequence clusters">
-      <created>1465229068059</created>
-      <option name="number" value="00543" />
-      <option name="project" value="LOCAL" />
-      <updated>1465229068060</updated>
-    </task>
-    <task id="LOCAL-00544" summary="sequence clusters">
-      <created>1465229223370</created>
-      <option name="number" value="00544" />
-      <option name="project" value="LOCAL" />
-      <updated>1465229223370</updated>
-    </task>
-    <task id="LOCAL-00545" summary="sequence clusters">
-      <created>1465229541366</created>
-      <option name="number" value="00545" />
-      <option name="project" value="LOCAL" />
-      <updated>1465229541366</updated>
-    </task>
-    <task id="LOCAL-00546" summary="sequence clusters">
-      <created>1465229888549</created>
-      <option name="number" value="00546" />
-      <option name="project" value="LOCAL" />
-      <updated>1465229888549</updated>
-    </task>
-    <task id="LOCAL-00547" summary="sequence clusters">
-      <created>1465229933885</created>
-      <option name="number" value="00547" />
-      <option name="project" value="LOCAL" />
-      <updated>1465229933885</updated>
-    </task>
-    <task id="LOCAL-00548" summary="sequence clusters">
-      <created>1465230020101</created>
-      <option name="number" value="00548" />
-      <option name="project" value="LOCAL" />
-      <updated>1465230020101</updated>
-    </task>
     <task id="LOCAL-00549" summary="sequence clusters">
       <created>1465230100406</created>
       <option name="number" value="00549" />
@@ -1040,7 +956,79 @@
       <option name="project" value="LOCAL" />
       <updated>1465576214414</updated>
     </task>
-    <option name="localTasksCounter" value="586" />
+    <task id="LOCAL-00586" summary="sequence clusters">
+      <created>1465987504843</created>
+      <option name="number" value="00586" />
+      <option name="project" value="LOCAL" />
+      <updated>1465987504843</updated>
+    </task>
+    <task id="LOCAL-00587" summary="sequence clusters">
+      <created>1465987662298</created>
+      <option name="number" value="00587" />
+      <option name="project" value="LOCAL" />
+      <updated>1465987662298</updated>
+    </task>
+    <task id="LOCAL-00588" summary="sequence clusters">
+      <created>1465988126473</created>
+      <option name="number" value="00588" />
+      <option name="project" value="LOCAL" />
+      <updated>1465988126473</updated>
+    </task>
+    <task id="LOCAL-00589" summary="sequence clusters">
+      <created>1465988413122</created>
+      <option name="number" value="00589" />
+      <option name="project" value="LOCAL" />
+      <updated>1465988413123</updated>
+    </task>
+    <task id="LOCAL-00590" summary="sequence clusters">
+      <created>1465988444327</created>
+      <option name="number" value="00590" />
+      <option name="project" value="LOCAL" />
+      <updated>1465988444327</updated>
+    </task>
+    <task id="LOCAL-00591" summary="sequence clusters">
+      <created>1465988578805</created>
+      <option name="number" value="00591" />
+      <option name="project" value="LOCAL" />
+      <updated>1465988578805</updated>
+    </task>
+    <task id="LOCAL-00592" summary="sequence clusters">
+      <created>1465988681666</created>
+      <option name="number" value="00592" />
+      <option name="project" value="LOCAL" />
+      <updated>1465988681666</updated>
+    </task>
+    <task id="LOCAL-00593" summary="sequence clusters">
+      <created>1465989103168</created>
+      <option name="number" value="00593" />
+      <option name="project" value="LOCAL" />
+      <updated>1465989103168</updated>
+    </task>
+    <task id="LOCAL-00594" summary="sequence clusters">
+      <created>1465989386208</created>
+      <option name="number" value="00594" />
+      <option name="project" value="LOCAL" />
+      <updated>1465989386208</updated>
+    </task>
+    <task id="LOCAL-00595" summary="sequence clusters">
+      <created>1465989492920</created>
+      <option name="number" value="00595" />
+      <option name="project" value="LOCAL" />
+      <updated>1465989492920</updated>
+    </task>
+    <task id="LOCAL-00596" summary="sequence clusters">
+      <created>1465989596645</created>
+      <option name="number" value="00596" />
+      <option name="project" value="LOCAL" />
+      <updated>1465989596645</updated>
+    </task>
+    <task id="LOCAL-00597" summary="sequence clusters">
+      <created>1465989857977</created>
+      <option name="number" value="00597" />
+      <option name="project" value="LOCAL" />
+      <updated>1465989857977</updated>
+    </task>
+    <option name="localTasksCounter" value="598" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1064,15 +1052,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="25" width="1920" height="1055" extended-state="0" />
+    <frame x="-1" y="25" width="1922" height="1055" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2256194" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22538178" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
@@ -1083,7 +1072,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.4978678" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399361" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1165,19 +1153,17 @@
           <line>826</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/Parsers/PAML.py</url>
+          <line>2</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="10" />
+      <option name="time" value="11" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/annotation/replace_augustus_ids_by_synonyms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="21" column="93" selection-start-line="21" selection-start-column="93" selection-end-line="21" selection-end-column="93" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence/rename_sequence_ids.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
@@ -1315,13 +1301,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/File.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="33" column="31" selection-start-line="33" selection-start-column="31" selection-end-line="33" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -1510,28 +1489,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/File.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6012">
+          <caret line="39" column="32" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/treefam/extract_families_of_species.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="2322">
+          <caret line="45" column="15" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Parsers/PAML.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-62.357143" vertical-offset="0" max-vertical-offset="3420">
+          <caret line="97" column="79" selection-start-line="97" selection-start-column="79" selection-end-line="97" selection-end-column="79" />
+          <folding>
+            <element signature="e#23#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2994" max-vertical-offset="3960">
-          <caret line="190" column="28" selection-start-line="190" selection-start-column="28" selection-end-line="190" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1302" max-vertical-offset="4716">
+          <caret line="66" column="42" selection-start-line="66" selection-start-column="42" selection-end-line="66" selection-end-column="42" />
           <folding>
             <element signature="e#54#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Parsers/PAML.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1026" max-vertical-offset="3168">
-          <caret line="89" column="42" selection-start-line="89" selection-start-column="8" selection-end-line="89" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/evolution/parallel_codeml.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.90789473" vertical-offset="162" max-vertical-offset="1116">
-          <caret line="55" column="3" selection-start-line="55" selection-start-column="3" selection-end-line="55" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.8815789" vertical-offset="258" max-vertical-offset="1170">
+          <caret line="59" column="98" selection-start-line="59" selection-start-column="98" selection-end-line="59" selection-end-column="98" />
           <folding>
             <element signature="e#54#64#0" expanded="true" />
           </folding>
