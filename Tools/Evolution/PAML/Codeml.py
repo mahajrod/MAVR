@@ -1,8 +1,48 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import os
+import sys
+
+import multiprocessing as mp
 from Tools.Abstract import Tool
+from Parsers.PAML import CodeMLReport
 from Routines import FileRoutines
+
+print_mutex = mp.Lock()
+
+
+def extract_trees_from_codeml_report(list_of_options):
+    # this function is global because of stutid damned pickle mode in python!!!!!
+    # use mutex to safe write to stdout from multiple threads
+    # list of options = [sample_directory, tree_file, report_suffix, output_prefix]
+    sys.stdout.write("Handling %s\n" % list_of_options[0])
+    work_dir = os.getcwd()
+    sample_dir = os.path.abspath(list_of_options[0])
+    list_of_files = os.listdir(sample_dir)
+    report_files_list = []
+    suffix_length = len(list_of_options[2])
+    for filename in list_of_files:
+        if filename[-suffix_length] == list_of_options[2]:
+            report_files_list.append(filename)
+
+    print_string = "Handling %s\n" % list_of_options[0]
+    if not report_files_list:
+        print_string += "\tNo report file with suffix %s were found\n\tSkipping\n" % list_of_options[2]
+        return -1
+    elif len(report_files_list) > 1:
+        print_string += "\tWere found several (%i) report files with suffix %s\n\tSkipping\n" % (len(report_files_list),
+                                                                                                 list_of_options[2])
+        return -2
+
+    print_mutex.acquire()
+    sys.stdout.write(print_string)
+    print_mutex.release()
+    os.chdir(sample_dir)
+    codeml_report = CodeMLReport(report_files_list[0], treefile=list_of_options[1])
+    codeml_report.write_trees(list_of_files[3])
+    codeml_report.get_all_values(list_of_files[3] + ".all.values")
+    codeml_report.get_feature_values(mode="leaves")
+    os.chdir(work_dir)
 
 
 class Codeml(Tool):
@@ -155,3 +195,21 @@ class Codeml(Tool):
                                    omega=omega, getSE=getSE, RateAncestor=RateAncestor, Mgene=Mgene,
                                    small_difference=small_difference, clean_data=clean_data, method=method)
         self.parallel_execute(options_list, dir_list=dir_list)
+
+    def parallel_results_extraction(self, in_dir, tree_file, report_suffix, output_prefix):
+
+        work_dir = os.getcwd()
+        input_directory = os.path.abspath(in_dir)
+        samples_list = sorted(os.listdir(input_directory))
+        tree_file_abs_path = os.path.abspath(tree_file)
+        options_list = []
+
+        for sample in samples_list:
+            sample_dir = "%s/%s/" % (input_directory, sample)
+            options_list.append([sample_dir, tree_file_abs_path, report_suffix, output_prefix])
+
+        os.chdir(input_directory)
+        pool = mp.Pool(self.threads)
+        pool.map(extract_trees_from_codeml_report, options_list)
+
+        os.chdir(work_dir)
