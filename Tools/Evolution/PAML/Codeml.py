@@ -247,21 +247,16 @@ class Codeml(Tool):
 
     def parallel_results_extraction(self, in_dir, tree_file, report_suffix, output_prefix,
                                     report_file):
-
         work_dir = os.getcwd()
         input_directory = os.path.abspath(in_dir)
         dir_list = sorted(os.listdir(input_directory))
-        samples_list = []
-        for filename in dir_list:
-            if os.path.isdir(filename):
-                samples_list.append(filename)
         tree_file_abs_path = os.path.abspath(tree_file)
         options_list = []
 
-        for sample in samples_list:
-            print sample
-            sample_dir = "%s/%s/" % (input_directory, sample)
-            options_list.append([sample_dir, tree_file_abs_path, report_suffix, output_prefix])
+        for filename in dir_list:
+            sample_dir = "%s/%s/" % (input_directory, filename)
+            if os.path.isdir(sample_dir):
+                options_list.append([sample_dir, tree_file_abs_path, report_suffix, output_prefix])
 
         os.chdir(input_directory)
 
