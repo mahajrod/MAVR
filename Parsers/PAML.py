@@ -28,10 +28,11 @@ class CodeMLReport():
         if treefile:
             with open(treefile, "r") as tree_fd:
                 self.tree = Tree(tree_fd.readline())
-            for tree_node, dNnode, dSnode, Wnode in zip(self.tree.traverse(), self.dNtree.traverse(), self.dStree.traverse(), self.Wtree.traverse()):
-                tree_node.add_feature("dN", dNnode.dist)
-                tree_node.add_feature("dS", dSnode.dist)
-                tree_node.add_feature("W", Wnode.dist)
+            if self.dStree and self.dNtree and self.WStree:
+                for tree_node, dNnode, dSnode, Wnode in zip(self.tree.traverse(), self.dNtree.traverse(), self.dStree.traverse(), self.Wtree.traverse()):
+                    tree_node.add_feature("dN", dNnode.dist)
+                    tree_node.add_feature("dS", dSnode.dist)
+                    tree_node.add_feature("W", Wnode.dist)
         else:
             self.tree = None
 
