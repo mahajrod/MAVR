@@ -72,6 +72,7 @@ def results_extraction_listener(queue, output_file):
     error_fd.write("#sample\terror_code\n")
     while 1:
         result = queue.get()
+        print result
         if isinstance(result[1], int):
             error_fd.write("%s\t%i\n" % (result[0], result[1]))
         if result == 'finish':
