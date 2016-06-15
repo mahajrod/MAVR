@@ -69,6 +69,7 @@ def results_extraction_listener(queue, output_file):
         result = queue.get()
         if result == 'finish':
             print "AAA"
+            print output_file
             positive_selection_dict.write(output_file)
             break
         if result[1]:
