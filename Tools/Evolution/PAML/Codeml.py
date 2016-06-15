@@ -16,6 +16,7 @@ def extract_trees_from_codeml_report(list_of_options):
     # use mutex to safe write to stdout from multiple threads
     # list of options = [sample_directory, tree_file, report_suffix, output_prefix]
     sys.stdout.write("Handling %s\n" % list_of_options[0])
+    print list_of_options
     work_dir = os.getcwd()
     sample_dir = os.path.abspath(list_of_options[0])
     list_of_files = os.listdir(sample_dir)
@@ -26,7 +27,6 @@ def extract_trees_from_codeml_report(list_of_options):
             report_files_list.append(filename)
 
     print_string = "Handling %s\n" % list_of_options[0]
-    print list_of_options
     print "XXXX"
     if not report_files_list:
         print_string += "\tNo report file with suffix %s were found\n\tSkipping\n" % list_of_options[2]
