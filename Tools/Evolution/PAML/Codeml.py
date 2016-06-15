@@ -60,8 +60,12 @@ def extract_trees_from_codeml_report(list_of_options):
     codeml_report.get_all_values(list_of_options[3] + ".all.values")
     codeml_report.get_feature_values(mode="leaves")
     os.chdir(work_dir)
+    extract_trees_from_codeml_report.queue.put((sample_name, codeml_report.find_leaves_with_positive_selection()))
+    return sample_name, codeml_report.find_leaves_with_positive_selection()
 
-    return sample_name, str(codeml_report.find_leaves_with_positive_selection())
+
+def extract_trees_from_codeml_report_init(queue):
+    extract_trees_from_codeml_report.queue = queue
 
 
 def results_extraction_listener(queue, output_file):
@@ -259,7 +263,7 @@ class Codeml(Tool):
 
         manager = mp.Manager()
         queue = manager.Queue()
-        process_pool = mp.Pool(self.threads + 1)
+        process_pool = mp.Pool(self.threads + 1, extract_trees_from_codeml_report_init, [queue])
         watcher = process_pool.apply_async(results_extraction_listener, (queue, report_file))
 
         #print options_list
