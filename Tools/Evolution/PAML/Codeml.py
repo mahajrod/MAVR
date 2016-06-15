@@ -25,7 +25,7 @@ def extract_trees_from_codeml_report(list_of_options):
     for filename in list_of_files:
         if len(filename) < suffix_length:
             continue
-        if filename[-suffix_length] == list_of_options[2]:
+        if filename[-suffix_length:] == list_of_options[2]:
             report_files_list.append(filename)
 
     print_string = "Handling %s\n" % list_of_options[0]
