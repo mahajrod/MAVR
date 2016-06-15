@@ -34,6 +34,10 @@ def extract_trees_from_codeml_report(list_of_options):
 
     print_string = "Handling %s\n" % list_of_options[0]
     #print "XXXX"
+
+    os.chdir(sample_dir)
+    codeml_report = CodeMLReport(report_files_list[0], treefile=list_of_options[1])
+
     error_code = 0
     if not report_files_list:
         print_string += "\tNo report file with suffix %s were found\n\tSkipping\n" % list_of_options[2]
@@ -42,18 +46,16 @@ def extract_trees_from_codeml_report(list_of_options):
         print_string += "\tWere found several (%i) report files with suffix %s\n\tSkipping\n" % (len(report_files_list),
                                                                                                  list_of_options[2])
         error_code = -2
+    elif (codeml_report.dNtree is None) or (codeml_report.dStree is None) or (codeml_report.Wtree is None):
+        print_string += "\tCodeML report is not full\n\tSkipping\n"
+        error_code = -3
 
-    #print "QQQQ"
     print_mutex.acquire()
     sys.stdout.write(print_string)
-    #print "UUUU"
     print_mutex.release()
     if error_code < 0:
-        return error_code
-    os.chdir(sample_dir)
+        return sample_name, error_code
 
-    codeml_report = CodeMLReport(report_files_list[0], treefile=list_of_options[1])
-    print sample_name, codeml_report.dNtree
     codeml_report.write_trees(list_of_options[3])
     codeml_report.get_all_values(list_of_options[3] + ".all.values")
     codeml_report.get_feature_values(mode="leaves")
@@ -66,8 +68,12 @@ def results_extraction_listener(queue, output_file):
     """listens for messages on the queue, writes to file."""
 
     positive_selection_dict = TwoLvlDict()
+    error_fd = open("errors.err", "w")
+    error_fd.write("#sample\terror_code\n")
     while 1:
         result = queue.get()
+        if isinstance(result[1], int):
+            error_fd.write("%s\t%i\n" % (result[0], result[1]))
         if result == 'finish':
             print "AAA"
             print output_file
