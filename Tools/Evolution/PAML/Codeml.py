@@ -50,9 +50,9 @@ def extract_trees_from_codeml_report(list_of_options):
 
     codeml_report = CodeMLReport(report_files_list[0], treefile=list_of_options[1])
     #print("AAAA")
-    codeml_report.write_trees(list_of_files[3])
+    codeml_report.write_trees(list_of_options[3])
     #print("BBBB")
-    codeml_report.get_all_values(list_of_files[3] + ".all.values")
+    codeml_report.get_all_values(list_of_options[3] + ".all.values")
     #print("CCCC")
     codeml_report.get_feature_values(mode="leaves")
     #print("DDDD")
