@@ -24,7 +24,7 @@ def extract_trees_from_codeml_report(list_of_options):
     sample_name = sample_name[-1] if sample_name[-1] != "" else sample_name[-2]
     work_dir = os.getcwd()
     sample_dir = os.path.abspath(list_of_options[0])
-    print sample_dir
+    #print sample_dir
     list_of_files = os.listdir(sample_dir)
     report_files_list = []
     suffix_length = len(list_of_options[2])
@@ -64,8 +64,8 @@ def extract_trees_from_codeml_report(list_of_options):
     os.chdir(work_dir)
 
     tmp = codeml_report.find_leaves_with_positive_selection()
-    if tmp:
-        print sample_name, tmp
+    #if tmp:
+    #    print sample_name, tmp
     extract_trees_from_codeml_report.queue.put((sample_name, codeml_report.find_leaves_with_positive_selection()))
     return sample_name, codeml_report.find_leaves_with_positive_selection()
 
