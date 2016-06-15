@@ -63,7 +63,7 @@ def extract_trees_from_codeml_report(list_of_options):
     codeml_report.get_feature_values(mode="leaves")
     os.chdir(work_dir)
 
-    tmp =codeml_report.find_leaves_with_positive_selection()
+    tmp = codeml_report.find_leaves_with_positive_selection()
     if tmp:
         print sample_name, tmp
     extract_trees_from_codeml_report.queue.put((sample_name, codeml_report.find_leaves_with_positive_selection()))
@@ -89,7 +89,8 @@ def results_extraction_listener(queue, output_file):
             print "AAA"
             #print output_file
             positive_selection_dict.write(output_file)
-            print positive_selection_dict
+            positive_selection_dict.table_form(absent_symbol=".")
+            #print positive_selection_dict
             break
         if result[1]:
             positive_selection_dict[result[0]] = result[1]
