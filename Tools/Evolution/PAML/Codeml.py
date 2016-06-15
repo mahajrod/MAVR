@@ -91,7 +91,7 @@ def results_extraction_listener(queue, output_file):
             positive_selection_dict.write(output_file)
             with open(output_file, "w") as out_fd:
                 out_fd.write(positive_selection_dict.table_form(absent_symbol="."))
-            #print positive_selection_dict
+            print positive_selection_dict.table_form(absent_symbol=".")
             break
         if result[1]:
             positive_selection_dict[result[0]] = result[1]
