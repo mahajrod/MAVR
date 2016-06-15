@@ -15,43 +15,51 @@ def extract_trees_from_codeml_report(list_of_options):
     # this function is global because of stutid damned pickle mode in python!!!!!
     # use mutex to safe write to stdout from multiple threads
     # list of options = [sample_directory, tree_file, report_suffix, output_prefix]
-    sys.stdout.write("Handling %s\n" % list_of_options[0])
-    print list_of_options
+    #sys.stdout.write("Handling %s\n" % list_of_options[0])
+    #print list_of_options
     work_dir = os.getcwd()
     sample_dir = os.path.abspath(list_of_options[0])
     list_of_files = os.listdir(sample_dir)
     report_files_list = []
     suffix_length = len(list_of_options[2])
     for filename in list_of_files:
+        if len(filename) < suffix_length:
+            continue
         if filename[-suffix_length] == list_of_options[2]:
             report_files_list.append(filename)
 
     print_string = "Handling %s\n" % list_of_options[0]
-    print "XXXX"
+    #print "XXXX"
     if not report_files_list:
         print_string += "\tNo report file with suffix %s were found\n\tSkipping\n" % list_of_options[2]
-        print "YYYY"
+        print_mutex.acquire()
+        print print_string
+        print_mutex.release()
+        #print "YYYY"
         return -1
     elif len(report_files_list) > 1:
         print_string += "\tWere found several (%i) report files with suffix %s\n\tSkipping\n" % (len(report_files_list),
                                                                                                  list_of_options[2])
-        print "ZZZZ"
+        print_mutex.acquire()
+        print print_string
+        print_mutex.release()
+        #print "ZZZZ"
         return -2
-    print "QQQQ"
+    #print "QQQQ"
     print_mutex.acquire()
     sys.stdout.write(print_string)
-    print "UUUU"
+    #print "UUUU"
     print_mutex.release()
     os.chdir(sample_dir)
 
     codeml_report = CodeMLReport(report_files_list[0], treefile=list_of_options[1])
-    print("AAAA")
+    #print("AAAA")
     codeml_report.write_trees(list_of_files[3])
-    print("BBBB")
+    #print("BBBB")
     codeml_report.get_all_values(list_of_files[3] + ".all.values")
-    print("CCCC")
+    #print("CCCC")
     codeml_report.get_feature_values(mode="leaves")
-    print("DDDD")
+    #print("DDDD")
     os.chdir(work_dir)
 
 
