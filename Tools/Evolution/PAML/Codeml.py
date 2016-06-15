@@ -242,7 +242,11 @@ class Codeml(Tool):
 
         work_dir = os.getcwd()
         input_directory = os.path.abspath(in_dir)
-        samples_list = sorted(os.listdir(input_directory))
+        dir_list = sorted(os.listdir(input_directory))
+        samples_list = []
+        for filename in dir_list:
+            if os.path.isdir(filename):
+                samples_list.append(filename)
         tree_file_abs_path = os.path.abspath(tree_file)
         options_list = []
 
