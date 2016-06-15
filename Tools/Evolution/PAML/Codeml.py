@@ -39,9 +39,13 @@ def extract_trees_from_codeml_report(list_of_options):
     print_mutex.release()
     os.chdir(sample_dir)
     codeml_report = CodeMLReport(report_files_list[0], treefile=list_of_options[1])
+    print("AAAA")
     codeml_report.write_trees(list_of_files[3])
+    print("BBBB")
     codeml_report.get_all_values(list_of_files[3] + ".all.values")
+    print("CCCC")
     codeml_report.get_feature_values(mode="leaves")
+    print("DDDD")
     os.chdir(work_dir)
 
 
@@ -210,7 +214,7 @@ class Codeml(Tool):
 
         os.chdir(input_directory)
         pool = mp.Pool(self.threads)
-        print options_list
+        #print options_list
         pool.map(extract_trees_from_codeml_report, options_list)
 
         os.chdir(work_dir)
