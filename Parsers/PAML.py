@@ -11,6 +11,9 @@ class CodeMLReport():
     Only parsing  of  dN, dS and omega trees is supported
     """
     def __init__(self, reportfile, treefile=None):
+        self.dStree = None
+        self.dNtree = None
+        self.Wtree = None
         with open(reportfile, "r") as in_fd:
             for line in in_fd:
                 if line[:8] == "dS tree:":
