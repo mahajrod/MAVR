@@ -62,7 +62,10 @@ def extract_trees_from_codeml_report(list_of_options):
     codeml_report.get_all_values(list_of_options[3] + ".all.values")
     codeml_report.get_feature_values(mode="leaves")
     os.chdir(work_dir)
-    print sample_name, codeml_report.find_leaves_with_positive_selection()
+
+    tmp =codeml_report.find_leaves_with_positive_selection()
+    if tmp:
+        print sample_name, tmp
     extract_trees_from_codeml_report.queue.put((sample_name, codeml_report.find_leaves_with_positive_selection()))
     return sample_name, codeml_report.find_leaves_with_positive_selection()
 
@@ -79,16 +82,17 @@ def results_extraction_listener(queue, output_file):
     error_fd.write("#sample\terror_code\n")
     while 1:
         result = queue.get()
-        print result
         if isinstance(result[1], int):
             error_fd.write("%s\t%i\n" % (result[0], result[1]))
+            continue
         if result == 'finish':
             print "AAA"
-            print output_file
+            #print output_file
             positive_selection_dict.write(output_file)
             break
         if result[1]:
             positive_selection_dict[result[0]] = result[1]
+            print result
         #pos_sel_fd.flush()
 
     #pos_sel_fd.close()
