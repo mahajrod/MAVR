@@ -53,6 +53,7 @@ def extract_trees_from_codeml_report(list_of_options):
     os.chdir(sample_dir)
 
     codeml_report = CodeMLReport(report_files_list[0], treefile=list_of_options[1])
+    print sample_name, codeml_report.dNtree
     codeml_report.write_trees(list_of_options[3])
     codeml_report.get_all_values(list_of_options[3] + ".all.values")
     codeml_report.get_feature_values(mode="leaves")
