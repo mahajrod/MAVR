@@ -38,6 +38,7 @@ def extract_trees_from_codeml_report(list_of_options):
     sys.stdout.write(print_string)
     print_mutex.release()
     os.chdir(sample_dir)
+    print list_of_options
     codeml_report = CodeMLReport(report_files_list[0], treefile=list_of_options[1])
     print("AAAA")
     codeml_report.write_trees(list_of_files[3])
