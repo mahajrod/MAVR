@@ -210,6 +210,7 @@ class Codeml(Tool):
 
         os.chdir(input_directory)
         pool = mp.Pool(self.threads)
+        print options_list
         pool.map(extract_trees_from_codeml_report, options_list)
 
         os.chdir(work_dir)
