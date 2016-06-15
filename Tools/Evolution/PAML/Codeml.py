@@ -40,6 +40,7 @@ def extract_trees_from_codeml_report(list_of_options):
     print "QQQQ"
     print_mutex.acquire()
     sys.stdout.write(print_string)
+    print "UUUU"
     print_mutex.release()
     os.chdir(sample_dir)
 
