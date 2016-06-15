@@ -26,19 +26,23 @@ def extract_trees_from_codeml_report(list_of_options):
             report_files_list.append(filename)
 
     print_string = "Handling %s\n" % list_of_options[0]
+    print list_of_options
+    print "XXXX"
     if not report_files_list:
         print_string += "\tNo report file with suffix %s were found\n\tSkipping\n" % list_of_options[2]
+        print "YYYY"
         return -1
     elif len(report_files_list) > 1:
         print_string += "\tWere found several (%i) report files with suffix %s\n\tSkipping\n" % (len(report_files_list),
                                                                                                  list_of_options[2])
+        print "ZZZZ"
         return -2
-
+    print "QQQQ"
     print_mutex.acquire()
     sys.stdout.write(print_string)
     print_mutex.release()
     os.chdir(sample_dir)
-    print list_of_options
+
     codeml_report = CodeMLReport(report_files_list[0], treefile=list_of_options[1])
     print("AAAA")
     codeml_report.write_trees(list_of_files[3])
