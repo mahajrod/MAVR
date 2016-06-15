@@ -93,6 +93,7 @@ def results_extraction_listener(queue, output_file):
         if result[1]:
             positive_selection_dict[result[0]] = result[1]
             print result
+            print positive_selection_dict
         #pos_sel_fd.flush()
 
     #pos_sel_fd.close()
