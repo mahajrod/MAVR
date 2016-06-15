@@ -20,7 +20,8 @@ def extract_trees_from_codeml_report(list_of_options):
     # list of options = [sample_directory, tree_file, report_suffix, output_prefix]
     #sys.stdout.write("Handling %s\n" % list_of_options[0])
     #print list_of_options
-    sample_name = File.split_filename(list_of_options[0])[1]
+    sample_name = list_of_options[0].split("/")
+    sample_name = sample_name[-1] if sample_name[-1] != "" else sample_name[-2]
     work_dir = os.getcwd()
     sample_dir = os.path.abspath(list_of_options[0])
     list_of_files = os.listdir(sample_dir)
