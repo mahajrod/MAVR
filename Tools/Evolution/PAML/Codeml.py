@@ -81,6 +81,7 @@ def results_extraction_listener(queue, output_file_prefix, selected_species_list
     selected_species_positive_selection_dict = TwoLvlDict()
     error_fd = open("errors.err", "w")
     error_fd.write("#sample\terror_code\n")
+    print selected_species_list
     while 1:
         result = queue.get()
         if isinstance(result[1], int):
