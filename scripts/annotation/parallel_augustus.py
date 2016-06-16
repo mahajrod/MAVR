@@ -22,9 +22,8 @@ parser.add_argument("-o", "--output", action="store", dest="output", required=Tr
                     help="Prefix of output files")
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
                     help="Number of threads to use")
-parser.add_argument("-r", "--species_prefix", action="store", dest="species_prefix", required=True,
+parser.add_argument("-x", "--species_prefix", action="store", dest="species_prefix", required=True,
                     help="Species-related prefix to use in IDs")
-
 parser.add_argument("-s", "--species", action="store", dest="species", required=True,
                     help="Species to use as model")
 parser.add_argument("-r", "--strand", action="store", dest="strand", default="both",

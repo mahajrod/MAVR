@@ -433,6 +433,99 @@ class AUGUSTUS(Tool):
                                 break
                     out_fd.write("# end gene %s\n" % gene_syn_id)
 
+    @staticmethod
+    def replace_augustus_ids(augustus_gff, output_prefix, species_prefix=None, number_of_digits_in_id=8):
+
+        output_gff = "%s.gff" % output_prefix
+        genes_syn_file = "%s.gene.syn" % output_prefix
+        transcripts_syn_file = "%s.transcript.syn" % output_prefix
+        cds_syn_file = "%s.cds.syn" % output_prefix
+        genes_syn_dict = SynDict()
+        transcripts_syn_dict = SynDict()
+        cds_syn_dict = SynDict()
+        gene_counter = 0
+        gene_id_template = "%sG%%0%ii" % (species_prefix, number_of_digits_in_id)
+        transcripts_counter = 0
+        transcript_id_template = "%sT%%0%ii" % (species_prefix, number_of_digits_in_id)
+        cds_counter = 0
+        cds_id_template = "%sC%%0%ii" % (species_prefix, number_of_digits_in_id)
+        with open(augustus_gff, "r") as in_fd:
+            with open(output_gff, "w") as out_fd:
+                for line in in_fd:
+                    tmp = line.strip()
+                    if len(tmp) < 13:
+                        out_fd.write(line)
+                        continue
+                    if tmp[:12] != "# start gene":
+                        out_fd.write(line)
+                        continue
+                    augustus_gene_id = tmp.split(" ")[-1]
+                    gene_counter += 1
+
+                    gene_syn_id = gene_id_template % gene_counter
+                    genes_syn_dict[augustus_gene_id] = gene_syn_id
+                    augustus_transcript_id = ""
+                    augustus_transcript_parent = ""
+                    out_fd.write("# start gene %s\n" % gene_syn_id)
+                    tmp = in_fd.next().strip()
+                    while True:
+                        while tmp[0] != "#":
+                            tmp_list = tmp.split("\t")
+                            feature_type = tmp_list[2]
+                            edited_str = "\t".join(tmp_list[:-1])
+                            info_field_list = tmp_list[-1].split(";")
+                            if feature_type == "gene":
+                                edited_str += "\tID=%s\n" % gene_syn_id
+                            elif feature_type == "transcript":
+                                for entry in info_field_list:
+                                    if "ID" in entry:
+                                        augustus_transcript_id = entry.split("=")[-1]
+                                        if augustus_transcript_id not in transcripts_syn_dict:
+                                            transcripts_counter += 1
+                                            transcripts_syn_dict[augustus_transcript_id] = transcript_id_template % transcripts_counter
+                                        transcript_syn_id = transcripts_syn_dict[augustus_transcript_id]
+                                    if "Parent" in entry:
+                                        augustus_transcript_parent = entry.split("=")[-1]
+                                        if augustus_transcript_parent != augustus_gene_id:
+                                            raise ValueError("Transcript parent id and gene id are not same!")
+                                edited_str += "\tID=%s;Parent=%s\n" % (transcript_syn_id, gene_syn_id)
+                            elif feature_type == "CDS":
+                                for entry in info_field_list:
+                                    if "ID" in entry:
+                                        augustus_cds_id = entry.split("=")[-1]
+                                        if augustus_cds_id not in cds_syn_dict:
+                                            cds_counter += 1
+                                            cds_syn_dict[augustus_cds_id] = cds_id_template % cds_counter
+                                        cds_syn_id = cds_syn_dict[augustus_cds_id]
+                                    if "Parent" in entry:
+                                        augustus_cds_parent = entry.split("=")[-1]
+                                        if augustus_cds_parent != augustus_transcript_id:
+                                            raise ValueError("CDS parent id and transcript id are not same!")
+                                edited_str += "\tID=%s;Parent=%s\n" % (cds_syn_id, transcript_syn_id)
+                            elif (feature_type == "stop_codon") or (feature_type == "start_codon"):
+                                for entry in info_field_list:
+                                    if "Parent" in entry:
+                                        augustus_feature_parent = entry.split("=")[-1]
+                                        if augustus_feature_parent != augustus_transcript_id:
+                                            raise ValueError("Feature parent id and transcript id are not same!")
+                                edited_str += "\tParent=%s\n" % transcript_syn_id
+                            else:
+                                edited_str = tmp
+
+                            out_fd.write(edited_str)
+                            tmp = in_fd.next().strip()
+                        while tmp[0] == "#":
+                            if "# end gene" in tmp:
+                                break
+                            out_fd.write(tmp + "\n")
+                            tmp = in_fd.next().strip()
+                        if "# end gene" in tmp:
+                                break
+                    out_fd.write("# end gene %s\n" % gene_syn_id)
+        genes_syn_dict.write(genes_syn_file)
+        transcripts_syn_dict.write(transcripts_syn_file)
+        cds_syn_dict.write(cds_syn_file)
+
     """
     def rename_augustus_genes(self, augustus_gff, output_prefix, genes_syn_file=None, transcripts_syn_file=None,
                               species_prefix=None, number_of_digits_in_number=8):
