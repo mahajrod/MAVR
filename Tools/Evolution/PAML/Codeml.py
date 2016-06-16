@@ -74,10 +74,11 @@ def extract_trees_from_codeml_report_init(queue):
     extract_trees_from_codeml_report.queue = queue
 
 
-def results_extraction_listener(queue, output_file):
+def results_extraction_listener(queue, output_file_prefix, selected_species_list=None):
     """listens for messages on the queue, writes to file."""
 
     positive_selection_dict = TwoLvlDict()
+    selected_species_positive_selection_dict = TwoLvlDict()
     error_fd = open("errors.err", "w")
     error_fd.write("#sample\terror_code\n")
     while 1:
@@ -88,13 +89,19 @@ def results_extraction_listener(queue, output_file):
         if result == 'finish':
             print "AAA"
             #print output_file
-            positive_selection_dict.write(output_file)
-            with open(output_file, "w") as out_fd:
-                out_fd.write(positive_selection_dict.table_form(absent_symbol="."))
-            print positive_selection_dict.table_form(absent_symbol=".")
+            positive_selection_dict.write("%s.all" % output_file_prefix)
+            if selected_species_list:
+                selected_species_positive_selection_dict.write("%s.selected_species" % output_file_prefix)
+            #print positive_selection_dict.table_form(absent_symbol=".")
             break
         if result[1]:
             positive_selection_dict[result[0]] = result[1]
+            if selected_species_list:
+                for species in selected_species_list:
+                    if species in result[1]:
+                        if result[0] not in selected_species_positive_selection_dict:
+                            selected_species_positive_selection_dict[result[0]] = {}
+                        selected_species_positive_selection_dict[[result[0]]][species] = result[1][species]
 
         #pos_sel_fd.flush()
 
@@ -253,7 +260,7 @@ class Codeml(Tool):
         self.parallel_execute(options_list, dir_list=dir_list)
 
     def parallel_results_extraction(self, in_dir, tree_file, report_suffix, output_prefix,
-                                    report_file):
+                                    report_file_prefix, selected_species_list=None):
         work_dir = os.getcwd()
         input_directory = os.path.abspath(in_dir)
         dir_list = sorted(os.listdir(input_directory))
@@ -270,7 +277,8 @@ class Codeml(Tool):
         manager = mp.Manager()
         queue = manager.Queue()
         process_pool = mp.Pool(self.threads + 1, extract_trees_from_codeml_report_init, [queue])
-        watcher = process_pool.apply_async(results_extraction_listener, (queue, report_file))
+        watcher = process_pool.apply_async(results_extraction_listener,
+                                           (queue, report_file_prefix, selected_species_list))
 
         #print options_list
         process_pool.map(extract_trees_from_codeml_report, options_list)

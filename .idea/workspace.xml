@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py" afterPath="$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parsers/PAML.py" afterPath="$PROJECT_DIR$/Parsers/PAML.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/evolution/parallel_codeml.py" afterPath="$PROJECT_DIR$/scripts/evolution/parallel_codeml.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -22,8 +21,8 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/MAVR$extract_results_ragnvald.coverage" NAME="extract_results_ragnvald Coverage Results" MODIFIED="1444977224067" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/projects/deaminases/mating_type_detection" />
     <SUITE FILE_PATH="coverage/MAVR$extract_ncf_exon_lengthes.coverage" NAME="extract_ncf_exon_lengthes Coverage Results" MODIFIED="1455547492086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/projects/nxf" />
+    <SUITE FILE_PATH="coverage/MAVR$extract_results_ragnvald.coverage" NAME="extract_results_ragnvald Coverage Results" MODIFIED="1444977224067" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/projects/deaminases/mating_type_detection" />
     <SUITE FILE_PATH="coverage/MAVR$RepeatMasker.coverage" NAME="RepeatMasker Coverage Results" MODIFIED="1460315764871" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Tools/RepeatMasking" />
     <SUITE FILE_PATH="coverage/MAVR$divergence_time_estimation.coverage" NAME="divergence_time_estimation Coverage Results" MODIFIED="1456438806977" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts/evolution" />
     <SUITE FILE_PATH="coverage/MAVR$HMMER3.coverage" NAME="HMMER3 Coverage Results" MODIFIED="1462656324145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Tools/HMMER" />
@@ -31,9 +30,6 @@
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
-  </component>
-  <component name="DaemonCodeAnalyzer">
-    <disable_hints />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
@@ -44,8 +40,8 @@
       <file leaf-file-name="parallel_codeml.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/evolution/parallel_codeml.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8815789" vertical-offset="258" max-vertical-offset="1170">
-              <caret line="59" column="98" selection-start-line="59" selection-start-column="98" selection-end-line="59" selection-end-column="98" />
+            <state vertical-scroll-proportion="0.19078948">
+              <caret line="26" column="30" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
               <folding>
                 <element signature="e#54#64#0" expanded="true" />
               </folding>
@@ -56,7 +52,7 @@
       <file leaf-file-name="Abstract.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="36" max-vertical-offset="5634">
+            <state vertical-scroll-proportion="0.0">
               <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
               <folding />
             </state>
@@ -66,8 +62,8 @@
       <file leaf-file-name="PAML.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Parsers/PAML.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-62.357143" vertical-offset="0" max-vertical-offset="3420">
-              <caret line="97" column="79" selection-start-line="97" selection-start-column="79" selection-end-line="97" selection-end-column="79" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
               <folding>
                 <element signature="e#23#58#0" expanded="true" />
               </folding>
@@ -78,8 +74,8 @@
       <file leaf-file-name="Codeml.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1302" max-vertical-offset="4716">
-              <caret line="66" column="42" selection-start-line="66" selection-start-column="42" selection-end-line="66" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="280" column="43" selection-start-line="280" selection-start-column="43" selection-end-line="280" selection-end-column="43" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
@@ -87,10 +83,20 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="GeneralCollections.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CustomCollections/GeneralCollections.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="82" column="39" selection-start-line="82" selection-start-column="29" selection-end-line="82" selection-end-column="73" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="File.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Routines/File.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6012">
+            <state vertical-scroll-proportion="0.0">
               <caret line="39" column="32" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="32" />
               <folding />
             </state>
@@ -100,8 +106,8 @@
       <file leaf-file-name="extract_families_of_species.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/treefam/extract_families_of_species.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="2322">
-              <caret line="45" column="15" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="41" column="54" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="57" />
               <folding />
             </state>
           </provider>
@@ -181,10 +187,12 @@
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
   </component>
+  <component name="NamedScopeManager">
+    <order />
+  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1" />
     <option name="y" value="25" />
-    <option name="width" value="1922" />
+    <option name="width" value="1920" />
     <option name="height" value="1055" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -211,6 +219,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -425,13 +434,26 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="CustomCollections" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="BConverters" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -559,7 +581,79 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="true" type="tests" factoryName="py.test">
+    <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MAVR" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="TARGET" value="" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MAVR" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PyLettuceRunConfigurationType" factoryName="Lettuce">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MAVR" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MAVR" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Attests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -577,11 +671,26 @@
       <option name="TEST_TYPE" value="TEST_SCRIPT" />
       <option name="PATTERN" value="" />
       <option name="USE_PATTERN" value="false" />
-      <option name="testToRun" value="" />
-      <option name="keywords" value="" />
-      <option name="params" value="" />
-      <option name="USE_PARAM" value="false" />
-      <option name="USE_KEYWORD" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MAVR" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Nosetests">
@@ -604,24 +713,6 @@
       <option name="USE_PATTERN" value="false" />
       <option name="PARAMS" value="" />
       <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="MAVR" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
@@ -647,7 +738,7 @@
       <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="tests" factoryName="Doctests">
+    <configuration default="true" type="tests" factoryName="py.test">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -665,26 +756,11 @@
       <option name="TEST_TYPE" value="TEST_SCRIPT" />
       <option name="PATTERN" value="" />
       <option name="USE_PATTERN" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Attests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="MAVR" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
+      <option name="testToRun" value="" />
+      <option name="keywords" value="" />
+      <option name="params" value="" />
+      <option name="USE_PARAM" value="false" />
+      <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
     <configuration default="false" name="SequenceCluster" type="PythonConfigurationType" factoryName="Python">
@@ -733,156 +809,6 @@
       <created>1443270821851</created>
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
-    </task>
-    <task id="LOCAL-00549" summary="sequence clusters">
-      <created>1465230100406</created>
-      <option name="number" value="00549" />
-      <option name="project" value="LOCAL" />
-      <updated>1465230100406</updated>
-    </task>
-    <task id="LOCAL-00550" summary="sequence clusters">
-      <created>1465230157361</created>
-      <option name="number" value="00550" />
-      <option name="project" value="LOCAL" />
-      <updated>1465230157361</updated>
-    </task>
-    <task id="LOCAL-00551" summary="sequence clusters">
-      <created>1465230274760</created>
-      <option name="number" value="00551" />
-      <option name="project" value="LOCAL" />
-      <updated>1465230274760</updated>
-    </task>
-    <task id="LOCAL-00552" summary="sequence clusters">
-      <created>1465232440477</created>
-      <option name="number" value="00552" />
-      <option name="project" value="LOCAL" />
-      <updated>1465232440477</updated>
-    </task>
-    <task id="LOCAL-00553" summary="sequence clusters">
-      <created>1465232448641</created>
-      <option name="number" value="00553" />
-      <option name="project" value="LOCAL" />
-      <updated>1465232448641</updated>
-    </task>
-    <task id="LOCAL-00554" summary="sequence clusters">
-      <created>1465481831196</created>
-      <option name="number" value="00554" />
-      <option name="project" value="LOCAL" />
-      <updated>1465481831197</updated>
-    </task>
-    <task id="LOCAL-00555" summary="sequence clusters">
-      <created>1465484029529</created>
-      <option name="number" value="00555" />
-      <option name="project" value="LOCAL" />
-      <updated>1465484029529</updated>
-    </task>
-    <task id="LOCAL-00556" summary="sequence clusters">
-      <created>1465484561227</created>
-      <option name="number" value="00556" />
-      <option name="project" value="LOCAL" />
-      <updated>1465484561227</updated>
-    </task>
-    <task id="LOCAL-00557" summary="sequence clusters">
-      <created>1465484957629</created>
-      <option name="number" value="00557" />
-      <option name="project" value="LOCAL" />
-      <updated>1465484957629</updated>
-    </task>
-    <task id="LOCAL-00558" summary="sequence clusters">
-      <created>1465485220309</created>
-      <option name="number" value="00558" />
-      <option name="project" value="LOCAL" />
-      <updated>1465485220309</updated>
-    </task>
-    <task id="LOCAL-00559" summary="sequence clusters">
-      <created>1465485255424</created>
-      <option name="number" value="00559" />
-      <option name="project" value="LOCAL" />
-      <updated>1465485255424</updated>
-    </task>
-    <task id="LOCAL-00560" summary="sequence clusters">
-      <created>1465485433248</created>
-      <option name="number" value="00560" />
-      <option name="project" value="LOCAL" />
-      <updated>1465485433248</updated>
-    </task>
-    <task id="LOCAL-00561" summary="sequence clusters">
-      <created>1465485633950</created>
-      <option name="number" value="00561" />
-      <option name="project" value="LOCAL" />
-      <updated>1465485633950</updated>
-    </task>
-    <task id="LOCAL-00562" summary="sequence clusters">
-      <created>1465485759578</created>
-      <option name="number" value="00562" />
-      <option name="project" value="LOCAL" />
-      <updated>1465485759578</updated>
-    </task>
-    <task id="LOCAL-00563" summary="sequence clusters">
-      <created>1465485832477</created>
-      <option name="number" value="00563" />
-      <option name="project" value="LOCAL" />
-      <updated>1465485832477</updated>
-    </task>
-    <task id="LOCAL-00564" summary="sequence clusters">
-      <created>1465486303961</created>
-      <option name="number" value="00564" />
-      <option name="project" value="LOCAL" />
-      <updated>1465486303961</updated>
-    </task>
-    <task id="LOCAL-00565" summary="sequence clusters">
-      <created>1465486449297</created>
-      <option name="number" value="00565" />
-      <option name="project" value="LOCAL" />
-      <updated>1465486449297</updated>
-    </task>
-    <task id="LOCAL-00566" summary="sequence clusters">
-      <created>1465486500155</created>
-      <option name="number" value="00566" />
-      <option name="project" value="LOCAL" />
-      <updated>1465486500155</updated>
-    </task>
-    <task id="LOCAL-00567" summary="sequence clusters">
-      <created>1465486675022</created>
-      <option name="number" value="00567" />
-      <option name="project" value="LOCAL" />
-      <updated>1465486675022</updated>
-    </task>
-    <task id="LOCAL-00568" summary="sequence clusters">
-      <created>1465486754438</created>
-      <option name="number" value="00568" />
-      <option name="project" value="LOCAL" />
-      <updated>1465486754438</updated>
-    </task>
-    <task id="LOCAL-00569" summary="sequence clusters">
-      <created>1465488096446</created>
-      <option name="number" value="00569" />
-      <option name="project" value="LOCAL" />
-      <updated>1465488096446</updated>
-    </task>
-    <task id="LOCAL-00570" summary="sequence clusters">
-      <created>1465490363244</created>
-      <option name="number" value="00570" />
-      <option name="project" value="LOCAL" />
-      <updated>1465490363244</updated>
-    </task>
-    <task id="LOCAL-00571" summary="sequence clusters">
-      <created>1465490468721</created>
-      <option name="number" value="00571" />
-      <option name="project" value="LOCAL" />
-      <updated>1465490468721</updated>
-    </task>
-    <task id="LOCAL-00572" summary="sequence clusters">
-      <created>1465490484310</created>
-      <option name="number" value="00572" />
-      <option name="project" value="LOCAL" />
-      <updated>1465490484310</updated>
-    </task>
-    <task id="LOCAL-00573" summary="sequence clusters">
-      <created>1465490664310</created>
-      <option name="number" value="00573" />
-      <option name="project" value="LOCAL" />
-      <updated>1465490664310</updated>
     </task>
     <task id="LOCAL-00574" summary="sequence clusters">
       <created>1465490990282</created>
@@ -1028,7 +954,157 @@
       <option name="project" value="LOCAL" />
       <updated>1465989857977</updated>
     </task>
-    <option name="localTasksCounter" value="598" />
+    <task id="LOCAL-00598" summary="sequence clusters">
+      <created>1465999103811</created>
+      <option name="number" value="00598" />
+      <option name="project" value="LOCAL" />
+      <updated>1465999103812</updated>
+    </task>
+    <task id="LOCAL-00599" summary="sequence clusters">
+      <created>1465999274905</created>
+      <option name="number" value="00599" />
+      <option name="project" value="LOCAL" />
+      <updated>1465999274905</updated>
+    </task>
+    <task id="LOCAL-00600" summary="sequence clusters">
+      <created>1465999305171</created>
+      <option name="number" value="00600" />
+      <option name="project" value="LOCAL" />
+      <updated>1465999305171</updated>
+    </task>
+    <task id="LOCAL-00601" summary="sequence clusters">
+      <created>1466005510127</created>
+      <option name="number" value="00601" />
+      <option name="project" value="LOCAL" />
+      <updated>1466005510127</updated>
+    </task>
+    <task id="LOCAL-00602" summary="sequence clusters">
+      <created>1466005572303</created>
+      <option name="number" value="00602" />
+      <option name="project" value="LOCAL" />
+      <updated>1466005572303</updated>
+    </task>
+    <task id="LOCAL-00603" summary="sequence clusters">
+      <created>1466006615197</created>
+      <option name="number" value="00603" />
+      <option name="project" value="LOCAL" />
+      <updated>1466006615197</updated>
+    </task>
+    <task id="LOCAL-00604" summary="sequence clusters">
+      <created>1466006721157</created>
+      <option name="number" value="00604" />
+      <option name="project" value="LOCAL" />
+      <updated>1466006721157</updated>
+    </task>
+    <task id="LOCAL-00605" summary="sequence clusters">
+      <created>1466006815609</created>
+      <option name="number" value="00605" />
+      <option name="project" value="LOCAL" />
+      <updated>1466006815609</updated>
+    </task>
+    <task id="LOCAL-00606" summary="sequence clusters">
+      <created>1466007014394</created>
+      <option name="number" value="00606" />
+      <option name="project" value="LOCAL" />
+      <updated>1466007014394</updated>
+    </task>
+    <task id="LOCAL-00607" summary="sequence clusters">
+      <created>1466007196841</created>
+      <option name="number" value="00607" />
+      <option name="project" value="LOCAL" />
+      <updated>1466007196841</updated>
+    </task>
+    <task id="LOCAL-00608" summary="sequence clusters">
+      <created>1466007348495</created>
+      <option name="number" value="00608" />
+      <option name="project" value="LOCAL" />
+      <updated>1466007348495</updated>
+    </task>
+    <task id="LOCAL-00609" summary="sequence clusters">
+      <created>1466007963615</created>
+      <option name="number" value="00609" />
+      <option name="project" value="LOCAL" />
+      <updated>1466007963615</updated>
+    </task>
+    <task id="LOCAL-00610" summary="sequence clusters">
+      <created>1466008077396</created>
+      <option name="number" value="00610" />
+      <option name="project" value="LOCAL" />
+      <updated>1466008077396</updated>
+    </task>
+    <task id="LOCAL-00611" summary="sequence clusters">
+      <created>1466008266316</created>
+      <option name="number" value="00611" />
+      <option name="project" value="LOCAL" />
+      <updated>1466008266317</updated>
+    </task>
+    <task id="LOCAL-00612" summary="sequence clusters">
+      <created>1466008449652</created>
+      <option name="number" value="00612" />
+      <option name="project" value="LOCAL" />
+      <updated>1466008449652</updated>
+    </task>
+    <task id="LOCAL-00613" summary="sequence clusters">
+      <created>1466008577021</created>
+      <option name="number" value="00613" />
+      <option name="project" value="LOCAL" />
+      <updated>1466008577021</updated>
+    </task>
+    <task id="LOCAL-00614" summary="sequence clusters">
+      <created>1466008705688</created>
+      <option name="number" value="00614" />
+      <option name="project" value="LOCAL" />
+      <updated>1466008705688</updated>
+    </task>
+    <task id="LOCAL-00615" summary="sequence clusters">
+      <created>1466009001150</created>
+      <option name="number" value="00615" />
+      <option name="project" value="LOCAL" />
+      <updated>1466009001150</updated>
+    </task>
+    <task id="LOCAL-00616" summary="sequence clusters">
+      <created>1466009083415</created>
+      <option name="number" value="00616" />
+      <option name="project" value="LOCAL" />
+      <updated>1466009083415</updated>
+    </task>
+    <task id="LOCAL-00617" summary="sequence clusters">
+      <created>1466009201620</created>
+      <option name="number" value="00617" />
+      <option name="project" value="LOCAL" />
+      <updated>1466009201620</updated>
+    </task>
+    <task id="LOCAL-00618" summary="sequence clusters">
+      <created>1466009408589</created>
+      <option name="number" value="00618" />
+      <option name="project" value="LOCAL" />
+      <updated>1466009408589</updated>
+    </task>
+    <task id="LOCAL-00619" summary="sequence clusters">
+      <created>1466009493612</created>
+      <option name="number" value="00619" />
+      <option name="project" value="LOCAL" />
+      <updated>1466009493613</updated>
+    </task>
+    <task id="LOCAL-00620" summary="sequence clusters">
+      <created>1466009627804</created>
+      <option name="number" value="00620" />
+      <option name="project" value="LOCAL" />
+      <updated>1466009627804</updated>
+    </task>
+    <task id="LOCAL-00621" summary="sequence clusters">
+      <created>1466009707474</created>
+      <option name="number" value="00621" />
+      <option name="project" value="LOCAL" />
+      <updated>1466009707474</updated>
+    </task>
+    <task id="LOCAL-00622" summary="sequence clusters">
+      <created>1466009758348</created>
+      <option name="number" value="00622" />
+      <option name="project" value="LOCAL" />
+      <updated>1466009758349</updated>
+    </task>
+    <option name="localTasksCounter" value="623" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1052,30 +1128,30 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="25" width="1922" height="1055" extended-state="6" />
+    <frame x="0" y="25" width="1920" height="1055" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22538178" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22761194" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.4978678" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399361" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3375932" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1096,9 +1172,9 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23538704" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3383915" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3383915" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="UnknownFeatures">
@@ -1116,9 +1192,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="myTodoPanelSettings">
-      <TodoPanelSettings />
-    </option>
     <MESSAGE value="added parallel mode to TRF&#10;" />
     <MESSAGE value="additions in scripts/expansion&#10;" />
     <MESSAGE value="additions in scripts/alignment&#10;" />
@@ -1164,233 +1237,226 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/sequence/rename_sequence_ids.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/transcriptome/annotation/extract_complete_proteins_from_transdecoder_output.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/transcriptome/annotation/transdecoder_annotation_analysis.bash">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Evolution/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/treefam/download_treefam_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/alignment/parallel_exonerate.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/blast/parallel_blast_commands.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/expansion/extract_families_graphs_from_hclust_input.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="50" column="25" selection-start-line="50" selection-start-column="25" selection-end-line="50" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Annotation/Exonerate.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_exonerate.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="65" column="32" selection-start-line="65" selection-start-column="32" selection-end-line="65" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Assemblers/Spades.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/RepeatMasking/TRF.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3881578" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="-1.3881578">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/annotation/prepare_hints_from_exonerate_target_output.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.68421054" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.68421054">
           <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="55" selection-end-column="86" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/RepeatSearchTools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/AssemblyTools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/annotation/split_exonerate_output.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_augustus.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="257" column="0" selection-start-line="257" selection-start-column="0" selection-end-line="257" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Evolution/PAML/MCMCTree.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.75" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="3.75">
           <caret line="190" column="59" selection-start-line="190" selection-start-column="59" selection-end-line="190" selection-end-column="59" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/RepeatMasking/RepeatMasker.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.28289473" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="-0.28289473">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/evolution/divergence_time_estimation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/download/download_from_sra_by_ids.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/alignment/map_reads.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/alignment/make_blast_plus_db.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Alignment.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SeqAnalysis/SeqAnalysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.285714" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="-10.285714">
           <caret line="79" column="68" selection-start-line="79" selection-start-column="68" selection-end-line="79" selection-end-column="68" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BConverters/AnnotationConverters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/convert/fasta2phylip.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/convert/fasta2paml.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BConverters/SequenceConverters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BConverters/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BConverters/Converters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/annotation/extract_introns_from_genbank.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="215" column="12" selection-start-line="215" selection-start-column="8" selection-end-line="215" selection-end-column="12" />
           <folding />
         </state>
@@ -1398,127 +1464,135 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Tree.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/merge_alignments.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BConverters/MultipleAlignmentConverters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="15" column="12" selection-start-line="15" selection-start-column="8" selection-end-line="22" selection-end-column="89" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Evolution/PAML/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Routines/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6315789" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.6315789">
           <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/phylogenetics/unroot_tree.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="45" column="119" selection-start-line="45" selection-start-column="119" selection-end-line="45" selection-end-column="119" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/phylogenetics/convert_trees.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="12" column="38" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Parsers/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="912">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/evolution/prepare_alignment_for_codeml.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="20" column="65" selection-start-line="20" selection-start-column="65" selection-end-line="20" selection-end-column="65" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Routines/MultipleAlignment.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="48" column="64" selection-start-line="48" selection-start-column="64" selection-end-line="48" selection-end-column="64" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Parsers/Abstract.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.0789473" vertical-offset="2808" max-vertical-offset="7776">
+        <state vertical-scroll-proportion="-3.0789473">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5400" max-vertical-offset="8118">
+        <state vertical-scroll-proportion="0.0">
           <caret line="329" column="96" selection-start-line="329" selection-start-column="95" selection-end-line="329" selection-end-column="113" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5634">
-          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Routines/File.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6012">
+        <state vertical-scroll-proportion="0.0">
           <caret line="39" column="32" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/treefam/extract_families_of_species.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="2322">
-          <caret line="45" column="15" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="54" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="57" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Parsers/PAML.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-62.357143" vertical-offset="0" max-vertical-offset="3420">
-          <caret line="97" column="79" selection-start-line="97" selection-start-column="79" selection-end-line="97" selection-end-column="79" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
           <folding>
             <element signature="e#23#58#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/CustomCollections/GeneralCollections.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="82" column="39" selection-start-line="82" selection-start-column="29" selection-end-line="82" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1302" max-vertical-offset="4716">
-          <caret line="66" column="42" selection-start-line="66" selection-start-column="42" selection-end-line="66" selection-end-column="42" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="280" column="43" selection-start-line="280" selection-start-column="43" selection-end-line="280" selection-end-column="43" />
           <folding>
             <element signature="e#54#63#0" expanded="true" />
           </folding>
@@ -1527,8 +1601,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/evolution/parallel_codeml.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8815789" vertical-offset="258" max-vertical-offset="1170">
-          <caret line="59" column="98" selection-start-line="59" selection-start-column="98" selection-end-line="59" selection-end-column="98" />
+        <state vertical-scroll-proportion="0.19078948">
+          <caret line="26" column="30" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
           <folding>
             <element signature="e#54#64#0" expanded="true" />
           </folding>
