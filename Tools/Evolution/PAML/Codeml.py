@@ -81,7 +81,6 @@ def results_extraction_listener(queue, output_file_prefix, selected_species_list
     selected_species_positive_selection_dict = TwoLvlDict()
     error_fd = open("errors.err", "w")
     error_fd.write("#sample\terror_code\n")
-    print selected_species_list
     while 1:
         result = queue.get()
         if isinstance(result[1], int):
@@ -89,7 +88,6 @@ def results_extraction_listener(queue, output_file_prefix, selected_species_list
             continue
         if result == 'finish':
             print "AAA"
-            print output_file_prefix
             positive_selection_dict.write("%s.all" % output_file_prefix, absent_symbol=".")
             if selected_species_list:
                 selected_species_positive_selection_dict.write("%s.selected_species" % output_file_prefix,
@@ -97,7 +95,6 @@ def results_extraction_listener(queue, output_file_prefix, selected_species_list
             # print positive_selection_dict.table_form(absent_symbol=".")
             break
         if result[1]:
-            print positive_selection_dict
             positive_selection_dict[result[0]] = result[1]
             if selected_species_list:
                 for species in selected_species_list:
