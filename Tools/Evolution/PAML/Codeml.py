@@ -90,10 +90,11 @@ def results_extraction_listener(queue, output_file_prefix, selected_species_list
         if result == 'finish':
             print "AAA"
             print output_file_prefix
-            positive_selection_dict.write("%s.all" % output_file_prefix)
+            positive_selection_dict.write("%s.all" % output_file_prefix, absent_symbol=".")
             if selected_species_list:
-                selected_species_positive_selection_dict.write("%s.selected_species" % output_file_prefix)
-            #print positive_selection_dict.table_form(absent_symbol=".")
+                selected_species_positive_selection_dict.write("%s.selected_species" % output_file_prefix,
+                                                               absent_symbol=".")
+            # print positive_selection_dict.table_form(absent_symbol=".")
             break
         if result[1]:
             print positive_selection_dict
@@ -103,7 +104,7 @@ def results_extraction_listener(queue, output_file_prefix, selected_species_list
                     if species in result[1]:
                         if result[0] not in selected_species_positive_selection_dict:
                             selected_species_positive_selection_dict[result[0]] = {}
-                        selected_species_positive_selection_dict[[result[0]]][species] = result[1][species]
+                        selected_species_positive_selection_dict[result[0]][species] = result[1][species]
 
         #pos_sel_fd.flush()
 
