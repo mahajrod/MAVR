@@ -436,7 +436,7 @@ class AUGUSTUS(Tool):
     @staticmethod
     def replace_augustus_ids(augustus_gff, output_prefix, species_prefix=None, number_of_digits_in_id=8):
 
-        output_gff = "%s.gff" % output_prefix
+        output_gff = "%s.renamed.gff" % output_prefix
         genes_syn_file = "%s.gene.syn" % output_prefix
         transcripts_syn_file = "%s.transcript.syn" % output_prefix
         cds_syn_file = "%s.cds.syn" % output_prefix
