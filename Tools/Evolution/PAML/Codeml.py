@@ -88,13 +88,14 @@ def results_extraction_listener(queue, output_file_prefix, selected_species_list
             continue
         if result == 'finish':
             print "AAA"
-            #print output_file
+            print output_file_prefix
             positive_selection_dict.write("%s.all" % output_file_prefix)
             if selected_species_list:
                 selected_species_positive_selection_dict.write("%s.selected_species" % output_file_prefix)
             #print positive_selection_dict.table_form(absent_symbol=".")
             break
         if result[1]:
+            print positive_selection_dict
             positive_selection_dict[result[0]] = result[1]
             if selected_species_list:
                 for species in selected_species_list:
