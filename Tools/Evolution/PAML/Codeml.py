@@ -102,6 +102,7 @@ def results_extraction_listener(queue, output_file_prefix, selected_species_list
             if selected_species_list:
                 for species in selected_species_list:
                     if species in result[1]:
+                        print species
                         if result[0] not in selected_species_positive_selection_dict:
                             selected_species_positive_selection_dict[result[0]] = {}
                         selected_species_positive_selection_dict[result[0]][species] = result[1][species]
