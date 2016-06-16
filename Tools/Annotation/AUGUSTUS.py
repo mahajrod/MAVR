@@ -526,19 +526,6 @@ class AUGUSTUS(Tool):
         transcripts_syn_dict.write(transcripts_syn_file)
         cds_syn_dict.write(cds_syn_file)
 
-    """
-    def rename_augustus_genes(self, augustus_gff, output_prefix, genes_syn_file=None, transcripts_syn_file=None,
-                              species_prefix=None, number_of_digits_in_number=8):
-        if genes_syn_file is None:
-            if species_prefix is None:
-                raise ValueError("Both species prefix and genes synonym file were no set")
-            self.assign_synonyms_to_annotations_from_augustus_gff(self, augustus_gff, output_prefix, species_prefix,
-                                                                  number_of_digits_in_number=number_of_digits_in_number)
-        output_gff = "%s.renamed.gff" % output_prefix
-        with open(augustus_gff, "r") as in_fd:
-            with open()
-    """
-
 
 
 

@@ -35,8 +35,7 @@ parser.add_argument("-g", "--gene_model", action="store", dest="gene_model",
                          "intronless   : only predict single-exon genes like in prokaryotes and some eukaryotes"
                          "complete     : only predict complete genes"
                          "atleastone   : predict at least one complete gene"
-                         "exactlyone   : predict exactly one complete gene"
-                         "Default: complete")
+                         "exactlyone   : predict exactly one complete gene")
 parser.add_argument("-e", "--other_options", action="store", dest="other_options",
                     help="Other augustus options")
 parser.add_argument("-c", "--augustus_config_dir", action="store", dest="config_dir",
