@@ -60,7 +60,8 @@ parser.add_argument("-a", "--augustus_dir", action="store", dest="augustus_dir",
 
 args = parser.parse_args()
 
-output_gff = "%s.gff" % args.output
+output_raw_gff = "%s.gff" % args.output
+output_gff = "%s.renamed.gff" % args.output
 output_pep = "%s.pep" % args.output
 output_evidence_stats = "%s.transcript.evidence" % args.output
 output_evidence_stats_longest_pep = "%s.transcript.evidence.longest_pep" % args.output
@@ -111,13 +112,13 @@ AUGUSTUS.threads = args.threads
 
 print("Annotating genes...")
 
-AUGUSTUS.parallel_predict(args.species, args.input, output_gff, strand=args.strand, gene_model=args.gene_model,
+AUGUSTUS.parallel_predict(args.species, args.input, output_raw_gff, strand=args.strand, gene_model=args.gene_model,
                           output_gff3=True, other_options=args.other_options, config_dir=args.config_dir,
                           use_softmasking=args.softmasking, hints_file=args.hintsfile,
                           extrinsicCfgFile=args.extrinsicCfgFile, predict_UTR=args.predict_UTR)
 
-AUGUSTUS.assign_synonyms_to_annotations_from_augustus_gff(output_gff, args.output, args.species_prefix,
-                                                          number_of_digits_in_number=8)
+AUGUSTUS.replace_augustus_ids(output_raw_gff, args.output, species_prefix=args.species_prefix,
+                              number_of_digits_in_id=8)
 
 Gffread.extract_transcript_sequences(output_gff, args.input, args.output)
 
@@ -139,7 +140,8 @@ os.system("awk -F'\\t' 'NR==1 {}; NR > 1 {print $2}' %s > %s" % (output_supporte
 if args.pfam_db:
     print("Annotating domains(Pfam database)...")
     HMMER3.threads = args.threads
-    HMMER3.parallel_hmmscan(args.pfam_db, output_pep, output_hmmscan, num_of_seqs_per_scan=None, split_dir="splited_hmmscan_fasta/",
+    HMMER3.parallel_hmmscan(args.pfam_db, output_pep, output_hmmscan, num_of_seqs_per_scan=None,
+                            split_dir="splited_hmmscan_fasta/",
                             splited_output_dir="splited_hmmscan_output_dir",
                             tblout_outfile=None, domtblout_outfile=output_domtblout, pfamtblout_outfile=None,
                             splited_tblout_dir=None, splited_domtblout_dir="hmmscan_domtblout/")
