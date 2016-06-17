@@ -110,7 +110,7 @@ AUGUSTUS.path = args.augustus_dir
 AUGUSTUS.threads = args.threads
 
 print("Annotating genes...")
-
+"""
 AUGUSTUS.parallel_predict(args.species, args.input, output_raw_gff, strand=args.strand, gene_model=args.gene_model,
                           output_gff3=True, other_options=args.other_options, config_dir=args.config_dir,
                           use_softmasking=args.softmasking, hints_file=args.hintsfile,
@@ -152,9 +152,9 @@ if args.pfam_db:
                                                                                                output_pfam_supported_genes_ids)
     os.system(remove_transcript_ids_str)
 
-    for directory in ("splited_hmmscan_fasta/", "splited_hmmscan_output_dir", "hmmscan_domtblout/"):
-        shutil.rmtree(directory)
-
+    #for directory in ("splited_hmmscan_fasta/", "splited_hmmscan_output_dir", "hmmscan_domtblout/"):
+    #    shutil.rmtree(directory)
+"""
 if args.swissprot_db:
     print("Annotating peptides(Swissprot database)...")
     BLASTp.threads = args.threads
