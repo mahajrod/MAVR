@@ -115,10 +115,10 @@ AUGUSTUS.parallel_predict(args.species, args.input, output_raw_gff, strand=args.
                           output_gff3=True, other_options=args.other_options, config_dir=args.config_dir,
                           use_softmasking=args.softmasking, hints_file=args.hintsfile,
                           extrinsicCfgFile=args.extrinsicCfgFile, predict_UTR=args.predict_UTR)
-
+"""
 AUGUSTUS.replace_augustus_ids(output_raw_gff, args.output, species_prefix=args.species_prefix,
                               number_of_digits_in_id=8)
-
+"""
 Gffread.extract_transcript_sequences(output_gff, args.input, args.output)
 
 AUGUSTUS.extract_gene_ids_from_output(output_gff, all_annotated_genes_ids)
@@ -154,6 +154,8 @@ if args.pfam_db:
 
     #for directory in ("splited_hmmscan_fasta/", "splited_hmmscan_output_dir", "hmmscan_domtblout/"):
     #    shutil.rmtree(directory)
+"""
+
 """
 if args.swissprot_db:
     print("Annotating peptides(Swissprot database)...")
@@ -255,3 +257,4 @@ if args.pfam_db and args.swissprot_db:
     os.system("mv %s.supported.transcripts.swissprot_or_pfam_and_hints* %s" % (args.output, db_and_hints_dir))
 
 #gffread augustus_4_sp_hints.gff -g ~/data/genomes/caracal/final.assembly.fasta -x augustus_4_sp_hints.cds
+"""
