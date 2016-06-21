@@ -51,12 +51,12 @@ args = parser.parse_args()
 
 Codeml.threads = args.threads
 Codeml.path = args.path
-"""
+
 Codeml.parallel_codeml(args.input_dir, args.tree, args.output_dir, seq_type=args.seq_type,
                        codon_frequency=args.codon_frequency, noisy=3, verbose="much", runmode=0, clock=0,
                        aminoacid_distance=None, model=args.model, nssites=0, Mgene=args.mgene,
                        genetic_code=args.genetic_code, fix_kappa=False, kappa=5, fix_omega=False, omega=0.2, getSE=0,
                        RateAncestor=0, small_difference=args.small_difference, clean_data=args.clean_data, method=0)
-"""
+
 Codeml.parallel_results_extraction(args.output_dir, args.tree, ".out", "results", args.report_file_prefix,
                                    selected_species_list=args.selected_species)

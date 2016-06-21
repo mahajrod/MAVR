@@ -14,6 +14,7 @@ class CodeMLReport():
         self.dStree = None
         self.dNtree = None
         self.Wtree = None
+        self.LnL = None
         with open(reportfile, "r") as in_fd:
             for line in in_fd:
                 if line[:8] == "dS tree:":
@@ -24,6 +25,9 @@ class CodeMLReport():
                     continue
                 elif line.strip() == "w ratios as labels for TreeView:":
                     self.Wtree = Tree(in_fd.next().replace(" #", ": "))  # convert omega tree to readable by ete2 format
+                    continue
+                elif line[:10] == "lnL(ntime:":
+                    self.LnL = float(line.strip().split(":")[-1].split()[0])
                     continue
         if treefile:
             with open(treefile, "r") as tree_fd:

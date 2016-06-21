@@ -4,6 +4,11 @@ import os
 import sys
 
 import multiprocessing as mp
+
+from collections import OrderedDict
+
+from scipy.stats import chisqprob
+
 from Routines import File
 from Tools.Abstract import Tool
 from Parsers.PAML import CodeMLReport
@@ -104,10 +109,6 @@ def results_extraction_listener(queue, output_file_prefix, selected_species_list
                             selected_species_positive_selection_dict[result[0]] = {}
                         selected_species_positive_selection_dict[result[0]][species] = result[1][species]
 
-        #pos_sel_fd.flush()
-
-    #pos_sel_fd.close()
-
 
 class Codeml(Tool):
     def __init__(self, path="", max_threads=4):
@@ -155,8 +156,8 @@ class Codeml(Tool):
     @staticmethod
     def generate_ctl_file(seq_file, tree_file, out_file, ctl_file, seq_type="codons", codon_frequency="F3X4", noisy=3,
                           verbose="concise", runmode=0, clock=0, aminoacid_distance=None, model=1, nssites=0,
-                          genetic_code=0, fix_kappa=False, kappa=5, fix_omega=False, omega=0.2, getSE=0, RateAncestor=0,
-                          small_difference=0.00001, clean_data=True, method=0, Mgene=None):
+                          genetic_code=0, fix_kappa=False, kappa=5, fix_omega=False, omega=0.2, fix_alpha=True, alpha=0,
+                          getSE=0, RateAncestor=0, small_difference=0.00001, clean_data=True, method=0, Mgene=None):
 
         if verbose == "concise":
             verb = 0
@@ -209,7 +210,11 @@ class Codeml(Tool):
         options += "fix_kappa = %i\n" % (1 if fix_kappa else 0)
         options += "kappa = %i\n" % kappa
         options += "fix_omega = %i\n" % (1 if fix_omega else 0)
-        options += "omega = %f\n" % omega
+        options += "omega = %f\n\n" % omega
+
+        options += "fix_alpha = %i\n" % (1 if fix_alpha else 0)
+        options += "alpha = %f\n" % alpha
+
 
         options += "getSE = %i\n" % getSE
         options += "RateAncestor = %i\n" % RateAncestor
@@ -236,7 +241,7 @@ class Codeml(Tool):
     def parallel_codeml(self, in_dir, tree_file, out_dir, seq_type="codons", codon_frequency="F3X4", noisy=3,
                           verbose="concise", runmode=0, clock=0, aminoacid_distance=None, model=1, nssites=0,
                           genetic_code=0, fix_kappa=False, kappa=5, fix_omega=False, omega=0.2, getSE=0, RateAncestor=0,
-                          small_difference=0.00001, clean_data=True, method=0, Mgene=None):
+                          small_difference=0.000001, clean_data=True, method=0, Mgene=None):
 
         FileRoutines.save_mkdir(out_dir)
         alignment_files_list = FileRoutines.make_list_of_path_to_files(in_dir)
@@ -286,4 +291,66 @@ class Codeml(Tool):
         queue.put('finish')
         process_pool.close()
         os.chdir(work_dir)
+
+    def parallel_positive_selection_test(self, in_dir, tree_file, out_dir, results_file, seq_type="codons", codon_frequency="F3X4", noisy=3,
+                                         verbose="concise", runmode=0, clock=0, aminoacid_distance=None,
+                                         genetic_code=0, fix_kappa=False, kappa=5,  getSE=0, RateAncestor=0,
+                                         small_difference=0.000001, clean_data=True, method=0):
+        """
+        This function implements positive selection test (branch-site model)
+        for branch labeled in tree file using model_A vs model_A_null(omega fixed to 1) comparison
+        """
+
+        FileRoutines.save_mkdir(out_dir)
+        alignment_files_list = FileRoutines.make_list_of_path_to_files(in_dir)
+        tree_file_abs_path = os.path.abspath(tree_file)
+        options_list = []
+        dir_list = []
+        basename_dir_list = []
+        model_list = ["Model_A", "Model_A_null"]
+        fix_omega_dict = {"Model_A": False, "Model_A_null": True}
+        for filename in alignment_files_list:
+            directory, basename, extension = FileRoutines.split_filename(filename)
+            filename_out_dir = os.path.abspath("%s/%s/" % (out_dir, basename))
+            basename_dir_list.append(basename)
+            FileRoutines.save_mkdir(filename_out_dir)
+
+            for model in model_list:
+                model_dir = "%s/%s/" % (filename_out_dir, model)
+                FileRoutines.save_mkdir(model_dir)
+                out_file = "%s/%s/%s.out" % (filename_out_dir, model, basename)
+                ctl_file = "%s/%s/%s.ctl" % (filename_out_dir, model, basename)
+
+                options_list.append(ctl_file)
+                dir_list.append(model_dir)
+
+                self.generate_ctl_file(os.path.abspath(filename), tree_file_abs_path, out_file, ctl_file,
+                                       seq_type=seq_type, codon_frequency=codon_frequency, noisy=noisy, verbose=verbose,
+                                       runmode=runmode, clock=clock, aminoacid_distance=aminoacid_distance, model=2,
+                                       nssites=2, genetic_code=genetic_code, fix_kappa=fix_kappa,
+                                       kappa=kappa, fix_omega=fix_omega_dict[model], omega=1, getSE=getSE,
+                                       RateAncestor=RateAncestor, Mgene=0,
+                                       small_difference=small_difference, clean_data=clean_data, method=method)
+        self.parallel_execute(options_list, dir_list=dir_list)
+
+        results_dict = OrderedDict()
+        for basename in basename_dir_list:
+            results_dict[basename] = OrderedDict()
+            for model in model_list:
+                output_file = "%s/%s/%s/%s.out" % (out_dir, basename, model, basename)
+                codeml_report = CodeMLReport(output_file)
+                results_dict[basename][model] = codeml_report.LnL
+        with open(results_file, "w") as out_fd:
+            out_fd.write("id\tmodel_a_null,LnL\tmodel_a,LnL\t2*delta\tp-value\n")
+            for basename in basename_dir_list:
+                for model in model_list:
+                    if results_dict[basename][model] is None:
+                        print("LnL was not calculated for %s" % basename)
+                        break
+                else:
+                    doubled_delta = 2 * (results_dict[basename]["Model_A"] - results_dict[basename]["Model_A_null"])
+                    p_value = chisqprob(doubled_delta, 1) # degrees of freedom = 1
+                    out_fd.write("%s\t%f\t%f\t%f\t%s\n" % (basename, results_dict[basename]["Model_A_null"],
+                                                           results_dict[basename]["Model_A"], doubled_delta,
+                                                           p_value))
 
