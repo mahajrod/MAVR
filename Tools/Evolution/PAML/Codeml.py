@@ -321,7 +321,7 @@ class Codeml(Tool):
                 out_file = "%s/%s/%s.out" % (filename_out_dir, model, basename)
                 ctl_file = "%s/%s/%s.ctl" % (filename_out_dir, model, basename)
 
-                options_list.append(ctl_file)
+                options_list.append("%s.ctl" % basename)
                 dir_list.append(model_dir)
 
                 self.generate_ctl_file(os.path.abspath(filename), tree_file_abs_path, out_file, ctl_file,
