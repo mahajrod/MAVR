@@ -307,7 +307,7 @@ class Codeml(Tool):
         options_list = []
         dir_list = []
         basename_dir_list = []
-        model_list = ["Model_A_null"] # ["Model_A", "Model_A_null"]
+        model_list = ["Model_A", "Model_A_null"]
         fix_omega_dict = {"Model_A": False, "Model_A_null": True}
         for filename in alignment_files_list:
             directory, basename, extension = FileRoutines.split_filename(filename)
