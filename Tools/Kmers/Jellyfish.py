@@ -114,6 +114,11 @@ class Jellyfish(Tool):
         unique_peak_width = unique_peak_borders[1] - unique_peak_borders[0] + 1
         print unique_peak_borders
         print unique_peak_width
+        print "Maximums to show"
+        print maximums_to_show
+        print "Minimums to show"
+        print minimums_to_show
+
         unique_peak_borders_mean_multiplicity = MathRoutines.mean_from_bins(bins[unique_peak_borders[0]: unique_peak_borders[1]+1],
                                                                             counts[unique_peak_borders[0]: unique_peak_borders[1]+1])
         std_1 = MathRoutines.std_from_bins(bins[unique_peak_borders[0]: unique_peak_borders[1]+1],

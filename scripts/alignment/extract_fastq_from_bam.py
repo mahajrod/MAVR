@@ -23,7 +23,6 @@ parser.add_argument("-e", "--prepared_bam", action="store", dest="prepared_bam",
 """
 parser.add_argument("-e", "--prepared_bam_prefix", action="store", dest="prepared_bam_prefix",
                     help="Prefix of sorted bam file(s). Required if -p/--prepare_bam option is set")
-
 parser.add_argument("-d", "--temp_dir", action="store", dest="temp_dir",
                     help="Directory to use for temporary files. Required if -p/--prepare_bam option is set")
 parser.add_argument("-o", "--out_prefix", action="store", dest="out_prefix", required=True,
