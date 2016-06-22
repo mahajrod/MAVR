@@ -35,8 +35,8 @@ parser.add_argument("-m", "--max_memory_per_thread", action="store", dest="max_m
                     help="Maximum memory per thread. Default - 1G")
 args = parser.parse_args()
 
-if args.prepare_bam and ((not args.prepared_bam) or (not args.temp_dir)):
-    raise ValueError("Options -e/--prepared_bam and -m/--temp_dir must be set if -p/--prepare_bam option is used")
+if args.prepare_bam and ((not args.prepared_bam_prefix) or (not args.temp_dir)):
+    raise ValueError("Options -e/--prepared_bam_prefix and -m/--temp_dir must be set if -p/--prepare_bam option is used")
 
 SamtoolsV1.threads = args.threads
 
