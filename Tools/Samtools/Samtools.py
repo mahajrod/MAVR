@@ -90,7 +90,7 @@ class SamtoolsV1(Tool):
         info_field = self.get_info_from_flags(black_list_flags)
 
         view_options = " -h -b -u -F %i %s" % (info_field, input_bam)
-        sort_options = " -h -@ %i -n -m %s -T %s -o %s -" % (self.threads, max_memory_per_thread,
+        sort_options = " -@ %i -n -m %s -T %s -o %s -" % (self.threads, max_memory_per_thread,
                                                           temp_file_prefix, output_bam)
 
         if bam_file_to_write_unpaired_reads:
