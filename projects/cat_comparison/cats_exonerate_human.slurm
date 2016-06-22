@@ -18,12 +18,12 @@ WORK_DIR="/work/pavlov/okochenova/genomes_workdir/cat_comparison/"
 
 for SPECIES in AciJub_1.0 CroCro_1.0 LynPar_1.0 PanPar_1.0 PanLeo_1.0 PanTig_1.0 FelMar_1.0 PanOnc_1.0 FelCat_8.0;
     do
-    TARGET_GENOME="${CAT_GENOMES_DIR}${SPECIES}"
+    TARGET_GENOME="${CAT_GENOMES_DIR}${SPECIES}.fixed.fa"
     TARGET_GENOME_DIR="${WORK_DIR}${SPECIES}/"
     EXONERATE_OUTPUT_DIR="${TARGET_GENOME_DIR}${REFERENCE_SPECIES}/"
     EXONERATE_OUTPUT_FILE="${EXONERATE_OUTPUT_DIR}/exonerate_${REFERENCE_SPECIES}_pep_${SLURM_ARRAY_TASK_ID}.out"
-    mkdir ${TARGET_GENOME_DIR}
-    mkdir ${EXONERATE_OUTPUT_DIR}
+    mkdir -p ${TARGET_GENOME_DIR}
+    mkdir -p ${EXONERATE_OUTPUT_DIR}
     exonerate  --model protein2genome --showalignment --showquerygff --showtargetgff \
            -n 10 -q ${PEP_FILE} -t ${TARGET_GENOME} > ${EXONERATE_OUTPUT_FILE}
     done
