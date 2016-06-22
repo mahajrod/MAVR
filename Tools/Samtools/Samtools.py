@@ -85,14 +85,20 @@ class SamtoolsV1(Tool):
         return info_field
 
     def prepare_bam_for_read_extraction(self, input_bam, output_bam, temp_file_prefix="temp_bam",
-                                        max_memory_per_thread="1G"):
+                                        max_memory_per_thread="1G", bam_file_to_write_unpaired_reads=None):
         black_list_flags = ["not_primary_alignment", "supplementary_alignment"]
         info_field = self.get_info_from_flags(black_list_flags)
 
         view_options = " -b -u -F %i %s" % (info_field, input_bam)
         sort_options = " -@ %i -n -m %s -T %s -o %s -" % (self.threads, max_memory_per_thread,
                                                           temp_file_prefix, output_bam)
-        cmd = "samtools view %s | samtools sort %s" % (view_options, sort_options)
+
+        if bam_file_to_write_unpaired_reads:
+            split_unpaired_options = " -f %i -U %s" % (self.bam_flags["read_paired"], bam_file_to_write_unpaired_reads)
+            cmd = "samtools view %s | samtools view %s | samtools sort %s" % (view_options, split_unpaired_options,
+                                                                              sort_options)
+        else:
+            cmd = "samtools view %s | samtools sort %s" % (view_options, sort_options)
         self.execute(options="", cmd=cmd)
 
     def faidx(self, fasta_file):
