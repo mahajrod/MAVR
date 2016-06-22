@@ -43,7 +43,7 @@ SamtoolsV1.threads = args.threads
 if args.prepare_bam or args.mix_ends:
     FileRoutines.save_mkdir(FileRoutines.check_path(args.temp_dir))
     prepared_pe_bam_file = "%s.bam" % args.prepared_bam_prefix
-    prepared_unpaired_bam_file = ("%s.unpaired.bam" % args.mix_ends) if args.mix_ends else None
+    prepared_unpaired_bam_file = ("%s.unpaired.bam" % args.prepared_bam_prefix) if args.mix_ends else None
     """
     SamtoolsV1.prepare_bam_for_read_extraction(args.input, args.prepared_bam, temp_file_prefix=args.temp_dir,
                                                max_memory_per_thread=args.max_memory_per_thread)
