@@ -89,12 +89,12 @@ class SamtoolsV1(Tool):
         black_list_flags = ["not_primary_alignment", "supplementary_alignment"]
         info_field = self.get_info_from_flags(black_list_flags)
 
-        view_options = " -b -u -F %i %s" % (info_field, input_bam)
-        sort_options = " -@ %i -n -m %s -T %s -o %s -" % (self.threads, max_memory_per_thread,
+        view_options = " -h -b -u -F %i %s" % (info_field, input_bam)
+        sort_options = " -h -@ %i -n -m %s -T %s -o %s -" % (self.threads, max_memory_per_thread,
                                                           temp_file_prefix, output_bam)
 
         if bam_file_to_write_unpaired_reads:
-            split_unpaired_options = " -f %i -U %s" % (self.bam_flags["read_paired"], bam_file_to_write_unpaired_reads)
+            split_unpaired_options = " -h -f %i -U %s" % (self.bam_flags["read_paired"], bam_file_to_write_unpaired_reads)
             cmd = "samtools view %s | samtools view %s | samtools sort %s" % (view_options, split_unpaired_options,
                                                                               sort_options)
         else:
