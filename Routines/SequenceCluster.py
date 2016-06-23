@@ -231,9 +231,9 @@ class SequenceClusterRoutines:
                 if create_directory_for_each_cluster:
                     fam_dir = "%s%s/" % (out_dir, fam_id)
                     FileRoutines.save_mkdir(fam_dir)
-                    out_file = "%s%s.pep" % (fam_dir, out_prefix if out_prefix else fam_id)
+                    out_file = "%s%s.fasta" % (fam_dir, out_prefix if out_prefix else fam_id)
                 else:
-                    out_file = "%s/%s.pep" % (out_dir, out_prefix if out_prefix else fam_id)
+                    out_file = "%s/%s.fasta" % (out_dir, out_prefix if out_prefix else fam_id)
 
                 SeqIO.write(SequenceRoutines.record_by_id_generator(protein_dict, cluster_dict[fam_id], verbose=True),
                             out_file, format=seq_format)
