@@ -73,7 +73,7 @@ class PRANK(Tool):
                        show_tree=None, show_ancestral_sequences=None, show_evolutionary_events=None,
                        showall=None, compute_posterior_support=None, njtree=None):
 
-        self.parallel_align(self, list_of_files, output_directory, output_suffix=output_suffix, tree_file=tree_file,
+        self.parallel_align(list_of_files, output_directory, output_suffix=output_suffix, tree_file=tree_file,
                             output_format=output_format, show_xml=show_xml, show_tree=show_tree,
                             show_ancestral_sequences=show_ancestral_sequences,
                             show_evolutionary_events=show_evolutionary_events, showall=showall,
