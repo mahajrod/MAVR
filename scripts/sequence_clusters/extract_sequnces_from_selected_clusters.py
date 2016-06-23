@@ -25,7 +25,7 @@ parser.add_argument("-d", "--output_directory", action="store", dest="out_dir", 
 
 args = parser.parse_args()
 
-SequenceClusterRoutines.extract_sequences_from_selected_clusters(args.clusters_id_file, args.cluster_file,
+SequenceClusterRoutines.extract_sequences_from_selected_clusters(args.cluster_id_file, args.cluster_file,
                                                                  args.seq_file, output_dir=args.out_dir,
                                                                  seq_format=args.seq_file_format,
                                                                  out_prefix=args.output,
