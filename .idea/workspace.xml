@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/extract_sequnces_from_selected_clusters.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/SequenceCluster.py" afterPath="$PROJECT_DIR$/Routines/SequenceCluster.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/multiple_alignment/parallel_codon_alignment_by_prank.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/multiple_alignment/parallel_prank.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/MultipleAlignment/MAFFT.py" afterPath="$PROJECT_DIR$/Tools/MultipleAlignment/MAFFT.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/MultipleAlignment/PRANK.py" afterPath="$PROJECT_DIR$/Tools/MultipleAlignment/PRANK.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -40,26 +42,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="get_codon_alignment.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_codon_alignment.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="702">
-              <caret line="12" column="78" selection-start-line="12" selection-start-column="78" selection-end-line="12" selection-end-column="78" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="extract_sequences_by_clusters.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/extract_sequences_by_clusters.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="882">
-              <caret line="19" column="33" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="extract_families_of_species.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/treefam/extract_families_of_species.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -84,7 +66,19 @@
         <entry file="file://$PROJECT_DIR$/Routines/SequenceCluster.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="3498" max-vertical-offset="4446">
-              <caret line="230" column="52" selection-start-line="230" selection-start-column="52" selection-end-line="230" selection-end-column="52" />
+              <caret line="231" column="57" selection-start-line="231" selection-start-column="57" selection-end-line="231" selection-end-column="57" />
+              <folding>
+                <element signature="e#22#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MAFFT.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tools/MultipleAlignment/MAFFT.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="96" max-vertical-offset="1026">
+              <caret line="48" column="38" selection-start-line="48" selection-start-column="38" selection-end-line="48" selection-end-column="38" />
               <folding>
                 <element signature="e#22#31#0" expanded="true" />
               </folding>
@@ -102,21 +96,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="extract_proteins_from_selected_families.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/treefam/extract_proteins_from_selected_families.py">
+      <file leaf-file-name="parallel_prank.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/parallel_prank.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
+              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+              <folding>
+                <element signature="e#54#69#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="parallel_codon_alignment_by_prank.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/parallel_codon_alignment_by_prank.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.45394737" vertical-offset="0" max-vertical-offset="912">
+              <caret line="27" column="51" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="extract_sequnces_from_selected_clusters.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="extract_sequnces_from_selected_clusters.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/extract_sequnces_from_selected_clusters.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.69078946" vertical-offset="0" max-vertical-offset="912">
-              <caret line="35" column="58" selection-start-line="35" selection-start-column="58" selection-end-line="35" selection-end-column="58" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="684">
+              <caret line="19" column="70" selection-start-line="19" selection-start-column="70" selection-end-line="19" selection-end-column="70" />
               <folding>
                 <element signature="e#55#70#0" expanded="true" />
               </folding>
@@ -128,8 +134,20 @@
         <entry file="file://$PROJECT_DIR$/Routines/TreeFam.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1152">
-              <caret line="15" column="23" selection-start-line="14" selection-start-column="4" selection-end-line="41" selection-end-column="0" />
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PRANK.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tools/MultipleAlignment/PRANK.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="577" max-vertical-offset="1566">
+              <caret line="59" column="48" selection-start-line="59" selection-start-column="48" selection-end-line="59" selection-end-column="48" />
+              <folding>
+                <element signature="e#22#31#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -150,9 +168,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/sequence_clusters/rename_sequence_in_clusters_by_species_name.py" />
-        <option value="$PROJECT_DIR$/projects/parrot_genome/A_vitata_chicken.slurm" />
-        <option value="$PROJECT_DIR$/projects/parrot_genome/A_vittata_chicken.slurm" />
         <option value="$PROJECT_DIR$/projects/parrot_genome/A_vittata_ficedula_albicollis.slurm" />
         <option value="$PROJECT_DIR$/projects/parrot_genome/A_vittata_taeniopygia_guttata.slurm" />
         <option value="$PROJECT_DIR$/projects/begula/Begula_lingula_anatina.slurm" />
@@ -196,11 +211,14 @@
         <option value="$PROJECT_DIR$/projects/cat_comparison/cats_exonerate_cat.slurm" />
         <option value="$PROJECT_DIR$/Tools/Samtools/Samtools.py" />
         <option value="$PROJECT_DIR$/scripts/alignment/extract_fastq_from_bam.py" />
-        <option value="$PROJECT_DIR$/Tools/MultipleAlignment/PRANK.py" />
         <option value="$PROJECT_DIR$/scripts/sequence_clusters/treefam/label_ortholog_files_with_species_name.sh" />
         <option value="$PROJECT_DIR$/scripts/sequence_clusters/rename_elements_in_clusters.py" />
-        <option value="$PROJECT_DIR$/Routines/SequenceCluster.py" />
         <option value="$PROJECT_DIR$/scripts/sequence_clusters/extract_sequnces_from_selected_clusters.py" />
+        <option value="$PROJECT_DIR$/Routines/SequenceCluster.py" />
+        <option value="$PROJECT_DIR$/Tools/MultipleAlignment/MAFFT.py" />
+        <option value="$PROJECT_DIR$/Tools/MultipleAlignment/PRANK.py" />
+        <option value="$PROJECT_DIR$/scripts/multiple_alignment/parallel_prank.py" />
+        <option value="$PROJECT_DIR$/scripts/multiple_alignment/parallel_codon_alignment_by_prank.py" />
       </list>
     </option>
   </component>
@@ -576,20 +594,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Routines" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="Parsers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -634,11 +638,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts/multiple_alignment" />
       <recent name="$PROJECT_DIR$/scripts/sequence_clusters" />
       <recent name="$PROJECT_DIR$/scripts/sequence_clusters/treefam" />
       <recent name="$PROJECT_DIR$/projects/cat_comparison" />
       <recent name="$PROJECT_DIR$/scripts/evolution" />
-      <recent name="$PROJECT_DIR$/scripts/annotation" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/scripts/sequence_clusters" />
@@ -927,36 +931,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00605" summary="sequence clusters">
-      <created>1466006815609</created>
-      <option name="number" value="00605" />
-      <option name="project" value="LOCAL" />
-      <updated>1466006815609</updated>
-    </task>
-    <task id="LOCAL-00606" summary="sequence clusters">
-      <created>1466007014394</created>
-      <option name="number" value="00606" />
-      <option name="project" value="LOCAL" />
-      <updated>1466007014394</updated>
-    </task>
-    <task id="LOCAL-00607" summary="sequence clusters">
-      <created>1466007196841</created>
-      <option name="number" value="00607" />
-      <option name="project" value="LOCAL" />
-      <updated>1466007196841</updated>
-    </task>
-    <task id="LOCAL-00608" summary="sequence clusters">
-      <created>1466007348495</created>
-      <option name="number" value="00608" />
-      <option name="project" value="LOCAL" />
-      <updated>1466007348495</updated>
-    </task>
-    <task id="LOCAL-00609" summary="sequence clusters">
-      <created>1466007963615</created>
-      <option name="number" value="00609" />
-      <option name="project" value="LOCAL" />
-      <updated>1466007963615</updated>
-    </task>
     <task id="LOCAL-00610" summary="sequence clusters">
       <created>1466008077396</created>
       <option name="number" value="00610" />
@@ -1221,7 +1195,37 @@
       <option name="project" value="LOCAL" />
       <updated>1466670845621</updated>
     </task>
-    <option name="localTasksCounter" value="654" />
+    <task id="LOCAL-00654" summary="sequence clusters">
+      <created>1466672689577</created>
+      <option name="number" value="00654" />
+      <option name="project" value="LOCAL" />
+      <updated>1466672689577</updated>
+    </task>
+    <task id="LOCAL-00655" summary="sequence clusters">
+      <created>1466672731586</created>
+      <option name="number" value="00655" />
+      <option name="project" value="LOCAL" />
+      <updated>1466672731587</updated>
+    </task>
+    <task id="LOCAL-00656" summary="sequence clusters">
+      <created>1466673021952</created>
+      <option name="number" value="00656" />
+      <option name="project" value="LOCAL" />
+      <updated>1466673021952</updated>
+    </task>
+    <task id="LOCAL-00657" summary="sequence clusters">
+      <created>1466673051752</created>
+      <option name="number" value="00657" />
+      <option name="project" value="LOCAL" />
+      <updated>1466673051752</updated>
+    </task>
+    <task id="LOCAL-00658" summary="sequence clusters">
+      <created>1466673449221</created>
+      <option name="number" value="00658" />
+      <option name="project" value="LOCAL" />
+      <updated>1466673449222</updated>
+    </task>
+    <option name="localTasksCounter" value="659" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1356,34 +1360,17 @@
           <line>95</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/Tools/MultipleAlignment/PRANK.py</url>
+          <line>1</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="12" />
+      <option name="time" value="13" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Parsers/Abstract.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.0789473" vertical-offset="0" max-vertical-offset="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/File.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="39" column="32" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
@@ -1677,14 +1664,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/MultipleAlignment/PRANK.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="666">
-          <caret line="29" column="56" selection-start-line="29" selection-start-column="56" selection-end-line="29" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_codon_alignment.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="702">
@@ -1733,14 +1712,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/TreeFam.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1152">
-          <caret line="15" column="23" selection-start-line="14" selection-start-column="4" selection-end-line="41" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/treefam/extract_proteins_from_selected_families.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="912">
@@ -1749,23 +1720,69 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/TreeFam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1152">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/extract_sequnces_from_selected_clusters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="684">
+          <caret line="19" column="70" selection-start-line="19" selection-start-column="70" selection-end-line="19" selection-end-column="70" />
+          <folding>
+            <element signature="e#55#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Routines/SequenceCluster.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3498" max-vertical-offset="4446">
-          <caret line="230" column="52" selection-start-line="230" selection-start-column="52" selection-end-line="230" selection-end-column="52" />
+          <caret line="231" column="57" selection-start-line="231" selection-start-column="57" selection-end-line="231" selection-end-column="57" />
           <folding>
             <element signature="e#22#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/extract_sequnces_from_selected_clusters.py">
+    <entry file="file://$PROJECT_DIR$/Tools/MultipleAlignment/MAFFT.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.69078946" vertical-offset="0" max-vertical-offset="912">
-          <caret line="35" column="58" selection-start-line="35" selection-start-column="58" selection-end-line="35" selection-end-column="58" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="96" max-vertical-offset="1026">
+          <caret line="48" column="38" selection-start-line="48" selection-start-column="38" selection-end-line="48" selection-end-column="38" />
           <folding>
-            <element signature="e#55#70#0" expanded="true" />
+            <element signature="e#22#31#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/MultipleAlignment/PRANK.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="577" max-vertical-offset="1566">
+          <caret line="59" column="48" selection-start-line="59" selection-start-column="48" selection-end-line="59" selection-end-column="48" />
+          <folding>
+            <element signature="e#22#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/parallel_prank.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding>
+            <element signature="e#54#69#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/parallel_codon_alignment_by_prank.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45394737" vertical-offset="0" max-vertical-offset="912">
+          <caret line="27" column="51" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
+          <folding />
         </state>
       </provider>
     </entry>

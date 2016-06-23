@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 
-from Routines.File import split_filename
+from Routines import FileRoutines
 
 from Tools.Abstract import Tool
 
@@ -42,10 +42,11 @@ class MAFFT(Tool):
         options += " --anysymbol" if anysymbol else ""
         options_list = []
         for filename in list_of_files:
-            basename = split_filename(filename)[1]
+            basename = FileRoutines.split_filename(filename)[1]
             op = options
             op += " %s" % filename
-            op += " > %s/%s_%s.fasta" % (output_directory, basename, output_suffix)
+            op += " > %s/%s.fasta" % (output_directory,
+                                      ("%s_%s" % (basename, output_suffix)) if output_suffix else basename)
             options_list.append(op)
 
         self.parallel_execute(options_list, threads=number_of_processes)
