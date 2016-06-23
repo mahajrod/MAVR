@@ -184,3 +184,29 @@ class SequenceClusterRoutines:
 
         for species in clusters_dict:
             os.remove("%s_tmp.idx" % species)
+
+    @staticmethod
+    def rename_elements_in_clusters(clusters_file, syn_file, output_clusters_file,
+                                    remove_clusters_with_not_renamed_elements=False):
+        syn_dict = SynDict()
+        syn_dict.read(syn_file, comments_prefix="#")
+
+        clusters_dict = SynDict()
+        clusters_dict.read(clusters_file, split_values=True, values_separator=",", comments_prefix="#")
+
+        output_clusters_dict = SynDict()
+
+        for cluster in clusters_dict:
+            renamed_element_list = []
+            for element in clusters_dict[cluster]:
+                if element in syn_dict:
+                    renamed_element_list.append(syn_dict[element])
+                else:
+                    renamed_element_list.append(element)
+                    if remove_clusters_with_not_renamed_elements:
+                        break
+            else:
+                output_clusters_dict[cluster] = renamed_element_list
+
+        output_clusters_dict.write(output_clusters_file)
+

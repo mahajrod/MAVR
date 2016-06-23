@@ -10,7 +10,8 @@ class PRANK(Tool):
     def align(self,
               sequence_file, output, tree_file=None, output_format=None, show_xml=None,
               show_tree=None, show_ancestral_sequences=None, show_evolutionary_events=None,
-              showall=None, compute_posterior_support=None, njtree=None):
+              showall=None, compute_posterior_support=None, njtree=None, skip_insertions=False,
+              codon_alignment=None, translated_alignment=None):
         # TODO: add rest of options
         options = " -d=%s" % sequence_file
         options += " -o=%s" % output
@@ -24,5 +25,8 @@ class PRANK(Tool):
         options += " -showall" if not showall else ""
         options += " -support" if not compute_posterior_support else ""
         options += " -njtree" if not njtree else ""
+        options += " -F" if skip_insertions else ""
+        options += " -codon" if codon_alignment else ""
+        options += " -translate" if translated_alignment else ""
 
         self.execute(options)
