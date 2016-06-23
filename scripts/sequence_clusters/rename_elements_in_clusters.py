@@ -19,5 +19,5 @@ parser.add_argument("-r", "--remove_clusters_with_not_renamed_elements", action=
 
 args = parser.parse_args()
 
-SequenceClusterRoutines.rename_elements_in_clusters(args.input_clusters_file, args.syn_file, args.output_clusters_file,
+SequenceClusterRoutines.rename_elements_in_clusters(args.input_cluster_file, args.syn_file, args.output_cluster_file,
                                                     remove_clusters_with_not_renamed_elements=args.remove_clusters_with_not_renamed_elements)
