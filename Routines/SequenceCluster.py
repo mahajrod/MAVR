@@ -7,7 +7,7 @@ from Bio import SeqIO
 
 from Routines import FileRoutines
 from Routines.Sequence import SequenceRoutines
-from CustomCollections.GeneralCollections import SynDict, IdSet
+from CustomCollections.GeneralCollections import SynDict, IdSet, IdList
 
 
 class SequenceClusterRoutines:
@@ -210,3 +210,32 @@ class SequenceClusterRoutines:
 
         output_clusters_dict.write(output_clusters_file, splited_values=True)
 
+    @staticmethod
+    def extract_sequences_from_selected_clusters(clusters_id_file, cluster_file, seq_file,
+                                                 output_dir="./", seq_format="fasta",
+                                                 out_prefix=None, create_dir_for_each_cluster=False):
+        from Routines import SequenceRoutines, FileRoutines
+        cluster_id_list = IdList()
+        cluster_dict = SynDict()
+        #print(pep_file)
+        FileRoutines.save_mkdir(output_dir)
+        out_dir = FileRoutines.check_path(output_dir)
+        create_directory_for_each_cluster = True if out_prefix else create_dir_for_each_cluster
+        if clusters_id_file:
+            cluster_id_list.read(clusters_id_file)
+        cluster_dict.read(cluster_file, split_values=True, values_separator=",")
+        protein_dict = SeqIO.index_db("tmp.idx", FileRoutines.make_list_of_path_to_files(seq_file), format=seq_format)
+
+        for fam_id in cluster_id_list if clusters_id_file else cluster_dict:
+            if fam_id in cluster_dict:
+                if create_directory_for_each_cluster:
+                    fam_dir = "%s%s/" % (out_dir, fam_id)
+                    FileRoutines.save_mkdir(fam_dir)
+                    out_file = "%s%s.pep" % (fam_dir, out_prefix if out_prefix else fam_id)
+                else:
+                    out_file = "%s/%s.pep" % (out_dir, out_prefix if out_prefix else fam_id)
+
+                SeqIO.write(SequenceRoutines.record_by_id_generator(protein_dict, cluster_dict[fam_id], verbose=True),
+                            out_file, format=seq_format)
+
+        os.remove("tmp.idx")
