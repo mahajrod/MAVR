@@ -3,7 +3,7 @@ __author__ = 'Sergei F. Kliver'
 
 import argparse
 
-from Routines import TreeFamRoutines, FileRoutines, SequenceRoutines
+from Routines import FileRoutines, SequenceRoutines
 
 parser = argparse.ArgumentParser()
 
@@ -24,11 +24,6 @@ parser.add_argument("-d", "--output_directory", action="store", dest="out_dir", 
                     help="Directory to write output")
 
 args = parser.parse_args()
-
-TreeFamRoutines.extract_proteins_from_selected_families(args.fam_id_file, args.fam_file, args.pep_file,
-                                                        output_dir=args.out_dir, pep_format=args.pep_file_format,
-                                                        out_prefix=args.output,
-                                                        create_dir_for_each_family=args.create_dir_for_each_family)
 
 SequenceRoutines.extract_sequences_from_selected_clusters(args.clusters_id_file, args.cluster_file, args.seq_file,
                                                           output_dir=args.out_dir, seq_format=args.seq_file_format,
