@@ -208,5 +208,5 @@ class SequenceClusterRoutines:
             else:
                 output_clusters_dict[cluster] = renamed_element_list
 
-        output_clusters_dict.write(output_clusters_file)
+        output_clusters_dict.write(output_clusters_file, splited_values=True)
 
