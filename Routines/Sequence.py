@@ -122,6 +122,23 @@ class SequenceRoutines():
         return seq_dict
 
     @staticmethod
+    def translated_seq_generator(cds_dict, id_expression=None, genetic_code_table=1, translate_to_stop=True):
+
+        #pep_dict = OrderedDict()
+        for cds_id in cds_dict:
+            pep_seq = cds_dict[cds_id].translate(to_stop=translate_to_stop, table=genetic_code_table)
+            pep_id = id_expression(cds_id) if id_expression else cds_id
+            description = " cds_id=%s" % cds_id
+            pep_record = SeqRecord(id=pep_id, description=description, seq=pep_seq)
+            yield pep_record
+
+    def translate_sequences_from_file(self, input_file, output_file, format="fasta", id_expression=None,
+                                      genetic_code_table=1, translate_to_stop=True):
+        cds_dict = SeqIO.index_db("tmp.idx", input_file, format=format)
+        SeqIO.write(self.translated_seq_generator(cds_dict, id_expression=id_expression,
+                                                  genetic_code_table=genetic_code_table,
+                                                  translate_to_stop=translate_to_stop), output_file, format=format)
+    @staticmethod
     def get_cds_to_pep_accordance(cds_dict, pep_dict, verbose=False,
                                   parsing_mode="index_db", genetic_code_table=1,
                                   include_id_check=False):
@@ -652,6 +669,40 @@ class SequenceRoutines():
                     output_file, format=format)
 
         os.remove("temp.idx")
+
+    @staticmethod
+    def trim_cds_and_remove_terminal_stop_codons_generator(record_dict, stop_codons_list=("TGA", "TAA", "TAG")):
+
+        stop_codons = []
+        for stop_codon in stop_codons_list:
+            stop_codons.append(stop_codon.upper().replace("U", "T"))
+
+        for record_id in record_dict:
+            new_record = deepcopy(record_dict[record_id])
+            seq_length = len(new_record.seq)
+            remainder = seq_length % 3
+            if remainder == 0:
+                if str(new_record.seq[-3:]).upper() in stop_codons_list:
+                    trim = 3
+                else:
+                    trim = 0
+            else:
+                if str(new_record.seq[-3+remainder:remainder]).upper() in stop_codons:
+                    trim = 3 + remainder
+                else:
+                    trim = remainder
+            if trim > 0:
+                new_record.seq = Seq(new_record.seq[:-trim])
+
+            yield new_record
+
+    def trim_cds_and_remove_terminal_stop_codons(self, input_file, output_file, stop_codons_list=("TGA", "TAA", "TAG")):
+
+        record_dict = SeqIO.index_db("tmp.idx", input_file, format="fasta")
+
+        SeqIO.write(self.trim_cds_and_remove_terminal_stop_codons_generator(record_dict,
+                                                                            stop_codons_list=stop_codons_list),
+                    output_file, format="fasta")
 
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):

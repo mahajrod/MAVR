@@ -120,6 +120,9 @@ AUGUSTUS.replace_augustus_ids(output_raw_gff, args.output, species_prefix=args.s
                               number_of_digits_in_id=8)
 
 Gffread.extract_transcript_sequences(output_gff, args.input, args.output)
+SequenceRoutines.trim_cds_and_remove_terminal_stop_codons("%s.cds" % args.output, "%s.trimmed.cds" % args.output) # using default stop_codons(from universal genetic_code)
+SequenceRoutines.translate_sequences_from_file("%s.trimmed.cds" % args.output, "%s.trimmed.pep" % args.output, format="fasta", id_expression=None,
+                                      genetic_code_table=1, translate_to_stop=True) # Universal code !!!
 
 AUGUSTUS.extract_gene_ids_from_output(output_gff, all_annotated_genes_ids)
 AUGUSTUS.extract_CDS_annotations_from_output(output_gff, CDS_gff)
@@ -134,6 +137,7 @@ print("Extracting peptides...")
 AUGUSTUS.extract_proteins_from_output(output_gff, output_pep, id_prefix="", evidence_stats_file=output_evidence_stats,
                                       supported_by_hints_file=output_supported_stats)
 
+"""
 os.system("awk -F'\\t' 'NR==1 {}; NR > 1 {print $2}' %s > %s" % (output_supported_stats, output_supported_stats_ids))
 
 if args.pfam_db:
@@ -256,4 +260,4 @@ if args.pfam_db and args.swissprot_db:
     os.system("mv %s.supported.transcripts.swissprot_or_pfam_and_hints* %s" % (args.output, db_and_hints_dir))
 
 #gffread augustus_4_sp_hints.gff -g ~/data/genomes/caracal/final.assembly.fasta -x augustus_4_sp_hints.cds
-
+"""
