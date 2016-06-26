@@ -121,8 +121,9 @@ AUGUSTUS.replace_augustus_ids(output_raw_gff, args.output, species_prefix=args.s
 
 Gffread.extract_transcript_sequences(output_gff, args.input, args.output)
 SequenceRoutines.trim_cds_and_remove_terminal_stop_codons("%s.cds" % args.output, "%s.trimmed.cds" % args.output) # using default stop_codons(from universal genetic_code)
-SequenceRoutines.translate_sequences_from_file("%s.trimmed.cds" % args.output, "%s.trimmed.pep" % args.output, format="fasta", id_expression=None,
-                                      genetic_code_table=1, translate_to_stop=True) # Universal code !!!
+SequenceRoutines.translate_sequences_from_file("%s.trimmed.cds" % args.output, "%s.trimmed.pep" % args.output,
+                                               format="fasta", id_expression=None,
+                                               genetic_code_table=1, translate_to_stop=False) # Universal code !!!
 
 AUGUSTUS.extract_gene_ids_from_output(output_gff, all_annotated_genes_ids)
 AUGUSTUS.extract_CDS_annotations_from_output(output_gff, CDS_gff)
