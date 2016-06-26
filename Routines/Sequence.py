@@ -138,6 +138,8 @@ class SequenceRoutines():
         SeqIO.write(self.translated_seq_generator(cds_dict, id_expression=id_expression,
                                                   genetic_code_table=genetic_code_table,
                                                   translate_to_stop=translate_to_stop), output_file, format=format)
+        os.remove("tmp.idx")
+
     @staticmethod
     def get_cds_to_pep_accordance(cds_dict, pep_dict, verbose=False,
                                   parsing_mode="index_db", genetic_code_table=1,
@@ -703,6 +705,7 @@ class SequenceRoutines():
         SeqIO.write(self.trim_cds_and_remove_terminal_stop_codons_generator(record_dict,
                                                                             stop_codons_list=stop_codons_list),
                     output_file, format="fasta")
+        os.remove("tmp.idx")
 
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
