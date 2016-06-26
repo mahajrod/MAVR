@@ -126,7 +126,7 @@ class SequenceRoutines():
 
         #pep_dict = OrderedDict()
         for cds_id in cds_dict:
-            pep_seq = cds_dict[cds_id].translate(to_stop=translate_to_stop, table=genetic_code_table)
+            pep_seq = cds_dict[cds_id].seq.translate(to_stop=translate_to_stop, table=genetic_code_table)
             pep_id = id_expression(cds_id) if id_expression else cds_id
             description = " cds_id=%s" % cds_id
             pep_record = SeqRecord(id=pep_id, description=description, seq=pep_seq)
