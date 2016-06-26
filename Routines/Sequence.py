@@ -14,7 +14,7 @@ from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
 
-from CustomCollections.GeneralCollections import TwoLvlDict, SynDict, IdList
+from CustomCollections.GeneralCollections import TwoLvlDict, SynDict, IdList, IdSet
 from Routines.Functions import output_dict
 
 
@@ -139,6 +139,51 @@ class SequenceRoutines():
                                                   genetic_code_table=genetic_code_table,
                                                   translate_to_stop=translate_to_stop), output_file, format=format)
         os.remove("tmp.idx")
+
+    @staticmethod
+    def compare_sequences(record_dict_1, record_dict_2):
+        id_set_dict_1 = IdSet(record_dict_1.keys())
+        id_set_dict_2 = IdSet(record_dict_2.keys())
+        common_ids = id_set_dict_1 & id_set_dict_2
+        id_set_unique_to_dict_1 = id_set_dict_1 - id_set_dict_2
+        id_set_unique_to_dict_2 = id_set_dict_2 - id_set_dict_1
+
+        equal_seq_ids_set = IdSet()
+        non_equal_seq_ids_set = IdSet()
+        for seq_id in common_ids:
+            if record_dict_1[seq_id].seq == record_dict_2[seq_id].seq:
+                equal_seq_ids_set.add(seq_id)
+            else:
+                non_equal_seq_ids_set.add(seq_id)
+
+        return equal_seq_ids_set, non_equal_seq_ids_set, id_set_unique_to_dict_1, id_set_unique_to_dict_2
+
+    def compare_sequences_from_files(self, seq_file_1, seq_file_2, output_prefix, format="fasta", verbose=True):
+        record_dict_1 = SeqIO.index_db("tmp_A.idx", seq_file_1, format=format)
+        record_dict_2 = SeqIO.index_db("tmp_B.idx", seq_file_2, format=format)
+
+        comparison_results = self.compare_sequences(record_dict_1, record_dict_2)
+        number_of_same_seqs = len(comparison_results[0])
+        number_of_different_seqs = len(comparison_results[1])
+        number_of_unique_to_file_1_seqs = len(comparison_results[2])
+        number_of_unique_to_file_2_seqs = len(comparison_results[3])
+        for i, extension in zip(range(0, 4), ("same", "different", "unique_to_file_A", "unique_to_file_B")):
+            comparison_results[i].write("%s.%s" % (output_prefix, extension))
+
+        for filename in "tmp_A.idx", "tmp_B.idx":
+            os.remove(filename)
+        stat_string = "Same sequences: %i\nDifferent sequences: %i\nUnique to file A: %i\nUnique to file B : %i\n" % \
+                      (number_of_same_seqs, number_of_different_seqs,
+                       number_of_unique_to_file_1_seqs, number_of_unique_to_file_2_seqs)
+
+        with open("%s.stat" % output_prefix, "w") as stat_fd:
+            stat_fd.write(stat_string)
+
+        if verbose:
+            print(stat_string)
+
+        return comparison_results
+
 
     @staticmethod
     def get_cds_to_pep_accordance(cds_dict, pep_dict, verbose=False,

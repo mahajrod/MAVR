@@ -138,6 +138,9 @@ print("Extracting peptides...")
 AUGUSTUS.extract_proteins_from_output(output_gff, output_pep, id_prefix="", evidence_stats_file=output_evidence_stats,
                                       supported_by_hints_file=output_supported_stats)
 
+SequenceRoutines.compare_sequences_from_files(output_pep, "%s.trimmed.pep" % args.output, "comparison_of_peptides",
+                                              format="fasta", verbose=True)
+
 """
 os.system("awk -F'\\t' 'NR==1 {}; NR > 1 {print $2}' %s > %s" % (output_supported_stats, output_supported_stats_ids))
 
