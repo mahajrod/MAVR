@@ -115,16 +115,18 @@ AUGUSTUS.parallel_predict(args.species, args.input, output_raw_gff, strand=args.
                           output_gff3=True, other_options=args.other_options, config_dir=args.config_dir,
                           use_softmasking=args.softmasking, hints_file=args.hintsfile,
                           extrinsicCfgFile=args.extrinsicCfgFile, predict_UTR=args.predict_UTR)
-
+"""
 AUGUSTUS.replace_augustus_ids(output_raw_gff, args.output, species_prefix=args.species_prefix,
                               number_of_digits_in_id=8)
 
 Gffread.extract_transcript_sequences(output_gff, args.input, args.output)
-"""
-SequenceRoutines.trim_cds_and_remove_terminal_stop_codons("%s.cds" % args.output, "%s.trimmed.cds" % args.output) # using default stop_codons(from universal genetic_code)/ Note that this will affect mtDNA proteins
+
+SequenceRoutines.trim_cds_and_remove_terminal_stop_codons("%s.cds" % args.output, "%s.trimmed.cds" % args.output,
+                                                          stop_codons_list=("TGA", "TAA", "TAG")) # using default stop_codons(from universal genetic_code)/ Note that this will affect mtDNA proteins
 SequenceRoutines.translate_sequences_from_file("%s.trimmed.cds" % args.output, "%s.trimmed.pep" % args.output,
                                                format="fasta", id_expression=None,
-                                               genetic_code_table=1, translate_to_stop=False) # Universal code !!!
+                                               genetic_code_table=1, translate_to_stop=False,
+                                               prefix_of_file_inframe_stop_codons_seqs="cds_with_in_frame_stop_codons",) # Universal code !!!
 
 AUGUSTUS.extract_gene_ids_from_output(output_gff, all_annotated_genes_ids)
 AUGUSTUS.extract_CDS_annotations_from_output(output_gff, CDS_gff)
@@ -142,7 +144,7 @@ AUGUSTUS.extract_proteins_from_output(output_gff, output_pep, id_prefix="", evid
 SequenceRoutines.compare_sequences_from_files(output_pep, "%s.trimmed.pep" % args.output, "comparison_of_peptides",
                                               format="fasta", verbose=True)
 
-"""
+
 os.system("awk -F'\\t' 'NR==1 {}; NR > 1 {print $2}' %s > %s" % (output_supported_stats, output_supported_stats_ids))
 
 if args.pfam_db:
@@ -265,4 +267,4 @@ if args.pfam_db and args.swissprot_db:
     os.system("mv %s.supported.transcripts.swissprot_or_pfam_and_hints* %s" % (args.output, db_and_hints_dir))
 
 #gffread augustus_4_sp_hints.gff -g ~/data/genomes/caracal/final.assembly.fasta -x augustus_4_sp_hints.cds
-"""
+

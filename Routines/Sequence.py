@@ -121,42 +121,6 @@ class SequenceRoutines():
 
         return seq_dict
 
-    """
-    @staticmethod
-    def translated_seq_generator(cds_dict, id_expression=None, genetic_code_table=1, translate_to_stop=True,
-                                 stop_codon_symbol="*", ids_file_of_seqs_with_infame_stop_codons=None,
-                                 ):
-
-        #pep_dict = OrderedDict()
-        if ids_file_of_seqs_with_infame_stop_codons:
-            stop_fd = open(ids_file_of_seqs_with_infame_stop_codons, "w")
-        for cds_id in cds_dict:
-            pep_seq = cds_dict[cds_id].seq.translate(to_stop=translate_to_stop, table=genetic_code_table,
-                                                     stop_symbol=stop_codon_symbol)
-            pep_id = id_expression(cds_id) if id_expression else cds_id
-            description = " cds_id=%s" % cds_id
-            pep_record = SeqRecord(id=pep_id, description=description, seq=pep_seq)
-
-            if ids_file_of_seqs_with_infame_stop_codons:
-                if stop_codon_symbol in pep_seq:
-                    stop_fd.write("%s\n" % pep_id)
-
-            yield pep_record
-
-        if ids_file_of_seqs_with_infame_stop_codons:
-            stop_fd.close()
-
-    def translate_sequences_from_file(self, input_file, output_file, format="fasta", id_expression=None,
-                                      genetic_code_table=1, translate_to_stop=True,
-                                      ids_file_of_seqs_with_infame_stop_codons="proteins_with_in_frame_stop_codons.ids"):
-        cds_dict = SeqIO.index_db("tmp.idx", input_file, format=format)
-        SeqIO.write(self.translated_seq_generator(cds_dict, id_expression=id_expression,
-                                                  genetic_code_table=genetic_code_table,
-                                                  translate_to_stop=translate_to_stop,
-                                                  ids_file_of_seqs_with_infame_stop_codons=ids_file_of_seqs_with_infame_stop_codons),
-                    output_file, format=format)
-        os.remove("tmp.idx")
-    """
     def translated_seq_generator(self, cds_dict, id_expression=None, genetic_code_table=1, translate_to_stop=True,
                                  stop_codon_symbol="*", prefix_of_file_inframe_stop_codons_seqs=None):
 
@@ -183,7 +147,7 @@ class SequenceRoutines():
 
     def translate_sequences_from_file(self, input_file, output_file, format="fasta", id_expression=None,
                                       genetic_code_table=1, translate_to_stop=True,
-                                      prefix_of_file_inframe_stop_codons_seqs="proteins_with_in_frame_stop_codons"):
+                                      prefix_of_file_inframe_stop_codons_seqs="cds_with_in_frame_stop_codons"):
         cds_dict = SeqIO.index_db("tmp.idx", input_file, format=format)
         SeqIO.write(self.translated_seq_generator(cds_dict, id_expression=id_expression,
                                                   genetic_code_table=genetic_code_table,
