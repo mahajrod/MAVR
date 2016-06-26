@@ -84,7 +84,9 @@ output_swissprot_blastp_hits_names = "%s.swissprot.hits.names" % args.output
 
 output_swissprot_pfam_supported_transcripts_ids = "%s.supported.transcripts.swissprot_or_pfam.ids" % args.output
 output_swissprot_pfam_or_hints_supported_transcripts_ids = "%s.supported.transcripts.swissprot_or_pfam_or_hints.ids" % args.output
+output_swissprot_pfam_or_hints_supported_transcripts_inframe_stop_ids = "%s.supported.transcripts.swissprot_or_pfam_or_hints.inframe_stop.ids" % args.output
 output_swissprot_pfam_and_hints_supported_transcripts_ids = "%s.supported.transcripts.swissprot_or_pfam_and_hints.ids" % args.output
+output_swissprot_pfam_and_hints_supported_transcripts_inframe_stop_ids = "%s.supported.transcripts.swissprot_or_pfam_and_hints.inframe_stop.ids" % args.output
 output_swissprot_pfam_or_hints_supported_transcripts_evidence = "%s.supported.transcripts.swissprot_or_pfam_or_hints.evidence" % args.output
 output_swissprot_pfam_and_hints_supported_transcripts_evidence = "%s.supported.transcripts.swissprot_or_pfam_and_hints.evidence" % args.output
 output_swissprot_pfam_or_hints_supported_transcripts_pep = "%s.supported.transcripts.swissprot_or_pfam_or_hints.pep" % args.output
@@ -95,6 +97,8 @@ output_swissprot_pfam_and_hints_supported_transcripts_longest_pep_evidence = "%s
 output_swissprot_pfam_or_hints_supported_transcripts_longest_pep = "%s.supported.transcripts.swissprot_or_pfam_or_hints.longest_pep.pep" % args.output
 output_swissprot_pfam_and_hints_supported_transcripts_longest_pep = "%s.supported.transcripts.swissprot_or_pfam_and_hints.longest_pep.pep" % args.output
 
+prefix_of_file_inframe_stop_codons_seqs = "cds_with_in_frame_stop_codons"
+cds_with_inframe_stop_codons_ids = "%s.ids" % prefix_of_file_inframe_stop_codons_seqs
 
 CDS_gff = "%s.CDS.gff" % args.output
 CDS_masked_gff = "%s.CDS.masked.gff" % args.output
@@ -126,7 +130,7 @@ SequenceRoutines.trim_cds_and_remove_terminal_stop_codons("%s.cds" % args.output
 SequenceRoutines.translate_sequences_from_file("%s.trimmed.cds" % args.output, "%s.trimmed.pep" % args.output,
                                                format="fasta", id_expression=None,
                                                genetic_code_table=1, translate_to_stop=False,
-                                               prefix_of_file_inframe_stop_codons_seqs="cds_with_in_frame_stop_codons",) # Universal code !!!
+                                               prefix_of_file_inframe_stop_codons_seqs=prefix_of_file_inframe_stop_codons_seqs) # Universal code !!!
 
 AUGUSTUS.extract_gene_ids_from_output(output_gff, all_annotated_genes_ids)
 AUGUSTUS.extract_CDS_annotations_from_output(output_gff, CDS_gff)
@@ -143,7 +147,6 @@ AUGUSTUS.extract_proteins_from_output(output_gff, output_pep, id_prefix="", evid
 
 SequenceRoutines.compare_sequences_from_files(output_pep, "%s.trimmed.pep" % args.output, "comparison_of_peptides",
                                               format="fasta", verbose=True)
-
 
 os.system("awk -F'\\t' 'NR==1 {}; NR > 1 {print $2}' %s > %s" % (output_supported_stats, output_supported_stats_ids))
 
@@ -162,10 +165,6 @@ if args.pfam_db:
     remove_transcript_ids_str = "sed -re 's/\.t[0123456789]+//' %s | sort -k 1 | uniq > %s" % (output_pfam_supported_transcripts_ids,
                                                                                                output_pfam_supported_genes_ids)
     os.system(remove_transcript_ids_str)
-
-    #for directory in ("splited_hmmscan_fasta/", "splited_hmmscan_output_dir", "hmmscan_domtblout/"):
-    #    shutil.rmtree(directory)
-
 
 if args.swissprot_db:
     print("Annotating peptides(Swissprot database)...")
@@ -226,6 +225,17 @@ if args.pfam_db and args.swissprot_db:
             SequenceRoutines.extract_sequence_by_ids("%s%s" % (args.output, suffix),
                                                      id_file,
                                                      "%s%s" % (out_pref, suffix))
+
+    HMMER3.intersect_ids_from_files(output_swissprot_pfam_or_hints_supported_transcripts_ids,
+                                    cds_with_inframe_stop_codons_ids,
+                                    output_swissprot_pfam_or_hints_supported_transcripts_inframe_stop_ids,
+                                    mode="common")
+
+    HMMER3.intersect_ids_from_files(output_swissprot_pfam_and_hints_supported_transcripts_ids,
+                                    cds_with_inframe_stop_codons_ids,
+                                    output_swissprot_pfam_and_hints_supported_transcripts_inframe_stop_ids,
+                                    mode="common")
+
 
 elif args.pfam_db:
     gene_ids_white_list = [output_pfam_supported_genes_ids]
