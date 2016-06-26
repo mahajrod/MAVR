@@ -692,7 +692,7 @@ class SequenceRoutines():
                 else:
                     trim = remainder
             if trim > 0:
-                new_record.seq = Seq(new_record.seq[:-trim])
+                new_record.seq = new_record.seq[:-trim]
 
             yield new_record
 
