@@ -115,12 +115,13 @@ AUGUSTUS.parallel_predict(args.species, args.input, output_raw_gff, strand=args.
                           output_gff3=True, other_options=args.other_options, config_dir=args.config_dir,
                           use_softmasking=args.softmasking, hints_file=args.hintsfile,
                           extrinsicCfgFile=args.extrinsicCfgFile, predict_UTR=args.predict_UTR)
-"""
+
 AUGUSTUS.replace_augustus_ids(output_raw_gff, args.output, species_prefix=args.species_prefix,
                               number_of_digits_in_id=8)
 
 Gffread.extract_transcript_sequences(output_gff, args.input, args.output)
-SequenceRoutines.trim_cds_and_remove_terminal_stop_codons("%s.cds" % args.output, "%s.trimmed.cds" % args.output) # using default stop_codons(from universal genetic_code)
+"""
+SequenceRoutines.trim_cds_and_remove_terminal_stop_codons("%s.cds" % args.output, "%s.trimmed.cds" % args.output) # using default stop_codons(from universal genetic_code)/ Note that this will affect mtDNA proteins
 SequenceRoutines.translate_sequences_from_file("%s.trimmed.cds" % args.output, "%s.trimmed.pep" % args.output,
                                                format="fasta", id_expression=None,
                                                genetic_code_table=1, translate_to_stop=False) # Universal code !!!

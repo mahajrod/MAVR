@@ -121,23 +121,75 @@ class SequenceRoutines():
 
         return seq_dict
 
+    """
     @staticmethod
-    def translated_seq_generator(cds_dict, id_expression=None, genetic_code_table=1, translate_to_stop=True):
+    def translated_seq_generator(cds_dict, id_expression=None, genetic_code_table=1, translate_to_stop=True,
+                                 stop_codon_symbol="*", ids_file_of_seqs_with_infame_stop_codons=None,
+                                 ):
 
         #pep_dict = OrderedDict()
+        if ids_file_of_seqs_with_infame_stop_codons:
+            stop_fd = open(ids_file_of_seqs_with_infame_stop_codons, "w")
         for cds_id in cds_dict:
-            pep_seq = cds_dict[cds_id].seq.translate(to_stop=translate_to_stop, table=genetic_code_table)
+            pep_seq = cds_dict[cds_id].seq.translate(to_stop=translate_to_stop, table=genetic_code_table,
+                                                     stop_symbol=stop_codon_symbol)
             pep_id = id_expression(cds_id) if id_expression else cds_id
             description = " cds_id=%s" % cds_id
             pep_record = SeqRecord(id=pep_id, description=description, seq=pep_seq)
+
+            if ids_file_of_seqs_with_infame_stop_codons:
+                if stop_codon_symbol in pep_seq:
+                    stop_fd.write("%s\n" % pep_id)
+
             yield pep_record
 
+        if ids_file_of_seqs_with_infame_stop_codons:
+            stop_fd.close()
+
     def translate_sequences_from_file(self, input_file, output_file, format="fasta", id_expression=None,
-                                      genetic_code_table=1, translate_to_stop=True):
+                                      genetic_code_table=1, translate_to_stop=True,
+                                      ids_file_of_seqs_with_infame_stop_codons="proteins_with_in_frame_stop_codons.ids"):
         cds_dict = SeqIO.index_db("tmp.idx", input_file, format=format)
         SeqIO.write(self.translated_seq_generator(cds_dict, id_expression=id_expression,
                                                   genetic_code_table=genetic_code_table,
-                                                  translate_to_stop=translate_to_stop), output_file, format=format)
+                                                  translate_to_stop=translate_to_stop,
+                                                  ids_file_of_seqs_with_infame_stop_codons=ids_file_of_seqs_with_infame_stop_codons),
+                    output_file, format=format)
+        os.remove("tmp.idx")
+    """
+    def translated_seq_generator(self, cds_dict, id_expression=None, genetic_code_table=1, translate_to_stop=True,
+                                 stop_codon_symbol="*", prefix_of_file_inframe_stop_codons_seqs=None):
+
+        seqs_inframe_stop_codons_ids = IdSet()
+        for cds_id in cds_dict:
+            pep_seq = cds_dict[cds_id].seq.translate(to_stop=translate_to_stop, table=genetic_code_table,
+                                                     stop_symbol=stop_codon_symbol)
+            pep_id = id_expression(cds_id) if id_expression else cds_id
+            description = " cds_id=%s" % cds_id
+            pep_record = SeqRecord(id=pep_id, description=description, seq=pep_seq)
+
+            if stop_codon_symbol in pep_seq:
+                seqs_inframe_stop_codons_ids.add(pep_id)
+
+            yield pep_record
+
+        if prefix_of_file_inframe_stop_codons_seqs:
+            id_file = "%s.ids" % prefix_of_file_inframe_stop_codons_seqs
+            seq_file = "%s.cds" % prefix_of_file_inframe_stop_codons_seqs
+
+            seqs_inframe_stop_codons_ids.write(id_file)
+            SeqIO.write(self.record_by_id_generator(cds_dict, seqs_inframe_stop_codons_ids), seq_file,
+                        format="fasta")
+
+    def translate_sequences_from_file(self, input_file, output_file, format="fasta", id_expression=None,
+                                      genetic_code_table=1, translate_to_stop=True,
+                                      prefix_of_file_inframe_stop_codons_seqs="proteins_with_in_frame_stop_codons"):
+        cds_dict = SeqIO.index_db("tmp.idx", input_file, format=format)
+        SeqIO.write(self.translated_seq_generator(cds_dict, id_expression=id_expression,
+                                                  genetic_code_table=genetic_code_table,
+                                                  translate_to_stop=translate_to_stop,
+                                                  prefix_of_file_inframe_stop_codons_seqs=prefix_of_file_inframe_stop_codons_seqs),
+                    output_file, format=format)
         os.remove("tmp.idx")
 
     @staticmethod
@@ -184,6 +236,74 @@ class SequenceRoutines():
 
         return comparison_results
 
+    @staticmethod
+    def check_proteins_for_stop_codons(protein_dict, stop_codon_symbol_set=("*", ".")):
+        pep_with_stop_codons_ids = IdSet()
+        for pep_id in protein_dict:
+            for stop_codon_symbol in stop_codon_symbol_set:
+                if stop_codon_symbol in protein_dict[pep_id].seq:
+                    pep_with_stop_codons_ids.add(pep_id)
+                    continue
+        return pep_with_stop_codons_ids
+
+    def check_proteins_for_stop_codons_from_file(self, pep_file, output_prefix, stop_codon_symbol_set=("*", "."), format="fasta"):
+        pep_with_stop_codons_ids_file = "%s.ids" % output_prefix
+        pep_with_stop_codons_seq_file = "%s.pep" % output_prefix
+        pep_dict = SeqIO.index_db("tmp.idx", pep_file, format=format)
+
+        pep_with_stop_codons_ids = self.check_proteins_for_stop_codons(pep_dict,
+                                                                       stop_codon_symbol_set=stop_codon_symbol_set)
+        pep_with_stop_codons_ids.write(pep_with_stop_codons_ids_file)
+        SeqIO.write(self.record_by_id_generator(pep_dict, pep_with_stop_codons_ids), pep_with_stop_codons_seq_file,
+                    format=format)
+        os.remove("tmp.idx")
+        return pep_with_stop_codons_ids
+
+    @staticmethod
+    def check_cds_for_in_frame_stop_codons(cds_dict, genetic_code_table=1):
+        cds_with_stop_codons_ids = IdSet()
+        stop_codon_symbol = "*"
+        for cds_id in cds_dict:
+            pep_seq = cds_dict[cds_id].seq.translate(to_stop=False, table=genetic_code_table,
+                                                     stop_symbol=stop_codon_symbol)
+            if stop_codon_symbol in pep_seq:
+                cds_with_stop_codons_ids.add(cds_id)
+                continue
+        return cds_with_stop_codons_ids
+
+    def check_cds_for_stop_codons_from_file(self, cds_file, output_prefix, genetic_code_table=1, format="fasta"):
+        cds_with_stop_codons_ids_file = "%s.ids" % output_prefix
+        cds_with_stop_codons_seq_file = "%s.cds" % output_prefix
+        cds_dict = SeqIO.index_db("tmp.idx", cds_file, format=format)
+
+        cds_with_stop_codons_ids = self.check_cds_for_in_frame_stop_codons(cds_dict,
+                                                                           genetic_code_table=genetic_code_table)
+        cds_with_stop_codons_ids.write(cds_with_stop_codons_ids_file)
+        SeqIO.write(self.record_by_id_generator(cds_dict, cds_with_stop_codons_ids), cds_with_stop_codons_seq_file, 
+                    format=format)
+        os.remove("tmp.idx")
+        return cds_with_stop_codons_ids
+
+    @staticmethod
+    def check_for_selenocystein_presence(pep_dict):
+        selenocystein_ids = IdSet()
+
+        for pep_id in pep_dict:
+            if "U" in pep_dict[pep_id].seq:
+                selenocystein_ids.add(pep_id)
+
+        return selenocystein_ids
+
+    def check_selenocystein_presence_from_file(self, pep_file, output_prefix, format="fasta"):
+        selenocystein_ids_file = "%s.ids" % output_prefix
+        selenocystein_pep_file = "%s.pep" % output_prefix
+        pep_dict = SeqIO.index_db("tmp.idx", pep_file, format=format)
+
+        selenocystein_ids = self.check_for_selenocystein_presence(pep_dict)
+        selenocystein_ids.write(selenocystein_ids_file)
+        SeqIO.write(self.record_by_id_generator(pep_dict, selenocystein_ids), selenocystein_pep_file, format=format)
+        os.remove("tmp.idx")
+        return selenocystein_ids
 
     @staticmethod
     def get_cds_to_pep_accordance(cds_dict, pep_dict, verbose=False,
