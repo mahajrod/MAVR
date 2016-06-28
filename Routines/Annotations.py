@@ -93,12 +93,11 @@ class AnnotationsRoutines:
 
                     if len(tmp_entry) != 2:
                         continue
-
                     if tmp_entry[0] == "transcript_id":
-                        print "tttt"
+                        #print "tttt"
                         transcript_id = entry[1][1:-1]  # remove quotes
                     elif tmp_entry[0] == "protein_id":
-                        print "ppppp"
+                        #print "ppppp"
                         protein_id = entry[1][1:-1]
 
                 if (transcript_id is not None) and (protein_id is not None):
