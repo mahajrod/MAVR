@@ -92,10 +92,10 @@ class AnnotationsRoutines:
                     tmp_entry = entry.split()
                     if len(entry) != 2:
                         continue
-                    if entry[0] == "transcript_id":
+                    if tmp_entry[0] == "transcript_id":
                         print "tttt"
                         transcript_id = entry[1][1:-1]  # remove quotes
-                    elif entry[0] == "protein_id":
+                    elif tmp_entry[0] == "protein_id":
                         print "ppppp"
                         protein_id = entry[1][1:-1]
 
