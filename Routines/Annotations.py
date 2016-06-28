@@ -90,9 +90,10 @@ class AnnotationsRoutines:
                 #print tmp_list
                 for entry in tmp_list:
                     tmp_entry = entry.split()
-                    print tmp_entry
-                    if len(entry) != 2:
+
+                    if len(tmp_entry) != 2:
                         continue
+
                     if tmp_entry[0] == "transcript_id":
                         print "tttt"
                         transcript_id = entry[1][1:-1]  # remove quotes
