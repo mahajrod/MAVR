@@ -95,10 +95,10 @@ class AnnotationsRoutines:
                         continue
                     if tmp_entry[0] == "transcript_id":
                         #print "tttt"
-                        transcript_id = entry[1][1:-1]  # remove quotes
+                        transcript_id = tmp_entry[1][1:-1]  # remove quotes
                     elif tmp_entry[0] == "protein_id":
                         #print "ppppp"
-                        protein_id = entry[1][1:-1]
+                        protein_id = tmp_entry[1][1:-1]
 
                 if (transcript_id is not None) and (protein_id is not None):
                     if transcript_id in accordance_dict:
