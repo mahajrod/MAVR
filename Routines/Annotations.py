@@ -87,14 +87,16 @@ class AnnotationsRoutines:
                 tmp_list = tmp_list[-1].split(";")
                 protein_id = None
                 transcript_id = None
-                print tmp_list
+                #print tmp_list
                 for entry in tmp_list:
                     tmp_entry = entry.split()
                     if len(entry) != 2:
                         continue
                     if entry[0] == "transcript_id":
+                        print "tttt"
                         transcript_id = entry[1][1:-1]  # remove quotes
                     elif entry[0] == "protein_id":
+                        print "ppppp"
                         protein_id = entry[1][1:-1]
 
                 if (transcript_id is not None) and (protein_id is not None):
