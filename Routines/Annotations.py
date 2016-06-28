@@ -75,3 +75,35 @@ class AnnotationsRoutines:
                             out_fd.write("\t".join(line_list))
                         else:
                             out_fd.write(line)
+
+    @staticmethod
+    def get_transcript_to_pep_accordance_from_gtf(gtf_file, output_file, comment_symbol="#"):
+        accordance_dict = SynDict()
+        with open(gtf_file, "r") as gtf_fd:
+            for line in gtf_fd:
+                if line[0] == comment_symbol:
+                    continue
+                tmp_list = line.strip().split("\t")
+                tmp_list = tmp_list[-1].split(";")
+                protein_id = None
+                transcript_id = None
+                for entry in tmp_list:
+                    tmp_entry = entry.split()
+                    if len(entry) != 2:
+                        continue
+                    if entry[0] == "transcript_id":
+                        transcript_id = entry[1][1:-1]  # remove quotes
+                    elif entry[0] == "protein_id":
+                        protein_id = entry[1][1:-1]
+
+                if (transcript_id is not None) and (protein_id is not None):
+                    if transcript_id in accordance_dict:
+                        accordance_dict[transcript_id].add(protein_id)
+                    else:
+                        accordance_dict[transcript_id] = {protein_id}
+        accordance_dict.write(output_file, splited_values=True)
+
+
+
+
+
