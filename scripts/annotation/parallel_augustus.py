@@ -119,7 +119,7 @@ AUGUSTUS.parallel_predict(args.species, args.input, output_raw_gff, strand=args.
                           output_gff3=True, other_options=args.other_options, config_dir=args.config_dir,
                           use_softmasking=args.softmasking, hints_file=args.hintsfile,
                           extrinsicCfgFile=args.extrinsicCfgFile, predict_UTR=args.predict_UTR)
-"""
+
 AUGUSTUS.replace_augustus_ids(output_raw_gff, args.output, species_prefix=args.species_prefix,
                               number_of_digits_in_id=8)
 
@@ -182,11 +182,12 @@ if args.swissprot_db:
 
     for directory in ("splited_blastp_fasta", "splited_blastp_output_dir"):
         shutil.rmtree(directory)
-
+"""
 gene_ids_black_list = [genes_masked_ids] if args.masking else []
 gene_ids_white_list = []
 
 if args.pfam_db and args.swissprot_db:
+    """
     gene_ids_white_list = [output_pfam_supported_genes_ids, output_swissprot_supported_genes_ids]
     HMMER3.intersect_ids_from_files(output_swissprot_supported_transcripts_ids, output_pfam_supported_transcripts_ids,
                                     output_swissprot_pfam_supported_transcripts_ids, mode="combine")
@@ -213,7 +214,7 @@ if args.pfam_db and args.swissprot_db:
                                              output_swissprot_pfam_or_hints_supported_transcripts_longest_pep)
     SequenceRoutines.extract_sequence_by_ids(output_pep, "%s.ids" % output_swissprot_pfam_and_hints_supported_transcripts_longest_pep_evidence,
                                              output_swissprot_pfam_and_hints_supported_transcripts_longest_pep)
-
+    """
     for id_file in output_swissprot_pfam_or_hints_supported_transcripts_ids, \
                    output_swissprot_pfam_and_hints_supported_transcripts_ids, \
                    "%s.ids" % output_swissprot_pfam_or_hints_supported_transcripts_longest_pep_evidence, \
@@ -236,7 +237,7 @@ if args.pfam_db and args.swissprot_db:
                                     output_swissprot_pfam_and_hints_supported_transcripts_inframe_stop_ids,
                                     mode="common")
 
-
+"""
 elif args.pfam_db:
     gene_ids_white_list = [output_pfam_supported_genes_ids]
 elif args.swissprot_db:
@@ -266,7 +267,7 @@ for stat_file in output_evidence_stats, output_supported_stats, \
                                                    extensions=("png", "svg"),
                                                    legend_location="upper center",
                                                    stats_as_legend=True)
-
+"""
 if args.pfam_db and args.swissprot_db:
     db_or_hints_dir = "supported_by_db_or_hints/"
     db_and_hints_dir = "supported_by_db_and_hints/"
