@@ -221,7 +221,7 @@ if args.pfam_db and args.swissprot_db:
         out_pref = id_file[:-4]
         out_gff = "%s.gff" % out_pref
         AnnotationsRoutines.extract_transcripts_by_ids(output_gff, id_file, out_gff)
-        for suffix in ".cds", ".transcript":
+        for suffix in ".trimmed.cds", ".transcript":
             SequenceRoutines.extract_sequence_by_ids("%s%s" % (args.output, suffix),
                                                      id_file,
                                                      "%s%s" % (out_pref, suffix))
