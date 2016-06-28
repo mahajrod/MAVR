@@ -87,6 +87,7 @@ class AnnotationsRoutines:
                 tmp_list = tmp_list[-1].split(";")
                 protein_id = None
                 transcript_id = None
+                print tmp_list
                 for entry in tmp_list:
                     tmp_entry = entry.split()
                     if len(entry) != 2:
