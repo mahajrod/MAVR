@@ -99,9 +99,10 @@ class NCBIRoutines:
         downloaded_protein_ids = IdList(peptide_dict.keys())
 
         print "%i proteins were downloaded" % len(downloaded_protein_ids)
-        not_downloded_proteins_ids = Tool.intersect_ids(protein_id_list, downloaded_protein_ids, mode="only_a")
-        print "%i proteins were not downloaded" % len(not_downloded_proteins_ids)
-        not_downloded_proteins_ids.write("%s.not_downloaded.ids" % output_prefix)
+        not_downloaded_proteins_ids = Tool.intersect_ids(protein_id_list, downloaded_protein_ids, mode="only_a")
+        print "%i proteins were not downloaded" % len(not_downloaded_proteins_ids)
+        not_downloaded_proteins_ids.write("%s.not_downloaded.ids" % output_prefix)
+        downloaded_protein_ids.write("%s.downloaded.ids" % output_prefix)
 
         pep_without_transcripts = IdList()
         pep_with_several_CDS_features = IdList()
