@@ -135,14 +135,16 @@ class NCBIRoutines:
         pep_to_transcript_accordance.write("%s.pep_to_transcript.accordance" % output_prefix)
 
         transcript_ranges = np.append(np.arange(0, number_of_transcripts, download_chunk_size), [number_of_transcripts])
+
         print "Downloading transcripts..."
-        for i in range(0, len(ranges)-1):
+        for i in range(0, len(transcript_ranges)-1):
             print "Downloading chunk %i" % i
             transcript_tmp_file = "%s/%s_%i" % (transcript_temp_dir, transcript_file, i)
             self.efetch("nuccore", transcript_ids[transcript_ranges[i]:transcript_ranges[i+1]],
                         transcript_tmp_file, rettype="gb", retmode="text")
 
         os.system("cat %s/* > %s" % (transcript_temp_dir, transcript_file))
+
 
         transcript_dict = SeqIO.index_db("tmp_1.idx", transcript_file, format="genbank")
         """
