@@ -160,7 +160,7 @@ class NCBIRoutines:
             for feature in transcript_dict[transcript_id].features:
                 CDS_counter = 1
                 if feature.type == "CDS":
-                    print feature
+                    #print feature
 
                     feature_seq = feature.extract(transcript_dict[transcript_id].seq)
                     feature_id = "%s_cds_%i" % (transcript_id, CDS_counter)
