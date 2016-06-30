@@ -80,12 +80,12 @@ class NCBIRoutines:
         transcript_file = "%s.trascript.genbank" % output_prefix
 
         ranges = np.append(np.arange(0, number_of_ids, download_chunk_size), [number_of_ids])
-        """
+
         for i in range(0, len(ranges)-1):
             print "Downloading chunk %i" % i
             pep_tmp_file = "%s/%s_%i" % (temp_dir, pep_file, i)
             self.efetch("protein", protein_id_list[ranges[i]:ranges[i+1]], pep_tmp_file, rettype="gb", retmode="text")
-        """
+
         os.system("cat %s/* > %s" % (temp_dir, pep_file))
         print "BBBB"
         peptide_dict = SeqIO.index_db("tmp.idx", pep_file, format="genbank")
