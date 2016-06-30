@@ -9,6 +9,7 @@ from Bio import SeqIO, Entrez
 from Routines import FileRoutines
 from CustomCollections.GeneralCollections import IdList, SynDict
 
+from Tools.Abstract import Tool
 
 class NCBIRoutines:
     def __init__(self):
@@ -79,14 +80,22 @@ class NCBIRoutines:
         transcript_file = "%s.trascript.genbank" % output_prefix
 
         ranges = np.append(np.arange(0, number_of_ids, download_chunk_size), [number_of_ids])
+        """
         for i in range(0, len(ranges)-1):
             print "Downloading chunk %i" % i
             pep_tmp_file = "%s/%s_%i" % (temp_dir, pep_file, i)
             self.efetch("protein", protein_id_list[ranges[i]:ranges[i+1]], pep_tmp_file, rettype="gb", retmode="text")
-
-        os.system("cat %s/* > %s" % temp_dir, pep_file)
+        """
+        os.system("cat %s/* > %s" % (temp_dir, pep_file))
         print "BBBB"
         peptide_dict = SeqIO.index_db("tmp.idx", pep_file, format="genbank")
+        downloaded_protein_ids = IdList(peptide_dict.keys())
+
+        print "%i proteins were downloaded" % len(downloaded_protein_ids)
+        not_downloded_proteins_ids = Tool.intersect_ids(protein_id_list, downloaded_protein_ids, mode="only_a")
+        print "%i proteins were not downloaded" % len(not_downloded_proteins_ids)
+        not_downloded_proteins_ids.write("%s.not_downloaded.ids" % output_prefix)
+
 
         pep_to_transcript_accordance = SynDict()
         for pep_id in peptide_dict:
