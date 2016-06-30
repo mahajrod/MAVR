@@ -103,6 +103,7 @@ class NCBIRoutines:
         print "%i proteins were not downloaded" % len(not_downloaded_proteins_ids)
         not_downloaded_proteins_ids.write("%s.not_downloaded.ids" % output_prefix)
         downloaded_protein_ids.write("%s.downloaded.ids" % output_prefix)
+        print Tool.intersect_ids(protein_id_list, downloaded_protein_ids, mode="count")
 
         pep_without_transcripts = IdList()
         pep_with_several_CDS_features = IdList()
@@ -118,8 +119,6 @@ class NCBIRoutines:
                         if pep_id not in pep_to_transcript_accordance:
                             pep_to_transcript_accordance[pep_id] = [transcript_id]
                         else:
-
-
                             pep_to_transcript_accordance[pep_id].append(transcript_id)
                             print("Genbank record for %s contains several CDS features" % pep_id)
                             pep_with_several_CDS_features.append(pep_id)
@@ -142,6 +141,7 @@ class NCBIRoutines:
 
         transcript_ranges = np.append(np.arange(0, number_of_transcripts, download_chunk_size), [number_of_transcripts])
 
+        """
         print "Downloading transcripts..."
         for i in range(0, len(transcript_ranges)-1):
             print "Downloading chunk %i" % i
@@ -150,7 +150,7 @@ class NCBIRoutines:
                         transcript_tmp_file, rettype="gb", retmode="text")
 
         os.system("cat %s/* > %s" % (transcript_temp_dir, transcript_file))
-
+        """
 
         transcript_dict = SeqIO.index_db("tmp_1.idx", transcript_file, format="genbank")
         """
