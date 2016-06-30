@@ -4,8 +4,9 @@ import time
 
 import numpy as np
 
+from collections import OrderedDict
 from Bio import SeqIO, Entrez
-
+from Bio.SeqRecord import SeqRecord
 from Routines import FileRoutines
 from CustomCollections.GeneralCollections import IdList, SynDict
 
@@ -153,12 +154,22 @@ class NCBIRoutines:
         """
 
         transcript_dict = SeqIO.index_db("tmp_1.idx", transcript_file, format="genbank")
-        """
+        ""
+        cds_records_list = []
         for transcript_id in transcript_dict:
-            for feature in transcript_dict[transcript_id]:
+            for feature in transcript_dict[transcript_id].features:
+                CDS_counter = 1
                 if feature.type == "CDS":
                     print feature
-        """
+
+                    feature_seq = feature.extract(transcript_dict[transcript_id].seq)
+                    feature_id = "%s_cds_%i" % (transcript_id, CDS_counter)
+                    if "protein_id" in feature.qualifiers:
+                        description = "protein=%s" % feature.qualifiers["protein_id"][0]
+                    else:
+                        print "Corresponding protein id was not found for %s" % transcript_id
+                    cds_records_list.append(SeqRecord(seq=feature_seq, id=feature_id, description=description))
+        SeqIO.write(cds_records_list, "%s.cds" % output_prefix, format="fasta")
 
         """
         for filename in "tmp.idx", "tmp_2.idx":
