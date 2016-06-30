@@ -2,6 +2,8 @@
 import os
 import time
 
+import numpy as np
+
 from Bio import SeqIO, Entrez
 
 from Routines import FileRoutines
@@ -68,13 +70,21 @@ class NCBIRoutines:
                         strand=strand)
             time.sleep(0.4)
 
-    def get_cds_for_proteins(self, protein_id_list, output_prefix):
+    def get_cds_for_proteins(self, protein_id_list, output_prefix, download_chunk_size=100, temp_dir="temp"):
 
+        number_of_ids = len(protein_id_list)
+        print "Totaly %i ids" % number_of_ids
+        FileRoutines.save_mkdir(temp_dir)
         pep_file = "%s.pep.genbank" % output_prefix
         transcript_file = "%s.trascript.genbank" % output_prefix
-        print "AAAA"
-        self.efetch("protein", protein_id_list, pep_file, rettype="gb", retmode="text")
 
+        ranges = np.append(np.arange(0, number_of_ids, download_chunk_size), [number_of_ids])
+        for i in range(0, len(ranges)-1):
+            print "Downloading chunk %i" % i
+            pep_tmp_file = "%s/%s_%i" % (temp_dir, pep_file, i)
+            self.efetch("protein", protein_id_list[ranges[i]:ranges[i+1]], pep_tmp_file, rettype="gb", retmode="text")
+
+        os.system("cat %s/* > %s" % temp_dir, pep_file)
         print "BBBB"
         peptide_dict = SeqIO.index_db("tmp.idx", pep_file, format="genbank")
 
@@ -87,5 +97,5 @@ class NCBIRoutines:
     def get_cds_for_proteins_from_id_file(self, protein_id_file, output_prefix):
         pep_ids = IdList()
         pep_ids.read(protein_id_file)
-        print "Totaly %i ids" % len(pep_ids)
+
         self.get_cds_for_proteins(pep_ids, output_prefix)
