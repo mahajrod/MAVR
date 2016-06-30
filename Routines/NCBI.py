@@ -73,20 +73,20 @@ class NCBIRoutines:
     def get_cds_for_proteins(self, protein_id_list, output_prefix, download_chunk_size=100, temp_dir="temp"):
         from Tools.Abstract import Tool
         number_of_ids = len(protein_id_list)
-        print "Totaly %i ids" % number_of_ids
+        print "Total %i ids" % number_of_ids
         FileRoutines.save_mkdir(temp_dir)
         pep_file = "%s.pep.genbank" % output_prefix
         transcript_file = "%s.trascript.genbank" % output_prefix
 
         ranges = np.append(np.arange(0, number_of_ids, download_chunk_size), [number_of_ids])
 
+        """
         for i in range(0, len(ranges)-1):
             print "Downloading chunk %i" % i
             pep_tmp_file = "%s/%s_%i" % (temp_dir, pep_file, i)
             self.efetch("protein", protein_id_list[ranges[i]:ranges[i+1]], pep_tmp_file, rettype="gb", retmode="text")
-
+        """
         os.system("cat %s/* > %s" % (temp_dir, pep_file))
-        print "BBBB"
         peptide_dict = SeqIO.index_db("tmp.idx", pep_file, format="genbank")
         downloaded_protein_ids = IdList(peptide_dict.keys())
 
@@ -95,13 +95,32 @@ class NCBIRoutines:
         print "%i proteins were not downloaded" % len(not_downloded_proteins_ids)
         not_downloded_proteins_ids.write("%s.not_downloaded.ids" % output_prefix)
 
-
         pep_to_transcript_accordance = SynDict()
+        transcript_ids = IdList()
+        number_of_transcripts = len(transcript_ids)
+
         for pep_id in peptide_dict:
-            for feature in peptide_dict[pep_id]:
+            for feature in peptide_dict[pep_id].features:
+                if feature.type == "CDS":
+                    print feature
+                    pass
+        """
+        pep_to_transcript_accordance.write("%s.pep_to_transcript.accordance" % output_prefix)
+        transcript_ids.write("%s.transcripts.ids" % output_prefix)
+
+        print "Total %i transcript ids" % number_of_transcripts
+
+        transcript_dict = SeqIO.index_db("tmp_1.idx", transcript_file, format="genbank")
+
+        for transcript_id in transcript_dict:
+            for feature in transcript_dict[transcript_id]:
                 if feature.type == "CDS":
                     print feature
 
+
+        for filename in "tmp.idx", "tmp_2.idx":
+            os.remove(filename)
+        """
     def get_cds_for_proteins_from_id_file(self, protein_id_file, output_prefix):
         pep_ids = IdList()
         pep_ids.read(protein_id_file)
