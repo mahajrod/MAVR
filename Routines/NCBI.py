@@ -117,9 +117,14 @@ class NCBIRoutines:
                         if pep_id not in pep_to_transcript_accordance:
                             pep_to_transcript_accordance[pep_id] = [transcript_id]
                         else:
+
+
                             pep_to_transcript_accordance[pep_id].append(transcript_id)
                             print("Genbank record for %s contains several CDS features" % pep_id)
                             pep_with_several_CDS_features.append(pep_id)
+                        if transcript_id in transcript_ids:
+                            print "Repeated transcript id: %s" % transcript_id
+                            continue
                         transcript_ids.append(transcript_id)
                     except:
                         print "Transcript id for %s was not found" % pep_id
