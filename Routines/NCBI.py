@@ -87,7 +87,7 @@ class NCBIRoutines:
 
         ranges = np.append(np.arange(0, number_of_ids, download_chunk_size), [number_of_ids])
 
-        """
+
         print "Downloading proteins..."
         for i in range(0, len(ranges)-1):
             print "Downloading chunk %i" % i
@@ -95,7 +95,7 @@ class NCBIRoutines:
             self.efetch("protein", protein_id_list[ranges[i]:ranges[i+1]], pep_tmp_file, rettype="gb", retmode="text")
 
         os.system("cat %s/* > %s" % (protein_temp_dir, pep_file))
-        """
+
         peptide_dict = SeqIO.index_db("tmp.idx", pep_file, format="genbank")
         downloaded_protein_ids = IdList(peptide_dict.keys())
 
@@ -142,7 +142,7 @@ class NCBIRoutines:
 
         transcript_ranges = np.append(np.arange(0, number_of_transcripts, download_chunk_size), [number_of_transcripts])
 
-        """
+
         print "Downloading transcripts..."
         for i in range(0, len(transcript_ranges)-1):
             print "Downloading chunk %i" % i
@@ -151,10 +151,10 @@ class NCBIRoutines:
                         transcript_tmp_file, rettype="gb", retmode="text")
 
         os.system("cat %s/* > %s" % (transcript_temp_dir, transcript_file))
-        """
+
 
         transcript_dict = SeqIO.index_db("tmp_1.idx", transcript_file, format="genbank")
-        ""
+
         cds_records_list = []
         for transcript_id in transcript_dict:
             for feature in transcript_dict[transcript_id].features:
@@ -163,7 +163,7 @@ class NCBIRoutines:
                     #print feature
 
                     feature_seq = feature.extract(transcript_dict[transcript_id].seq)
-                    feature_id = "%s_cds_%i" % (transcript_id, CDS_counter)
+                    feature_id = transcript_id  # case with several CDS per transcripts is was not taken into account
                     if "protein_id" in feature.qualifiers:
                         description = "protein=%s" % feature.qualifiers["protein_id"][0]
                     else:
@@ -171,11 +171,10 @@ class NCBIRoutines:
                     cds_records_list.append(SeqRecord(seq=feature_seq, id=feature_id, description=description))
         SeqIO.write(cds_records_list, "%s.cds" % output_prefix, format="fasta")
 
-        """
         for filename in "tmp.idx", "tmp_2.idx":
             os.remove(filename)
 
-        """
+
 
     def get_cds_for_proteins_from_id_file(self, protein_id_file, output_prefix):
         pep_ids = IdList()
