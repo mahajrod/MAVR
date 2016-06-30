@@ -64,8 +64,8 @@
       <file leaf-file-name="NCBI.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Routines/NCBI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.82236844" vertical-offset="582" max-vertical-offset="1692">
-              <caret line="74" column="19" selection-start-line="74" selection-start-column="19" selection-end-line="74" selection-end-column="19" />
+            <state vertical-scroll-proportion="0.34868422" vertical-offset="258" max-vertical-offset="1746">
+              <caret line="32" column="8" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
               <folding>
                 <element signature="e#22#31#0" expanded="true" />
               </folding>
@@ -744,12 +744,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00625" summary="sequence clusters">
-      <created>1466038325161</created>
-      <option name="number" value="00625" />
-      <option name="project" value="LOCAL" />
-      <updated>1466038325161</updated>
-    </task>
     <task id="LOCAL-00626" summary="sequence clusters">
       <created>1466038751875</created>
       <option name="number" value="00626" />
@@ -1038,7 +1032,13 @@
       <option name="project" value="LOCAL" />
       <updated>1467300709415</updated>
     </task>
-    <option name="localTasksCounter" value="674" />
+    <task id="LOCAL-00674" summary="changes in parallel augustus">
+      <created>1467301004151</created>
+      <option name="number" value="00674" />
+      <option name="project" value="LOCAL" />
+      <updated>1467301004151</updated>
+    </task>
+    <option name="localTasksCounter" value="675" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1571,8 +1571,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Routines/NCBI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.82236844" vertical-offset="582" max-vertical-offset="1692">
-          <caret line="74" column="19" selection-start-line="74" selection-start-column="19" selection-end-line="74" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.34868422" vertical-offset="258" max-vertical-offset="1746">
+          <caret line="32" column="8" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
           <folding>
             <element signature="e#22#31#0" expanded="true" />
           </folding>

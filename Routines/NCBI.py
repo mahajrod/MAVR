@@ -28,7 +28,10 @@ class NCBIRoutines:
         query += "&seq_stop=%s" % str(seq_stop) if seq_stop else ""
         query += "&strand=%s" % str(strand) if strand else ""
 
-        os.system("curl '%s' > %s" % (query, out_file))
+        curl_string = "curl '%s' > %s" % (query, out_file)
+
+        print curl_string
+        os.system(curl_string)
 
     def get_gene_sequences(self, email, query, retmax=100000, output_directory=None):
         if output_directory:
