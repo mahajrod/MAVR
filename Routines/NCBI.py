@@ -17,7 +17,7 @@ class NCBIRoutines:
         pass
 
     @staticmethod
-    def efetch(database, id_list, out_file, retmode=None, rettype=None, seq_start=None, seq_stop=None, strand=None):
+    def efetch(database, id_list, out_file, retmode=None, rettype=None, seq_start=None, seq_stop=None, strand=None, verbose=False):
         # replacement for Biopython Entrez.efetch
         # Biopython Entrez.efetch is bugged - it ignores seq_start and seq_stop values
         # eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=669632474&retmode=text&rettype=gb&seq_start=10832751&seq_stop=10848091&strand=1
@@ -32,8 +32,8 @@ class NCBIRoutines:
         query += "&strand=%s" % str(strand) if strand else ""
 
         curl_string = "curl '%s' > %s" % (query, out_file)
-
-        print curl_string
+        if verbose:
+            print curl_string
         os.system(curl_string)
 
     def get_gene_sequences(self, email, query, retmax=100000, output_directory=None):
