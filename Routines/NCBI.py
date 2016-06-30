@@ -21,12 +21,12 @@ class NCBIRoutines:
         query = "eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?"
         query += "db=%s" % database
         query += "&id=%s" % (id_list if isinstance(id_list, str) else ",".join(id_list))
-        query += "&retmode=%s" % retmode if retmode else None
-        query += "&rettype=%s" % rettype if rettype else None
+        query += "&retmode=%s" % retmode if retmode else ""
+        query += "&rettype=%s" % rettype if rettype else ""
 
-        query += "&seq_start=%s" % str(seq_start) if seq_start else None
-        query += "&seq_stop=%s" % str(seq_stop) if seq_stop else None
-        query += "&strand=%s" % str(strand) if strand else None
+        query += "&seq_start=%s" % str(seq_start) if seq_start else ""
+        query += "&seq_stop=%s" % str(seq_stop) if seq_stop else ""
+        query += "&strand=%s" % str(strand) if strand else ""
 
         os.system("curl '%s' > %s" % (query, out_file))
 
@@ -64,3 +64,23 @@ class NCBIRoutines:
             self.efetch("nuccore", gi, out_file, retmode="text", rettype="gb", seq_start=start, seq_stop=end,
                         strand=strand)
             time.sleep(0.4)
+
+    def get_cds_for_proteins(self, protein_id_list, output_prefix):
+
+        pep_file = "%s.pep.genbank" % output_prefix
+        transcript_file = "%s.trascript.genbank" % output_prefix
+
+        self.efetch("protein", protein_id_list, pep_file, rettype="gb", retmode="text")
+
+        peptide_dict = SeqIO.index_db("tmp.idx", pep_file, format="genbank")
+
+        pep_to_transcript_accordance = SynDict()
+        for pep_id in peptide_dict:
+            for feature in peptide_dict[pep_id]:
+                if feature.type == "CDS":
+                    print feature
+
+    def get_cds_for_proteins_from_id_file(self, protein_id_file, output_prefix):
+        pep_ids = IdList()
+        pep_ids.read(protein_id_file)
+        self.get_cds_for_proteins(pep_ids, output_prefix)

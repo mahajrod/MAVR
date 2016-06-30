@@ -1,14 +1,12 @@
 CustomCollections
 Pipelines
-Converters
-dataj
+Data
 Pictures
 Routines
-General
+BConverters
 SeqAnalysis
 Parsers
 Graphics
 Download
 Tools
 GeneSynonyms
-Data

@@ -78,6 +78,9 @@ class AnnotationsRoutines:
 
     @staticmethod
     def get_transcript_to_pep_accordance_from_gtf(gtf_file, output_file, comment_symbol="#"):
+        """
+        Tested on gtf files from Ensembl relealese 70
+        """
         accordance_dict = SynDict()
         with open(gtf_file, "r") as gtf_fd:
             for line in gtf_fd:

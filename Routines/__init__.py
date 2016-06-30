@@ -8,6 +8,7 @@ from Routines.Math import SmoothRoutines
 from Routines.Primer import PrimerRoutines
 from Routines.EggNOG import EggNOGRoutines
 from Routines.TreeFam import TreeFamRoutines
+from Routines.Drawing import DrawingRoutines
 from Routines.Sequence import SequenceRoutines
 from Routines.Alignment import AlignmentRoutines
 from Routines.Matplotlib import MatplotlibRoutines
@@ -24,6 +25,7 @@ SmoothRoutines = SmoothRoutines()
 PrimerRoutines = PrimerRoutines()
 EggNOGRoutines = EggNOGRoutines()
 TreeFamRoutines = TreeFamRoutines()
+DrawingRoutines = DrawingRoutines()
 SequenceRoutines = SequenceRoutines()
 AlignmentRoutines = AlignmentRoutines()
 MatplotlibRoutines = MatplotlibRoutines()

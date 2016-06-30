@@ -836,6 +836,86 @@ class SequenceRoutines():
                     output_file, format="fasta")
         os.remove("tmp.idx")
 
+    # --------------------Search--------------------------
+    #              !!!!IMPORTANT!!!!!!
+    # in this section python notation for coordinates inside sequence is used
+    @staticmethod
+    def find_homopolymer_end(seq, nucleotide, seq_length, start, search_type="perfect",
+                           max_single_insert_size=1, max_total_insert_length=None, max_number_of_insertions=2):
+        shift_list = []
+        number_of_insertions = 0
+        total_insertion_length = 0
+        insertion_length = 0
+        i = start + 1
+        if search_type == 'perfect':
+            while i < seq_length:
+                if seq[i] != nucleotide:
+                    return i, None
+                i += 1
+            return seq_length, None
+        else:
+            while i < seq_length:
+                if seq[i] != nucleotide:
+                    if seq[i-1] == nucleotide:
+                        shift_list.append(i)
+                        insertion_length = 1
+                    else:
+                        insertion_length += 1
+                    number_of_insertions += 1
+                    total_insertion_length += 1
+                    if number_of_insertions > max_number_of_insertions or insertion_length > max_single_insert_size:
+                        end = shift_list[-1]
+                        break
+                    if max_total_insert_length:
+                        if total_insertion_length > max_total_insert_length:
+                            end = shift_list[-1]
+                            break
+                i += 1
+            else:
+                if seq[-1] == nucleotide:
+                    end = seq_length
+                else:
+                    end = shift_list[0]
+
+            new_start = shift_list[0] if shift_list else end
+            return end, new_start
+
+    def find_homopolymers(self, seq, nucleotide, min_size=5, search_type="perfect",
+                      max_single_insert_size=1, max_total_insert_length=None, max_number_of_insertions=2):
+        # search types:
+        #   perfect - search only for perfect homopolymers, all options other than min_size are ignored
+        #   non_perfect - search for non_perfect homopolymers with max_single_insert_size, max_total_insert_length
+        #                 and max_number_of_insertions
+        seq_length = len(seq)
+        i = 0
+        homopolymers_coords = []
+        homopolymers_lengthes = []
+        #print(seq_length)
+        prev_end = 0
+        while i < seq_length:
+            if seq[i] == nucleotide:
+                end, new_start = self.find_homopolymer_end(seq, nucleotide, seq_length, i, search_type=search_type,
+                                                           max_single_insert_size=max_single_insert_size,
+                                                           max_total_insert_length=max_total_insert_length,
+                                                           max_number_of_insertions=max_number_of_insertions)
+                # print(end, i)
+                length = end - i
+                if homopolymers_coords:
+                    prev_end = homopolymers_coords[-1][1]
+
+                if length >= min_size and end > prev_end:
+                    homopolymers_coords.append((i, end))
+                    homopolymers_lengthes.append(length)
+
+                i = end
+                if new_start is not None:
+                    i = new_start
+                continue
+            i += 1
+
+        homopolymers_lengthes = np.array(homopolymers_lengthes)
+        return homopolymers_coords, homopolymers_lengthes
+
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
     lengths_dict = OrderedDict({})
@@ -956,41 +1036,7 @@ def find_homopolymer_end(seq, nucleotide, seq_length, start, search_type="perfec
         return end, new_start
 
 
-def find_homopolymers(seq, nucleotide, min_size=5, search_type="perfect",
-                      max_single_insert_size=1, max_total_insert_length=None, max_number_of_insertions=2):
-    # search types:
-    #   perfect - search only for perfect homopolymers, all options other than min_size are ignored
-    #   non_perfect - search for non_perfect homopolymers with max_single_insert_size, max_total_insert_length
-    #                 and max_number_of_insertions
-    seq_length = len(seq)
-    i = 0
-    homopolymers_coords = []
-    homopolymers_lengthes = []
-    #print(seq_length)
-    prev_end = 0
-    while i < seq_length:
-        if seq[i] == nucleotide:
-            end, new_start = find_homopolymer_end(seq, nucleotide, seq_length, i, search_type=search_type,
-                                                  max_single_insert_size=max_single_insert_size,
-                                                  max_total_insert_length=max_total_insert_length,
-                                                  max_number_of_insertions=max_number_of_insertions)
-            # print(end, i)
-            length = end - i
-            if homopolymers_coords:
-                prev_end = homopolymers_coords[-1][1]
 
-            if length >= min_size and end > prev_end:
-                homopolymers_coords.append((i, end))
-                homopolymers_lengthes.append(length)
-
-            i = end
-            if new_start is not None:
-                i = new_start
-            continue
-        i += 1
-
-    homopolymers_lengthes = np.array(homopolymers_lengthes)
-    return homopolymers_coords, homopolymers_lengthes
 
 # ----------------------Filters-----------------------
 

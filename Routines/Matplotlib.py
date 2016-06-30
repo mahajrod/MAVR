@@ -120,3 +120,4 @@ class MatplotlibRoutines:
     def add_line(axes, start, end, color):
         line = Line2D([start[0], end[0]], [start[1], end[1]], color=color)
         return axes.add_line(line)
+
