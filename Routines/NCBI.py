@@ -69,9 +69,10 @@ class NCBIRoutines:
 
         pep_file = "%s.pep.genbank" % output_prefix
         transcript_file = "%s.trascript.genbank" % output_prefix
-
+        print "AAAA"
         self.efetch("protein", protein_id_list, pep_file, rettype="gb", retmode="text")
 
+        print "BBBB"
         peptide_dict = SeqIO.index_db("tmp.idx", pep_file, format="genbank")
 
         pep_to_transcript_accordance = SynDict()
@@ -83,4 +84,5 @@ class NCBIRoutines:
     def get_cds_for_proteins_from_id_file(self, protein_id_file, output_prefix):
         pep_ids = IdList()
         pep_ids.read(protein_id_file)
+        print "Totaly %i ids" % len(pep_ids)
         self.get_cds_for_proteins(pep_ids, output_prefix)
