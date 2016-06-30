@@ -9,7 +9,6 @@ from Bio import SeqIO, Entrez
 from Routines import FileRoutines
 from CustomCollections.GeneralCollections import IdList, SynDict
 
-from Tools.Abstract import Tool
 
 class NCBIRoutines:
     def __init__(self):
@@ -72,7 +71,7 @@ class NCBIRoutines:
             time.sleep(0.4)
 
     def get_cds_for_proteins(self, protein_id_list, output_prefix, download_chunk_size=100, temp_dir="temp"):
-
+        from Tools.Abstract import Tool
         number_of_ids = len(protein_id_list)
         print "Totaly %i ids" % number_of_ids
         FileRoutines.save_mkdir(temp_dir)
