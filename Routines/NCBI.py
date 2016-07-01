@@ -147,7 +147,6 @@ class NCBIRoutines:
 
         transcript_ranges = np.append(np.arange(0, number_of_transcripts, download_chunk_size), [number_of_transcripts])
 
-
         print "Downloading transcripts..."
         for i in range(0, len(transcript_ranges)-1):
             print "Downloading chunk %i" % i
@@ -179,7 +178,11 @@ class NCBIRoutines:
         for filename in "tmp.idx", "tmp_2.idx":
             os.remove(filename)
 
-
+        stat_string = "Input protein ids\t %i\n" % number_of_ids
+        stat_string += "Downloaded proteins\t%i\n" % transcript_ids
+        stat_string += "Downloaded transcripts\t%i\n" % len(transcript_dict)
+        with open("%s.stats", "w") as stat_fd:
+            stat_fd.write(stat_string)
 
     def get_cds_for_proteins_from_id_file(self, protein_id_file, output_prefix):
         pep_ids = IdList()
