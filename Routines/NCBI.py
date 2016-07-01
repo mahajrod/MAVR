@@ -18,7 +18,7 @@ class NCBIRoutines:
 
     @staticmethod
     def efetch(database, id_list, out_file, retmode=None, rettype=None, seq_start=None, seq_stop=None, strand=None, verbose=False,
-               number_of_retries=100, retry_delay=None):
+               number_of_retries=100, retry_delay=None, log_file="efetch.log"):
         # replacement for Biopython Entrez.efetch
         # Biopython Entrez.efetch is bugged - it ignores seq_start and seq_stop values
         # eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=669632474&retmode=text&rettype=gb&seq_start=10832751&seq_stop=10848091&strand=1
@@ -38,6 +38,8 @@ class NCBIRoutines:
         curl_options += " > %s" % out_file
 
         curl_string = "curl %s" % curl_options
+        with open(log_file, "a") as log_fd:
+            log_fd.write(curl_string + "\n")
         if verbose:
             print curl_string
         os.system(curl_string)
