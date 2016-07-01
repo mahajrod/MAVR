@@ -181,7 +181,7 @@ class NCBIRoutines:
 
         print stat_string
 
-        with open("%s.stats", "w") as stat_fd:
+        with open("%s.stats" % output_prefix, "w") as stat_fd:
             stat_fd.write(stat_string)
 
         for filename in "tmp.idx", "tmp_1.idx":
