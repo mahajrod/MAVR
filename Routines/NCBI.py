@@ -176,15 +176,16 @@ class NCBIRoutines:
         SeqIO.write(cds_records_list, "%s.cds" % output_prefix, format="fasta")
 
         stat_string = "Input protein ids\t %i\n" % number_of_ids
-        stat_string += "Downloaded proteins\t%i\n" % transcript_ids
+        stat_string += "Downloaded proteins\t%i\n" % number_of_transcripts
         stat_string += "Downloaded transcripts\t%i\n" % len(transcript_dict)
+
+        print stat_string
+
         with open("%s.stats", "w") as stat_fd:
             stat_fd.write(stat_string)
 
         for filename in "tmp.idx", "tmp_1.idx":
             os.remove(filename)
-
-
 
     def get_cds_for_proteins_from_id_file(self, protein_id_file, output_prefix):
         pep_ids = IdList()
