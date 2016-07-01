@@ -17,7 +17,8 @@ class NCBIRoutines:
         pass
 
     @staticmethod
-    def efetch(database, id_list, out_file, retmode=None, rettype=None, seq_start=None, seq_stop=None, strand=None, verbose=False):
+    def efetch(database, id_list, out_file, retmode=None, rettype=None, seq_start=None, seq_stop=None, strand=None, verbose=False,
+               number_of_retries=100, retry_delay=None):
         # replacement for Biopython Entrez.efetch
         # Biopython Entrez.efetch is bugged - it ignores seq_start and seq_stop values
         # eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=669632474&retmode=text&rettype=gb&seq_start=10832751&seq_stop=10848091&strand=1
@@ -31,7 +32,12 @@ class NCBIRoutines:
         query += "&seq_stop=%s" % str(seq_stop) if seq_stop else ""
         query += "&strand=%s" % str(strand) if strand else ""
 
-        curl_string = "curl '%s' > %s" % (query, out_file)
+        curl_options = " --retry %i" % number_of_retries if number_of_retries else ""
+        curl_options += " --retry-delay %i" % retry_delay if retry_delay else ""
+        curl_options += " '%s'" % query
+        curl_options += " > %s" % out_file
+
+        curl_string = "curl %s" % curl_options
         if verbose:
             print curl_string
         os.system(curl_string)
@@ -86,7 +92,6 @@ class NCBIRoutines:
         transcript_file = "%s.trascript.genbank" % output_prefix
 
         ranges = np.append(np.arange(0, number_of_ids, download_chunk_size), [number_of_ids])
-
 
         print "Downloading proteins..."
         for i in range(0, len(ranges)-1):
