@@ -94,3 +94,5 @@ if args.title:
 for ext in args.extensions:
     plt.savefig("%s.%s" % (args.output_prefix, ext))
 
+np.savetxt("%s.histo" % args.output_prefix, zip(bin_centers, n), fmt='%i,%i')
+
