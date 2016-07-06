@@ -74,7 +74,15 @@ elif args.width_of_bins:
     bins = np.append(bins, [args.max_length])
 else:
     bins = 30
-plt.hist(lengths, bins=bins)
+
+n, bins, patches = plt.hist(lengths, bins=bins)
+
+bin_centers = bins + (bins[1] - bins[0])
+print bin_centers
+print len(n)
+print len(bin_centers)
+
+
 plt.xlim(xmin=args.min_length, xmax=args.max_length)
 if args.xlabel:
     plt.xlabel(args.xlabel)
