@@ -880,6 +880,34 @@ class SequenceRoutines():
             new_start = shift_list[0] if shift_list else end
             return end, new_start
 
+    @staticmethod
+    def make_region_bed_file(record_dict, output_file, white_list=None, black_list=None, output_format="0-based"):
+        with open(output_file, "w") as out_fd:
+            for record_id in record_dict:
+                if white_list:
+                    if record_id not in white_list:
+                        continue
+                if black_list:
+                    if record_id in black_list:
+                        continue
+                bed_string = "%s" % record_id
+                if output_format == "0-based":
+                    bed_string += "\t0\t%i\n" % len(record_dict[record_id])
+                out_fd.write(bed_string)
+
+    def make_region_bed_file_from_file(self, seq_file, output_file, white_id_file=None, black_id_file=None,
+                                       output_format="0-based", input_format="fasta"):
+        record_dict = SeqIO.index_db("tmp.idx", seq_file, format=input_format)
+        black_id_list = IdList()
+        white_id_list = IdList()
+        if black_id_file:
+            black_id_list.read(black_id_file)
+        if white_id_file:
+            white_id_list.read(white_id_file)
+
+        self.make_region_bed_file(record_dict, output_file, white_list=white_id_list, black_list=black_id_list,
+                                  output_format=output_format)
+
     def find_homopolymers(self, seq, nucleotide, min_size=5, search_type="perfect",
                       max_single_insert_size=1, max_total_insert_length=None, max_number_of_insertions=2):
         # search types:
