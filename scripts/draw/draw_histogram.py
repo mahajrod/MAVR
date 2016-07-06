@@ -77,7 +77,7 @@ else:
 
 n, bins, patches = plt.hist(lengths, bins=bins)
 
-bin_centers = bins + (bins[1] - bins[0])
+bin_centers = (bins + ((bins[1] - bins[0])/2))[:-1]
 print bin_centers
 print len(n)
 print len(bin_centers)
