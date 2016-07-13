@@ -3,13 +3,13 @@ __author__ = 'Sergei F. Kliver'
 
 import os
 import argparse
-"""
-import numpy as np
+
+#import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 os.environ['MPLCONFIGDIR'] = '/tmp/'
-import matplotlib.pyplot as plt
-"""
+#import matplotlib.pyplot as plt
+
 from Bio import SeqIO
 
 #from Routines import MatplotlibRoutines
