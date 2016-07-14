@@ -35,6 +35,40 @@ class MathRoutines:
     def std_from_bins(self, bins, counts, mean=None):
         return np.sqrt(self.variance_from_bins(bins, counts, mean=mean))
 
+    @staticmethod
+    def get_stats_from_file(data_file, minimum=None, maximum=None, dtype=float, comments='#', delimiter=None, converters=None, skiprows=0,
+                            usecols=None, unpack=False, ndmin=0, output_file=None, verbose=False):
+        data = np.loadtxt(data_file, comments=comments, delimiter=delimiter, converters=converters, skiprows=skiprows,
+                          usecols=usecols, unpack=unpack, ndmin=ndmin, dtype=dtype)
+
+        if (minimum is not None) and (maximum is not None):
+            condlist = [(data >= minimum) & (data <= maximum)]
+            filtered_data = np.select(condlist, data)
+        elif minimum is not None:
+            condlist = [data >= minimum]
+            filtered_data = np.select(condlist, data)
+        elif maximum is not None:
+            condlist = [data <= maximum]
+            filtered_data = np.select(condlist, data)
+        else:
+            filtered_data = data
+
+        std = np.std(filtered_data)
+        mean = np.mean(filtered_data)
+        median = np.median(filtered_data)
+        var_coeff = std / mean
+
+        output_string = "Mean\t%f\nMedian\t%f\nStandard deviation\t%f\nVariation coefficient\t%f\n" \
+                        % (mean, median, std, var_coeff)
+        if verbose:
+            print output_string
+
+        if output_file:
+            with open(output_file, "w"):
+                output_file.write(output_string)
+
+        return mean, median, std, var_coeff
+
 
 class SmoothRoutines:
     def __init__(self):

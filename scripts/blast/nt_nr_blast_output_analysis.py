@@ -8,7 +8,7 @@ from Bio import SearchIO
 from Bio.SearchIO import QueryResult
 from Bio import Entrez
 from Routines.File import read_ids
-from Routines import AlignmentRoutines
+from Routines import MultipleAlignmentRoutines
 
 parser = argparse.ArgumentParser()
 
@@ -66,7 +66,7 @@ def iterator(blast_results):
 print("Parsing input file...")
 blast_results = SearchIO.index(args.input, args.format)
 
-gi_ids_list = map(lambda x: x.split("|")[1], AlignmentRoutines.get_db_ids(blast_results))
+gi_ids_list = map(lambda x: x.split("|")[1], MultipleAlignmentRoutines.get_db_ids(blast_results))
 #print(gi_ids_list)
 print("Downloading sequence summaries...")
 handle = Entrez.esummary(db=args.db, id=",".join(gi_ids_list))

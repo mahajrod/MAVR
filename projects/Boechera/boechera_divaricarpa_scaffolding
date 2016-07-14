@@ -2,18 +2,33 @@
 #skliver@dcdell
 
 cd /mnt/guatemala/skliver/Boechera/Boechera_divaricarpa/genome/mp_filtered/
-
+# merge categories A,B,C
 cat splited_categories/8300.8.96964.AGTTCC_A_R1.fastq splited_categories/8300.8.96964.AGTTCC_B_R1.fastq splited_categories/8300.8.96964.AGTTCC_C_R1.fastq > 8300.8.96964.AGTTCC.filtered_1.fastq
 cat splited_categories/8300.8.96964.AGTTCC_A_R2.fastq splited_categories/8300.8.96964.AGTTCC_B_R2.fastq splited_categories/8300.8.96964.AGTTCC_C_R2.fastq > 8300.8.96964.AGTTCC.filtered_2.fastq
 
 cat splited_categories/8235.5.94709.CGATGT_A_R1.fastq splited_categories/8235.5.94709.CGATGT_B_R1.fastq splited_categories/8235.5.94709.CGATGT_C_R1.fastq > 8235.5.94709.CGATGT.filtered_1.fastq
 cat splited_categories/8235.5.94709.CGATGT_A_R2.fastq splited_categories/8235.5.94709.CGATGT_B_R2.fastq splited_categories/8235.5.94709.CGATGT_C_R2.fastq > 8235.5.94709.CGATGT.filtered_2.fastq
 
+
+
 mkdir -p /mnt/guatemala/skliver/Boechera/Boechera_divaricarpa/genome/mp_filtered/insert_size_estimation/
 cd /mnt/guatemala/skliver/Boechera/Boechera_divaricarpa/genome/mp_filtered/insert_size_estimation/
+# Estimate real median insert size for MP
 
-bowtie2 --very-sensitive -x /mnt/peru/skliver/Boechera/Boechera_divaricarpa/genome/assemblies/discovar_adapters_filtered_cookie_trimmomatic/a.final/bowtie2_index/assembly.full -1 ../8235.5.94709.CGATGT.filtered_1.fastq -2 ../8235.5.94709.CGATGT.filtered_2.fastq --no-mixed --no-unal -p 10 > 8235.5.94709.CGATGT.filtered.no_mixed.no_unal.sam
-bowtie2 --very-sensitive -x /mnt/peru/skliver/Boechera/Boechera_divaricarpa/genome/assemblies/discovar_adapters_filtered_cookie_trimmomatic/a.final/bowtie2_index/assembly.full -1 ../8300.8.96964.AGTTCC.filtered_1.fastq -2 ../8300.8.96964.AGTTCC.filtered_2.fastq --no-mixed --no-unal -p 10 > 8300.8.96964.AGTTCC.filtered.no_mixed.no_unal.sam
+bowtie2 --very-sensitive -x /mnt/peru/skliver/Boechera/Boechera_divaricarpa/genome/assemblies/discovar_adapters_filtered_cookie_trimmomatic/a.final/bowtie2_index/assembly.full -1 ../8300.8.96964.AGTTCC.filtered_1.fastq -2 ../8300.8.96964.AGTTCC.filtered_2.fastq  -p 15 -X 30000 --rf > 8300.8.96964.AGTTCC.filtered.rf.x30kb.sam
+bowtie2 --very-sensitive -x /mnt/peru/skliver/Boechera/Boechera_divaricarpa/genome/assemblies/discovar_adapters_filtered_cookie_trimmomatic/a.final/bowtie2_index/assembly.full -1 ../8235.5.94709.CGATGT.filtered_1.fastq -2 ../8235.5.94709.CGATGT.filtered_2.fastq  -p 25 -X 30000 --rf > 8235.5.94709.CGATGT.filtered.rf.x30kb.sam
 
+# extract reads mapped to 20kb+ contigs
+samtools view -L /mnt/peru/skliver/Boechera/Boechera_divaricarpa/genome/assemblies/discovar_adapters_filtered_cookie_trimmomatic/a.final/a.lines.20kb+.bed 8235.5.94709.CGATGT.filtered.rf.x30kb.sam > 8235.5.94709.CGATGT.filtered.rf.x30kb.contigs20Kb+.sam
+samtools view -L /mnt/peru/skliver/Boechera/Boechera_divaricarpa/genome/assemblies/discovar_adapters_filtered_cookie_trimmomatic/a.final/a.lines.20kb+.bed 8300.8.96964.AGTTCC.filtered.rf.x30kb.sam > 8300.8.96964.AGTTCC.filtered.rf.x30kb.contigs20kb+.sam
+
+# extract insert size values from sam file
+awk -F'\t' '{ if ($9 > 0) print $9}' 8300.8.96964.AGTTCC.filtered.rf.x30kb.contigs20kb+.sam > 8300.8.96964.AGTTCC.filtered.rf.x30kb.contigs20kb+.len
+awk -F'\t' '{ if ($9 > 0) print $9}' 8235.5.94709.CGATGT.filtered.rf.x30kb.contigs20Kb+.sam > 8235.5.94709.CGATGT.filtered.rf.x30kb.contigs20Kb+.len
+
+~/Soft/MAVR/scripts/draw/draw_histogram.py -i 8300.8.96964.AGTTCC.filtered.rf.x30kb.contigs20kb+.len -o 8300.8.96964.AGTTCC.filtered.rf.x30kb.contigs20kb+.hist -w 100 -t "Insert size distribution" -l "Insert size" -y "N of fragments" -x 15000
+~/Soft/MAVR/scripts/draw/draw_histogram.py -i 8235.5.94709.CGATGT.filtered.rf.x30kb.contigs20Kb+.len -o 8235.5.94709.CGATGT.filtered.rf.x30kb.contigs20Kb+.hist -w 100 -t "Insert size distribution" -l "Insert size" -y "N of fragments" -x 15000
+
+# prepare contigs for scaffolding
 cd /mnt/peru/skliver/Boechera/Boechera_divaricarpa/genome/assemblies/discovar_adapters_filtered_cookie_trimmomatic/a.final/scaffolding
 ~/Soft/SOAP/Prepare/prepare/finalFusion -p 10 -g assembly.full -c assembly.full.fasta -D

@@ -13,7 +13,7 @@ from CustomCollections.GeneralCollections import SynDict
 class AlignmentRoutines:
     def __init__(self):
         pass
-
+    """
     @staticmethod
     def get_db_ids(search_dict):
         id_set = set()
@@ -122,13 +122,13 @@ class AlignmentRoutines:
             if (len(position_strings[0]) > 1) or (len(position_strings[1]) > 1):
                 continue
             ambigious_codon = position_strings[0][0] + position_strings[1][0] + "N"
-            """
-            if Seq(ambigious_codon).translate(table=genetic_code_table) == "X":
-                continue
-            else:
-                degenerate_columns.append(alignment[:, 3*i + 2])
-                #print(i*3 +3)
-            """
+
+            #if Seq(ambigious_codon).translate(table=genetic_code_table) == "X":
+            #    continue
+            #else:
+            #    degenerate_columns.append(alignment[:, 3*i + 2])
+            #    #print(i*3 +3)
+
             if ambigious_codon in degenerate_codon_set:
                 degenerate_columns.append(alignment[:, 3*i + 2])
 
@@ -165,3 +165,4 @@ class AlignmentRoutines:
         alignments = AlignIO.read(alignment_file, format=alignment_format)
         SeqIO.write(self.sequences_from_alignment_generator(alignments, gap_symbol=gap_symbol),
                     output_file, format=output_format)
+    """

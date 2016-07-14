@@ -3,7 +3,7 @@ __author__ = 'Sergei F. Kliver'
 
 import argparse
 
-from Routines import AlignmentRoutines
+from Routines import MultipleAlignmentRoutines
 
 
 parser = argparse.ArgumentParser()
@@ -20,6 +20,6 @@ parser.add_argument("-g", "--genetic_code_table", action="store", dest="genetic_
 
 args = parser.parse_args()
 
-AlignmentRoutines.extract_degenerate_sites_from_codon_alignment_from_file(args.input, args.output,
-                                                                          genetic_code_table=args.genetic_code_table,
-                                                                          format=args.format)
+MultipleAlignmentRoutines.extract_degenerate_sites_from_codon_alignment_from_file(args.input, args.output,
+                                                                                  genetic_code_table=args.genetic_code_table,
+                                                                                  format=args.format)

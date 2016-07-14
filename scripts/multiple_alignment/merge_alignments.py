@@ -3,7 +3,7 @@ __author__ = 'Sergei F. Kliver'
 
 import argparse
 
-from Routines import AlignmentRoutines, FileRoutines
+from Routines import MultipleAlignmentRoutines, FileRoutines
 
 
 parser = argparse.ArgumentParser()
@@ -20,4 +20,4 @@ parser.add_argument("-f", "--format", action="store", dest="format", default="fa
 
 args = parser.parse_args()
 
-AlignmentRoutines.merge_alignment(args.input, args.output, args.coords_file, format=args.format)
+MultipleAlignmentRoutines.merge_alignment(args.input, args.output, args.coords_file, format=args.format)

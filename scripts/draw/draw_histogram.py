@@ -69,7 +69,7 @@ if args.number_of_bins:
     bins = args.number_of_bins
 elif args.width_of_bins:
     bins = np.arange(args.min_length, args.max_length, args.width_of_bins)
-    print bins
+    #print bins
     #bins[0] += 1
     bins = np.append(bins, [args.max_length])
 else:
@@ -78,10 +78,9 @@ else:
 n, bins, patches = plt.hist(lengths, bins=bins)
 
 bin_centers = (bins + ((bins[1] - bins[0])/2))[:-1]
-print bin_centers
-print len(n)
-print len(bin_centers)
-
+#print bin_centers
+#print len(n)
+#print len(bin_centers)
 
 plt.xlim(xmin=args.min_length, xmax=args.max_length)
 if args.xlabel:
@@ -94,5 +93,6 @@ if args.title:
 for ext in args.extensions:
     plt.savefig("%s.%s" % (args.output_prefix, ext))
 
+# save histo values
 np.savetxt("%s.histo" % args.output_prefix, zip(bin_centers, n), fmt="%i\t%i")
 
