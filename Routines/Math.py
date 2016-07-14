@@ -42,13 +42,14 @@ class MathRoutines:
                           usecols=usecols, unpack=unpack, ndmin=ndmin, dtype=dtype)
 
         if (minimum is not None) and (maximum is not None):
-            condlist = [(data >= minimum) & (data <= maximum)]
+            condlist = (data >= minimum) & (data <= maximum)
+            print
             filtered_data = np.select(condlist, data)
         elif minimum is not None:
-            condlist = [data >= minimum]
+            condlist = data >= minimum
             filtered_data = np.select(condlist, data)
         elif maximum is not None:
-            condlist = [data <= maximum]
+            condlist = data <= maximum
             filtered_data = np.select(condlist, data)
         else:
             filtered_data = data
