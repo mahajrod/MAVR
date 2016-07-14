@@ -44,7 +44,7 @@ class MathRoutines:
         print minimum, maximum
         if (minimum is not None) and (maximum is not None):
             condlist = (data >= minimum) & (data <= maximum)
-            print
+            print condlist
             filtered_data = np.select(condlist, data)
         elif minimum is not None:
             condlist = data >= minimum
