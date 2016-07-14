@@ -15,7 +15,7 @@ parser.add_argument("-n", "--min_value", action="store", dest="min_length", type
                     help="Minimum value to use. Default - not set")
 parser.add_argument("-x", "--max_value", action="store", dest="max_length", type=float,
                     help="Maximum value to use. Default - not set")
-parser.add_argument("-c", "comments_prefix", action="store", dest="comments_prefix", default="#",
+parser.add_argument("-c", "--comments_prefix", action="store", dest="comments_prefix", default="#",
                     help="Comments prefix. Default - '#'")
 parser.add_argument("-d", "--delimiter", action="store", dest="delimiter",
                     help="Value delimiter. Default - any space symbol")
