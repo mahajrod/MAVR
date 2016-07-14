@@ -41,6 +41,7 @@ class MathRoutines:
         data = np.loadtxt(data_file, comments=comments, delimiter=delimiter, converters=converters, skiprows=skiprows,
                           usecols=usecols, unpack=unpack, ndmin=ndmin, dtype=dtype)
 
+        print minimum, maximum
         if (minimum is not None) and (maximum is not None):
             condlist = (data >= minimum) & (data <= maximum)
             print
@@ -54,6 +55,9 @@ class MathRoutines:
         else:
             filtered_data = data
 
+        print filtered_data
+        print(len(filtered_data))
+
         std = np.std(filtered_data)
         mean = np.mean(filtered_data)
         median = np.median(filtered_data)
@@ -65,8 +69,8 @@ class MathRoutines:
             print output_string
 
         if output_file:
-            with open(output_file, "w"):
-                output_file.write(output_string)
+            with open(output_file, "w") as out_fd:
+                out_fd.write(output_string)
 
         return mean, median, std, var_coeff
 
