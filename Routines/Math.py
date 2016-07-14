@@ -43,15 +43,15 @@ class MathRoutines:
 
         print minimum, maximum
         if (minimum is not None) and (maximum is not None):
-            condlist = (data >= minimum) & (data <= maximum)
-            print condlist
-            filtered_data = np.select(condlist, data)
+            #indices = np.where(data >= minimum) & (data <= maximum)
+            #print condlist
+            filtered_data = data[(data >= minimum) & (data <= maximum)]
         elif minimum is not None:
-            condlist = data >= minimum
-            filtered_data = np.select(condlist, data)
+            #condlist = data >= minimum
+            filtered_data = data[data >= minimum]
         elif maximum is not None:
-            condlist = data <= maximum
-            filtered_data = np.select(condlist, data)
+            #condlist = data <= maximum
+            filtered_data = data[data <= maximum]
         else:
             filtered_data = data
 
