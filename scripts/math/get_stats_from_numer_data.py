@@ -13,7 +13,7 @@ parser.add_argument("-o", "--output", action="store", dest="output", required=Tr
                     help="Prefix of output file")
 parser.add_argument("-n", "--min_value", action="store", dest="min_length", type=float,
                     help="Minimum value to use. Default - not set")
-parser.add_argument("-x", "--max_value", action="store", dest="max_length", type=float,
+parser.add_argument("-m", "--max_value", action="store", dest="max_length", type=float,
                     help="Maximum value to use. Default - not set")
 parser.add_argument("-c", "--comments_prefix", action="store", dest="comments_prefix", default="#",
                     help="Comments prefix. Default - '#'")
