@@ -41,7 +41,7 @@ class MathRoutines:
         data = np.loadtxt(data_file, comments=comments, delimiter=delimiter, converters=converters, skiprows=skiprows,
                           usecols=usecols, unpack=unpack, ndmin=ndmin, dtype=dtype)
 
-        print minimum, maximum
+        #print minimum, maximum
         if (minimum is not None) and (maximum is not None):
             #indices = np.where(data >= minimum) & (data <= maximum)
             #print condlist
@@ -55,8 +55,8 @@ class MathRoutines:
         else:
             filtered_data = data
 
-        print filtered_data
-        print(len(filtered_data))
+        #print filtered_data
+        #print(len(filtered_data))
 
         std = np.std(filtered_data)
         mean = np.mean(filtered_data)
