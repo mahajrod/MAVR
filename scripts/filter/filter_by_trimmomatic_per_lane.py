@@ -51,6 +51,9 @@ parser.add_argument("-b", "--base_quality", action="store", dest="base_quality",
 
 parser.add_argument("-l", "--min_length", action="store", dest="min_len", type=int,
                     help="Minimum length of read to retain. If not set - skip this stage")
+parser.add_argument("-c", "--crop_length", action="store", dest="crop_len", type=int, type=int,
+                    help="Number of bases to retain from 5'end. If not set - skip this stage")
+
 parser.add_argument("-j", "--path_to_trimmomatic_dir", action="store", dest="path_to_trimmomatic_dir", default="",
                     help="Path to Trimmomatic directory")
 
@@ -110,6 +113,6 @@ for sample in samples:
                            min_adapter_len=args.min_adapter_len, sliding_window_size=args.sliding_window_size,
                            average_quality_threshold=args.average_quality_threshold,
                            leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
-                           crop_length=None, head_crop_length=None, min_length=args.min_len, logfile=trimmomatic_log,
+                           crop_length=args.crop_len, head_crop_length=None, min_length=args.min_len, logfile=trimmomatic_log,
                            base_quality=args.base_quality)
 

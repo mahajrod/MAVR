@@ -29,6 +29,11 @@ awk -F'\t' '{ if ($9 > 0) print $9}' 8235.5.94709.CGATGT.filtered.rf.x30kb.conti
 ~/Soft/MAVR/scripts/draw/draw_histogram.py -i 8300.8.96964.AGTTCC.filtered.rf.x30kb.contigs20kb+.len -o 8300.8.96964.AGTTCC.filtered.rf.x30kb.contigs20kb+.hist -w 100 -t "Insert size distribution" -l "Insert size" -y "N of fragments" -x 15000
 ~/Soft/MAVR/scripts/draw/draw_histogram.py -i 8235.5.94709.CGATGT.filtered.rf.x30kb.contigs20Kb+.len -o 8235.5.94709.CGATGT.filtered.rf.x30kb.contigs20Kb+.hist -w 100 -t "Insert size distribution" -l "Insert size" -y "N of fragments" -x 15000
 
+# prepare config file for scaffolding
+
 # prepare contigs for scaffolding
 cd /mnt/peru/skliver/Boechera/Boechera_divaricarpa/genome/assemblies/discovar_adapters_filtered_cookie_trimmomatic/a.final/scaffolding
 ~/Soft/SOAP/Prepare/prepare/finalFusion -p 10 -g assembly.full -c assembly.full.fasta -D
+
+~/Soft/SOAP/SOAPdenovo2-bin-LINUX-generic-r240/SOAPdenovo-63mer map -p 28 -s config -g assembly.full 1>map.log 2>map.err
+~/Soft/SOAP/SOAPdenovo2-bin-LINUX-generic-r240/SOAPdenovo-63mer scaff -p 28 -g assembly.full 1>scaff.log 2>scaff.err
