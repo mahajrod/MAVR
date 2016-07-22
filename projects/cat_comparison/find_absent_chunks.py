@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 __author__ = 'mahajrod'
 import os
 import argparse
@@ -22,7 +23,6 @@ if chunk_numbers[-1] > args.number_of_chunks:
     print("Largest number of present chunks(%i) is larger than expected(%i)" % (chunk_numbers[-1],
                                                                                 args.number_of_chunks))
 print("Absent chunks:")
-
 
 for i in range(1, args.number_of_chunks + 1):
     if i not in chunk_numbers:
