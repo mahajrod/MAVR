@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#SBATCH --array=1-950%950
+#SBATCH --array=408,910
 #SBATCH --time=100:00:00         # Run time in hh:mm:ss
 #SBATCH --mem-per-cpu=4096       # Minimum memory required per CPU (in megabytes)
 #SBATCH --job-name=Cats_cat
@@ -16,7 +16,7 @@ PEP_FILE="${SPLITED_PEP_DIR}felis_catus_ncbi_${SLURM_ARRAY_TASK_ID}.fasta"
 CAT_GENOMES_DIR="/work/pavlov/okochenova/genomes/cat_project/"
 WORK_DIR="/work/pavlov/okochenova/genomes_workdir/cat_comparison/"
 
-for SPECIES in AciJub_1.0 CroCro_1.0 LynPar_1.0 PanPar_1.0 PanLeo_1.0 PanTig_1.0 PanOnc_1.0 FelCat_8.0;
+for SPECIES in PanLeo_1.0;
     do
     TARGET_GENOME="${CAT_GENOMES_DIR}${SPECIES}.fixed.fa"
     TARGET_GENOME_DIR="${WORK_DIR}${SPECIES}/"

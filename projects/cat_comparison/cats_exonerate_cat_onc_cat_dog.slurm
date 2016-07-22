@@ -16,7 +16,7 @@ PEP_FILE="${SPLITED_PEP_DIR}felis_catus_ncbi_${SLURM_ARRAY_TASK_ID}.fasta"
 CAT_GENOMES_DIR="/work/pavlov/okochenova/genomes/cat_project/"
 WORK_DIR="/work/pavlov/okochenova/genomes_workdir/cat_comparison/"
 
-for SPECIES in AciJub_1.0 CroCro_1.0 LynPar_1.0 PanPar_1.0 PanLeo_1.0 PanTig_1.0 PanOnc_1.0 FelCat_8.0;
+for SPECIES in PanOnc_1.0 FelCat_8.0 CanFam_3.1;
     do
     TARGET_GENOME="${CAT_GENOMES_DIR}${SPECIES}.fixed.fa"
     TARGET_GENOME_DIR="${WORK_DIR}${SPECIES}/"
