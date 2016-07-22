@@ -29,7 +29,7 @@ for i in range(1, args.number_of_chunks + 1):
         absent_chunks.append(i)
 
 if absent_chunks:
-    print("Absent chunks:")
+    print("Absent chunks(total %i): " % len(absent_chunks))
     for k in absent_chunks:
         print(k)
 else:
