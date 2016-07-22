@@ -6,7 +6,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", "--input_dir", action="store", dest="input_file", required=True,
+parser.add_argument("-i", "--input", action="store", dest="input", required=True,
                     help="Input dir with exonerate output named in style *_<chunk_number>.out")
 parser.add_argument("-n", "--total_number_of_chunks", action="store", dest="number_of_chunks", type=int,
                     required=True,
@@ -15,7 +15,7 @@ parser.add_argument("-n", "--total_number_of_chunks", action="store", dest="numb
 args = parser.parse_args()
 
 
-chunk_files = os.listdir(args.input_dir)
+chunk_files = os.listdir(args.input)
 
 chunk_numbers = sorted([int(n.split(".")[-2].split("_")[-1]) for n in chunk_files])
 
