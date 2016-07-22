@@ -22,8 +22,15 @@ chunk_numbers = sorted([int(n.split(".")[-2].split("_")[-1]) for n in chunk_file
 if chunk_numbers[-1] > args.number_of_chunks:
     print("Largest number of present chunks(%i) is larger than expected(%i)" % (chunk_numbers[-1],
                                                                                 args.number_of_chunks))
-print("Absent chunks:")
 
+absent_chunks = []
 for i in range(1, args.number_of_chunks + 1):
     if i not in chunk_numbers:
-        print i
+        absent_chunks.append(i)
+
+if absent_chunks:
+    print("Absent chunks:")
+    for k in absent_chunks:
+        print(k)
+else:
+    print("No absent chunks")
