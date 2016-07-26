@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 #SBATCH --array=117,166,175,220,304,313,358,389,436,469,488,496,535,572,575,601,652,67,682,692,722,738,766,76,773,843,860,866,91,95
 #SBATCH --time=100:00:00         # Run time in hh:mm:ss
-#SBATCH --mem-per-cpu=4096       # Minimum memory required per CPU (in megabytes)
+#SBATCH --mem-per-cpu=12096       # Minimum memory required per CPU (in megabytes)
 #SBATCH --job-name=Cats_ferret
-#SBATCH --error=/work/pavlov/okochenova/genomes_workdir/cat_comparison/logs/exonerate_ferret.ensembl.%A_%a.err
-#SBATCH --output=/work/pavlov/okochenova/genomes_workdir/cat_comparison/logs/exonerate_ferret.ensembl.%A_%a.out
+#SBATCH --error=/work/pavlov/okochenova/genomes_workdir/cat_comparison/logs/exonerate_ferret_felcat.ensembl.%A_%a.err
+#SBATCH --output=/work/pavlov/okochenova/genomes_workdir/cat_comparison/logs/exonerate_ferret_felcat.ensembl.%A_%a.out
 
 module load exonerate/2.2
 source /work/pavlov/okochenova/profile
