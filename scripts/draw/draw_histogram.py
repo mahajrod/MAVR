@@ -32,6 +32,8 @@ parser.add_argument("-n", "--min_value", action="store", dest="min_length", type
                     help="Minimum value to show. Default - 1")
 parser.add_argument("-x", "--max_value", action="store", dest="max_length", type=float,
                     help="Maximum value to show. Default - length of longest sequence")
+parser.add_argument("-g", "--logbase", action="store", dest="logbase", type=int, default=10,
+                    help="Logbase to use for log-scaled histogramms")
 parser.add_argument("-e", "--extensions", action="store", dest="extensions", type=lambda x: x.split(","),
                     default=["png", "svg"],
                     help="Comma-separated list of extensions for histogram files")
@@ -62,8 +64,8 @@ if (args.max_length != max_len) and (args.min_length != 1):
     else:
         filtered = lengths
 
-plt.figure(1, figsize=(6, 6))
-plt.subplot(1, 1, 1)
+figure = plt.figure(1, figsize=(6, 6))
+subplot = plt.subplot(1, 1, 1)
 
 if args.number_of_bins:
     bins = args.number_of_bins
@@ -92,6 +94,11 @@ if args.title:
 
 for ext in args.extensions:
     plt.savefig("%s.%s" % (args.output_prefix, ext))
+
+subplot.set_yscale('log', basey=args.logbase)
+subplot.set_xscale('log', basex=args.logbase)
+for ext in args.extensions:
+    plt.savefig("%s.logscale.%s" % (args.output_prefix, ext))
 
 # save histo values
 np.savetxt("%s.histo" % args.output_prefix, zip(bin_centers, n), fmt="%i\t%i")
