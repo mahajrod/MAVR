@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#SBATCH --array=1-950%950
+#SBATCH --array=191,408,478,55,586,596,599,623,651,655,661,672,679,714,725,730,748,750,765,774,784,785,810,816,841,890,905,908,910,916,917
 #SBATCH --time=100:00:00         # Run time in hh:mm:ss
-#SBATCH --mem-per-cpu=4096       # Minimum memory required per CPU (in megabytes)
+#SBATCH --mem-per-cpu=10096       # Minimum memory required per CPU (in megabytes)
 #SBATCH --job-name=Cats_cat
-#SBATCH --error=/work/pavlov/okochenova/genomes_workdir/cat_comparison/logs/exonerate_cat.ncbi.%A_%a.err
-#SBATCH --output=/work/pavlov/okochenova/genomes_workdir/cat_comparison/logs/exonerate_cat.ncbi.%A_%a.out
+#SBATCH --error=/work/pavlov/okochenova/genomes_workdir/cat_comparison/logs/exonerate_cat_cat.ncbi.%A_%a.err
+#SBATCH --output=/work/pavlov/okochenova/genomes_workdir/cat_comparison/logs/exonerate_cat_cat.ncbi.%A_%a.out
 
 module load exonerate/2.2
 source /work/pavlov/okochenova/profile
@@ -16,7 +16,7 @@ PEP_FILE="${SPLITED_PEP_DIR}felis_catus_ncbi_${SLURM_ARRAY_TASK_ID}.fasta"
 CAT_GENOMES_DIR="/work/pavlov/okochenova/genomes/cat_project/"
 WORK_DIR="/work/pavlov/okochenova/genomes_workdir/cat_comparison/"
 
-for SPECIES in PanOnc_1.0 FelCat_8.0;
+for SPECIES in FelCat_8.0;
     do
     TARGET_GENOME="${CAT_GENOMES_DIR}${SPECIES}.fixed.fa"
     TARGET_GENOME_DIR="${WORK_DIR}${SPECIES}/"
