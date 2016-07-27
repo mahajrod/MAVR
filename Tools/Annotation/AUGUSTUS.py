@@ -178,6 +178,7 @@ class AUGUSTUS(Tool):
                                 else:
                                     protein += part
                         if complete_proteins_id_file:
+                            print "AAAAA"
                             if start_presence and stop_presence:
                                 complete_fd.write("%s%s" % (id_prefix, transcript_id))
 
