@@ -96,7 +96,7 @@ for ext in args.extensions:
     plt.savefig("%s.%s" % (args.output_prefix, ext))
 
 subplot.set_yscale('log', basey=args.logbase)
-subplot.set_xscale('log', basex=args.logbase)
+#subplot.set_xscale('log', basex=args.logbase)
 for ext in args.extensions:
     plt.savefig("%s.logscale.%s" % (args.output_prefix, ext))
 
