@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 __author__ = 'mahajrod'
-
+import os
 import argparse
 import pprint
 
 from collections import OrderedDict
 import matplotlib
 matplotlib.use('Agg')
+os.environ['MPLCONFIGDIR'] = '/tmp/'
 import matplotlib.pyplot as plt
 import numpy as np
 

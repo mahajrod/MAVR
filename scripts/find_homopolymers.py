@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 __author__ = 'mahajrod'
+import os
 import argparse
 
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')
+os.environ['MPLCONFIGDIR'] = '/tmp/'
 import matplotlib.pyplot as plt
 
 from Routines.Sequence import find_homopolymers

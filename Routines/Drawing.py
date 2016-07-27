@@ -1,5 +1,11 @@
 __author__ = 'mahajrod'
+
+import os
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')
+os.environ['MPLCONFIGDIR'] = '/tmp/'
+
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from matplotlib import text

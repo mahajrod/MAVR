@@ -1,0 +1,12 @@
+
+for SAMPLE in JH-016P JH-027F JH-027M JH-027P JH-028P JH-029P JH-030P JH-031P JH-032P JH-057P ; do samtools depth -q 1 /mnt/genomerussia/ssidorov/bakeoff/macrogen/bam/macrogen.${SAMPLE}.sorted.bam > ${SAMPLE}.coverage; awk '{print $3}' ${SAMPLE}.coverage > ${SAMPLE}.coverage.numbers ~/soft/MAVR/scripts/draw/draw_histogram.py -i ${SAMPLE}.coverage.numbers -o ${SAMPLE}.coverage.hist.less_100 -w 1 -e png,svg -l Coverage -y "Number of bases" -t "Coverage distribution" -x 100; ~/soft/MAVR/scripts/draw/draw_histogram.py -i ${SAMPLE}.coverage.numbers -o ${SAMPLE}.coverage.hist -w 1 -e png,svg -l Coverage -y "Number of bases" -t "Coverage distribution"; done
+
+
+for SAMPLE in JH-027P JH-029P JH-031P JH-057P;
+    do
+    echo "Handling ${SAMPLE}";
+    samtools depth -q 1 /mnt/genomerussia/ssidorov/bakeoff/macrogen/bam/macrogen.${SAMPLE}.sorted.bam > ${SAMPLE}.coverage;
+    awk '{print $3}' ${SAMPLE}.coverage > ${SAMPLE}.coverage.numbers;
+    ~/soft/MAVR/scripts/draw/draw_histogram.py -i ${SAMPLE}.coverage.numbers -o ${SAMPLE}.coverage.hist.less_100 -w 1 -e png,svg -l Coverage -y "Number of bases" -t "Coverage distribution" -x 100;
+    ~/soft/MAVR/scripts/draw/draw_histogram.py -i ${SAMPLE}.coverage.numbers -o ${SAMPLE}.coverage.hist -w 1 -e png,svg -l Coverage -y "Number of bases" -t "Coverage distribution";
+    done

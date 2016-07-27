@@ -79,6 +79,8 @@ class MatplotlibRoutines:
     def percent_histogram(data, output_prefix, n_bins=20, title="", xlabel="%", ylabel="Number",
                           extensions=("jpg", "png", "svg"), legend=None, legend_location="best", input_mode="percent"):
 
+
+
         figure = plt.figure()
         subplot = plt.subplot(1, 1, 1)
 

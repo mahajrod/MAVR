@@ -7,6 +7,7 @@ import os
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')
+os.environ['MPLCONFIGDIR'] = '/tmp/'
 import matplotlib.pyplot as plt
 
 from Bio import SeqIO

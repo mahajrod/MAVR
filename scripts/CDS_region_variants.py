@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 __author__ = 'mahajrod'
-
+import os
 import argparse
 import pprint
 from BCBio.GFF import GFFExaminer
 from BCBio import GFF
 import matplotlib
 matplotlib.use('Agg')
+os.environ['MPLCONFIGDIR'] = '/tmp/'
 import matplotlib.pyplot as plt
 
 from Parsers.VCF import CollectionVCF
