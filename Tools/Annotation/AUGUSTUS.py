@@ -163,7 +163,7 @@ class AUGUSTUS(Tool):
                         #out_fd.write(">%s%s\t gene=%s\n" % (id_prefix, transcript_id, gene))
                     elif "\tstart_codon\t" in line:
                         start_presence = True
-                    elif "\tstart_codon\t" in line:
+                    elif "\tstop_codon\t" in line:
                         stop_presence = True
                     elif "# protein sequence" in line:
                         protein = line.strip().split("[")[-1]
@@ -178,8 +178,8 @@ class AUGUSTUS(Tool):
                                 else:
                                     protein += part
                         if complete_proteins_id_file:
-                            print "AAAAA"
-                            print (start_presence, stop_presence)
+                            #print "AAAAA"
+                            #print (start_presence, stop_presence)
                             if start_presence and stop_presence:
                                 complete_fd.write("%s%s\n" % (id_prefix, transcript_id))
 
