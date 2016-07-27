@@ -183,7 +183,7 @@ class AUGUSTUS(Tool):
                             if start_presence and stop_presence:
                                 complete_fd.write("%s%s\n" % (id_prefix, transcript_id))
 
-                        out_fd.write(">%s%s\t gene=%s\n start_presence=%s stop_presence=%s" % (id_prefix, transcript_id,
+                        out_fd.write(">%s%s\t gene=%s start_presence=%s stop_presence=%s\n" % (id_prefix, transcript_id,
                                                                                                gene,
                                                                                                str(start_presence),
                                                                                                str(stop_presence)))
