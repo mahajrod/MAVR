@@ -137,7 +137,7 @@ class AUGUSTUS(Tool):
             CGAS.cat(list_of_output_files, output=output)
 
     def extract_proteins_from_output(self, augustus_output, protein_output, evidence_stats_file=None,
-                                     supported_by_hints_file=None, id_prefix="p."):
+                                     supported_by_hints_file=None, complete_proteins_id_file=None, id_prefix="p."):
         if evidence_stats_file:
             ev_fd = open(evidence_stats_file, "w")
             ev_fd.write("#gene_id\ttranscript_id\tsupported_fraction\tcds_support\tintron_support\t")
@@ -148,6 +148,9 @@ class AUGUSTUS(Tool):
             sup_fd.write("#gene_id\ttranscript_id\tsupported_fraction\tcds_support\tintron_support\t")
             sup_fd.write("5'UTR_support\t3'UTR_support\tincompatible_hints_groups\tprotein_length\n")
 
+        if complete_proteins_id_file:
+            complete_fd = open(complete_proteins_id_file, "w")
+
         with open(protein_output, "w") as out_fd:
             with open(augustus_output, "r") as in_fd:
                 for line in in_fd:
@@ -155,8 +158,13 @@ class AUGUSTUS(Tool):
                         gene = line.strip().split()[-1]
                     elif "\ttranscript\t" in line:
                         transcript_id = line.split("\t")[8].split(";")[0].split("=")[1]
-                        out_fd.write(">%s%s\t gene=%s\n" % (id_prefix, transcript_id, gene))
-
+                        start_presence = False
+                        stop_presence = False
+                        #out_fd.write(">%s%s\t gene=%s\n" % (id_prefix, transcript_id, gene))
+                    elif "\tstart_codon\t" in line:
+                        start_presence = True
+                    elif "\tstart_codon\t" in line:
+                        stop_presence = True
                     elif "# protein sequence" in line:
                         protein = line.strip().split("[")[-1]
                         if "]" in protein:
@@ -169,7 +177,14 @@ class AUGUSTUS(Tool):
                                     break
                                 else:
                                     protein += part
+                        if complete_proteins_id_file:
+                            if start_presence and stop_presence:
+                                complete_fd.write("%s%s" % (id_prefix, transcript_id))
 
+                        out_fd.write(">%s%s\t gene=%s\n start_presence=%s stop_presence=%s" % (id_prefix, transcript_id,
+                                                                                               gene,
+                                                                                               str(start_presence),
+                                                                                               str(stop_presence)))
                         out_fd.write(protein)
                         protein_len = len(protein)
                         out_fd.write("\n")
