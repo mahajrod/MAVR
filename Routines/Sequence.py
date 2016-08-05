@@ -75,6 +75,35 @@ class SequenceRoutines():
                     output_file, format=format)
         os.remove(tmp_index_file)
 
+    def extract_sequences_by_length_from_file(self, input_file, output_file, min_len=1, max_len=None, format="fasta",
+                                              tmp_index_file="tmp.idx", id_file=None):
+
+        if (min_len is None) and (max_len is None):
+            raise ValueError("Both minimum and maximum lengths were not set")
+        elif (min_len is not None) and (max_len is not None) and (min_len > max_len):
+            raise ValueError("Minimum length is greater then maximum lengths")
+        elif min_len < 0:
+            raise ValueError("Minimum length is below zero")
+        elif max_len < 0:
+            raise ValueError("Maximum length is below zero")
+
+        sequence_dict = SeqIO.index_db(tmp_index_file, input_file, format=format)
+
+        if (min_len is not None) and (min_len > 1) and (max_len is not None):
+            length_expression = lambda record: min_len <= len(record.seq) <= max_len
+        elif (min_len is not None) and (min_len > 1):
+            length_expression = lambda record: len(record.seq) >= min_len
+        elif max_len is not None:
+            length_expression = lambda record: len(record.seq) <= max_len
+        else:
+            length_expression = lambda record: True
+
+        SeqIO.write(self.record_by_expression_generator(sequence_dict, expression=length_expression,
+                                                        id_file=id_file),
+                    output_file, format=format)
+
+        os.remove(tmp_index_file)
+
     @staticmethod
     def find_gaps(record_dict):
         gap_reg_exp = re.compile("N+", re.IGNORECASE)

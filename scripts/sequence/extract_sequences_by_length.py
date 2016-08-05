@@ -1,12 +1,9 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
-import sys
 import argparse
-from Bio import SeqIO
 
-#from Routines.Sequence import filter_sequences
 from Routines import SequenceRoutines
+
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_file", action="store", dest="input_file",
@@ -24,6 +21,14 @@ parser.add_argument("-d", "--id_file", action="store", dest="id_file",
                     help="File to write ids of extracted sequences. Default - don't write")
 args = parser.parse_args()
 
+
+SequenceRoutines.extract_sequences_by_length_from_file(args.input_file, args.output_file,
+                                                       min_len=args.min_length,
+                                                       max_len=args.max_length, format=args.format,
+                                                       tmp_index_file="tmp.idx",
+                                                       id_file=args.id_file)
+
+"""
 if (args.min_length is None) and (args.max_length is None):
     raise ValueError("Both minimum and maximum lengths were not set")
 elif (args.min_length is not None) and (args.max_length is not None) and (args.min_length > args.max_length):
@@ -50,7 +55,7 @@ SeqIO.write(SequenceRoutines.record_by_expression_generator(sequence_dict, expre
 #SeqIO.write(record_by_id_generator(sequence_dict, id_list), args.output_file, format=args.format)
 
 os.remove(tmp_index_file)
-
+"""
 
 
 

@@ -51,6 +51,8 @@ class RepeatMasker(Tool):
     def extract_annotated_repeat_types_from_gff(gff_file, annotated_repeat_classes_file):
         sed_string = "sed -r 's/.*Class=(.*);Family.*/\1/' %s | sort | uniq > %s" % (gff_file,
                                                                                      annotated_repeat_classes_file)
+        # awk variant of string
+        # awk -F'\t' '{print $9}' repeatmasker.selected_repeat_classes.gff | awk -F';' '{print $1}' | awk -F'=' '{print $2}' | sort | uniq
         os.system(sed_string)
 
     def extract_repeats_used_for_gene_annotation(self, input_gff, output_gff):

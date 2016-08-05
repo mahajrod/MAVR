@@ -10,3 +10,8 @@ for GENOME in *;
 
     cd ../../;
     done
+
+
+
+# More universal variant
+# grep -P "Class=DNA|Class=DNA\?|Class=LINE|Class=LTR|Class=LTR\?|Class=RC|Class=RC\?|Class=SINE|Class=SINE\?|Class=Retroposon"
