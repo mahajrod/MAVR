@@ -21,7 +21,7 @@ parser.add_argument("-n", "--min_length", action="store", dest="min_length", typ
 parser.add_argument("-x", "--max_length", action="store", dest="max_length", type=int,
                     help="Maximum length of sequence to store. Default: filter not set")
 parser.add_argument("-d", "--id_file", action="store", dest="id_file",
-                    help="File to write ids of extracted peptides. Default - don't write")
+                    help="File to write ids of extracted sequences. Default - don't write")
 args = parser.parse_args()
 
 if (args.min_length is None) and (args.max_length is None):
