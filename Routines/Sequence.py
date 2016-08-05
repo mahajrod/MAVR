@@ -134,6 +134,7 @@ class SequenceRoutines():
                         yield record_dict[record_id]
                     else:
                         for record_id in record_dict:
+                            print "BBBBBBBBBB"
                             if expression(record_dict[record_id]):
                                 print("CCCCCCCC")
                                 id_fd.write(record_id + "\n")
