@@ -127,7 +127,6 @@ class SequenceRoutines():
         :return: None
         """
         if id_file:
-            print "GGGGGGGGGGGG"
             with open(id_file, "w") as id_fd:
                 if expression is None:
                     for record_id in record_dict:
@@ -135,9 +134,7 @@ class SequenceRoutines():
                         yield record_dict[record_id]
                 else:
                     for record_id in record_dict:
-                        print "BBBBBBBBBB"
                         if expression(record_dict[record_id]):
-                            print("CCCCCCCC")
                             id_fd.write(record_id + "\n")
                             yield record_dict[record_id]
         else:
