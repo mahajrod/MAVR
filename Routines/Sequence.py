@@ -82,9 +82,9 @@ class SequenceRoutines():
             raise ValueError("Both minimum and maximum lengths were not set")
         elif (min_len is not None) and (max_len is not None) and (min_len > max_len):
             raise ValueError("Minimum length is greater then maximum lengths")
-        elif min_len < 0:
+        elif (min_len is not None) and (min_len < 0):
             raise ValueError("Minimum length is below zero")
-        elif max_len < 0:
+        elif (max_len is not None) and (max_len < 0):
             raise ValueError("Maximum length is below zero")
 
         sequence_dict = SeqIO.index_db(tmp_index_file, input_file, format=format)
