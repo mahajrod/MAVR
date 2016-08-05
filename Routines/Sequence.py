@@ -126,6 +126,7 @@ class SequenceRoutines():
         :param id_file: file to write ids of records passed expression
         :return: None
         """
+        print "KKKKKKKKKKKK"
         if id_file:
             with open(id_file, "w") as id_fd:
                 if expression is None:
