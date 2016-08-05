@@ -25,5 +25,5 @@ record_dict = SeqIO.index_db("temp_index.idx", [args.input], format=args.format)
 lengths_dict = SequenceRoutines.get_lengths(record_dict, out_file=out_fd)
 print("Longest sequence: %i" % max(lengths_dict.values()))
 print("Shortest sequence: %i" % min(lengths_dict.values()))
-
+print("Total length: %i" % sum(lengths_dict.values()))
 os.remove("temp_index.idx")
