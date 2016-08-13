@@ -3,3 +3,6 @@ for  SAMPLE in *_*.*/; do echo ${SAMPLE}; ls -l ${SAMPLE}/cat/ | awk 'NR > 1 {pr
 
 for  SAMPLE in *.*/; do echo ${SAMPLE}; ls -l ${SAMPLE}/human/ | awk 'NR > 1 {print $0}'  | wc -l; ls -l ${SAMPLE}/human/ | awk 'NR > 1 {if ($5<500) print $9}' | wc -l; ls -l ${SAMPLE}/human/ | awk 'NR > 1 {if ($5<500) print $9}'; /work/pavlov/okochenova/soft/MAVR/projects/cat_comparison/find_absent_chunks.py -i ${SAMPLE}/human/ -n 940; done
 
+for  SAMPLE in *.*/; do echo ${SAMPLE}; ls -l ${SAMPLE}/dog/ | awk 'NR > 1 {print $0}'  | wc -l; ls -l ${SAMPLE}/dog/ | awk 'NR > 1 {if ($5<500) print $9}' | wc -l; ls -l ${SAMPLE}/dog/ | awk 'NR > 1 {if ($5<500) print $9}'; /work/pavlov/okochenova/soft/MAVR/projects/cat_comparison/find_absent_chunks.py -i ${SAMPLE}/dog/ -n 932; done
+
+for  SAMPLE in *_*.*/; do echo ${SAMPLE}; ls -l ${SAMPLE}/ferret/ | awk 'NR > 1 {print $0}'  | wc -l; ls -l ${SAMPLE}/ferret/ | awk 'NR > 1 {if ($5<500) print $9}' | wc -l; ls -l ${SAMPLE}/ferret/ | awk 'NR > 1 {if ($5<500) print $9}'; /work/pavlov/okochenova/soft/MAVR/projects/cat_comparison/find_absent_chunks.py -i ${SAMPLE}/ferret/ -n 956; done

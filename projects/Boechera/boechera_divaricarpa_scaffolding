@@ -37,3 +37,7 @@ cd /mnt/peru/skliver/Boechera/Boechera_divaricarpa/genome/assemblies/discovar_ad
 
 ~/Soft/SOAP/SOAPdenovo2-bin-LINUX-generic-r240/SOAPdenovo-63mer map -p 28 -s config -g assembly.full 1>map.log 2>map.err
 ~/Soft/SOAP/SOAPdenovo2-bin-LINUX-generic-r240/SOAPdenovo-63mer scaff -p 28 -g assembly.full 1>scaff.log 2>scaff.err
+
+# gap closing
+
+~/Soft/SOAP/GapCloser/GapCloser -a assembly.full.scafSeq -b config -o assembly.full.scafSeq.gap_closed.fasta -l 251 -t 25
