@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #SBATCH --array=110,117,120,154,159,166,175,220,250,263,293,29,2,303,304,313,320,323,358,367,379,388,389,404,409,436,462,469,477,480,482,486,488,496,535,572,575,601,602,647,652,67,682,688,692,697,722,730,738,766,76,773,775,787,794,823,824,843,845,860,866,91,945,95,97
 #SBATCH --time=100:00:00         # Run time in hh:mm:ss
-#SBATCH --mem-per-cpu=4096       # Minimum memory required per CPU (in megabytes)
+#SBATCH --mem-per-cpu=16096       # Minimum memory required per CPU (in megabytes)
 #SBATCH --job-name=Cats_ferret
 #SBATCH --error=/work/pavlov/okochenova/genomes_workdir/cat_comparison/logs/exonerate_ferret.ensembl.%A_%a.err
 #SBATCH --output=/work/pavlov/okochenova/genomes_workdir/cat_comparison/logs/exonerate_ferret.ensembl.%A_%a.out
