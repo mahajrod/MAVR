@@ -115,13 +115,10 @@ plt.xlabel("Sequence length")
 plt.ylabel("Length of sequences")
 plt.xscale('log', logbase=10)
 
-
 plt.legend()
-
 
 for ext in ".png", ".svg":
     plt.savefig("%s.%s" % (args.output_prefix, ext))
-
 
 for assembly_label in assemblies_dict:
     os.remove("%s.tmp.idx" % assembly_label)
