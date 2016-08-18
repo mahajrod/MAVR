@@ -13,6 +13,7 @@ from CustomCollections.GeneralCollections import TwoLvlDict
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_file_list", action="store", dest="input_file_list", required=True,
+                    type=lambda s: s.split(","),
                     help="Comma-separated list of files with different assemblies")
 parser.add_argument("-l", "--labels_list", action="store", dest="labels_list",
                     type=lambda s: s.split(","),
