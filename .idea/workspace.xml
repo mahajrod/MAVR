@@ -93,8 +93,8 @@
       <file leaf-file-name="get_stats_from_assemblies.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/assembly/get_stats_from_assemblies.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.73828757" vertical-offset="497" max-vertical-offset="1566">
-              <caret line="53" column="129" selection-start-line="53" selection-start-column="129" selection-end-line="53" selection-end-column="129" />
+            <state vertical-scroll-proportion="0.5347334" vertical-offset="947" max-vertical-offset="1566">
+              <caret line="71" column="17" selection-start-line="71" selection-start-column="17" selection-end-line="71" selection-end-column="17" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
@@ -125,8 +125,8 @@
       <file leaf-file-name="Sequence.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="17453" max-vertical-offset="23040">
-              <caret line="985" column="79" selection-start-line="985" selection-start-column="78" selection-end-line="985" selection-end-column="91" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="18371" max-vertical-offset="23166">
+              <caret line="1040" column="28" selection-start-line="1040" selection-start-column="28" selection-end-line="1040" selection-end-column="28" />
               <folding>
                 <element signature="e#24#33#0" expanded="true" />
               </folding>
@@ -812,12 +812,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00727" summary="changes">
-      <created>1469534046636</created>
-      <option name="number" value="00727" />
-      <option name="project" value="LOCAL" />
-      <updated>1469534046636</updated>
-    </task>
     <task id="LOCAL-00728" summary="changes">
       <created>1469534259460</created>
       <option name="number" value="00728" />
@@ -1106,7 +1100,13 @@
       <option name="project" value="LOCAL" />
       <updated>1471485218803</updated>
     </task>
-    <option name="localTasksCounter" value="776" />
+    <task id="LOCAL-00776" summary="changes">
+      <created>1471485868320</created>
+      <option name="number" value="00776" />
+      <option name="project" value="LOCAL" />
+      <updated>1471485868320</updated>
+    </task>
+    <option name="localTasksCounter" value="777" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1606,8 +1606,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="17453" max-vertical-offset="23040">
-          <caret line="985" column="79" selection-start-line="985" selection-start-column="78" selection-end-line="985" selection-end-column="91" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="18371" max-vertical-offset="23166">
+          <caret line="1040" column="28" selection-start-line="1040" selection-start-column="28" selection-end-line="1040" selection-end-column="28" />
           <folding>
             <element signature="e#24#33#0" expanded="true" />
           </folding>
@@ -1616,8 +1616,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/assembly/get_stats_from_assemblies.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.73828757" vertical-offset="497" max-vertical-offset="1566">
-          <caret line="53" column="129" selection-start-line="53" selection-start-column="129" selection-end-line="53" selection-end-column="129" />
+        <state vertical-scroll-proportion="0.5347334" vertical-offset="947" max-vertical-offset="1566">
+          <caret line="71" column="17" selection-start-line="71" selection-start-column="17" selection-end-line="71" selection-end-column="17" />
           <folding>
             <element signature="e#54#63#0" expanded="true" />
           </folding>
