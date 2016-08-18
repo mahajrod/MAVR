@@ -69,7 +69,7 @@ for assembly in assembly_contig_cumulative_length:
 
 assembly_N50_dict.write("%s.N50" % args.output_prefix)
 assembly_number_of_contigs.write("%s.contig_number" % args.output_prefix)
-assembly_bins.write("%s.bins" % args.output_prefix)
+#assembly_bins.write("%s.bins" % args.output_prefix)
 assembly_contig_cumulative_length.write("%s.cumulative_length" % args.output_prefix)
 assembly_contig_number_values.write("%s.contig_number_values" % args.output_prefix)
 
