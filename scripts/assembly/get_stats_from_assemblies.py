@@ -89,7 +89,7 @@ print(assembly_contig_cumulative_length)
 #assembly_contig_number_values.write("%s.contig_number_values" % args.output_prefix)
 
 fig = plt.figure(figsize=(12, 6))
-subplot = plt.subplot(1, 2, 1)
+subplot_1 = plt.subplot(1, 2, 1)
 
 plt.hist([assembly_length_array[assembly] for assembly in assembly_length_array], bins,
          label=assembly_length_array.keys())
@@ -100,6 +100,19 @@ plt.xscale('log', logbase=10)
 plt.yscale('log', logbase=10)
 
 plt.legend()
+
+subplot_2 = plt.subplot(1, 2, 2)
+
+plt.plot([assembly_contig_cumulative_length[assembly] for assembly in assembly_contig_cumulative_length], bins,
+         label=assembly_contig_cumulative_length.keys())
+
+plt.xlabel("Sequence length")
+plt.ylabel("Length of sequences")
+plt.xscale('log', logbase=10)
+
+
+plt.legend()
+
 
 for ext in ".png", ".svg":
     plt.savefig("%s.%s" % (args.output_prefix, ext))
