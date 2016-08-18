@@ -104,7 +104,9 @@ plt.legend()
 subplot_2 = plt.subplot(1, 2, 2)
 
 for assembly in assembly_contig_cumulative_length:
-    plt.plot(assembly_contig_cumulative_length[assembly], bins[:-1], label=assembly)
+    print assembly_contig_cumulative_length[assembly]
+    print bins[:-1]
+    plt.plot(bins[:-1], assembly_contig_cumulative_length[assembly], label=assembly)
 
 plt.xlabel("Sequence length")
 plt.ylabel("Length of sequences")
