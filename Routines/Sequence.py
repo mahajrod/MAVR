@@ -990,9 +990,9 @@ class SequenceRoutines():
 
         right_bin = int(math.log(longest_contig, logbase)) + 1
         bins = [logbase**i for i in range(0, right_bin + 1)]
-        bins = [0] + bins  # just to count contigs of length less then logbase
-        contig_cumulative_length_values = [0 for i in range(0, right_bin + 1)]
-        contig_number_values = [0 for i in range(0, right_bin + 1)]
+        bins = bins
+        contig_cumulative_length_values = [0 for i in range(0, right_bin)]
+        contig_number_values = [0 for i in range(0, right_bin)]
 
         for contig_len in length_array:
             len_power = int(math.log(contig_len, logbase))
