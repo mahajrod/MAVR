@@ -997,8 +997,11 @@ class SequenceRoutines():
         for contig_len in length_array:
             len_power = int(math.log(contig_len, logbase))
             contig_cumulative_length_values[len_power] += contig_len
-            contig_number_values += 1
+            contig_number_values[len_power] += 1
 
+        print(bins)
+        print(contig_cumulative_length_values)
+        print(contig_number_values)
         number_of_contigs_dict = OrderedDict()
         N50_dict = OrderedDict()
         # TODO: make calculations of all N50s in one run
