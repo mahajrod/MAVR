@@ -89,14 +89,14 @@ print(assembly_contig_cumulative_length)
 
 fig = plt.figure()
 subplot = plt.subplot(1, 2, 1)
-
+plt.ticklabel_format(axis="x", style='sci', scilimits=(0, 0))
 for assembly_label in assembly_contig_cumulative_length:
     plt.hist(range(0, number_of_bins), number_of_bins, weights=assembly_contig_cumulative_length[assembly_label], label=assembly_label)
 
 plt.xlabel("Sequence length")
 plt.ylabel("Total length of sequences")
 plt.xticks(range(0, number_of_bins), [10**i for i in range(0, number_of_bins)])
-plt.ticklabel_format(axis="x", style='sci', scilimits=(0, 0))
+
 plt.legend()
 
 for ext in ".png", ".svg":
