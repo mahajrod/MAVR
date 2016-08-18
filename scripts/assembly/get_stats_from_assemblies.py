@@ -69,7 +69,7 @@ for assembly in assembly_contig_cumulative_length:
         assembly_contig_number_values[assembly] += [0 for i in range(0, bin_number_difference)]
 
 assembly_N50_dict.write("%s.N50" % args.output_prefix)
-L50.write("%s.L50" % args.output_prefix)
+assembly_L50.write("%s.L50" % args.output_prefix)
 #assembly_bins.write("%s.bins" % args.output_prefix)
 print(assembly_contig_cumulative_length)
 #assembly_contig_cumulative_length.write("%s.cumulative_length" % args.output_prefix)
