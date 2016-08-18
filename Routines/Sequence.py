@@ -983,19 +983,19 @@ class SequenceRoutines():
         return homopolymers_coords, homopolymers_lengthes
 
     @staticmethod
-    def calculate_assembly_stats(record_dict, thresholds_list=(0, 500, 1000), logbase=10):
+    def calculate_assembly_stats(record_dict, thresholds_list=(0, 500, 1000)):
         length_array = np.array(sorted([len(record_dict[record].seq) for record in record_dict], reverse=True))
         total_length = sum(length_array)
         longest_contig = length_array[0]
 
-        right_bin = int(math.log(longest_contig, logbase)) + 1
-        bins = [logbase**i for i in range(0, right_bin + 1)]
+        right_bin = int(math.log10(longest_contig)) + 1
+        bins = [10**i for i in range(0, right_bin + 1)]
         bins = bins
         contig_cumulative_length_values = [0 for i in range(0, right_bin)]
         contig_number_values = [0 for i in range(0, right_bin)]
 
         for contig_len in length_array:
-            len_power = int(math.log(contig_len, logbase))
+            len_power = int(math.log10(contig_len))
             contig_cumulative_length_values[len_power] += contig_len
             contig_number_values[len_power] += 1
 

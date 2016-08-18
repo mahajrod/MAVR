@@ -23,9 +23,6 @@ parser.add_argument("-t", "--thresholds", action="store", dest="thresholds", def
                     type=lambda s: map(int, s.split(",")),
                     help="Comma-separated list of thresholds for N50 calculations. "
                          "Default: 0,100,250,500,1000")
-
-parser.add_argument("-g", "--logbase", action="store", dest="logbase", type=int, default=10,
-                    help="Logarithm base for contig histograms. Default - 10")
 parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", required=True,
                     help="Prefix of output files")
 parser.add_argument("-f", "--format", action="store", dest="format", default="fasta",
