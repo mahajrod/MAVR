@@ -984,6 +984,10 @@ class SequenceRoutines():
 
     @staticmethod
     def calculate_assembly_stats(record_dict, thresholds_list=(0, 500, 1000), seq_len_file=None):
+        Ns_number = 0
+        for contig_id in record_dict:
+            Ns_number += record_dict[contig_id].seq.count("N") + record_dict[contig_id].seq.count("n")
+
         length_array = np.array(sorted([len(record_dict[record].seq) for record in record_dict], reverse=True))
         if seq_len_file:
             np.savetxt(seq_len_file, length_array, fmt="%i")
@@ -1006,6 +1010,7 @@ class SequenceRoutines():
         print(contig_number_values)
         L50 = OrderedDict()
         N50_dict = OrderedDict()
+
         # TODO: make calculations of all N50s in one run
         for threshold in thresholds_list:
             length_above_threshold = 0
@@ -1038,7 +1043,7 @@ class SequenceRoutines():
             N50_dict[threshold] = N50
             L50[threshold] = number_of_contigs
 
-        return N50_dict, L50, total_length, longest_contig, bins, contig_cumulative_length_values, contig_number_values
+        return N50_dict, L50, total_length, longest_contig, Ns_number, bins, contig_cumulative_length_values, contig_number_values
 
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):

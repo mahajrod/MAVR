@@ -7,6 +7,12 @@ from collections import OrderedDict
 
 from Bio import SeqIO
 
+import matplotlib
+matplotlib.use('Agg')
+os.environ['MPLCONFIGDIR'] = '/tmp/'
+
+import matplotlib.pyplot as plt
+
 from Routines import SequenceRoutines
 from CustomCollections.GeneralCollections import TwoLvlDict
 
@@ -46,9 +52,10 @@ assembly_L50 = TwoLvlDict()
 assembly_bins = []
 assembly_contig_cumulative_length = OrderedDict()
 assembly_contig_number_values = OrderedDict()
+assembly_general_stats = TwoLvlDict()
 
 for assembly in assemblies_dict:
-    N50_dict, L50, total_length, longest_contig, bins, contig_cumulative_length_values, \
+    N50_dict, L50, total_length, longest_contig, Ns_number, bins, contig_cumulative_length_values, \
         contig_number_values = SequenceRoutines.calculate_assembly_stats(assemblies_dict[assembly],
                                                                          thresholds_list=args.thresholds,
                                                                          seq_len_file="%s.%s.len" % (args.output_prefix, assembly))
@@ -56,9 +63,13 @@ for assembly in assemblies_dict:
     assembly_L50[assembly] = L50
     assembly_contig_cumulative_length[assembly] = contig_cumulative_length_values
     assembly_contig_number_values[assembly] = contig_number_values
-
+    assembly_general_stats[assembly] = OrderedDict()
+    assembly_general_stats[assembly]["Ns"] = Ns_number
+    assembly_general_stats[assembly]["Longest contig"] = longest_contig
+    assembly_general_stats[assembly]["Total length"] = total_length
     if len(assembly_bins) < len(bins):
         assembly_bins = bins
+
 number_of_bins = len(bins) - 1
 
 # add zeroes to absent bins for all assemblies
@@ -70,10 +81,27 @@ for assembly in assembly_contig_cumulative_length:
 
 assembly_N50_dict.write("%s.N50" % args.output_prefix)
 assembly_L50.write("%s.L50" % args.output_prefix)
+assembly_general_stats.write("%s.general" % args.output_prefix)
 #assembly_bins.write("%s.bins" % args.output_prefix)
 print(assembly_contig_cumulative_length)
 #assembly_contig_cumulative_length.write("%s.cumulative_length" % args.output_prefix)
 #assembly_contig_number_values.write("%s.contig_number_values" % args.output_prefix)
+
+fig = plt.figure()
+subplot = plt.subplot(1, 2, 1)
+
+for assembly_label in assembly_contig_cumulative_length:
+    plt.hist(range(0, number_of_bins), number_of_bins, weights=assembly_contig_cumulative_length[assembly_label], label=assembly_label)
+
+plt.xlabel("Sequence length")
+plt.ylabel("Total length of sequences")
+plt.xticks(range(0, number_of_bins), [10**i for i in range(0, number_of_bins)])
+plt.ticklabel_format(axis="x", style='sci', scilimits=(0, 0))
+plt.legend()
+
+for ext in ".png", ".svg":
+    plt.savefig("%s.%s" % (args.output_prefix, ext))
+
 
 for assembly_label in assemblies_dict:
     os.remove("%s.tmp.idx" % assembly_label)
