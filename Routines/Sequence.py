@@ -1008,9 +1008,9 @@ class SequenceRoutines():
         print(bins)
         print(contig_cumulative_length_values)
         print(contig_number_values)
-        L50 = OrderedDict()
+        L50_dict = OrderedDict()
         N50_dict = OrderedDict()
-
+        length_dict = OrderedDict()
         # TODO: make calculations of all N50s in one run
         for threshold in thresholds_list:
             length_above_threshold = 0
@@ -1025,7 +1025,7 @@ class SequenceRoutines():
 
             tmp = 0
             number_of_contigs = 0
-
+            tmp_length = 0
             for length in length_array:
                 """
                 if tmp < half_length:
@@ -1041,9 +1041,15 @@ class SequenceRoutines():
                     N50 = length
                     break
             N50_dict[threshold] = N50
-            L50[threshold] = number_of_contigs
+            L50_dict[threshold] = number_of_contigs
+            for length in length_array:
+                if length >= threshold:
+                    tmp_length += length
+                else:
+                    break
+            length_dict[threshold] = tmp_length
 
-        return length_array, N50_dict, L50, total_length, longest_contig, Ns_number, bins, contig_cumulative_length_values, contig_number_values
+        return length_array, N50_dict, L50_dict, length_dict, total_length, longest_contig, Ns_number, bins, contig_cumulative_length_values, contig_number_values
 
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):

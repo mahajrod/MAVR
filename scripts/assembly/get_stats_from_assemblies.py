@@ -54,13 +54,14 @@ assembly_contig_cumulative_length = OrderedDict()
 assembly_contig_number_values = OrderedDict()
 assembly_general_stats = TwoLvlDict()
 assembly_length_array = OrderedDict()
+assembly_lengths = TwoLvlDict()
 for assembly in assemblies_dict:
-    lengths_array, N50_dict, L50, total_length, longest_contig, Ns_number, bins, contig_cumulative_length_values, \
+    lengths_array, N50_dict, L50_dict, length_dict, total_length, longest_contig, Ns_number, bins, contig_cumulative_length_values, \
         contig_number_values = SequenceRoutines.calculate_assembly_stats(assemblies_dict[assembly],
                                                                          thresholds_list=args.thresholds,
                                                                          seq_len_file="%s.%s.len" % (args.output_prefix, assembly))
     assembly_N50_dict[assembly] = N50_dict
-    assembly_L50[assembly] = L50
+    assembly_L50[assembly] = L50_dict
     assembly_contig_cumulative_length[assembly] = contig_cumulative_length_values
     assembly_contig_number_values[assembly] = contig_number_values
     assembly_general_stats[assembly] = OrderedDict()
@@ -68,6 +69,7 @@ for assembly in assemblies_dict:
     assembly_general_stats[assembly]["Longest contig"] = longest_contig
     assembly_general_stats[assembly]["Total length"] = total_length
     assembly_length_array[assembly] = lengths_array
+    assembly_lengths[assembly] = length_dict
     if len(assembly_bins) < len(bins):
         assembly_bins = bins
 
@@ -83,6 +85,7 @@ for assembly in assembly_contig_cumulative_length:
 assembly_N50_dict.write("%s.N50" % args.output_prefix)
 assembly_L50.write("%s.L50" % args.output_prefix)
 assembly_general_stats.write("%s.general" % args.output_prefix)
+assembly_lengths.write("%s.lengths" % args.output_prefix)
 #assembly_bins.write("%s.bins" % args.output_prefix)
 #print(assembly_contig_cumulative_length)
 #assembly_contig_cumulative_length.write("%s.cumulative_length" % args.output_prefix)
@@ -104,8 +107,8 @@ plt.legend()
 subplot_2 = plt.subplot(1, 2, 2)
 
 for assembly in assembly_contig_cumulative_length:
-    print assembly_contig_cumulative_length[assembly]
-    print bins[:-1]
+    #print assembly_contig_cumulative_length[assembly]
+    #print bins[:-1]
     plt.plot(bins[:-1], assembly_contig_cumulative_length[assembly], label=assembly)
 
 plt.xlabel("Sequence length")

@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Sequence.py" afterPath="$PROJECT_DIR$/Routines/Sequence.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/assembly/get_stats_from_assemblies.py" afterPath="$PROJECT_DIR$/scripts/assembly/get_stats_from_assemblies.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -79,11 +80,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="get_stats_from_assemblies.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="get_stats_from_assemblies.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/assembly/get_stats_from_assemblies.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1068" max-vertical-offset="2070">
-              <caret line="69" column="51" selection-start-line="69" selection-start-column="51" selection-end-line="69" selection-end-column="51" />
+            <state vertical-scroll-proportion="0.30921054" vertical-offset="1284" max-vertical-offset="2430">
+              <caret line="87" column="28" selection-start-line="87" selection-start-column="28" selection-end-line="87" selection-end-column="28" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
@@ -123,11 +124,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Sequence.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Sequence.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6589912" vertical-offset="18209" max-vertical-offset="23256">
-              <caret line="1045" column="29" selection-start-line="1045" selection-start-column="29" selection-end-line="1045" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="18101" max-vertical-offset="23364">
+              <caret line="1051" column="50" selection-start-line="1051" selection-start-column="49" selection-end-line="1051" selection-end-column="60" />
               <folding>
                 <element signature="e#24#33#0" expanded="true" />
               </folding>
@@ -813,54 +814,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00734" summary="changes">
-      <created>1469622230168</created>
-      <option name="number" value="00734" />
-      <option name="project" value="LOCAL" />
-      <updated>1469622230168</updated>
-    </task>
-    <task id="LOCAL-00735" summary="changes">
-      <created>1469623043129</created>
-      <option name="number" value="00735" />
-      <option name="project" value="LOCAL" />
-      <updated>1469623043129</updated>
-    </task>
-    <task id="LOCAL-00736" summary="changes">
-      <created>1469624089387</created>
-      <option name="number" value="00736" />
-      <option name="project" value="LOCAL" />
-      <updated>1469624089387</updated>
-    </task>
-    <task id="LOCAL-00737" summary="changes">
-      <created>1469624134070</created>
-      <option name="number" value="00737" />
-      <option name="project" value="LOCAL" />
-      <updated>1469624134070</updated>
-    </task>
-    <task id="LOCAL-00738" summary="changes">
-      <created>1469624183542</created>
-      <option name="number" value="00738" />
-      <option name="project" value="LOCAL" />
-      <updated>1469624183542</updated>
-    </task>
-    <task id="LOCAL-00739" summary="changes">
-      <created>1469624456043</created>
-      <option name="number" value="00739" />
-      <option name="project" value="LOCAL" />
-      <updated>1469624456043</updated>
-    </task>
-    <task id="LOCAL-00740" summary="changes">
-      <created>1469624571180</created>
-      <option name="number" value="00740" />
-      <option name="project" value="LOCAL" />
-      <updated>1469624571180</updated>
-    </task>
-    <task id="LOCAL-00741" summary="changes">
-      <created>1469793688515</created>
-      <option name="number" value="00741" />
-      <option name="project" value="LOCAL" />
-      <updated>1469793688515</updated>
-    </task>
     <task id="LOCAL-00742" summary="changes">
       <created>1470132025218</created>
       <option name="number" value="00742" />
@@ -1107,7 +1060,55 @@
       <option name="project" value="LOCAL" />
       <updated>1471531382007</updated>
     </task>
-    <option name="localTasksCounter" value="783" />
+    <task id="LOCAL-00783" summary="changes">
+      <created>1471531394840</created>
+      <option name="number" value="00783" />
+      <option name="project" value="LOCAL" />
+      <updated>1471531394840</updated>
+    </task>
+    <task id="LOCAL-00784" summary="changes">
+      <created>1471531711773</created>
+      <option name="number" value="00784" />
+      <option name="project" value="LOCAL" />
+      <updated>1471531711773</updated>
+    </task>
+    <task id="LOCAL-00785" summary="changes">
+      <created>1471532012694</created>
+      <option name="number" value="00785" />
+      <option name="project" value="LOCAL" />
+      <updated>1471532012694</updated>
+    </task>
+    <task id="LOCAL-00786" summary="changes">
+      <created>1471532342468</created>
+      <option name="number" value="00786" />
+      <option name="project" value="LOCAL" />
+      <updated>1471532342468</updated>
+    </task>
+    <task id="LOCAL-00787" summary="changes">
+      <created>1471532857751</created>
+      <option name="number" value="00787" />
+      <option name="project" value="LOCAL" />
+      <updated>1471532857751</updated>
+    </task>
+    <task id="LOCAL-00788" summary="changes">
+      <created>1471533124634</created>
+      <option name="number" value="00788" />
+      <option name="project" value="LOCAL" />
+      <updated>1471533124634</updated>
+    </task>
+    <task id="LOCAL-00789" summary="changes">
+      <created>1471533678017</created>
+      <option name="number" value="00789" />
+      <option name="project" value="LOCAL" />
+      <updated>1471533678017</updated>
+    </task>
+    <task id="LOCAL-00790" summary="changes">
+      <created>1471534015029</created>
+      <option name="number" value="00790" />
+      <option name="project" value="LOCAL" />
+      <updated>1471534015029</updated>
+    </task>
+    <option name="localTasksCounter" value="791" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1140,7 +1141,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11585045" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11585045" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
@@ -1562,14 +1563,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/sequence/make_region_bed_file.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/projects/Boechera/boechera_divaricarpa_scaffolding">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="279" max-vertical-offset="900">
@@ -1604,22 +1597,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/assembly/get_stats_from_assemblies.py">
+    <entry file="file://$PROJECT_DIR$/scripts/sequence/make_region_bed_file.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1068" max-vertical-offset="2070">
-          <caret line="69" column="51" selection-start-line="69" selection-start-column="51" selection-end-line="69" selection-end-column="51" />
-          <folding>
-            <element signature="e#54#63#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6589912" vertical-offset="18209" max-vertical-offset="23256">
-          <caret line="1045" column="29" selection-start-line="1045" selection-start-column="29" selection-end-line="1045" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="18101" max-vertical-offset="23364">
+          <caret line="1051" column="50" selection-start-line="1051" selection-start-column="49" selection-end-line="1051" selection-end-column="60" />
           <folding>
             <element signature="e#24#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/assembly/get_stats_from_assemblies.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30921054" vertical-offset="1284" max-vertical-offset="2430">
+          <caret line="87" column="28" selection-start-line="87" selection-start-column="28" selection-end-line="87" selection-end-column="28" />
+          <folding>
+            <element signature="e#54#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
