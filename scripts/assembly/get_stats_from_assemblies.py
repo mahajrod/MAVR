@@ -84,7 +84,7 @@ assembly_N50_dict.write("%s.N50" % args.output_prefix)
 assembly_L50.write("%s.L50" % args.output_prefix)
 assembly_general_stats.write("%s.general" % args.output_prefix)
 #assembly_bins.write("%s.bins" % args.output_prefix)
-print(assembly_contig_cumulative_length)
+#print(assembly_contig_cumulative_length)
 #assembly_contig_cumulative_length.write("%s.cumulative_length" % args.output_prefix)
 #assembly_contig_number_values.write("%s.contig_number_values" % args.output_prefix)
 
@@ -103,8 +103,8 @@ plt.legend()
 
 subplot_2 = plt.subplot(1, 2, 2)
 
-plt.plot([assembly_contig_cumulative_length[assembly] for assembly in assembly_contig_cumulative_length], bins[:-1],
-         label=assembly_contig_cumulative_length.keys())
+for assembly in assembly_contig_cumulative_length:
+    plt.plot(assembly_contig_cumulative_length[assembly], bins[:-1], label=assembly)
 
 plt.xlabel("Sequence length")
 plt.ylabel("Length of sequences")
