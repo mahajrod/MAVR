@@ -44,13 +44,14 @@ for i in range(0, len(args.input_file_list)):
 assembly_N50_dict = TwoLvlDict()
 assembly_number_of_contigs = TwoLvlDict()
 assembly_bins = []
-assembly_contig_cumulative_length = TwoLvlDict()
-assembly_contig_number_values = TwoLvlDict()
+assembly_contig_cumulative_length = OrderedDict()
+assembly_contig_number_values = OrderedDict()
 
 for assembly in assemblies_dict:
     N50_dict, number_of_contigs_dict, total_length, longest_contig, bins, contig_cumulative_length_values, \
         contig_number_values = SequenceRoutines.calculate_assembly_stats(assemblies_dict[assembly],
-                                                                         thresholds_list=args.thresholds)
+                                                                         thresholds_list=args.thresholds,
+                                                                         seq_len_file="%s.%s.len" % (args.output_prefix, assembly))
     assembly_N50_dict[assembly] = N50_dict
     assembly_number_of_contigs[assembly] = number_of_contigs_dict
     assembly_contig_cumulative_length[assembly] = contig_cumulative_length_values
@@ -71,8 +72,8 @@ assembly_N50_dict.write("%s.N50" % args.output_prefix)
 assembly_number_of_contigs.write("%s.contig_number" % args.output_prefix)
 #assembly_bins.write("%s.bins" % args.output_prefix)
 print(assembly_contig_cumulative_length)
-assembly_contig_cumulative_length.write("%s.cumulative_length" % args.output_prefix)
-assembly_contig_number_values.write("%s.contig_number_values" % args.output_prefix)
+#assembly_contig_cumulative_length.write("%s.cumulative_length" % args.output_prefix)
+#assembly_contig_number_values.write("%s.contig_number_values" % args.output_prefix)
 
 for assembly_label in assemblies_dict:
     os.remove("%s.tmp.idx" % assembly_label)

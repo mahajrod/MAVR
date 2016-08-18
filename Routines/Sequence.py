@@ -983,8 +983,10 @@ class SequenceRoutines():
         return homopolymers_coords, homopolymers_lengthes
 
     @staticmethod
-    def calculate_assembly_stats(record_dict, thresholds_list=(0, 500, 1000)):
+    def calculate_assembly_stats(record_dict, thresholds_list=(0, 500, 1000), seq_len_file=None):
         length_array = np.array(sorted([len(record_dict[record].seq) for record in record_dict], reverse=True))
+        if seq_len_file:
+            np.savetxt(seq_len_file, length_array, fmt="%i")
         total_length = sum(length_array)
         longest_contig = length_array[0]
 

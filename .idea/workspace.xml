@@ -4,7 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/scripts/filter/gather_filtering_stats.py" line="91" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="changes">
+    <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Sequence.py" afterPath="$PROJECT_DIR$/Routines/Sequence.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/assembly/get_stats_from_assemblies.py" afterPath="$PROJECT_DIR$/scripts/assembly/get_stats_from_assemblies.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -90,11 +90,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="get_stats_from_assemblies.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="get_stats_from_assemblies.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/assembly/get_stats_from_assemblies.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="443" max-vertical-offset="1530">
-              <caret line="24" column="55" selection-start-line="24" selection-start-column="55" selection-end-line="24" selection-end-column="55" />
+            <state vertical-scroll-proportion="0.73828757" vertical-offset="497" max-vertical-offset="1566">
+              <caret line="53" column="129" selection-start-line="53" selection-start-column="129" selection-end-line="53" selection-end-column="129" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
@@ -122,11 +122,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Sequence.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Sequence.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.273021" vertical-offset="17543" max-vertical-offset="23004">
-              <caret line="984" column="17" selection-start-line="984" selection-start-column="17" selection-end-line="984" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="17453" max-vertical-offset="23040">
+              <caret line="985" column="79" selection-start-line="985" selection-start-column="78" selection-end-line="985" selection-end-column="91" />
               <folding>
                 <element signature="e#24#33#0" expanded="true" />
               </folding>
@@ -812,30 +812,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00723" summary="changes">
-      <created>1469195395595</created>
-      <option name="number" value="00723" />
-      <option name="project" value="LOCAL" />
-      <updated>1469195395595</updated>
-    </task>
-    <task id="LOCAL-00724" summary="changes">
-      <created>1469198094172</created>
-      <option name="number" value="00724" />
-      <option name="project" value="LOCAL" />
-      <updated>1469198094172</updated>
-    </task>
-    <task id="LOCAL-00725" summary="changes">
-      <created>1469533363219</created>
-      <option name="number" value="00725" />
-      <option name="project" value="LOCAL" />
-      <updated>1469533363219</updated>
-    </task>
-    <task id="LOCAL-00726" summary="changes">
-      <created>1469533421261</created>
-      <option name="number" value="00726" />
-      <option name="project" value="LOCAL" />
-      <updated>1469533421261</updated>
-    </task>
     <task id="LOCAL-00727" summary="changes">
       <created>1469534046636</created>
       <option name="number" value="00727" />
@@ -1106,7 +1082,31 @@
       <option name="project" value="LOCAL" />
       <updated>1471483609576</updated>
     </task>
-    <option name="localTasksCounter" value="772" />
+    <task id="LOCAL-00772" summary="changes">
+      <created>1471484308954</created>
+      <option name="number" value="00772" />
+      <option name="project" value="LOCAL" />
+      <updated>1471484308954</updated>
+    </task>
+    <task id="LOCAL-00773" summary="changes">
+      <created>1471484436605</created>
+      <option name="number" value="00773" />
+      <option name="project" value="LOCAL" />
+      <updated>1471484436605</updated>
+    </task>
+    <task id="LOCAL-00774" summary="changes">
+      <created>1471484722403</created>
+      <option name="number" value="00774" />
+      <option name="project" value="LOCAL" />
+      <updated>1471484722403</updated>
+    </task>
+    <task id="LOCAL-00775" summary="changes">
+      <created>1471485218803</created>
+      <option name="number" value="00775" />
+      <option name="project" value="LOCAL" />
+      <updated>1471485218803</updated>
+    </task>
+    <option name="localTasksCounter" value="776" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1604,22 +1604,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/assembly/get_stats_from_assemblies.py">
+    <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="443" max-vertical-offset="1530">
-          <caret line="24" column="55" selection-start-line="24" selection-start-column="55" selection-end-line="24" selection-end-column="55" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="17453" max-vertical-offset="23040">
+          <caret line="985" column="79" selection-start-line="985" selection-start-column="78" selection-end-line="985" selection-end-column="91" />
           <folding>
-            <element signature="e#54#63#0" expanded="true" />
+            <element signature="e#24#33#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
+    <entry file="file://$PROJECT_DIR$/scripts/assembly/get_stats_from_assemblies.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.273021" vertical-offset="17543" max-vertical-offset="23004">
-          <caret line="984" column="17" selection-start-line="984" selection-start-column="17" selection-end-line="984" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.73828757" vertical-offset="497" max-vertical-offset="1566">
+          <caret line="53" column="129" selection-start-line="53" selection-start-column="129" selection-end-line="53" selection-end-column="129" />
           <folding>
-            <element signature="e#24#33#0" expanded="true" />
+            <element signature="e#54#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
