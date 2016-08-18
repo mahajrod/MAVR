@@ -2,6 +2,7 @@ __author__ = 'mahajrod'
 import os
 import re
 import sys
+import math
 import pickle
 
 from copy import deepcopy
@@ -980,6 +981,52 @@ class SequenceRoutines():
 
         homopolymers_lengthes = np.array(homopolymers_lengthes)
         return homopolymers_coords, homopolymers_lengthes
+
+    @staticmethod
+    def calculate_assembly_stats(record_dict, thresholds_list=(0, 500, 1000), logbase=10):
+        length_array = np.array(sorted([len(record_dict[record].seq) for record in record_dict], reverse=True))
+        total_length = sum(length_array)
+        longest_contig = length_array[0]
+
+        right_bin = int(math.log(longest_contig, logbase)) + 1
+        bins = [logbase**i for i in range(0, right_bin + 1)]
+        bins = [0] + bins  # just to count contigs of length less then logbase
+        contig_cumulative_length_values = [0 for i in range(0, right_bin + 1)]
+        contig_number_values = [0 for i in range(0, right_bin + 1)]
+
+        for contig_len in length_array:
+            len_power = int(math.log(contig_len, logbase))
+            contig_cumulative_length_values[len_power] += contig_len
+            contig_number_values += 1
+
+        number_of_contigs_dict = OrderedDict()
+        N50_dict = OrderedDict()
+        # TODO: make calculations of all N50s in one run
+        for threshold in thresholds_list:
+            length_above_threshold = 0
+            N50 = 0
+            for length in length_array:
+                if length >= threshold:
+                    length_above_threshold += length
+                else:
+                    break
+            half_length = int(length_above_threshold/2)
+            half_length = half_length if half_length*2 == length_above_threshold else half_length + 1
+
+            tmp = 0
+            number_of_contigs = 0
+
+            for length in length_array:
+                if tmp < half_length:
+                    number_of_contigs += 1
+                    tmp += length
+                else:
+                    N50 = length
+                    break
+            N50_dict[threshold] = N50
+            number_of_contigs_dict[threshold] = number_of_contigs
+
+        return N50_dict, number_of_contigs_dict, total_length, longest_contig, bins, contig_cumulative_length_values, contig_number_values
 
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):

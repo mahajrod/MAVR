@@ -41,3 +41,4 @@ cd /mnt/peru/skliver/Boechera/Boechera_divaricarpa/genome/assemblies/discovar_ad
 # gap closing
 
 ~/Soft/SOAP/GapCloser/GapCloser -a assembly.full.scafSeq -b config -o assembly.full.scafSeq.gap_closed.fasta -l 251 -t 25
+
