@@ -88,7 +88,7 @@ print(assembly_contig_cumulative_length)
 #assembly_contig_cumulative_length.write("%s.cumulative_length" % args.output_prefix)
 #assembly_contig_number_values.write("%s.contig_number_values" % args.output_prefix)
 
-fig = plt.figure(figsize=(8, 8))
+fig = plt.figure(figsize=(8, 16))
 subplot = plt.subplot(1, 2, 1)
 
 plt.hist([assembly_length_array[assembly] for assembly in assembly_length_array], bins,
@@ -97,6 +97,7 @@ plt.hist([assembly_length_array[assembly] for assembly in assembly_length_array]
 plt.xlabel("Sequence length")
 plt.ylabel("Number of sequences")
 plt.xscale('log', logbase=10)
+plt.yscale('log', logbase=10)
 plt.legend()
 
 for ext in ".png", ".svg":
