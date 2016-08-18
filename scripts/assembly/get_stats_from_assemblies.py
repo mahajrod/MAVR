@@ -53,9 +53,9 @@ assembly_bins = []
 assembly_contig_cumulative_length = OrderedDict()
 assembly_contig_number_values = OrderedDict()
 assembly_general_stats = TwoLvlDict()
-
+assembly_length_array = OrderedDict()
 for assembly in assemblies_dict:
-    N50_dict, L50, total_length, longest_contig, Ns_number, bins, contig_cumulative_length_values, \
+    lengths_array, N50_dict, L50, total_length, longest_contig, Ns_number, bins, contig_cumulative_length_values, \
         contig_number_values = SequenceRoutines.calculate_assembly_stats(assemblies_dict[assembly],
                                                                          thresholds_list=args.thresholds,
                                                                          seq_len_file="%s.%s.len" % (args.output_prefix, assembly))
@@ -67,6 +67,7 @@ for assembly in assemblies_dict:
     assembly_general_stats[assembly]["Ns"] = Ns_number
     assembly_general_stats[assembly]["Longest contig"] = longest_contig
     assembly_general_stats[assembly]["Total length"] = total_length
+    assembly_length_array[assembly] = lengths_array
     if len(assembly_bins) < len(bins):
         assembly_bins = bins
 
@@ -89,13 +90,13 @@ print(assembly_contig_cumulative_length)
 
 fig = plt.figure()
 subplot = plt.subplot(1, 2, 1)
-plt.ticklabel_format(axis="x", style='sci', scilimits=(0, 0))
-for assembly_label in assembly_contig_cumulative_length:
-    plt.hist(range(0, number_of_bins), number_of_bins, weights=assembly_contig_cumulative_length[assembly_label], label=assembly_label)
+
+plt.hist([assembly_length_array[assembly] for assembly in assembly_length_array], bins,
+         label=assembly_length_array.keys())
 
 plt.xlabel("Sequence length")
-plt.ylabel("Total length of sequences")
-plt.xticks(range(0, number_of_bins), [10**i for i in range(0, number_of_bins)])
+plt.ylabel("Number of sequences")
+plt.xscale('log', logbase=10)
 
 plt.legend()
 
