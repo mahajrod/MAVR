@@ -52,7 +52,7 @@ assembly_contig_number_values = TwoLvlDict()
 
 for assembly in assemblies_dict:
     N50_dict, number_of_contigs_dict, total_length, longest_contig, bins, contig_cumulative_length_values, \
-        contig_number_values = SequenceRoutines.calculate_N50(assemblies_dict[assembly],
+        contig_number_values = SequenceRoutines.calculate_assembly_stats(assemblies_dict[assembly],
                                                               thresholds_list=args.thresholds)
     assembly_N50_dict[assembly] = N50_dict
     assembly_number_of_contigs[assembly] = assembly_number_of_contigs
