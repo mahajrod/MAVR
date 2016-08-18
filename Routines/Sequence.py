@@ -1043,7 +1043,7 @@ class SequenceRoutines():
             N50_dict[threshold] = N50
             L50[threshold] = number_of_contigs
 
-        return N50_dict, L50, total_length, longest_contig, Ns_number, bins, contig_cumulative_length_values, contig_number_values
+        return length_array, N50_dict, L50, total_length, longest_contig, Ns_number, bins, contig_cumulative_length_values, contig_number_values
 
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
