@@ -98,6 +98,7 @@ plt.xlabel("Sequence length")
 plt.ylabel("Number of sequences")
 plt.xscale('log', logbase=10)
 plt.yscale('log', logbase=10)
+
 plt.legend()
 
 for ext in ".png", ".svg":
