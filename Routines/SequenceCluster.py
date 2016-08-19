@@ -251,13 +251,13 @@ class SequenceClusterRoutines:
         for cluster in cluster_dict:
             extracted_elements = []
             if mode == "w":
-                for element in cluster:
+                for element in cluster_dict[cluster]:
                     if element in element_id_list:
                         extracted_elements.append(element)
                 if extracted_elements:
                     extracted_clusters[cluster] = extracted_elements
             elif mode == "a":
-                for element in cluster:
+                for element in cluster_dict[cluster]:
                     if element in element_id_list:
                         extracted_clusters[cluster] = cluster_dict[cluster]
                         break
