@@ -239,3 +239,40 @@ class SequenceClusterRoutines:
                             out_file, format=seq_format)
 
         os.remove("tmp.idx")
+
+    @staticmethod
+    def extract_clusters_by_element_ids(cluster_dict, element_id_list, mode="w"):
+        """"
+        mode: "w" - if elements from element_id_list are present in cluster extracts only that elements
+              "a" - if elements from element_id_list are present in cluster extracts all elements
+        """
+
+        extracted_clusters = SynDict()
+        for cluster in cluster_dict:
+            extracted_elements = []
+            if mode == "w":
+                for element in cluster:
+                    if element in element_id_list:
+                        extracted_elements.append(element)
+                if extracted_elements:
+                    extracted_clusters[cluster] = extracted_elements
+            elif mode == "a":
+                for element in cluster:
+                    if element in element_id_list:
+                        extracted_clusters[cluster] = cluster_dict[cluster]
+                        break
+
+        return extracted_clusters
+
+    def extract_clusters_by_element_ids_from_file(self, cluster_file, element_file, output_file, mode="w"):
+        """"
+        mode: "w" - if elements from element_id_list are present in cluster extracts only that elements
+              "a" - if elements from element_id_list are present in cluster extracts all elements
+        """
+        cluster_dict = SynDict()
+        cluster_dict.read(cluster_file, split_values=True, comments_prefix="#")
+
+        element_id_list = IdList()
+        element_id_list.read(element_file, comments_prefix="#")
+        extracted_clusters = self.extract_clusters_by_element_ids(cluster_dict, element_id_list, mode=mode)
+        extracted_clusters.write(output_file, splited_values=True)
