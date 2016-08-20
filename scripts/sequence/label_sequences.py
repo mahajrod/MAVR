@@ -4,9 +4,6 @@ import os
 import sys
 import argparse
 
-from Routines import TreeFamRoutines
-
-
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input", action="store", dest="input", required=True,
