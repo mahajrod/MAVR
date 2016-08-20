@@ -21,7 +21,7 @@ parser.add_argument("-s", "--separator", action="store", dest="separator", defau
 
 args = parser.parse_args()
 
-list_of_cluster_files = FileRoutines.make_list_of_path_to_files(input)
+list_of_cluster_files = FileRoutines.make_list_of_path_to_files(args.input)
 
 single_copy_clusters = SequenceClusterRoutines.extract_single_copy_clusters_from_files(list_of_cluster_files, args.output,
                                                                 label_elements=args.label, separator=args.separator,
