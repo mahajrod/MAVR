@@ -303,7 +303,7 @@ class SequenceClusterRoutines:
         return output_dict
 
     @staticmethod
-    def extract_single_copy_clusters(dict_of_cluster_dicts, label_elements=False, separator="@",
+    def extract_single_copy_clusters(dict_of_cluster_dicts, label_elements=False, label=None, separator="@",
                                      label_position="first"):
 
         if label_position == "first":
@@ -327,7 +327,8 @@ class SequenceClusterRoutines:
                 sc_clusters_dict[cluster] = []
                 for group in dict_of_cluster_dicts:
                     if label_elements:
-                        sc_clusters_dict[cluster].append(label_function(dict_of_cluster_dicts[group][cluster][0]))
+                        sc_clusters_dict[cluster].append(label_function(dict_of_cluster_dicts[group][cluster][0],
+                                                                        label))
                     else:
                         sc_clusters_dict[cluster].append(dict_of_cluster_dicts[group][cluster][0])
 
@@ -346,6 +347,7 @@ class SequenceClusterRoutines:
             dict_of_cluster_dicts[label].read(filename, split_values=True, comments_prefix="#")
 
             sc_clusters_dict = self. extract_single_copy_clusters(dict_of_cluster_dicts, label_elements=label_elements,
+                                                                  label=label,
                                                                   separator=separator, label_position=label_position)
 
             sc_clusters_dict.write(output_file, splited_values=True)
