@@ -23,6 +23,8 @@ args = parser.parse_args()
 
 list_of_cluster_files = FileRoutines.make_list_of_path_to_files(input)
 
-SequenceClusterRoutines.extract_single_copy_clusters_from_files(list_of_cluster_files, args.output,
+single_copy_clusters = SequenceClusterRoutines.extract_single_copy_clusters_from_files(list_of_cluster_files, args.output,
                                                                 label_elements=args.label, separator=args.separator,
                                                                 label_position=args.label_position)
+
+print "Was found %i single-copy clusters" % len(single_copy_clusters)
