@@ -276,3 +276,79 @@ class SequenceClusterRoutines:
         element_id_list.read(element_file, comments_prefix="#")
         extracted_clusters = self.extract_clusters_by_element_ids(cluster_dict, element_id_list, mode=mode)
         extracted_clusters.write(output_file, splited_values=True)
+
+    @staticmethod
+    def label_cluster_elements(cluster_dict, label, separator="@", label_position="first"):
+        labeled_cluster_dict = SynDict()
+        if label_position == "first":
+            label_function = lambda s: "%s%s%s" % (label, separator, s)
+        elif label_position == "last":
+            label_function = lambda s: "%s%s%s" % (s, separator, label)
+
+        for cluster in cluster_dict:
+            labeled_cluster_dict[cluster] = []
+            for element in cluster_dict[cluster]:
+                labeled_cluster_dict[cluster].append(label_function(element))
+
+        return labeled_cluster_dict
+
+    def label_cluster_elements_from_file(self, input_file, label, output_file, separator="@", label_position="first"):
+        input_dict = SynDict()
+        input_dict.read(input_file, split_values=True, comments_prefix="#")
+
+        output_dict = self.label_cluster_elements(input_dict, label, separator=separator,
+                                                  label_position=label_position)
+        output_dict.write(output_file, splited_values=True)
+
+        return output_dict
+
+    @staticmethod
+    def extract_single_copy_clusters(dict_of_cluster_dicts, label_elements=False, separator="@",
+                                     label_position="first"):
+
+        if label_position == "first":
+            label_function = lambda s, label: "%s%s%s" % (label, separator, s)
+        elif label_position == "last":
+            label_function = lambda s, label: "%s%s%s" % (s, separator, label)
+
+        sc_clusters_dict = SynDict()
+
+        clusters_set = set()
+        for group in dict_of_cluster_dicts:
+            clusters_set = clusters_set | set(dict_of_cluster_dicts[group].keys())
+
+        for cluster in clusters_set:
+            for group in dict_of_cluster_dicts:
+                if cluster not in dict_of_cluster_dicts[group]:
+                    break
+                if len(dict_of_cluster_dicts[group][cluster]) > 1:
+                    break
+            else:
+                sc_clusters_dict[cluster] = []
+                for group in dict_of_cluster_dicts:
+                    if label_elements:
+                        sc_clusters_dict[cluster].append(label_function(dict_of_cluster_dicts[group][cluster][0]))
+                    else:
+                        sc_clusters_dict[cluster].append(dict_of_cluster_dicts[group][cluster][0])
+
+        return sc_clusters_dict
+
+    def extract_single_copy_clusters_from_files(self, list_of_cluster_files, output_file, label_elements=False, separator="@",
+                                                label_position="first", function_to_convert_filename_to_label=None):
+        dict_of_cluster_dicts = OrderedDict()
+        for filename in list_of_cluster_files:
+            if function_to_convert_filename_to_label:
+                label = function_to_convert_filename_to_label(filename)
+            else:
+                label = FileRoutines.split_filename(filename)[1]  # use basename as label
+
+            dict_of_cluster_dicts[label] = SynDict()
+            dict_of_cluster_dicts[label].read(filename, split_values=True, comments_prefix="#")
+
+            sc_clusters_dict = self. extract_single_copy_clusters(dict_of_cluster_dicts, label_elements=label_elements,
+                                                                  separator=separator, label_position=label_position)
+
+            sc_clusters_dict.write(output_file, splited_values=True)
+
+        return sc_clusters_dict
+
