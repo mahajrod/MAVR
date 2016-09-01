@@ -131,7 +131,7 @@ class CollectionBARRNAP():
             count_dict.write(output_file)
 
         if total_output_file:
-            with open(total_output_file) as out_fd:
+            with open(total_output_file, "w") as out_fd:
                 out_fd.write("#rRNA\tComplete\tPartial%s\n" % ("(<%.2f of expected length)" if
                                                                self.partial_threshold else ""))
                 for type in total_count_dict:
