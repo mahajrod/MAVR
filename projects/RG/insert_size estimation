@@ -1,2 +1,9 @@
 #without discordant reads
 for SAMPLE in GR0087  GR0088  GR0089  GR0104  GR0105  GR0107; do mkdir ${SAMPLE}; cd ${SAMPLE}; echo "Handling ${SAMPLE}"; IN_BAM="/mnt/genomerussia/ncherkasov/gr/dasha/no_fastq_filtering_bam/${SAMPLE}/${SAMPLE}.sorted.bam"; samtools view -f 2 ${IN_BAM} | awk -F'\t' '{ if ($9 > 0) print $9}' > ${SAMPLE}.len; ~/soft/MAVR/scripts/draw/draw_histogram.py -i ${SAMPLE}.len -o ${SAMPLE}.hist -w 10 -t "Insert size distribution" -l "Insert size" -y "N of fragments" -x 2000; ~/soft/MAVR/scripts/math/get_stats_from_numer_data.py -i ${SAMPLE}.len -o ${SAMPLE}.stat ; cd ../; done
+
+
+for ISL in 100 200 300 400 600 700 800 900 1000 1100 1200; do SAMPLE=JH-027F_${ISL}; mkdir ${SAMPLE}; IN_BAM="/mnt/genomerussia/ssidorov/bakeoff/illumina/bam/JH-027F_testX/JH-027F.bowtie2.very-sensitive.X_${ISL}.hg38-ensembl.bam"; cd ${SAMPLE}; samtools view -f 2 ${IN_BAM} | awk -F'\t' '{ if ($9 > 0) print $9}' > ${SAMPLE}.no_discordant.len; ~/soft/MAVR/scripts/draw/draw_histogram.py -i ${SAMPLE}.no_discordant.len -o ${SAMPLE}.no_discordant.hist -w 10 -t "Insert size distribution" -l "Insert size" -y "N of fragments" -x 2000; ~/soft/MAVR/scripts/math/get_stats_from_numer_data.py -i ${SAMPLE}.no_discordant.len -o ${SAMPLE}.no_discordant.stat ;cd ../; done
+
+#with discordant pairs
+
+for ISL in 100 200 300 400 600 700 800 900 1000 1100 1200; do SAMPLE=JH-027F_${ISL}; mkdir -p  ${SAMPLE}; IN_BAM="/mnt/genomerussia/ssidorov/bakeoff/illumina/bam/JH-027F_testX/JH-027F.bowtie2.very-sensitive.X_${ISL}.hg38-ensembl.bam"; cd ${SAMPLE}; samtools view ${IN_BAM} | awk -F'\t' '{ if ($9 > 0) print $9}' > ${SAMPLE}.all.len; ~/soft/MAVR/scripts/draw/draw_histogram.py -i ${SAMPLE}.all.len -o ${SAMPLE}.all.hist -w 10 -t "Insert size distribution" -l "Insert size" -y "N of fragments" -x 2000; ~/soft/MAVR/scripts/math/get_stats_from_numer_data.py -i ${SAMPLE}.all.len -o ${SAMPLE}.all.stat ;cd ../; done

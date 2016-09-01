@@ -31,7 +31,9 @@ class BLASTPlus(Tool):
                        splited_output_dir="splited_output_dir",
                        evalue=None, output_format=None,
                        threads=None, num_of_seqs_per_scan=None,
-                       combine_output_to_single_file=True):
+                       combine_output_to_single_file=True,
+                       async_run=False,
+                       external_process_pool=None):
 
         splited_dir = check_path(split_dir)
         splited_out_dir = check_path(splited_output_dir)
@@ -66,7 +68,8 @@ class BLASTPlus(Tool):
             options_list.append(options)
             out_files.append(out_filename)
 
-        self.parallel_execute(options_list, cmd=blast_command, threads=threads)
+        self.parallel_execute(options_list, cmd=blast_command, threads=threads, async_run=async_run,
+                              external_process_pool=external_process_pool)
 
         if combine_output_to_single_file:
             CGAS.cat(out_files, output=outfile)

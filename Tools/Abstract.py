@@ -57,7 +57,7 @@ class Tool():
             return None
 
     def parallel_execute(self, options_list, cmd=None, capture_output=False, threads=None, dir_list=None,
-                         write_output_to_file=None):
+                         write_output_to_file=None, external_process_pool=None, async_run=False):
         command = cmd if cmd is not None else self.cmd
         if dir_list:
             if isinstance(dir_list, str):
@@ -77,9 +77,9 @@ class Tool():
         with open("exe_list.t", "a") as exe_fd:
             for entry in exe_string_list:
                 exe_fd.write("%s\n" % entry)
-        process_pool = mp.Pool(threads if threads else self.threads)
+        process_pool = external_process_pool if external_process_pool else mp.Pool(threads if threads else self.threads)
 
-        results = process_pool.map(execute, exe_string_list)
+        results = process_pool.map_async(execute, exe_string_list) if async_run else process_pool.map(execute, exe_string_list)
         #process_pool.close()
         if write_output_to_file:
             with open(write_output_to_file, "w") as out_fd:

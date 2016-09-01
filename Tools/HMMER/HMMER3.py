@@ -253,7 +253,8 @@ class HMMER3(Tool):
                          turn_off_biased_composition_score_corrections=None,
                          input_format=None, threads=None, combine_output_to_single_file=True,
                          biopython_165_compartibility=False,
-                         remove_tmp_dirs=True
+                         remove_tmp_dirs=True,
+                         async_run=False, external_process_pool=None
                          ):
 
         splited_dir = check_path(split_dir)
@@ -328,7 +329,8 @@ class HMMER3(Tool):
             domtblout_files.append(domtblout_file)
             pfamtblout_files.append(pfamtblout_file)
 
-        self.parallel_execute(options_list, cmd="hmmscan", threads=threads)
+        self.parallel_execute(options_list, cmd="hmmscan", threads=threads, async_run=async_run,
+                              external_process_pool=external_process_pool)
 
         if combine_output_to_single_file:
             if biopython_165_compartibility:

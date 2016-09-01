@@ -104,7 +104,8 @@ class AUGUSTUS(Tool):
     def parallel_predict(self, species, genome_file, output, strand="both", gene_model=None, output_gff3=True,
                          other_options="", split_dir="splited_input", splited_output_dir="splited_output_dir",
                          config_dir=None, combine_output_to_single_file=True, use_softmasking=None, hints_file=None,
-                         extrinsicCfgFile=None, predict_UTR=None):
+                         extrinsicCfgFile=None, predict_UTR=None, external_process_pool=None,
+                         async_run=False):
         common_options = self.parse_options(species, genome_file="", strand=strand, gene_model=gene_model,
                                             output_gff3=output_gff3, other_options=other_options,
                                             config_dir=config_dir, use_softmasking=use_softmasking,
@@ -131,7 +132,7 @@ class AUGUSTUS(Tool):
             options += " > %s" % output_file
             options_list.append(options)
 
-        self.parallel_execute(options_list)
+        self.parallel_execute(options_list, external_process_pool=external_process_pool, async_run=async_run)
 
         if combine_output_to_single_file:
             CGAS.cat(list_of_output_files, output=output)
