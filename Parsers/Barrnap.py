@@ -132,8 +132,8 @@ class CollectionBARRNAP():
 
         if total_output_file:
             with open(total_output_file, "w") as out_fd:
-                out_fd.write("#rRNA\tComplete\tPartial%s\n" % ("(<%.2f of expected length)" % self.partial_threshold if
-                                                               self.partial_threshold else ""))
+                out_fd.write("#rRNA\tComplete%s\tPartial%s\n" % ("(>%.2f of expected length)" % self.partial_threshold if self.partial_threshold else "",
+                                                                 "(<%.2f of expected length)" % self.partial_threshold if self.partial_threshold else ""))
                 for type in total_count_dict:
                     out_fd.write("%s\t%i\t%i\n" % (type, total_count_dict[type]["complete"],
                                                    total_count_dict[type]["partial"]))
@@ -146,32 +146,6 @@ class CollectionBARRNAP():
             return count_dict, total_count_dict
         else:
             raise ValueError("Unknown return type. Allowed variants: 'chrom', 'total', 'both'")
-
-    """
-    def count_types(self, output_file=None):
-
-        annotated_types = self.get_annotated_types()
-        total_count_dict = OrderedDict()
-
-        for type in annotated_types:
-            total_count_dict[type] = OrderedDict()
-            total_count_dict[type]["complete"] = 0
-            total_count_dict[type]["partial"] = 0
-
-        for chrom in self.records:
-            for record in self.records[chrom]:
-                if record.partial:
-                    total_count_dict[record.type]["partial"] += 1
-                else:
-                    total_count_dict[record.type]["complete"] += 1
-        if output_file:
-            with open(output_file) as out_fd:
-                out_fd.write("#rRNA\tNumber\n")
-                for type in total_count_dict:
-                    out_fd.write("%s\t%i\n" % (type, total_count_dict[type]))
-
-        return total_count_dict
-    """
 
     def write_gff(self, out_file, write_chr_string=False):
         with open(out_file, "w") as out_fd:
