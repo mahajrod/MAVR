@@ -132,7 +132,7 @@ class CollectionBARRNAP():
 
         if total_output_file:
             with open(total_output_file, "w") as out_fd:
-                out_fd.write("#rRNA\tComplete\tPartial%s\n" % ("(<%.2f of expected length)" if
+                out_fd.write("#rRNA\tComplete\tPartial%s\n" % ("(<%.2f of expected length)" % self.partial_threshold if
                                                                self.partial_threshold else ""))
                 for type in total_count_dict:
                     out_fd.write("%s\t%i\t%i\n" % (type, total_count_dict[type]["complete"],
