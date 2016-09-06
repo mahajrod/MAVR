@@ -16,4 +16,3 @@ args = parser.parse_args()
 
 
 Barrnap.analyze_report(args.report_file, args.output_prefix)
-

@@ -155,7 +155,6 @@ class CollectionBARRNAP():
                 for record in self.records[chrom]:
                     out_fd.write("%s\t%s\n" % (chrom, record.gff_str()))
 
-
     def write(self, out_file):
         with open(out_file, "w") as out_fd:
             out_fd.write("#>chrom\n#\tstart\tend\tperiod\tnumber_of_copies\tpattern\ttandem_repeat\n")
