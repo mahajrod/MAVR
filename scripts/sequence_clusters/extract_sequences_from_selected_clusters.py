@@ -13,7 +13,7 @@ parser.add_argument("-f", "--cluster_file", action="store", dest="cluster_file",
                     help="File with clusters")
 parser.add_argument("-p", "--seq_file", action="store", dest="seq_file", required=True,
                     type=lambda s: FileRoutines.make_list_of_path_to_files(s.split(",")),
-                    help="List of comma-separated files/directories with proteins")
+                    help="List of comma-separated files/directories with sequences")
 parser.add_argument("-r", "--seq_file_format", action="store", dest="seq_file_format", default="fasta",
                     help="Format of file with sequences")
 parser.add_argument("-c", "--create_dir_for_each_cluster", action="store_true", dest="create_dir_for_each_cluster",

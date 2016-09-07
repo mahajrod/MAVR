@@ -21,6 +21,7 @@ MAVR.egg-info/dependency_links.txt
 MAVR.egg-info/requires.txt
 MAVR.egg-info/top_level.txt
 Parsers/Abstract.py
+Parsers/Barrnap.py
 Parsers/CAFE.py
 Parsers/CCF.py
 Parsers/Cufflinks.py
@@ -50,6 +51,7 @@ Routines/Alignment.py
 Routines/Annotations.py
 Routines/Drawing.py
 Routines/EggNOG.py
+Routines/Fastq.py
 Routines/File.py
 Routines/Functions.py
 Routines/Math.py
@@ -76,6 +78,7 @@ Tools/Alignment/Novoalign.py
 Tools/Alignment/TMAP.py
 Tools/Alignment/__init__.py
 Tools/Annotation/AUGUSTUS.py
+Tools/Annotation/Barrnap.py
 Tools/Annotation/Exonerate.py
 Tools/Annotation/GlimerHMM.py
 Tools/Annotation/SNPeff.py
@@ -119,6 +122,7 @@ Tools/GATK/ApplyRecalibration.py
 Tools/GATK/BaseRecalibrator.py
 Tools/GATK/CombineVariants.py
 Tools/GATK/FastaAlternateReferenceMaker.py
+Tools/GATK/HaplotypeCaller.py
 Tools/GATK/IndelRealigner.py
 Tools/GATK/PrintReads.py
 Tools/GATK/RealignerTargetCreator.py

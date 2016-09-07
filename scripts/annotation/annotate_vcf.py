@@ -15,7 +15,7 @@ parser.add_argument("-o", "--output_vcf", action="store", dest="output", require
 parser.add_argument("-g", "--genome", action="store", dest="genome", required=True,
                     help="Genome to use (from SNPeff database)")
 parser.add_argument("-d", "--snpeff_dir", action="store", dest="snpeff_dir",
-                    default="/home/mahajrod/Repositories/genetic/NGS_tools/snpEff",
+                    default="/home/mahajrod/Repositories/genetic/NGS_tools/snpEff/",
                     help="Directory with SNPeff jar")
 parser.add_argument("-s", "--summary_file", action="store", dest="summary_file",
                     help="Name of stats file (summary). Default is 'snpEff_summary.html'")

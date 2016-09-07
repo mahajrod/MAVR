@@ -145,7 +145,7 @@ class NCBIRoutines:
         number_of_transcripts = len(transcript_ids)
         print "%i transcripts were found" % number_of_transcripts
 
-        pep_to_transcript_accordance.write("%s.pep_to_transcript.accordance" % output_prefix)
+        pep_to_transcript_accordance.write("%s.pep_to_transcript.accordance" % output_prefix, splited_values=True)
 
         transcript_ranges = np.append(np.arange(0, number_of_transcripts, download_chunk_size), [number_of_transcripts])
 
