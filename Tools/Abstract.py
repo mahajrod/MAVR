@@ -283,7 +283,7 @@ class JavaTool(Tool):
         command = cmd if cmd is not None else ""
 
         java_string = "java"
-        java_string += " -Xmx%s" if self.max_memory else ""
+        java_string += " -Xmx%s" % str(self.max_memory) if self.max_memory else ""
         #print (self.jar_path)
         java_string += " -jar %s%s" % (self.jar_path, self.jar)
         java_string += " %s" % command
