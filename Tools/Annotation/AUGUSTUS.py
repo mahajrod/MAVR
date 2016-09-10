@@ -557,9 +557,10 @@ class AUGUSTUS(Tool):
                     mult = line_list[6]
                     if int(mult) < min_supporting_reads:
                         continue
-                    out_fd.write("%s\tSTAR\tintron\t%s\t%s\t%s\t.\t.\tmult=%s;src=%s\n" % (chrom, intron_start,
-                                                                                           intron_end, strand,
-                                                                                           mult, source))
+                    # strand of intron will be detected automatically by AUGUSTUS
+                    out_fd.write("%s\tSTAR\tintron\t%s\t%s\t0\t.\t.\tmult=%s;src=%s\n" % (chrom, intron_start,
+                                                                                          intron_end,
+                                                                                          mult, source))
 
 
 
