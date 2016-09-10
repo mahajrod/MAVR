@@ -544,6 +544,26 @@ class AUGUSTUS(Tool):
         transcripts_syn_dict.write(transcripts_syn_file)
         cds_syn_dict.write(cds_syn_file)
 
+    @staticmethod
+    def convert_star_junctions_to_intron_hints(star_junction_file, output_hint_gff, min_supporting_reads=1, source="RNASEQ"):
+        with open(star_junction_file, "r") as in_fd:
+            with open(output_hint_gff, "w") as out_fd:
+                for line in in_fd:
+                    line_list = line.strip().split("\t")
+                    chrom = line_list[0]
+                    intron_start = line_list[1]
+                    intron_end = line_list[2]
+                    strand = line_list[3]
+                    mult = line_list[6]
+                    if int(mult) < min_supporting_reads:
+                        continue
+                    out_fd.write("%s\tSTAR\tintron\t%s\t%s\t%s\t.\t.\tmult=%s;src=%s\n" % (chrom, intron_start,
+                                                                                           intron_end, strand,
+                                                                                           mult, source))
+
+
+
+
 
 
 

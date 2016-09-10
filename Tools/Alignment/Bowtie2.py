@@ -20,12 +20,14 @@ class Bowtie2(Tool):
               alignment_mode="very-sensitive",
               output_file="alignment.sam",
               find_discordant_alignments=True,
-              find_separated_alignments=True):
+              find_separated_alignments=True,
+              concordant_upper_threshold=None,):
 
         options = " -p %i" % self.threads
         options += " --%s" % alignment_mode
         options += " --%s" % quality_score
         options += " -x %s" % bowtie2_index
+        options += " -X %i" % concordant_upper_threshold if concordant_upper_threshold else ""
         options += " --no-discordant" if not find_discordant_alignments else ""
         options += " --no-mixed" if not find_separated_alignments else ""
         options += " -1 %s -2 %s" % (",".join(right_reads_list), ",".join(left_reads_list)) \
