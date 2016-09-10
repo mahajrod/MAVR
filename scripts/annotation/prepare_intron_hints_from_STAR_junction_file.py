@@ -15,7 +15,7 @@ parser.add_argument("-m", "--min_supporting_readse", action="store", dest="min_s
                     type=int,
                     help="Minimum number of supporting reads to retain junction. Default: 1, i.e. "
                          "all junctions from file are retained")
-parser.add_argument("-s", "--source", action="store", dest="source", default=3, default="RNASEQ",
+parser.add_argument("-s", "--source", action="store", dest="source", default="RNASEQ",
                     help="Source of hints. Default: RNASEQ")
 
 args = parser.parse_args()
