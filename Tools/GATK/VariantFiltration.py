@@ -30,14 +30,14 @@ class VariantFiltration(JavaTool):
     def filter_bad_SNP(self, reference_file, input_vcf, output_vcf, filter_name='ambiguous_snp', QD=2.0, FS=60.0,
                        MQ=40.0, HaplotypeScore=13.0, MappingQualityRankSum=-12.5, ReadPosRankSum=-8.0):
 
-        filter_expression = 'QD < %f || FS > %f || MQ < %f || HaplotypeScore > %f || MappingQualityRankSum < %f || ReadPosRankSum < %f' \
+        filter_expression = "'QD < %f || FS > %f || MQ < %f || HaplotypeScore > %f || MappingQualityRankSum < %f || ReadPosRankSum < %f'" \
                            % (QD, FS, MQ, HaplotypeScore, MappingQualityRankSum, ReadPosRankSum)
 
         self.filter(reference_file, input_vcf, filter_expression, filter_name, output_vcf)
 
     def filter_bad_indel(self, reference_file, input_vcf, output_vcf, filter_name='ambiguous_indel', QD=2.0,
                          ReadPosRankSum=-20.0, InbreedingCoeff=-0.8, FS=200.0):
-        filter_expression = "QD < %f || ReadPosRankSum < %f || InbreedingCoeff < %f || FS > %f" \
+        filter_expression = "'QD < %f || ReadPosRankSum < %f || InbreedingCoeff < %f || FS > %f'" \
                            % (QD, ReadPosRankSum, InbreedingCoeff, FS)
 
         self.filter(reference_file, input_vcf, filter_expression, filter_name, output_vcf)
