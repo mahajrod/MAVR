@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 from Tools.Abstract import JavaTool
-from Tools.GATK import SelectVariants, CombineVariants
+
 
 
 class VariantFiltration(JavaTool):
@@ -46,6 +46,7 @@ class VariantFiltration(JavaTool):
                             snp_FS=60.0, snp_MQ=40.0, snp_HaplotypeScore=13.0, snp_MappingQualityRankSum=-12.5,
                             snp_ReadPosRankSum=-8.0, indel_filter_name='ambiguous_indel', indel_QD=2.0,
                             indel_ReadPosRankSum=-20.0, indel_InbreedingCoeff=-0.8, indel_FS=200.0):
+        from Tools.GATK import SelectVariants, CombineVariants
         snp_raw_vcf = "%s.snp.raw.vcf" % output_prefix
         indel_raw_vcf = "%s.indel.raw.vcf" % output_prefix
 
