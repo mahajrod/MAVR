@@ -23,7 +23,7 @@ class VariantFiltration(JavaTool):
         return options
 
     def filter(self, reference_file, input_vcf, output_vcf, filter_expression, filter_name, ):
-        options = self.parse_common_options(reference_file, input_vcf, filter_expression, filter_name, output_vcf)
+        options = self.parse_common_options(reference_file, input_vcf, output_vcf, filter_expression, filter_name)
 
         self.execute(options=options)
 
