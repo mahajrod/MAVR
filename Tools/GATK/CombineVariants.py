@@ -16,6 +16,7 @@ class CombineVariants(JavaTool):
         options = " -R %s" % reference_file
         options += " -nt %i" % self.threads
         options += " --variant %s" % (input_filelist if isinstance(input_filelist, str) else " --variant ".join(input_filelist))
+        options += " --genotypemergeoption UNSORTED"
         options += " -o %s" % output_vcf
 
         self.execute(options=options)
