@@ -18,7 +18,5 @@ SelectVariants = SelectVariants()
 UnifiedGenotyper = UnifiedGenotyper()
 VariantFiltration = VariantFiltration()
 VariantRecalibrator = VariantRecalibrator()
-
-
 IndelRealigner = IndelRealigner()
 RealignerTargetCreator = RealignerTargetCreator()
