@@ -55,6 +55,8 @@ class VariantFiltration(JavaTool):
 
         combined_filtered_vcf = "%s.combined.filtered.vcf" % output_prefix
         print type(SelectVariants)
+        SelectVariants.jar_path = self.jar_path
+        CombineVariants.jar_path = self.jar_path
         SelectVariants.get_SNP(reference_file, input_vcf, snp_raw_vcf)
         SelectVariants.get_indel(reference_file, input_vcf, indel_raw_vcf)
 
