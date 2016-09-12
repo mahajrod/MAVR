@@ -1,0 +1,4 @@
+
+
+(.*)=(.*)
+parser.add_argument("--\1", action="store", dest="%\1", type=str, default="\2", help="")

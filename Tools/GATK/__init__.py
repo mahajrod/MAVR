@@ -9,7 +9,7 @@ from Tools.GATK.VariantFiltration import VariantFiltration
 from Tools.GATK.VariantRecalibrator import VariantRecalibrator
 from Tools.GATK.IndelRealigner import IndelRealigner
 from Tools.GATK.RealignerTargetCreator import RealignerTargetCreator
-#TODO: think how to rewrite to comfortably use general for all subtools options
+
 
 ApplyRecalibration = ApplyRecalibration()
 CombineVariants = CombineVariants()
