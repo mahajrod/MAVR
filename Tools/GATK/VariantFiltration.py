@@ -33,7 +33,7 @@ class VariantFiltration(JavaTool):
         filter_expression = "'QD < %f || FS > %f || MQ < %f || HaplotypeScore > %f || MQRankSum < %f || ReadPosRankSum < %f'" \
                            % (QD, FS, MQ, HaplotypeScore, MappingQualityRankSum, ReadPosRankSum)
         """
-        filter_expression = "'QD < %f || FS > %f || MQ < %f || MQRankSum < %f || ReadPosRankSum < %f'" \
+        filter_expression = "QD < %f || FS > %f || MQ < %f || MQRankSum < %f || ReadPosRankSum < %f" \
                            % (QD, FS, MQ, MappingQualityRankSum,  ReadPosRankSum)
 
         self.filter(reference_file, input_vcf, output_vcf, filter_expression, filter_name)
@@ -44,7 +44,7 @@ class VariantFiltration(JavaTool):
         filter_expression = "'QD < %f || ReadPosRankSum < %f || InbreedingCoeff < %f || FS > %f'" \
                            % (QD, ReadPosRankSum, InbreedingCoeff, FS)
         """
-        filter_expression = "'QD < %f || ReadPosRankSum < %f || FS > %f'" \
+        filter_expression = "QD < %f || ReadPosRankSum < %f || FS > %f" \
                            % (QD, ReadPosRankSum, FS)
         self.filter(reference_file, input_vcf, output_vcf, filter_expression, filter_name)
 
