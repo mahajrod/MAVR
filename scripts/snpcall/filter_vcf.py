@@ -15,7 +15,7 @@ parser.add_argument("-r", "--reference", action="store", dest="reference", requi
                     help="Fasta with reference genome")
 parser.add_argument("-g", "--gatk_directory", action="store", dest="gatk_dir", default="",
                     help="Directory with GATK jar")
-parser.add_argument("--snp_filter_name", action="store", dest="snp_filter_name", type="str",
+parser.add_argument("--snp_filter_name", action="store", dest="snp_filter_name", type=str,
                     default="ambiguous_snp", help="SNP filter name")
 parser.add_argument("--snp_QD", action="store", dest="snp_QD", type=float, default=2.0,
                     help="SNP QD threshold")
@@ -29,7 +29,7 @@ parser.add_argument("--snp_MappingQualityRankSum", action="store", dest="snp_Map
                     default=-12.5, help="SNP MappingQualityRankSum threshold")
 parser.add_argument("--snp_ReadPosRankSum", action="store", dest="snp_ReadPosRankSum", type=float, default=-8.0,
                     help="SNP ReadPosRankSum threshold")
-parser.add_argument("--indel_filter_name", action="store", dest="indel_filter_name", type="str",
+parser.add_argument("--indel_filter_name", action="store", dest="indel_filter_name", type=str,
                     default="ambiguous_indel", help="Indel filter name")
 parser.add_argument("--indel_QD", action="store", dest="indel_QD", type=float, default=2.0,
                     help="Indel QD threshold")
