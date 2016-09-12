@@ -29,11 +29,12 @@ class VariantFiltration(JavaTool):
 
     def filter_bad_SNP(self, reference_file, input_vcf, output_vcf, filter_name='ambiguous_snp', QD=2.0, FS=60.0,
                        MQ=40.0, HaplotypeScore=13.0, MappingQualityRankSum=-12.5, ReadPosRankSum=-8.0):
-
+        """
         filter_expression = "'QD < %f || FS > %f || MQ < %f || HaplotypeScore > %f || MQRankSum < %f || ReadPosRankSum < %f'" \
                            % (QD, FS, MQ, HaplotypeScore, MappingQualityRankSum, ReadPosRankSum)
-        filter_expression = "'QD < %f || FS > %f || MQ < %f || MQRankSum < %f || ReadPosRankSum < %f'" \
-                           % (QD, FS, MQ, HaplotypeScore,  ReadPosRankSum)
+        """
+        filter_expression = "'QD < %.1f || FS > %.1f || MQ < %.1f || MQRankSum < %.1f || ReadPosRankSum < %.1f'" \
+                           % (QD, FS, MQ, MappingQualityRankSum,  ReadPosRankSum)
 
         self.filter(reference_file, input_vcf, filter_expression, filter_name, output_vcf)
 
@@ -43,7 +44,7 @@ class VariantFiltration(JavaTool):
         filter_expression = "'QD < %f || ReadPosRankSum < %f || InbreedingCoeff < %f || FS > %f'" \
                            % (QD, ReadPosRankSum, InbreedingCoeff, FS)
         """
-        filter_expression = "'QD < %f || ReadPosRankSum < %f || FS > %f'" \
+        filter_expression = "'QD < %.1f || ReadPosRankSum < %.1f || FS > %.1f'" \
                            % (QD, ReadPosRankSum, FS)
         self.filter(reference_file, input_vcf, filter_expression, filter_name, output_vcf)
 
