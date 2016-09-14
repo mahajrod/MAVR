@@ -26,7 +26,7 @@ parser.add_argument("--snp_MQ", action="store", dest="snp_MQ", type=float, defau
 parser.add_argument("--snp_HaplotypeScore", action="store", dest="snp_HaplotypeScore", type=float, default=13.0,
                     help="SNP HaplotypeScore threshold. Default -  13.0")
 parser.add_argument("--snp_MappingQualityRankSum", action="store", dest="snp_MappingQualityRankSum", type=float,
-                    default=-12.5, help="SNP MappingQualityRankSum threshold. Default -")
+                    default=-12.5, help="SNP MappingQualityRankSum threshold. Default - -12.5")
 parser.add_argument("--snp_ReadPosRankSum", action="store", dest="snp_ReadPosRankSum", type=float, default=-8.0,
                     help="SNP ReadPosRankSum threshold. Default -   -8.0")
 parser.add_argument("--indel_filter_name", action="store", dest="indel_filter_name", type=str,
@@ -48,7 +48,7 @@ VariantFiltration.filter_bad_variants(args.reference, args.input_vcf, args.outpu
                                       snp_filter_name=args.snp_filter_name, snp_QD=args.snp_QD,
                                       snp_FS=args.snp_FS, snp_MQ=args.snp_MQ,
                                       snp_HaplotypeScore=args.snp_HaplotypeScore,
-                                      snp_MappingQualityRankSum=-args.snp_MappingQualityRankSum,
+                                      snp_MappingQualityRankSum=args.snp_MappingQualityRankSum,
                                       snp_ReadPosRankSum=args.snp_ReadPosRankSum,
                                       indel_filter_name=args.indel_filter_name, indel_QD=args.indel_QD,
                                       indel_ReadPosRankSum=args.indel_ReadPosRankSum,
