@@ -2,3 +2,23 @@
 
 (.*)=(.*)
 parser.add_argument("--\1", action="store", dest="%\1", type=str, default="\2", help="")
+
+prepare options
+
+option\tdescription
+(.*)\t(.*)
+
+string options
+
+options \+= \" \1 \%s\" \% \1 if \1 else \"\"
+
+int option
+
+options \+= \" \1 \%i\" \% \1 if \1 else \"\"
+
+float options
+
+options \+= \" \1 \%f\" \% \1 if \1 else \"\"
+
+flag options
+options \+= \" \1\" if \1 else \"\"

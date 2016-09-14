@@ -96,4 +96,4 @@ class VariantFiltration(JavaTool):
         filter_name = 'ambigious_indel'
         self.filter(gatk_dir, reference_file, input_vcf, filter_expresion, filter_name, output_vcf)
     """
-
+qq

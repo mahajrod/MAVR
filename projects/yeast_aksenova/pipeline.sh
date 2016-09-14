@@ -2,6 +2,9 @@
 
 cd ~/data/genomes/saccharomyces_cerevisiae/LAN210/LAN210_v0.10m
 
+samtools view -q 20 -b  1279_SMY732-4-7.bowtie2.sorted.rmdup.read_groups.bam > 1279_SMY732-4-7.bowtie2.sorted.rmdup.read_groups.q20.bam
+samtools index 1279_SMY732-4-7.bowtie2.sorted.rmdup.read_groups.q20.bam
+
 samtools faidx LAN210_v0.10m.fasta
 
 java -jar ~/soft/PiCARD/picard.jar CreateSequenceDictionary R= LAN210_v0.10m.fasta O= LAN210_v0.10m.dict
