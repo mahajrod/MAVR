@@ -8,11 +8,15 @@ class SSPACE(Tool):
     def __init__(self, path="", max_threads=4):
         Tool.__init__(self, "SSPACE_Standard_v3.0.pl", path=path, max_threads=max_threads)
 
-    def scaffold(self, library_file, contig_fasta, output_basename, extend_contigs=True, min_overlap_len=None,
+    def scaffold(self, library_file, contig_fasta, output_basename, extend_contigs=False, min_overlap_len=None,
                  min_reads_for_contig_extension=None, min_contig_len=None, min_link_number=None,
                  min_link_ratio=None, min_contig_overlap=None, max_gaps_for_bowtie=None, skip_read_processing=None,
                  verbose_scaffolding=None,
                  make_dot_file=True):
+        """
+        IMPORTANT: Extension of contigs during scaffolding doesnt work in SSPACE 3.0!!!!!!!!!!!!!
+
+        """
 
         options = " -T %i" % self.threads
         options += " -l %s" % library_file
