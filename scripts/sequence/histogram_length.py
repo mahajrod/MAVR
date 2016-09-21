@@ -1,18 +1,19 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-
 import os
 import argparse
 
-from numpy import arange, int32, append
-
 from Bio import SeqIO
-
+"""
+from numpy import arange, int32, append
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 from CustomCollections.GeneralCollections import SynDict
+"""""
+
+from Routines import DrawingRoutines
 
 parser = argparse.ArgumentParser()
 
@@ -39,8 +40,12 @@ args = parser.parse_args()
 if (args.number_of_bins is not None) and (args.width_of_bins is not None):
     raise AttributeError("Options -w/--width_of_bins and -b/--number_of_bins mustn't be set simultaneously")
 sequence_dict = SeqIO.index_db("temp.idx", args.input_file, args.format)
-length_dict = SynDict()
 
+DrawingRoutines.draw_length_histogram(sequence_dict, args.output_prefix, number_of_bins=args.number_of_bins,
+                                      width_of_bins=args.width_of_bins, min_length=args.min_length,
+                                      max_length=args.max_length, extensions=args.extensions)
+
+"""
 
 for record in sequence_dict:
     length_dict[record] = len(sequence_dict[record].seq)
@@ -84,3 +89,4 @@ for ext in args.extensions:
     plt.savefig("%s.%s" % (args.output_prefix, ext))
 
 os.remove("temp.idx")
+"""

@@ -13,9 +13,8 @@ from BCBio import GFF
 
 from Bio import AlignIO
 
-
+from CustomCollections.GeneralCollections import SynDict
 from Pictures.Features import RectangularProtein
-
 
 
 class DrawingRoutines:
@@ -122,6 +121,68 @@ class DrawingRoutines:
             features = list(GFF.parse(gff_fd))[0].features
 
         self.draw_alignment(alignment, features, output_prefix, ext_list=ext_list)
+
+    @staticmethod
+    def draw_length_histogram(sequence_dict, output_prefix, number_of_bins=None, width_of_bins=None,
+                              min_length=1, max_length=None, extensions=("png", "svg"),
+                              legend_location='best'):
+        length_dict = SynDict()
+
+        for record in sequence_dict:
+            length_dict[record] = len(sequence_dict[record].seq)
+
+        length_dict.write("%s.len" % output_prefix)
+
+        lengths = length_dict.values()
+
+        max_len = max(lengths)
+        min_len = min(lengths)
+        median = np.median(lengths)
+        mean = np.mean(lengths)
+
+        if max_length is None:
+            maximum_length = max_len
+        else:
+            maximum_length = max_length
+
+        filtered = []
+
+        if (maximum_length < max_len) and (min_length > 1):
+            for entry in lengths:
+                if min_length <= entry <= maximum_length:
+                    filtered.append(entry)
+        elif min_length > 1:
+            for entry in lengths:
+                if min_length <= entry:
+                    filtered.append(entry)
+        elif maximum_length < max_len:
+            for entry in lengths:
+                if entry <= maximum_length:
+                    filtered.append(entry)
+        else:
+            filtered = lengths
+
+        plt.figure(1, figsize=(6, 6))
+        plt.subplot(1, 1, 1)
+
+        if number_of_bins:
+            bins = number_of_bins
+        elif width_of_bins:
+            bins = np.arange(min_length - 1, maximum_length, width_of_bins, dtype=np.int32)
+            bins[0] += 1
+            bins = np.append(bins, [maximum_length])
+        else:
+            bins = 30
+        plt.hist(filtered, bins=bins)
+        plt.xlim(xmin=min_length, xmax=maximum_length)
+        plt.xlabel("Length")
+        plt.ylabel("N")
+        plt.title("Distribution of sequence lengths")
+        plt.legend(("Min: %i\nMax: %i\nMean: %i\nMedian: %i" % (min_len, max_len, mean, median),), loc=legend_location)
+        for ext in extensions:
+            plt.savefig("%s.%s" % (output_prefix, ext))
+
+        os.remove("temp.idx")
 
 
 
