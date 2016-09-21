@@ -34,6 +34,8 @@ parser.add_argument("-x", "--max_length", action="store", dest="max_length", typ
 parser.add_argument("-e", "--extensions", action="store", dest="extensions", type=lambda x: x.split(","),
                     default=["png", "svg"],
                     help="Comma-separated list of extensions for histogram files")
+parser.add_argument("-l", "--legend_location", action="store", dest="legend_location", default='best',
+                    help="Legend location on histogram. Default - 'best'")
 
 args = parser.parse_args()
 
@@ -43,7 +45,8 @@ sequence_dict = SeqIO.index_db("temp.idx", args.input_file, args.format)
 
 DrawingRoutines.draw_length_histogram(sequence_dict, args.output_prefix, number_of_bins=args.number_of_bins,
                                       width_of_bins=args.width_of_bins, min_length=args.min_length,
-                                      max_length=args.max_length, extensions=args.extensions)
+                                      max_length=args.max_length, extensions=args.extensions,
+                                      legend_location=args.legend_location)
 
 """
 

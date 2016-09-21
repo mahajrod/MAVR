@@ -183,7 +183,3 @@ class DrawingRoutines:
             plt.savefig("%s.%s" % (output_prefix, ext))
 
         os.remove("temp.idx")
-
-
-
-
