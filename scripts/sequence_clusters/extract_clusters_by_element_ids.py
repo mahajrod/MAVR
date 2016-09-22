@@ -16,8 +16,8 @@ parser.add_argument("-o", "--output", action="store", dest="output", required=Tr
                     help="File to write extracted clusters")
 parser.add_argument("-m", "--mode", action="store", dest="mode", default="w",
                     help="extraction mode. Allowed - 'w' - if elements from element_id_list are present "
-                         "in cluster extracts only that elements 'a' - if elements from element_id_list are present "
-                         "in cluster extracts all elements Default - 'w'")
+                         "in cluster extracts only that elements; 'a' - if elements from element_id_list are present "
+                         "in cluster extracts all elements. Default - 'w'")
 
 args = parser.parse_args()
 

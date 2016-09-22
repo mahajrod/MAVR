@@ -39,6 +39,8 @@ class TreeFamRoutines(SequenceClusterRoutines):
 
                 SeqIO.write(SequenceRoutines.record_by_id_generator(protein_dict, fam_dict[fam_id], verbose=True),
                             out_file, format=pep_format)
+            else:
+                print("%s was not found" % fam_id)
 
         os.remove("tmp.idx")
 
