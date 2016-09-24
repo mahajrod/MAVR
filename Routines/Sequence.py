@@ -64,10 +64,11 @@ class SequenceRoutines():
         for record_id in record_dict:
             yield record_dict[record_id]
 
-    def extract_sequence_by_ids(self, sequence_file, id_file, output_file, format="fasta", verbose=False):
+    def extract_sequence_by_ids(self, sequence_file, id_file, output_file, format="fasta", verbose=False,
+                                id_column_number=0):
         tmp_index_file = "tmp.idx"
         id_list = IdList()
-        id_list.read(id_file)
+        id_list.read(id_file, column_number=id_column_number)
         if verbose:
             print("Parsing %s..." % (sequence_file if isinstance(id_file, str) else ",".join(id_file)))
 

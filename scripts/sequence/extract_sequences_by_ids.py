@@ -17,10 +17,13 @@ parser.add_argument("-f", "--format", action="store", dest="format", default="fa
                     help="Format of input and output files. Allowed formats genbank, fasta(default)")
 parser.add_argument("-d", "--id_file", action="store", dest="id_file",
                     help="File with ids of sequences to extract")
+parser.add_argument("-c", "--id_column", action="store", dest="id_column", type=int, default=0,
+                    help="Number of column with ids in id file (0-based). Default: 0")
 
 args = parser.parse_args()
 
-SequenceRoutines.extract_sequence_by_ids(args.input, args.id_file, args.output, format=args.format, verbose=True)
+SequenceRoutines.extract_sequence_by_ids(args.input, args.id_file, args.output, format=args.format, verbose=True,
+                                         id_column_number=args.id_column)
 
 
 
