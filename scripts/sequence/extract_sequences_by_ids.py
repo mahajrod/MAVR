@@ -24,6 +24,3 @@ args = parser.parse_args()
 
 SequenceRoutines.extract_sequence_by_ids(args.input, args.id_file, args.output, format=args.format, verbose=True,
                                          id_column_number=args.id_column)
-
-
-
