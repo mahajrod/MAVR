@@ -12,7 +12,7 @@ source /work/pavlov/okochenova/profile
 REFERENCE_SPECIES="brassica_rapa"
 SOURCE="ncbi"
 SPLITED_PEP_DIR="/work/pavlov/okochenova/genomes/${REFERENCE_SPECIES}/${SOURCE}/pep/splited/"
-PEP_FILE="${SPLITED_PEP_DIR}${REFERENCE_SPECIES}.ncbi_${SLURM_ARRAY_TASK_ID}.fasta"
+PEP_FILE="${SPLITED_PEP_DIR}${REFERENCE_SPECIES}.${SOURCE}_${SLURM_ARRAY_TASK_ID}.fasta"
 
 BHOLBOELLI_GENOMES_DIR="/work/pavlov/okochenova/genomes/boechera_holboelli/"
 WORK_DIR="/work/pavlov/okochenova/genomes_workdir/boechera_holboelli/"
