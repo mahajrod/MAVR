@@ -13,4 +13,5 @@ for SP in *;
                                                                                              -f ${SP}/supported_by_db_and_hints/${SP}.augustus.supported.transcripts.swissprot_or_pfam_and_hints.longest_pep.evidence.olfactory.fam \
                                                                                              -p ${SP}/supported_by_db_and_hints/${SP}.augustus.supported.transcripts.swissprot_or_pfam_and_hints.longest_pep.pep \
                                                                                              -d ${SP}/supported_by_db_and_hints/olfactory;
+
     done
