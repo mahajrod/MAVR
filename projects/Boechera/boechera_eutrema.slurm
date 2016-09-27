@@ -9,7 +9,7 @@
 module load exonerate/2.2
 source /work/pavlov/okochenova/profile
 
-REFERENCE_SPECIES="eutrema_salsuginem"
+REFERENCE_SPECIES="eutrema_salsugineum"
 SOURCE="ncbi"
 SPLITED_PEP_DIR="/work/pavlov/okochenova/genomes/${REFERENCE_SPECIES}/${SOURCE}/pep/splited/"
 PEP_FILE="${SPLITED_PEP_DIR}${REFERENCE_SPECIES}.${SOURCE}_${SLURM_ARRAY_TASK_ID}.fasta"
