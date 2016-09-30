@@ -24,3 +24,4 @@ args = parser.parse_args()
 RepeatModeler.threads = args.threads
 RepeatModeler.build_db(args.database_name, fasta_dir=args.input, file_with_filenames=None, engine=args.engine)
 RepeatModeler.annotate_repeats(args.database_name, engine=args.engine, recover_dir=None)
+
