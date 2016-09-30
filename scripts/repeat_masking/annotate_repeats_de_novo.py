@@ -7,8 +7,8 @@ from Tools.RepeatMasking import RepeatModeler
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", "--input", action="store", dest="input", required=True,
-                    help="Input file/directory with files in fasta format. Only files with extensions"
+parser.add_argument("-i", "--input_directory", action="store", dest="input", required=True,
+                    help="Input directory with files in fasta format. Only files with extensions"
                          " .fa/.fasta are recognized.")
 parser.add_argument("-n", "--database_name", action="store", dest="database_name", required=True,
                     help="Name of database to use")
