@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+for  SAMPLE in SOAP_SOAP SSPACE_Sealer SSPACE_SOAP; do CHUNK_NUMBER=931; SPECIES="brassica_rapa"; echo ${SAMPLE}; ls -l ${SAMPLE}/${SPECIES}/ | awk 'NR > 1 {print $0}'  | wc -l; ls -l ${SAMPLE}/${SPECIES}/ | awk 'NR > 1 {if ($5<500) print $9}' | wc -l; ls -l ${SAMPLE}/${SPECIES}/ | awk 'NR > 1 {if ($5<500) print $9}'; /work/pavlov/okochenova/soft/MAVR/projects/cat_comparison/find_absent_chunks.py -i ${SAMPLE}/${SPECIES}/ -n ${CHUNK_NUMBER}; done
+
+for  SAMPLE in SOAP_SOAP SSPACE_Sealer SSPACE_SOAP; do CHUNK_NUMBER=948; SPECIES="eutrema_salsugineum"; echo ${SAMPLE}; ls -l ${SAMPLE}/${SPECIES}/ | awk 'NR > 1 {print $0}'  | wc -l; ls -l ${SAMPLE}/${SPECIES}/ | awk 'NR > 1 {if ($5<500) print $9}' | wc -l; ls -l ${SAMPLE}/${SPECIES}/ | awk 'NR > 1 {if ($5<500) print $9}'; /work/pavlov/okochenova/soft/MAVR/projects/cat_comparison/find_absent_chunks.py -i ${SAMPLE}/${SPECIES}/ -n ${CHUNK_NUMBER}; done
+
+for  SAMPLE in SOAP_SOAP SSPACE_Sealer  SSPACE_SOAP; do CHUNK_NUMBER=932; SPECIES="arabidopsis_thaliana"; echo ${SAMPLE}; ls -l ${SAMPLE}/${SPECIES}/ | awk 'NR > 1 {print $0}'  | wc -l; ls -l ${SAMPLE}/${SPECIES}/ | awk 'NR > 1 {if ($5<500) print $9}' | wc -l; ls -l ${SAMPLE}/${SPECIES}/ | awk 'NR > 1 {if ($5<500) print $9}'; /work/pavlov/okochenova/soft/MAVR/projects/cat_comparison/find_absent_chunks.py -i ${SAMPLE}/${SPECIES}/ -n ${CHUNK_NUMBER}; done
+
+for  SAMPLE in SOAP_SOAP SSPACE_Sealer SSPACE_SOAP; do CHUNK_NUMBER=926; SPECIES="capsella_rubella"; echo ${SAMPLE}; ls -l ${SAMPLE}/${SPECIES}/ | awk 'NR > 1 {print $0}'  | wc -l; ls -l ${SAMPLE}/${SPECIES}/ | awk 'NR > 1 {if ($5<500) print $9}' | wc -l; ls -l ${SAMPLE}/${SPECIES}/ | awk 'NR > 1 {if ($5<500) print $9}'; /work/pavlov/okochenova/soft/MAVR/projects/cat_comparison/find_absent_chunks.py -i ${SAMPLE}/${SPECIES}/ -n ${CHUNK_NUMBER}; done
+
