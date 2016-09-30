@@ -17,11 +17,9 @@ parser.add_argument("-t", "--threads", action="store", dest="threads", type=int,
 
 parser.add_argument("-e", "--engine", action="store", dest="engine", default="ncbi",
                     help="Engine to use for repeat annotation. Default - 'ncbi'")
-parser.add_argument("-f", "--repeat_families", action="store", dest="repeat_families", required=True,
-                    help="File to write annotated repeat families")
+
 args = parser.parse_args()
 
 RepeatModeler.threads = args.threads
 RepeatModeler.build_db(args.database_name, fasta_dir=args.input, file_with_filenames=None, engine=args.engine)
 RepeatModeler.annotate_repeats(args.database_name, engine=args.engine, recover_dir=None)
-
