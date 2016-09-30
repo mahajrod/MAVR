@@ -19,7 +19,7 @@ class RepeatModeler(Tool):
         options += " -engine %s" % engine if engine else ""
         options += " -batch %s " % file_with_filenames if file_with_filenames else ""
 
-        self.cmd(options, cmd="BuildDatabase")
+        self.execute(options, cmd="BuildDatabase")
 
     def annotate_repeats(self, database, engine="ncbi", recover_dir=None):
 
@@ -28,4 +28,4 @@ class RepeatModeler(Tool):
         options += " -engine %s" % engine if engine else ""
         options += " -recoverDir %s " % recover_dir if recover_dir else ""
 
-        self.cmd(options)
+        self.execute(options)

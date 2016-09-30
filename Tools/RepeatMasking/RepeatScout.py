@@ -35,4 +35,4 @@ class RepeatScout(Tool):
         options += " -freq %s" % str(freq)
         options += " -l %s" % str(l)
 
-        self.cmd(options)
+        self.execute(options)

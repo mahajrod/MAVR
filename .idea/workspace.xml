@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/RepeatMasking/RepeatModeler.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/RepeatMasking/RepeatScout.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/repeat_masking/annotate_repeats_de_novo.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/Boechera/check_exonerate_output" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/RG/counter.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/RG/filter.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/RG/kmer.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/RG/qc.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/RepeatMasking/__init__.py" afterPath="$PROJECT_DIR$/Tools/RepeatMasking/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/RepeatMasking/RepeatModeler.py" afterPath="$PROJECT_DIR$/Tools/RepeatMasking/RepeatModeler.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/RepeatMasking/RepeatScout.py" afterPath="$PROJECT_DIR$/Tools/RepeatMasking/RepeatScout.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -89,10 +82,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RepeatMasker.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RepeatMasker.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Tools/RepeatMasking/RepeatMasker.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1206">
+            <state vertical-scroll-proportion="-0.29605263" vertical-offset="270" max-vertical-offset="1206">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -103,7 +96,7 @@
         <entry file="file://$PROJECT_DIR$/Tools/RepeatMasking/RepeatScout.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="774">
-              <caret line="37" column="25" selection-start-line="37" selection-start-column="25" selection-end-line="37" selection-end-column="25" />
+              <caret line="37" column="21" selection-start-line="37" selection-start-column="21" selection-end-line="37" selection-end-column="21" />
               <folding>
                 <element signature="e#22#31#0" expanded="true" />
               </folding>
@@ -127,17 +120,17 @@
         <entry file="file://$PROJECT_DIR$/Tools/RepeatMasking/RepeatModeler.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="594">
-              <caret line="23" column="69" selection-start-line="11" selection-start-column="8" selection-end-line="23" selection-end-column="74" />
+              <caret line="30" column="21" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="annotate_repeats_de_novo.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="annotate_repeats_de_novo.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/repeat_masking/annotate_repeats_de_novo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5131579" vertical-offset="0" max-vertical-offset="912">
-              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="558">
+              <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
               <folding>
                 <element signature="e#55#70#0" expanded="true" />
               </folding>
@@ -218,10 +211,10 @@
         <option value="$PROJECT_DIR$/projects/RG/counter.sh" />
         <option value="$PROJECT_DIR$/projects/Boechera/boechera_eutrema.slurm" />
         <option value="$PROJECT_DIR$/projects/Boechera/check_exonerate_output" />
-        <option value="$PROJECT_DIR$/Tools/RepeatMasking/RepeatScout.py" />
         <option value="$PROJECT_DIR$/Tools/RepeatMasking/__init__.py" />
-        <option value="$PROJECT_DIR$/Tools/RepeatMasking/RepeatModeler.py" />
         <option value="$PROJECT_DIR$/scripts/repeat_masking/annotate_repeats_de_novo.py" />
+        <option value="$PROJECT_DIR$/Tools/RepeatMasking/RepeatModeler.py" />
+        <option value="$PROJECT_DIR$/Tools/RepeatMasking/RepeatScout.py" />
       </list>
     </option>
   </component>
@@ -697,30 +690,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00803" summary="changes">
-      <created>1471715060823</created>
-      <option name="number" value="00803" />
-      <option name="project" value="LOCAL" />
-      <updated>1471715060823</updated>
-    </task>
-    <task id="LOCAL-00804" summary="changes">
-      <created>1471716163716</created>
-      <option name="number" value="00804" />
-      <option name="project" value="LOCAL" />
-      <updated>1471716163716</updated>
-    </task>
-    <task id="LOCAL-00805" summary="changes">
-      <created>1471965307864</created>
-      <option name="number" value="00805" />
-      <option name="project" value="LOCAL" />
-      <updated>1471965307865</updated>
-    </task>
-    <task id="LOCAL-00806" summary="changes">
-      <created>1472747622623</created>
-      <option name="number" value="00806" />
-      <option name="project" value="LOCAL" />
-      <updated>1472747622623</updated>
-    </task>
     <task id="LOCAL-00807" summary="changes">
       <created>1472747731840</created>
       <option name="number" value="00807" />
@@ -991,7 +960,31 @@
       <option name="project" value="LOCAL" />
       <updated>1474980480389</updated>
     </task>
-    <option name="localTasksCounter" value="852" />
+    <task id="LOCAL-00852" summary="changes">
+      <created>1475248903992</created>
+      <option name="number" value="00852" />
+      <option name="project" value="LOCAL" />
+      <updated>1475248903993</updated>
+    </task>
+    <task id="LOCAL-00853" summary="changes">
+      <created>1475249434685</created>
+      <option name="number" value="00853" />
+      <option name="project" value="LOCAL" />
+      <updated>1475249434686</updated>
+    </task>
+    <task id="LOCAL-00854" summary="changes">
+      <created>1475249485031</created>
+      <option name="number" value="00854" />
+      <option name="project" value="LOCAL" />
+      <updated>1475249485031</updated>
+    </task>
+    <task id="LOCAL-00855" summary="changes">
+      <created>1475249560248</created>
+      <option name="number" value="00855" />
+      <option name="project" value="LOCAL" />
+      <updated>1475249560248</updated>
+    </task>
+    <option name="localTasksCounter" value="856" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1018,12 +1011,13 @@
     <frame x="-1" y="25" width="1922" height="1055" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24381253" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24381253" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
@@ -1034,7 +1028,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43343982" sideWeight="0.4978678" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399361" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1462,30 +1455,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/RepeatMasking/RepeatMasker.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1206">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/RepeatMasking/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
           <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding>
             <element signature="e#23#62#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/RepeatMasking/RepeatScout.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="774">
-          <caret line="37" column="25" selection-start-line="37" selection-start-column="25" selection-end-line="37" selection-end-column="25" />
-          <folding>
-            <element signature="e#22#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1498,21 +1473,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/repeat_masking/annotate_repeats_de_novo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="558">
+          <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+          <folding>
+            <element signature="e#55#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/RepeatMasking/RepeatModeler.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="594">
-          <caret line="23" column="69" selection-start-line="11" selection-start-column="8" selection-end-line="23" selection-end-column="74" />
+          <caret line="30" column="21" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/repeat_masking/annotate_repeats_de_novo.py">
+    <entry file="file://$PROJECT_DIR$/Tools/RepeatMasking/RepeatScout.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5131579" vertical-offset="0" max-vertical-offset="912">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="774">
+          <caret line="37" column="21" selection-start-line="37" selection-start-column="21" selection-end-line="37" selection-end-column="21" />
           <folding>
-            <element signature="e#55#70#0" expanded="true" />
+            <element signature="e#22#31#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/RepeatMasking/RepeatMasker.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.29605263" vertical-offset="270" max-vertical-offset="1206">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
