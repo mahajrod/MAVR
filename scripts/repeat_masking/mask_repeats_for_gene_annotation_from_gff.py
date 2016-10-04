@@ -21,7 +21,7 @@ output_gff = "%s.gff" % args.output_prefix
 repeat_classes = "%s.repeat_classes" % args.output_prefix
 repeat_families = "%s.repeat_families" % args.output_prefix
 extracted_gff = "%s.selected_repeat_classes.gff" % args.output_prefix
-output_fasta = "%s.selected_repeat_classes.masked.fasta"
+output_fasta = "%s.selected_repeat_classes.masked.fasta" % args.output_prefix
 
 RepeatMasker.convert_rm_out_to_gff(args.input, output_gff, repeat_classes, repeat_families)
 
