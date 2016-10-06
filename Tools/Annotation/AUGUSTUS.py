@@ -528,7 +528,7 @@ class AUGUSTUS(Tool):
                                             raise ValueError("Feature parent id and transcript id are not same!")
                                 edited_str += "\tParent=%s\n" % transcript_syn_id
                             else:
-                                edited_str = tmp
+                                edited_str = tmp + "\n"
 
                             out_fd.write(edited_str)
                             tmp = in_fd.next().strip()
