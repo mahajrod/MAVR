@@ -15,7 +15,7 @@ class AUGUSTUS(Tool):
 
     def parse_options(self, species, genome_file="", strand="both", gene_model=None, output_gff3=True,
                       other_options="", config_dir=None, use_softmasking=None, hints_file=None,
-                      extrinsicCfgFile=None, predict_UTR=None):
+                      extrinsicCfgFile=None, predict_UTR=None, min_intron_len=None):
 
         """
             AUGUSTUS (3.0.2) is a gene prediction tool for eukaryotes
@@ -88,16 +88,18 @@ class AUGUSTUS(Tool):
         options += " --species=%s" % species
         options += (" --AUGUSTUS_CONFIG_PATH=%s" % config_dir) if config_dir else ""
         options += " %s" % genome_file
+        options += (" --min_intron_len=%i" % min_intron_len) if min_intron_len else ""
 
         return options
 
     def predict(self, species, genome_file, output, strand="both", gene_model="complete", output_gff3=True,
                 other_options="", use_softmasking=None, hints_file=None, extrinsicCfgFile=None,
-                predict_UTR=None):
+                predict_UTR=None, min_intron_len=None):
         options = self.parse_options(species, genome_file=genome_file, strand=strand, gene_model=gene_model,
                                      output_gff3=output_gff3, other_options=other_options,
                                      use_softmasking=use_softmasking, hints_file=hints_file,
-                                     extrinsicCfgFile=extrinsicCfgFile, predict_UTR=predict_UTR)
+                                     extrinsicCfgFile=extrinsicCfgFile, predict_UTR=predict_UTR,
+                                     min_intron_len=min_intron_len)
         options += " > %s" % output
         self.execute(options)
 
@@ -105,12 +107,12 @@ class AUGUSTUS(Tool):
                          other_options="", split_dir="splited_input", splited_output_dir="splited_output_dir",
                          config_dir=None, combine_output_to_single_file=True, use_softmasking=None, hints_file=None,
                          extrinsicCfgFile=None, predict_UTR=None, external_process_pool=None,
-                         async_run=False):
+                         async_run=False, min_intron_len=None):
         common_options = self.parse_options(species, genome_file="", strand=strand, gene_model=gene_model,
                                             output_gff3=output_gff3, other_options=other_options,
                                             config_dir=config_dir, use_softmasking=use_softmasking,
                                             hints_file=hints_file, extrinsicCfgFile=extrinsicCfgFile,
-                                            predict_UTR=predict_UTR)
+                                            predict_UTR=predict_UTR, min_intron_len=min_intron_len)
 
         splited_dir = FileRoutines.check_path(split_dir)
         splited_out_dir = FileRoutines.check_path(splited_output_dir)

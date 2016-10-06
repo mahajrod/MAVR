@@ -56,8 +56,6 @@ parser.add_argument("-u", "--predict_UTR", action="store_true", dest="predict_UT
                     help="Predict UTR. works not for all species")
 parser.add_argument("-a", "--augustus_dir", action="store", dest="augustus_dir", default="",
                     help="Directory with augustus binary")
-parser.add_argument("--min_intron_len", action="store", dest="min_intron_len", type=int,
-                    help="Minimum intron length. Default: default augustus value")
 
 args = parser.parse_args()
 
@@ -116,13 +114,12 @@ AUGUSTUS.path = args.augustus_dir
 AUGUSTUS.threads = args.threads
 
 print("Annotating genes...")
-
+"""
 AUGUSTUS.parallel_predict(args.species, args.input, output_raw_gff, strand=args.strand, gene_model=args.gene_model,
                           output_gff3=True, other_options=args.other_options, config_dir=args.config_dir,
                           use_softmasking=args.softmasking, hints_file=args.hintsfile,
-                          extrinsicCfgFile=args.extrinsicCfgFile, predict_UTR=args.predict_UTR,
-                          min_intron_len=args.min_intron_len)
-
+                          extrinsicCfgFile=args.extrinsicCfgFile, predict_UTR=args.predict_UTR)
+"""
 AUGUSTUS.replace_augustus_ids(output_raw_gff, args.output, species_prefix=args.species_prefix,
                               number_of_digits_in_id=8)
 
