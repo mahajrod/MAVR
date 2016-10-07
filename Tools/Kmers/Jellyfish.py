@@ -98,7 +98,7 @@ class Jellyfish(Tool):
         sed_string = 'sed -e "s/\t.*//" %s > %s' % (kmer_table_file, kmer_file)
         os.system(sed_string)
 
-    def draw_kmer_distribution(self, histo_file, kmer_length, output_prefix, output_formats=["svg", "png", "jpg"],
+    def draw_kmer_distribution(self, histo_file, kmer_length, output_prefix, output_formats=["svg", "png"],
                                logbase=10, non_log_low_limit=5, non_log_high_limit=100, order=3, mode="wrap",
                                check_peaks_coef=10):
         bins, counts = np.loadtxt(histo_file, unpack=True)

@@ -26,7 +26,7 @@ parser.add_argument("-i", "--input_file", action="store", dest="input", type=lam
 parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", required=True,
                     help="Output prefix")
 parser.add_argument("-e", "--output_formats", action="store", dest="output_formats", type=lambda s: s.split(","),
-                    default=["svg", "png", "jpg"],
+                    default=["svg", "png"],
                     help="Comma-separated list of formats (supported by matlotlib) "
                          "of output figure.Default: svg,eps,pdf,png,jpg")
 parser.add_argument("-l", "--logbase", action="store", dest="logbase", type=int, default=10,
