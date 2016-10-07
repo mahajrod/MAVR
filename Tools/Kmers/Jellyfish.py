@@ -135,8 +135,8 @@ class Jellyfish(Tool):
         general_stats += "Total number of kmers\t%i\n" % total_number_of_kmers
         general_stats += "Total number of kmers with errors\t%i\n" % total_number_of_kmers_with_errors
         general_stats += "Fraction of kmers with errors\t%.3f\n" % np.around(fraction_of_kmers_with_errors, decimals=3)
-        general_stats += "Kmer multiplicity at first minimum\t%i\n" % minimums_to_show[0][0]
-        general_stats += "Kmer multiplicity at first maximum\t%i\n" % maximums_to_show[0][0]
+        general_stats += "Kmer multiplicity at first minimum\t%s\n" % (str(minimums_to_show[0][0]) if minimums_to_show else "None")
+        general_stats += "Kmer multiplicity at first maximum\t%i\n" % (str(maximums_to_show[0][0]) if maximums_to_show else "None")
         general_stats += "Width of first peak\t%i\n" % unique_peak_width
         general_stats += "Mean kmer multiplicity in first peak\t%.2f\n" % np.around(unique_peak_borders_mean_multiplicity, decimals=2)
         general_stats += "Standard deviation of kmer multiplicity in first peak\t%.2f\n" % np.around(std_1, decimals=2)
