@@ -72,8 +72,4 @@ with open(args.out_file, "w") as out_fd:
 
 awk_string = "awk -F'\\t' 'NR==1 {}; NR>1 {printf \"%%s\\t%%s\\n\", $2, $3}' %s | sort -t $'\\t' -k 1 -k2n > %s" % (args.out_file,
                                                                                          args.out_file + ".len")
-
 os.remove(tmp_index_file)
-
-
-
