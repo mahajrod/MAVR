@@ -1106,6 +1106,8 @@ class SequenceRoutines():
         self.get_random_species_genomes(record_dict, count_species_file, output_file,
                                         output_type=output_type, prev_id_dict={})
 
+        os.remove("tmp.idx")
+
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
     lengths_dict = OrderedDict({})
