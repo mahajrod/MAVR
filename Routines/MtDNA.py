@@ -323,8 +323,8 @@ class MtDNARoutines(SequenceRoutines):
                         region_dict["D-loop"].append(new_record)
                     #print(feature.extract(record_dict[record_id]))
             for key in nucleotide_record_features:
-                print key
-                print nucleotide_record_features[key]
+                #print key
+                #print nucleotide_record_features[key]
                 if nucleotide_record_features[key] != 1:
                     print("Suspicious record %s. Duplication or absense genes" % record_id)
                     #print(nucleotide_record_features)
