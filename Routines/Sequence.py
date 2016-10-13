@@ -1055,16 +1055,21 @@ class SequenceRoutines():
 
         return length_array, N50_dict, L50_dict, length_dict, total_length, longest_contig, Ns_number, bins, contig_cumulative_length_values, contig_number_values
 
-    @staticmethod
-    def get_random_species_genomes(record_dict,
-                                   count_species_file,
+    def get_random_species_genomes(self,
+                                   record_dict,
                                    output_file,
                                    selected_species_file="selected_species.t",
+                                   count_species_file=None,
                                    output_type="fasta",
                                    prev_id_dict={}):
         print("Extracting random genomes(one per species)...")
         #return ids of random genomes, one per species
-        fd = open(count_species_file, "r")
+
+        if not count_species_file:
+            self.count_species(record_dict, output_filename="count_species.count")
+            fd = open("count_species.count", "r")
+        else:
+            fd = open(count_species_file, "r")
         fd_species = open(selected_species_file, "w")
         fd_species.write("#species\tid\n")
         number_of_species = int(fd.readline().strip().split("\t")[1])
@@ -1098,9 +1103,7 @@ class SequenceRoutines():
                                      format="genbank")
         count_species_file = "%s.species_counts" % output_prefix
         output_file = "%s.extracted.%s" % (output_prefix, output_type)
-        selected_species_file = "%s.selected_species" % output_prefix
         self.get_random_species_genomes(record_dict, count_species_file, output_file,
-                                        selected_species_file=selected_species_file,
                                         output_type=output_type, prev_id_dict={})
 
 
