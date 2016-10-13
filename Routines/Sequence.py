@@ -5,6 +5,8 @@ import sys
 import math
 import pickle
 
+from random import randint
+
 from copy import deepcopy
 from collections import OrderedDict
 
@@ -16,6 +18,7 @@ from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
 
 from CustomCollections.GeneralCollections import TwoLvlDict, SynDict, IdList, IdSet
+from Routines import FileRoutines
 from Routines.Functions import output_dict
 
 
@@ -1051,6 +1054,54 @@ class SequenceRoutines():
             length_dict[threshold] = tmp_length
 
         return length_array, N50_dict, L50_dict, length_dict, total_length, longest_contig, Ns_number, bins, contig_cumulative_length_values, contig_number_values
+
+    @staticmethod
+    def get_random_species_genomes(record_dict,
+                                   count_species_file,
+                                   output_file,
+                                   selected_species_file="selected_species.t",
+                                   output_type="fasta",
+                                   prev_id_dict={}):
+        print("Extracting random genomes(one per species)...")
+        #return ids of random genomes, one per species
+        fd = open(count_species_file, "r")
+        fd_species = open(selected_species_file, "w")
+        fd_species.write("#species\tid\n")
+        number_of_species = int(fd.readline().strip().split("\t")[1])
+        print("Totaly %s species " % number_of_species)
+        random_ids = []
+        retained_ids = []
+        for line in fd:
+            line_list = line.strip().split("\t")
+            species = line_list[0]
+            if species in prev_id_dict:
+                if prev_id_dict[species] in record_dict:
+                    new_id = prev_id_dict[species]
+                    retained_ids.append(prev_id_dict[species])
+            else:
+                num_of_genomes = int(line_list[1])
+                id_list = line_list[2].split(",")
+                random_number = randint(1, num_of_genomes)
+                new_id = id_list[random_number-1]
+            random_ids.append(new_id)
+            fd_species.write("%s\t%s\n" % (species, new_id))
+        fd.close()
+        fd_species.close()
+        random_ids = set(random_ids)
+        SeqIO.write([record_dict[id_entry] for id_entry in random_ids], open(output_file, "w"), output_type)
+        #print(len(retained_ids), retained_ids)
+        return random_ids
+
+    def get_random_species_genomes_from_genbank_file(self, input_gb_files, output_prefix, output_type="genbank"):
+
+        record_dict = SeqIO.index_db("tmp.idx", FileRoutines.make_list_of_path_to_files(input_gb_files),
+                                     format="genbank")
+        count_species_file = "%s.species_counts" % output_prefix
+        output_file = "%s.extracted.%s" % (output_prefix, output_type)
+        selected_species_file = "%s.selected_species" % output_prefix
+        self.get_random_species_genomes(record_dict, count_species_file, output_file,
+                                        selected_species_file=selected_species_file,
+                                        output_type=output_type, prev_id_dict={})
 
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):

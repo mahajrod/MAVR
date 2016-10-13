@@ -5,6 +5,7 @@ from Routines.File import FileRoutines
 from Routines.Tree import TreeRoutines
 from Routines.NCBI import NCBIRoutines
 from Routines.Math import SmoothRoutines
+from Routines.MtDNA import MtDNARoutines
 from Routines.Fastq import FastQRoutines
 from Routines.Primer import PrimerRoutines
 from Routines.EggNOG import EggNOGRoutines
@@ -22,6 +23,7 @@ MathRoutines = MathRoutines()
 FileRoutines = FileRoutines()
 TreeRoutines = TreeRoutines()
 NCBIRoutines = NCBIRoutines()
+MtDNARoutines = MtDNARoutines()
 FastQRoutines = FastQRoutines()
 SmoothRoutines = SmoothRoutines()
 PrimerRoutines = PrimerRoutines()
