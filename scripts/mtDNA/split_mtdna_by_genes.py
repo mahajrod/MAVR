@@ -11,8 +11,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-i", "--input_file", action="store", dest="input", required=True,
                     type=lambda s: FileRoutines.make_list_of_path_to_files(s.split(",")),
                     help="Comma separated list of genbank files/directories")
-parser.add_argument("-o", "--output_file_prefix", action="store", dest="output_prefix", required=True,
-                    help="Prefix of output files")
+#parser.add_argument("-o", "--output_file_prefix", action="store", dest="output_prefix", required=True,
+#                    help="Prefix of output files")
 parser.add_argument("-f", "--format", action="store", dest="format", default="genbank",
                     help="Format of input and output file. Allowed formats genbank(default), fasta")
 

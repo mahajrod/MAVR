@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/mtDNA/split_mtdna_by_genes.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/mtDNA/get_general_data_from_genbank_file.py" afterPath="$PROJECT_DIR$/scripts/mtDNA/get_general_data_from_genbank_file.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/mtDNA/split_mtdna_by_genes.py" afterPath="$PROJECT_DIR$/scripts/mtDNA/split_mtdna_by_genes.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -110,8 +109,8 @@
       <file leaf-file-name="split_mtdna_by_genes.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/mtDNA/split_mtdna_by_genes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.62658226" vertical-offset="0" max-vertical-offset="632">
-              <caret line="22" column="77" selection-start-line="22" selection-start-column="77" selection-end-line="22" selection-end-column="77" />
+            <state vertical-scroll-proportion="0.39873418" vertical-offset="0" max-vertical-offset="632">
+              <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
               <folding>
                 <element signature="e#55#70#0" expanded="true" />
               </folding>
@@ -831,12 +830,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00822" summary="changes">
-      <created>1473703243976</created>
-      <option name="number" value="00822" />
-      <option name="project" value="LOCAL" />
-      <updated>1473703243976</updated>
-    </task>
     <task id="LOCAL-00823" summary="changes">
       <created>1473703311500</created>
       <option name="number" value="00823" />
@@ -1125,7 +1118,13 @@
       <option name="project" value="LOCAL" />
       <updated>1476348506619</updated>
     </task>
-    <option name="localTasksCounter" value="871" />
+    <task id="LOCAL-00871" summary="changes">
+      <created>1476350943445</created>
+      <option name="number" value="00871" />
+      <option name="project" value="LOCAL" />
+      <updated>1476350943445</updated>
+    </task>
+    <option name="localTasksCounter" value="872" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1159,7 +1158,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43343982" sideWeight="0.4978678" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2533757" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2533757" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
@@ -1654,8 +1653,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/mtDNA/split_mtdna_by_genes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.62658226" vertical-offset="0" max-vertical-offset="632">
-          <caret line="22" column="77" selection-start-line="22" selection-start-column="77" selection-end-line="22" selection-end-column="77" />
+        <state vertical-scroll-proportion="0.39873418" vertical-offset="0" max-vertical-offset="632">
+          <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
           <folding>
             <element signature="e#55#70#0" expanded="true" />
           </folding>
