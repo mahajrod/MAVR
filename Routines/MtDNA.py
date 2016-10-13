@@ -212,6 +212,7 @@ class MtDNARoutines(SequenceRoutines):
         nucleotide_exception_records = []
         protein_exception_records = []
         for record_id in record_dict:
+            print record_id
             if record_id in black_list:
                 continue
             nucleotide_record_features = {}
@@ -335,9 +336,11 @@ class MtDNARoutines(SequenceRoutines):
                     break
         nucleotide_exception_records = set(nucleotide_exception_records)
         protein_exception_records = set(protein_exception_records)
+        print nucleotide_exception_records
+        print protein_exception_records
         sudpicious_records = nucleotide_exception_records | protein_exception_records
         print("Totally suspicious records : %i" % len(sudpicious_records))
-        print("Suspicious records %s: " % ",".join(sudpicious_records))
+        print("Suspicious records: %s " % ",".join(sudpicious_records))
 
         with open("suspicious_records.t", "w") as fd_sus:
             fd_sus.write("#id\n" + "\n".join(sudpicious_records))
