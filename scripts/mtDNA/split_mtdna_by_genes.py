@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-
+import os
 import argparse
 
 from Bio import SeqIO
@@ -21,4 +21,6 @@ args = parser.parse_args()
 record_dict = SeqIO.index_db("tmp.idx", args.input, format=args.format)
 
 MtDNARoutines.split_mitochondrion_genome_by_genes(record_dict, black_list=[])
+
+os.remove("tmp.idx")
 
