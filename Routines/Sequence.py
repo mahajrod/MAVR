@@ -1101,9 +1101,9 @@ class SequenceRoutines():
 
         record_dict = SeqIO.index_db("tmp.idx", FileRoutines.make_list_of_path_to_files(input_gb_files),
                                      format="genbank")
-        count_species_file = "%s.species_counts" % output_prefix
+        #count_species_file = "%s.species_counts" % output_prefix
         output_file = "%s.extracted.%s" % (output_prefix, output_type)
-        self.get_random_species_genomes(record_dict, count_species_file, output_file,
+        self.get_random_species_genomes(record_dict, output_file,
                                         output_type=output_type, prev_id_dict={})
 
         os.remove("tmp.idx")
