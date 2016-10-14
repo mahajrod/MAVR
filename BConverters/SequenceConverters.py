@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 __author__ = 'mahajrod'
 import collections
 
@@ -7,6 +8,9 @@ from Parsers.General import parse_metamiga_fasta
 
 
 class SequenceConverters:
+
+    def __init__(self):
+        pass
 
     @staticmethod
     def fastq2fasta(input_file, output_file):
