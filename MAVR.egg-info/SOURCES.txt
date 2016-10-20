@@ -43,7 +43,6 @@ Pictures/Styles/Features.py
 Pictures/Styles/__init__.py
 Pipelines/GenePrediction.py
 Pipelines/Phylogeny.py
-Pipelines/RepeatSearch.py
 Pipelines/SNPCall.py
 Pipelines/__init__.py
 Pipelines/Expansion/__init__.py
@@ -56,6 +55,7 @@ Routines/File.py
 Routines/Functions.py
 Routines/Math.py
 Routines/Matplotlib.py
+Routines/MtDNA.py
 Routines/MultipleAlignment.py
 Routines/NCBI.py
 Routines/Primer.py
@@ -75,7 +75,9 @@ Tools/__init__.py
 Tools/Alignment/BWA.py
 Tools/Alignment/Bowtie2.py
 Tools/Alignment/Novoalign.py
+Tools/Alignment/STAR.py
 Tools/Alignment/TMAP.py
+Tools/Alignment/Tophat.py
 Tools/Alignment/__init__.py
 Tools/Annotation/AUGUSTUS.py
 Tools/Annotation/Barrnap.py
@@ -100,6 +102,7 @@ Tools/Bedtools/Flank.py
 Tools/Bedtools/GenomeCov.py
 Tools/Bedtools/GetFasta.py
 Tools/Bedtools/Intersect.py
+Tools/Bedtools/MaskFasta.py
 Tools/Bedtools/__init__.py
 Tools/BioFormats/BioConvert.py
 Tools/BioFormats/__init__.py
@@ -131,6 +134,9 @@ Tools/GATK/UnifiedGenotyper.py
 Tools/GATK/VariantFiltration.py
 Tools/GATK/VariantRecalibrator.py
 Tools/GATK/__init__.py
+Tools/GapClosers/GapFiller.py
+Tools/GapClosers/Sealer.py
+Tools/GapClosers/__init__.py
 Tools/HMMER/HMMER3.py
 Tools/HMMER/__init__.py
 Tools/ImageMagick/Convert.py
@@ -152,13 +158,14 @@ Tools/Picard/AddOrReplaceReadGroups.py
 Tools/Picard/CreateSequenceDictionary.py
 Tools/Picard/__init__.py
 Tools/RepeatMasking/RepeatMasker.py
+Tools/RepeatMasking/RepeatModeler.py
+Tools/RepeatMasking/RepeatScout.py
 Tools/RepeatMasking/TRF.py
 Tools/RepeatMasking/__init__.py
 Tools/Samtools/Samtools.py
 Tools/Samtools/__init__.py
-Tools/Tuxedo/Cufflinks.py
-Tools/Tuxedo/Tophat.py
-Tools/Tuxedo/__init__.py
+Tools/Scaffolders/SSPACE.py
+Tools/Scaffolders/__init__.py
 scripts/CDS_region_variants.py
 scripts/assembly_transcriptome.py
 scripts/blast_fastqc.py

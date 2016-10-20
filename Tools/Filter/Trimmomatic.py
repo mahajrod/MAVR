@@ -7,7 +7,7 @@ from Tools.Abstract import JavaTool
 class Trimmomatic(JavaTool):
 
     def __init__(self, java_path="", max_threads=4, jar_path="", jar=None):
-        jar = "trimmomatic-0.35.jar" if jar is None else jar
+        jar = "trimmomatic.jar" if jar is None else jar
         JavaTool.__init__(self, jar, java_path=java_path, max_threads=max_threads,
                           jar_path=jar_path, max_memory=None, timelog="trimmomatic.time.log")
 

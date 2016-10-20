@@ -51,7 +51,7 @@ parser.add_argument("-b", "--base_quality", action="store", dest="base_quality",
 
 parser.add_argument("-l", "--min_length", action="store", dest="min_len", type=int,
                     help="Minimum length of read to retain. If not set - skip this stage")
-parser.add_argument("-c", "--crop_length", action="store", dest="crop_len", type=int, type=int,
+parser.add_argument("-c", "--crop_length", action="store", dest="crop_len", type=int,
                     help="Number of bases to retain from 5'end. If not set - skip this stage")
 
 parser.add_argument("-j", "--path_to_trimmomatic_dir", action="store", dest="path_to_trimmomatic_dir", default="",

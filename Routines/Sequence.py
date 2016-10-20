@@ -598,7 +598,32 @@ class SequenceRoutines():
             fd.write(organism + "\t%i\t%s\n" % (species_count_dict[organism][0], 
                                                 ",".join(species_count_dict[organism][1])))
         return number_of_species, species_count_dict
-    
+
+    def count_species_from_file(self, sequence_file, format="genbank", output_filename="count_species.count"):
+        record_dict = SeqIO.index_db("tmp.idx", sequence_file, format=format)
+        self.count_species(record_dict, output_filename=output_filename)
+        os.remove("tmp.idx")
+
+    @staticmethod
+    def get_id_to_species_accordance(record_dict, output="id_to_species.accordance"):
+        accordance_dict = {}
+        for record_id in record_dict:
+            organism = record_dict[record_id].annotations['organism'] if "organism" in record_dict[record_id].annotations else "."
+            accordance_dict[record_id] = organism
+
+        with open(output, "w") as out_fd:
+            for record_id in accordance_dict:
+                print record_id, accordance_dict[record_id]
+                out_fd.write("%s\t%s\n" % (record_id, accordance_dict[record_id]))
+
+        return accordance_dict
+
+    def get_id_to_species_accordance_from_file(self, sequence_file, format="genbank",
+                                               output="id_to_species.accordance"):
+        record_dict = SeqIO.index_db("tmp.idx", sequence_file, format=format)
+        self.get_id_to_species_accordance(record_dict, output=output)
+        os.remove("tmp.idx")
+
     @staticmethod
     def split_records_by_taxa_level(record_dict, prefix, taxa_level=1, filetype="genbank"):
         """taxa levels starts from 0"""
