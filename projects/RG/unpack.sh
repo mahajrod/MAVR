@@ -11,7 +11,7 @@ for SAMPLE in ${SAMPLE_LIST[@]};
     SAMPLE_GROUP=`echo ${SAMPLE} | cut -c1-4`
 
     mkdir -p ${UNPACKED_READS_DIR}/${SAMPLE_GROUP} ${UNPACKED_READS_DIR}/${SAMPLE_GROUP}/${SAMPLE};
-    FILES=($(ls ${SAMPLE}/ | sed 's/.gz//'));
+    FILES=($(ls ${RAW_READS_DIR}/${SAMPLE_GROUP}/${SAMPLE}/ | sed 's/.gz//'));
     NUMBER_OF_FILES=${#FILES[@]}
     LEFT_FILES=
     RIGHT_FILES=
