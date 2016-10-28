@@ -26,6 +26,8 @@ FACUT_BIN_DIR=/home/genomerussia/tools/Facut/bin/
 FASTQC_DIR=/home/genomerussia/tools/FastQC/
 COOCKIECUTTER_SRC_DIR=/home/genomerussia/tools/Cookiecutter/src/
 
+#PYTHONPATH=${PYTHONPATH}:/home/genomerussia/tools/MAVR
+#export PYTONPATH
 #-------------------------------------------------------
 
 #----------------------Settings-------------------------
@@ -52,7 +54,8 @@ for SAMPLE in ${SAMPLE_LIST[@]};
     echo "Counting k-mer distribution for ${SAMPLE}"
     echo "    ${NUMBER_OF_FILES} files"
 
-    KMER_STRING="PYTHONPATH=${PYTHONPATH}:/home/genomerussia/tools/MAVR ${MAVR_SCRIPTS_DIR}/kmer/draw_kmer_distribution_from_fastq.py -i ${FILES_COMMA} -t ${THREAD_NUMBER} -m ${KMER_SIZE} -b -s ${MEMORY} -e png -w 3 -g 80 -o ${OUTPUT_PREFIX}"
+    PYTHONPATH=${PYTHONPATH}:/home/genomerussia/tools/MAVR
+    KMER_STRING=" ${MAVR_SCRIPTS_DIR}/kmer/draw_kmer_distribution_from_fastq.py -i ${FILES_COMMA} -t ${THREAD_NUMBER} -m ${KMER_SIZE} -b -s ${MEMORY} -e png -w 3 -g 80 -o ${OUTPUT_PREFIX}"
     echo ${KMER_STRING}
 
     ${KMER_STRING}
