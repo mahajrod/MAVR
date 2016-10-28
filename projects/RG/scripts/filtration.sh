@@ -26,6 +26,7 @@ FACUT_BIN_DIR=/home/genomerussia/tools/Facut/bin/
 FASTQC_DIR=/home/genomerussia/tools/FastQC/
 COOCKIECUTTER_SRC_DIR=/home/genomerussia/tools/Cookiecutter/src/
 
+ADAPTER_KMER_FILE=${TOOLS_DIR}/service_sequences/trueseq_adapters_with_rev_com_23_mer.kmer
 #PYTHONPATH=${PYTHONPATH}:/home/genomerussia/tools/MAVR
 #export PYTONPATH
 #-------------------------------------------------------
@@ -34,6 +35,10 @@ COOCKIECUTTER_SRC_DIR=/home/genomerussia/tools/Cookiecutter/src/
 THREAD_NUMBER=60
 KMER_SIZE=23
 MEMORY=30G
+PHRED_SCORE_TYPE=phred33
+READ_NAME_TYPE=illumina
+QUALITY_THRESHOLD=20
+
 #-------------------------------------------------------
 
 SAMPLE_LIST=($@)
@@ -43,17 +48,19 @@ for SAMPLE in ${SAMPLE_LIST[@]};
 
     SAMPLE_GROUP=`echo ${SAMPLE} | cut -c1-4`
 
-    mkdir -p ${FASTQC_STAT_DIR}/${SAMPLE_GROUP} ${FASTQC_STAT_DIR}/${SAMPLE_GROUP}/${SAMPLE};
+    mkdir -p ${FILTERED_READS_DIR}/${SAMPLE_GROUP} ${FILTERED_READS_DIR}/${SAMPLE_GROUP}/${SAMPLE};
+    mkdir -p ${FILTERING_STAT_DIR}/${SAMPLE_GROUP} ${FILTERING_STAT_DIR}/${SAMPLE_GROUP}/${SAMPLE};
 
     NUMBER_OF_FILES=`ls ${UNPACKED_READS_DIR}/${SAMPLE_GROUP}/${SAMPLE}/* | wc -l`
+    FILES=($(ls ${UNPACKED_READS_DIR}/${SAMPLE_GROUP}/${SAMPLE}/* | sed 's/.gz//'));
 
-    OUTPUT_DIR=${FASTQC_STAT_DIR}/${SAMPLE_GROUP}/${SAMPLE}/
-
-    echo "Starting FastQC analysis"
+    OUTPUT_STAT=${ADAPTERS_STAT_DIR}/${SAMPLE_GROUP}/${SAMPLE}/${SAMPLE}.filtering.stat
+    OUTPUT_PREFIX=${FILTERED_READS_DIR}/${SAMPLE_GROUP}/${SAMPLE}/${SAMPLE}
+    echo "Filtering reads by mean quality"
     echo "    ${NUMBER_OF_FILES} files"
 
-    FASTQC_STRING="${FASTQC_DIR}/fastqc -k 10 --nogroup -t ${NUMBER_OF_FILES} -o ${OUTPUT_DIR} ${UNPACKED_READS_DIR}/${SAMPLE_GROUP}/${SAMPLE}/*"
-    echo ${FASTQC_STRING}
+    FACUT_STRING="${FACUT_BIN_DIR}/filter_by_mean_quality -t ${QUALITY_THRESHOLD} -q ${PHRED_SCORE_TYPE} -n ${READ_NAME_TYPE}  -f ${FILES[0]} -r ${FILES[1]} -p ${OUTPUT_PREFIX} > ${OUTPUT_STAT}"
+    echo ${FACUT_STRING}
 
-    ${FASTQC_STRING}
+    ${FACUT_STRING}
     done

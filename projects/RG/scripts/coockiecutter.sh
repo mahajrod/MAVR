@@ -26,8 +26,16 @@ FACUT_BIN_DIR=/home/genomerussia/tools/Facut/bin/
 FASTQC_DIR=/home/genomerussia/tools/FastQC/
 COOCKIECUTTER_SRC_DIR=/home/genomerussia/tools/Cookiecutter/src/
 
+ADAPTER_KMER_FILE=${TOOLS_DIR}/service_sequences/trueseq_adapters_with_rev_com_23_mer.kmer
+#PYTHONPATH=${PYTHONPATH}:/home/genomerussia/tools/MAVR
+#export PYTONPATH
 #-------------------------------------------------------
 
+#----------------------Settings-------------------------
+THREAD_NUMBER=60
+KMER_SIZE=23
+MEMORY=30G
+#-------------------------------------------------------
 
 SAMPLE_LIST=($@)
 
@@ -36,40 +44,18 @@ for SAMPLE in ${SAMPLE_LIST[@]};
 
     SAMPLE_GROUP=`echo ${SAMPLE} | cut -c1-4`
 
-    mkdir -p ${UNPACKED_READS_DIR}/${SAMPLE_GROUP} ${UNPACKED_READS_DIR}/${SAMPLE_GROUP}/${SAMPLE};
-    FILES=($(ls ${RAW_READS_DIR}/${SAMPLE_GROUP}/${SAMPLE}/* | sed 's/.gz//'));
+    mkdir -p ${ADAPTERS_STAT_DIR}/${SAMPLE_GROUP} ${ADAPTERS_STAT_DIR}/${SAMPLE_GROUP}/${SAMPLE};
 
-    NUMBER_OF_FILES=${#FILES[@]}
-    LEFT_FILES=
-    RIGHT_FILES=
-    INDEX=0
+    NUMBER_OF_FILES=`ls ${UNPACKED_READS_DIR}/${SAMPLE_GROUP}/${SAMPLE}/* | wc -l`
+    FILES=($(ls ${UNPACKED_READS_DIR}/${SAMPLE_GROUP}/${SAMPLE}/* | sed 's/.gz//'));
 
-    #echo ${INDEX}
-    #echo ${NUMBER_OF_FILES}
-    while ((INDEX < NUMBER_OF_FILES));
-        do
-        LEFT_FILES="${LEFT_FILES} ${FILES[${INDEX}]}"
-        RIGHT_FILES="${RIGHT_FILES} ${FILES[`expr ${INDEX}+1`]}"
-        INDEX=`expr $INDEX + 2`
+    OUTPUT=${ADAPTERS_STAT_DIR}/${SAMPLE_GROUP}/${SAMPLE}/${SAMPLE}.adapters.stat
 
-        done
-
-    #echo ${LEFT_FILES}
-    #echo ${RIGHT_FILES}
-
-    LEFT_UNPACKED_FILE=${UNPACKED_READS_DIR}/${SAMPLE_GROUP}/${SAMPLE}/${SAMPLE}_1.fastq
-    RIGHT_UNPACKED_FILE=${UNPACKED_READS_DIR}/${SAMPLE_GROUP}/${SAMPLE}/${SAMPLE}_2.fastq
-
-    LEFT_FILES_EXTRACT_STRING="zcat ${LEFT_FILES} > ${LEFT_UNPACKED_FILE} &"
-    RIGHT_FILES_EXTRACT_STRING="zcat ${RIGHT_FILES} > ${RIGHT_UNPACKED_FILE}"
-
-    echo "Unpacking and merging files for ${SAMPLE}"
+    echo "Counting reads with adapters"
     echo "    ${NUMBER_OF_FILES} files"
 
-    echo ${LEFT_FILES_EXTRACT_STRING}
-    ${LEFT_FILES_EXTRACT_STRING}
+    COOCKIECUTTER_STRING="${COOCKIECUTTER_SRC_DIR}/counter -1 ${FILES[0]} -2 ${FILES[1]} -o ${ADAPTERS_STAT_DIR}/${SAMPLE_GROUP}/${SAMPLE}/ -f ${ADAPTER_KMER_FILE} > ${OUTPUT}"
+    echo ${COOCKIECUTTER_STRING}
 
-    echo ${RIGHT_FILES_EXTRACT_STRING}
-    ${RIGHT_FILES_EXTRACT_STRING}
-
+    ${COOCKIECUTTER_STRING}
     done
