@@ -53,7 +53,7 @@ for SAMPLE in ${SAMPLE_LIST[@]};
     NUMBER_OF_FILES=`ls ${UNPACKED_READS_DIR}/${SAMPLE_GROUP}/${SAMPLE}/* | wc -l`
     FILES=($(ls ${UNPACKED_READS_DIR}/${SAMPLE_GROUP}/${SAMPLE}/* | sed 's/.gz//'));
 
-    OUTPUT_STAT=${ADAPTERS_STAT_DIR}/${SAMPLE_GROUP}/${SAMPLE}/${SAMPLE}.filtering.stat
+    OUTPUT_STAT=${FILTERING_STAT_DIR}/${SAMPLE_GROUP}/${SAMPLE}/${SAMPLE}.filtering.stat
     OUTPUT_PREFIX=${FILTERED_READS_DIR}/${SAMPLE_GROUP}/${SAMPLE}/${SAMPLE}
     echo "Filtering reads by mean quality"
     echo "    ${NUMBER_OF_FILES} files"
