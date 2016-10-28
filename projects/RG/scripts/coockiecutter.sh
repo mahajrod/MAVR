@@ -35,6 +35,9 @@ ADAPTER_KMER_FILE=${TOOLS_DIR}/service_sequences/trueseq_adapters_with_rev_com_2
 THREAD_NUMBER=60
 KMER_SIZE=23
 MEMORY=30G
+PHRED_SCORE_TYPE=phred33
+READ_NAME_TYPE=illumina
+QUALITY_THRESHOLD=20
 #-------------------------------------------------------
 
 SAMPLE_LIST=($@)

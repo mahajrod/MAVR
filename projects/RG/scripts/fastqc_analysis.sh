@@ -26,6 +26,7 @@ FACUT_BIN_DIR=/home/genomerussia/tools/Facut/bin/
 FASTQC_DIR=/home/genomerussia/tools/FastQC/
 COOCKIECUTTER_SRC_DIR=/home/genomerussia/tools/Cookiecutter/src/
 
+ADAPTER_KMER_FILE=${TOOLS_DIR}/service_sequences/trueseq_adapters_with_rev_com_23_mer.kmer
 #PYTHONPATH=${PYTHONPATH}:/home/genomerussia/tools/MAVR
 #export PYTONPATH
 #-------------------------------------------------------
@@ -34,6 +35,9 @@ COOCKIECUTTER_SRC_DIR=/home/genomerussia/tools/Cookiecutter/src/
 THREAD_NUMBER=60
 KMER_SIZE=23
 MEMORY=30G
+PHRED_SCORE_TYPE=phred33
+READ_NAME_TYPE=illumina
+QUALITY_THRESHOLD=20
 #-------------------------------------------------------
 
 SAMPLE_LIST=($@)

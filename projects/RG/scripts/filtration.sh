@@ -38,7 +38,6 @@ MEMORY=30G
 PHRED_SCORE_TYPE=phred33
 READ_NAME_TYPE=illumina
 QUALITY_THRESHOLD=20
-
 #-------------------------------------------------------
 
 SAMPLE_LIST=($@)
