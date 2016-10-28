@@ -3,7 +3,7 @@
 FASTQ_DIR=/home/genomerussia/main/fastq/
 RAW_READS_DIR=${FASTQ_DIR}/raw/
 UNPACKED_READS_DIR=${FASTQ_DIR}/unpacked/
-UNPACKED_READS_DIR=${FASTQ_DIR}/filtered/
+FILTERED_READS_DIR=${FASTQ_DIR}/filtered/
 
 ANALYSIS_DIR=/home/genomerussia/main/analysis/
 
@@ -14,7 +14,7 @@ ALIGNMENT_TMP_DIR=${ALIGNMENT_DIR}/tmp/
 
 JF_DB_DIR=${ANALYSIS_DIR}/jf/
 
-STAT_DIR=${ALIGNMENT_DIR}/stat/
+STAT_DIR=${ANALYSIS_DIR}/stat/
 ADAPTERS_STAT_DIR=${STAT_DIR}/adapters/
 FASTQC_STAT_DIR=${STAT_DIR}/fastqc/
 FILTERING_STAT_DIR=${STAT_DIR}/filtering/
