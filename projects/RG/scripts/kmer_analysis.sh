@@ -64,7 +64,11 @@ for SAMPLE in ${SAMPLE_LIST[@]};
     KMER_STRING=" ${MAVR_SCRIPTS_DIR}/kmer/draw_kmer_distribution_from_fastq.py -i ${FILES_COMMA} -t ${THREAD_NUMBER} -m ${KMER_SIZE} -b -s ${MEMORY} -e png -w 3 -g 80 -o ${OUTPUT_PREFIX}"
     echo ${KMER_STRING}
 
-    #${KMER_STRING}
+    ${KMER_STRING}
 
-    cp ${SAMPLE_JF_DIR}/${SAMPLE}_${KMER_SIZE}_mer.histo ${SAMPLE_JF_DIR}/${SAMPLE}_${KMER_SIZE}_mer_histo* ${SAMPLE_KMER_STAT_DIR}
+    echo "Coping statistics to statistics directory"
+    CP_STRING="cp ${SAMPLE_JF_DIR}/${SAMPLE}_${KMER_SIZE}_mer.histo ${SAMPLE_JF_DIR}/${SAMPLE}_${KMER_SIZE}_mer_histo* ${SAMPLE_KMER_STAT_DIR}"
+    echo ${CP_STRING}
+    ${CP_STRING}
+
     done
