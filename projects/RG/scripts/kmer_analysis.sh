@@ -66,5 +66,5 @@ for SAMPLE in ${SAMPLE_LIST[@]};
 
     #${KMER_STRING}
 
-    cp ${SAMPLE_JF_DIR}/${SAMPLE}_${KMER_SIZE}.histo ${SAMPLE_JF_DIR}/${SAMPLE}_${KMER_SIZE}_histo* ${SAMPLE_KMER_STAT_DIR}
+    cp ${SAMPLE_JF_DIR}/${SAMPLE}_${KMER_SIZE}_mer.histo ${SAMPLE_JF_DIR}/${SAMPLE}_${KMER_SIZE}_mer_histo* ${SAMPLE_KMER_STAT_DIR}
     done
