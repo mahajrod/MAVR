@@ -22,5 +22,5 @@ args = parser.parse_args()
 
 for alignment_file in args.input:
     alignment_name_list = FileRoutines.split_filename(alignment_file)
-    output_file = "%s/%s.position_matrix" % (args.output_dir, alignment_name_list[1])
+    output_file = "%s/%s.unique_positions.counts" % (args.output_dir, alignment_name_list[1])
     MultipleAlignmentRoutines.count_unique_positions_per_sequence_from_file(alignment_file, output_file, gap_symbol="-")
