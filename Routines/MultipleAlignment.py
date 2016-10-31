@@ -35,6 +35,7 @@ class MultipleAlignmentRoutines:
 
         position_presence_array = np.array([0 for rec in alignment], int, order="F")
         print align_array[0, ]
+        print align_array[:, 1]
         return align_array
 
     def get_position_presence_matrix_fom_file(self, alignment_file, output_file, format="fasta",
