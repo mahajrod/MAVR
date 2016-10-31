@@ -50,6 +50,8 @@ class MultipleAlignmentRoutines:
 
         print alignment_array[0, ]
         print alignment_array[:, 1]
+        print alignment_array
+        print position_presence_array
         return position_presence_array
 
     def get_position_presence_matrix_fom_file(self, alignment_file, output_file, format="fasta",
