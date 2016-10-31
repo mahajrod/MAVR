@@ -32,8 +32,9 @@ class MultipleAlignmentRoutines:
         number_of_sequences = len(alignment)
         # converting alignment to numpy letter array stored by columns!
         align_array = np.array([list(rec) for rec in alignment], np.character, order="F")
+
+        position_presence_array = np.array([0 for rec in alignment], int, order="F")
         print align_array[0, ]
-        position_presence_array = 0
         return align_array
 
     def get_position_presence_matrix_fom_file(self, alignment_file, output_file, format="fasta",
