@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/multiple_alignment/get_position_precence_matrix.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/multiple_alignment/count_unique_positions_per_sequence.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/MultipleAlignment.py" afterPath="$PROJECT_DIR$/Routines/MultipleAlignment.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -50,16 +50,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="extract_families_of_species.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/treefam/extract_families_of_species.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2322">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="kmer_analysis.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/projects/RG/scripts/kmer_analysis.sh">
           <provider selected="true" editor-type-id="text-editor">
@@ -93,11 +83,21 @@
       <file leaf-file-name="MultipleAlignment.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Routines/MultipleAlignment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-27.642857" vertical-offset="0" max-vertical-offset="4932">
-              <caret line="43" column="29" selection-start-line="43" selection-start-column="29" selection-end-line="43" selection-end-column="29" />
+            <state vertical-scroll-proportion="-14.214286" vertical-offset="1114" max-vertical-offset="5958">
+              <caret line="84" column="93" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="105" />
               <folding>
                 <element signature="e#24#33#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="count_unique_positions_per_sequence.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/count_unique_positions_per_sequence.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.45394737" vertical-offset="0" max-vertical-offset="912">
+              <caret line="25" column="120" selection-start-line="25" selection-start-column="120" selection-end-line="25" selection-end-column="120" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -112,12 +112,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="get_position_precence_matrix.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="get_position_precence_matrix.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_position_precence_matrix.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.47368422" vertical-offset="0" max-vertical-offset="912">
-              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="594">
+              <caret line="16" column="48" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
+              <folding>
+                <element signature="e#55#70#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -158,8 +160,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/projects/Boechera/boechera_arabidopsis.slurm" />
-        <option value="$PROJECT_DIR$/projects/Boechera/boechera_capsella.slurm" />
         <option value="$PROJECT_DIR$/projects/Boechera/eutrema.slurm" />
         <option value="$PROJECT_DIR$/projects/Boechera/boechera_brassica.slurm" />
         <option value="$PROJECT_DIR$/projects/RG/filter.sh" />
@@ -207,8 +207,10 @@
         <option value="$PROJECT_DIR$/projects/RG/scripts/filtration.sh" />
         <option value="$PROJECT_DIR$/projects/RG/scripts/unpack.sh" />
         <option value="$PROJECT_DIR$/projects/RG/scripts/kmer_analysis.sh" />
-        <option value="$PROJECT_DIR$/Routines/MultipleAlignment.py" />
         <option value="$PROJECT_DIR$/scripts/multiple_alignment/get_position_precence_matrix.py" />
+        <option value="$PROJECT_DIR$/scripts/multiple_alignment/find_unique_position_distibution.py" />
+        <option value="$PROJECT_DIR$/Routines/MultipleAlignment.py" />
+        <option value="$PROJECT_DIR$/scripts/multiple_alignment/count_unique_positions_per_sequence.py" />
       </list>
     </option>
   </component>
@@ -654,78 +656,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00849" summary="changes">
-      <created>1474899996918</created>
-      <option name="number" value="00849" />
-      <option name="project" value="LOCAL" />
-      <updated>1474899996918</updated>
-    </task>
-    <task id="LOCAL-00850" summary="changes">
-      <created>1474900178583</created>
-      <option name="number" value="00850" />
-      <option name="project" value="LOCAL" />
-      <updated>1474900178584</updated>
-    </task>
-    <task id="LOCAL-00851" summary="changes">
-      <created>1474980480377</created>
-      <option name="number" value="00851" />
-      <option name="project" value="LOCAL" />
-      <updated>1474980480389</updated>
-    </task>
-    <task id="LOCAL-00852" summary="changes">
-      <created>1475248903992</created>
-      <option name="number" value="00852" />
-      <option name="project" value="LOCAL" />
-      <updated>1475248903993</updated>
-    </task>
-    <task id="LOCAL-00853" summary="changes">
-      <created>1475249434685</created>
-      <option name="number" value="00853" />
-      <option name="project" value="LOCAL" />
-      <updated>1475249434686</updated>
-    </task>
-    <task id="LOCAL-00854" summary="changes">
-      <created>1475249485031</created>
-      <option name="number" value="00854" />
-      <option name="project" value="LOCAL" />
-      <updated>1475249485031</updated>
-    </task>
-    <task id="LOCAL-00855" summary="changes">
-      <created>1475249560248</created>
-      <option name="number" value="00855" />
-      <option name="project" value="LOCAL" />
-      <updated>1475249560248</updated>
-    </task>
-    <task id="LOCAL-00856" summary="changes">
-      <created>1475249636770</created>
-      <option name="number" value="00856" />
-      <option name="project" value="LOCAL" />
-      <updated>1475249636770</updated>
-    </task>
-    <task id="LOCAL-00857" summary="changes">
-      <created>1475249712377</created>
-      <option name="number" value="00857" />
-      <option name="project" value="LOCAL" />
-      <updated>1475249712377</updated>
-    </task>
-    <task id="LOCAL-00858" summary="changes">
-      <created>1475624181672</created>
-      <option name="number" value="00858" />
-      <option name="project" value="LOCAL" />
-      <updated>1475624181672</updated>
-    </task>
-    <task id="LOCAL-00859" summary="changes">
-      <created>1475624852441</created>
-      <option name="number" value="00859" />
-      <option name="project" value="LOCAL" />
-      <updated>1475624852441</updated>
-    </task>
-    <task id="LOCAL-00860" summary="changes">
-      <created>1475713253775</created>
-      <option name="number" value="00860" />
-      <option name="project" value="LOCAL" />
-      <updated>1475713253900</updated>
-    </task>
     <task id="LOCAL-00861" summary="changes">
       <created>1475714498523</created>
       <option name="number" value="00861" />
@@ -948,7 +878,79 @@
       <option name="project" value="LOCAL" />
       <updated>1477740369921</updated>
     </task>
-    <option name="localTasksCounter" value="898" />
+    <task id="LOCAL-00898" summary="changes">
+      <created>1477907980607</created>
+      <option name="number" value="00898" />
+      <option name="project" value="LOCAL" />
+      <updated>1477907980607</updated>
+    </task>
+    <task id="LOCAL-00899" summary="changes">
+      <created>1477918708688</created>
+      <option name="number" value="00899" />
+      <option name="project" value="LOCAL" />
+      <updated>1477918708688</updated>
+    </task>
+    <task id="LOCAL-00900" summary="changes">
+      <created>1477919089867</created>
+      <option name="number" value="00900" />
+      <option name="project" value="LOCAL" />
+      <updated>1477919089867</updated>
+    </task>
+    <task id="LOCAL-00901" summary="changes">
+      <created>1477919231903</created>
+      <option name="number" value="00901" />
+      <option name="project" value="LOCAL" />
+      <updated>1477919231903</updated>
+    </task>
+    <task id="LOCAL-00902" summary="changes">
+      <created>1477920900496</created>
+      <option name="number" value="00902" />
+      <option name="project" value="LOCAL" />
+      <updated>1477920900496</updated>
+    </task>
+    <task id="LOCAL-00903" summary="changes">
+      <created>1477920975715</created>
+      <option name="number" value="00903" />
+      <option name="project" value="LOCAL" />
+      <updated>1477920975715</updated>
+    </task>
+    <task id="LOCAL-00904" summary="changes">
+      <created>1477921005821</created>
+      <option name="number" value="00904" />
+      <option name="project" value="LOCAL" />
+      <updated>1477921005822</updated>
+    </task>
+    <task id="LOCAL-00905" summary="changes">
+      <created>1477921086028</created>
+      <option name="number" value="00905" />
+      <option name="project" value="LOCAL" />
+      <updated>1477921086028</updated>
+    </task>
+    <task id="LOCAL-00906" summary="changes">
+      <created>1477921180201</created>
+      <option name="number" value="00906" />
+      <option name="project" value="LOCAL" />
+      <updated>1477921180201</updated>
+    </task>
+    <task id="LOCAL-00907" summary="changes">
+      <created>1477921188489</created>
+      <option name="number" value="00907" />
+      <option name="project" value="LOCAL" />
+      <updated>1477921188489</updated>
+    </task>
+    <task id="LOCAL-00908" summary="changes">
+      <created>1477923614174</created>
+      <option name="number" value="00908" />
+      <option name="project" value="LOCAL" />
+      <updated>1477923614174</updated>
+    </task>
+    <task id="LOCAL-00909" summary="changes">
+      <created>1477923658591</created>
+      <option name="number" value="00909" />
+      <option name="project" value="LOCAL" />
+      <updated>1477923658591</updated>
+    </task>
+    <option name="localTasksCounter" value="910" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -981,7 +983,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34491837" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22538178" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
@@ -1096,13 +1098,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Routines/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="14" column="48" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/mtDNA/iterative_assembly.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.7039474" vertical-offset="0" max-vertical-offset="0">
@@ -1403,14 +1398,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/hmmer3/assign_proteins_to_families.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="1170">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/projects/RG/scripts/unpack.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="720" max-vertical-offset="1656">
@@ -1443,16 +1430,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/MultipleAlignment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-27.642857" vertical-offset="0" max-vertical-offset="4932">
-          <caret line="43" column="29" selection-start-line="43" selection-start-column="29" selection-end-line="43" selection-end-column="29" />
-          <folding>
-            <element signature="e#24#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/merge_alignments.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="912">
@@ -1463,8 +1440,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_position_precence_matrix.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47368422" vertical-offset="0" max-vertical-offset="912">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="594">
+          <caret line="16" column="48" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
+          <folding>
+            <element signature="e#55#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/hmmer3/assign_proteins_to_families.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="1170">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/MultipleAlignment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.214286" vertical-offset="1114" max-vertical-offset="5958">
+          <caret line="84" column="93" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="105" />
+          <folding>
+            <element signature="e#24#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/count_unique_positions_per_sequence.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45394737" vertical-offset="0" max-vertical-offset="912">
+          <caret line="25" column="120" selection-start-line="25" selection-start-column="120" selection-end-line="25" selection-end-column="120" />
           <folding />
         </state>
       </provider>
