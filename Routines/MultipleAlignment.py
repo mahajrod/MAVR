@@ -27,16 +27,30 @@ class MultipleAlignmentRoutines:
         return number_of_sequences, length_of_alignment
 
     @staticmethod
-    def get_position_presence_matrix(alignment, gap_symbol="-"):
+    def get_position_presence_matrix(alignment, gap_symbol="-",):
 
         number_of_sequences = len(alignment)
+        alignment_length = len(alignment[0])
         # converting alignment to numpy letter array stored by columns!
-        align_array = np.array([list(rec) for rec in alignment], np.character, order="F")
+        alignment_array = np.array([list(rec) for rec in alignment], np.character, order="F")
+
+        print "%i sequences in alignment" % number_of_sequences
+        print "%i columns in alignment" % alignment_length
 
         position_presence_array = np.array([0 for rec in alignment], int, order="F")
-        print align_array[0, ]
-        print align_array[:, 1]
-        return align_array
+
+        for column in range(0, alignment_length):
+            column_list = alignment_array[:, column]
+            number_of_gaps = 0
+            for element in column_list:
+                if element == gap_symbol:
+                    number_of_gaps += 1
+            for row in range(0, number_of_sequences):
+                position_presence_array = -number_of_gaps if alignment_array[row, column] == gap_symbol else number_of_sequences - number_of_gaps
+
+        print alignment_array[0, ]
+        print alignment_array[:, 1]
+        return position_presence_array
 
     def get_position_presence_matrix_fom_file(self, alignment_file, output_file, format="fasta",
                                               gap_symbol="-"):
