@@ -46,7 +46,7 @@ class MultipleAlignmentRoutines:
                 if element == gap_symbol:
                     number_of_gaps += 1
             for row in range(0, number_of_sequences):
-                position_presence_array = -number_of_gaps if alignment_array[row, column] == gap_symbol else number_of_sequences - number_of_gaps
+                position_presence_array[row, column] = -number_of_gaps if alignment_array[row, column] == gap_symbol else number_of_sequences - number_of_gaps
 
         print alignment_array[0, ]
         print alignment_array[:, 1]
