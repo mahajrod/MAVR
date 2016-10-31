@@ -23,5 +23,5 @@ args = parser.parse_args()
 for alignment_file in args.input:
     alignment_name_list = FileRoutines.split_filename(alignment_file)
     output_file = "%s/%s.position_matrix" % (args.output_dir, alignment_name_list[1])
-    MultipleAlignmentRoutines.get_position_presence_matrix_fom_file(alignment_file, args.output,
+    MultipleAlignmentRoutines.get_position_presence_matrix_fom_file(alignment_file, output_file,
                                                                     format=args.format, gap_symbol=args.gap_symbol)
