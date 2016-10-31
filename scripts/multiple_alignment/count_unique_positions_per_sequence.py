@@ -25,4 +25,5 @@ for alignment_file in args.input:
     output_file = "%s/%s.unique_positions.counts" % (args.output_dir, alignment_name_list[1])
     print alignment_file
 
-    MultipleAlignmentRoutines.count_unique_positions_per_sequence_from_file(alignment_file, output_file, gap_symbol="-")
+    MultipleAlignmentRoutines.count_unique_positions_per_sequence_from_file(alignment_file, output_file,
+                                                                            format=format, gap_symbol="-")

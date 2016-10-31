@@ -82,7 +82,7 @@ class MultipleAlignmentRoutines:
 
         return unique_position_count_dict
 
-    def count_unique_positions_per_sequence_from_file(self, alignment_file, output_file, gap_symbol="-"):
+    def count_unique_positions_per_sequence_from_file(self, alignment_file, output_file, format="fasta", gap_symbol="-"):
         alignment = AlignIO.read(alignment_file, format=format)
         number_of_sequences = len(alignment)
         alignment_length = len(alignment[0])
