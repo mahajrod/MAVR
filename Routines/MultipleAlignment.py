@@ -59,7 +59,7 @@ class MultipleAlignmentRoutines:
         alignment = AlignIO.read(alignment_file, format=format)
 
         position_matrix = self.get_position_presence_matrix(alignment, gap_symbol)
-
+        np.savetxt(output_file, position_matrix, fmt="%i", delimiter='\t')
         print position_matrix
 
     @staticmethod
