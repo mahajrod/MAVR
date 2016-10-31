@@ -37,7 +37,7 @@ class MultipleAlignmentRoutines:
         print "%i sequences in alignment" % number_of_sequences
         print "%i columns in alignment" % alignment_length
 
-        position_presence_array = np.array([0 for rec in alignment], int, order="F")
+        position_presence_array = np.array([[0 for letter in rec.seq] for rec in alignment], int, order="F")
 
         for column in range(0, alignment_length):
             column_list = alignment_array[:, column]
