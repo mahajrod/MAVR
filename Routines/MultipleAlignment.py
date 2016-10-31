@@ -56,6 +56,7 @@ class MultipleAlignmentRoutines:
 
     def get_position_presence_matrix_fom_file(self, alignment_file, output_file, format="fasta",
                                               gap_symbol="-"):
+
         alignment = AlignIO.read(alignment_file, format=format)
 
         position_matrix = self.get_position_presence_matrix(alignment, gap_symbol)
