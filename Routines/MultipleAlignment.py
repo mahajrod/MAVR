@@ -1,7 +1,7 @@
 __author__ = 'mahajrod'
 import os
 
-from numpy import loadtxt
+import numpy as np
 
 from Bio.Seq import Seq
 from Bio import SeqIO, AlignIO
@@ -15,6 +15,7 @@ from CustomCollections.GeneralCollections import SynDict
 class MultipleAlignmentRoutines:
     def __init__(self):
         pass
+
     @staticmethod
     def get_general_statistics(alignment, verbose=False):
         number_of_sequences = len(alignment)
@@ -24,6 +25,24 @@ class MultipleAlignmentRoutines:
             print ("\tNumber of sequences %i" % number_of_sequences)
             print ("\tLength %i" % length_of_alignment)
         return number_of_sequences, length_of_alignment
+
+    @staticmethod
+    def get_position_presence_matrix(alignment, gap_symbol="-"):
+
+        number_of_sequences = len(alignment)
+        # converting alignment to numpy letter array stored by columns!
+        align_array = np.array([list(rec) for rec in alignment], np.character, order="F")
+
+        return align_array
+
+    def get_position_presence_matrix_fom_file(self, alignment_file, output_file, format="fasta",
+                                              gap_symbol="-"):
+        alignment = AlignIO.read(alignment_file, format=format)
+
+        position_matrix = self.get_position_presence_matrix(alignment, gap_symbol)
+
+        print position_matrix
+
 
     @staticmethod
     def parse_alignment(input_file, filetype="fasta"):
@@ -85,7 +104,7 @@ class MultipleAlignmentRoutines:
         number_of_sequences = len(sequence_dict)
         alignment_length = len(sequence_dict[sequence_dict.keys()[0]])
 
-        gene_lengths_in_codons = loadtxt(coordinates_file, dtype=int, comments='#', usecols=(0,))/3
+        gene_lengths_in_codons = np.loadtxt(coordinates_file, dtype=int, comments='#', usecols=(0,))/3
         number_of_genes = len(gene_lengths_in_codons)
         codon_number_string = " ".join(map(str, gene_lengths_in_codons))
         with open(output_file, "w") as out_fd:
