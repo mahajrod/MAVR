@@ -95,6 +95,8 @@ class MatplotlibRoutines:
         plt.ylabel(ylabel)
         if legend:
             plt.legend((legend,), loc=legend_location)
+        if label:
+            plt.legend(loc=legend_location)
         for ext in extensions:
             plt.savefig("%s.%s" % (output_prefix, ext))
 
