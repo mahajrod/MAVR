@@ -104,6 +104,42 @@ class MatplotlibRoutines:
         for ext in extensions:
             plt.savefig("%s.%s" % (output_prefix, ext))
 
+    @staticmethod
+    def extended_percent_histogram(data, output_prefix, n_bins=20, title="", xlabel="%", ylabel="Number", label=None,
+                                   extensions=("png", "svg"), legend=None, legend_location="best", input_mode="percent", xmax=None,
+                                   xmin=None):
+
+        figure = plt.figure()
+        subplot = plt.subplot(1, 1, 1)
+
+        maximum = np.max(data)
+
+        bins = list(np.linspace(0, 100, 21))
+        bins.append(maximum + 1)
+
+        n, bins, patches = plt.hist(data, bins=bins, label=label)
+
+        print n
+        print bins
+        print patches
+
+        if input_mode == "percent":
+            plt.xlim(xmin=0, xmax=100)
+        elif input_mode == "fraction":
+            plt.xlim(xmin=0, xmax=1)
+        else:
+            raise ValueError("Unrecognized type of input data(neither percents nor fractions)")
+        plt.title(title)
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
+        if legend:
+            plt.legend((legend,), loc=legend_location)
+        if label:
+            plt.legend(loc=legend_location)
+        for ext in extensions:
+            plt.savefig("%s.%s" % (output_prefix, ext))
+
+
     def percent_histogram_from_file(self, data_file, output_prefix, data_type=float, column_list=None, separator=None,
                                     comments="#", n_bins=20, title="", xlabel="%", ylabel="Number",
                                     extensions=("png", "svg"), legend=None, legend_location="best",
