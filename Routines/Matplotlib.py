@@ -124,7 +124,7 @@ class MatplotlibRoutines:
         print patches
 
         if input_mode == "percent":
-            plt.xlim(xmin=0, xmax=100)
+            plt.xlim(xmin=0, xmax=105)
         elif input_mode == "fraction":
             plt.xlim(xmin=0, xmax=1)
         else:
@@ -138,7 +138,6 @@ class MatplotlibRoutines:
             plt.legend(loc=legend_location)
         for ext in extensions:
             plt.savefig("%s.%s" % (output_prefix, ext))
-
 
     def percent_histogram_from_file(self, data_file, output_prefix, data_type=float, column_list=None, separator=None,
                                     comments="#", n_bins=20, title="", xlabel="%", ylabel="Number",
