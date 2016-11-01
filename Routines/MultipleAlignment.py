@@ -100,10 +100,10 @@ class MultipleAlignmentRoutines:
                     unique_positions += 1
 
             unique_position_count_dict[sequence_id] = unique_positions
-            unique_position_count_percent_dict[sequence_id] = float(unique_positions) / (alignment_length - str(alignment[row].seq).count(gap_symbol))
+            unique_position_count_percent_dict[sequence_id] = 100 *  float(unique_positions) / (alignment_length - str(alignment[row].seq).count(gap_symbol))
 
         unique_position_count_dict.write("%s.absolute_counts" % output_prefix)
-        unique_position_count_percent_dict.write("%s.relative_counts" % output_prefix)
+        unique_position_count_percent_dict.write("%s.percent_counts" % output_prefix)
 
         return unique_position_count_dict if return_mode == "absolute" else unique_position_count_percent_dict
 

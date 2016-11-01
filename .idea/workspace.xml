@@ -7,8 +7,7 @@
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Matplotlib.py" afterPath="$PROJECT_DIR$/Routines/Matplotlib.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/MultipleAlignment.py" afterPath="$PROJECT_DIR$/Routines/MultipleAlignment.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/multiple_alignment/count_unique_positions_per_sequence.py" afterPath="$PROJECT_DIR$/scripts/multiple_alignment/count_unique_positions_per_sequence.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in alignments.py" afterPath="$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in alignments.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in_alignments.py" afterPath="$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in_alignments.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -72,11 +71,23 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Jellyfish.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tools/Kmers/Jellyfish.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="4254" max-vertical-offset="5166">
+              <caret line="107" column="76" selection-start-line="107" selection-start-column="76" selection-end-line="107" selection-end-column="76" />
+              <folding>
+                <element signature="e#54#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="MultipleAlignment.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Routines/MultipleAlignment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.0" vertical-offset="1240" max-vertical-offset="6066">
-              <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+            <state vertical-scroll-proportion="-23.142857" vertical-offset="1188" max-vertical-offset="6066">
+              <caret line="102" column="68" selection-start-line="102" selection-start-column="68" selection-end-line="102" selection-end-column="68" />
               <folding>
                 <element signature="e#24#33#0" expanded="true" />
               </folding>
@@ -84,21 +95,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Matplotlib.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Matplotlib.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Routines/Matplotlib.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.44078946" vertical-offset="1842" max-vertical-offset="2754">
-              <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1080" max-vertical-offset="2754">
+              <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+              <folding>
+                <element signature="e#24#33#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="get_distribution_of_unique_positions_in alignments.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in alignments.py">
+      <file leaf-file-name="get_distribution_of_unique_positions_in_alignments.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in_alignments.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="972">
-              <caret line="47" column="56" selection-start-line="47" selection-start-column="56" selection-end-line="47" selection-end-column="56" />
+            <state vertical-scroll-proportion="0.3881579" vertical-offset="60" max-vertical-offset="972">
+              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding>
                 <element signature="e#55#70#0" expanded="true" />
               </folding>
@@ -144,7 +157,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/projects/RG/filter.sh" />
         <option value="$PROJECT_DIR$/projects/Boechera/boechera_eutrema.slurm" />
         <option value="$PROJECT_DIR$/projects/Boechera/check_exonerate_output" />
         <option value="$PROJECT_DIR$/Tools/RepeatMasking/__init__.py" />
@@ -191,10 +203,11 @@
         <option value="$PROJECT_DIR$/projects/RG/scripts/kmer_analysis.sh" />
         <option value="$PROJECT_DIR$/scripts/multiple_alignment/get_position_precence_matrix.py" />
         <option value="$PROJECT_DIR$/scripts/multiple_alignment/find_unique_position_distibution.py" />
-        <option value="$PROJECT_DIR$/Routines/MultipleAlignment.py" />
         <option value="$PROJECT_DIR$/scripts/multiple_alignment/count_unique_positions_per_sequence.py" />
         <option value="$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in alignments.py" />
         <option value="$PROJECT_DIR$/Routines/Matplotlib.py" />
+        <option value="$PROJECT_DIR$/Routines/MultipleAlignment.py" />
+        <option value="$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in_alignments.py" />
       </list>
     </option>
   </component>
@@ -292,6 +305,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="projects" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Kmers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -640,36 +685,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00867" summary="changes">
-      <created>1476347229638</created>
-      <option name="number" value="00867" />
-      <option name="project" value="LOCAL" />
-      <updated>1476347229638</updated>
-    </task>
-    <task id="LOCAL-00868" summary="changes">
-      <created>1476347283048</created>
-      <option name="number" value="00868" />
-      <option name="project" value="LOCAL" />
-      <updated>1476347283048</updated>
-    </task>
-    <task id="LOCAL-00869" summary="changes">
-      <created>1476348492210</created>
-      <option name="number" value="00869" />
-      <option name="project" value="LOCAL" />
-      <updated>1476348492210</updated>
-    </task>
-    <task id="LOCAL-00870" summary="changes">
-      <created>1476348506619</created>
-      <option name="number" value="00870" />
-      <option name="project" value="LOCAL" />
-      <updated>1476348506619</updated>
-    </task>
-    <task id="LOCAL-00871" summary="changes">
-      <created>1476350943445</created>
-      <option name="number" value="00871" />
-      <option name="project" value="LOCAL" />
-      <updated>1476350943445</updated>
-    </task>
     <task id="LOCAL-00872" summary="changes">
       <created>1476350965026</created>
       <option name="number" value="00872" />
@@ -934,7 +949,37 @@
       <option name="project" value="LOCAL" />
       <updated>1478002900810</updated>
     </task>
-    <option name="localTasksCounter" value="916" />
+    <task id="LOCAL-00916" summary="changes">
+      <created>1478003741390</created>
+      <option name="number" value="00916" />
+      <option name="project" value="LOCAL" />
+      <updated>1478003741390</updated>
+    </task>
+    <task id="LOCAL-00917" summary="changes">
+      <created>1478003798153</created>
+      <option name="number" value="00917" />
+      <option name="project" value="LOCAL" />
+      <updated>1478003798153</updated>
+    </task>
+    <task id="LOCAL-00918" summary="changes">
+      <created>1478005330483</created>
+      <option name="number" value="00918" />
+      <option name="project" value="LOCAL" />
+      <updated>1478005330483</updated>
+    </task>
+    <task id="LOCAL-00919" summary="changes">
+      <created>1478005383944</created>
+      <option name="number" value="00919" />
+      <option name="project" value="LOCAL" />
+      <updated>1478005383944</updated>
+    </task>
+    <task id="LOCAL-00920" summary="changes">
+      <created>1478005844642</created>
+      <option name="number" value="00920" />
+      <option name="project" value="LOCAL" />
+      <updated>1478005844642</updated>
+    </task>
+    <option name="localTasksCounter" value="921" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1076,8 +1121,13 @@
           <line>1</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/Tools/Kmers/Jellyfish.py</url>
+          <line>2</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="19" />
+      <option name="time" value="20" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1212,14 +1262,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="396" max-vertical-offset="2322">
           <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Kmers/Jellyfish.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1620" max-vertical-offset="5094">
-          <caret line="107" column="76" selection-start-line="107" selection-start-column="76" selection-end-line="107" selection-end-column="76" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1436,31 +1478,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in alignments.py">
+    <entry file="file://$PROJECT_DIR$/Tools/Kmers/Jellyfish.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="972">
-          <caret line="47" column="56" selection-start-line="47" selection-start-column="56" selection-end-line="47" selection-end-column="56" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="4254" max-vertical-offset="5166">
+          <caret line="107" column="76" selection-start-line="107" selection-start-column="76" selection-end-line="107" selection-end-column="76" />
           <folding>
-            <element signature="e#55#70#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/MultipleAlignment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.0" vertical-offset="1240" max-vertical-offset="6066">
-          <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
-          <folding>
-            <element signature="e#24#33#0" expanded="true" />
+            <element signature="e#54#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Matplotlib.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.44078946" vertical-offset="1842" max-vertical-offset="2754">
-          <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1080" max-vertical-offset="2754">
+          <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+          <folding>
+            <element signature="e#24#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/MultipleAlignment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-23.142857" vertical-offset="1188" max-vertical-offset="6066">
+          <caret line="102" column="68" selection-start-line="102" selection-start-column="68" selection-end-line="102" selection-end-column="68" />
+          <folding>
+            <element signature="e#24#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in_alignments.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3881579" vertical-offset="60" max-vertical-offset="972">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="e#55#70#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
