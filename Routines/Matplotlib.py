@@ -78,7 +78,10 @@ class MatplotlibRoutines:
     @staticmethod
     def percent_histogram(data, output_prefix, n_bins=20, title="", xlabel="%", ylabel="Number", label=None,
                           extensions=("png", "svg"), legend=None, legend_location="best", input_mode="percent"):
-
+        import matplotlib
+        matplotlib.use('Agg')
+        os.environ['MPLCONFIGDIR'] = '/tmp/'
+        import matplotlib.pyplot as plt
 
 
         figure = plt.figure()
