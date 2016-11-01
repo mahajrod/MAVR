@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in alignments.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Matplotlib.py" afterPath="$PROJECT_DIR$/Routines/Matplotlib.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/MultipleAlignment.py" afterPath="$PROJECT_DIR$/Routines/MultipleAlignment.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/multiple_alignment/count_unique_positions_per_sequence.py" afterPath="$PROJECT_DIR$/scripts/multiple_alignment/count_unique_positions_per_sequence.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in alignments.py" afterPath="$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in alignments.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -74,8 +75,8 @@
       <file leaf-file-name="MultipleAlignment.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Routines/MultipleAlignment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.928572" vertical-offset="898" max-vertical-offset="5958">
-              <caret line="70" column="88" selection-start-line="70" selection-start-column="88" selection-end-line="71" selection-end-column="39" />
+            <state vertical-scroll-proportion="-11.0" vertical-offset="1240" max-vertical-offset="6066">
+              <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
               <folding>
                 <element signature="e#24#33#0" expanded="true" />
               </folding>
@@ -86,18 +87,8 @@
       <file leaf-file-name="Matplotlib.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Routines/Matplotlib.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.118421055" vertical-offset="1296" max-vertical-offset="2754">
-              <caret line="79" column="38" selection-start-line="79" selection-start-column="38" selection-end-line="79" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="count_unique_positions_per_sequence.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/count_unique_positions_per_sequence.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="576">
-              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <state vertical-scroll-proportion="-0.44078946" vertical-offset="1842" max-vertical-offset="2754">
+              <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -107,20 +98,10 @@
         <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in alignments.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="972">
-              <caret line="47" column="45" selection-start-line="47" selection-start-column="45" selection-end-line="47" selection-end-column="45" />
+              <caret line="47" column="56" selection-start-line="47" selection-start-column="56" selection-end-line="47" selection-end-column="56" />
               <folding>
                 <element signature="e#55#70#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="merge_alignments.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/merge_alignments.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="486">
-              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -129,7 +110,7 @@
         <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_position_precence_matrix.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="594">
-              <caret line="16" column="48" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
+              <caret line="0" column="21" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
               <folding>
                 <element signature="e#55#70#0" expanded="true" />
               </folding>
@@ -137,11 +118,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="assign_proteins_to_families.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/hmmer3/assign_proteins_to_families.py">
+      <file leaf-file-name="count_unique_positions_per_sequence.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/count_unique_positions_per_sequence.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="1170">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="576">
+              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -659,12 +640,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00866" summary="changes">
-      <created>1476346595048</created>
-      <option name="number" value="00866" />
-      <option name="project" value="LOCAL" />
-      <updated>1476346595049</updated>
-    </task>
     <task id="LOCAL-00867" summary="changes">
       <created>1476347229638</created>
       <option name="number" value="00867" />
@@ -953,7 +928,13 @@
       <option name="project" value="LOCAL" />
       <updated>1477928756941</updated>
     </task>
-    <option name="localTasksCounter" value="915" />
+    <task id="LOCAL-00915" summary="changes">
+      <created>1478002900810</created>
+      <option name="number" value="00915" />
+      <option name="project" value="LOCAL" />
+      <updated>1478002900810</updated>
+    </task>
+    <option name="localTasksCounter" value="916" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1238,6 +1219,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1620" max-vertical-offset="5094">
           <caret line="107" column="76" selection-start-line="107" selection-start-column="76" selection-end-line="107" selection-end-column="76" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1388,14 +1370,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/hmmer3/assign_proteins_to_families.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="1170">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/transcriptome/annotation/transdecoder_annotation_analysis.bash">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2196">
@@ -1436,30 +1410,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/hmmer3/assign_proteins_to_families.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.23684211" vertical-offset="216" max-vertical-offset="1170">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_position_precence_matrix.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="594">
-          <caret line="16" column="48" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
-          <folding>
-            <element signature="e#55#70#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/MultipleAlignment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.928572" vertical-offset="898" max-vertical-offset="5958">
-          <caret line="70" column="88" selection-start-line="70" selection-start-column="88" selection-end-line="71" selection-end-column="39" />
-          <folding>
-            <element signature="e#24#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in alignments.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="972">
-          <caret line="47" column="45" selection-start-line="47" selection-start-column="45" selection-end-line="47" selection-end-column="45" />
+          <caret line="0" column="21" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
           <folding>
             <element signature="e#55#70#0" expanded="true" />
           </folding>
@@ -1474,10 +1436,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in alignments.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="972">
+          <caret line="47" column="56" selection-start-line="47" selection-start-column="56" selection-end-line="47" selection-end-column="56" />
+          <folding>
+            <element signature="e#55#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/MultipleAlignment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.0" vertical-offset="1240" max-vertical-offset="6066">
+          <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+          <folding>
+            <element signature="e#24#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Matplotlib.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.118421055" vertical-offset="1296" max-vertical-offset="2754">
-          <caret line="79" column="38" selection-start-line="79" selection-start-column="38" selection-end-line="79" selection-end-column="38" />
+        <state vertical-scroll-proportion="-0.44078946" vertical-offset="1842" max-vertical-offset="2754">
+          <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
           <folding />
         </state>
       </provider>

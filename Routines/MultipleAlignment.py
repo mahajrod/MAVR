@@ -82,12 +82,15 @@ class MultipleAlignmentRoutines:
 
         return unique_position_count_dict
 
-    def count_unique_positions_per_sequence_from_file(self, alignment_file, output_file, format="fasta", gap_symbol="-"):
+    def count_unique_positions_per_sequence_from_file(self, alignment_file, output_prefix, format="fasta",
+                                                      gap_symbol="-", return_mode="absolute"):
+
         alignment = AlignIO.read(alignment_file, format=format)
         number_of_sequences = len(alignment)
         alignment_length = len(alignment[0])
         position_presence_matrix = self.get_position_presence_matrix(alignment, gap_symbol=gap_symbol)
         unique_position_count_dict = SynDict()
+        unique_position_count_percent_dict = SynDict()
 
         for row in range(0, number_of_sequences):
             sequence_id = alignment[row].id
@@ -97,9 +100,12 @@ class MultipleAlignmentRoutines:
                     unique_positions += 1
 
             unique_position_count_dict[sequence_id] = unique_positions
+            unique_position_count_percent_dict[sequence_id] = float(unique_positions) / (alignment_length - str(alignment[row].seq).count(gap_symbol))
 
-        unique_position_count_dict.write(output_file)
-        return unique_position_count_dict
+        unique_position_count_dict.write("%s.absolute_counts" % output_prefix)
+        unique_position_count_percent_dict.write("%s.relative_counts" % output_prefix)
+
+        return unique_position_count_dict if return_mode == "absolute" else unique_position_count_percent_dict
 
     @staticmethod
     def parse_alignment(input_file, filetype="fasta"):

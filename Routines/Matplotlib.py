@@ -76,7 +76,7 @@ class MatplotlibRoutines:
         return c1, c2, bbox_patch1, bbox_patch2, p
 
     @staticmethod
-    def percent_histogram(data, output_prefix, n_bins=20, title="", xlabel="%", ylabel="Number",
+    def percent_histogram(data, output_prefix, n_bins=20, title="", xlabel="%", ylabel="Number", label=None,
                           extensions=("png", "svg"), legend=None, legend_location="best", input_mode="percent"):
 
 
@@ -84,7 +84,7 @@ class MatplotlibRoutines:
         figure = plt.figure()
         subplot = plt.subplot(1, 1, 1)
 
-        plt.hist(data, bins=n_bins)
+        plt.hist(data, bins=n_bins, label=label)
         if input_mode == "percent":
             plt.xlim(xmin=0, xmax=100)
         elif input_mode == "fraction":
@@ -102,7 +102,7 @@ class MatplotlibRoutines:
     def percent_histogram_from_file(self, data_file, output_prefix, data_type=float, column_list=None, separator=None,
                                     comments="#", n_bins=20, title="", xlabel="%", ylabel="Number",
                                     extensions=("png", "svg"), legend=None, legend_location="best",
-                                    stats_as_legend=False, input_mode="percent"):
+                                    stats_as_legend=False, input_mode="percent", label=None):
         #print column_list
         data = np.loadtxt(data_file, dtype=data_type, comments=comments, delimiter=separator, usecols=column_list)
         if input_mode == "percent":
@@ -116,7 +116,7 @@ class MatplotlibRoutines:
         
         self.percent_histogram(data, output_prefix=output_prefix, n_bins=n_bins, title=title, xlabel=xlabel,
                                ylabel=ylabel, extensions=extensions, legend=legenda, legend_location=legend_location,
-                               input_mode=input_mode)
+                               input_mode=input_mode, label=label)
 
     @staticmethod
     def add_line(axes, start, end, color):

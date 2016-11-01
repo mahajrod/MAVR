@@ -26,12 +26,13 @@ unique_position_dict = TwoLvlDict()
 
 for alignment_file in args.input:
     alignment_name_list = FileRoutines.split_filename(alignment_file)
-    output_file = "%s/%s.unique_positions.counts" % (args.output_dir, alignment_name_list[1])
+    output_prefix = "%s/%s.unique_positions" % (args.output_dir, alignment_name_list[1])
 
     unique_position_dict[alignment_name_list[1]] = MultipleAlignmentRoutines.count_unique_positions_per_sequence_from_file(alignment_file,
-                                                                                                                           output_file,
+                                                                                                                           output_prefix,
                                                                                                                            format=args.format,
-                                                                                                                           gap_symbol="-")
+                                                                                                                           gap_symbol="-",
+                                                                                                                           return_mode="relative")
 
 species_list = unique_position_dict.sl_keys()
 
@@ -44,5 +45,4 @@ for species in species_list:
 
 data_list = [data_dict[species] for species in data_dict]
 
-MatplotlibRoutines.int_histogram(data_list, "aaa.png", n_bins=None, title="", xlabel="%", ylabel="Number",
-                                 extensions=("png", "svg"), legend=species_list, legend_location="best")
+MatplotlibRoutines.percent_histogram(data_list, "tratata")
