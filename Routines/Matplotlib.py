@@ -84,6 +84,7 @@ class MatplotlibRoutines:
         import matplotlib.pyplot as plt
 
 
+
         figure = plt.figure()
         subplot = plt.subplot(1, 1, 1)
 
