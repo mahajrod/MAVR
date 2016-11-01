@@ -83,7 +83,11 @@ class MatplotlibRoutines:
         figure = plt.figure()
         subplot = plt.subplot(1, 1, 1)
 
-        plt.hist(data, bins=n_bins, label=label)
+        n, bins, patches = plt.hist(data, bins=n_bins, label=label)
+
+        print n
+        print bins
+        print patches
         if input_mode == "percent":
             plt.xlim(xmin=0, xmax=100)
         elif input_mode == "fraction":
