@@ -1,0 +1,48 @@
+#!/usr/bin/env python
+__author__ = 'Sergei F. Kliver'
+
+import argparse
+
+from collections import OrderedDict
+
+from Routines import MultipleAlignmentRoutines, FileRoutines, MatplotlibRoutines
+from CustomCollections.GeneralCollections import TwoLvlDict
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument("-i", "--input", action="store", dest="input", required=True,
+                    type=lambda s: FileRoutines.make_list_of_path_to_files(s.split(",")),
+                    help="Comma-separated list of files/directories with alignments")
+parser.add_argument("-o", "--output_directory", action="store", dest="output_dir", default="./",
+                    help="Output directory to write resulting files. Default - current directory")
+parser.add_argument("-f", "--format", action="store", dest="format", default="fasta",
+                    help="Format of alignments")
+parser.add_argument("-g", "--gap_symbol", action="store", dest="gap_symbol", default="-",
+                    help="Gap symbol. Default - '-'")
+
+args = parser.parse_args()
+
+unique_position_dict = TwoLvlDict()
+
+for alignment_file in args.input:
+    alignment_name_list = FileRoutines.split_filename(alignment_file)
+    output_file = "%s/%s.unique_positions.counts" % (args.output_dir, alignment_name_list[1])
+
+    unique_position_dict[alignment_name_list[1]] = MultipleAlignmentRoutines.count_unique_positions_per_sequence_from_file(alignment_file,
+                                                                                                                           output_file,
+                                                                                                                           format=args.format,
+                                                                                                                           gap_symbol="-")
+
+species_list = unique_position_dict.sl_keys()
+
+data_dict = OrderedDict()
+
+for species in species_list:
+    data_dict[species] = []
+    for alignment in unique_position_dict:
+        data_dict[species].append(unique_position_dict[alignment][species])
+
+data_list = [data_dict[species] for species in data_dict]
+
+MatplotlibRoutines.int_histogram(data_list, "aaa.png", n_bins=None, title="", xlabel="%", ylabel="Number",
+                                 extensions=("png", "svg"), legend=species_list, legend_location="best")

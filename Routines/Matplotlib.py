@@ -77,7 +77,7 @@ class MatplotlibRoutines:
 
     @staticmethod
     def percent_histogram(data, output_prefix, n_bins=20, title="", xlabel="%", ylabel="Number",
-                          extensions=("jpg", "png", "svg"), legend=None, legend_location="best", input_mode="percent"):
+                          extensions=("png", "svg"), legend=None, legend_location="best", input_mode="percent"):
 
 
 
@@ -101,7 +101,7 @@ class MatplotlibRoutines:
 
     def percent_histogram_from_file(self, data_file, output_prefix, data_type=float, column_list=None, separator=None,
                                     comments="#", n_bins=20, title="", xlabel="%", ylabel="Number",
-                                    extensions=("jpg", "png", "svg"), legend=None, legend_location="best",
+                                    extensions=("png", "svg"), legend=None, legend_location="best",
                                     stats_as_legend=False, input_mode="percent"):
         #print column_list
         data = np.loadtxt(data_file, dtype=data_type, comments=comments, delimiter=separator, usecols=column_list)
@@ -123,3 +123,26 @@ class MatplotlibRoutines:
         line = Line2D([start[0], end[0]], [start[1], end[1]], color=color)
         return axes.add_line(line)
 
+    @staticmethod
+    def int_histogram(data, output_prefix, n_bins=None, title="", xlabel="%", ylabel="Number",
+                      extensions=("png", "svg"), legend=None, legend_location="best"):
+
+
+
+        figure = plt.figure()
+        subplot = plt.subplot(1, 1, 1)
+
+        maximum = np.max(data)
+        minimum = np.min(data)
+        number_of_bins = n_bins if n_bins else maximum - minimum + 1
+        plt.hist(data, bins=number_of_bins)
+
+        plt.xlim(xmin=minimum - 1, xmax=maximum)
+
+        plt.title(title)
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
+        if legend:
+            plt.legend((legend,), loc=legend_location)
+        for ext in extensions:
+            plt.savefig("%s.%s" % (output_prefix, ext))
