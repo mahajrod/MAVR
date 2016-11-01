@@ -14,7 +14,7 @@ parser.add_argument("-i", "--input", action="store", dest="input", required=True
                     type=lambda s: FileRoutines.make_list_of_path_to_files(s.split(",")),
                     help="Comma-separated list of files/directories with alignments")
 parser.add_argument("-o", "--output_directory", action="store", dest="output_dir", default="./",
-                    help="Output directory to write resulting files. Default - current directory")
+                    help="Output directory to write count files. Default - current directory")
 parser.add_argument("-f", "--format", action="store", dest="format", default="fasta",
                     help="Format of alignments")
 parser.add_argument("-g", "--gap_symbol", action="store", dest="gap_symbol", default="-",
@@ -23,6 +23,8 @@ parser.add_argument("-g", "--gap_symbol", action="store", dest="gap_symbol", def
 args = parser.parse_args()
 
 unique_position_dict = TwoLvlDict()
+
+FileRoutines.save_mkdir(args.output_dir)
 
 for alignment_file in args.input:
     alignment_name_list = FileRoutines.split_filename(alignment_file)
