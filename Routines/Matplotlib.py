@@ -162,7 +162,7 @@ class MatplotlibRoutines:
                                    extensions=("png", "svg"), legend=None, legend_location="best", input_mode="percent",
                                    xmax=None, xmin=None):
 
-        figure = plt.figure(figsize=(16, 8))
+        figure = plt.figure(figsize=(16, 16))
 
 
         maximum = np.max(data)
