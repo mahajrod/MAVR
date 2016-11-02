@@ -223,7 +223,7 @@ class MatplotlibRoutines:
             left = bins + (i + 1) * width
             print left
             print histogram_list[i]
-            subplot.bar(left, histogram_list[i], width, label=label, color=color_list[i],)
+            subplot.bar(left, histogram_list[i], width, label=label[i], color=color_list[i],)
         """
         n, bins, patches = plt.hist(data, bins=bins, label=label)
 
