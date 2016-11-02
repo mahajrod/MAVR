@@ -212,6 +212,7 @@ class MatplotlibRoutines:
 
         for i in range(0, number_of_histograms):
             left = bins + (i + 1) * width
+            print histogram_list[i]
             plt.bar(bins, histogram_list[i], width)
         """
         n, bins, patches = plt.hist(data, bins=bins, label=label)
