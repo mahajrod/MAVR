@@ -185,7 +185,7 @@ class MatplotlibRoutines:
         color_list = list(islice(color_cycle, None, number_of_histograms))
 
         for subplot_index in (1, 2):
-            subplot = plt.subplot(1, 2, subplot_index)
+            subplot = plt.subplot(2, 1, subplot_index)
             for i in range(0, number_of_histograms):
                 left = bins + (i + 1) * width
                 print left
