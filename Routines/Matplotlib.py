@@ -217,7 +217,7 @@ class MatplotlibRoutines:
             left = bins + (i + 1) * width
             print left
             print histogram_list[i]
-            subplot.bar(left, histogram_list[i], width, label=label, color=next(prop_iter)['color'])
+            subplot.bar(left, histogram_list[i], width, label=label, colormap='Paired')
         """
         n, bins, patches = plt.hist(data, bins=bins, label=label)
 
