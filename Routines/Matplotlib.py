@@ -210,11 +210,14 @@ class MatplotlibRoutines:
 
         width = 5.0 / float((number_of_histograms +2))
         print width
+
+        prop_iter = iter(plt.rcParams['axes.prop_cycle'])
+
         for i in range(0, number_of_histograms):
             left = bins + (i + 1) * width
             print left
             print histogram_list[i]
-            subplot.bar(left, histogram_list[i], width)
+            subplot.bar(left, histogram_list[i], width, label=label, color=next(prop_iter)['color'])
         """
         n, bins, patches = plt.hist(data, bins=bins, label=label)
 
