@@ -208,7 +208,7 @@ class MatplotlibRoutines:
 
         number_of_histograms = len(histogram_list)
 
-        width = 5 / (number_of_histograms +2)
+        width = 5.0 / float((number_of_histograms +2))
         print width
         for i in range(0, number_of_histograms):
             left = bins + (i + 1) * width
