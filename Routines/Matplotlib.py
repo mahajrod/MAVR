@@ -202,7 +202,7 @@ class MatplotlibRoutines:
         bins = np.append(bins, maximum + 1)
 
         histogram_list = [np.histogram(dataset, bins=bins)[0] for dataset in data]
-        bins[-1] = 105
+        bins = bins[:-1]
         print bins
         print histogram_list
 
