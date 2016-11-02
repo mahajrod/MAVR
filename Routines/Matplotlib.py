@@ -216,7 +216,7 @@ class MatplotlibRoutines:
         width = 5.0 / float((number_of_histograms +2))
         print width
 
-        color_cycle = cycle(['b', 'r', 'c', 'g', 'indigo', 'y', 'k', 'olive', 'purple', 'darkred', 'gold'])
+        color_cycle = cycle(['b', 'r', 'c', 'g', 'indigo', 'y', 'k', 'olive', 'violet', 'darkgrey', 'gold'])
 
         color_list = list(islice(color_cycle, None, number_of_histograms))
         for i in range(0, number_of_histograms):
