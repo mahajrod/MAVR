@@ -34,7 +34,8 @@ for alignment_file in args.input:
                                                                                                                            output_prefix,
                                                                                                                            format=args.format,
                                                                                                                            gap_symbol="-",
-                                                                                                                           return_mode="relative")
+                                                                                                                           return_mode="relative",
+                                                                                                                           verbose=False)
 
 species_list = unique_position_dict.sl_keys()
 

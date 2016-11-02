@@ -172,13 +172,13 @@ class MatplotlibRoutines:
 
         histogram_list = [np.histogram(dataset, bins=bins)[0] for dataset in data]
         bins = bins[:-1]
-        print bins
-        print histogram_list
+        #print bins
+        #print histogram_list
 
         number_of_histograms = len(histogram_list)
 
         width = 5.0 / float((number_of_histograms + 2))
-        print width
+        #print width
 
         color_cycle = cycle(['b', 'r', 'c', 'g', 'indigo', 'y', 'k', 'olive', 'violet', 'darkgrey', 'gold'])
 
@@ -188,8 +188,8 @@ class MatplotlibRoutines:
             subplot = plt.subplot(2, 1, subplot_index)
             for i in range(0, number_of_histograms):
                 left = bins + (i + 1) * width
-                print left
-                print histogram_list[i]
+                #print left
+                #print histogram_list[i]
                 subplot.bar(left, histogram_list[i], width, label=list(label)[i], color=color_list[i],)
 
             plt.xlim(xmin=0, xmax=105)

@@ -27,15 +27,16 @@ class MultipleAlignmentRoutines:
         return number_of_sequences, length_of_alignment
 
     @staticmethod
-    def get_position_presence_matrix(alignment, gap_symbol="-",):
+    def get_position_presence_matrix(alignment, gap_symbol="-", verbose=True):
 
         number_of_sequences = len(alignment)
         alignment_length = len(alignment[0])
         # converting alignment to numpy letter array stored by columns!
         alignment_array = np.array([list(rec) for rec in alignment], np.character, order="F")
 
-        print "%i sequences in alignment" % number_of_sequences
-        print "%i columns in alignment" % alignment_length
+        if verbose:
+            print "%i sequences in alignment" % number_of_sequences
+            print "%i columns in alignment" % alignment_length
 
         position_presence_array = np.array([[0 for letter in rec.seq] for rec in alignment], int, order="F")
 
@@ -56,19 +57,20 @@ class MultipleAlignmentRoutines:
         #print position_presence_array
         return position_presence_array
 
-    def get_position_presence_matrix_fom_file(self, alignment_file, output_file, format="fasta", gap_symbol="-"):
+    def get_position_presence_matrix_fom_file(self, alignment_file, output_file, format="fasta", gap_symbol="-",
+                                              verbose=True):
 
         alignment = AlignIO.read(alignment_file, format=format)
 
-        position_matrix = self.get_position_presence_matrix(alignment, gap_symbol)
+        position_matrix = self.get_position_presence_matrix(alignment, gap_symbol, verbose=verbose)
         np.savetxt(output_file, position_matrix, fmt="%i", delimiter='\t')
         #print position_matrix
         return position_matrix
 
-    def count_unique_positions_per_sequence(self, alignment, gap_symbol="-",):
+    def count_unique_positions_per_sequence(self, alignment, gap_symbol="-", verbose=True):
         number_of_sequences = len(alignment)
         alignment_length = len(alignment[0])
-        position_presence_matrix = self.get_position_presence_matrix(alignment, gap_symbol=gap_symbol)
+        position_presence_matrix = self.get_position_presence_matrix(alignment, gap_symbol=gap_symbol, verbose=verbose)
         unique_position_count_dict = {}
 
         for row in range(0, number_of_sequences):
@@ -83,12 +85,12 @@ class MultipleAlignmentRoutines:
         return unique_position_count_dict
 
     def count_unique_positions_per_sequence_from_file(self, alignment_file, output_prefix, format="fasta",
-                                                      gap_symbol="-", return_mode="absolute"):
+                                                      gap_symbol="-", return_mode="absolute", verbose=True):
 
         alignment = AlignIO.read(alignment_file, format=format)
         number_of_sequences = len(alignment)
         alignment_length = len(alignment[0])
-        position_presence_matrix = self.get_position_presence_matrix(alignment, gap_symbol=gap_symbol)
+        position_presence_matrix = self.get_position_presence_matrix(alignment, gap_symbol=gap_symbol, verbose=verbose)
         unique_position_count_dict = SynDict()
         unique_position_count_percent_dict = SynDict()
 
