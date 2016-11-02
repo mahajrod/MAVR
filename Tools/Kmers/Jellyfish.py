@@ -105,7 +105,8 @@ class Jellyfish(Tool):
         maximums_to_show, minimums_to_show, \
             unique_peak_borders, number_of_distinct_kmers, \
             number_of_distinct_kmers_with_errors,\
-            total_number_of_kmers, total_number_of_kmers_with_errors = self.extract_parameters_from_histo(counts, bins,
+            total_number_of_kmers, total_number_of_kmers_with_errors,  \
+            estimated_genome_size = self.extract_parameters_from_histo(counts, bins,
                                                                              output_prefix,
                                                                              order=order,
                                                                              mode=mode,
@@ -142,6 +143,8 @@ class Jellyfish(Tool):
         general_stats += "Standard deviation of kmer multiplicity in first peak\t%.2f\n" % np.around(std_1, decimals=2)
         general_stats += "Variance coefficient of kmer multiplicity in first peak\t%.2f\n" % np.around(var_1,
                                                                                                        decimals=2)
+        general_stats += "Estimated genome size, bp %i\n" % estimated_genome_size
+
         with open("%s.histo.stats" % output_prefix, "w") as stat_fd:
             stat_fd.write(general_stats)
         print(general_stats)
@@ -270,11 +273,22 @@ class Jellyfish(Tool):
         total_number_of_kmers = sum(np.multiply(counts, bins))
         total_number_of_kmers_with_errors = sum(np.multiply(counts[0:local_minimums_idx[0]],
                                                                      bins[0:local_minimums_idx[0]]))
+
+        maximums_to_show = [(bins[i], counts[i]) for i in peaks_in_checked_area_idx]
+        minimums_to_show = [(bins[i], counts[i]) for i in minimums_in_checked_area_idx]
+
+        estimated_genome_size = 0
+
+        for i in range(int(minimums_to_show[0][0]), len(counts)):
+            estimated_genome_size += counts[i] * bins[i]
+
+        estimated_genome_size = estimated_genome_size/first_unique_peak_coverage
+
         return [(bins[i], counts[i]) for i in peaks_in_checked_area_idx], \
                [(bins[i], counts[i]) for i in minimums_in_checked_area_idx], \
                (local_minimums_idx[0], nearest_value_to_first_min_idx), \
                number_of_distinct_kmers, number_of_distinct_kmers_with_errors, \
-               total_number_of_kmers, total_number_of_kmers_with_errors
+               total_number_of_kmers, total_number_of_kmers_with_errors, estimated_genome_size
 
 
 

@@ -109,7 +109,7 @@ class MatplotlibRoutines:
                                    extensions=("png", "svg"), legend=None, legend_location="best", input_mode="percent", xmax=None,
                                    xmin=None):
 
-        figure = plt.figure()
+        figure = plt.figure(figsize=(8, 16))
         subplot = plt.subplot(1, 1, 1)
 
         maximum = np.max(data)
