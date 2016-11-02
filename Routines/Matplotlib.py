@@ -186,3 +186,49 @@ class MatplotlibRoutines:
             plt.legend((legend,), loc=legend_location)
         for ext in extensions:
             plt.savefig("%s.%s" % (output_prefix, ext))
+
+
+    @staticmethod
+    def extended_percent_histogram_2(data, output_prefix, n_bins=20, title="", xlabel="%", ylabel="Number", label=None,
+                                   extensions=("png", "svg"), legend=None, legend_location="best", input_mode="percent", xmax=None,
+                                   xmin=None):
+
+        figure = plt.figure(figsize=(8, 16))
+        subplot = plt.subplot(1, 1, 1)
+
+        maximum = np.max(data)
+
+        bins = np.linspace(0, 100, 21)
+        bins = np.append(bins, maximum + 1)
+
+        histogram_list = [np.histogram(dataset, bins=bins)[0] for dataset in data]
+        bins[-1] = 105
+        print bins
+        print histogram_list
+
+        number_of_histograms = len(histogram_list)
+
+        width = 5 / (number_of_histograms +2)
+
+        for i in range(0, number_of_histograms):
+            left = bins + (i + 1) * width
+            plt.bar(bins, histogram_list[i], width)
+        """
+        n, bins, patches = plt.hist(data, bins=bins, label=label)
+
+        print n
+        print bins
+        print patches
+        """
+
+        plt.xlim(xmin=0, xmax=105)
+
+        plt.title(title)
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
+        if legend:
+            plt.legend((legend,), loc=legend_location)
+        if label:
+            plt.legend(loc=legend_location)
+        for ext in extensions:
+            plt.savefig("%s.%s" % (output_prefix, ext))
