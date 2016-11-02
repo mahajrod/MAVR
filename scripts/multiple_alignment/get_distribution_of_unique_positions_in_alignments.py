@@ -47,5 +47,5 @@ for species in species_list:
 
 data_list = [data_dict[species] for species in data_dict]
 
-MatplotlibRoutines.extended_percent_histogram_2(data_list, "tratata", input_mode="percent", label=species_list)
+MatplotlibRoutines.extended_percent_histogram(data_list, "tratata", input_mode="percent", label=species_list)
 
