@@ -1,5 +1,8 @@
 __author__ = 'mahajrod'
 import os
+
+from itertools import cycle, islice
+
 import matplotlib
 matplotlib.use('Agg')
 os.environ['MPLCONFIGDIR'] = '/tmp/'
@@ -7,6 +10,8 @@ import matplotlib.pyplot as plt
 from matplotlib.transforms import Bbox, TransformedBbox, blended_transform_factory
 from mpl_toolkits.axes_grid1.inset_locator import BboxPatch, BboxConnector, BboxConnectorPatch
 from matplotlib.lines import Line2D
+
+
 
 import numpy as np
 
@@ -211,13 +216,14 @@ class MatplotlibRoutines:
         width = 5.0 / float((number_of_histograms +2))
         print width
 
-        prop_iter = iter(plt.rcParams['axes.prop_cycle'])
+        color_cycle = cycle(['b', 'r', 'c', 'g', 'indigo', 'y', 'k', 'olive', 'purple', 'darkred', 'gold'])
 
+        color_list = list(islice(color_cycle, None, number_of_histograms))
         for i in range(0, number_of_histograms):
             left = bins + (i + 1) * width
             print left
             print histogram_list[i]
-            subplot.bar(left, histogram_list[i], width, label=label, colormap='Paired')
+            subplot.bar(left, histogram_list[i], width, label=label, color=color_list[i],)
         """
         n, bins, patches = plt.hist(data, bins=bins, label=label)
 
