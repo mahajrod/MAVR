@@ -193,7 +193,7 @@ class MatplotlibRoutines:
                                    extensions=("png", "svg"), legend=None, legend_location="best", input_mode="percent", xmax=None,
                                    xmin=None):
 
-        figure = plt.figure(figsize=(8, 16))
+        figure = plt.figure(figsize=(16, 8))
         subplot = plt.subplot(1, 1, 1)
 
         maximum = np.max(data)
@@ -209,9 +209,10 @@ class MatplotlibRoutines:
         number_of_histograms = len(histogram_list)
 
         width = 5 / (number_of_histograms +2)
-
+        print width
         for i in range(0, number_of_histograms):
             left = bins + (i + 1) * width
+            print left
             print histogram_list[i]
             plt.bar(bins, histogram_list[i], width)
         """
