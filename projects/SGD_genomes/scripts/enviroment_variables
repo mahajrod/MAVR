@@ -1,4 +1,4 @@
-!/usr/bin/env bash
+#!/usr/bin/env bash
 #-----------------Environment variables-----------------
 FASTQ_DIR=/mnt/genomerussia/skliver/SGD_project/fastq/
 RAW_READS_DIR=${FASTQ_DIR}/raw/
