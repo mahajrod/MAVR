@@ -6,7 +6,7 @@ SAMPLE_LIST=($@)
 for SAMPLE in ${SAMPLE_LIST[@]};
     do
 
-    SAMPLE_GROUP=`echo ${SAMPLE} | cut -c1-4`
+    SAMPLE_GROUP=`echo ${SAMPLE} | cut -c1-9`
     SAMPLE_JF_DIR=${JF_DB_DIR}/${SAMPLE_GROUP}/${SAMPLE}/
     SAMPLE_KMER_STAT_DIR=${KMER_STAT_DIR}/${SAMPLE_GROUP}/${SAMPLE}/
 

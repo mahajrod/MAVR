@@ -5,7 +5,7 @@ SAMPLE_LIST=($@)
 for SAMPLE in ${SAMPLE_LIST[@]};
     do
 
-    SAMPLE_GROUP=`echo ${SAMPLE} | cut -c1-4`
+    SAMPLE_GROUP=`echo ${SAMPLE} | cut -c1-9`
 
     mkdir -p ${FASTQC_STAT_DIR}/${SAMPLE_GROUP} ${FASTQC_STAT_DIR}/${SAMPLE_GROUP}/${SAMPLE};
 

@@ -5,7 +5,7 @@ SAMPLE_LIST=($@)
 for SAMPLE in ${SAMPLE_LIST[@]};
     do
 
-    SAMPLE_GROUP=`echo ${SAMPLE} | cut -c1-4`
+    SAMPLE_GROUP=`echo ${SAMPLE} | cut -c1-9`
 
     mkdir -p ${UNPACKED_READS_DIR}/${SAMPLE_GROUP} ${UNPACKED_READS_DIR}/${SAMPLE_GROUP}/${SAMPLE};
     FILES=($(ls ${RAW_READS_DIR}/${SAMPLE_GROUP}/${SAMPLE}/* | sed 's/.gz//'));
