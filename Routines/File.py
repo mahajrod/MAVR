@@ -169,6 +169,29 @@ class FileRoutines():
                     out_fd.write(line)
         out_fd.close()
 
+    @staticmethod
+    def make_lists_forward_and_reverse_files(sample_dir):
+        file_list = sorted(os.listdir(sample_dir))
+        filtered_filelist = []
+        filetypes = set()
+        for entry in file_list:
+            if file[-3:] == ".fq" or file[-6:] == ".fastq":
+                filetypes.add("fq")
+            elif file[-6:] == ".fq.gz" or file[-9:] == ".fastq.gz":
+                filetypes.add("fq.gz")
+            elif file[-7:] == ".fq.bz2" or file[-10:] == ".fastq.bz2":
+                filetypes.add("fq.bz2")
+            else:
+                continue
+            filtered_filelist.append("%s/%s" % (sample_dir, entry))
+        forward_files = filtered_filelist[::2]
+        reverse_files = filtered_filelist[1:][::2]
+
+        if len(filetypes) > 1:
+            print("WARNING: mix of archives of different types and/or uncompressed files")
+
+        return filetypes, forward_files, reverse_files
+
 
 filetypes_dict = {"fasta": [".fa", ".fasta", ".fa", ".pep", ".cds"],
                   "fastq": [".fastq", ".fq"],

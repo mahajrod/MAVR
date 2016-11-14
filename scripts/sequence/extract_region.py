@@ -7,8 +7,7 @@ import argparse
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 
-from Routines.File import read_ids, make_list_of_path_to_files
-from Routines.Sequence import record_by_id_generator
+from Routines.File import make_list_of_path_to_files
 
 
 def get_regions_from_string(s):
