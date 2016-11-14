@@ -80,7 +80,7 @@ class FilteringPipeline():
 
             self.combine_files(samples_directory, sample, merged_raw_sample_dir)
 
-            Cookiecutter.rm_reads(self, adapter_fragment_file, merged_forward_reads, coockie_stats,
+            Cookiecutter.rm_reads(adapter_fragment_file, merged_forward_reads, coockie_stats,
                                   right_reads=merged_reverse_reads,
                                   out_dir=coockie_filtered_sample_dir, use_dust_filter=False,
                                   dust_cutoff=None, dust_window_size=None, use_N_filter=False,
