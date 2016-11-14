@@ -44,13 +44,12 @@ parser.add_argument("-n", "--min_adapter_len", action="store", dest="min_adapter
 parser.add_argument("-g", "--sliding_window_size", action="store", dest="sliding_window_size", type=int,
                     help="Size of sliding window when checking quality. "
                          "If not set - reads will be filtered by mean quality")
-parser.add_argument("-q", "--average_quality_threshold", action="store", dest="average_quality_threshold", default=15,
+parser.add_argument("-q", "--average_quality_threshold", action="store", dest="average_quality_threshold", default=20,
                     type=int,
                     help="Quality threshold for sliding window or whole read."
                          "Depends on -q/--average_quality_threshold option.Default - 15.")
 parser.add_argument("-b", "--base_quality", action="store", dest="base_quality", default="phred33",
                     help="Type of base quality. Possible variants: phred33, phred64. Default - phred33 ")
-
 
 parser.add_argument("-l", "--min_length", action="store", dest="min_len", type=int, default=50,
                     help="Minimum length of read to retain. Default - 50")
@@ -74,4 +73,4 @@ FilteringPipeline.filter(args.samples_dir, args.output_dir, args.adapter_kmers, 
                          average_quality_threshold=args.average_quality_threshold,
                          leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
                          crop_length=None, head_crop_length=None, min_len=args.min_len,
-                         base_quality=args.base_quality)
+                         base_quality=args.base_quality, read_name_type="illumina")
