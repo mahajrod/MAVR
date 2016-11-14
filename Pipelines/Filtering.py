@@ -76,9 +76,13 @@ class FilteringPipeline():
             merged_raw_sample_dir = "%s/%s/" % (merged_raw_dir, sample)
             merged_forward_reads = "%s/%s_1.fq" % (merged_raw_sample_dir, sample)
             merged_reverse_reads = "%s/%s_2.fq" % (merged_raw_sample_dir, sample)
+
             coockie_filtered_sample_dir = "%s/%s/" % (coockie_filtered_dir, sample)
             coockie_stats = "%s/%s.stats" % (coockie_filtered_sample_dir, sample)
 
+            coockie_trimmomatic_filtered_sample_dir = "%s/%s/" % (coockie_trimmomatic_filtered_dir, sample)
+
+            """
             self.combine_files(samples_directory, sample, merged_raw_sample_dir)
 
             Cookiecutter.rm_reads(adapter_fragment_file, merged_forward_reads, coockie_stats,
@@ -87,13 +91,16 @@ class FilteringPipeline():
                                   dust_cutoff=None, dust_window_size=None, use_N_filter=False,
                                   read_length_cutoff=None, polyGC_length_cutoff=None)
             """
-            coockie_filtered_forward =
-            coockie_filtered_reverse =
+
+            coockie_filtered_paired_forward_reads = "%s/%s_1.ok.fastq" % (coockie_trimmomatic_filtered_sample_dir, sample)
+            coockie_filtered_paired_reverse_reads = "%s/%s_2.ok.fastq" % (coockie_trimmomatic_filtered_sample_dir, sample)
+            # se reads produced by Coockiecutter are ignored now!!
 
             coockie_trimmomatic_filtered_sample_dir = "%s/%s/" % (coockie_trimmomatic_filtered_dir, sample)
             trimmomatic_output_prefix = "%s/%s" % (coockie_trimmomatic_filtered_sample_dir, sample)
             trimmomatic_log = "%s.log" % trimmomatic_output_prefix
-            Trimmomatic.filter(coockie_filtered_forward, trimmomatic_output_prefix, output_extension="fq", right_reads=coockie_filtered_reverse,
+            Trimmomatic.filter(coockie_filtered_paired_forward_reads, trimmomatic_output_prefix, output_extension="fq",
+                               right_reads=coockie_filtered_paired_reverse_reads,
                                adapters_file=trimmomatic_adapter_file,
                                mismatch_number=mismatch_number, pe_reads_score=pe_reads_score, se_read_score=se_read_score,
                                min_adapter_len=min_adapter_len, sliding_window_size=sliding_window_size,
@@ -102,4 +109,6 @@ class FilteringPipeline():
                                trailing_base_quality_threshold=trailing_base_quality_threshold,
                                crop_length=crop_length, head_crop_length=head_crop_length, min_length=min_len, logfile=trimmomatic_log,
                                base_quality=base_quality)
-            """
+
+            if sliding_window_size is not None:
+                pass
