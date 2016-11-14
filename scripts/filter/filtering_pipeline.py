@@ -46,8 +46,8 @@ parser.add_argument("-g", "--sliding_window_size", action="store", dest="sliding
                          "If not set - reads will be filtered by mean quality")
 parser.add_argument("-q", "--average_quality_threshold", action="store", dest="average_quality_threshold", default=15,
                     type=int,
-                    help="Quality threshold for sliding window. Works only if -q/--average_quality_threshold is set"
-                         "Default - 15.")
+                    help="Quality threshold for sliding window or whole read."
+                         "Depends on -q/--average_quality_threshold option.Default - 15.")
 parser.add_argument("-b", "--base_quality", action="store", dest="base_quality", default="phred33",
                     help="Type of base quality. Possible variants: phred33, phred64. Default - phred33 ")
 
