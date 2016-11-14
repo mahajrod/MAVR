@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 import os
-from multiprocessing import Pool
 
 from Tools.Filter import Cookiecutter, Trimmomatic, FaCut
 from Routines import FileRoutines
+
 
 class FilteringPipeline():
     def __init__(self):
@@ -16,9 +16,10 @@ class FilteringPipeline():
         coockie_filtered_dir = "%s/coockiecutter/" % filtered_dir
         coockie_trimmomatic_filtered_dir = "%s/coockiecutter_trimmomatic/" % filtered_dir
         coockie_trimmomatic_quality_filtered_dir = "%s/coockiecutter_trimmomatic_quality/" % filtered_dir
+        final_filtered_dir = "%s/final/" % filtered_dir
 
         FileRoutines.save_mkdir(filtered_dir)
-        for directory in merged_raw_dir, coockie_filtered_dir, coockie_trimmomatic_filtered_dir, coockie_trimmomatic_quality_filtered_dir:
+        for directory in merged_raw_dir, coockie_filtered_dir, coockie_trimmomatic_filtered_dir, coockie_trimmomatic_quality_filtered_dir, final_filtered_dir:
             FileRoutines.save_mkdir(directory)
             for sample in sample_list:
                 FileRoutines.save_mkdir("%s/%s" % (directory, sample))
@@ -56,7 +57,7 @@ class FilteringPipeline():
                average_quality_threshold=15,
                leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
                crop_length=None, head_crop_length=None, min_len=50,
-               base_quality="phred33"):
+               base_quality="phred33", read_name_type="illumina"):
 
         Cookiecutter.path = coockiecutter_dir
         Trimmomatic.jar_path = trimmomatic_dir
@@ -68,6 +69,7 @@ class FilteringPipeline():
         coockie_filtered_dir = "%s/coockiecutter/" % filtered_dir
         coockie_trimmomatic_filtered_dir = "%s/coockiecutter_trimmomatic/" % filtered_dir
         coockie_trimmomatic_quality_filtered_dir = "%s/coockiecutter_trimmomatic_quality/" % filtered_dir
+        final_filtered_dir = "%s/final/" % filtered_dir
 
         sample_list = samples_to_handle if samples_to_handle else self.get_sample_list(samples_directory)
         self.prepare_directories(output_directory, sample_list)
@@ -81,6 +83,9 @@ class FilteringPipeline():
             coockie_stats = "%s/%s.stats" % (coockie_filtered_sample_dir, sample)
 
             coockie_trimmomatic_filtered_sample_dir = "%s/%s/" % (coockie_trimmomatic_filtered_dir, sample)
+
+            coockie_trimmomatic_quality_filtered_sample_dir = "%s/%s/" % (coockie_trimmomatic_quality_filtered_dir, sample)
+            final_filtered_sample_dir = "%s/%s/" % (final_filtered_dir, sample)
 
             """
             self.combine_files(samples_directory, sample, merged_raw_sample_dir)
@@ -99,6 +104,8 @@ class FilteringPipeline():
             coockie_trimmomatic_filtered_sample_dir = "%s/%s/" % (coockie_trimmomatic_filtered_dir, sample)
             trimmomatic_output_prefix = "%s/%s" % (coockie_trimmomatic_filtered_sample_dir, sample)
             trimmomatic_log = "%s.log" % trimmomatic_output_prefix
+
+            """
             Trimmomatic.filter(coockie_filtered_paired_forward_reads, trimmomatic_output_prefix, output_extension="fq",
                                right_reads=coockie_filtered_paired_reverse_reads,
                                adapters_file=trimmomatic_adapter_file,
@@ -111,6 +118,23 @@ class FilteringPipeline():
                                crop_length=crop_length, head_crop_length=head_crop_length, min_length=min_len,
                                logfile=trimmomatic_log,
                                base_quality=base_quality)
+            """
+
+            coockie_trimmomatic_filtered_paired_forward_reads = "%s/%s_1.pe.fq" % (coockie_trimmomatic_filtered_sample_dir, sample)
+            coockie_trimmomatic_filtered_paired_reverse_reads = "%s/%s_2.pe.fq" % (coockie_trimmomatic_filtered_sample_dir, sample)
+
+            final_forward_reads = "%s/%s.final_1.fastq" % (final_filtered_sample_dir, sample)
+            final_reverse_reads = "%s/%s.final_2.fastq" % (final_filtered_sample_dir, sample)
 
             if sliding_window_size is None:
-                pass
+                facut_output_prefix = "%s/%s" % (coockie_trimmomatic_quality_filtered_sample_dir, sample)
+                facut_stat_file = "%s.stat" % facut_output_prefix
+                FaCut.filter_by_mean_quality(average_quality_threshold,
+                                             coockie_trimmomatic_filtered_paired_forward_reads,
+                                             coockie_trimmomatic_filtered_paired_reverse_reads,
+                                             facut_output_prefix, quality_type=base_quality,
+                                             stat_file=facut_stat_file, name_type=read_name_type)
+
+            else:
+                os.system("ln %s %s" % (coockie_trimmomatic_filtered_paired_forward_reads, final_forward_reads))
+                os.system("ln %s %s" % (coockie_trimmomatic_filtered_paired_reverse_reads, final_reverse_reads))
