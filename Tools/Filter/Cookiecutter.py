@@ -21,15 +21,15 @@ class Cookiecutter(Tool):
 
     def remove(self, adapter_file, left_reads, right_reads=None, out_dir="./"):
         options = self.parse_common_options(adapter_file, left_reads, right_reads=right_reads, out_dir=out_dir)
-        self.execute(options, cmd="cookiecutter remove")
+        self.execute(options, cmd="remove")
 
     def extract(self, adapter_file, left_reads, right_reads=None, out_dir="./"):
         options = self.parse_common_options(adapter_file, left_reads, right_reads=right_reads, out_dir=out_dir)
-        self.execute(options, cmd="cookiecutter extract")
+        self.execute(options, cmd="extract")
 
     def separate(self, adapter_file, left_reads, right_reads=None, out_dir="./"):
         options = self.parse_common_options(adapter_file, left_reads, right_reads=right_reads, out_dir=out_dir)
-        self.execute(options, cmd="cookiecutter separate")
+        self.execute(options, cmd="separate")
 
     def rm_reads(self, adapter_file, left_reads, stats_file, right_reads=None, out_dir="./", use_dust_filter=False,
                  dust_cutoff=None, dust_window_size=None, use_N_filter=False,
@@ -43,7 +43,7 @@ class Cookiecutter(Tool):
         options += " -N" if use_N_filter else ""
         options += " > %s" % stats_file
 
-        self.execute(options, cmd="cookiecutter rm_reads")
+        self.execute(options, cmd="rm_reads")
 
 
 class CookiecutterOld(Tool):
