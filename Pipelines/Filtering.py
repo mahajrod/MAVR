@@ -77,7 +77,7 @@ class FilteringPipeline():
             merged_forward_reads = "%s/%s_1.fq" % (merged_raw_sample_dir, sample)
             merged_reverse_reads = "%s/%s_2.fq" % (merged_raw_sample_dir, sample)
             coockie_filtered_sample_dir = "%s/%s/" % (coockie_filtered_dir, sample)
-            coockie_stats = "%s/%s.stats" % (merged_raw_sample_dir, sample)
+            coockie_stats = "%s/%s.stats" % (coockie_filtered_sample_dir, sample)
 
             self.combine_files(samples_directory, sample, merged_raw_sample_dir)
 
