@@ -175,11 +175,11 @@ class FileRoutines():
         filtered_filelist = []
         filetypes = set()
         for entry in file_list:
-            if file[-3:] == ".fq" or file[-6:] == ".fastq":
+            if entry[-3:] == ".fq" or entry[-6:] == ".fastq":
                 filetypes.add("fq")
-            elif file[-6:] == ".fq.gz" or file[-9:] == ".fastq.gz":
+            elif entry[-6:] == ".fq.gz" or entry[-9:] == ".fastq.gz":
                 filetypes.add("fq.gz")
-            elif file[-7:] == ".fq.bz2" or file[-10:] == ".fastq.bz2":
+            elif entry[-7:] == ".fq.bz2" or entry[-10:] == ".fastq.bz2":
                 filetypes.add("fq.bz2")
             else:
                 continue
