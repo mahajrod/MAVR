@@ -72,6 +72,7 @@ class FilteringPipeline():
         sample_list = samples_to_handle if samples_to_handle else self.get_sample_list(samples_directory)
         self.prepare_directories(output_directory, sample_list)
         for sample in sample_list:
+            print "Handling sample %s" % sample
             merged_raw_sample_dir = "%s/%s/" % (merged_raw_dir, sample)
             merged_forward_reads = "%s/%s_1.fq" % (merged_raw_sample_dir, sample)
             merged_reverse_reads = "%s/%s_2.fq" % (merged_raw_sample_dir, sample)
