@@ -135,6 +135,11 @@ class FilteringPipeline():
                                              facut_output_prefix, quality_type=base_quality,
                                              stat_file=facut_stat_file, name_type=read_name_type)
 
+                facut_filtered_forward_reads = "%s_1.pe.fq" % facut_output_prefix
+                facut_filtered_reverse_reads = "%s_2.pe.fq" % facut_output_prefix
+                os.system("ln %s %s" % (facut_filtered_forward_reads, final_forward_reads))
+                os.system("ln %s %s" % (facut_filtered_reverse_reads, final_reverse_reads))
+
             else:
                 os.system("ln %s %s" % (coockie_trimmomatic_filtered_paired_forward_reads, final_forward_reads))
                 os.system("ln %s %s" % (coockie_trimmomatic_filtered_paired_reverse_reads, final_reverse_reads))
