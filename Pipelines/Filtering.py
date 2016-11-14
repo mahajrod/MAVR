@@ -92,8 +92,8 @@ class FilteringPipeline():
                                   read_length_cutoff=None, polyGC_length_cutoff=None)
             """
 
-            coockie_filtered_paired_forward_reads = "%s/%s_1.ok.fastq" % (coockie_trimmomatic_filtered_sample_dir, sample)
-            coockie_filtered_paired_reverse_reads = "%s/%s_2.ok.fastq" % (coockie_trimmomatic_filtered_sample_dir, sample)
+            coockie_filtered_paired_forward_reads = "%s/%s_1.ok.fastq" % (coockie_filtered_sample_dir, sample)
+            coockie_filtered_paired_reverse_reads = "%s/%s_2.ok.fastq" % (coockie_filtered_sample_dir, sample)
             # se reads produced by Coockiecutter are ignored now!!
 
             coockie_trimmomatic_filtered_sample_dir = "%s/%s/" % (coockie_trimmomatic_filtered_dir, sample)
@@ -102,13 +102,15 @@ class FilteringPipeline():
             Trimmomatic.filter(coockie_filtered_paired_forward_reads, trimmomatic_output_prefix, output_extension="fq",
                                right_reads=coockie_filtered_paired_reverse_reads,
                                adapters_file=trimmomatic_adapter_file,
-                               mismatch_number=mismatch_number, pe_reads_score=pe_reads_score, se_read_score=se_read_score,
+                               mismatch_number=mismatch_number, pe_reads_score=pe_reads_score,
+                               se_read_score=se_read_score,
                                min_adapter_len=min_adapter_len, sliding_window_size=sliding_window_size,
                                average_quality_threshold=average_quality_threshold,
                                leading_base_quality_threshold=leading_base_quality_threshold,
                                trailing_base_quality_threshold=trailing_base_quality_threshold,
-                               crop_length=crop_length, head_crop_length=head_crop_length, min_length=min_len, logfile=trimmomatic_log,
+                               crop_length=crop_length, head_crop_length=head_crop_length, min_length=min_len,
+                               logfile=trimmomatic_log,
                                base_quality=base_quality)
 
-            if sliding_window_size is not None:
+            if sliding_window_size is None:
                 pass
