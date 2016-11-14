@@ -54,7 +54,7 @@ parser.add_argument("-c", "--coockiecutter_dir", action="store", dest="coockiecu
                     help="Path to Coockiecutter directory")
 parser.add_argument("-f", "--facut_dir", action="store", dest="facut_dir", default="",
                     help="Path to Facut directory")
-parser.add_argument("-r", "--remove_intermediate_files", action="store-true",
+parser.add_argument("-r", "--remove_intermediate_files", action="store_true",
                     dest="remove_intermediate_files", default=False,
                     help="Remove intermediate files")
 
