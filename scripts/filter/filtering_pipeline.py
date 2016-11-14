@@ -42,7 +42,8 @@ parser.add_argument("-e", "--se_score", action="store", dest="se_score", type=in
 parser.add_argument("-n", "--min_adapter_len", action="store", dest="min_adapter_len", type=int, default=1,
                     help="Minimum length of adapter fragment. Works only if -a/--adapters option is set. Default - 1.")
 parser.add_argument("-g", "--sliding_window_size", action="store", dest="sliding_window_size", type=int,
-                    help="Size of sliding window when checking quality. If not set - skip this stage")
+                    help="Size of sliding window when checking quality. "
+                         "If not set - reads will be filtered by mean quality")
 parser.add_argument("-q", "--average_quality_threshold", action="store", dest="average_quality_threshold", default=15,
                     type=int,
                     help="Quality threshold for sliding window. Works only if -q/--average_quality_threshold is set"
@@ -51,8 +52,8 @@ parser.add_argument("-b", "--base_quality", action="store", dest="base_quality",
                     help="Type of base quality. Possible variants: phred33, phred64. Default - phred33 ")
 
 
-parser.add_argument("-l", "--min_length", action="store", dest="min_len", type=int,
-                    help="Minimum length of read to retain. If not set - skip this stage")
+parser.add_argument("-l", "--min_length", action="store", dest="min_len", type=int, default=50,
+                    help="Minimum length of read to retain. Default - 50")
 
 parser.add_argument("-j", "--trimmomatic_dir", action="store", dest="trimmomatic_dir", default="",
                     help="Path to Trimmomatic directory")
@@ -72,5 +73,5 @@ FilteringPipeline.filter(args.samples_dir, args.output_dir, args.adapter_kmers, 
                          sliding_window_size=args.sliding_window_size,
                          average_quality_threshold=args.average_quality_threshold,
                          leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
-                         crop_length=None, head_crop_length=None, min_len=50,
+                         crop_length=None, head_crop_length=None, min_len=args.min_len,
                          base_quality=args.base_quality)
