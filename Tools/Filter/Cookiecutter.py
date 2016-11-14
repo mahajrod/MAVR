@@ -12,7 +12,7 @@ class Cookiecutter(Tool):
 
     def parse_common_options(self, adapter_file, left_reads, right_reads=None, out_dir="./"):
         options = " -t %i" % self.threads
-        options += " --adapters %s" % adapter_file
+        options += " -f %s" % adapter_file
         options += " -o %s" % out_dir
         options += " -i %s" % left_reads if right_reads is None else ""     # single-end data
         options += " -1 %s -2 %s" % (left_reads, right_reads) if right_reads else ""    # paired-end data
