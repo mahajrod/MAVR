@@ -12,7 +12,7 @@ class Cookiecutter(Tool):
 
     def parse_common_options(self, adapter_file, left_reads, right_reads=None, out_dir="./"):
 
-        options = " -f %s" % adapter_file
+        options = " --fragments %s" % adapter_file
         #options += " -t %i" % self.threads
         options += " -o %s" % out_dir
         options += " -i %s" % left_reads if right_reads is None else ""     # single-end data
