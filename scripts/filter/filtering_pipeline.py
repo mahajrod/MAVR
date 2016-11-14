@@ -24,14 +24,12 @@ parser.add_argument("-o", "--output_dir", action="store", dest="output_dir",
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=1, type=int,
                     help="Number of threads to use in Trimmomatic. Default - 1.")
 
-
 parser.add_argument("-a", "--adapters", action="store", dest="adapters", type=os.path.abspath,
                     required=True,
                     help="File with adapters to trim by Trimmomatic")
-parser.add_argument("-r", "--adapter_kmers", action="store", dest="adapter_kmers", type=os.path.abspath,
+parser.add_argument("-k", "--adapter_kmers", action="store", dest="adapter_kmers", type=os.path.abspath,
                     required=True,
                     help="File with adapter k-mers for Coockiecutter")
-
 
 parser.add_argument("-m", "--mismatch_number", action="store", dest="mismatch_number", type=int, default=2,
                     help="Number of mismatches in adapter seed. Works only if -a/--adapters option is set. Default - 2.")
@@ -60,6 +58,9 @@ parser.add_argument("-c", "--coockiecutter_dir", action="store", dest="coockiecu
                     help="Path to Coockiecutter directory")
 parser.add_argument("-f", "--facut_dir", action="store", dest="facut_dir", default="",
                     help="Path to Facut directory")
+parser.add_argument("-r", "--remove_intermediate_files", action="store-true",
+                    dest="remove_intermediate_files", default=False,
+                    help="Remove intermediate files")
 
 args = parser.parse_args()
 
@@ -73,4 +74,5 @@ FilteringPipeline.filter(args.samples_dir, args.output_dir, args.adapter_kmers, 
                          average_quality_threshold=args.average_quality_threshold,
                          leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
                          crop_length=None, head_crop_length=None, min_len=args.min_len,
-                         base_quality=args.base_quality, read_name_type="illumina")
+                         base_quality=args.base_quality, read_name_type="illumina",
+                         remove_intermediate_files=args.remove_intermediate_files)
