@@ -101,7 +101,7 @@ class FilteringPipeline:
             final_filtered_sample_dir = "%s/%s/" % (final_filtered_dir, sample)
             filtering_stat_sample_dir = "%s/%s" % (filtering_stat_dir, sample)
 
-            """
+            #"""
             self.combine_files(samples_directory, sample, merged_raw_sample_dir)
 
             Cookiecutter.rm_reads(adapter_fragment_file, merged_forward_reads, coockie_stats,
@@ -109,7 +109,7 @@ class FilteringPipeline:
                                   out_dir=coockie_filtered_sample_dir, use_dust_filter=False,
                                   dust_cutoff=None, dust_window_size=None, use_N_filter=False,
                                   read_length_cutoff=None, polyGC_length_cutoff=None)
-            """
+            #"""
             coockiecutter_report = CoockiecutterReport(coockie_stats)
 
             filtering_statistics[sample]["raw_pairs"] = coockiecutter_report.input_pairs
@@ -125,7 +125,7 @@ class FilteringPipeline:
             coockie_trimmomatic_filtered_sample_dir = "%s/%s/" % (coockie_trimmomatic_filtered_dir, sample)
             trimmomatic_output_prefix = "%s/%s" % (coockie_trimmomatic_filtered_sample_dir, sample)
             trimmomatic_log = "%s.trimmomatic.log" % trimmomatic_output_prefix
-            """
+            #"""
             Trimmomatic.filter(coockie_filtered_paired_forward_reads, trimmomatic_output_prefix, output_extension="fq",
                                right_reads=coockie_filtered_paired_reverse_reads,
                                adapters_file=trimmomatic_adapter_file,
@@ -138,7 +138,7 @@ class FilteringPipeline:
                                crop_length=crop_length, head_crop_length=head_crop_length, min_length=min_len,
                                logfile=trimmomatic_log,
                                base_quality=base_quality)
-            """
+            #"""
             trimmomatic_report = TrimmomaticReport(trimmomatic_log)
             filtering_statistics[sample]["pairs_after_trimmomatic"] = trimmomatic_report.stats["both_surviving"]
             filtering_statistics[sample]["pairs_after_trimmomatic,%"] = trimmomatic_report.stats["both_surviving,%"]
@@ -154,13 +154,13 @@ class FilteringPipeline:
             if sliding_window_size is None:
                 facut_output_prefix = "%s/%s" % (coockie_trimmomatic_quality_filtered_sample_dir, sample)
                 facut_stat_file = "%s.facut.stat" % facut_output_prefix
-                """
+                #"""
                 FaCut.filter_by_mean_quality(average_quality_threshold,
                                              coockie_trimmomatic_filtered_paired_forward_reads,
                                              coockie_trimmomatic_filtered_paired_reverse_reads,
                                              facut_output_prefix, quality_type=base_quality,
                                              stat_file=facut_stat_file, name_type=read_name_type)
-                """
+                #"""
                 facut_report = FaCutReport(facut_stat_file)
 
                 filtering_statistics[sample]["pairs_after_facut"] = facut_report.retained_pairs
