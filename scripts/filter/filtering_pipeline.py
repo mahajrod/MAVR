@@ -62,6 +62,16 @@ parser.add_argument("-r", "--remove_intermediate_files", action="store_true",
 
 args = parser.parse_args()
 
+"""
+EXAMPLE
+skliver@supermicro:
+cd ~/workdir/yeast/nizhnikov/good_run/fastq
+~/soft/MAVR/scripts/filter/filtering_pipeline.py -d raw/ -o ./ \
+                                                 -k ~/data/service_seq/trueseq_adapters_with_rev_com_23_mer.kmer
+                                                 -a ~/soft/Trimmomatic-0.35/adapters/TruSeq3-PE.fa
+                                                 -j ~/soft/Trimmomatic-0.35/
+                                                 -x filtering_general.stat -r
+"""
 
 FilteringPipeline.filter(args.samples_dir, args.output_dir, args.adapter_kmers, args.adapters, args.general_stat_file,
                          samples_to_handle=args.samples, threads=args.threads, trimmomatic_dir=args.trimmomatic_dir,
