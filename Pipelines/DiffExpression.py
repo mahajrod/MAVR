@@ -25,7 +25,7 @@ class DiffExpressionPipeline(FilteringPipeline):
 
         alignment_dir = "%s/alignment/" % output_directory
 
-        for directory in alignment_dir:
+        for directory in (alignment_dir, ):
             FileRoutines.save_mkdir(directory)
             for sample in sample_list:
                 FileRoutines.save_mkdir("%s/%s" % (directory, sample))
