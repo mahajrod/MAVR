@@ -18,6 +18,9 @@ class FaCutReport:
                                       "reverse_only": 7,
                                       "both_discarded": 8})
         self.tile_table = []
+        self.machine_id_list = []
+        self.flowcell_id_list = []
+
         with open(facut_report_file, "r") as in_fd:
             tmp = ["", ""]
             while tmp[0] != "Paires retained:":
@@ -35,13 +38,20 @@ class FaCutReport:
 
             for line in in_fd:
                 tmp = line.strip().split("\t")
-                for i in (1, 3, 5, 6, 7, 8):
+                for i in (1, 3, 4, 5, 6, 7, 8):
                     tmp[i] = int(tmp[i])
                 tmp.append(tmp[5] + tmp[6] + tmp[7] + tmp[8])
+                if tmp[0] not in self.machine_id_list:
+                    self.machine_id_list.append(tmp[0])
+                tmp[0] = self.machine_id_list.index(tmp[0])
 
-                self.tile_table.append(tuple(tmp))
+                if tmp[2] not in self.flowcell_id_list:
+                    self.flowcell_id_list.append(tmp[0])
+                tmp[2] = self.flowcell_id_list.index(tmp[2])
 
-        self.tile_table = np.array(self.tile_table, dtype='|S50, u4, S50, u4, S6, u8, u8, u8, u8, u8')
+                self.tile_table.append(tmp)
+
+        self.tile_table = np.array(self.tile_table)
         print self.tile_table
         print self.tile_table[1]
         print self.tile_table[1][5]
