@@ -38,7 +38,7 @@ class STAR(Tool):
               three_prime_trim=None, five_prime_trim=None, adapter_seq_for_three_prime_clip=None,
               max_mismatch_percent_for_adapter_trimming=None, three_prime_trim_after_adapter_clip=None,
               output_type="BAM", sort_bam=True, max_memory_for_bam_sorting=8000000000, include_unmapped_reads_in_bam=True,
-              output_unmapped_reads=True, output_dir="./", two_pass_mode=False):
+              output_unmapped_reads=True, output_dir="./", two_pass_mode=False, max_intron_length=None):
         if reverse_read_list:
             if len(forward_read_list) != len(reverse_read_list):
                 raise ValueError("Wrong read file pairing")
@@ -69,6 +69,7 @@ class STAR(Tool):
         options += " --outReadsUnmapped Fastx" if output_unmapped_reads else ""
         options += " --outFileNamePrefix %s" % output_dir if output_dir else ""
         options += " --twopassMode Basic" if two_pass_mode else ""
+        options += " --alignIntronMax %i" % max_intron_length if max_intron_length else ""
 
         self.execute(options)
 
