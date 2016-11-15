@@ -166,6 +166,8 @@ class FilteringPipeline:
                 filtering_statistics[sample]["pairs_after_facutc,%"] = float(facut_report.retained_pairs) / float(facut_report.input_pairs) * 100
                 filtering_statistics[sample]["retained_pairs_in_worst_tile,%"] = facut_report.minimum_retained_pairs_in_tiles_fraction * 100
 
+                filtering_statistics[sample]["pairs_survived_after_filtration,%"] = float(facut_report.retained_pairs) / coockiecutter_report.input_pairs * 100
+
                 facut_filtered_forward_reads = "%s_1.pe.fq" % facut_output_prefix
                 facut_filtered_reverse_reads = "%s_2.pe.fq" % facut_output_prefix
                 os.system("cp %s %s" % (facut_stat_file, filtering_stat_sample_dir))
@@ -181,4 +183,4 @@ class FilteringPipeline:
                 shutil.rmtree(coockie_trimmomatic_filtered_dir)
                 shutil.rmtree(coockie_trimmomatic_quality_filtered_dir)
 
-            filtering_statistics.write(general_stat_file)
+            filtering_statistics.write(general_stat_file, sort=False)
