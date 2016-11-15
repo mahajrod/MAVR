@@ -42,11 +42,11 @@ class DiffExpressionPipeline(FilteringPipeline):
 
         STAR.threads = threads
         STAR.path = star_dir
-
+        """
         if genome_fasta:
             STAR.index(genome_dir, genome_fasta, annotation_gtf=None, junction_tab_file=None, sjdboverhang=None,
                        genomeSAindexNbases=None, genomeChrBinNbits=None, genome_size=genome_size)
-
+        """
         sample_list = samples_to_handle if samples_to_handle else self.get_sample_list(samples_directory)
         self.prepare_directories(output_directory, sample_list)
 
