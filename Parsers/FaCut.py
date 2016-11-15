@@ -59,7 +59,7 @@ class FaCutReport:
         #print self.tile_table[:][5]
 
     def get_fraction_of_retained_pairs_per_tile(self):
-        return self.tile_table[:, 5] / self.tile_table[:, 9]
+        return np.array(self.tile_table[:, 5], dtype=float) / np.array(self.tile_table[:, 9], dtype=float)
 
     def draw_fraction_of_retained_pairs_per_tile_histogram(self, output_prefix):
         print self.get_fraction_of_retained_pairs_per_tile()
