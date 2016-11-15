@@ -46,7 +46,7 @@ class FaCutReport:
                 tmp[0] = self.machine_id_list.index(tmp[0])
 
                 if tmp[2] not in self.flowcell_id_list:
-                    self.flowcell_id_list.append(tmp[0])
+                    self.flowcell_id_list.append(tmp[2])
                 tmp[2] = self.flowcell_id_list.index(tmp[2])
 
                 self.tile_table.append(tmp)
