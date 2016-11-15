@@ -52,16 +52,17 @@ class FaCutReport:
                 self.tile_table.append(tmp)
 
         self.tile_table = np.array(self.tile_table)
-        print self.tile_table
-        print self.tile_table[1]
-        print self.tile_table[1][5]
+        #print self.tile_table
+        #print self.tile_table[1]
+        #print self.tile_table[1][5]
 
-        print self.tile_table[:][5]
+        #print self.tile_table[:][5]
 
     def get_fraction_of_retained_pairs_per_tile(self):
         return self.tile_table[:, 5] / self.tile_table[:, 9]
 
     def draw_fraction_of_retained_pairs_per_tile_histogram(self, output_prefix):
+        print self.get_fraction_of_retained_pairs_per_tile()
         MatplotlibRoutines.percent_histogram(self.get_fraction_of_retained_pairs_per_tile(), output_prefix,
                                              n_bins=20, title="Distribution of retained pairs per pile",
                                              xlabel="Fraction", ylabel="Number", label=None,
