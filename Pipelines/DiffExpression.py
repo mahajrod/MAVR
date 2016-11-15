@@ -9,6 +9,8 @@ from CustomCollections.GeneralCollections import TwoLvlDict
 
 from Tools.Filter import Cookiecutter, Trimmomatic, FaCut
 from Tools.Alignment import STAR
+from Tools.Expression import HTSeq
+
 from Parsers.FaCut import FaCutReport
 from Parsers.Coockiecutter import CoockiecutterReport
 from Parsers.Trimmomatic import TrimmomaticReport
@@ -38,7 +40,7 @@ class DiffExpressionPipeline(FilteringPipeline):
                        three_prime_trim=None, five_prime_trim=None, adapter_seq_for_three_prime_clip=None,
                        max_mismatch_percent_for_adapter_trimming=None, three_prime_trim_after_adapter_clip=None,
                        output_type="BAM", sort_bam=True, max_memory_for_bam_sorting=None, include_unmapped_reads_in_bam=True,
-                       output_unmapped_reads=True,  two_pass_mode=False, star_dir=None, threads=1):
+                       output_unmapped_reads=True,  two_pass_mode=False, star_dir=None, threads=1, max_intron_length=None):
 
         STAR.threads = threads
         STAR.path = star_dir
@@ -56,7 +58,7 @@ class DiffExpressionPipeline(FilteringPipeline):
             sample_dir = "%s/%s/" % (samples_directory, sample)
             alignment_sample_dir = "%s/%s/" % (alignment_dir, sample)
             filetypes, forward_files, reverse_files = FileRoutines.make_lists_forward_and_reverse_files(sample_dir)
-            """
+
             STAR.align(genome_dir, forward_files, reverse_read_list=reverse_files, annotation_gtf=annotation_gtf,
                        feature_from_gtf_to_use_as_exon=feature_from_gtf_to_use_as_exon,
                        exon_tag_to_use_as_transcript_id=exon_tag_to_use_as_transcript_id,
@@ -71,8 +73,8 @@ class DiffExpressionPipeline(FilteringPipeline):
                        max_memory_for_bam_sorting=max_memory_for_bam_sorting,
                        include_unmapped_reads_in_bam=include_unmapped_reads_in_bam,
                        output_unmapped_reads=output_unmapped_reads, output_dir=alignment_sample_dir,
-                       two_pass_mode=two_pass_mode)
-            """
+                       two_pass_mode=two_pass_mode, max_intron_length=max_intron_length)
+
             os.system("samtools index %s/Aligned.sortedByCoord.out.bam" % alignment_sample_dir)
 
     """

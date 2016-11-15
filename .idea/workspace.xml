@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Alignment/STAR.py" afterPath="$PROJECT_DIR$/Tools/Alignment/STAR.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pipelines/DiffExpression.py" afterPath="$PROJECT_DIR$/Pipelines/DiffExpression.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/transcriptome/differential_expression/star_htseq.py" afterPath="$PROJECT_DIR$/scripts/transcriptome/differential_expression/star_htseq.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -37,18 +37,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Trimmomatic.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/Filter/Trimmomatic.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="91" column="28" selection-start-line="75" selection-start-column="4" selection-end-line="122" selection-end-column="0" />
-              <folding>
-                <element signature="e#24#33#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Filtering.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Pipelines/Filtering.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -57,16 +45,6 @@
               <folding>
                 <element signature="e#22#31#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GenePrediction.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Pipelines/GenePrediction.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -97,9 +75,41 @@
         <entry file="file://$PROJECT_DIR$/Pipelines/DiffExpression.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="47" column="96" selection-start-line="47" selection-start-column="96" selection-end-line="47" selection-end-column="96" />
+              <caret line="75" column="59" selection-start-line="75" selection-start-column="52" selection-end-line="75" selection-end-column="87" />
               <folding>
                 <element signature="e#22#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Cufflinks.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tools/Expression/Cufflinks.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HTSeq.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tools/Expression/HTSeq.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tools/Expression/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <folding>
+                <element signature="e#25#65#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -108,8 +118,8 @@
       <file leaf-file-name="star_htseq.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/transcriptome/differential_expression/star_htseq.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.45698324">
-              <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.17541899">
+              <caret line="59" column="28" selection-start-line="59" selection-start-column="28" selection-end-line="59" selection-end-column="28" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
@@ -121,7 +131,7 @@
         <entry file="file://$PROJECT_DIR$/Tools/Alignment/STAR.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="39" column="75" selection-start-line="39" selection-start-column="75" selection-end-line="39" selection-end-column="85" />
+              <caret line="40" column="82" selection-start-line="40" selection-start-column="80" selection-end-line="40" selection-end-column="102" />
               <folding>
                 <element signature="e#22#31#0" expanded="true" />
               </folding>
@@ -157,8 +167,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/annotation/trim_cds_and_remove_terminal_stop_codons.py" />
-        <option value="$PROJECT_DIR$/BConverters/SequenceConverters.py" />
         <option value="$PROJECT_DIR$/scripts/fastq/fastq2fasta.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/count_species_in_genbank_file.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/get_id_to_species_accordance.py" />
@@ -205,8 +213,10 @@
         <option value="$PROJECT_DIR$/Pipelines/Filtering.py" />
         <option value="$PROJECT_DIR$/Pipelines/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/transcriptome/expression/differential_expression_pipeline.py" />
-        <option value="$PROJECT_DIR$/Pipelines/DiffExpression.py" />
+        <option value="$PROJECT_DIR$/Tools/Expression/__init__.py" />
+        <option value="$PROJECT_DIR$/Tools/Expression/HTSeq.py" />
         <option value="$PROJECT_DIR$/Tools/Alignment/STAR.py" />
+        <option value="$PROJECT_DIR$/Pipelines/DiffExpression.py" />
         <option value="$PROJECT_DIR$/scripts/transcriptome/differential_expression/star_htseq.py" />
       </list>
     </option>
@@ -382,7 +392,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Alignment" />
+              <option name="myItemId" value="Expression" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -397,20 +407,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Pipelines" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Parsers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -458,11 +454,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Tools/Expression" />
       <recent name="$PROJECT_DIR$/scripts/transcriptome/expression" />
       <recent name="$PROJECT_DIR$/Pipelines" />
       <recent name="$PROJECT_DIR$/Parsers" />
       <recent name="$PROJECT_DIR$/scripts/filter" />
-      <recent name="$PROJECT_DIR$/projects/SGD_genomes" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/projects/RG/scripts" />
@@ -815,36 +811,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00949" summary="changes">
-      <created>1478184410345</created>
-      <option name="number" value="00949" />
-      <option name="project" value="LOCAL" />
-      <updated>1478184410345</updated>
-    </task>
-    <task id="LOCAL-00950" summary="changes">
-      <created>1478184668065</created>
-      <option name="number" value="00950" />
-      <option name="project" value="LOCAL" />
-      <updated>1478184668065</updated>
-    </task>
-    <task id="LOCAL-00951" summary="changes">
-      <created>1478184837794</created>
-      <option name="number" value="00951" />
-      <option name="project" value="LOCAL" />
-      <updated>1478184837794</updated>
-    </task>
-    <task id="LOCAL-00952" summary="changes">
-      <created>1478185120045</created>
-      <option name="number" value="00952" />
-      <option name="project" value="LOCAL" />
-      <updated>1478185120046</updated>
-    </task>
-    <task id="LOCAL-00953" summary="changes">
-      <created>1479150412041</created>
-      <option name="number" value="00953" />
-      <option name="project" value="LOCAL" />
-      <updated>1479150412041</updated>
-    </task>
     <task id="LOCAL-00954" summary="changes">
       <created>1479150576033</created>
       <option name="number" value="00954" />
@@ -1109,7 +1075,37 @@
       <option name="project" value="LOCAL" />
       <updated>1479232660462</updated>
     </task>
-    <option name="localTasksCounter" value="998" />
+    <task id="LOCAL-00998" summary="changes">
+      <created>1479235133022</created>
+      <option name="number" value="00998" />
+      <option name="project" value="LOCAL" />
+      <updated>1479235133022</updated>
+    </task>
+    <task id="LOCAL-00999" summary="changes">
+      <created>1479235217192</created>
+      <option name="number" value="00999" />
+      <option name="project" value="LOCAL" />
+      <updated>1479235217192</updated>
+    </task>
+    <task id="LOCAL-01000" summary="changes">
+      <created>1479236003732</created>
+      <option name="number" value="01000" />
+      <option name="project" value="LOCAL" />
+      <updated>1479236003732</updated>
+    </task>
+    <task id="LOCAL-01001" summary="changes">
+      <created>1479236024142</created>
+      <option name="number" value="01001" />
+      <option name="project" value="LOCAL" />
+      <updated>1479236024142</updated>
+    </task>
+    <task id="LOCAL-01002" summary="changes">
+      <created>1479240034905</created>
+      <option name="number" value="01002" />
+      <option name="project" value="LOCAL" />
+      <updated>1479240034905</updated>
+    </task>
+    <option name="localTasksCounter" value="1003" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1147,7 +1143,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2553305" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2553305" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14376996" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1259,27 +1255,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/projects/RG/scripts/kmer_analysis.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="57" column="16" selection-start-line="57" selection-start-column="16" selection-end-line="57" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/merge_alignments.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/hmmer3/assign_proteins_to_families.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.23684211">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/count_unique_positions_per_sequence.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1652,10 +1627,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Expression/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding>
+            <element signature="e#25#65#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Expression/Cufflinks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Expression/HTSeq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Pipelines/DiffExpression.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="47" column="96" selection-start-line="47" selection-start-column="96" selection-end-line="47" selection-end-column="96" />
+          <caret line="75" column="59" selection-start-line="75" selection-start-column="52" selection-end-line="75" selection-end-column="87" />
           <folding>
             <element signature="e#22#31#0" expanded="true" />
           </folding>
@@ -1665,7 +1666,7 @@
     <entry file="file://$PROJECT_DIR$/Tools/Alignment/STAR.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="75" selection-start-line="39" selection-start-column="75" selection-end-line="39" selection-end-column="85" />
+          <caret line="40" column="82" selection-start-line="40" selection-start-column="80" selection-end-line="40" selection-end-column="102" />
           <folding>
             <element signature="e#22#31#0" expanded="true" />
           </folding>
@@ -1674,8 +1675,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/transcriptome/differential_expression/star_htseq.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45698324">
-          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.17541899">
+          <caret line="59" column="28" selection-start-line="59" selection-start-column="28" selection-end-line="59" selection-end-column="28" />
           <folding>
             <element signature="e#54#63#0" expanded="true" />
           </folding>

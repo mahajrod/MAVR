@@ -41,10 +41,11 @@ parser.add_argument("-u", "--include_unmapped_reads", action="store_true",
 parser.add_argument("-m", "--max_memory_for_bam_sorting", action="store", type=int,
                     dest="max_memory_for_bam_sorting", default=8000000000,
                     help="Max memory for bam sorting")
+parser.add_argument("-x", "--max_intron_length", action="store", dest="max_intron_length", type=int,
+                    help="Maximum intron length. Default: not set")
 
 """"
-parser.add_argument("-x", "--general_stat_file", action="store", dest="general_stat_file", required=True,
-                    help="File to write general statistics about filtration")
+
 parser.add_argument("-k", "--adapter_kmers", action="store", dest="adapter_kmers", type=os.path.abspath,
                     required=True,
                     help="File with adapter k-mers for Coockiecutter")
@@ -82,6 +83,8 @@ cd ~/workdir/yeast/nizhnikov/good_run
                                                                         -f ~/data/genomes/saccharomyces_cerevisiae/S288C_R64/fasta/S288C_reference_sequence_R64-1-1_20110203_modified.fasta \
                                                                         -t 10 -i 12000000 \
                                                                         -j ~/data/genomes/saccharomyces_cerevisiae/S288C_R64/gff/SJ.intron.tab -r ~/soft/STAR/bin/Linux_x86_64//
+                                                                        -m 20000000000
+                                                                        -x 3000
 
 """
 
@@ -99,4 +102,4 @@ DiffExpressionPipeline.star_and_htseq(args.genome_dir, args.samples_dir, args.ou
                                       max_memory_for_bam_sorting=args.max_memory_for_bam_sorting,
                                       include_unmapped_reads_in_bam=args.include_unmapped_reads,
                                       output_unmapped_reads=True,  two_pass_mode=False, star_dir=args.star_dir,
-                                      threads=args.threads)
+                                      threads=args.threads, max_intron_length=args.max_intron_length)
