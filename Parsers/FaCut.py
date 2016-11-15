@@ -53,7 +53,7 @@ class FaCutReport:
 
         self.tile_table = np.array(self.tile_table)
 
-        self.minimum_retained_pairs_in_tiles = min(self.get_fraction_of_retained_pairs_per_tile)
+        self.minimum_retained_pairs_in_tiles_fraction = min(self.get_fraction_of_retained_pairs_per_tile())
 
     def get_fraction_of_retained_pairs_per_tile(self):
         return np.array(self.tile_table[:, 5], dtype=float) / np.array(self.tile_table[:, 9], dtype=float)

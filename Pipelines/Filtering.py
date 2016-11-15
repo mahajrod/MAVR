@@ -1,10 +1,16 @@
 #!/usr/bin/env python
-import os, shutil
+import os
+import shutil
+
+from collections import OrderedDict
 
 from Tools.Filter import Cookiecutter, Trimmomatic, FaCut
 from Routines import FileRoutines
 from Parsers.FaCut import FaCutReport
 from Parsers.Coockiecutter import CoockiecutterReport
+from Parsers.Trimmomatic import TrimmomaticReport
+
+from CustomCollections.GeneralCollections import TwoLvlDict
 
 
 class FilteringPipeline:
@@ -54,6 +60,7 @@ class FilteringPipeline:
             raise IOError("Extracting from mix of archives in not implemented yet")
 
     def filter(self, samples_directory, output_directory, adapter_fragment_file, trimmomatic_adapter_file,
+               general_stat_file,
                samples_to_handle=None, threads=4, trimmomatic_dir="", coockiecutter_dir="", facut_dir="",
                mismatch_number=2, pe_reads_score=30, se_read_score=10,
                min_adapter_len=1, sliding_window_size=None,
@@ -77,8 +84,10 @@ class FilteringPipeline:
 
         sample_list = samples_to_handle if samples_to_handle else self.get_sample_list(samples_directory)
         self.prepare_directories(output_directory, sample_list)
+        filtering_statistics = TwoLvlDict()
         for sample in sample_list:
             print "Handling sample %s" % sample
+            filtering_statistics[sample] = OrderedDict()
             merged_raw_sample_dir = "%s/%s/" % (merged_raw_dir, sample)
             merged_forward_reads = "%s/%s_1.fq" % (merged_raw_sample_dir, sample)
             merged_reverse_reads = "%s/%s_2.fq" % (merged_raw_sample_dir, sample)
@@ -101,6 +110,10 @@ class FilteringPipeline:
                                   read_length_cutoff=None, polyGC_length_cutoff=None)
             """
             coockiecutter_report = CoockiecutterReport(coockie_stats)
+
+            filtering_statistics[sample]["raw_pairs"] = coockiecutter_report.input_pairs
+            filtering_statistics[sample]["pairs_after_coockiecutter"] = coockiecutter_report.retained_pairs
+            filtering_statistics[sample]["pairs_after_coockiecutter,%"] = float(coockiecutter_report.retained_pairs)/float(coockiecutter_report.input_pairs)*100
 
             os.system("cp %s %s" % (coockie_stats, filtering_stat_sample_dir))
 
@@ -125,6 +138,10 @@ class FilteringPipeline:
                                logfile=trimmomatic_log,
                                base_quality=base_quality)
             """
+            trimmomatic_report = TrimmomaticReport(trimmomatic_log)
+            filtering_statistics[sample]["pairs_after_trimmomatic"] = trimmomatic_report.stats["both_surviving"]
+            filtering_statistics[sample]["pairs_after_trimmomatic,%"] = trimmomatic_report.stats["both_surviving,%"]
+
             os.system("cp %s %s" % (trimmomatic_log, filtering_stat_sample_dir))
 
             coockie_trimmomatic_filtered_paired_forward_reads = "%s/%s_1.pe.fq" % (coockie_trimmomatic_filtered_sample_dir, sample)
@@ -145,6 +162,10 @@ class FilteringPipeline:
                 """
                 facut_report = FaCutReport(facut_stat_file)
 
+                filtering_statistics[sample]["pairs_after_facut"] = facut_report.retained_pairs
+                filtering_statistics[sample]["pairs_after_facutc,%"] = float(facut_report.retained_pairs) / float(facut_report.input_pairs) * 100
+                filtering_statistics[sample]["retained_pairs_in_worst_tile,%"] = facut_report.minimum_retained_pairs_in_tiles_fraction * 100
+
                 facut_filtered_forward_reads = "%s_1.pe.fq" % facut_output_prefix
                 facut_filtered_reverse_reads = "%s_2.pe.fq" % facut_output_prefix
                 os.system("cp %s %s" % (facut_stat_file, filtering_stat_sample_dir))
@@ -159,3 +180,5 @@ class FilteringPipeline:
                 shutil.rmtree(coockie_filtered_dir)
                 shutil.rmtree(coockie_trimmomatic_filtered_dir)
                 shutil.rmtree(coockie_trimmomatic_quality_filtered_dir)
+
+            filtering_statistics.write(general_stat_file)

@@ -11,6 +11,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-d", "--sample_directory", action="store", dest="samples_dir", required=True,
                     type=lambda s: check_path(os.path.abspath(s)),
                     help="Directory with samples")
+parser.add_argument("-x", "--general_stat_file", action="store", dest="general_stat_file", required=True,
+                    help="File to write general statistics about filtration")
 parser.add_argument("-s", "--samples", action="store", dest="samples",
                     help="Comma-separated list of subdirectories(one per sample) to handle. "
                          "If not set all subdirectories will be considered as containing samples")
@@ -61,7 +63,7 @@ parser.add_argument("-r", "--remove_intermediate_files", action="store_true",
 args = parser.parse_args()
 
 
-FilteringPipeline.filter(args.samples_dir, args.output_dir, args.adapter_kmers, args.adapters,
+FilteringPipeline.filter(args.samples_dir, args.output_dir, args.adapter_kmers, args.adapters, args.general_stat_file,
                          samples_to_handle=args.samples, threads=args.threads, trimmomatic_dir=args.trimmomatic_dir,
                          coockiecutter_dir=args.coockiecutter_dir, facut_dir=args.facut_dir,
                          mismatch_number=args.mismatch_number, pe_reads_score=args.pe_score,
