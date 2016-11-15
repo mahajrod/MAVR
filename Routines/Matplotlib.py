@@ -2,7 +2,7 @@ __author__ = 'mahajrod'
 import os
 
 from itertools import cycle, islice
-
+from collections import Iterable
 import matplotlib
 matplotlib.use('Agg')
 os.environ['MPLCONFIGDIR'] = '/tmp/'
@@ -88,7 +88,15 @@ class MatplotlibRoutines:
         figure = plt.figure()
         subplot = plt.subplot(1, 1, 1)
 
-        n, bins, patches = plt.hist(data, bins=n_bins, label=label)
+        if isinstance(n_bins, Iterable):
+            number_of_bins = n_bins
+        else:
+            if input_mode == "percent":
+                n_bins = np.linspace(0, 100, n_bins+1)
+            elif input_mode == "fraction":
+                n_bins = np.linspace(0, 1.0, n_bins+1)
+
+        n, bins, patches = plt.hist(data, bins=number_of_bins, label=label)
 
         print n
         print bins
