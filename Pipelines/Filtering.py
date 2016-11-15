@@ -180,9 +180,9 @@ class FilteringPipeline:
                 os.system("ln %s %s" % (coockie_trimmomatic_filtered_paired_reverse_reads, final_reverse_reads))
                 filtering_statistics[sample]["pairs_survived_after_filtration,%"] = float("%.2f" % (float(trimmomatic_report.stats["both_surviving"]) / coockiecutter_report.input_pairs * 100))
 
-            if remove_intermediate_files:
-                shutil.rmtree(coockie_filtered_dir)
-                shutil.rmtree(coockie_trimmomatic_filtered_dir)
-                shutil.rmtree(coockie_trimmomatic_quality_filtered_dir)
+        if remove_intermediate_files:
+            shutil.rmtree(coockie_filtered_dir)
+            shutil.rmtree(coockie_trimmomatic_filtered_dir)
+            shutil.rmtree(coockie_trimmomatic_quality_filtered_dir)
 
-            filtering_statistics.write(general_stat_file, sort=False)
+        filtering_statistics.write(general_stat_file, sort=False)
