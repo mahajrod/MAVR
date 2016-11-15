@@ -73,14 +73,14 @@ class TwoLvlDict(OrderedDict):
                     filtered_out[fl_key][sl_key] = self[fl_key].pop(sl_key, None)
         return filtered_out
 
-    def write(self, out_filename, absent_symbol="0", close_after_if_file_object=False):
+    def write(self, out_filename, absent_symbol="0", close_after_if_file_object=False, sort=True):
         if isinstance(out_filename, file):
-            out_filename.write(self.table_form(absent_symbol=absent_symbol))
+            out_filename.write(self.table_form(absent_symbol=absent_symbol, sort=sort))
             if close_after_if_file_object:
                 out_filename.close()
         else:
             with open(out_filename, "w") as out_fd:
-                out_fd.write(self.table_form(absent_symbol=absent_symbol))
+                out_fd.write(self.table_form(absent_symbol=absent_symbol, sort=sort))
 
     def write_splited(self, out_dir="./", extension="t", value_separator=","):
         from Routines.File import check_path
