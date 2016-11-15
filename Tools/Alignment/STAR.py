@@ -37,7 +37,7 @@ class STAR(Tool):
               exon_tag_to_use_as_gene_id=None, length_of_sequences_flanking_junction=None, junction_tab_file_list=None,
               three_prime_trim=None, five_prime_trim=None, adapter_seq_for_three_prime_clip=None,
               max_mismatch_percent_for_adapter_trimming=None, three_prime_trim_after_adapter_clip=None,
-              output_type="BAM", sort_bam=True, max_memory_for_bam_sorting=None, include_unmapped_reads_in_bam=True,
+              output_type="BAM", sort_bam=True, max_memory_for_bam_sorting=8000000000, include_unmapped_reads_in_bam=True,
               output_unmapped_reads=True, output_dir="./", two_pass_mode=False):
         if reverse_read_list:
             if len(forward_read_list) != len(reverse_read_list):

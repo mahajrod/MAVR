@@ -38,7 +38,9 @@ parser.add_argument("-r", "--star_dir", action="store", dest="star_dir", default
 parser.add_argument("-u", "--include_unmapped_reads", action="store_true",
                     dest="include_unmapped_reads", default=False,
                     help="Include unmapped reads in Bam file")
-
+parser.add_argument("-m", "--max_memory_for_bam_sorting", action="store", type=int,
+                    dest="max_memory_for_bam_sorting", default=8000000000,
+                    help="Max memory for bam sorting")
 
 """"
 parser.add_argument("-x", "--general_stat_file", action="store", dest="general_stat_file", required=True,
@@ -46,9 +48,6 @@ parser.add_argument("-x", "--general_stat_file", action="store", dest="general_s
 parser.add_argument("-k", "--adapter_kmers", action="store", dest="adapter_kmers", type=os.path.abspath,
                     required=True,
                     help="File with adapter k-mers for Coockiecutter")
-
-parser.add_argument("-m", "--mismatch_number", action="store", dest="mismatch_number", type=int, default=2,
-                    help="Number of mismatches in adapter seed. Works only if -a/--adapters option is set. Default - 2.")
 
 parser.add_argument("-p", "--pe_score", action="store", dest="pe_score", type=int, default=30,
                     help="PE reads adapter score. Works only if -a/--adapters option is set. Default - 30.")
@@ -77,8 +76,12 @@ args = parser.parse_args()
 
 """
 EXAMPLE
-skliver@supermicro:
-cd ~/workdir/yeast/nizhnikov/good_run/
+cd ~/workdir/yeast/nizhnikov/good_run
+~/soft/MAVR/scripts/transcriptome/differential_expression/star_htseq.py -d fastq/filtered/final/ -o ./ \
+                                                                        -g ~/data/genomes/saccharomyces_cerevisiae/S288C_R64/fasta/STAR_index \
+                                                                        -f ~/data/genomes/saccharomyces_cerevisiae/S288C_R64/fasta/S288C_reference_sequence_R64-1-1_20110203_modified.fasta \
+                                                                        -t 10 -i 12000000 \
+                                                                        -j ~/data/genomes/saccharomyces_cerevisiae/S288C_R64/gff/SJ.intron.tab -r ~/soft/STAR/bin/Linux_x86_64//
 
 """
 
@@ -92,7 +95,8 @@ DiffExpressionPipeline.star_and_htseq(args.genome_dir, args.samples_dir, args.ou
                                       adapter_seq_for_three_prime_clip=None,
                                       max_mismatch_percent_for_adapter_trimming=None,
                                       three_prime_trim_after_adapter_clip=None,
-                                      output_type="BAM", sort_bam=True, max_memory_for_bam_sorting=None,
+                                      output_type="BAM", sort_bam=True,
+                                      max_memory_for_bam_sorting=args.max_memory_for_bam_sorting,
                                       include_unmapped_reads_in_bam=args.include_unmapped_reads,
                                       output_unmapped_reads=True,  two_pass_mode=False, star_dir=args.star_dir,
                                       threads=args.threads)
