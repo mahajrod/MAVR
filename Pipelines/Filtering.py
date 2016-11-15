@@ -114,7 +114,7 @@ class FilteringPipeline:
 
             filtering_statistics[sample]["raw_pairs"] = coockiecutter_report.input_pairs
             filtering_statistics[sample]["pairs_after_coockiecutter"] = coockiecutter_report.retained_pairs
-            filtering_statistics[sample]["pairs_after_coockiecutter,%"] = int("%.2f" % (float(coockiecutter_report.retained_pairs)/float(coockiecutter_report.input_pairs)*100))
+            filtering_statistics[sample]["pairs_after_coockiecutter,%"] = float("%.2f" % (float(coockiecutter_report.retained_pairs)/float(coockiecutter_report.input_pairs)*100))
 
             os.system("cp %s %s" % (coockie_stats, filtering_stat_sample_dir))
 
@@ -164,10 +164,10 @@ class FilteringPipeline:
                 facut_report = FaCutReport(facut_stat_file)
 
                 filtering_statistics[sample]["pairs_after_facut"] = facut_report.retained_pairs
-                filtering_statistics[sample]["pairs_after_facut,%"] = int("%.2f" % (float(facut_report.retained_pairs) / float(facut_report.input_pairs) * 100))
+                filtering_statistics[sample]["pairs_after_facut,%"] = float("%.2f" % (float(facut_report.retained_pairs) / float(facut_report.input_pairs) * 100))
                 filtering_statistics[sample]["retained_pairs_in_worst_tile,%"] = facut_report.minimum_retained_pairs_in_tiles_fraction * 100
 
-                filtering_statistics[sample]["pairs_survived_after_filtration,%"] = int("%.2f" % (float(facut_report.retained_pairs) / coockiecutter_report.input_pairs * 100))
+                filtering_statistics[sample]["pairs_survived_after_filtration,%"] = float("%.2f" % (float(facut_report.retained_pairs) / coockiecutter_report.input_pairs * 100))
 
                 facut_filtered_forward_reads = "%s_1.pe.fq" % facut_output_prefix
                 facut_filtered_reverse_reads = "%s_2.pe.fq" % facut_output_prefix
@@ -178,7 +178,7 @@ class FilteringPipeline:
             else:
                 os.system("ln %s %s" % (coockie_trimmomatic_filtered_paired_forward_reads, final_forward_reads))
                 os.system("ln %s %s" % (coockie_trimmomatic_filtered_paired_reverse_reads, final_reverse_reads))
-                filtering_statistics[sample]["pairs_survived_after_filtration,%"] = int("%.2f" % (float(trimmomatic_report.stats["both_surviving"]) / coockiecutter_report.input_pairs * 100))
+                filtering_statistics[sample]["pairs_survived_after_filtration,%"] = float("%.2f" % (float(trimmomatic_report.stats["both_surviving"]) / coockiecutter_report.input_pairs * 100))
 
             if remove_intermediate_files:
                 shutil.rmtree(coockie_filtered_dir)
