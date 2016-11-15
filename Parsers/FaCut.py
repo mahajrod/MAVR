@@ -20,7 +20,7 @@ class FaCutReport:
         self.tile_table = []
         with open(facut_report_file, "r") as in_fd:
             tmp = ["", ""]
-            while tmp != "Paires retained:":
+            while tmp[0] != "Paires retained:":
                 tmp = in_fd.readline().strip().split("\t")
 
             self.retained_pairs = int(tmp[1])
