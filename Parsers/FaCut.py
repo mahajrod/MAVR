@@ -41,7 +41,7 @@ class FaCutReport:
 
                 self.tile_table.append(tuple(tmp))
 
-            self.tile_table = np.array(self.tile_table, dtype='|S50, u4, S50, u4, S6, u16, u16, u16, u16, u16')
+            self.tile_table = np.array(self.tile_table, dtype='|S50, u4, S50, u4, S6, u8, u8, u8, u8, u8')
 
     def get_fraction_of_retained_pairs_per_tile(self):
         return self.tile_table[:, 5] / self.tile_table[:, 9]
