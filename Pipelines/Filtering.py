@@ -101,8 +101,9 @@ class FilteringPipeline:
             final_filtered_sample_dir = "%s/%s/" % (final_filtered_dir, sample)
             filtering_stat_sample_dir = "%s/%s" % (filtering_stat_dir, sample)
 
-            self.combine_files(samples_directory, sample, merged_raw_sample_dir)
             """
+            self.combine_files(samples_directory, sample, merged_raw_sample_dir)
+
             Cookiecutter.rm_reads(adapter_fragment_file, merged_forward_reads, coockie_stats,
                                   right_reads=merged_reverse_reads,
                                   out_dir=coockie_filtered_sample_dir, use_dust_filter=False,
@@ -163,7 +164,7 @@ class FilteringPipeline:
                 facut_report = FaCutReport(facut_stat_file)
 
                 filtering_statistics[sample]["pairs_after_facut"] = facut_report.retained_pairs
-                filtering_statistics[sample]["pairs_after_facutc,%"] = float(facut_report.retained_pairs) / float(facut_report.input_pairs) * 100
+                filtering_statistics[sample]["pairs_after_facut,%"] = float(facut_report.retained_pairs) / float(facut_report.input_pairs) * 100
                 filtering_statistics[sample]["retained_pairs_in_worst_tile,%"] = facut_report.minimum_retained_pairs_in_tiles_fraction * 100
 
                 filtering_statistics[sample]["pairs_survived_after_filtration,%"] = float(facut_report.retained_pairs) / coockiecutter_report.input_pairs * 100

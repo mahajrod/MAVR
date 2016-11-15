@@ -14,7 +14,7 @@ class TwoLvlDict(OrderedDict):
 
     def table_form(self, absent_symbol="0", sort=True, column_sep="\t", list_sep=","):
         first_level_keys = list(self.keys())
-        second_level_keys = set([])
+        second_level_keys = OrderedSet()
         for fl_key in first_level_keys:
             for sl_key in self[fl_key]:
                 second_level_keys.add(sl_key)
@@ -37,7 +37,7 @@ class TwoLvlDict(OrderedDict):
         return string
 
     def sl_keys(self):
-        sl_key_set = set()
+        sl_key_set = OrderedSet()
         for fl_key in self:
             for sl_key in self[fl_key]:
                 sl_key_set.add(sl_key)

@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Parsers/Trimmomatic.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parsers/FaCut.py" afterPath="$PROJECT_DIR$/Parsers/FaCut.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pipelines/Filtering.py" afterPath="$PROJECT_DIR$/Pipelines/Filtering.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/filter/filtering_pipeline.py" afterPath="$PROJECT_DIR$/scripts/filter/filtering_pipeline.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" afterPath="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -109,7 +107,7 @@
         <entry file="file://$PROJECT_DIR$/Pipelines/Filtering.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="183" column="56" selection-start-line="183" selection-start-column="56" selection-end-line="183" selection-end-column="56" />
+              <caret line="166" column="63" selection-start-line="166" selection-start-column="63" selection-end-line="166" selection-end-column="63" />
               <folding>
                 <element signature="e#22#31#0" expanded="true" />
               </folding>
@@ -117,14 +115,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="filtering_pipeline.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="filtering_pipeline.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/filter/filtering_pipeline.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.65810055">
-              <caret line="65" column="118" selection-start-line="65" selection-start-column="118" selection-end-line="65" selection-end-column="118" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GeneralCollections.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CustomCollections/GeneralCollections.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.20111732">
+              <caret line="40" column="27" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -145,7 +153,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Routines/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/mtDNA/get_general_data_from_genbank_file.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/get_random_species_sequences.py" />
         <option value="$PROJECT_DIR$/scripts/mtDNA/split_mtdna_by_genes.py" />
@@ -194,8 +201,9 @@
         <option value="$PROJECT_DIR$/Routines/Matplotlib.py" />
         <option value="$PROJECT_DIR$/Parsers/Trimmomatic.py" />
         <option value="$PROJECT_DIR$/Parsers/FaCut.py" />
-        <option value="$PROJECT_DIR$/Pipelines/Filtering.py" />
         <option value="$PROJECT_DIR$/scripts/filter/filtering_pipeline.py" />
+        <option value="$PROJECT_DIR$/Pipelines/Filtering.py" />
+        <option value="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" />
       </list>
     </option>
   </component>
@@ -341,6 +349,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Parsers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CustomCollections" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -731,24 +753,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00938" summary="changes">
-      <created>1478085208818</created>
-      <option name="number" value="00938" />
-      <option name="project" value="LOCAL" />
-      <updated>1478085208818</updated>
-    </task>
-    <task id="LOCAL-00939" summary="changes">
-      <created>1478086176641</created>
-      <option name="number" value="00939" />
-      <option name="project" value="LOCAL" />
-      <updated>1478086176641</updated>
-    </task>
-    <task id="LOCAL-00940" summary="changes">
-      <created>1478086255807</created>
-      <option name="number" value="00940" />
-      <option name="project" value="LOCAL" />
-      <updated>1478086255807</updated>
-    </task>
     <task id="LOCAL-00941" summary="changes">
       <created>1478086310933</created>
       <option name="number" value="00941" />
@@ -1025,7 +1029,25 @@
       <option name="project" value="LOCAL" />
       <updated>1479171573412</updated>
     </task>
-    <option name="localTasksCounter" value="987" />
+    <task id="LOCAL-00987" summary="changes">
+      <created>1479181772763</created>
+      <option name="number" value="00987" />
+      <option name="project" value="LOCAL" />
+      <updated>1479181772763</updated>
+    </task>
+    <task id="LOCAL-00988" summary="changes">
+      <created>1479182116993</created>
+      <option name="number" value="00988" />
+      <option name="project" value="LOCAL" />
+      <updated>1479182116993</updated>
+    </task>
+    <task id="LOCAL-00989" summary="changes">
+      <created>1479182128806</created>
+      <option name="number" value="00989" />
+      <option name="project" value="LOCAL" />
+      <updated>1479182128807</updated>
+    </task>
+    <option name="localTasksCounter" value="990" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1175,13 +1197,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/eggnog/convert_members_tsv_to_fam.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/treefam/extract_families_of_species.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1554,6 +1569,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/filter/filtering_pipeline.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+          <folding>
+            <element signature="e#54#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pipelines/Filtering.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="166" column="63" selection-start-line="166" selection-start-column="63" selection-end-line="166" selection-end-column="63" />
+          <folding>
+            <element signature="e#22#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Parsers/FaCut.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1564,23 +1599,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Pipelines/Filtering.py">
+    <entry file="file://$PROJECT_DIR$/CustomCollections/GeneralCollections.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="183" column="56" selection-start-line="183" selection-start-column="56" selection-end-line="183" selection-end-column="56" />
-          <folding>
-            <element signature="e#22#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/filter/filtering_pipeline.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.65810055">
-          <caret line="65" column="118" selection-start-line="65" selection-start-column="118" selection-end-line="65" selection-end-column="118" />
-          <folding>
-            <element signature="e#54#63#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.20111732">
+          <caret line="40" column="27" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
