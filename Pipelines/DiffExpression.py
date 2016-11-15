@@ -4,61 +4,75 @@ import shutil
 
 from collections import OrderedDict
 
-from Tools.Filter import Cookiecutter, Trimmomatic, FaCut
 from Routines import FileRoutines
+from CustomCollections.GeneralCollections import TwoLvlDict
+
+from Tools.Filter import Cookiecutter, Trimmomatic, FaCut
+from Tools.Alignment import STAR
 from Parsers.FaCut import FaCutReport
 from Parsers.Coockiecutter import CoockiecutterReport
 from Parsers.Trimmomatic import TrimmomaticReport
 
-from CustomCollections.GeneralCollections import TwoLvlDict
+from Pipelines.Filtering import FilteringPipeline
 
 
-class FilteringPipeline:
+class DiffExpressionPipeline(FilteringPipeline):
     def __init__(self):
         pass
 
     @staticmethod
     def prepare_directories(output_directory, sample_list):
-        merged_raw_dir = "%s/merged/" % output_directory
-        filtered_dir = "%s/filtered/" % output_directory
-        filtering_stat_dir = "%s/filtered_stat/" % output_directory
-        coockie_filtered_dir = "%s/coockiecutter/" % filtered_dir
-        coockie_trimmomatic_filtered_dir = "%s/coockiecutter_trimmomatic/" % filtered_dir
-        coockie_trimmomatic_quality_filtered_dir = "%s/coockiecutter_trimmomatic_quality/" % filtered_dir
-        final_filtered_dir = "%s/final/" % filtered_dir
 
-        FileRoutines.save_mkdir(filtered_dir)
-        for directory in merged_raw_dir, coockie_filtered_dir, coockie_trimmomatic_filtered_dir, coockie_trimmomatic_quality_filtered_dir, final_filtered_dir, filtering_stat_dir:
+        alignment_dir = "%s/alignment/" % output_directory
+
+        for directory in alignment_dir:
             FileRoutines.save_mkdir(directory)
             for sample in sample_list:
                 FileRoutines.save_mkdir("%s/%s" % (directory, sample))
 
-    @staticmethod
-    def get_sample_list(samples_directory):
-        samples = sorted(os.listdir(samples_directory))
-        sample_list = []
-        for sample in samples:
-            if os.path.isdir("%s/%s" % (samples_directory, sample)):
-                sample_list.append(sample)
-        return sample_list
+    def star_and_htseq(self, genome_dir, samples_directory, output_directory, genome_fasta=None, samples_to_handle=None,
+                       genome_size=None, annotation_gtf=None,
+                       feature_from_gtf_to_use_as_exon=None, exon_tag_to_use_as_transcript_id=None,
+                       exon_tag_to_use_as_gene_id=None, length_of_sequences_flanking_junction=None,
+                       junction_tab_file_list=None,
+                       three_prime_trim=None, five_prime_trim=None, adapter_seq_for_three_prime_clip=None,
+                       max_mismatch_percent_for_adapter_trimming=None, three_prime_trim_after_adapter_clip=None,
+                       output_type="BAM", sort_bam=True, max_memory_for_bam_sorting=None, include_unmapped_reads_in_bam=True,
+                       output_unmapped_reads=True,  two_pass_mode=False, star_dir=None, threads=1):
 
-    @staticmethod
-    def combine_fastq_files(samples_directory, sample, output_directory):
-        sample_dir = "%s/%s/" % (samples_directory, sample)
-        filetypes, forward_files, reverse_files = FileRoutines.make_lists_forward_and_reverse_files(sample_dir)
-        if len(filetypes) == 1:
-            if "fq.gz" in filetypes:
-                command = "zcat"
-            elif "fq.bz2" in filetypes:
-                command = "bzcat"
-            else:
-                command = "cat"
+        STAR.threads = threads
+        STAR.path = star_dir
 
-            os.system("%s %s > %s/%s_1.fq" % (command, " ".join(forward_files), output_directory, sample))
-            os.system("%s %s > %s/%s_2.fq" % (command, " ".join(reverse_files), output_directory, sample))
-        else:
-            raise IOError("Extracting from mix of archives in not implemented yet")
+        if genome_fasta:
+            STAR.index(genome_dir, genome_fasta, annotation_gtf=None, junction_tab_file=None, sjdboverhang=None,
+                       genomeSAindexNbases=None, genomeChrBinNbits=None, genome_size=genome_size)
 
+        sample_list = samples_to_handle if samples_to_handle else self.get_sample_list(samples_directory)
+        self.prepare_directories(output_directory, sample_list)
+
+        alignment_dir = "%s/alignment/" % output_directory
+
+        for sample in sample_list:
+            sample_dir = "%s/%s/" % (samples_directory, sample)
+            alignment_sample_dir = "%s/%s/" % (alignment_dir, sample)
+            filetypes, forward_files, reverse_files = FileRoutines.make_lists_forward_and_reverse_files(sample_dir)
+            STAR.align(genome_dir, forward_files, reverse_read_list=reverse_files, annotation_gtf=annotation_gtf,
+                       feature_from_gtf_to_use_as_exon=feature_from_gtf_to_use_as_exon,
+                       exon_tag_to_use_as_transcript_id=exon_tag_to_use_as_transcript_id,
+                       exon_tag_to_use_as_gene_id=exon_tag_to_use_as_gene_id,
+                       length_of_sequences_flanking_junction=length_of_sequences_flanking_junction,
+                       junction_tab_file_list=junction_tab_file_list,
+                       three_prime_trim=three_prime_trim, five_prime_trim=five_prime_trim,
+                       adapter_seq_for_three_prime_clip=adapter_seq_for_three_prime_clip,
+                       max_mismatch_percent_for_adapter_trimming=max_mismatch_percent_for_adapter_trimming,
+                       three_prime_trim_after_adapter_clip=three_prime_trim_after_adapter_clip,
+                       output_type=output_type, sort_bam=sort_bam,
+                       max_memory_for_bam_sorting=max_memory_for_bam_sorting,
+                       include_unmapped_reads_in_bam=include_unmapped_reads_in_bam,
+                       output_unmapped_reads=output_unmapped_reads, output_dir=alignment_sample_dir,
+                       two_pass_mode=two_pass_mode)
+
+    """
     def filter(self, samples_directory, output_directory, adapter_fragment_file, trimmomatic_adapter_file,
                general_stat_file,
                samples_to_handle=None, threads=4, trimmomatic_dir="", coockiecutter_dir="", facut_dir="",
@@ -101,15 +115,15 @@ class FilteringPipeline:
             final_filtered_sample_dir = "%s/%s/" % (final_filtered_dir, sample)
             filtering_stat_sample_dir = "%s/%s" % (filtering_stat_dir, sample)
 
-            #"""
-            self.combine_fastq_files(samples_directory, sample, merged_raw_sample_dir)
+
+            self.combine_files(samples_directory, sample, merged_raw_sample_dir)
 
             Cookiecutter.rm_reads(adapter_fragment_file, merged_forward_reads, coockie_stats,
                                   right_reads=merged_reverse_reads,
                                   out_dir=coockie_filtered_sample_dir, use_dust_filter=False,
                                   dust_cutoff=None, dust_window_size=None, use_N_filter=False,
                                   read_length_cutoff=None, polyGC_length_cutoff=None)
-            #"""
+
             coockiecutter_report = CoockiecutterReport(coockie_stats)
 
             filtering_statistics[sample]["raw_pairs"] = coockiecutter_report.input_pairs
@@ -125,7 +139,7 @@ class FilteringPipeline:
             coockie_trimmomatic_filtered_sample_dir = "%s/%s/" % (coockie_trimmomatic_filtered_dir, sample)
             trimmomatic_output_prefix = "%s/%s" % (coockie_trimmomatic_filtered_sample_dir, sample)
             trimmomatic_log = "%s.trimmomatic.log" % trimmomatic_output_prefix
-            #"""
+
             Trimmomatic.filter(coockie_filtered_paired_forward_reads, trimmomatic_output_prefix, output_extension="fq",
                                right_reads=coockie_filtered_paired_reverse_reads,
                                adapters_file=trimmomatic_adapter_file,
@@ -138,7 +152,7 @@ class FilteringPipeline:
                                crop_length=crop_length, head_crop_length=head_crop_length, min_length=min_len,
                                logfile=trimmomatic_log,
                                base_quality=base_quality)
-            #"""
+
             trimmomatic_report = TrimmomaticReport(trimmomatic_log)
             filtering_statistics[sample]["pairs_after_trimmomatic"] = trimmomatic_report.stats["both_surviving"]
             filtering_statistics[sample]["pairs_after_trimmomatic,%"] = trimmomatic_report.stats["both_surviving,%"]
@@ -154,13 +168,13 @@ class FilteringPipeline:
             if sliding_window_size is None:
                 facut_output_prefix = "%s/%s" % (coockie_trimmomatic_quality_filtered_sample_dir, sample)
                 facut_stat_file = "%s.facut.stat" % facut_output_prefix
-                #"""
+
                 FaCut.filter_by_mean_quality(average_quality_threshold,
                                              coockie_trimmomatic_filtered_paired_forward_reads,
                                              coockie_trimmomatic_filtered_paired_reverse_reads,
                                              facut_output_prefix, quality_type=base_quality,
                                              stat_file=facut_stat_file, name_type=read_name_type)
-                #"""
+
                 facut_report = FaCutReport(facut_stat_file)
 
                 filtering_statistics[sample]["pairs_after_facut"] = facut_report.retained_pairs
@@ -186,3 +200,4 @@ class FilteringPipeline:
             shutil.rmtree(coockie_trimmomatic_quality_filtered_dir)
 
         filtering_statistics.write(general_stat_file, sort=False)
+        """
