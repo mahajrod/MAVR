@@ -92,9 +92,9 @@ class MatplotlibRoutines:
             number_of_bins = n_bins
         else:
             if input_mode == "percent":
-                n_bins = np.linspace(0, 100, n_bins+1)
+                number_of_bins = np.linspace(0, 100, n_bins+1)
             elif input_mode == "fraction":
-                n_bins = np.linspace(0, 1.0, n_bins+1)
+                number_of_bins = np.linspace(0, 1.0, n_bins+1)
 
         n, bins, patches = plt.hist(data, bins=number_of_bins, label=label)
 
