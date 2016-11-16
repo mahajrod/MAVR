@@ -113,7 +113,7 @@ cd ~/workdir/yeast/nizhnikov/good_run
                                                                         -n no \
                                                                         -e ~/data/genomes/saccharomyces_cerevisiae/S288C_R64/gff/saccharomyces_cerevisiae_R64-1-1_20110208_edited_mt_no_fasta.gff \
                                                                         --feature_type_for_htseq CDS \
-                                                                        --feature_id_attribute_for_htseq Parent
+                                                                        --feature_id_attribute_for_htseq Parent \
                                                                         -b all_samples_read_count.table
 """
 

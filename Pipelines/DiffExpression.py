@@ -84,7 +84,7 @@ class DiffExpressionPipeline(FilteringPipeline):
             """
             alignment_file = "%s/Aligned.sortedByCoord.out.bam" % alignment_sample_dir
 
-            print "\tIndexing alignment file"
+            print "\tIndexing alignment file..."
             os.system("samtools index %s" % alignment_file)
 
             print "\tCounting reads aligned to features"
