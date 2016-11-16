@@ -8,8 +8,8 @@ class HTSeq(Tool):
     def __init__(self, path="", max_threads=4):
         Tool.__init__(self, "htseq-count", path=path, max_threads=max_threads)
 
-    def count(self, alignment_file, gff_file, samtype="bam", order=None, stranded_rnaseq="yes", min_alignment_quality=10,
-              feature_type="exon", feature_id_attribute="gene_id", mode="union",
+    def count(self, alignment_file, gff_file, output_file, samtype="bam", order=None, stranded_rnaseq="yes",
+              min_alignment_quality=10, feature_type="exon", feature_id_attribute="gene_id", mode="union",
               suppress_progres_report=False):
         """
           -h, --help            show this help message and exit
@@ -59,6 +59,6 @@ class HTSeq(Tool):
 
         options += " %s" % alignment_file
         options += " %s" % gff_file
+        options += " > %s" % output_file
 
         self.execute(options=options)
-

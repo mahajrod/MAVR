@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pipelines/DiffExpression.py" afterPath="$PROJECT_DIR$/Pipelines/DiffExpression.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Expression/HTSeq.py" afterPath="$PROJECT_DIR$/Tools/Expression/HTSeq.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/transcriptome/differential_expression/star_htseq.py" afterPath="$PROJECT_DIR$/scripts/transcriptome/differential_expression/star_htseq.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -71,11 +72,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DiffExpression.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DiffExpression.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Pipelines/DiffExpression.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="75" column="59" selection-start-line="75" selection-start-column="52" selection-end-line="75" selection-end-column="87" />
+            <state vertical-scroll-proportion="0.3765363">
+              <caret line="82" column="12" selection-start-line="82" selection-start-column="12" selection-end-line="82" selection-end-column="12" />
               <folding>
                 <element signature="e#22#31#0" expanded="true" />
               </folding>
@@ -97,8 +98,10 @@
         <entry file="file://$PROJECT_DIR$/Tools/Expression/HTSeq.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
-              <folding />
+              <caret line="10" column="30" selection-start-line="10" selection-start-column="14" selection-end-line="12" selection-end-column="43" />
+              <folding>
+                <element signature="e#506#2771#1" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -115,11 +118,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="star_htseq.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="star_htseq.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/transcriptome/differential_expression/star_htseq.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.17541899">
-              <caret line="59" column="28" selection-start-line="59" selection-start-column="28" selection-end-line="59" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="113" column="111" selection-start-line="113" selection-start-column="111" selection-end-line="113" selection-end-column="111" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
@@ -214,10 +217,10 @@
         <option value="$PROJECT_DIR$/Pipelines/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/transcriptome/expression/differential_expression_pipeline.py" />
         <option value="$PROJECT_DIR$/Tools/Expression/__init__.py" />
-        <option value="$PROJECT_DIR$/Tools/Expression/HTSeq.py" />
         <option value="$PROJECT_DIR$/Tools/Alignment/STAR.py" />
-        <option value="$PROJECT_DIR$/Pipelines/DiffExpression.py" />
+        <option value="$PROJECT_DIR$/Tools/Expression/HTSeq.py" />
         <option value="$PROJECT_DIR$/scripts/transcriptome/differential_expression/star_htseq.py" />
+        <option value="$PROJECT_DIR$/Pipelines/DiffExpression.py" />
       </list>
     </option>
   </component>
@@ -811,12 +814,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00954" summary="changes">
-      <created>1479150576033</created>
-      <option name="number" value="00954" />
-      <option name="project" value="LOCAL" />
-      <updated>1479150576034</updated>
-    </task>
     <task id="LOCAL-00955" summary="changes">
       <created>1479150751776</created>
       <option name="number" value="00955" />
@@ -1105,7 +1102,13 @@
       <option name="project" value="LOCAL" />
       <updated>1479240034905</updated>
     </task>
-    <option name="localTasksCounter" value="1003" />
+    <task id="LOCAL-01003" summary="changes">
+      <created>1479240074553</created>
+      <option name="number" value="01003" />
+      <option name="project" value="LOCAL" />
+      <updated>1479240074553</updated>
+    </task>
+    <option name="localTasksCounter" value="1004" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1645,24 +1648,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Expression/HTSeq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Pipelines/DiffExpression.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="75" column="59" selection-start-line="75" selection-start-column="52" selection-end-line="75" selection-end-column="87" />
-          <folding>
-            <element signature="e#22#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Alignment/STAR.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1673,12 +1658,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Expression/HTSeq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="30" selection-start-line="10" selection-start-column="14" selection-end-line="12" selection-end-column="43" />
+          <folding>
+            <element signature="e#506#2771#1" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/transcriptome/differential_expression/star_htseq.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17541899">
-          <caret line="59" column="28" selection-start-line="59" selection-start-column="28" selection-end-line="59" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="113" column="111" selection-start-line="113" selection-start-column="111" selection-end-line="113" selection-end-column="111" />
           <folding>
             <element signature="e#54#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pipelines/DiffExpression.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3765363">
+          <caret line="82" column="12" selection-start-line="82" selection-start-column="12" selection-end-line="82" selection-end-column="12" />
+          <folding>
+            <element signature="e#22#31#0" expanded="true" />
           </folding>
         </state>
       </provider>

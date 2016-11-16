@@ -18,6 +18,26 @@ parser.add_argument("-o", "--output_dir", action="store", dest="output_dir",
 parser.add_argument("-g", "--genome_dir", action="store", dest="genome_dir", required=True,
                     type=lambda s: check_path(os.path.abspath(s)),
                     help="Directory with star index for genome")
+parser.add_argument("-e", "--gff_for_htseq", action="store", required=True,
+                    dest="gff_for_htseq", help="Gff file with annotations for HTseq")
+parser.add_argument("-n", "--stranded_rnaseq", action="store", default="yes",
+                    dest="stranded_rnaseq", help="Type of RNAseq data. Allowed: 'yes' - stranded"
+                                                 "'no' - unstranded, 'reverse' - stranded but with "
+                                                 "reversed orientation of reads in pair. Default - yes.")
+parser.add_argument("-l", "--min_alignment_quality", action="store", default=10, type=int,
+                    dest="min_alignment_quality",
+                    help="Minimum quality of read alignment to be considered. Default - 10")
+
+parser.add_argument("--feature_type_for_htseq", action="store", default="exon",
+                    dest="feature_type_for_htseq",
+                    help="Feature type from annotation gff to be used for counting reads. Default - 'exon'")
+parser.add_argument("--feature_id_attribute_for_htseq", action="store", default="gene_id",
+                    dest="feature_id_attribute_for_htseq",
+                    help="Feature id attribute from annotation gff to be considered for counting reads. "
+                         "Default - 'gene_id'")
+parser.add_argument("--htseq_mode", action="store", default="union",
+                    dest="htseq_mode",
+                    help="HTSeq mode for counting reads. Default - 'union'")
 parser.add_argument("-f", "--genome_fasta", action="store", dest="genome_fasta",
                     type=os.path.abspath,
                     help="Path to genome fasta file. If set Star will construct genome index first"
@@ -73,6 +93,9 @@ parser.add_argument("-c", "--coockiecutter_dir", action="store", dest="coockiecu
 
 """
 
+
+
+
 args = parser.parse_args()
 
 """
@@ -82,13 +105,17 @@ cd ~/workdir/yeast/nizhnikov/good_run
                                                                         -g ~/data/genomes/saccharomyces_cerevisiae/S288C_R64/fasta/STAR_index \
                                                                         -f ~/data/genomes/saccharomyces_cerevisiae/S288C_R64/fasta/S288C_reference_sequence_R64-1-1_20110203_modified.fasta \
                                                                         -t 10 -i 12000000 \
-                                                                        -j ~/data/genomes/saccharomyces_cerevisiae/S288C_R64/gff/SJ.intron.tab -r ~/soft/STAR/bin/Linux_x86_64//
-                                                                        -m 20000000000
-                                                                        -x 3000
-
+                                                                        -j ~/data/genomes/saccharomyces_cerevisiae/S288C_R64/gff/SJ.intron.tab -r ~/soft/STAR/bin/Linux_x86_64//    \
+                                                                        -m 20000000000  \
+                                                                        -x 3000 \
+                                                                        -n no   \
+                                                                        -e ~/data/genomes/saccharomyces_cerevisiae/S288C_R64/gff/   \
+                                                                        --feature_type_for_htseq CDS    \
+                                                                        --feature_id_attribute_for_htseq Parent
 """
 
-DiffExpressionPipeline.star_and_htseq(args.genome_dir, args.samples_dir, args.output_dir, genome_fasta=args.genome_fasta,
+DiffExpressionPipeline.star_and_htseq(args.genome_dir, args.samples_dir, args.output_dir, args.gff_for_htseq,
+                                      genome_fasta=args.genome_fasta,
                                       genome_size=args.genome_size, samples_to_handle=args.samples,
                                       annotation_gtf=args.annotation_gtf,
                                       feature_from_gtf_to_use_as_exon=None, exon_tag_to_use_as_transcript_id=None,
@@ -102,4 +129,10 @@ DiffExpressionPipeline.star_and_htseq(args.genome_dir, args.samples_dir, args.ou
                                       max_memory_for_bam_sorting=args.max_memory_for_bam_sorting,
                                       include_unmapped_reads_in_bam=args.include_unmapped_reads,
                                       output_unmapped_reads=True,  two_pass_mode=False, star_dir=args.star_dir,
-                                      threads=args.threads, max_intron_length=args.max_intron_length)
+                                      threads=args.threads, max_intron_length=args.max_intron_length,
+                                      stranded_rnaseq=args.stranded_rnaseq,
+                                      min_alignment_quality=args.min_alignment_quality,
+                                      feature_type_for_htseq=args.feature_type_for_htseq,
+                                      feature_id_attribute_for_htseq=args.feature_id_attribute_for_htseq,
+                                      htseq_mode=args.htseq_mode)
+
