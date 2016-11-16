@@ -20,6 +20,8 @@ parser.add_argument("-g", "--genome_dir", action="store", dest="genome_dir", req
                     help="Directory with star index for genome")
 parser.add_argument("-e", "--gff_for_htseq", action="store", required=True,
                     dest="gff_for_htseq", help="Gff file with annotations for HTseq")
+parser.add_argument("-b", "--count_table_file", action="store", dest="count_table_file", type=os.path.abspath,
+                    help="File to write resulting count table")
 parser.add_argument("-n", "--stranded_rnaseq", action="store", default="yes",
                     dest="stranded_rnaseq", help="Type of RNAseq data. Allowed: 'yes' - stranded"
                                                  "'no' - unstranded, 'reverse' - stranded but with "
@@ -105,17 +107,18 @@ cd ~/workdir/yeast/nizhnikov/good_run
                                                                         -g ~/data/genomes/saccharomyces_cerevisiae/S288C_R64/fasta/STAR_index \
                                                                         -f ~/data/genomes/saccharomyces_cerevisiae/S288C_R64/fasta/S288C_reference_sequence_R64-1-1_20110203_modified.fasta \
                                                                         -t 10 -i 12000000 \
-                                                                        -j ~/data/genomes/saccharomyces_cerevisiae/S288C_R64/gff/SJ.intron.tab -r ~/soft/STAR/bin/Linux_x86_64//    \
-                                                                        -m 20000000000  \
+                                                                        -j ~/data/genomes/saccharomyces_cerevisiae/S288C_R64/gff/SJ.intron.tab -r ~/soft/STAR/bin/Linux_x86_64// \
+                                                                        -m 20000000000 \
                                                                         -x 3000 \
-                                                                        -n no   \
-                                                                        -e ~/data/genomes/saccharomyces_cerevisiae/S288C_R64/gff/   \
-                                                                        --feature_type_for_htseq CDS    \
+                                                                        -n no \
+                                                                        -e ~/data/genomes/saccharomyces_cerevisiae/S288C_R64/gff/saccharomyces_cerevisiae_R64-1-1_20110208_edited_mt_no_fasta.gff \
+                                                                        --feature_type_for_htseq CDS \
                                                                         --feature_id_attribute_for_htseq Parent
+                                                                        -b all_samples_read_count.table
 """
 
 DiffExpressionPipeline.star_and_htseq(args.genome_dir, args.samples_dir, args.output_dir, args.gff_for_htseq,
-                                      genome_fasta=args.genome_fasta,
+                                      args.count_table_file, genome_fasta=args.genome_fasta,
                                       genome_size=args.genome_size, samples_to_handle=args.samples,
                                       annotation_gtf=args.annotation_gtf,
                                       feature_from_gtf_to_use_as_exon=None, exon_tag_to_use_as_transcript_id=None,

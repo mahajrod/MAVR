@@ -5,7 +5,7 @@ import shutil
 from collections import OrderedDict
 
 from Routines import FileRoutines
-from CustomCollections.GeneralCollections import TwoLvlDict
+from CustomCollections.GeneralCollections import TwoLvlDict, SynDict
 
 from Tools.Filter import Cookiecutter, Trimmomatic, FaCut
 from Tools.Alignment import STAR
@@ -32,7 +32,7 @@ class DiffExpressionPipeline(FilteringPipeline):
             for sample in sample_list:
                 FileRoutines.save_mkdir("%s/%s" % (directory, sample))
 
-    def star_and_htseq(self, genome_dir, samples_directory, output_directory, gff_for_htseq,
+    def star_and_htseq(self, genome_dir, samples_directory, output_directory, gff_for_htseq, count_table_file,
                        genome_fasta=None, samples_to_handle=None,
                        genome_size=None, annotation_gtf=None,
                        feature_from_gtf_to_use_as_exon=None, exon_tag_to_use_as_transcript_id=None,
@@ -57,6 +57,7 @@ class DiffExpressionPipeline(FilteringPipeline):
 
         alignment_dir = "%s/alignment/" % output_directory
 
+        count_table = TwoLvlDict()
         for sample in sample_list:
             print ("Handling %s" % sample)
             sample_dir = "%s/%s/" % (samples_directory, sample)
@@ -88,11 +89,19 @@ class DiffExpressionPipeline(FilteringPipeline):
 
             print "\tCounting reads aligned to features"
             count_file = "%s/%s.htseq.count" % (alignment_sample_dir, sample)
-
+            """
             HTSeq.count(alignment_file, gff_for_htseq, count_file, samtype="bam", order="pos",
                         stranded_rnaseq=stranded_rnaseq, min_alignment_quality=min_alignment_quality,
                         feature_type=feature_type_for_htseq, feature_id_attribute=feature_id_attribute_for_htseq,
                         mode=htseq_mode, suppress_progres_report=False)
+            """
+            sample_counts = SynDict()
+            sample_counts.read(count_file, header=False, separator="\t", allow_repeats_of_key=False,
+                               split_values=False, values_separator=",", key_index=0, value_index=1,
+                               close_after_if_file_object=False, expression=None, comments_prefix="__")
+            count_table[sample] = sample_counts
+
+        count_table.write(count_table_file)
 
     """
     def filter(self, samples_directory, output_directory, adapter_fragment_file, trimmomatic_adapter_file,
