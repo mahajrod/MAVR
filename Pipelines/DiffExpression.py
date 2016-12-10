@@ -87,7 +87,7 @@ class DiffExpressionPipeline(FilteringPipeline):
             print "\tIndexing alignment file..."
             os.system("samtools index %s" % alignment_file)
 
-            print "\tCounting reads aligned to features"
+            print "\tCounting reads aligned to features..."
             count_file = "%s/%s.htseq.count" % (alignment_sample_dir, sample)
             """
             HTSeq.count(alignment_file, gff_for_htseq, count_file, samtype="bam", order="pos",

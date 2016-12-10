@@ -42,9 +42,31 @@ class FileRoutines():
         prefix, extension = os.path.splitext(basename)
         return directory, prefix, extension
 
-    @staticmethod
-    def make_list_of_path_to_files(list_of_dirs_and_files, expression=None):
+    def make_list_of_path_to_files(self, list_of_dirs_and_files, expression=None, recursive=False):
+        file_list = []
+        for entry in [list_of_dirs_and_files] if isinstance(list_of_dirs_and_files, str) else list_of_dirs_and_files:
+            if os.path.isdir(entry):
+                files_in_dir = ["%s%s" % (self.check_path(entry), filename)
+                                for filename in sorted(filter(expression, os.listdir(entry))
+                                                       if expression else os.listdir(entry))]
+                if recursive:
+                    for filename in files_in_dir:
+                        if os.path.isdir(filename):
+                            file_list += self.make_list_of_path_to_files([filename],
+                                                                         expression=expression,
+                                                                         recursive=recursive)
+                        else:
+                            file_list.append(filename)
+                else:
+                    file_list += files_in_dir
+            elif os.path.exists(entry):
+                file_list.append(os.path.abspath(entry))
+            else:
+                print("%s does not exist" % entry)
 
+        return file_list
+    """
+    def make_list_of_path_to_files(self, list_of_dirs_and_files, expression=None):
         pathes_list = []
         list_of_objects = [list_of_dirs_and_files] if isinstance(list_of_dirs_and_files, str) else \
             list_of_dirs_and_files if isinstance(list_of_dirs_and_files, Iterable) else None
@@ -55,14 +77,14 @@ class FileRoutines():
             if os.path.isdir(entry):
                 files_in_dir = sorted(filter(expression, os.listdir(entry)) if expression else os.listdir(entry))
                 for filename in files_in_dir:
-                    pathes_list.append("%s%s" % (check_path(entry), filename))
+                    pathes_list.append("%s%s" % (self.check_path(entry), filename))
             elif os.path.exists(entry):
                 pathes_list.append(os.path.abspath(entry))
             else:
                 print("%s does not exist" % entry)
 
         return pathes_list
-
+    """
     @staticmethod
     def read_synonyms_dict(filename, header=False, separator="\t",
                            split_values=False, values_separator=",", key_index=0, value_index=1):

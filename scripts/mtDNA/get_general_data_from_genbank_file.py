@@ -7,7 +7,7 @@ import os
 from Bio import SeqIO
 from BCBio import GFF
 
-from Routines.Sequence import record_by_id_generator, find_gaps
+from Routines import SequenceRoutines #  record_by_id_generator, find_gaps
 
 from GeneSynonyms.MitoGenesSynonyms import mithochondrioal_genes_syndict
 
@@ -27,7 +27,7 @@ tmp_index_file = "temp.idx"
 
 print("Parsing %s..." % args.input_file)
 sequence_dict = SeqIO.index_db(tmp_index_file, args.input_file, format="genbank")
-gaps_dict = find_gaps(sequence_dict)
+gaps_dict = SequenceRoutines.find_gaps(sequence_dict)
 
 with open(args.out_file, "w") as out_fd:
     out_fd.write("#sequence_id\tspecies\tlength\tlineage\treferences\tgenes\trRNA\n")

@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 import os
+import re
 import time
+import xmltodict
+
+from collections import Iterable
 
 import numpy as np
 
@@ -8,7 +12,58 @@ from collections import OrderedDict
 from Bio import SeqIO, Entrez
 from Bio.SeqRecord import SeqRecord
 from Routines import FileRoutines
-from CustomCollections.GeneralCollections import IdList, SynDict
+from CustomCollections.GeneralCollections import IdList, SynDict, TwoLvlDict
+
+
+class AssemblySummary(OrderedDict):
+
+    def __init__(self, entrez_summary_biopython):
+        OrderedDict.__init__(self)
+        parameters_dict = entrez_summary_biopython['DocumentSummarySet']['DocumentSummary'][0]
+        self.stats = self.parse_stats_from_assembly_summary_metadata(parameters_dict['Meta'])
+
+        for parameter in 'SpeciesName', 'Organism', 'Taxid', 'AssemblyName', 'FtpPath_GenBank', 'PropertyList', \
+                         'SubmissionDate', 'AssemblyAccession', 'LastMajorReleaseAccession', \
+                         'AssemblyType', 'PartialGenomeRepresentation', 'AssemblyClass', 'AnomalousList',\
+                         'AssemblyStatus', 'BioSampleId':
+            if parameter in parameters_dict:
+                setattr(self, parameter, parameters_dict[parameter])
+            else:
+                setattr(self, parameter, None)
+                #exec("self[%s] = None" % parameter)
+        for entry in self.stats:
+            self[entry] = self.stats[entry]
+        for entry in parameters_dict:
+            self[entry] = parameters_dict[entry]
+
+        for parameter in "alt_loci_count", "chromosome_count", "contig_count", "contig_l50", "contig_n50", \
+                         "non_chromosome_replicon_count", "replicon_count", "scaffold_count_all", \
+                         "scaffold_count_placed", "scaffold_count_unlocalized", "scaffold_count_unplaced",\
+                         "scaffold_l50", "scaffold_n50", "total_length", "ungapped_length":
+            setattr(self, parameter, self[parameter])
+
+        self.complete_genome = True if self.AssemblyStatus == 'Complete Genome' else False
+        self.chromosome_lvl = True if 'has-chromosome' in self.PropertyList else False
+        self.chloroplast = True if 'has-chloroplast' in self.PropertyList else False
+        self.mitochondrion = True if 'has-mitochondrion' in self.PropertyList else False
+        self.plasmid = True if 'has-plasmid' in self.PropertyList else False
+
+    @staticmethod
+    def parse_stats_from_assembly_summary_metadata(metadata):
+
+        end = re.search("/Stats>", metadata).end()
+        tmp_dict = xmltodict.parse(metadata[:end])
+        stat_dict = OrderedDict()
+        for entry in tmp_dict["Stats"]["Stat"]:
+            if "scaffold_count" in entry['@category']:
+                stat_dict[entry['@category'] + "_" + entry['@sequence_tag']] = int(entry['#text'])
+            else:
+                stat_dict[entry['@category']] = int(entry['#text'])
+
+        return stat_dict
+
+    def string_form(self, separator="\t"):
+        pass
 
 
 class NCBIRoutines:
@@ -194,3 +249,225 @@ class NCBIRoutines:
         pep_ids.read(protein_id_file)
 
         self.get_cds_for_proteins(pep_ids, output_prefix)
+
+    @staticmethod
+    def get_taxonomy(taxa_list, output_file, email, input_type="latin"):
+        Entrez.email = email
+        out_file = open(output_file, "w")
+        out_file.write("#species\tlineage\n")
+        if input_type == "latin":
+            for taxon in taxa_list:
+                print "Handling %s" % taxon
+                summary = Entrez.read(Entrez.esearch(db="taxonomy", term=taxon))
+                if summary:
+                    id_list = summary["IdList"]
+                    for id in id_list:
+                        print "handling %s" % id
+                        record = Entrez.read(Entrez.efetch(db="taxonomy", id=id, retmode="xml"))
+                        out_file.write("%s\t%s\t%s\n" % (taxon, record[0]["Rank"], record[0]["Lineage"]))
+
+        elif input_type == "id":
+            for taxon in taxa_list:
+                print "Handling %s" % taxon
+                record = Entrez.read(Entrez.efetch(db="taxonomy", id=taxon, retmode="xml"))
+                out_file.write("%s\t%s\t%s\n" % (taxon, record[0]["Rank"], record[0]["Lineage"]))
+
+    def get_taxonomy_from_id_file(self, taxa_file, output_file, email, input_type="latin"):
+
+        taxa_list = IdList()
+        taxa_list.read(taxa_file)
+
+        self.get_taxonomy(taxa_list, output_file, email, input_type=input_type)
+
+    def get_taxa_genomes_summary(self, taxa, email, output_file):
+        Entrez.email = email
+        taxa_list = taxa if isinstance(taxa, Iterable) else [taxa]
+
+        for taxon in taxa_list:
+            search_term = "%s[Orgn]" % taxon
+
+            summary = Entrez.read(Entrez.esearch(db="genome", term=search_term, retmax=10000, retmode="xml"))
+            print "Were found %s species" % summary["Count"]
+            #print summary
+
+            for species_id in summary["IdList"]: #[167] :
+                print "Species id %s " % species_id
+
+                species_summary = Entrez.read(Entrez.esummary(db="genome", id=species_id, retmax=10000, retmode="xml"))
+                #print species_summary
+
+                assembly_links = Entrez.read(Entrez.elink(dbfrom="genome", id=species_id, retmode="xml",
+                                                          retmax=10000, linkname="genome_assembly"))
+                #print len(links)
+                #print links
+                #print links[0]["LinkSetDb"][0]["Link"]
+                assembly_ids = [id_dict["Id"] for id_dict in assembly_links[0]["LinkSetDb"][0]["Link"]]
+                #print len(assembly_links[0]["LinkSetDb"][0]["Link"])
+                #print assembly_ids
+                #print len(assembly_ids)
+                assembly_dict = TwoLvlDict()
+                assemblies_with_ambiguous_taxonomies = SynDict()
+                for assembly_id in assembly_ids: #[:1]:
+                    assembly_summary = AssemblySummary(Entrez.read(Entrez.esummary(db="assembly",
+                                                                                   id=assembly_id,
+                                                                                   retmode="xml")))
+                    print assembly_summary
+                    #print assembly_summary.__dict__
+
+                    print assembly_summary['PropertyList']
+                    print assembly_summary.SpeciesName
+                    """
+                                                    u'ChainId': '1886755',
+                                                    u'AsmUpdateDate': '2016/11/28 00:00',
+                                                    u'GbUid': '3745278',
+                                                    u'PropertyList': ['full-genome-representation', 'has-chromosome', 'has-plasmid', 'latest', 'latest_genbank'],
+                                                    u'SubmissionDate': '2016/11/28 00:00',
+                                                    u'GB_BioProjects': [{u'BioprojectAccn': 'PRJNA353939',
+                                                                         u'BioprojectId': '353939'}],
+                                                    u'AssemblyAccession': 'GCA_001886755.1',
+                                                    u'LastMajorReleaseAccession': 'GCA_001886755.1',
+                                                    u'Synonym': {u'RefSeq': '',
+                                                                 u'Genbank': 'GCA_001886755.1',
+                                                                 u'Similarity': ''},
+                                                    u'FtpPath_RefSeq': '',
+                                                    u'AsmReleaseDate_RefSeq': '1/01/01 00:00',
+                                                    u'AssemblyType': 'haploid',
+                                                    u'AssemblyDescription': '',
+                                                    u'AsmReleaseDate_GenBank': '2016/11/28 00:00',
+                                                    u'RS_Projects': [],
+                                                    u'RefSeq_category': 'na',
+                                                    u'PartialGenomeRepresentation': 'false',
+                                                    u'Coverage': '0',
+                                                    u'AssemblyClass': 'haploid',
+                                                    u'ExclFromRefSeq': [],
+                                                    u'SeqReleaseDate': '2016/11/28 00:00',
+                                                    u'AnomalousList': [],
+                                                    u'AssemblyStatus': 'Complete Genome',
+                                                    u'AsmReleaseDate': '2016/11/28 00:00',
+                                                    u'ReleaseLevel': 'Major',
+                                                    u'Taxid': '562',
+                                                    u'LastUpdateDate': '2016/11/28 00:00',
+                                                    u'RsUid': '',
+                                                    u'FromType': '',
+                                                    u'WGS': '',
+                                                    u'GB_Projects': ['353939'],
+                                                    u'BioSampleId': '6029894',
+                                                    u'AssemblyName': 'ASM188675v1',
+                                                    u'EnsemblName': '',
+                                                    u'Organism': 'Escherichia coli (E. coli)',
+                                                    u'Biosource': {u'Isolate': '',
+                                                                   u'InfraspeciesList': [{u'Sub_type': 'strain',
+                                                                                          u'Sub_value': 'MRSN346595'}],
+                                                                   u'Sex': ''},
+                                                    u'SpeciesName': 'Escherichia coli',
+                                                    u'BioSampleAccn': 'SAMN06029894',
+                                                    u'FtpPath_GenBank': 'ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/001/886/755/GCA_001886755.1_ASM188675v1',
+                                                    u'SpeciesTaxid': '562',
+                                                    u'UCSCName': '',
+                                                    u'Primary': '3745268',
+                                                    u'Meta': ' <Stats> <Stat category="alt_loci_count" sequence_tag="all">0</Stat> <Stat category="chromosome_count" sequence_tag="all">1</Stat> <Stat category="contig_count" sequence_tag="all">6</Stat> <Stat category="contig_l50" sequence_tag="all">1</Stat> <Stat category="contig_n50" sequence_tag="all">4796421</Stat> <Stat category="non_chromosome_replicon_count" sequence_tag="all">5</Stat> <Stat category="replicon_count" sequence_tag="all">6</Stat> <Stat category="scaffold_count" sequence_tag="all">6</Stat> <Stat category="scaffold_count" sequence_tag="placed">6</Stat> <Stat category="scaffold_count" sequence_tag="unlocalized">0</Stat> <Stat category="scaffold_count" sequence_tag="unplaced">0</Stat> <Stat category="scaffold_l50" sequence_tag="all">1</Stat> <Stat category="scaffold_n50" sequence_tag="all">4796421</Stat> <Stat category="total_length" sequence_tag="all">5116627</Stat> <Stat category="ungapped_length" sequence_tag="all">5116627</Stat> </Stats> <FtpSites>   <FtpPath type="GenBank">ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/001/886/755/GCA_001886755.1_ASM188675v1</FtpPath> </FtpSites> <assembly-level>5</assembly-level> <assembly-status>Complete Genome</assembly-status> <representative-status>na</representative-status> <submitter-organization>Walter Reed Army Institute of Research</submitter-organization>    ',
+                                                    u'NCBIReleaseDate': '2016/11/28 00:00',
+                                                    u'SubmitterOrganization': 'Walter Reed Army Institute of Research',
+                                                    u'RS_BioProjects': [],
+                                                    u'SortOrder': '5C10018867559899'},
+                                                    attributes={u'uid': u'894571'}
+                    """
+                    """
+                    taxonomy_links = Entrez.read(Entrez.elink(dbfrom="assembly", id=assembly_id, retmode="xml",
+                                                              retmax=10000, linkname="assembly_taxonomy"))
+                    #print taxonomy_links
+                    taxonomy_ids = [id_dict["Id"] for id_dict in taxonomy_links[0]["LinkSetDb"][0]["Link"]]
+
+                    if len(taxonomy_ids) > 1:
+                        print "WARNING: more than one taxonomy id for assembly %s" % assembly_ids
+                        assemblies_with_ambiguous_taxonomies[assembly_id] = taxonomy_ids
+                    #print taxonomy_ids
+
+                    taxonomy_record = Entrez.read(Entrez.efetch(db="taxonomy", id=taxonomy_ids[0], retmode="xml"))
+
+                    #print taxonomy_record
+                    scientific_name = taxonomy_record[0]["ScientificName"]
+                    lineage = taxonomy_record[0]["Lineage"]
+                    #common_name_list = taxonomy_record[0]["CommonName"]
+                    print taxonomy_record[0]["ScientificName"]
+                    """
+                print "\n\n"
+        pass
+"""
+assembly_nuccore 	Nucleotide 	Nucleotide 	Nucleotide 	5000
+assembly_nuccore_insdc 	Nucleotide INSDC 	Nucleotide INSDC 	Nucleotide INSDC (GenBank) 	5000
+assembly_nuccore_refseq 	Nucleotide RefSeq 	Nucleotide RefSeq 	Nucleotide RefSeq 	5000
+assembly_nuccore_wgsmaster 	WGS Master 	WGS Master 	WGS Master 	5000
+assembly_nuccore_wgscontig 	WGS contigs 	WGS contigs 	WGS contigs 	5000
+assembly_nuccore_insdc 	Nucleotide INSDC 	Nucleotide INSDC 	Nucleotide INSDC (GenBank) 	5000
+assembly_nuccore_refseq 	Nucleotide RefSeq 	Nucleotide RefSeq 	Nucleotide RefSeq 	5000
+assembly_nuccore_wgsmaster 	WGS Master 	WGS Master 	WGS Master
+"""
+
+"""
+
+#Example of assembly summary
+
+{u'DocumentSummarySet':
+     DictElement({u'DbBuild': 'Build161130-1600.1',
+                  u'DocumentSummary': [DictElement({u'ChainId': '1886755',
+                                                    u'AsmUpdateDate': '2016/11/28 00:00',
+                                                    u'GbUid': '3745278',
+                                                    u'PropertyList': ['full-genome-representation', 'has-chromosome', 'has-plasmid', 'latest', 'latest_genbank'],
+                                                    u'SubmissionDate': '2016/11/28 00:00',
+                                                    u'GB_BioProjects': [{u'BioprojectAccn': 'PRJNA353939',
+                                                                         u'BioprojectId': '353939'}],
+                                                    u'AssemblyAccession': 'GCA_001886755.1',
+                                                    u'LastMajorReleaseAccession': 'GCA_001886755.1',
+                                                    u'Synonym': {u'RefSeq': '',
+                                                                 u'Genbank': 'GCA_001886755.1',
+                                                                 u'Similarity': ''},
+                                                    u'FtpPath_RefSeq': '',
+                                                    u'AsmReleaseDate_RefSeq': '1/01/01 00:00',
+                                                    u'AssemblyType': 'haploid',
+                                                    u'AssemblyDescription': '',
+                                                    u'AsmReleaseDate_GenBank': '2016/11/28 00:00',
+                                                    u'RS_Projects': [],
+                                                    u'RefSeq_category': 'na',
+                                                    u'PartialGenomeRepresentation': 'false',
+                                                    u'Coverage': '0',
+                                                    u'AssemblyClass': 'haploid',
+                                                    u'ExclFromRefSeq': [],
+                                                    u'SeqReleaseDate': '2016/11/28 00:00',
+                                                    u'AnomalousList': [],
+                                                    u'AssemblyStatus': 'Complete Genome',
+                                                    u'AsmReleaseDate': '2016/11/28 00:00',
+                                                    u'ReleaseLevel': 'Major',
+                                                    u'Taxid': '562',
+                                                    u'LastUpdateDate': '2016/11/28 00:00',
+                                                    u'RsUid': '',
+                                                    u'FromType': '',
+                                                    u'WGS': '',
+                                                    u'GB_Projects': ['353939'],
+                                                    u'BioSampleId': '6029894',
+                                                    u'AssemblyName': 'ASM188675v1',
+                                                    u'EnsemblName': '',
+                                                    u'Organism': 'Escherichia coli (E. coli)',
+                                                    u'Biosource': {u'Isolate': '',
+                                                                   u'InfraspeciesList': [{u'Sub_type': 'strain',
+                                                                                          u'Sub_value': 'MRSN346595'}],
+                                                                   u'Sex': ''},
+                                                    u'SpeciesName': 'Escherichia coli',
+                                                    u'BioSampleAccn': 'SAMN06029894',
+                                                    u'FtpPath_GenBank': 'ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/001/886/755/GCA_001886755.1_ASM188675v1',
+                                                    u'SpeciesTaxid': '562',
+                                                    u'UCSCName': '',
+                                                    u'Primary': '3745268',
+                                                    u'Meta': ' <Stats> <Stat category="alt_loci_count" sequence_tag="all">0</Stat> <Stat category="chromosome_count" sequence_tag="all">1</Stat> <Stat category="contig_count" sequence_tag="all">6</Stat> <Stat category="contig_l50" sequence_tag="all">1</Stat> <Stat category="contig_n50" sequence_tag="all">4796421</Stat> <Stat category="non_chromosome_replicon_count" sequence_tag="all">5</Stat> <Stat category="replicon_count" sequence_tag="all">6</Stat> <Stat category="scaffold_count" sequence_tag="all">6</Stat> <Stat category="scaffold_count" sequence_tag="placed">6</Stat> <Stat category="scaffold_count" sequence_tag="unlocalized">0</Stat> <Stat category="scaffold_count" sequence_tag="unplaced">0</Stat> <Stat category="scaffold_l50" sequence_tag="all">1</Stat> <Stat category="scaffold_n50" sequence_tag="all">4796421</Stat> <Stat category="total_length" sequence_tag="all">5116627</Stat> <Stat category="ungapped_length" sequence_tag="all">5116627</Stat> </Stats> <FtpSites>   <FtpPath type="GenBank">ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/001/886/755/GCA_001886755.1_ASM188675v1</FtpPath> </FtpSites> <assembly-level>5</assembly-level> <assembly-status>Complete Genome</assembly-status> <representative-status>na</representative-status> <submitter-organization>Walter Reed Army Institute of Research</submitter-organization>    ',
+                                                    u'NCBIReleaseDate': '2016/11/28 00:00',
+                                                    u'SubmitterOrganization': 'Walter Reed Army Institute of Research',
+                                                    u'RS_BioProjects': [],
+                                                    u'SortOrder': '5C10018867559899'},
+                                                    attributes={u'uid': u'894571'}
+                                                   )
+                                       ]
+                  },
+                 attributes={u'status': u'OK'}
+                 )
+ }
+"""
