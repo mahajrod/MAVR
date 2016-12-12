@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
 #-----------------Environment variables-----------------
-FASTQ_DIR=/home/genomerussia/main/fastq/
+WORKDIR=/home/genomerussia/main/
+TOOLS_DIR=/home/genomerussia/tools/
+
+FASTQ_DIR=${WORKDIR}/fastq/
+ANALYSIS_DIR=${WORKDIR}/analysis/
+ALIGNMENT_DIR=${WORKDIR}/analysis/alignment/
+
 RAW_READS_DIR=${FASTQ_DIR}/raw/
 UNPACKED_READS_DIR=${FASTQ_DIR}/unpacked/
 FILTERED_READS_DIR=${FASTQ_DIR}/filtered/
 
-ANALYSIS_DIR=/home/genomerussia/main/analysis/
-
-ALIGNMENT_DIR=/home/genomerussia/main/analysis/alignment/
 ALIGNMENT_BAM_DIR=${ALIGNMENT_DIR}/bam/
 ALIGNMENT_LOG_DIR=${ALIGNMENT_DIR}/log/
 ALIGNMENT_TMP_DIR=${ALIGNMENT_DIR}/tmp/
@@ -20,11 +23,10 @@ FASTQC_STAT_DIR=${STAT_DIR}/fastqc/
 FILTERING_STAT_DIR=${STAT_DIR}/filtering/
 KMER_STAT_DIR=${STAT_DIR}/kmer/
 
-TOOLS_DIR=/home/genomerussia/tools/
-MAVR_SCRIPTS_DIR=/home/genomerussia/tools/MAVR/scripts/
-FACUT_BIN_DIR=/home/genomerussia/tools/Facut/bin/
-FASTQC_DIR=/home/genomerussia/tools/FastQC/
-COOCKIECUTTER_SRC_DIR=/home/genomerussia/tools/Cookiecutter/src/
+MAVR_SCRIPTS_DIR=${TOOLS_DIR}/MAVR/scripts/
+FACUT_BIN_DIR=${TOOLS_DIR}/Facut/bin/
+FASTQC_DIR=${TOOLS_DIR}/FastQC/
+COOCKIECUTTER_SRC_DIR=${TOOLS_DIR}/Cookiecutter/src/
 
 ADAPTER_KMER_FILE=${TOOLS_DIR}/service_sequences/trueseq_adapters_with_rev_com_23_mer.kmer
 #PYTHONPATH=${PYTHONPATH}:/home/genomerussia/tools/MAVR
@@ -49,7 +51,7 @@ for SAMPLE in ${SAMPLE_LIST[@]};
     SAMPLE_GROUP=`echo ${SAMPLE} | cut -c1-4`
 
     mkdir -p ${UNPACKED_READS_DIR}/${SAMPLE_GROUP} ${UNPACKED_READS_DIR}/${SAMPLE_GROUP}/${SAMPLE};
-    FILES=($(ls ${RAW_READS_DIR}/${SAMPLE_GROUP}/${SAMPLE}/* | sed 's/.gz//'));
+    FILES=($(ls ${RAW_READS_DIR}/${SAMPLE_GROUP}/${SAMPLE}/*.f*q.gz | sed 's/.gz//'));
 
     NUMBER_OF_FILES=${#FILES[@]}
     LEFT_FILES=

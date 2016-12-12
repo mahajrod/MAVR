@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-#-----------------Environment variables-----------------
-WORKDIR=/home/genomerussia/main/
+
+WORKDIR=$1
+TOOLS_DIR=/home/genomerussia/tools/
+
 FASTQ_DIR=${WORKDIR}/fastq/
 ANALYSIS_DIR=${WORKDIR}/analysis/
 ALIGNMENT_DIR=${WORKDIR}/analysis/alignment/
@@ -8,9 +10,6 @@ ALIGNMENT_DIR=${WORKDIR}/analysis/alignment/
 RAW_READS_DIR=${FASTQ_DIR}/raw/
 UNPACKED_READS_DIR=${FASTQ_DIR}/unpacked/
 FILTERED_READS_DIR=${FASTQ_DIR}/filtered/
-
-
-
 
 ALIGNMENT_BAM_DIR=${ALIGNMENT_DIR}/bam/
 ALIGNMENT_LOG_DIR=${ALIGNMENT_DIR}/log/
@@ -24,16 +23,13 @@ FASTQC_STAT_DIR=${STAT_DIR}/fastqc/
 FILTERING_STAT_DIR=${STAT_DIR}/filtering/
 KMER_STAT_DIR=${STAT_DIR}/kmer/
 
-TOOLS_DIR=/home/genomerussia/tools/
 MAVR_SCRIPTS_DIR=${TOOLS_DIR}/MAVR/scripts/
 FACUT_BIN_DIR=${TOOLS_DIR}/Facut/bin/
 FASTQC_DIR=${TOOLS_DIR}/FastQC/
 COOCKIECUTTER_SRC_DIR=${TOOLS_DIR}/Cookiecutter/src/
 
 ADAPTER_KMER_FILE=${TOOLS_DIR}/service_sequences/trueseq_adapters_with_rev_com_23_mer.kmer
-#PYTHONPATH=${PYTHONPATH}:/home/genomerussia/tools/MAVR
-#export PYTONPATH
-#-------------------------------------------------------
+
 
 #----------------------Settings-------------------------
 THREAD_NUMBER=60
@@ -44,24 +40,33 @@ READ_NAME_TYPE=illumina
 QUALITY_THRESHOLD=20
 #-------------------------------------------------------
 
-SAMPLE_LIST=($@)
+export WORKDIR
+export TOOLS_DIR
+export FASTQ_DIR
+export ANALYSIS_DIR
+export ALIGNMENT_DIR
+export RAW_READS_DIR
+export UNPACKED_READS_DIR
+export FILTERED_READS_DIR
+export ALIGNMENT_BAM_DIR
+export ALIGNMENT_LOG_DIR
+export ALIGNMENT_TMP_DIR
+export JF_DB_DIR
+export STAT_DIR
+export ADAPTERS_STAT_DIR
+export FASTQC_STAT_DIR
+export FILTERING_STAT_DIR
+export KMER_STAT_DIR
+export MAVR_SCRIPTS_DIR
+export FACUT_BIN_DIR
+export FASTQC_DIR
+export COOCKIECUTTER_SRC_DIR
+export ADAPTER_KMER_FILE
 
-for SAMPLE in ${SAMPLE_LIST[@]};
-    do
-
-    SAMPLE_GROUP=`echo ${SAMPLE} | cut -c1-4`
-
-    mkdir -p ${FASTQC_STAT_DIR}/${SAMPLE_GROUP} ${FASTQC_STAT_DIR}/${SAMPLE_GROUP}/${SAMPLE};
-
-    NUMBER_OF_FILES=`ls ${UNPACKED_READS_DIR}/${SAMPLE_GROUP}/${SAMPLE}/* | wc -l`
-
-    OUTPUT_DIR=${FASTQC_STAT_DIR}/${SAMPLE_GROUP}/${SAMPLE}/
-
-    echo "Starting FastQC analysis"
-    echo "    ${NUMBER_OF_FILES} files"
-
-    FASTQC_STRING="${FASTQC_DIR}/fastqc -k 10 --nogroup -t ${NUMBER_OF_FILES} -o ${OUTPUT_DIR} ${UNPACKED_READS_DIR}/${SAMPLE_GROUP}/${SAMPLE}/*"
-    echo ${FASTQC_STRING}
-
-    ${FASTQC_STRING}
-    done
+export THREAD_NUMBER
+export KMER_SIZE
+export MEMORY
+export PHRED_SCORE_TYPE
+export READ_NAME_TYPE
+export QUALITY_THRESHOLD
+#-------------------------------------------------------
