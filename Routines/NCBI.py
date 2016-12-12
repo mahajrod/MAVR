@@ -17,24 +17,37 @@ from CustomCollections.GeneralCollections import IdList, SynDict, TwoLvlDict
 
 class AssemblySummary(OrderedDict):
 
-    def __init__(self, entrez_summary_biopython):
+    def __init__(self, assembly_summary_biopython_dict_element):
         OrderedDict.__init__(self)
-        parameters_dict = entrez_summary_biopython['DocumentSummarySet']['DocumentSummary'][0]
-        self.stats = self.parse_stats_from_assembly_summary_metadata(parameters_dict['Meta'])
+        #parameters_dict = entrez_summary_biopython['DocumentSummarySet']['DocumentSummary'][0]
+        self.stats = self.parse_stats_from_assembly_summary_metadata(assembly_summary_biopython_dict_element['Meta'])
 
         for parameter in 'SpeciesName', 'Organism', 'Taxid', 'AssemblyName', 'FtpPath_GenBank', 'PropertyList', \
-                         'SubmissionDate', 'AssemblyAccession', 'LastMajorReleaseAccession', \
+                         'SubmissionDate', 'LastUpdateDate', 'AssemblyAccession', 'LastMajorReleaseAccession', \
                          'AssemblyType', 'PartialGenomeRepresentation', 'AssemblyClass', 'AnomalousList',\
-                         'AssemblyStatus', 'BioSampleId':
-            if parameter in parameters_dict:
-                setattr(self, parameter, parameters_dict[parameter])
+                         'AssemblyStatus', 'BioSampleId', 'BioSampleAccn', 'WGS', 'Biosource':
+            if parameter in assembly_summary_biopython_dict_element:
+                setattr(self, parameter, assembly_summary_biopython_dict_element[parameter])
             else:
                 setattr(self, parameter, None)
                 #exec("self[%s] = None" % parameter)
+
+        if self.Biosource:
+            self['Isolate'] = self.Biosource['Isolate'] if self.Biosource['Isolate'] else None
+            self['Sub_type'] = self.Biosource['InfraspeciesList'][0]['Sub_type']
+            self['Sub_value'] = self.Biosource['InfraspeciesList'][0]['Sub_value']
+        else:
+            self['Isolate'] = None
+            self['Sub_type'] = None
+            self['Sub_value'] = None
+
+        for parameter in 'Isolate', 'Sub_type', 'Sub_value':
+            setattr(self, parameter, self[parameter])
+
         for entry in self.stats:
             self[entry] = self.stats[entry]
-        for entry in parameters_dict:
-            self[entry] = parameters_dict[entry]
+        for entry in assembly_summary_biopython_dict_element:
+            self[entry] = assembly_summary_biopython_dict_element[entry]
 
         for parameter in "alt_loci_count", "chromosome_count", "contig_count", "contig_l50", "contig_n50", \
                          "non_chromosome_replicon_count", "replicon_count", "scaffold_count_all", \
@@ -42,11 +55,21 @@ class AssemblySummary(OrderedDict):
                          "scaffold_l50", "scaffold_n50", "total_length", "ungapped_length":
             setattr(self, parameter, self[parameter])
 
-        self.complete_genome = True if self.AssemblyStatus == 'Complete Genome' else False
+        self.full_genome = True if 'full-genome-representation' in self.PropertyList else False
         self.chromosome_lvl = True if 'has-chromosome' in self.PropertyList else False
         self.chloroplast = True if 'has-chloroplast' in self.PropertyList else False
         self.mitochondrion = True if 'has-mitochondrion' in self.PropertyList else False
         self.plasmid = True if 'has-plasmid' in self.PropertyList else False
+
+        self.header_list = ['SpeciesName', 'Taxid', 'Isolate', 'Sub_type', 'Sub_value', 'BioSampleId', 'BioSampleAccn',
+                            'WGS', 'AssemblyAccession', 'AssemblyName', 'SubmissionDate', 'LastUpdateDate',
+                            'AssemblyType', 'AssemblyStatus',
+                            'FullGenome', "ChromosomeLvl", 'Chloroplast', "Mitochondrion", "Plasmid",
+                            'total_length', 'ungapped_length', "alt_loci_count",
+                            'chromosome_count', 'non_chromosome_replicon_count', 'replicon_count',
+                            'scaffold_count_all', 'scaffold_count_placed', 'scaffold_count_unlocalized',
+                            'scaffold_count_unplaced', 'scaffold_l50', 'scaffold_n50',
+                            'contig_count', 'contig_l50', 'contig_n50', 'FtpPath_GenBank']
 
     @staticmethod
     def parse_stats_from_assembly_summary_metadata(metadata):
@@ -62,8 +85,55 @@ class AssemblySummary(OrderedDict):
 
         return stat_dict
 
-    def string_form(self, separator="\t"):
-        pass
+    def get_header(self):
+        return "\t".join(self.header_list)
+
+    def __str__(self, separator="\t"):
+        values_list = []
+        for key in self.header_list:
+            if key == 'FullGenome':
+                values_list.append("Y" if self.full_genome else "N")
+            elif key == "ChromosomeLvl":
+                values_list.append("Y" if self.chromosome_lvl else "N")
+            elif key == "Chloroplast":
+                values_list.append("Y" if self.chloroplast else "N")
+            elif key == "Mitochondrion":
+                values_list.append("Y" if self.chloroplast else "N")
+            elif key == "Plasmid":
+                values_list.append("Y" if self.plasmid else "N")
+            else:
+                if isinstance(self[key], str):
+                    tmp = (self[key])
+                elif isinstance(self[key], list) or isinstance(self[key], set):
+                    tmp = ','.join(self[key])
+                elif self[key] is None:
+                    tmp = "."
+                else:
+                    tmp = str(self[key])
+                values_list.append(tmp)
+
+        return separator.join(values_list)
+
+
+class AssemblySummaryList(list):
+    def __init__(self, entrez_summary_biopython):
+        list.__init__(self)
+        for assembly_summary_biopython_dict_element in entrez_summary_biopython['DocumentSummarySet']['DocumentSummary']:
+            print assembly_summary_biopython_dict_element
+            self.append(AssemblySummary(assembly_summary_biopython_dict_element))
+
+        self.header = self[0].get_header()
+
+    def __str__(self):
+        string = self.header + "\n"
+        for summary in self:
+            string += str(summary) + "\n"
+
+    def write(self, output_file):
+        with open(output_file, "w") as out_fd:
+            out_fd.write(self.header + "\n")
+        for summary in self:
+            out_fd.write(str(summary) + "\n")
 
 
 class NCBIRoutines:
@@ -279,7 +349,7 @@ class NCBIRoutines:
 
         self.get_taxonomy(taxa_list, output_file, email, input_type=input_type)
 
-    def get_taxa_genomes_summary(self, taxa, email, output_file):
+    def get_taxa_genomes_summary(self, taxa, email, output_file, max_ids_per_query=1000):
         Entrez.email = email
         taxa_list = taxa if isinstance(taxa, Iterable) else [taxa]
 
@@ -296,9 +366,10 @@ class NCBIRoutines:
                 species_summary = Entrez.read(Entrez.esummary(db="genome", id=species_id, retmax=10000, retmode="xml"))
                 #print species_summary
 
+                # get assemblies linked with genome of species
                 assembly_links = Entrez.read(Entrez.elink(dbfrom="genome", id=species_id, retmode="xml",
                                                           retmax=10000, linkname="genome_assembly"))
-                #print len(links)
+                assembly_number = len(assembly_links)
                 #print links
                 #print links[0]["LinkSetDb"][0]["Link"]
                 assembly_ids = [id_dict["Id"] for id_dict in assembly_links[0]["LinkSetDb"][0]["Link"]]
@@ -307,71 +378,24 @@ class NCBIRoutines:
                 #print len(assembly_ids)
                 assembly_dict = TwoLvlDict()
                 assemblies_with_ambiguous_taxonomies = SynDict()
-                for assembly_id in assembly_ids: #[:1]:
-                    assembly_summary = AssemblySummary(Entrez.read(Entrez.esummary(db="assembly",
-                                                                                   id=assembly_id,
-                                                                                   retmode="xml")))
-                    print assembly_summary
-                    #print assembly_summary.__dict__
+                summaries = Entrez.read(Entrez.esummary(db="assembly", id=",".join(assembly_ids), retmode="xml"))
+                #print summaries
+                #for assembly_id in assembly_ids: #[:1]:
 
-                    print assembly_summary['PropertyList']
-                    print assembly_summary.SpeciesName
+                summary_set = AssemblySummaryList(summaries)
+                for tmp in summary_set:
+                    print "aaaaaaaaaaa"
                     """
-                                                    u'ChainId': '1886755',
-                                                    u'AsmUpdateDate': '2016/11/28 00:00',
-                                                    u'GbUid': '3745278',
-                                                    u'PropertyList': ['full-genome-representation', 'has-chromosome', 'has-plasmid', 'latest', 'latest_genbank'],
-                                                    u'SubmissionDate': '2016/11/28 00:00',
-                                                    u'GB_BioProjects': [{u'BioprojectAccn': 'PRJNA353939',
-                                                                         u'BioprojectId': '353939'}],
-                                                    u'AssemblyAccession': 'GCA_001886755.1',
-                                                    u'LastMajorReleaseAccession': 'GCA_001886755.1',
-                                                    u'Synonym': {u'RefSeq': '',
-                                                                 u'Genbank': 'GCA_001886755.1',
-                                                                 u'Similarity': ''},
-                                                    u'FtpPath_RefSeq': '',
-                                                    u'AsmReleaseDate_RefSeq': '1/01/01 00:00',
-                                                    u'AssemblyType': 'haploid',
-                                                    u'AssemblyDescription': '',
-                                                    u'AsmReleaseDate_GenBank': '2016/11/28 00:00',
-                                                    u'RS_Projects': [],
-                                                    u'RefSeq_category': 'na',
-                                                    u'PartialGenomeRepresentation': 'false',
-                                                    u'Coverage': '0',
-                                                    u'AssemblyClass': 'haploid',
-                                                    u'ExclFromRefSeq': [],
-                                                    u'SeqReleaseDate': '2016/11/28 00:00',
-                                                    u'AnomalousList': [],
-                                                    u'AssemblyStatus': 'Complete Genome',
-                                                    u'AsmReleaseDate': '2016/11/28 00:00',
-                                                    u'ReleaseLevel': 'Major',
-                                                    u'Taxid': '562',
-                                                    u'LastUpdateDate': '2016/11/28 00:00',
-                                                    u'RsUid': '',
-                                                    u'FromType': '',
-                                                    u'WGS': '',
-                                                    u'GB_Projects': ['353939'],
-                                                    u'BioSampleId': '6029894',
-                                                    u'AssemblyName': 'ASM188675v1',
-                                                    u'EnsemblName': '',
-                                                    u'Organism': 'Escherichia coli (E. coli)',
-                                                    u'Biosource': {u'Isolate': '',
-                                                                   u'InfraspeciesList': [{u'Sub_type': 'strain',
-                                                                                          u'Sub_value': 'MRSN346595'}],
-                                                                   u'Sex': ''},
-                                                    u'SpeciesName': 'Escherichia coli',
-                                                    u'BioSampleAccn': 'SAMN06029894',
-                                                    u'FtpPath_GenBank': 'ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/001/886/755/GCA_001886755.1_ASM188675v1',
-                                                    u'SpeciesTaxid': '562',
-                                                    u'UCSCName': '',
-                                                    u'Primary': '3745268',
-                                                    u'Meta': ' <Stats> <Stat category="alt_loci_count" sequence_tag="all">0</Stat> <Stat category="chromosome_count" sequence_tag="all">1</Stat> <Stat category="contig_count" sequence_tag="all">6</Stat> <Stat category="contig_l50" sequence_tag="all">1</Stat> <Stat category="contig_n50" sequence_tag="all">4796421</Stat> <Stat category="non_chromosome_replicon_count" sequence_tag="all">5</Stat> <Stat category="replicon_count" sequence_tag="all">6</Stat> <Stat category="scaffold_count" sequence_tag="all">6</Stat> <Stat category="scaffold_count" sequence_tag="placed">6</Stat> <Stat category="scaffold_count" sequence_tag="unlocalized">0</Stat> <Stat category="scaffold_count" sequence_tag="unplaced">0</Stat> <Stat category="scaffold_l50" sequence_tag="all">1</Stat> <Stat category="scaffold_n50" sequence_tag="all">4796421</Stat> <Stat category="total_length" sequence_tag="all">5116627</Stat> <Stat category="ungapped_length" sequence_tag="all">5116627</Stat> </Stats> <FtpSites>   <FtpPath type="GenBank">ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/001/886/755/GCA_001886755.1_ASM188675v1</FtpPath> </FtpSites> <assembly-level>5</assembly-level> <assembly-status>Complete Genome</assembly-status> <representative-status>na</representative-status> <submitter-organization>Walter Reed Army Institute of Research</submitter-organization>    ',
-                                                    u'NCBIReleaseDate': '2016/11/28 00:00',
-                                                    u'SubmitterOrganization': 'Walter Reed Army Institute of Research',
-                                                    u'RS_BioProjects': [],
-                                                    u'SortOrder': '5C10018867559899'},
-                                                    attributes={u'uid': u'894571'}
+                    tmp = Entrez.read(Entrez.esummary(db="assembly",
+                                                                                   id=assembly_id,
+                                                                            retmode="xml"))
                     """
+                    print tmp
+                    #assembly_summary = AssemblySummary(tmp)
+                    #print assembly_summary
+
+                    #print assembly_summary.SpeciesName
+
                     """
                     taxonomy_links = Entrez.read(Entrez.elink(dbfrom="assembly", id=assembly_id, retmode="xml",
                                                               retmax=10000, linkname="assembly_taxonomy"))
