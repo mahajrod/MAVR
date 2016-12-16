@@ -215,7 +215,14 @@ class SequenceClusterRoutines:
         output_clusters_dict.write(output_clusters_file, splited_values=True)
 
     @staticmethod
-    def extract_sequences_from_selected_clusters(clusters_id_file, cluster_file, seq_file,
+    def check_absence_of_cluster_elements(fam_list, sequence_dict):
+        absent_elements = []
+        for element in fam_list:
+            if element not in sequence_dict:
+                absent_elements.append(element)
+        return absent_elements
+
+    def extract_sequences_from_selected_clusters(self, clusters_id_file, cluster_file, seq_file,
                                                  output_dir="./", seq_format="fasta",
                                                  out_prefix=None, create_dir_for_each_cluster=False,
                                                  skip_cluster_if_no_sequence_for_element=True):
@@ -235,11 +242,11 @@ class SequenceClusterRoutines:
         for fam_id in cluster_id_list if clusters_id_file else cluster_dict:
 
             if skip_cluster_if_no_sequence_for_element:
-                for element in cluster_dict[fam_id]:
-                    if element not in protein_dict:
-                        print "Skipping cluster %s due to absent element" % fam_id
-                        number_of_skipped_clusters += 1
-                        continue
+                absent_elements = self.check_absence_of_cluster_elements(cluster_dict[fam_id], protein_dict)
+                if absent_elements:
+                    print "Skipping cluster %s due to absent element(%s)" % (fam_id, ",".join(absent_elements))
+                    number_of_skipped_clusters += 1
+                    break
 
             if fam_id in cluster_dict:
                 if create_directory_for_each_cluster:

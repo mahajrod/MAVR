@@ -5,16 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Data/Entrez/entrez_crosslinks_between_databases.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/alignment/check_read_pairing_in_name_sorted_bam.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Data/Entrez/entrez_crosslinks_between_databases.names" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" afterPath="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/NCBI.py" afterPath="$PROJECT_DIR$/Routines/NCBI.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/SOURCES.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/SOURCES.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/SequenceCluster.py" afterPath="$PROJECT_DIR$/Routines/SequenceCluster.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence_clusters/extract_sequences_from_selected_clusters.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/extract_sequences_from_selected_clusters.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/entrez/get_taxa_genomes_summary.py" afterPath="$PROJECT_DIR$/scripts/entrez/get_taxa_genomes_summary.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/projects/RG/general_scripts/set_environment_variables.sh" afterPath="$PROJECT_DIR$/projects/RG/general_scripts/set_environment_variables.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -49,21 +41,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SequenceCluster.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SequenceCluster.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Routines/SequenceCluster.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3762" max-vertical-offset="6660">
-              <caret line="239" column="72" selection-start-line="239" selection-start-column="72" selection-end-line="239" selection-end-column="72" />
+            <state vertical-scroll-proportion="0.41447368" vertical-offset="3942" max-vertical-offset="6786">
+              <caret line="248" column="25" selection-start-line="248" selection-start-column="25" selection-end-line="248" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="extract_sequences_from_selected_clusters.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="extract_sequences_from_selected_clusters.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/extract_sequences_from_selected_clusters.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6807564" vertical-offset="0" max-vertical-offset="899">
-              <caret line="36" column="149" selection-start-line="36" selection-start-column="149" selection-end-line="36" selection-end-column="149" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="756">
+              <caret line="21" column="33" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -174,8 +166,8 @@
         <option value="$PROJECT_DIR$/scripts/sequence_clusters/rename_elements_in_clusters.py" />
         <option value="$PROJECT_DIR$/Routines/NCBI.py" />
         <option value="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" />
-        <option value="$PROJECT_DIR$/Routines/SequenceCluster.py" />
         <option value="$PROJECT_DIR$/scripts/sequence_clusters/extract_sequences_from_selected_clusters.py" />
+        <option value="$PROJECT_DIR$/Routines/SequenceCluster.py" />
       </list>
     </option>
   </component>
@@ -706,12 +698,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-00964" summary="changes">
-      <created>1479153904166</created>
-      <option name="number" value="00964" />
-      <option name="project" value="LOCAL" />
-      <updated>1479153904166</updated>
-    </task>
     <task id="LOCAL-00965" summary="changes">
       <created>1479154021373</created>
       <option name="number" value="00965" />
@@ -1000,7 +986,13 @@
       <option name="project" value="LOCAL" />
       <updated>1481875691812</updated>
     </task>
-    <option name="localTasksCounter" value="1013" />
+    <task id="LOCAL-01013" summary="changes">
+      <created>1481885525473</created>
+      <option name="number" value="01013" />
+      <option name="project" value="LOCAL" />
+      <updated>1481885525473</updated>
+    </task>
+    <option name="localTasksCounter" value="1014" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1535,18 +1527,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/SequenceCluster.py">
+    <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/extract_sequences_from_selected_clusters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3762" max-vertical-offset="6660">
-          <caret line="239" column="72" selection-start-line="239" selection-start-column="72" selection-end-line="239" selection-end-column="72" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="756">
+          <caret line="21" column="33" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/extract_sequences_from_selected_clusters.py">
+    <entry file="file://$PROJECT_DIR$/Routines/SequenceCluster.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6807564" vertical-offset="0" max-vertical-offset="899">
-          <caret line="36" column="149" selection-start-line="36" selection-start-column="149" selection-end-line="36" selection-end-column="149" />
+        <state vertical-scroll-proportion="0.41447368" vertical-offset="3942" max-vertical-offset="6786">
+          <caret line="248" column="25" selection-start-line="248" selection-start-column="25" selection-end-line="248" selection-end-column="25" />
           <folding />
         </state>
       </provider>
