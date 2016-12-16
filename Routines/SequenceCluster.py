@@ -187,9 +187,13 @@ class SequenceClusterRoutines:
 
     @staticmethod
     def rename_elements_in_clusters(clusters_file, syn_file, output_clusters_file,
-                                    remove_clusters_with_not_renamed_elements=False):
+                                    remove_clusters_with_not_renamed_elements=False,
+                                    syn_file_key_column_index=0,
+                                    syn_file_value_column_index=1,
+                                    syn_file_column_separator='\t'):
         syn_dict = SynDict()
-        syn_dict.read(syn_file, comments_prefix="#")
+        syn_dict.read(syn_file, comments_prefix="#", key_index=syn_file_key_column_index,
+                      value_index=syn_file_value_column_index, separator=syn_file_column_separator)
 
         clusters_dict = SynDict()
         clusters_dict.read(clusters_file, split_values=True, values_separator=",", comments_prefix="#")
