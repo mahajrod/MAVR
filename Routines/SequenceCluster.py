@@ -246,7 +246,7 @@ class SequenceClusterRoutines:
                 if absent_elements:
                     print "Skipping cluster %s due to absent element(%s)" % (fam_id, ",".join(absent_elements))
                     number_of_skipped_clusters += 1
-                    break
+                    continue
 
             if fam_id in cluster_dict:
                 if create_directory_for_each_cluster:
