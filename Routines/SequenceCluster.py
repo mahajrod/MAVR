@@ -217,7 +217,8 @@ class SequenceClusterRoutines:
     @staticmethod
     def extract_sequences_from_selected_clusters(clusters_id_file, cluster_file, seq_file,
                                                  output_dir="./", seq_format="fasta",
-                                                 out_prefix=None, create_dir_for_each_cluster=False):
+                                                 out_prefix=None, create_dir_for_each_cluster=False,
+                                                 skip_cluster_if_no_sequence_for_element=True):
         from Routines import SequenceRoutines, FileRoutines
         cluster_id_list = IdList()
         cluster_dict = SynDict()
@@ -230,7 +231,16 @@ class SequenceClusterRoutines:
         cluster_dict.read(cluster_file, split_values=True, values_separator=",")
         protein_dict = SeqIO.index_db("tmp.idx", FileRoutines.make_list_of_path_to_files(seq_file), format=seq_format)
 
+        number_of_skipped_clusters = 0
         for fam_id in cluster_id_list if clusters_id_file else cluster_dict:
+
+            if skip_cluster_if_no_sequence_for_element:
+                for element in cluster_dict[fam_id]:
+                    if element not in protein_dict:
+                        print "Skipping cluster %s due to absent element" % fam_id
+                        number_of_skipped_clusters += 1
+                        continue
+
             if fam_id in cluster_dict:
                 if create_directory_for_each_cluster:
                     fam_dir = "%s%s/" % (out_dir, fam_id)
@@ -243,6 +253,9 @@ class SequenceClusterRoutines:
                             out_file, format=seq_format)
 
         os.remove("tmp.idx")
+        print "%i clusters were skipped due to absent elements" % number_of_skipped_clusters
+
+        return number_of_skipped_clusters
 
     @staticmethod
     def extract_clusters_by_element_ids(cluster_dict, element_id_list, mode="w"):

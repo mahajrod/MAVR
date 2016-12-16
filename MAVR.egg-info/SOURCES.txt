@@ -185,6 +185,7 @@ scripts/get_flanking_regions.py
 scripts/gff_examine.py
 scripts/parallel_augustus_correct_errors.py
 scripts/remove_duplicates_flybase_UTR.py
+scripts/alignment/check_read_pairing_in_name_sorted_bam.sh
 scripts/alignment/extract_fastq_from_bam.py
 scripts/alignment/make_blast_plus_db.py
 scripts/alignment/map_reads.py
@@ -375,7 +376,9 @@ scripts/sequence_clusters/label_cluster_elements.py
 scripts/sequence_clusters/merge_fam_files.py
 scripts/sequence_clusters/rename_elements_in_clusters.py
 scripts/sequence_clusters/rename_sequence_in_clusters_by_species_name.py
+scripts/sequence_clusters/split_clusters_by_element_labels.py
 scripts/sequence_clusters/eggnog/assign_orthologs.py
+scripts/sequence_clusters/eggnog/convert_members_tsv_to_fam.bash
 scripts/sequence_clusters/eggnog/convert_members_tsv_to_fam.py
 scripts/sequence_clusters/eggnog/edit_profile_names_in_fam_file.py
 scripts/sequence_clusters/eggnog/extract_proteins_from_alignments.py

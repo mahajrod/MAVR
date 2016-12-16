@@ -22,6 +22,10 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output",
                     help="Output prefix to use")
 parser.add_argument("-d", "--output_directory", action="store", dest="out_dir", default="./",
                     help="Directory to write output")
+parser.add_argument("-n", "--dont_skip_cluster_if_absent_element", action="store_true",
+                    dest="dont_skip_cluster_if_absent_element", default=False,
+                    help="Don't skip cluster with absent sequences")
+
 
 args = parser.parse_args()
 
@@ -29,4 +33,5 @@ SequenceClusterRoutines.extract_sequences_from_selected_clusters(args.cluster_id
                                                                  args.seq_file, output_dir=args.out_dir,
                                                                  seq_format=args.seq_file_format,
                                                                  out_prefix=args.output,
-                                                                 create_dir_for_each_cluster=args.create_dir_for_each_cluster)
+                                                                 create_dir_for_each_cluster=args.create_dir_for_each_cluster,
+                                                                 skip_cluster_if_no_sequence_for_element=not args.dont_skip_cluster_if_absent_element)

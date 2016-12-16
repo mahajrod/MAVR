@@ -33,13 +33,24 @@ class AssemblySummary(OrderedDict):
                 #exec("self[%s] = None" % parameter)
 
         if self.Biosource:
+            #print self.Biosource
             self['Isolate'] = self.Biosource['Isolate'] if self.Biosource['Isolate'] else None
-            self['Sub_type'] = self.Biosource['InfraspeciesList'][0]['Sub_type']
-            self['Sub_value'] = self.Biosource['InfraspeciesList'][0]['Sub_value']
+            if ('InfraspeciesList' in self.Biosource) and self.Biosource['InfraspeciesList']:
+                self['Sub_type'] = self.Biosource['InfraspeciesList'][0]['Sub_type'] if 'Sub_type' in self.Biosource['InfraspeciesList'][0] else None
+                self['Sub_value'] = self.Biosource['InfraspeciesList'][0]['Sub_value'] if 'Sub_value' in self.Biosource['InfraspeciesList'][0] else None
+            else:
+                self['Sub_type'] = None
+                self['Sub_value'] = None
+            if ('Sex' in self.Biosource) and self.Biosource['Sex']:
+                self['Sex'] = self.Biosource['Sex']
+            else:
+                self['Sex'] = None
+
         else:
             self['Isolate'] = None
             self['Sub_type'] = None
             self['Sub_value'] = None
+            self['Sex'] = None
 
         for parameter in 'Isolate', 'Sub_type', 'Sub_value':
             setattr(self, parameter, self[parameter])
@@ -61,10 +72,10 @@ class AssemblySummary(OrderedDict):
         self.mitochondrion = True if 'has-mitochondrion' in self.PropertyList else False
         self.plasmid = True if 'has-plasmid' in self.PropertyList else False
 
-        self.header_list = ['SpeciesName', 'Taxid', 'Isolate', 'Sub_type', 'Sub_value', 'BioSampleId', 'BioSampleAccn',
+        self.header_list = ['SpeciesName', 'Taxid', 'Isolate', 'Sub_type', 'Sub_value', 'Sex', 'BioSampleId', 'BioSampleAccn',
                             'WGS', 'AssemblyAccession', 'AssemblyName', 'SubmissionDate', 'LastUpdateDate',
                             'AssemblyType', 'AssemblyStatus',
-                            'FullGenome', "ChromosomeLvl", 'Chloroplast', "Mitochondrion", "Plasmid",
+                            'WholeGenome', "ChromosomeLvl", 'Chloroplast', "Mitochondrion", "Plasmid",
                             'total_length', 'ungapped_length', "alt_loci_count",
                             'chromosome_count', 'non_chromosome_replicon_count', 'replicon_count',
                             'scaffold_count_all', 'scaffold_count_placed', 'scaffold_count_unlocalized',
@@ -91,7 +102,7 @@ class AssemblySummary(OrderedDict):
     def __str__(self, separator="\t"):
         values_list = []
         for key in self.header_list:
-            if key == 'FullGenome':
+            if key == 'WholeGenome':
                 values_list.append("Y" if self.full_genome else "N")
             elif key == "ChromosomeLvl":
                 values_list.append("Y" if self.chromosome_lvl else "N")
@@ -111,18 +122,35 @@ class AssemblySummary(OrderedDict):
                 else:
                     tmp = str(self[key])
                 values_list.append(tmp)
-
+        #print values_list
         return separator.join(values_list)
+
+    def complete_genome(self):
+
+
+        pass
 
 
 class AssemblySummaryList(list):
-    def __init__(self, entrez_summary_biopython):
+    def __init__(self, entrez_summary_biopython=None):
         list.__init__(self)
-        for assembly_summary_biopython_dict_element in entrez_summary_biopython['DocumentSummarySet']['DocumentSummary']:
-            print assembly_summary_biopython_dict_element
-            self.append(AssemblySummary(assembly_summary_biopython_dict_element))
+        if entrez_summary_biopython:
+            for assembly_summary_biopython_dict_element in entrez_summary_biopython['DocumentSummarySet']['DocumentSummary']:
+            #print assembly_summary_biopython_dict_element
+                self.append(AssemblySummary(assembly_summary_biopython_dict_element))
 
-        self.header = self[0].get_header()
+            self.header = self[0].get_header()
+
+        else:
+            self.header = "\t".join(['SpeciesName', 'Taxid', 'Isolate', 'Sub_type', 'Sub_value', 'Sex', 'BioSampleId',
+                                     'BioSampleAccn', 'WGS', 'AssemblyAccession', 'AssemblyName', 'SubmissionDate',
+                                     'LastUpdateDate', 'AssemblyType', 'AssemblyStatus',
+                                     'WholeGenome', "ChromosomeLvl", 'Chloroplast', "Mitochondrion", "Plasmid",
+                                     'total_length', 'ungapped_length', "alt_loci_count",
+                                     'chromosome_count', 'non_chromosome_replicon_count', 'replicon_count',
+                                     'scaffold_count_all', 'scaffold_count_placed', 'scaffold_count_unlocalized',
+                                     'scaffold_count_unplaced', 'scaffold_l50', 'scaffold_n50',
+                                     'contig_count', 'contig_l50', 'contig_n50', 'FtpPath_GenBank'])
 
     def __str__(self):
         string = self.header + "\n"
@@ -132,14 +160,34 @@ class AssemblySummaryList(list):
     def write(self, output_file):
         with open(output_file, "w") as out_fd:
             out_fd.write(self.header + "\n")
+            for summary in self:
+                out_fd.write(str(summary) + "\n")
+
+    def filter(self, expression):
+        filtered = AssemblySummaryList()
+        filtered_out = AssemblySummaryList()
+
         for summary in self:
-            out_fd.write(str(summary) + "\n")
+            if expression(summary):
+                filtered.append(summary)
+            else:
+                filtered_out.append(summary)
+
+        return filtered, filtered_out
+
+    def filter_non_chrom_level_genomes(self):
+        def chromosome_lvl(summary):
+            return summary.chromosome_lvl
+
+        return self.filter(chromosome_lvl)
 
 
 class NCBIRoutines:
     def __init__(self):
-
+        #print os.getcwd()
+        #self.entrez_crosslinks = IdList(filename="./Data/Entrez/entrez_crosslinks_between_databases.names")
         pass
+
 
     @staticmethod
     def efetch(database, id_list, out_file, retmode=None, rettype=None, seq_start=None, seq_stop=None, strand=None, verbose=False,
@@ -334,12 +382,14 @@ class NCBIRoutines:
                     for id in id_list:
                         print "handling %s" % id
                         record = Entrez.read(Entrez.efetch(db="taxonomy", id=id, retmode="xml"))
+                        #print record
                         out_file.write("%s\t%s\t%s\n" % (taxon, record[0]["Rank"], record[0]["Lineage"]))
 
         elif input_type == "id":
             for taxon in taxa_list:
                 print "Handling %s" % taxon
                 record = Entrez.read(Entrez.efetch(db="taxonomy", id=taxon, retmode="xml"))
+                print record
                 out_file.write("%s\t%s\t%s\n" % (taxon, record[0]["Rank"], record[0]["Lineage"]))
 
     def get_taxonomy_from_id_file(self, taxa_file, output_file, email, input_type="latin"):
@@ -349,9 +399,17 @@ class NCBIRoutines:
 
         self.get_taxonomy(taxa_list, output_file, email, input_type=input_type)
 
-    def get_taxa_genomes_summary(self, taxa, email, output_file, max_ids_per_query=1000):
+    def get_taxa_genomes_summary(self, taxa, email, output_directory, output_prefix, max_ids_per_query=8000):
         Entrez.email = email
         taxa_list = taxa if isinstance(taxa, Iterable) else [taxa]
+
+        all_files_dir = "%s%s/" % (FileRoutines.check_path(output_directory), "all")
+        chromosome_lvl_dir = "%s%s/" % (FileRoutines.check_path(output_directory), "chromosome_lvl")
+        non_chromosome_lvl_dir = "%s%s/" % (FileRoutines.check_path(output_directory), "nonchromosome_lvl")
+        stat_dir = "%s%s/" % (FileRoutines.check_path(output_directory), "stat")
+        taxa_stat_dir = "%s%s/" % (FileRoutines.check_path(output_directory), "taxa_stat")
+        for subdir in all_files_dir, chromosome_lvl_dir, non_chromosome_lvl_dir, stat_dir, taxa_stat_dir:
+            FileRoutines.save_mkdir(subdir)
 
         for taxon in taxa_list:
             search_term = "%s[Orgn]" % taxon
@@ -360,11 +418,25 @@ class NCBIRoutines:
             print "Were found %s species" % summary["Count"]
             #print summary
 
-            for species_id in summary["IdList"]: #[167] :
-                print "Species id %s " % species_id
+            taxon_stat_file = "%s/%s.stat" % (taxa_stat_dir, taxon.replace(" ", "_"))
+            taxon_stat_dict = TwoLvlDict()
 
-                species_summary = Entrez.read(Entrez.esummary(db="genome", id=species_id, retmax=10000, retmode="xml"))
+            for species_id in summary["IdList"]: #[167] :
+                print "Handling species id %s " % species_id
+
+                species_stat_file = "%s/%s.stat" % (stat_dir, species_id)
+                species_stat_dict = TwoLvlDict()
+                species_stat_dict[species_id] = OrderedDict()
+
+                taxon_stat_dict[species_id] = OrderedDict()
+
+                for stat in "all", "chromosome_lvl", "non_chromosome_lvl":
+                    species_stat_dict[species_id][stat] = 0
+                    taxon_stat_dict[species_id][stat] = 0
+                #species_summary = Entrez.read(Entrez.esummary(db="genome", id=species_id, retmax=10000, retmode="xml"))
                 #print species_summary
+
+
 
                 # get assemblies linked with genome of species
                 assembly_links = Entrez.read(Entrez.elink(dbfrom="genome", id=species_id, retmode="xml",
@@ -372,31 +444,104 @@ class NCBIRoutines:
                 assembly_number = len(assembly_links)
                 #print links
                 #print links[0]["LinkSetDb"][0]["Link"]
-                assembly_ids = [id_dict["Id"] for id_dict in assembly_links[0]["LinkSetDb"][0]["Link"]]
+                if assembly_links:
+                    if "LinkSetDb" in assembly_links[0]:
+                        if assembly_links[0]["LinkSetDb"]:
+                            if "Link" in assembly_links[0]["LinkSetDb"][0]:
+                                assembly_ids = [id_dict["Id"] for id_dict in assembly_links[0]["LinkSetDb"][0]["Link"]]
+                            else:
+                                continue
+                        else:
+                            continue
+                    else:
+                        continue
+                else:
+                    continue
+                number_of_ids = len(assembly_ids)
+
+                print "\tFound %i assemblies" % number_of_ids
+
+                id_group_edges = np.arange(0, number_of_ids+1, max_ids_per_query)
+
+                if id_group_edges[-1] != number_of_ids:
+                    id_group_edges = np.append(id_group_edges, number_of_ids)
+
+                number_of_id_groups = len(id_group_edges) - 1
+
                 #print len(assembly_links[0]["LinkSetDb"][0]["Link"])
                 #print assembly_ids
                 #print len(assembly_ids)
-                assembly_dict = TwoLvlDict()
-                assemblies_with_ambiguous_taxonomies = SynDict()
-                summaries = Entrez.read(Entrez.esummary(db="assembly", id=",".join(assembly_ids), retmode="xml"))
+                #assembly_dict = TwoLvlDict()
+                #assemblies_with_ambiguous_taxonomies = SynDict()
+                #summaries = Entrez.read(Entrez.esummary(db="assembly", id=",".join(assembly_ids), retmode="xml"))
+
+                summary_list = None
+                for i in range(0, number_of_id_groups):
+                    print "\tDownloading summary about assemblies %i - %i" % (id_group_edges[i]+1, id_group_edges[i+1])
+                    #print len(assembly_ids[id_group_edges[i]:id_group_edges[i+1]])
+                    summaries = Entrez.read(Entrez.esummary(db="assembly",
+                                                            id=",".join(assembly_ids[id_group_edges[i]:id_group_edges[i+1]]),
+                                                            retmode="xml"))
+                    tmp_summary_list = AssemblySummaryList(entrez_summary_biopython=summaries)
+                    summary_list = (summary_list + tmp_summary_list) if summary_list else tmp_summary_list
+
+                print "\tDownloaded %i" % len(summary_list)
+
+                if len(summary_list) != number_of_ids:
+                    print "\tWARNING:Not all assemblies were downloaded"
+                    """
+                    print "\tFollowing assemblies were not downloaded(ids):%s" % ",".join(set())
+                    """
+
+                if summary_list:
+                    species_stat_dict[species_id]["all"] = len(summary_list)
+                    taxon_stat_dict[species_id]["all"] = len(summary_list)
+                    output_file = "%s%s.genome.summary" % ((output_prefix + ".") if output_prefix else "", species_id)
+                                                           #summary_list[0]['SpeciesName'].replace(" ", "_"))
+
+                    all_output_file = "%s/%s" % (all_files_dir, output_file)
+                    chromosome_lvl_output_file = "%s/%s" % (chromosome_lvl_dir, output_file)
+                    non_chromosome_lvl_output_file = "%s/%s" % (non_chromosome_lvl_dir, output_file)
+
+                    chromosome_lvl_summary_list, non_chromosome_lvl_summary_list = summary_list.filter_non_chrom_level_genomes()
+
+                    if chromosome_lvl_summary_list:
+                        chromosome_lvl_summary_list.write(chromosome_lvl_output_file)
+                        species_stat_dict[species_id]["chromosome_lvl"] = len(chromosome_lvl_summary_list)
+                        taxon_stat_dict[species_id]["chromosome_lvl"] = len(chromosome_lvl_summary_list)
+                    if non_chromosome_lvl_summary_list:
+                        non_chromosome_lvl_summary_list.write(non_chromosome_lvl_output_file)
+                        species_stat_dict[species_id]["non_chromosome_lvl"] = len(non_chromosome_lvl_summary_list)
+                        taxon_stat_dict[species_id]["non_chromosome_lvl"] = len(non_chromosome_lvl_summary_list)
+                    #print summary_list
+                    summary_list.write(all_output_file)
+
+                species_stat_dict.write(species_stat_file)
+
+                print "\n\n"
+
+            taxon_stat_dict.write(taxon_stat_file)
+
+
                 #print summaries
                 #for assembly_id in assembly_ids: #[:1]:
 
-                summary_set = AssemblySummaryList(summaries)
+                #summary_set = AssemblySummaryList(summaries)
+            """
                 for tmp in summary_set:
-                    print "aaaaaaaaaaa"
-                    """
+                    #print "aaaaaaaaaaa"
+
                     tmp = Entrez.read(Entrez.esummary(db="assembly",
                                                                                    id=assembly_id,
                                                                             retmode="xml"))
-                    """
-                    print tmp
+
+                    #print tmp
                     #assembly_summary = AssemblySummary(tmp)
                     #print assembly_summary
 
                     #print assembly_summary.SpeciesName
 
-                    """
+
                     taxonomy_links = Entrez.read(Entrez.elink(dbfrom="assembly", id=assembly_id, retmode="xml",
                                                               retmax=10000, linkname="assembly_taxonomy"))
                     #print taxonomy_links
@@ -414,9 +559,9 @@ class NCBIRoutines:
                     lineage = taxonomy_record[0]["Lineage"]
                     #common_name_list = taxonomy_record[0]["CommonName"]
                     print taxonomy_record[0]["ScientificName"]
-                    """
-                print "\n\n"
-        pass
+                """
+
+
 """
 assembly_nuccore 	Nucleotide 	Nucleotide 	Nucleotide 	5000
 assembly_nuccore_insdc 	Nucleotide INSDC 	Nucleotide INSDC 	Nucleotide INSDC (GenBank) 	5000

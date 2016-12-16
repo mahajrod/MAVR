@@ -174,6 +174,18 @@ class OrderedSet(MutableSet):
 
 class IdList(list):
 
+    def __init__(self, idlist=None, filename=None, header=False, close_after_if_file_object=False, column_number=None,
+                 column_separator="\t", comments_prefix=None, id_in_column_separator=None):
+        list.__init__(self)
+
+        if filename:
+            self.read(filename, header=header, close_after_if_file_object=close_after_if_file_object,
+                      column_number=column_number, column_separator=column_separator,
+                      comments_prefix=comments_prefix, id_in_column_separator=id_in_column_separator)
+        elif idlist:
+            for element in idlist:
+                self.append(element)
+
     def read(self, filename, header=False, close_after_if_file_object=False, column_number=None, column_separator="\t",
              comments_prefix=None, id_in_column_separator=None):
         #reads ids from file with one id per line
