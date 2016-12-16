@@ -14,7 +14,7 @@ parser.add_argument("-s", "--syn_file", action="store", dest="syn_file", require
 
 parser.add_argument("-k", "--key_column_index", action="store", dest="key_column_index", type=int, default=0,
                     help="Index of key column in synonym file. Default: 0")
-parser.add_argument("-k", "--value_column_index", action="store", dest="value_column_index", type=int, default=1,
+parser.add_argument("-v", "--value_column_index", action="store", dest="value_column_index", type=int, default=1,
                     help="Index of value column in synonym file.Default: 1")
 parser.add_argument("-e", "--separator", action="store", dest="column_separator", default='\t',
                     help="Column separator in synonym file. Default: \\t")
