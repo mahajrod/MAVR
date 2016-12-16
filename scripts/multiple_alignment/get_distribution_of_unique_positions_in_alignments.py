@@ -20,6 +20,9 @@ parser.add_argument("-f", "--format", action="store", dest="format", default="fa
 parser.add_argument("-g", "--gap_symbol", action="store", dest="gap_symbol", default="-",
                     help="Gap symbol. Default - '-'")
 
+parser.add_argument("-m", "--histogram_output", action="store", dest="histogram_output", required=True,
+                    help="File to write histogram")
+
 args = parser.parse_args()
 
 unique_position_dict = TwoLvlDict()
@@ -48,5 +51,5 @@ for species in species_list:
 
 data_list = [data_dict[species] for species in data_dict]
 
-MatplotlibRoutines.extended_percent_histogram(data_list, "tratata", input_mode="percent", label=species_list)
+MatplotlibRoutines.extended_percent_histogram(data_list, args.histogram_output, input_mode="percent", label=species_list)
 
