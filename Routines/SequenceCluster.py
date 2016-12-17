@@ -337,6 +337,41 @@ class SequenceClusterRoutines:
         return labels_set
 
     @staticmethod
+    def replace_label(cluster_dict, syn_dict=None, old_separator="@", old_label_position="first", new_separator="@", new_label_position="first"):
+        new_cluster_dict = SynDict()
+        for cluster in cluster_dict:
+            new_cluster_dict[cluster] = []
+            for element in cluster_dict[cluster]:
+                tmp = element.split(old_separator)
+                if old_label_position == "first":
+                    label = tmp[0]
+                    element_id = old_separator.join(tmp[1:])
+                else:
+                    label = tmp[-1]
+                    element_id = old_separator.join(tmp[:-1])
+
+                if new_label_position == 'first':
+                    new_cluster_dict[cluster].append("%s%s%s" % (syn_dict[label] if syn_dict else label, new_separator, element_id))
+                else:
+                    new_cluster_dict[cluster].append("%s%s%s" % (element_id, new_separator, syn_dict[label] if syn_dict else label))
+
+        return new_cluster_dict
+
+    def replace_label_from_file(self, input_file, output_file, syn_file_or_dict, old_separator="@",
+                                old_label_position="first",
+                                new_separator="@", new_label_position="first"):
+
+        syn_dict = SynDict(filename=syn_file_or_dict, split_values=False) if isinstance(syn_file_or_dict, str) else SynDict(syn_file_or_dict)
+        cluster_dict = SynDict(filename=input_file, split_values=True)
+        new_cluster_dict = self.replace_label(cluster_dict, syn_dict=syn_dict, old_separator=old_separator,
+                                              old_label_position=old_label_position, new_separator=new_separator,
+                                              new_label_position=new_label_position)
+
+        new_cluster_dict.write(output_file, splited_values=True)
+
+        return new_cluster_dict
+
+    @staticmethod
     def extract_single_copy_clusters(dict_of_cluster_dicts, label_elements=False, separator="@",
                                      label_position="first"):
 
