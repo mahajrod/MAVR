@@ -388,7 +388,8 @@ class NCBIRoutines:
                         record = Entrez.read(Entrez.efetch(db="taxonomy", id=id, retmode="xml"))
                         #print record
                         out_file.write("%s\t%s\t%s\n" % (taxon, record[0]["Rank"], record[0]["Lineage"]))
-                        species_syn_dict[taxon].append(record[0]["Species"])
+
+                        species_syn_dict[taxon].append(record[0]['ScientificName'])
                         #species_set.add(record[0]["Species"])
         elif input_type == "id":
             for taxon in taxa_list:
@@ -398,7 +399,8 @@ class NCBIRoutines:
                 record = Entrez.read(Entrez.efetch(db="taxonomy", id=taxon, retmode="xml"))
                 print record
                 out_file.write("%s\t%s\t%s\n" % (taxon, record[0]["Rank"], record[0]["Lineage"]))
-                species_syn_dict[taxon].append(record[0]["Species"])
+                print record[0]
+                species_syn_dict[taxon].append(record[0]['ScientificName'])
                 #species_set.add(record[0]["Species"])
 
         return species_syn_dict
