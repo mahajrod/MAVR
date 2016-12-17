@@ -37,11 +37,12 @@ class EggNOGRoutines(SequenceClusterRoutines):
     @staticmethod
     def extract_proteins_from_alignments(dir_with_alignments, output_dir):
         out_dir = FileRoutines.check_path(output_dir)
-        from Routines import MultipleAlignmentRoutines
+
         print type(FileRoutines)
         input_files = FileRoutines.make_list_of_path_to_files([dir_with_alignments] if isinstance(dir_with_alignments, str) else dir_with_alignments)
 
         FileRoutines.save_mkdir(out_dir)
+        from Routines import MultipleAlignmentRoutines
         for filename in input_files:
             filename_list = FileRoutines.split_filename(filename)
             output_file = "%s%s%s" % (out_dir, filename_list[1], filename_list[2])
