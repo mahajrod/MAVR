@@ -394,6 +394,7 @@ class NCBIRoutines:
             for taxon in taxa_list:
                 print "Handling %s" % taxon
                 species_syn_dict[taxon] = []
+                print taxon
                 record = Entrez.read(Entrez.efetch(db="taxonomy", id=taxon, retmode="xml"))
                 print record
                 out_file.write("%s\t%s\t%s\n" % (taxon, record[0]["Rank"], record[0]["Lineage"]))
