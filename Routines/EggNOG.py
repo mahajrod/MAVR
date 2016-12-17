@@ -10,11 +10,9 @@ from CustomCollections.GeneralCollections import IdList, SynDict
 from Routines.SequenceCluster import SequenceClusterRoutines
 
 
-
 class EggNOGRoutines(SequenceClusterRoutines):
     def __init__(self):
-
-        pass
+        SequenceClusterRoutines.__init__(self)
 
     @staticmethod
     def edit_profile_names_in_fam_file(input_fam_file, output_fam_file, comments_prefix="#"):
@@ -85,9 +83,16 @@ class EggNOGRoutines(SequenceClusterRoutines):
         if not email:
             species = species_ids
         else:
-            species = NCBIRoutines.get_taxonomy(species_ids, "%s.species.taxonomy" % output_prefix, email, input_type="id")
+            species = NCBIRoutines.get_taxonomy(species_ids, "%s.species.taxonomy" % output_prefix,
+                                                email, input_type="id")
 
         species.write("%s.species" % output_prefix, splited_values=True)
+
+        for species_id in species:
+            for i in range(0, len(species[species_id])):
+                species[species_id][i] = species[species_id][i].lower().replace(" ", "_")
+
+        species.write("%s.replaced_spaces.species" % output_prefix, splited_values=True)
 
 
 

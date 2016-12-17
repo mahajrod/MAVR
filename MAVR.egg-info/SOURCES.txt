@@ -383,6 +383,7 @@ scripts/sequence_clusters/eggnog/convert_members_tsv_to_fam.bash
 scripts/sequence_clusters/eggnog/convert_members_tsv_to_fam.py
 scripts/sequence_clusters/eggnog/edit_profile_names_in_fam_file.py
 scripts/sequence_clusters/eggnog/extract_proteins_from_alignments.py
+scripts/sequence_clusters/eggnog/get_species_from_eggnog_fam.py
 scripts/sequence_clusters/eggnog/rename_files_from_taxaid_to_species_name.py
 scripts/sequence_clusters/eggnog/split_proteins_per_species.py
 scripts/sequence_clusters/expansion/analyse_cafe_report.py
