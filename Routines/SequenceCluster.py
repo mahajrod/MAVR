@@ -260,7 +260,7 @@ class SequenceClusterRoutines:
                             out_file, format=seq_format)
 
         os.remove("tmp.idx")
-        print "%i clusters were skipped due to absent elements" % number_of_skipped_clusters
+        print "%i of %i clusters were skipped due to absent elements" % (number_of_skipped_clusters, len(cluster_dict))
 
         return number_of_skipped_clusters
 
@@ -325,6 +325,16 @@ class SequenceClusterRoutines:
         output_dict.write(output_file, splited_values=True)
 
         return output_dict
+
+    @staticmethod
+    def extract_labels_from_cluster_elements(cluster_dict, separator="@", label_position="first"):
+        labels_set = set()
+        for cluster in cluster_dict:
+            for element in cluster_dict[cluster]:
+                label = element.split(separator)
+                label = label[0] if label_position == "first" else label[-1]
+                labels_set.add(label)
+        return labels_set
 
     @staticmethod
     def extract_single_copy_clusters(dict_of_cluster_dicts, label_elements=False, separator="@",

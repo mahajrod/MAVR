@@ -5,9 +5,10 @@ from copy import deepcopy
 
 from Bio import SeqIO
 
-from Routines import FileRoutines
+from Routines import FileRoutines, NCBIRoutines
 from CustomCollections.GeneralCollections import IdList, SynDict
 from Routines.SequenceCluster import SequenceClusterRoutines
+
 
 
 class EggNOGRoutines(SequenceClusterRoutines):
@@ -74,6 +75,21 @@ class EggNOGRoutines(SequenceClusterRoutines):
         for taxa_id in syn_dict:
             out_file = "%s%s.pep" % (out_dir, taxa_id)
             SeqIO.write(renamed_records_generator(protein_dict, taxa_id), out_file, format=output_format)
+
+    def get_species_from_eggnog_tsv(self, eggnog_tsv, output_prefix, email=None):
+
+        cluster_dict = SynDict(filename=eggnog_tsv, key_index=1, value_index=5, split_values=True)
+
+        species_ids = self.extract_labels_from_cluster_elements(cluster_dict, separator=".", label_position="first")
+
+        if not email:
+            species = species_ids
+        else:
+            species = NCBIRoutines.get_taxonomy(species_ids, "%s.species.taxonomy" % output_prefix, email, input_type="id")
+
+        species.write("%s.species" % output_prefix, splited_values=True)
+
+
 
 
 

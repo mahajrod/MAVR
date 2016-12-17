@@ -12,7 +12,7 @@ from collections import OrderedDict
 from Bio import SeqIO, Entrez
 from Bio.SeqRecord import SeqRecord
 from Routines import FileRoutines
-from CustomCollections.GeneralCollections import IdList, SynDict, TwoLvlDict
+from CustomCollections.GeneralCollections import IdList, SynDict, TwoLvlDict, IdSet
 
 
 class AssemblySummary(OrderedDict):
@@ -373,24 +373,34 @@ class NCBIRoutines:
         Entrez.email = email
         out_file = open(output_file, "w")
         out_file.write("#species\tlineage\n")
+
+        species_syn_dict = SynDict()
+
         if input_type == "latin":
             for taxon in taxa_list:
                 print "Handling %s" % taxon
                 summary = Entrez.read(Entrez.esearch(db="taxonomy", term=taxon))
                 if summary:
                     id_list = summary["IdList"]
+                    species_syn_dict[taxon] = []
                     for id in id_list:
                         print "handling %s" % id
                         record = Entrez.read(Entrez.efetch(db="taxonomy", id=id, retmode="xml"))
                         #print record
                         out_file.write("%s\t%s\t%s\n" % (taxon, record[0]["Rank"], record[0]["Lineage"]))
-
+                        species_syn_dict[taxon].append(record[0]["Species"])
+                        #species_set.add(record[0]["Species"])
         elif input_type == "id":
             for taxon in taxa_list:
                 print "Handling %s" % taxon
+                species_syn_dict[taxon] = []
                 record = Entrez.read(Entrez.efetch(db="taxonomy", id=taxon, retmode="xml"))
                 print record
                 out_file.write("%s\t%s\t%s\n" % (taxon, record[0]["Rank"], record[0]["Lineage"]))
+                species_syn_dict[taxon].append(record[0]["Species"])
+                #species_set.add(record[0]["Species"])
+
+        return species_syn_dict
 
     def get_taxonomy_from_id_file(self, taxa_file, output_file, email, input_type="latin"):
 
@@ -481,7 +491,7 @@ class NCBIRoutines:
                     #print len(assembly_ids[id_group_edges[i]:id_group_edges[i+1]])
                     summaries = Entrez.read(Entrez.esummary(db="assembly",
                                                             id=",".join(assembly_ids[id_group_edges[i]:id_group_edges[i+1]]),
-                                                            retmode="xml"))
+                                                            retmode="xml"), validate=False)
                     tmp_summary_list = AssemblySummaryList(entrez_summary_biopython=summaries)
                     summary_list = (summary_list + tmp_summary_list) if summary_list else tmp_summary_list
 
@@ -522,11 +532,6 @@ class NCBIRoutines:
 
             taxon_stat_dict.write(taxon_stat_file)
 
-
-                #print summaries
-                #for assembly_id in assembly_ids: #[:1]:
-
-                #summary_set = AssemblySummaryList(summaries)
             """
                 for tmp in summary_set:
                     #print "aaaaaaaaaaa"

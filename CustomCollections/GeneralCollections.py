@@ -270,6 +270,20 @@ class WDict(OrderedDict):
 
 class SynDict(OrderedDict):
 
+    def __init__(self, filename=None, header=False, separator="\t", allow_repeats_of_key=False,
+                 split_values=False, values_separator=",", key_index=0, value_index=1,
+                 close_after_if_file_object=False, expression=None, comments_prefix=None):
+        OrderedDict.__init__(self)
+
+        if filename:
+            self.read(filename, header=header, separator=separator,
+                      allow_repeats_of_key=allow_repeats_of_key,
+                      split_values=split_values, values_separator=values_separator,
+                      key_index=key_index, value_index=value_index,
+                      close_after_if_file_object=close_after_if_file_object, expression=expression,
+                      comments_prefix=comments_prefix)
+
+
     def count_synonyms(self):
         count_dict = OrderedDict()
         for key in self:

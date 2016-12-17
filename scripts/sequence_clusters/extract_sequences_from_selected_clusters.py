@@ -29,7 +29,6 @@ parser.add_argument("-n", "--dont_skip_cluster_if_absent_element", action="store
 
 args = parser.parse_args()
 
-print not args.dont_skip_cluster_if_absent_element
 SequenceClusterRoutines.extract_sequences_from_selected_clusters(args.cluster_id_file, args.cluster_file,
                                                                  args.seq_file, output_dir=args.out_dir,
                                                                  seq_format=args.seq_file_format,

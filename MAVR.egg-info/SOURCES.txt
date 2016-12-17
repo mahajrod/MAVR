@@ -187,6 +187,7 @@ scripts/parallel_augustus_correct_errors.py
 scripts/remove_duplicates_flybase_UTR.py
 scripts/alignment/check_read_pairing_in_name_sorted_bam.sh
 scripts/alignment/extract_fastq_from_bam.py
+scripts/alignment/extract_se_from_bam.sh
 scripts/alignment/make_blast_plus_db.py
 scripts/alignment/map_reads.py
 scripts/alignment/parallel_exonerate.py
