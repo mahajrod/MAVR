@@ -6,6 +6,7 @@ from copy import deepcopy
 from Bio import SeqIO
 
 from Routines import FileRoutines, NCBIRoutines
+from Routines.File import make_list_of_path_to_files
 from CustomCollections.GeneralCollections import IdList, SynDict
 from Routines.SequenceCluster import SequenceClusterRoutines
 
@@ -40,7 +41,7 @@ class EggNOGRoutines(SequenceClusterRoutines):
 
         print type(FileRoutines)
 
-        input_files = FileRoutines.make_list_of_path_to_files(FileRoutines, [dir_with_alignments] if isinstance(dir_with_alignments, str) else dir_with_alignments)
+        input_files = FileRoutines.make_list_of_path_to_files([dir_with_alignments] if isinstance(dir_with_alignments, str) else dir_with_alignments)
 
         FileRoutines.save_mkdir(out_dir)
         from Routines import MultipleAlignmentRoutines
@@ -51,7 +52,7 @@ class EggNOGRoutines(SequenceClusterRoutines):
 
     @staticmethod
     def split_proteins_per_species(dir_with_proteins, output_dir, input_format="fasta", output_format="fasta"):
-        input_files = FileRoutines.make_list_of_path_to_files([dir_with_proteins] if isinstance(dir_with_proteins, str) else dir_with_proteins)
+        input_files = make_list_of_path_to_files([dir_with_proteins] if isinstance(dir_with_proteins, str) else dir_with_proteins)
 
         out_dir = FileRoutines.check_path(output_dir)
         FileRoutines.save_mkdir(out_dir)
