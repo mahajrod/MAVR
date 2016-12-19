@@ -24,5 +24,7 @@ class CoockiecutterReport():
                         self.stat[read_position][tmp[0]] = int(tmp[1])
                     tmp = in_fd.readline()
 
-        self.input_pairs = self.stat["left"]["ok"] + self.stat["left"]["adapter"] + self.stat["left"]["n"]
+        match_key = "match" if "match" in self.stat["left"] else "adapter"
+
+        self.input_pairs = self.stat["left"]["ok"] + self.stat["left"][match_key] + self.stat["left"]["n"]
         self.retained_pairs = self.stat["left"]["pe"]
