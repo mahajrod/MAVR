@@ -10,21 +10,19 @@ class CoockiecutterReport():
         self.stat["right"] = OrderedDict()
 
         with open(coockiecutter_report_file, "r") as in_fd:
-            in_fd.readline()
-            in_fd.readline()
-            for i in range(0, 6):
-                tmp = in_fd.readline().strip().split()
-                if i == 3:
-                    self.stat["left"][tmp[0]] = float(tmp[1])
-                else:
-                    self.stat["left"][tmp[0]] = int(tmp[1])
-            in_fd.readline()
-            for i in range(0, 6):
-                tmp = in_fd.readline().strip().split()
-                if i == 3:
-                    self.stat["right"][tmp[0]] = float(tmp[1])
-                else:
-                    self.stat["right"][tmp[0]] = int(tmp[1])
+            tmp = ""
+
+            for read_position in "left", "right":
+                while "ok" not in tmp:
+                    tmp = in_fd.readline()
+
+                while "\t" in tmp:
+                    tmp = tmp.strip().split("\t")
+                    if "%" in tmp[1]:
+                        self.stat[read_position][tmp[0]] = float(tmp[1].replace("%", ""))
+                    else:
+                        self.stat[read_position][tmp[0]] = int(tmp[1])
+                    tmp = in_fd.readline()
 
         self.input_pairs = self.stat["left"]["ok"] + self.stat["left"]["adapter"] + self.stat["left"]["n"]
         self.retained_pairs = self.stat["left"]["pe"]
