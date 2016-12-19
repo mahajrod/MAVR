@@ -101,7 +101,7 @@ class FilteringPipeline:
             final_filtered_sample_dir = "%s/%s/" % (final_filtered_dir, sample)
             filtering_stat_sample_dir = "%s/%s" % (filtering_stat_dir, sample)
 
-            """
+            #"""
 
             self.combine_fastq_files(samples_directory, sample, merged_raw_sample_dir)
 
