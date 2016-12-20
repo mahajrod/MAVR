@@ -6,4 +6,4 @@
 
 #cat ${INPUT_FILES} | awk '{if(NR%4==1 || NR%4==2) print}' | sed 's/^@/\>/'
 
-cat $@ | awk '{if(NR%4==1 || NR%4==2) print $0}' | sed 's/^@/\>/'
+cat $@ | awk '{if(NR%4==1 || NR%4==2) print $0 }' | sed 's/^@/\>/'
