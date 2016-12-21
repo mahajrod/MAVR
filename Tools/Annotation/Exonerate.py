@@ -6,8 +6,6 @@ import shutil
 
 from Tools.Abstract import Tool
 
-from Tools.LinuxTools import CGAS
-from Parsers.TRF import CollectionTRF
 from Routines.File import split_filename, save_mkdir
 from CustomCollections.GeneralCollections import SynDict, IdList
 
