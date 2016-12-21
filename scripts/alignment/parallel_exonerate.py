@@ -4,7 +4,7 @@ __author__ = 'mahajrod'
 import argparse
 
 from Routines.File import split_filename
-from Tools.Exonerate import Exonerate
+from Tools.Annotation import Exonerate
 
 parser = argparse.ArgumentParser()
 
