@@ -1,0 +1,4 @@
+
+from Pipelines.GenomeAnnotation.ProteinCodingGeneAnnotation import ProteinCodingGeneAnnotation
+
+ProteinCodingGeneAnnotation = ProteinCodingGeneAnnotation()

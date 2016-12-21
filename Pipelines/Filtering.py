@@ -1,8 +1,11 @@
 #!/usr/bin/env python
+
 import os
 import shutil
 
 from collections import OrderedDict
+
+from Pipelines.Abstract import Pipeline
 
 from Tools.Filter import Cookiecutter, Trimmomatic, FaCut
 from Routines import FileRoutines
@@ -13,12 +16,10 @@ from Parsers.Trimmomatic import TrimmomaticReport
 from CustomCollections.GeneralCollections import TwoLvlDict
 
 
-class FilteringPipeline:
-    def __init__(self):
-        pass
+class FilteringPipeline(Pipeline):
 
     @staticmethod
-    def prepare_directories(output_directory, sample_list):
+    def prepare_filtering_directories(output_directory, sample_list):
         merged_raw_dir = "%s/merged/" % output_directory
         filtered_dir = "%s/filtered/" % output_directory
         filtering_stat_dir = "%s/filtered_stat/" % output_directory
@@ -32,32 +33,6 @@ class FilteringPipeline:
             FileRoutines.save_mkdir(directory)
             for sample in sample_list:
                 FileRoutines.save_mkdir("%s/%s" % (directory, sample))
-
-    @staticmethod
-    def get_sample_list(samples_directory):
-        samples = sorted(os.listdir(samples_directory))
-        sample_list = []
-        for sample in samples:
-            if os.path.isdir("%s/%s" % (samples_directory, sample)):
-                sample_list.append(sample)
-        return sample_list
-
-    @staticmethod
-    def combine_fastq_files(samples_directory, sample, output_directory):
-        sample_dir = "%s/%s/" % (samples_directory, sample)
-        filetypes, forward_files, reverse_files = FileRoutines.make_lists_forward_and_reverse_files(sample_dir)
-        if len(filetypes) == 1:
-            if "fq.gz" in filetypes:
-                command = "zcat"
-            elif "fq.bz2" in filetypes:
-                command = "bzcat"
-            else:
-                command = "cat"
-
-            os.system("%s %s > %s/%s_1.fq" % (command, " ".join(forward_files), output_directory, sample))
-            os.system("%s %s > %s/%s_2.fq" % (command, " ".join(reverse_files), output_directory, sample))
-        else:
-            raise IOError("Extracting from mix of archives in not implemented yet")
 
     def filter(self, samples_directory, output_directory, adapter_fragment_file, trimmomatic_adapter_file,
                general_stat_file,
@@ -83,7 +58,7 @@ class FilteringPipeline:
         filtering_stat_dir = "%s/filtered_stat/" % output_directory
 
         sample_list = samples_to_handle if samples_to_handle else self.get_sample_list(samples_directory)
-        self.prepare_directories(output_directory, sample_list)
+        self.prepare_filtering_directories(output_directory, sample_list)
         filtering_statistics = TwoLvlDict()
         for sample in sample_list:
             print "Handling sample %s" % sample

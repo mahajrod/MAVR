@@ -7,9 +7,9 @@ from collections import OrderedDict
 from Routines import FileRoutines
 from CustomCollections.GeneralCollections import TwoLvlDict, SynDict
 
+from Tools.Annotation import AUGUSTUS
 from Tools.Filter import Cookiecutter, Trimmomatic, FaCut
 from Tools.Alignment import STAR
-from Tools.Expression import HTSeq
 
 from Parsers.FaCut import FaCutReport
 from Parsers.Coockiecutter import CoockiecutterReport
@@ -18,19 +18,28 @@ from Parsers.Trimmomatic import TrimmomaticReport
 from Pipelines.Filtering import FilteringPipeline
 
 
-class DiffExpressionPipeline(FilteringPipeline):
+class ProteinCodingGeneAnnotation(FilteringPipeline):
     def __init__(self):
         pass
 
     @staticmethod
-    def prepare_diff_expression_directories(output_directory, sample_list):
+    def prepare_gene_annotation_directories(output_directory, protein_species_list=None, rnaseq_tissues_list=None):
 
-        alignment_dir = "%s/alignment/" % output_directory
+        annotation_dir = "%s/annotation/" % output_directory
 
-        for directory in (alignment_dir, ):
+        protein_evidence_dir = "%s/protein_evidence/" % annotation_dir
+        rnaseq_evidence_dir = "%s/rnaseq_evidence/" % annotation_dir
+        est_evidence_dir = "%s/est_evidence/" % annotation_dir
+
+        augustus_dir = "%s/augustus/" % annotation_dir
+        augustus_hints_dir = "%s/hints/" % augustus_dir
+
+        for directory in (annotation_dir, protein_evidence_dir, rnaseq_evidence_dir,
+                          est_evidence_dir, augustus_dir, augustus_hints_dir):
             FileRoutines.save_mkdir(directory)
-            for sample in sample_list:
-                FileRoutines.save_mkdir("%s/%s" % (directory, sample))
+            #for sample in sample_list:
+            #    FileRoutines.save_mkdir("%s/%s" % (directory, sample))
+    """
 
     def star_and_htseq(self, genome_dir, samples_directory, output_directory, gff_for_htseq, count_table_file,
                        genome_fasta=None, samples_to_handle=None,
@@ -53,7 +62,7 @@ class DiffExpressionPipeline(FilteringPipeline):
                        genomeSAindexNbases=None, genomeChrBinNbits=None, genome_size=genome_size)
 
         sample_list = samples_to_handle if samples_to_handle else self.get_sample_list(samples_directory)
-        self.prepare_diff_expression_directories(output_directory, sample_list)
+        self.prepare_directories(output_directory, sample_list)
 
         alignment_dir = "%s/alignment/" % output_directory
 
@@ -102,3 +111,4 @@ class DiffExpressionPipeline(FilteringPipeline):
             count_table[sample] = sample_counts
 
         count_table.write(count_table_file)
+        """
