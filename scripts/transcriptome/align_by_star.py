@@ -29,10 +29,8 @@ parser.add_argument("-s", "--samples", action="store", dest="samples",
                          "If not set all subdirectories will be considered as containing samples")
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=1, type=int,
                     help="Number of threads to use in Trimmomatic. Default - 1.")
-
 parser.add_argument("-a", "--annotation_gtf", action="store", dest="annotation_gtf", type=os.path.abspath,
                     help="Gtf file with annotations for STAR")
-
 parser.add_argument("-i", "--genome_size", action="store", dest="genome_size", type=int,
                     help="Genome size. Required for constructing genome index")
 parser.add_argument("-j", "--junction_tab_file", action="store", dest="junction_tab_file",
@@ -49,6 +47,30 @@ parser.add_argument("-x", "--max_intron_length", action="store", dest="max_intro
                     help="Maximum intron length. Default: not set")
 
 args = parser.parse_args()
+
+"""
+Examples of usage:
+skliver@dcdell:/mnt/guatemala/skliver/Pusa_sibirica/transcriptome/own/alignment/Nerpa$
+~/Soft/MAVR/scripts/transcriptome/align_by_star.py \
+    -d filtered/filtered/final/ \
+    -g ../../genome/index_STAR \
+    -t 30 \
+    -o alignment/ \
+    -i 2400000000 \
+    -m 100000000000 \
+    -r ~/Soft/STAR/bin/Linux_x86_64/
+
+~/Soft/MAVR/scripts/transcriptome/align_by_star.py \
+    -f ../../genome/nerpaGenome.1000.fa \
+    -d filtered/filtered/final/ \
+    -g ../../genome/index_STAR \
+    -t 30 \
+    -o alignment/ \
+    -i 2400000000 \
+    -m 100000000000 \
+    -r ~/Soft/STAR/bin/Linux_x86_64/
+
+"""
 
 STAR.threads = args.threads
 STAR.path = args.star_dir
@@ -70,7 +92,7 @@ for sample in sample_list:
     filetypes, forward_files, reverse_files = FileRoutines.make_lists_forward_and_reverse_files(sample_dir)
 
     print "\tAligning reads..."
-    """
+
     STAR.align(args.genome_dir, forward_files, reverse_read_list=reverse_files,
                annotation_gtf=args.annotation_gtf if not args.genome_fasta else None,
                feature_from_gtf_to_use_as_exon=None,
@@ -87,6 +109,7 @@ for sample in sample_list:
                include_unmapped_reads_in_bam=args.include_unmapped_reads,
                output_unmapped_reads=args.include_unmapped_reads, output_dir=alignment_sample_dir,
                two_pass_mode=True, max_intron_length=None)
-    """
+
+    print "\tIndexing bam file..."
     resulting_bam_file = "%s/Aligned.sortedByCoord.out.bam" % alignment_sample_dir
     SamtoolsV1.index(resulting_bam_file)
