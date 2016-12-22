@@ -68,18 +68,19 @@ for sample in sample_list:
 
     print "\tAligning reads..."
 
-    STAR.align(args.genome_dir, forward_files, reverse_read_list=reverse_files, annotation_gtf=annotation_gtf,
-               feature_from_gtf_to_use_as_exon=feature_from_gtf_to_use_as_exon,
-               exon_tag_to_use_as_transcript_id=exon_tag_to_use_as_transcript_id,
-               exon_tag_to_use_as_gene_id=exon_tag_to_use_as_gene_id,
-               length_of_sequences_flanking_junction=length_of_sequences_flanking_junction,
-               junction_tab_file_list=junction_tab_file_list,
-               three_prime_trim=three_prime_trim, five_prime_trim=five_prime_trim,
-               adapter_seq_for_three_prime_clip=adapter_seq_for_three_prime_clip,
-               max_mismatch_percent_for_adapter_trimming=max_mismatch_percent_for_adapter_trimming,
-               three_prime_trim_after_adapter_clip=three_prime_trim_after_adapter_clip,
-               output_type=output_type, sort_bam=sort_bam,
-               max_memory_for_bam_sorting=max_memory_for_bam_sorting,
+    STAR.align(args.genome_dir, forward_files, reverse_read_list=reverse_files,
+               annotation_gtf=args.annotation_gtf if not args.genome_fasta else None,
+               feature_from_gtf_to_use_as_exon=None,
+               exon_tag_to_use_as_transcript_id=None,
+               exon_tag_to_use_as_gene_id=None,
+               length_of_sequences_flanking_junction=None,
+               junction_tab_file_list=args.junction_tab_file,
+               three_prime_trim=None, five_prime_trim=None,
+               adapter_seq_for_three_prime_clip=None,
+               max_mismatch_percent_for_adapter_trimming=None,
+               three_prime_trim_after_adapter_clip=None,
+               output_type="BAM", sort_bam=True,
+               max_memory_for_bam_sorting=args.max_memory_for_bam_sorting,
                include_unmapped_reads_in_bam=args.include_unmapped_reads,
-               output_unmapped_reads=output_unmapped_reads, output_dir=alignment_sample_dir,
-               two_pass_mode=two_pass_mode, max_intron_length=max_intron_length)
+               output_unmapped_reads=args.include_unmapped_reads, output_dir=alignment_sample_dir,
+               two_pass_mode=True, max_intron_length=None)
