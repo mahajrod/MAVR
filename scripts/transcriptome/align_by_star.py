@@ -4,6 +4,7 @@ import os
 import argparse
 
 from Tools.Alignment import STAR
+from Tools.Samtools import SamtoolsV1
 from Pipelines import Pipeline
 from Routines import FileRoutines
 from Routines.File import check_path
@@ -69,7 +70,7 @@ for sample in sample_list:
     filetypes, forward_files, reverse_files = FileRoutines.make_lists_forward_and_reverse_files(sample_dir)
 
     print "\tAligning reads..."
-
+    """
     STAR.align(args.genome_dir, forward_files, reverse_read_list=reverse_files,
                annotation_gtf=args.annotation_gtf if not args.genome_fasta else None,
                feature_from_gtf_to_use_as_exon=None,
@@ -86,3 +87,6 @@ for sample in sample_list:
                include_unmapped_reads_in_bam=args.include_unmapped_reads,
                output_unmapped_reads=args.include_unmapped_reads, output_dir=alignment_sample_dir,
                two_pass_mode=True, max_intron_length=None)
+    """
+    resulting_bam_file = "%s/Aligned.sortedByCoord.out.bam" % alignment_sample_dir
+    SamtoolsV1.index(resulting_bam_file)
