@@ -57,7 +57,7 @@ if args.genome_fasta:
                junction_tab_file=args.junction_tab_file, sjdboverhang=None,
                genomeSAindexNbases=None, genomeChrBinNbits=None, genome_size=args.genome_size)
 
-sample_list = args.samples if args.samples else Pipeline.get_sample_list(args.samples_directory)
+sample_list = args.samples if args.samples else Pipeline.get_sample_list(args.samples_dir)
 
 
 for sample in sample_list:
