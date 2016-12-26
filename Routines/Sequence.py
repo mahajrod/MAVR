@@ -22,10 +22,119 @@ from Routines import FileRoutines
 from Routines.Functions import output_dict
 
 
-class SequenceRoutines():
+class SequenceRoutines(FileRoutines):
 
     def __init__(self):
-        pass
+        FileRoutines.__init__(self)
+
+    def split_fasta(self, input_fasta, output_dir, num_of_recs_per_file=None, num_of_files=None, output_prefix=None):
+        """
+        by default splits input files into files with num_of_recs_per_file.
+        if num_of_files is set num_of_recs_per_file is ignored.
+        """
+        self.save_mkdir(output_dir)
+        out_prefix = self.split_filename(input_fasta)[1] if output_prefix is None else output_prefix
+        sequence_dict = SeqIO.index_db("temp.idx", input_fasta, "fasta")
+
+        split_index = 1
+        records_written = 0
+        record_ids_list = list(sequence_dict.keys())
+        number_of_records = len(record_ids_list)
+
+        num_of_recs = int(number_of_records/num_of_files) + 1 if num_of_files else num_of_recs_per_file
+        while (records_written + num_of_recs) <= number_of_records:
+
+            SeqIO.write(self.record_by_id_generator(sequence_dict,
+                                                    record_ids_list[records_written:records_written+num_of_recs]),
+                        "%s/%s_%i.fasta" % (output_dir, out_prefix, split_index), format="fasta")
+            split_index += 1
+            records_written += num_of_recs
+
+        if records_written != number_of_records:
+            SeqIO.write(self.record_by_id_generator(sequence_dict,
+                                                    record_ids_list[records_written:]),
+                        "%s/%s_%i.fasta" % (output_dir, out_prefix, split_index), format="fasta")
+
+        os.remove("temp.idx")
+
+    def split_fasta_by_seq_len(self, input_fasta, output_dir, max_len_per_file=None, output_prefix=None):
+        """
+        by default splits input files into files with num_of_recs_per_file.
+        if num_of_files is set num_of_recs_per_file is ignored.
+        """
+        self.save_mkdir(output_dir)
+
+        out_prefix = self.split_filename(input_fasta)[1] if output_prefix is None else output_prefix
+        sequence_dict = SeqIO.index_db("temp.idx", input_fasta, "fasta")
+        length = 0
+
+        for record_id in sequence_dict:
+            length += len(sequence_dict[record_id].seq)
+
+        max_len = max_len_per_file if max_len_per_file else int(length / self.threads)
+
+        split_index = 1
+        id_list = []
+        total_length = 0
+
+        for record_id in sequence_dict:
+            record_length = len(sequence_dict[record_id].seq)
+            if record_length >= max_len:
+                SeqIO.write(sequence_dict[record_id],
+                            "%s/%s_%i.fasta" % (output_dir, out_prefix, split_index), format="fasta")
+
+            elif total_length + record_length > max_len:
+                SeqIO.write(self.record_by_id_generator(sequence_dict, id_list),
+                            "%s/%s_%i.fasta" % (output_dir, out_prefix, split_index), format="fasta")
+                total_length = record_length
+                id_list = [record_id]
+
+            elif total_length + record_length == max_len:
+                id_list.append(record_id)
+                SeqIO.write(self.record_by_id_generator(sequence_dict, id_list),
+                            "%s/%s_%i.fasta" % (output_dir, out_prefix, split_index), format="fasta")
+                total_length = 0
+                id_list = []
+
+            elif total_length + record_length < max_len:
+                id_list.append(record_id)
+                total_length += record_length
+                continue
+
+            split_index += 1
+
+        if id_list:
+            SeqIO.write(self.record_by_id_generator(sequence_dict, id_list),
+                        "%s/%s_%i.fasta" % (output_dir, out_prefix, split_index), format="fasta")
+
+        os.remove("temp.idx")
+
+    def extract_common_sequences(self, list_of_files_with_sequences_of_samples, list_of_names_of_samples,
+                                 output_dir, separator="_", format="fasta"):
+
+        def generator_with_id_correction(samples_seq_dict, common_record_id):
+            for sample in samples_seq_dict:
+                record = samples_seq_dict[sample][common_record_id]
+                record.id = "%s%s%s" % (sample, separator, record.id)
+                yield record
+
+        self.save_mkdir(output_dir)
+        index = 0
+        samples_seq_dict = OrderedDict()
+        for filename, sample_name in zip(list_of_files_with_sequences_of_samples, list_of_names_of_samples):
+            samples_seq_dict[sample_name] = SeqIO.index_db("tmp_%i.idx" % index, filename, format=format)
+            index += 1
+        common_sequence_ids = set(samples_seq_dict[list_of_names_of_samples[0]].keys())
+
+        for sample_name in list_of_names_of_samples[1:]:
+            common_sequence_ids = common_sequence_ids & set(samples_seq_dict[sample_name].keys())
+
+        for common_id in common_sequence_ids:
+            SeqIO.write(generator_with_id_correction(samples_seq_dict, common_id),
+                        "%s%s.%s" % (self.check_path(output_dir), common_id, format),
+                        format=format)
+        for i in range(0, index):
+            os.remove("tmp_%i.idx" % i)
 
     @staticmethod
     def get_lengths(record_dict, out_file=None, close_after_if_file_object=False):
@@ -1124,7 +1233,7 @@ class SequenceRoutines():
 
     def get_random_species_genomes_from_genbank_file(self, input_gb_files, output_prefix, output_type="genbank"):
 
-        record_dict = SeqIO.index_db("tmp.idx", FileRoutines.make_list_of_path_to_files(input_gb_files),
+        record_dict = SeqIO.index_db("tmp.idx", self.make_list_of_path_to_files(input_gb_files),
                                      format="genbank")
         #count_species_file = "%s.species_counts" % output_prefix
         output_file = "%s.extracted.%s" % (output_prefix, output_type)
@@ -1133,6 +1242,131 @@ class SequenceRoutines():
 
         os.remove("tmp.idx")
 
+    @staticmethod
+    def get_protein_segments_from_CDS_location(CDS_location, number_of_end_nucleotides_to_ignore=0):
+        cds_segments_len_list = [len(segment_location) for segment_location in CDS_location.parts]
+        #print("CDS segment list")
+        #print cds_segments_len_list
+        cds_segments_len_list[-1] -= number_of_end_nucleotides_to_ignore
+        #print cds_segments_len_list
+        tmp_len = 0
+        next_segment_start = 0
+        left_phase = 0
+        right_phase = 0
+
+        protein_segments_list = []
+        protein_segment_phases_list = []
+        for i in range(0, len(cds_segments_len_list)):
+            tmp_len += cds_segments_len_list[i]
+            full_triplet_cummulative_number = int(tmp_len / 3)
+            remainder = tmp_len % 3
+
+            right_phase = remainder
+            segment_location = FeatureLocation(start=next_segment_start, end=full_triplet_cummulative_number)
+            segment_phase = (left_phase, right_phase)
+            if remainder == 0:
+                next_segment_start = full_triplet_cummulative_number
+                left_phase = 0
+            else:
+                next_segment_start = full_triplet_cummulative_number + 1
+                left_phase = 3 - remainder
+
+            protein_segments_list.append(segment_location)
+            protein_segment_phases_list.append(segment_phase)
+        #python-based coordinates
+        return protein_segments_list, protein_segment_phases_list
+
+    @staticmethod
+    def make_string_from_nested_list_of_ints(input_list, first_lvl_separator=",", second_lvl_separator=";"):
+        return second_lvl_separator.join([first_lvl_separator.join(map(str, coordinates)) for coordinates in input_list])
+
+    def get_protein_marking_by_exons_from_genbank(self, record_dict,
+                                                  output_file,
+                                                  protein_id_field_in_cds_feature="protein_id",
+                                                  gene_id_field_in_cds_feature="gene",
+                                                  translation_field_in_cds_feature="translation",
+                                                  genetic_code_table=1, stop_codon_symbol="*", verbose=True):
+        output_header_list = ["protein_id",
+                              "gene_id",
+                              "protein_length",
+                              "CDS_exon_number",
+                              "CDS_exon_coordinates",
+                              "CDS_strand",
+                              "protein_segments",
+                              "protein_segment_phases",
+                              "CDS_seq",
+                              "protein_seq"]
+
+        output_header = "\t".join(output_header_list) + "\n"
+
+        out_fd = open(output_file, "w")
+        out_fd.write(output_header)
+
+        for record_id in record_dict:
+            if verbose:
+                print "Handling %s" % record_id
+            for feature in record_dict[record_id].features:
+
+                if feature.type == "CDS":
+                    protein_id = feature.qualifiers[protein_id_field_in_cds_feature][0] if protein_id_field_in_cds_feature in feature.qualifiers else None
+                    gene_id = feature.qualifiers[gene_id_field_in_cds_feature][0] if gene_id_field_in_cds_feature in feature.qualifiers else None
+                    translation = feature.qualifiers[translation_field_in_cds_feature][0] if translation_field_in_cds_feature in feature.qualifiers else None
+
+                    translation = translation[:-1] if translation[-1] == stop_codon_symbol else translation
+
+                    if verbose:
+                        print "\t" + protein_id
+                    #print gene_id
+                    #print translation
+                    CDS_len = len(feature.location)
+                    CDS = feature.extract(record_dict[record_id]).seq
+                    CDS_translation = CDS.translate(to_stop=True, table=genetic_code_table,
+                                                    stop_symbol=stop_codon_symbol)
+                    #print CDS_translation
+
+                    if translation != CDS_translation:
+                        print "\tWARNING!!! Translational discrepancy in %s! Ignoring..." % protein_id
+                        continue
+                    protein_length = len(translation)
+
+                    #print feature.location
+                    #print feature.location.strand
+                    #print feature.location.parts
+                    segments_lengths = [len(segment_location) for segment_location in feature.location.parts]
+                    #print segments_lengths
+                    CDS_exon_number = len(feature.location.parts)
+                    number_of_end_nucleotides_to_ignore = CDS_len - protein_length*3
+                    protein_segments, protein_segment_phases_list = self.get_protein_segments_from_CDS_location(feature.location,
+                                                                                                                number_of_end_nucleotides_to_ignore=number_of_end_nucleotides_to_ignore)
+                    #print protein_segments
+                    #print CDS_len
+                    #print float(len(feature.location))/3.0
+                    #print len(translation) if translation else None
+                    #print "\n\n"
+
+                    CDS_exon_coordinates = [[location.start, location.end] for location in feature.location.parts]
+                    CDS_exon_coordinates[-1][-1] -= number_of_end_nucleotides_to_ignore
+                    CDS_exon_coordinates_for_string = deepcopy(CDS_exon_coordinates)
+                    for i in range(0, len(CDS_exon_coordinates)):
+                        CDS_exon_coordinates_for_string[i][0] += 1
+                    CDS_exon_coordinates_str = self.make_string_from_nested_list_of_ints(CDS_exon_coordinates_for_string)
+
+                    protein_segments_for_string = deepcopy(protein_segments)
+                    for i in range(0, len(protein_segments_for_string)):
+                        protein_segments_for_string[i] = [protein_segments_for_string[i].start + 1, protein_segments_for_string[i].end]
+                    output_string = "%s\t%s\t%i\t%i\t%s\t%s\t%s\t%s\t%s\t%s\n" % (protein_id,
+                                                                                  gene_id,
+                                                                                  protein_length,
+                                                                                  CDS_exon_number,
+                                                                                  CDS_exon_coordinates_str,
+                                                                                  "+" if feature.location.strand == 1 else "-" if feature.location.strand == -1 else ".",
+                                                                                  self.make_string_from_nested_list_of_ints(protein_segments_for_string),
+                                                                                  self.make_string_from_nested_list_of_ints(protein_segment_phases_list),
+                                                                                  str(CDS)[:-number_of_end_nucleotides_to_ignore],
+                                                                                  str(CDS_translation))
+                    #print output_string
+                    out_fd.write(output_string)
+        pass
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
     lengths_dict = OrderedDict({})

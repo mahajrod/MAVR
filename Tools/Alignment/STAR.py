@@ -4,6 +4,8 @@ from math import log, floor
 from Tools.Abstract import Tool
 from Routines import FileRoutines
 
+from Tools.Samtools import SamtoolsV1
+
 
 class STAR(Tool):
     """
@@ -72,4 +74,56 @@ class STAR(Tool):
         options += " --alignIntronMax %i" % max_intron_length if max_intron_length else ""
 
         self.execute(options)
-
+        
+    def align_samples(self, samples_dir, output_dir, genome_dir, genome_fasta=None, samples=None,
+                      annotation_gtf=None,  sjdboverhang=None,
+                      genomeSAindexNbases=None, genomeChrBinNbits=None, genome_size=None,
+                      feature_from_gtf_to_use_as_exon=None, exon_tag_to_use_as_transcript_id=None,
+                      exon_tag_to_use_as_gene_id=None, length_of_sequences_flanking_junction=None,
+                      junction_tab_file_list=None, three_prime_trim=None, five_prime_trim=None,
+                      adapter_seq_for_three_prime_clip=None, max_mismatch_percent_for_adapter_trimming=None,
+                      three_prime_trim_after_adapter_clip=None, output_type="BAM", sort_bam=True,
+                      max_memory_for_bam_sorting=8000000000, include_unmapped_reads_in_bam=True,
+                      output_unmapped_reads=True, two_pass_mode=True, max_intron_length=None):
+        #STAR.threads = threads
+        #STAR.path = star_dir
+        
+        if genome_fasta:
+            STAR.index(genome_dir, genome_fasta, annotation_gtf=annotation_gtf,
+                       junction_tab_file=junction_tab_file_list, sjdboverhang=sjdboverhang,
+                       genomeSAindexNbases=genomeSAindexNbases, genomeChrBinNbits=genomeChrBinNbits,
+                       genome_size=genome_size)
+        
+        sample_list = samples if samples else self.get_sample_list(samples_dir)
+        
+        FileRoutines.save_mkdir(output_dir)
+        
+        for sample in sample_list:
+            print ("Handling %s" % sample)
+            sample_dir = "%s/%s/" % (samples_dir, sample)
+            alignment_sample_dir = "%s/%s/" % (output_dir, sample)
+            FileRoutines.save_mkdir(alignment_sample_dir)
+            filetypes, forward_files, reverse_files = FileRoutines.make_lists_forward_and_reverse_files(sample_dir)
+        
+            print "\tAligning reads..."
+        
+            STAR.align(genome_dir, forward_files, reverse_read_list=reverse_files,
+                       annotation_gtf=annotation_gtf if not genome_fasta else None,
+                       feature_from_gtf_to_use_as_exon=feature_from_gtf_to_use_as_exon,
+                       exon_tag_to_use_as_transcript_id=exon_tag_to_use_as_transcript_id,
+                       exon_tag_to_use_as_gene_id=exon_tag_to_use_as_gene_id,
+                       length_of_sequences_flanking_junction=length_of_sequences_flanking_junction,
+                       junction_tab_file_list=junction_tab_file_list,
+                       three_prime_trim=three_prime_trim, five_prime_trim=five_prime_trim,
+                       adapter_seq_for_three_prime_clip=adapter_seq_for_three_prime_clip,
+                       max_mismatch_percent_for_adapter_trimming=max_mismatch_percent_for_adapter_trimming,
+                       three_prime_trim_after_adapter_clip=three_prime_trim_after_adapter_clip,
+                       output_type=output_type, sort_bam=sort_bam,
+                       max_memory_for_bam_sorting=max_memory_for_bam_sorting,
+                       include_unmapped_reads_in_bam=include_unmapped_reads_in_bam,
+                       output_unmapped_reads=output_unmapped_reads, output_dir=alignment_sample_dir,
+                       two_pass_mode=two_pass_mode, max_intron_length=max_intron_length)
+        
+            print "\tIndexing bam file..."
+            resulting_bam_file = "%s/Aligned.sortedByCoord.out.bam" % alignment_sample_dir
+            SamtoolsV1.index(resulting_bam_file)

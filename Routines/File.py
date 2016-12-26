@@ -2,7 +2,10 @@
 __author__ = 'mahajrod'
 
 import os
+import sys
 from collections import Iterable, OrderedDict
+
+from CustomCollections.GeneralCollections import IdSet,  IdList
 
 
 class FileRoutines():
@@ -213,6 +216,106 @@ class FileRoutines():
             print("WARNING: mix of archives of different types and/or uncompressed files")
 
         return filetypes, forward_files, reverse_files
+
+    def combine_fastq_files(self, samples_directory, sample, output_directory):
+        sample_dir = "%s/%s/" % (samples_directory, sample)
+        filetypes, forward_files, reverse_files = self.make_lists_forward_and_reverse_files(sample_dir)
+        if len(filetypes) == 1:
+            if "fq.gz" in filetypes:
+                command = "zcat"
+            elif "fq.bz2" in filetypes:
+                command = "bzcat"
+            else:
+                command = "cat"
+
+            os.system("%s %s > %s/%s_1.fq" % (command, " ".join(forward_files), output_directory, sample))
+            os.system("%s %s > %s/%s_2.fq" % (command, " ".join(reverse_files), output_directory, sample))
+        else:
+            raise IOError("Extracting from mix of archives in not implemented yet")
+
+    @staticmethod
+    def get_sample_list(samples_directory):
+        samples = sorted(os.listdir(samples_directory))
+        sample_list = []
+        for sample in samples:
+            if os.path.isdir("%s/%s" % (samples_directory, sample)):
+                sample_list.append(sample)
+        return sample_list
+
+    @staticmethod
+    def extract_ids_from_file(input_file, output_file=None, header=False, column_separator="\t",
+                              comments_prefix="#", column_number=None):
+        id_list = IdList()
+        id_list.read(input_file, column_separator=column_separator, comments_prefix=comments_prefix,
+                     column_number=column_number, header=header)
+        if output_file:
+            id_list.write(output_file, header=header)
+        return id_list
+
+    @staticmethod
+    def intersect_ids_from_files(files_with_ids_from_group_a, files_with_ids_from_group_b,
+                                 result_file=None, mode="common"):
+        a = IdSet()
+        b = IdSet()
+
+        if mode == "common":
+            expression = lambda a, b: a & b
+        elif mode == "only_a":
+            expression = lambda a, b: a - b
+        elif mode == "only_b":
+            expression = lambda a, b: b - a
+        elif mode == "not_common":
+            expression = lambda a, b: a ^ b
+        elif mode == "combine":
+            expression = lambda a, b: a | b
+
+        #print(files_with_ids_from_group_a)
+        for filename in [files_with_ids_from_group_a] if isinstance(files_with_ids_from_group_a, str) else files_with_ids_from_group_a:
+            id_set = IdSet()
+            id_set.read(filename, comments_prefix="#")
+            a = a | id_set
+
+        for filename in [files_with_ids_from_group_b] if isinstance(files_with_ids_from_group_b, str) else files_with_ids_from_group_b:
+            id_set = IdSet()
+            id_set.read(filename, comments_prefix="#")
+            b = b | id_set
+
+        result_fd = open(result_file, "w") if result_file else sys.stdout
+        if mode != "count":
+            final_set = IdSet(expression(a, b))
+            final_set.write(result_fd)
+        else:
+            result_fd.write("Group_A\t%i\nGroup_B\t%i\nCommon\t%i\nOnly_group_A\t%i\nOnly_group_B\t%i\nNot_common\t%i\nAll\t%i\n" %
+                            (len(a), len(b), len(a & b), len(a - b), len(b - a), len(a ^ b), len(a | b)))
+
+    @staticmethod
+    def intersect_ids(list_of_group_a, list_of_group_b, mode="common"):
+        # possible modes: common, only_a, only_b, not_common,  combine, count
+        a = IdSet()
+        b = IdSet()
+
+        if mode == "common":
+            expression = lambda a, b: a & b
+        elif mode == "only_a":
+            expression = lambda a, b: a - b
+        elif mode == "only_b":
+            expression = lambda a, b: b - a
+        elif mode == "not_common":
+            expression = lambda a, b: a ^ b
+        elif mode == "combine":
+            expression = lambda a, b: a | b
+
+        for id_list in list_of_group_a:
+            a = a | IdSet(id_list)
+
+        for id_list in list_of_group_b:
+            b = b | IdSet(id_list)
+
+        if mode != "count":
+            return IdSet(expression(a, b))
+        else:
+            return len(a), len(b), len(a & b), len(a - b), len(b - a), len(a ^ b), len(a | b)
+
 
 
 filetypes_dict = {"fasta": [".fa", ".fasta", ".fa", ".pep", ".cds"],

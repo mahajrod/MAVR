@@ -92,7 +92,7 @@ class AUGUSTUS(Tool):
 
         return options
 
-    def predict(self, species, genome_file, output, strand="both", gene_model="complete", output_gff3=True,
+    def predict(self, species, genome_file, output, strand=None, gene_model=None, output_gff3=True,
                 other_options="", use_softmasking=None, hints_file=None, extrinsicCfgFile=None,
                 predict_UTR=None, min_intron_len=None):
         options = self.parse_options(species, genome_file=genome_file, strand=strand, gene_model=gene_model,

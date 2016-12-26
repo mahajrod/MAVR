@@ -1,36 +1,27 @@
 #!/usr/bin/env python
 import os
-import shutil
 
-from collections import OrderedDict
-
-from Routines import FileRoutines
 from CustomCollections.GeneralCollections import TwoLvlDict, SynDict
 
-from Tools.Filter import Cookiecutter, Trimmomatic, FaCut
 from Tools.Alignment import STAR
 from Tools.Expression import HTSeq
-
-from Parsers.FaCut import FaCutReport
-from Parsers.Coockiecutter import CoockiecutterReport
-from Parsers.Trimmomatic import TrimmomaticReport
 
 from Pipelines.Filtering import FilteringPipeline
 
 
 class DiffExpressionPipeline(FilteringPipeline):
-    def __init__(self):
-        pass
 
-    @staticmethod
-    def prepare_diff_expression_directories(output_directory, sample_list):
+    def __init__(self):
+        FilteringPipeline.__init__(self)
+
+    def prepare_diff_expression_directories(self, output_directory, sample_list):
 
         alignment_dir = "%s/alignment/" % output_directory
 
         for directory in (alignment_dir, ):
-            FileRoutines.save_mkdir(directory)
+            self.save_mkdir(directory)
             for sample in sample_list:
-                FileRoutines.save_mkdir("%s/%s" % (directory, sample))
+                self.save_mkdir("%s/%s" % (directory, sample))
 
     def star_and_htseq(self, genome_dir, samples_directory, output_directory, gff_for_htseq, count_table_file,
                        genome_fasta=None, samples_to_handle=None,
@@ -62,7 +53,7 @@ class DiffExpressionPipeline(FilteringPipeline):
             print ("Handling %s" % sample)
             sample_dir = "%s/%s/" % (samples_directory, sample)
             alignment_sample_dir = "%s/%s/" % (alignment_dir, sample)
-            filetypes, forward_files, reverse_files = FileRoutines.make_lists_forward_and_reverse_files(sample_dir)
+            filetypes, forward_files, reverse_files = self.make_lists_forward_and_reverse_files(sample_dir)
 
             print "\tAligning reads..."
 

@@ -259,7 +259,7 @@ class Gffread(Tool):
 
         output_cds_file = "%s.cds" % output_prefix
         output_transcripts_file = "%s.transcript" % output_prefix
-        output_protein_file = "%s.protein" % output_prefix
+        output_protein_file = "%s.pep" % output_prefix
         options = self.parse_common_options(input_gff_file,
                                             coding_only=coding_only,
                                             genomic_fasta_file=genomic_fasta_file,
@@ -268,6 +268,7 @@ class Gffread(Tool):
                                             output_transcripts_file=output_transcripts_file)
         #print options
         self.execute(options=options)
+        return output_transcripts_file, output_cds_file, output_protein_file
 
     def extract_cds(self, input_gff_file, genomic_fasta_file, output_file):
 

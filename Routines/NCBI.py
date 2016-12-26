@@ -14,6 +14,8 @@ from Bio.SeqRecord import SeqRecord
 from Routines import FileRoutines
 from CustomCollections.GeneralCollections import IdList, SynDict, TwoLvlDict, IdSet
 
+from urllib2 import URLError
+
 
 class AssemblySummary(OrderedDict):
 
@@ -81,6 +83,11 @@ class AssemblySummary(OrderedDict):
                             'scaffold_count_all', 'scaffold_count_placed', 'scaffold_count_unlocalized',
                             'scaffold_count_unplaced', 'scaffold_l50', 'scaffold_n50',
                             'contig_count', 'contig_l50', 'contig_n50', 'FtpPath_GenBank']
+        self.is_hybrid = True if " x " in self.SpeciesName else False
+        self.unknown = True if ("unknown" in self.SpeciesName) or ("Unknown" in self.SpeciesName) else False
+        self.only_genus_known = True if (" sp. " in self.SpeciesName) else False
+        self.candidate_species = True if ("candidate" in self.SpeciesName) or ("Candidate" in self.SpeciesName) else False
+
 
     @staticmethod
     def parse_stats_from_assembly_summary_metadata(metadata):
@@ -125,10 +132,59 @@ class AssemblySummary(OrderedDict):
         #print values_list
         return separator.join(values_list)
 
-    def complete_genome(self):
+    def ambiguous_species(self):
+        return True if (self.is_hybrid or self.unknown or self.only_genus_known or self.candidate_species) else False
 
+    def check_integrity(self, min_scaffold_n50=None, min_contig_n50=None, max_scaffold_l50=None,
+                        max_contig_l50=None, max_contig_count=None, max_scaffold_count=None,
+                        max_chromosome_count=None, min_chromosome_count=None, max_unlocalized_scaffolds=None,
+                        max_unplaced_scaffolds=None, max_total_length=None, min_total_length=None,
+                        max_ungapped_length=None, min_ungapped_length=None):
+        if min_contig_n50:
+            if self.contig_n50 < min_contig_n50:
+                return False
+        if min_scaffold_n50:
+            if self.scaffold_n50 < min_scaffold_n50:
+                return False
+        if max_scaffold_l50:
+            if self.scaffold_l50 > max_scaffold_l50:
+                return False
+        if max_contig_l50:
+            if self.contig_l50 > max_contig_l50:
+                return False
+        if max_contig_count:
+            if self.contig_count > max_contig_count:
+                return False
+        if max_scaffold_count:
+            if self.scaffold_count_all > max_scaffold_count:
+                return False
+        if max_chromosome_count:
+            if self.chromosome_count > max_chromosome_count:
+                return False
+        if min_chromosome_count:
+            if self.chromosome_count < min_chromosome_count:
+                return False
+        if max_unlocalized_scaffolds:
+            if self.scaffold_count_unlocalized > max_unlocalized_scaffolds:
+                return False
+        if max_unplaced_scaffolds:
+            if self.scaffold_count_unplaced < max_unplaced_scaffolds:
+                return False
+        if max_total_length:
+            if self.total_length > max_total_length:
+                return False
+        if min_total_length:
+            if self.total_length < min_total_length:
+                return False
 
-        pass
+        if max_ungapped_length:
+            if self.ungapped_length > max_ungapped_length:
+                return False
+        if min_ungapped_length:
+            if self.ungapped_length < min_ungapped_length:
+                return False
+
+        return True
 
 
 class AssemblySummaryList(list):
@@ -181,13 +237,38 @@ class AssemblySummaryList(list):
 
         return self.filter(chromosome_lvl)
 
+    def filter_ambiguous_species(self, verbose=False):
+        if verbose:
+            for summary in self:
+                print "\tSpeciesName\tIsAmbigious"
+                print "\t%s\t%s" % (str(summary.SpeciesName), str(summary.ambiguous_species()))
+        return self.filter(lambda summary: not summary.ambiguous_species())
 
-class NCBIRoutines:
+    def filter_by_integrity(self, min_scaffold_n50=None, min_contig_n50=None, max_scaffold_l50=None,
+                            max_contig_l50=None, max_contig_count=None, max_scaffold_count=None,
+                            max_chromosome_count=None, min_chromosome_count=None, max_unlocalized_scaffolds=None,
+                            max_unplaced_scaffolds=None, max_total_length=None, min_total_length=None,
+                            max_ungapped_length=None, min_ungapped_length=None,
+                            no_ambiguous_species=False):
+
+        def expression(summary):
+            return summary.check_integrity(min_scaffold_n50=min_scaffold_n50, min_contig_n50=min_contig_n50,
+                                           max_scaffold_l50=max_scaffold_l50, max_contig_l50=max_contig_l50,
+                                           max_contig_count=max_contig_count, max_scaffold_count=max_scaffold_count,
+                                           max_chromosome_count=max_chromosome_count,
+                                           min_chromosome_count=min_chromosome_count,
+                                           max_unlocalized_scaffolds=max_unlocalized_scaffolds,
+                                           max_unplaced_scaffolds=max_unplaced_scaffolds,
+                                           max_total_length=max_total_length, min_total_length=min_total_length,
+                                           max_ungapped_length=max_ungapped_length,
+                                           min_ungapped_length=min_ungapped_length) \
+                   and ((not summary.ambiguous_species()) if no_ambiguous_species else True)
+
+        return self.filter(expression)
+
+class NCBIRoutines(FileRoutines):
     def __init__(self):
-        #print os.getcwd()
-        #self.entrez_crosslinks = IdList(filename="./Data/Entrez/entrez_crosslinks_between_databases.names")
-        pass
-
+        FileRoutines.__init__(self)
 
     @staticmethod
     def efetch(database, id_list, out_file, retmode=None, rettype=None, seq_start=None, seq_stop=None, strand=None, verbose=False,
@@ -219,7 +300,7 @@ class NCBIRoutines:
 
     def get_gene_sequences(self, email, query, retmax=100000, output_directory=None):
         if output_directory:
-            FileRoutines.save_mkdir(output_directory)
+            self.save_mkdir(output_directory)
         Entrez.email = email
         handle = Entrez.esearch(term=query, db="gene", rettype="xml", retmax=retmax)
         records = Entrez.read(handle, validate=False)
@@ -262,7 +343,7 @@ class NCBIRoutines:
         print "Total %i ids" % number_of_ids
 
         for directory in transcript_temp_dir, protein_temp_dir:
-            FileRoutines.save_mkdir(directory)
+            self.save_mkdir(directory)
         pep_file = "%s.pep.genbank" % output_prefix
         transcript_file = "%s.trascript.genbank" % output_prefix
 
@@ -412,22 +493,56 @@ class NCBIRoutines:
 
         self.get_taxonomy(taxa_list, output_file, email, input_type=input_type)
 
-    def get_taxa_genomes_summary(self, taxa, email, output_directory, output_prefix, max_ids_per_query=8000):
+    def get_taxa_genomes_summary(self, taxa, email, output_directory, output_prefix,
+                                 max_ids_per_query=8000, max_download_attempts=500,
+                                 min_scaffold_n50=None, min_contig_n50=None, max_scaffold_l50=None,
+                                 max_contig_l50=None, max_contig_count=None, max_scaffold_count=None,
+                                 max_chromosome_count=None, min_chromosome_count=None, max_unlocalized_scaffolds=None,
+                                 max_unplaced_scaffolds=None, max_total_length=None, min_total_length=None,
+                                 max_ungapped_length=None, min_ungapped_length=None,
+                                 no_ambiguous_species=True):
         Entrez.email = email
         taxa_list = taxa if isinstance(taxa, Iterable) else [taxa]
 
-        all_files_dir = "%s%s/" % (FileRoutines.check_path(output_directory), "all")
-        chromosome_lvl_dir = "%s%s/" % (FileRoutines.check_path(output_directory), "chromosome_lvl")
-        non_chromosome_lvl_dir = "%s%s/" % (FileRoutines.check_path(output_directory), "nonchromosome_lvl")
-        stat_dir = "%s%s/" % (FileRoutines.check_path(output_directory), "stat")
-        taxa_stat_dir = "%s%s/" % (FileRoutines.check_path(output_directory), "taxa_stat")
-        for subdir in all_files_dir, chromosome_lvl_dir, non_chromosome_lvl_dir, stat_dir, taxa_stat_dir:
-            FileRoutines.save_mkdir(subdir)
+        all_files_dir = "%s%s/" % (self.check_path(output_directory), "all")
+        nonambiguous_species_all_dir = "%snonambiguous_species_all/" % self.check_path(output_directory)
+        ambiguous_species_all_dir = "%s%s/" % (self.check_path(output_directory), "ambiguous_species_all")
+        chromosome_lvl_dir = "%s%s/" % (self.check_path(output_directory), "chromosome_lvl")
+        non_chromosome_lvl_dir = "%s%s/" % (self.check_path(output_directory), "nonchromosome_lvl")
+
+        filtered_by_integrity_dir = "%s%s/" % (self.check_path(output_directory), "passed_integrity_filters")
+        filtered_out_by_integrity_dir = "%s%s/" % (self.check_path(output_directory), "not_passed_integrity_filters")
+
+        stat_dir = "%s%s/" % (self.check_path(output_directory), "stat")
+        taxa_stat_dir = "%s%s/" % (self.check_path(output_directory), "taxa_stat")
+        for subdir in (all_files_dir, chromosome_lvl_dir, non_chromosome_lvl_dir, stat_dir,
+                       taxa_stat_dir, nonambiguous_species_all_dir, ambiguous_species_all_dir):
+            self.save_mkdir(subdir)
+
+        filter_by_integrity = min_scaffold_n50 or min_contig_n50 or max_scaffold_l50 or max_contig_l50 \
+                              or max_contig_count or max_scaffold_count or max_chromosome_count \
+                              or min_chromosome_count or max_unlocalized_scaffolds \
+                              or max_unplaced_scaffolds or max_total_length or min_total_length \
+                              or max_ungapped_length or min_ungapped_length
+
+        if filter_by_integrity:
+            for subdir in (filtered_by_integrity_dir, filtered_out_by_integrity_dir):
+                self.save_mkdir(subdir)
 
         for taxon in taxa_list:
             search_term = "%s[Orgn]" % taxon
 
-            summary = Entrez.read(Entrez.esearch(db="genome", term=search_term, retmax=10000, retmode="xml"))
+            attempt_counter = 1
+            while True:
+                try:
+                    summary = Entrez.read(Entrez.esearch(db="genome", term=search_term, retmax=10000, retmode="xml"))
+                    break
+                except URLError:
+                    if attempt_counter > max_download_attempts:
+                        URLError("Network problems. Maximum attempt number is exceeded")
+                    print "URLError. Retrying... Attempt %i" % attempt_counter
+                    attempt_counter += 1
+
             print "Were found %s species" % summary["Count"]
             #print summary
 
@@ -449,11 +564,20 @@ class NCBIRoutines:
                 #species_summary = Entrez.read(Entrez.esummary(db="genome", id=species_id, retmax=10000, retmode="xml"))
                 #print species_summary
 
-
-
                 # get assemblies linked with genome of species
-                assembly_links = Entrez.read(Entrez.elink(dbfrom="genome", id=species_id, retmode="xml",
-                                                          retmax=10000, linkname="genome_assembly"))
+
+                attempt_counter = 1
+                while True:
+                    try:
+                        assembly_links = Entrez.read(Entrez.elink(dbfrom="genome", id=species_id, retmode="xml",
+                                                                  retmax=10000, linkname="genome_assembly"))
+                        break
+                    except URLError:
+                        if attempt_counter > max_download_attempts:
+                            URLError("Network problems. Maximum attempt number is exceeded")
+                        print "URLError. Retrying... Attempt %i" % attempt_counter
+                        attempt_counter += 1
+
                 assembly_number = len(assembly_links)
                 #print links
                 #print links[0]["LinkSetDb"][0]["Link"]
@@ -515,20 +639,61 @@ class NCBIRoutines:
                     all_output_file = "%s/%s" % (all_files_dir, output_file)
                     chromosome_lvl_output_file = "%s/%s" % (chromosome_lvl_dir, output_file)
                     non_chromosome_lvl_output_file = "%s/%s" % (non_chromosome_lvl_dir, output_file)
-
+                    nonambiguous_species_output_file = "%s/%s" % (nonambiguous_species_all_dir, output_file)
+                    ambiguous_species_output_file = "%s/%s" % (ambiguous_species_all_dir, output_file)
                     chromosome_lvl_summary_list, non_chromosome_lvl_summary_list = summary_list.filter_non_chrom_level_genomes()
+                    filtered_by_integrity_file = "%s/%s" % (filtered_by_integrity_dir, output_file)
+                    filtered_out_by_integrity_file = "%s/%s" % (filtered_out_by_integrity_dir, output_file)
+
+                    species_stat_dict[species_id]["chromosome_lvl"] = len(chromosome_lvl_summary_list)
+                    taxon_stat_dict[species_id]["chromosome_lvl"] = len(chromosome_lvl_summary_list)
+                    species_stat_dict[species_id]["non_chromosome_lvl"] = len(non_chromosome_lvl_summary_list)
+                    taxon_stat_dict[species_id]["non_chromosome_lvl"] = len(non_chromosome_lvl_summary_list)
+
+                    print("\tChromosome level assemblies %i" % species_stat_dict[species_id]["chromosome_lvl"])
+                    print("\tNon chromosome level assemblies %i" % species_stat_dict[species_id]["non_chromosome_lvl"])
 
                     if chromosome_lvl_summary_list:
                         chromosome_lvl_summary_list.write(chromosome_lvl_output_file)
-                        species_stat_dict[species_id]["chromosome_lvl"] = len(chromosome_lvl_summary_list)
-                        taxon_stat_dict[species_id]["chromosome_lvl"] = len(chromosome_lvl_summary_list)
+
                     if non_chromosome_lvl_summary_list:
                         non_chromosome_lvl_summary_list.write(non_chromosome_lvl_output_file)
-                        species_stat_dict[species_id]["non_chromosome_lvl"] = len(non_chromosome_lvl_summary_list)
-                        taxon_stat_dict[species_id]["non_chromosome_lvl"] = len(non_chromosome_lvl_summary_list)
-                    #print summary_list
+
+                    nonambiguous_species_summary_list, ambiguous_species_summary_list = summary_list.filter_ambiguous_species()
+                    #print(len(nonambiguous_species_summary_list), len(ambiguous_species_summary_list))
+                    species_stat_dict[species_id]["nonambiguous_species"] = len(nonambiguous_species_summary_list)
+                    species_stat_dict[species_id]["ambiguous_species"] = len(ambiguous_species_summary_list)
+                    print "\tAmbiguous species %i" % species_stat_dict[species_id]["ambiguous_species"]
+                    if nonambiguous_species_summary_list:
+                        nonambiguous_species_summary_list.write(nonambiguous_species_output_file)
+                    if ambiguous_species_summary_list:
+                        ambiguous_species_summary_list.write(ambiguous_species_output_file)
+
                     summary_list.write(all_output_file)
 
+                    if filter_by_integrity:
+                        filtered_by_integrity, filtered_out_by_integrity = summary_list.filter_by_integrity(min_scaffold_n50=min_scaffold_n50,
+                                                                                                            min_contig_n50=min_contig_n50,
+                                                                                                            max_scaffold_l50=max_scaffold_l50,
+                                                                                                            max_contig_l50=max_contig_l50,
+                                                                                                            max_contig_count=max_contig_count,
+                                                                                                            max_scaffold_count=max_scaffold_count,
+                                                                                                            max_chromosome_count=max_chromosome_count,
+                                                                                                            min_chromosome_count=min_chromosome_count,
+                                                                                                            max_unlocalized_scaffolds=max_unlocalized_scaffolds,
+                                                                                                            max_unplaced_scaffolds=max_unplaced_scaffolds,
+                                                                                                            max_total_length=max_total_length,
+                                                                                                            min_total_length=min_total_length,
+                                                                                                            max_ungapped_length=max_ungapped_length,
+                                                                                                            min_ungapped_length=min_ungapped_length,
+                                                                                                            no_ambiguous_species=no_ambiguous_species)
+                        species_stat_dict[species_id]["filtered_by_integrity"] = len(filtered_by_integrity)
+                        species_stat_dict[species_id]["filtered_out_by_integrity"] = len(filtered_out_by_integrity)
+                        if filtered_by_integrity:
+                            filtered_by_integrity.write(filtered_by_integrity_file)
+                        if filtered_out_by_integrity:
+                            filtered_out_by_integrity.write(filtered_out_by_integrity_file)
+                        print "\tPassed integrity filters %i" % species_stat_dict[species_id]["filtered_by_integrity"]
                 species_stat_dict.write(species_stat_file)
 
                 print "\n\n"

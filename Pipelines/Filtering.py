@@ -8,7 +8,7 @@ from collections import OrderedDict
 from Pipelines.Abstract import Pipeline
 
 from Tools.Filter import Cookiecutter, Trimmomatic, FaCut
-from Routines import FileRoutines
+#from Routines import FileRoutines
 from Parsers.FaCut import FaCutReport
 from Parsers.Coockiecutter import CoockiecutterReport
 from Parsers.Trimmomatic import TrimmomaticReport
@@ -18,8 +18,7 @@ from CustomCollections.GeneralCollections import TwoLvlDict
 
 class FilteringPipeline(Pipeline):
 
-    @staticmethod
-    def prepare_filtering_directories(output_directory, sample_list):
+    def prepare_filtering_directories(self, output_directory, sample_list):
         merged_raw_dir = "%s/merged/" % output_directory
         filtered_dir = "%s/filtered/" % output_directory
         filtering_stat_dir = "%s/filtered_stat/" % output_directory
@@ -28,11 +27,11 @@ class FilteringPipeline(Pipeline):
         coockie_trimmomatic_quality_filtered_dir = "%s/coockiecutter_trimmomatic_quality/" % filtered_dir
         final_filtered_dir = "%s/final/" % filtered_dir
 
-        FileRoutines.save_mkdir(filtered_dir)
+        self.save_mkdir(filtered_dir)
         for directory in merged_raw_dir, coockie_filtered_dir, coockie_trimmomatic_filtered_dir, coockie_trimmomatic_quality_filtered_dir, final_filtered_dir, filtering_stat_dir:
-            FileRoutines.save_mkdir(directory)
+            self.save_mkdir(directory)
             for sample in sample_list:
-                FileRoutines.save_mkdir("%s/%s" % (directory, sample))
+                self.save_mkdir("%s/%s" % (directory, sample))
 
     def filter(self, samples_directory, output_directory, adapter_fragment_file, trimmomatic_adapter_file,
                general_stat_file,
