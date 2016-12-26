@@ -1327,7 +1327,11 @@ class SequenceRoutines(FileRoutines):
                     if translation != CDS_translation:
                         print "\tWARNING!!! Translational discrepancy in %s! Ignoring..." % protein_id
                         print translation
+                        print "\n"
+
                         print CDS_translation
+
+                        print CDS
                         continue
                     protein_length = len(translation)
 
