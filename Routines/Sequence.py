@@ -1286,14 +1286,15 @@ class SequenceRoutines(FileRoutines):
                                                   gene_id_field_in_cds_feature="gene",
                                                   translation_field_in_cds_feature="translation",
                                                   genetic_code_table=1, stop_codon_symbol="*", verbose=True):
-        @staticmethod
+        """
         def extract_feature_seq(feature, record):
-            seq = MutableSeq()
+            seq = ""
             for part in feature.location.parts:
-                tmp = MutableSeq(record.seq[part.start:part.end])
-                seq += tmp.reverse_complement() if feature.location.strand == -1 else tmp
+                tmp = record.seq[part.start:part.end]
+                tmp = tmp.reverse_complement() if feature.location.strand == -1 else tmp
+                seq += str(tmp)
             return seq
-
+        """
 
         output_header_list = ["protein_id",
                               "gene_id",
@@ -1311,6 +1312,7 @@ class SequenceRoutines(FileRoutines):
         out_fd = open(output_file, "w")
         out_fd.write(output_header)
 
+        ignored_protein_counter = 0
         for record_id in record_dict:
             if verbose:
                 print "Handling %s" % record_id
@@ -1332,22 +1334,6 @@ class SequenceRoutines(FileRoutines):
                     CDS_translation = CDS.translate(to_stop=True, table=genetic_code_table,
                                                     stop_symbol=stop_codon_symbol)
                     #print CDS_translation
-
-                    if translation != CDS_translation:
-                        print "\tWARNING!!! Translational discrepancy in %s! Ignoring..." % protein_id
-                        print translation
-                        print "\n"
-
-                        print CDS_translation
-                        print "\n"
-
-                        print feature.location
-                        print "\n"
-
-                        print CDS
-                        print "\n"
-                        print extract_feature_seq(feature, record_dict[record_id])
-                        continue
 
                     protein_length = len(translation)
 
@@ -1387,8 +1373,18 @@ class SequenceRoutines(FileRoutines):
                                                                                   str(CDS)[:-number_of_end_nucleotides_to_ignore],
                                                                                   str(CDS_translation))
                     #print output_string
+
+                    if translation != CDS_translation:
+                        print "\tWARNING!!! Translational discrepancy in %s! Ignoring..." % protein_id
+
+                        print output_string
+                        ignored_protein_counter += 1
+                        continue
                     out_fd.write(output_string)
+
+        print "\n\n%i proteins were ignored due to translational discrepancy" % ignored_protein_counter
         pass
+
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
     lengths_dict = OrderedDict({})
