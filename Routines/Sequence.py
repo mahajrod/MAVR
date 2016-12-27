@@ -1330,6 +1330,10 @@ class SequenceRoutines(FileRoutines):
                         print "\n"
 
                         print CDS_translation
+                        print "\n"
+
+                        print feature.location
+                        print "\n"
 
                         print CDS
                         continue
