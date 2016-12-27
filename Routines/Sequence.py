@@ -1345,7 +1345,7 @@ class SequenceRoutines(FileRoutines):
                         print "\n"
 
                         print CDS
-
+                        print "\n"
                         print extract_feature_seq(feature, record_dict[record_id])
                         continue
 
