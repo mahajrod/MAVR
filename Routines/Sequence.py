@@ -1281,7 +1281,7 @@ class SequenceRoutines(FileRoutines):
         return second_lvl_separator.join([first_lvl_separator.join(map(str, coordinates)) for coordinates in input_list])
 
     def get_protein_marking_by_exons_from_genbank(self, record_dict,
-                                                  output_file,
+                                                  output_prefix,
                                                   protein_id_field_in_cds_feature="protein_id",
                                                   gene_id_field_in_cds_feature="gene",
                                                   translation_field_in_cds_feature="translation",
@@ -1296,21 +1296,35 @@ class SequenceRoutines(FileRoutines):
             return seq
         """
 
-        output_header_list = ["protein_id",
-                              "gene_id",
-                              "protein_length",
-                              "CDS_exon_number",
-                              "CDS_exon_coordinates",
-                              "CDS_strand",
-                              "protein_segments",
-                              "protein_segment_phases",
-                              "CDS_seq",
-                              "protein_seq"]
+        output_full_header_list = ["protein_id",
+                                   "gene_id",
+                                   "protein_length",
+                                   "CDS_exon_number",
+                                   "CDS_exon_coordinates",
+                                   "CDS_strand",
+                                   "protein_segments",
+                                   "protein_segment_phases",
+                                   "CDS_seq",
+                                   "protein_seq"]
 
-        output_header = "\t".join(output_header_list) + "\n"
+        output_simple_header_list = ["protein_id",
+                                     "protein_length",
+                                     "segment_number",
+                                     "protein_segments",
+                                     "protein_segment_phases"
+                                     ]
 
-        out_fd = open(output_file, "w")
-        out_fd.write(output_header)
+        output_full_header = "\t".join(output_full_header_list) + "\n"
+        output_simple_header = "\t".join(output_simple_header_list) + "\n"
+
+        output_full_file = "%s.full" % output_prefix
+        output_simple_file = "%s.simple" % output_prefix
+
+        out_full_fd = open(output_full_file, "w")
+        out_full_fd.write(output_full_header)
+
+        out_simple_fd = open(output_simple_file, "w")
+        out_simple_fd.write(output_simple_header)
 
         ignored_protein_counter = 0
         for record_id in record_dict:
@@ -1362,25 +1376,32 @@ class SequenceRoutines(FileRoutines):
                     protein_segments_for_string = deepcopy(protein_segments)
                     for i in range(0, len(protein_segments_for_string)):
                         protein_segments_for_string[i] = [protein_segments_for_string[i].start + 1, protein_segments_for_string[i].end]
-                    output_string = "%s\t%s\t%i\t%i\t%s\t%s\t%s\t%s\t%s\t%s\n" % (protein_id,
-                                                                                  gene_id,
-                                                                                  protein_length,
-                                                                                  CDS_exon_number,
-                                                                                  CDS_exon_coordinates_str,
-                                                                                  "+" if feature.location.strand == 1 else "-" if feature.location.strand == -1 else ".",
-                                                                                  self.make_string_from_nested_list_of_ints(protein_segments_for_string),
-                                                                                  self.make_string_from_nested_list_of_ints(protein_segment_phases_list),
-                                                                                  str(CDS)[:-number_of_end_nucleotides_to_ignore],
-                                                                                  str(CDS_translation))
+                    output_full_string = "%s\t%s\t%i\t%i\t%s\t%s\t%s\t%s\t%s\t%s\n" % (protein_id,
+                                                                                       gene_id,
+                                                                                       protein_length,
+                                                                                       CDS_exon_number,
+                                                                                       CDS_exon_coordinates_str,
+                                                                                       "+" if feature.location.strand == 1 else "-" if feature.location.strand == -1 else ".",
+                                                                                       self.make_string_from_nested_list_of_ints(protein_segments_for_string),
+                                                                                       self.make_string_from_nested_list_of_ints(protein_segment_phases_list),
+                                                                                       str(CDS)[:-number_of_end_nucleotides_to_ignore],
+                                                                                       str(CDS_translation))
+
+                    output_simple_string = "%s\t%i\t%i\t%s\t%s\n" % (protein_id,
+                                                                     protein_length,
+                                                                     CDS_exon_number,
+                                                                     self.make_string_from_nested_list_of_ints(protein_segments_for_string),
+                                                                     self.make_string_from_nested_list_of_ints(protein_segment_phases_list))
                     #print output_string
 
                     if translation != CDS_translation:
                         print "\tWARNING!!! Translational discrepancy in %s! Ignoring..." % protein_id
 
-                        print output_string
+                        print output_full_string
                         ignored_protein_counter += 1
                         continue
-                    out_fd.write(output_string)
+                    out_full_fd.write(output_full_string)
+                    out_simple_fd.write(output_simple_string)
 
         print "\n\n%i proteins were ignored due to translational discrepancy" % ignored_protein_counter
         pass
