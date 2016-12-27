@@ -13,7 +13,7 @@ from collections import OrderedDict
 import numpy as np
 
 from Bio import SeqIO
-from Bio.Seq import Seq
+from Bio.Seq import Seq, MutableSeq
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
 
@@ -1286,6 +1286,15 @@ class SequenceRoutines(FileRoutines):
                                                   gene_id_field_in_cds_feature="gene",
                                                   translation_field_in_cds_feature="translation",
                                                   genetic_code_table=1, stop_codon_symbol="*", verbose=True):
+        @staticmethod
+        def extract_feature_seq(feature, record):
+            seq = MutableSeq()
+            for part in feature.location.parts:
+                tmp = MutableSeq(record.seq[part.start:part.end])
+                seq += tmp.reverse_complement() if feature.location.strand == -1 else tmp
+            return seq
+
+
         output_header_list = ["protein_id",
                               "gene_id",
                               "protein_length",
@@ -1336,7 +1345,10 @@ class SequenceRoutines(FileRoutines):
                         print "\n"
 
                         print CDS
+
+                        print extract_feature_seq(feature, record_dict[record_id])
                         continue
+
                     protein_length = len(translation)
 
                     #print feature.location
