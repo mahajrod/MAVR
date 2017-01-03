@@ -6,14 +6,14 @@ for SAMPLE in ${SAMPLE_LIST[@]};
     do
 
     #SAMPLE_GROUP=`echo ${SAMPLE} | cut -c1-4`
-    SAMPLE_JF_DIR=${JF_DB_DIR}/${SAMPLE}/
-    SAMPLE_KMER_STAT_DIR=${KMER_STAT_DIR}/${SAMPLE}/
+    SAMPLE_JF_DIR=${JF_DB_FILTERED_DIR}/${SAMPLE}/
+    SAMPLE_KMER_STAT_FILTERED_DIR=${KMER_STAT_FILTERED_DIR}/${SAMPLE}/
 
-    mkdir -p ${KMER_STAT_DIR} ${SAMPLE_KMER_STAT_DIR};
-    mkdir -p ${JF_DB_DIR} ${SAMPLE_JF_DIR};
-    #get comma-separated list of files in ${UNPACKED_READS_DIR}/${SAMPLE}
-    FILES_COMMA=`ls -m ${UNPACKED_READS_DIR}/${SAMPLE}/* | sed -r "s/, /,/g" | tr -d '\n'`;
-    NUMBER_OF_FILES=`ls ${UNPACKED_READS_DIR}/${SAMPLE}/* | wc -l`
+    mkdir -p ${KMER_STAT_FILTERED_DIR} ${SAMPLE_KMER_STAT_FILTERED_DIR};
+    mkdir -p ${JF_DB_FILTERED_DIR} ${SAMPLE_JF_DIR};
+    #get comma-separated list of files in ${FILTERED_READS_DIR}/${SAMPLE}
+    FILES_COMMA=`ls -m ${FILTERED_READS_DIR}/${SAMPLE}/* | sed -r "s/, /,/g" | tr -d '\n'`;
+    NUMBER_OF_FILES=`ls ${FILTERED_READS_DIR}/${SAMPLE}/* | wc -l`
 
     OUTPUT_PREFIX=${SAMPLE_JF_DIR}/${SAMPLE}
 
@@ -27,7 +27,7 @@ for SAMPLE in ${SAMPLE_LIST[@]};
     ${KMER_STRING}
 
     echo "Coping statistics to statistics directory"
-    CP_STRING="cp ${SAMPLE_JF_DIR}/${SAMPLE}_${KMER_SIZE}_mer.histo ${SAMPLE_JF_DIR}/${SAMPLE}_${KMER_SIZE}_mer_histo* ${SAMPLE_KMER_STAT_DIR}"
+    CP_STRING="cp ${SAMPLE_JF_DIR}/${SAMPLE}_${KMER_SIZE}_mer.histo ${SAMPLE_JF_DIR}/${SAMPLE}_${KMER_SIZE}_mer_histo* ${SAMPLE_KMER_STAT_FILTERED_DIR}"
     echo ${CP_STRING}
     ${CP_STRING}
 

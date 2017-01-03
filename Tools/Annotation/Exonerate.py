@@ -4,10 +4,55 @@ __author__ = 'Sergei F. Kliver'
 import os
 import shutil
 
+from collections import OrderedDict
 from Tools.Abstract import Tool
 
 from Routines.File import split_filename, save_mkdir
 from CustomCollections.GeneralCollections import SynDict, IdList
+
+
+class VulgarAlignment:
+    def __init__(self, exonerate_vulgar_string):
+        string_list = exonerate_vulgar_string.split()
+        self.query_id = string_list[0]
+        self.query_start = string_list[1]
+        self.query_end = string_list[2]
+        self.query_strand = string_list[3]
+        self.target_id = string_list[4]
+        self.target_start = string_list[5]
+        self.target_end = string_list[6]
+        self.target_strand = string_list[7]
+        self.alignment_score = string_list[8]
+        self.vulgar_dict = self.parse_vulgar_string(string_list[9:])
+
+    @staticmethod
+    def parse_vulgar_string(vulgar_string):
+        vulgar_dict = OrderedDict()
+        if isinstance(vulgar_string, str):
+            vulgar_list = vulgar_string.strip().split()
+        else:
+            vulgar_list = vulgar_string
+        if len(vulgar_list) % 3 != 0:
+            raise ValueError("ERROE: Input vulgar string is malformed!")
+        for i in range(0, int(len(vulgar_list)/3)):
+            vulgar_dict[vulgar_list[i*3]] = (vulgar_list[i*3+1], vulgar_list[i*3+2])
+        return vulgar_list
+
+    def parse_exonerate_vulgar_string(self, exonerate_vulgar_string):
+        string_list = exonerate_vulgar_string.split()
+        query_id = string_list[0]
+        query_start = string_list[1]
+        query_end = string_list[2]
+        query_strand = string_list[3]
+        target_id = string_list[4]
+        target_start = string_list[5]
+        target_end = string_list[6]
+        target_strand = string_list[7]
+        alignment_score = string_list[8]
+        vulgar_dict = self.parse_vulgar_string(string_list[9:])
+
+        return ((query_id, query_start, query_end, query_strand), (target_id, target_start, target_end, target_strand),
+                alignment_score, vulgar_dict)
 
 
 class Exonerate(Tool):

@@ -30,6 +30,11 @@ COOCKIECUTTER_SRC_DIR=${TOOLS_DIR}/Cookiecutter/src/
 
 ADAPTER_KMER_FILE=${TOOLS_DIR}/service_sequences/trueseq_adapters_with_rev_com_23_mer.kmer
 
+JF_DB_FILTERED_DIR=${ANALYSIS_DIR}/jf_filtered/
+KMER_STAT_FILTERED_DIR=${STAT_DIR}/kmer_filtered/
+FASTQC_STAT_FILTERED_DIR=${STAT_DIR}/fastqc_filtered/
+FASTQC_STAT_RAW_SPLITED_DIR=${STAT_DIR}/fastqc_raw_splited/
+
 #----------------------Settings-------------------------
 THREAD_NUMBER=60
 KMER_SIZE=23
@@ -70,6 +75,10 @@ COOCKIECUTTER_SRC_DIR=${TOOLS_DIR}/Cookiecutter/src/
 
 ADAPTER_KMER_FILE=${TOOLS_DIR}/service_sequences/trueseq_adapters_with_rev_com_23_mer.kmer
 
+JF_DB_FILTERED_DIR=${ANALYSIS_DIR}/jf_filtered/
+KMER_STAT_FILTERED_DIR=${STAT_DIR}/kmer_filtered/
+FASTQC_STAT_FILTERED_DIR=${STAT_DIR}/fastqc_filtered/
+FASTQC_STAT_RAW_SPLITED_DIR=${STAT_DIR}/fastqc_raw_splited/
 
 #----------------------Settings-------------------------
 THREAD_NUMBER=60
