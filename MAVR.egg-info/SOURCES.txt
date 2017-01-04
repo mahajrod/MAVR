@@ -277,6 +277,7 @@ scripts/filter/filter_by_trimmomatic_per_lane.py
 scripts/filter/filtering_pipeline.py
 scripts/filter/gather_filtering_stats.py
 scripts/filter/gather_trimmomatic_statistics.py
+scripts/filter/get_general_stats_from_facut_reports.py
 scripts/filter/left_clustered_starts.py
 scripts/filter/merge_and_check_reads.py
 scripts/filter/merge_and_filter_reads.sh
