@@ -54,6 +54,8 @@ FILTERING_STAT_FILE_LIST=()
 
 SAMPLE_STRING=`echo $@ | tr " " ,`  # replace space by comma
 
+echo ${SAMPLE_LIST[@]}
+
 for SAMPLE in ${SAMPLE_LIST[@]};
     do
     SAMPLE_GROUP=`echo ${SAMPLE} | cut -c1-4`
