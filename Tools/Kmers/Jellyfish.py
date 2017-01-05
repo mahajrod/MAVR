@@ -53,7 +53,7 @@ class Jellyfish(Tool):
 
         self.execute(options, cmd="jellyfish stats")
 
-    def histo(self, in_file, out_file, bin_width=1, lower_count=1, upper_count=10000,
+    def histo(self, in_file, out_file, bin_width=1, lower_count=1, upper_count=100000000,
               include_absent_kmers=False):
 
         if (lower_count is not None) and (upper_count is not None):
@@ -100,12 +100,12 @@ class Jellyfish(Tool):
 
     def draw_kmer_distribution(self, histo_file, kmer_length, output_prefix, output_formats=["svg", "png"],
                                logbase=10, non_log_low_limit=5, non_log_high_limit=100, order=3, mode="wrap",
-                               check_peaks_coef=10):
+                               check_peaks_coef=10, draw_separated_pictures=False):
         bins, counts = np.loadtxt(histo_file, unpack=True)
         maximums_to_show, minimums_to_show, \
             unique_peak_borders, number_of_distinct_kmers, \
             number_of_distinct_kmers_with_errors,\
-            total_number_of_kmers, total_number_of_kmers_with_errors,  \
+            total_number_of_kmers, total_number_of_kmers_with_errors, \
             estimated_genome_size = self.extract_parameters_from_histo(counts, bins,
                                                                              output_prefix,
                                                                              order=order,
@@ -115,9 +115,9 @@ class Jellyfish(Tool):
         unique_peak_width = unique_peak_borders[1] - unique_peak_borders[0] + 1
         #print unique_peak_borders
         #print unique_peak_width
-        print "Maximums to show"
+        #print "Maximums to show"
         #print maximums_to_show
-        print "Minimums to show"
+        #print "Minimums to show"
         #print minimums_to_show
 
         unique_peak_borders_mean_multiplicity = MathRoutines.mean_from_bins(bins[unique_peak_borders[0]: unique_peak_borders[1]+1],
@@ -143,44 +143,53 @@ class Jellyfish(Tool):
         general_stats += "Standard deviation of kmer multiplicity in first peak\t%.2f\n" % np.around(std_1, decimals=2)
         general_stats += "Variance coefficient of kmer multiplicity in first peak\t%.2f\n" % np.around(var_1,
                                                                                                        decimals=2)
-        general_stats += "Estimated genome size, bp %i\n" % estimated_genome_size
-
+        general_stats += "Estimated genome size, bp\t%i\n" % estimated_genome_size
         with open("%s.histo.stats" % output_prefix, "w") as stat_fd:
             stat_fd.write(general_stats)
         print(general_stats)
 
         max_bin = max(bins)
-        figure = plt.figure(1, figsize=(8, 8), dpi=300)
-        subplot = plt.subplot(1, 1, 1)
-        plt.suptitle("Distribution of %i-mers" % kmer_length, fontweight='bold')
-        plt.plot(bins, counts)
-        plt.xlim(xmin=1, xmax=max_bin)
-        plt.xlabel("Multiplicity")
-        plt.ylabel("Number of distinct %s-mers" % kmer_length)
-        subplot.set_yscale('log', basey=logbase)
-        subplot.set_xscale('log', basex=logbase)
-
-        for extension in output_formats:
-            plt.savefig("%s.logscale.%s" % (output_prefix, extension))
-
-        plt.close()
 
         selected_counts = counts[non_log_low_limit-1:non_log_high_limit]
         selected_bins = bins[non_log_low_limit-1:non_log_high_limit]
 
-        figure = plt.figure(2, figsize=(8, 8), dpi=300)
-        subplot = plt.subplot(1, 1, 1)
-        plt.suptitle("Distribution of %s-mers" % kmer_length, fontweight='bold')
-        plt.plot(selected_bins, selected_counts)
+        if draw_separated_pictures:
+            figure = plt.figure(1, figsize=(8, 8), dpi=300)
+            subplot = plt.subplot(1, 1, 1)
+            plt.suptitle("Distribution of %i-mers" % kmer_length, fontweight='bold')
+            plt.plot(bins, counts)
+            plt.xlim(xmin=1, xmax=max_bin)
+            plt.xlabel("Multiplicity")
+            plt.ylabel("Number of distinct %s-mers" % kmer_length)
+            subplot.set_yscale('log', basey=logbase)
+            subplot.set_xscale('log', basex=logbase)
 
-        plt.xlabel("Multiplicity")
-        plt.ylabel("Number of distinct %s-mers" % kmer_length)
-        plt.xlim(xmin=non_log_low_limit, xmax=non_log_high_limit)
+            for extension in output_formats:
+                plt.savefig("%s.logscale.%s" % (output_prefix, extension))
 
-        for extension in output_formats:
-            plt.savefig("%s.no_logscale.%s" % (output_prefix, extension))
+            plt.close()
 
-        plt.close()
+            figure = plt.figure(2, figsize=(8, 8), dpi=300)
+            subplot = plt.subplot(1, 1, 1)
+            plt.suptitle("Distribution of %s-mers" % kmer_length, fontweight='bold')
+            plt.plot(selected_bins, selected_counts)
+
+            plt.xlabel("Multiplicity")
+            plt.ylabel("Number of distinct %s-mers" % kmer_length)
+            plt.xlim(xmin=non_log_low_limit, xmax=non_log_high_limit)
+
+            for extension in output_formats:
+                plt.savefig("%s.no_logscale.%s" % (output_prefix, extension))
+
+            plt.close()
+
+        size_in_gigabases = float(estimated_genome_size) / float(10 ** 9)
+        size_in_megabases = float(estimated_genome_size) / float(10 ** 6)
+        if size_in_gigabases > 0:
+            legend = "Genome size %.2f G" % size_in_gigabases
+        else:
+            legend = "Genome size %.2f M" % size_in_megabases
+
         for index in range(3, 5):
             figure = plt.figure(index, figsize=(6, 12), dpi=400)
             subplot_list = []
@@ -188,6 +197,8 @@ class Jellyfish(Tool):
                 subplot_list.append(plt.subplot(2, 1, i))
                 plt.suptitle("Distribution of %s-mers" % kmer_length, fontweight='bold', fontsize=13)
                 plt.plot(b, c)
+
+                plt.legend((legend, ), loc="upper right")
 
                 if index == 4:
                     for minimum in minimums_to_show:
@@ -232,8 +243,10 @@ class Jellyfish(Tool):
         check_peaks_coef:
             histogram is checked for presence of additional peaks in range [first_unique_peak, check_peaks_coef*first_unique_peak]
         """
+
         local_maximums_idx = argrelextrema(counts, np.greater, order=order, mode=mode)[0]
         local_minimums_idx = argrelextrema(counts, np.less, order=order, mode=mode)[0]
+
         with open("%s.local_maximums" % output_prefix, "w") as out_fd:
             out_fd.write("#multiplicity\tnumber_of_kmers\n")
             for idx in local_maximums_idx:
@@ -284,13 +297,9 @@ class Jellyfish(Tool):
 
         estimated_genome_size = estimated_genome_size/first_unique_peak_coverage
 
-        return [(bins[i], counts[i]) for i in peaks_in_checked_area_idx], \
-               [(bins[i], counts[i]) for i in minimums_in_checked_area_idx], \
+        return maximums_to_show, \
+               minimums_to_show, \
                (local_minimums_idx[0], nearest_value_to_first_min_idx), \
                number_of_distinct_kmers, number_of_distinct_kmers_with_errors, \
                total_number_of_kmers, total_number_of_kmers_with_errors, estimated_genome_size
 
-
-
-if __name__ == "__main__":
-    pass

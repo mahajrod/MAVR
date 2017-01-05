@@ -124,7 +124,7 @@ class FaCutReportCollection(OrderedDict):
         if file_dict:
             for file_id in file_dict:
                 if file_id in self:
-                    raise KeyError("Report with same id(%s) is already present in FaCuTReportCollection" % str(file_id))
+                    raise KeyError("Report with same id(%s) is already present in FaCutReportCollection" % str(file_id))
                 self[file_id] = FaCutReport(file_dict[file_id])
 
     def get_general_stats(self):
