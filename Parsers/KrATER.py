@@ -11,9 +11,9 @@ class KrATERReport(OrderedDict):
 
         with open(krater_report_file, "r") as in_fd:
             for line in in_fd:
-                tmp = line.split()
+                tmp = line.split("\t")
                 self[tmp[0]] = tmp[1]
-
+        print self
         self["Number of distinct kmers"] = int(self["Number of distinct kmers"])
         self["Number of distinct kmers with errors"] = int(self["Number of distinct kmers with errors"])
         self["Fraction of distinct kmers with errors"] = float(self["Fraction of distinct kmers with errors"])
