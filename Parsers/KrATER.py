@@ -13,7 +13,7 @@ class KrATERReport(OrderedDict):
             for line in in_fd:
                 tmp = line.split("\t")
                 self[tmp[0]] = tmp[1]
-        print self
+
         self["Number of distinct kmers"] = int(self["Number of distinct kmers"])
         self["Number of distinct kmers with errors"] = int(self["Number of distinct kmers with errors"])
         self["Fraction of distinct kmers with errors"] = float(self["Fraction of distinct kmers with errors"])
@@ -47,10 +47,6 @@ class KrATERReportCollection(OrderedDict):
 
         for report_id in self:
             stat_dict[report_id] = OrderedDict()
-
-            stat_dict[report_id]["input_pairs"] = self[report_id].input_pairs
-            stat_dict[report_id]["pairs_without_adapters"] = self[report_id].retained_pairs
-            stat_dict[report_id]["pairs_without_adapters_fraction"] = self[report_id].retained_pairs_fraction
 
             stat_dict[report_id]["Number of distinct kmers"] = self[report_id]["Number of distinct kmers"]
             stat_dict[report_id]["Number of distinct kmers"] = self[report_id]["Number of distinct kmers"]
