@@ -288,6 +288,7 @@ scripts/filter/remove_terminal_ns.py
 scripts/filter/restore_pairs.py
 scripts/general/collaps_synonym_strings.py
 scripts/general/combine_ids.py
+scripts/general/combine_tables_from_file.py
 scripts/general/parallel_md5sum.py
 scripts/graph/draw_graph.py
 scripts/hmmer3/assign_proteins_to_families.py

@@ -68,6 +68,11 @@ class FileRoutines():
                 print("%s does not exist" % entry)
 
         return file_list
+
+    def make_list_of_path_to_files_from_string(self, input_string, file_separator=",",
+                                               expression=None, recursive=False):
+        return self.make_list_of_path_to_files(input_string.split(file_separator), expression=expression, recursive=recursive)
+
     """
     def make_list_of_path_to_files(self, list_of_dirs_and_files, expression=None):
         pathes_list = []

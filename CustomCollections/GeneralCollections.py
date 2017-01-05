@@ -11,6 +11,47 @@ class Graph(ig.Graph):
 
 class TwoLvlDict(OrderedDict):
 
+    def __init__(self, dictionary=None, input_file=None, column_sep="\t", value_sep=",",
+                 split_values=False, absent_symbol=None, value_expression=None, ignore_value_repeats=False):
+        OrderedDict.__init__(self)
+        if dictionary:
+            for fl_key in dictionary:
+                self[fl_key] = OrderedDict()
+                for sl_key in dictionary[fl_key]:
+                    self[fl_key][sl_key] = dictionary[fl_key][sl_key]
+        if input_file:
+            input_file_list = [input_file] if isinstance(input_file, str) else input_file
+            for filename in input_file_list:
+                with open(filename, "r") as in_fd:
+                    header_list = in_fd.readline().strip().split(column_sep)
+                    for fl_key in header_list[1:]:
+                        if fl_key not in self:
+                            self[fl_key] = OrderedDict()
+                    for line in in_fd:
+                        tmp_list = line.strip().split("\t")
+                        if len(tmp_list) != len(header_list):
+                            raise ValueError("Error!!! Several values are absent! Malformed input file %s" % filename)
+                        for i in range(1, len(header_list)): #in tmp_list[1:]:
+                            #if tmp_list[0] not in self[header_list[i]]:
+                            #    self[header_list[i]][tmp_list[0]] =
+                            if not ignore_value_repeats:
+                                if tmp_list[0] in self[header_list[i]]:
+                                    if self[header_list[i]][tmp_list[0]] is not None:
+                                        raise ValueError("Value is already present in TwoLvlDict. Filename: %s. Fl_key: %s. Sl_key: %s" % (filename, header_list[i], tmp_list[0]))
+
+                            value = tmp_list[i]
+                            if absent_symbol:
+                                if value == absent_symbol:
+                                    continue
+                            if split_values:
+                                value = value.split(value_sep)
+                                if value_expression:
+                                    value = map(value_expression, value)
+                            else:
+                                if value_expression:
+                                    value = value_expression(value)
+                            self[header_list[i]][tmp_list[0]] = value
+
     def table_form(self, absent_symbol="0", sort=True, column_sep="\t", list_sep=","):
         first_level_keys = list(self.keys())
         second_level_keys = OrderedSet()
