@@ -4,7 +4,7 @@
 #from collections import OrderedDict
 #from Tools.Filter import Cookiecutter, Trimmomatic, FaCut
 from Tools.Abstract import Tool
-from Routines import MatplotlibRoutines
+from Routines.Matplotlib import MatplotlibRoutines
 #from Parsers.FaCut import FaCutReport
 #from Parsers.Coockiecutter import CoockiecutterReport
 #from Parsers.Trimmomatic import TrimmomaticReport
