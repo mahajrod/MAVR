@@ -18,6 +18,9 @@ from CustomCollections.GeneralCollections import TwoLvlDict
 
 class FilteringPipeline(Pipeline):
 
+    def __init__(self):
+        Pipeline.__init__(self)
+
     def prepare_filtering_directories(self, output_directory, sample_list):
         out_dir = os.path.abspath(output_directory)
         merged_raw_dir = "%s/merged/" % out_dir

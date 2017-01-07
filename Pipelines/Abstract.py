@@ -14,7 +14,4 @@ from Routines.Matplotlib import MatplotlibRoutines
 
 class Pipeline(Tool, MatplotlibRoutines):
     def __init__(self):
-        Tool.__init__(self)
-
-
-
+        Tool.__init__(self, cmd="")
