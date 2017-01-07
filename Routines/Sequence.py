@@ -386,7 +386,7 @@ class SequenceRoutines(FileRoutines):
     def parse_seq_file(input_file, mode, format="fasta", index_file=None):
         if mode == "index_db":
             index = index_file if index_file else "tmp.idx"
-            seq_dict = SeqIO.index_db(index, input_file, format=format)
+            seq_dict = SeqIO.index_db(index, [input_file] if isinstance(input_file, str) else input_file, format=format)
         elif mode == "index":
             seq_dict = SeqIO.index(input_file, format=format)
         elif mode == "parse":
