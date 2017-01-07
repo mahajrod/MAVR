@@ -5,15 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pipelines/Abstract.py" afterPath="$PROJECT_DIR$/Pipelines/Abstract.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pipelines/Filtering.py" afterPath="$PROJECT_DIR$/Pipelines/Filtering.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/alignment/check_read_pairing_in_name_sorted_bam.sh" afterPath="$PROJECT_DIR$/scripts/alignment/check_read_pairing_in_name_sorted_bam.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/entrez/count_assemblies_from_genome_summaries.sh" afterPath="$PROJECT_DIR$/scripts/entrez/count_assemblies_from_genome_summaries.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/alignment/extract_se_from_bam.sh" afterPath="$PROJECT_DIR$/scripts/alignment/extract_se_from_bam.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/repeats/str/extract_str_data_from_genbank_file.py" afterPath="$PROJECT_DIR$/scripts/repeats/str/extract_str_data_from_genbank_file.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pipelines/GenomeAssembly/Scaffolding.py" afterPath="$PROJECT_DIR$/Pipelines/GenomeAssembly/Scaffolding.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/projects/Boechera/boechera_holboeli_scaffolding" afterPath="$PROJECT_DIR$/projects/Boechera/boechera_holboeli_scaffolding" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/assembly/get_insert_size_distribution.py" afterPath="$PROJECT_DIR$/scripts/assembly/get_insert_size_distribution.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/mtDNA/iterative_assembly.py" afterPath="$PROJECT_DIR$/scripts/mtDNA/iterative_assembly.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/general/parallel_md5sum.py" afterPath="$PROJECT_DIR$/scripts/general/parallel_md5sum.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -49,7 +43,7 @@
         <entry file="file://$PROJECT_DIR$/Pipelines/GenomeAssembly/Scaffolding.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="97" selection-start-line="29" selection-start-column="97" selection-end-line="29" selection-end-column="97" />
+              <caret line="21" column="74" selection-start-line="21" selection-start-column="74" selection-end-line="21" selection-end-column="101" />
               <folding>
                 <element signature="e#22#31#0" expanded="true" />
               </folding>
@@ -57,34 +51,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GapClosing.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Pipelines/GenomeAssembly/GapClosing.py">
+      <file leaf-file-name="Sequence.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
+            <state vertical-scroll-proportion="-9.142858">
+              <caret line="386" column="30" selection-start-line="386" selection-start-column="30" selection-end-line="386" selection-end-column="30" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ContigAssembly.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Pipelines/GenomeAssembly/ContigAssembly.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Assembly.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Pipelines/GenomeAssembly/Assembly.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="35" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="51" />
-              <folding>
-                <element signature="e#23#62#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -99,33 +71,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Filtering.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Pipelines/Filtering.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
-              <folding>
-                <element signature="e#23#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DiffExpression.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Pipelines/DiffExpression.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="get_insert_size_distribution.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="get_insert_size_distribution.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/assembly/get_insert_size_distribution.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.9045093">
+              <caret line="51" column="114" selection-start-line="51" selection-start-column="114" selection-end-line="51" selection-end-column="114" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
@@ -133,10 +83,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Abstract.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Abstract.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Pipelines/Abstract.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.41184387">
+            <state vertical-scroll-proportion="0.0">
               <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding>
                 <element signature="e#144#175#0" expanded="true" />
@@ -173,7 +123,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Pipelines/GenomeAnnotation/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/alignment/parallel_exonerate.py" />
         <option value="$PROJECT_DIR$/Pipelines/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/transcriptome/align_by_star.py" />
@@ -213,17 +162,18 @@
         <option value="$PROJECT_DIR$/Pipelines/GenomeAnnotation/ProteinCodingGeneAnnotation.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/get_sequence_lengths.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/make_region_bed_file.py" />
-        <option value="$PROJECT_DIR$/Routines/Sequence.py" />
         <option value="$PROJECT_DIR$/Routines/Matplotlib.py" />
         <option value="$PROJECT_DIR$/scripts/draw/draw_histogram.py" />
         <option value="$PROJECT_DIR$/Pipelines/GenomeAssembly/GapClosing.py" />
         <option value="$PROJECT_DIR$/Pipelines/GenomeAssembly/ContigAssembly.py" />
         <option value="$PROJECT_DIR$/Pipelines/GenomeAssembly/Assembly.py" />
         <option value="$PROJECT_DIR$/Pipelines/GenomeAssembly/__init__.py" />
-        <option value="$PROJECT_DIR$/Pipelines/GenomeAssembly/Scaffolding.py" />
-        <option value="$PROJECT_DIR$/scripts/assembly/get_insert_size_distribution.py" />
         <option value="$PROJECT_DIR$/Pipelines/Filtering.py" />
         <option value="$PROJECT_DIR$/Pipelines/Abstract.py" />
+        <option value="$PROJECT_DIR$/projects/Boechera/boechera_holboeli_scaffolding" />
+        <option value="$PROJECT_DIR$/Routines/Sequence.py" />
+        <option value="$PROJECT_DIR$/Pipelines/GenomeAssembly/Scaffolding.py" />
+        <option value="$PROJECT_DIR$/scripts/assembly/get_insert_size_distribution.py" />
       </list>
     </option>
   </component>
@@ -951,30 +901,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-01018" summary="changes">
-      <created>1481963775051</created>
-      <option name="number" value="01018" />
-      <option name="project" value="LOCAL" />
-      <updated>1481963775051</updated>
-    </task>
-    <task id="LOCAL-01019" summary="changes">
-      <created>1481964202302</created>
-      <option name="number" value="01019" />
-      <option name="project" value="LOCAL" />
-      <updated>1481964202303</updated>
-    </task>
-    <task id="LOCAL-01020" summary="changes">
-      <created>1481968052830</created>
-      <option name="number" value="01020" />
-      <option name="project" value="LOCAL" />
-      <updated>1481968052830</updated>
-    </task>
-    <task id="LOCAL-01021" summary="changes">
-      <created>1481968884538</created>
-      <option name="number" value="01021" />
-      <option name="project" value="LOCAL" />
-      <updated>1481968884538</updated>
-    </task>
     <task id="LOCAL-01022" summary="changes">
       <created>1481969493515</created>
       <option name="number" value="01022" />
@@ -1245,7 +1171,31 @@
       <option name="project" value="LOCAL" />
       <updated>1483807112263</updated>
     </task>
-    <option name="localTasksCounter" value="1067" />
+    <task id="LOCAL-01067" summary="changes">
+      <created>1483807366432</created>
+      <option name="number" value="01067" />
+      <option name="project" value="LOCAL" />
+      <updated>1483807366432</updated>
+    </task>
+    <task id="LOCAL-01068" summary="changes">
+      <created>1483807623979</created>
+      <option name="number" value="01068" />
+      <option name="project" value="LOCAL" />
+      <updated>1483807623979</updated>
+    </task>
+    <task id="LOCAL-01069" summary="changes">
+      <created>1483807854769</created>
+      <option name="number" value="01069" />
+      <option name="project" value="LOCAL" />
+      <updated>1483807854770</updated>
+    </task>
+    <task id="LOCAL-01070" summary="changes">
+      <created>1483807980088</created>
+      <option name="number" value="01070" />
+      <option name="project" value="LOCAL" />
+      <updated>1483807980088</updated>
+    </task>
+    <option name="localTasksCounter" value="1071" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1278,10 +1228,10 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2886049" sideWeight="0.8545455" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2886049" sideWeight="0.8553137" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2886049" sideWeight="0.14545454" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1799787" sideWeight="0.50237215" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2886049" sideWeight="0.1446863" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1682641" sideWeight="0.50237215" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.013615734" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1420,13 +1370,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Routines/NCBI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="506" column="29" selection-start-line="506" selection-start-column="29" selection-end-line="506" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence/get_protein_marking_by_exons_from_genbank.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1680,14 +1623,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/projects/Boechera/boechera_divaricarpa_scaffolding">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="242" selection-start-line="18" selection-start-column="0" selection-end-line="28" selection-end-column="242" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Routines/File.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1712,14 +1647,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.428572">
-          <caret line="1219" column="62" selection-start-line="1219" selection-start-column="62" selection-end-line="1219" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence/make_region_bed_file.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.87214">
@@ -1740,9 +1667,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
-          <folding>
-            <element signature="e#23#97#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1752,34 +1677,6 @@
           <caret line="24" column="65" selection-start-line="24" selection-start-column="65" selection-end-line="24" selection-end-column="65" />
           <folding>
             <element signature="e#55#70#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/assembly/get_insert_size_distribution.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-          <folding>
-            <element signature="e#54#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Pipelines/DiffExpression.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Pipelines/GenomeAssembly/Scaffolding.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="97" selection-start-line="29" selection-start-column="97" selection-end-line="29" selection-end-column="97" />
-          <folding>
-            <element signature="e#22#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1796,14 +1693,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Pipelines/GenomeAnnotation/ProteinCodingGeneAnnotation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="77" column="16" selection-start-line="77" selection-start-column="16" selection-end-line="77" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -1840,10 +1729,70 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Pipelines/Abstract.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41184387">
+        <state vertical-scroll-proportion="0.0">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding>
             <element signature="e#144#175#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pipelines/DiffExpression.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pipelines/GenomeAnnotation/ProteinCodingGeneAnnotation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="77" column="16" selection-start-line="77" selection-start-column="16" selection-end-line="77" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/Boechera/boechera_holboeli_scaffolding">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04845222">
+          <caret line="2" column="76" selection-start-line="2" selection-start-column="76" selection-end-line="2" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/Boechera/boechera_divaricarpa_scaffolding">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46702558">
+          <caret line="28" column="242" selection-start-line="18" selection-start-column="0" selection-end-line="28" selection-end-column="242" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.142858">
+          <caret line="386" column="30" selection-start-line="386" selection-start-column="30" selection-end-line="386" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pipelines/GenomeAssembly/Scaffolding.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="74" selection-start-line="21" selection-start-column="74" selection-end-line="21" selection-end-column="101" />
+          <folding>
+            <element signature="e#22#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/assembly/get_insert_size_distribution.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9045093">
+          <caret line="51" column="114" selection-start-line="51" selection-start-column="114" selection-end-line="51" selection-end-column="114" />
+          <folding>
+            <element signature="e#54#63#0" expanded="true" />
           </folding>
         </state>
       </provider>

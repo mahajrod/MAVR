@@ -19,8 +19,9 @@ class ScaffoldingPipeline(Pipeline):
             self.save_mkdir(sample_dir)
 
     def get_insert_size_distribution(self, sample_directory, forward_files, reverse_files, estimated_insert_size,
-                                     output_prefix, genome, genome_index, read_orientation="fr",
-                                     parsing_mode="index_db", number_of_bins=100, genome_format="fasta"):
+                                     output_prefix, genome, genome_index, input_files_are_fasta=False,
+                                     read_orientation="fr", parsing_mode="index_db", number_of_bins=100,
+                                     genome_format="fasta"):
 
         sample_dir = os.path.abspath(sample_directory)
         output_pref = "%s/%s" % (sample_dir, output_prefix)
@@ -31,12 +32,17 @@ class ScaffoldingPipeline(Pipeline):
 
         output_len_file = "%s.len" % output_pref
 
-        bowtie_string = "bowtie2 --very-sensitive -x %s -1 %s -2 %s  -p %i -X %i --%s " % (genome_index,
-                                                                                           forward_files if isinstance(forward_files, str) else ",".join(forward_files),
-                                                                                           reverse_files if isinstance(reverse_files, str) else ",".join(reverse_files),
-                                                                                           self.threads,
-                                                                                           min_contig_len_threshold,
-                                                                                           read_orientation)
+        bowtie_options = " --very-sensitive"
+        bowtie_options += " -x %s" % genome_index
+        bowtie_options += " -1 %s" % (forward_files if isinstance(forward_files, str) else ",".join(forward_files))
+
+        bowtie_options += " -2 %s" % (reverse_files if isinstance(reverse_files, str) else ",".join(reverse_files))
+        bowtie_options += " -p %i" % self.threads
+        bowtie_options += " -X %i" % min_contig_len_threshold
+        bowtie_options += " --%s" % read_orientation
+        bowtie_options += " -f" if input_files_are_fasta else ""
+
+        bowtie_string = "bowtie2 %s" % bowtie_options
 
         samtools_string = "samtools view -L %s -" % region_bed_file
         awk_string = "awk -F'\\t' '{ if ($9 > 0) print $9}'"

@@ -27,6 +27,9 @@ parser.add_argument("-m", "--format", action="store", dest="format", default="fa
 parser.add_argument("-p", "--parsing_mode", action="store", dest="parsing_mode", default="index_db",
                     help="Parsing mode for input sequence file. "
                          "Possible variants: 'index_db'(default), 'index', 'parse'")
+parser.add_argument("-a", "--input_fasta", action="store_true", dest="input_fasta",
+                    help="Reads are in fasta format. Default: False")
+
 
 args = parser.parse_args()
 
@@ -46,4 +49,4 @@ ScaffoldingPipeline.get_insert_size_distribution(os.getcwd(), args.forward, args
                                                  args.estimated_insert_size, args.output_prefix,
                                                  args.genome, args.bowtie2_index, read_orientation="fr",
                                                  parsing_mode=args.parsing_mode, number_of_bins=100,
-                                                 genome_format=args.format)
+                                                 genome_format=args.format, input_files_are_fasta=args.input_fasta)
