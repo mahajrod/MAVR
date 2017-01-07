@@ -57,8 +57,8 @@ class MathRoutines:
 
         #print filtered_data
         #print(len(filtered_data))
-        maximum = np.max(filtered_data)
-        minimum = np.minimum(filtered_data)
+        maximum = np.amax(filtered_data)
+        minimum = np.amin(filtered_data)
         std = np.std(filtered_data)
         mean = np.mean(filtered_data)
         median = np.median(filtered_data)
