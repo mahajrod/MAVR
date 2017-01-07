@@ -57,14 +57,15 @@ class MathRoutines:
 
         #print filtered_data
         #print(len(filtered_data))
-
+        maximum = np.max(filtered_data)
+        minimum = np.minimum(filtered_data)
         std = np.std(filtered_data)
         mean = np.mean(filtered_data)
         median = np.median(filtered_data)
         var_coeff = std / mean
 
-        output_string = "Mean\t%f\nMedian\t%f\nStandard deviation\t%f\nVariation coefficient\t%f\n" \
-                        % (mean, median, std, var_coeff)
+        output_string = "Max\t%f\nMin\t%f\nMean\t%f\nMedian\t%f\nStandard deviation\t%f\nVariation coefficient\t%f\n" \
+                        % (maximum, minimum, mean, median, std, var_coeff)
         if verbose:
             print output_string
 
