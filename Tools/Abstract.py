@@ -6,7 +6,7 @@ from subprocess import PIPE, Popen
 from collections import Iterable
 
 
-from Routines import SequenceRoutines
+from Routines.Sequence import SequenceRoutines
 
 print_mutex = mp.Lock()
 
