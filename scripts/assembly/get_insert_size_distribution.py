@@ -17,20 +17,26 @@ parser.add_argument("-i", "--estimated_insert_size", action="store", dest="estim
                     type=int, help="Estimated insert size")
 parser.add_argument("-g", "--genome", action="store", dest="genome", required=True,
                     help="Path to file with genome")
-parser.add_argument("-b", "--bowtie2_index", action="store", dest="bowtie2_index", required=True,
-                    help="Path to bowtie2 index of genome")
+parser.add_argument("-b", "--genome_index", action="store", dest="genome_index", required=True,
+                    help="Path to genome index of genome. Must be compatible with choosed aligner")
 parser.add_argument("-e", "--read_orientation", action="store", dest="read_orientation", default="fr",
                     help="Read orientation in pair. Allowed: fr(illumina paired end, default), "
-                         "rf(illumina mate-pairs), ff")
+                         "rf(illumina mate-pairs), ff. WORKS WITH BOWTIE2 ONLY!!!")
 parser.add_argument("-m", "--format", action="store", dest="format", default="fasta",
                     help="Format of genome file. Allowed formats genbank, fasta(default)")
 parser.add_argument("-p", "--parsing_mode", action="store", dest="parsing_mode", default="index_db",
                     help="Parsing mode for input sequence file. "
                          "Possible variants: 'index_db'(default), 'index', 'parse'")
 parser.add_argument("-a", "--input_fasta", action="store_true", dest="input_fasta",
-                    help="Reads are in fasta format. Default: False")
+                    help="Reads are in fasta format. Default: False. NEEDS FOR BOWTIE2 ONLY!!!")
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
                     help="Number of threads to use")
+parser.add_argument("-d", "--aligner_binary_dir", action="store", dest="aligner_binary_dir", default="",
+                    help="Directory with aligner binary")
+parser.add_argument("-s", "--store_sam", action="store_true", dest="store_sam",
+                    help="Store .sam file with read alignments")
+parser.add_argument("-l", "--aligner", action="store", dest="aligner", default="bowtie2",
+                    help="Aligner. Allowed: bowtie2(default), bwa")
 
 args = parser.parse_args()
 
@@ -51,4 +57,6 @@ ScaffoldingPipeline.get_insert_size_distribution(os.getcwd(), args.forward, args
                                                  args.estimated_insert_size, args.output_prefix,
                                                  args.genome, args.bowtie2_index, read_orientation="fr",
                                                  parsing_mode=args.parsing_mode, number_of_bins=100,
-                                                 genome_format=args.format, input_files_are_fasta=args.input_fasta)
+                                                 genome_format=args.format, input_files_are_fasta=args.input_fasta,
+                                                 store_sam=False, aligner=args.aligner,
+                                                 aligner_binary_dir=args.aligner_binary_dir)
