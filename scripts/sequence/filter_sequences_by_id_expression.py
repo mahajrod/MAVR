@@ -23,7 +23,7 @@ parser.add_argument("-p", "--parsing_mode", action="store", dest="parsing_mode",
 
 args = parser.parse_args()
 
-SequenceRoutines.filter_seq_by_reg_expression_from_file(args.input_file, args.regular_expression,
+SequenceRoutines.filter_seq_by_reg_expression_from_file(args.input, args.regular_expression,
                                                         args.filtered_file, args.filtered_out_file,
                                                         parsing_mode="index_db", format=args.format,
-                                                        index_file="tmp.idx", retain_index=False, reg_exp_flags=None)
+                                                        index_file="tmp.idx", retain_index=False, reg_exp_flags=0)

@@ -355,6 +355,7 @@ scripts/sequence/extract_sequences_by_ids.py
 scripts/sequence/extract_sequences_by_length.py
 scripts/sequence/extract_species_names_from_genbank_files.py
 scripts/sequence/extract_terminal_sequences.py
+scripts/sequence/filter_sequences_by_id_expression.py
 scripts/sequence/find_gaps.py
 scripts/sequence/find_repeated_ids_in_fasta.bash
 scripts/sequence/get_cds_pep_accordance.py

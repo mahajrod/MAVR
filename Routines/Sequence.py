@@ -282,7 +282,7 @@ class SequenceRoutines(FileRoutines):
 
         return self.filter_seq_by_expression(record_dict, expression)
 
-    def filter_seq_by_ids_and_reg_expression(self, record_dict, reg_expression, reg_exp_flags=None):
+    def filter_seq_by_ids_and_reg_expression(self, record_dict, reg_expression, reg_exp_flags=0):
 
         compiled_reg_expression = re.compile(reg_expression, flags=reg_exp_flags)
 
@@ -308,7 +308,7 @@ class SequenceRoutines(FileRoutines):
     def filter_seq_by_reg_expression_from_file(self, input_file, reg_expression,
                                                output_filtered_file, output_filtered_out_file,
                                                parsing_mode="index_db", format="fasta",
-                                               index_file="tmp.idx", retain_index=False, reg_exp_flags=None):
+                                               index_file="tmp.idx", retain_index=False, reg_exp_flags=0):
 
         compiled_reg_expression = re.compile(reg_expression, flags=reg_exp_flags)
 
