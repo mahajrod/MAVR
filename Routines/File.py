@@ -8,7 +8,7 @@ from collections import Iterable, OrderedDict
 from CustomCollections.GeneralCollections import IdSet,  IdList
 
 
-class FileRoutines():
+class FileRoutines:
     def __init__(self):
         self.filetypes_dict = {"fasta": [".fa", ".fasta", ".fa", ".pep", ".cds"],
                                "fastq": [".fastq", ".fq"],

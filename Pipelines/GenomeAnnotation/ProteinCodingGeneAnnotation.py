@@ -70,12 +70,12 @@ class ProteinCodingGeneAnnotation(FilteringPipeline):
             #    FileRoutines.save_mkdir("%s/%s" % (directory, sample))
 
         return (genome_dir, masking_dir,
-                          annotation_dir, protein_evidence_dir, protein_evidence_fasta_dir,
-                          protein_evidence_exonerate_dir, rnaseq_evidence_dir, rnaseq_read_dir,
-                          rnaseq_alignment_dir, est_evidence_dir, augustus_dir, augustus_hints_dir,
-                          augustus_splited_hints_dir, augustus_raw_dir, augustus_db_or_hint_support_dir,
-                          augustus_db_and_hint_support_dir, augustus_pfam_alignments,
-                          augustus_swissprot_alignments)
+                annotation_dir, protein_evidence_dir, protein_evidence_fasta_dir,
+                protein_evidence_exonerate_dir, rnaseq_evidence_dir, rnaseq_read_dir,
+                rnaseq_alignment_dir, est_evidence_dir, augustus_dir, augustus_hints_dir,
+                augustus_splited_hints_dir, augustus_raw_dir, augustus_db_or_hint_support_dir,
+                augustus_db_and_hint_support_dir, augustus_pfam_alignments,
+                augustus_swissprot_alignments)
 
     def softmask_genome(self, nonmasked_genome, repeatmasker_out_file):
         pass

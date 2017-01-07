@@ -1,19 +1,8 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 
-import os
 import argparse
-
-import numpy as np
-#from numpy import arange, int32, append, fromfile
-
-from Bio import SeqIO
-
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-
-from CustomCollections.GeneralCollections import SynDict
+from Routines import MatplotlibRoutines
 
 parser = argparse.ArgumentParser()
 
@@ -33,10 +22,10 @@ parser.add_argument("-n", "--min_value", action="store", dest="min_length", type
 parser.add_argument("-x", "--max_value", action="store", dest="max_length", type=float,
                     help="Maximum value to show. Default - length of longest sequence")
 parser.add_argument("-g", "--logbase", action="store", dest="logbase", type=int, default=10,
-                    help="Logbase to use for log-scaled histogramms")
+                    help="Logbase to use for log-scaled histograms")
 parser.add_argument("-e", "--extensions", action="store", dest="extensions", type=lambda x: x.split(","),
-                    default=["png", "svg"],
-                    help="Comma-separated list of extensions for histogram files")
+                    default=["png"],
+                    help="Comma-separated list of extensions for histogram files. Default: png only")
 parser.add_argument("-l", "--xlabel", action="store", dest="xlabel",
                     help="X label")
 parser.add_argument("-y", "--ylabel", action="store", dest="ylabel",
@@ -46,6 +35,12 @@ parser.add_argument("-t", "--title", action="store", dest="title",
 
 args = parser.parse_args()
 
+MatplotlibRoutines.draw_histogram(args.input_file, args.output_prefix, number_of_bins=args.number_of_bins,
+                                  width_of_bins=args.width_of_bins, separator=args.separator,
+                                  max_length=args.max_length, min_length=args.min_length,
+                                  xlabel=args.xlabel, ylabel=args.ylabel, title=args.title,
+                                  extensions=args.extensions, logbase=args.logbase)
+"""
 if (args.number_of_bins is not None) and (args.width_of_bins is not None):
     raise AttributeError("Options -w/--width_of_bins and -b/--number_of_bins mustn't be set simultaneously")
 
@@ -102,4 +97,4 @@ for ext in args.extensions:
 
 # save histo values
 np.savetxt("%s.histo" % args.output_prefix, zip(bin_centers, n), fmt="%i\t%i")
-
+"""

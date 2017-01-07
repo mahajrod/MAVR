@@ -215,3 +215,78 @@ class MatplotlibRoutines:
                     plt.legend(loc=legend_location)
         for ext in extensions:
             plt.savefig("%s.%s" % (output_prefix, ext))
+
+    @staticmethod
+    def draw_histogram(input_file, output_prefix, number_of_bins=None, width_of_bins=None, separator="\n",
+                       max_length=None, min_length=1, xlabel=None, ylabel=None, title=None, extensions=("png",),
+                       logbase=10):
+        if (number_of_bins is not None) and (width_of_bins is not None):
+            raise AttributeError("Options -w/--width_of_bins and -b/--number_of_bins mustn't be set simultaneously")
+
+        if min_length < 0:
+            raise ValueError("Minimum length can't be negative")
+        if max_length < 0:
+            raise ValueError("Maximum length can't be negative")
+
+        lengths = np.fromfile(input_file, sep=separator)
+
+        max_lenn = max(lengths)
+        min_lenn = min(lengths)
+
+        max_len = max_length if max_length < max_lenn else max_lenn
+        min_len = min_length if min_lenn < min_length else min_lenn
+        filtered = []
+
+        if (max_len < max_lenn) and (min_len > min_lenn):
+            for entry in lengths:
+                if min_len <= entry <= max_len:
+                    filtered.append(entry)
+        elif max_len < max_lenn:
+            for entry in lengths:
+                if entry <= max_len:
+                    filtered.append(entry)
+        elif min_len > min_lenn:
+            for entry in lengths:
+                if min_len <= entry:
+                    filtered.append(entry)
+        else:
+            filtered = lengths
+
+        figure = plt.figure(1, figsize=(6, 6))
+        subplot = plt.subplot(1, 1, 1)
+
+        if number_of_bins:
+            bins = number_of_bins
+        elif width_of_bins:
+            bins = np.arange(min_len, max_len, width_of_bins)
+            #print bins
+            #bins[0] += 1
+            bins = np.append(bins, [max_len])
+        else:
+            bins = 30
+
+        n, bins, patches = plt.hist(filtered, bins=bins)
+
+        bin_centers = (bins + ((bins[1] - bins[0])/2))[:-1]
+        #print bin_centers
+        #print len(n)
+        #print len(bin_centers)
+
+        plt.xlim(xmin=min_len, xmax=max_len)
+        if xlabel:
+            plt.xlabel(xlabel)
+        if ylabel:
+            plt.ylabel(ylabel)
+        if title:
+            plt.title(title)
+
+        for ext in extensions:
+            plt.savefig("%s.%s" % (output_prefix, ext))
+
+        subplot.set_yscale('log', basey=logbase)
+        #subplot.set_xscale('log', basex=args.logbase)
+        for ext in extensions:
+            plt.savefig("%s.logscale.%s" % (output_prefix, ext))
+
+        # save histo values
+        np.savetxt("%s.histo" % output_prefix, zip(bin_centers, n), fmt="%i\t%i")

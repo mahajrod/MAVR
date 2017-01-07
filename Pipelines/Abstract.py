@@ -3,7 +3,8 @@
 #import shutil
 #from collections import OrderedDict
 #from Tools.Filter import Cookiecutter, Trimmomatic, FaCut
-from Routines import SequenceRoutines
+from Tools.Abstract import Tool
+from Routines import MatplotlibRoutines
 #from Parsers.FaCut import FaCutReport
 #from Parsers.Coockiecutter import CoockiecutterReport
 #from Parsers.Trimmomatic import TrimmomaticReport
@@ -11,9 +12,9 @@ from Routines import SequenceRoutines
 #from CustomCollections.GeneralCollections import TwoLvlDict
 
 
-class Pipeline(SequenceRoutines):
+class Pipeline(Tool, MatplotlibRoutines):
     def __init__(self):
-        SequenceRoutines.__init__(self)
+        Tool.__init__(self)
 
 
 

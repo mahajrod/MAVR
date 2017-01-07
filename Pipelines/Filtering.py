@@ -19,9 +19,10 @@ from CustomCollections.GeneralCollections import TwoLvlDict
 class FilteringPipeline(Pipeline):
 
     def prepare_filtering_directories(self, output_directory, sample_list):
-        merged_raw_dir = "%s/merged/" % output_directory
-        filtered_dir = "%s/filtered/" % output_directory
-        filtering_stat_dir = "%s/filtered_stat/" % output_directory
+        out_dir = os.path.abspath(output_directory)
+        merged_raw_dir = "%s/merged/" % out_dir
+        filtered_dir = "%s/filtered/" % out_dir
+        filtering_stat_dir = "%s/filtered_stat/" % out_dir
         coockie_filtered_dir = "%s/coockiecutter/" % filtered_dir
         coockie_trimmomatic_filtered_dir = "%s/coockiecutter_trimmomatic/" % filtered_dir
         coockie_trimmomatic_quality_filtered_dir = "%s/coockiecutter_trimmomatic_quality/" % filtered_dir
@@ -32,6 +33,8 @@ class FilteringPipeline(Pipeline):
             self.save_mkdir(directory)
             for sample in sample_list:
                 self.save_mkdir("%s/%s" % (directory, sample))
+        return (merged_raw_dir, filtered_dir, coockie_filtered_dir, coockie_trimmomatic_filtered_dir,
+                coockie_trimmomatic_quality_filtered_dir, final_filtered_dir, filtering_stat_dir)
 
     def filter(self, samples_directory, output_directory, adapter_fragment_file, trimmomatic_adapter_file,
                general_stat_file,
@@ -47,7 +50,7 @@ class FilteringPipeline(Pipeline):
         Trimmomatic.jar_path = trimmomatic_dir
         Trimmomatic.threads = threads
         FaCut.path = facut_dir
-
+        """
         merged_raw_dir = "%s/merged/" % output_directory
         filtered_dir = "%s/filtered/" % output_directory
         coockie_filtered_dir = "%s/coockiecutter/" % filtered_dir
@@ -55,10 +58,14 @@ class FilteringPipeline(Pipeline):
         coockie_trimmomatic_quality_filtered_dir = "%s/coockiecutter_trimmomatic_quality/" % filtered_dir
         final_filtered_dir = "%s/final/" % filtered_dir
         filtering_stat_dir = "%s/filtered_stat/" % output_directory
-
+        """
         sample_list = samples_to_handle if samples_to_handle else self.get_sample_list(samples_directory)
-        self.prepare_filtering_directories(output_directory, sample_list)
+        merged_raw_dir, filtered_dir, coockie_filtered_dir, \
+        coockie_trimmomatic_filtered_dir, coockie_trimmomatic_quality_filtered_dir, \
+        final_filtered_dir, filtering_stat_dir = self.prepare_filtering_directories(output_directory, sample_list)
+
         filtering_statistics = TwoLvlDict()
+
         for sample in sample_list:
             print "Handling sample %s" % sample
             filtering_statistics[sample] = OrderedDict()
@@ -97,7 +104,7 @@ class FilteringPipeline(Pipeline):
             coockie_filtered_paired_reverse_reads = "%s/%s_2.ok.fastq" % (coockie_filtered_sample_dir, sample)
             # se reads produced by Coockiecutter are ignored now!!
 
-            coockie_trimmomatic_filtered_sample_dir = "%s/%s/" % (coockie_trimmomatic_filtered_dir, sample)
+            #coockie_trimmomatic_filtered_sample_dir = "%s/%s/" % (coockie_trimmomatic_filtered_dir, sample)
             trimmomatic_output_prefix = "%s/%s" % (coockie_trimmomatic_filtered_sample_dir, sample)
             trimmomatic_log = "%s.trimmomatic.log" % trimmomatic_output_prefix
             #"""

@@ -1179,7 +1179,8 @@ class SequenceRoutines(FileRoutines):
             return end, new_start
 
     @staticmethod
-    def make_region_bed_file(record_dict, output_file, white_list=None, black_list=None, output_format="0-based"):
+    def make_region_bed_file(record_dict, output_file, white_list=None, black_list=None,
+                             output_format="0-based", min_len=None, max_len=None):
         with open(output_file, "w") as out_fd:
             for record_id in record_dict:
                 if white_list:
@@ -1188,14 +1189,25 @@ class SequenceRoutines(FileRoutines):
                 if black_list:
                     if record_id in black_list:
                         continue
+                if min_len:
+                    if len(record_dict[record_id]) < min_len:
+                        continue
+                if max_len:
+                    if len(record_dict[record_id]) > max_len:
+                        continue
                 bed_string = "%s" % record_id
                 if output_format == "0-based":
-                    bed_string += "\t0\t%i\n" % len(record_dict[record_id])
+                    bed_string += "\t0\t%i\n" % (len(record_dict[record_id]) - 1)
+                elif output_format == "1-based":
+                    bed_string += "\t1\t%i\n" % len(record_dict[record_id])
+                else:
+                    raise ValueError("Unrecognized bed format %s" % output_format)
                 out_fd.write(bed_string)
 
     def make_region_bed_file_from_file(self, seq_file, output_file, white_id_file=None, black_id_file=None,
-                                       output_format="0-based", input_format="fasta"):
-        record_dict = SeqIO.index_db("tmp.idx", seq_file, format=input_format)
+                                       output_format="0-based", input_format="fasta", min_len=None, max_len=None,
+                                       parsing_mode="index_db", index_file="tmp.idx", retain_index=False):
+        record_dict = self.parse_seq_file(seq_file, parsing_mode, format=input_format, index_file=index_file)#SeqIO.index_db("tmp.idx", seq_file, format=input_format)
         black_id_list = IdList()
         white_id_list = IdList()
         if black_id_file:
@@ -1204,10 +1216,12 @@ class SequenceRoutines(FileRoutines):
             white_id_list.read(white_id_file)
 
         self.make_region_bed_file(record_dict, output_file, white_list=white_id_list, black_list=black_id_list,
-                                  output_format=output_format)
+                                  output_format=output_format, min_len=min_len, max_len=max_len)
+        if (parsing_mode == "index_db") and (not retain_index):
+            os.remove(index_file)
 
     def find_homopolymers(self, seq, nucleotide, min_size=5, search_type="perfect",
-                      max_single_insert_size=1, max_total_insert_length=None, max_number_of_insertions=2):
+                          max_single_insert_size=1, max_total_insert_length=None, max_number_of_insertions=2):
         # search types:
         #   perfect - search only for perfect homopolymers, all options other than min_size are ignored
         #   non_perfect - search for non_perfect homopolymers with max_single_insert_size, max_total_insert_length
