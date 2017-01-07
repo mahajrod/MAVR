@@ -63,5 +63,5 @@ ScaffoldingPipeline.get_insert_size_distribution(os.getcwd(), args.forward, args
                                                  args.genome, args.genome_index, read_orientation="fr",
                                                  parsing_mode=args.parsing_mode, number_of_bins=100,
                                                  genome_format=args.format, input_files_are_fasta=args.input_fasta,
-                                                 store_sam=False, aligner=args.aligner,
+                                                 store_sam=args.store_sam, aligner=args.aligner,
                                                  aligner_binary_dir=args.aligner_binary_dir)
