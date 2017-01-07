@@ -1,25 +1,25 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import os
-import sys
 import argparse
 
 from Bio import SeqIO
 
-from CustomCollections.GeneralCollections import SynDict
-from Routines.File import read_ids, make_list_of_path_to_files, check_path, save_mkdir
+from CustomCollections.GeneralCollections import SynDict, IdSet
+from Routines import FileRoutines
+#from Routines.File import read_ids, make_list_of_path_to_files, check_path, save_mkdir
 from Routines import SequenceRoutines
 
 
-def make_list_of_path_to_files_from_comma_sep_string(string):
-    return make_list_of_path_to_files(string.split(","))
+#def make_list_of_path_to_files_from_comma_sep_string(string):
+#    return make_list_of_path_to_files(string.split(","))
 
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_file_list", action="store", dest="input", required=True,
-                    type=make_list_of_path_to_files_from_comma_sep_string,
+                    type=FileRoutines.make_list_of_path_to_files_from_string,
                     help="Comma-separated list of input files/directories with sequences")
-parser.add_argument("-o", "--output_directory", action="store", dest="output", type=check_path,
+parser.add_argument("-o", "--output_directory", action="store", dest="output", type=FileRoutines.check_path,
                     help="Directory to output groups_of sequences")
 parser.add_argument("-f", "--format", action="store", dest="format", default="fasta",
                     help="Format of input and output files. Allowed formats genbank, fasta(default)")
@@ -30,11 +30,12 @@ parser.add_argument("-d", "--id_file", action="store", dest="id_file",
 
 args = parser.parse_args()
 
-save_mkdir(args.output)
+FileRoutines.save_mkdir(args.output)
 args.extension = args.extension if args.extension else args.format
 tmp_index_file = "temp.idx"
 
-id_list = read_ids(args.id_file)
+#id_list = read_ids(args.id_file)
+id_list = IdSet(filename=args.id_file)
 
 sequence_groups_id = SynDict()
 sequence_groups_id.read(args.id_file, split_values=True)
@@ -46,6 +47,3 @@ for group in sequence_groups_id:
                 "%s%s.%s" % (args.output, group, args.extension), format=args.format)
 
 os.remove(tmp_index_file)
-
-
-

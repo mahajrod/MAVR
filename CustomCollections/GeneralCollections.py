@@ -264,7 +264,20 @@ class IdList(list):
 
 class IdSet(OrderedSet):
 
-    def read(self, filename, header=False, close_after_if_file_object=False, comments_prefix=None):
+    def __init__(self, idset=None, filename=None, header=False, close_after_if_file_object=False, column_number=None,
+                 column_separator="\t", comments_prefix=None, id_in_column_separator=None):
+        OrderedSet.__init__(self)
+
+        if filename:
+            self.read(filename, header=header, close_after_if_file_object=close_after_if_file_object,
+                      column_number=column_number, column_separator=column_separator,
+                      comments_prefix=comments_prefix, id_in_column_separator=id_in_column_separator)
+        if idset:
+            for element in idset:
+                self.add(element)
+
+    def read(self, filename, header=False, close_after_if_file_object=False, column_number=None, column_separator="\t",
+             comments_prefix=None, id_in_column_separator=None):
         #reads ids from file with one id per line
         
         in_fd = filename if isinstance(filename, file) else open(filename, "r")
@@ -276,7 +289,14 @@ class IdSet(OrderedSet):
             if comments_prefix:
                 if line[: com_pref_len] == comments_prefix:
                     continue
-            self.add(line.strip())
+            ids = line.strip().split(column_separator)[column_number] if column_number is not None else line.strip()
+            if id_in_column_separator:
+                ids = set(ids.split(id_in_column_separator))
+                for entry in ids:
+                    self.add(entry)
+            else:
+                self.add(ids)
+
         if (not isinstance(filename, file)) or close_after_if_file_object:
             in_fd.close()
         return self

@@ -63,4 +63,3 @@ SeqIO.write(record_by_expression_generator(right_fragments_dict, lambda x: True)
 
 print("Totally %i/%i records with overlaps" % (overlap_counter, number_of_records))
 os.remove("temp.idx")
-

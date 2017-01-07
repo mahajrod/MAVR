@@ -261,6 +261,65 @@ class SequenceRoutines(FileRoutines):
                         yield record_dict[record_id]
 
     @staticmethod
+    def filter_seq_by_expression(record_dict, expression):
+        filtered_ids = IdSet()
+        filtered_out_ids = IdSet()
+        for record_id in record_dict:
+            if expression(record_dict[record_id]):
+                filtered_ids.add(record_id)
+            else:
+                filtered_out_ids.add(record_id)
+        return filtered_ids, filtered_out_ids
+
+    @staticmethod
+    def expression_for_seq_ids(record, compiled_reg_expression):
+        return True if compiled_reg_expression.search(record.id)else False
+
+    def filter_seq_by_ids_and_compiled_reg_expression(self, record_dict, compiled_reg_expression):
+
+        def expression(record):
+            return True if compiled_reg_expression.search(record.id)else False
+
+        return self.filter_seq_by_expression(record_dict, expression)
+
+    def filter_seq_by_ids_and_reg_expression(self, record_dict, reg_expression, reg_exp_flags=None):
+
+        compiled_reg_expression = re.compile(reg_expression, flags=reg_exp_flags)
+
+        def expression(record):
+            return True if compiled_reg_expression.search(record.id)else False
+
+        return self.filter_seq_by_expression(record_dict, expression)
+
+    def filter_seq_by_expression_from_file(self, input_file, expression_function,
+                                           output_filtered_file, output_filtered_out_file,
+                                           parsing_mode="index_db", format="fasta",
+                                           index_file="tmp.idx", retain_index=False):
+        record_dict = self.parse_seq_file(input_file, parsing_mode, format=format, index_file=index_file)
+
+        filtered_ids, filtered_out_ids = self.filter_seq_by_expression(record_dict, expression_function)
+
+        SeqIO.write(self.record_by_id_generator(record_dict, filtered_ids), output_filtered_file, format=format)
+        SeqIO.write(self.record_by_id_generator(record_dict, filtered_out_ids), output_filtered_out_file, format=format)
+
+        if not retain_index:
+            os.remove(index_file)
+
+    def filter_seq_by_reg_expression_from_file(self, input_file, reg_expression,
+                                               output_filtered_file, output_filtered_out_file,
+                                               parsing_mode="index_db", format="fasta",
+                                               index_file="tmp.idx", retain_index=False, reg_exp_flags=None):
+
+        compiled_reg_expression = re.compile(reg_expression, flags=reg_exp_flags)
+
+        def expression(record):
+            return True if compiled_reg_expression.search(record.id)else False
+
+        self.filter_seq_by_expression_from_file(input_file, expression, output_filtered_file, output_filtered_out_file,
+                                                parsing_mode=parsing_mode, format=format,
+                                                index_file=index_file, retain_index=retain_index)
+
+    @staticmethod
     def parse_seq_file(input_file, mode, format="fasta", index_file=None):
         if mode == "index_db":
             index = index_file if index_file else "tmp.idx"
