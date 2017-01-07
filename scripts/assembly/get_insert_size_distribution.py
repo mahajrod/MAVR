@@ -29,7 +29,8 @@ parser.add_argument("-p", "--parsing_mode", action="store", dest="parsing_mode",
                          "Possible variants: 'index_db'(default), 'index', 'parse'")
 parser.add_argument("-a", "--input_fasta", action="store_true", dest="input_fasta",
                     help="Reads are in fasta format. Default: False")
-
+parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
+                    help="Number of threads to use")
 
 args = parser.parse_args()
 
@@ -45,6 +46,7 @@ example of usage
                                               -r GSS_BOH_BAC_end.reverse.fa
 
 """
+ScaffoldingPipeline.threads = args.threads
 ScaffoldingPipeline.get_insert_size_distribution(os.getcwd(), args.forward, args.reverse,
                                                  args.estimated_insert_size, args.output_prefix,
                                                  args.genome, args.bowtie2_index, read_orientation="fr",
