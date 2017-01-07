@@ -19,7 +19,7 @@ parser.add_argument("-a", "--forward_suffix", action="store", dest="forward_suff
 parser.add_argument("-b", "--reverse_suffix", action="store", dest="reverse_suffix", required=True,
                     help="Suffix of sequence ids from reverse files")
 
-parser.add_argument("-f", "--format", action="store", dest="format", default="fasta",
+parser.add_argument("-m", "--format", action="store", dest="format", default="fasta",
                     help="Format of input and output file. Allowed formats genbank, fasta(default)")
 parser.add_argument("-p", "--parsing_mode", action="store", dest="parsing_mode", default="index_db",
                     help="Parsing mode for input sequence file. "
