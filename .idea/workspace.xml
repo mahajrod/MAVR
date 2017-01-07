@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/sequence/check_pairing.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/sequence/count_sequences_in_fasta.bash" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/sequence/extract_ids_from_fasta.bash" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Sequence.py" afterPath="$PROJECT_DIR$/Routines/Sequence.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence/filter_sequences_by_id_expression.py" afterPath="$PROJECT_DIR$/scripts/sequence/filter_sequences_by_id_expression.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence/check_pairing.py" afterPath="$PROJECT_DIR$/scripts/sequence/check_pairing.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -43,17 +44,47 @@
         <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="352" column="43" selection-start-line="351" selection-start-column="8" selection-end-line="354" selection-end-column="82" />
+              <caret line="293" column="81" selection-start-line="293" selection-start-column="81" selection-end-line="293" selection-end-column="81" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="check_pairing.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="check_pairing.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/sequence/check_pairing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3207547">
-              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="find_repeated_ids_in_fasta.bash" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/sequence/find_repeated_ids_in_fasta.bash">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="count_sequences_in_fasta.bash" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/sequence/count_sequences_in_fasta.bash">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="extract_ids_from_fasta.bash" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/sequence/extract_ids_from_fasta.bash">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.04851752">
+              <caret line="2" column="38" selection-start-line="2" selection-start-column="38" selection-end-line="2" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -119,8 +150,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/projects/RG/general_scripts/kmer_analysis.sh" />
-        <option value="$PROJECT_DIR$/projects/RG/general_scripts/filtration.sh" />
         <option value="$PROJECT_DIR$/projects/RG/general_scripts/fastqc_analysis.sh" />
         <option value="$PROJECT_DIR$/projects/RG/general_scripts/coockiecutter.sh" />
         <option value="$PROJECT_DIR$/projects/RG/general_scripts/set_environment_variables.sh" />
@@ -167,9 +196,11 @@
         <option value="$PROJECT_DIR$/scripts/sequence/extract_groups_of_sequences.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/get_random_species_sequences.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/extract_terminal_sequences.py" />
-        <option value="$PROJECT_DIR$/Routines/Sequence.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/filter_sequences_by_id_expression.py" />
+        <option value="$PROJECT_DIR$/Routines/Sequence.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/check_pairing.py" />
+        <option value="$PROJECT_DIR$/scripts/sequence/count_sequences_in_fasta.bash" />
+        <option value="$PROJECT_DIR$/scripts/sequence/extract_ids_from_fasta.bash" />
       </list>
     </option>
   </component>
@@ -775,18 +806,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-01010" summary="changes">
-      <created>1481875508142</created>
-      <option name="number" value="01010" />
-      <option name="project" value="LOCAL" />
-      <updated>1481875508143</updated>
-    </task>
-    <task id="LOCAL-01011" summary="changes">
-      <created>1481875625782</created>
-      <option name="number" value="01011" />
-      <option name="project" value="LOCAL" />
-      <updated>1481875625782</updated>
-    </task>
     <task id="LOCAL-01012" summary="changes">
       <created>1481875691812</created>
       <option name="number" value="01012" />
@@ -1069,7 +1088,19 @@
       <option name="project" value="LOCAL" />
       <updated>1483787969681</updated>
     </task>
-    <option name="localTasksCounter" value="1059" />
+    <task id="LOCAL-01059" summary="changes">
+      <created>1483792864258</created>
+      <option name="number" value="01059" />
+      <option name="project" value="LOCAL" />
+      <updated>1483792864258</updated>
+    </task>
+    <task id="LOCAL-01060" summary="changes">
+      <created>1483793007009</created>
+      <option name="number" value="01060" />
+      <option name="project" value="LOCAL" />
+      <updated>1483793007009</updated>
+    </task>
+    <option name="localTasksCounter" value="1061" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1244,27 +1275,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Routines/Fastq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/Functions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/MultipleAlignment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Pipelines/DiffExpression.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.098712444">
@@ -1612,14 +1622,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="352" column="43" selection-start-line="351" selection-start-column="8" selection-end-line="354" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence/filter_sequences_by_id_expression.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1630,10 +1632,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="293" column="81" selection-start-line="293" selection-start-column="81" selection-end-line="293" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence/check_pairing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3207547">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence/find_repeated_ids_in_fasta.bash">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence/count_sequences_in_fasta.bash">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence/extract_ids_from_fasta.bash">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04851752">
+          <caret line="2" column="38" selection-start-line="2" selection-start-column="38" selection-end-line="2" selection-end-column="38" />
           <folding />
         </state>
       </provider>

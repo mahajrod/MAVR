@@ -31,10 +31,12 @@ args = parser.parse_args()
 """
 example of usage
 
-~/Soft/MAVR/scripts/sequence/filter_sequences_by_id_expression.py -i GSS_BOH_BAC_end.fa \
-                                                                  -a GSS_BOH_BAC_end.forward.fa \
-                                                                  -b GSS_BOH_BAC_end.reverse.fa \
-                                                                  -e "\.F$" -p parse
+~/Soft/MAVR/scripts/sequence/check_pairing.py -p parse \
+                                              -a ".F" \
+                                              -b ".R" \
+                                              -o GSS_BOH_BAC_end \
+                                              -f GSS_BOH_BAC_end.forward.fa \
+                                              -r GSS_BOH_BAC_end.reverse.fa
 
 """
 SequenceRoutines.check_pairing_from_file(args.forward, args.reverse, args.output_prefix, args.forward_suffix,

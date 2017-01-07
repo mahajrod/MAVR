@@ -302,7 +302,7 @@ class SequenceRoutines(FileRoutines):
         SeqIO.write(self.record_by_id_generator(record_dict, filtered_ids), output_filtered_file, format=format)
         SeqIO.write(self.record_by_id_generator(record_dict, filtered_out_ids), output_filtered_out_file, format=format)
 
-        if not retain_index:
+        if (parsing_mode == "index_db") and (not retain_index):
             os.remove(index_file)
 
     def filter_seq_by_reg_expression_from_file(self, input_file, reg_expression,
@@ -372,7 +372,7 @@ class SequenceRoutines(FileRoutines):
                                                (forward_paired_file, reverse_paired_file, forward_unpaired_file, reverse_unpaired_file)):
             SeqIO.write(self.record_by_id_generator(dictionary, ids, verbose=True), filename, format=format)
 
-        if not retain_index:
+        if (parsing_mode == "index_db") and (not retain_index):
             os.remove(forward_index_file)
             os.remove(reverse_index_file)
     """
