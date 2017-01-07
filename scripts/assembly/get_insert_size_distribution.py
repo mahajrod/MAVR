@@ -42,7 +42,7 @@ example of usage
                                               -r GSS_BOH_BAC_end.reverse.fa
 
 """
-ScaffoldingPipeline.get_insert_size_distribution(os.getcwd(), args.forward, args.reverse_files,
+ScaffoldingPipeline.get_insert_size_distribution(os.getcwd(), args.forward, args.reverse,
                                                  args.estimated_insert_size, args.output_prefix,
                                                  args.genome, args.bowtie2_index, read_orientation="fr",
                                                  parsing_mode=args.parsing_mode, number_of_bins=100,
