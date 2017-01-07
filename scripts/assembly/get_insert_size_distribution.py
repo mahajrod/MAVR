@@ -44,18 +44,23 @@ args = parser.parse_args()
 """
 example of usage
 
-~/Soft/MAVR/scripts/sequence/check_pairing.py -p parse \
-                                              -a ".F" \
-                                              -b ".R" \
-                                              -o GSS_BOH_BAC_end \
-                                              -f GSS_BOH_BAC_end.forward.fa \
-                                              -r GSS_BOH_BAC_end.reverse.fa
+cd /mnt/guatemala/skliver/Boechera/Boechera_holboellii/genome/insert_size_estimation/BES$
+
+~/Soft/MAVR/scripts/assembly/get_insert_size_distribution.py -f ../../gz/GSS_BOH_BAC_end.pe.forward.fasta \
+                                                             -r ../../gz/GSS_BOH_BAC_end.pe.reverse.fasta \
+                                                             -o GSS_BOH_BAC.rf \
+                                                             -i 100000 \
+                                                             -e rf \
+                                                             -p parse \
+                                                             -b /mnt/peru/skliver/Boechera/Boechera_holboellii/genome/assemblies/discovar_adapter_filtered_cookie_trimmomatic/a.final/bowtie2_index/a.lines -g /mnt/peru/skliver/Boechera/Boechera_holboellii/genome/assemblies/discovar_adapter_filtered_cookie_trimmomatic/a.final/a.lines.fasta \
+                                                             -a \
+                                                             -t 30
 
 """
 ScaffoldingPipeline.threads = args.threads
 ScaffoldingPipeline.get_insert_size_distribution(os.getcwd(), args.forward, args.reverse,
                                                  args.estimated_insert_size, args.output_prefix,
-                                                 args.genome, args.bowtie2_index, read_orientation="fr",
+                                                 args.genome, args.genome_index, read_orientation="fr",
                                                  parsing_mode=args.parsing_mode, number_of_bins=100,
                                                  genome_format=args.format, input_files_are_fasta=args.input_fasta,
                                                  store_sam=False, aligner=args.aligner,
