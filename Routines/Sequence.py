@@ -319,6 +319,69 @@ class SequenceRoutines(FileRoutines):
                                                 parsing_mode=parsing_mode, format=format,
                                                 index_file=index_file, retain_index=retain_index)
 
+    def check_pairing(self, forward_record_dict, reverse_record_dict, forward_record_id_suffix,
+                      reverse_record_id_suffix):
+        forward_suffix_len = len(forward_record_id_suffix)
+        reverse_suffix_len = len(reverse_record_id_suffix)
+
+        forward_ids = forward_record_dict.keys()
+        forward_ids_common_part = []
+        for forward_id in forward_ids:
+            if forward_id[-forward_suffix_len:] != forward_record_id_suffix:
+                raise ValueError("Forward record %s doesn't have forward id suffix" % forward_id)
+            forward_ids_common_part.append(forward_id[:-forward_suffix_len])
+
+        reverse_ids = reverse_record_dict.keys()
+        reverse_ids_common_part = []
+        for reverse_id in reverse_ids:
+            if reverse_id[-reverse_suffix_len:] != reverse_record_id_suffix:
+                raise ValueError("Reverse record %s doesn't have forward id suffix" % reverse_id)
+            reverse_ids_common_part.append(reverse_id[:-reverse_suffix_len])
+
+        paired_ids = self.intersect_ids([forward_ids_common_part], [reverse_ids_common_part], mode="common")
+        only_forward_ids = self.intersect_ids(forward_ids_common_part, reverse_ids_common_part, mode="only_a")
+        only_reverse_ids = self.intersect_ids(forward_ids_common_part, reverse_ids_common_part, mode="only_b")
+
+        forward_full_paired_ids = [common_id + forward_record_id_suffix for common_id in paired_ids]
+        reverse_full_paired_ids = [common_id + reverse_record_id_suffix for common_id in paired_ids]
+        only_forward_full_ids = [only_forward_id + forward_record_id_suffix for only_forward_id in only_forward_ids]
+        only_reverse_full_ids = [only_reverse_id + reverse_record_id_suffix for only_reverse_id in only_reverse_ids]
+
+        return forward_full_paired_ids, reverse_full_paired_ids, only_forward_full_ids, only_reverse_full_ids
+
+    def check_pairing_from_file(self, forward_file, reverse_file, output_prefix, forward_record_id_suffix,
+                                reverse_record_id_suffix, parsing_mode="index_db", format="fasta",
+                                forward_index_file="forward_tmp.idx", reverse_index_file="reverse_tmp.idx",
+                                retain_index=False, output_file_extension="fasta"):
+        forward_dict = self.parse_seq_file(forward_file, parsing_mode, format=format, index_file=forward_index_file)
+        reverse_dict = self.parse_seq_file(reverse_file, parsing_mode, format=format, index_file=reverse_index_file)
+
+        forward_full_paired_ids, \
+        reverse_full_paired_ids, \
+        only_forward_full_ids, \
+        only_reverse_full_ids = self.check_pairing(forward_dict, reverse_dict,
+                                                   forward_record_id_suffix, reverse_record_id_suffix)
+
+        forward_paired_file = "%s.pe.forward.%s" % (output_prefix, output_file_extension)
+        reverse_paired_file = "%s.pe.reverse.%s" % (output_prefix, output_file_extension)
+        forward_unpaired_file = "%s.se.forward.%s" % (output_prefix, output_file_extension)
+        reverse_unpaired_file = "%s.se.reverse.%s" % (output_prefix, output_file_extension)
+
+        for (dictionary, ids, filename) in zip((forward_dict, reverse_dict, forward_dict, reverse_dict),
+                                               (forward_full_paired_ids, reverse_full_paired_ids, only_forward_full_ids, only_reverse_full_ids),
+                                               (forward_paired_file, reverse_paired_file, forward_unpaired_file, reverse_unpaired_file)):
+            SeqIO.write(self.record_by_id_generator(dictionary, ids, verbose=True), filename, format=format)
+
+        if not retain_index:
+            os.remove(forward_index_file)
+            os.remove(reverse_index_file)
+    """
+    @staticmethod
+    def check_pairing_from_interleaved_dict(record_dict, forward_record_id_suffix, reverse_record_id_suffix):
+        forward_suffix_len = len(forward_record_id_suffix)
+        reverse_suffix_len = len(reverse_record_id_suffix)
+    """
+
     @staticmethod
     def parse_seq_file(input_file, mode, format="fasta", index_file=None):
         if mode == "index_db":
