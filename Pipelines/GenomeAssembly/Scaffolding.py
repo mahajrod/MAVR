@@ -32,8 +32,8 @@ class ScaffoldingPipeline(Pipeline):
         output_len_file = "%s.len" % output_pref
 
         bowtie_string = "bowtie2 --very-sensitive -x %s -1 %s -2 %s  -p %i -X %i --%s " % (genome_index,
-                                                                                           ",".join(forward_files),
-                                                                                           ",".join(reverse_files),
+                                                                                           forward_files if isinstance(forward_files, str) else ",".join(forward_files),
+                                                                                           reverse_files if isinstance(reverse_files, str) else ",".join(reverse_files),
                                                                                            self.threads,
                                                                                            min_contig_len_threshold,
                                                                                            read_orientation)
