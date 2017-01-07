@@ -22,7 +22,7 @@ class ScaffoldingPipeline(Pipeline):
                                      output_prefix, genome, genome_index, input_files_are_fasta=False,
                                      read_orientation="fr", parsing_mode="index_db", number_of_bins=100,
                                      genome_format="fasta", store_sam=False, aligner="bowtie2",
-                                     aligner_binary_dir=""):
+                                     aligner_binary_dir="", xlimit_for_histo=None):
 
         sample_dir = os.path.abspath(sample_directory)
         output_pref = "%s/%s" % (sample_dir, output_prefix)
@@ -77,6 +77,7 @@ class ScaffoldingPipeline(Pipeline):
 
         self.execute(cmd=final_string)
 
-        self.draw_histogram(output_len_file, output_pref, max_length=min_contig_len_threshold,
+        self.draw_histogram(output_len_file, output_pref,
+                            max_length=xlimit_for_histo if xlimit_for_histo else min_contig_len_threshold,
                             number_of_bins=number_of_bins, xlabel="Insert size",
                             ylabel="Number of fragments", title="Insert size distribution", extensions=("png",))

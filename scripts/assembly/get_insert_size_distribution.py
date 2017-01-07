@@ -37,6 +37,10 @@ parser.add_argument("-s", "--store_sam", action="store_true", dest="store_sam",
                     help="Store .sam file with read alignments")
 parser.add_argument("-l", "--aligner", action="store", dest="aligner", default="bowtie2",
                     help="Aligner. Allowed: bowtie2(default), bwa")
+parser.add_argument("-x", "--max_xlimit_for_histo", action="store",
+                    dest="xlimit_for_histo",
+                    help="Xlimit for histogram. Default: 3 * estimated_insert_size "
+                         "(set by -i/--estimated_insert_size option) ")
 
 args = parser.parse_args()
 
@@ -64,4 +68,5 @@ ScaffoldingPipeline.get_insert_size_distribution(os.getcwd(), args.forward, args
                                                  parsing_mode=args.parsing_mode, number_of_bins=100,
                                                  genome_format=args.format, input_files_are_fasta=args.input_fasta,
                                                  store_sam=args.store_sam, aligner=args.aligner,
-                                                 aligner_binary_dir=args.aligner_binary_dir)
+                                                 aligner_binary_dir=args.aligner_binary_dir,
+                                                 xlimit_for_histo=args.xlimit_for_histo)
