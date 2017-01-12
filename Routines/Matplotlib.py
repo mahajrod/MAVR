@@ -309,7 +309,7 @@ class MatplotlibRoutines:
             plt.suptitle(suptitle)
         if len(subplot_tuple) != 2:
             raise ValueError("Subplot tuple should contain exactly two values, not %i!" % len(subplot_tuple))
-        if not (isinstance(subplot_tuple[0], int) and isinstance(subplot_tuple, int)):
+        if not (isinstance(subplot_tuple[0], int) and isinstance(subplot_tuple[1], int)):
             raise ValueError("Subplot tuple should contain two values, not (%s, %s)!" % (str(type(subplot_tuple[0])),
                                                                                          str(type(subplot_tuple[1]))))
 
