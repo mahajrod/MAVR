@@ -132,7 +132,7 @@ class SamtoolsV1(Tool):
         flags_for_filtration += self.bam_flags["not_primary_alignment"]
         flags_for_filtration += self.bam_flags["read_unmapped"]
         flags_for_filtration += self.bam_flags["mate_unmapped"]
-        flags_for_filtration += self.self.bam_flags["read_mapped_in_proper_pair"] if concordant_only else 0
+        flags_for_filtration += self.bam_flags["read_mapped_in_proper_pair"] if concordant_only else 0
 
         samtools_options = " -F %i" % flags_for_filtration
         samtools_options += " %s" % input_sam
