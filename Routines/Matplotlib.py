@@ -326,7 +326,7 @@ class MatplotlibRoutines:
                     if dataset_index < len(parameters_list[parameter_index]):
                         parameters[parameter_index] = parameters_list[parameter_index][dataset_index]
 
-            subplot = plt.subplot(subplot_tuple[0], subplot_tuple[1], dataset_index)
+            subplot = plt.subplot(subplot_tuple[0], subplot_tuple[1], dataset_index + 1)
             histo = self.draw_histogram(list_of_data_arrays[dataset_index],  number_of_bins=parameters[0],
                                         width_of_bins=parameters[1], max_threshold=parameters[2],
                                         min_threshold=parameters[3], xlabel=parameters[4], ylabel=parameters[5],
