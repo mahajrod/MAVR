@@ -351,19 +351,21 @@ class MatplotlibRoutines:
                                                 extensions=("png",), suptitle=None):
         subplot_tuple = (2, 2)
 
+        none_list = [None, None, None, None]
+
         list_of_data = [list_of_data_arrays[0], list_of_data_arrays[1],
                         list_of_data_arrays[0], list_of_data_arrays[1]]
         number_of_bins_listtt = [number_of_bins_list[0], number_of_bins_list[1],
-                                 number_of_bins_list[0], number_of_bins_list[1]]
+                                 number_of_bins_list[0], number_of_bins_list[1]] if number_of_bins_list else none_list
         width_of_bins_listtt = [width_of_bins_list[0], width_of_bins_list[1],
-                                width_of_bins_list[0], width_of_bins_list[1]]
+                                width_of_bins_list[0], width_of_bins_list[1]] if width_of_bins_list else none_list
         max_threshold_listtt = [max_threshold_list[0], max_threshold_list[1],
-                                max_threshold_list[0], max_threshold_list[1]]
+                                max_threshold_list[0], max_threshold_list[1]] if max_threshold_list else none_list
 
         min_threshold_listtt = [min_threshold_list[0], min_threshold_list[1],
-                                min_threshold_list[0], min_threshold_list[1]]
+                                min_threshold_list[0], min_threshold_list[1]] if min_threshold_list else none_list
         title_listtt = [title_list[0], title_list[1],
-                        "%s\n, logscaled" % title_list[0], "%s\n, logscaled" % title_list[1]]
+                        "%s\n, logscaled" % title_list[0], "%s\n, logscaled" % title_list[1]] if title_list else none_list
 
         ylogbase_list = [None, None, logbase, logbase]
         xlabel_list = [None, None, xlabel, xlabel]
