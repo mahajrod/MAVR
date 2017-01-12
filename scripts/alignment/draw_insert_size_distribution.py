@@ -18,7 +18,7 @@ parser.add_argument("-w", "--width_of_bins", action="store", dest="width_of_bins
 parser.add_argument("-n", "--min_value", action="store", dest="min_insert_size", type=float, default=0,
                     help="Minimum insert to show on histogram. Default - 0")
 parser.add_argument("-x", "--max_value", action="store", dest="max_insert_size", type=float, default=1000,
-                    help="Maximum value to show. Default - length of longest sequence")
+                    help="Maximum value to show. Default: 1000")
 parser.add_argument("-g", "--logbase", action="store", dest="logbase", type=int, default=10,
                     help="Logbase to use for log-scaled histograms")
 parser.add_argument("-e", "--extensions", action="store", dest="extensions", type=lambda x: x.split(","),

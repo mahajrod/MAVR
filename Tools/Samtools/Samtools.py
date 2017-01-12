@@ -146,26 +146,26 @@ class SamtoolsV1(Tool):
     def draw_insert_size_distribution(self, input_sam, output_prefix, width_of_bin=5, max_insert_size=1200,
                                       min_insert_size=0, extensions=("png",), separator="\n", logbase=10):
 
-        output_concordant_file = "%s.concordant.len"
-        output_all_file = "%s.all.len"
+        output_concordant_file = "%s.concordant.len" % output_prefix
+        output_all_file = "%s.all.len" % output_prefix
 
         self.get_insert_sizes(input_sam, output_concordant_file, concordant_only=True)
         self.get_insert_sizes(input_sam, output_all_file, concordant_only=False)
 
-        DrawingRoutines.MatplotlibRoutines.draw_tetra_histogram_with_two_logscaled_from_file([output_concordant_file, output_all_file],
-                                                                                             output_prefix, figsize=(10, 10),
-                                                                                             number_of_bins_list=None,
-                                                                                             width_of_bins_list=[width_of_bin, width_of_bin],
-                                                                                             max_threshold_list=[max_insert_size, max_insert_size],
-                                                                                             min_threshold_list=[min_insert_size, min_insert_size],
-                                                                                             xlabel="Insert size",
-                                                                                             ylabel="Number of fragments",
-                                                                                             title_list=["Concordant pairs", "Discordant_pairs"],
-                                                                                             logbase=logbase,
-                                                                                             label_list=None,
-                                                                                             extensions=extensions,
-                                                                                             suptitle="Insert size distribution",
-                                                                                             separator=separator)
+        DrawingRoutines.draw_tetra_histogram_with_two_logscaled_from_file([output_concordant_file, output_all_file],
+                                                                          output_prefix, figsize=(10, 10),
+                                                                          number_of_bins_list=None,
+                                                                          width_of_bins_list=[width_of_bin, width_of_bin],
+                                                                          max_threshold_list=[max_insert_size, max_insert_size],
+                                                                          min_threshold_list=[min_insert_size, min_insert_size],
+                                                                          xlabel="Insert size",
+                                                                          ylabel="Number of fragments",
+                                                                          title_list=["Concordant pairs", "Discordant_pairs"],
+                                                                          logbase=logbase,
+                                                                          label_list=None,
+                                                                          extensions=extensions,
+                                                                          suptitle="Insert size distribution",
+                                                                          separator=separator)
 
 
 class SamtoolsV0(SamtoolsV1, Tool):

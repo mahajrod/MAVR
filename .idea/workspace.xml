@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/alignment/draw_insert_size_distribution.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/draw/draw_tetra_histogram_with_two_logscaled.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Drawing.py" afterPath="$PROJECT_DIR$/Routines/Drawing.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Matplotlib.py" afterPath="$PROJECT_DIR$/Routines/Matplotlib.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Samtools/Samtools.py" afterPath="$PROJECT_DIR$/Tools/Samtools/Samtools.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pipelines/GenomeAssembly/Scaffolding.py" afterPath="$PROJECT_DIR$/Pipelines/GenomeAssembly/Scaffolding.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/draw/draw_histogram.py" afterPath="$PROJECT_DIR$/scripts/draw/draw_histogram.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/alignment/draw_insert_size_distribution.py" afterPath="$PROJECT_DIR$/scripts/alignment/draw_insert_size_distribution.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -125,8 +120,8 @@
       <file leaf-file-name="Samtools.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools/Samtools/Samtools.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2380" max-vertical-offset="3708">
-              <caret line="159" column="145" selection-start-line="159" selection-start-column="145" selection-end-line="159" selection-end-column="145" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2376" max-vertical-offset="3708">
+              <caret line="138" column="132" selection-start-line="138" selection-start-column="132" selection-end-line="138" selection-end-column="132" />
               <folding>
                 <element signature="e#23#54#0" expanded="true" />
               </folding>
@@ -137,8 +132,8 @@
       <file leaf-file-name="draw_insert_size_distribution.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/alignment/draw_insert_size_distribution.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.61822987" vertical-offset="0" max-vertical-offset="757">
-              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.47556144" vertical-offset="0" max-vertical-offset="757">
+              <caret line="20" column="62" selection-start-line="20" selection-start-column="62" selection-end-line="20" selection-end-column="62" />
               <folding>
                 <element signature="e#55#70#0" expanded="true" />
               </folding>
@@ -223,8 +218,8 @@
         <option value="$PROJECT_DIR$/Routines/Matplotlib.py" />
         <option value="$PROJECT_DIR$/scripts/draw/draw_tetra_histogram_with_two_logscaled.py" />
         <option value="$PROJECT_DIR$/Pipelines/GenomeAssembly/Scaffolding.py" />
-        <option value="$PROJECT_DIR$/Tools/Samtools/Samtools.py" />
         <option value="$PROJECT_DIR$/scripts/alignment/draw_insert_size_distribution.py" />
+        <option value="$PROJECT_DIR$/Tools/Samtools/Samtools.py" />
       </list>
     </option>
   </component>
@@ -733,18 +728,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-01030" summary="changes">
-      <created>1482182284228</created>
-      <option name="number" value="01030" />
-      <option name="project" value="LOCAL" />
-      <updated>1482182284228</updated>
-    </task>
-    <task id="LOCAL-01031" summary="changes">
-      <created>1482182644308</created>
-      <option name="number" value="01031" />
-      <option name="project" value="LOCAL" />
-      <updated>1482182644308</updated>
-    </task>
     <task id="LOCAL-01032" summary="changes">
       <created>1482184311295</created>
       <option name="number" value="01032" />
@@ -1027,7 +1010,19 @@
       <option name="project" value="LOCAL" />
       <updated>1483822583470</updated>
     </task>
-    <option name="localTasksCounter" value="1079" />
+    <task id="LOCAL-01079" summary="changes">
+      <created>1484235736943</created>
+      <option name="number" value="01079" />
+      <option name="project" value="LOCAL" />
+      <updated>1484235736943</updated>
+    </task>
+    <task id="LOCAL-01080" summary="changes">
+      <created>1484235947927</created>
+      <option name="number" value="01080" />
+      <option name="project" value="LOCAL" />
+      <updated>1484235947927</updated>
+    </task>
+    <option name="localTasksCounter" value="1081" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1054,12 +1049,13 @@
     <frame x="-1" y="25" width="1922" height="1055" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1937862" sideWeight="0.8456713" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1937862" sideWeight="0.8456713" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1937862" sideWeight="0.15432873" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1512247" sideWeight="0.50237215" order="7" side_tool="true" content_ui="tabs" />
@@ -1070,7 +1066,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30777422" sideWeight="0.49762782" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399361" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973376" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1577,8 +1572,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Samtools/Samtools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2380" max-vertical-offset="3708">
-          <caret line="159" column="145" selection-start-line="159" selection-start-column="145" selection-end-line="159" selection-end-column="145" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2376" max-vertical-offset="3708">
+          <caret line="138" column="132" selection-start-line="138" selection-start-column="132" selection-end-line="138" selection-end-column="132" />
           <folding>
             <element signature="e#23#54#0" expanded="true" />
           </folding>
@@ -1587,8 +1582,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/alignment/draw_insert_size_distribution.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.61822987" vertical-offset="0" max-vertical-offset="757">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.47556144" vertical-offset="0" max-vertical-offset="757">
+          <caret line="20" column="62" selection-start-line="20" selection-start-column="62" selection-end-line="20" selection-end-column="62" />
           <folding>
             <element signature="e#55#70#0" expanded="true" />
           </folding>
