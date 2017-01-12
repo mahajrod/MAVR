@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Matplotlib.py" afterPath="$PROJECT_DIR$/Routines/Matplotlib.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Samtools/Samtools.py" afterPath="$PROJECT_DIR$/Tools/Samtools/Samtools.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/alignment/draw_insert_size_distribution.py" afterPath="$PROJECT_DIR$/scripts/alignment/draw_insert_size_distribution.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -53,28 +53,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="histogram_length.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/sequence/histogram_length.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="756" max-vertical-offset="1746">
-              <caret line="45" column="37" selection-start-line="45" selection-start-column="37" selection-end-line="45" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="draw_histogram.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/draw/draw_histogram.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="738" max-vertical-offset="1908">
-              <caret line="41" column="44" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="44" />
-              <folding>
-                <element signature="e#55#70#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="draw_tetra_histogram_with_two_logscaled.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/draw/draw_tetra_histogram_with_two_logscaled.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -108,7 +86,7 @@
       <file leaf-file-name="Drawing.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Routines/Drawing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="234" max-vertical-offset="3456">
+            <state vertical-scroll-proportion="0.0" vertical-offset="202" max-vertical-offset="3456">
               <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
               <folding>
                 <element signature="e#25#34#0" expanded="true" />
@@ -121,7 +99,7 @@
         <entry file="file://$PROJECT_DIR$/Tools/Samtools/Samtools.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="2376" max-vertical-offset="3708">
-              <caret line="138" column="132" selection-start-line="138" selection-start-column="132" selection-end-line="138" selection-end-column="132" />
+              <caret line="152" column="137" selection-start-line="152" selection-start-column="137" selection-end-line="152" selection-end-column="137" />
               <folding>
                 <element signature="e#23#54#0" expanded="true" />
               </folding>
@@ -129,10 +107,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="draw_insert_size_distribution.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="draw_insert_size_distribution.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/alignment/draw_insert_size_distribution.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.47556144" vertical-offset="0" max-vertical-offset="757">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="702">
               <caret line="20" column="62" selection-start-line="20" selection-start-column="62" selection-end-line="20" selection-end-column="62" />
               <folding>
                 <element signature="e#55#70#0" expanded="true" />
@@ -141,11 +119,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Matplotlib.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Matplotlib.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Routines/Matplotlib.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="6804" max-vertical-offset="8532">
-              <caret line="392" column="17" selection-start-line="392" selection-start-column="17" selection-end-line="392" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.9393531" vertical-offset="5909" max-vertical-offset="8568">
+              <caret line="367" column="61" selection-start-line="367" selection-start-column="61" selection-end-line="367" selection-end-column="61" />
               <folding>
                 <element signature="e#24#33#0" expanded="true" />
               </folding>
@@ -215,11 +193,11 @@
         <option value="$PROJECT_DIR$/Routines/Math.py" />
         <option value="$PROJECT_DIR$/scripts/draw/draw_histogram.py" />
         <option value="$PROJECT_DIR$/Routines/Drawing.py" />
-        <option value="$PROJECT_DIR$/Routines/Matplotlib.py" />
         <option value="$PROJECT_DIR$/scripts/draw/draw_tetra_histogram_with_two_logscaled.py" />
         <option value="$PROJECT_DIR$/Pipelines/GenomeAssembly/Scaffolding.py" />
         <option value="$PROJECT_DIR$/scripts/alignment/draw_insert_size_distribution.py" />
         <option value="$PROJECT_DIR$/Tools/Samtools/Samtools.py" />
+        <option value="$PROJECT_DIR$/Routines/Matplotlib.py" />
       </list>
     </option>
   </component>
@@ -728,36 +706,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-01032" summary="changes">
-      <created>1482184311295</created>
-      <option name="number" value="01032" />
-      <option name="project" value="LOCAL" />
-      <updated>1482184311295</updated>
-    </task>
-    <task id="LOCAL-01033" summary="changes">
-      <created>1482184392518</created>
-      <option name="number" value="01033" />
-      <option name="project" value="LOCAL" />
-      <updated>1482184392519</updated>
-    </task>
-    <task id="LOCAL-01034" summary="changes">
-      <created>1482307970162</created>
-      <option name="number" value="01034" />
-      <option name="project" value="LOCAL" />
-      <updated>1482307970163</updated>
-    </task>
-    <task id="LOCAL-01035" summary="changes">
-      <created>1482320293300</created>
-      <option name="number" value="01035" />
-      <option name="project" value="LOCAL" />
-      <updated>1482320293300</updated>
-    </task>
-    <task id="LOCAL-01036" summary="changes">
-      <created>1482320347176</created>
-      <option name="number" value="01036" />
-      <option name="project" value="LOCAL" />
-      <updated>1482320347176</updated>
-    </task>
     <task id="LOCAL-01037" summary="changes">
       <created>1482405499867</created>
       <option name="number" value="01037" />
@@ -1022,7 +970,37 @@
       <option name="project" value="LOCAL" />
       <updated>1484235947927</updated>
     </task>
-    <option name="localTasksCounter" value="1081" />
+    <task id="LOCAL-01081" summary="changes">
+      <created>1484236030312</created>
+      <option name="number" value="01081" />
+      <option name="project" value="LOCAL" />
+      <updated>1484236030312</updated>
+    </task>
+    <task id="LOCAL-01082" summary="changes">
+      <created>1484236330750</created>
+      <option name="number" value="01082" />
+      <option name="project" value="LOCAL" />
+      <updated>1484236330751</updated>
+    </task>
+    <task id="LOCAL-01083" summary="changes">
+      <created>1484236420050</created>
+      <option name="number" value="01083" />
+      <option name="project" value="LOCAL" />
+      <updated>1484236420050</updated>
+    </task>
+    <task id="LOCAL-01084" summary="changes">
+      <created>1484236456273</created>
+      <option name="number" value="01084" />
+      <option name="project" value="LOCAL" />
+      <updated>1484236456273</updated>
+    </task>
+    <task id="LOCAL-01085" summary="changes">
+      <created>1484236565870</created>
+      <option name="number" value="01085" />
+      <option name="project" value="LOCAL" />
+      <updated>1484236565870</updated>
+    </task>
+    <option name="localTasksCounter" value="1086" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1506,29 +1484,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/alignment/map_reads.py">
+    <entry file="file://$PROJECT_DIR$/scripts/draw/draw_tetra_histogram_with_two_logscaled.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2394">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1998">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="22" selection-end-column="114" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/alignment/sam2bam">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="770">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/Matplotlib.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="6804" max-vertical-offset="8532">
-          <caret line="392" column="17" selection-start-line="392" selection-start-column="17" selection-end-line="392" selection-end-column="17" />
-          <folding>
-            <element signature="e#24#33#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1552,6 +1512,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/alignment/draw_insert_size_distribution.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="702">
+          <caret line="20" column="62" selection-start-line="20" selection-start-column="62" selection-end-line="20" selection-end-column="62" />
+          <folding>
+            <element signature="e#55#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/alignment/sam2bam">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="770">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/alignment/map_reads.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2394">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Samtools/Samtools.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2376" max-vertical-offset="3708">
+          <caret line="152" column="137" selection-start-line="152" selection-start-column="137" selection-end-line="152" selection-end-column="137" />
+          <folding>
+            <element signature="e#23#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Drawing.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
@@ -1562,30 +1558,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/draw/draw_tetra_histogram_with_two_logscaled.py">
+    <entry file="file://$PROJECT_DIR$/Routines/Matplotlib.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1998">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="22" selection-end-column="114" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Samtools/Samtools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2376" max-vertical-offset="3708">
-          <caret line="138" column="132" selection-start-line="138" selection-start-column="132" selection-end-line="138" selection-end-column="132" />
+        <state vertical-scroll-proportion="0.9393531" vertical-offset="5909" max-vertical-offset="8568">
+          <caret line="367" column="61" selection-start-line="367" selection-start-column="61" selection-end-line="367" selection-end-column="61" />
           <folding>
-            <element signature="e#23#54#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/alignment/draw_insert_size_distribution.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47556144" vertical-offset="0" max-vertical-offset="757">
-          <caret line="20" column="62" selection-start-line="20" selection-start-column="62" selection-end-line="20" selection-end-column="62" />
-          <folding>
-            <element signature="e#55#70#0" expanded="true" />
+            <element signature="e#24#33#0" expanded="true" />
           </folding>
         </state>
       </provider>

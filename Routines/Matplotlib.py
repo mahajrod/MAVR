@@ -365,7 +365,7 @@ class MatplotlibRoutines:
         min_threshold_listtt = [min_threshold_list[0], min_threshold_list[1],
                                 min_threshold_list[0], min_threshold_list[1]] if min_threshold_list else none_list
         title_listtt = [title_list[0], title_list[1],
-                        "%s\n, logscaled" % title_list[0], "%s\n, logscaled" % title_list[1]] if title_list else none_list
+                        "%s, logscaled" % title_list[0], "%s, logscaled" % title_list[1]] if title_list else none_list
 
         ylogbase_list = [None, None, logbase, logbase]
         xlabel_list = [None, None, xlabel, xlabel]

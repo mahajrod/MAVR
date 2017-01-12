@@ -160,7 +160,7 @@ class SamtoolsV1(Tool):
                                                                           min_threshold_list=[min_insert_size, min_insert_size],
                                                                           xlabel="Insert size",
                                                                           ylabel="Number of fragments",
-                                                                          title_list=["Concordant pairs", "Discordant_pairs"],
+                                                                          title_list=["Concordant pairs", "All pairs"],
                                                                           logbase=logbase,
                                                                           label_list=None,
                                                                           extensions=extensions,
