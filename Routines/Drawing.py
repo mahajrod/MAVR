@@ -14,12 +14,13 @@ from BCBio import GFF
 from Bio import AlignIO
 
 from CustomCollections.GeneralCollections import SynDict
+from Routines.Matplotlib import MatplotlibRoutines
 from Pictures.Features import RectangularProtein
 
 
-class DrawingRoutines:
+class DrawingRoutines(MatplotlibRoutines):
     def __init__(self):
-        pass
+        MatplotlibRoutines.__init__(self)
 
     @staticmethod
     def draw_alignment(alignment, features, output_prefix, record_style=None, ext_list=["svg", "png"]):

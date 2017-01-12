@@ -6,15 +6,22 @@ from Routines import MatplotlibRoutines
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", "--input_file", action="store", dest="input_file",
-                    help="Input file with data")
+parser.add_argument("-i", "--input", action="store", dest="input", required=True,
+                    type=lambda s : s.split(","),
+                    help="Comma separated list of two input files with data")
 parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix",
                     help="Prefix of output files")
 parser.add_argument("-s", "--separator", action="store", dest="separator", default="\n",
                     help="Separator between values in input file. Default - '\\n', i.e. one value per line")
+parser.add_argument("-l", "--xlabel", action="store", dest="xlabel",
+                    help="X label")
+parser.add_argument("-y", "--ylabel", action="store", dest="ylabel",
+                    help="Y label")
+
 
 parser.add_argument("-b", "--number_of_bins", action="store", dest="number_of_bins", type=int,
                     help="Number of bins in histogram. Incompatible with -w/--width_of_bins option. Default - 30")
+
 parser.add_argument("-w", "--width_of_bins", action="store", dest="width_of_bins", type=float,
                     help="Width of bins in histogram. Incompatible with -b/--number_of_bins option. Not set by default")
 parser.add_argument("-n", "--min_value", action="store", dest="min_length", type=float, default=0,
@@ -26,20 +33,19 @@ parser.add_argument("-g", "--logbase", action="store", dest="logbase", type=int,
 parser.add_argument("-e", "--extensions", action="store", dest="extensions", type=lambda x: x.split(","),
                     default=["png"],
                     help="Comma-separated list of extensions for histogram files. Default: png only")
-parser.add_argument("-l", "--xlabel", action="store", dest="xlabel",
-                    help="X label")
-parser.add_argument("-y", "--ylabel", action="store", dest="ylabel",
-                    help="Y label")
-parser.add_argument("-t", "--title", action="store", dest="title",
-                    help="Title of histogram")
+
+parser.add_argument("-t", "--title_list", action="store", dest="title_list",
+                    help="Comma-separated ist of two title for histograms")
 
 args = parser.parse_args()
 
-MatplotlibRoutines.draw_histogram_from_file(args.input_file, args.output_prefix, number_of_bins=args.number_of_bins,
-                                            width_of_bins=args.width_of_bins, separator=args.separator,
-                                            max_length=args.max_length, min_length=args.min_length,
-                                            xlabel=args.xlabel, ylabel=args.ylabel, title=args.title,
-                                            extensions=args.extensions, logbase=args.logbase)
+MatplotlibRoutines.draw_tetra_histogram_with_two_logscaled_from_file(args.input,  args.output_prefix, figsize=(10, 10),
+                                                                     number_of_bins_list=None, width_of_bins_list=None,
+                                                                     max_threshold_list=None, min_threshold_list=None,
+                                                                     xlabel=args.xlabel, ylabel=args.ylabel,
+                                                                     title_list=args.title_list, logbase=args.logbase, label_list=None,
+                                                                     extensions=args.extensions, suptitle=None,
+                                                                     separator=args.separator)
 """
 if (args.number_of_bins is not None) and (args.width_of_bins is not None):
     raise AttributeError("Options -w/--width_of_bins and -b/--number_of_bins mustn't be set simultaneously")

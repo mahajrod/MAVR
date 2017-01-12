@@ -11,8 +11,6 @@ from matplotlib.transforms import Bbox, TransformedBbox, blended_transform_facto
 from mpl_toolkits.axes_grid1.inset_locator import BboxPatch, BboxConnector, BboxConnectorPatch
 from matplotlib.lines import Line2D
 
-
-
 import numpy as np
 
 
@@ -217,9 +215,185 @@ class MatplotlibRoutines:
             plt.savefig("%s.%s" % (output_prefix, ext))
 
     @staticmethod
-    def draw_histogram(input_file, output_prefix, number_of_bins=None, width_of_bins=None, separator="\n",
-                       max_length=None, min_length=1, xlabel=None, ylabel=None, title=None, extensions=("png",),
-                       logbase=10):
+    def draw_histogram(data_array, output_prefix=None, number_of_bins=None, width_of_bins=None,
+                       max_threshold=None, min_threshold=None, xlabel=None, ylabel=None,
+                       title=None, extensions=("png",), ylogbase=None, subplot=None, suptitle=None):
+        if (number_of_bins is not None) and (width_of_bins is not None):
+            raise AttributeError("Options -w/--width_of_bins and -b/--number_of_bins mustn't be set simultaneously")
+
+        if max_threshold and min_threshold:
+            if max_threshold < min_threshold:
+                raise ValueError("Maximum threshold (%s) is lower than minimum threshold(%s)" % (str(max_threshold),
+                                                                                                 str(min_threshold)))
+
+        max_lenn = max(data_array)
+        min_lenn = min(data_array)
+
+        max_len = max_threshold if (max_threshold is not None) and (max_threshold < max_lenn) else max_lenn
+        min_len = min_threshold if (min_threshold is not None) and (min_lenn < min_threshold) else min_lenn
+        filtered = []
+
+        if (max_len < max_lenn) and (min_len > min_lenn):
+            for entry in data_array:
+                if min_len <= entry <= max_len:
+                    filtered.append(entry)
+        elif max_len < max_lenn:
+            for entry in data_array:
+                if entry <= max_len:
+                    filtered.append(entry)
+        elif min_len > min_lenn:
+            for entry in data_array:
+                if min_len <= entry:
+                    filtered.append(entry)
+        else:
+            filtered = data_array
+        if not subplot:
+            figure = plt.figure(1, figsize=(6, 6))
+            subplott = plt.subplot(1, 1, 1)
+
+        if number_of_bins:
+            bins = number_of_bins
+        elif width_of_bins:
+            bins = np.arange(min_len, max_len, width_of_bins)
+            #print bins
+            #bins[0] += 1
+            bins = np.append(bins, [max_len])
+        else:
+            bins = 30
+
+        n, bins, patches = plt.hist(filtered, bins=bins)
+
+        bin_centers = (bins + ((bins[1] - bins[0])/2))[:-1]
+        #print bin_centers
+        #print len(n)
+        #print len(bin_centers)
+
+        plt.xlim(xmin=min_len, xmax=max_len)
+        if xlabel:
+            plt.xlabel(xlabel)
+        if ylabel:
+            plt.ylabel(ylabel)
+        if title:
+            plt.title(title)
+        if suptitle:
+            plt.suptitle(suptitle)
+
+        if ylogbase:
+            subplot.set_yscale('log', basey=ylogbase)
+
+        if output_prefix:
+            for ext in extensions:
+                plt.savefig("%s.%s" % (output_prefix, ext))
+
+                # save histo values
+                np.savetxt("%s.histo" % output_prefix, zip(bin_centers, n), fmt="%i\t%i")
+
+        return zip(bin_centers, n)
+
+    def draw_tetra_histrogram_picture(self, data_array1, data_array2, data_array3=None, data_array4=None,
+                                      figsize=(10, 10), number_of_bins=None, width_of_bins=None,
+                                      max_threshold=None, min_threshold=None, xlabel1=None, xlabel2=None, xlabel3=None,
+                                      xlabel4=None, ylabel1=None, ylabel2=None, ylabel3=None, ylabel4=None,
+                                      title1=None, title2=None, title3=None, title4=None, ylogbase1=None, ylogbase2=None,
+                                      ylogbase3=None, ylogbase4=None,
+                                      extensions=("png",), suptitle=None):
+        figure = plt.figure(1, figsize=figsize)
+
+    def draw_multi_histogram_picture(self, list_of_data_arrays, subplot_tuple, output_prefix=None,
+                                     figsize=(10, 10), number_of_bins_list=None, width_of_bins_list=None,
+                                     max_threshold_list=None, min_threshold_list=None, xlabel_list=None, ylabel_list=None,
+                                     title_list=None, ylogbase_list=None, label_list=None,
+                                     extensions=("png",), suptitle=None):
+        figure = plt.figure(1, figsize=figsize)
+        if suptitle:
+            plt.suptitle(suptitle)
+        if len(subplot_tuple) != 2:
+            raise ValueError("Subplot tuple should contain exactly two values, not %i!" % len(subplot_tuple))
+        if not (isinstance(subplot_tuple[0], int) and isinstance(subplot_tuple, int)):
+            raise ValueError("Subplot tuple should contain two values, not (%s, %s)!" % (str(type(subplot_tuple[0])),
+                                                                                         str(type(subplot_tuple[1]))))
+
+        number_of_subplots = subplot_tuple[0] * subplot_tuple[1]
+        number_of_datasets = len(list_of_data_arrays)
+
+        parameters_list = [number_of_bins_list, width_of_bins_list, max_threshold_list, min_threshold_list,
+                           xlabel_list, ylabel_list, title_list, ylogbase_list, label_list]
+
+        for dataset_index in range(0, number_of_datasets):
+            parameters = [None, None, None, None, None, None, None, None, None]
+            for parameter_index in range(0, 9):
+                if parameters_list[parameter_index]:
+                    if dataset_index < len(parameters_list[parameter_index]):
+                        parameters[parameter_index] = parameters_list[parameter_index][dataset_index]
+
+            subplot = plt.subplot(subplot_tuple[0], subplot_tuple[2], dataset_index)
+            histo = self.draw_histogram(list_of_data_arrays[dataset_index],  number_of_bins=parameters[0],
+                                        width_of_bins=parameters[1], max_threshold=parameters[2],
+                                        min_threshold=parameters[3], xlabel=parameters[4], ylabel=parameters[5],
+                                        title=parameters[6], extensions=("png",), ylogbase=parameters[7], subplot=subplot,
+                                        suptitle=None)
+            if output_prefix:
+                output_histo_file = "%s.%s.%shisto" % (output_prefix,
+                                                       dataset_index if parameters[8] is None else parameters[9],
+                                                       ("log%i." % parameters[7]) if parameters[7] else "")
+                np.savetxt(output_histo_file, histo, fmt="%i\t%i")
+
+        if output_prefix:
+            for ext in extensions:
+                plt.savefig("%s.%s" % (output_prefix, ext))
+
+        return figure
+
+    def draw_tetra_histogram_with_two_logscaled(self, list_of_data_arrays,  output_prefix=None,
+                                                figsize=(10, 10), number_of_bins_list=None, width_of_bins_list=None,
+                                                max_threshold_list=None, min_threshold_list=None, xlabel=None, ylabel=None,
+                                                title_list=None, logbase=10, label_list=None,
+                                                extensions=("png",), suptitle=None):
+        subplot_tuple = (2, 2)
+
+        list_of_data = [list_of_data_arrays[0], list_of_data_arrays[1],
+                        list_of_data_arrays[0], list_of_data_arrays[1]]
+        number_of_bins_listtt = [number_of_bins_list[0], number_of_bins_list[1],
+                                 number_of_bins_list[0], number_of_bins_list[1]]
+        width_of_bins_listtt = [width_of_bins_list[0], width_of_bins_list[1],
+                                width_of_bins_list[0], width_of_bins_list[1]]
+        max_threshold_listtt = [max_threshold_list[0], max_threshold_list[1],
+                                max_threshold_list[0], max_threshold_list[1]]
+
+        min_threshold_listtt = [min_threshold_list[0], min_threshold_list[1],
+                                min_threshold_list[0], min_threshold_list[1]]
+        title_listtt = [title_list[0], title_list[1],
+                        "%s\n, logscaled" % title_list[0], "%s\n, logscaled" % title_list[1]]
+
+        ylogbase_list = [None, None, logbase, logbase]
+        xlabel_list = [None, None, xlabel, xlabel]
+        ylabel_list = [ylabel, None, ylabel, None]
+        self.draw_multi_histogram_picture(list_of_data, subplot_tuple, output_prefix=output_prefix,
+                                          figsize=figsize, number_of_bins_list=number_of_bins_listtt,
+                                          width_of_bins_list=width_of_bins_listtt,
+                                          max_threshold_list=max_threshold_listtt,
+                                          min_threshold_list=min_threshold_listtt, xlabel_list=xlabel_list, ylabel_list=ylabel_list,
+                                          title_list=title_listtt, ylogbase_list=ylogbase_list, label_list=None,
+                                          extensions=extensions, suptitle=suptitle)
+
+    def draw_tetra_histogram_with_two_logscaled_from_file(self, list_of_files,  output_prefix,
+                                                          figsize=(10, 10), number_of_bins_list=None, width_of_bins_list=None,
+                                                          max_threshold_list=None, min_threshold_list=None, xlabel=None, ylabel=None,
+                                                          title_list=None, logbase=10, label_list=None,
+                                                          extensions=("png",), suptitle=None, separator="\n"):
+        list_of_data = [np.fromfile(filename, sep=separator) for filename in list_of_files]
+        self.draw_tetra_histogram_with_two_logscaled(list_of_data,  output_prefix=output_prefix,
+                                                     figsize=figsize, number_of_bins_list=number_of_bins_list,
+                                                     width_of_bins_list=width_of_bins_list,
+                                                     max_threshold_list=max_threshold_list,
+                                                     min_threshold_list=min_threshold_list, xlabel=xlabel,
+                                                     ylabel=ylabel, title_list=title_list, logbase=logbase,
+                                                     label_list=label_list, extensions=extensions, suptitle=suptitle)
+
+    @staticmethod
+    def draw_histogram_from_file(input_file, output_prefix, number_of_bins=None, width_of_bins=None,
+                                 separator="\n", max_length=None, min_length=1, xlabel=None, ylabel=None,
+                                 title=None, extensions=("png",), logbase=10):
         if (number_of_bins is not None) and (width_of_bins is not None):
             raise AttributeError("Options -w/--width_of_bins and -b/--number_of_bins mustn't be set simultaneously")
 
@@ -290,3 +464,5 @@ class MatplotlibRoutines:
 
         # save histo values
         np.savetxt("%s.histo" % output_prefix, zip(bin_centers, n), fmt="%i\t%i")
+
+

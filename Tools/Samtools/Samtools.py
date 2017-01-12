@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from Tools.Abstract import Tool
-
+from Routines import DrawingRoutines
 
 class SamtoolsV1(Tool):
     """
@@ -111,7 +111,61 @@ class SamtoolsV1(Tool):
 
         options = " %s" % bam_file
 
-        self.execute(options, cmd="samtools index")
+        self.execute(options=options, cmd="samtools index")
+
+    def sam2bam(self, input_sam, output_bam):
+
+        options = " -bh"
+        options += " -o %s" % output_bam
+        options += " %s" % input_sam
+
+        self.execute(options=options, cmd="samtools view")
+
+    def convert_sam_and_index(self, input_sam, output_bam):
+
+        self.sam2bam(input_sam, output_bam)
+        self.index(output_bam)
+
+    def get_insert_sizes(self, input_sam, output_len_file, concordant_only=False):
+
+        flags_for_filtration = self.bam_flags["supplementary_alignment"]
+        flags_for_filtration += self.bam_flags["not_primary_alignment"]
+        flags_for_filtration += self.bam_flags["read_unmapped"]
+        flags_for_filtration += self.bam_flags["mate_unmapped"]
+        flags_for_filtration += self.self.bam_flags["read_mapped_in_proper_pair"] if concordant_only else 0
+
+        samtools_options = " -F %i" % flags_for_filtration
+        samtools_options += " %s" % input_sam
+
+        samtools_string = "samtools view %s" % samtools_options
+        awk_string = "awk -F'\\t' '{ if ($9 > 0) print $9}' > %s" % output_len_file
+        cmd = "%s | %s" % (samtools_string, awk_string)
+
+        self.execute(cmd=cmd)
+
+    def draw_insert_size_distribution(self, input_sam, output_prefix, width_of_bin=5, max_insert_size=1200,
+                                      min_insert_size=0, extensions=("png",), separator="\n", logbase=10):
+
+        output_concordant_file = "%s.concordant.len"
+        output_all_file = "%s.all.len"
+
+        self.get_insert_sizes(input_sam, output_concordant_file, concordant_only=True)
+        self.get_insert_sizes(input_sam, output_all_file, concordant_only=False)
+
+        DrawingRoutines.MatplotlibRoutines.draw_tetra_histogram_with_two_logscaled_from_file([output_concordant_file, output_all_file],
+                                                                                             output_prefix, figsize=(10, 10),
+                                                                                             number_of_bins_list=None,
+                                                                                             width_of_bins_list=[width_of_bin, width_of_bin],
+                                                                                             max_threshold_list=[max_insert_size, max_insert_size],
+                                                                                             min_threshold_list=[min_insert_size, min_insert_size],
+                                                                                             xlabel="Insert size",
+                                                                                             ylabel="Number of fragments",
+                                                                                             title_list=["Concordant pairs", "Discordant_pairs"],
+                                                                                             logbase=logbase,
+                                                                                             label_list=None,
+                                                                                             extensions=extensions,
+                                                                                             suptitle="Insert size distribution",
+                                                                                             separator=separator)
 
 
 class SamtoolsV0(SamtoolsV1, Tool):
