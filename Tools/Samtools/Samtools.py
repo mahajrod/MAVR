@@ -126,32 +126,49 @@ class SamtoolsV1(Tool):
         self.sam2bam(input_sam, output_bam)
         self.index(output_bam)
 
-    def get_insert_sizes(self, input_sam, output_len_file, concordant_only=False):
+    def get_insert_sizes(self, input_sam, output_prefix):
 
-        flags_for_filtration = self.bam_flags["supplementary_alignment"]
-        flags_for_filtration += self.bam_flags["not_primary_alignment"]
-        flags_for_filtration += self.bam_flags["read_unmapped"]
-        flags_for_filtration += self.bam_flags["mate_unmapped"]
-        flags_for_filtration += self.bam_flags["read_mapped_in_proper_pair"] if concordant_only else 0
+        output_concordant_only = "%s.concordant.len" % output_prefix
+        output_discordant_only = "%s.discordant.len" % output_prefix
+        output_all = "%s.all.len" % output_prefix
 
-        samtools_options = " -F %i" % flags_for_filtration
-        samtools_options += " %s" % input_sam
+        common_flags_for_filtering_out = self.bam_flags["supplementary_alignment"]
+        common_flags_for_filtering_out += self.bam_flags["not_primary_alignment"]
+        common_flags_for_filtering_out += self.bam_flags["read_unmapped"]
+        common_flags_for_filtering_out += self.bam_flags["mate_unmapped"]
 
-        samtools_string = "samtools view %s" % samtools_options
-        awk_string = "awk -F'\\t' '{ if ($9 > 0) print $9}' > %s" % output_len_file
-        cmd = "%s | %s" % (samtools_string, awk_string)
+        flags_for_discordant_only = common_flags_for_filtering_out + self.bam_flags["read_mapped_in_proper_pair"]
 
-        self.execute(cmd=cmd)
+        samtools_options_for_discordant_only = " -F %i" % flags_for_discordant_only
+        samtools_options_for_discordant_only += " %s" % input_sam
+
+        samtools_options_for_concordant_only = " -F %i" % common_flags_for_filtering_out
+        samtools_options_for_concordant_only += " -f %i" % self.bam_flags["read_mapped_in_proper_pair"]
+        samtools_options_for_concordant_only += " %s" % input_sam
+
+        samtools_string_for_discordant_only = "samtools view %s" % samtools_options_for_discordant_only
+        samtools_string_for_concordant_only = "samtools view %s" % samtools_options_for_concordant_only
+
+        awk_string = "awk -F'\\t' '{ if ($9 > 0) print $9}'"
+        cmd_discordant_only = "%s | %s > %s" % (samtools_string_for_discordant_only, awk_string, output_discordant_only)
+        cmd_concordant_only = "%s | %s > %s" % (samtools_string_for_concordant_only, awk_string, output_discordant_only)
+        print(cmd_discordant_only)
+        print(cmd_concordant_only)
+
+        self.parallel_execute(options_list=[cmd_concordant_only, cmd_discordant_only], cmd="", threads=2,)
+
+        cat_cmd = "cat %s %s > %s" % (output_discordant_only, output_concordant_only, output_all)
+        self.execute(cmd=cat_cmd)
 
     def draw_insert_size_distribution(self, input_sam, output_prefix, width_of_bin=5, max_insert_size=1200,
                                       min_insert_size=0, extensions=("png",), separator="\n", logbase=10):
 
-        output_concordant_file = "%s.concordant.len" % output_prefix
+        output_concordant_only_file = "%s.concordant.len" % output_prefix
+        output_discordant_only_file = "%s.discordant.len" % output_prefix
         output_all_file = "%s.all.len" % output_prefix
 
-        self.get_insert_sizes(input_sam, output_concordant_file, concordant_only=True)
-        self.get_insert_sizes(input_sam, output_all_file, concordant_only=False)
-
+        self.get_insert_sizes(input_sam, output_prefix)
+        """
         DrawingRoutines.draw_tetra_histogram_with_two_logscaled_from_file([output_concordant_file, output_all_file],
                                                                           output_prefix, figsize=(10, 10),
                                                                           number_of_bins_list=None,
@@ -166,7 +183,31 @@ class SamtoolsV1(Tool):
                                                                           extensions=extensions,
                                                                           suptitle="Insert size distribution",
                                                                           separator=separator)
-
+        """
+        DrawingRoutines.draw_hexa_histogram_with_two_logscaled_from_file([output_concordant_only_file,
+                                                                          output_discordant_only_file,
+                                                                          output_all_file],
+                                                                         output_prefix, figsize=(10, 15),
+                                                                         number_of_bins_list=None,
+                                                                         width_of_bins_list=[width_of_bin,
+                                                                                             width_of_bin,
+                                                                                             width_of_bin],
+                                                                         max_threshold_list=[max_insert_size,
+                                                                                             max_insert_size,
+                                                                                             max_insert_size],
+                                                                         min_threshold_list=[min_insert_size,
+                                                                                             min_insert_size,
+                                                                                             min_insert_size],
+                                                                         xlabel="Insert size",
+                                                                         ylabel="Number of fragments",
+                                                                         title_list=["Concordant pairs",
+                                                                                     "Discordant pairs",
+                                                                                     "All pairs"],
+                                                                         logbase=logbase,
+                                                                         label_list=None,
+                                                                         extensions=extensions,
+                                                                         suptitle="Insert size distribution",
+                                                                         separator=separator)
 
 class SamtoolsV0(SamtoolsV1, Tool):
     """

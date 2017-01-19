@@ -290,15 +290,6 @@ class MatplotlibRoutines:
 
         return zip(bin_centers, n)
 
-    def draw_tetra_histrogram_picture(self, data_array1, data_array2, data_array3=None, data_array4=None,
-                                      figsize=(10, 10), number_of_bins=None, width_of_bins=None,
-                                      max_threshold=None, min_threshold=None, xlabel1=None, xlabel2=None, xlabel3=None,
-                                      xlabel4=None, ylabel1=None, ylabel2=None, ylabel3=None, ylabel4=None,
-                                      title1=None, title2=None, title3=None, title4=None, ylogbase1=None, ylogbase2=None,
-                                      ylogbase3=None, ylogbase4=None,
-                                      extensions=("png",), suptitle=None):
-        figure = plt.figure(1, figsize=figsize)
-
     def draw_multi_histogram_picture(self, list_of_data_arrays, subplot_tuple, output_prefix=None,
                                      figsize=(10, 10), number_of_bins_list=None, width_of_bins_list=None,
                                      max_threshold_list=None, min_threshold_list=None, xlabel_list=None, ylabel_list=None,
@@ -378,6 +369,40 @@ class MatplotlibRoutines:
                                           title_list=title_listtt, ylogbase_list=ylogbase_list, label_list=None,
                                           extensions=extensions, suptitle=suptitle)
 
+    def draw_hexa_histogram_with_two_logscaled(self, list_of_data_arrays,  output_prefix=None,
+                                                figsize=(10, 15), number_of_bins_list=None, width_of_bins_list=None,
+                                                max_threshold_list=None, min_threshold_list=None, xlabel=None, ylabel=None,
+                                                title_list=None, logbase=10, label_list=None,
+                                                extensions=("png",), suptitle=None):
+        subplot_tuple = (3, 2)
+
+        none_list = [None, None, None, None, None, None]
+
+        list_of_data = [list_of_data_arrays[0], list_of_data_arrays[1], list_of_data_arrays[2],
+                        list_of_data_arrays[0], list_of_data_arrays[1], list_of_data_arrays[2]]
+        number_of_bins_listtt = [number_of_bins_list[0], number_of_bins_list[1], number_of_bins_list[2],
+                                 number_of_bins_list[0], number_of_bins_list[1], number_of_bins_list[2]] if number_of_bins_list else none_list
+        width_of_bins_listtt = [width_of_bins_list[0], width_of_bins_list[1], width_of_bins_list[2],
+                                width_of_bins_list[0], width_of_bins_list[1], width_of_bins_list[2]] if width_of_bins_list else none_list
+        max_threshold_listtt = [max_threshold_list[0], max_threshold_list[1], max_threshold_list[2],
+                                max_threshold_list[0], max_threshold_list[1], max_threshold_list[2]] if max_threshold_list else none_list
+
+        min_threshold_listtt = [min_threshold_list[0], min_threshold_list[1], min_threshold_list[2],
+                                min_threshold_list[0], min_threshold_list[1], min_threshold_list[2]] if min_threshold_list else none_list
+        title_listtt = [title_list[0], title_list[1], title_list[2],
+                        "%s, logscaled" % title_list[0], "%s, logscaled" % title_list[1], "%s, logscaled" % title_list[2]] if title_list else none_list
+
+        ylogbase_list = [None, None, None, logbase, logbase, logbase]
+        xlabel_list = [None, None, None, xlabel, xlabel, xlabel]
+        ylabel_list = [ylabel, None, None, ylabel, None, None]
+        self.draw_multi_histogram_picture(list_of_data, subplot_tuple, output_prefix=output_prefix,
+                                          figsize=figsize, number_of_bins_list=number_of_bins_listtt,
+                                          width_of_bins_list=width_of_bins_listtt,
+                                          max_threshold_list=max_threshold_listtt,
+                                          min_threshold_list=min_threshold_listtt, xlabel_list=xlabel_list, ylabel_list=ylabel_list,
+                                          title_list=title_listtt, ylogbase_list=ylogbase_list, label_list=None,
+                                          extensions=extensions, suptitle=suptitle)
+
     def draw_tetra_histogram_with_two_logscaled_from_file(self, list_of_files,  output_prefix,
                                                           figsize=(10, 10), number_of_bins_list=None, width_of_bins_list=None,
                                                           max_threshold_list=None, min_threshold_list=None, xlabel=None, ylabel=None,
@@ -385,6 +410,21 @@ class MatplotlibRoutines:
                                                           extensions=("png",), suptitle=None, separator="\n"):
         list_of_data = [np.fromfile(filename, sep=separator) for filename in list_of_files]
         self.draw_tetra_histogram_with_two_logscaled(list_of_data,  output_prefix=output_prefix,
+                                                     figsize=figsize, number_of_bins_list=number_of_bins_list,
+                                                     width_of_bins_list=width_of_bins_list,
+                                                     max_threshold_list=max_threshold_list,
+                                                     min_threshold_list=min_threshold_list, xlabel=xlabel,
+                                                     ylabel=ylabel, title_list=title_list, logbase=logbase,
+                                                     label_list=label_list, extensions=extensions, suptitle=suptitle)
+
+    def draw_hexa_histogram_with_two_logscaled_from_file(self, list_of_files,  output_prefix,
+                                                         figsize=(10, 15), number_of_bins_list=None, width_of_bins_list=None,
+                                                         max_threshold_list=None, min_threshold_list=None, xlabel=None, ylabel=None,
+                                                         title_list=None, logbase=10, label_list=None,
+                                                         extensions=("png",), suptitle=None, separator="\n"):
+
+        list_of_data = [np.fromfile(filename, sep=separator) for filename in list_of_files]
+        self.draw_hexa_histogram_with_two_logscaled(list_of_data,  output_prefix=output_prefix,
                                                      figsize=figsize, number_of_bins_list=number_of_bins_list,
                                                      width_of_bins_list=width_of_bins_list,
                                                      max_threshold_list=max_threshold_list,
