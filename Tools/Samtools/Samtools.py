@@ -151,7 +151,7 @@ class SamtoolsV1(Tool):
 
         awk_string = "awk -F'\\t' '{ if ($9 > 0) print $9}'"
         cmd_discordant_only = "%s | %s > %s" % (samtools_string_for_discordant_only, awk_string, output_discordant_only)
-        cmd_concordant_only = "%s | %s > %s" % (samtools_string_for_concordant_only, awk_string, output_discordant_only)
+        cmd_concordant_only = "%s | %s > %s" % (samtools_string_for_concordant_only, awk_string, output_concordant_only)
         print(cmd_discordant_only)
         print(cmd_concordant_only)
 
