@@ -1261,10 +1261,9 @@ class SequenceRoutines(FileRoutines):
         Ns_number = 0
         for contig_id in record_dict:
             Ns_number += record_dict[contig_id].seq.count("N") + record_dict[contig_id].seq.count("n")
-        
+
         for record in record_dict:
-            if len(record_dict[record].seq) == 0:
-                print record
+            print "%s\t%i" % (record, len(record_dict[record].seq))
 
         length_array = np.array(sorted([len(record_dict[record].seq) for record in record_dict], reverse=True))
         if seq_len_file:

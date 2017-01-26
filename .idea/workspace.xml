@@ -121,8 +121,8 @@
       <file leaf-file-name="Sequence.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4826923" vertical-offset="22357" max-vertical-offset="31878">
-              <caret line="1276" column="26" selection-start-line="1276" selection-start-column="26" selection-end-line="1276" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.24038461" vertical-offset="22249" max-vertical-offset="31932">
+              <caret line="1263" column="0" selection-start-line="1263" selection-start-column="0" selection-end-line="1263" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -772,18 +772,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-01041" summary="changes">
-      <created>1482418741350</created>
-      <option name="number" value="01041" />
-      <option name="project" value="LOCAL" />
-      <updated>1482418741350</updated>
-    </task>
-    <task id="LOCAL-01042" summary="changes">
-      <created>1482419135724</created>
-      <option name="number" value="01042" />
-      <option name="project" value="LOCAL" />
-      <updated>1482419135725</updated>
-    </task>
     <task id="LOCAL-01043" summary="changes">
       <created>1482844200174</created>
       <option name="number" value="01043" />
@@ -1066,7 +1054,19 @@
       <option name="project" value="LOCAL" />
       <updated>1485398497055</updated>
     </task>
-    <option name="localTasksCounter" value="1090" />
+    <task id="LOCAL-01090" summary="changes">
+      <created>1485398620739</created>
+      <option name="number" value="01090" />
+      <option name="project" value="LOCAL" />
+      <updated>1485398620739</updated>
+    </task>
+    <task id="LOCAL-01091" summary="changes">
+      <created>1485399011797</created>
+      <option name="number" value="01091" />
+      <option name="project" value="LOCAL" />
+      <updated>1485399011797</updated>
+    </task>
+    <option name="localTasksCounter" value="1092" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1099,9 +1099,9 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1487669" sideWeight="0.8660714" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21638823" sideWeight="0.5964286" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1487669" sideWeight="0.13392857" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21638823" sideWeight="0.40357143" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15022762" sideWeight="0.50237215" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.013615734" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1617,8 +1617,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4826923" vertical-offset="22357" max-vertical-offset="31878">
-          <caret line="1276" column="26" selection-start-line="1276" selection-start-column="26" selection-end-line="1276" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.24038461" vertical-offset="22249" max-vertical-offset="31950">
+          <caret line="1263" column="0" selection-start-line="1263" selection-start-column="0" selection-end-line="1263" selection-end-column="0" />
           <folding />
         </state>
       </provider>
