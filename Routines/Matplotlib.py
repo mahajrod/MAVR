@@ -7,6 +7,7 @@ import matplotlib
 matplotlib.use('Agg')
 os.environ['MPLCONFIGDIR'] = '/tmp/'
 import matplotlib.pyplot as plt
+plt.ioff()
 from matplotlib.transforms import Bbox, TransformedBbox, blended_transform_factory
 from mpl_toolkits.axes_grid1.inset_locator import BboxPatch, BboxConnector, BboxConnectorPatch
 from matplotlib.lines import Line2D

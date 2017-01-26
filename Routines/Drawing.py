@@ -7,6 +7,7 @@ matplotlib.use('Agg')
 os.environ['MPLCONFIGDIR'] = '/tmp/'
 
 import matplotlib.pyplot as plt
+plt.ioff()
 from matplotlib.patches import Rectangle
 from matplotlib import text
 from BCBio import GFF
