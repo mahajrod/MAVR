@@ -1261,6 +1261,10 @@ class SequenceRoutines(FileRoutines):
         Ns_number = 0
         for contig_id in record_dict:
             Ns_number += record_dict[contig_id].seq.count("N") + record_dict[contig_id].seq.count("n")
+        
+        for record in record_dict:
+            if len(record_dict[record].seq) == 0:
+                print record
 
         length_array = np.array(sorted([len(record_dict[record].seq) for record in record_dict], reverse=True))
         if seq_len_file:
@@ -1276,7 +1280,7 @@ class SequenceRoutines(FileRoutines):
 
         print length_array
         for contig_len in length_array:
-            print contig_len
+            #print contig_len
             len_power = int(math.log10(contig_len))
             contig_cumulative_length_values[len_power] += contig_len
             contig_number_values[len_power] += 1
