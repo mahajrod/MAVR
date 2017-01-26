@@ -1274,6 +1274,7 @@ class SequenceRoutines(FileRoutines):
         contig_cumulative_length_values = [0 for i in range(0, right_bin)]
         contig_number_values = [0 for i in range(0, right_bin)]
 
+        print length_array
         for contig_len in length_array:
             print contig_len
             len_power = int(math.log10(contig_len))
