@@ -226,9 +226,9 @@ class FileRoutines:
         sample_dir = "%s/%s/" % (samples_directory, sample)
         filetypes, forward_files, reverse_files = self.make_lists_forward_and_reverse_files(sample_dir)
         if len(filetypes) == 1:
-            if "fq.gz" in filetypes:
+            if ("fq.gz" in filetypes) or ("fastq.gz" in filetypes):
                 command = "zcat"
-            elif "fq.bz2" in filetypes:
+            elif ("fq.bz2" in filetypes) or ("fastq.bz2" in filetypes):
                 command = "bzcat"
             else:
                 command = "cat"
