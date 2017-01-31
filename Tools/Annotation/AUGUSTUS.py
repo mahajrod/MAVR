@@ -547,7 +547,7 @@ class AUGUSTUS(Tool):
         cds_syn_dict.write(cds_syn_file)
 
     @staticmethod
-    def convert_star_junctions_to_intron_hints(star_junction_file, output_hint_gff, min_supporting_reads=1,
+    def convert_star_junctions_to_intron_hints(star_junction_file, output_hint_gff, min_supporting_uniquely_mapped_reads=1,
                                                source="RNASEQ", priority=100):
         with open(star_junction_file, "r") as in_fd:
             with open(output_hint_gff, "w") as out_fd:
@@ -558,7 +558,7 @@ class AUGUSTUS(Tool):
                     intron_end = line_list[2]
                     strand = line_list[3]
                     mult = line_list[6]
-                    if int(mult) < min_supporting_reads:
+                    if int(mult) < min_supporting_uniquely_mapped_reads:
                         continue
                     # strand of intron will be detected automatically by AUGUSTUS
                     out_fd.write("%s\tSTAR\tintron\t%s\t%s\t0\t.\t.\tmult=%s;src=%s;pri=%i\n" % (chrom, intron_start,
