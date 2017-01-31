@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" afterPath="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/prepare_intron_hints_from_STAR_junction_file.py" afterPath="$PROJECT_DIR$/scripts/annotation/prepare_intron_hints_from_STAR_junction_file.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/SOURCES.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/SOURCES.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/entrez/get_taxonomy.py" afterPath="$PROJECT_DIR$/scripts/entrez/get_taxonomy.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" afterPath="$PROJECT_DIR$/MAVR.egg-info/top_level.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -41,26 +42,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="gather_general_statistics.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/projects/RG/scripts/gather_general_statistics.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1062" max-vertical-offset="1926">
-              <caret line="59" column="19" selection-start-line="59" selection-start-column="19" selection-end-line="59" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Abstract.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="826" max-vertical-offset="2142">
-              <caret line="62" column="40" selection-start-line="62" selection-start-column="37" selection-end-line="62" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="star_htseq.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/transcriptome/differential_expression/star_htseq.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -71,10 +52,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="prepare_intron_hints_from_STAR_junction_file.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="prepare_intron_hints_from_STAR_junction_file.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/annotation/prepare_intron_hints_from_STAR_junction_file.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.31539425" vertical-offset="0" max-vertical-offset="799">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="522">
               <caret line="17" column="59" selection-start-line="17" selection-start-column="59" selection-end-line="17" selection-end-column="59" />
               <folding />
             </state>
@@ -84,8 +65,48 @@
       <file leaf-file-name="AUGUSTUS.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="9533" max-vertical-offset="10332">
-              <caret line="560" column="71" selection-start-line="560" selection-start-column="71" selection-end-line="560" selection-end-column="71" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="5525" max-vertical-offset="10332">
+              <caret line="349" column="113" selection-start-line="349" selection-start-column="15" selection-end-line="349" selection-end-column="113" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="parallel_augustus_correct_errors.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/parallel_augustus_correct_errors.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="695" max-vertical-offset="4896">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gff_examine.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/gff_examine.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1800">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="parallel_augustus.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_augustus.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="4097" max-vertical-offset="4896">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="get_taxonomy.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/entrez/get_taxonomy.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5320197" vertical-offset="0" max-vertical-offset="1026">
+              <caret line="24" column="62" selection-start-line="24" selection-start-column="62" selection-end-line="24" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -101,41 +122,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="filtering_pipeline.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/filter/filtering_pipeline.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="362" max-vertical-offset="1584">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Filtering.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Pipelines/Filtering.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1100" max-vertical-offset="3132">
-              <caret line="89" column="26" selection-start-line="89" selection-start-column="26" selection-end-line="89" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="File.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Routines/File.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="3831" max-vertical-offset="8712">
               <caret line="228" column="49" selection-start-line="228" selection-start-column="49" selection-end-line="228" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Abstract.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Pipelines/Abstract.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="396">
-              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -157,8 +148,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Routines/NCBI.py" />
-        <option value="$PROJECT_DIR$/scripts/entrez/count_assemblies_from_genome_summaries.sh" />
         <option value="$PROJECT_DIR$/scripts/annotation/ensembl/correct_ensembl_genbank_files.sh" />
         <option value="$PROJECT_DIR$/scripts/sequence/get_protein_marking_by_exons_from_genbank.py" />
         <option value="$PROJECT_DIR$/Tools/Annotation/Exonerate.py" />
@@ -208,6 +197,8 @@
         <option value="$PROJECT_DIR$/scripts/transcriptome/align_by_star.py" />
         <option value="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" />
         <option value="$PROJECT_DIR$/scripts/annotation/prepare_intron_hints_from_STAR_junction_file.py" />
+        <option value="$PROJECT_DIR$/scripts/antibodies/c" />
+        <option value="$PROJECT_DIR$/scripts/entrez/get_taxonomy.py" />
       </list>
     </option>
   </component>
@@ -290,73 +281,47 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="transcriptome" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="transcriptome" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="differential_expression" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="transcriptome" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="annotation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="repeats" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="str" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="entrez" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="antibodies" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -753,12 +718,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-01047" summary="changes">
-      <created>1482855348561</created>
-      <option name="number" value="01047" />
-      <option name="project" value="LOCAL" />
-      <updated>1482855348561</updated>
-    </task>
     <task id="LOCAL-01048" summary="changes">
       <created>1483530259086</created>
       <option name="number" value="01048" />
@@ -1047,7 +1006,13 @@
       <option name="project" value="LOCAL" />
       <updated>1485864327251</updated>
     </task>
-    <option name="localTasksCounter" value="1096" />
+    <task id="LOCAL-01096" summary="changes">
+      <created>1485864622110</created>
+      <option name="number" value="01096" />
+      <option name="project" value="LOCAL" />
+      <updated>1485864622111</updated>
+    </task>
+    <option name="localTasksCounter" value="1097" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1080,9 +1045,9 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17080909" sideWeight="0.8676996" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31835008" sideWeight="0.8676996" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17080909" sideWeight="0.13230036" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31835008" sideWeight="0.13230036" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.10171306" sideWeight="0.50277996" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.013615734" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1230,41 +1195,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/sequence/extract_terminal_sequences.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8544474" vertical-offset="0" max-vertical-offset="0">
-          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/sequence/extract_groups_of_sequences.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.2425876" vertical-offset="0" max-vertical-offset="0">
-          <caret line="2" column="9" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/sequence/filter_sequences_by_id_expression.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="37" column="86" selection-start-line="37" selection-start-column="86" selection-end-line="37" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/sequence/count_sequences_in_fasta.bash">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/sequence/find_repeated_ids_in_fasta.bash">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence/leave_only_label.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
@@ -1584,18 +1514,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py">
+    <entry file="file://$PROJECT_DIR$/scripts/annotation/prepare_intron_hints_from_STAR_junction_file.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="9533" max-vertical-offset="10332">
-          <caret line="560" column="71" selection-start-line="560" selection-start-column="71" selection-end-line="560" selection-end-column="71" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="522">
+          <caret line="17" column="59" selection-start-line="17" selection-start-column="59" selection-end-line="17" selection-end-column="59" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/annotation/prepare_intron_hints_from_STAR_junction_file.py">
+    <entry file="file://$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31539425" vertical-offset="0" max-vertical-offset="799">
-          <caret line="17" column="59" selection-start-line="17" selection-start-column="59" selection-end-line="17" selection-end-column="59" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="5525" max-vertical-offset="10332">
+          <caret line="349" column="113" selection-start-line="349" selection-start-column="15" selection-end-line="349" selection-end-column="113" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/gff_examine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1800">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/parallel_augustus_correct_errors.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4896">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_augustus.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4097" max-vertical-offset="4896">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/entrez/get_taxonomy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5320197" vertical-offset="0" max-vertical-offset="1026">
+          <caret line="24" column="62" selection-start-line="24" selection-start-column="62" selection-end-line="24" selection-end-column="62" />
           <folding />
         </state>
       </provider>

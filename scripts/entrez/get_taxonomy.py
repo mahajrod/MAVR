@@ -10,9 +10,9 @@ from Routines import NCBIRoutines
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", "--input_file", action="store", dest="input",
+parser.add_argument("-i", "--input", action="store", dest="input",
                     help="Input file with latin names of taxa (one per line)")
-parser.add_argument("-o", "--output_file", action="store", dest="output_file",
+parser.add_argument("-o", "--output", action="store", dest="output",
                     help="Output file")
 parser.add_argument("-a", "--email", action="store", dest="email", required=True,
                     help="Email used in Entrez queues")
@@ -22,7 +22,7 @@ parser.add_argument("-t", "--input_type", action="store", dest="input_type", def
 
 args = parser.parse_args()
 
-NCBIRoutines.get_taxonomy_from_id_file(args.input_file, args.output_file, args.email, input_type=args.input_type)
+NCBIRoutines.get_taxonomy_from_id_file(args.input, args.output, args.email, input_type=args.input_type)
 
 """
 Entrez.email = args.email

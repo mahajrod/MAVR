@@ -56,6 +56,11 @@ Pipelines/__init__.py
 Pipelines/Expansion/__init__.py
 Pipelines/GenomeAnnotation/ProteinCodingGeneAnnotation.py
 Pipelines/GenomeAnnotation/__init__.py
+Pipelines/GenomeAssembly/Assembly.py
+Pipelines/GenomeAssembly/ContigAssembly.py
+Pipelines/GenomeAssembly/GapClosing.py
+Pipelines/GenomeAssembly/Scaffolding.py
+Pipelines/GenomeAssembly/__init__.py
 Routines/Alignment.py
 Routines/Annotations.py
 Routines/Drawing.py
@@ -189,6 +194,7 @@ scripts/gff_examine.py
 scripts/parallel_augustus_correct_errors.py
 scripts/remove_duplicates_flybase_UTR.py
 scripts/alignment/check_read_pairing_in_name_sorted_bam.sh
+scripts/alignment/draw_insert_size_distribution.py
 scripts/alignment/extract_fastq_from_bam.py
 scripts/alignment/extract_se_from_bam.sh
 scripts/alignment/make_blast_plus_db.py
@@ -235,7 +241,9 @@ scripts/annotation/ncbi/analyze_ncbi_pep.py
 scripts/annotation/ncbi/get_cds_for_proteins.py
 scripts/annotation/rRNA/analyze_barrnap_report.py
 scripts/annotation/rRNA/annotate_rrna_by_barrnap.py
+scripts/antibodies/c
 scripts/antibodies/check_for_bad_antigen_candidates.py
+scripts/assembly/get_insert_size_distribution.py
 scripts/assembly/get_stats_from_assemblies.py
 scripts/blast/blast_all_vs_all.py
 scripts/blast/extract_hits_from_blast_tblout.py
@@ -253,6 +261,7 @@ scripts/draw/draw_histogram.py
 scripts/draw/draw_percent_histogram.py
 scripts/draw/draw_plot.py
 scripts/draw/draw_protein_alignment.py
+scripts/draw/draw_tetra_histogram_with_two_logscaled.py
 scripts/entrez/count_assemblies_from_genome_summaries.sh
 scripts/entrez/get_gene_sequences.py
 scripts/entrez/get_taxa_genomes_summary.py
@@ -343,12 +352,15 @@ scripts/repeat_masking/tandem_repeat_masking.py
 scripts/repeats/str/extract_str_data_from_genbank_file.py
 scripts/sequence/GC_content.py
 scripts/sequence/check_cds_for_stop_codons.py
+scripts/sequence/check_pairing.py
 scripts/sequence/check_proteins_for_stop_codons.py
 scripts/sequence/check_selenocystein_presence.py
 scripts/sequence/compare_sequences.py
 scripts/sequence/convert_sequence_formats.py
+scripts/sequence/count_sequences_in_fasta.bash
 scripts/sequence/count_species.py
 scripts/sequence/extract_groups_of_sequences.py
+scripts/sequence/extract_ids_from_fasta.bash
 scripts/sequence/extract_region.py
 scripts/sequence/extract_sequences_by_gff.py
 scripts/sequence/extract_sequences_by_ids.py
