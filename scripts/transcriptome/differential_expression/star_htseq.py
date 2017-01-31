@@ -94,10 +94,6 @@ parser.add_argument("-c", "--coockiecutter_dir", action="store", dest="coockiecu
                     help="Path to Coockiecutter directory")
 
 """
-
-
-
-
 args = parser.parse_args()
 
 """
@@ -138,4 +134,3 @@ DiffExpressionPipeline.star_and_htseq(args.genome_dir, args.samples_dir, args.ou
                                       feature_type_for_htseq=args.feature_type_for_htseq,
                                       feature_id_attribute_for_htseq=args.feature_id_attribute_for_htseq,
                                       htseq_mode=args.htseq_mode)
-

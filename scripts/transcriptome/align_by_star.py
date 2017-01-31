@@ -24,7 +24,7 @@ parser.add_argument("-f", "--genome_fasta", action="store", dest="genome_fasta",
                     type=os.path.abspath,
                     help="Path to genome fasta file. If set Star will construct genome index first"
                          "in directory set by -g/--genome_dir")
-parser.add_argument("-s", "--samples", action="store", dest="samples",
+parser.add_argument("-s", "--samples", action="store", dest="samples", type=lambda s: s.split(","),
                     help="Comma-separated list of subdirectories(one per sample) to handle. "
                          "If not set all subdirectories will be considered as containing samples")
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=1, type=int,
