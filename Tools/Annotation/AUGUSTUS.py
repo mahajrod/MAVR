@@ -583,6 +583,8 @@ class AUGUSTUS(Tool):
                 cds_support_list.append(cds_support_tmp[0] / cds_support_tmp[0])
 
                 intron_support_tmp = map(float, line_list[4].split("/"))
+                if intron_support_tmp[1] == 0:
+                    continue
                 intron_support_list.append(intron_support_tmp[0] / intron_support_tmp[1])
 
         self.draw_heatmap_and_three_percent_histograms(total_support_list, cds_support_list,
