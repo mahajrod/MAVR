@@ -209,12 +209,17 @@ class DrawingRoutines(MatplotlibRoutines):
 
         subplot = plt.subplot(2, 2, 2)
         print bins
-        counts, xedges, yedges, image = plt.hist2d(second_histo_values, third_histo_values, bins=(bins, bins), range=[[0, 100], [0, 100]])
-        cmap = plt.get_cmap('jet', 100)
+        counts, xedges, yedges, image = plt.hist2d(second_histo_values,
+                                                   third_histo_values,
+                                                   bins=(bins, bins),
+                                                   range=[[0, 100], [0, 100]])
+        max_counts = int(np.nanmax(counts))
+
+        cmap = plt.get_cmap('jet', max_counts)
         #cmap.set_under('gray')
         mappable = plt.cm.ScalarMappable(cmap=cmap)
         mappable.set_array([])
-        mappable.set_clim(0, 100)
+        mappable.set_clim(0, max_counts)
         #mappable.set_array([])
         #mappable.set_clim(-0.5, ncolors+0.5)
         colorbar = plt.colorbar(mappable)
