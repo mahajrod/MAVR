@@ -2,7 +2,7 @@
 import os
 import shutil
 
-from Routines import FileRoutines, SequenceRoutines, MatplotlibRoutines
+from Routines import FileRoutines, SequenceRoutines, MatplotlibRoutines, DrawingRoutines
 from CustomCollections.GeneralCollections import IdList, SynDict
 
 from Tools.Abstract import Tool
@@ -566,7 +566,8 @@ class AUGUSTUS(Tool):
                                                                                                  mult, source,
                                                                                                  priority))
 
-    def draw_evidence_figures(self, evidence_file, output_prefix):
+    @staticmethod
+    def draw_evidence_figures(evidence_file, output_prefix):
 
         total_support_list = []
 
@@ -587,9 +588,9 @@ class AUGUSTUS(Tool):
                     continue
                 intron_support_list.append(intron_support_tmp[0] / intron_support_tmp[1])
 
-        self.draw_heatmap_and_three_percent_histograms(total_support_list, cds_support_list,
-                                                       intron_support_list, output_prefix, figsize=(8, 8),
-                                                       extensions=("png", "svg"))
+        DrawingRoutines.draw_heatmap_and_three_percent_histograms(total_support_list, cds_support_list,
+                                                                  intron_support_list, output_prefix, figsize=(8, 8),
+                                                                  extensions=("png", "svg"))
 
 
 
