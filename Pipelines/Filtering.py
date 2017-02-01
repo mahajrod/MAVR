@@ -47,7 +47,7 @@ class FilteringPipeline(Pipeline):
                average_quality_threshold=15,
                leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
                crop_length=None, head_crop_length=None, min_len=50,
-               base_quality="phred33", read_name_type="illumina", remove_intermediate_files=False):
+               base_quality="phred33", read_name_type="illumina", remove_intermediate_files=False, skip_coockiecutter=False):
 
         Cookiecutter.path = coockiecutter_dir
         Trimmomatic.jar_path = trimmomatic_dir
@@ -89,30 +89,33 @@ class FilteringPipeline(Pipeline):
 
             self.combine_fastq_files(samples_directory, sample, merged_raw_sample_dir)
 
-            Cookiecutter.rm_reads(adapter_fragment_file, merged_forward_reads, coockie_stats,
-                                  right_reads=merged_reverse_reads,
-                                  out_dir=coockie_filtered_sample_dir, use_dust_filter=False,
-                                  dust_cutoff=None, dust_window_size=None, use_N_filter=False,
-                                  read_length_cutoff=None, polyGC_length_cutoff=None)
-            #"""
-            coockiecutter_report = CoockiecutterReport(coockie_stats)
+            if not skip_coockiecutter:
+                Cookiecutter.rm_reads(adapter_fragment_file, merged_forward_reads, coockie_stats,
+                                      right_reads=merged_reverse_reads,
+                                      out_dir=coockie_filtered_sample_dir, use_dust_filter=False,
+                                      dust_cutoff=None, dust_window_size=None, use_N_filter=False,
+                                      read_length_cutoff=None, polyGC_length_cutoff=None)
+                #"""
+                coockiecutter_report = CoockiecutterReport(coockie_stats)
 
-            filtering_statistics[sample]["raw_pairs"] = coockiecutter_report.input_pairs
-            filtering_statistics[sample]["pairs_after_coockiecutter"] = coockiecutter_report.retained_pairs
-            filtering_statistics[sample]["pairs_after_coockiecutter,%"] = float("%.2f" % (float(coockiecutter_report.retained_pairs)/float(coockiecutter_report.input_pairs)*100))
+                filtering_statistics[sample]["raw_pairs"] = coockiecutter_report.input_pairs
+                filtering_statistics[sample]["pairs_after_coockiecutter"] = coockiecutter_report.retained_pairs
+                filtering_statistics[sample]["pairs_after_coockiecutter,%"] = float("%.2f" % (float(coockiecutter_report.retained_pairs)/float(coockiecutter_report.input_pairs)*100))
 
-            os.system("cp %s %s" % (coockie_stats, filtering_stat_sample_dir))
+                os.system("cp %s %s" % (coockie_stats, filtering_stat_sample_dir))
 
-            coockie_filtered_paired_forward_reads = "%s/%s_1.ok.fastq" % (coockie_filtered_sample_dir, sample)
-            coockie_filtered_paired_reverse_reads = "%s/%s_2.ok.fastq" % (coockie_filtered_sample_dir, sample)
+                coockie_filtered_paired_forward_reads = "%s/%s_1.ok.fastq" % (coockie_filtered_sample_dir, sample)
+                coockie_filtered_paired_reverse_reads = "%s/%s_2.ok.fastq" % (coockie_filtered_sample_dir, sample)
+
             # se reads produced by Coockiecutter are ignored now!!
 
             #coockie_trimmomatic_filtered_sample_dir = "%s/%s/" % (coockie_trimmomatic_filtered_dir, sample)
             trimmomatic_output_prefix = "%s/%s" % (coockie_trimmomatic_filtered_sample_dir, sample)
             trimmomatic_log = "%s.trimmomatic.log" % trimmomatic_output_prefix
             #"""
-            Trimmomatic.filter(coockie_filtered_paired_forward_reads, trimmomatic_output_prefix, output_extension="fq",
-                               right_reads=coockie_filtered_paired_reverse_reads,
+            Trimmomatic.filter(merged_forward_reads if skip_coockiecutter else coockie_filtered_paired_forward_reads,
+                               trimmomatic_output_prefix, output_extension="fq",
+                               right_reads=merged_reverse_reads if skip_coockiecutter else coockie_filtered_paired_reverse_reads,
                                adapters_file=trimmomatic_adapter_file,
                                mismatch_number=mismatch_number, pe_reads_score=pe_reads_score,
                                se_read_score=se_read_score,
@@ -125,6 +128,8 @@ class FilteringPipeline(Pipeline):
                                base_quality=base_quality)
             #"""
             trimmomatic_report = TrimmomaticReport(trimmomatic_log)
+            if skip_coockiecutter:
+                filtering_statistics[sample]["raw_pairs"] = trimmomatic_report.stats["input"]
             filtering_statistics[sample]["pairs_after_trimmomatic"] = trimmomatic_report.stats["both_surviving"]
             filtering_statistics[sample]["pairs_after_trimmomatic,%"] = trimmomatic_report.stats["both_surviving,%"]
 
@@ -152,7 +157,7 @@ class FilteringPipeline(Pipeline):
                 filtering_statistics[sample]["pairs_after_facut,%"] = float("%.2f" % (float(facut_report.retained_pairs) / float(facut_report.input_pairs) * 100))
                 filtering_statistics[sample]["retained_pairs_in_worst_tile,%"] = facut_report.minimum_retained_pairs_in_tiles_fraction * 100
 
-                filtering_statistics[sample]["pairs_survived_after_filtration,%"] = float("%.2f" % (float(facut_report.retained_pairs) / coockiecutter_report.input_pairs * 100))
+                filtering_statistics[sample]["pairs_survived_after_filtration,%"] = float("%.2f" % (float(facut_report.retained_pairs) / filtering_statistics[sample]["raw_pairs"] * 100))
 
                 facut_filtered_forward_reads = "%s_1.pe.fq" % facut_output_prefix
                 facut_filtered_reverse_reads = "%s_2.pe.fq" % facut_output_prefix
@@ -163,7 +168,7 @@ class FilteringPipeline(Pipeline):
             else:
                 os.system("ln %s %s" % (coockie_trimmomatic_filtered_paired_forward_reads, final_forward_reads))
                 os.system("ln %s %s" % (coockie_trimmomatic_filtered_paired_reverse_reads, final_reverse_reads))
-                filtering_statistics[sample]["pairs_survived_after_filtration,%"] = float("%.2f" % (float(trimmomatic_report.stats["both_surviving"]) / coockiecutter_report.input_pairs * 100))
+                filtering_statistics[sample]["pairs_survived_after_filtration,%"] = float("%.2f" % (float(trimmomatic_report.stats["both_surviving"]) / filtering_statistics[sample]["raw_pairs"] * 100))
 
             print filtering_statistics.table_form()
 
