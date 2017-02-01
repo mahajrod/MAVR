@@ -3,7 +3,7 @@ __author__ = 'Sergei F. Kliver'
 
 import argparse
 
-from Routines import MatplotlibRoutines
+from Routines import DrawingRoutines
 
 parser = argparse.ArgumentParser()
 
@@ -14,4 +14,4 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
 
 args = parser.parse_args()
 
-MatplotlibRoutines.draw_evidence_figures(args.input, args.output_prefix)
+DrawingRoutines.draw_evidence_figures(args.input, args.output_prefix)
