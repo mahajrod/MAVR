@@ -195,7 +195,7 @@ class DrawingRoutines(MatplotlibRoutines):
 
         plt.figure(1, figsize=figsize)
 
-        for (index, histo_values, title) in zip([1, 3, 4],
+        for (index, histo_values, title) in zip([1, 2, 3],
                                                 [first_histo_values, second_histo_values, third_histo_values],
                                                 ["Total support", "CDS support", "Intron support"]):
             subplot = plt.subplot(2, 2, index)
@@ -207,7 +207,7 @@ class DrawingRoutines(MatplotlibRoutines):
 
         bins = np.linspace(0, 100, 21)
 
-        subplot = plt.subplot(2, 2, 2)
+        subplot = plt.subplot(2, 2, 4)
         print bins
         counts, xedges, yedges, image = plt.hist2d(second_histo_values,
                                                    third_histo_values,
