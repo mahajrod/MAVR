@@ -226,6 +226,6 @@ class DrawingRoutines(MatplotlibRoutines):
         plt.xlabel("CDS support")
         plt.ylabel("Intron support")
         plt.title("Transcript support")
-
+        plt.tight_layout()
         for ext in extensions:
             plt.savefig("%s.%s" % (output_prefix, ext))
