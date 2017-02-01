@@ -594,7 +594,7 @@ class AUGUSTUS(Tool):
         print np.array(cds_support_list)
         print np.array(intron_support_list)
         DrawingRoutines.draw_heatmap_and_three_percent_histograms(total_support_list, cds_support_list,
-                                                                  intron_support_list, output_prefix, figsize=(8, 8),
+                                                                  intron_support_list, output_prefix, figsize=(12, 12),
                                                                   extensions=("png", "svg"))
 
 
