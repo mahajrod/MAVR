@@ -13,7 +13,7 @@ parser.add_argument("-d", "--sample_directory", action="store", dest="samples_di
                     help="Directory with samples")
 parser.add_argument("-x", "--general_stat_file", action="store", dest="general_stat_file", required=True,
                     help="File to write general statistics about filtration")
-parser.add_argument("-s", "--samples", action="store", dest="samples",
+parser.add_argument("-s", "--samples", action="store", dest="samples", type=lambda s: s.split(","),
                     help="Comma-separated list of subdirectories(one per sample) to handle. "
                          "If not set all subdirectories will be considered as containing samples")
 parser.add_argument("-o", "--output_dir", action="store", dest="output_dir",
