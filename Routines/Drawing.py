@@ -187,7 +187,7 @@ class DrawingRoutines(MatplotlibRoutines):
         os.remove("temp.idx")
 
     def draw_heatmap_and_three_percent_histograms(self, first_histo_values, second_histo_values,
-                                                  third_histo_values, output_prefix, figsize=(8, 8),
+                                                  third_histo_values, output_prefix, figsize=(12, 12),
                                                   extensions=("png", "svg")):
         """
         second_histo_values and third_histo_values are used to build heatmap
@@ -210,7 +210,14 @@ class DrawingRoutines(MatplotlibRoutines):
         subplot = plt.subplot(2, 2, 2)
         print bins
         counts, xedges, yedges, image = plt.hist2d(second_histo_values, third_histo_values, bins=(bins, bins), range=[[0, 100], [0, 100]])
-
+        cmap = plt.get_cmap('jet', 100)
+        #cmap.set_under('gray')
+        mappable = plt.cm.ScalarMappable(cmap=cmap)
+        mappable.set_array([])
+        mappable.set_clim(0, 100)
+        #mappable.set_array([])
+        #mappable.set_clim(-0.5, ncolors+0.5)
+        colorbar = plt.colorbar(mappable)
         plt.xlabel("CDS support")
         plt.ylabel("Intron support")
         plt.title("Transcript support")
