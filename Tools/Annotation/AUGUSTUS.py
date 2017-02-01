@@ -582,12 +582,12 @@ class AUGUSTUS(Tool):
                 total_support_list.append(float(line_list[2]))
 
                 cds_support_tmp = map(float, line_list[3].split("/"))
-                cds_support_list.append(cds_support_tmp[0] / cds_support_tmp[1])
+                cds_support_list.append(cds_support_tmp[0] / cds_support_tmp[1] * 100)
 
                 intron_support_tmp = map(float, line_list[4].split("/"))
                 if intron_support_tmp[1] == 0:
                     continue
-                intron_support_list.append(intron_support_tmp[0] / intron_support_tmp[1])
+                intron_support_list.append(intron_support_tmp[0] / intron_support_tmp[1] * 100)
 
         print np.array(total_support_list)
         print np.array(cds_support_list)
