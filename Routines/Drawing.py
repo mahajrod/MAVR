@@ -185,3 +185,35 @@ class DrawingRoutines(MatplotlibRoutines):
             plt.savefig("%s.%s" % (output_prefix, ext))
 
         os.remove("temp.idx")
+
+    def draw_heatmap_and_three_percent_histograms(self, first_histo_values, second_histo_values,
+                                                  third_histo_values, output_prefix, figsize=(8, 8),
+                                                  extensions=("png", "svg")):
+        """
+        second_histo_values and third_histo_values are used to build heatmap
+        """
+
+        plt.figure(1, figsize=figsize)
+
+        for (index, histo_values, title) in zip([1, 3, 4],
+                                                [first_histo_values, second_histo_values, third_histo_values],
+                                                ["Total support", "CDS support", "Intron support"]):
+            subplot = plt.subplot(2, 2, index)
+
+            self.percent_histogram(histo_values, output_prefix=None, n_bins=20, title=title, xlabel="%",
+                                   ylabel="Number of transcripts", label=None, extensions=("png", "svg"),
+                                   legend=None, legend_location="best", input_mode="percent", xmax=None,
+                                   xmin=None)
+
+        bins = np.linspace(0, 100, 21)
+
+        subplot = plt.subplot(2, 2, 2)
+
+        counts, xedges, yedges, image = plt.hist2d(second_histo_values, third_histo_values, (bins, bins))
+
+        plt.xlabel("CDS support")
+        plt.ylabel("Intron support")
+        plt.title("Transcript support")
+
+        for ext in extensions:
+            plt.savefig("%s.%s" % (output_prefix, ext))

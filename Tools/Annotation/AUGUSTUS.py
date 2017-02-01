@@ -566,6 +566,30 @@ class AUGUSTUS(Tool):
                                                                                                  mult, source,
                                                                                                  priority))
 
+    def draw_evidence_figures(self, evidence_file, output_prefix):
+
+        total_support_list = []
+
+        cds_support_list = []
+        intron_support_list = []
+
+        with open(evidence_file, "r") as evid_fd:
+            header = evid_fd.readline()
+            for line in evid_fd:
+                line_list = line.strip().split("\t")
+                total_support_list.append(float(line_list[2]))
+
+                cds_support_tmp = map(float, line_list[3].split("/"))
+                cds_support_list.append(cds_support_tmp[0] / cds_support_tmp[0])
+
+                intron_support_tmp = map(float, line_list[4].split("/"))
+                intron_support_list.append(intron_support_tmp[0] / intron_support_tmp[1])
+
+        self.draw_heatmap_and_three_percent_histograms(total_support_list, cds_support_list,
+                                                       intron_support_list, output_prefix, figsize=(8, 8),
+                                                       extensions=("png", "svg"))
+
+
 
 
 

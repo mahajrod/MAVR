@@ -80,12 +80,12 @@ class MatplotlibRoutines:
         return c1, c2, bbox_patch1, bbox_patch2, p
 
     @staticmethod
-    def percent_histogram(data, output_prefix, n_bins=20, title="", xlabel="%", ylabel="Number", label=None,
+    def percent_histogram(data, output_prefix=None, n_bins=20, title="", xlabel="%", ylabel="Number", label=None,
                           extensions=("png", "svg"), legend=None, legend_location="best", input_mode="percent", xmax=None,
                           xmin=None):
-
-        figure = plt.figure()
-        subplot = plt.subplot(1, 1, 1)
+        if output_prefix:
+            figure = plt.figure()
+            subplot = plt.subplot(1, 1, 1)
 
         if isinstance(n_bins, Iterable):
             number_of_bins = n_bins
@@ -106,15 +106,22 @@ class MatplotlibRoutines:
             plt.xlim(xmin=0, xmax=1)
         else:
             raise ValueError("Unrecognized type of input data(neither percents nor fractions)")
-        plt.title(title)
-        plt.xlabel(xlabel)
-        plt.ylabel(ylabel)
+
+        if title:
+            plt.title(title)
+        if xlabel:
+            plt.xlabel(xlabel)
+        if ylabel:
+            plt.ylabel(ylabel)
+
         if legend:
             plt.legend((legend,), loc=legend_location)
         if label:
             plt.legend(loc=legend_location)
-        for ext in extensions:
-            plt.savefig("%s.%s" % (output_prefix, ext))
+
+        if output_prefix:
+            for ext in extensions:
+                plt.savefig("%s.%s" % (output_prefix, ext))
 
     def percent_histogram_from_file(self, data_file, output_prefix, data_type=float, column_list=None, separator=None,
                                     comments="#", n_bins=20, title="", xlabel="%", ylabel="Number",
