@@ -14,4 +14,4 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
 
 args = parser.parse_args()
 
-DrawingRoutines.draw_evidence_figures(args.input, args.output_prefix)
+DrawingRoutines.draw_heatmap_and_three_percent_histograms(args.input, args.output_prefix)
