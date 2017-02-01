@@ -219,7 +219,7 @@ class DrawingRoutines(MatplotlibRoutines):
         #cmap.set_under('gray')
         mappable = plt.cm.ScalarMappable(cmap=cmap)
         mappable.set_array([])
-        mappable.set_clim(0, max_counts)
+        mappable.set_clim(0.00001, max_counts)
         #mappable.set_array([])
         #mappable.set_clim(-0.5, ncolors+0.5)
         colorbar = plt.colorbar(mappable)
