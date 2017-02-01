@@ -209,7 +209,7 @@ class DrawingRoutines(MatplotlibRoutines):
 
         subplot = plt.subplot(2, 2, 2)
         print bins
-        counts, xedges, yedges, image = plt.hist2d(second_histo_values, third_histo_values, bins=20, range=[[0, 100], [0, 100]])
+        counts, xedges, yedges, image = plt.hist2d(second_histo_values, third_histo_values, bins=(bins, bins), range=[[0, 100], [0, 100]])
 
         plt.xlabel("CDS support")
         plt.ylabel("Intron support")
