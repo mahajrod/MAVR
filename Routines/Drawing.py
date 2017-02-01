@@ -187,7 +187,7 @@ class DrawingRoutines(MatplotlibRoutines):
         os.remove("temp.idx")
 
     def draw_heatmap_and_three_percent_histograms(self, first_histo_values, second_histo_values,
-                                                  third_histo_values, output_prefix, figsize=(12, 12),
+                                                  third_histo_values, output_prefix, figsize=(16, 16),
                                                   extensions=("png", "svg")):
         """
         second_histo_values and third_histo_values are used to build heatmap
