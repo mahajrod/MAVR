@@ -3,7 +3,7 @@ __author__ = 'Sergei F. Kliver'
 
 import argparse
 
-from Routines import DrawingRoutines
+from Tools.Annotation import AUGUSTUS
 
 parser = argparse.ArgumentParser()
 
@@ -14,4 +14,4 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
 
 args = parser.parse_args()
 
-DrawingRoutines.draw_heatmap_and_three_percent_histograms(args.input, args.output_prefix)
+AUGUSTUS.draw_heatmap_and_three_percent_histograms(args.input, args.output_prefix)
