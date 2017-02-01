@@ -182,7 +182,7 @@ if args.swissprot_db:
 
     for directory in ("splited_blastp_fasta", "splited_blastp_output_dir"):
         shutil.rmtree(directory)
-"""
+
 gene_ids_black_list = [genes_masked_ids] if args.masking else []
 gene_ids_white_list = []
 
@@ -253,7 +253,7 @@ final_ids.read(final_genes_ids)
 
 AnnotationsRoutines.extract_annotation_from_gff(output_gff, final_ids, ["gene"], final_gff)
 AUGUSTUS.extract_CDS_annotations_from_output(final_gff, final_CDS_gff)
-
+"""
 for stat_file in output_evidence_stats, output_supported_stats, \
                  output_swissprot_pfam_or_hints_supported_transcripts_longest_pep_evidence, \
                  output_swissprot_pfam_and_hints_supported_transcripts_longest_pep_evidence, \
