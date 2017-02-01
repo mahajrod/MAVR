@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import os
 import shutil
+import numpy as np
 
 from Routines import FileRoutines, SequenceRoutines, MatplotlibRoutines, DrawingRoutines
 from CustomCollections.GeneralCollections import IdList, SynDict
@@ -588,6 +589,9 @@ class AUGUSTUS(Tool):
                     continue
                 intron_support_list.append(intron_support_tmp[0] / intron_support_tmp[1])
 
+        print np.array(total_support_list)
+        print np.array(cds_support_list)
+        print np.array(intron_support_list)
         DrawingRoutines.draw_heatmap_and_three_percent_histograms(total_support_list, cds_support_list,
                                                                   intron_support_list, output_prefix, figsize=(8, 8),
                                                                   extensions=("png", "svg"))

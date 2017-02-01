@@ -208,7 +208,7 @@ class DrawingRoutines(MatplotlibRoutines):
         bins = np.linspace(0, 100, 21)
 
         subplot = plt.subplot(2, 2, 2)
-
+        print bins
         counts, xedges, yedges, image = plt.hist2d(second_histo_values, third_histo_values, (bins, bins))
 
         plt.xlabel("CDS support")
