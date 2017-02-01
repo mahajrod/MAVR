@@ -97,9 +97,9 @@ class MatplotlibRoutines:
 
         n, bins, patches = plt.hist(data, bins=number_of_bins, label=label)
 
-        print n
-        print bins
-        print patches
+        #print n
+        #print bins
+        #print patches
         if input_mode == "percent":
             plt.xlim(xmin=0, xmax=100)
         elif input_mode == "fraction":
