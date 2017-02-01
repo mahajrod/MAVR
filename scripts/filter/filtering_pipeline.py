@@ -59,6 +59,9 @@ parser.add_argument("-f", "--facut_dir", action="store", dest="facut_dir", defau
 parser.add_argument("-r", "--remove_intermediate_files", action="store_true",
                     dest="remove_intermediate_files", default=False,
                     help="Remove intermediate files")
+parser.add_argument("--skip_coockiecutter", action="store_true",
+                    dest="skip_coockiecutter", default=False,
+                    help="Skip filtration by coockiecutter")
 
 args = parser.parse_args()
 
@@ -83,4 +86,5 @@ FilteringPipeline.filter(args.samples_dir, args.output_dir, args.adapter_kmers, 
                          leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
                          crop_length=None, head_crop_length=None, min_len=args.min_len,
                          base_quality=args.base_quality, read_name_type="illumina",
-                         remove_intermediate_files=args.remove_intermediate_files)
+                         remove_intermediate_files=args.remove_intermediate_files,
+                         skip_coockiecutter=args.skip_coockiecutter)
