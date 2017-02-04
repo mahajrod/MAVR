@@ -82,6 +82,7 @@ class FaCutReport:
         # split tile_table by lanes
         lane_tile_list = np.split(self.tile_table,
                                   np.where(np.diff(self.tile_table[:, 0:self.table_ids["tile"]], axis=0))[0] + 1)
+        print lane_tile_list
         lane_table = []
         for lane_tile_table in lane_tile_list:
             lane_ids = list(lane_tile_table[0][:self.table_ids["tile"]])
