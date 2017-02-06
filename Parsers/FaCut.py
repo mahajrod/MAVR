@@ -51,7 +51,7 @@ class FaCutReport:
 
                 if tmp[2] not in self.flowcell_id_list:
                     self.flowcell_id_list.append(tmp[2])
-                tmp[2] = self.flowcell_id_list.index(tmp[2])  # replace lane id by index
+                tmp[2] = self.flowcell_id_list.index(tmp[2])  # replace flowcell id by index
 
                 self.tile_table.append(tmp)
         #print self.tile_table
@@ -81,10 +81,25 @@ class FaCutReport:
     def get_lane_table(self):
         # split tile_table by lanes
         lane_tile_list = np.split(self.tile_table,
-                                  np.where(np.diff(self.tile_table[:, 0:self.table_ids["tile"]], axis=0))[0] + 1)
+                                  np.unique(np.where(np.diff(self.tile_table[:, 0:self.table_ids["tile"]], axis=0))[0]) + 1)
+        """
+        print len((self.tile_table[:, 0:self.table_ids["tile"]]))
+        print list(np.where(np.diff(self.tile_table[:, 0:self.table_ids["tile"]], axis=0)))
+        print "CCCCCCCCCCCCCCCCCCCCCC"
+
+        print list(np.diff(self.tile_table[:, 0:self.table_ids["tile"]], axis=0))
+        print "BBBBBBBBBBBBBBB"
+
+
+        print lane_tile_list
+        print "AAAAAAAAAAAAAAAAAAAAAAAAAAa"
+        print "\n"
+        """
         #print lane_tile_list
         lane_table = []
         for lane_tile_table in lane_tile_list:
+            #print lane_tile_table
+            #print "\n"
             lane_ids = list(lane_tile_table[0][:self.table_ids["tile"]])
             lane_values = list(np.sum(lane_tile_table[:, self.table_ids["both_retained"]:], axis=0))
 
