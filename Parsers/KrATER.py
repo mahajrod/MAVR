@@ -11,7 +11,7 @@ class KrATERReport(OrderedDict):
 
         with open(krater_report_file, "r") as in_fd:
             for line in in_fd:
-                tmp = line.split("\t")
+                tmp = line.strip().split("\t")
                 self[tmp[0]] = tmp[1]
 
         self["Number of distinct kmers"] = int(self["Number of distinct kmers"])
@@ -24,6 +24,7 @@ class KrATERReport(OrderedDict):
 
         self["Width of first peak"] = int(self["Width of first peak"])
         self["Mean kmer multiplicity in first peak"] = float(self["Mean kmer multiplicity in first peak"])
+        self["Kmer multiplicity at first maximum"] = int(self["Kmer multiplicity at first maximum"])
         self["Standard deviation of kmer multiplicity in first peak"] = float(self["Standard deviation of kmer multiplicity in first peak"])
         self["Variance coefficient of kmer multiplicity in first peak"] = float(self["Variance coefficient of kmer multiplicity in first peak"])
         if "Estimated genome size, bp" in self: # for compatibility with older versions that don't count genome size
