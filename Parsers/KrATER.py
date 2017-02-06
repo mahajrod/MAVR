@@ -24,7 +24,7 @@ class KrATERReport(OrderedDict):
 
         self["Width of first peak"] = int(self["Width of first peak"])
         self["Mean kmer multiplicity in first peak"] = float(self["Mean kmer multiplicity in first peak"])
-        self["Kmer multiplicity at first maximum"] = int(self["Kmer multiplicity at first maximum"])
+        self["Kmer multiplicity at first maximum"] = float(self["Kmer multiplicity at first maximum"])
         self["Standard deviation of kmer multiplicity in first peak"] = float(self["Standard deviation of kmer multiplicity in first peak"])
         self["Variance coefficient of kmer multiplicity in first peak"] = float(self["Variance coefficient of kmer multiplicity in first peak"])
         if "Estimated genome size, bp" in self: # for compatibility with older versions that don't count genome size
