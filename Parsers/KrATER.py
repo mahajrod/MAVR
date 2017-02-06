@@ -58,6 +58,7 @@ class KrATERReportCollection(OrderedDict):
 
             stat_dict[report_id]["Width of first peak"] = self[report_id]["Width of first peak"]
             stat_dict[report_id]["Mean kmer multiplicity in first peak"] = self[report_id]["Mean kmer multiplicity in first peak"]
+            stat_dict[report_id]["Kmer multiplicity at first maximum "] = self[report_id]["Kmer multiplicity at first maximum"]
             stat_dict[report_id]["Standard deviation of kmer multiplicity in first peak"] = self[report_id]["Standard deviation of kmer multiplicity in first peak"]
             stat_dict[report_id]["Variance coefficient of kmer multiplicity in first peak"] = self[report_id]["Variance coefficient of kmer multiplicity in first peak"]
             if "Estimated genome size, bp" in self[report_id]:

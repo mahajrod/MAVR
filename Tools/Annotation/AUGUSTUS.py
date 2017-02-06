@@ -595,7 +595,7 @@ class AUGUSTUS(Tool):
         print len(intron_support_list)
         print intron_support_list.count(-1)
         DrawingRoutines.draw_heatmap_and_three_percent_histograms(total_support_list, cds_support_list,
-                                                                  intron_support_list, output_prefix, figsize=(12, 12),
+                                                                  intron_support_list, output_prefix, figsize=(8, 8),
                                                                   extensions=("png", "svg"))
 
 
