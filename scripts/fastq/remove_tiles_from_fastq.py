@@ -12,10 +12,10 @@ parser.add_argument("-f", "--forward_reads", action="store", dest="forward_reads
 parser.add_argument("-r", "--reverse_reads", action="store", dest="reverse_reads", required=True,
                     help="Reverse reads")
 
-parser.add_argument("-a", "--forward_tiles_to_remove", action="store", dest="forward_tiles_to_remove", required=True,
+parser.add_argument("-a", "--forward_tiles_to_remove", action="store", dest="forward_tiles_to_remove",
                     type=lambda s: s.split(","),
                     help="Comma-separated list of tiles to remove from forward reads")
-parser.add_argument("-b", "--reverse_tiles_to_remove", action="store", dest="reverse_tiles_to_remove", required=True,
+parser.add_argument("-b", "--reverse_tiles_to_remove", action="store", dest="reverse_tiles_to_remove",
                     type=lambda s: s.split(","),
                     help="Comma-separated list of tiles to remove from reverse reads")
 
