@@ -24,7 +24,7 @@ class FileRoutines:
         elif filename[-4:] == ".bz2":
             return bz2.open(filename, flags)
         else:
-            open(filename, flags)
+            return open(filename, flags)
 
     @staticmethod
     def save_mkdir(dirname):
