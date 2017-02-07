@@ -3,6 +3,8 @@ __author__ = 'mahajrod'
 
 import os
 import sys
+import bz2
+import gzip
 from collections import Iterable, OrderedDict
 
 from CustomCollections.GeneralCollections import IdSet,  IdList
@@ -14,6 +16,15 @@ class FileRoutines:
                                "fastq": [".fastq", ".fq"],
                                "genbank": [".gb", ".genbank"],
                                "newick": [".nwk"]}
+
+    @staticmethod
+    def metaopen(filename, flags):
+        if filename[-3:] == ".gz":
+            return gzip.open(filename, flags)
+        elif filename[-4:] == ".bz2":
+            return bz2.open(filename, flags)
+        else:
+            open(filename, flags)
 
     @staticmethod
     def save_mkdir(dirname):

@@ -16,9 +16,10 @@ from Bio.SeqFeature import SeqFeature, FeatureLocation
 
 from CustomCollections.GeneralCollections import TwoLvlDict, SynDict, IdList, IdSet
 from Routines.Functions import output_dict
+from Routines.File import FileRoutines
 
 
-class FastQRoutines():
+class FastQRoutines(FileRoutines):
 
     def __init__(self):
         pass
@@ -46,20 +47,20 @@ class FastQRoutines():
         filtered_forward_se = "%s.ok.forward.se.fastq" % output_prefix
         filtered_out_forward_se = "%s.bad.forward.fastq" % output_prefix
 
-        filtered_paired_reverse_pe = "%s.ok.pe_2fastq" % output_prefix
+        filtered_paired_reverse_pe = "%s.ok.pe_2.fastq" % output_prefix
         filtered_reverse_se = "%s.ok.reverse.se.fastq" % output_prefix
         filtered_out_reverse_se = "%s.bad.reverse.fastq" % output_prefix
 
-        forward_input_fd = open(forward_reads, "r")
-        reverse_input_fd = open(reverse_reads, "r")
+        forward_input_fd = self.metaopen(forward_reads, "r")
+        reverse_input_fd = self.metaopen(reverse_reads, "r")
 
-        filtered_paired_forward_pe_fd = open(filtered_paired_forward_pe, "w")
-        filtered_forward_se_fd = open(filtered_forward_se, "w")
-        filtered_out_forward_se_fd = open(filtered_out_forward_se, "w")
+        filtered_paired_forward_pe_fd = self.metaopen(filtered_paired_forward_pe, "w")
+        filtered_forward_se_fd = self.metaopen(filtered_forward_se, "w")
+        filtered_out_forward_se_fd = self.metaopen(filtered_out_forward_se, "w")
 
-        filtered_paired_reverse_pe_fd = open(filtered_paired_reverse_pe, "w")
-        filtered_reverse_se_fd = open(filtered_reverse_se, "w")
-        filtered_out_reverse_se_fd = open(filtered_out_reverse_se, "w")
+        filtered_paired_reverse_pe_fd = self.metaopen(filtered_paired_reverse_pe, "w")
+        filtered_reverse_se_fd = self.metaopen(filtered_reverse_se, "w")
+        filtered_out_reverse_se_fd = self.metaopen(filtered_out_reverse_se, "w")
 
         for line in forward_input_fd:
             name_list = line.strip()[1:].split(":")
