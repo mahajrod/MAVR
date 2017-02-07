@@ -34,3 +34,73 @@ class FastQRoutines():
                     out_fd.write(in_fd.next())
                     out_fd.write(in_fd.next().strip()[::-1])
                     out_fd.write("\n")
+
+    @staticmethod
+    def parse_illumina_name(string):
+        name_list = string[1:].split(" ")
+
+    def remove_tiles_from_fastq(self, forward_reads, black_list_forward_tiles_list,
+                                reverse_reads, black_list_reverse_tiles_list, output_prefix):
+
+        filtered_paired_forward_pe = "%s.ok.pe_1.fastq" % output_prefix
+        filtered_forward_se = "%s.ok.forward.se.fastq" % output_prefix
+        filtered_out_forward_se = "%s.bad.forward.fastq" % output_prefix
+
+        filtered_paired_reverse_pe = "%s.ok.pe_2fastq" % output_prefix
+        filtered_reverse_se = "%s.ok.reverse.se.fastq" % output_prefix
+        filtered_out_reverse_se = "%s.bad.reverse.fastq" % output_prefix
+
+        forward_input_fd = open(forward_reads, "r")
+        reverse_input_fd = open(reverse_reads, "r")
+
+        filtered_paired_forward_pe_fd = open(filtered_paired_forward_pe, "w")
+        filtered_forward_se_fd = open(filtered_forward_se, "w")
+        filtered_out_forward_se_fd = open(filtered_out_forward_se, "w")
+
+        filtered_paired_reverse_pe_fd = open(filtered_paired_reverse_pe, "w")
+        filtered_reverse_se_fd = open(filtered_reverse_se, "w")
+        filtered_out_reverse_se_fd = open(filtered_out_reverse_se, "w")
+
+        for line in forward_input_fd:
+            name_list = line.strip()[1:].split(":")
+            #instrument_id = name_list[0]
+            #run_id = name_list[1]
+            #flowcell_id = name_list[2]
+            #lane_id = name_list[3]
+            tile_id = name_list[4]
+
+            if (tile_id in black_list_forward_tiles_list) and (tile_id in black_list_reverse_tiles_list):
+                filtered_out_forward_se_fd.write(line)
+                for i in range(0, 3):
+                    filtered_out_forward_se_fd.write(forward_input_fd.next())
+                for i in range(0, 4):
+                    filtered_out_reverse_se_fd.write(reverse_input_fd.next())
+
+            elif (tile_id in black_list_forward_tiles_list) and (not(tile_id in black_list_reverse_tiles_list)):
+                filtered_out_forward_se_fd.write(line)
+                for i in range(0, 3):
+                    filtered_out_forward_se_fd.write(forward_input_fd.next())
+                for i in range(0, 4):
+                    filtered_reverse_se_fd.write(reverse_input_fd.next())
+
+            elif (not (tile_id in black_list_forward_tiles_list)) and (tile_id in black_list_reverse_tiles_list):
+                filtered_forward_se_fd.write(line)
+                for i in range(0, 3):
+                    filtered_forward_se_fd.write(forward_input_fd.next())
+                for i in range(0, 4):
+                    filtered_out_reverse_se_fd.write(reverse_input_fd.next())
+
+            else:
+                filtered_paired_forward_pe_fd.write(line)
+                for i in range(0, 3):
+                    filtered_paired_forward_pe_fd.write(forward_input_fd.next())
+                for i in range(0, 4):
+                    filtered_paired_reverse_pe_fd.write(reverse_input_fd.next())
+
+        filtered_paired_forward_pe_fd.close()
+        filtered_forward_se_fd.close()
+        filtered_out_forward_se_fd.close()
+
+        filtered_paired_reverse_pe_fd.close()
+        filtered_reverse_se_fd.close()
+        filtered_out_reverse_se_fd.close()

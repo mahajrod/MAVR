@@ -206,6 +206,7 @@ scripts/annotation/annotate_vcf.py
 scripts/annotation/assign_synonyms_to_annotations_from_augustus_gff.py
 scripts/annotation/assign_synonyms_to_features_from_augustus_gff.py
 scripts/annotation/distances_between_genes.py
+scripts/annotation/draw_evidence_figures.py
 scripts/annotation/extract_annotations_from_gff_by_ids.py
 scripts/annotation/extract_annotations_from_gff_by_types.py
 scripts/annotation/extract_cds_by_gff.py
@@ -241,7 +242,6 @@ scripts/annotation/ncbi/analyze_ncbi_pep.py
 scripts/annotation/ncbi/get_cds_for_proteins.py
 scripts/annotation/rRNA/analyze_barrnap_report.py
 scripts/annotation/rRNA/annotate_rrna_by_barrnap.py
-scripts/antibodies/c
 scripts/antibodies/check_for_bad_antigen_candidates.py
 scripts/assembly/get_insert_size_distribution.py
 scripts/assembly/get_stats_from_assemblies.py
