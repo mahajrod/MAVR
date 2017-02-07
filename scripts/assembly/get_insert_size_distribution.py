@@ -35,8 +35,8 @@ parser.add_argument("-d", "--aligner_binary_dir", action="store", dest="aligner_
                     help="Directory with aligner binary")
 parser.add_argument("-s", "--store_sam", action="store_true", dest="store_sam",
                     help="Store .sam file with read alignments")
-parser.add_argument("-l", "--aligner", action="store", dest="aligner", default="bowtie2",
-                    help="Aligner. Allowed: bowtie2(default), bwa")
+parser.add_argument("-l", "--aligner", action="store", dest="aligner", default="bwa",
+                    help="Aligner. Allowed: bowtie2, bwa(default)")
 parser.add_argument("-x", "--max_xlimit_for_histo", action="store",
                     dest="xlimit_for_histo",
                     help="Xlimit for histogram. Default: 3 * estimated_insert_size "
