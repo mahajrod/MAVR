@@ -88,7 +88,7 @@ class FilteringPipeline(Pipeline):
 
             #"""
 
-            self.combine_fastq_files(samples_directory, sample, merged_raw_sample_dir)
+            self.combine_fastq_files(samples_directory, sample, merged_raw_sample_dir, use_links_if_merge_not_necessary=True)
 
             if not skip_coockiecutter:
                 Cookiecutter.rm_reads(adapter_fragment_file, merged_forward_reads, coockie_stats,

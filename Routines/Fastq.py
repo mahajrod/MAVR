@@ -105,3 +105,24 @@ class FastQRoutines(FileRoutines):
         filtered_paired_reverse_pe_fd.close()
         filtered_reverse_se_fd.close()
         filtered_out_reverse_se_fd.close()
+
+    def combine_fastq_files(self, samples_directory, sample, output_directory,
+                            use_links_if_merge_not_necessary=True):
+        sample_dir = "%s/%s/" % (samples_directory, sample)
+        filetypes, forward_files, reverse_files = self.make_lists_forward_and_reverse_files(sample_dir)
+        if len(filetypes) == 1:
+            if ("fq.gz" in filetypes) or ("fastq.gz" in filetypes):
+                command = "zcat"
+            elif ("fq.bz2" in filetypes) or ("fastq.bz2" in filetypes):
+                command = "bzcat"
+            else:
+                command = "cat"
+
+            if use_links_if_merge_not_necessary and (len(forward_files) == 1) and (len(reverse_files) == 1):
+                os.system("ln -s %s %s/%s_1.fq" % (forward_files[0], output_directory, sample))
+                os.system("ln -s %s %s/%s_2.fq" % (reverse_files[0], output_directory, sample))
+            else:
+                os.system("%s %s > %s/%s_1.fq" % (command, " ".join(forward_files), output_directory, sample))
+                os.system("%s %s > %s/%s_2.fq" % (command, " ".join(reverse_files), output_directory, sample))
+        else:
+            raise IOError("Extracting from mix of archives in not implemented yet")

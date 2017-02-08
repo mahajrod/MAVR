@@ -5,6 +5,7 @@
 #from Tools.Filter import Cookiecutter, Trimmomatic, FaCut
 from Tools.Abstract import Tool
 from Routines.Matplotlib import MatplotlibRoutines
+from Routines.Fastq import FastQRoutines
 #from Parsers.FaCut import FaCutReport
 #from Parsers.Coockiecutter import CoockiecutterReport
 #from Parsers.Trimmomatic import TrimmomaticReport
@@ -12,6 +13,6 @@ from Routines.Matplotlib import MatplotlibRoutines
 #from CustomCollections.GeneralCollections import TwoLvlDict
 
 
-class Pipeline(Tool, MatplotlibRoutines):
+class Pipeline(Tool, MatplotlibRoutines, FastQRoutines):
     def __init__(self):
         Tool.__init__(self, cmd="")
