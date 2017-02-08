@@ -177,5 +177,6 @@ class FilteringPipeline(Pipeline):
             shutil.rmtree(coockie_filtered_dir)
             shutil.rmtree(coockie_trimmomatic_filtered_dir)
             shutil.rmtree(coockie_trimmomatic_quality_filtered_dir)
+            shutil.rmtree(merged_raw_dir)
 
         filtering_statistics.write(general_stat_file, sort=False)
