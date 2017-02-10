@@ -377,12 +377,12 @@ class MatplotlibRoutines:
                                           title_list=title_listtt, ylogbase_list=ylogbase_list, label_list=None,
                                           extensions=extensions, suptitle=suptitle)
 
-    def draw_hexa_histogram_with_two_logscaled(self, list_of_data_arrays,  output_prefix=None,
-                                                figsize=(10, 15), number_of_bins_list=None, width_of_bins_list=None,
-                                                max_threshold_list=None, min_threshold_list=None, xlabel=None, ylabel=None,
-                                                title_list=None, logbase=10, label_list=None,
-                                                extensions=("png",), suptitle=None):
-        subplot_tuple = (3, 2)
+    def draw_hexa_histogram_with_three_logscaled(self, list_of_data_arrays,  output_prefix=None,
+                                                 figsize=(10, 15), number_of_bins_list=None, width_of_bins_list=None,
+                                                 max_threshold_list=None, min_threshold_list=None, xlabel=None, ylabel=None,
+                                                 title_list=None, logbase=10, label_list=None,
+                                                 extensions=("png",), suptitle=None):
+        subplot_tuple = (2, 3)
 
         none_list = [None, None, None, None, None, None]
 
