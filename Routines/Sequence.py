@@ -1262,8 +1262,8 @@ class SequenceRoutines(FileRoutines):
         for contig_id in record_dict:
             Ns_number += record_dict[contig_id].seq.count("N") + record_dict[contig_id].seq.count("n")
 
-        for record in record_dict:
-            print "%s\t%i" % (record, len(record_dict[record].seq))
+        # for record in record_dict:
+        #    print "%s\t%i" % (record, len(record_dict[record].seq))
 
         length_array = np.array(sorted([len(record_dict[record].seq) for record in record_dict], reverse=True))
         if seq_len_file:
@@ -1277,16 +1277,16 @@ class SequenceRoutines(FileRoutines):
         contig_cumulative_length_values = [0 for i in range(0, right_bin)]
         contig_number_values = [0 for i in range(0, right_bin)]
 
-        print length_array
+        #print length_array
         for contig_len in length_array:
             #print contig_len
             len_power = int(math.log10(contig_len))
             contig_cumulative_length_values[len_power] += contig_len
             contig_number_values[len_power] += 1
 
-        print(bins)
-        print(contig_cumulative_length_values)
-        print(contig_number_values)
+        #print(bins)
+        #print(contig_cumulative_length_values)
+        #print(contig_number_values)
         L50_dict = OrderedDict()
         N50_dict = OrderedDict()
         length_dict = OrderedDict()
