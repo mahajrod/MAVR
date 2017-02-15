@@ -62,6 +62,9 @@ parser.add_argument("-r", "--remove_intermediate_files", action="store_true",
 parser.add_argument("--skip_coockiecutter", action="store_true",
                     dest="skip_coockiecutter", default=False,
                     help="Skip filtration by coockiecutter")
+parser.add_argument("-z", "--read_name_type", action="store", dest="read_name_type", default="illumina",
+                    help="Read name type")
+
 
 args = parser.parse_args()
 
@@ -85,6 +88,6 @@ FilteringPipeline.filter(args.samples_dir, args.output_dir, args.adapter_kmers, 
                          average_quality_threshold=args.average_quality_threshold,
                          leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
                          crop_length=None, head_crop_length=None, min_len=args.min_len,
-                         base_quality=args.base_quality, read_name_type="illumina",
+                         base_quality=args.base_quality, read_name_type=args.read_name_type,
                          remove_intermediate_files=args.remove_intermediate_files,
                          skip_coockiecutter=args.skip_coockiecutter)
