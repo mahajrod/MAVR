@@ -229,3 +229,15 @@ class DrawingRoutines(MatplotlibRoutines):
         plt.tight_layout()
         for ext in extensions:
             plt.savefig("%s.%s" % (output_prefix, ext))
+
+    @staticmethod
+    def draw_precalculated_heatmap(heatmap_array, output_prefix=None, figsize=(5, 5), extensions=("png", "svg")):
+
+        if output_prefix:
+            figure = plt.figure(1, figsize=figsize)
+
+        heatmap = plt.imshow(heatmap_array, origin='low', interpolation='none')
+
+        if output_prefix:
+            for ext in extensions:
+                plt.savefig("%s.%s" % (output_prefix, ext))

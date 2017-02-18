@@ -113,17 +113,27 @@ class SamtoolsV1(Tool):
 
         self.execute(options=options, cmd="samtools index")
 
-    def sam2bam(self, input_sam, output_bam):
+    def sam2bam(self, input_sam, output_bam, sort=True, temp_file_prefix="temp_bam",
+                sort_by_name=False, max_memory_per_thread="1G"):
 
         options = " -bh"
-        options += " -o %s" % output_bam
+        options += " -o %s" % output_bam if not sort else ""
         options += " %s" % input_sam
+
+        sort_options = self.parse_sort_options(temp_file_prefix=temp_file_prefix, sort_by_name=sort_by_name,
+                                               max_memory_per_thread=max_memory_per_thread)
+        sort_options += " -o %s" % output_bam
+        sort_options += " -"
+
+        options += " | samtools sort %s" % sort_options if sort else ""
 
         self.execute(options=options, cmd="samtools view")
 
-    def convert_sam_and_index(self, input_sam, output_bam):
+    def convert_sam_and_index(self, input_sam, output_bam, sort=True, temp_file_prefix="temp_bam",
+                              sort_by_name=False, max_memory_per_thread="1G"):
 
-        self.sam2bam(input_sam, output_bam)
+        self.sam2bam(input_sam, output_bam, sort=sort, temp_file_prefix=temp_file_prefix,
+                     sort_by_name=sort_by_name, max_memory_per_thread=max_memory_per_thread)
         self.index(output_bam)
 
     def get_insert_sizes(self, input_sam, output_prefix):

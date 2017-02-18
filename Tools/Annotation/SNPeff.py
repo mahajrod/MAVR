@@ -11,7 +11,6 @@ class SNPeff(JavaTool):
         JavaTool.__init__(self, jar, java_path="", max_threads=max_threads, jar_path=jar_path, max_memory=max_memory)
         self.config_path = config_path
 
-
     def build_db(self, datafiles, input_format="gff3", build_type=None):
         """
         To build custom db at first add record to config file
