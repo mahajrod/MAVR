@@ -110,7 +110,28 @@ class AnnotationsRoutines:
                         accordance_dict[transcript_id] = {protein_id}
         accordance_dict.write(output_file, splited_values=True)
 
+    @staticmethod
+    def fix_gff_coordinates_order(input_gff, output_gff):
+        number_of_fixed_lines = 0
+        with open(input_gff, "r") as in_fd:
+            with open(output_gff, "w") as out_fd:
+                for line in in_fd:
+                    if line[0] == "#":
+                        out_fd.write(line)
+                        continue
 
+                    tmp = line.split("\t")
+
+                    if int(tmp[2]) <= int(tmp[3]):
+                        out_fd.write(line)
+                        continue
+
+                    tmp[2], tmp[3] = tmp[3], tmp[2]
+                    out_fd.write("\t".join(tmp))
+
+                    number_of_fixed_lines += 1
+
+        print("Fixed lines: %i" % number_of_fixed_lines)
 
 
 

@@ -5,35 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/SRAToolkit/FastqDump.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/SRAToolkit/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/sra/parallel_unpack_sra.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/annotation/fix_gff_coordinates.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pipelines/DiffExpression.py" afterPath="$PROJECT_DIR$/Pipelines/DiffExpression.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pipelines/Filtering.py" afterPath="$PROJECT_DIR$/Pipelines/Filtering.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pipelines/GenomeAnnotation/ProteinCodingGeneAnnotation.py" afterPath="$PROJECT_DIR$/Pipelines/GenomeAnnotation/ProteinCodingGeneAnnotation.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pipelines/GenomeAssembly/Scaffolding.py" afterPath="$PROJECT_DIR$/Pipelines/GenomeAssembly/Scaffolding.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/EggNOG.py" afterPath="$PROJECT_DIR$/Routines/EggNOG.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/File.py" afterPath="$PROJECT_DIR$/Routines/File.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/NCBI.py" afterPath="$PROJECT_DIR$/Routines/NCBI.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/SequenceCluster.py" afterPath="$PROJECT_DIR$/Routines/SequenceCluster.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/TreeFam.py" afterPath="$PROJECT_DIR$/Routines/TreeFam.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Alignment/STAR.py" afterPath="$PROJECT_DIR$/Tools/Alignment/STAR.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" afterPath="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py" afterPath="$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/MultipleAlignment/PRANK.py" afterPath="$PROJECT_DIR$/Tools/MultipleAlignment/PRANK.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/alignment/extract_fastq_from_bam.py" afterPath="$PROJECT_DIR$/scripts/alignment/extract_fastq_from_bam.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" afterPath="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/parallel_augustus_tmp.py" afterPath="$PROJECT_DIR$/scripts/annotation/parallel_augustus_tmp.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/chemidoc/convert_scn_to_tiff.py" afterPath="$PROJECT_DIR$/scripts/chemidoc/convert_scn_to_tiff.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in_alignments.py" afterPath="$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in_alignments.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/parallel_augustus_correct_errors.py" afterPath="$PROJECT_DIR$/scripts/parallel_augustus_correct_errors.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence/extract_groups_of_sequences.py" afterPath="$PROJECT_DIR$/scripts/sequence/extract_groups_of_sequences.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence_clusters/eggnog/rename_files_from_taxaid_to_species_name.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/eggnog/rename_files_from_taxaid_to_species_name.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence_clusters/expansion/compare_clusters.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/expansion/compare_clusters.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence_clusters/extract_sequences_by_clusters.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/extract_sequences_by_clusters.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence_clusters/rename_sequence_in_clusters_by_species_name.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/rename_sequence_in_clusters_by_species_name.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/transcriptome/align_by_star.py" afterPath="$PROJECT_DIR$/scripts/transcriptome/align_by_star.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Annotations.py" afterPath="$PROJECT_DIR$/Routines/Annotations.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/add_len_to_simple_output.py" afterPath="$PROJECT_DIR$/scripts/annotation/add_len_to_simple_output.py" />
     </list>
     <ignored path="MAVR.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -76,21 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TRF.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/RepeatMasking/TRF.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="FastqDump.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools/SRAToolkit/FastqDump.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="353">
-              <caret line="26" column="114" lean-forward="false" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="114" />
+            <state relative-caret-position="263">
+              <caret line="21" column="62" lean-forward="true" selection-start-line="21" selection-start-column="62" selection-end-line="21" selection-end-column="62" />
               <folding>
                 <element signature="e#55#64#0" expanded="true" />
               </folding>
@@ -111,8 +76,8 @@
       <file leaf-file-name="parallel_unpack_sra.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/sra/parallel_unpack_sra.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state relative-caret-position="252">
+              <caret line="14" column="27" lean-forward="false" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
               <folding>
                 <element signature="e#55#70#0" expanded="true" />
               </folding>
@@ -120,21 +85,55 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="get_distribution_of_unique_positions_in_alignments.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in_alignments.py">
+      <file leaf-file-name="SNPeff.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tools/Annotation/SNPeff.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="785">
-              <caret line="53" column="102" lean-forward="false" selection-start-line="53" selection-start-column="102" selection-end-line="53" selection-end-column="102" />
+            <state relative-caret-position="288">
+              <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/SRAToolkit/__init__.py">
+      <file leaf-file-name="Annotations.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Routines/Annotations.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="857">
+              <caret line="133" column="55" lean-forward="false" selection-start-line="133" selection-start-column="55" selection-end-line="133" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add_len_to_simple_output.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/annotation/add_len_to_simple_output.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="72">
-              <caret line="4" column="12" lean-forward="false" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+              <caret line="4" column="38" lean-forward="false" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+              <folding>
+                <element signature="e#54#69#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fix_gff_coordinates.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/annotation/fix_gff_coordinates.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <folding>
+                <element signature="e#54#69#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="get_distribution_of_unique_positions_in_alignments.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in_alignments.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="443">
+              <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -146,28 +145,6 @@
             <state relative-caret-position="245">
               <caret line="29" column="9" lean-forward="false" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="18" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Sequence.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SequenceConverters.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BConverters/SequenceConverters.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="10" column="43" lean-forward="false" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
-              <folding>
-                <element signature="e#46#64#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -195,10 +172,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/sequence/check_pairing.py" />
-        <option value="$PROJECT_DIR$/scripts/sequence/extract_ids_from_fasta.bash" />
-        <option value="$PROJECT_DIR$/scripts/sequence/count_sequences_in_fasta.bash" />
-        <option value="$PROJECT_DIR$/scripts/sequence/find_repeated_ids_in_fasta.bash" />
         <option value="$PROJECT_DIR$/scripts/sequence/leave_only_label.sh" />
         <option value="$PROJECT_DIR$/Tools/Abstract.py" />
         <option value="$PROJECT_DIR$/Pipelines/GenomeAnnotation/ProteinCodingGeneAnnotation.py" />
@@ -243,9 +216,13 @@
         <option value="$PROJECT_DIR$/Tools/SRAToolkit/__init__.py" />
         <option value="$PROJECT_DIR$/Routines/File.py" />
         <option value="$PROJECT_DIR$/scripts/sra/unpack_sra.py" />
+        <option value="$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in_alignments.py" />
         <option value="$PROJECT_DIR$/Tools/SRAToolkit/FastqDump.py" />
         <option value="$PROJECT_DIR$/scripts/sra/parallel_unpack_sra.py" />
-        <option value="$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in_alignments.py" />
+        <option value="$PROJECT_DIR$/Routines/Annotations.py" />
+        <option value="$PROJECT_DIR$/scripts/annotation/rRNA/fix_gff_coordinates.py" />
+        <option value="$PROJECT_DIR$/scripts/annotation/fix_gff_coordinates.py" />
+        <option value="$PROJECT_DIR$/scripts/annotation/add_len_to_simple_output.py" />
       </list>
     </option>
   </component>
@@ -365,6 +342,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="annotation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Tools" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -383,7 +378,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="SRAToolkit" />
+              <option name="myItemId" value="Annotation" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -397,11 +392,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RepeatMasking" />
+              <option name="myItemId" value="Routines" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -452,18 +443,18 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts/annotation" />
       <recent name="$PROJECT_DIR$/projects/RG/scripts" />
       <recent name="$PROJECT_DIR$/Tools/Alignment" />
-      <recent name="$PROJECT_DIR$/scripts/annotation" />
       <recent name="$PROJECT_DIR$/Tools/Annotation" />
       <recent name="$PROJECT_DIR$/scripts/sequence_clusters" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts/annotation/rRNA" />
       <recent name="$PROJECT_DIR$/scripts/sra" />
       <recent name="$PROJECT_DIR$/Tools/SRAToolkit" />
       <recent name="$PROJECT_DIR$/scripts/convert" />
       <recent name="$PROJECT_DIR$/projects/RG/scripts" />
-      <recent name="$PROJECT_DIR$/Tools/Transcriptome" />
     </key>
   </component>
   <component name="RunManager" selected="Python.NCBI">
@@ -750,27 +741,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1443270821851</updated>
-    </task>
-    <task id="LOCAL-01102" summary="changes">
-      <created>1485944309051</created>
-      <option name="number" value="01102" />
-      <option name="presentableId" value="LOCAL-01102" />
-      <option name="project" value="LOCAL" />
-      <updated>1485944309051</updated>
-    </task>
-    <task id="LOCAL-01103" summary="changes">
-      <created>1485944441628</created>
-      <option name="number" value="01103" />
-      <option name="presentableId" value="LOCAL-01103" />
-      <option name="project" value="LOCAL" />
-      <updated>1485944441628</updated>
-    </task>
-    <task id="LOCAL-01104" summary="changes">
-      <created>1485944561945</created>
-      <option name="number" value="01104" />
-      <option name="presentableId" value="LOCAL-01104" />
-      <option name="project" value="LOCAL" />
-      <updated>1485944561945</updated>
     </task>
     <task id="LOCAL-01105" summary="changes">
       <created>1485944711899</created>
@@ -1094,7 +1064,28 @@
       <option name="project" value="LOCAL" />
       <updated>1487731883291</updated>
     </task>
-    <option name="localTasksCounter" value="1151" />
+    <task id="LOCAL-01151" summary="changes">
+      <created>1487780221590</created>
+      <option name="number" value="01151" />
+      <option name="presentableId" value="LOCAL-01151" />
+      <option name="project" value="LOCAL" />
+      <updated>1487780221591</updated>
+    </task>
+    <task id="LOCAL-01152" summary="changes">
+      <created>1487780786536</created>
+      <option name="number" value="01152" />
+      <option name="presentableId" value="LOCAL-01152" />
+      <option name="project" value="LOCAL" />
+      <updated>1487780786536</updated>
+    </task>
+    <task id="LOCAL-01153" summary="changes">
+      <created>1487780908642</created>
+      <option name="number" value="01153" />
+      <option name="presentableId" value="LOCAL-01153" />
+      <option name="project" value="LOCAL" />
+      <updated>1487780908642</updated>
+    </task>
+    <option name="localTasksCounter" value="1154" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1274,20 +1265,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/kmer/get_general_stats_from_krater_reports.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/fastq/fastq2fasta.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Parsers/FaCut.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1330,13 +1307,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/Annotations.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Matplotlib.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1369,13 +1339,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="218" column="31" lean-forward="false" selection-start-line="218" selection-start-column="31" selection-end-line="218" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Annotation/SNPeff.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1630,10 +1593,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in_alignments.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="443">
+          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/SRAToolkit/FastqDump.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="26" column="114" lean-forward="false" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="114" />
+        <state relative-caret-position="263">
+          <caret line="21" column="62" lean-forward="true" selection-start-line="21" selection-start-column="62" selection-end-line="21" selection-end-column="62" />
           <folding>
             <element signature="e#55#64#0" expanded="true" />
           </folding>
@@ -1650,19 +1621,47 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sra/parallel_unpack_sra.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        <state relative-caret-position="252">
+          <caret line="14" column="27" lean-forward="false" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
           <folding>
             <element signature="e#55#70#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in_alignments.py">
+    <entry file="file://$PROJECT_DIR$/Tools/Annotation/SNPeff.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="785">
-          <caret line="53" column="102" lean-forward="false" selection-start-line="53" selection-start-column="102" selection-end-line="53" selection-end-column="102" />
+        <state relative-caret-position="288">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/Annotations.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="857">
+          <caret line="133" column="55" lean-forward="false" selection-start-line="133" selection-start-column="55" selection-end-line="133" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/annotation/fix_gff_coordinates.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding>
+            <element signature="e#54#69#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/annotation/add_len_to_simple_output.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="38" lean-forward="false" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+          <folding>
+            <element signature="e#54#69#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

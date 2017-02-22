@@ -3,7 +3,6 @@ __author__ = 'Sergei F. Kliver'
 import argparse
 
 from Tools.Annotation import Exonerate
-from Routines.File import make_list_of_path_to_files
 
 parser = argparse.ArgumentParser()
 
