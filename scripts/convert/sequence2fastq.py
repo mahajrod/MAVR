@@ -10,7 +10,7 @@ parser.add_argument("-i", "--input", action="store", dest="input", required=True
                     help="Input sequence file")
 parser.add_argument("-o", "--output", action="store", dest="output", required=True,
                     help="Output fastq file")
-parser.add_argument("-d", "--default_quality", action="store", dest="default_quality", required=True,
+parser.add_argument("-d", "--default_quality", action="store", dest="default_quality", required=True, type=int,
                     help="Quality for bases in output fastq file")
 parser.add_argument("-m", "--mode", action="store", dest="mode", default="index_db",
                     help="Parsing mode for sequence file. Allowed: parse, index, index_db(default)")
