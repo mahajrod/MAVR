@@ -5,9 +5,9 @@ import collections
 from Bio import SeqIO
 from Bio import AlignIO
 from Parsers.General import parse_metamiga_fasta
+from Routines import SequenceRoutines
 
-
-class SequenceConverters:
+class SequenceConverters(SequenceRoutines):
 
     def __init__(self):
         pass
@@ -91,3 +91,15 @@ class SequenceConverters:
 
         record_dict = SeqIO.index_db(input_index, input_data, input_filetype)
         SeqIO.write(record_dict.values(), output_file, output_filetype)
+
+    def sequence2fastq(self, sequence_file, output_file, mode, default_quality,
+                       format="fasta", index_file=None, score_type=33):
+        #input_file, mode, format="fasta", index_file=None
+        record_dict = self.parse_seq_file(sequence_file, mode, format=format, index_file=index_file)
+
+        with open(output_file, "w") as out_fd:
+            for record_id in record_dict:
+                record_len = len(record_dict[record_id].seq)
+                out_fd.write("@%s\n" % record_id)
+                out_fd.write("%s\n+\n" % str(record_dict[record_id].seq))
+                out_fd.write("%s\n" % (chr(score_type + default_quality) * record_len))
