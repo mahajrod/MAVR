@@ -7,10 +7,11 @@ from Bio import AlignIO
 from Parsers.General import parse_metamiga_fasta
 from Routines import SequenceRoutines
 
+
 class SequenceConverters(SequenceRoutines):
 
     def __init__(self):
-        pass
+        SequenceRoutines.__init__(self)
 
     @staticmethod
     def fastq2fasta(input_file, output_file):
