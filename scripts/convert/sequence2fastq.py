@@ -18,7 +18,7 @@ parser.add_argument("-f", "--format", action="store", dest="format", default="fa
                     help="Format of sequence file. Default: fasta")
 parser.add_argument("--index_file", action="store", dest="index_file",
                     help="Index file for parsing in index_db mode. Default: construct new")
-parser.add_argument("-q", "--quality_score", action="store", dest="quality_score", default=33,
+parser.add_argument("-q", "--quality_score", action="store", dest="quality_score", default=33, type=int,
                     help="Quality score(offset). Allowed: 33(default), 64")
 
 args = parser.parse_args()
