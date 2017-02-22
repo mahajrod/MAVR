@@ -122,11 +122,11 @@ class AnnotationsRoutines:
 
                     tmp = line.split("\t")
 
-                    if int(tmp[2]) <= int(tmp[3]):
+                    if int(tmp[3]) <= int(tmp[4]):
                         out_fd.write(line)
                         continue
 
-                    tmp[2], tmp[3] = tmp[3], tmp[2]
+                    tmp[3], tmp[4] = tmp[4], tmp[3]
                     out_fd.write("\t".join(tmp))
 
                     number_of_fixed_lines += 1
