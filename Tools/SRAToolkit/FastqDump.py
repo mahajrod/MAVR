@@ -26,7 +26,7 @@ class FastqDump(Tool):
 
     def parallel_unpack(self, input_dir, output_dir, sra_id_list=None, paired_input=True, retain_original_ids=True):
 
-        sra_id_list = sra_id_list if sra_id_list else os.listdir()
+        sra_id_list = sra_id_list if sra_id_list else os.listdir(input_dir)
 
         common_options = " --split-3" if paired_input else ""
         common_options += " --origfmt" if retain_original_ids else ""
