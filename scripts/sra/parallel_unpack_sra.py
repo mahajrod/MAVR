@@ -20,9 +20,12 @@ parser.add_argument("-t", "--threads", action="store", dest="threads", default=1
                     help="Number of threads")
 parser.add_argument("-u", "--unpaired", action="store_false", dest="paired", default=True,
                     help="Sra archives contain unpaired reads")
+parser.add_argument("-p", "--fastq_dump_dir", action="store", dest="fastq_dump_dir", default="",
+                    help="Path to directory with fastq-dump directory")
 
 args = parser.parse_args()
 
 FastqDump.threads = args.threads
+FastqDump.path = args.fastq_dump_dir
 FastqDump.parallel_unpack(args.input_dir, args.output_dir, sra_id_list=args.sra_id_list, paired_input=args.paired,
                           retain_original_ids=True)
