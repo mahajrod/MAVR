@@ -36,7 +36,7 @@ syn_dict = SynDict()
 syn_dict.read(args.syn_file, header=args.header, separator=args.separator, key_index=args.key_index,
               value_index=args.value_index, comments_prefix=args.comments_prefix)
 
-FileRoutines.save_mkdir(args.output_files_dir)
+FileRoutines.safe_mkdir(args.output_files_dir)
 input_files = os.listdir(args.input_files_dir)
 for filename in input_files:
     directory, taxon_id, extension = FileRoutines.split_filename(filename)

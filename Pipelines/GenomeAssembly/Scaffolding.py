@@ -13,10 +13,10 @@ class ScaffoldingPipeline(Pipeline):
         out_dir = os.path.abspath(output_directory)
         index_directory = "%s/bowtie_index/" % out_dir
 
-        self.save_mkdir(index_directory)
+        self.safe_mkdir(index_directory)
         for sample in sample_list:
             sample_dir = "%s/%s" % (out_dir, sample)
-            self.save_mkdir(sample_dir)
+            self.safe_mkdir(sample_dir)
 
     def get_insert_size_distribution(self, sample_directory, forward_files, reverse_files, estimated_insert_size,
                                      output_prefix, genome, genome_index, input_files_are_fasta=False,

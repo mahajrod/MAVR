@@ -57,7 +57,7 @@ class PRANK(Tool):
                                                    skip_insertions=skip_insertions, codon_alignment=codon_alignment,
                                                    translated_alignment=translated_alignment)
 
-        FileRoutines.save_mkdir(output_directory)
+        FileRoutines.safe_mkdir(output_directory)
         options_list = []
         for filename in list_of_files:
             basename = FileRoutines.split_filename(filename)[1]

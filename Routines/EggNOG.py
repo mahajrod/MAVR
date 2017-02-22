@@ -43,7 +43,7 @@ class EggNOGRoutines(SequenceClusterRoutines):
 
         input_files = make_list_of_path_to_files([dir_with_alignments] if isinstance(dir_with_alignments, str) else dir_with_alignments)
 
-        FileRoutines.save_mkdir(out_dir)
+        FileRoutines.safe_mkdir(out_dir)
         from Routines import MultipleAlignmentRoutines
         for filename in input_files:
             filename_list = FileRoutines.split_filename(filename)
@@ -55,7 +55,7 @@ class EggNOGRoutines(SequenceClusterRoutines):
         input_files = FileRoutines.make_list_of_path_to_files([dir_with_proteins] if isinstance(dir_with_proteins, str) else dir_with_proteins)
 
         out_dir = FileRoutines.check_path(output_dir)
-        FileRoutines.save_mkdir(out_dir)
+        FileRoutines.safe_mkdir(out_dir)
 
         protein_dict = SeqIO.index_db("temp.idx", input_files, format=input_format)
 

@@ -20,7 +20,7 @@ class TreeFamRoutines(SequenceClusterRoutines):
         fam_id_list = IdList()
         fam_dict = SynDict()
         #print(pep_file)
-        FileRoutines.save_mkdir(output_dir)
+        FileRoutines.safe_mkdir(output_dir)
         out_dir = FileRoutines.check_path(output_dir)
         create_directory_for_each_family = True if out_prefix else create_dir_for_each_family
         if families_id_file:
@@ -32,7 +32,7 @@ class TreeFamRoutines(SequenceClusterRoutines):
             if fam_id in fam_dict:
                 if create_directory_for_each_family:
                     fam_dir = "%s%s/" % (out_dir, fam_id)
-                    FileRoutines.save_mkdir(fam_dir)
+                    FileRoutines.safe_mkdir(fam_dir)
                     out_file = "%s%s.pep" % (fam_dir, out_prefix if out_prefix else fam_id)
                 else:
                     out_file = "%s/%s.pep" % (out_dir, out_prefix if out_prefix else fam_id)

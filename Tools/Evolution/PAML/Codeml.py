@@ -243,7 +243,7 @@ class Codeml(Tool):
                           genetic_code=0, fix_kappa=False, kappa=5, fix_omega=False, omega=0.2, getSE=0, RateAncestor=0,
                           small_difference=0.000001, clean_data=True, method=0, Mgene=None):
 
-        FileRoutines.save_mkdir(out_dir)
+        FileRoutines.safe_mkdir(out_dir)
         alignment_files_list = FileRoutines.make_list_of_path_to_files(in_dir)
         tree_file_abs_path = os.path.abspath(tree_file)
         options_list = []
@@ -256,7 +256,7 @@ class Codeml(Tool):
 
             options_list.append(ctl_file)
             dir_list.append(filename_out_dir)
-            FileRoutines.save_mkdir(filename_out_dir)
+            FileRoutines.safe_mkdir(filename_out_dir)
             self.generate_ctl_file(os.path.abspath(filename), tree_file_abs_path, out_file, ctl_file, seq_type=seq_type,
                                    codon_frequency=codon_frequency, noisy=noisy, verbose=verbose, runmode=runmode,
                                    clock=clock, aminoacid_distance=aminoacid_distance, model=model, nssites=nssites,
@@ -301,7 +301,7 @@ class Codeml(Tool):
         for branch labeled in tree file using model_A vs model_A_null(omega fixed to 1) comparison
         """
 
-        FileRoutines.save_mkdir(out_dir)
+        FileRoutines.safe_mkdir(out_dir)
         alignment_files_list = FileRoutines.make_list_of_path_to_files(in_dir)
         tree_file_abs_path = os.path.abspath(tree_file)
         options_list = []
@@ -313,11 +313,11 @@ class Codeml(Tool):
             directory, basename, extension = FileRoutines.split_filename(filename)
             filename_out_dir = os.path.abspath("%s/%s/" % (out_dir, basename))
             basename_dir_list.append(basename)
-            FileRoutines.save_mkdir(filename_out_dir)
+            FileRoutines.safe_mkdir(filename_out_dir)
 
             for model in model_list:
                 model_dir = "%s/%s/" % (filename_out_dir, model)
-                FileRoutines.save_mkdir(model_dir)
+                FileRoutines.safe_mkdir(model_dir)
                 out_file = "%s/%s/%s.out" % (filename_out_dir, model, basename)
                 ctl_file = "%s/%s/%s.ctl" % (filename_out_dir, model, basename)
 

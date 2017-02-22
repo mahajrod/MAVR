@@ -41,7 +41,7 @@ if args.prepare_bam and ((not args.prepared_bam_prefix) or (not args.temp_dir)):
 SamtoolsV1.threads = args.threads
 
 if args.prepare_bam or args.mix_ends:
-    FileRoutines.save_mkdir(FileRoutines.check_path(args.temp_dir))
+    FileRoutines.safe_mkdir(FileRoutines.check_path(args.temp_dir))
     prepared_pe_bam_file = "%s.bam" % args.prepared_bam_prefix
     prepared_unpaired_bam_file = ("%s.unpaired.bam" % args.prepared_bam_prefix) if args.mix_ends else None
     """

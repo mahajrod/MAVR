@@ -117,8 +117,8 @@ class AUGUSTUS(Tool):
 
         splited_dir = FileRoutines.check_path(split_dir)
         splited_out_dir = FileRoutines.check_path(splited_output_dir)
-        FileRoutines.save_mkdir(splited_dir)
-        FileRoutines.save_mkdir(splited_out_dir)
+        FileRoutines.safe_mkdir(splited_dir)
+        FileRoutines.safe_mkdir(splited_out_dir)
 
         self.split_fasta_by_seq_len(genome_file, splited_dir)
 

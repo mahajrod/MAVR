@@ -44,7 +44,7 @@ parser.add_argument("-o", "--out_dir", action="store", dest="out_dir", default="
 
 args = parser.parse_args()
 
-FileRoutines.save_mkdir(args.out_dir)
+FileRoutines.safe_mkdir(args.out_dir)
 
 ref_clusters_dict = read_cluster_file(args.ref_file, with_counts=args.ref_with_counts)
 check_clusters_dict = read_cluster_file(args.file_to_check, with_counts=args.check_with_counts)

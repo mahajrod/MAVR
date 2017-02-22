@@ -60,12 +60,12 @@ class ProteinCodingGeneAnnotation(FilteringPipeline):
                           augustus_splited_hints_dir, augustus_raw_dir, augustus_db_or_hint_support_dir,
                           augustus_db_and_hint_support_dir, augustus_pfam_alignments,
                           augustus_swissprot_alignments):
-            self.save_mkdir(directory)
+            self.safe_mkdir(directory)
 
         for species in protein_species_list:
-            self.save_mkdir("%s/%s/" % (protein_evidence_dir, species))
+            self.safe_mkdir("%s/%s/" % (protein_evidence_dir, species))
         for tissue in rnaseq_tissues_list:
-            self.save_mkdir("%s/%s/" % (rnaseq_evidence_dir, tissue))
+            self.safe_mkdir("%s/%s/" % (rnaseq_evidence_dir, tissue))
             #for sample in sample_list:
             #    FileRoutines.save_mkdir("%s/%s" % (directory, sample))
 

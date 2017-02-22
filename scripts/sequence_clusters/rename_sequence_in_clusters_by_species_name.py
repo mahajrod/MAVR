@@ -22,7 +22,7 @@ parser.add_argument("-r", "--label_last", action="store_false", dest="label_firs
 args = parser.parse_args()
 
 input_file_list = sorted(os.listdir(args.input_dir))
-FileRoutines.save_mkdir(args.output_dir)
+FileRoutines.safe_mkdir(args.output_dir)
 if args.label_first:
     id_expression = lambda record_id: record_id.split(args.separator)[0]
 else:

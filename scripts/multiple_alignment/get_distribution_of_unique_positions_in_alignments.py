@@ -27,7 +27,7 @@ args = parser.parse_args()
 
 unique_position_dict = TwoLvlDict()
 
-FileRoutines.save_mkdir(args.output_dir)
+FileRoutines.safe_mkdir(args.output_dir)
 
 for alignment_file in args.input:
     alignment_name_list = FileRoutines.split_filename(alignment_file)
@@ -52,4 +52,3 @@ for species in species_list:
 data_list = [data_dict[species] for species in data_dict]
 
 MatplotlibRoutines.extended_percent_histogram(data_list, args.histogram_output, input_mode="percent", label=species_list)
-

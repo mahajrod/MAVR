@@ -19,9 +19,9 @@ class DiffExpressionPipeline(FilteringPipeline):
         alignment_dir = "%s/alignment/" % output_directory
 
         for directory in (alignment_dir, ):
-            self.save_mkdir(directory)
+            self.safe_mkdir(directory)
             for sample in sample_list:
-                self.save_mkdir("%s/%s" % (directory, sample))
+                self.safe_mkdir("%s/%s" % (directory, sample))
 
     def star_and_htseq(self, genome_dir, samples_directory, output_directory, gff_for_htseq, count_table_file,
                        genome_fasta=None, samples_to_handle=None,

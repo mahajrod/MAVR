@@ -230,7 +230,7 @@ class SequenceClusterRoutines:
         cluster_id_list = IdList()
         cluster_dict = SynDict()
         #print(pep_file)
-        FileRoutines.save_mkdir(output_dir)
+        FileRoutines.safe_mkdir(output_dir)
         out_dir = FileRoutines.check_path(output_dir)
         create_directory_for_each_cluster = True if out_prefix else create_dir_for_each_cluster
         if clusters_id_file:
@@ -251,7 +251,7 @@ class SequenceClusterRoutines:
             if fam_id in cluster_dict:
                 if create_directory_for_each_cluster:
                     fam_dir = "%s%s/" % (out_dir, fam_id)
-                    FileRoutines.save_mkdir(fam_dir)
+                    FileRoutines.safe_mkdir(fam_dir)
                     out_file = "%s%s.fasta" % (fam_dir, out_prefix if out_prefix else fam_id)
                 else:
                     out_file = "%s/%s.fasta" % (out_dir, out_prefix if out_prefix else fam_id)

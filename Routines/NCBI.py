@@ -266,6 +266,7 @@ class AssemblySummaryList(list):
 
         return self.filter(expression)
 
+
 class NCBIRoutines(FileRoutines):
     def __init__(self):
         FileRoutines.__init__(self)

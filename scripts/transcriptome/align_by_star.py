@@ -82,13 +82,13 @@ if args.genome_fasta:
 
 sample_list = args.samples if args.samples else Pipeline.get_sample_list(args.samples_dir)
 
-FileRoutines.save_mkdir(args.output_dir)
+FileRoutines.safe_mkdir(args.output_dir)
 
 for sample in sample_list:
     print ("Handling %s" % sample)
     sample_dir = "%s/%s/" % (args.samples_dir, sample)
     alignment_sample_dir = "%s/%s/" % (args.output_dir, sample)
-    FileRoutines.save_mkdir(alignment_sample_dir)
+    FileRoutines.safe_mkdir(alignment_sample_dir)
     filetypes, forward_files, reverse_files = FileRoutines.make_lists_forward_and_reverse_files(sample_dir)
 
     print "\tAligning reads..."

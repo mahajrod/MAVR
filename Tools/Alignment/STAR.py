@@ -17,7 +17,7 @@ class STAR(Tool):
     def index(self, genome_dir, genome_fasta, annotation_gtf=None, junction_tab_file=None, sjdboverhang=None,
               genomeSAindexNbases=None, genomeChrBinNbits=None, genome_size=None):
 
-        FileRoutines.save_mkdir(genome_dir)
+        FileRoutines.safe_mkdir(genome_dir)
 
         options = "--runMode genomeGenerate"
         options += " --genomeDir %s" % os.path.abspath(genome_dir)
@@ -96,13 +96,13 @@ class STAR(Tool):
         
         sample_list = samples if samples else self.get_sample_list(samples_dir)
         
-        FileRoutines.save_mkdir(output_dir)
+        FileRoutines.safe_mkdir(output_dir)
         
         for sample in sample_list:
             print ("Handling %s" % sample)
             sample_dir = "%s/%s/" % (samples_dir, sample)
             alignment_sample_dir = "%s/%s/" % (output_dir, sample)
-            FileRoutines.save_mkdir(alignment_sample_dir)
+            FileRoutines.safe_mkdir(alignment_sample_dir)
             filetypes, forward_files, reverse_files = FileRoutines.make_lists_forward_and_reverse_files(sample_dir)
         
             print "\tAligning reads..."

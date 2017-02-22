@@ -272,7 +272,7 @@ if args.pfam_db and args.swissprot_db:
     db_or_hints_dir = "supported_by_db_or_hints/"
     db_and_hints_dir = "supported_by_db_and_hints/"
     for directory in db_and_hints_dir, db_or_hints_dir:
-        FileRoutines.save_mkdir(directory)
+        FileRoutines.safe_mkdir(directory)
 
     os.system("mv %s.supported.transcripts.swissprot_or_pfam_or_hints* %s" % (args.output, db_or_hints_dir))
     os.system("mv %s.supported.transcripts.swissprot_or_pfam_and_hints* %s" % (args.output, db_and_hints_dir))

@@ -31,11 +31,11 @@ class FilteringPipeline(Pipeline):
         coockie_trimmomatic_quality_filtered_dir = "%s/coockiecutter_trimmomatic_quality/" % filtered_dir
         final_filtered_dir = "%s/final/" % filtered_dir
 
-        self.save_mkdir(filtered_dir)
+        self.safe_mkdir(filtered_dir)
         for directory in merged_raw_dir, coockie_filtered_dir, coockie_trimmomatic_filtered_dir, coockie_trimmomatic_quality_filtered_dir, final_filtered_dir, filtering_stat_dir:
-            self.save_mkdir(directory)
+            self.safe_mkdir(directory)
             for sample in sample_list:
-                self.save_mkdir("%s/%s" % (directory, sample))
+                self.safe_mkdir("%s/%s" % (directory, sample))
         return (merged_raw_dir, filtered_dir, coockie_filtered_dir, coockie_trimmomatic_filtered_dir,
                 coockie_trimmomatic_quality_filtered_dir, final_filtered_dir, filtering_stat_dir)
 

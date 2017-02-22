@@ -28,7 +28,7 @@ args = parser.parse_args()
 
 temp_dir = "temp/"
 
-FileRoutines.save_mkdir(temp_dir)
+FileRoutines.safe_mkdir(temp_dir)
 
 BioConvert.threads = args.threads
 Convert.threads = args.threads

@@ -27,7 +27,7 @@ class FileRoutines:
             return open(filename, flags)
 
     @staticmethod
-    def save_mkdir(dirname):
+    def safe_mkdir(dirname):
         try:
             os.mkdir(dirname)
         except OSError:

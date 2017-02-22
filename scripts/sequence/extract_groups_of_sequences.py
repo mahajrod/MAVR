@@ -30,7 +30,7 @@ parser.add_argument("-d", "--id_file", action="store", dest="id_file",
 
 args = parser.parse_args()
 
-FileRoutines.save_mkdir(args.output)
+FileRoutines.safe_mkdir(args.output)
 args.extension = args.extension if args.extension else args.format
 tmp_index_file = "temp.idx"
 

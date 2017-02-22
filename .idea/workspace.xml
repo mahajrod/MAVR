@@ -5,9 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/convert/sequence2fastq.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BConverters/SequenceConverters.py" afterPath="$PROJECT_DIR$/BConverters/SequenceConverters.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/SRAToolkit/FastqDump.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/SRAToolkit/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/sra/parallel_unpack_sra.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pipelines/DiffExpression.py" afterPath="$PROJECT_DIR$/Pipelines/DiffExpression.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pipelines/Filtering.py" afterPath="$PROJECT_DIR$/Pipelines/Filtering.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pipelines/GenomeAnnotation/ProteinCodingGeneAnnotation.py" afterPath="$PROJECT_DIR$/Pipelines/GenomeAnnotation/ProteinCodingGeneAnnotation.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pipelines/GenomeAssembly/Scaffolding.py" afterPath="$PROJECT_DIR$/Pipelines/GenomeAssembly/Scaffolding.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/EggNOG.py" afterPath="$PROJECT_DIR$/Routines/EggNOG.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/File.py" afterPath="$PROJECT_DIR$/Routines/File.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/NCBI.py" afterPath="$PROJECT_DIR$/Routines/NCBI.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/SequenceCluster.py" afterPath="$PROJECT_DIR$/Routines/SequenceCluster.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/TreeFam.py" afterPath="$PROJECT_DIR$/Routines/TreeFam.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Alignment/STAR.py" afterPath="$PROJECT_DIR$/Tools/Alignment/STAR.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" afterPath="$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py" afterPath="$PROJECT_DIR$/Tools/Evolution/PAML/Codeml.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/MultipleAlignment/PRANK.py" afterPath="$PROJECT_DIR$/Tools/MultipleAlignment/PRANK.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/alignment/extract_fastq_from_bam.py" afterPath="$PROJECT_DIR$/scripts/alignment/extract_fastq_from_bam.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" afterPath="$PROJECT_DIR$/scripts/annotation/parallel_augustus.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/parallel_augustus_tmp.py" afterPath="$PROJECT_DIR$/scripts/annotation/parallel_augustus_tmp.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/chemidoc/convert_scn_to_tiff.py" afterPath="$PROJECT_DIR$/scripts/chemidoc/convert_scn_to_tiff.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in_alignments.py" afterPath="$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in_alignments.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/parallel_augustus_correct_errors.py" afterPath="$PROJECT_DIR$/scripts/parallel_augustus_correct_errors.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence/extract_groups_of_sequences.py" afterPath="$PROJECT_DIR$/scripts/sequence/extract_groups_of_sequences.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence_clusters/eggnog/rename_files_from_taxaid_to_species_name.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/eggnog/rename_files_from_taxaid_to_species_name.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence_clusters/expansion/compare_clusters.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/expansion/compare_clusters.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence_clusters/extract_sequences_by_clusters.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/extract_sequences_by_clusters.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence_clusters/rename_sequence_in_clusters_by_species_name.py" afterPath="$PROJECT_DIR$/scripts/sequence_clusters/rename_sequence_in_clusters_by_species_name.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/transcriptome/align_by_star.py" afterPath="$PROJECT_DIR$/scripts/transcriptome/align_by_star.py" />
     </list>
     <ignored path="MAVR.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -20,7 +46,6 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/MAVR$NCBI.coverage" NAME="NCBI Coverage Results" MODIFIED="1480810720469" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Routines" />
     <SUITE FILE_PATH="coverage/MAVR$extract_ncf_exon_lengthes.coverage" NAME="extract_ncf_exon_lengthes Coverage Results" MODIFIED="1455547492086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/projects/nxf" />
@@ -38,54 +63,12 @@
     <favorites_list name="MAVR" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="get_insert_size_distribution.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/assembly/get_insert_size_distribution.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="62" column="3" selection-start-line="62" selection-start-column="3" selection-end-line="62" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="boechera_holboeli_scaffolding" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/projects/Boechera/boechera_holboeli_scaffolding">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="boechera_divaricarpa_scaffolding" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/projects/Boechera/boechera_divaricarpa_scaffolding">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SequenceConverters.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BConverters/SequenceConverters.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="83" column="102" selection-start-line="83" selection-start-column="102" selection-end-line="83" selection-end-column="102" />
-              <folding>
-                <element signature="e#46#64#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sequence2fastq.py" pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="sequence2fastq.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/convert/sequence2fastq.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5316456">
-              <caret line="21" column="73" selection-start-line="21" selection-start-column="73" selection-end-line="21" selection-end-column="73" />
+            <state relative-caret-position="234">
+              <caret line="13" column="64" lean-forward="false" selection-start-line="13" selection-start-column="64" selection-end-line="13" selection-end-column="64" />
               <folding>
                 <element signature="e#55#70#0" expanded="true" />
               </folding>
@@ -93,11 +76,75 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="TRF.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tools/RepeatMasking/TRF.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FastqDump.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tools/SRAToolkit/FastqDump.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="353">
+              <caret line="26" column="114" lean-forward="false" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="114" />
+              <folding>
+                <element signature="e#55#64#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="get_codon_alignment.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_codon_alignment.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="parallel_unpack_sra.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/sra/parallel_unpack_sra.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="396">
+              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+              <folding>
+                <element signature="e#55#70#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="get_distribution_of_unique_positions_in_alignments.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in_alignments.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="785">
+              <caret line="53" column="102" lean-forward="false" selection-start-line="53" selection-start-column="102" selection-end-line="53" selection-end-column="102" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tools/SRAToolkit/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="4" column="12" lean-forward="false" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="File.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Routines/File.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.9642856">
-              <caret line="183" column="30" selection-start-line="183" selection-start-column="30" selection-end-line="183" selection-end-column="30" />
+            <state relative-caret-position="245">
+              <caret line="29" column="9" lean-forward="false" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -106,9 +153,21 @@
       <file leaf-file-name="Sequence.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.107142">
-              <caret line="385" column="72" selection-start-line="385" selection-start-column="23" selection-end-line="385" selection-end-column="72" />
+            <state relative-caret-position="90">
+              <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SequenceConverters.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BConverters/SequenceConverters.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="10" column="43" lean-forward="false" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+              <folding>
+                <element signature="e#46#64#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -127,6 +186,7 @@
     <findStrings>
       <find>fastq</find>
       <find>combi</find>
+      <find>mkdir</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -135,12 +195,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/projects/RG/scripts/gather_general_statistics.sh" />
-        <option value="$PROJECT_DIR$/CustomCollections/GeneralCollections.py" />
-        <option value="$PROJECT_DIR$/scripts/sequence/extract_groups_of_sequences.py" />
-        <option value="$PROJECT_DIR$/scripts/sequence/get_random_species_sequences.py" />
-        <option value="$PROJECT_DIR$/scripts/sequence/extract_terminal_sequences.py" />
-        <option value="$PROJECT_DIR$/scripts/sequence/filter_sequences_by_id_expression.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/check_pairing.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/extract_ids_from_fasta.bash" />
         <option value="$PROJECT_DIR$/scripts/sequence/count_sequences_in_fasta.bash" />
@@ -170,7 +224,6 @@
         <option value="$PROJECT_DIR$/scripts/assembly/get_insert_size_distribution.py" />
         <option value="$PROJECT_DIR$/scripts/fastq/remove_tiles_from_fastq.py" />
         <option value="$PROJECT_DIR$/projects/RG/scripts/fastqc_prefiltered_analysis.sh" />
-        <option value="$PROJECT_DIR$/Routines/File.py" />
         <option value="$PROJECT_DIR$/Pipelines/Abstract.py" />
         <option value="$PROJECT_DIR$/Routines/Fastq.py" />
         <option value="$PROJECT_DIR$/Pipelines/Filtering.py" />
@@ -186,6 +239,13 @@
         <option value="$PROJECT_DIR$/projects/RG/scripts/unpack_prefiltered_ready.sh" />
         <option value="$PROJECT_DIR$/BConverters/SequenceConverters.py" />
         <option value="$PROJECT_DIR$/scripts/convert/sequence2fastq.py" />
+        <option value="$PROJECT_DIR$/Routines/NCBI.py" />
+        <option value="$PROJECT_DIR$/Tools/SRAToolkit/__init__.py" />
+        <option value="$PROJECT_DIR$/Routines/File.py" />
+        <option value="$PROJECT_DIR$/scripts/sra/unpack_sra.py" />
+        <option value="$PROJECT_DIR$/Tools/SRAToolkit/FastqDump.py" />
+        <option value="$PROJECT_DIR$/scripts/sra/parallel_unpack_sra.py" />
+        <option value="$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in_alignments.py" />
       </list>
     </option>
   </component>
@@ -193,24 +253,11 @@
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
   </component>
-  <component name="NamedScopeManager">
-    <order />
-  </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-1" />
     <option name="y" value="25" />
     <option name="width" value="1922" />
     <option name="height" value="1055" />
-  </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
-    <OptionsSetting value="true" id="Add" />
-    <OptionsSetting value="true" id="Remove" />
-    <OptionsSetting value="true" id="Checkout" />
-    <OptionsSetting value="true" id="Update" />
-    <OptionsSetting value="true" id="Status" />
-    <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="0" id="Add" />
-    <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -223,8 +270,11 @@
       <autoscrollToSource />
       <autoscrollFromSource />
       <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -232,12 +282,6 @@
               <option name="myItemId" value="MAVR" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="MAVR" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
@@ -271,7 +315,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="convert" />
+              <option name="myItemId" value="sra" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -285,7 +329,79 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Routines" />
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="multiple_alignment" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="entrez" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SRAToolkit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RepeatMasking" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -305,7 +421,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -336,19 +451,19 @@
     </option>
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/scripts/convert" />
-      <recent name="$PROJECT_DIR$/projects/RG/scripts" />
-      <recent name="$PROJECT_DIR$/Tools/Transcriptome" />
-      <recent name="$PROJECT_DIR$/scripts/fastq" />
-      <recent name="$PROJECT_DIR$/scripts/annotation" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/projects/RG/scripts" />
       <recent name="$PROJECT_DIR$/Tools/Alignment" />
       <recent name="$PROJECT_DIR$/scripts/annotation" />
       <recent name="$PROJECT_DIR$/Tools/Annotation" />
       <recent name="$PROJECT_DIR$/scripts/sequence_clusters" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts/sra" />
+      <recent name="$PROJECT_DIR$/Tools/SRAToolkit" />
+      <recent name="$PROJECT_DIR$/scripts/convert" />
+      <recent name="$PROJECT_DIR$/projects/RG/scripts" />
+      <recent name="$PROJECT_DIR$/Tools/Transcriptome" />
     </key>
   </component>
   <component name="RunManager" selected="Python.NCBI">
@@ -446,68 +561,6 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="INTERPRETER_PATH" value="/bin/bash" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <module name="" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="MAVR" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="TARGET" value="" />
-      <option name="SETTINGS_FILE" value="" />
-      <option name="CUSTOM_SETTINGS" value="false" />
-      <option name="USE_OPTIONS" value="false" />
-      <option name="OPTIONS" value="" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
-      <method />
-    </configuration>
-    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="MAVR" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="ADDITIONAL_ARGS" value="" />
-      <method />
-    </configuration>
-    <configuration default="true" type="PyLettuceRunConfigurationType" factoryName="Lettuce">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="MAVR" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="ADDITIONAL_ARGS" value="" />
-      <method />
-    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -526,7 +579,16 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MAVR" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Attests">
@@ -675,7 +737,9 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -684,303 +748,353 @@
       <changelist id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="" />
       <created>1443270821851</created>
       <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
       <updated>1443270821851</updated>
-    </task>
-    <task id="LOCAL-01097" summary="changes">
-      <created>1485932089914</created>
-      <option name="number" value="01097" />
-      <option name="project" value="LOCAL" />
-      <updated>1485932089914</updated>
-    </task>
-    <task id="LOCAL-01098" summary="changes">
-      <created>1485932879671</created>
-      <option name="number" value="01098" />
-      <option name="project" value="LOCAL" />
-      <updated>1485932879672</updated>
-    </task>
-    <task id="LOCAL-01099" summary="changes">
-      <created>1485933850419</created>
-      <option name="number" value="01099" />
-      <option name="project" value="LOCAL" />
-      <updated>1485933850419</updated>
-    </task>
-    <task id="LOCAL-01100" summary="changes">
-      <created>1485943777315</created>
-      <option name="number" value="01100" />
-      <option name="project" value="LOCAL" />
-      <updated>1485943777316</updated>
-    </task>
-    <task id="LOCAL-01101" summary="changes">
-      <created>1485944247249</created>
-      <option name="number" value="01101" />
-      <option name="project" value="LOCAL" />
-      <updated>1485944247249</updated>
     </task>
     <task id="LOCAL-01102" summary="changes">
       <created>1485944309051</created>
       <option name="number" value="01102" />
+      <option name="presentableId" value="LOCAL-01102" />
       <option name="project" value="LOCAL" />
       <updated>1485944309051</updated>
     </task>
     <task id="LOCAL-01103" summary="changes">
       <created>1485944441628</created>
       <option name="number" value="01103" />
+      <option name="presentableId" value="LOCAL-01103" />
       <option name="project" value="LOCAL" />
       <updated>1485944441628</updated>
     </task>
     <task id="LOCAL-01104" summary="changes">
       <created>1485944561945</created>
       <option name="number" value="01104" />
+      <option name="presentableId" value="LOCAL-01104" />
       <option name="project" value="LOCAL" />
       <updated>1485944561945</updated>
     </task>
     <task id="LOCAL-01105" summary="changes">
       <created>1485944711899</created>
       <option name="number" value="01105" />
+      <option name="presentableId" value="LOCAL-01105" />
       <option name="project" value="LOCAL" />
       <updated>1485944711899</updated>
     </task>
     <task id="LOCAL-01106" summary="changes">
       <created>1485944803975</created>
       <option name="number" value="01106" />
+      <option name="presentableId" value="LOCAL-01106" />
       <option name="project" value="LOCAL" />
       <updated>1485944803975</updated>
     </task>
     <task id="LOCAL-01107" summary="changes">
       <created>1485944936198</created>
       <option name="number" value="01107" />
+      <option name="presentableId" value="LOCAL-01107" />
       <option name="project" value="LOCAL" />
       <updated>1485944936198</updated>
     </task>
     <task id="LOCAL-01108" summary="changes">
       <created>1485945187599</created>
       <option name="number" value="01108" />
+      <option name="presentableId" value="LOCAL-01108" />
       <option name="project" value="LOCAL" />
       <updated>1485945187599</updated>
     </task>
     <task id="LOCAL-01109" summary="changes">
       <created>1485945260892</created>
       <option name="number" value="01109" />
+      <option name="presentableId" value="LOCAL-01109" />
       <option name="project" value="LOCAL" />
       <updated>1485945260892</updated>
     </task>
     <task id="LOCAL-01110" summary="changes">
       <created>1485945383508</created>
       <option name="number" value="01110" />
+      <option name="presentableId" value="LOCAL-01110" />
       <option name="project" value="LOCAL" />
       <updated>1485945383509</updated>
     </task>
     <task id="LOCAL-01111" summary="changes">
       <created>1485945390865</created>
       <option name="number" value="01111" />
+      <option name="presentableId" value="LOCAL-01111" />
       <option name="project" value="LOCAL" />
       <updated>1485945390865</updated>
     </task>
     <task id="LOCAL-01112" summary="changes">
       <created>1485945499645</created>
       <option name="number" value="01112" />
+      <option name="presentableId" value="LOCAL-01112" />
       <option name="project" value="LOCAL" />
       <updated>1485945499645</updated>
     </task>
     <task id="LOCAL-01113" summary="changes">
       <created>1485945594041</created>
       <option name="number" value="01113" />
+      <option name="presentableId" value="LOCAL-01113" />
       <option name="project" value="LOCAL" />
       <updated>1485945594041</updated>
     </task>
     <task id="LOCAL-01114" summary="changes">
       <created>1485945890608</created>
       <option name="number" value="01114" />
+      <option name="presentableId" value="LOCAL-01114" />
       <option name="project" value="LOCAL" />
       <updated>1485945890608</updated>
     </task>
     <task id="LOCAL-01115" summary="changes">
       <created>1485946173145</created>
       <option name="number" value="01115" />
+      <option name="presentableId" value="LOCAL-01115" />
       <option name="project" value="LOCAL" />
       <updated>1485946173145</updated>
     </task>
     <task id="LOCAL-01116" summary="changes">
       <created>1485946306483</created>
       <option name="number" value="01116" />
+      <option name="presentableId" value="LOCAL-01116" />
       <option name="project" value="LOCAL" />
       <updated>1485946306484</updated>
     </task>
     <task id="LOCAL-01117" summary="changes">
       <created>1485946410485</created>
       <option name="number" value="01117" />
+      <option name="presentableId" value="LOCAL-01117" />
       <option name="project" value="LOCAL" />
       <updated>1485946410485</updated>
     </task>
     <task id="LOCAL-01118" summary="changes">
       <created>1485946434259</created>
       <option name="number" value="01118" />
+      <option name="presentableId" value="LOCAL-01118" />
       <option name="project" value="LOCAL" />
       <updated>1485946434259</updated>
     </task>
     <task id="LOCAL-01119" summary="changes">
       <created>1485946542994</created>
       <option name="number" value="01119" />
+      <option name="presentableId" value="LOCAL-01119" />
       <option name="project" value="LOCAL" />
       <updated>1485946542994</updated>
     </task>
     <task id="LOCAL-01120" summary="changes">
       <created>1485946899347</created>
       <option name="number" value="01120" />
+      <option name="presentableId" value="LOCAL-01120" />
       <option name="project" value="LOCAL" />
       <updated>1485946899347</updated>
     </task>
     <task id="LOCAL-01121" summary="changes">
       <created>1485947045844</created>
       <option name="number" value="01121" />
+      <option name="presentableId" value="LOCAL-01121" />
       <option name="project" value="LOCAL" />
       <updated>1485947045844</updated>
     </task>
     <task id="LOCAL-01122" summary="changes">
       <created>1485947053652</created>
       <option name="number" value="01122" />
+      <option name="presentableId" value="LOCAL-01122" />
       <option name="project" value="LOCAL" />
       <updated>1485947053652</updated>
     </task>
     <task id="LOCAL-01123" summary="changes">
       <created>1485947155588</created>
       <option name="number" value="01123" />
+      <option name="presentableId" value="LOCAL-01123" />
       <option name="project" value="LOCAL" />
       <updated>1485947155589</updated>
     </task>
     <task id="LOCAL-01124" summary="changes">
       <created>1485947206224</created>
       <option name="number" value="01124" />
+      <option name="presentableId" value="LOCAL-01124" />
       <option name="project" value="LOCAL" />
       <updated>1485947206224</updated>
     </task>
     <task id="LOCAL-01125" summary="changes">
       <created>1486208005004</created>
       <option name="number" value="01125" />
+      <option name="presentableId" value="LOCAL-01125" />
       <option name="project" value="LOCAL" />
       <updated>1486208005106</updated>
     </task>
     <task id="LOCAL-01126" summary="changes">
       <created>1486378707855</created>
       <option name="number" value="01126" />
+      <option name="presentableId" value="LOCAL-01126" />
       <option name="project" value="LOCAL" />
       <updated>1486378707855</updated>
     </task>
     <task id="LOCAL-01127" summary="changes">
       <created>1486381654773</created>
       <option name="number" value="01127" />
+      <option name="presentableId" value="LOCAL-01127" />
       <option name="project" value="LOCAL" />
       <updated>1486381654773</updated>
     </task>
     <task id="LOCAL-01128" summary="changes">
       <created>1486381818945</created>
       <option name="number" value="01128" />
+      <option name="presentableId" value="LOCAL-01128" />
       <option name="project" value="LOCAL" />
       <updated>1486381818946</updated>
     </task>
     <task id="LOCAL-01129" summary="changes">
       <created>1486381961370</created>
       <option name="number" value="01129" />
+      <option name="presentableId" value="LOCAL-01129" />
       <option name="project" value="LOCAL" />
       <updated>1486381961370</updated>
     </task>
     <task id="LOCAL-01130" summary="changes">
       <created>1486384801843</created>
       <option name="number" value="01130" />
+      <option name="presentableId" value="LOCAL-01130" />
       <option name="project" value="LOCAL" />
       <updated>1486384801843</updated>
     </task>
     <task id="LOCAL-01131" summary="changes">
       <created>1486487265855</created>
       <option name="number" value="01131" />
+      <option name="presentableId" value="LOCAL-01131" />
       <option name="project" value="LOCAL" />
       <updated>1486487265856</updated>
     </task>
     <task id="LOCAL-01132" summary="changes">
       <created>1486490945299</created>
       <option name="number" value="01132" />
+      <option name="presentableId" value="LOCAL-01132" />
       <option name="project" value="LOCAL" />
       <updated>1486490945299</updated>
     </task>
     <task id="LOCAL-01133" summary="changes">
       <created>1486491296586</created>
       <option name="number" value="01133" />
+      <option name="presentableId" value="LOCAL-01133" />
       <option name="project" value="LOCAL" />
       <updated>1486491296586</updated>
     </task>
     <task id="LOCAL-01134" summary="changes">
       <created>1486492849678</created>
       <option name="number" value="01134" />
+      <option name="presentableId" value="LOCAL-01134" />
       <option name="project" value="LOCAL" />
       <updated>1486492849678</updated>
     </task>
     <task id="LOCAL-01135" summary="changes">
       <created>1486492982751</created>
       <option name="number" value="01135" />
+      <option name="presentableId" value="LOCAL-01135" />
       <option name="project" value="LOCAL" />
       <updated>1486492982751</updated>
     </task>
     <task id="LOCAL-01136" summary="changes">
       <created>1486553856853</created>
       <option name="number" value="01136" />
+      <option name="presentableId" value="LOCAL-01136" />
       <option name="project" value="LOCAL" />
       <updated>1486553856853</updated>
     </task>
     <task id="LOCAL-01137" summary="changes">
       <created>1486578160649</created>
       <option name="number" value="01137" />
+      <option name="presentableId" value="LOCAL-01137" />
       <option name="project" value="LOCAL" />
       <updated>1486578160649</updated>
     </task>
     <task id="LOCAL-01138" summary="changes">
       <created>1486578244751</created>
       <option name="number" value="01138" />
+      <option name="presentableId" value="LOCAL-01138" />
       <option name="project" value="LOCAL" />
       <updated>1486578244751</updated>
     </task>
     <task id="LOCAL-01139" summary="changes">
       <created>1486579351513</created>
       <option name="number" value="01139" />
+      <option name="presentableId" value="LOCAL-01139" />
       <option name="project" value="LOCAL" />
       <updated>1486579351513</updated>
     </task>
     <task id="LOCAL-01140" summary="changes">
       <created>1486731923775</created>
       <option name="number" value="01140" />
+      <option name="presentableId" value="LOCAL-01140" />
       <option name="project" value="LOCAL" />
       <updated>1486731923776</updated>
     </task>
     <task id="LOCAL-01141" summary="changes">
       <created>1486936308083</created>
       <option name="number" value="01141" />
+      <option name="presentableId" value="LOCAL-01141" />
       <option name="project" value="LOCAL" />
       <updated>1486936308109</updated>
     </task>
     <task id="LOCAL-01142" summary="changes">
       <created>1486999585150</created>
       <option name="number" value="01142" />
+      <option name="presentableId" value="LOCAL-01142" />
       <option name="project" value="LOCAL" />
       <updated>1486999585150</updated>
     </task>
     <task id="LOCAL-01143" summary="changes">
       <created>1487197920892</created>
       <option name="number" value="01143" />
+      <option name="presentableId" value="LOCAL-01143" />
       <option name="project" value="LOCAL" />
       <updated>1487197920892</updated>
     </task>
     <task id="LOCAL-01144" summary="changes">
       <created>1487437441228</created>
       <option name="number" value="01144" />
+      <option name="presentableId" value="LOCAL-01144" />
       <option name="project" value="LOCAL" />
       <updated>1487437441229</updated>
     </task>
     <task id="LOCAL-01145" summary="changes">
       <created>1487723974311</created>
       <option name="number" value="01145" />
+      <option name="presentableId" value="LOCAL-01145" />
       <option name="project" value="LOCAL" />
       <updated>1487723974356</updated>
     </task>
-    <option name="localTasksCounter" value="1146" />
+    <task id="LOCAL-01146" summary="changes">
+      <created>1487730964939</created>
+      <option name="number" value="01146" />
+      <option name="presentableId" value="LOCAL-01146" />
+      <option name="project" value="LOCAL" />
+      <updated>1487730964939</updated>
+    </task>
+    <task id="LOCAL-01147" summary="changes">
+      <created>1487731256863</created>
+      <option name="number" value="01147" />
+      <option name="presentableId" value="LOCAL-01147" />
+      <option name="project" value="LOCAL" />
+      <updated>1487731256863</updated>
+    </task>
+    <task id="LOCAL-01148" summary="changes">
+      <created>1487731665480</created>
+      <option name="number" value="01148" />
+      <option name="presentableId" value="LOCAL-01148" />
+      <option name="project" value="LOCAL" />
+      <updated>1487731665480</updated>
+    </task>
+    <task id="LOCAL-01149" summary="changes">
+      <created>1487731759921</created>
+      <option name="number" value="01149" />
+      <option name="presentableId" value="LOCAL-01149" />
+      <option name="project" value="LOCAL" />
+      <updated>1487731759921</updated>
+    </task>
+    <task id="LOCAL-01150" summary="changes">
+      <created>1487731883290</created>
+      <option name="number" value="01150" />
+      <option name="presentableId" value="LOCAL-01150" />
+      <option name="project" value="LOCAL" />
+      <updated>1487731883291</updated>
+    </task>
+    <option name="localTasksCounter" value="1151" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1007,50 +1121,50 @@
     <frame x="-1" y="25" width="1922" height="1055" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.11927582" sideWeight="0.4888179" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29499468" sideWeight="0.8187134" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22875299" sideWeight="0.18128654" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2140575" sideWeight="0.5111821" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.013615734" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399361" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973376" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14376996" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19536598" sideWeight="0.8187134" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.039445627" sideWeight="0.5134281" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.039445627" sideWeight="0.48657188" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.013615734" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22875299" sideWeight="0.18128654" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14376996" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973376" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.399361" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20127796" sideWeight="0.4978678" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399361" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5021322" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23538704" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3383915" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.039445627" sideWeight="0.5134281" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.013615734" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14376996" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19536598" sideWeight="0.8187134" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973376" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.039445627" sideWeight="0.48657188" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22875299" sideWeight="0.18128654" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.399361" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="UnknownFeatures">
@@ -1160,382 +1274,395 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/mut_strandness.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/variant_location_pies.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/mut_locations.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/compare_sub_plus_and_sub_minus_by_genes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/compare_sub_plus_and_sub_minus.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/desaminases/heatmap_article.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="110" column="51" selection-start-line="110" selection-start-column="16" selection-end-line="110" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_augustus_tmp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/cat_genomes/caracal_exonerate_dog.slurm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="63" selection-start-line="19" selection-start-column="0" selection-end-line="20" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Annotation/AUGUSTUS.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="608" column="0" selection-start-line="608" selection-start-column="0" selection-end-line="608" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/RG/scripts/kmer_analysis.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="74" column="21" selection-start-line="74" selection-start-column="21" selection-end-line="74" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parsers/KrATER.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/RG/scripts/gather_general_statistics.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="59" column="19" selection-start-line="59" selection-start-column="19" selection-end-line="59" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_augustus.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="260" column="80" selection-start-line="260" selection-start-column="80" selection-end-line="260" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/kmer/get_general_stats_from_krater_reports.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/fastq/fastq2fasta.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Parsers/FaCut.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="76" column="67" selection-start-line="76" selection-start-column="67" selection-end-line="76" selection-end-column="67" />
+        <state relative-caret-position="0">
+          <caret line="76" column="67" lean-forward="false" selection-start-line="76" selection-start-column="67" selection-end-line="76" selection-end-column="67" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/projects/RG/scripts/fastqc_prefiltered_analysis.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="54" column="6" selection-start-line="54" selection-start-column="6" selection-end-line="54" selection-end-column="6" />
+        <state relative-caret-position="0">
+          <caret line="54" column="6" lean-forward="false" selection-start-line="54" selection-start-column="6" selection-end-line="54" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Pipelines/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Fastq.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Pipelines/Abstract.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+        <state relative-caret-position="0">
+          <caret line="8" column="38" lean-forward="false" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Alignment.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Annotations.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Matplotlib.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="384" column="29" selection-start-line="384" selection-start-column="29" selection-end-line="384" selection-end-column="29" />
+        <state relative-caret-position="0">
+          <caret line="384" column="29" lean-forward="false" selection-start-line="384" selection-start-column="29" selection-end-line="384" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Scaffolders/SSPACE.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/fastq/remove_tiles_from_fastq.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="41" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
+        <state relative-caret-position="0">
+          <caret line="12" column="41" lean-forward="false" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/assembly/get_stats_from_assemblies.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="23" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
+        <state relative-caret-position="0">
+          <caret line="39" column="23" lean-forward="false" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Drawing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="218" column="31" selection-start-line="218" selection-start-column="31" selection-end-line="218" selection-end-column="31" />
+        <state relative-caret-position="0">
+          <caret line="218" column="31" lean-forward="false" selection-start-line="218" selection-start-column="31" selection-end-line="218" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Annotation/SNPeff.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/filter/filtering_pipeline.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Pipelines/Filtering.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="56" column="11" selection-start-line="56" selection-start-column="11" selection-end-line="56" selection-end-column="11" />
+        <state relative-caret-position="0">
+          <caret line="56" column="11" lean-forward="false" selection-start-line="56" selection-start-column="11" selection-end-line="56" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Bedtools/GenomeCov.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
+        <state relative-caret-position="0">
+          <caret line="19" column="40" lean-forward="false" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/annotation/annotate_vcf.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Transcriptome/PASA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="96" selection-start-line="17" selection-start-column="96" selection-end-line="17" selection-end-column="96" />
+        <state relative-caret-position="0">
+          <caret line="17" column="96" lean-forward="false" selection-start-line="17" selection-start-column="96" selection-end-line="17" selection-end-column="96" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Abstract.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="38" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="50" />
+        <state relative-caret-position="0">
+          <caret line="25" column="38" lean-forward="false" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="50" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/download/download_from_sra_by_ids.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="44" column="66" selection-start-line="44" selection-start-column="66" selection-end-line="44" selection-end-column="66" />
+        <state relative-caret-position="0">
+          <caret line="44" column="66" lean-forward="false" selection-start-line="44" selection-start-column="66" selection-end-line="44" selection-end-column="66" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence/check_pairing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/alignment/check_read_pairing_in_name_sorted_bam.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Samtools/Samtools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="182" column="8" selection-start-line="182" selection-start-column="8" selection-end-line="183" selection-end-column="99" />
+        <state relative-caret-position="0">
+          <caret line="182" column="8" lean-forward="false" selection-start-line="182" selection-start-column="8" selection-end-line="183" selection-end-column="99" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/alignment/draw_insert_size_distribution.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
+        <state relative-caret-position="0">
+          <caret line="4" column="37" lean-forward="false" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Pipelines/GenomeAssembly/Scaffolding.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="69" column="53" selection-start-line="69" selection-start-column="53" selection-end-line="69" selection-end-column="53" />
+        <state relative-caret-position="0">
+          <caret line="69" column="53" lean-forward="false" selection-start-line="69" selection-start-column="53" selection-end-line="69" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/projects/Boechera/boechera_holboeli_scaffolding">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/convert/fastq2fasta.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20253165">
-          <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="8" column="51" lean-forward="false" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/convert/fasta2phylip.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#55#70#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/projects/Boechera/boechera_divaricarpa_scaffolding">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="31" />
+        <state relative-caret-position="756">
+          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/projects/RG/scripts/unpack_prefiltered_ready.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37974682">
-          <caret line="69" column="12" selection-start-line="69" selection-start-column="12" selection-end-line="69" selection-end-column="12" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="69" column="12" lean-forward="false" selection-start-line="69" selection-start-column="12" selection-end-line="69" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/projects/RG/scripts/unpack.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31926864">
-          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/assembly/get_insert_size_distribution.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="62" column="3" selection-start-line="62" selection-start-column="3" selection-end-line="62" selection-end-column="3" />
+        <state relative-caret-position="0">
+          <caret line="62" column="3" lean-forward="false" selection-start-line="62" selection-start-column="3" selection-end-line="62" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/File.py">
+    <entry file="file://$PROJECT_DIR$/BConverters/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.9642856">
-          <caret line="183" column="30" selection-start-line="183" selection-start-column="30" selection-end-line="183" selection-end-column="30" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#1#62#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
+    <entry file="file://$PROJECT_DIR$/BConverters/Converters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.107142">
-          <caret line="385" column="72" selection-start-line="385" selection-start-column="23" selection-end-line="385" selection-end-column="72" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BConverters/SequenceConverters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="83" column="102" selection-start-line="83" selection-start-column="102" selection-end-line="83" selection-end-column="102" />
+        <state relative-caret-position="90">
+          <caret line="10" column="43" lean-forward="false" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
           <folding>
             <element signature="e#46#64#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/RepeatMasking/RepeatScout.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/RepeatMasking/RepeatModeler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/RepeatMasking/RepeatMasker.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3069">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/RepeatMasking/TRF.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/eggnog/rename_files_from_taxaid_to_species_name.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="38" column="13" lean-forward="false" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/SRAToolkit/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="12" lean-forward="false" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_codon_alignment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/NCBI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3914">
+          <caret line="268" column="0" lean-forward="true" selection-start-line="268" selection-start-column="0" selection-end-line="268" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/convert/sequence2fastq.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5316456">
-          <caret line="21" column="73" selection-start-line="21" selection-start-column="73" selection-end-line="21" selection-end-column="73" />
+        <state relative-caret-position="234">
+          <caret line="13" column="64" lean-forward="false" selection-start-line="13" selection-start-column="64" selection-end-line="13" selection-end-column="64" />
           <folding>
             <element signature="e#55#70#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/SRAToolkit/FastqDump.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="26" column="114" lean-forward="false" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="114" />
+          <folding>
+            <element signature="e#55#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/File.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="29" column="9" lean-forward="false" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sra/parallel_unpack_sra.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding>
+            <element signature="e#55#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in_alignments.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="785">
+          <caret line="53" column="102" lean-forward="false" selection-start-line="53" selection-start-column="102" selection-end-line="53" selection-end-column="102" />
+          <folding />
         </state>
       </provider>
     </entry>
