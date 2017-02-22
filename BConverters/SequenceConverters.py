@@ -5,7 +5,7 @@ import collections
 from Bio import SeqIO
 from Bio import AlignIO
 from Parsers.General import parse_metamiga_fasta
-from Routines import SequenceRoutines
+from Routines.Sequence import SequenceRoutines
 
 
 class SequenceConverters(SequenceRoutines):
