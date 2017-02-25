@@ -112,26 +112,63 @@ class AnnotationsRoutines:
 
     @staticmethod
     def fix_gff_coordinates_order(input_gff, output_gff):
-        number_of_fixed_lines = 0
+        fixed_lines_number = 0
+        malformed_lines_number = 0
         with open(input_gff, "r") as in_fd:
             with open(output_gff, "w") as out_fd:
                 for line in in_fd:
                     if line[0] == "#":
                         out_fd.write(line)
                         continue
-
                     tmp = line.split("\t")
 
-                    if int(tmp[3]) <= int(tmp[4]):
+                    try:
+                        start = int(tmp[3])
+                        end = int(tmp[4])
+                    except ValueError:
+                        malformed_lines_number += 1
+                        continue
+
+                    if start <= end:
                         out_fd.write(line)
                         continue
 
                     tmp[3], tmp[4] = tmp[4], tmp[3]
                     out_fd.write("\t".join(tmp))
 
-                    number_of_fixed_lines += 1
+                    fixed_lines_number += 1
 
-        print("Fixed lines: %i" % number_of_fixed_lines)
+        print("Fixed lines: %i" % fixed_lines_number)
+        print("Malformed lines(removed): %i" % malformed_lines_number)
+
+    @staticmethod
+    def fix_absent_feature_type_field(input_gff, output_gff, feature_type):
+        fixed_lines_number = 0
+        malformed_lines_number = 0
+        malformed_lines_list = []
+        line_number = 0
+        with open(input_gff, "r") as in_fd:
+            with open(output_gff, "w") as out_fd:
+                for line in in_fd:
+                    line_number += 1
+                    if line[0] == "#":
+                        out_fd.write(line)
+                        continue
+                    tmp = line.split("\t")
+
+                    try:
+                        start = int(tmp[3])
+                        end = int(tmp[4])
+
+                    except ValueError:
+                        malformed_lines_number += 1
+                        malformed_lines_list.append(line_number)
+                        tmp = tmp[:2] + [feature_type] + tmp[3:]
+                        out_fd.write("\t".join(tmp))
+                        continue
+
+
+
 
 
 

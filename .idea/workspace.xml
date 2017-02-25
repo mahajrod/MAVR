@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/annotation/fix_gff_coordinates.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/annotation/fix_absent_feature_type.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Annotations.py" afterPath="$PROJECT_DIR$/Routines/Annotations.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/add_len_to_simple_output.py" afterPath="$PROJECT_DIR$/scripts/annotation/add_len_to_simple_output.py" />
     </list>
     <ignored path="MAVR.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,21 +53,11 @@
       <file leaf-file-name="FastqDump.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools/SRAToolkit/FastqDump.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
-              <caret line="21" column="62" lean-forward="true" selection-start-line="21" selection-start-column="62" selection-end-line="21" selection-end-column="62" />
+            <state relative-caret-position="378">
+              <caret line="21" column="62" lean-forward="false" selection-start-line="21" selection-start-column="62" selection-end-line="21" selection-end-column="62" />
               <folding>
                 <element signature="e#55#64#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="get_codon_alignment.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_codon_alignment.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -88,31 +77,39 @@
       <file leaf-file-name="SNPeff.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools/Annotation/SNPeff.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
+            <state relative-caret-position="558">
               <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Annotations.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Annotations.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Routines/Annotations.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="857">
-              <caret line="133" column="55" lean-forward="false" selection-start-line="133" selection-start-column="55" selection-end-line="133" selection-end-column="55" />
+            <state relative-caret-position="821">
+              <caret line="165" column="53" lean-forward="false" selection-start-line="165" selection-start-column="53" selection-end-line="165" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="add_len_to_simple_output.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="fix_absent_feature_type.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/annotation/fix_absent_feature_type.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="17" column="100" lean-forward="false" selection-start-line="17" selection-start-column="100" selection-end-line="17" selection-end-column="100" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add_len_to_simple_output.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/annotation/add_len_to_simple_output.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="4" column="38" lean-forward="false" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
-              <folding>
-                <element signature="e#54#69#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="54">
+              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -132,8 +129,8 @@
       <file leaf-file-name="get_distribution_of_unique_positions_in_alignments.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in_alignments.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="443">
-              <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+            <state relative-caret-position="522">
+              <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -142,7 +139,7 @@
       <file leaf-file-name="File.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Routines/File.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
+            <state relative-caret-position="414">
               <caret line="29" column="9" lean-forward="false" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="18" />
               <folding />
             </state>
@@ -172,7 +169,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/sequence/leave_only_label.sh" />
         <option value="$PROJECT_DIR$/Tools/Abstract.py" />
         <option value="$PROJECT_DIR$/Pipelines/GenomeAnnotation/ProteinCodingGeneAnnotation.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/get_sequence_lengths.py" />
@@ -219,10 +215,11 @@
         <option value="$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in_alignments.py" />
         <option value="$PROJECT_DIR$/Tools/SRAToolkit/FastqDump.py" />
         <option value="$PROJECT_DIR$/scripts/sra/parallel_unpack_sra.py" />
-        <option value="$PROJECT_DIR$/Routines/Annotations.py" />
         <option value="$PROJECT_DIR$/scripts/annotation/rRNA/fix_gff_coordinates.py" />
         <option value="$PROJECT_DIR$/scripts/annotation/fix_gff_coordinates.py" />
         <option value="$PROJECT_DIR$/scripts/annotation/add_len_to_simple_output.py" />
+        <option value="$PROJECT_DIR$/scripts/annotation/fix_absent_feature_type.py" />
+        <option value="$PROJECT_DIR$/Routines/Annotations.py" />
       </list>
     </option>
   </component>
@@ -251,7 +248,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -412,7 +409,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -442,19 +439,19 @@
     </option>
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts/annotation" />
+      <recent name="$PROJECT_DIR$/scripts/annotation/rRNA" />
+      <recent name="$PROJECT_DIR$/scripts/sra" />
+      <recent name="$PROJECT_DIR$/Tools/SRAToolkit" />
+      <recent name="$PROJECT_DIR$/scripts/convert" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/scripts/annotation" />
       <recent name="$PROJECT_DIR$/projects/RG/scripts" />
       <recent name="$PROJECT_DIR$/Tools/Alignment" />
       <recent name="$PROJECT_DIR$/Tools/Annotation" />
       <recent name="$PROJECT_DIR$/scripts/sequence_clusters" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/scripts/annotation/rRNA" />
-      <recent name="$PROJECT_DIR$/scripts/sra" />
-      <recent name="$PROJECT_DIR$/Tools/SRAToolkit" />
-      <recent name="$PROJECT_DIR$/scripts/convert" />
-      <recent name="$PROJECT_DIR$/projects/RG/scripts" />
     </key>
   </component>
   <component name="RunManager" selected="Python.NCBI">
@@ -741,20 +738,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1443270821851</updated>
-    </task>
-    <task id="LOCAL-01105" summary="changes">
-      <created>1485944711899</created>
-      <option name="number" value="01105" />
-      <option name="presentableId" value="LOCAL-01105" />
-      <option name="project" value="LOCAL" />
-      <updated>1485944711899</updated>
-    </task>
-    <task id="LOCAL-01106" summary="changes">
-      <created>1485944803975</created>
-      <option name="number" value="01106" />
-      <option name="presentableId" value="LOCAL-01106" />
-      <option name="project" value="LOCAL" />
-      <updated>1485944803975</updated>
     </task>
     <task id="LOCAL-01107" summary="changes">
       <created>1485944936198</created>
@@ -1085,7 +1068,21 @@
       <option name="project" value="LOCAL" />
       <updated>1487780908642</updated>
     </task>
-    <option name="localTasksCounter" value="1154" />
+    <task id="LOCAL-01154" summary="changes">
+      <created>1487789045780</created>
+      <option name="number" value="01154" />
+      <option name="presentableId" value="LOCAL-01154" />
+      <option name="project" value="LOCAL" />
+      <updated>1487789045780</updated>
+    </task>
+    <task id="LOCAL-01155" summary="changes">
+      <created>1487789221400</created>
+      <option name="number" value="01155" />
+      <option name="presentableId" value="LOCAL-01155" />
+      <option name="project" value="LOCAL" />
+      <updated>1487789221401</updated>
+    </task>
+    <option name="localTasksCounter" value="1156" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1112,10 +1109,9 @@
     <frame x="-1" y="25" width="1922" height="1055" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19536598" sideWeight="0.8187134" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19747235" sideWeight="0.8187134" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.039445627" sideWeight="0.5134281" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.039445627" sideWeight="0.48657188" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.013615734" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1130,14 +1126,15 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14376996" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973376" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.039445627" sideWeight="0.48657188" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.399361" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1150,12 +1147,12 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19536598" sideWeight="0.8187134" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973376" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.039445627" sideWeight="0.48657188" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.039445627" sideWeight="0.48657188" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22875299" sideWeight="0.18128654" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.399361" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22875299" sideWeight="0.18128654" order="1" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="UnknownFeatures">
@@ -1265,13 +1262,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Parsers/FaCut.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="76" column="67" lean-forward="false" selection-start-line="76" selection-start-column="67" selection-end-line="76" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/projects/RG/scripts/fastqc_prefiltered_analysis.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1374,7 +1364,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="17" column="96" lean-forward="false" selection-start-line="17" selection-start-column="96" selection-end-line="17" selection-end-column="96" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1411,7 +1400,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="182" column="8" lean-forward="false" selection-start-line="182" selection-start-column="8" selection-end-line="183" selection-end-column="99" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1427,7 +1415,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="69" column="53" lean-forward="false" selection-start-line="69" selection-start-column="53" selection-end-line="69" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1435,7 +1422,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1455,9 +1441,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/projects/Boechera/boechera_divaricarpa_scaffolding">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
+        <state relative-caret-position="0">
           <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1479,7 +1464,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="62" column="3" lean-forward="false" selection-start-line="62" selection-start-column="3" selection-end-line="62" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1487,9 +1471,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#1#62#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1497,25 +1478,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BConverters/SequenceConverters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
+        <state relative-caret-position="0">
           <caret line="10" column="43" lean-forward="false" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
-          <folding>
-            <element signature="e#46#64#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
+        <state relative-caret-position="0">
           <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1523,7 +1499,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1537,9 +1512,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/RepeatMasking/RepeatMasker.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3069">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1547,23 +1521,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/eggnog/rename_files_from_taxaid_to_species_name.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
+        <state relative-caret-position="0">
           <caret line="38" column="13" lean-forward="false" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/SRAToolkit/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
+        <state relative-caret-position="0">
           <caret line="4" column="12" lean-forward="false" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1577,9 +1548,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Routines/NCBI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3914">
-          <caret line="268" column="0" lean-forward="true" selection-start-line="268" selection-start-column="0" selection-end-line="268" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="268" column="0" lean-forward="false" selection-start-line="268" selection-start-column="0" selection-end-line="268" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1595,16 +1565,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/multiple_alignment/get_distribution_of_unique_positions_in_alignments.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+        <state relative-caret-position="522">
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/SRAToolkit/FastqDump.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="21" column="62" lean-forward="true" selection-start-line="21" selection-start-column="62" selection-end-line="21" selection-end-column="62" />
+        <state relative-caret-position="378">
+          <caret line="21" column="62" lean-forward="false" selection-start-line="21" selection-start-column="62" selection-end-line="21" selection-end-column="62" />
           <folding>
             <element signature="e#55#64#0" expanded="true" />
           </folding>
@@ -1613,7 +1583,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Routines/File.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
+        <state relative-caret-position="414">
           <caret line="29" column="9" lean-forward="false" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="18" />
           <folding />
         </state>
@@ -1631,16 +1601,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Annotation/SNPeff.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
+        <state relative-caret-position="558">
           <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/Annotations.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="857">
-          <caret line="133" column="55" lean-forward="false" selection-start-line="133" selection-start-column="55" selection-end-line="133" selection-end-column="55" />
           <folding />
         </state>
       </provider>
@@ -1657,11 +1619,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/annotation/add_len_to_simple_output.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="38" lean-forward="false" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
-          <folding>
-            <element signature="e#54#69#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="54">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/annotation/fix_absent_feature_type.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="17" column="100" lean-forward="false" selection-start-line="17" selection-start-column="100" selection-end-line="17" selection-end-column="100" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/Annotations.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="821">
+          <caret line="165" column="53" lean-forward="false" selection-start-line="165" selection-start-column="53" selection-end-line="165" selection-end-column="53" />
+          <folding />
         </state>
       </provider>
     </entry>
