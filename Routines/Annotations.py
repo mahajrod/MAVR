@@ -163,10 +163,11 @@ class AnnotationsRoutines:
                     except ValueError:
                         malformed_lines_number += 1
                         malformed_lines_list.append(line_number)
-                        tmp = tmp[:2] + [feature_type] + tmp[3:]
+                        tmp = tmp[:2] + [feature_type] + tmp[2:]
                         out_fd.write("\t".join(tmp))
                         continue
 
+                    out_fd.write(line)
 
 
 
