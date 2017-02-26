@@ -71,8 +71,8 @@ class DrawingRoutines(MatplotlibRoutines):
             """
 
             subplot.annotate(record.id, xy=(0, gap_y_start), xycoords='data', fontsize=16,
-                xytext=(-15, 1.5 * gap_line_y_shift), textcoords='offset points',
-                ha='right', va='top')
+                             xytext=(-15, 1.5 * gap_line_y_shift), textcoords='offset points',
+                             ha='right', va='top')
 
             for gap_coords, gap_len in zip(gap_coords_list, gap_len_list):
                 fragment = Rectangle((prev_x, start_y), gap_coords[0] - prev_x - 1, protein_height, fill=False,
@@ -110,7 +110,7 @@ class DrawingRoutines(MatplotlibRoutines):
                                  xytext=(0, 1.5 * gap_line_y_shift), textcoords='offset points', ha='center', va='top')
 
         plt.xlim(xmax=alignment_length + 1)
-        plt.ylim(ymin=0, ymax=start_y + 2*protein_height)
+        plt.ylim(ymin=0, ymax=start_y + 2 * protein_height)
         for extension in ext_list:
             plt.savefig("%s.%s" % (output_prefix, extension))
 
@@ -118,9 +118,11 @@ class DrawingRoutines(MatplotlibRoutines):
                                  alignment_format="fasta", ext_list=["svg", "png"]):
 
         alignment = AlignIO.read(alignment_file, format=alignment_format)
-
-        with open(feature_gff, "r") as gff_fd:
-            features = list(GFF.parse(gff_fd))[0].features
+        if feature_gff:
+            with open(feature_gff, "r") as gff_fd:
+                features = list(GFF.parse(gff_fd))[0].features
+        else:
+            features = []
 
         self.draw_alignment(alignment, features, output_prefix, ext_list=ext_list)
 
