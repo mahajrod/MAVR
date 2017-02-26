@@ -24,12 +24,17 @@ class DrawingRoutines(MatplotlibRoutines):
         MatplotlibRoutines.__init__(self)
 
     @staticmethod
-    def draw_alignment(alignment, features, output_prefix, record_style=None, ext_list=["svg", "png"]):
+    def draw_alignment(alignment, features, output_prefix, record_style=None, ext_list=["svg", "png"],
+                       label_fontsize=13, left_offset=0.2, figure_width=8, id_synonym_dict=None,
+                       id_replacement_mode="partial"):
+        """
+        id_replacement_mode have to be either partial or exact
+        """
         from Routines import SequenceRoutines
         sequence_number = len(alignment)
         alignment_length = len(alignment[0].seq)
 
-        figure = plt.figure(figsize=(8, sequence_number))
+        figure = plt.figure(figsize=(figure_width, sequence_number))
         subplot = plt.subplot(1, 1, 1)
 
         subplot.get_yaxis().set_visible(False)
@@ -52,7 +57,7 @@ class DrawingRoutines(MatplotlibRoutines):
 
         domen_colors = []
         for feature in features:
-            if feature.type == "domen":
+            if (feature.type == "domen") or (feature.type == "domain"):
                 domen_colors.append(subplot._get_lines.color_cycle.next())
 
         for record in alignment:
@@ -69,8 +74,35 @@ class DrawingRoutines(MatplotlibRoutines):
                          horizontalalignment='center',
                          verticalalignment='center')
             """
+            if id_synonym_dict:
+                if id_replacement_mode == "exact":
+                    if record.id in id_synonym_dict:
+                        record_label = id_synonym_dict[record.id]
+                    else:
+                        record_label = record.id
+                        print("WARNING!!! Synonym for %s was not found" % record.id)
+                elif id_replacement_mode == "partial":
 
-            subplot.annotate(record.id, xy=(0, gap_y_start), xycoords='data', fontsize=16,
+                    partial_syn_list = []
+                    for partial_syn in id_synonym_dict:
+                        if partial_syn in record.id:
+                            partial_syn_list.append(partial_syn)
+
+                    if len(partial_syn_list) > 1:
+                        print("WARNING!!! More than one possible replacement for %s was found: %s. No replacement then." % (record.id, ",".join(partial_syn_list)))
+                        record_label = record.id
+                    elif not partial_syn_list:
+                        record_label = record.id
+                        print("WARNING!!! Synonym for %s was not found" % record.id)
+                    else:
+                        record_label = id_synonym_dict[partial_syn_list[0]]
+                else:
+                    raise ValueError("Unknown id replacement mode")
+
+            else:
+                record_label = record.id
+
+            subplot.annotate(record_label, xy=(0, gap_y_start), xycoords='data', fontsize=16,
                              xytext=(-15, 1.5 * gap_line_y_shift), textcoords='offset points',
                              ha='right', va='top')
 
@@ -106,18 +138,20 @@ class DrawingRoutines(MatplotlibRoutines):
             if feature.type == "domen":
                 print feature.id, feature.location
                 subplot.annotate(feature.id, xy=(feature.location.start + len(feature)/2, gap_y_start + protein_height),
-                                 xycoords='data', fontsize=13,
+                                 xycoords='data', fontsize=label_fontsize,
                                  xytext=(0, 1.5 * gap_line_y_shift), textcoords='offset points', ha='center', va='top')
 
         plt.xlim(xmax=alignment_length + 1)
         plt.ylim(ymin=0, ymax=start_y + 2 * protein_height)
         #plt.tight_layout()
-        plt.subplots_adjust(left=0.2)#bottom=0.1, right=0.8, top=0.9)
+        plt.subplots_adjust(left=left_offset)#bottom=0.1, right=0.8, top=0.9)
         for extension in ext_list:
             plt.savefig("%s.%s" % (output_prefix, extension))
 
     def draw_alignment_from_file(self, alignment_file, feature_gff, output_prefix, alignment_style=None,
-                                 alignment_format="fasta", ext_list=["svg", "png"]):
+                                 alignment_format="fasta", ext_list=["svg", "png"], label_fontsize=13,
+                                 left_offset=0.2, figure_width=8, id_synonym_dict=None,
+                                 id_replacement_mode="partial"):
 
         alignment = AlignIO.read(alignment_file, format=alignment_format)
         if feature_gff:
@@ -126,7 +160,9 @@ class DrawingRoutines(MatplotlibRoutines):
         else:
             features = []
 
-        self.draw_alignment(alignment, features, output_prefix, ext_list=ext_list)
+        self.draw_alignment(alignment, features, output_prefix, ext_list=ext_list, label_fontsize=label_fontsize,
+                            left_offset=left_offset, figure_width=figure_width, id_synonym_dict=id_synonym_dict,
+                            id_replacement_mode=id_replacement_mode)
 
     @staticmethod
     def draw_length_histogram(sequence_dict, output_prefix, number_of_bins=None, width_of_bins=None,
