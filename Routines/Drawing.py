@@ -111,7 +111,8 @@ class DrawingRoutines(MatplotlibRoutines):
 
         plt.xlim(xmax=alignment_length + 1)
         plt.ylim(ymin=0, ymax=start_y + 2 * protein_height)
-        plt.tight_layout()
+        #plt.tight_layout()
+        plt.subplots_adjust(left=0.2)#bottom=0.1, right=0.8, top=0.9)
         for extension in ext_list:
             plt.savefig("%s.%s" % (output_prefix, extension))
 
