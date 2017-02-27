@@ -330,4 +330,7 @@ class MultipleAlignmentRoutines:
         SeqIO.write(self.sequences_from_alignment_generator(alignments, gap_symbol=gap_symbol),
                     output_file, format=output_format)
 
+    def translate_codon_alignment(self, codon_alignment, codon_table):
+        pass
+
 

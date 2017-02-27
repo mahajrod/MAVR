@@ -18,6 +18,7 @@ from Routines.Sequence import SequenceRoutines
 class MtDNARoutines(SequenceRoutines):
 
     def __init__(self):
+        SequenceRoutines.__init__(self)
         self.mithochondrion_synonym_table = [
                                             ["12S_rRNA",
                                              "12S rRNA",

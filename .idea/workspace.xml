@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Drawing.py" afterPath="$PROJECT_DIR$/Routines/Drawing.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/draw/draw_protein_alignment.py" afterPath="$PROJECT_DIR$/scripts/draw/draw_protein_alignment.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/MtDNA.py" afterPath="$PROJECT_DIR$/Routines/MtDNA.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/MultipleAlignment.py" afterPath="$PROJECT_DIR$/Routines/MultipleAlignment.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MAVR.iws" />
@@ -49,11 +50,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Drawing.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Drawing.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Routines/Drawing.py">
           <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6447368">
+              <caret line="115" column="90" selection-start-line="115" selection-start-column="90" selection-end-line="115" selection-end-column="90" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Alignment.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Routines/Alignment.py">
+          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="163" column="82" selection-start-line="163" selection-start-column="80" selection-end-line="164" selection-end-column="67" />
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MtDNA.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Routines/MtDNA.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="20" column="38" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MultipleAlignment.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Routines/MultipleAlignment.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="333" column="12" selection-start-line="333" selection-start-column="12" selection-end-line="333" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -69,11 +100,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="draw_protein_alignment.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="draw_protein_alignment.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/draw/draw_protein_alignment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8618421">
-              <caret line="79" column="82" selection-start-line="79" selection-start-column="82" selection-end-line="79" selection-end-column="82" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="50" column="58" selection-start-line="50" selection-start-column="58" selection-end-line="50" selection-end-column="58" />
               <folding />
             </state>
           </provider>
@@ -102,8 +133,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Pipelines/GenomeAnnotation/ProteinCodingGeneAnnotation.py" />
-        <option value="$PROJECT_DIR$/scripts/sequence/get_sequence_lengths.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/make_region_bed_file.py" />
         <option value="$PROJECT_DIR$/Pipelines/GenomeAssembly/GapClosing.py" />
         <option value="$PROJECT_DIR$/Pipelines/GenomeAssembly/ContigAssembly.py" />
@@ -151,8 +180,10 @@
         <option value="$PROJECT_DIR$/scripts/annotation/add_len_to_simple_output.py" />
         <option value="$PROJECT_DIR$/scripts/annotation/fix_absent_feature_type.py" />
         <option value="$PROJECT_DIR$/Routines/Annotations.py" />
-        <option value="$PROJECT_DIR$/Routines/Drawing.py" />
         <option value="$PROJECT_DIR$/scripts/draw/draw_protein_alignment.py" />
+        <option value="$PROJECT_DIR$/Routines/MtDNA.py" />
+        <option value="$PROJECT_DIR$/Routines/MultipleAlignment.py" />
+        <option value="$PROJECT_DIR$/Routines/Drawing.py" />
       </list>
     </option>
   </component>
@@ -767,66 +798,6 @@
       <option name="number" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-01112" summary="changes">
-      <created>1485945499645</created>
-      <option name="number" value="01112" />
-      <option name="project" value="LOCAL" />
-      <updated>1485945499645</updated>
-    </task>
-    <task id="LOCAL-01113" summary="changes">
-      <created>1485945594041</created>
-      <option name="number" value="01113" />
-      <option name="project" value="LOCAL" />
-      <updated>1485945594041</updated>
-    </task>
-    <task id="LOCAL-01114" summary="changes">
-      <created>1485945890608</created>
-      <option name="number" value="01114" />
-      <option name="project" value="LOCAL" />
-      <updated>1485945890608</updated>
-    </task>
-    <task id="LOCAL-01115" summary="changes">
-      <created>1485946173145</created>
-      <option name="number" value="01115" />
-      <option name="project" value="LOCAL" />
-      <updated>1485946173145</updated>
-    </task>
-    <task id="LOCAL-01116" summary="changes">
-      <created>1485946306483</created>
-      <option name="number" value="01116" />
-      <option name="project" value="LOCAL" />
-      <updated>1485946306484</updated>
-    </task>
-    <task id="LOCAL-01117" summary="changes">
-      <created>1485946410485</created>
-      <option name="number" value="01117" />
-      <option name="project" value="LOCAL" />
-      <updated>1485946410485</updated>
-    </task>
-    <task id="LOCAL-01118" summary="changes">
-      <created>1485946434259</created>
-      <option name="number" value="01118" />
-      <option name="project" value="LOCAL" />
-      <updated>1485946434259</updated>
-    </task>
-    <task id="LOCAL-01119" summary="changes">
-      <created>1485946542994</created>
-      <option name="number" value="01119" />
-      <option name="project" value="LOCAL" />
-      <updated>1485946542994</updated>
-    </task>
-    <task id="LOCAL-01120" summary="changes">
-      <created>1485946899347</created>
-      <option name="number" value="01120" />
-      <option name="project" value="LOCAL" />
-      <updated>1485946899347</updated>
-    </task>
-    <task id="LOCAL-01121" summary="changes">
-      <created>1485947045844</created>
-      <option name="number" value="01121" />
-      <option name="project" value="LOCAL" />
-      <updated>1485947045844</updated>
-    </task>
     <task id="LOCAL-01122" summary="changes">
       <created>1485947053652</created>
       <option name="number" value="01122" />
@@ -1061,7 +1032,67 @@
       <option name="project" value="LOCAL" />
       <updated>1488149406234</updated>
     </task>
-    <option name="localTasksCounter" value="1161" />
+    <task id="LOCAL-01161" summary="changes">
+      <created>1488153574969</created>
+      <option name="number" value="01161" />
+      <option name="project" value="LOCAL" />
+      <updated>1488153574969</updated>
+    </task>
+    <task id="LOCAL-01162" summary="changes">
+      <created>1488154094916</created>
+      <option name="number" value="01162" />
+      <option name="project" value="LOCAL" />
+      <updated>1488154094916</updated>
+    </task>
+    <task id="LOCAL-01163" summary="changes">
+      <created>1488154138479</created>
+      <option name="number" value="01163" />
+      <option name="project" value="LOCAL" />
+      <updated>1488154138479</updated>
+    </task>
+    <task id="LOCAL-01164" summary="changes">
+      <created>1488154810385</created>
+      <option name="number" value="01164" />
+      <option name="project" value="LOCAL" />
+      <updated>1488154810385</updated>
+    </task>
+    <task id="LOCAL-01165" summary="changes">
+      <created>1488155077989</created>
+      <option name="number" value="01165" />
+      <option name="project" value="LOCAL" />
+      <updated>1488155077989</updated>
+    </task>
+    <task id="LOCAL-01166" summary="changes">
+      <created>1488155190846</created>
+      <option name="number" value="01166" />
+      <option name="project" value="LOCAL" />
+      <updated>1488155190846</updated>
+    </task>
+    <task id="LOCAL-01167" summary="changes">
+      <created>1488155251287</created>
+      <option name="number" value="01167" />
+      <option name="project" value="LOCAL" />
+      <updated>1488155251287</updated>
+    </task>
+    <task id="LOCAL-01168" summary="changes">
+      <created>1488155309591</created>
+      <option name="number" value="01168" />
+      <option name="project" value="LOCAL" />
+      <updated>1488155309591</updated>
+    </task>
+    <task id="LOCAL-01169" summary="changes">
+      <created>1488155392489</created>
+      <option name="number" value="01169" />
+      <option name="project" value="LOCAL" />
+      <updated>1488155392489</updated>
+    </task>
+    <task id="LOCAL-01170" summary="changes">
+      <created>1488155433531</created>
+      <option name="number" value="01170" />
+      <option name="project" value="LOCAL" />
+      <updated>1488155433531</updated>
+    </task>
+    <option name="localTasksCounter" value="1171" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1094,7 +1125,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1996805" sideWeight="0.8187134" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1996805" sideWeight="0.8187134" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22875299" sideWeight="0.18128654" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.039445627" sideWeight="0.5134281" order="7" side_tool="true" content_ui="tabs" />
@@ -1241,27 +1272,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Routines/Alignment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/Matplotlib.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="384" column="29" selection-start-line="384" selection-start-column="29" selection-end-line="384" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Scaffolders/SSPACE.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/fastq/remove_tiles_from_fastq.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1605,18 +1615,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/Drawing.py">
+    <entry file="file://$PROJECT_DIR$/scripts/draw/draw_protein_alignment.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="163" column="82" selection-start-line="163" selection-start-column="80" selection-end-line="164" selection-end-column="67" />
+          <caret line="50" column="58" selection-start-line="50" selection-start-column="58" selection-end-line="50" selection-end-column="58" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/draw/draw_protein_alignment.py">
+    <entry file="file://$PROJECT_DIR$/Routines/Alignment.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8618421">
-          <caret line="79" column="82" selection-start-line="79" selection-start-column="82" selection-end-line="79" selection-end-column="82" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/MtDNA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="38" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/MultipleAlignment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="333" column="12" selection-start-line="333" selection-start-column="12" selection-end-line="333" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/Drawing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6447368">
+          <caret line="115" column="90" selection-start-line="115" selection-start-column="90" selection-end-line="115" selection-end-column="90" />
           <folding />
         </state>
       </provider>
