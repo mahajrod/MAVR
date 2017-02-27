@@ -178,6 +178,8 @@ Tools/RepeatMasking/RepeatModeler.py
 Tools/RepeatMasking/RepeatScout.py
 Tools/RepeatMasking/TRF.py
 Tools/RepeatMasking/__init__.py
+Tools/SRAToolkit/FastqDump.py
+Tools/SRAToolkit/__init__.py
 Tools/Samtools/Samtools.py
 Tools/Samtools/__init__.py
 Tools/Scaffolders/SSPACE.py
@@ -222,6 +224,8 @@ scripts/annotation/extract_top_hits_from_target_gff_exonerate.py
 scripts/annotation/extract_transcripts_from_gff_by_ids.py
 scripts/annotation/find_PAS.py
 scripts/annotation/find_single_exon_genes.py
+scripts/annotation/fix_absent_feature_type.py
+scripts/annotation/fix_gff_coordinates.py
 scripts/annotation/gather_protein-coding_gene-stats_from_gff.py
 scripts/annotation/get_isoform_len_from_gff.py
 scripts/annotation/get_summary_table.py
@@ -256,6 +260,7 @@ scripts/chemidoc/convert_scn_to_tiff.py
 scripts/convert/fasta2paml.py
 scripts/convert/fasta2phylip.py
 scripts/convert/fastq2fasta.sh
+scripts/convert/sequence2fastq.py
 scripts/download/download_from_sra_by_ids.py
 scripts/draw/draw_histogram.py
 scripts/draw/draw_percent_histogram.py
@@ -273,6 +278,7 @@ scripts/evolution/parallel_codeml.py
 scripts/evolution/parallel_positive_selection_test.py
 scripts/evolution/prepare_alignment_for_codeml.py
 scripts/fastq/fastq2fasta.py
+scripts/fastq/remove_tiles_from_fastq.py
 scripts/fastq/reverse_complement_fastq.py
 scripts/file/extract_by_column_value.py
 scripts/file/split_file_by_column.py
@@ -329,6 +335,7 @@ scripts/multiple_alignment/parallel_mafft.py
 scripts/multiple_alignment/parallel_prank.py
 scripts/multiple_alignment/remove_columns_with_gaps.py
 scripts/multiple_alignment/slice_multiple_alignment.py
+scripts/multiple_alignment/translate_codon_alignment.py
 scripts/phylogenetics/add_features_to_tree.py
 scripts/phylogenetics/collapse_by_support.py
 scripts/phylogenetics/convert_trees.py
@@ -448,6 +455,7 @@ scripts/snpcall/filter_vcf.py
 scripts/snpcall/intersect_vcf.py
 scripts/snpcall/remove_variants_with_filters.py
 scripts/snpcall/snpcall.py
+scripts/sra/parallel_unpack_sra.py
 scripts/transcriptome/align_by_star.py
 scripts/transcriptome/annotation/extract_complete_proteins_from_transdecoder_output.py
 scripts/transcriptome/annotation/predict_proteins_from_transcripts.py

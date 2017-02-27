@@ -9,6 +9,7 @@ from Routines.MtDNA import MtDNARoutines
 from Routines.Fastq import FastQRoutines
 from Routines.Primer import PrimerRoutines
 from Routines.EggNOG import EggNOGRoutines
+from Routines.Ensembl import EnsemblRoutines
 from Routines.TreeFam import TreeFamRoutines
 from Routines.Drawing import DrawingRoutines
 from Routines.Sequence import SequenceRoutines
@@ -28,6 +29,7 @@ FastQRoutines = FastQRoutines()
 SmoothRoutines = SmoothRoutines()
 PrimerRoutines = PrimerRoutines()
 EggNOGRoutines = EggNOGRoutines()
+EnsemblRoutines = EnsemblRoutines()
 TreeFamRoutines = TreeFamRoutines()
 DrawingRoutines = DrawingRoutines()
 SequenceRoutines = SequenceRoutines()
