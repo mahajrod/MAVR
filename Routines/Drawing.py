@@ -64,7 +64,7 @@ class DrawingRoutines(MatplotlibRoutines):
             print record.id
             gap_coords_list, gap_len_list = SequenceRoutines.find_homopolymers(record.seq, "-", min_size=1,
                                                                                search_type="perfect")
-            print gap_coords_list, gap_len_list
+            #print gap_coords_list, gap_len_list
 
             start_y += protein_height + dist_bettwen_proteins
             gap_y_start = gap_line_y_shift + start_y
@@ -113,13 +113,13 @@ class DrawingRoutines(MatplotlibRoutines):
 
                     fragment = Rectangle((prev_x, start_y), gap_coords[0] - prev_x, protein_height, fill=False,
                                          edgecolor="black", facecolor="grey")
-                    print prev_x
-                    print gap_coords[0] - prev_x
+                    #print prev_x
+                    #print gap_coords[0] - prev_x
 
                     subplot.add_patch(fragment)
                 prev_x = gap_coords[1]
-                print [gap_coords[0], gap_coords[0] + int(gap_len/2), gap_coords[1]]
-                plt.plot([gap_coords[0], gap_coords[0] + int(gap_len/2), gap_coords[1]], #plt.plot([gap_coords[0] + 2, gap_coords[0] + int(gap_len/2) + 1, gap_coords[1] - 1],
+                #print [gap_coords[0], gap_coords[0] + int(gap_len/2) + 1, gap_coords[1]]
+                plt.plot([gap_coords[0], gap_coords[0] + int(gap_len/2) + 1, gap_coords[1]], #plt.plot([gap_coords[0] + 2, gap_coords[0] + int(gap_len/2) + 1, gap_coords[1] - 1],
                          [gap_y_start, gap_y_jump, gap_y_start], color="black", linewidth=1)
 
             if not gap_coords_list:
@@ -130,6 +130,7 @@ class DrawingRoutines(MatplotlibRoutines):
                 if gap_coords_list[-1][-1] != alignment_length:
                     fragment = Rectangle((prev_x, start_y), alignment_length - prev_x, protein_height, fill=False,
                                          edgecolor="black", facecolor="grey")
+                    print prev_x, alignment_length - prev_x
                     subplot.add_patch(fragment)
             i = 0
             for feature in features:
