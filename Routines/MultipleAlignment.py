@@ -337,6 +337,7 @@ class MultipleAlignmentRoutines(SequenceRoutines):
 
         def translated_record_generator(alignment):
             for record in alignment:
-                yield SeqRecord(seq=record.seq.translate(gap=gap_symbol, table=table))
+                yield SeqRecord(seq=record.seq.translate(gap=gap_symbol, table=table, id=record.id,
+                                                         description=record.description))
 
         SeqIO.write(translated_record_generator(alignment), protein_alignment_file, format=format)
