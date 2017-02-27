@@ -113,7 +113,7 @@ class DrawingRoutines(MatplotlibRoutines):
                 subplot.add_patch(fragment)
                 prev_x = gap_coords[1]
                 plt.plot([gap_coords[0] + 1, gap_coords[0] + int(gap_len/2), gap_coords[1] - 1],
-                         [gap_y_start, gap_y_jump, gap_y_start], color="black", linewidth=1, antialiased=False)
+                         [gap_y_start, gap_y_jump, gap_y_start], color="black", linewidth=1)
 
             if not gap_coords_list:
                 fragment = Rectangle((prev_x, start_y), alignment_length, protein_height, fill=False,
