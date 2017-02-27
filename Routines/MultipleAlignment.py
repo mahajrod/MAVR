@@ -8,13 +8,14 @@ from Bio import SeqIO, AlignIO
 from Bio.SeqRecord import SeqRecord
 from Bio.Align import MultipleSeqAlignment
 
-from Routines import SequenceRoutines
+#from Routines import SequenceRoutines
 from CustomCollections.GeneralCollections import SynDict
+from Routines.Sequence import SequenceRoutines
 
 
-class MultipleAlignmentRoutines:
+class MultipleAlignmentRoutines(SequenceRoutines):
     def __init__(self):
-        pass
+        SequenceRoutines.__init__(self)
 
     @staticmethod
     def get_general_statistics(alignment, verbose=False):
@@ -269,9 +270,8 @@ class MultipleAlignmentRoutines:
                 coord_fd.write("%i\t%i\t%i\n" % (coord_tuple[1] - coord_tuple[0] + 1, coord_tuple[0], coord_tuple[1]))
         return merged_alignment, sequence_lengthes, sequence_coordinates
 
-    @staticmethod
-    def extract_degenerate_sites_from_codon_alignment(alignment, genetic_code_table=1):
-        degenerate_codon_set = SequenceRoutines.get_degenerate_codon_set(genetic_code_table)
+    def extract_degenerate_sites_from_codon_alignment(self, alignment, genetic_code_table=1):
+        degenerate_codon_set = self.get_degenerate_codon_set(genetic_code_table)
         number_of_alignments = len(alignment)
         alignment_length = len(alignment[0])
         if alignment_length % 3 > 0:
@@ -330,7 +330,13 @@ class MultipleAlignmentRoutines:
         SeqIO.write(self.sequences_from_alignment_generator(alignments, gap_symbol=gap_symbol),
                     output_file, format=output_format)
 
-    def translate_codon_alignment(self, codon_alignment, codon_table):
-        pass
+    @staticmethod
+    def translate_codon_alignment(codon_alignment_file, protein_alignment_file, format="fasta",
+                                  gap_symbol="-", table=1):
+        alignment = AlignIO.read(codon_alignment_file, format=format)
 
+        def translated_record_generator(alignment):
+            for record_id in alignment:
+                yield SeqRecord(seq=alignment[record_id].seq.translate(gap=gap_symbol, table=table))
 
+        SeqIO.write(translated_record_generator(alignment), protein_alignment_file, format=format)
