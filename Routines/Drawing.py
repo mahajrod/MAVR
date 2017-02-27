@@ -64,7 +64,7 @@ class DrawingRoutines(MatplotlibRoutines):
             print record.id
             gap_coords_list, gap_len_list = SequenceRoutines.find_homopolymers(record.seq, "-", min_size=1,
                                                                                search_type="perfect")
-            #print gap_coords_list, gap_len_list
+            print gap_coords_list, gap_len_list
 
             start_y += protein_height + dist_bettwen_proteins
             gap_y_start = gap_line_y_shift + start_y
@@ -113,7 +113,7 @@ class DrawingRoutines(MatplotlibRoutines):
 
                     fragment = Rectangle((prev_x, start_y), gap_coords[0] - prev_x - 1, protein_height, fill=False,
                                          edgecolor="black", facecolor="grey")
-                    print (prev_x, start_y)
+                    print prev_x
                     print gap_coords[0] - prev_x - 1
 
                     subplot.add_patch(fragment)
