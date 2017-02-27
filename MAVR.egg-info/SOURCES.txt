@@ -65,6 +65,7 @@ Routines/Alignment.py
 Routines/Annotations.py
 Routines/Drawing.py
 Routines/EggNOG.py
+Routines/Ensembl.py
 Routines/Fastq.py
 Routines/File.py
 Routines/Functions.py
@@ -267,6 +268,7 @@ scripts/draw/draw_percent_histogram.py
 scripts/draw/draw_plot.py
 scripts/draw/draw_protein_alignment.py
 scripts/draw/draw_tetra_histogram_with_two_logscaled.py
+scripts/ensembl/convert_biomart_protein_annotation_to_gff.py
 scripts/entrez/count_assemblies_from_genome_summaries.sh
 scripts/entrez/get_gene_sequences.py
 scripts/entrez/get_taxa_genomes_summary.py

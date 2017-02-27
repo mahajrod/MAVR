@@ -316,7 +316,33 @@ class FileRoutines:
         else:
             return len(a), len(b), len(a & b), len(a - b), len(b - a), len(a ^ b), len(a | b)
 
+    @staticmethod
+    def split_by_column(input_file, column_number, separator="\t", header=False, outfile_prefix=None,
+                        use_column_value_as_prefix=False):
+        # column number should start from 0
+        header_string = None
+        splited_name = input_file.split(".")
+        extension = splited_name[-1] if len(splited_name) > 1 else ""
+        out_prefix = outfile_prefix if outfile_prefix is not None \
+            else ".".join(splited_name[:-1]) if len(splited_name) > 1 else splited_name[0]
+        out_fd_dict = {}
 
+        with open(input_file, "r") as in_fd:
+            if header:
+                header_string = in_fd.readline()
+            for line in in_fd:
+                line_str = line.strip().split(separator)
+                if line_str[column_number] not in out_fd_dict:
+                    print (line_str[column_number])
+                    suffix = line_str[column_number].replace(" ", "_")
+                    out_name = "%s.%s" % (suffix, extension) if use_column_value_as_prefix else "%s_%s.%s" % (out_prefix, suffix, extension)
+                    out_fd_dict[line_str[column_number]] = open(out_name, "w")
+                    if header:
+                        out_fd_dict[line_str[column_number]].write(header_string)
+                out_fd_dict[line_str[column_number]].write(line)
+
+        for entry in out_fd_dict:
+            out_fd_dict[entry].close()
 
 filetypes_dict = {"fasta": [".fa", ".fasta", ".fa", ".pep", ".cds"],
                   "fastq": [".fastq", ".fq"],
@@ -426,34 +452,6 @@ def read_tsv_as_columns_dict(filename, header_prefix="#", separator="\t"):
             for i in range(0, number_of_columns):
                 tsv_dict[header_list[i]].append(tmp_line[i])
     return tsv_dict
-
-
-def tsv_split_by_column(tsv_file, column_number, separator="\t", header=False, outfile_prefix=None):
-    # column number should start from 0
-    header_string = None
-    splited_name = tsv_file.split(".")
-    extension = splited_name[-1] if len(splited_name) > 1 else ""
-    out_prefix = outfile_prefix if outfile_prefix is not None \
-        else ".".join(splited_name[:-1]) if len(splited_name) > 1 else splited_name[0]
-    out_fd_dict = {}
-
-    with open(tsv_file, "r") as in_fd:
-        if header:
-            header_string = in_fd.readline()
-        for line in in_fd:
-            line_str = line.strip().split(separator)
-            if line_str[column_number] not in out_fd_dict:
-                print (line_str[column_number])
-                suffix = line_str[column_number].replace(" ", "_")
-                out_name = "%s_%s.%s" % (out_prefix, suffix, extension)
-                out_fd_dict[line_str[column_number]] = open(out_name, "w")
-                if header:
-                    out_fd_dict[line_str[column_number]].write(header_string)
-            out_fd_dict[line_str[column_number]].write(line)
-
-    for entry in out_fd_dict:
-        out_fd_dict[entry].close()
-
 
 def tsv_extract_by_column_value(tsv_file, column_number, column_value, separator="\t",
                                 header=False, outfile_prefix=None):
