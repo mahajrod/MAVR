@@ -111,10 +111,10 @@ class DrawingRoutines(MatplotlibRoutines):
 
                 if gap_coords[0] != 0:
 
-                    fragment = Rectangle((prev_x, start_y), gap_coords[0] - prev_x - 1, protein_height, fill=False,
+                    fragment = Rectangle((prev_x, start_y), gap_coords[0] - prev_x, protein_height, fill=False,
                                          edgecolor="black", facecolor="grey")
                     print prev_x
-                    print gap_coords[0] - prev_x - 1
+                    print gap_coords[0] - prev_x
 
                     subplot.add_patch(fragment)
                 prev_x = gap_coords[1]
