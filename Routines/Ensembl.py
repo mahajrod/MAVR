@@ -44,15 +44,30 @@ class EnsemblRoutines(FileRoutines):
         domain_start_index = header_list.index(domain_start_header)
         domain_end_index = header_list.index(domain_end_header)
 
+        line_number = 1
         with open(output_gff, "w") as out_fd:
             for line in in_fd:
-                tmp_list = line.strip().split(separator)
+                line_number += 1
+                tmp_list = line.strip("\n").split(separator)
                 protein_id = tmp_list[protein_id_index]
                 domain_id = tmp_list[domain_id_index]
                 domain_start = tmp_list[domain_start_index]
                 domain_end = tmp_list[domain_end_index]
 
-                out_fd.write("%s\tensembl\tdomain\t%s\t%s\t.\t+\t.\tID=%s; Description=%s\t" % (protein_id,
+                if protein_id == "":
+                    print("WARNING!!! Line %i: malformed, no protein id. Skipping..." % line_number)
+                    continue
+                elif domain_id == "":
+                    print("WARNING!!! Line %i: no domain for %s. Skipping..." % (line_number, protein_id))
+                    continue
+                elif domain_start == "":
+                    print("WARNING!!! Line %i: no start coordinate of domain %s for protein %s. Skipping..." % (line_number, domain_id, protein_id))
+                    continue
+                elif domain_end == "":
+                    print("WARNING!!! Line %i: no end coordinate of domain %s for protein %s. Skipping..." % (line_number, domain_id, protein_id))
+                    continue
+
+                out_fd.write("%s\tensembl\tdomain\t%s\t%s\t.\t+\t.\tID=%s; Description=%s\n" % (protein_id,
                                                                                                 domain_start,
                                                                                                 domain_end,
                                                                                                 domain_id,
