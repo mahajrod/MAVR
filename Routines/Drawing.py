@@ -130,7 +130,7 @@ class DrawingRoutines(MatplotlibRoutines):
                 if gap_coords_list[-1][-1] != alignment_length:
                     fragment = Rectangle((prev_x, start_y), alignment_length - prev_x, protein_height, fill=False,
                                          edgecolor="black", facecolor="grey")
-                    print prev_x, alignment_length - prev_x
+                    #print prev_x, alignment_length - prev_x
                     subplot.add_patch(fragment)
             i = 0
             for feature in features:
