@@ -19,9 +19,13 @@ parser.add_argument("-e", "--header", action="store_true", dest="header", defaul
 parser.add_argument("-u", "--use_column_value_as_prefix", action="store_true", dest="use_column_value_as_prefix",
                     default=False,
                     help="Use column value as prefix for output files")
+parser.add_argument("-r", "--sorted_input", action="store_true", dest="sorted_input",
+                    default=False,
+                    help="Input file is sorted. Do it to reduce number of simultaneously opened files")
+
 
 args = parser.parse_args()
 
 FileRoutines.split_by_column(args.input_file, args.column_number, separator=args.separator,
                              header=args.header, outfile_prefix=args.output_prefix,
-                             use_column_value_as_prefix=args.use_column_value_as_prefix)
+                             use_column_value_as_prefix=args.use_column_value_as_prefix, sorted_input=args.sorted_input)
