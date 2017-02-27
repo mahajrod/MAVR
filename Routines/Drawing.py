@@ -119,6 +119,7 @@ class DrawingRoutines(MatplotlibRoutines):
                     subplot.add_patch(fragment)
                 prev_x = gap_coords[1]
                 #+2 added to reduce overlapping
+                print [gap_coords[0], gap_coords[0] + int(gap_len/2), gap_coords[1]]
                 plt.plot([gap_coords[0], gap_coords[0] + int(gap_len/2), gap_coords[1]], #plt.plot([gap_coords[0] + 2, gap_coords[0] + int(gap_len/2) + 1, gap_coords[1] - 1],
                          [gap_y_start, gap_y_jump, gap_y_start], color="black", linewidth=1)
 
