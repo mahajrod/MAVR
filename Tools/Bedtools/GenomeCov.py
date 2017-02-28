@@ -86,6 +86,6 @@ class GenomeCov(Tool):
                                                                                            zero_coveraged_region_number,
                                                                                            leading_zero_covarage_len,
                                                                                            trailing_zero_covarage_len,
-                                                                                           zero_coverage_coordinates))
+                                                                                           ",".join(zero_coverage_coordinates)))
 
 
