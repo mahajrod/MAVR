@@ -86,7 +86,7 @@ class MathRoutines:
             if input_array[i] == value:
                 plateau_parameters = [i, 1]
                 i += 1
-                while (input_array[i] == value) and (i < array_len):
+                while i < array_len and input_array[i] == value:
                     plateau_parameters[1] += 1
                     i += 1
                 plateau_list.append(plateau_parameters)
@@ -94,6 +94,7 @@ class MathRoutines:
             i += 1
 
         return number_of_values, plateau_list
+
 
 class SmoothRoutines:
     def __init__(self):
