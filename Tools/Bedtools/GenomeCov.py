@@ -40,6 +40,7 @@ class GenomeCov(Tool):
                 out_fd.write(output_header)
                 for line in in_fd:
                     line_number += 1
+                    print (line_number)
                     if line == "\n":    # skip blank lines
                         continue
                     tmp = line.strip().split("\t")
