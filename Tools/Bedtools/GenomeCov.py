@@ -73,7 +73,7 @@ class GenomeCov(Tool):
                         leading_zero_covarage_len = 0
                         trailing_zero_covarage_len = 0
                         zero_coveraged_region_number = 0
-                        zero_coverage_coordinates = "."
+                        zero_coverage_coordinates_list = ["."]
 
                     out_fd.write("%s\t%i\t%.2f\t%.2f\t%i\t%i\t%i\t%i\t%i\t%i\t%i\t%s\n" % (record_id,
                                                                                            record_len,
@@ -86,6 +86,6 @@ class GenomeCov(Tool):
                                                                                            zero_coveraged_region_number,
                                                                                            leading_zero_covarage_len,
                                                                                            trailing_zero_covarage_len,
-                                                                                           ",".join(zero_coverage_coordinates)))
+                                                                                           ",".join([zero_coverage_coordinates_list])))
 
 
