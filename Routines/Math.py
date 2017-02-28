@@ -84,7 +84,7 @@ class MathRoutines:
         plateau_list = []
         while i < array_len:
             if input_array[i] == value:
-                plateau_parameters = (i, 1)
+                plateau_parameters = [i, 1]
                 i += 1
                 while (input_array[i] == value) and (i < array_len):
                     plateau_parameters[1] += 1
