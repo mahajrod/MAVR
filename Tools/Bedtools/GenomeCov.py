@@ -44,6 +44,7 @@ class GenomeCov(Tool):
                     if line == "\n":    # skip blank lines
                         continue
                     tmp = line.strip().split("\t")
+                    print tmp
                     record_id = tmp[0]
                     record_len = int(tmp[1])
                     coverage_array = map(int, tmp[2].split(","))
