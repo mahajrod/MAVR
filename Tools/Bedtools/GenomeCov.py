@@ -41,6 +41,7 @@ class GenomeCov(Tool):
                 for line in in_fd:
                     line_number += 1
                     print (line_number)
+                    print [line]
                     if line == "\n" or line == "":    # skip blank lines
                         continue
                     tmp = line.strip().split("\t")
