@@ -41,10 +41,10 @@ class GenomeCov(Tool):
                 for line in in_fd:
                     line_number += 1
                     print (line_number)
-                    if line == "\n":    # skip blank lines
+                    if line == "\n" or line == "":    # skip blank lines
                         continue
                     tmp = line.strip().split("\t")
-                    print tmp
+                    #print tmp
                     record_id = tmp[0]
                     record_len = int(tmp[1])
                     coverage_array = map(int, tmp[2].split(","))
