@@ -32,8 +32,8 @@ class GenomeCov(Tool):
     @staticmethod
     def analyze_collapsed_coverage_file(collapsed_file, output_file):
         line_number = 0
-        with open(collapsed_file, "w") as in_fd:
-            with open(output_file, "r") as out_fd:
+        with open(collapsed_file, "r") as in_fd:
+            with open(output_file, "w") as out_fd:
 
                 output_header = "#Scaffold\tLength\tMean_coverage\tMedian_coverage\tMin_coverage\tMax_coverage\tCoveraged_positions\tZero_coverage_position_number\tZero_coveraged_region_number\tLeading_zero_covarage_len\tTrailing_zero_covarage_len\tZero_coverage_region_coordinates\n"
 
