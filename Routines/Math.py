@@ -75,6 +75,25 @@ class MathRoutines:
 
         return mean, median, std, var_coeff
 
+    @staticmethod
+    def find_flat_regions_in_array(input_array, value):
+
+        array_len = len(input_array)
+        number_of_values = 0
+        i = 0
+        plateau_list = []
+        while i < array_len:
+            if input_array[i] == value:
+                plateau_parameters = (i, 1)
+                i += 1
+                while (input_array[i] == value) and (i < array_len):
+                    plateau_parameters[1] += 1
+                    i += 1
+                plateau_list.append(plateau_parameters)
+                number_of_values += plateau_parameters[1]
+            i += 1
+
+        return number_of_values, plateau_list
 
 class SmoothRoutines:
     def __init__(self):

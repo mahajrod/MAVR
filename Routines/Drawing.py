@@ -16,21 +16,21 @@ from Bio import AlignIO
 
 from CustomCollections.GeneralCollections import SynDict
 from Routines.Matplotlib import MatplotlibRoutines
+from Routines.Sequence import SequenceRoutines
 from Pictures.Features import RectangularProtein
 
 
-class DrawingRoutines(MatplotlibRoutines):
+class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
     def __init__(self):
         MatplotlibRoutines.__init__(self)
 
-    @staticmethod
-    def draw_alignment(alignment, features, output_prefix, record_style=None, ext_list=["svg", "png"],
+    def draw_alignment(self, alignment, features, output_prefix, record_style=None, ext_list=["svg", "png"],
                        label_fontsize=13, left_offset=0.2, figure_width=8, id_synonym_dict=None,
-                       id_replacement_mode="partial"):
+                       id_replacement_mode="partial", domain_style="vlines"):
         """
         id_replacement_mode have to be either partial or exact
         """
-        from Routines import SequenceRoutines
+        #from Routines import SequenceRoutines
         sequence_number = len(alignment)
         alignment_length = len(alignment[0].seq)
 
@@ -61,9 +61,9 @@ class DrawingRoutines(MatplotlibRoutines):
                 domen_colors.append(subplot._get_lines.color_cycle.next())
 
         for record in alignment:
-            print record.id
-            gap_coords_list, gap_len_list = SequenceRoutines.find_homopolymers(record.seq, "-", min_size=1,
-                                                                               search_type="perfect")
+
+            gap_coords_list, gap_len_list = self.find_homopolymers(record.seq, "-", min_size=1,
+                                                                   search_type="perfect")
             #print gap_coords_list, gap_len_list
 
             start_y += protein_height + dist_bettwen_proteins
@@ -134,12 +134,15 @@ class DrawingRoutines(MatplotlibRoutines):
                     subplot.add_patch(fragment)
             i = 0
             for feature in features:
-                if feature.type == "domen":
+                if (feature.type == "domen") or (feature.type == "domain"):
                     print feature.id, feature.location
-
-                    fragment = Rectangle((feature.location.start, start_y), len(feature)-1, protein_height, fill=False,
-                                     facecolor="grey", edgecolor=domen_colors[i]) #edgecolor="green",
-                    subplot.add_patch(fragment)
+                    if domain_style == "rectangle":
+                        fragment = Rectangle((feature.location.start, start_y), len(feature)-1, protein_height, fill=False,
+                                             facecolor="grey", edgecolor=domen_colors[i]) #edgecolor="green",
+                        subplot.add_patch(fragment)
+                    elif domain_style == "vlines":
+                        plt.vlines(feature.location.start, protein_height, start_y + protein_height, colors=domen_colors[i])
+                        plt.vlines(feature.location.end - 1, protein_height, start_y + protein_height, colors=domen_colors[i])
                     i += 1
 
         for feature in features:
@@ -164,7 +167,11 @@ class DrawingRoutines(MatplotlibRoutines):
         alignment = AlignIO.read(alignment_file, format=alignment_format)
         if feature_gff:
             with open(feature_gff, "r") as gff_fd:
-                features = list(GFF.parse(gff_fd))[0].features
+                record = list(GFF.parse(gff_fd))[0]
+                features = record.features
+                record_id = record.id
+                gap_coords_list, gap_len_list = self.find_homopolymers(record.seq, "-", min_size=1,
+                                                                       search_type="perfect")
         else:
             features = []
 
