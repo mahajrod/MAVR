@@ -14,4 +14,3 @@ parser.add_argument("-o", "--output", action="store", dest="output",
 args = parser.parse_args()
 
 GenomeCov.analyze_collapsed_coverage_file(args.input, args.output)
-

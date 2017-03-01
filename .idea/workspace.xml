@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/transcriptome/coverage_analyzis.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Sequence.py" afterPath="$PROJECT_DIR$/Routines/Sequence.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Bedtools/GenomeCov.py" afterPath="$PROJECT_DIR$/Tools/Bedtools/GenomeCov.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/alignment/collapse_bedtools_coverage_file.sh" afterPath="$PROJECT_DIR$/scripts/alignment/collapse_bedtools_coverage_file.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence/extract_sequences_by_ids.py" afterPath="$PROJECT_DIR$/scripts/sequence/extract_sequences_by_ids.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/alignment/analize_collapsed_coverage_file.py" afterPath="$PROJECT_DIR$/scripts/alignment/analize_collapsed_coverage_file.py" />
     </list>
     <ignored path="MAVR.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,18 +41,18 @@
       <file leaf-file-name="collapse_bedtools_coverage_file.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/alignment/collapse_bedtools_coverage_file.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
+            <state relative-caret-position="0">
               <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GenomeCov.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GenomeCov.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Tools/Bedtools/GenomeCov.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="27" column="235" lean-forward="false" selection-start-line="27" selection-start-column="235" selection-end-line="27" selection-end-column="235" />
+            <state relative-caret-position="321">
+              <caret line="86" column="118" lean-forward="true" selection-start-line="86" selection-start-column="118" selection-end-line="86" selection-end-column="118" />
               <folding>
                 <element signature="e#55#64#0" expanded="true" />
               </folding>
@@ -73,7 +70,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="extract_sequences_by_ids.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="extract_sequences_by_ids.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/sequence/extract_sequences_by_ids.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="414">
@@ -96,21 +93,11 @@
       <file leaf-file-name="analize_collapsed_coverage_file.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/alignment/analize_collapsed_coverage_file.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="11" column="48" lean-forward="false" selection-start-line="11" selection-start-column="48" selection-end-line="11" selection-end-column="48" />
+            <state relative-caret-position="288">
+              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding>
                 <element signature="e#55#70#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/Bedtools/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -130,7 +117,7 @@
       <file leaf-file-name="Math.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Routines/Math.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1224">
+            <state relative-caret-position="360">
               <caret line="73" column="35" lean-forward="false" selection-start-line="73" selection-start-column="35" selection-end-line="73" selection-end-column="35" />
               <folding />
             </state>
@@ -217,12 +204,12 @@
         <option value="$PROJECT_DIR$/Routines/File.py" />
         <option value="$PROJECT_DIR$/scripts/file/split_file_by_column.py" />
         <option value="$PROJECT_DIR$/Routines/Drawing.py" />
-        <option value="$PROJECT_DIR$/scripts/alignment/analize_collapsed_coverage_file.py" />
         <option value="$PROJECT_DIR$/Routines/Math.py" />
         <option value="$PROJECT_DIR$/scripts/alignment/collapse_bedtools_coverage_file.sh" />
-        <option value="$PROJECT_DIR$/Tools/Bedtools/GenomeCov.py" />
         <option value="$PROJECT_DIR$/Routines/Sequence.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/extract_sequences_by_ids.py" />
+        <option value="$PROJECT_DIR$/scripts/alignment/analize_collapsed_coverage_file.py" />
+        <option value="$PROJECT_DIR$/Tools/Bedtools/GenomeCov.py" />
       </list>
     </option>
   </component>
@@ -703,13 +690,6 @@
       <option name="presentableId" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-01159" summary="changes">
-      <created>1488148985372</created>
-      <option name="number" value="01159" />
-      <option name="presentableId" value="LOCAL-01159" />
-      <option name="project" value="LOCAL" />
-      <updated>1488148985372</updated>
-    </task>
     <task id="LOCAL-01160" summary="changes">
       <created>1488149406234</created>
       <option name="number" value="01160" />
@@ -1046,7 +1026,14 @@
       <option name="project" value="LOCAL" />
       <updated>1488300183945</updated>
     </task>
-    <option name="localTasksCounter" value="1208" />
+    <task id="LOCAL-01208" summary="changes">
+      <created>1488383703938</created>
+      <option name="number" value="01208" />
+      <option name="presentableId" value="LOCAL-01208" />
+      <option name="project" value="LOCAL" />
+      <updated>1488383703939</updated>
+    </task>
+    <option name="localTasksCounter" value="1209" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1073,7 +1060,7 @@
     <frame x="-1" y="25" width="1922" height="1055" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21800947" sideWeight="0.8187134" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21800947" sideWeight="0.8187134" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.039445627" sideWeight="0.5134281" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.013615734" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1504,14 +1491,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Bedtools/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Drawing.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -1519,39 +1498,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/Math.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1224">
-          <caret line="73" column="35" lean-forward="false" selection-start-line="73" selection-start-column="35" selection-end-line="73" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/alignment/analize_collapsed_coverage_file.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="11" column="48" lean-forward="false" selection-start-line="11" selection-start-column="48" selection-end-line="11" selection-end-column="48" />
-          <folding>
-            <element signature="e#55#70#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/alignment/collapse_bedtools_coverage_file.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
+        <state relative-caret-position="0">
           <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Bedtools/GenomeCov.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="27" column="235" lean-forward="false" selection-start-line="27" selection-start-column="235" selection-end-line="27" selection-end-column="235" />
-          <folding>
-            <element signature="e#55#64#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1561,6 +1512,32 @@
         <state relative-caret-position="414">
           <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence/extract_sequences_by_ids.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="26" column="26" lean-forward="false" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Bedtools/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/alignment/analize_collapsed_coverage_file.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#55#70#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1574,11 +1551,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/sequence/extract_sequences_by_ids.py">
+    <entry file="file://$PROJECT_DIR$/Routines/Math.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="26" column="26" lean-forward="false" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
+        <state relative-caret-position="360">
+          <caret line="73" column="35" lean-forward="false" selection-start-line="73" selection-start-column="35" selection-end-line="73" selection-end-column="35" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Bedtools/GenomeCov.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="86" column="118" lean-forward="true" selection-start-line="86" selection-start-column="118" selection-end-line="86" selection-end-column="118" />
+          <folding>
+            <element signature="e#55#64#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
