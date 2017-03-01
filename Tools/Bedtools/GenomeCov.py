@@ -35,7 +35,7 @@ class GenomeCov(Tool):
         with open(collapsed_file, "r") as in_fd:
             with open(output_file, "w") as out_fd:
 
-                output_header = "#Scaffold\tLength\tMean_coverage\tMedian_coverage\tMin_coverage\tMax_coverage\tCoveraged_positions\tZero_coverage_position_number\tZero_coveraged_region_number\tLeading_zero_covarage_len\tTrailing_zero_covarage_len\tZero_coverage_region_coordinates\tMean_coverage(without zerocoveraged_ends)\tMean_coverage(without zerocoveraged_ends)\n"
+                output_header = "#Scaffold\tLength\tMean_coverage\tMedian_coverage\tMin_coverage\tMax_coverage\tCoveraged_positions\tZero_coverage_position_number\tZero_coveraged_region_number\tLeading_zero_covarage_len\tTrailing_zero_covarage_len\tZero_coverage_region_coordinates\tMean_coverage(without_zerocoveraged_ends)\tMedian_coverage(without_zerocoveraged_ends)\tLength_without_zero_coverage_ends\n"
 
                 out_fd.write(output_header)
                 for line in in_fd:
@@ -90,23 +90,25 @@ class GenomeCov(Tool):
                         end_coverage_coordinate = record_len
                         zero_coverage_coordinates_list = ["."]
 
+                    length_without_zerocoveraged_ends = end_coverage_coordinate - start_coverage_coordinate
                     mean_coverage_without_zero_coverage_ends = float(np.mean(coverage_array[start_coverage_coordinate:end_coverage_coordinate]))
                     median_coverage_without_zero_coverage_ends = float(np.median(coverage_array[start_coverage_coordinate:end_coverage_coordinate]))
 
-                    out_fd.write("%s\t%i\t%.2f\t%.2f\t%i\t%i\t%i\t%i\t%i\t%i\t%i\t%s\t%.2f\t%.2f\n" % (record_id,
-                                                                                                       record_len,
-                                                                                                       mean_coverage,
-                                                                                                       median_coverage,
-                                                                                                       min_coverage,
-                                                                                                       max_coverage,
-                                                                                                       coveraged_position_number,
-                                                                                                       zero_coverage_position_number,
-                                                                                                       zero_coveraged_region_number,
-                                                                                                       leading_zero_coverage_len,
-                                                                                                       trailing_zero_coverage_len,
-                                                                                                       ",".join(zero_coverage_coordinates_list),
-                                                                                                       mean_coverage_without_zero_coverage_ends,
-                                                                                                       median_coverage_without_zero_coverage_ends
-                                                                                                       ))
+                    out_fd.write("%s\t%i\t%.2f\t%.2f\t%i\t%i\t%i\t%i\t%i\t%i\t%i\t%s\t%.2f\t%.2f\t%i\n" % (record_id,
+                                                                                                           record_len,
+                                                                                                           mean_coverage,
+                                                                                                           median_coverage,
+                                                                                                           min_coverage,
+                                                                                                           max_coverage,
+                                                                                                           coveraged_position_number,
+                                                                                                           zero_coverage_position_number,
+                                                                                                           zero_coveraged_region_number,
+                                                                                                           leading_zero_coverage_len,
+                                                                                                           trailing_zero_coverage_len,
+                                                                                                           ",".join(zero_coverage_coordinates_list),
+                                                                                                           mean_coverage_without_zero_coverage_ends,
+                                                                                                           median_coverage_without_zero_coverage_ends,
+                                                                                                           length_without_zerocoveraged_ends
+                                                                                                           ))
 
 

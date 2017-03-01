@@ -7,7 +7,6 @@
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Bedtools/GenomeCov.py" afterPath="$PROJECT_DIR$/Tools/Bedtools/GenomeCov.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/alignment/analize_collapsed_coverage_file.py" afterPath="$PROJECT_DIR$/scripts/alignment/analize_collapsed_coverage_file.py" />
     </list>
     <ignored path="MAVR.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,8 +50,8 @@
       <file leaf-file-name="GenomeCov.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Tools/Bedtools/GenomeCov.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="86" column="118" lean-forward="true" selection-start-line="86" selection-start-column="118" selection-end-line="86" selection-end-column="118" />
+            <state relative-caret-position="537">
+              <caret line="99" column="125" lean-forward="true" selection-start-line="99" selection-start-column="125" selection-end-line="99" selection-end-column="125" />
               <folding>
                 <element signature="e#55#64#0" expanded="true" />
               </folding>
@@ -690,13 +689,6 @@
       <option name="presentableId" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-01160" summary="changes">
-      <created>1488149406234</created>
-      <option name="number" value="01160" />
-      <option name="presentableId" value="LOCAL-01160" />
-      <option name="project" value="LOCAL" />
-      <updated>1488149406234</updated>
-    </task>
     <task id="LOCAL-01161" summary="changes">
       <created>1488153574969</created>
       <option name="number" value="01161" />
@@ -1033,7 +1025,14 @@
       <option name="project" value="LOCAL" />
       <updated>1488383703939</updated>
     </task>
-    <option name="localTasksCounter" value="1209" />
+    <task id="LOCAL-01209" summary="changes">
+      <created>1488385142150</created>
+      <option name="number" value="01209" />
+      <option name="presentableId" value="LOCAL-01209" />
+      <option name="project" value="LOCAL" />
+      <updated>1488385142150</updated>
+    </task>
+    <option name="localTasksCounter" value="1210" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1561,8 +1560,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Bedtools/GenomeCov.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="86" column="118" lean-forward="true" selection-start-line="86" selection-start-column="118" selection-end-line="86" selection-end-column="118" />
+        <state relative-caret-position="537">
+          <caret line="99" column="125" lean-forward="true" selection-start-line="99" selection-start-column="125" selection-end-line="99" selection-end-column="125" />
           <folding>
             <element signature="e#55#64#0" expanded="true" />
           </folding>
