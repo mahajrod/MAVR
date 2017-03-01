@@ -25,7 +25,7 @@ class GenomeCov(Tool):
 
     def collapse_coverage_file(self, coverage_file, output_file):
 
-        awk_string = "awk -F'\\t' 'BEGIN {SCAF=\"\"; LEN=\"\"; COV=\"\"} {if ($1 != SCAF) {printf \"%s\\t%s\\t%s\\n\",SCAF,LEN,COV; SCAF=$1; LEN=$2; COV=$3} else {LEN=$2; COV=COV\",\"$3}} ; END {printf \"%s\\t%s\\t%s\\n\",SCAF,LEN,COV}' %s > %s" % (coverage_file, output_file)
+        awk_string = "awk -F'\\t' 'BEGIN {SCAF=\"\"; LEN=\"\"; COV=\"\"} {if (($1 != SCAF)) {if (NR > 1) {printf \"%%s\\t%%s\\t%%s\\n\",SCAF,LEN, COV}; SCAF=$1; LEN=$2; COV=$3} else {LEN=$2; COV=COV\",\"$3}} ; END {printf \"%%s\t%%s\t%%s\n\",SCAF,LEN, COV} %s > %s" % (coverage_file, output_file)
 
         self.execute(options="", cmd=awk_string)
 

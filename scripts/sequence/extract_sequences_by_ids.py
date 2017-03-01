@@ -19,8 +19,15 @@ parser.add_argument("-d", "--id_file", action="store", dest="id_file",
                     help="File with ids of sequences to extract")
 parser.add_argument("-c", "--id_column", action="store", dest="id_column", type=int, default=0,
                     help="Number of column with ids in id file (0-based). Default: 0")
+parser.add_argument("-e", "--extraction_mode", action="store", dest="coincidence_mode", default="exact",
+                    help="Coincidence mode for id: exact(full, default), partial")
+parser.add_argument("-a", "--allow_multiple_coincidence_report", action="store_true",
+                    dest="allow_multiple_coincidence_report", default=False,
+                    help="Allow multiple coincidence report of sequences for partial coincidence mode."
+                         "By default an error is raised")
 
 args = parser.parse_args()
 
 SequenceRoutines.extract_sequence_by_ids(args.input, args.id_file, args.output, format=args.format, verbose=True,
-                                         id_column_number=args.id_column)
+                                         id_column_number=args.id_column, coincidence_mode=args.extraction_mode,
+                                         allow_multiple_coincidence_report=args.allow_multiple_coincidence_report)
