@@ -426,7 +426,7 @@ class MatplotlibRoutines:
                                                      label_list=label_list, extensions=extensions, suptitle=suptitle)
 
     def draw_hexa_histogram_with_three_logscaled_from_file(self, list_of_files,  output_prefix,
-                                                         figsize=(10, 15), number_of_bins_list=None, width_of_bins_list=None,
+                                                         figsize=(15, 10), number_of_bins_list=None, width_of_bins_list=None,
                                                          max_threshold_list=None, min_threshold_list=None, xlabel=None, ylabel=None,
                                                          title_list=None, logbase=10, label_list=None,
                                                          extensions=("png",), suptitle=None, separator="\n"):
