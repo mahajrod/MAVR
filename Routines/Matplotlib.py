@@ -425,14 +425,14 @@ class MatplotlibRoutines:
                                                      ylabel=ylabel, title_list=title_list, logbase=logbase,
                                                      label_list=label_list, extensions=extensions, suptitle=suptitle)
 
-    def draw_hexa_histogram_with_two_logscaled_from_file(self, list_of_files,  output_prefix,
+    def draw_hexa_histogram_with_three_logscaled_from_file(self, list_of_files,  output_prefix,
                                                          figsize=(10, 15), number_of_bins_list=None, width_of_bins_list=None,
                                                          max_threshold_list=None, min_threshold_list=None, xlabel=None, ylabel=None,
                                                          title_list=None, logbase=10, label_list=None,
                                                          extensions=("png",), suptitle=None, separator="\n"):
 
         list_of_data = [np.fromfile(filename, sep=separator) for filename in list_of_files]
-        self.draw_hexa_histogram_with_two_logscaled(list_of_data,  output_prefix=output_prefix,
+        self.draw_hexa_histogram_with_three_logscaled(list_of_data,  output_prefix=output_prefix,
                                                      figsize=figsize, number_of_bins_list=number_of_bins_list,
                                                      width_of_bins_list=width_of_bins_list,
                                                      max_threshold_list=max_threshold_list,

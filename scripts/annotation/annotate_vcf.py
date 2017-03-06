@@ -33,6 +33,7 @@ parser.add_argument("-v", "--verbose", action="store_true", dest="verbose",
                     help="Verbose mode")
 parser.add_argument("-m", "--memory", action="store", dest="memory",
                     help="Memory limit for java. Default: 500m")
+
 args = parser.parse_args()
 
 SNPeff.jar_path = args.snpeff_dir
