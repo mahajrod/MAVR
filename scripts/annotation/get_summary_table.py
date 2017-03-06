@@ -30,6 +30,7 @@ parser.add_argument("-r", "--remove_nucleotide_substitutions", action="store_tru
                     help="Remove nucleotide substitutions from output(preserve only AA substitutions)")
 parser.add_argument("-c", "--convert_aa_to_single_letter", action="store_true", dest="convert_to_single_letter",
                     help="Convert aminoacids to single letters")
+
 args = parser.parse_args()
 
 args.input = make_list_of_path_to_files(args.input)

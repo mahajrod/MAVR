@@ -31,10 +31,12 @@ parser.add_argument("--no_utr", action="store_true", dest="no_utr",
                     help="Do not show 5_PRIME_UTR or 3_PRIME_UTR changes")
 parser.add_argument("-v", "--verbose", action="store_true", dest="verbose",
                     help="Verbose mode")
-
+parser.add_argument("-m", "--memory", action="store", dest="memory",
+                    help="Memory limit for java. Default: 500m")
 args = parser.parse_args()
 
 SNPeff.jar_path = args.snpeff_dir
+SNPeff.max_memory = args.memory
 SNPeff.annotate(args.genome, args.input, args.output, summary_file=args.summary_file, verbose=args.verbose,
                 no_downstream=args.no_downstream, no_intergenic=args.no_intergenic, no_intron=args.no_intron,
                 no_upstream=args.no_upstream, no_utr=args.no_utr)
