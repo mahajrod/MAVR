@@ -197,7 +197,7 @@ class SamtoolsV1(Tool):
         DrawingRoutines.draw_hexa_histogram_with_three_logscaled_from_file([output_concordant_only_file,
                                                                            output_discordant_only_file,
                                                                            output_all_file],
-                                                                           output_prefix, figsize=(10, 15),
+                                                                           output_prefix, figsize=(15, 10),
                                                                            number_of_bins_list=None,
                                                                            width_of_bins_list=[width_of_bin,
                                                                                                width_of_bin,
