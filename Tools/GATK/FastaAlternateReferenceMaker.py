@@ -1,15 +1,26 @@
 #!/usr/bin/env python
 import os
-from Tools.Abstract import Tool
+from Tools.Abstract import JavaTool
 
 
-class FastaAlternateReferenceMaker():
+class FastaAlternateReferenceMaker(JavaTool):
     # http://www.broadinstitute.org/gatk/gatkdocs/org_broadinstitute_sting_gatk_walkers_fasta_FastaAlternateReferenceMaker.html
 
-    def correct_reference(self, gatk_dir, reference, new_reference, variants_vcf):
+    def __init__(self,  java_path="", max_threads=4, jar_path="", max_memory=None, timelog="tool_time.log"):
+        JavaTool.__init__(self, "GenomeAnalysisTK.jar -T FastaAlternateReferenceMaker", java_path=java_path,
+                          max_threads=max_threads, jar_path=jar_path, max_memory=max_memory,
+                          timelog=timelog)
 
-        os.system("java -Xmx2g -jar %sGenomeAnalysisTK.jar -R %s -T FastaAlternateReferenceMaker -o %s --variant %s"
-                  % (gatk_dir, reference, new_reference, variants_vcf))
+    def correct_reference(self, reference, new_reference, variants_vcf):
+
+        options = " -R %s" % reference
+        options += " -o %s" % new_reference
+        options += " --variant %s" % variants_vcf
+
+        self.execute(options=options)
+
+        #os.system("java -Xmx2g -jar %sGenomeAnalysisTK.jar -R %s -T FastaAlternateReferenceMaker -o %s --variant %s"
+        #          % (gatk_dir, reference, new_reference, variants_vcf))
 
     def restore_names(self, reference, new_reference, corrected_reference, sed_script="sed_script.scr", names_file="chr_name_lines.t"):
         os.system("grep '>' %s > %s" % (reference, names_file))

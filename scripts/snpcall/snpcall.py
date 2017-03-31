@@ -3,7 +3,7 @@ __author__ = 'Sergei F. Kliver'
 import os
 import argparse
 
-from Tools.GATK import UnifiedGenotyper, SelectVariants, VariantFiltration,CombineVariants
+from Tools.GATK import UnifiedGenotyper, SelectVariants, VariantFiltration, CombineVariants
 
 
 parser = argparse.ArgumentParser()
@@ -23,8 +23,27 @@ parser.add_argument("-q", "--variant_emit_quality", action="store", dest="emit_q
 parser.add_argument("-u", "--variant_call_quality", action="store", dest="call_quality", default=100, type=int,
                     help="Minimum quality of variant to be called. Variant with quality between call and emit will "
                          "be present in vcf file but with filter 'low quality'")
+parser.add_argument("--quality_to_change", action="store", dest="quality_to_change", default=None, type=int,
+                    help="Change quality of read alignment with this quality to quality set by "
+                         "--quality_to_change_to  on the fly. Default - do not change any read quality")
+parser.add_argument("--quality_to_change_to", action="store", dest="quality_to_change_to", default=60, type=int,
+                    help="Change quality of read alignment wit quality set by --quality_to_change option "
+                         "to this quality on the fly. Works only if --quality_to_change option is set. Default - 60.")
+
+
+parser.add_argument("--remove_spliced_reads", action="store_true", dest="remove_spliced_reads", default=False,
+                    help="Remove spliced reads.")
+
 
 args = parser.parse_args()
+
+
+SelectVariants.jar_path = args.gatk_dir
+CombineVariants.jar_path = args.gatk_dir
+UnifiedGenotyper.jar_path = args.gatk_dir
+VariantFiltration.jar_path = args.gatk_dir
+
+UnifiedGenotyper.threads = args.threads
 
 rmdup_sorted_filtered_alignment = "%s_final.bam" % args.prefix
 
@@ -41,17 +60,19 @@ UnifiedGenotyper.variant_call(args.alignment,
                               args.reference,
                               stand_emit_conf=args.emit_quality,
                               stand_call_conf=args.call_quality,
-                              GATK_dir=args.gatk_dir,
-                              num_of_threads=args.threads,
                               output_mode="EMIT_VARIANTS_ONLY",
                               discovery_mode="BOTH",
-                              output_file=vcf_all)
+                              output_file=vcf_all,
+                              quality_to_change=args.quality_to_change,
+                              quality_to_change_to=args.quality_to_change_to,
+                              remove_spliced_reads=args.remove_spliced_reads)
 
-SelectVariants.get_indel(args.gatk_dir, args.reference, vcf_all, vcf_indel)
-SelectVariants.get_SNP(args.gatk_dir, args.reference, vcf_all, vcf_SNP)
+SelectVariants.get_indel(args.reference, vcf_all, vcf_indel)
+SelectVariants.get_SNP(args.reference, vcf_all, vcf_SNP)
 
-VariantFiltration.filter_bad_SNP(args.gatk_dir, args.reference, vcf_SNP, vcf_filtered_SNP)
-VariantFiltration.filter_bad_indel(args.gatk_dir, args.reference, vcf_indel, vcf_filtered_indel)
-SelectVariants.remove_filtered(args.gatk_dir, args.reference, vcf_filtered_SNP, vcf_best_SNP)
-SelectVariants.remove_filtered(args.gatk_dir, args.reference, vcf_filtered_indel, vcf_best_indel)
-CombineVariants.combine_from_same_source(args.gatk_dir, args.reference, [vcf_best_SNP, vcf_best_indel], vcf_best_merged)
+VariantFiltration.filter_bad_SNP(args.reference, vcf_SNP, vcf_filtered_SNP)
+VariantFiltration.filter_bad_indel(args.reference, vcf_indel, vcf_filtered_indel)
+
+SelectVariants.remove_entries_with_filters(args.reference, vcf_filtered_SNP, vcf_best_SNP)
+SelectVariants.remove_entries_with_filters(args.reference, vcf_filtered_indel, vcf_best_indel)
+CombineVariants.combine_from_same_source(args.reference, [vcf_best_SNP, vcf_best_indel], vcf_best_merged)

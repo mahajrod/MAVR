@@ -196,7 +196,9 @@ scripts/get_flanking_regions.py
 scripts/gff_examine.py
 scripts/parallel_augustus_correct_errors.py
 scripts/remove_duplicates_flybase_UTR.py
+scripts/alignment/analize_collapsed_coverage_file.py
 scripts/alignment/check_read_pairing_in_name_sorted_bam.sh
+scripts/alignment/collapse_bedtools_coverage_file.sh
 scripts/alignment/draw_insert_size_distribution.py
 scripts/alignment/extract_fastq_from_bam.py
 scripts/alignment/extract_se_from_bam.sh
@@ -455,10 +457,12 @@ scripts/snpcall/combine_vcf.py
 scripts/snpcall/compare_vcf.py
 scripts/snpcall/filter_vcf.py
 scripts/snpcall/intersect_vcf.py
+scripts/snpcall/make_fasta_from_vcf.py
 scripts/snpcall/remove_variants_with_filters.py
 scripts/snpcall/snpcall.py
 scripts/sra/parallel_unpack_sra.py
 scripts/transcriptome/align_by_star.py
+scripts/transcriptome/coverage_analyzis.sh
 scripts/transcriptome/annotation/extract_complete_proteins_from_transdecoder_output.py
 scripts/transcriptome/annotation/predict_proteins_from_transcripts.py
 scripts/transcriptome/annotation/transdecoder_annotation_analysis.bash
