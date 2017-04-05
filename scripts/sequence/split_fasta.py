@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 __author__ = 'mahajrod'
-import os
+
 import argparse
 
-from Bio import SeqIO
-
-from Tools.Abstract import Tool
+from Routines import SequenceRoutines
 
 parser = argparse.ArgumentParser()
 
@@ -27,5 +25,5 @@ args = parser.parse_args()
 if args.num_of_records_per_file and args.num_of_out_files:
     raise ValueError("Options -n and -f can't be set simultaneously")
 
-Tool.split_fasta(args.input, args.output_dir, num_of_recs_per_file=args.num_of_records_per_file,
-                 num_of_files=args.num_of_out_files, output_prefix=args.prefix)
+SequenceRoutines.split_fasta(args.input, args.output_dir, num_of_recs_per_file=args.num_of_records_per_file,
+                             num_of_files=args.num_of_out_files, output_prefix=args.prefix)
