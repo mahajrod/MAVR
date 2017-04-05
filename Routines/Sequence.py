@@ -32,7 +32,7 @@ class SequenceRoutines(FileRoutines):
         by default splits input files into files with num_of_recs_per_file.
         if num_of_files is set num_of_recs_per_file is ignored.
         """
-        self.save_mkdir(output_dir)
+        self.safe_mkdir(output_dir)
         out_prefix = self.split_filename(input_fasta)[1] if output_prefix is None else output_prefix
         sequence_dict = SeqIO.index_db("temp.idx", input_fasta, "fasta")
 
@@ -62,7 +62,7 @@ class SequenceRoutines(FileRoutines):
         by default splits input files into files with num_of_recs_per_file.
         if num_of_files is set num_of_recs_per_file is ignored.
         """
-        self.save_mkdir(output_dir)
+        self.safe_mkdir(output_dir)
 
         out_prefix = self.split_filename(input_fasta)[1] if output_prefix is None else output_prefix
         sequence_dict = SeqIO.index_db("temp.idx", input_fasta, "fasta")
@@ -118,7 +118,7 @@ class SequenceRoutines(FileRoutines):
                 record.id = "%s%s%s" % (sample, separator, record.id)
                 yield record
 
-        self.save_mkdir(output_dir)
+        self.safe_mkdir(output_dir)
         index = 0
         samples_seq_dict = OrderedDict()
         for filename, sample_name in zip(list_of_files_with_sequences_of_samples, list_of_names_of_samples):
