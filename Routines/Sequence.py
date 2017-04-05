@@ -18,7 +18,7 @@ from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
 
 from CustomCollections.GeneralCollections import TwoLvlDict, SynDict, IdList, IdSet
-from Routines import FileRoutines
+from Routines.File import FileRoutines
 from Routines.Functions import output_dict
 
 
