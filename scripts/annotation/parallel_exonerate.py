@@ -1,12 +1,8 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
-import shutil
+
 import argparse
 
-from Tools.HMMER import HMMER3
-from Tools.BLAST import BLASTp
-from Tools.Bedtools import Intersect
 from Tools.Annotation import Exonerate
 
 from Routines import AnnotationsRoutines
