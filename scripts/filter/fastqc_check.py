@@ -7,7 +7,7 @@ import argparse
 from Tools.Filter import Trimmomatic
 #from Tools.Filter import FastQC
 
-from Routines.File import check_path, save_mkdir
+from Routines.File import check_path, safe_mkdir
 
 parser = argparse.ArgumentParser()
 
@@ -65,7 +65,7 @@ for sample in samples:
     sample_dir = "%s%s/" % (args.samples_dir, sample)
 
     sample_out_dir = "%s%s/" % (args.output_dir, sample)
-    save_mkdir(sample_out_dir)
+    safe_mkdir(sample_out_dir)
     trimmomatic_log = "%s/trimmomatic.log" % sample_out_dir
     trimmomatic_time_log = "%s/trimmomatic.time.log" % sample_out_dir
     output_prefix = "%s%s.TMF" % (sample_out_dir, sample)

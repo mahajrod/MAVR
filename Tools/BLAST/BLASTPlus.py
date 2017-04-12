@@ -6,8 +6,9 @@ from subprocess import PIPE, Popen
 
 from Tools.Abstract import Tool
 from Tools.LinuxTools import CGAS
-from Routines.File import check_path, save_mkdir, split_filename
+from Routines import FileRoutines
 from CustomCollections.GeneralCollections import SynDict
+
 
 class BLASTPlus(Tool):
     def __init__(self, path="", max_threads=4):
@@ -35,10 +36,10 @@ class BLASTPlus(Tool):
                        async_run=False,
                        external_process_pool=None):
 
-        splited_dir = check_path(split_dir)
-        splited_out_dir = check_path(splited_output_dir)
-        save_mkdir(splited_dir)
-        save_mkdir(splited_out_dir)
+        splited_dir = FileRoutines.check_path(split_dir)
+        splited_out_dir = FileRoutines.check_path(splited_output_dir)
+        self.safe_mkdir(splited_dir)
+        self.safe_mkdir(splited_out_dir)
 
         number_of_files = num_of_seqs_per_scan if num_of_seqs_per_scan else 5 * threads if threads else 5 * self.threads
         self.split_fasta(seqfile, splited_dir, num_of_files=number_of_files)
@@ -46,7 +47,7 @@ class BLASTPlus(Tool):
         list_of_files = []
 
         for filename in input_list_of_files:
-            filename_prefix = split_filename(filename)[1]
+            filename_prefix = FileRoutines.split_filename(filename)[1]
 
             input_file = "%s%s" % (splited_dir, filename)
             output_file = "%s%s.hits" % (splited_out_dir, filename_prefix)

@@ -9,7 +9,7 @@ import argparse
 from Tools.Filter import FaCut
 from Tools.Filter import CookiecutterOld
 
-from Routines.File import check_path, save_mkdir
+from Routines.File import check_path, safe_mkdir
 
 parser = argparse.ArgumentParser()
 
@@ -34,7 +34,7 @@ parser.add_argument("-c", "--path_to_cookiecutter_dir", action="store", dest="pa
 args = parser.parse_args()
 
 samples = args.samples.split(",") if args.samples else sorted(os.listdir(args.samples_dir))
-save_mkdir(args.output_dir)
+safe_mkdir(args.output_dir)
 
 CookiecutterOld.path = args.path_to_cookiecutter_dir
 
@@ -44,7 +44,7 @@ for sample in samples:
     sample_dir = "%s%s/" % (args.samples_dir, sample)
 
     sample_out_dir = "%s%s/" % (args.output_dir, sample)
-    save_mkdir(sample_out_dir)
+    safe_mkdir(sample_out_dir)
     files_from_sample_dir = sorted(os.listdir(sample_dir))
 
     filtered_files_from_sample_dir = []

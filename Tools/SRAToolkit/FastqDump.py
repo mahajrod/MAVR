@@ -7,7 +7,7 @@ import shutil
 from Tools.Abstract import Tool
 
 from Parsers.TRF import CollectionTRF
-from Routines.File import split_filename, save_mkdir
+from Routines.File import split_filename
 from Tools.LinuxTools import CGAS
 
 

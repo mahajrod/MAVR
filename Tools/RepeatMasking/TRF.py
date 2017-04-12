@@ -7,7 +7,7 @@ import shutil
 from Tools.Abstract import Tool
 
 from Parsers.TRF import CollectionTRF
-from Routines.File import split_filename, save_mkdir
+from Routines import FileRoutines
 from Tools.LinuxTools import CGAS
 
 
@@ -65,7 +65,7 @@ class TRF(Tool):
                                       splited_result_dir="splited_output", converted_output_dir="converted_output",
                                       max_len_per_file=100000, store_intermediate_files=False):
         work_dir = os.getcwd()
-        splited_filename = split_filename(query_file)
+        splited_filename = FileRoutines.split_filename(query_file)
         self.split_fasta_by_seq_len(query_file, splited_fasta_dir, max_len_per_file=max_len_per_file,
                                     output_prefix=splited_filename[1])
 
@@ -81,8 +81,8 @@ class TRF(Tool):
         options_list = []
         splited_files = os.listdir(splited_fasta_dir)
 
-        save_mkdir(splited_result_dir)
-        save_mkdir(converted_output_dir)
+        FileRoutines.safe_mkdir(splited_result_dir)
+        FileRoutines.safe_mkdir(converted_output_dir)
         os.chdir(splited_result_dir)
 
         input_dir = splited_fasta_dir if (splited_fasta_dir[0] == "/") or (splited_fasta_dir[0] == "~") \

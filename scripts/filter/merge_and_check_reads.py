@@ -9,7 +9,7 @@ from multiprocessing import Pool
 from Tools.Filter import Trimmomatic
 from Tools.Filter import FastQC
 
-from Routines.File import check_path, save_mkdir
+from Routines import FileRoutines
 
 
 parser = argparse.ArgumentParser()
@@ -32,10 +32,10 @@ parser.add_argument("-c", "--merging_threads", action="store", dest="merging_thr
                     help="Number of threads to use during merging")
 
 parser.add_argument("-r", "--merged_dir", action="store", dest="merged_dir",
-                    type=lambda s: check_path(os.path.abspath(s)),
+                    type=lambda s: FileRoutines.check_path(os.path.abspath(s)),
                     default="./fastq/", help="Directory to write merged files. Default: ./fastq/")
 parser.add_argument("-k", "--kmer_dir", action="store", dest="merged_dir",
-                    type=lambda s: check_path(os.path.abspath(s)),
+                    type=lambda s: FileRoutines.check_path(os.path.abspath(s)),
                     default="./kmers/", help="Directory to write results of kmer analysis. Default: ./kmers/")
 
 parser.add_argument("-i", "--input_file", action="store", dest="input", type=lambda s: s.split(","), required=True,

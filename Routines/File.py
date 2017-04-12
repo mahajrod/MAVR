@@ -357,7 +357,7 @@ filetypes_dict = {"fasta": [".fa", ".fasta", ".fa", ".pep", ".cds"],
                   "newick": [".nwk"]}
 
 
-def save_mkdir(dirname):
+def safe_mkdir(dirname):
     try:
         os.mkdir(dirname)
     except OSError:

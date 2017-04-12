@@ -4,19 +4,19 @@ import os
 import argparse
 
 from Bio import AlignIO
-from Routines import MultipleAlignmentRoutines
-from Routines.File import check_path, make_list_of_path_to_files, save_mkdir, split_filename
+from Routines import MultipleAlignmentRoutines, FileRoutines
+#from Routines.File import check_path, make_list_of_path_to_files, save_mkdir, split_filename
 
 
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input", action="store", dest="input",
-                    type=lambda x: make_list_of_path_to_files(x.split(",")),
+                    type=lambda x: FileRoutines.make_list_of_path_to_files(x.split(",")),
                     help="Comma-separated list of files or directory with files "
                          "containing alignments(one alignment per file)")
 parser.add_argument("-n", "--max_gap_number", action="store", dest="max_gap_number", default=0, type=int,
                     help="Maximum number of gaps to retain column")
-parser.add_argument("-o", "--output_directory", action="store", dest="output", type=check_path,
+parser.add_argument("-o", "--output_directory", action="store", dest="output", type=FileRoutines.check_path,
                     help="Output directory")
 parser.add_argument("-g", "--gap_symbol", action="store", dest="gap_symbol", default="-",
                     help="Gap symbol")
@@ -29,10 +29,10 @@ parser.add_argument("-v", "--verbose", action="store_true", dest="verbose",
 
 args = parser.parse_args()
 
-save_mkdir(args.output)
+FileRoutines.safe_mkdir(args.output)
 
 for alignment_file in args.input:
-    splited_filename = split_filename(alignment_file)
+    splited_filename = FileRoutines.split_filename(alignment_file)
     if args.verbose:
         print ("Handling %s ..." % alignment_file)
     output_filename = "%s%s%s%s" % (args.output, splited_filename[1], args.suffix, splited_filename[2])

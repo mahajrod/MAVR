@@ -9,12 +9,12 @@ import argparse
 from Tools.Filter import Trimmomatic
 #from Tools.Filter import FastQC
 
-from Routines.File import check_path, save_mkdir
+from Routines import FileRoutines
 
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-d", "--sample_directory", action="store", dest="samples_dir", required=True,
-                    type=lambda s: check_path(os.path.abspath(s)),
+                    type=lambda s: FileRoutines.check_path(os.path.abspath(s)),
                     help="Directory with samples")
 parser.add_argument("-s", "--samples", action="store", dest="samples",
                     help="Comma-separated list of subdirectories(one per sample) to handle. "
@@ -23,7 +23,7 @@ parser.add_argument("-s", "--samples", action="store", dest="samples",
                          "Filenames should should contain '_1.fq' or '_1.fastq' for forward(left) reads, "
                          " '_2.fq' or '_2.fastq' for reverse(right) reads and '.fq' or '.fastq' for SE reads")
 parser.add_argument("-o", "--output_dir", action="store", dest="output_dir",
-                    type=lambda s: check_path(os.path.abspath(s)),
+                    type=lambda s: FileRoutines.check_path(os.path.abspath(s)),
                     default="./", help="Directory to write output. Default: current directory")
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=1, type=int,
                     help="Number of threads to use in Trimmomatic. Default - 1.")
@@ -64,14 +64,14 @@ Trimmomatic.threads = args.threads
 #print(Trimmomatic.path)
 #print(Trimmomatic.jar_path)
 samples = args.samples.split(",") if args.samples else sorted(os.listdir(args.samples_dir))
-save_mkdir(args.output_dir)
+FileRoutines.safe_mkdir(args.output_dir)
 for sample in samples:
     print("Handling %s" % sample)
 
     sample_dir = "%s%s/" % (args.samples_dir, sample)
 
     sample_out_dir = "%s%s/" % (args.output_dir, sample)
-    save_mkdir(sample_out_dir)
+    FileRoutines.safe_mkdir(sample_out_dir)
     trimmomatic_log = "%s/trimmomatic.log" % sample_out_dir
     trimmomatic_time_log = "%s/trimmomatic.time.log" % sample_out_dir
 

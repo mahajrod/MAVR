@@ -8,7 +8,7 @@ from Bio import SearchIO
 from Tools.Abstract import Tool
 from Tools.LinuxTools import CGAS
 from CustomCollections.GeneralCollections import IdList, SynDict
-from Routines.File import check_path, split_filename, read_ids, save_mkdir
+from Routines import FileRoutines
 
 
 class HMMER3(Tool):
@@ -126,7 +126,7 @@ class HMMER3(Tool):
         #ids_list = read_ids(id_fd, close_after_if_file_object=False)
         ids_list.read(id_fd, close_after_if_file_object=True)
         number_of_ids = len(ids_list)
-        out_prefix = split_filename(hmmfile)[1] if output_prefix is None else output_prefix
+        out_prefix = self.split_filename(hmmfile)[1] if output_prefix is None else output_prefix
 
         num_of_ids = int(number_of_ids/num_of_files) + 1 if num_of_files else num_of_recs_per_file
 
@@ -257,17 +257,17 @@ class HMMER3(Tool):
                          async_run=False, external_process_pool=None
                          ):
 
-        splited_dir = check_path(split_dir)
-        splited_out_dir = check_path(splited_output_dir)
-        save_mkdir(splited_dir)
-        save_mkdir(splited_out_dir)
+        splited_dir = self.check_path(split_dir)
+        splited_out_dir = self.check_path(splited_output_dir)
+        self.safe_mkdir(splited_dir)
+        self.safe_mkdir(splited_out_dir)
 
         if splited_tblout_dir:
-            save_mkdir(splited_tblout_dir)
+            self.safe_mkdir(splited_tblout_dir)
         if splited_domtblout_dir:
-            save_mkdir(splited_domtblout_dir)
+            self.safe_mkdir(splited_domtblout_dir)
         if splited_pfamtblout_dir:
-            save_mkdir(splited_pfamtblout_dir)
+            self.safe_mkdir(splited_pfamtblout_dir)
 
         number_of_files = num_of_seqs_per_scan if num_of_seqs_per_scan else 5 * threads if threads else 5 * self.threads
         self.split_fasta(seqfile, splited_dir, num_of_files=number_of_files)
@@ -275,7 +275,7 @@ class HMMER3(Tool):
         list_of_files = []
 
         for filename in input_list_of_files:
-            filename_prefix = split_filename(filename)[1]
+            filename_prefix = self.split_filename(filename)[1]
 
             input_file = "%s%s" % (splited_dir, filename)
             output_file = "%s%s.hits" % (splited_out_dir, filename_prefix)

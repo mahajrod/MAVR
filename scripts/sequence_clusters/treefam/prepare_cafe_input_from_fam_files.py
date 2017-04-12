@@ -10,7 +10,7 @@ import argparse
 
 from collections import OrderedDict
 
-from Routines.File import check_path, save_mkdir
+from Routines import FileRoutines
 from CustomCollections.GeneralCollections import SynDict, TwoLvlDict, IdList
 
 parser = argparse.ArgumentParser()
@@ -32,11 +32,11 @@ parser.add_argument("-w", "--white_list_file", action="store", dest="white_list_
 parser.add_argument("-m", "--min_species_number", action="store", dest="min_species_number", default=1, type=int,
                     help="Minimum number of species with family to retain family. Default: 1")
 parser.add_argument("-f", "--filtered_families_directory", action="store", dest="filtered_family_dir",
-                    default="filtered_fam", type=check_path,
+                    default="filtered_fam", type=FileRoutines.check_path,
                     help="Directory to write filtered_families")
 args = parser.parse_args()
 
-save_mkdir(args.filtered_family_dir)
+FileRoutines.safe_mkdir(args.filtered_family_dir)
 species_list = sorted(args.species_set)
 if args.white_list_file and args.black_list_file:
     raise ValueError("Black list and white list cant be set simultaneously")
@@ -56,7 +56,7 @@ fam_count_dict = TwoLvlDict()
 species_family_dict = TwoLvlDict()
 for species in args.species_set:
     species_family_dict[species] = SynDict()
-    species_family_dict[species].read("%s%s%s" % (check_path(args.input), species, args.suffix), split_values=True,
+    species_family_dict[species].read("%s%s%s" % (FileRoutines.check_path(args.input), species, args.suffix), split_values=True,
                                       values_separator=",", separator="\t")
     #print species_family_dict[species]
     fam_count_dict[species] = species_family_dict[species].count_synonyms()

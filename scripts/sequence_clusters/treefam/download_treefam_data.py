@@ -6,7 +6,7 @@ import argparse
 from multiprocessing import Pool
 
 from CustomCollections.GeneralCollections import IdList
-from Routines.File import check_path, save_mkdir
+from Routines import FileRoutines
 
 parser = argparse.ArgumentParser()
 
@@ -14,7 +14,7 @@ parser.add_argument("-i", "--id_file", action="store", dest="input", default="st
                     help="Input file with ids of families. Default: stdin")
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=10, type=int,
                     help="Number of threads to download. Default: 10")
-parser.add_argument("-o", "--output_directory", action="store", dest="output_dir", default="fam_data/", type=check_path,
+parser.add_argument("-o", "--output_directory", action="store", dest="output_dir", default="fam_data/", type=FileRoutines.check_path,
                     help="Directory to output files.")
 parser.add_argument("-l", "--alignment", action="store_true", dest="alignment", default=False,
                     help="Download alignments")
@@ -26,12 +26,12 @@ parser.add_argument("-a", "--all", action="store_true", dest="all", default=Fals
                     help="Download all: alignment, tree, hmm")
 parser.add_argument("-s", "--store_logs", action="store_true", dest="store_logs", default=False,
                     help="Store download logs in directory set by -g/--logs_dir option")
-parser.add_argument("-g", "--logs_dir", action="store", dest="logs_dir", default="logs", type=check_path,
+parser.add_argument("-g", "--logs_dir", action="store", dest="logs_dir", default="logs", type=FileRoutines.check_path,
                     help="Directory with logs")
 args = parser.parse_args()
 
-save_mkdir(args.output_dir)
-save_mkdir(args.logs_dir)
+FileRoutines.safe_mkdir(args.output_dir)
+FileRoutines.safe_mkdir(args.logs_dir)
 
 if (not args.alignment) and (not args.tree) and (not args.hmm):
     args.all = True

@@ -7,7 +7,6 @@ import shutil
 from collections import OrderedDict
 from Tools.Abstract import Tool
 
-from Routines.File import split_filename, save_mkdir
 from CustomCollections.GeneralCollections import SynDict, IdList
 
 
@@ -88,7 +87,7 @@ class Exonerate(Tool):
                            other_options=None,
                            num_of_files=None,
                            converted_output_dir="converted_output"):
-        splited_filename = split_filename(query_file)
+        splited_filename = self.split_filename(query_file)
         self.split_fasta(query_file, splited_fasta_dir, num_of_recs_per_file=num_of_recs_per_file,
                          num_of_files=num_of_files,
                          output_prefix=splited_filename[1])
@@ -103,11 +102,11 @@ class Exonerate(Tool):
         options_list = []
         splited_files = os.listdir(splited_fasta_dir)
 
-        save_mkdir(splited_result_dir)
+        self.safe_mkdir(splited_result_dir)
         #save_mkdir(converted_output_dir)
 
         for filename in splited_files:
-            filename_list = split_filename(filename)
+            filename_list = self.split_filename(filename)
             options = common_options
             options += " -q %s/%s" % (splited_fasta_dir, filename)
             options += " -t %s" % target_file

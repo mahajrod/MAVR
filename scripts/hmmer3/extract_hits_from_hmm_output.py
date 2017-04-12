@@ -8,11 +8,11 @@ from multiprocessing import Pool
 
 from Bio import SearchIO
 
-from Routines.File import make_list_of_path_to_files, split_filename, check_path, save_mkdir
+from Routines import FileRoutines # make_list_of_path_to_files, split_filename, check_path, save_mkdir
 from Tools.LinuxTools import CGAS
 
 def make_list_of_path_to_files_from_comma_sep_string(string):
-    return make_list_of_path_to_files(string.split(","))
+    return FileRoutines.make_list_of_path_to_files(string.split(","))
 
 parser = argparse.ArgumentParser()
 
@@ -26,19 +26,19 @@ parser.add_argument("-o", "--output_file", action="store", dest="output", defaul
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=1, type=int,
                     help="Number of threads to handle input")
 parser.add_argument("-d", "--top_hits_dir", action="store", dest="top_hits_dir", default="top_hits_dir/",
-                    type=check_path,
+                    type=FileRoutines.check_path,
                     help="Directory to write intermediate(splited) output")
 parser.add_argument("-r", "--retain_splited_output", action="store_true", dest="retain",
                     help="Retain splited output")
 
 args = parser.parse_args()
 
-save_mkdir(args.top_hits_dir)
+FileRoutines.safe_mkdir(args.top_hits_dir)
 
 
 def handle_input(filename):
     sys.stdout.write("Handling %s\n" % filename)
-    prefix = split_filename(filename)[1]
+    prefix = FileRoutines.split_filename(filename)[1]
     index_file = "%s.tmp.idx" % prefix
     hmm_dict = SearchIO.index_db(index_file, filename, args.format)
     if args.output == "stdout":

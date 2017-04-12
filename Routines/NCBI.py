@@ -301,7 +301,7 @@ class NCBIRoutines(FileRoutines):
 
     def get_gene_sequences(self, email, query, retmax=100000, output_directory=None):
         if output_directory:
-            self.save_mkdir(output_directory)
+            self.safe_mkdir(output_directory)
         Entrez.email = email
         handle = Entrez.esearch(term=query, db="gene", rettype="xml", retmax=retmax)
         records = Entrez.read(handle, validate=False)
@@ -344,7 +344,7 @@ class NCBIRoutines(FileRoutines):
         print "Total %i ids" % number_of_ids
 
         for directory in transcript_temp_dir, protein_temp_dir:
-            self.save_mkdir(directory)
+            self.safe_mkdir(directory)
         pep_file = "%s.pep.genbank" % output_prefix
         transcript_file = "%s.trascript.genbank" % output_prefix
 
@@ -518,7 +518,7 @@ class NCBIRoutines(FileRoutines):
         taxa_stat_dir = "%s%s/" % (self.check_path(output_directory), "taxa_stat")
         for subdir in (all_files_dir, chromosome_lvl_dir, non_chromosome_lvl_dir, stat_dir,
                        taxa_stat_dir, nonambiguous_species_all_dir, ambiguous_species_all_dir):
-            self.save_mkdir(subdir)
+            self.safe_mkdir(subdir)
 
         filter_by_integrity = min_scaffold_n50 or min_contig_n50 or max_scaffold_l50 or max_contig_l50 \
                               or max_contig_count or max_scaffold_count or max_chromosome_count \
@@ -528,7 +528,7 @@ class NCBIRoutines(FileRoutines):
 
         if filter_by_integrity:
             for subdir in (filtered_by_integrity_dir, filtered_out_by_integrity_dir):
-                self.save_mkdir(subdir)
+                self.safe_mkdir(subdir)
 
         for taxon in taxa_list:
             search_term = "%s[Orgn]" % taxon

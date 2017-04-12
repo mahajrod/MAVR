@@ -8,12 +8,12 @@ import argparse
 import numpy as np
 
 
-from Routines.File import check_path, save_mkdir
+from Routines import FileRoutines
 
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-d", "--sample_directory", action="store", dest="samples_dir", required=True,
-                    type=lambda s: check_path(os.path.abspath(s)),
+                    type=lambda s: FileRoutines.check_path(os.path.abspath(s)),
                     help="Directory with samples")
 parser.add_argument("-s", "--samples", action="store", dest="samples",
                     help="Comma-separated list of subdirectories(one per sample) to handle. "
@@ -22,7 +22,7 @@ parser.add_argument("-s", "--samples", action="store", dest="samples",
                          "Filenames should should contain '_1.fq' or '_1.fastq' for forward(left) reads, "
                          " '_2.fq' or '_2.fastq' for reverse(right) reads and '.fq' or '.fastq' for SE reads")
 parser.add_argument("-o", "--output_dir", action="store", dest="output_dir",
-                    type=lambda s: check_path(os.path.abspath(s)),
+                    type=lambda s: FileRoutines.check_path(os.path.abspath(s)),
                     default="./", help="Directory to write output. Default: current directory")
 """
 #parser.add_argument("-t", "--threads", action="store", dest="threads", default=1, type=int,
@@ -39,7 +39,7 @@ parser.add_argument("-n", "--name_type", action="store", dest="name_type", defau
 args = parser.parse_args()
 
 samples = args.samples.split(",") if args.samples else sorted(os.listdir(args.samples_dir))
-save_mkdir(args.output_dir)
+FileRoutines.safe_mkdir(args.output_dir)
 
 overall_stat_file = "%s/overall_samples.stat" % args.output_dir
 overall_stat_fd = open(overall_stat_file, "w")
@@ -51,7 +51,7 @@ for sample in samples:
     sample_dir = "%s%s/" % (args.samples_dir, sample)
 
     sample_out_dir = "%s%s/" % (args.output_dir, sample)
-    save_mkdir(sample_out_dir)
+    FileRoutines.safe_mkdir(sample_out_dir)
     files_from_sample_dir = sorted(os.listdir(sample_dir))
 
     stat_files_from_sample_dir = []

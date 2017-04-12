@@ -1,14 +1,8 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 
-import os
-import shutil
-
 from Tools.Abstract import Tool
 from Parsers.Barrnap import CollectionBARRNAP
-
-from Routines.File import split_filename, save_mkdir
-from CustomCollections.GeneralCollections import SynDict, IdList
 
 
 class Barrnap(Tool):
