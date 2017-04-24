@@ -363,7 +363,7 @@ class Exonerate(Tool):
                     continue
                 cds_id = correspondence_dict[transcript_id]
                 length = len(cds_dict[cds_id].seq)
-                start = transcript_dict[transcript_id].seq.find(cds_dict[cds_id].seq)
+                start = transcript_dict[transcript_id].seq.upper().find(cds_dict[cds_id].seq.upper())
                 if start == -1:
                     cds_not_found_transcript_list.append(transcript_id)
                     if verbose:
