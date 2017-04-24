@@ -369,7 +369,7 @@ class Exonerate(Tool):
                     if verbose:
                         print("CDS was not found for transcript %s" % transcript_id)
                     continue
-                annotation_string = "%s\t+\t%i\t%i\n" % (transcript_id, start, length)
+                annotation_string = "%s\t+\t%i\t%i\n" % (transcript_id, start + 1, length)
 
                 annotation_fd.write(annotation_string)
 
