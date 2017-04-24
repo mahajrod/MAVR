@@ -1,6 +1,8 @@
 __author__ = 'mahajrod'
 
 import os
+from collections import OrderedDict
+
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')
@@ -8,7 +10,7 @@ os.environ['MPLCONFIGDIR'] = '/tmp/'
 
 import matplotlib.pyplot as plt
 plt.ioff()
-from matplotlib.patches import Rectangle
+from matplotlib.patches import Rectangle, Circle
 from matplotlib import text
 from BCBio import GFF
 
@@ -23,6 +25,139 @@ from Pictures.Features import RectangularProtein
 class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
     def __init__(self):
         MatplotlibRoutines.__init__(self)
+
+    def draw_chromosomes_with_features_simple(self, chromosomes_gff, genes_gff, output_prefix, figsize=(10, 10),
+                                              sense_feature_color="green", antisense_feature_color="red",
+                                              chromosome_color="black", label_fontsize=15,
+                                              ext_list=("png",)):
+
+        figure = plt.figure(figsize=figsize)
+        subplot = plt.subplot(1, 1, 1)
+
+        subplot.get_yaxis().set_visible(False)
+        #subplot.get_xaxis().set_visible(False)
+        #axes.xaxis.set_major_formatter(x_formatter)
+
+        #subplot.spines['bottom'].set_color('none')
+        subplot.spines['right'].set_color('none')
+        subplot.spines['left'].set_color('none')
+        subplot.spines['top'].set_color('none')
+
+        chr_dict = OrderedDict()
+
+        max_chr_len = 0
+        chr_number = 0
+        with open(chromosomes_gff, "r") as chr_fd:
+            for line in chr_fd:
+                if line[0] == "#":
+                    continue
+                line_list = line.split("\t")
+                feature_scaffold = line_list[0]
+                feature_type = line_list[2]
+                feature_start = line_list[3]
+                feature_end = line_list[4]
+                #feature_strand = line_list[6]
+
+                if feature_type == "chromosome":
+                    chr_dict[feature_scaffold] = OrderedDict()
+                    chr_dict[feature_scaffold]["Genes"] = OrderedDict()
+                    chr_dict[feature_scaffold]["Length"] = int(feature_end)
+                    if chr_dict[feature_scaffold]["Length"] > max_chr_len:
+                        max_chr_len = chr_dict[feature_scaffold]["Length"]
+                        chr_number += 1
+                elif feature_type == "centromere":
+                    # add check for case when centromere line is first in gff file
+                    chr_dict[feature_scaffold]["Centromere"] = [int(feature_start), int(feature_end)]
+        print chr_dict
+        if genes_gff:
+            with open(genes_gff, "r") as gene_fd:
+                for line in gene_fd:
+                    if line[0] == "#":
+                        continue
+                    line_list = line.split("\t")
+                    feature_scaffold = line_list[0]
+                    feature_type = line_list[2]
+                    feature_start = line_list[3]
+                    feature_end = line_list[4]
+                    feature_strand = line_list[6]
+                    description_list = line_list[-1].split(";")
+
+                    entry_id = None
+                    for entry in description_list:
+                        if entry[:3] == "ID=":
+                            entry_id = entry[3:]
+                    if not entry_id:
+                        continue
+
+                    chr_dict[feature_scaffold]["Genes"][entry_id] = [int(feature_start), int(feature_end), feature_strand]
+
+        centromere_radius = int(max_chr_len/100)
+        distance_between_chromosome_and_gene = centromere_radius * 2
+        distance_between_chromosomes = centromere_radius * 8
+        chromosome_width = int(centromere_radius / 2)
+        gene_width = chromosome_width
+        chromosome_position = - int(distance_between_chromosomes / 3)
+
+        text_x_offset = -max_chr_len/20
+        for chromosome in chr_dict:
+            print "Drawing chromosome %s" % chromosome
+            chromosome_position += distance_between_chromosomes
+            chromosome_fragments_list = []
+            if "Centromere" not in chr_dict[chromosome]:
+                chromosome_fragments_list.append(Rectangle((1, chromosome_position), chr_dict[chromosome]["Length"],
+                                                           chromosome_width, fill=True, edgecolor=chromosome_color,
+                                                           facecolor=chromosome_color))
+            else:
+                # left arm of chromosome
+                print "Centromere"
+                #print "Left arm"
+                #print (1, chromosome_position), chr_dict[chromosome]["Centromere"][0], chromosome_width
+
+
+                chromosome_fragments_list.append(Rectangle((1, chromosome_position), chr_dict[chromosome]["Centromere"][0],
+                                                           chromosome_width, fill=True, edgecolor=chromosome_color,
+                                                           facecolor=chromosome_color))
+                chromosome_fragments_list.append(Circle((chr_dict[chromosome]["Centromere"][0] + centromere_radius,
+                                                         chromosome_position + chromosome_width/2), centromere_radius,
+                                                        fill=False, edgecolor=chromosome_color,
+                                                        facecolor=chromosome_color))
+                chromosome_fragments_list.append(Rectangle((chr_dict[chromosome]["Centromere"][0] + 2 * centromere_radius,
+                                                            chromosome_position), chr_dict[chromosome]["Length"] - chr_dict[chromosome]["Centromere"][1],
+                                                           chromosome_width, fill=True, edgecolor=chromosome_color,
+                                                           facecolor=chromosome_color))
+            for patch in chromosome_fragments_list:
+                subplot.add_patch(patch)
+
+            subplot.annotate(chromosome, xy=(text_x_offset, chromosome_position),
+                             xycoords='data', fontsize=label_fontsize,
+                             ha='center', va='center')
+
+            if chr_dict[chromosome]["Genes"]:
+                for gene in chr_dict[chromosome]["Genes"]:
+                    print "Adding feature %s: %i-%i, %s" % (gene, chr_dict[chromosome]["Genes"][gene][0],
+                                                            chr_dict[chromosome]["Genes"][gene][1],
+                                                            chr_dict[chromosome]["Genes"][gene][2])
+                    gene_color = sense_feature_color if chr_dict[chromosome]["Genes"][gene][2] == "+" else antisense_feature_color
+
+                    gene_start = chr_dict[chromosome]["Genes"][gene][0]
+                    if "Centromere" in chr_dict[chromosome]:
+                        if gene_start >= chr_dict[chromosome]["Centromere"][1]:
+                            gene_start += centromere_radius * 2
+
+                    gene_patch = Rectangle((gene_start, chromosome_position + (1 if chr_dict[chromosome]["Genes"][gene][2] == "+" else -1) * distance_between_chromosome_and_gene),
+                                           chr_dict[chromosome]["Genes"][gene][1] - chr_dict[chromosome]["Genes"][gene][0] + 1,
+                                           gene_width, fill=True, edgecolor=gene_color,
+                                           facecolor=gene_color)
+                    subplot.add_patch(gene_patch)
+        plt.xlim(xmax=max_chr_len, xmin=text_x_offset)
+        plt.ylim(ymax=chromosome_position+distance_between_chromosomes)
+        plt.subplots_adjust(right=0.95)#bottom=0.1, right=0.8, top=0.9)
+        for extension in ext_list:
+            plt.savefig("%s.%s" % (output_prefix, extension))
+
+
+
+
 
     def draw_alignment(self, alignment, features, output_prefix, record_style=None, ext_list=["svg", "png"],
                        label_fontsize=13, left_offset=0.2, figure_width=8, id_synonym_dict=None,
@@ -48,9 +183,9 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
 
         protein_height = 10
 
-        dist_bettwen_proteins = 10
+        dist_between_proteins = 10
         start_x = 0
-        start_y = - dist_bettwen_proteins
+        start_y = - dist_between_proteins
 
         gap_line_y_shift = int(protein_height/2)
         gap_line_y_jump = int(protein_height/2)
@@ -66,7 +201,7 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
                                                                    search_type="perfect")
             #print gap_coords_list, gap_len_list
 
-            start_y += protein_height + dist_bettwen_proteins
+            start_y += protein_height + dist_between_proteins
             gap_y_start = gap_line_y_shift + start_y
             gap_y_jump = gap_y_start + gap_line_y_jump
             prev_x = 0

@@ -336,6 +336,49 @@ class Exonerate(Tool):
         extracted_gff_fd.close()
         filtered_out_gff_fd.close()
 
+    def prepare_annotation_file_from_transcript_and_cds(self, transcript_file, cds_file, correspondence_file,
+                                                        output_prefix, format="fasta",
+                                                        correspondence_key_column=0, correspondence_value_column=1,
+                                                        verbose=False):
+        transcript_dict = self.parse_seq_file(transcript_file, "parse", format=format)
+
+        cds_dict = self.parse_seq_file(cds_file, "parse", format=format)
+
+        correspondence_dict = SynDict(filename=correspondence_file, comments_prefix="#",
+                                      key_index=correspondence_key_column, value_index=correspondence_value_column)
+
+        no_corresponding_cds_transcript_list = IdList()
+        cds_not_found_transcript_list = IdList()
+
+        annotation_file = "%s.annotation" % output_prefix
+        no_corresponding_cds_transcript_file = "%s.no_cds.id" % output_prefix
+        cds_not_found_transcript_file = "%s.not_found_cds.id" % output_prefix
+
+        with open(annotation_file, "w") as annotation_fd:
+            for transcript_id in transcript_dict:
+                if transcript_id not in correspondence_dict:
+                    no_corresponding_cds_transcript_list.append(transcript_id)
+                    if verbose:
+                        print("No cds in correspondence file for transcript %s" % transcript_id)
+                    continue
+                cds_id = correspondence_dict[transcript_id]
+                length = len(cds_dict[cds_id].seq)
+                start = transcript_dict[transcript_id].seq.find(cds_dict[cds_id].seq)
+                if start == -1:
+                    cds_not_found_transcript_list.append(transcript_id)
+                    if verbose:
+                        print("CDS was not found for transcript %s" % transcript_id)
+                    continue
+                annotation_string = "%s\t+\t%i\t%i\n" % (transcript_id, start, length)
+
+                annotation_fd.write(annotation_string)
+
+        no_corresponding_cds_transcript_list.write(no_corresponding_cds_transcript_file)
+        cds_not_found_transcript_list.write(cds_not_found_transcript_file)
+
+
+
+
 
 if __name__ == "__main__":
     pass

@@ -265,6 +265,7 @@ scripts/convert/fasta2phylip.py
 scripts/convert/fastq2fasta.sh
 scripts/convert/sequence2fastq.py
 scripts/download/download_from_sra_by_ids.py
+scripts/draw/draw_chromosomes_with_features_simple.py
 scripts/draw/draw_histogram.py
 scripts/draw/draw_percent_histogram.py
 scripts/draw/draw_plot.py
@@ -285,6 +286,7 @@ scripts/fastq/fastq2fasta.py
 scripts/fastq/remove_tiles_from_fastq.py
 scripts/fastq/reverse_complement_fastq.py
 scripts/file/extract_by_column_value.py
+scripts/file/replace_column_value_by_syn.py
 scripts/file/split_file_by_column.py
 scripts/filter/check_fastq_presense.py
 scripts/filter/draw_fraction_of_retained_pairs_per_tile_histogram.py

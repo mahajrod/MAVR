@@ -168,8 +168,3 @@ class AnnotationsRoutines:
                         continue
 
                     out_fd.write(line)
-
-
-
-
-

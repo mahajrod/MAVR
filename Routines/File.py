@@ -7,7 +7,7 @@ import bz2
 import gzip
 from collections import Iterable, OrderedDict
 
-from CustomCollections.GeneralCollections import IdSet,  IdList
+from CustomCollections.GeneralCollections import IdSet,  IdList, SynDict
 
 
 class FileRoutines:
@@ -350,6 +350,39 @@ class FileRoutines:
         else:
             for entry in out_fd_dict:
                 out_fd_dict[entry].close()
+
+    @staticmethod
+    def replace_column_value_by_syn(input_file, syn_file, out_file, column=0, comment_prefix=None, separator="\t",
+                                    syn_header=False, syn_separator="\t",
+                                    syn_key_index=0, syn_value_index=1, syn_comment_prefix=None):
+        syn_dict = SynDict(filename=syn_file, header=syn_header, separator=syn_separator, key_index=syn_key_index,
+                           value_index=syn_value_index, comments_prefix=syn_comment_prefix)
+        if comment_prefix:
+            comment_prefix_len = len(comment_prefix)
+        line_number = 0
+        replaced = 0
+        not_replaced = 0
+        with open(input_file, "r") as in_fd:
+            with open(out_file, "w") as out_fd:
+                for line in in_fd:
+                    line_number += 1
+                    if comment_prefix:
+                        if line[0:comment_prefix_len] == comment_prefix:
+                            out_fd.write(line)
+                            continue
+                    line_list = line.strip("\n").split(separator)
+                    if len(line_list) < column + 1:
+                        sys.stderr.write("WARNING!!! Line %i doesn't have column %i\n" % (line_number, column))
+                    if line_list[column] in syn_dict:
+                        replaced += 1
+                        line_list[column] = syn_dict[line_list[column]]
+                    else:
+                        not_replaced += 1
+
+                    out_fd.write(separator.join(line_list))
+                    out_fd.write("\n")
+
+        sys.stderr.write("Replaced: %i\nNot replaced: %i\n" % (replaced, not_replaced))
 
 filetypes_dict = {"fasta": [".fa", ".fasta", ".fa", ".pep", ".cds"],
                   "fastq": [".fastq", ".fq"],
