@@ -30,8 +30,10 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
                                               sense_feature_color="green", antisense_feature_color="red",
                                               chromosome_color="black", label_fontsize=15,
                                               ext_list=("png",), dpi=None):
-
-        figure = plt.figure(figsize=figsize, dpi=dpi)
+        if dpi:
+            figure = plt.figure(figsize=figsize, dpi=dpi)
+        else:
+            figure = plt.figure(figsize=figsize)
         subplot = plt.subplot(1, 1, 1)
 
         subplot.get_yaxis().set_visible(False)

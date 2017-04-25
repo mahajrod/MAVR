@@ -34,12 +34,13 @@ parser.add_argument("-f", "--alignment_format", action="store", dest="alignment_
 parser.add_argument("-e", "--extensions", action="store", dest="extensions", type=lambda x: x.split(","),
                     default=["png", "svg"],
                     help="Comma-separated list of extensions for picture")
-
+parser.add_argument("-d", "--dpi", action="store", dest="dpi",
+                    help="DPI of figure")
 
 args = parser.parse_args()
 
 
 DrawingRoutines.draw_chromosomes_with_features_simple(args.chromosome_gff, args.feature_gff, args.output_prefix,
-                                                      figsize=(10, 10),
+                                                      figsize=(10, 10), dpi=args.dpi,
                                                       sense_feature_color="green", antisense_feature_color="red",
                                                       chromosome_color="black", label_fontsize=args.label_fontsize)

@@ -245,6 +245,7 @@ scripts/annotation/replace_region_names_in_gff.py
 scripts/annotation/split_exonerate_output.py
 scripts/annotation/trim_cds_and_remove_terminal_stop_codons.py
 scripts/annotation/ensembl/correct_ensembl_genbank_files.sh
+scripts/annotation/exonerate/prepare_annotation_file_from_transcript_and_cds.py
 scripts/annotation/ncbi/analyze_ncbi_pep.py
 scripts/annotation/ncbi/get_cds_for_proteins.py
 scripts/annotation/rRNA/analyze_barrnap_report.py
@@ -380,6 +381,7 @@ scripts/sequence/extract_sequences_by_ids.py
 scripts/sequence/extract_sequences_by_length.py
 scripts/sequence/extract_species_names_from_genbank_files.py
 scripts/sequence/extract_terminal_sequences.py
+scripts/sequence/fasta2corresponce.bash
 scripts/sequence/filter_sequences_by_id_expression.py
 scripts/sequence/find_gaps.py
 scripts/sequence/find_repeated_ids_in_fasta.bash
@@ -397,6 +399,7 @@ scripts/sequence/make_region_bed_file.py
 scripts/sequence/number_of_sequences.py
 scripts/sequence/remove_selenocystein_proteins.py
 scripts/sequence/rename_sequence_ids.py
+scripts/sequence/replace_custom_aminoacids_by_unknown_residue.py
 scripts/sequence/replace_selenocystein.py
 scripts/sequence/reverse_complement.py
 scripts/sequence/split_fasta.py
