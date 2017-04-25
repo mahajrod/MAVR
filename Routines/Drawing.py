@@ -29,9 +29,9 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
     def draw_chromosomes_with_features_simple(self, chromosomes_gff, genes_gff, output_prefix, figsize=(10, 10),
                                               sense_feature_color="green", antisense_feature_color="red",
                                               chromosome_color="black", label_fontsize=15,
-                                              ext_list=("png",)):
+                                              ext_list=("png",), dpi=None):
 
-        figure = plt.figure(figsize=figsize)
+        figure = plt.figure(figsize=figsize, dpi=dpi)
         subplot = plt.subplot(1, 1, 1)
 
         subplot.get_yaxis().set_visible(False)
