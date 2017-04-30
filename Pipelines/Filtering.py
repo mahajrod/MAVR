@@ -173,6 +173,12 @@ class FilteringPipeline(Pipeline):
 
             print filtering_statistics.table_form()
 
+            if remove_intermediate_files:
+                shutil.rmtree(merged_raw_sample_dir)
+                shutil.rmtree(coockie_filtered_sample_dir)
+                shutil.rmtree(coockie_trimmomatic_filtered_sample_dir)
+                shutil.rmtree(coockie_trimmomatic_quality_filtered_sample_dir)
+
         if remove_intermediate_files:
             shutil.rmtree(coockie_filtered_dir)
             shutil.rmtree(coockie_trimmomatic_filtered_dir)
