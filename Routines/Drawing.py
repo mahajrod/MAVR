@@ -30,10 +30,13 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
                                               sense_feature_color="green", antisense_feature_color="red",
                                               chromosome_color="black", label_fontsize=15,
                                               ext_list=("png",), dpi=None):
+        figure = plt.figure(figsize=figsize, dpi=dpi)
+        """
         if dpi:
             figure = plt.figure(figsize=figsize, dpi=dpi)
         else:
             figure = plt.figure(figsize=figsize)
+        """
         subplot = plt.subplot(1, 1, 1)
 
         subplot.get_yaxis().set_visible(False)
@@ -100,7 +103,7 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
         gene_width = chromosome_width
         chromosome_position = - int(distance_between_chromosomes / 3)
 
-        text_x_offset = -max_chr_len/20
+        text_x_offset = -max_chr_len/15
         for chromosome in chr_dict:
             print "Drawing chromosome %s" % chromosome
             chromosome_position += distance_between_chromosomes
@@ -155,11 +158,7 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
         plt.ylim(ymax=chromosome_position+distance_between_chromosomes)
         plt.subplots_adjust(right=0.95)#bottom=0.1, right=0.8, top=0.9)
         for extension in ext_list:
-            plt.savefig("%s.%s" % (output_prefix, extension))
-
-
-
-
+            plt.savefig("%s.%s" % (output_prefix, extension), dpi=dpi)
 
     def draw_alignment(self, alignment, features, output_prefix, record_style=None, ext_list=["svg", "png"],
                        label_fontsize=13, left_offset=0.2, figure_width=8, id_synonym_dict=None,
