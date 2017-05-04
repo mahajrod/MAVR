@@ -7,6 +7,7 @@ import numpy as np
 from Tools.Abstract import Tool
 from Routines import MathRoutines
 
+
 class GenomeCov(Tool):
     def __init__(self, path="", max_threads=4):
         Tool.__init__(self, "bedtools genomecov", path=path, max_threads=max_threads)
@@ -32,6 +33,10 @@ class GenomeCov(Tool):
     @staticmethod
     def analyze_collapsed_coverage_file(collapsed_file, output_file):
         line_number = 0
+
+        def int_through_float(string):
+            return int(float(string))
+
         with open(collapsed_file, "r") as in_fd:
             with open(output_file, "w") as out_fd:
 
@@ -48,7 +53,11 @@ class GenomeCov(Tool):
                     #print tmp
                     record_id = tmp[0]
                     record_len = int(tmp[1])
-                    coverage_array = map(int, tmp[2].split(","))
+
+                    try:
+                        coverage_array = map(int, tmp[2].split(","))
+                    except ValueError:
+                        coverage_array = map(int_through_float, tmp[2].split(","))
 
                     if record_len != len(coverage_array):
                         raise ValueError("Malformed line %i" % line_number)
