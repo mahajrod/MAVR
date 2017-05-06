@@ -1595,8 +1595,8 @@ class SequenceRoutines(FileRoutines):
             matches_list = []
 
             for frame in (0, 1, 2):
-                pep_frame_list.append(transcript_dict[transcript_id].seq[frame:].translate(table=genetic_code_table))
-                match_iterator = reg_exp.finditer(pep_frame_list[frame])
+                #pep_frame_list.append(transcript_dict[transcript_id].seq[frame:].translate(table=genetic_code_table))
+                match_iterator = reg_exp.finditer(str(transcript_dict[transcript_id].seq[frame:].translate(table=genetic_code_table)))
                 matches_coords_list = []
                 for match in match_iterator:
                     #1-based coordinates for output
