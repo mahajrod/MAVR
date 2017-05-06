@@ -1578,6 +1578,7 @@ class SequenceRoutines(FileRoutines):
 
         transcript_with_no_protein_id_list = IdList()
         multiple_protein_hits_list = IdList()
+        no_protein_hits_list = IdList()
         cds_coordinates_dict = OrderedDict()
 
         for transcript_id in transcript_dict:
@@ -1605,6 +1606,12 @@ class SequenceRoutines(FileRoutines):
                 if matches_coords_list:
                     matches_list += matches_coords_list
 
+            if len(matches_list) == 0:
+                print("No hits for protein %s in transcript %s. Skipping..." % (correspondence_dict[transcript_id],
+                                                                                transcript_id))
+                no_protein_hits_list.append(transcript_id)
+                continue
+
             if len(matches_list) > 1:
                 print("Multiple hits for protein %s in transcript %s. Skipping..." % (correspondence_dict[transcript_id],
                                                                                       transcript_id))
@@ -1613,7 +1620,10 @@ class SequenceRoutines(FileRoutines):
             print matches_list
             cds_coordinates_dict[transcript_id] = matches_list[0]
 
-        return cds_coordinates_dict, transcript_with_no_protein_id_list, multiple_protein_hits_list
+        return cds_coordinates_dict, \
+               transcript_with_no_protein_id_list, \
+               no_protein_hits_list, \
+               multiple_protein_hits_list
 
     def find_cds_coordinates_in_transcript_by_pep_from_file(self, transcript_file, protein_file, correspondence_file,
                                                             output_prefix, parsing_mode="parse", verbose=True,
@@ -1625,16 +1635,19 @@ class SequenceRoutines(FileRoutines):
                                            index_file=protein_index_file)
         correspondence_dict = SynDict(filename=correspondence_file)
 
-        cds_coordinates_dict, transcript_with_no_protein_id_list, multiple_protein_hits_list = \
+        cds_coordinates_dict, transcript_with_no_protein_id_list, no_protein_hits_list, multiple_protein_hits_list = \
             self.find_cds_coordinates_in_transcript_by_pep(transcript_dict, protein_dict, correspondence_dict,
                                                            verbose=verbose, genetic_code_table=genetic_code_table)
 
         cds_coordinates_file = "%s.cds.coordinates" % output_prefix
         transcript_with_no_protein_id_file = "%s.no_pep.ids" % output_prefix
+        no_protein_hits_file = "%s.no_pep_hits.ids" % output_prefix
         multiple_protein_hits_file = "%s.mult_pep.ids" % output_prefix
 
         transcript_with_no_protein_id_list.write(transcript_with_no_protein_id_file)
+        no_protein_hits_list.write(no_protein_hits_file)
         multiple_protein_hits_list.write(multiple_protein_hits_file)
+
         with open(cds_coordinates_file, "w") as coord_fd:
             for transcript_id in cds_coordinates_dict:
                 coord_fd.write("%s\t%i\t%i\n" % (transcript_id, cds_coordinates_dict[transcript_id[0]],
