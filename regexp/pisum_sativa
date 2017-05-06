@@ -1,0 +1,3 @@
+
+#get transcript to pep correspondence from peptide ids
+sed 's/\(.*\)_[0-9]_\?\(AA\)\?$/\1\t\0/' Peptides_Ps.all.ids > transcripts_to_pep.correspondence

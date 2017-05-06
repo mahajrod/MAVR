@@ -1572,6 +1572,74 @@ class SequenceRoutines(FileRoutines):
         print "\n\n%i proteins were ignored due to translational discrepancy" % ignored_protein_counter
         pass
 
+    @staticmethod
+    def find_cds_coordinates_in_transcript_by_pep(transcript_dict, protein_dict, correspondence_dict,
+                                                  verbose=True, genetic_code_table=1):
+
+        transcript_with_no_protein_id_list = IdList()
+        multiple_protein_hits_list = IdList()
+        cds_coordinates_dict = OrderedDict()
+
+        for transcript_id in transcript_dict:
+            if transcript_id not in correspondence_dict:
+                transcript_with_no_protein_id_list.append(transcript_id)
+                if verbose:
+                    print("Protein not found for transcript %s" % transcript_id)
+                continue
+
+            peptide = protein_dict[correspondence_dict[transcript_id]]
+
+            reg_exp = re.compile(peptide)
+
+            pep_frame_list = []
+            matches_list = []
+
+            for frame in (0, 1, 2):
+                pep_frame_list.append(transcript_dict[transcript_id].seq[frame:].translate(table=genetic_code_table))
+                match_iterator = reg_exp.finditer(pep_frame_list[frame])
+                matches_coords_list = []
+                for match in match_iterator:
+                    #1-based coordinates for output
+                    matches_coords_list.append((match.start*3 + frame + 1, match.end*3 + frame))
+
+                if matches_coords_list:
+                    matches_list += matches_coords_list
+
+            if len(matches_list) > 1:
+                print("Multiple hits for protein %s in transcript %s. Skipping..." % (correspondence_dict[transcript_id],
+                                                                                      transcript_id))
+                multiple_protein_hits_list.append(transcript_id)
+                continue
+            cds_coordinates_dict[transcript_id] = matches_list[0]
+
+        return cds_coordinates_dict, transcript_with_no_protein_id_list, multiple_protein_hits_list
+
+    def find_cds_coordinates_in_transcript_by_pep_from_file(self, transcript_file, protein_file, correspondence_file,
+                                                            output_prefix, parsing_mode="parse", verbose=True,
+                                                            format="fasta", transcript_index_file=None,
+                                                            protein_index_file=None, genetic_code_table=1):
+        transcript_dict = self.parse_seq_file(transcript_file, mode=parsing_mode, format=format,
+                                              index_file=transcript_index_file)
+        protein_dict = self.parse_seq_file(protein_file, mode=parsing_mode, format=format,
+                                           index_file=protein_index_file)
+        correspondence_dict = SynDict(filename=correspondence_file)
+
+        cds_coordinates_dict, transcript_with_no_protein_id_list, multiple_protein_hits_list = \
+            self.find_cds_coordinates_in_transcript_by_pep(transcript_dict, protein_dict, correspondence_dict,
+                                                           verbose=verbose, genetic_code_table=genetic_code_table)
+
+        cds_coordinates_file = "%s.cds.coordinates" % output_prefix
+        transcript_with_no_protein_id_file = "%s.no_pep.ids" % output_prefix
+        multiple_protein_hits_file = "%s.mult_pep.ids" % output_prefix
+
+        transcript_with_no_protein_id_list.write(transcript_with_no_protein_id_file)
+        multiple_protein_hits_list.write(multiple_protein_hits_file)
+        with open(cds_coordinates_file, "w") as coord_fd:
+            for transcript_id in cds_coordinates_dict:
+                coord_fd.write("%s\t%i\t%i\n" % (transcript_id, cds_coordinates_dict[transcript_id[0]],
+                                                 cds_coordinates_dict[transcript_id[1]]))
+
+
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
     lengths_dict = OrderedDict({})
