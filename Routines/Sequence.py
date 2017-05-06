@@ -1610,6 +1610,7 @@ class SequenceRoutines(FileRoutines):
                                                                                       transcript_id))
                 multiple_protein_hits_list.append(transcript_id)
                 continue
+            print matches_list
             cds_coordinates_dict[transcript_id] = matches_list[0]
 
         return cds_coordinates_dict, transcript_with_no_protein_id_list, multiple_protein_hits_list
