@@ -1587,9 +1587,9 @@ class SequenceRoutines(FileRoutines):
                     print("Protein not found for transcript %s" % transcript_id)
                 continue
 
-            peptide = protein_dict[correspondence_dict[transcript_id]]
+            peptide = protein_dict[correspondence_dict[transcript_id]].seq
 
-            reg_exp = re.compile(peptide)
+            reg_exp = re.compile(str(peptide))
 
             pep_frame_list = []
             matches_list = []
@@ -1638,7 +1638,6 @@ class SequenceRoutines(FileRoutines):
             for transcript_id in cds_coordinates_dict:
                 coord_fd.write("%s\t%i\t%i\n" % (transcript_id, cds_coordinates_dict[transcript_id[0]],
                                                  cds_coordinates_dict[transcript_id[1]]))
-
 
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
