@@ -1600,7 +1600,7 @@ class SequenceRoutines(FileRoutines):
                 matches_coords_list = []
                 for match in match_iterator:
                     #1-based coordinates for output
-                    matches_coords_list.append((match.start*3 + frame + 1, match.end*3 + frame))
+                    matches_coords_list.append((match.start() * 3 + frame + 1, match.end() * 3 + frame))
 
                 if matches_coords_list:
                     matches_list += matches_coords_list
