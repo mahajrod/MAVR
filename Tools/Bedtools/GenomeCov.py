@@ -2,6 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 
 import os
+from collections import OrderedDict
 import numpy as np
 
 from Tools.Abstract import Tool
@@ -29,6 +30,32 @@ class GenomeCov(Tool):
         awk_string = "awk -F'\\t' 'BEGIN {SCAF=\"\"; LEN=\"\"; COV=\"\"} {if (($1 != SCAF)) {if (NR > 1) {printf \"%%s\\t%%s\\t%%s\\n\",SCAF,LEN, COV}; SCAF=$1; LEN=$2; COV=$3} else {LEN=$2; COV=COV\",\"$3}} ; END {printf \"%%s\t%%s\t%%s\n\",SCAF,LEN, COV} %s > %s" % (coverage_file, output_file)
 
         self.execute(options="", cmd=awk_string)
+
+    @staticmethod
+    def extract_data_for_cds_from_collapsed_coverage_file(collapsed_coverage_file, cds_bed_file, output_file,
+                                                          skip_transcript_with_no_cds=False):
+        cds_dict = OrderedDict()
+
+        with open(cds_bed_file, "r") as cds_fd:
+            for line in cds_fd:
+                line_list = line.strip().split("\t")
+                # convert coordinates to python notation
+                cds_dict[line_list[0]] = (int(line_list[1]) - 1, int(line_list[2]))
+        with open(collapsed_coverage_file, "r") as col_cov_fd:
+            with open(output_file, "w") as out_fd:
+                for line in col_cov_fd:
+                    transcript_id, length, coverage_array = line.strip().split("\t")
+
+                    if transcript_id not in cds_dict:
+                        print("No CDS for transcript %s. %s" % (transcript_id, "Skipping..." if skip_transcript_with_no_cds else ""))
+                        if skip_transcript_with_no_cds:
+                            continue
+                        out_fd.write(line)
+                        continue
+                    coverage_array = coverage_array.split(",")
+                    cds_len = cds_dict[transcript_id][1] - cds_dict[transcript_id][0]
+                    out_fd.write("%s\t%s\t%s\n" % (transcript_id, str(cds_len),
+                                                   ",".join(coverage_array[cds_dict[transcript_id][0]:cds_dict[transcript_id][1]])))
 
     @staticmethod
     def analyze_collapsed_coverage_file(collapsed_file, output_file):
