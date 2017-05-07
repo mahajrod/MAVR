@@ -127,6 +127,8 @@ class GenomeCov(Tool):
                         zero_coverage_coordinates_list = ["."]
 
                     length_without_zerocoveraged_ends = end_coverage_coordinate - start_coverage_coordinate
+                    if length_without_zerocoveraged_ends == 0:
+                        continue
                     mean_coverage_without_zero_coverage_ends = float(np.mean(coverage_array[start_coverage_coordinate:end_coverage_coordinate]))
                     median_coverage_without_zero_coverage_ends = float(np.median(coverage_array[start_coverage_coordinate:end_coverage_coordinate]))
 
