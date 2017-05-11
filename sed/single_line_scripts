@@ -1,0 +1,2 @@
+#bed2gff
+sed 's/\(.*\)\t\([0-9]\+\)\t\([0-9]\+\)/\1\tcustom\tCDS\t\2\t\3\t\.\t+\t\.\tID=\1/' clusters.cds.coords.cds.coordinates > clusters.cds.coords.cds.coordinate.gff

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-
+from CustomCollections.GeneralCollections import SynDict, TwoLvlDict
 from Tools.Abstract import Tool
 
 
@@ -62,3 +62,21 @@ class HTSeq(Tool):
         options += " > %s" % output_file
 
         self.execute(options=options)
+
+    @staticmethod
+    def combine_count_files(count_file_list, output_file, sample_name_list=None):
+
+        if sample_name_list is not None:
+            if len(count_file_list) == len(sample_name_list):
+                raise ValueError("Several files doesn't have corresponding sample name")
+
+        samples = zip(sample_name_list if sample_name_list else count_file_list, count_file_list)
+
+        count_table = TwoLvlDict()
+
+        for sample, filename in samples:
+            count_table[sample] = SynDict(filename=filename, header=False, separator="\t", allow_repeats_of_key=False,
+                                          split_values=False, values_separator=",", key_index=0, value_index=1,
+                                          close_after_if_file_object=False, expression=None, comments_prefix="__")
+
+        count_table.write(output_file)
