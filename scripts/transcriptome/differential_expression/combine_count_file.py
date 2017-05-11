@@ -21,4 +21,4 @@ parser.add_argument("-s", "--sample_list", action="store", dest="sample_list",
 
 args = parser.parse_args()
 
-HTSeq.combine_count_files(args.file_list, args.file_list, sample_name_list=args.sample_list)
+HTSeq.combine_count_files(args.file_list, args.output, sample_name_list=args.sample_list)
