@@ -67,7 +67,7 @@ class HTSeq(Tool):
     def combine_count_files(count_file_list, output_file, sample_name_list=None):
 
         if sample_name_list is not None:
-            if len(count_file_list) == len(sample_name_list):
+            if len(count_file_list) != len(sample_name_list):
                 raise ValueError("Several files doesn't have corresponding sample name")
 
         samples = zip(sample_name_list if sample_name_list else count_file_list, count_file_list)
