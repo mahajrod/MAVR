@@ -53,7 +53,7 @@ parser.add_argument("-m", "--masking", action="store", dest="masking",
 """
 args = parser.parse_args()
 
-if args.args.num_of_seq_per_file and args.num_of_out_files:
+if args.num_of_seq_per_file and args.num_of_out_files:
     raise ValueError("Options -u/--num_of_seq_per_file and -e/--num_of_out_files can't be set simultaneously")
 
 if (not args.num_of_seq_per_file) and (not args.num_of_out_files):
