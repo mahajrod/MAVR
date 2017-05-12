@@ -61,7 +61,7 @@ if (not args.num_of_seq_per_file) and (not args.num_of_splited_files):
 
 Exonerate.threads = args.threads
 
-Exonerate.parallel_alignment(args.input, args.target, args.model, num_of_files=args.num_of_spited_files,
+Exonerate.parallel_alignment(args.input, args.target, args.model, num_of_files=args.num_of_splited_files,
                              num_of_recs_per_file=args.num_of_seq_per_file,
                              show_alignment=True, show_sugar=None, show_cigar=None,
                              show_vulgar=None, show_query_gff=True, show_target_gff=True,
