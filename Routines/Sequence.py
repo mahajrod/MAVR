@@ -27,14 +27,16 @@ class SequenceRoutines(FileRoutines):
     def __init__(self):
         FileRoutines.__init__(self)
 
-    def split_fasta(self, input_fasta, output_dir, num_of_recs_per_file=None, num_of_files=None, output_prefix=None):
+    def split_fasta(self, input_fasta, output_dir, num_of_recs_per_file=None, num_of_files=None, output_prefix=None,
+                    parsing_mode="parse", index_file=None):
         """
         by default splits input files into files with num_of_recs_per_file.
         if num_of_files is set num_of_recs_per_file is ignored.
         """
         self.safe_mkdir(output_dir)
         out_prefix = self.split_filename(input_fasta)[1] if output_prefix is None else output_prefix
-        sequence_dict = SeqIO.index_db("temp.idx", input_fasta, "fasta")
+
+        sequence_dict = self.parse_seq_file(input_fasta, parsing_mode, format="fasta", index_file=index_file) # SeqIO.index_db("temp.idx", input_fasta, "fasta")
 
         split_index = 1
         records_written = 0

@@ -86,11 +86,12 @@ class Exonerate(Tool):
                            number_of_results_to_report=None,
                            other_options=None,
                            num_of_files=None,
-                           converted_output_dir="converted_output"):
+                           converted_output_dir="converted_output", parsing_mode="parse", index_file=None):
         splited_filename = self.split_filename(query_file)
         self.split_fasta(query_file, splited_fasta_dir, num_of_recs_per_file=num_of_recs_per_file,
                          num_of_files=num_of_files,
-                         output_prefix=splited_filename[1])
+                         output_prefix=splited_filename[1],
+                         parsing_mode=parsing_mode, index_file=index_file)
 
         common_options = self.parse_common_options(model, show_alignment=show_alignment,
                                                    show_sugar=show_sugar, show_cigar=show_cigar,
