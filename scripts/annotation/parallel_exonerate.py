@@ -29,7 +29,9 @@ parser.add_argument("-u", "--num_of_seq_per_file", action="store", dest="num_of_
                     help="Number of sequences per splited input")
 parser.add_argument("-d", "--exonerate_dir", action="store", dest="exonerate_dir", default="",
                     help="Directory with exonerate binary")
-
+parser.add_argument("-e", "--num_of_splited_files", action="store", dest="num_of_splited_files",
+                    type=int, default=None,
+                    help="Number of splited files")
 """
 parser.add_argument("-u", "--num_in_seq_per_file", action="store", dest="num_in_seq_per_file",
                     type=int, default=1000,
