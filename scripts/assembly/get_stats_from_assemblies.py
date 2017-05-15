@@ -35,6 +35,7 @@ parser.add_argument("-f", "--format", action="store", dest="format", default="fa
                     help="Format of input files")
 parser.add_argument("-p", "--parsing_mode", action="store", dest="parsing_mode", default="parse",
                     help="Parsing mode for assembly files. Allowed: parse(default), index, index_db")
+
 args = parser.parse_args()
 
 if args.labels_list is not None:
