@@ -33,7 +33,8 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
                     help="Prefix of output files")
 parser.add_argument("-f", "--format", action="store", dest="format", default="fasta",
                     help="Format of input files")
-
+parser.add_argument("-p", "--parsing_mode", action="store", dest="parsing_mode", default="parse",
+                    help="Parsing mode for assembly files. Allowed: parse(default), index, index_db")
 args = parser.parse_args()
 
 if args.labels_list is not None:
@@ -44,8 +45,11 @@ assemblies_dict = OrderedDict()
 for i in range(0, len(args.input_file_list)):
     assembly_label = args.labels_list[i] if args.labels_list else "A%i" % (i + 1)
     tmp_index = "%s.tmp.idx" % assembly_label
-    assemblies_dict[assembly_label] = SeqIO.index_db(tmp_index, args.input_file_list[i],
-                                                     format=args.format)
+    assemblies_dict[assembly_label] = SequenceRoutines.parse_seq_file(args.input_file_list[i],
+                                                                      args.parsing_mode,
+                                                                      format=args.format,
+                                                                      index_file=temp_index)
+    #SeqIO.index_db(tmp_index, args.input_file_list[i],format=args.format)
 
 assembly_N50_dict = TwoLvlDict()
 assembly_L50 = TwoLvlDict()
