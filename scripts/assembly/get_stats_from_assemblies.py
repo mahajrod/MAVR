@@ -49,7 +49,7 @@ for i in range(0, len(args.input_file_list)):
     assemblies_dict[assembly_label] = SequenceRoutines.parse_seq_file(args.input_file_list[i],
                                                                       args.parsing_mode,
                                                                       format=args.format,
-                                                                      index_file=temp_index)
+                                                                      index_file=tmp_index)
     #SeqIO.index_db(tmp_index, args.input_file_list[i],format=args.format)
 
 assembly_N50_dict = TwoLvlDict()
