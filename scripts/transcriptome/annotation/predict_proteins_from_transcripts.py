@@ -57,6 +57,9 @@ parser.add_argument("-n", "--number_of_top_orfs_for_training", action="store", t
                          "Model (hexamer stats) (default: 500)")
 parser.add_argument("-c", "--hmmer_dir", action="store", dest="hmmer_dir", default="",
                     help="Directory with hmmer v3.1 binaries")
+parser.add_argument("-d", "--blast_dir", action="store", dest="blast_dir", default="",
+                    help="Directory with BLAST+ binaries")
+
 args = parser.parse_args()
 
 input_filename_list = FileRoutines.split_filename(args.input)
@@ -81,6 +84,7 @@ blastp_split_dir = "%ssplited_fasta_dir/" % blastp_dir
 blastp_splited_output_dir = "%ssplited_output_dir" % blastp_dir
 HMMER3.path = args.hmmer_dir
 HMMER3.threads = args.threads
+BLASTp.path = args.blast_dir
 BLASTp.threads = args.threads
 
 TransDecoder.extract_longest_orfs(args.input, genetic_code=args.genetic_code,
