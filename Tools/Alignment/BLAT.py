@@ -18,7 +18,7 @@ class BLAT(Tool):
 
         return options
 
-    def parallel_align(self, database, query_fasta, output_file, split_dir="splited_input/",
+    def parallel_align(self, database, query_fasta, output, split_dir="splited_input/",
                        splited_output_dir="splited_output_dir/",
                        database_type=None, query_type=None, add_header=True,
                        threads=None, remove_tmp_dirs=True,
@@ -52,9 +52,9 @@ class BLAT(Tool):
         self.parallel_execute(options_list, cmd="blat", threads=threads, async_run=async_run,
                               external_process_pool=external_process_pool)
 
-        cat_string = "cat %s > %s" % ("\t".join(output_file_list), output_file)
+        cat_string = "cat %s > %s" % ("\t".join(output_file_list), output)
         os.system(cat_string)
 
         if remove_tmp_dirs:
-            shutil.rmtree(splited_dir)
-            shutil.rmtree(splited_output_dir)
+            shutil.rmtree(splited_dir, ignore_errors=True)
+            shutil.rmtree(splited_output_dir, ignore_errors=True)
