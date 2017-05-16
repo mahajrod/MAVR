@@ -1,6 +1,6 @@
 CustomCollections
 Pipelines
-Tools
+Data
 Pictures
 Routines
 BConverters
@@ -8,5 +8,5 @@ SeqAnalysis
 Parsers
 Graphics
 Download
-Data
+Tools
 GeneSynonyms

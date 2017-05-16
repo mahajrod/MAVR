@@ -14,6 +14,7 @@ from Routines.TreeFam import TreeFamRoutines
 from Routines.Drawing import DrawingRoutines
 from Routines.Sequence import SequenceRoutines
 from Routines.Alignment import AlignmentRoutines
+from Routines.Expression import ExpressionRoutines
 from Routines.Matplotlib import MatplotlibRoutines
 from Routines.Annotations import AnnotationsRoutines
 from Routines.SequenceCluster import SequenceClusterRoutines
@@ -34,6 +35,7 @@ TreeFamRoutines = TreeFamRoutines()
 DrawingRoutines = DrawingRoutines()
 SequenceRoutines = SequenceRoutines()
 AlignmentRoutines = AlignmentRoutines()
+ExpressionRoutines = ExpressionRoutines()
 MatplotlibRoutines = MatplotlibRoutines()
 AnnotationsRoutines = AnnotationsRoutines()
 SequenceClusterRoutines = SequenceClusterRoutines()

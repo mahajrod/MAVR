@@ -377,9 +377,5 @@ class Exonerate(Tool):
         no_corresponding_cds_transcript_list.write(no_corresponding_cds_transcript_file)
         cds_not_found_transcript_list.write(cds_not_found_transcript_file)
 
-
-
-
-
 if __name__ == "__main__":
     pass

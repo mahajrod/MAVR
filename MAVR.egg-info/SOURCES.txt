@@ -66,6 +66,7 @@ Routines/Annotations.py
 Routines/Drawing.py
 Routines/EggNOG.py
 Routines/Ensembl.py
+Routines/Expression.py
 Routines/Fastq.py
 Routines/File.py
 Routines/Functions.py
@@ -88,6 +89,7 @@ Tools/Picard.py
 Tools/RepeatSearchTools.py
 Tools/TVC.py
 Tools/__init__.py
+Tools/Alignment/BLAT.py
 Tools/Alignment/BWA.py
 Tools/Alignment/Bowtie2.py
 Tools/Alignment/Novoalign.py
@@ -183,6 +185,7 @@ Tools/SRAToolkit/FastqDump.py
 Tools/SRAToolkit/__init__.py
 Tools/Samtools/Samtools.py
 Tools/Samtools/__init__.py
+Tools/Scaffolders/LRNAScaffolder.py
 Tools/Scaffolders/SSPACE.py
 Tools/Scaffolders/__init__.py
 scripts/CDS_region_variants.py
@@ -200,6 +203,7 @@ scripts/alignment/analize_collapsed_coverage_file.py
 scripts/alignment/check_read_pairing_in_name_sorted_bam.sh
 scripts/alignment/collapse_bedtools_coverage_file.sh
 scripts/alignment/draw_insert_size_distribution.py
+scripts/alignment/extract_data_for_cds_from_collapsed_coverage_file.py
 scripts/alignment/extract_fastq_from_bam.py
 scripts/alignment/extract_se_from_bam.sh
 scripts/alignment/make_blast_plus_db.py
@@ -381,8 +385,9 @@ scripts/sequence/extract_sequences_by_ids.py
 scripts/sequence/extract_sequences_by_length.py
 scripts/sequence/extract_species_names_from_genbank_files.py
 scripts/sequence/extract_terminal_sequences.py
-scripts/sequence/fasta2corresponce.bash
+scripts/sequence/fasta2correspondence.bash
 scripts/sequence/filter_sequences_by_id_expression.py
+scripts/sequence/find_cds_coordinates_in_transcript_by_pep.py
 scripts/sequence/find_gaps.py
 scripts/sequence/find_repeated_ids_in_fasta.bash
 scripts/sequence/get_cds_pep_accordance.py
@@ -471,4 +476,8 @@ scripts/transcriptome/coverage_analyzis.sh
 scripts/transcriptome/annotation/extract_complete_proteins_from_transdecoder_output.py
 scripts/transcriptome/annotation/predict_proteins_from_transcripts.py
 scripts/transcriptome/annotation/transdecoder_annotation_analysis.bash
+scripts/transcriptome/differential_expression/combine_count_file.py
+scripts/transcriptome/differential_expression/divide_count_by_base_level.py
+scripts/transcriptome/differential_expression/divide_count_by_max_level.py
+scripts/transcriptome/differential_expression/divide_count_by_several_base_level.py
 scripts/transcriptome/differential_expression/star_htseq.py

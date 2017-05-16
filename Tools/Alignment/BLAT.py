@@ -1,0 +1,60 @@
+#!/usr/bin/env python
+import os
+import shutil
+from Tools.Abstract import Tool
+
+
+class BLAT(Tool):
+
+    def __init__(self, path="", max_threads=4):
+        Tool.__init__(self, "blat", path=path, max_threads=max_threads)
+
+    def parse_options(self, database_type=None, query_type=None, add_header=True):
+
+        options = ""
+        options += " -t=%s" % database_type if database_type else ""
+        options += " -q=%s" % query_type if query_type else ""
+        options += " -noHead" if not add_header else ""
+
+        return options
+
+    def parallel_align(self, database, query_fasta, output_file, split_dir="splited_input/",
+                       splited_output_dir="splited_output_dir/",
+                       database_type=None, query_type=None, add_header=True,
+                       threads=None, remove_tmp_dirs=True,
+                       async_run=False, external_process_pool=None):
+        splited_dir = self.check_path(split_dir)
+        splited_out_dir = self.check_path(splited_output_dir)
+        self.safe_mkdir(splited_dir)
+        self.safe_mkdir(splited_out_dir)
+
+        common_options = self.parse_options(database_type=database_type,
+                                            query_type=query_type,
+                                            add_header=add_header)
+
+        number_of_files = 5 * threads if threads else 5 * self.threads
+        self.split_fasta(query_fasta, splited_dir, num_of_files=number_of_files)
+
+        options_list = []
+        input_list_of_files = sorted(os.listdir(splited_dir))
+        output_file_list = []
+        for filename in input_list_of_files:
+            query = "%s/%s" % (splited_dir, filename)
+            output_file = "%s/%s.out" % (splited_out_dir, filename)
+            options = "%s" % database
+            options += " %s" % query
+            options += " %s" % common_options
+            options += " %s" % output_file
+
+            options_list.append(options)
+            output_file_list.append(output_file)
+
+        self.parallel_execute(options_list, cmd="blat", threads=threads, async_run=async_run,
+                              external_process_pool=external_process_pool)
+
+        cat_string = "cat %s > %s" % ("\t".join(output_file_list), output_file)
+        os.system(cat_string)
+
+        if remove_tmp_dirs:
+            shutil.rmtree(splited_dir)
+            shutil.rmtree(splited_output_dir)
