@@ -9,7 +9,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--database", action="store", dest="database", required=True,
                     help="Input file with database")
-parser.add_argument("-d", "--query_fasta", action="store", dest="query_fasta", required=True,
+parser.add_argument("-q", "--query_fasta", action="store", dest="query_fasta", required=True,
                     help="Fasta file with query sequences")
 parser.add_argument("-p", "--path_to_blat_dir", action="store", dest="path_to_blat_dir",
                     default="", help="Path to BLAT directory")
