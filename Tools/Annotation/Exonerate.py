@@ -81,7 +81,7 @@ class Exonerate(Tool):
     def parallel_alignment(self, query_file, target_file, model, num_of_recs_per_file=None,
                            show_alignment=None, show_sugar=True, show_cigar=None,
                            show_vulgar=None, show_query_gff=None, show_target_gff=None,
-                           store_intermediate_files=False,
+                           store_intermediate_files=True,
                            splited_fasta_dir="splited_fasta_dir", splited_result_dir="splited_output",
                            number_of_results_to_report=None,
                            other_options=None,

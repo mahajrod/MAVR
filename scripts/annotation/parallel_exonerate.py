@@ -67,7 +67,7 @@ Exonerate.parallel_alignment(args.input, args.target, args.model, num_of_files=a
                              num_of_recs_per_file=args.num_of_seq_per_file,
                              show_alignment=True, show_sugar=None, show_cigar=None,
                              show_vulgar=None, show_query_gff=True, show_target_gff=True,
-                             store_intermediate_files=False,
+                             store_intermediate_files=True,
                              splited_fasta_dir="splited_fasta_dir", splited_result_dir="splited_output",
                              number_of_results_to_report=args.num_of_results_to_report,
                              converted_output_dir="converted_output")
