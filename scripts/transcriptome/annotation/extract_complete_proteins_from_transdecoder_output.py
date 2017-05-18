@@ -11,6 +11,9 @@ from Routines.Sequence import record_by_expression_generator
 
 
 def check_if_protein_is_complete(record):
+    print record.description
+    print record.description.split()
+    print record.description.split()[5]
     return record.description.split()[5].split(":")[1] == "complete"
 
 parser = argparse.ArgumentParser()
