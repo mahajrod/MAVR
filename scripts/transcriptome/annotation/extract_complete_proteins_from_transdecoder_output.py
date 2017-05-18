@@ -11,10 +11,14 @@ from Routines.Sequence import record_by_expression_generator
 
 
 def check_if_protein_is_complete(record):
-    print record.description
-    print record.description.split()
-    print record.description.split()[5]
-    return record.description.split()[5].split(":")[1] == "complete"
+
+    splited_description = record.description.split()
+    complete_orf = None
+    for entry in splited_description:
+        if ("type" in entry) and (":" in entry):
+            complete_orf = entry.split(":")[1] == "complete"
+
+    return complete_orf
 
 parser = argparse.ArgumentParser()
 

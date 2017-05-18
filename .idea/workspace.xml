@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/annotation/exonerate/get_query_ids_from_exonerate_output.bash" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Annotation/Exonerate.py" afterPath="$PROJECT_DIR$/Tools/Annotation/Exonerate.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/parallel_exonerate.py" afterPath="$PROJECT_DIR$/scripts/annotation/parallel_exonerate.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/alignment/parallel_blat.py" afterPath="$PROJECT_DIR$/scripts/alignment/parallel_blat.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/transcriptome/annotation/extract_complete_proteins_from_transdecoder_output.py" afterPath="$PROJECT_DIR$/scripts/transcriptome/annotation/extract_complete_proteins_from_transdecoder_output.py" />
     </list>
     <ignored path="MAVR.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,16 +38,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BLASTPlus.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/BLAST/BLASTPlus.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="BLAST.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools/BLAST/BLAST.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -59,32 +48,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="predict_proteins_from_transcripts.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/transcriptome/annotation/predict_proteins_from_transcripts.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1476">
-              <caret line="90" column="33" lean-forward="false" selection-start-line="90" selection-start-column="33" selection-end-line="90" selection-end-column="33" />
-              <folding>
-                <element signature="e#54#63#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Sequence.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7056">
-              <caret line="412" column="22" lean-forward="false" selection-start-line="412" selection-start-column="4" selection-end-line="412" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="HMMER3.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools/HMMER/HMMER3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
+            <state relative-caret-position="5238">
               <caret line="299" column="43" lean-forward="false" selection-start-line="299" selection-start-column="43" selection-end-line="299" selection-end-column="43" />
               <folding />
             </state>
@@ -94,18 +61,48 @@
       <file leaf-file-name="Exonerate.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools/Annotation/Exonerate.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
+            <state relative-caret-position="1386">
               <caret line="83" column="56" lean-forward="false" selection-start-line="83" selection-start-column="56" selection-end-line="83" selection-end-column="56" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parallel_exonerate.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="parallel_exonerate.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_exonerate.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="894">
+            <state relative-caret-position="845">
               <caret line="69" column="58" lean-forward="false" selection-start-line="69" selection-start-column="58" selection-end-line="69" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="parallel_blat.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/alignment/parallel_blat.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="648">
+              <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="transdecoder_annotation_analysis.bash" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/transcriptome/annotation/transdecoder_annotation_analysis.bash">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="522">
+              <caret line="29" column="63" lean-forward="true" selection-start-line="29" selection-start-column="63" selection-end-line="29" selection-end-column="63" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="extract_complete_proteins_from_transdecoder_output.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/transcriptome/annotation/extract_complete_proteins_from_transdecoder_output.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="15" column="23" lean-forward="false" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -115,7 +112,7 @@
         <entry file="file://$PROJECT_DIR$/scripts/annotation/exonerate/get_query_ids_from_exonerate_output.bash">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="54">
-              <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -179,7 +176,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/hmmer3/extract_hits_from_hmm_output.py" />
         <option value="$PROJECT_DIR$/scripts/hmmer3/extract_top_hits_from_hmm_output.py" />
         <option value="$PROJECT_DIR$/scripts/multiple_alignment/parallel_mafft.py" />
         <option value="$PROJECT_DIR$/scripts/multiple_alignment/remove_columns_with_gaps.py" />
@@ -222,7 +218,6 @@
         <option value="$PROJECT_DIR$/Routines/Expression.py" />
         <option value="$PROJECT_DIR$/scripts/transcriptome/differential_expression/divide_count_by_several_base_level.py" />
         <option value="$PROJECT_DIR$/Tools/Alignment/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/alignment/parallel_blat.py" />
         <option value="$PROJECT_DIR$/Tools/Alignment/BLAT.py" />
         <option value="$PROJECT_DIR$/Tools/Abstract.py" />
         <option value="$PROJECT_DIR$/scripts/transcriptome/annotation/predict_proteins_from_transcripts.py" />
@@ -230,6 +225,8 @@
         <option value="$PROJECT_DIR$/Tools/Annotation/Exonerate.py" />
         <option value="$PROJECT_DIR$/scripts/annotation/parallel_exonerate.py" />
         <option value="$PROJECT_DIR$/scripts/annotation/exonerate/get_query_ids_from_exonerate_output.bash" />
+        <option value="$PROJECT_DIR$/scripts/alignment/parallel_blat.py" />
+        <option value="$PROJECT_DIR$/scripts/transcriptome/annotation/extract_complete_proteins_from_transdecoder_output.py" />
       </list>
     </option>
   </component>
@@ -240,8 +237,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-1" />
     <option name="y" value="25" />
-    <option name="width" value="1282" />
-    <option name="height" value="775" />
+    <option name="width" value="1682" />
+    <option name="height" value="1025" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -268,146 +265,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sequence" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="annotation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="annotation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="exonerate" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HMMER" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BLAST" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Annotation" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -753,20 +610,6 @@
       <option name="presentableId" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-01220" summary="changes">
-      <created>1491361035595</created>
-      <option name="number" value="01220" />
-      <option name="presentableId" value="LOCAL-01220" />
-      <option name="project" value="LOCAL" />
-      <updated>1491361035595</updated>
-    </task>
-    <task id="LOCAL-01221" summary="changes">
-      <created>1491361275953</created>
-      <option name="number" value="01221" />
-      <option name="presentableId" value="LOCAL-01221" />
-      <option name="project" value="LOCAL" />
-      <updated>1491361275953</updated>
-    </task>
     <task id="LOCAL-01222" summary="changes">
       <created>1492018241577</created>
       <option name="number" value="01222" />
@@ -1096,7 +939,21 @@
       <option name="project" value="LOCAL" />
       <updated>1494955642638</updated>
     </task>
-    <option name="localTasksCounter" value="1269" />
+    <task id="LOCAL-01269" summary="changes">
+      <created>1495023202928</created>
+      <option name="number" value="01269" />
+      <option name="presentableId" value="LOCAL-01269" />
+      <option name="project" value="LOCAL" />
+      <updated>1495023202928</updated>
+    </task>
+    <task id="LOCAL-01270" summary="changes">
+      <created>1495104561929</created>
+      <option name="number" value="01270" />
+      <option name="presentableId" value="LOCAL-01270" />
+      <option name="project" value="LOCAL" />
+      <updated>1495104561930</updated>
+    </task>
+    <option name="localTasksCounter" value="1271" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1120,10 +977,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="25" width="1282" height="775" extended-state="6" />
+    <frame x="-1" y="25" width="1682" height="1025" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25893566" sideWeight="0.8187134" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21699819" sideWeight="0.8187134" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.039445627" sideWeight="0.5134281" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.013615734" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -1258,20 +1115,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/transcriptome/coverage_analyzis.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/transcriptome/align_by_star.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Transcriptome/PASA.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1534,7 +1377,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
           <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1543,16 +1385,6 @@
         <state relative-caret-position="234">
           <caret line="20" column="25" lean-forward="false" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/alignment/parallel_blat.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="9" column="76" lean-forward="false" selection-start-line="9" selection-start-column="76" selection-end-line="9" selection-end-column="76" />
-          <folding>
-            <element signature="e#47#62#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1592,8 +1424,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/HMMER/HMMER3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
+        <state relative-caret-position="5238">
           <caret line="299" column="43" lean-forward="false" selection-start-line="299" selection-start-column="43" selection-end-line="299" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools/Annotation/Exonerate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1386">
+          <caret line="83" column="56" lean-forward="false" selection-start-line="83" selection-start-column="56" selection-end-line="83" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_exonerate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="845">
+          <caret line="69" column="58" lean-forward="false" selection-start-line="69" selection-start-column="58" selection-end-line="69" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/annotation/exonerate/get_query_ids_from_exonerate_output.bash">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1618,26 +1474,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Annotation/Exonerate.py">
+    <entry file="file://$PROJECT_DIR$/scripts/alignment/parallel_blat.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="83" column="56" lean-forward="false" selection-start-line="83" selection-start-column="56" selection-end-line="83" selection-end-column="56" />
+        <state relative-caret-position="648">
+          <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/annotation/exonerate/get_query_ids_from_exonerate_output.bash">
+    <entry file="file://$PROJECT_DIR$/scripts/transcriptome/annotation/transdecoder_annotation_analysis.bash">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state relative-caret-position="522">
+          <caret line="29" column="63" lean-forward="true" selection-start-line="29" selection-start-column="63" selection-end-line="29" selection-end-column="63" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/annotation/parallel_exonerate.py">
+    <entry file="file://$PROJECT_DIR$/scripts/transcriptome/annotation/extract_complete_proteins_from_transdecoder_output.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="894">
-          <caret line="69" column="58" lean-forward="false" selection-start-line="69" selection-start-column="58" selection-end-line="69" selection-end-column="58" />
+        <state relative-caret-position="144">
+          <caret line="15" column="23" lean-forward="false" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
           <folding />
         </state>
       </provider>

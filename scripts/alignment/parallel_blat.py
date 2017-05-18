@@ -11,6 +11,13 @@ parser.add_argument("-i", "--database", action="store", dest="database", require
                     help="Input file with database")
 parser.add_argument("-q", "--query_fasta", action="store", dest="query_fasta", required=True,
                     help="Fasta file with query sequences")
+
+
+parser.add_argument("-a", "--query_type", action="store", dest="query_type",
+                    help="Query type. Allowed: dna(default), rna, prot, dnax, rnax")
+parser.add_argument("-b", "--database_type", action="store", dest="database_type",
+                    help="Database type. Allowed: dna(default), prot, dnax")
+
 parser.add_argument("-p", "--path_to_blat_dir", action="store", dest="path_to_blat_dir",
                     default="", help="Path to BLAT directory")
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=4,
@@ -26,10 +33,6 @@ BLAT.threads = args.threads
 BLAT.path = args.path_to_blat_dir
 BLAT.parallel_align(args.database, args.query_fasta, args.output, split_dir="splited_input/",
                     splited_output_dir="splited_output_dir/",
-                    database_type=None, query_type=None, add_header=not args.no_header,
+                    database_type=args.databse_type, query_type=args.query_type, add_header=not args.no_header,
                     threads=None, remove_tmp_dirs=True,
                     async_run=False, external_process_pool=None)
-
-
-
-
