@@ -30,7 +30,6 @@ parser.add_argument("-d", "--id_check", action="store_true", dest="id_check",
 parser.add_argument("-w", "-cds_with_no_pep_idfile", action="store_true", dest="cds_with_no_pep_idfile",
                     help="File to write ids of CDS with no protein hit. Default: not set")
 
-
 args = parser.parse_args()
 
 SequenceRoutines.get_cds_to_pep_accordance_from_files(args.cds_file, args.pep_file, args.out, verbose=args.verbose,
