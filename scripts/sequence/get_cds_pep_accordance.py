@@ -27,7 +27,7 @@ parser.add_argument("-t", "--genetic_code_table", action="store", dest="genetic_
                          "Default: 1(The standard code)")
 parser.add_argument("-d", "--id_check", action="store_true", dest="id_check",
                     help="Also use id check - if there is id present in both files consider them as accordance")
-parser.add_argument("-w", "-cds_with_no_pep_idfile", action="store_true", dest="cds_with_no_pep_idfile",
+parser.add_argument("-w", "-cds_with_no_pep_idfile", action="store", dest="cds_with_no_pep_idfile",
                     help="File to write ids of CDS with no protein hit. Default: not set")
 
 args = parser.parse_args()
