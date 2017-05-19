@@ -574,6 +574,7 @@ class SequenceRoutines(FileRoutines):
                                   parsing_mode="index_db", genetic_code_table=1,
                                   include_id_check=False):
         cds_pep_accordance_dict = SynDict()
+        cds_with_absent_proteins_id_list = IdList()
 
         for cds_id in cds_dict:
             cds_pep = cds_dict[cds_id].seq.translate(to_stop=True, table=genetic_code_table)
@@ -591,12 +592,13 @@ class SequenceRoutines(FileRoutines):
                         pep_dict.pop(pep_id, None)
                     break
             else:
+                cds_with_absent_proteins_id_list.append(cds_id)
                 if verbose:
                     print("Protein was not found for %s CDS" % cds_id)
 
-        return cds_pep_accordance_dict
+        return cds_pep_accordance_dict, cds_with_absent_proteins_id_list
 
-    def get_cds_to_pep_accordance_from_files(self, cds_file, pep_file, output_file, format="fasta",
+    def get_cds_to_pep_accordance_from_files(self, cds_file, pep_file, output_file, cds_with_no_pep_idfile=None, format="fasta",
                                              verbose=True, parsing_mode="parse", index_file_suffix="tmp.idx",
                                              genetic_code_table=1, include_id_check=False):
 
@@ -605,11 +607,13 @@ class SequenceRoutines(FileRoutines):
         pep_dict = self.parse_seq_file(pep_file, mode=parsing_mode, format=format,
                                        index_file="pep_%s" % index_file_suffix)
 
-        cds_pep_accordance_dict = self.get_cds_to_pep_accordance(cds_dict, pep_dict, verbose=verbose,
-                                                                 parsing_mode=parsing_mode,
-                                                                 genetic_code_table=genetic_code_table,
-                                                                 include_id_check=include_id_check)
+        cds_pep_accordance_dict, cds_with_absent_proteins_id_list = self.get_cds_to_pep_accordance(cds_dict, pep_dict, verbose=verbose,
+                                                                                                   parsing_mode=parsing_mode,
+                                                                                                   genetic_code_table=genetic_code_table,
+                                                                                                   include_id_check=include_id_check)
         cds_pep_accordance_dict.write(output_file)
+        if cds_with_no_pep_idfile:
+            cds_with_absent_proteins_id_list.write(cds_with_no_pep_idfile)
 
     @staticmethod
     def extract_exon_lengths(record_dict):

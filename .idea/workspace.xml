@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/addax/ovis_exonerate_addax.slurm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/pacbio/pacbio_adapters_tag.bash" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/mahajrod.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/mahajrod.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Sequence.py" afterPath="$PROJECT_DIR$/Routines/Sequence.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sequence/get_cds_pep_accordance.py" afterPath="$PROJECT_DIR$/scripts/sequence/get_cds_pep_accordance.py" />
     </list>
     <ignored path="MAVR.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,26 +38,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="parallel_blat.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/alignment/parallel_blat.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="648">
-              <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="transdecoder_annotation_analysis.bash" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/transcriptome/annotation/transdecoder_annotation_analysis.bash">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="29" column="63" lean-forward="false" selection-start-line="29" selection-start-column="63" selection-end-line="29" selection-end-column="63" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools/PacBio/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -69,11 +48,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="get_cds_pep_accordance.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="get_cds_pep_accordance.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/sequence/get_cds_pep_accordance.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="648">
+              <caret line="39" column="104" lean-forward="false" selection-start-line="39" selection-start-column="104" selection-end-line="39" selection-end-column="104" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Sequence.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="57">
+              <caret line="600" column="83" lean-forward="false" selection-start-line="600" selection-start-column="82" selection-end-line="600" selection-end-column="111" />
               <folding />
             </state>
           </provider>
@@ -89,11 +78,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ovis_exonerate_addax.slurm" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ovis_exonerate_addax.slurm" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/projects/addax/ovis_exonerate_addax.slurm">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="162">
               <caret line="9" column="73" lean-forward="false" selection-start-line="9" selection-start-column="73" selection-end-line="9" selection-end-column="73" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="single_line_scripts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sed/single_line_scripts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="get_query_ids_from_exonerate_output.bash" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/annotation/exonerate/get_query_ids_from_exonerate_output.bash">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="36">
+              <caret line="2" column="5" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="81" />
               <folding />
             </state>
           </provider>
@@ -129,16 +138,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="extract_complete_proteins_from_transdecoder_output.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/transcriptome/annotation/extract_complete_proteins_from_transdecoder_output.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="15" column="23" lean-forward="false" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -162,6 +161,7 @@
       <find>parse_seq_file</find>
       <find>def parse_seq_file</find>
       <find>sra</find>
+      <find>get_cds</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/scripts</dir>
@@ -173,7 +173,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/sequence_clusters/treefam/prepare_cafe_input_from_fam_files.py" />
         <option value="$PROJECT_DIR$/Tools/BLAST/BLASTPlus.py" />
         <option value="$PROJECT_DIR$/Tools/BioFormats/BioConvert.py" />
         <option value="$PROJECT_DIR$/Tools/Annotation/Barrnap.py" />
@@ -199,7 +198,6 @@
         <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/Tools/Expression/HTSeq.py" />
         <option value="$PROJECT_DIR$/scripts/transcriptome/differential_expression/combine_count_file.py" />
-        <option value="$PROJECT_DIR$/Routines/Sequence.py" />
         <option value="$PROJECT_DIR$/projects/addax/goat_exonerate_addax.slurm" />
         <option value="$PROJECT_DIR$/manuals/grid/slurm.t" />
         <option value="$PROJECT_DIR$/scripts/assembly/get_stats_from_assemblies.py" />
@@ -217,13 +215,15 @@
         <option value="$PROJECT_DIR$/Tools/HMMER/HMMER3.py" />
         <option value="$PROJECT_DIR$/Tools/Annotation/Exonerate.py" />
         <option value="$PROJECT_DIR$/scripts/annotation/parallel_exonerate.py" />
-        <option value="$PROJECT_DIR$/scripts/annotation/exonerate/get_query_ids_from_exonerate_output.bash" />
         <option value="$PROJECT_DIR$/scripts/alignment/parallel_blat.py" />
         <option value="$PROJECT_DIR$/scripts/transcriptome/annotation/extract_complete_proteins_from_transdecoder_output.py" />
         <option value="$PROJECT_DIR$/Tools/PacBio/SMRTLink4.py" />
         <option value="$PROJECT_DIR$/Tools/PacBio/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/pacbio/pacbio_adapters_tag.bash" />
         <option value="$PROJECT_DIR$/projects/addax/ovis_exonerate_addax.slurm" />
+        <option value="$PROJECT_DIR$/scripts/annotation/exonerate/get_query_ids_from_exonerate_output.bash" />
+        <option value="$PROJECT_DIR$/Routines/Sequence.py" />
+        <option value="$PROJECT_DIR$/scripts/sequence/get_cds_pep_accordance.py" />
       </list>
     </option>
   </component>
@@ -275,6 +275,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="sed" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="scripts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -307,24 +321,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pacbio" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAVR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="projects" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -344,6 +340,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="addax" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Routines" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -689,20 +699,6 @@
       <option name="presentableId" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-01224" summary="changes">
-      <created>1493069466202</created>
-      <option name="number" value="01224" />
-      <option name="presentableId" value="LOCAL-01224" />
-      <option name="project" value="LOCAL" />
-      <updated>1493069466202</updated>
-    </task>
-    <task id="LOCAL-01225" summary="changes">
-      <created>1493070041293</created>
-      <option name="number" value="01225" />
-      <option name="presentableId" value="LOCAL-01225" />
-      <option name="project" value="LOCAL" />
-      <updated>1493070041293</updated>
-    </task>
     <task id="LOCAL-01226" summary="changes">
       <created>1493070206512</created>
       <option name="number" value="01226" />
@@ -1032,7 +1028,21 @@
       <option name="project" value="LOCAL" />
       <updated>1495110876397</updated>
     </task>
-    <option name="localTasksCounter" value="1273" />
+    <task id="LOCAL-01273" summary="changes">
+      <created>1495185768389</created>
+      <option name="number" value="01273" />
+      <option name="presentableId" value="LOCAL-01273" />
+      <option name="project" value="LOCAL" />
+      <updated>1495185768389</updated>
+    </task>
+    <task id="LOCAL-01274" summary="changes">
+      <created>1495187212899</created>
+      <option name="number" value="01274" />
+      <option name="presentableId" value="LOCAL-01274" />
+      <option name="project" value="LOCAL" />
+      <updated>1495187212899</updated>
+    </task>
+    <option name="localTasksCounter" value="1275" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1059,7 +1069,7 @@
     <frame x="-1" y="25" width="1282" height="775" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21683876" sideWeight="0.8187134" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19936457" sideWeight="0.8187134" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.039445627" sideWeight="0.5134281" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.013615734" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -1194,13 +1204,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/projects/addax/goat_exonerate_addax.slurm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="64" lean-forward="false" selection-start-line="5" selection-start-column="64" selection-end-line="5" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/projects/cat_comparison/cats_exonerate_cat.slurm">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
@@ -1412,13 +1415,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7056">
-          <caret line="412" column="22" lean-forward="false" selection-start-line="412" selection-start-column="4" selection-end-line="412" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/transcriptome/annotation/predict_proteins_from_transcripts.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1476">
@@ -1461,13 +1457,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/annotation/exonerate/get_query_ids_from_exonerate_output.bash">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/transcriptome/differential_expression/divide_count_by_base_level.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -1480,7 +1469,7 @@
         <state relative-caret-position="342">
           <caret line="37" column="41" lean-forward="false" selection-start-line="37" selection-start-column="41" selection-end-line="37" selection-end-column="41" />
           <folding>
-            <element signature="e#25#63#0" expanded="true" />
+            <element signature="e#25#63#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1541,10 +1530,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/sequence/get_cds_pep_accordance.py">
+    <entry file="file://$PROJECT_DIR$/sed/single_line_scripts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/annotation/exonerate/get_query_ids_from_exonerate_output.bash">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="5" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="81" />
           <folding />
         </state>
       </provider>
@@ -1561,6 +1558,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="9" column="73" lean-forward="false" selection-start-line="9" selection-start-column="73" selection-end-line="9" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="600" column="83" lean-forward="false" selection-start-line="600" selection-start-column="82" selection-end-line="600" selection-end-column="111" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence/get_cds_pep_accordance.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="648">
+          <caret line="39" column="104" lean-forward="false" selection-start-line="39" selection-start-column="104" selection-end-line="39" selection-end-column="104" />
           <folding />
         </state>
       </provider>

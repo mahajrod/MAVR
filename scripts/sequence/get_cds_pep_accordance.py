@@ -27,12 +27,17 @@ parser.add_argument("-t", "--genetic_code_table", action="store", dest="genetic_
                          "Default: 1(The standard code)")
 parser.add_argument("-d", "--id_check", action="store_true", dest="id_check",
                     help="Also use id check - if there is id present in both files consider them as accordance")
+parser.add_argument("-w", "-cds_with_no_pep_idfile", action="store_true", dest="cds_with_no_pep_idfile",
+                    help="File to write ids of CDS with no protein hit. Default: not set")
+
+
 args = parser.parse_args()
 
 SequenceRoutines.get_cds_to_pep_accordance_from_files(args.cds_file, args.pep_file, args.out, verbose=args.verbose,
                                                       parsing_mode=args.parsing_mode,
                                                       genetic_code_table=args.genetic_code_table,
-                                                      include_id_check=args.id_check)
+                                                      include_id_check=args.id_check,
+                                                      cds_with_no_pep_idfile=args.cds_with_no_pep_idfile)
 if args.parsing_mode == "index_db":
     os.remove("cds_tmp.idx")
     os.remove("pep_tmp.idx")
