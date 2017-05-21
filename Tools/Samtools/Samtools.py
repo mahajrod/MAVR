@@ -3,6 +3,7 @@
 from Tools.Abstract import Tool
 from Routines import DrawingRoutines
 
+
 class SamtoolsV1(Tool):
     """
     Class for samtools 1.0+
@@ -26,6 +27,53 @@ class SamtoolsV1(Tool):
                           "read_is_PCR_or_optical_duplicate": 1024,
                           "supplementary_alignment": 2048
                           }
+
+    def get_read_names(self, input_bam, output_file):
+
+        options = " view"
+        options += " %s" % input_bam
+        options += " | awk \'{print $1}\' > %s" % output_file
+
+        self.execute(options=options)
+
+    def get_reads_by_name(self, read_name_list, input_sam_fd, output_sam_fd, mode="include", search_mode="exact"):
+
+        if search_mode == "exact":
+            def expression(read_name):
+                for entry in read_name_list:
+                    if entry == read_name:
+                        return True
+                return False
+        elif search_mode == "partial":
+            def expression(read_name):
+                for entry in read_name_list:
+                    if read_name in entry:
+                        return True
+                return False
+        if mode == "include":
+            def include_expression(read_name):
+                return expression(read_name)
+        elif mode == "remove":
+            def include_expression(read_name):
+                return not expression(read_name)
+
+        for line in input_sam_fd:
+            if line[0] != "@":
+                if include_expression(line.split()[0]):
+                    output_sam_fd.write(line)
+                break
+            output_sam_fd.write(line)
+        for line in input_sam_fd:
+            if include_expression(line.split()[0]):
+                output_sam_fd.write(line)
+
+
+
+
+
+
+
+
 
     def rmdup(self, input_bam, output_bam, remove_dup_for_se_reads=False, treat_both_pe_and_se_reads=False):
 

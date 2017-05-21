@@ -10,7 +10,7 @@ from Data.Nucleotides import back_degenerate_nucleotides
 from CustomCollections.GeneralCollections import SynDict
 
 
-class AlignmentRoutines:
+class AlignmentRoutines(SequenceRoutines):
     def __init__(self):
         pass
     """

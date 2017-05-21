@@ -11,7 +11,7 @@ import numpy as np
 from collections import OrderedDict
 from Bio import SeqIO, Entrez
 from Bio.SeqRecord import SeqRecord
-from Routines import FileRoutines
+from Routines.File import FileRoutines
 from CustomCollections.GeneralCollections import IdList, SynDict, TwoLvlDict, IdSet
 
 from urllib2 import URLError
