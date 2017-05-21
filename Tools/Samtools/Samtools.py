@@ -66,6 +66,8 @@ class SamtoolsV1(Tool):
         for line in input_sam_fd:
             if include_expression(line.split()[0]):
                 output_sam_fd.write(line)
+            else:
+                print ("uuuu")
 
 
 
