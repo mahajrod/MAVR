@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Routines/Pacbio.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/alignment/get_read_names_from_sam.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/alignment/get_reads_by_name.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/alignment/get_read_names_from_sam.py" afterPath="$PROJECT_DIR$/scripts/alignment/get_reads_by_name.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Alignment.py" afterPath="$PROJECT_DIR$/Routines/Alignment.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/NCBI.py" afterPath="$PROJECT_DIR$/Routines/NCBI.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Samtools/Samtools.py" afterPath="$PROJECT_DIR$/Tools/Samtools/Samtools.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/alignment/get_read_names_from_sam.py" afterPath="$PROJECT_DIR$/scripts/alignment/get_read_names_from_sam.py" />
     </list>
     <ignored path="MAVR.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,11 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="get_read_names_from_sam.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/alignment/get_read_names_from_sam.py">
+      <file leaf-file-name="get_reads_by_name.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/alignment/get_reads_by_name.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+            <state relative-caret-position="144">
+              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding>
                 <element signature="e#54#64#0" expanded="true" />
               </folding>
@@ -66,8 +62,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="get_reads_by_name.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/alignment/get_reads_by_name.py">
+      <file leaf-file-name="get_read_names_from_sam.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/alignment/get_read_names_from_sam.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -79,7 +75,7 @@
       <file leaf-file-name="Samtools.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools/Samtools/Samtools.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="613">
+            <state relative-caret-position="343">
               <caret line="63" column="21" lean-forward="true" selection-start-line="63" selection-start-column="21" selection-end-line="63" selection-end-column="21" />
               <folding />
             </state>
@@ -694,13 +690,6 @@
       <option name="presentableId" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-01229" summary="changes">
-      <created>1493087139734</created>
-      <option name="number" value="01229" />
-      <option name="presentableId" value="LOCAL-01229" />
-      <option name="project" value="LOCAL" />
-      <updated>1493087139734</updated>
-    </task>
     <task id="LOCAL-01230" summary="changes">
       <created>1493510813124</created>
       <option name="number" value="01230" />
@@ -1037,7 +1026,14 @@
       <option name="project" value="LOCAL" />
       <updated>1495190215855</updated>
     </task>
-    <option name="localTasksCounter" value="1278" />
+    <task id="LOCAL-01278" summary="changes">
+      <created>1495372998322</created>
+      <option name="number" value="01278" />
+      <option name="presentableId" value="LOCAL-01278" />
+      <option name="project" value="LOCAL" />
+      <updated>1495372998323</updated>
+    </task>
+    <option name="localTasksCounter" value="1279" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1202,11 +1198,6 @@
           <url>file://$PROJECT_DIR$/Routines/NCBI.py</url>
           <line>1</line>
           <option name="timeStamp" value="37" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/scripts/alignment/get_read_names_from_sam.py</url>
-          <line>11</line>
-          <option name="timeStamp" value="38" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="39" />
@@ -1533,14 +1524,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/NCBI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="13" column="38" lean-forward="false" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Routines/Alignment.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
@@ -1567,29 +1550,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/alignment/get_reads_by_name.py">
+    <entry file="file://$PROJECT_DIR$/Routines/NCBI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="201">
+          <caret line="13" column="38" lean-forward="false" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Samtools/Samtools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="613">
+        <state relative-caret-position="343">
           <caret line="63" column="21" lean-forward="true" selection-start-line="63" selection-start-column="21" selection-end-line="63" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/alignment/get_read_names_from_sam.py">
+    <entry file="file://$PROJECT_DIR$/scripts/alignment/get_reads_by_name.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+        <state relative-caret-position="144">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding>
             <element signature="e#54#64#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/alignment/get_read_names_from_sam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
