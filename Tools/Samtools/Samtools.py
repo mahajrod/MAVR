@@ -47,9 +47,10 @@ class SamtoolsV1(Tool):
         elif search_mode == "partial":
             def expression(read_name):
                 for entry in read_name_list:
-                    if read_name in entry:
+                    if entry in read_name:
                         return True
                 return False
+
         if mode == "include":
             def include_expression(read_name):
                 return expression(read_name)
@@ -66,8 +67,7 @@ class SamtoolsV1(Tool):
         for line in input_sam_fd:
             if include_expression(line.split()[0]):
                 output_sam_fd.write(line)
-            else:
-                print ("uuuu")
+
 
 
 
