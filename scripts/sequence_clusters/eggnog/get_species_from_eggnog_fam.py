@@ -14,7 +14,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-i", "--input", action="store", dest="input", required=True,
                     help="Eggnog tsv file")
 parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", required=True,
-                    help="Directory to write fam files named by species names")
+                    help="Prefix of output files")
 parser.add_argument("-e", "--email", action="store", dest="email",
                     help="E-mail for request ot NCBI Taxonomy. If not set species ids will not be converted to species"
                          "names by queries to NCBI Taxonomy database(requires Internet connection)")
