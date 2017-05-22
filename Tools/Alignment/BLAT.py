@@ -58,3 +58,25 @@ class BLAT(Tool):
         if remove_tmp_dirs:
             shutil.rmtree(splited_dir, ignore_errors=True)
             shutil.rmtree(splited_output_dir, ignore_errors=True)
+
+    def align_pep_for_scaffolding(self, database, query_fasta, output, split_dir="splited_input/",
+                                  splited_output_dir="splited_output_dir/",
+                                  threads=None, remove_tmp_dirs=True,
+                                  async_run=False, external_process_pool=None):
+
+        self.parallel_align(database, query_fasta, output, split_dir=split_dir,
+                            splited_output_dir=splited_output_dir,
+                            database_type="dnax", query_type="prot", add_header=False,
+                            threads=threads, remove_tmp_dirs=remove_tmp_dirs,
+                            async_run=async_run, external_process_pool=external_process_pool)
+
+    def align_transcripts_for_scaffolding(self, database, query_fasta, output, split_dir="splited_input/",
+                                          splited_output_dir="splited_output_dir/",
+                                          threads=None, remove_tmp_dirs=True,
+                                          async_run=False, external_process_pool=None):
+
+        self.parallel_align(database, query_fasta, output, split_dir=split_dir,
+                            splited_output_dir=splited_output_dir,
+                            database_type="dna", query_type="dna", add_header=False,
+                            threads=threads, remove_tmp_dirs=remove_tmp_dirs,
+                            async_run=async_run, external_process_pool=external_process_pool)
