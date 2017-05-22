@@ -84,7 +84,8 @@ class EggNOGRoutines(SequenceClusterRoutines):
         cluster_dict = SynDict(filename=eggnog_tsv, key_index=1, value_index=5, split_values=True)
 
         species_ids = self.extract_labels_from_cluster_elements(cluster_dict, separator=".", label_position="first")
-        print species_ids
+        print("Input species ids: %s" % " ".join(species_ids))
+
         if not email:
             species = species_ids
         else:
