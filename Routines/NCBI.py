@@ -276,11 +276,10 @@ class NCBIRoutines(FileRoutines):
                number_of_retries=100, retry_delay=None, log_file="efetch.log"):
         # replacement for Biopython Entrez.efetch
         # Biopython Entrez.efetch is bugged - it ignores seq_start and seq_stop values
-        # eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=669632474&retmode=text&rettype=gb&seq_start=10832751&seq_stop=10848091&strand=1
-        query = "eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?"
+        # https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=669632474&retmode=text&rettype=gb&seq_start=10832751&seq_stop=10848091&strand=1
+        query = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?"
 
-        #small change due ncbi change test it
-        query += "db=%s&amp" % database
+        query += "db=%s" % database
 
         query += "&id=%s" % (id_list if isinstance(id_list, str) else ",".join(id_list))
         query += "&retmode=%s" % retmode if retmode else ""
