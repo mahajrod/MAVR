@@ -105,7 +105,7 @@ class EnsemblRoutines(SequenceRoutines):
 
         data_dict = OrderedDict()
         for protein_id in protein_dict:
-            length = protein_dict[protein_id].seq
+            length = len(protein_dict[protein_id].seq)
             description_list = protein_dict[protein_id].description.split()
             #print protein_dict[protein_id]
             #print ''
