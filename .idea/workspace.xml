@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/pacbio_museum/pacbio_ccs.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/alignment/align_proteins_to_genome_by_blat.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/alignment/align_transcripts_to_genome_by_blat.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/annotation/ensembl/get_longest_pep_per_gene_from_ensembl_pep_file.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Pacbio.py" afterPath="$PROJECT_DIR$/Routines/Pacbio.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Alignment/BLAT.py" afterPath="$PROJECT_DIR$/Tools/Alignment/BLAT.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Ensembl.py" afterPath="$PROJECT_DIR$/Routines/Ensembl.py" />
     </list>
     <ignored path="MAVR.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,11 +38,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Pacbio.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Routines/Pacbio.py">
+      <file leaf-file-name="EggNOG.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Routines/EggNOG.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="20" column="11" lean-forward="false" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
+            <state relative-caret-position="845">
+              <caret line="83" column="89" lean-forward="false" selection-start-line="83" selection-start-column="89" selection-end-line="83" selection-end-column="89" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NCBI.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Routines/NCBI.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4968">
+              <caret line="276" column="49" lean-forward="false" selection-start-line="276" selection-start-column="49" selection-end-line="276" selection-end-column="49" />
               <folding>
                 <element signature="e#22#31#0" expanded="true" />
               </folding>
@@ -53,93 +60,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pacbio_ccs.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/projects/pacbio_museum/pacbio_ccs.sh">
+      <file leaf-file-name="Ensembl.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Routines/Ensembl.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="8" column="163" lean-forward="false" selection-start-line="8" selection-start-column="163" selection-end-line="8" selection-end-column="163" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BLAT.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/Alignment/BLAT.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="737">
-              <caret line="79" column="64" lean-forward="false" selection-start-line="79" selection-start-column="64" selection-end-line="79" selection-end-column="64" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="parallel_blat.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/alignment/parallel_blat.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="648">
-              <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="align_proteins_to_genome_by_blat.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/alignment/align_proteins_to_genome_by_blat.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="align_transcripts_to_genome_by_blat.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/alignment/align_transcripts_to_genome_by_blat.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="16" column="91" lean-forward="true" selection-start-line="16" selection-start-column="91" selection-end-line="16" selection-end-column="91" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="get_reads_by_name.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/alignment/get_reads_by_name.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+            <state relative-caret-position="593">
+              <caret line="126" column="8" lean-forward="false" selection-start-line="126" selection-start-column="8" selection-end-line="126" selection-end-column="89" />
               <folding>
-                <element signature="e#54#64#0" expanded="true" />
+                <element signature="e#22#31#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Samtools.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/Samtools/Samtools.py">
+      <file leaf-file-name="get_longest_pep_per_gene_from_ensembl_pep_file.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/annotation/ensembl/get_longest_pep_per_gene_from_ensembl_pep_file.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="936">
-              <caret line="53" column="10" lean-forward="false" selection-start-line="53" selection-start-column="10" selection-end-line="53" selection-end-column="10" />
-              <folding />
+            <state relative-caret-position="288">
+              <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <folding>
+                <element signature="e#55#70#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pacbio_adapters_tag.bash" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/pacbio/pacbio_adapters_tag.bash">
+      <file leaf-file-name="Sequence.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" column="16" lean-forward="false" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Jellyfish.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tools/Kmers/Jellyfish.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="16" column="7" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="22" selection-end-column="76" />
+            <state relative-caret-position="284">
+              <caret line="175" column="40" lean-forward="false" selection-start-line="175" selection-start-column="35" selection-end-line="175" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -170,6 +119,7 @@
       <find>sra</find>
       <find>get_cds</find>
       <find>FileRoutines</find>
+      <find>write</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/scripts</dir>
@@ -181,10 +131,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/sequence/replace_custom_aminoacids_by_unknown_residue.py" />
-        <option value="$PROJECT_DIR$/Routines/Annotations.py" />
-        <option value="$PROJECT_DIR$/scripts/annotation/exonerate/repare_annotation_file_from_transcript_and_cds.py" />
-        <option value="$PROJECT_DIR$/scripts/sequence/fasta2corresponce.bash" />
         <option value="$PROJECT_DIR$/scripts/draw/draw_chromosomes_with_features_simple.py" />
         <option value="$PROJECT_DIR$/Routines/Drawing.py" />
         <option value="$PROJECT_DIR$/Routines/Fastq.py" />
@@ -224,7 +170,6 @@
         <option value="$PROJECT_DIR$/Routines/Sequence.py" />
         <option value="$PROJECT_DIR$/scripts/sequence/get_cds_pep_accordance.py" />
         <option value="$PROJECT_DIR$/Routines/Alignment.py" />
-        <option value="$PROJECT_DIR$/Routines/NCBI.py" />
         <option value="$PROJECT_DIR$/scripts/alignment/get_read_names_from_sam.py" />
         <option value="$PROJECT_DIR$/Tools/Samtools/Samtools.py" />
         <option value="$PROJECT_DIR$/Routines/Pacbio.py" />
@@ -232,6 +177,11 @@
         <option value="$PROJECT_DIR$/Tools/Alignment/BLAT.py" />
         <option value="$PROJECT_DIR$/scripts/alignment/align_proteins_to_genome_by_blat.py" />
         <option value="$PROJECT_DIR$/scripts/alignment/align_transcripts_to_genome_by_blat.py" />
+        <option value="$PROJECT_DIR$/Routines/EggNOG.py" />
+        <option value="$PROJECT_DIR$/scripts/sequence_clusters/eggnog/get_species_from_eggnog_fam.py" />
+        <option value="$PROJECT_DIR$/Routines/NCBI.py" />
+        <option value="$PROJECT_DIR$/Routines/Ensembl.py" />
+        <option value="$PROJECT_DIR$/scripts/annotation/ensembl/get_longest_pep_per_gene_from_ensembl_pep_file.py" />
       </list>
     </option>
   </component>
@@ -260,6 +210,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -300,7 +252,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="alignment" />
+              <option name="myItemId" value="sequence_clusters" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -314,7 +266,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Tools" />
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sequence_clusters" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eggnog" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -328,11 +288,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Tools" />
+              <option name="myItemId" value="scripts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Samtools" />
+              <option name="myItemId" value="annotation" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -346,18 +306,56 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Tools" />
+              <option name="myItemId" value="scripts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Alignment" />
+              <option name="myItemId" value="annotation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="exonerate" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="annotation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ensembl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAVR" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -387,19 +385,19 @@
     </option>
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts/annotation/ensembl" />
+      <recent name="$PROJECT_DIR$/scripts/alignment" />
+      <recent name="$PROJECT_DIR$/Routines" />
+      <recent name="$PROJECT_DIR$/projects/addax" />
+      <recent name="$PROJECT_DIR$/scripts/transcriptome/differential_expression" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/scripts/annotation" />
       <recent name="$PROJECT_DIR$/projects/RG/scripts" />
       <recent name="$PROJECT_DIR$/Tools/Alignment" />
       <recent name="$PROJECT_DIR$/Tools/Annotation" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/scripts/alignment" />
-      <recent name="$PROJECT_DIR$/Routines" />
-      <recent name="$PROJECT_DIR$/projects/addax" />
-      <recent name="$PROJECT_DIR$/scripts/transcriptome/differential_expression" />
-      <recent name="$PROJECT_DIR$/Tools/Alignment" />
     </key>
   </component>
   <component name="RunManager" selected="Python.Drawing">
@@ -696,48 +694,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1443270821851</updated>
-    </task>
-    <task id="LOCAL-01233" summary="changes">
-      <created>1493940167990</created>
-      <option name="number" value="01233" />
-      <option name="presentableId" value="LOCAL-01233" />
-      <option name="project" value="LOCAL" />
-      <updated>1493940167990</updated>
-    </task>
-    <task id="LOCAL-01234" summary="changes">
-      <created>1494109622589</created>
-      <option name="number" value="01234" />
-      <option name="presentableId" value="LOCAL-01234" />
-      <option name="project" value="LOCAL" />
-      <updated>1494109622589</updated>
-    </task>
-    <task id="LOCAL-01235" summary="changes">
-      <created>1494110808563</created>
-      <option name="number" value="01235" />
-      <option name="presentableId" value="LOCAL-01235" />
-      <option name="project" value="LOCAL" />
-      <updated>1494110808563</updated>
-    </task>
-    <task id="LOCAL-01236" summary="changes">
-      <created>1494110914772</created>
-      <option name="number" value="01236" />
-      <option name="presentableId" value="LOCAL-01236" />
-      <option name="project" value="LOCAL" />
-      <updated>1494110914772</updated>
-    </task>
-    <task id="LOCAL-01237" summary="changes">
-      <created>1494111015388</created>
-      <option name="number" value="01237" />
-      <option name="presentableId" value="LOCAL-01237" />
-      <option name="project" value="LOCAL" />
-      <updated>1494111015388</updated>
-    </task>
-    <task id="LOCAL-01238" summary="changes">
-      <created>1494111122500</created>
-      <option name="number" value="01238" />
-      <option name="presentableId" value="LOCAL-01238" />
-      <option name="project" value="LOCAL" />
-      <updated>1494111122500</updated>
     </task>
     <task id="LOCAL-01239" summary="changes">
       <created>1494111370926</created>
@@ -1040,7 +996,49 @@
       <option name="project" value="LOCAL" />
       <updated>1495375455258</updated>
     </task>
-    <option name="localTasksCounter" value="1282" />
+    <task id="LOCAL-01282" summary="changes">
+      <created>1495444247438</created>
+      <option name="number" value="01282" />
+      <option name="presentableId" value="LOCAL-01282" />
+      <option name="project" value="LOCAL" />
+      <updated>1495444247440</updated>
+    </task>
+    <task id="LOCAL-01283" summary="changes">
+      <created>1495447223542</created>
+      <option name="number" value="01283" />
+      <option name="presentableId" value="LOCAL-01283" />
+      <option name="project" value="LOCAL" />
+      <updated>1495447223542</updated>
+    </task>
+    <task id="LOCAL-01284" summary="changes">
+      <created>1495447439594</created>
+      <option name="number" value="01284" />
+      <option name="presentableId" value="LOCAL-01284" />
+      <option name="project" value="LOCAL" />
+      <updated>1495447439594</updated>
+    </task>
+    <task id="LOCAL-01285" summary="changes">
+      <created>1495466447445</created>
+      <option name="number" value="01285" />
+      <option name="presentableId" value="LOCAL-01285" />
+      <option name="project" value="LOCAL" />
+      <updated>1495466447445</updated>
+    </task>
+    <task id="LOCAL-01286" summary="changes">
+      <created>1495472258793</created>
+      <option name="number" value="01286" />
+      <option name="presentableId" value="LOCAL-01286" />
+      <option name="project" value="LOCAL" />
+      <updated>1495472258793</updated>
+    </task>
+    <task id="LOCAL-01287" summary="changes">
+      <created>1495541447746</created>
+      <option name="number" value="01287" />
+      <option name="presentableId" value="LOCAL-01287" />
+      <option name="project" value="LOCAL" />
+      <updated>1495541447747</updated>
+    </task>
+    <option name="localTasksCounter" value="1288" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1067,7 +1065,7 @@
     <frame x="-1" y="25" width="1682" height="1025" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.278481" sideWeight="0.8187134" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28209764" sideWeight="0.8187134" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.039445627" sideWeight="0.5134281" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.013615734" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -1212,55 +1210,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Tools/Scaffolders/SSPACE.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-108">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/download/download_from_sra_by_ids.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-54">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Alignment/Tophat.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Alignment/STAR.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Alignment/Novoalign.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tools/Scaffolders/LRNAScaffolder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="48" lean-forward="false" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/annotation/add_len_to_simple_output.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Bedtools/Flank.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1462,7 +1411,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="16" column="7" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="22" selection-end-column="76" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1477,15 +1425,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
           <caret line="2" column="16" lean-forward="false" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="600" column="83" lean-forward="false" selection-start-line="600" selection-start-column="82" selection-end-line="600" selection-end-column="111" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1503,14 +1442,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routines/NCBI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="13" column="38" lean-forward="false" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/alignment/get_read_names_from_sam.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1522,7 +1453,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="936">
           <caret line="53" column="10" lean-forward="false" selection-start-line="53" selection-start-column="10" selection-end-line="53" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1530,9 +1460,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding>
-            <element signature="e#54#64#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1541,7 +1468,7 @@
         <state relative-caret-position="162">
           <caret line="20" column="11" lean-forward="false" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
           <folding>
-            <element signature="e#22#31#0" expanded="true" />
+            <element signature="e#22#31#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1550,13 +1477,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="8" column="163" lean-forward="false" selection-start-line="8" selection-start-column="163" selection-end-line="8" selection-end-column="163" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tools/Alignment/BLAT.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="737">
+        <state relative-caret-position="1386">
           <caret line="79" column="64" lean-forward="false" selection-start-line="79" selection-start-column="64" selection-end-line="79" selection-end-column="64" />
           <folding />
         </state>
@@ -1570,10 +1496,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/alignment/align_proteins_to_genome_by_blat.py">
+    <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/eggnog/convert_members_tsv_to_fam.bash">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/NCBI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4968">
+          <caret line="276" column="49" lean-forward="false" selection-start-line="276" selection-start-column="49" selection-end-line="276" selection-end-column="49" />
+          <folding>
+            <element signature="e#22#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/Sequence.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="175" column="40" lean-forward="false" selection-start-line="175" selection-start-column="35" selection-end-line="175" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/eggnog/edit_profile_names_in_fam_file.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/eggnog/convert_members_tsv_to_fam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1581,8 +1540,52 @@
     <entry file="file://$PROJECT_DIR$/scripts/alignment/align_transcripts_to_genome_by_blat.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
-          <caret line="16" column="91" lean-forward="true" selection-start-line="16" selection-start-column="91" selection-end-line="16" selection-end-column="91" />
+          <caret line="16" column="91" lean-forward="false" selection-start-line="16" selection-start-column="91" selection-end-line="16" selection-end-column="91" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/alignment/align_proteins_to_genome_by_blat.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sequence_clusters/eggnog/get_species_from_eggnog_fam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/EggNOG.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="845">
+          <caret line="83" column="89" lean-forward="false" selection-start-line="83" selection-start-column="89" selection-end-line="83" selection-end-column="89" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routines/Ensembl.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="593">
+          <caret line="126" column="8" lean-forward="false" selection-start-line="126" selection-start-column="8" selection-end-line="126" selection-end-column="89" />
+          <folding>
+            <element signature="e#22#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/annotation/ensembl/get_longest_pep_per_gene_from_ensembl_pep_file.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#55#70#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
