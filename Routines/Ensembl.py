@@ -107,6 +107,8 @@ class EnsemblRoutines(SequenceRoutines):
         for protein_id in protein_dict:
             length = protein_dict[protein_id].seq
             description_list = protein_dict[protein_id].description.split()
+            print protein_dict[protein_id]
+            print ''
             print description_list
             if output_prefix:
                 len_fd.write("%s\t%s\t%i\n" % (gene_id, protein_id, length))
