@@ -107,14 +107,15 @@ class EnsemblRoutines(SequenceRoutines):
         for protein_id in protein_dict:
             length = protein_dict[protein_id].seq
             description_list = protein_dict[protein_id].description.split()
-            print protein_dict[protein_id]
-            print ''
-            print description_list
-            if output_prefix:
-                len_fd.write("%s\t%s\t%i\n" % (gene_id, protein_id, length))
+            #print protein_dict[protein_id]
+            #print ''
+            #print description_list
+
             for entry in description_list:
                 if "gene:" in entry:
                     gene_id = entry.split(":")[1]
+            if output_prefix:
+                len_fd.write("%s\t%s\t%i\n" % (gene_id, protein_id, length))
             if gene_id not in data_dict:
                 data_dict[gene_id] = protein_id
             else:
