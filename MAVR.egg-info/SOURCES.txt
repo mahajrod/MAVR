@@ -75,6 +75,7 @@ Routines/Matplotlib.py
 Routines/MtDNA.py
 Routines/MultipleAlignment.py
 Routines/NCBI.py
+Routines/Pacbio.py
 Routines/Primer.py
 Routines/Sequence.py
 Routines/SequenceCluster.py
@@ -167,6 +168,8 @@ Tools/LinuxTools/__init__.py
 Tools/MultipleAlignment/MAFFT.py
 Tools/MultipleAlignment/PRANK.py
 Tools/MultipleAlignment/__init__.py
+Tools/PacBio/SMRTLink4.py
+Tools/PacBio/__init__.py
 Tools/Phylogenetics/ExaBayes.py
 Tools/Phylogenetics/ExaML.py
 Tools/Phylogenetics/MrBayes.py
@@ -199,6 +202,8 @@ scripts/get_flanking_regions.py
 scripts/gff_examine.py
 scripts/parallel_augustus_correct_errors.py
 scripts/remove_duplicates_flybase_UTR.py
+scripts/alignment/align_proteins_to_genome_by_blat.py
+scripts/alignment/align_transcripts_to_genome_by_blat.py
 scripts/alignment/analize_collapsed_coverage_file.py
 scripts/alignment/check_read_pairing_in_name_sorted_bam.sh
 scripts/alignment/collapse_bedtools_coverage_file.sh
@@ -206,8 +211,11 @@ scripts/alignment/draw_insert_size_distribution.py
 scripts/alignment/extract_data_for_cds_from_collapsed_coverage_file.py
 scripts/alignment/extract_fastq_from_bam.py
 scripts/alignment/extract_se_from_bam.sh
+scripts/alignment/get_read_names_from_sam.py
+scripts/alignment/get_reads_by_name.py
 scripts/alignment/make_blast_plus_db.py
 scripts/alignment/map_reads.py
+scripts/alignment/parallel_blat.py
 scripts/alignment/parallel_exonerate.py
 scripts/alignment/sam2bam
 scripts/annotation/add_len_to_simple_output.py
@@ -249,9 +257,13 @@ scripts/annotation/replace_region_names_in_gff.py
 scripts/annotation/split_exonerate_output.py
 scripts/annotation/trim_cds_and_remove_terminal_stop_codons.py
 scripts/annotation/ensembl/correct_ensembl_genbank_files.sh
+scripts/annotation/ensembl/get_longest_pep_per_gene_from_ensembl_pep_file.py
+scripts/annotation/exonerate/get_query_ids_from_exonerate_output.bash
 scripts/annotation/exonerate/prepare_annotation_file_from_transcript_and_cds.py
+scripts/annotation/ncbi/add_protein_length_to_accordance_file.py
 scripts/annotation/ncbi/analyze_ncbi_pep.py
 scripts/annotation/ncbi/get_cds_for_proteins.py
+scripts/annotation/ncbi/get_gene_to_protein_accordance_from_gff.bash
 scripts/annotation/rRNA/analyze_barrnap_report.py
 scripts/annotation/rRNA/annotate_rrna_by_barrnap.py
 scripts/antibodies/check_for_bad_antigen_candidates.py
@@ -347,6 +359,7 @@ scripts/multiple_alignment/parallel_prank.py
 scripts/multiple_alignment/remove_columns_with_gaps.py
 scripts/multiple_alignment/slice_multiple_alignment.py
 scripts/multiple_alignment/translate_codon_alignment.py
+scripts/pacbio/pacbio_adapters_tag.bash
 scripts/phylogenetics/add_features_to_tree.py
 scripts/phylogenetics/collapse_by_support.py
 scripts/phylogenetics/convert_trees.py
