@@ -78,7 +78,7 @@ class EnsemblRoutines(SequenceRoutines):
     def get_gene_transcript_protein_from_ensembl_pep_fasta(ensembl_fasta, output_file):
 
         with open(ensembl_fasta, "r") as in_fd:
-            with open(output_file) as out_fd:
+            with open(output_file, "w") as out_fd:
                 for line in in_fd:
                     if line[0] != ">":
                         continue
