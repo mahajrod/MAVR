@@ -140,6 +140,35 @@ class SequenceRoutines(FileRoutines):
             os.remove("tmp_%i.idx" % i)
 
     @staticmethod
+    def get_cds_by_coordinates_from_transcript_generator(transcript_dict, coordinates_dict, zero_based=False):
+        for record_id in transcript_dict:
+            if record_id not in coordinates_dict:
+                print("WARNING!!! No CDS coordinates for transcript %s" % record_id)
+                continue
+
+            start = coordinates_dict[record_id][0] if zero_based else coordinates_dict[record_id][0] - 1
+            end = coordinates_dict[record_id][1] + 1 if zero_based else coordinates_dict[record_id][1]
+            new_record = deepcopy(transcript_dict[record_id])
+            new_record.seq = new_record.seq[start:end]
+            yield new_record
+
+    def get_cds_by_bed_from_transcript_file(self, transcript_file, coordinate_bed, output_file, zero_based=False,
+                                            transcript_format="fasta", parsing_mode="parse"):
+        transcript_dict = self.parse_seq_file(transcript_file, format=transcript_format,
+                                              mode=parsing_mode)
+        coordinates_dict = OrderedDict()
+        with open(coordinate_bed, 'r') as in_fd:
+            for line in in_fd:
+                line_list = line.strip().split("\t")
+                coordinates_dict[line_list[0]] = (int(line_list[1]), int(line_list[2]))
+
+        SeqIO.write(self.get_cds_by_coordinates_from_transcript_generator(transcript_dict,
+                                                                          coordinates_dict,
+                                                                          zero_based=zero_based),
+                    output_file,
+                    transcript_format)
+
+    @staticmethod
     def get_lengths(record_dict, out_file=None, close_after_if_file_object=False):
         lengths_dict = SynDict()
         for record_id in record_dict:
