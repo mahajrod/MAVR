@@ -59,7 +59,8 @@ class SequenceRoutines(FileRoutines):
         if index_file:
             os.remove(index_file)
 
-    def split_fasta_by_seq_len(self, input_fasta, output_dir, max_len_per_file=None, output_prefix=None):
+    def split_fasta_by_seq_len(self, input_fasta, output_dir, max_len_per_file=None, output_prefix=None,
+                               parsing_mode="parse", index_file='temp.idx'):
         """
         by default splits input files into files with num_of_recs_per_file.
         if num_of_files is set num_of_recs_per_file is ignored.
@@ -67,7 +68,7 @@ class SequenceRoutines(FileRoutines):
         self.safe_mkdir(output_dir)
 
         out_prefix = self.split_filename(input_fasta)[1] if output_prefix is None else output_prefix
-        sequence_dict = SeqIO.index_db("temp.idx", input_fasta, "fasta")
+        sequence_dict = self.parse_seq_file(input_fasta, parsing_mode, format="fasta", index_file=index_file)
         length = 0
 
         for record_id in sequence_dict:

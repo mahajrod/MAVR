@@ -108,7 +108,7 @@ class AUGUSTUS(Tool):
                          other_options="", split_dir="splited_input", splited_output_dir="splited_output_dir",
                          config_dir=None, combine_output_to_single_file=True, use_softmasking=None, hints_file=None,
                          extrinsicCfgFile=None, predict_UTR=None, external_process_pool=None,
-                         async_run=False, min_intron_len=None):
+                         async_run=False, min_intron_len=None, parsing_mode="parse"):
         common_options = self.parse_options(species, genome_file="", strand=strand, gene_model=gene_model,
                                             output_gff3=output_gff3, other_options=other_options,
                                             config_dir=config_dir, use_softmasking=use_softmasking,
@@ -120,7 +120,7 @@ class AUGUSTUS(Tool):
         FileRoutines.safe_mkdir(splited_dir)
         FileRoutines.safe_mkdir(splited_out_dir)
 
-        self.split_fasta_by_seq_len(genome_file, splited_dir)
+        self.split_fasta_by_seq_len(genome_file, splited_dir, parsing_mode=parsing_mode)
 
         input_list_of_files = sorted(os.listdir(splited_dir))
         list_of_output_files = []

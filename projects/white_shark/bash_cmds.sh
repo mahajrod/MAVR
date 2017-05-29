@@ -15,3 +15,8 @@ awk '{print $2}' eshark.pep.len.longest_pep.tab > eshark.pep.len.longest_pep.ids
 grep -P '\tCDS\t' /home/mahajrod/Genetics/Projects/white_shark/species/rhincodon_typus/data/annotation/GCF_001642345.1_ASM164234v2_genomic.gff | grep 'protein_id=' > GCF_001642345.1_ASM164234v2_genomic.cds.gff
 
 sed 's/.*gene=\([A-Za-z0-9\.\-\_]\+\).*protein_id=\([A-Za-z0-9\.\-\_]\+\).*/\1\t\2/' GCF_001642345.1_ASM164234v2_genomic.cds.gff | sort | uniq > GCF_001642345.1_ASM164234v2_genomic.gene_to_protein.accordance
+
+
+#Astyanax mexicanus
+~/Soft/MAVR/scripts/annotation/ensembl/get_gene_transcript_protein_from_ensembl_pep_fasta.py -i Astyanax_mexicanus.AstMex102.pep.all.fa -o astyanax_mexicanus.gene.trascript.protein.tsv
+

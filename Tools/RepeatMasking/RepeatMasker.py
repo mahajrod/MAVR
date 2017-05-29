@@ -22,7 +22,8 @@ class RepeatMasker(Tool):
                                                         "SINE",
                                                         "SINE\?",
                                                         "Helitron",
-                                                        "Helitron\?"]
+                                                        "Helitron\?"
+                                                        ]
 
     @staticmethod
     def convert_rm_out_to_gff(input_file, output_file, annotated_repeat_classes_file, annotated_repeat_families_file):
