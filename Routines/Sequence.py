@@ -110,7 +110,7 @@ class SequenceRoutines(FileRoutines):
             SeqIO.write(self.record_by_id_generator(sequence_dict, id_list),
                         "%s/%s_%i.fasta" % (output_dir, out_prefix, split_index), format="fasta")
         if parsing_mode == "index_db":
-            os.remove("temp.idx")
+            os.remove(index_file)
 
     def extract_common_sequences(self, list_of_files_with_sequences_of_samples, list_of_names_of_samples,
                                  output_dir, separator="_", format="fasta"):
