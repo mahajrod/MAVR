@@ -6,7 +6,7 @@ from copy import deepcopy
 from Bio import SeqIO
 
 from Routines import FileRoutines, NCBIRoutines
-from Routines.File import make_list_of_path_to_files
+#from Routines.File import make_list_of_path_to_files
 from CustomCollections.GeneralCollections import IdList, SynDict
 from Routines.SequenceCluster import SequenceClusterRoutines
 
@@ -41,7 +41,7 @@ class EggNOGRoutines(SequenceClusterRoutines):
 
         print type(FileRoutines)
 
-        input_files = make_list_of_path_to_files([dir_with_alignments] if isinstance(dir_with_alignments, str) else dir_with_alignments)
+        input_files = FileRoutines.make_list_of_path_to_files([dir_with_alignments] if isinstance(dir_with_alignments, str) else dir_with_alignments)
 
         FileRoutines.safe_mkdir(out_dir)
         from Routines import MultipleAlignmentRoutines
