@@ -456,7 +456,7 @@ class NCBIRoutines(FileRoutines):
     def get_taxonomy(taxa_list, output_file, email, input_type="latin"):
         Entrez.email = email
         out_file = open(output_file, "w")
-        out_file.write("#species\tlineage\n")
+        out_file.write("#species\trank\tlatin_name\tlineage\n")
 
         species_syn_dict = SynDict()
 
@@ -471,7 +471,10 @@ class NCBIRoutines(FileRoutines):
                         print "handling %s" % id
                         record = Entrez.read(Entrez.efetch(db="taxonomy", id=id, retmode="xml"))
                         #print record
-                        out_file.write("%s\t%s\t%s\n" % (taxon, record[0]["Rank"], record[0]["Lineage"]))
+                        out_file.write("%s\t%s\t%s\t%s\n" % (taxon,
+                                                             record[0]["Rank"],
+                                                             record[0]['ScientificName'],
+                                                             record[0]["Lineage"]))
 
                         species_syn_dict[taxon].append(record[0]['ScientificName'])
                         #species_set.add(record[0]["Species"])
@@ -482,7 +485,10 @@ class NCBIRoutines(FileRoutines):
                 #print taxon
                 record = Entrez.read(Entrez.efetch(db="taxonomy", id=taxon, retmode="xml"))
                 #print record
-                out_file.write("%s\t%s\t%s\n" % (taxon, record[0]["Rank"], record[0]["Lineage"]))
+                out_file.write("%s\t%s\t%s\t%s\n" % (taxon,
+                                                     record[0]["Rank"],
+                                                     record[0]['ScientificName'],
+                                                     record[0]["Lineage"]))
                 #print record[0]
                 species_syn_dict[taxon].append(record[0]['ScientificName'])
                 #species_set.add(record[0]["Species"])
@@ -494,7 +500,7 @@ class NCBIRoutines(FileRoutines):
         taxa_list = IdList()
         taxa_list.read(taxa_file)
 
-        self.get_taxonomy(taxa_list, output_file, email, input_type=input_type)
+        return self.get_taxonomy(taxa_list, output_file, email, input_type=input_type)
 
     def get_taxa_genomes_summary(self, taxa, email, output_directory, output_prefix,
                                  max_ids_per_query=8000, max_download_attempts=500,
