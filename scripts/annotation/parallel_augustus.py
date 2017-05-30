@@ -139,7 +139,7 @@ if args.masking:
     Intersect.intersect(CDS_gff, args.masking, CDS_masked_gff, method="-u")
     sed_string = "sed 's/.*=//;s/\.t.*//' %s | sort | uniq > %s" % (CDS_masked_gff, genes_masked_ids)
     os.system(sed_string)
-"""
+
 print("Extracting peptides...")
 
 AUGUSTUS.extract_proteins_from_output(output_gff, output_pep, id_prefix="", evidence_stats_file=output_evidence_stats,
@@ -247,9 +247,10 @@ else:
 
 HMMER3.intersect_ids_from_files([all_annotated_genes_ids], gene_ids_black_list, genes_not_masked_ids, mode="only_a")
 HMMER3.intersect_ids_from_files(gene_ids_white_list, gene_ids_black_list, final_genes_ids, mode="only_a")
-
+"""
 final_ids = IdSet()
 final_ids.read(final_genes_ids)
+
 
 AnnotationsRoutines.extract_annotation_from_gff(output_gff, final_ids, ["gene"], final_gff)
 AUGUSTUS.extract_CDS_annotations_from_output(final_gff, final_CDS_gff)
