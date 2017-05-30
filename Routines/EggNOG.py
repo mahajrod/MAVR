@@ -5,7 +5,7 @@ from copy import deepcopy
 
 from Bio import SeqIO
 
-from Routines import FileRoutines, NCBIRoutines
+from Routines import NCBIRoutines
 #from Routines.File import make_list_of_path_to_files
 from CustomCollections.GeneralCollections import IdList, SynDict
 from Routines.SequenceCluster import SequenceClusterRoutines
@@ -35,28 +35,26 @@ class EggNOGRoutines(SequenceClusterRoutines):
         cmd = "awk -F'\t' '{printf \"%%s\\t%%s\\n\",$2,$6 }' %s > %s" % (input_file, output_file)
         os.system(cmd)
 
-    @staticmethod
-    def extract_proteins_from_alignments(dir_with_alignments, output_dir):
-        out_dir = FileRoutines.check_path(output_dir)
+    def extract_proteins_from_alignments(self, dir_with_alignments, output_dir):
+        out_dir = self.check_path(output_dir)
 
-        print type(FileRoutines)
+        #print type(FileRoutines)
 
-        input_files = FileRoutines.make_list_of_path_to_files([dir_with_alignments] if isinstance(dir_with_alignments, str) else dir_with_alignments)
+        input_files = self.make_list_of_path_to_files([dir_with_alignments] if isinstance(dir_with_alignments, str) else dir_with_alignments)
 
-        FileRoutines.safe_mkdir(out_dir)
+        self.safe_mkdir(out_dir)
         from Routines import MultipleAlignmentRoutines
         for filename in input_files:
-            filename_list = FileRoutines.split_filename(filename)
+            filename_list = self.split_filename(filename)
             output_file = "%s%s%s" % (out_dir, filename_list[1], filename_list[2])
             MultipleAlignmentRoutines.extract_sequences_from_alignment(filename, output_file)
 
-    @staticmethod
-    def split_proteins_per_species(dir_with_proteins, output_dir, input_format="fasta", output_format="fasta"):
-        print type(FileRoutines)
-        input_files = FileRoutines.make_list_of_path_to_files([dir_with_proteins] if isinstance(dir_with_proteins, str) else dir_with_proteins)
+    def split_proteins_per_species(self, dir_with_proteins, output_dir, input_format="fasta", output_format="fasta"):
+        #print type(FileRoutines)
+        input_files = self.make_list_of_path_to_files([dir_with_proteins] if isinstance(dir_with_proteins, str) else dir_with_proteins)
 
-        out_dir = FileRoutines.check_path(output_dir)
-        FileRoutines.safe_mkdir(out_dir)
+        out_dir = self.check_path(output_dir)
+        self.safe_mkdir(out_dir)
 
         protein_dict = SeqIO.index_db("temp.idx", input_files, format=input_format)
 

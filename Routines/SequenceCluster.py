@@ -5,23 +5,23 @@ from collections import OrderedDict
 
 from Bio import SeqIO
 
-from Routines import FileRoutines
+#from Routines import FileRoutines
+from Routines.File import FileRoutines
 from Routines.Sequence import SequenceRoutines
 from CustomCollections.GeneralCollections import SynDict, IdSet, IdList
 
 
-class SequenceClusterRoutines:
+class SequenceClusterRoutines(FileRoutines):
+
     def __init__(self):
+        FileRoutines.__init__(self)
 
-        pass
-
-    @staticmethod
-    def read_cluster_files_from_dir(dir_with_cluster_files):
+    def read_cluster_files_from_dir(self, dir_with_cluster_files):
         cluster_files_list = sorted(os.listdir(dir_with_cluster_files))
         clusters_dict = OrderedDict()
         for filename in cluster_files_list:
-            filepath = "%s%s" % (FileRoutines.check_path(dir_with_cluster_files), filename)
-            filename_list = FileRoutines.split_filename(filepath)
+            filepath = "%s%s" % (self.check_path(dir_with_cluster_files), filename)
+            filename_list = self.split_filename(filepath)
             clusters_dict[filename_list[1]] = SynDict()
             clusters_dict[filename_list[1]].read(filepath, header=False, separator="\t", allow_repeats_of_key=False,
                                                  split_values=True, values_separator=",", key_index=0, value_index=1,
@@ -143,11 +143,11 @@ class SequenceClusterRoutines:
         cluster_names = self.get_cluster_names(clusters_dict, white_list_ids=white_list_ids)
 
         sequence_super_dict = OrderedDict()
-        out_dir = FileRoutines.check_path(output_dir)
+        out_dir = self.check_path(output_dir)
 
         for species in clusters_dict:
             idx_file = "%s_tmp.idx" % species
-            sequence_file = "%s%s.%s" % (FileRoutines.check_path(dir_with_sequence_files), species,
+            sequence_file = "%s%s.%s" % (self.check_path(dir_with_sequence_files), species,
                                          sequence_file_extension)
             sequence_super_dict[species] = SeqIO.index_db(idx_file, sequence_file, format=sequence_file_format)
 
@@ -226,17 +226,17 @@ class SequenceClusterRoutines:
                                                  output_dir="./", seq_format="fasta",
                                                  out_prefix=None, create_dir_for_each_cluster=False,
                                                  skip_cluster_if_no_sequence_for_element=True):
-        from Routines import SequenceRoutines, FileRoutines
+        from Routines import SequenceRoutines
         cluster_id_list = IdList()
         cluster_dict = SynDict()
         #print(pep_file)
-        FileRoutines.safe_mkdir(output_dir)
-        out_dir = FileRoutines.check_path(output_dir)
+        self.safe_mkdir(output_dir)
+        out_dir = self.check_path(output_dir)
         create_directory_for_each_cluster = True if out_prefix else create_dir_for_each_cluster
         if clusters_id_file:
             cluster_id_list.read(clusters_id_file)
         cluster_dict.read(cluster_file, split_values=True, values_separator=",")
-        protein_dict = SeqIO.index_db("tmp.idx", FileRoutines.make_list_of_path_to_files(seq_file), format=seq_format)
+        protein_dict = SeqIO.index_db("tmp.idx", self.make_list_of_path_to_files(seq_file), format=seq_format)
 
         number_of_skipped_clusters = 0
         for fam_id in cluster_id_list if clusters_id_file else cluster_dict:
@@ -251,7 +251,7 @@ class SequenceClusterRoutines:
             if fam_id in cluster_dict:
                 if create_directory_for_each_cluster:
                     fam_dir = "%s%s/" % (out_dir, fam_id)
-                    FileRoutines.safe_mkdir(fam_dir)
+                    self.safe_mkdir(fam_dir)
                     out_file = "%s%s.fasta" % (fam_dir, out_prefix if out_prefix else fam_id)
                 else:
                     out_file = "%s/%s.fasta" % (out_dir, out_prefix if out_prefix else fam_id)
@@ -410,7 +410,7 @@ class SequenceClusterRoutines:
             if function_to_convert_filename_to_label:
                 label = function_to_convert_filename_to_label(filename)
             else:
-                label = FileRoutines.split_filename(filename)[1]  # use basename as label
+                label = self.split_filename(filename)[1]  # use basename as label
 
             dict_of_cluster_dicts[label] = SynDict()
             dict_of_cluster_dicts[label].read(filename, split_values=True, comments_prefix="#")

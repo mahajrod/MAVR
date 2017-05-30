@@ -124,7 +124,7 @@ AUGUSTUS.replace_augustus_ids(output_raw_gff, args.output, species_prefix=args.s
                               number_of_digits_in_id=8)
 
 Gffread.extract_transcript_sequences(output_gff, args.input, args.output)
-"""
+
 SequenceRoutines.trim_cds_and_remove_terminal_stop_codons("%s.cds" % args.output, "%s.trimmed.cds" % args.output,
                                                           stop_codons_list=("TGA", "TAA", "TAG")) # using default stop_codons(from universal genetic_code)/ Note that this will affect mtDNA proteins
 SequenceRoutines.translate_sequences_from_file("%s.trimmed.cds" % args.output, "%s.trimmed.pep" % args.output,
@@ -139,7 +139,7 @@ if args.masking:
     Intersect.intersect(CDS_gff, args.masking, CDS_masked_gff, method="-u")
     sed_string = "sed 's/.*=//;s/\.t.*//' %s | sort | uniq > %s" % (CDS_masked_gff, genes_masked_ids)
     os.system(sed_string)
-
+"""
 print("Extracting peptides...")
 
 AUGUSTUS.extract_proteins_from_output(output_gff, output_pep, id_prefix="", evidence_stats_file=output_evidence_stats,

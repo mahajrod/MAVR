@@ -52,11 +52,27 @@ awk -F'\t' '{print $2}' lepisosteus_oculatus.gene.trascript.protein.longest_pep.
 ~/Soft/MAVR/scripts/sequence/extract_sequences_by_ids.py -i Lepisosteus_oculatus.LepOcu1.cds.all.trimmed.fa -o Lepisosteus_oculatus.longest_cds.cds -d lepisosteus_oculatus.longest_cds.ids
 
 #callorhinchus_milii
-grep -P "^>" callorhinchus_milii.longest.pep | sed 's/>//;s/\([A-Za-z0-9\._-]\+\)\s.*\s\([A-Za-z0-9\._-]\+\)\s\([A-Za-z0-9\._-]\+\)/\3\t\2\t\1/' > callorhinchus_milii.gene.trascript.protein.longest_pep.tsv
+grep -P "^>" eshark.pep.fa | sed 's/>//;s/\([A-Za-z0-9\._-]\+\)\s.*\s\([A-Za-z0-9\._-]\+\)\s\([A-Za-z0-9\._-]\+\)/\3\t\2\t\1/' > callorhinchus_milii.gene.trascript.protein.tsv
+awk -F'\t' '{printf "%s\t%s\n", $2, $3}' callorhinchus_milii.gene.trascript.protein.tsv > callorhinchus_milii.transcript_to_pep.accordance
+~/Soft/MAVR/scripts/sequence/find_cds_coordinates_in_transcript_by_pep.py -t eshark_transcripts.fa  -p eshark.pep.fa  -o callorhinchus_milii.cds.coords -c callorhinchus_milii.transcript_to_pep.accordance
+~/Soft/MAVR/scripts/transcriptome/annotation/get_cds_by_bed_from_transcript_file.py  -i eshark_transcripts.fa -o callorhinchus_milii.cds  -c callorhinchus_milii.cds.coords
 
-awk -F'\t' '{printf "%s\t%s\n", $2, $3}' callorhinchus_milii.gene.trascript.protein.longest_pep.tsv > callorhinchus_milii.transcript_to_pep.accordance
+~/Soft/MAVR/scripts/annotation/trim_cds_and_remove_terminal_stop_codons.py -i callorhinchus_milii.cds  -o callorhinchus_milii.trimmed.cds
 
-awk -F'\t' '{print $2}' lepisosteus_oculatus.gene.trascript.protein.longest_pep.tsv > lepisosteus_oculatus.longest_cds.ids
+~/Soft/MAVR/scripts/file/extract_by_column_value.py -i callorhinchus_milii.gene.trascript.protein.tsv -c 2 -f callorhinchus_milii.longest_pep.ids -o callorhinchus_milii.gene.trascript.protein.longest_pep
 
-~/Soft/MAVR/scripts/annotation/trim_cds_and_remove_terminal_stop_codons.py -i Lepisosteus_oculatus.LepOcu1.cds.all.fa  -o Lepisosteus_oculatus.LepOcu1.cds.all.trimmed.fa
-~/Soft/MAVR/scripts/sequence/extract_sequences_by_ids.py -i Lepisosteus_oculatus.LepOcu1.cds.all.trimmed.fa -o Lepisosteus_oculatus.longest_cds.cds -d lepisosteus_oculatus.longest_cds.ids
+awk -F'\t' '{print $2}' callorhinchus_milii.gene.trascript.protein.longest_pep.tsv > callorhinchus_milii.longest_cds.ids
+
+~/Soft/MAVR/scripts/sequence/extract_sequences_by_ids.py -i callorhinchus_milii.trimmed.cds -o Callorhinchus_milii.longest_cds.cds -d callorhinchus_milii.longest_cds.ids
+
+#rhincodon_typus
+
+~/Soft/MAVR/scripts/sequence/get_sequence_ids.py -i rhincodon_typus.longest.pep -o rhincodon_typus.longest.pep.ids
+~/Soft/MAVR/scripts/file/extract_by_column_value.py -i rhincodon_typus.cds.pep_to_transcript.accordance -c 0 -f rhincodon_typus.longest.pep.ids -o rhincodon_typus.pep_to_transcript.longest_pep.accordance
+
+awk -F'\t' '{printf "%s\t%s\n", $2, $1}' rhincodon_typus.pep_to_transcript.longest_pep.tsv.accordance.accordance > rhincodon_typus.transcript_to_pep.longest_pep.accordance
+awk -F'\t' '{print $2}' rhincodon_typus.transcript_to_pep.longest_pep.accordance > rhincodon_typus.longest_cds.ids
+~/Soft/MAVR/scripts/sequence/extract_sequences_by_ids.py -i rhincodon_typus.cds.cds -o Rhincodon_typus.longest_cds.cds -d rhincodon_typus.longest_cds.ids
+
+
+
