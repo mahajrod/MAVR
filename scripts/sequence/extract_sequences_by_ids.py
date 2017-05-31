@@ -25,10 +25,12 @@ parser.add_argument("-a", "--allow_multiple_coincidence_report", action="store_t
                     dest="allow_multiple_coincidence_report", default=False,
                     help="Allow multiple coincidence report of sequences for partial coincidence mode."
                          "By default an error is raised")
+parser.add_argument("-s", "--syn_file", action="store", dest="syn_file",
+                    help="File with synonyms of ids to use. Default - not set")
 
 args = parser.parse_args()
 
 SequenceRoutines.extract_sequence_by_ids(args.input, args.id_file, args.output, format=args.format, verbose=True,
                                          id_column_number=args.id_column, coincidence_mode=args.coincidence_mode,
-                                         allow_multiple_coincidence_report=args.allow_multiple_coincidence_report)
-
+                                         allow_multiple_coincidence_report=args.allow_multiple_coincidence_report,
+                                         syn_file=args.syn_file)
