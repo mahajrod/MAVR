@@ -232,10 +232,24 @@ class SequenceRoutines(FileRoutines):
             yield record_dict[record_id]
 
     def extract_sequence_by_ids(self, sequence_file, id_file, output_file, format="fasta", verbose=False,
-                                id_column_number=0, coincidence_mode="exact", allow_multiple_coincidence_report=False):
+                                id_column_number=0, coincidence_mode="exact", allow_multiple_coincidence_report=False,
+                                syn_file=None):
         tmp_index_file = "tmp.idx"
         id_list = IdList()
         id_list.read(id_file, column_number=id_column_number)
+
+        converted_ids = IdList()
+        if syn_file:
+            syn_dict = SynDict(filename=syn_file)
+            for entry in id_list:
+                if entry not in syn_dict:
+                    if verbose:
+                        print("No synonym for %s" % entry)
+                    converted_ids.append(entry)
+                    continue
+                converted_ids.append(syn_dict[entry])
+            id_list = converted_ids
+
         if verbose:
             print("Parsing %s..." % (sequence_file if isinstance(id_file, str) else ",".join(id_file)))
 

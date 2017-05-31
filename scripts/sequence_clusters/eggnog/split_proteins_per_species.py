@@ -4,7 +4,6 @@ import argparse
 
 from Routines import EggNOGRoutines
 
-
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_pep_dir", action="store", dest="input_pep_dir", required=True,

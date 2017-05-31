@@ -5,8 +5,6 @@ import argparse
 
 from Bio import AlignIO
 from Routines import MultipleAlignmentRoutines, FileRoutines
-#from Routines.File import check_path, make_list_of_path_to_files, save_mkdir, split_filename
-
 
 parser = argparse.ArgumentParser()
 

@@ -3,9 +3,6 @@ __author__ = 'Sergei F. Kliver'
 
 import argparse
 
-#from Bio import Entrez
-#from Routines.File import read_ids
-
 from Routines import NCBIRoutines
 
 parser = argparse.ArgumentParser()
@@ -18,7 +15,6 @@ parser.add_argument("-a", "--email", action="store", dest="email", required=True
                     help="Email used in Entrez queues")
 parser.add_argument("-t", "--input_type", action="store", dest="input_type", default="latin",
                     help="Type of input. Allowed: latin(default), id")
-
 
 args = parser.parse_args()
 

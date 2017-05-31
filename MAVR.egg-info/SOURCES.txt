@@ -257,6 +257,7 @@ scripts/annotation/replace_region_names_in_gff.py
 scripts/annotation/split_exonerate_output.py
 scripts/annotation/trim_cds_and_remove_terminal_stop_codons.py
 scripts/annotation/ensembl/correct_ensembl_genbank_files.sh
+scripts/annotation/ensembl/get_gene_transcript_protein_from_ensembl_pep_fasta.py
 scripts/annotation/ensembl/get_longest_pep_per_gene_from_ensembl_pep_file.py
 scripts/annotation/exonerate/get_query_ids_from_exonerate_output.bash
 scripts/annotation/exonerate/prepare_annotation_file_from_transcript_and_cds.py
@@ -327,7 +328,7 @@ scripts/filter/restore_pairs.py
 scripts/general/collaps_synonym_strings.py
 scripts/general/combine_ids.py
 scripts/general/combine_tables_from_file.py
-scripts/general/parallel_md5sum.py
+scripts/general/parallel_md5sum.bash
 scripts/graph/draw_graph.py
 scripts/hmmer3/assign_proteins_to_families.py
 scripts/hmmer3/convert_top_hits_to_families.py
@@ -487,6 +488,7 @@ scripts/sra/parallel_unpack_sra.py
 scripts/transcriptome/align_by_star.py
 scripts/transcriptome/coverage_analyzis.sh
 scripts/transcriptome/annotation/extract_complete_proteins_from_transdecoder_output.py
+scripts/transcriptome/annotation/get_cds_by_bed_from_transcript_file.py
 scripts/transcriptome/annotation/predict_proteins_from_transcripts.py
 scripts/transcriptome/annotation/transdecoder_annotation_analysis.bash
 scripts/transcriptome/differential_expression/combine_count_file.py

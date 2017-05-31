@@ -20,11 +20,11 @@ parser.add_argument("-o", "--output_files_dir", action="store", dest="output_fil
 parser.add_argument("-d", "--syn_file", action="store", dest="syn_file", required=True,
                     help="File with taxa ids and species names")
 parser.add_argument("-k", "--key_index", action="store", dest="key_index", type=int, default=0,
-                    help="Key column in file with synonyms(0-based)")
+                    help="Key column in file with synonyms(0-based). Default: 0")
 parser.add_argument("-v", "--value_index", action="store", dest="value_index", type=int, default=1,
-                    help="Value column in file with synonyms(0-based)")
+                    help="Value column in file with synonyms(0-based). Default: 1")
 parser.add_argument("-c", "--comments_prefix", action="store", dest="comments_prefix", default="#",
-                    help="Prefix of comments in synonyms file")
+                    help="Prefix of comments in synonyms file. Default - '#'")
 parser.add_argument("-m", "--columns_separator", action="store", dest="separator", default="\t",
                     help="Column separator in file with synonyms")
 parser.add_argument("-e", "--header", action="store_true", dest="header", default=False,

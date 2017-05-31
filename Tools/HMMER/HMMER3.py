@@ -304,7 +304,7 @@ class HMMER3(Tool):
                                                              MSV_threshold=MSV_threshold, Vit_threshold=Vit_threshold,
                                                              Fwd_threshold=Fwd_threshold,
                                                              turn_off_biased_composition_score_corrections=turn_off_biased_composition_score_corrections)
-        common_options += " --cpu %i" % 10
+        common_options += " --cpu %i" % 5
         common_options += " --qformat %s" if input_format else ""
         options_list = []
         out_files = []
