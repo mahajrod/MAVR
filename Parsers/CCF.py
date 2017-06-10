@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+plt.ioff()
 from matplotlib import colors
 from Parsers.Abstract import Record, Collection, Metadata, Header
 from Parsers.VCF import CollectionVCF, MetadataVCF, HeaderVCF

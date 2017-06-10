@@ -13,7 +13,7 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-
+plt.ioff()
 
 def split_gene_names(genes_list, name_first=True, separator="_"):
     species_dict = OrderedDict()

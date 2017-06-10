@@ -6,6 +6,7 @@ import os, sys
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+plt.ioff()
 import numpy as np
 sys.path.append("../")
 

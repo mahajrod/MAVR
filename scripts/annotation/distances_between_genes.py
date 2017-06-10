@@ -10,16 +10,12 @@ import matplotlib
 matplotlib.use('Agg')
 os.environ['MPLCONFIGDIR'] = '/tmp/'
 import matplotlib.pyplot as plt
-
+plt.ioff()
 from Bio import SeqIO
 
 from BCBio import GFF
 
 from collections import OrderedDict
-
-from CustomCollections.GeneralCollections import SynDict, IdList
-from Routines.File import read_ids,  check_path, safe_mkdir
-from Routines.Sequence import record_by_id_generator
 
 parser = argparse.ArgumentParser()
 

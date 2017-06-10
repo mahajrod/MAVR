@@ -9,6 +9,7 @@ from Bio.SeqUtils import GC
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+plt.ioff()
 
 parser = argparse.ArgumentParser()
 

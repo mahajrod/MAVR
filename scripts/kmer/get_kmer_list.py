@@ -10,6 +10,7 @@ os.environ['MPLCONFIGDIR'] = '/tmp/'
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+plt.ioff()
 
 from Routines.File import make_list_of_path_to_files
 from Tools.Kmers import Jellyfish

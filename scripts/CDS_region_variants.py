@@ -9,6 +9,7 @@ import matplotlib
 matplotlib.use('Agg')
 os.environ['MPLCONFIGDIR'] = '/tmp/'
 import matplotlib.pyplot as plt
+plt.ioff()
 
 from Parsers.VCF import CollectionVCF
 parser = argparse.ArgumentParser()

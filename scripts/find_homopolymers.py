@@ -8,8 +8,8 @@ import matplotlib
 matplotlib.use('Agg')
 os.environ['MPLCONFIGDIR'] = '/tmp/'
 import matplotlib.pyplot as plt
-
-from Routines.Sequence import find_homopolymers
+plt.ioff()
+from Routines import SequenceRoutines
 
 parser = argparse.ArgumentParser()
 
@@ -51,11 +51,11 @@ with open(args.out_file, "w") as out_fd:
         name_line = line.strip()
         sequence = in_fd.readline().strip()
         number_of_UTRs += 1
-        coords_list, length_list = find_homopolymers(sequence, args.nucleotide, min_size=args.min_size,
-                                           search_type=args.search_type,
-                                           max_single_insert_size=args.max_single_insert_size,
-                                           max_total_insert_length=args.max_total_insert_length,
-                                           max_number_of_insertions=args.max_number_of_insertions)
+        coords_list, length_list = SequenceRoutines.find_homopolymers(sequence, args.nucleotide, min_size=args.min_size,
+                                                                       search_type=args.search_type,
+                                                                       max_single_insert_size=args.max_single_insert_size,
+                                                                       max_total_insert_length=args.max_total_insert_length,
+                                                                       max_number_of_insertions=args.max_number_of_insertions)
         if not coords_list:
             continue
         id_list = name_line.split("|")[1].split(",")

@@ -7,7 +7,7 @@ import argparse
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-
+plt.ioff()
 from Tools.Kmers import Jellyfish
 
 parser = argparse.ArgumentParser()

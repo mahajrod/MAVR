@@ -3,6 +3,7 @@
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+plt.ioff()
 import numpy as np
 
 from mpl_toolkits.mplot3d import Axes3D

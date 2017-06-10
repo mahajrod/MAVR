@@ -1,20 +1,16 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 
-import os
 import argparse
 
 import numpy as np
 import scipy.stats as stats
-#from numpy import arange, int32, append, fromfile
-
-from Bio import SeqIO
 
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+plt.ioff()
 
-from CustomCollections.GeneralCollections import SynDict
 
 parser = argparse.ArgumentParser()
 

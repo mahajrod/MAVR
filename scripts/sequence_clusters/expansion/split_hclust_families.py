@@ -5,15 +5,9 @@ This scripts assumes that genes are named in following manner: species_geneid
 """
 
 import os
-import sys
 import argparse
 
 from collections import OrderedDict
-import numpy as np
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-
 
 def split_gene_names(genes_list, name_first=True, separator="_"):
     species_dict = OrderedDict()

@@ -9,10 +9,10 @@ import matplotlib
 matplotlib.use('Agg')
 os.environ['MPLCONFIGDIR'] = '/tmp/'
 import matplotlib.pyplot as plt
-
+plt.ioff()
 from Bio import SeqIO
 
-from Routines.Sequence import find_homopolymers
+from Routines import SequenceRoutines
 
 parser = argparse.ArgumentParser()
 
@@ -69,7 +69,7 @@ with open(args.out_file, "w") as out_fd:
         sequence = UTRs_dict[record_id].seq
         number_of_UTRs += 1
 
-        coords_list, length_list = find_homopolymers(sequence, args.nucleotide, min_size=args.min_size,
+        coords_list, length_list = SequenceRoutines.find_homopolymers(sequence, args.nucleotide, min_size=args.min_size,
                                                      search_type=args.search_type,
                                                      max_single_insert_size=args.max_single_insert_size,
                                                      max_total_insert_length=args.max_total_insert_length,

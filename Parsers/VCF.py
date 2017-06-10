@@ -11,6 +11,7 @@ from scipy.cluster.hierarchy import linkage, dendrogram, inconsistent, cophenet,
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+plt.ioff()
 
 from Bio import SeqIO
 from Bio.SeqFeature import SeqFeature, FeatureLocation

@@ -6,6 +6,7 @@ from math import sqrt
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+plt.ioff()
 import numpy as np
 
 from CustomCollections.GeneralCollections import TwoLvlDict

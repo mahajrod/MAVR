@@ -12,7 +12,7 @@ from Bio import SeqIO
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-
+plt.ioff()
 from CustomCollections.GeneralCollections import SynDict
 
 from Routines import DrawingRoutines
