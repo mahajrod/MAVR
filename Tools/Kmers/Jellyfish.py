@@ -291,11 +291,15 @@ class Jellyfish(Tool):
         minimums_to_show = [(bins[i], counts[i]) for i in minimums_in_checked_area_idx]
 
         estimated_genome_size = 0
+        if minimums_to_show:
+            for i in range(int(minimums_to_show[0][0]), len(counts)):
+                estimated_genome_size += counts[i] * bins[i]
+        else:
+            print("WARNING: Minimum between error peak and unique peak was not found. "
+                  "Estimation of genome size is impossible ")
+            estimated_genome_size = None
 
-        for i in range(int(minimums_to_show[0][0]), len(counts)):
-            estimated_genome_size += counts[i] * bins[i]
-
-        estimated_genome_size = estimated_genome_size/first_unique_peak_coverage
+        estimated_genome_size = estimated_genome_size/first_unique_peak_coverage if estimated_genome_size else None
 
         return maximums_to_show, \
                minimums_to_show, \

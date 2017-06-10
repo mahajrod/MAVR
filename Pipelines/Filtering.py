@@ -47,7 +47,8 @@ class FilteringPipeline(Pipeline):
                average_quality_threshold=15,
                leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
                crop_length=None, head_crop_length=None, min_len=50,
-               base_quality="phred33", read_name_type="illumina", remove_intermediate_files=False, skip_coockiecutter=False):
+               base_quality="phred33", read_name_type="illumina", remove_intermediate_files=False, skip_coockiecutter=False,
+               retain_single_end_reads=True):
 
         Cookiecutter.path = coockiecutter_dir
         Trimmomatic.jar_path = trimmomatic_dir
@@ -134,25 +135,55 @@ class FilteringPipeline(Pipeline):
             filtering_statistics[sample]["pairs_after_trimmomatic"] = trimmomatic_report.stats["both_surviving"]
             filtering_statistics[sample]["pairs_after_trimmomatic,%"] = trimmomatic_report.stats["both_surviving,%"]
 
+            if retain_single_end_reads:
+                filtering_statistics[sample]["forward_se_after_trimmomatic"] = trimmomatic_report.stats["forward_only_surviving"]
+                filtering_statistics[sample]["forward_se_after_trimmomatic,%"] = trimmomatic_report.stats["forward_only_surviving"]
+
+                filtering_statistics[sample]["reverse_se_after_trimmomatic"] = trimmomatic_report.stats["reverse_only_surviving,%"]
+                filtering_statistics[sample]["forward_se_after_trimmomatic,%"] = trimmomatic_report.stats["forward_only_surviving,%"]
+
             os.system("cp %s %s" % (trimmomatic_log, filtering_stat_sample_dir))
 
             coockie_trimmomatic_filtered_paired_forward_reads = "%s/%s_1.pe.fq" % (coockie_trimmomatic_filtered_sample_dir, sample)
             coockie_trimmomatic_filtered_paired_reverse_reads = "%s/%s_2.pe.fq" % (coockie_trimmomatic_filtered_sample_dir, sample)
 
+            coockie_trimmomatic_filtered_unpaired_forward_reads = "%s/%s_1.se.fq" % (coockie_trimmomatic_filtered_sample_dir, sample)
+            coockie_trimmomatic_filtered_unpaired_reverse_reads = "%s/%s_2.se.fq" % (coockie_trimmomatic_filtered_sample_dir, sample)
+
             final_forward_reads = "%s/%s.final_1.fastq" % (final_filtered_sample_dir, sample)
             final_reverse_reads = "%s/%s.final_2.fastq" % (final_filtered_sample_dir, sample)
 
+            final_forward_se_reads = "%s/%s.final_1.se.fastq" % (final_filtered_sample_dir, sample)
+            final_reverse_se_reads = "%s/%s.final_2.se.fastq" % (final_filtered_sample_dir, sample)
+
             if sliding_window_size is None:
-                facut_output_prefix = "%s/%s" % (coockie_trimmomatic_quality_filtered_sample_dir, sample)
-                facut_stat_file = "%s.facut.stat" % facut_output_prefix
+                facut_pe_output_prefix = "%s/%s.pe" % (coockie_trimmomatic_quality_filtered_sample_dir, sample)
+                facut_forward_se_output_prefix = "%s/%s.forward.se" % (coockie_trimmomatic_quality_filtered_sample_dir, sample)
+                facut_reverse_se_output_prefix = "%s/%s.reverse.se" % (coockie_trimmomatic_quality_filtered_sample_dir, sample)
+                facut_pe_stat_file = "%s.facut.stat" % facut_pe_output_prefix
+
+                facut_forward_se_stat_file = "%s.facut.stat" % facut_forward_se_output_prefix
+                facut_reverse_se_stat_file = "%s.facut.stat" % facut_reverse_se_output_prefix
                 #"""
                 FaCut.filter_by_mean_quality(average_quality_threshold,
+                                             facut_pe_output_prefix,
                                              coockie_trimmomatic_filtered_paired_forward_reads,
-                                             coockie_trimmomatic_filtered_paired_reverse_reads,
-                                             facut_output_prefix, quality_type=base_quality,
-                                             stat_file=facut_stat_file, name_type=read_name_type)
+                                             reverse_reads=coockie_trimmomatic_filtered_paired_reverse_reads,
+                                             quality_type=base_quality,
+                                             stat_file=facut_pe_stat_file, name_type=read_name_type)
+
+                FaCut.filter_by_mean_quality(average_quality_threshold,
+                                             facut_forward_se_output_prefix,
+                                             coockie_trimmomatic_filtered_unpaired_forward_reads,
+                                             quality_type=base_quality,
+                                             stat_file=facut_forward_se_stat_file, name_type=read_name_type)
+                FaCut.filter_by_mean_quality(average_quality_threshold,
+                                             facut_reverse_se_output_prefix,
+                                             coockie_trimmomatic_filtered_unpaired_reverse_reads,
+                                             quality_type=base_quality,
+                                             stat_file=facut_reverse_se_stat_file, name_type=read_name_type)
                 #"""
-                facut_report = FaCutReport(facut_stat_file)
+                facut_report = FaCutReport(facut_pe_stat_file)
 
                 filtering_statistics[sample]["pairs_after_facut"] = facut_report.retained_pairs
                 filtering_statistics[sample]["pairs_after_facut,%"] = float("%.2f" % (float(facut_report.retained_pairs) / float(facut_report.input_pairs) * 100))
@@ -160,15 +191,29 @@ class FilteringPipeline(Pipeline):
 
                 filtering_statistics[sample]["pairs_survived_after_filtration,%"] = float("%.2f" % (float(facut_report.retained_pairs) / filtering_statistics[sample]["raw_pairs"] * 100))
 
-                facut_filtered_forward_reads = "%s_1.pe.fq" % facut_output_prefix
-                facut_filtered_reverse_reads = "%s_2.pe.fq" % facut_output_prefix
-                os.system("cp %s %s" % (facut_stat_file, filtering_stat_sample_dir))
+                facut_filtered_forward_reads = "%s_1.pe.fq" % facut_pe_output_prefix
+                facut_filtered_reverse_reads = "%s_2.pe.fq" % facut_pe_output_prefix
+
+                facut_filtered_forward_se_reads = "%s.se.fq" % facut_forward_se_output_prefix
+                facut_filtered_reverse_se_reads = "%s.se.fq" % facut_reverse_se_output_prefix
+
+                os.system("cp %s %s" % (facut_pe_stat_file, filtering_stat_sample_dir))
+                if retain_single_end_reads:
+                    os.system("cp %s %s" % (facut_forward_se_stat_file, filtering_stat_sample_dir))
+                    os.system("cp %s %s" % (facut_reverse_se_stat_file, filtering_stat_sample_dir))
+
                 os.system("ln %s %s" % (facut_filtered_forward_reads, final_forward_reads))
                 os.system("ln %s %s" % (facut_filtered_reverse_reads, final_reverse_reads))
+                if retain_single_end_reads:
+                    os.system("ln %s %s" % (facut_filtered_forward_se_reads, final_forward_se_reads))
+                    os.system("ln %s %s" % (facut_filtered_reverse_se_reads, final_reverse_se_reads))
 
             else:
                 os.system("ln %s %s" % (coockie_trimmomatic_filtered_paired_forward_reads, final_forward_reads))
                 os.system("ln %s %s" % (coockie_trimmomatic_filtered_paired_reverse_reads, final_reverse_reads))
+                if retain_single_end_reads:
+                    os.system("ln %s %s" % (coockie_trimmomatic_filtered_unpaired_forward_reads, final_forward_se_reads))
+                    os.system("ln %s %s" % (coockie_trimmomatic_filtered_unpaired_reverse_reads, final_reverse_se_reads))
                 filtering_statistics[sample]["pairs_survived_after_filtration,%"] = float("%.2f" % (float(trimmomatic_report.stats["both_surviving"]) / filtering_statistics[sample]["raw_pairs"] * 100))
 
             print filtering_statistics.table_form()
