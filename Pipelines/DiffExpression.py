@@ -149,11 +149,11 @@ class DiffExpressionPipeline(FilteringPipeline):
 
             count_all_table[sample] = deepcopy(sample_counts)
 
-            for gene_id in count_se_table:
+            for gene_id in count_se_table[sample]:
                 if gene_id in count_all_table[sample]:
-                    count_all_table[sample][gene_id] += count_se_table[gene_id]
+                    count_all_table[sample][gene_id] += count_se_table[sample][gene_id]
                 else:
-                    count_all_table[sample][gene_id] = count_se_table[gene_id]
+                    count_all_table[sample][gene_id] = count_se_table[sample][gene_id]
 
         count_pe_table.write(count_pe_table_file)
         count_se_table.write(count_se_table_file)
