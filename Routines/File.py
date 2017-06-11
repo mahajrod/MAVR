@@ -228,7 +228,7 @@ class FileRoutines:
 
         single_end_filelist = []
         paired_end_filelist = []
-        for entry in file_list:
+        for entry in filtered_filelist:
             if filename_fragment_to_mark_se_reads in entry:
                 single_end_filelist.append(entry)
             else:
