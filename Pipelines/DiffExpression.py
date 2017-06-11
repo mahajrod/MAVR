@@ -147,13 +147,15 @@ class DiffExpressionPipeline(FilteringPipeline):
             count_pe_table[sample] = sample_counts
             count_se_table[sample] = sample_se_counts
 
-            count_all_table[sample] = deepcopy(sample_counts)
+            count_se_table[sample] = SynDict()
 
-            for gene_id in count_se_table[sample]:
-                if gene_id in count_all_table[sample]:
-                    count_all_table[sample][gene_id] += count_se_table[sample][gene_id]
-                else:
-                    count_all_table[sample][gene_id] = count_se_table[sample][gene_id]
+            for gene_id in set(sample_counts.keys()) | set(sample_se_counts.keys()):
+                if (gene_id in sample_counts) and (gene_id in sample_se_counts):
+                    count_all_table[sample][gene_id] = sample_counts[gene_id] + sample_se_counts[gene_id]
+                elif gene_id in sample_counts:
+                    count_all_table[sample][gene_id] = sample_counts[gene_id]
+                elif gene_id in sample_se_counts:
+                    count_all_table[sample][gene_id] = sample_se_counts[gene_id]
 
         count_pe_table.write(count_pe_table_file)
         count_se_table.write(count_se_table_file)
