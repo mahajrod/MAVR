@@ -141,7 +141,7 @@ class DiffExpressionPipeline(FilteringPipeline):
             sample_counts = SynDict(filename=count_file, header=False, separator="\t", allow_repeats_of_key=False,
                                     split_values=False, values_separator=",", key_index=0, value_index=1,
                                     close_after_if_file_object=False, expression=int, comments_prefix="__")
-            sample_se_counts = SynDict(filename=count_file, header=False, separator="\t", allow_repeats_of_key=False,
+            sample_se_counts = SynDict(filename=count_se_file, header=False, separator="\t", allow_repeats_of_key=False,
                                        split_values=False, values_separator=",", key_index=0, value_index=1,
                                        close_after_if_file_object=False, expression=int, comments_prefix="__")
             count_pe_table[sample] = sample_counts
