@@ -74,7 +74,8 @@ class DiffExpressionPipeline(FilteringPipeline):
                 self.safe_mkdir(alignment_sample_se_dir)
 
             print "\tAligning paired reads..."
-
+            count_file = "%s/%s.htseq.count" % (alignment_sample_dir, sample)
+            """
             STAR.align(genome_dir, forward_files, reverse_read_list=reverse_files, annotation_gtf=annotation_gtf,
                        feature_from_gtf_to_use_as_exon=feature_from_gtf_to_use_as_exon,
                        exon_tag_to_use_as_transcript_id=exon_tag_to_use_as_transcript_id,
@@ -97,15 +98,17 @@ class DiffExpressionPipeline(FilteringPipeline):
             os.system("samtools index %s" % alignment_file)
 
             print "\tCounting paired reads aligned to features..."
-            count_file = "%s/%s.htseq.count" % (alignment_sample_dir, sample)
+
 
             HTSeq.count(alignment_file, gff_for_htseq, count_file, samtype="bam", order="pos",
                         stranded_rnaseq=stranded_rnaseq, min_alignment_quality=min_alignment_quality,
                         feature_type=feature_type_for_htseq, feature_id_attribute=feature_id_attribute_for_htseq,
                         mode=htseq_mode, suppress_progres_report=False)
-
+            """
             if se_files:
                 print "\tAligning single reads..."
+                count_se_file = "%s/%s.htseq.count" % (alignment_sample_se_dir, sample)
+                """
                 STAR.align(genome_dir, se_files, reverse_read_list=None, annotation_gtf=annotation_gtf,
                            feature_from_gtf_to_use_as_exon=feature_from_gtf_to_use_as_exon,
                            exon_tag_to_use_as_transcript_id=exon_tag_to_use_as_transcript_id,
@@ -128,13 +131,13 @@ class DiffExpressionPipeline(FilteringPipeline):
                 os.system("samtools index %s" % alignment_se_file)
 
                 print "\tCounting single reads aligned to features..."
-                count_se_file = "%s/%s.htseq.count" % (alignment_sample_se_dir, sample)
+
 
                 HTSeq.count(alignment_se_file, gff_for_htseq, count_se_file, samtype="bam", order="pos",
                             stranded_rnaseq=stranded_rnaseq, min_alignment_quality=min_alignment_quality,
                             feature_type=feature_type_for_htseq, feature_id_attribute=feature_id_attribute_for_htseq,
                             mode=htseq_mode, suppress_progres_report=False)
-
+                """
             sample_counts = SynDict(filename=count_file, header=False, separator="\t", allow_repeats_of_key=False,
                                     split_values=False, values_separator=",", key_index=0, value_index=1,
                                     close_after_if_file_object=False, expression=int, comments_prefix="__")
@@ -148,9 +151,9 @@ class DiffExpressionPipeline(FilteringPipeline):
 
             for gene_id in count_se_table:
                 if gene_id in count_all_table[sample]:
-                    count_all_table[sample][gene_id] += count_se_table[sample][gene_id]
+                    count_all_table[sample][gene_id] += count_se_table[gene_id]
                 else:
-                    count_all_table[sample][gene_id] = count_se_table[sample][gene_id]
+                    count_all_table[sample][gene_id] = count_se_table[gene_id]
 
         count_pe_table.write(count_pe_table_file)
         count_se_table.write(count_se_table_file)
