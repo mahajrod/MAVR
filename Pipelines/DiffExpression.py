@@ -147,7 +147,7 @@ class DiffExpressionPipeline(FilteringPipeline):
             count_pe_table[sample] = sample_counts
             count_se_table[sample] = sample_se_counts
 
-            count_se_table[sample] = SynDict()
+            count_all_table[sample] = SynDict()
 
             for gene_id in set(sample_counts.keys()) | set(sample_se_counts.keys()):
                 if (gene_id in sample_counts) and (gene_id in sample_se_counts):
