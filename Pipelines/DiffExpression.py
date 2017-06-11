@@ -53,9 +53,9 @@ class DiffExpressionPipeline(FilteringPipeline):
         count_pe_table = TwoLvlDict()
         count_se_table = TwoLvlDict()
         count_all_table = TwoLvlDict()
-        count_pe_table_file = "%s/%s.pe.tab" % (output_directory, count_table_file_prefix)
-        count_se_table_file = "%s/%s.se.tab" % (output_directory, count_table_file_prefix)
-        count_all_table_file = "%s/%s.all.tab" % (output_directory, count_table_file_prefix)
+        count_pe_table_file = "%s.pe.tab" % count_table_file_prefix
+        count_se_table_file = "%s.se.tab" % count_table_file_prefix
+        count_all_table_file = "%s.all.tab" % count_table_file_prefix
 
         for sample in sample_list:
             print ("Handling %s" % sample)
