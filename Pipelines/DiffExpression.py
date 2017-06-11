@@ -63,6 +63,9 @@ class DiffExpressionPipeline(FilteringPipeline):
             alignment_sample_dir = "%s/%s/" % (alignment_dir, sample)
             alignment_sample_se_dir = "%s/se/" % alignment_sample_dir
             filetypes, forward_files, reverse_files, se_files = self.make_lists_forward_and_reverse_files(sample_dir)
+            print "+++++++++++++++++++++++++++++"
+            print sample_dir
+            print "+++++++++++++++++++++++++++++"
             if se_files:
                 self.safe_mkdir(alignment_sample_se_dir)
 
