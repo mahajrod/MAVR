@@ -211,7 +211,7 @@ class FileRoutines:
         out_fd.close()
 
     @staticmethod
-    def make_lists_forward_and_reverse_files(sample_dir):
+    def make_lists_forward_and_reverse_files(sample_dir, filename_fragment_to_mark_se_reads=".se."):
         file_list = sorted(os.listdir(sample_dir))
         filtered_filelist = []
         filetypes = set()
@@ -225,13 +225,22 @@ class FileRoutines:
             else:
                 continue
             filtered_filelist.append("%s/%s" % (sample_dir, entry))
-        forward_files = filtered_filelist[::2]
-        reverse_files = filtered_filelist[1:][::2]
+
+        single_end_filelist = []
+        paired_end_filelist = []
+        for entry in file_list:
+            if filename_fragment_to_mark_se_reads in entry:
+                single_end_filelist.append(entry)
+            else:
+                paired_end_filelist.append(entry)
+
+        forward_files = paired_end_filelist[::2]
+        reverse_files = paired_end_filelist[1:][::2]
 
         if len(filetypes) > 1:
             print("WARNING: mix of archives of different types and/or uncompressed files")
 
-        return filetypes, forward_files, reverse_files
+        return filetypes, forward_files, reverse_files, single_end_filelist
 
     @staticmethod
     def get_sample_list(samples_directory):

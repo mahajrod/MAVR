@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+from copy import deepcopy
 
 from CustomCollections.GeneralCollections import TwoLvlDict, SynDict
 
@@ -23,7 +24,7 @@ class DiffExpressionPipeline(FilteringPipeline):
             for sample in sample_list:
                 self.safe_mkdir("%s/%s" % (directory, sample))
 
-    def star_and_htseq(self, genome_dir, samples_directory, output_directory, gff_for_htseq, count_table_file,
+    def star_and_htseq(self, genome_dir, samples_directory, output_directory, gff_for_htseq, count_table_file_prefix,
                        genome_fasta=None, samples_to_handle=None,
                        genome_size=None, annotation_gtf=None,
                        feature_from_gtf_to_use_as_exon=None, exon_tag_to_use_as_transcript_id=None,
@@ -31,8 +32,9 @@ class DiffExpressionPipeline(FilteringPipeline):
                        junction_tab_file_list=None,
                        three_prime_trim=None, five_prime_trim=None, adapter_seq_for_three_prime_clip=None,
                        max_mismatch_percent_for_adapter_trimming=None, three_prime_trim_after_adapter_clip=None,
-                       output_type="BAM", sort_bam=True, max_memory_for_bam_sorting=None, include_unmapped_reads_in_bam=True,
-                       output_unmapped_reads=True,  two_pass_mode=False, star_dir=None, threads=1, max_intron_length=None,
+                       output_type="BAM", sort_bam=True, max_memory_for_bam_sorting=None,
+                       include_unmapped_reads_in_bam=True, output_unmapped_reads=True,
+                       two_pass_mode=False, star_dir=None, threads=1, max_intron_length=None,
                        stranded_rnaseq="yes",  min_alignment_quality=10, feature_type_for_htseq="exon",
                        feature_id_attribute_for_htseq="gene_id", htseq_mode="union"):
 
@@ -48,14 +50,23 @@ class DiffExpressionPipeline(FilteringPipeline):
 
         alignment_dir = "%s/alignment/" % output_directory
 
-        count_table = TwoLvlDict()
+        count_pe_table = TwoLvlDict()
+        count_se_table = TwoLvlDict()
+        count_all_table = TwoLvlDict()
+        count_pe_table_file = "%s.pe.tab" % count_table_file_prefix
+        count_se_table_file = "%s.se.tab" % count_table_file_prefix
+        count_all_table_file = "%s.all.tab" % count_table_file_prefix
+
         for sample in sample_list:
             print ("Handling %s" % sample)
             sample_dir = "%s/%s/" % (samples_directory, sample)
             alignment_sample_dir = "%s/%s/" % (alignment_dir, sample)
-            filetypes, forward_files, reverse_files = self.make_lists_forward_and_reverse_files(sample_dir)
+            alignment_sample_se_dir = "%s/se/" % alignment_sample_dir
+            filetypes, forward_files, reverse_files, se_files = self.make_lists_forward_and_reverse_files(sample_dir)
+            if se_files:
+                self.safe_mkdir(alignment_sample_se_dir)
 
-            print "\tAligning reads..."
+            print "\tAligning paired reads..."
 
             STAR.align(genome_dir, forward_files, reverse_read_list=reverse_files, annotation_gtf=annotation_gtf,
                        feature_from_gtf_to_use_as_exon=feature_from_gtf_to_use_as_exon,
@@ -75,10 +86,10 @@ class DiffExpressionPipeline(FilteringPipeline):
 
             alignment_file = "%s/Aligned.sortedByCoord.out.bam" % alignment_sample_dir
 
-            print "\tIndexing alignment file..."
+            print "\tIndexing alignment file for paired reads..."
             os.system("samtools index %s" % alignment_file)
 
-            print "\tCounting reads aligned to features..."
+            print "\tCounting paired reads aligned to features..."
             count_file = "%s/%s.htseq.count" % (alignment_sample_dir, sample)
 
             HTSeq.count(alignment_file, gff_for_htseq, count_file, samtype="bam", order="pos",
@@ -86,10 +97,54 @@ class DiffExpressionPipeline(FilteringPipeline):
                         feature_type=feature_type_for_htseq, feature_id_attribute=feature_id_attribute_for_htseq,
                         mode=htseq_mode, suppress_progres_report=False)
 
-            sample_counts = SynDict()
-            sample_counts.read(count_file, header=False, separator="\t", allow_repeats_of_key=False,
-                               split_values=False, values_separator=",", key_index=0, value_index=1,
-                               close_after_if_file_object=False, expression=None, comments_prefix="__")
-            count_table[sample] = sample_counts
+            if se_files:
+                print "\tAligning single reads..."
+                STAR.align(genome_dir, se_files, reverse_read_list=None, annotation_gtf=annotation_gtf,
+                           feature_from_gtf_to_use_as_exon=feature_from_gtf_to_use_as_exon,
+                           exon_tag_to_use_as_transcript_id=exon_tag_to_use_as_transcript_id,
+                           exon_tag_to_use_as_gene_id=exon_tag_to_use_as_gene_id,
+                           length_of_sequences_flanking_junction=length_of_sequences_flanking_junction,
+                           junction_tab_file_list=junction_tab_file_list,
+                           three_prime_trim=three_prime_trim, five_prime_trim=five_prime_trim,
+                           adapter_seq_for_three_prime_clip=adapter_seq_for_three_prime_clip,
+                           max_mismatch_percent_for_adapter_trimming=max_mismatch_percent_for_adapter_trimming,
+                           three_prime_trim_after_adapter_clip=three_prime_trim_after_adapter_clip,
+                           output_type=output_type, sort_bam=sort_bam,
+                           max_memory_for_bam_sorting=max_memory_for_bam_sorting,
+                           include_unmapped_reads_in_bam=include_unmapped_reads_in_bam,
+                           output_unmapped_reads=output_unmapped_reads, output_dir=alignment_sample_se_dir,
+                           two_pass_mode=two_pass_mode, max_intron_length=max_intron_length)
 
-        count_table.write(count_table_file)
+                alignment_se_file = "%s/Aligned.sortedByCoord.out.bam" % alignment_sample_se_dir
+
+                print "\tIndexing alignment file for single reads..."
+                os.system("samtools index %s" % alignment_se_file)
+
+                print "\tCounting single reads aligned to features..."
+                count_se_file = "%s/%s.htseq.count" % (alignment_sample_se_dir, sample)
+
+                HTSeq.count(alignment_se_file, gff_for_htseq, count_se_file, samtype="bam", order="pos",
+                            stranded_rnaseq=stranded_rnaseq, min_alignment_quality=min_alignment_quality,
+                            feature_type=feature_type_for_htseq, feature_id_attribute=feature_id_attribute_for_htseq,
+                            mode=htseq_mode, suppress_progres_report=False)
+
+            sample_counts = SynDict(filename=count_file, header=False, separator="\t", allow_repeats_of_key=False,
+                                    split_values=False, values_separator=",", key_index=0, value_index=1,
+                                    close_after_if_file_object=False, expression=int, comments_prefix="__")
+            sample_se_counts = SynDict(filename=count_file, header=False, separator="\t", allow_repeats_of_key=False,
+                                       split_values=False, values_separator=",", key_index=0, value_index=1,
+                                       close_after_if_file_object=False, expression=int, comments_prefix="__")
+            count_pe_table[sample] = sample_counts
+            count_se_table[sample] = sample_se_counts
+
+            count_all_table[sample] = deepcopy(sample_counts)
+
+            for gene_id in count_se_table:
+                if gene_id in count_all_table[sample]:
+                    count_all_table[sample][gene_id] += count_se_table[sample][gene_id]
+                else:
+                    count_all_table[sample][gene_id] = count_se_table[sample][gene_id]
+
+        count_pe_table.write(count_pe_table_file)
+        count_se_table.write(count_se_table_file)
+        count_all_table.write(count_all_table_file)

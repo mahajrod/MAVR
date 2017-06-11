@@ -9,6 +9,7 @@ import argparse
 
 from collections import OrderedDict
 
+
 def split_gene_names(genes_list, name_first=True, separator="_"):
     species_dict = OrderedDict()
     for gene in genes_list:

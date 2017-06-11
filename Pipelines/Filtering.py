@@ -8,7 +8,7 @@ from collections import OrderedDict
 from Pipelines.Abstract import Pipeline
 
 from Tools.Filter import Cookiecutter, Trimmomatic, FaCut
-#from Routines import FileRoutines
+
 from Parsers.FaCut import FaCutReport
 from Parsers.Coockiecutter import CoockiecutterReport
 from Parsers.Trimmomatic import TrimmomaticReport

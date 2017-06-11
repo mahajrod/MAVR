@@ -1531,6 +1531,7 @@
       <w>hsearch_db_concepts</w>
       <w>hsearch_db_keywords</w>
       <w>hsv</w>
+      <w>htseq</w>
       <w>iconv</w>
       <w>iconvlist</w>
       <w>icuGetCollate</w>
@@ -2633,6 +2634,7 @@
       <w>rmdup</w>
       <w>rmultinom</w>
       <w>rmvn</w>
+      <w>rnaseq</w>
       <w>rnbinom</w>
       <w>rnorm</w>
       <w>round</w>

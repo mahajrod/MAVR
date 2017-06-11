@@ -89,7 +89,7 @@ for sample in sample_list:
     sample_dir = "%s/%s/" % (args.samples_dir, sample)
     alignment_sample_dir = "%s/%s/" % (args.output_dir, sample)
     FileRoutines.safe_mkdir(alignment_sample_dir)
-    filetypes, forward_files, reverse_files = FileRoutines.make_lists_forward_and_reverse_files(sample_dir)
+    filetypes, forward_files, reverse_files, se_files = FileRoutines.make_lists_forward_and_reverse_files(sample_dir)
 
     print "\tAligning reads..."
 

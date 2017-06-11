@@ -20,8 +20,9 @@ parser.add_argument("-g", "--genome_dir", action="store", dest="genome_dir", req
                     help="Directory with star index for genome")
 parser.add_argument("-e", "--gff_for_htseq", action="store", required=True,
                     dest="gff_for_htseq", help="Gff file with annotations for HTseq")
-parser.add_argument("-b", "--count_table_file", action="store", dest="count_table_file", type=os.path.abspath,
-                    help="File to write resulting count table")
+parser.add_argument("-b", "--count_table_file_prefix", action="store", dest="count_table_file_prefix",
+                    type=os.path.abspath,
+                    help="Prefix of files to write resulting count table")
 parser.add_argument("-n", "--stranded_rnaseq", action="store", default="yes",
                     dest="stranded_rnaseq", help="Type of RNAseq data. Allowed: 'yes' - stranded"
                                                  "'no' - unstranded, 'reverse' - stranded but with "
@@ -114,7 +115,7 @@ cd ~/workdir/yeast/nizhnikov/good_run
 """
 
 DiffExpressionPipeline.star_and_htseq(args.genome_dir, args.samples_dir, args.output_dir, args.gff_for_htseq,
-                                      args.count_table_file, genome_fasta=args.genome_fasta,
+                                      args.count_table_file_prefix, genome_fasta=args.genome_fasta,
                                       genome_size=args.genome_size, samples_to_handle=args.samples,
                                       annotation_gtf=args.annotation_gtf,
                                       feature_from_gtf_to_use_as_exon=None, exon_tag_to_use_as_transcript_id=None,
