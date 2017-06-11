@@ -63,19 +63,13 @@ class DiffExpressionPipeline(FilteringPipeline):
             alignment_sample_dir = "%s/%s/" % (alignment_dir, sample)
             alignment_sample_se_dir = "%s/se/" % alignment_sample_dir
             filetypes, forward_files, reverse_files, se_files = self.make_lists_forward_and_reverse_files(sample_dir)
-            """
-            print "+++++++++++++++++++++++++++++"
-            print sample_dir
-            print forward_files
-            print reverse_files
-            print "+++++++++++++++++++++++++++++"
-            """
+
             if se_files:
                 self.safe_mkdir(alignment_sample_se_dir)
 
             print "\tAligning paired reads..."
             count_file = "%s/%s.htseq.count" % (alignment_sample_dir, sample)
-            """
+            #"""
             STAR.align(genome_dir, forward_files, reverse_read_list=reverse_files, annotation_gtf=annotation_gtf,
                        feature_from_gtf_to_use_as_exon=feature_from_gtf_to_use_as_exon,
                        exon_tag_to_use_as_transcript_id=exon_tag_to_use_as_transcript_id,
@@ -104,11 +98,11 @@ class DiffExpressionPipeline(FilteringPipeline):
                         stranded_rnaseq=stranded_rnaseq, min_alignment_quality=min_alignment_quality,
                         feature_type=feature_type_for_htseq, feature_id_attribute=feature_id_attribute_for_htseq,
                         mode=htseq_mode, suppress_progres_report=False)
-            """
+            #"""
             if se_files:
                 print "\tAligning single reads..."
                 count_se_file = "%s/%s.htseq.count" % (alignment_sample_se_dir, sample)
-                """
+                #"""
                 STAR.align(genome_dir, se_files, reverse_read_list=None, annotation_gtf=annotation_gtf,
                            feature_from_gtf_to_use_as_exon=feature_from_gtf_to_use_as_exon,
                            exon_tag_to_use_as_transcript_id=exon_tag_to_use_as_transcript_id,
@@ -137,7 +131,7 @@ class DiffExpressionPipeline(FilteringPipeline):
                             stranded_rnaseq=stranded_rnaseq, min_alignment_quality=min_alignment_quality,
                             feature_type=feature_type_for_htseq, feature_id_attribute=feature_id_attribute_for_htseq,
                             mode=htseq_mode, suppress_progres_report=False)
-                """
+                #"""
             sample_counts = SynDict(filename=count_file, header=False, separator="\t", allow_repeats_of_key=False,
                                     split_values=False, values_separator=",", key_index=0, value_index=1,
                                     close_after_if_file_object=False, expression=int, comments_prefix="__")
