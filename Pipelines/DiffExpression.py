@@ -99,6 +99,11 @@ class DiffExpressionPipeline(FilteringPipeline):
                         feature_type=feature_type_for_htseq, feature_id_attribute=feature_id_attribute_for_htseq,
                         mode=htseq_mode, suppress_progres_report=False)
             #"""
+            sample_counts = SynDict(filename=count_file, header=False, separator="\t", allow_repeats_of_key=False,
+                                    split_values=False, values_separator=",", key_index=0, value_index=1,
+                                    close_after_if_file_object=False, expression=int, comments_prefix="__")
+            count_pe_table[sample] = sample_counts
+
             if se_files:
                 print "\tAligning single reads..."
                 count_se_file = "%s/%s.htseq.count" % (alignment_sample_se_dir, sample)
@@ -126,30 +131,30 @@ class DiffExpressionPipeline(FilteringPipeline):
 
                 print "\tCounting single reads aligned to features..."
 
-
                 HTSeq.count(alignment_se_file, gff_for_htseq, count_se_file, samtype="bam", order="pos",
                             stranded_rnaseq=stranded_rnaseq, min_alignment_quality=min_alignment_quality,
                             feature_type=feature_type_for_htseq, feature_id_attribute=feature_id_attribute_for_htseq,
                             mode=htseq_mode, suppress_progres_report=False)
                 #"""
-            sample_counts = SynDict(filename=count_file, header=False, separator="\t", allow_repeats_of_key=False,
-                                    split_values=False, values_separator=",", key_index=0, value_index=1,
-                                    close_after_if_file_object=False, expression=int, comments_prefix="__")
-            sample_se_counts = SynDict(filename=count_se_file, header=False, separator="\t", allow_repeats_of_key=False,
-                                       split_values=False, values_separator=",", key_index=0, value_index=1,
-                                       close_after_if_file_object=False, expression=int, comments_prefix="__")
-            count_pe_table[sample] = sample_counts
-            count_se_table[sample] = sample_se_counts
 
+                sample_se_counts = SynDict(filename=count_se_file, header=False, separator="\t", allow_repeats_of_key=False,
+                                           split_values=False, values_separator=",", key_index=0, value_index=1,
+                                           close_after_if_file_object=False, expression=int, comments_prefix="__")
+
+                count_se_table[sample] = sample_se_counts
+            else:
+                count_se_table[sample] = SynDict()
             count_all_table[sample] = SynDict()
-
-            for gene_id in set(sample_counts.keys()) | set(sample_se_counts.keys()):
-                if (gene_id in sample_counts) and (gene_id in sample_se_counts):
-                    count_all_table[sample][gene_id] = sample_counts[gene_id] + sample_se_counts[gene_id]
-                elif gene_id in sample_counts:
-                    count_all_table[sample][gene_id] = sample_counts[gene_id]
-                elif gene_id in sample_se_counts:
-                    count_all_table[sample][gene_id] = sample_se_counts[gene_id]
+            if se_files:
+                for gene_id in set(sample_counts.keys()) | set(sample_se_counts.keys()):
+                    if (gene_id in sample_counts) and (gene_id in sample_se_counts):
+                        count_all_table[sample][gene_id] = sample_counts[gene_id] + sample_se_counts[gene_id]
+                    elif gene_id in sample_counts:
+                        count_all_table[sample][gene_id] = sample_counts[gene_id]
+                    elif gene_id in sample_se_counts:
+                        count_all_table[sample][gene_id] = sample_se_counts[gene_id]
+            else:
+                count_all_table[sample] = count_pe_table[sample]
 
         count_pe_table.write(count_pe_table_file)
         count_se_table.write(count_se_table_file)

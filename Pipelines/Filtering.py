@@ -205,15 +205,23 @@ class FilteringPipeline(Pipeline):
                 os.system("ln %s %s" % (facut_filtered_forward_reads, final_forward_reads))
                 os.system("ln %s %s" % (facut_filtered_reverse_reads, final_reverse_reads))
                 if retain_single_end_reads:
-                    os.system("ln %s %s" % (facut_filtered_forward_se_reads, final_forward_se_reads))
-                    os.system("ln %s %s" % (facut_filtered_reverse_se_reads, final_reverse_se_reads))
+                    os.system("cat %s %s > %s" % (facut_filtered_forward_se_reads,
+                                                  facut_filtered_reverse_se_reads,
+                                                  final_forward_se_reads))
+                    #os.system("ln %s %s" % (facut_filtered_forward_se_reads, final_forward_se_reads))
+                    #os.system("ln %s %s" % (facut_filtered_reverse_se_reads, final_reverse_se_reads))
 
             else:
                 os.system("ln %s %s" % (coockie_trimmomatic_filtered_paired_forward_reads, final_forward_reads))
                 os.system("ln %s %s" % (coockie_trimmomatic_filtered_paired_reverse_reads, final_reverse_reads))
                 if retain_single_end_reads:
+                    os.system("cat %s %s > %s" % (coockie_trimmomatic_filtered_unpaired_forward_reads,
+                                                  coockie_trimmomatic_filtered_unpaired_reverse_reads,
+                                                  final_forward_se_reads))
+                    """
                     os.system("ln %s %s" % (coockie_trimmomatic_filtered_unpaired_forward_reads, final_forward_se_reads))
                     os.system("ln %s %s" % (coockie_trimmomatic_filtered_unpaired_reverse_reads, final_reverse_se_reads))
+                    """
                 filtering_statistics[sample]["pairs_survived_after_filtration,%"] = float("%.2f" % (float(trimmomatic_report.stats["both_surviving"]) / filtering_statistics[sample]["raw_pairs"] * 100))
 
             print filtering_statistics.table_form()

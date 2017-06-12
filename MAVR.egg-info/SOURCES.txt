@@ -304,6 +304,7 @@ scripts/fastq/fastq2fasta.py
 scripts/fastq/remove_tiles_from_fastq.py
 scripts/fastq/reverse_complement_fastq.py
 scripts/file/extract_by_column_value.py
+scripts/file/remove_by_column_value.py
 scripts/file/replace_column_value_by_syn.py
 scripts/file/split_file_by_column.py
 scripts/filter/check_fastq_presense.py
