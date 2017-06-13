@@ -110,7 +110,7 @@ class FastQRoutines(FileRoutines):
                             use_links_if_merge_not_necessary=True):
         sample_dir = "%s/%s/" % (samples_directory, sample)
         print "AAAAAAAAAAAA"
-        #filetypes, forward_files, reverse_files, se_files = self.make_lists_forward_and_reverse_files(sample_dir)
+        filetypes, forward_files, reverse_files, se_files = self.make_lists_forward_and_reverse_files(sample_dir)
         print filetypes
         print forward_files
         print reverse_files
