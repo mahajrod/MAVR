@@ -78,17 +78,19 @@ class FilteringPipeline(Pipeline):
             merged_forward_reads = "%s/%s_1.fq" % (merged_raw_sample_dir, sample)
             merged_reverse_reads = "%s/%s_2.fq" % (merged_raw_sample_dir, sample)
 
+            print("BBBBBBBBBBBBBBBBB")
             coockie_filtered_sample_dir = "%s/%s/" % (coockie_filtered_dir, sample)
             coockie_stats = "%s/%s.coockiecutter.stats" % (coockie_filtered_sample_dir, sample)
 
             coockie_trimmomatic_filtered_sample_dir = "%s/%s/" % (coockie_trimmomatic_filtered_dir, sample)
 
+            print("CCCCCCCCCCCCCCCC")
             coockie_trimmomatic_quality_filtered_sample_dir = "%s/%s/" % (coockie_trimmomatic_quality_filtered_dir, sample)
             final_filtered_sample_dir = "%s/%s/" % (final_filtered_dir, sample)
             filtering_stat_sample_dir = "%s/%s" % (filtering_stat_dir, sample)
 
             #"""
-            print "UUUUUUU"
+            print ("UUUUUUU")
             self.combine_fastq_files(samples_directory, sample, merged_raw_sample_dir, use_links_if_merge_not_necessary=True)
 
             if not skip_coockiecutter:
