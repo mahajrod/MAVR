@@ -88,7 +88,7 @@ class FilteringPipeline(Pipeline):
             filtering_stat_sample_dir = "%s/%s" % (filtering_stat_dir, sample)
 
             #"""
-
+            print "UUUUUUU"
             self.combine_fastq_files(samples_directory, sample, merged_raw_sample_dir, use_links_if_merge_not_necessary=True)
 
             if not skip_coockiecutter:
