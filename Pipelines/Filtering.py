@@ -75,23 +75,20 @@ class FilteringPipeline(Pipeline):
             print "Handling sample %s" % sample
             filtering_statistics[sample] = OrderedDict()
             merged_raw_sample_dir = "%s/%s/" % (merged_raw_dir, sample)
-            merged_forward_reads = "%s/%s_1.fq" % (merged_raw_sample_dir, sample)
-            merged_reverse_reads = "%s/%s_2.fq" % (merged_raw_sample_dir, sample)
+            #merged_forward_reads = "%s/%s_1.fq" % (merged_raw_sample_dir, sample)
+            #merged_reverse_reads = "%s/%s_2.fq" % (merged_raw_sample_dir, sample)
 
-            print("BBBBBBBBBBBBBBBBB")
             coockie_filtered_sample_dir = "%s/%s/" % (coockie_filtered_dir, sample)
             coockie_stats = "%s/%s.coockiecutter.stats" % (coockie_filtered_sample_dir, sample)
 
             coockie_trimmomatic_filtered_sample_dir = "%s/%s/" % (coockie_trimmomatic_filtered_dir, sample)
 
-            print("CCCCCCCCCCCCCCCC")
             coockie_trimmomatic_quality_filtered_sample_dir = "%s/%s/" % (coockie_trimmomatic_quality_filtered_dir, sample)
             final_filtered_sample_dir = "%s/%s/" % (final_filtered_dir, sample)
             filtering_stat_sample_dir = "%s/%s" % (filtering_stat_dir, sample)
 
             #"""
-            print ("UUUUUUU")
-            self.combine_fastq_files(samples_directory, sample, merged_raw_sample_dir, use_links_if_merge_not_necessary=True)
+            merged_forward_reads, merged_reverse_reads, merged_se_reads = self.combine_fastq_files(samples_directory, sample, merged_raw_sample_dir, use_links_if_merge_not_necessary=True)
 
             if not skip_coockiecutter:
                 Cookiecutter.rm_reads(adapter_fragment_file, merged_forward_reads, coockie_stats,
@@ -110,26 +107,41 @@ class FilteringPipeline(Pipeline):
 
                 coockie_filtered_paired_forward_reads = "%s/%s_1.ok.fastq" % (coockie_filtered_sample_dir, sample)
                 coockie_filtered_paired_reverse_reads = "%s/%s_2.ok.fastq" % (coockie_filtered_sample_dir, sample)
-
+                coockie_filtered_paired_se_reads = ""
             # se reads produced by Coockiecutter are ignored now!!
 
             #coockie_trimmomatic_filtered_sample_dir = "%s/%s/" % (coockie_trimmomatic_filtered_dir, sample)
             trimmomatic_output_prefix = "%s/%s" % (coockie_trimmomatic_filtered_sample_dir, sample)
             trimmomatic_log = "%s.trimmomatic.log" % trimmomatic_output_prefix
             #"""
-            Trimmomatic.filter(merged_forward_reads if skip_coockiecutter else coockie_filtered_paired_forward_reads,
-                               trimmomatic_output_prefix, output_extension="fq",
-                               right_reads=merged_reverse_reads if skip_coockiecutter else coockie_filtered_paired_reverse_reads,
-                               adapters_file=trimmomatic_adapter_file,
-                               mismatch_number=mismatch_number, pe_reads_score=pe_reads_score,
-                               se_read_score=se_read_score,
-                               min_adapter_len=min_adapter_len, sliding_window_size=sliding_window_size,
-                               average_quality_threshold=average_quality_threshold,
-                               leading_base_quality_threshold=leading_base_quality_threshold,
-                               trailing_base_quality_threshold=trailing_base_quality_threshold,
-                               crop_length=crop_length, head_crop_length=head_crop_length, min_length=min_len,
-                               logfile=trimmomatic_log,
-                               base_quality=base_quality)
+            if (merged_forward_reads is None) and (merged_reverse_reads is None):
+                Trimmomatic.filter(merged_se_reads if skip_coockiecutter else coockie_filtered_paired_se_reads,
+                                   trimmomatic_output_prefix, output_extension="fq",
+                                   right_reads=None,
+                                   adapters_file=trimmomatic_adapter_file,
+                                   mismatch_number=mismatch_number, pe_reads_score=pe_reads_score,
+                                   se_read_score=se_read_score,
+                                   min_adapter_len=min_adapter_len, sliding_window_size=sliding_window_size,
+                                   average_quality_threshold=average_quality_threshold,
+                                   leading_base_quality_threshold=leading_base_quality_threshold,
+                                   trailing_base_quality_threshold=trailing_base_quality_threshold,
+                                   crop_length=crop_length, head_crop_length=head_crop_length, min_length=min_len,
+                                   logfile=trimmomatic_log,
+                                   base_quality=base_quality)
+            else:
+                Trimmomatic.filter(merged_forward_reads if skip_coockiecutter else coockie_filtered_paired_forward_reads,
+                                   trimmomatic_output_prefix, output_extension="fq",
+                                   right_reads=merged_reverse_reads if skip_coockiecutter else coockie_filtered_paired_reverse_reads,
+                                   adapters_file=trimmomatic_adapter_file,
+                                   mismatch_number=mismatch_number, pe_reads_score=pe_reads_score,
+                                   se_read_score=se_read_score,
+                                   min_adapter_len=min_adapter_len, sliding_window_size=sliding_window_size,
+                                   average_quality_threshold=average_quality_threshold,
+                                   leading_base_quality_threshold=leading_base_quality_threshold,
+                                   trailing_base_quality_threshold=trailing_base_quality_threshold,
+                                   crop_length=crop_length, head_crop_length=head_crop_length, min_length=min_len,
+                                   logfile=trimmomatic_log,
+                                   base_quality=base_quality)
             #"""
             trimmomatic_report = TrimmomaticReport(trimmomatic_log)
             if skip_coockiecutter:
