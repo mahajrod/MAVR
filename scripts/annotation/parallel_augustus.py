@@ -114,7 +114,7 @@ AUGUSTUS.path = args.augustus_dir
 AUGUSTUS.threads = args.threads
 
 print("Annotating genes...")
-""""
+#""""
 AUGUSTUS.parallel_predict(args.species, args.input, output_raw_gff, strand=args.strand, gene_model=args.gene_model,
                           output_gff3=True, other_options=args.other_options, config_dir=args.config_dir,
                           use_softmasking=args.softmasking, hints_file=args.hintsfile,
@@ -247,7 +247,7 @@ else:
 
 HMMER3.intersect_ids_from_files([all_annotated_genes_ids], gene_ids_black_list, genes_not_masked_ids, mode="only_a")
 HMMER3.intersect_ids_from_files(gene_ids_white_list, gene_ids_black_list, final_genes_ids, mode="only_a")
-"""
+#"""
 final_ids = IdSet()
 final_ids.read(final_genes_ids)
 
