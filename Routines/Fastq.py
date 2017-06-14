@@ -109,12 +109,9 @@ class FastQRoutines(FileRoutines):
     def combine_fastq_files(self, samples_directory, sample, output_directory,
                             use_links_if_merge_not_necessary=True):
         sample_dir = "%s/%s/" % (samples_directory, sample)
-        print "AAAAAAAAAAAA"
+
         filetypes, forward_files, reverse_files, se_files = self.make_lists_forward_and_reverse_files(sample_dir)
-        print filetypes
-        print forward_files
-        print reverse_files
-        print se_files
+
         uncompresed = True
         if len(filetypes) == 1:
             if ("fq.gz" in filetypes) or ("fastq.gz" in filetypes):
@@ -126,17 +123,32 @@ class FastQRoutines(FileRoutines):
             else:
                 command = "cat"
 
+            merged_forward = "%s/%s_1.fq" % (output_directory, sample)
+            merged_reverse = "%s/%s_2.fq" % (output_directory, sample)
+            merged_se = "%s/%s.se.fq" % (output_directory, sample)
+
             if use_links_if_merge_not_necessary and (len(forward_files) == 1) and (len(reverse_files) == 1) and (uncompresed == True):
-                os.system("ln -s %s %s/%s_1.fq" % (forward_files[0], output_directory, sample))
-                os.system("ln -s %s %s/%s_2.fq" % (reverse_files[0], output_directory, sample))
+                os.system("ln -s %s %s" % (forward_files[0], merged_forward))
+                os.system("ln -s %s %s" % (reverse_files[0], merged_reverse))
                 if len(se_files) == 1:
-                    os.system("ln -s %s %s/%s.se.fq" % (se_files[0], output_directory, sample))
-                else:
-                    os.system("%s %s > %s/%s.se.fq" % (command, " ".join(se_files), output_directory, sample))
+                    os.system("ln -s %s %s" % (se_files[0], merged_se))
+                    return merged_forward, merged_reverse, merged_se
+                elif len(se_files) > 0:
+                    os.system("%s %s > %s" % (command, " ".join(se_files), merged_se))
+                    return merged_forward, merged_reverse, None
             else:
                 if (len(forward_files) > 0) and (len(reverse_files) > 0):
-                    os.system("%s %s > %s/%s_1.fq" % (command, " ".join(forward_files), output_directory, sample))
-                    os.system("%s %s > %s/%s_2.fq" % (command, " ".join(reverse_files), output_directory, sample))
-                os.system("%s %s > %s/%s.se.fq" % (command, " ".join(se_files), output_directory, sample))
+                    os.system("%s %s > %s" % (command, " ".join(forward_files), merged_forward))
+                    os.system("%s %s > %s" % (command, " ".join(reverse_files), merged_reverse))
+                    if len(se_files) > 0:
+                        os.system("%s %s > %s/%s" % (command, " ".join(se_files), output_directory, merged_se))
+                        return merged_forward, merged_reverse, merged_se
+                    else:
+                        return merged_forward, merged_reverse, None
+                if len(se_files) > 0:
+                    os.system("%s %s > %s/%s" % (command, " ".join(se_files), output_directory, merged_se))
+                    return None, None, merged_se
+                else:
+                    raise IOError("No input files were found")
         else:
             raise IOError("Extracting from mix of archives in not implemented yet")
