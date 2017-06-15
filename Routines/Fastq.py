@@ -173,7 +173,8 @@ class FastQRoutines(FileRoutines):
                 with open(filtered_out_file, "w") as filtered_out_fd:
                     for read_name in in_fd:
                         read = in_fd.next()
-
+                        print len(read.strip())
+                        print expression(read.strip())
                         if expression(read.strip()):
                             filtered_fd.write(read_name)
                             filtered_fd.write(read)
