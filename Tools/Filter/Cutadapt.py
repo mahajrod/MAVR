@@ -10,7 +10,8 @@ class Cutadapt(Tool):
     @staticmethod
     def parse_options(forward_file, output_prefix, reverse_file=None, format="fastq",
                       three_prime_adapter_list=None, five_prime_adapter_list=None, anyway_adapter_list=None,
-                      max_number_of_adapters_per_read=None, trim_Ns_on_read_end=False, min_read_length_after_trimming=None):
+                      max_number_of_adapters_per_read=None, trim_Ns_on_read_end=False,
+                      min_read_length_after_trimming=None, logfile=None):
 
         three_prime_adapters = [three_prime_adapter_list] if isinstance(three_prime_adapter_list, str) else three_prime_adapter_list
         five_prime_adapters = [five_prime_adapter_list] if isinstance(five_prime_adapter_list, str) else five_prime_adapter_list
@@ -45,11 +46,14 @@ class Cutadapt(Tool):
             options += " -o %s" % filtered_se
             options += " %s" % forward_file
 
+        options += " > %s 2>&1" % logfile if logfile else ""
+
         return options
 
     def filter(self, forward_file, output_prefix, reverse_file=None, format="fastq",
                three_prime_adapter_list=None, five_prime_adapter_list=None, anyway_adapter_list=None,
-               max_number_of_adapters_per_read=None, trim_Ns_on_read_end=False, min_read_length_after_trimming=None):
+               max_number_of_adapters_per_read=None, trim_Ns_on_read_end=False, min_read_length_after_trimming=None,
+               logfile=None):
 
         options = self.parse_options(forward_file, output_prefix, reverse_file=reverse_file,
                                      format=format,
@@ -58,7 +62,8 @@ class Cutadapt(Tool):
                                      anyway_adapter_list=anyway_adapter_list,
                                      max_number_of_adapters_per_read=max_number_of_adapters_per_read,
                                      trim_Ns_on_read_end=trim_Ns_on_read_end,
-                                     min_read_length_after_trimming=min_read_length_after_trimming)
+                                     min_read_length_after_trimming=min_read_length_after_trimming,
+                                     logfile=logfile)
 
         self.execute(options=options)
 
