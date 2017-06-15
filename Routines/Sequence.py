@@ -629,6 +629,8 @@ class SequenceRoutines(FileRoutines):
                         if parsing_mode == "parse":
                             pep_dict.pop(pep_id, None)
                             break
+                if len(pep_dict[pep_id].seq)*3 > len(cds_dict[cds_id]):
+                    continue
 
                 if cds_pep == pep_dict[pep_id].seq:
                     cds_pep_accordance_dict[cds_id] = pep_id
@@ -642,12 +644,57 @@ class SequenceRoutines(FileRoutines):
 
         return cds_pep_accordance_dict, cds_with_absent_proteins_id_list
 
+    @staticmethod
+    def get_transcript_to_pep_accordance(transcript_dict, pep_dict, verbose=False,
+                                         parsing_mode="parse", genetic_code_table=1,
+                                         include_id_check=False):
+
+        transcript_pep_accordance_dict = SynDict()
+        transcript_with_absent_proteins_id_list = IdList()
+        transcript_with_several_proteins_id_list = IdList()
+
+        for transcript_id in transcript_dict:
+            transcript_pep_0 = transcript_dict[transcript_id].seq.translate(table=genetic_code_table)
+            transcript_pep_1 = transcript_dict[transcript_id].seq[1:].translate(table=genetic_code_table)
+            transcript_pep_2 = transcript_dict[transcript_id].seq[2:].translate(table=genetic_code_table)
+            for pep_id in pep_dict:
+                if include_id_check:
+                    if transcript_id in pep_dict:
+                        if transcript_id not in transcript_pep_accordance_dict:
+                            transcript_pep_accordance_dict[transcript_id] = [transcript_id]
+                        else:
+                            transcript_pep_accordance_dict[transcript_id].append(transcript_id)
+                        if parsing_mode == "parse":
+                            pep_dict.pop(pep_id, None)
+                            break
+                if len(pep_dict[pep_id].seq)*3 > len(transcript_dict[transcript_id]):
+                    continue
+                if (pep_dict[pep_id].seq in transcript_pep_0) or (pep_dict[pep_id].seq in transcript_pep_1) or (pep_dict[pep_id].seq in transcript_pep_2):
+                    if transcript_id not in transcript_pep_accordance_dict:
+                        transcript_pep_accordance_dict[transcript_id] = [pep_id]
+                    else:
+                        transcript_pep_accordance_dict[transcript_id].append(pep_id)
+
+                    if parsing_mode == "parse":
+                        pep_dict.pop(pep_id, None)
+                    break
+            else:
+                transcript_with_absent_proteins_id_list.append(transcript_id)
+                if verbose:
+                    print("Protein was not found for %s transcript" % transcript_id)
+
+        for transcript_id in transcript_pep_accordance_dict:
+            if len(transcript_pep_accordance_dict[transcript_id]) > 1:
+                transcript_with_several_proteins_id_list.append(transcript_id)
+
+        return transcript_pep_accordance_dict, transcript_with_absent_proteins_id_list, transcript_with_several_proteins_id_list
+
     def get_cds_to_pep_accordance_from_files(self, cds_file, pep_file, output_file, cds_with_no_pep_idfile=None, format="fasta",
                                              verbose=True, parsing_mode="parse", index_file_suffix="tmp.idx",
                                              genetic_code_table=1, include_id_check=False):
 
         cds_dict = self.parse_seq_file(cds_file, mode=parsing_mode, format=format,
-                                       index_file="cds_%s" % index_file_suffix)
+                                       index_file="transcript_%s" % index_file_suffix)
         pep_dict = self.parse_seq_file(pep_file, mode=parsing_mode, format=format,
                                        index_file="pep_%s" % index_file_suffix)
 
@@ -658,6 +705,28 @@ class SequenceRoutines(FileRoutines):
         cds_pep_accordance_dict.write(output_file)
         if cds_with_no_pep_idfile:
             cds_with_absent_proteins_id_list.write(cds_with_no_pep_idfile)
+
+    def get_transcript_to_pep_accordance_from_files(self, transcript_file, pep_file, output_file, transcript_with_no_pep_idfile=None, format="fasta",
+                                                    verbose=True, parsing_mode="parse", index_file_suffix="tmp.idx",
+                                                    transcript_with_several_proteins_idfile=None,
+                                                    genetic_code_table=1, include_id_check=False):
+
+        transcript_dict = self.parse_seq_file(transcript_file, mode=parsing_mode, format=format,
+                                              index_file="cds_%s" % index_file_suffix)
+        pep_dict = self.parse_seq_file(pep_file, mode=parsing_mode, format=format,
+                                       index_file="pep_%s" % index_file_suffix)
+
+        transcript_pep_accordance_dict, transcript_with_absent_proteins_id_list, transcript_with_several_proteins = \
+            self.get_transcript_to_pep_accordance(transcript_dict, pep_dict, verbose=verbose,
+                                                  parsing_mode=parsing_mode,
+                                                  genetic_code_table=genetic_code_table,
+                                                  include_id_check=include_id_check)
+        transcript_pep_accordance_dict.write(output_file, splited_values=True)
+        if transcript_with_no_pep_idfile:
+            transcript_with_absent_proteins_id_list.write(transcript_with_no_pep_idfile)
+
+        if transcript_with_several_proteins_idfile:
+            transcript_with_several_proteins.write(transcript_with_several_proteins_idfile)
 
     @staticmethod
     def extract_exon_lengths(record_dict):
