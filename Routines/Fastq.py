@@ -141,12 +141,12 @@ class FastQRoutines(FileRoutines):
                     os.system("%s %s > %s" % (command, " ".join(forward_files), merged_forward))
                     os.system("%s %s > %s" % (command, " ".join(reverse_files), merged_reverse))
                     if len(se_files) > 0:
-                        os.system("%s %s > %s/%s" % (command, " ".join(se_files), output_directory, merged_se))
+                        os.system("%s %s > %s" % (command, " ".join(se_files), merged_se))
                         return merged_forward, merged_reverse, merged_se
                     else:
                         return merged_forward, merged_reverse, None
                 if len(se_files) > 0:
-                    os.system("%s %s > %s/%s" % (command, " ".join(se_files), output_directory, merged_se))
+                    os.system("%s %s > %s" % (command, " ".join(se_files), merged_se))
                     return None, None, merged_se
                 else:
                     raise IOError("No input files were found")
