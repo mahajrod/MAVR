@@ -306,13 +306,13 @@ class FilteringPipeline(Pipeline):
                 raise ValueError("Presence of PE reads in miRNAseq data!!! Stopping...")
 
             adapter_filtered_reads_prefix = "%s/%s" % (adapter_filtered_sample_dir, sample)
-
+            """
             Cutadapt.filter(merged_se_reads, adapter_filtered_reads_prefix, reverse_file=None, format="fastq",
                             three_prime_adapter_list=adapter_list, five_prime_adapter_list=None,
                             anyway_adapter_list=None,
                             max_number_of_adapters_per_read=10, trim_Ns_on_read_end=True,
                             min_read_length_after_trimming=None)
-
+            """
             adapter_filtered_reads = "%s.se.fastq" % adapter_filtered_reads_prefix
 
             length_adapter_filtered_reads = "%s/%s.length_filtered.se.fastq" % (length_adapter_filtered_sample_dir, sample)
