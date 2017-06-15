@@ -17,14 +17,17 @@ class Cutadapt(Tool):
         anyway_adapters = [anyway_adapter_list] if isinstance(anyway_adapter_list, str) else anyway_adapter_list
 
         options = ""
-        for three_adapter in three_prime_adapters:
-            options = " -a %s" % three_adapter
+        if three_prime_adapter_list:
+            for three_adapter in three_prime_adapters:
+                options = " -a %s" % three_adapter
 
-        for five_adapter in five_prime_adapters:
-            options = " -g %s" % five_adapter
+        if five_prime_adapter_list:
+            for five_adapter in five_prime_adapters:
+                options = " -g %s" % five_adapter
 
-        for anyway_adapter in anyway_adapters:
-            options = " -b %s" % anyway_adapter
+        if anyway_adapter_list:
+            for anyway_adapter in anyway_adapters:
+                options = " -b %s" % anyway_adapter
 
         options += " -n %i" % max_number_of_adapters_per_read if max_number_of_adapters_per_read else ""
         options += " --trim-n" if trim_Ns_on_read_end else ""
