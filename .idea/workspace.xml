@@ -4,19 +4,8 @@
     <bookmark url="file://$PROJECT_DIR$/scripts/filter/gather_filtering_stats.py" line="91" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="changes">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tools/Filter/Cutadapt.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/projects/Boechera/repeat_masking.cmd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/filter/filtering_mirna_pipeline.py" />
+    <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pipelines/DiffExpression.py" afterPath="$PROJECT_DIR$/Pipelines/DiffExpression.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pipelines/Filtering.py" afterPath="$PROJECT_DIR$/Pipelines/Filtering.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Routines/Fastq.py" afterPath="$PROJECT_DIR$/Routines/Fastq.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SeqAnalysis/SeqAnalysis.py" afterPath="$PROJECT_DIR$/SeqAnalysis/SeqAnalysis.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tools/Filter/__init__.py" afterPath="$PROJECT_DIR$/Tools/Filter/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/projects/pacbio_museum/pacbio_ccs.sh" afterPath="$PROJECT_DIR$/projects/pacbio_museum/pacbio_ccs.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/projects/yeast_nizhnikov/cmd.sh" afterPath="$PROJECT_DIR$/projects/yeast_nizhnikov/cmd.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/annotation/prepare_hints_from_exonerate_target_output.py" afterPath="$PROJECT_DIR$/scripts/annotation/prepare_hints_from_exonerate_target_output.py" />
     </list>
     <ignored path="MAVR.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -729,13 +718,6 @@
       <option name="presentableId" value="Default" />
       <updated>1443270821851</updated>
     </task>
-    <task id="LOCAL-01291" summary="changes">
-      <created>1495620753292</created>
-      <option name="number" value="01291" />
-      <option name="presentableId" value="LOCAL-01291" />
-      <option name="project" value="LOCAL" />
-      <updated>1495620753292</updated>
-    </task>
     <task id="LOCAL-01292" summary="changes">
       <created>1495620877425</created>
       <option name="number" value="01292" />
@@ -1072,7 +1054,14 @@
       <option name="project" value="LOCAL" />
       <updated>1497535839013</updated>
     </task>
-    <option name="localTasksCounter" value="1340" />
+    <task id="LOCAL-01340" summary="changes">
+      <created>1497546625500</created>
+      <option name="number" value="01340" />
+      <option name="presentableId" value="LOCAL-01340" />
+      <option name="project" value="LOCAL" />
+      <updated>1497546625501</updated>
+    </task>
+    <option name="localTasksCounter" value="1341" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
