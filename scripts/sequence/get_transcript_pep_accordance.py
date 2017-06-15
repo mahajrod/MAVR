@@ -8,7 +8,7 @@ from Routines import SequenceRoutines
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-c", "--transcript_file", action="store", dest="cds_file", required=True,
+parser.add_argument("-c", "--transcript_file", action="store", dest="transcript_file", required=True,
                     help="Input file with sequences of transcripts")
 parser.add_argument("-p", "--pep_file", action="store", dest="pep_file", required=True,
                     help="Input file protein sequences")
