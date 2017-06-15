@@ -7,7 +7,7 @@ from collections import OrderedDict
 
 from Pipelines.Abstract import Pipeline
 
-from Tools.Filter import Cookiecutter, Trimmomatic, FaCut
+from Tools.Filter import Cookiecutter, Trimmomatic, FaCut, Cutadapt
 
 from Parsers.FaCut import FaCutReport
 from Parsers.Coockiecutter import CoockiecutterReport
@@ -44,10 +44,10 @@ class FilteringPipeline(Pipeline):
                samples_to_handle=None, threads=4, trimmomatic_dir="", coockiecutter_dir="", facut_dir="",
                mismatch_number=2, pe_reads_score=30, se_read_score=10,
                min_adapter_len=1, sliding_window_size=None,
-               average_quality_threshold=15,
+               average_quality_threshold=15, base_quality="phred33", read_name_type="illumina",
                leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
                crop_length=None, head_crop_length=None, min_len=50,
-               base_quality="phred33", read_name_type="illumina", remove_intermediate_files=False, skip_coockiecutter=False,
+               remove_intermediate_files=False, skip_coockiecutter=False,
                retain_single_end_reads=True):
 
         Cookiecutter.path = coockiecutter_dir
@@ -253,3 +253,92 @@ class FilteringPipeline(Pipeline):
             shutil.rmtree(merged_raw_dir)
 
         filtering_statistics.write(general_stat_file, sort=False)
+
+    def prepare_mirna_filtering_directories(self, output_directory, sample_list):
+        out_dir = os.path.abspath(output_directory)
+        merged_raw_dir = "%s/merged/" % out_dir
+        filtered_dir = "%s/filtered/" % out_dir
+        adapter_filtered_dir = "%s/adapter_filtered/" % out_dir
+        length_adapter_filtered_dir = "%s/length_adapter_filtered/" % out_dir
+        final_filtered_dir = "%s/final/" % filtered_dir
+
+        self.safe_mkdir(filtered_dir)
+        for directory in merged_raw_dir, adapter_filtered_dir, length_adapter_filtered_dir, final_filtered_dir:
+            self.safe_mkdir(directory)
+            for sample in sample_list:
+                self.safe_mkdir("%s/%s" % (directory, sample))
+
+        return merged_raw_dir, filtered_dir, adapter_filtered_dir, length_adapter_filtered_dir, final_filtered_dir
+
+    def filter_mirna(self, samples_directory, output_directory, adapter_list,
+                     general_stat_file=None,
+                     samples_to_handle=None, cutadapt_dir="",
+                     min_len=17, max_len=26,
+                     remove_intermediate_files=False,
+                     average_quality_threshold=15, base_quality="phred33", read_name_type="illumina",
+                     facut_dir=""
+                     ):
+
+        Cutadapt.path = cutadapt_dir
+        FaCut.path = facut_dir
+
+        sample_list = samples_to_handle if samples_to_handle else self.get_sample_list(samples_directory)
+        merged_raw_dir, filtered_dir, adapter_filtered_dir, length_adapter_filtered_dir, final_filtered_dir = \
+            self.prepare_mirna_filtering_directories(output_directory, sample_list)
+
+        #filtering_statistics = TwoLvlDict()
+
+        for sample in sample_list:
+            print "Handling sample %s" % sample
+            #filtering_statistics[sample] = OrderedDict()
+            merged_raw_sample_dir = "%s/%s/" % (merged_raw_dir, sample)
+
+            adapter_filtered_sample_dir = "%s/%s/" % (adapter_filtered_dir, sample)
+            length_adapter_filtered_sample_dir = "%s/%s/" % (length_adapter_filtered_dir, sample)
+            final_filtered_sample_dir = "%s/%s/" % (final_filtered_dir, sample)
+
+            #"""
+            merged_forward_reads, merged_reverse_reads, merged_se_reads = self.combine_fastq_files(samples_directory,
+                                                                                                   sample,
+                                                                                                   merged_raw_sample_dir,
+                                                                                                   use_links_if_merge_not_necessary=True)
+            if merged_forward_reads or merged_reverse_reads:
+                raise ValueError("Presence of PE reads in miRNAseq data!!! Stopping...")
+
+            adapter_filtered_reads_prefix = "%s/%s" % (adapter_filtered_sample_dir, sample)
+
+            Cutadapt.filter(merged_se_reads, adapter_filtered_reads_prefix, reverse_file=None, format="fastq",
+                            three_prime_adapter_list=adapter_list, five_prime_adapter_list=None,
+                            anyway_adapter_list=None,
+                            max_number_of_adapters_per_read=10, trim_Ns_on_read_end=True,
+                            min_read_length_after_trimming=None)
+
+            adapter_filtered_reads = "%s.se.fastq" % adapter_filtered_reads_prefix
+
+            length_adapter_filtered_reads = "%s/%s.length_filtered.se.fastq" % (length_adapter_filtered_sample_dir, sample)
+            length_adapter_filtered_out_reads = "%s/%s.length_filtered_out.se.fastq" % (length_adapter_filtered_sample_dir, sample)
+            self.filter_se_by_length(adapter_filtered_reads,
+                                     length_adapter_filtered_reads,
+                                     length_adapter_filtered_out_reads,
+                                     min_len=min_len, max_len=max_len)
+
+            quality_length_adapter_filtered_prefix = "%s/%s" % (final_filtered_sample_dir, sample)
+            quality_length_adapter_filtered_stat = "%s/%s.stat" % (final_filtered_sample_dir, sample)
+
+            FaCut.filter_by_mean_quality(average_quality_threshold,
+                                         quality_length_adapter_filtered_prefix,
+                                         length_adapter_filtered_reads,
+                                         quality_type=base_quality,
+                                         stat_file=quality_length_adapter_filtered_stat, name_type=read_name_type)
+
+            if remove_intermediate_files:
+                shutil.rmtree(merged_raw_sample_dir)
+                shutil.rmtree(length_adapter_filtered_sample_dir)
+                shutil.rmtree(adapter_filtered_sample_dir)
+
+        if remove_intermediate_files:
+            shutil.rmtree(adapter_filtered_dir)
+            shutil.rmtree(length_adapter_filtered_dir)
+            shutil.rmtree(merged_raw_dir)
+
+        #filtering_statistics.write(general_stat_file, sort=False)

@@ -1,7 +1,10 @@
 #!/usr/bin/env python2
 
 import re
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as pyplot
+pyplot.ioff()
 from random import randint
 
 from Bio import SeqIO

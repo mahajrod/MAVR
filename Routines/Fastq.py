@@ -152,3 +152,33 @@ class FastQRoutines(FileRoutines):
                     raise IOError("No input files were found")
         else:
             raise IOError("Extracting from mix of archives in not implemented yet")
+
+    @staticmethod
+    def filter_se_by_length(input_file, filtered_file, filtered_out_file, min_len=None, max_len=None):
+
+        if min_len and max_len:
+            def expression(line):
+                return min_len <= len(line) <= max_len
+        elif min_len:
+            def expression(line):
+                return min_len <= len(line)
+        elif max_len:
+            def expression(line):
+                return len(line) <= max_len
+        else:
+            raise ValueError("Both minimum and maximum thresholds for read length were not set")
+
+        with open(input_file, "r") as in_fd:
+            with open(filtered_file, "w") as filtered_fd:
+                with open(filtered_out_file, "w") as filtered_out_fd:
+                    for line in in_fd:
+                        if expression(line.strip()):
+                            filtered_fd.write(line)
+                            filtered_fd.write(in_fd.next())
+                            filtered_fd.write(in_fd.next())
+                            filtered_fd.write(in_fd.next())
+                        else:
+                            filtered_out_fd.write(line)
+                            filtered_out_fd.write(in_fd.next())
+                            filtered_out_fd.write(in_fd.next())
+                            filtered_out_fd.write(in_fd.next())

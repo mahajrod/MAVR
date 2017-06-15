@@ -9,7 +9,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input", action="store", dest="input", required=True,
                     type=lambda s: make_list_of_path_to_files(s.split(",")),
-                    help="Input comma-separated list of files/directories with exonerate output")
+                    help="Files with exonerate target output")
 parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix",
                     help="Prefix of output files")
 parser.add_argument("-d", "--white_id_file", action="store", dest="white_id_file",
