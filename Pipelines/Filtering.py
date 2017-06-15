@@ -258,8 +258,8 @@ class FilteringPipeline(Pipeline):
         out_dir = os.path.abspath(output_directory)
         merged_raw_dir = "%s/merged/" % out_dir
         filtered_dir = "%s/filtered/" % out_dir
-        adapter_filtered_dir = "%s/adapter_filtered/" % out_dir
-        length_adapter_filtered_dir = "%s/length_adapter_filtered/" % out_dir
+        adapter_filtered_dir = "%s/adapter_filtered/" % filtered_dir
+        length_adapter_filtered_dir = "%s/length_adapter_filtered/" % filtered_dir
         final_filtered_dir = "%s/final/" % filtered_dir
 
         self.safe_mkdir(filtered_dir)
