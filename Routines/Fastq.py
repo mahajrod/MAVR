@@ -172,7 +172,10 @@ class FastQRoutines(FileRoutines):
             with open(filtered_file, "w") as filtered_fd:
                 with open(filtered_out_file, "w") as filtered_out_fd:
                     for line in in_fd:
+                        print len(line.strip())
+                        print(expression(line.strip()))
                         if expression(line.strip()):
+                            print("AAAAAAAAAAAA")
                             filtered_fd.write(line)
                             filtered_fd.write(in_fd.next())
                             filtered_fd.write(in_fd.next())
