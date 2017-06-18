@@ -127,3 +127,35 @@ class STAR(Tool):
             print "\tIndexing bam file..."
             resulting_bam_file = "%s/Aligned.sortedByCoord.out.bam" % alignment_sample_dir
             SamtoolsV1.index(resulting_bam_file)
+
+    def align_miRNA(self, genome_dir, se_read_list, annotation_gtf=None, output_dir="./",
+                    max_memory_for_bam_sorting=8000000000):
+        """
+        Aligns miRNA according to ENCODE pipeline
+        """
+
+        options = " --runThreadN %i" % self.threads
+        options += " --genomeDir %s" % os.path.abspath(genome_dir)
+        options += " --sjdbGTFfile %s" % annotation_gtf if annotation_gtf else ""
+
+        options += "--alignEndsType EndToEnd"
+        options += "--outFilterMismatchNmax 1"
+        options += "--outFilterMultimapScoreRange 0"
+        options += "--quantMode TranscriptomeSAM GeneCounts"
+        options += "--outReadsUnmapped Fastx"
+        options += "--outSAMtype BAM SortedByCoordinate"
+        options += "--outFilterMultimapNmax 10"
+        options += "--outSAMunmapped Within"
+        options += "--outFilterScoreMinOverLread 0"
+        options += "--outFilterMatchNminOverLread 0"
+        options += "--outFilterMatchNmin 16"
+        options += "--alignSJDBoverhangMin 1000" if annotation_gtf else ""
+        options += "--alignIntronMax 1"
+        options += "--outWigType wiggle"
+        options += "--outWigStrand Stranded"
+        options += "--outWigNorm RPM"
+        options += " --outFileNamePrefix %s" % output_dir if output_dir else ""
+        options += " --limitBAMsortRAM %i" % max_memory_for_bam_sorting if max_memory_for_bam_sorting else ""
+        options += " --readFilesIn %s" % (os.path.abspath(se_read_list) if isinstance(se_read_list, str) else " ".join(map(os.path.abspath, se_read_list)))
+
+        self.execute(options)
