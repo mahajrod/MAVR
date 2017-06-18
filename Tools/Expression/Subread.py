@@ -6,7 +6,7 @@ from Tools.Abstract import Tool
 
 class Subread(Tool):
     def __init__(self, path="", max_threads=4):
-        Tool.__init__(self, "htseq-count", path=path, max_threads=max_threads)
+        Tool.__init__(self, "featureCounts", path=path, max_threads=max_threads)
 
     def count(self, alignment_file, gff_file, output_file, count_multimapped_reads=False, annotation_file_type="GTF",
               min_read_fraction_overlap=None, feature_type_to_use=None, attribute_type_to_use=None, ):
