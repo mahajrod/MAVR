@@ -48,7 +48,13 @@ parser.add_argument("-x", "--max_number_of_alignments_per_read", action="store",
                     help="Maximum number of alignments per read. Default: 10")
 parser.add_argument("-y", "--max_number_of_mismatches", action="store", type=int,
                     dest="max_number_of_mismatches", default=1,
-                    help="Maximum number of mismatches. Default: 1")
+                    help="Maximum number of mismatches. Ignored if set -z/--max_relative number_of_mismatches. "
+                         "Default: 1")
+parser.add_argument("-z", "--max_relative_number_of_mismatches", action="store", type=float,
+                    dest="max_relative_number_of_mismatches",
+                    help="Maximum number of mismatches relative to read length. "
+                         "If set overrides -y/--max_number_of_mismatches option. Default: Not set")
+max_relative_number_of_mismatches=None
 
 args = parser.parse_args()
 
@@ -103,7 +109,8 @@ for sample in sample_list:
                      max_memory_for_bam_sorting=args.max_memory_for_bam_sorting,
                      max_alignments_per_read=args.max_number_of_alignments_per_read,
                      no_soft_clip=args.enable_soft_clipping,
-                     max_number_of_mismatches=args.max_number_of_mismatches)
+                     max_number_of_mismatches=args.max_number_of_mismatches,
+                     max_relative_number_of_mismatches=args.max_relative_number_of_mismatches)
 
     print "\tIndexing bam file..."
     resulting_bam_file = "%s/Aligned.sortedByCoord.out.bam" % alignment_sample_dir

@@ -276,7 +276,7 @@ class FilteringPipeline(Pipeline):
                      min_len=15, max_len=39,
                      remove_intermediate_files=False,
                      average_quality_threshold=15, base_quality="phred33", read_name_type="illumina",
-                     facut_dir=""
+                     facut_dir="",
                      ):
 
         Cutadapt.path = cutadapt_dir

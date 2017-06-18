@@ -130,7 +130,7 @@ class STAR(Tool):
 
     def align_miRNA(self, genome_dir, se_read_list, annotation_gtf=None, output_dir="./",
                     max_memory_for_bam_sorting=8000000000, max_alignments_per_read=10, no_soft_clip=True,
-                    max_number_of_mismatches=1):
+                    max_number_of_mismatches=1, max_relative_number_of_mismatches=None):
         """
         Aligns miRNA according to ENCODE pipeline
         """
@@ -140,7 +140,10 @@ class STAR(Tool):
         options += " --sjdbGTFfile %s" % annotation_gtf if annotation_gtf else ""
 
         options += " --alignEndsType EndToEnd" if no_soft_clip else ""   # End-to-end alignment, no soft-clip by default
-        options += " --outFilterMismatchNmax %i" % max_number_of_mismatches  # Max 1 mismatch by default. maximum number of mismatches per pair, large number switches off this filter 7max number of mismatches per pair relative to read length: for 2x100b, max number of mismatches is 0.06*200=8 for the paired read
+        if max_relative_number_of_mismatches:
+            options += " --outFilterMismatchNoverLmax %f" % max_relative_number_of_mismatches
+        else:
+            options += " --outFilterMismatchNmax %i" % max_number_of_mismatches  # Max 1 mismatch by default. maximum number of mismatches per pair, large number switches off this filter 7max number of mismatches per pair relative to read length: for 2x100b, max number of mismatches is 0.06*200=8 for the paired read
         options += " --outFilterMultimapScoreRange 0" #the score range below the maximum score for multimapping alignments
         options += " --quantMode TranscriptomeSAM GeneCounts" if annotation_gtf else ""
         options += " --outReadsUnmapped Fastx" # output of unmapped and partially mapped (i.e. mapped only one mateof a paired end read) reads in separate file(s).
