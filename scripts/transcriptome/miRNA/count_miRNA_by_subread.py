@@ -23,9 +23,6 @@ parser.add_argument("--feature_id_attribute", action="store", default="gene_id",
                     dest="feature_id_attribute",
                     help="Feature id attribute from annotation gff to be considered for counting reads. "
                          "Default - 'gene_id'")
-parser.add_argument("--htseq_mode", action="store", default="union",
-                    dest="htseq_mode",
-                    help="HTSeq mode for counting reads. Default - 'union'")
 parser.add_argument("-s", "--sample", action="store", dest="sample",
                     help="Sample name. By default filename from subread file is used")
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
