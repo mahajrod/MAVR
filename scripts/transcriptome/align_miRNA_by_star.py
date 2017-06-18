@@ -41,7 +41,7 @@ parser.add_argument("-m", "--max_memory_for_bam_sorting", action="store", type=i
                     dest="max_memory_for_bam_sorting", default=8000000000,
                     help="Max memory for bam sorting. Default: 8 000 000 000")
 parser.add_argument("-e", "--enable_soft_clipping", action="store_false", default=True,
-                    dest="Enable_soft_clipping",
+                    dest="enable_soft_clipping",
                     help="Enable soft clipping. Default: False")
 parser.add_argument("-x", "--max_number_of_alignments_per_read", action="store", type=int,
                     dest="max_number_of_alignments_per_read", default=10,
