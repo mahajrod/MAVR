@@ -373,7 +373,7 @@ class SynDict(OrderedDict):
                     if line[: com_pref_len] == comments_prefix:
                         continue
                 else:
-                    self.header = in_fd.readline().strip()
+                    self.header = line.strip()
                     break
         else:
             self.header = None
