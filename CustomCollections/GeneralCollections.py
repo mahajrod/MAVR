@@ -366,7 +366,18 @@ class SynDict(OrderedDict):
         in_fd = filename if isinstance(filename, file) else open(filename, "r")
         if comments_prefix:
             com_pref_len = len(comments_prefix)
-        self.header = in_fd.readline().strip() if header else None
+
+        if header:
+            for line in in_fd:
+                if comments_prefix:
+                    if line[: com_pref_len] == comments_prefix:
+                        continue
+                else:
+                    self.header = in_fd.readline().strip()
+                    break
+        else:
+            self.header = None
+
         for line in in_fd:
             if comments_prefix:
                 if line[: com_pref_len] == comments_prefix:

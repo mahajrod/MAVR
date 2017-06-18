@@ -130,7 +130,8 @@ class STAR(Tool):
 
     def align_miRNA(self, genome_dir, se_read_list, annotation_gtf=None, output_dir="./",
                     max_memory_for_bam_sorting=8000000000, max_alignments_per_read=10, no_soft_clip=True,
-                    max_number_of_mismatches=1, max_relative_number_of_mismatches=None):
+                    max_number_of_mismatches=1, max_relative_number_of_mismatches=None,
+                    feature_name=None):
         """
         Aligns miRNA according to ENCODE pipeline
         """
@@ -158,6 +159,7 @@ class STAR(Tool):
         options += " --outWigType wiggle"
         options += " --outWigStrand Stranded"
         options += " --outWigNorm RPM"
+        options += " --sjdbGTFfeatureExon %s" % feature_name if feature_name else ""
         options += " --outFileNamePrefix %s" % output_dir if output_dir else ""
         options += " --limitBAMsortRAM %i" % max_memory_for_bam_sorting if max_memory_for_bam_sorting else ""
         options += " --readFilesIn %s" % (os.path.abspath(se_read_list) if isinstance(se_read_list, str) else " ".join(map(os.path.abspath, se_read_list)))
