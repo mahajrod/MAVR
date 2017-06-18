@@ -28,8 +28,12 @@ parser.add_argument("--htseq_mode", action="store", default="union",
                     help="HTSeq mode for counting reads. Default - 'union'")
 parser.add_argument("-s", "--sample", action="store", dest="sample",
                     help="Sample name. By default filename from subread file is used")
+parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
+                    help="Number of threads to use")
 
 args = parser.parse_args()
+
+Subread.threads = args.threads
 
 Subread.count_miRNA_reads(args.alignment, args.gff_for_subread, args.output_prefix, annotation_file_type="GTF",
                           min_read_fraction_overlap=args.min_read_fraction_overlap,
