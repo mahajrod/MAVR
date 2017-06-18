@@ -39,7 +39,16 @@ parser.add_argument("-r", "--star_dir", action="store", dest="star_dir", default
 
 parser.add_argument("-m", "--max_memory_for_bam_sorting", action="store", type=int,
                     dest="max_memory_for_bam_sorting", default=8000000000,
-                    help="Max memory for bam sorting")
+                    help="Max memory for bam sorting. Default: 8 000 000 000")
+parser.add_argument("-e", "--enable_soft_clipping", action="store_false", default=True,
+                    dest="Enable_soft_clipping",
+                    help="Enable soft clipping. Default: False")
+parser.add_argument("-x", "--max_number_of_alignments_per_read", action="store", type=int,
+                    dest="max_number_of_alignments_per_read", default=10,
+                    help="Maximum number of alignments per read. Default: 10")
+parser.add_argument("-y", "--max_number_of_mismatches", action="store", type=int,
+                    dest="max_number_of_mismatches", default=1,
+                    help="Maximum number of mismatches. Default: 1")
 
 args = parser.parse_args()
 
@@ -91,7 +100,10 @@ for sample in sample_list:
     STAR.align_miRNA(args.genome_dir, se_files,
                      output_dir=alignment_sample_dir,
                      annotation_gtf=args.annotation_gtf if not args.genome_fasta else None,
-                     max_memory_for_bam_sorting=args.max_memory_for_bam_sorting)
+                     max_memory_for_bam_sorting=args.max_memory_for_bam_sorting,
+                     max_alignments_per_read=args.max_number_of_alignments_per_read,
+                     no_soft_clip=args.enable_soft_clipping,
+                     max_number_of_mismatches=args.max_number_of_mismatches)
 
     print "\tIndexing bam file..."
     resulting_bam_file = "%s/Aligned.sortedByCoord.out.bam" % alignment_sample_dir

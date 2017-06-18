@@ -129,7 +129,8 @@ class STAR(Tool):
             SamtoolsV1.index(resulting_bam_file)
 
     def align_miRNA(self, genome_dir, se_read_list, annotation_gtf=None, output_dir="./",
-                    max_memory_for_bam_sorting=8000000000):
+                    max_memory_for_bam_sorting=8000000000, max_alignments_per_read=10, no_soft_clip=True,
+                    max_number_of_mismatches=1):
         """
         Aligns miRNA according to ENCODE pipeline
         """
@@ -138,19 +139,19 @@ class STAR(Tool):
         options += " --genomeDir %s" % os.path.abspath(genome_dir)
         options += " --sjdbGTFfile %s" % annotation_gtf if annotation_gtf else ""
 
-        options += " --alignEndsType EndToEnd"
-        options += " --outFilterMismatchNmax 1"
-        options += " --outFilterMultimapScoreRange 0"
+        options += " --alignEndsType EndToEnd" if no_soft_clip else ""   # End-to-end alignment, no soft-clip by default
+        options += " --outFilterMismatchNmax %i" % max_number_of_mismatches  # Max 1 mismatch by default. maximum number of mismatches per pair, large number switches off this filter 7max number of mismatches per pair relative to read length: for 2x100b, max number of mismatches is 0.06*200=8 for the paired read
+        options += " --outFilterMultimapScoreRange 0" #the score range below the maximum score for multimapping alignments
         options += " --quantMode TranscriptomeSAM GeneCounts" if annotation_gtf else ""
-        options += " --outReadsUnmapped Fastx"
+        options += " --outReadsUnmapped Fastx" # output of unmapped and partially mapped (i.e. mapped only one mateof a paired end read) reads in separate file(s).
         options += " --outSAMtype BAM SortedByCoordinate"
-        options += " --outFilterMultimapNmax 10"
+        options += " --outFilterMultimapNmax %i" % max_alignments_per_read # up to 10 alignments by default
         options += " --outSAMunmapped Within"
-        options += " --outFilterScoreMinOverLread 0"
+        options += " --outFilterScoreMinOverLread 0" # alignment will be output only if its score is higher than or equal to this valuenormalized to read length
         options += " --outFilterMatchNminOverLread 0"
-        options += " --outFilterMatchNmin 16"
+        options += " --outFilterMatchNmin 16" # Output alignment if more than <value> bases were aligned
         options += " --alignSJDBoverhangMin 1000" if annotation_gtf else ""
-        options += " --alignIntronMax 1"
+        options += " --alignIntronMax 1" # Max intron length
         options += " --outWigType wiggle"
         options += " --outWigStrand Stranded"
         options += " --outWigNorm RPM"
