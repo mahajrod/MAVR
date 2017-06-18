@@ -15,7 +15,7 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
                     required=True, help="Prefix of output files")
 parser.add_argument("-m", "--min_read_fraction_overlap", action="store", default=1.0, type=float,
                     dest="min_read_fraction_overlap",
-                    help="Default read fraction overlap. Default - 1.0 \(100%\)")
+                    help="Default read fraction overlap. Default - 1.0(100%%)")
 parser.add_argument("--feature_type", action="store", default="exon",
                     dest="feature_type",
                     help="Feature type from annotation gff to be used for counting reads. Default - 'exon'")
