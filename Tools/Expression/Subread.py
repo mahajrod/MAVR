@@ -229,7 +229,7 @@ class Subread(Tool):
         self.count(alignment_file, gff_file, with_multimapped_read_counts, count_multimapped_reads=True,
                    annotation_file_type=annotation_file_type,
                    min_read_fraction_overlap=min_read_fraction_overlap, feature_type_to_use=feature_type_to_use,
-                   attribute_type_to_use=attribute_type_to_use, strandes=stranded)
+                   attribute_type_to_use=attribute_type_to_use, stranded=stranded)
 
         no_multimapped_read_count_dict = SynDict(filename=no_multimapped_read_counts, comments_prefix="#",
                                                  key_index=0, value_index=6, expression=int, header=True)
