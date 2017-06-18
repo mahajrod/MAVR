@@ -374,11 +374,11 @@ class SynDict(OrderedDict):
                         print "BBBBBBBBBBB"
                         continue
 
-                else:
-                    self.header = line.strip()
-                    print line
-                    print "AAAAAAAA"
-                    break
+                    else:
+                        self.header = line.strip()
+                        print line
+                        print "AAAAAAAA"
+                        break
         else:
             self.header = None
 
