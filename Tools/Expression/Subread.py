@@ -252,7 +252,7 @@ class Subread(Tool):
             all_adjusted_read_count_dict[feature_id] = float(no_multimapped_read_count_dict[feature_id]) + \
                                                        (float(with_multimapped_read_count_dict[feature_id]) - float(no_multimapped_read_count_dict[feature_id])) / float(similar_feature_number_dict[feature_id])
 
-        all_adjusted_read_count_dict.write(all_adjusted_read_counts)
+        all_adjusted_read_count_dict.write(all_adjusted_read_counts, header=True)
 
 
 
