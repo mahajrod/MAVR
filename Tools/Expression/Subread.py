@@ -244,9 +244,9 @@ class Subread(Tool):
         all_adjusted_read_count_dict = SynDict()
         all_adjusted_read_count_dict.header = ".\t%s" % sample_nameeee
 
-        print no_multimapped_read_count_dict
-        print with_multimapped_read_count_dict
-        print similar_feature_number_dict
+        #print no_multimapped_read_count_dict
+        #print with_multimapped_read_count_dict
+        #print similar_feature_number_dict
 
         for feature_id in no_multimapped_read_count_dict:
             all_adjusted_read_count_dict[feature_id] = float(no_multimapped_read_count_dict[feature_id]) + \
