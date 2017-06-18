@@ -93,7 +93,7 @@ for sample in sample_list:
 
     print "\tAligning reads..."
 
-    STAR.align(args.genome_dir, forward_files, reverse_read_list=reverse_files,
+    STAR.align(args.genome_dir, forward_files if forward_files else se_files, reverse_read_list=reverse_files,
                annotation_gtf=args.annotation_gtf if not args.genome_fasta else None,
                feature_from_gtf_to_use_as_exon=None,
                exon_tag_to_use_as_transcript_id=None,
