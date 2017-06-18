@@ -221,6 +221,7 @@ class Subread(Tool):
         with_multimapped_read_counts = "%s.with_multimapped_reads.count" % output_prefix
         all_adjusted_read_counts = "%s.all_adjusted_reads.count" % output_prefix
 
+        """
         self.count(alignment_file, gff_file, no_multimapped_read_counts, annotation_file_type=annotation_file_type,
                    min_read_fraction_overlap=min_read_fraction_overlap, feature_type_to_use=feature_type_to_use,
                    attribute_type_to_use=attribute_type_to_use)
@@ -229,6 +230,7 @@ class Subread(Tool):
                    annotation_file_type=annotation_file_type,
                    min_read_fraction_overlap=min_read_fraction_overlap, feature_type_to_use=feature_type_to_use,
                    attribute_type_to_use=attribute_type_to_use)
+        """
 
         no_multimapped_read_count_dict = SynDict(filename=no_multimapped_read_counts, comments_prefix="#",
                                                  key_index=0, value_index=6, expression=int, header=True)
