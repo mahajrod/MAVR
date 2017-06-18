@@ -9,7 +9,7 @@ class Subread(Tool):
         Tool.__init__(self, "featureCounts", path=path, max_threads=max_threads)
 
     def count(self, alignment_file, gff_file, output_file, count_multimapped_reads=False, annotation_file_type="GTF",
-              min_read_fraction_overlap=None, feature_type_to_use=None, attribute_type_to_use=None, ):
+              min_read_fraction_overlap=None, feature_type_to_use=None, attribute_type_to_use=None, stranded=None):
         """
           Usage: featureCounts [options] -a <annotation_file> -o <output_file> input_file1 [input_file2] ...
 
@@ -210,27 +210,26 @@ class Subread(Tool):
         options += " -a %s" % gff_file
         options += " -o %s" % output_file
         options += " %s" % alignment_file
+        options += " -s %i" % stranded if stranded else ""
 
         self.execute(options=options)
 
     def count_miRNA_reads(self, alignment_file, gff_file, output_prefix, annotation_file_type="GTF",
                           min_read_fraction_overlap=1.0, feature_type_to_use=None, attribute_type_to_use=None,
-                          sample_name=None):
+                          sample_name=None, stranded=1):
 
         no_multimapped_read_counts = "%s.no_multimapped_reads.count" % output_prefix
         with_multimapped_read_counts = "%s.with_multimapped_reads.count" % output_prefix
         all_adjusted_read_counts = "%s.all_adjusted_reads.count" % output_prefix
 
-        """
         self.count(alignment_file, gff_file, no_multimapped_read_counts, annotation_file_type=annotation_file_type,
                    min_read_fraction_overlap=min_read_fraction_overlap, feature_type_to_use=feature_type_to_use,
-                   attribute_type_to_use=attribute_type_to_use)
+                   attribute_type_to_use=attribute_type_to_use, stranded=stranded)
 
         self.count(alignment_file, gff_file, with_multimapped_read_counts, count_multimapped_reads=True,
                    annotation_file_type=annotation_file_type,
                    min_read_fraction_overlap=min_read_fraction_overlap, feature_type_to_use=feature_type_to_use,
-                   attribute_type_to_use=attribute_type_to_use)
-        """
+                   attribute_type_to_use=attribute_type_to_use, strandes=stranded)
 
         no_multimapped_read_count_dict = SynDict(filename=no_multimapped_read_counts, comments_prefix="#",
                                                  key_index=0, value_index=6, expression=int, header=True)
