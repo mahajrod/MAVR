@@ -108,7 +108,7 @@ for sample in sample_list:
                max_memory_for_bam_sorting=args.max_memory_for_bam_sorting,
                include_unmapped_reads_in_bam=args.include_unmapped_reads,
                output_unmapped_reads=args.include_unmapped_reads, output_dir=alignment_sample_dir,
-               two_pass_mode=True, max_intron_length=None)
+               two_pass_mode=True, max_intron_length=args.max_intron_length)
 
     print "\tIndexing bam file..."
     resulting_bam_file = "%s/Aligned.sortedByCoord.out.bam" % alignment_sample_dir
