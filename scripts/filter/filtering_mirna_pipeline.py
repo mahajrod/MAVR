@@ -30,10 +30,10 @@ parser.add_argument("-q", "--average_quality_threshold", action="store", dest="a
                          "Depends on -q/--average_quality_threshold option.Default - 20.")
 parser.add_argument("-b", "--base_quality", action="store", dest="base_quality", default="phred33",
                     help="Type of base quality. Possible variants: phred33, phred64. Default - phred33 ")
-parser.add_argument("-l", "--min_length", action="store", dest="min_len", type=int, default=17,
-                    help="Minimum length of read to retain. Default - 17")
-parser.add_argument("-e", "--max_length", action="store", dest="max_len", type=int, default=26,
-                    help="Maximum length of read to retain. Default - 26")
+parser.add_argument("-l", "--min_length", action="store", dest="min_len", type=int, default=15,
+                    help="Minimum length of read to retain. Default - 15")
+parser.add_argument("-e", "--max_length", action="store", dest="max_len", type=int, default=39,
+                    help="Maximum length of read to retain. Default - 39")
 
 parser.add_argument("-c", "--cutadapt_dir", action="store", dest="cutadapt_dir", default="",
                     help="Path to Cutadapt directory")

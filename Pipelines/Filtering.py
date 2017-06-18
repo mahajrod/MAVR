@@ -273,7 +273,7 @@ class FilteringPipeline(Pipeline):
     def filter_mirna(self, samples_directory, output_directory, adapter_list,
                      general_stat_file=None,
                      samples_to_handle=None, cutadapt_dir="",
-                     min_len=17, max_len=26,
+                     min_len=15, max_len=39,
                      remove_intermediate_files=False,
                      average_quality_threshold=15, base_quality="phred33", read_name_type="illumina",
                      facut_dir=""
@@ -297,7 +297,11 @@ class FilteringPipeline(Pipeline):
             length_adapter_filtered_sample_dir = "%s/%s/" % (length_adapter_filtered_dir, sample)
             final_filtered_sample_dir = "%s/%s/" % (final_filtered_dir, sample)
 
-            #"""
+
+            adapter_filtered_reads_prefix = "%s/%s" % (adapter_filtered_sample_dir, sample)
+            cutadapt_logfile = "%s.log" % adapter_filtered_reads_prefix
+            """
+
             merged_forward_reads, merged_reverse_reads, merged_se_reads = self.combine_fastq_files(samples_directory,
                                                                                                    sample,
                                                                                                    merged_raw_sample_dir,
@@ -305,15 +309,14 @@ class FilteringPipeline(Pipeline):
             if merged_forward_reads or merged_reverse_reads:
                 raise ValueError("Presence of PE reads in miRNAseq data!!! Stopping...")
 
-            adapter_filtered_reads_prefix = "%s/%s" % (adapter_filtered_sample_dir, sample)
-            cutadapt_logfile = "%s.log" % adapter_filtered_reads_prefix
+
             Cutadapt.filter(merged_se_reads, adapter_filtered_reads_prefix, reverse_file=None, format="fastq",
                             three_prime_adapter_list=adapter_list, five_prime_adapter_list=None,
                             anyway_adapter_list=None,
                             max_number_of_adapters_per_read=10, trim_Ns_on_read_end=True,
                             min_read_length_after_trimming=None,
                             logfile=cutadapt_logfile)
-
+            """
             adapter_filtered_reads = "%s.se.fastq" % adapter_filtered_reads_prefix
 
             length_adapter_filtered_reads = "%s/%s.length_filtered.se.fastq" % (length_adapter_filtered_sample_dir, sample)
