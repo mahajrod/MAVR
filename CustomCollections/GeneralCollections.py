@@ -376,6 +376,7 @@ class SynDict(OrderedDict):
 
                 else:
                     self.header = line.strip()
+                    print line
                     print "AAAAAAAA"
                     break
         else:
@@ -383,6 +384,7 @@ class SynDict(OrderedDict):
 
         print "CCCCC"
         print line
+
         for line in in_fd:
             print "DDDDDDDDDDDD"
             if comments_prefix:
