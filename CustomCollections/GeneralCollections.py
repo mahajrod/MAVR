@@ -371,22 +371,15 @@ class SynDict(OrderedDict):
             for line in in_fd:
                 if comments_prefix:
                     if line[: com_pref_len] == comments_prefix:
-                        print "BBBBBBBBBBB"
                         continue
 
                     else:
                         self.header = line.strip()
-                        print line
-                        print "AAAAAAAA"
                         break
         else:
             self.header = None
 
-        print "CCCCC"
-        print line
-
         for line in in_fd:
-            print "DDDDDDDDDDDD"
             if comments_prefix:
                 if line[: com_pref_len] == comments_prefix:
                     continue
