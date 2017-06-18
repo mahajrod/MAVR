@@ -141,7 +141,7 @@ class STAR(Tool):
         options += " --alignEndsType EndToEnd"
         options += " --outFilterMismatchNmax 1"
         options += " --outFilterMultimapScoreRange 0"
-        options += " --quantMode TranscriptomeSAM GeneCounts"
+        options += " --quantMode TranscriptomeSAM GeneCounts" if annotation_gtf else ""
         options += " --outReadsUnmapped Fastx"
         options += " --outSAMtype BAM SortedByCoordinate"
         options += " --outFilterMultimapNmax 10"
