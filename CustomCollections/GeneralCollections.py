@@ -381,6 +381,7 @@ class SynDict(OrderedDict):
         else:
             self.header = None
 
+        print "CCCCC"
         for line in in_fd:
             if comments_prefix:
                 if line[: com_pref_len] == comments_prefix:
