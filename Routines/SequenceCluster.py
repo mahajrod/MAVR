@@ -188,6 +188,7 @@ class SequenceClusterRoutines(FileRoutines):
     @staticmethod
     def rename_elements_in_clusters(clusters_file, syn_file, output_clusters_file,
                                     remove_clusters_with_not_renamed_elements=False,
+                                    elements_with_absent_synonyms_file=None,
                                     syn_file_key_column_index=0,
                                     syn_file_value_column_index=1,
                                     syn_file_column_separator='\t'):
@@ -200,19 +201,29 @@ class SequenceClusterRoutines(FileRoutines):
 
         output_clusters_dict = SynDict()
 
+        absent_elements_dict = SynDict()
+
         for cluster in clusters_dict:
             renamed_element_list = []
             for element in clusters_dict[cluster]:
                 if element in syn_dict:
                     renamed_element_list.append(syn_dict[element])
                 else:
+                    if cluster not in absent_elements_dict:
+                        absent_elements_dict[cluster] = [element]
+                    else:
+                        absent_elements_dict[cluster].append(element)
                     renamed_element_list.append(element)
-                    if remove_clusters_with_not_renamed_elements:
-                        break
-            else:
+
+            if not remove_clusters_with_not_renamed_elements:
                 output_clusters_dict[cluster] = renamed_element_list
 
         output_clusters_dict.write(output_clusters_file, splited_values=True)
+
+        if elements_with_absent_synonyms_file:
+            absent_elements_dict.write(elements_with_absent_synonyms_file, splited_values=True)
+
+        return absent_elements_dict
 
     @staticmethod
     def check_absence_of_cluster_elements(fam_list, sequence_dict):
