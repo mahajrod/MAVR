@@ -402,6 +402,7 @@ class SynDict(OrderedDict):
                     self[key] += value
                 else:
                     print "Repeated key: %s" % key
+                    print self[key]
                     raise ValueError("Error while reading to SynDit: key is repeated")
 
         if (not isinstance(filename, file)) or close_after_if_file_object:
