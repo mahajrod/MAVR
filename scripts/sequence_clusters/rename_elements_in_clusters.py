@@ -21,6 +21,8 @@ parser.add_argument("-e", "--separator", action="store", dest="column_separator"
 
 parser.add_argument("-o", "--output_cluster_file", action="store", dest="output_cluster_file", required=True,
                     help="File to write clusters with renamed elements")
+parser.add_argument("-a", "--elements_without_synonyms_file", action="store", dest="elements_without_synonyms_file",
+                    help="File to write cluster elements without synonyms. Default: don't write")
 parser.add_argument("-r", "--remove_clusters_with_not_renamed_elements", action="store_true",
                     dest="remove_clusters_with_not_renamed_elements",
                     help="Remove clusters with not renamed elements. Default: false ")
@@ -31,4 +33,5 @@ SequenceClusterRoutines.rename_elements_in_clusters(args.input_cluster_file, arg
                                                     remove_clusters_with_not_renamed_elements=args.remove_clusters_with_not_renamed_elements,
                                                     syn_file_key_column_index=args.key_column_index,
                                                     syn_file_value_column_index=args.value_column_index,
-                                                    syn_file_column_separator=args.column_separator)
+                                                    syn_file_column_separator=args.column_separator,
+                                                    elements_with_absent_synonyms_file=args.elements_without_synonyms_file)
