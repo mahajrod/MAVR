@@ -205,6 +205,7 @@ class SequenceClusterRoutines(FileRoutines):
 
         for cluster in clusters_dict:
             renamed_element_list = []
+            all_elements_were_renamed_flag = True
             for element in clusters_dict[cluster]:
                 if element in syn_dict:
                     renamed_element_list.append(syn_dict[element])
@@ -213,9 +214,10 @@ class SequenceClusterRoutines(FileRoutines):
                         absent_elements_dict[cluster] = [element]
                     else:
                         absent_elements_dict[cluster].append(element)
+                    all_elements_were_renamed_flag = False
                     renamed_element_list.append(element)
 
-            if not remove_clusters_with_not_renamed_elements:
+            if (not remove_clusters_with_not_renamed_elements) or (remove_clusters_with_not_renamed_elements and all_elements_were_renamed_flag):
                 output_clusters_dict[cluster] = renamed_element_list
 
         output_clusters_dict.write(output_clusters_file, splited_values=True)
