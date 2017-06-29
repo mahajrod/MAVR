@@ -76,6 +76,37 @@ class MathRoutines:
         return mean, median, std, var_coeff
 
     @staticmethod
+    def get_per_row_stats_for_table_from_file(table_file, output_file, rownames=True, column_names=True,
+                                              separator="\t", comments_prefix="#"):
+        with open(table_file, "r") as in_fd:
+            with open(output_file, "w") as out_fd:
+                out_fd.write(("#Id\t" if rownames else "#") + "Mean\tMedian\tStd\tVariation_coefficient\n")
+                if column_names:
+                    input_header = in_fd.readline()
+                for line in in_fd:
+                    if line[: len(comments_prefix)] == comments_prefix:
+                        continue
+                    line_list = line.strip().split(separator)
+                    if rownames:
+                        row_id = line_list[0]
+                        data = map(float, line_list[1:])
+                    else:
+                        row_id = None
+                        data = map(float, line_list)
+
+                    std = np.std(data)
+                    mean = np.mean(data)
+                    median = np.median(data)
+                    var_coeff = std / mean
+
+                    out_put = ((row_id + "\t") if row_id else "") + "%f\t%f\t%f\t%f\n" % (mean, median, std, var_coeff)
+                    out_fd.write(out_put)
+
+
+
+
+
+    @staticmethod
     def find_flat_regions_in_array(input_array, value):
 
         array_len = len(input_array)
