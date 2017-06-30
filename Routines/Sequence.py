@@ -205,13 +205,13 @@ class SequenceRoutines(FileRoutines):
                     if verbose:
                         sys.stderr.write("Not found: %s\n" % record_id)
             elif coincidence_mode == "partial":
-                print "AAAAAA"
+                #print "AAAAAA"
                 entry_list = []
                 if record_id in record_dict:
-                    print "BBBBBB"
+                    #print "BBBBBB"
                     yield record_dict[record_id]
                 else:
-                    print "CCCCCCCCCC"
+                    #print "CCCCCCCCCC"
                     for dict_entry in record_dict:
                         if record_id in dict_entry:
                             entry_list.append(dict_entry)
@@ -222,9 +222,11 @@ class SequenceRoutines(FileRoutines):
                         else:
                             sys.stderr.write("ERROR!!! Multiple coincidence for %s" % record_id)
                             raise ValueError("Multiple coincidence for %s" % record_id)
-                        print entry_list
+                       # print entry_list
                         for entry in entry_list:
                             yield record_dict[entry]
+                    elif len(entry_list) == 1:
+                        yield record_dict[entry_list[0]]
                 if (not entry_list) and verbose:
                     sys.stderr.write("Not found: %s\n" % record_id)
             else:
