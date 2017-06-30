@@ -219,6 +219,7 @@ class SequenceRoutines(FileRoutines):
                         else:
                             sys.stderr.write("ERROR!!! Multiple coincidence for %s" % record_id)
                             raise ValueError("Multiple coincidence for %s" % record_id)
+                        print entry_list
                         for entry in entry_list:
                             yield record_dict[entry]
                 if (not entry_list) and verbose:
