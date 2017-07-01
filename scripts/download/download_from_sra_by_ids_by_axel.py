@@ -1,12 +1,8 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
-import sys
 import argparse
 
 from CustomCollections.GeneralCollections import IdList
-
-from multiprocessing import Pool
 
 from Tools.Abstract import Tool
 

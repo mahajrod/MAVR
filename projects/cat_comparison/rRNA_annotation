@@ -4,3 +4,12 @@ for GENOME in AciJub_1.0 CroCro_1.0 PanLeo_1.0 PanTig_1.0 CanFam_3.1 FelCat_8.0 
 #min len 0.1%
 
 for GENOME in AciJub_1.0 CroCro_1.0 PanLeo_1.0 PanTig_1.0 CanFam_3.1 FelCat_8.0 PanOnc_1.0 PriBen_1.0 CarCar_1.0 LynPar_1.0 PanPar_1.0 PriViv_1.0; do echo ${GENOME}; ~/soft/barrnap-0.6/bin/barrnap --kingdom euk --reject 0.001 --threads 16 ../../genomes/${GENOME}.fixed.fa > ${GENOME}.barrnap.euk.gff 2> ${GENOME}.barrnap.euk.err; ~/soft/barrnap-0.6/bin/barrnap --kingdom mito --reject 0.001 --threads 16 ../../genomes/${GENOME}.fixed.fa > ${GENOME}.barrnap.mito.gff 2> ${GENOME}.barrnap.mito.err;   done
+
+
+
+#Puma default settings
+for GENOME in PumCon_1.0; do echo ${GENOME}; ~/soft/barrnap-0.6/bin/barrnap --kingdom euk --threads 16 /mnt/genomerussia/GNDRbackup/data/genome/Cats/Puma/mountain_lion_17Sep2015_MifDV.fasta > ${GENOME}.barrnap.euk.gff 2> ${GENOME}.barrnap.euk.err; ~/soft/barrnap-0.6/bin/barrnap --kingdom mito --threads 16 /mnt/genomerussia/GNDRbackup/data/genome/Cats/Puma/mountain_lion_17Sep2015_MifDV.fasta > ${GENOME}.barrnap.mito.gff 2> ${GENOME}.barrnap.mito.err;   done
+
+#Puma min len 0.1%
+
+for GENOME in PumCon_1.0; do echo ${GENOME}; ~/soft/barrnap-0.6/bin/barrnap --kingdom euk --reject 0.001 --threads 16 /mnt/genomerussia/GNDRbackup/data/genome/Cats/Puma/mountain_lion_17Sep2015_MifDV.fasta > ${GENOME}.barrnap.euk.gff 2> ${GENOME}.barrnap.euk.err; ~/soft/barrnap-0.6/bin/barrnap --kingdom mito --reject 0.001 --threads 16 /mnt/genomerussia/GNDRbackup/data/genome/Cats/Puma/mountain_lion_17Sep2015_MifDV.fasta > ${GENOME}.barrnap.mito.gff 2> ${GENOME}.barrnap.mito.err;   done

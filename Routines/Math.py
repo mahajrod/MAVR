@@ -102,10 +102,6 @@ class MathRoutines:
                     out_put = ((row_id + "\t") if row_id else "") + "%f\t%f\t%f\t%f\n" % (mean, median, std, var_coeff)
                     out_fd.write(out_put)
 
-
-
-
-
     @staticmethod
     def find_flat_regions_in_array(input_array, value):
 
