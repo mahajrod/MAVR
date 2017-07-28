@@ -13,6 +13,7 @@ from Routines.Ensembl import EnsemblRoutines
 from Routines.TreeFam import TreeFamRoutines
 from Routines.Drawing import DrawingRoutines
 from Routines.Sequence import SequenceRoutines
+from Routines.Evolution import EvolutionRoutines
 from Routines.Alignment import AlignmentRoutines
 from Routines.Expression import ExpressionRoutines
 from Routines.Matplotlib import MatplotlibRoutines
@@ -35,6 +36,7 @@ EnsemblRoutines = EnsemblRoutines()
 TreeFamRoutines = TreeFamRoutines()
 DrawingRoutines = DrawingRoutines()
 SequenceRoutines = SequenceRoutines()
+EvolutionRoutines = EvolutionRoutines()
 AlignmentRoutines = AlignmentRoutines()
 ExpressionRoutines = ExpressionRoutines()
 MatplotlibRoutines = MatplotlibRoutines()
