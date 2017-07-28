@@ -17,6 +17,7 @@ from Routines.Alignment import AlignmentRoutines
 from Routines.Expression import ExpressionRoutines
 from Routines.Matplotlib import MatplotlibRoutines
 from Routines.Annotations import AnnotationsRoutines
+from Routines.Phylogenetics import PhylogeneticsRoutines
 from Routines.SequenceCluster import SequenceClusterRoutines
 from Routines.MultipleAlignment import MultipleAlignmentRoutines
 
@@ -38,5 +39,6 @@ AlignmentRoutines = AlignmentRoutines()
 ExpressionRoutines = ExpressionRoutines()
 MatplotlibRoutines = MatplotlibRoutines()
 AnnotationsRoutines = AnnotationsRoutines()
+PhylogeneticsRoutines = PhylogeneticsRoutines()
 SequenceClusterRoutines = SequenceClusterRoutines()
 MultipleAlignmentRoutines = MultipleAlignmentRoutines()
