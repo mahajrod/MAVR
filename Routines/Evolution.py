@@ -22,6 +22,6 @@ class EvolutionRoutines(PhylogeneticsRoutines):
                                                output_extension)
                 with open(output_file, "w") as out_fd:
                     out_fd.write(line)
-                for i in range(0, seq_number):
-                    out_fd.write(bootstrap_fd.next())
+                    for i in range(0, seq_number):
+                        out_fd.write(bootstrap_fd.next())
                 counter += 1
