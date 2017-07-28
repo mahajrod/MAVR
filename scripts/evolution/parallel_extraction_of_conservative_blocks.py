@@ -14,7 +14,7 @@ parser.add_argument("-o", "--output_dir", action="store", dest="output_dir", req
                     help="Output directory")
 parser.add_argument("-p", "--output_prefix", action="store", dest="output_prefix", required=True,
                     help="Output prefix")
-parser.add_argument("-t", "--input_type", action="store", dest="input_type", default="codon",
+parser.add_argument("-y", "--input_type", action="store", dest="input_type", default="codon",
                     help="Type of input sequences. Allowed: dna, codon(default), protein")
 parser.add_argument("-m", "--min_seq_number_for_conserved_position", action="store",
                     dest="min_seq_number_for_conserved_position", type=int,
