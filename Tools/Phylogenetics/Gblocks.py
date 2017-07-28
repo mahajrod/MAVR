@@ -80,7 +80,7 @@ class Gblocks(Tool):
 
         for entry in input_files_list:
             directory, prefix, extension = self.split_filename(entry)
-            os.system("ln -s %s %s/%s.%s" % (entry, data_dir, prefix, extension))
+            os.system("ln -s %s %s/%s%s" % (entry, data_dir, prefix, extension))
 
         data_files_list = self.make_list_of_path_to_files(data_dir, return_absolute_paths=True)
 
@@ -113,6 +113,7 @@ class Gblocks(Tool):
             os.system("mv %s %s/%s.ps" % (postscript_file, postscript_dir, prefix))
             os.system("mv %s %s/%s.htm" % (htm_file, htm_dir, prefix))
             self.convert_output_to_fasta(blocks_file, "%s/%s%s" % (results_dir, prefix, extension))
+            os.remove(blocks_file)
 
         block_coordinates_file = "%s.block.coordinates" % output_prefix
 
