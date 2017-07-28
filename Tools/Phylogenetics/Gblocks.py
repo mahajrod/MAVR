@@ -46,6 +46,7 @@ class Gblocks(Tool):
                     tmp = line.split(":")[1].strip().split("  ")
                     block_coordinates = [] # 1-based
                     for i in range(0, len(tmp)/2):
+                        print tmp
                         block_coordinates.append((int(tmp[i][1:]), int(tmp[i+1][:-1])))
 
         return block_coordinates
