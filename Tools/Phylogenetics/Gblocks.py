@@ -7,7 +7,7 @@ from collections import OrderedDict
 
 class Gblocks(Tool):
     def __init__(self, path="", max_threads=4):
-        Tool.__init__(self, "raxml", path=path, max_threads=max_threads)
+        Tool.__init__(self, "Gblocks", path=path, max_threads=max_threads)
 
     @staticmethod
     def parse_options(input_type="codon",
