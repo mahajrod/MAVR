@@ -24,4 +24,5 @@ class EvolutionRoutines(PhylogeneticsRoutines):
                     out_fd.write(line)
                     for i in range(0, seq_number):
                         out_fd.write(bootstrap_fd.next())
+                bootstrap_fd.next()  # read empty line between samples
                 counter += 1
