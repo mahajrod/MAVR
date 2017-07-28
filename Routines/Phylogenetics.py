@@ -11,9 +11,9 @@ class PhylogeneticsRoutines(MultipleAlignmentRoutines):
     def __init__(self):
         MultipleAlignmentRoutines.__init__(self)
 
-    @staticmethod
-    def bootstrap_alignment(alignment_file, output_directory, output_prefix,
+    def bootstrap_alignment(self, alignment_file, output_directory, output_prefix,
                             replicate_number, format="fasta"):
+        self.safe_mkdir(output_directory)
         alignment = AlignIO.read(alignment_file, format=format)
 
         bootstrap_replicate_generator = bootstrap(alignment, replicate_number)
