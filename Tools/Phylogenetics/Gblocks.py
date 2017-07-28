@@ -46,7 +46,7 @@ class Gblocks(Tool):
                     tmp = line.split(":")[1].strip().split("  ")
                     block_coordinates = [] # 1-based
                     for i in range(0, len(tmp)/2):
-                        print tmp
+                        #print tmp
                         block_coordinates.append((int(tmp[2*i][1:]), int(tmp[2*i+1][:-1])))
 
         return block_coordinates
@@ -112,7 +112,7 @@ class Gblocks(Tool):
             block_coordinates[prefix] = self.extract_block_coordinates(htm_file)
             os.system("mv %s %s/%s.ps" % (postscript_file, postscript_dir, prefix))
             os.system("mv %s %s/%s.htm" % (htm_file, htm_dir, prefix))
-            self.convert_output_to_fasta(blocks_file, "%s/%s.%s" % (results_dir, prefix, extension))
+            self.convert_output_to_fasta(blocks_file, "%s/%s%s" % (results_dir, prefix, extension))
 
         block_coordinates_file = "%s.block.coordinates" % output_prefix
 
