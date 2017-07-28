@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+mkdir labeled_fam; for SP in AciJub CanFam CarCar CroCro FelCat LynPar PanLeo PanOnc PanPar PanTig PriBen PriViv PumCon; do IN_FAM=`ls  fam/*${SP}*`; echo ${IN_FAM}; ~/Soft/MAVR/scripts/sequence_clusters/label_cluster_elements.py -i ${IN_FAM} -l ${SP} -o labeled_fam/${SP}.fam & done
+
+~/Soft/MAVR/scripts/sequence_clusters/merge_fam_files.py -i labeled_fam/ -o cat_species.merged.fam
+~/Soft/MAVR/scripts/sequence_clusters/expansion/prepare_cafe_input.py  -e @ -s AciJub,CanFam,CarCar,CroCro,FelCat,LynPar,PanLeo,PanOnc,PanPar,PanTig,PriBen,PriViv,PumCon -i cat_species.merged.fam  -c cat_species.merged.cafe
+~/Soft/MAVR/scripts/sequence_clusters/extract_monocluster_ids.py -i labeled_fam/ -o cat_merged.monoclusters.ids
+~/Soft/MAVR/scripts/sequence_clusters/extract_selected_families_from_fam_file.py -i cat_merged.monoclusters.fam  -d /mnt/guatemala/skliver/data/EggOG/maNOG/white_list_orthologs.ids -o cat_merged.monoclusters.filtered.fam
+~/Soft/MAVR/scripts/general/combine_ids.py -a cat_merged.monoclusters.ids -b /mnt/guatemala/skliver/data/EggOG/maNOG/white_list_orthologs.ids  -o cat_merged.monoclusters.filtered.ids
+
+mkdir cds labeled_cds pep labeled_pep monoclusters_pep monoclusters_pep_only_species_ids monoclusters_pep_only_species_ids_aln
+
+for SP in AciJub CanFam CarCar CroCro FelCat LynPar PanLeo PanOnc PanPar PanTig PriBen PriViv PumCon; do cp ../../augustus/${SP}*/supported_by_db_and_hints/${SP}*.swissprot_or_pfam_and_hints.longest_pep.pep ./${SP}.pep & done
+
+for SP in AciJub CanFam CarCar CroCro FelCat LynPar PanLeo PanOnc PanPar PanTig PriBen PriViv PumCon; do cp ../../augustus/${SP}*/supported_by_db_and_hints/${SP}*.swissprot_or_pfam_and_hints.trimmed.cds ./${SP}.cds & done
+
+for SP in AciJub CanFam CarCar CroCro FelCat LynPar PanLeo PanOnc PanPar PanTig PriBen PriViv PumCon; do ~/Soft/MAVR/scripts/sequence/label_sequences.py -i cds/${SP}.cds -l ${SP} -o labeled_cds/${SP}.cds & done
+for SP in AciJub CanFam CarCar CroCro FelCat LynPar PanLeo PanOnc PanPar PanTig PriBen PriViv PumCon; do ~/Soft/MAVR/scripts/sequence/label_sequences.py -i pep/${SP}.pep -l ${SP} -o labeled_pep/${SP}.pep & done
+
+for SP in AciJub CanFam CarCar CroCro FelCat LynPar PanLeo PanOnc PanPar PanTig PriBen PriViv PumCon; do ~/Soft/MAVR/scripts/sequence/get_cds_pep_accordance.py -c labeled_cds/${SP}.cds -p labeled_pep/${SP}.pep -o labeled_accordance/${SP}.cds_to_pep.accordance -d & done
+
+~/Soft/MAVR/scripts/sequence_clusters/extract_sequences_from_selected_clusters.py  -f cat_merged.monoclusters.filtered.fam  -p labeled_pep/ -d monoclusters_pep/
+
+ls monoclusters_pep | xargs -P 64 -I NAME  ~/Soft/MAVR/scripts/sequence/truncate_id_after_label.py -i monoclusters_pep/NAME -o monoclusters_pep_only_species_ids/NAME
+
+~/Soft/MAVR/scripts/multiple_alignment/parallel_mafft.py  -i monoclusters_pep_only_species_ids -p 50 -o monoclusters_pep_only_species_ids_aln/
+
+~/Soft/MAVR/scripts/multiple_alignment/parallel_mafft.py  -i monoclusters_pep_only_species_ids -p 50 -o monoclusters_pep_only_species_ids_aln/
+
+~/Soft/MAVR/scripts/multiple_alignment/merge_alignments.py -i monoclusters_pep_only_species_ids_aln/ -o monoclusters_pep_merged_alignment.fasta -c monoclusters_pep_merged_alignment.coords
+
+#######################CDS
+~/Soft/MAVR/scripts/sequence_clusters/extract_sequences_from_selected_clusters.py  -f cat_merged.monoclusters.filtered.fam  -p labeled_cds/ -d monoclusters_cds/
+mkdir monoclusters_cds_only_species_ids
+ls monoclusters_cds | xargs -P 64 -I NAME  ~/Soft/MAVR/scripts/sequence/truncate_id_after_label.py -i monoclusters_cds/NAME -o monoclusters_cds_only_species_ids/NAME
+
+~/Soft/MAVR/scripts/multiple_alignment/parallel_codon_alignment_by_prank.py -i monoclusters_cds_only_species_ids/ -p 64 -o monoclusters_cds_only_species_ids_aln -s ""

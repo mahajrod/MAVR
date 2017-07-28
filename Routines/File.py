@@ -56,7 +56,8 @@ class FileRoutines:
         prefix, extension = os.path.splitext(basename)
         return directory, prefix, extension
 
-    def make_list_of_path_to_files(self, list_of_dirs_and_files, expression=None, recursive=False):
+    def make_list_of_path_to_files(self, list_of_dirs_and_files, expression=None, recursive=False,
+                                   return_absolute_paths=True):
         file_list = []
         for entry in [list_of_dirs_and_files] if isinstance(list_of_dirs_and_files, str) else list_of_dirs_and_files:
             if os.path.isdir(entry):
@@ -78,7 +79,7 @@ class FileRoutines:
             else:
                 print("%s does not exist" % entry)
 
-        return file_list
+        return map(os.path.abspath, file_list) if return_absolute_paths else file_list
 
     def make_list_of_path_to_files_from_string(self, input_string, file_separator=",",
                                                expression=None, recursive=False):
@@ -453,19 +454,23 @@ def split_filename(filepath):
 
 def make_list_of_path_to_files(list_of_dirs_and_files, expression=None):
 
-    pathes_list = []
+    paths_list = []
     for entry in list_of_dirs_and_files:
         #print entry
         if os.path.isdir(entry):
             files_in_dir = sorted(filter(expression, os.listdir(entry)) if expression else os.listdir(entry))
             for filename in files_in_dir:
-                pathes_list.append("%s%s" % (check_path(entry), filename))
+                paths_list.append("%s%s" % (check_path(entry), filename))
         elif os.path.exists(entry):
-            pathes_list.append(entry)
+            if expression:
+                if expression(entry):
+                    paths_list.append(entry)
+            else:
+                paths_list.append(entry)
         else:
             print("%s does not exist" % entry)
 
-    return pathes_list
+    return paths_list
 
 
 def read_synonyms_dict(filename, header=False, separator="\t",

@@ -20,6 +20,7 @@ from CustomCollections.GeneralCollections import SynDict
 from Routines.Matplotlib import MatplotlibRoutines
 from Routines.Sequence import SequenceRoutines
 from Pictures.Features import RectangularProtein
+from Parsers.DESeq2 import CollectionPWC
 
 
 class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
@@ -29,7 +30,15 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
     def draw_chromosomes_with_features_simple(self, chromosomes_gff, genes_gff, output_prefix, figsize=(10, 10),
                                               sense_feature_color="green", antisense_feature_color="red",
                                               chromosome_color="black", label_fontsize=15,
-                                              ext_list=("png",), dpi=None):
+                                              chromosome_name_field=None,
+                                              ext_list=("png",), dpi=None,
+                                              alias_fields_in_gff=("ID", "Name", "gene", "Alias"),
+                                              id_field_in_gff="ID", deseq2_pwc_file=None, upregulated_color="green",
+                                              downregulated_color="red", absent_expression_data_color="black",
+                                              coloring_mode="strand"):
+        if deseq2_pwc_file and (coloring_mode == "expression"):
+            deseq2_pwc_collection = CollectionPWC(from_file=True, pwc_file=deseq2_pwc_file)
+
         figure = plt.figure(figsize=figsize, dpi=dpi)
         """
         if dpi:
@@ -61,10 +70,19 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
                 feature_type = line_list[2]
                 feature_start = line_list[3]
                 feature_end = line_list[4]
-                #feature_strand = line_list[6]
+                feature_description_list = line_list[8].split(";")
 
-                if feature_type == "chromosome":
+                chr_name = None
+                if chromosome_name_field:
+
+                    for entry in feature_description_list:
+                        entry_list = entry.split("=")
+                        if entry_list[0] == chromosome_name_field:
+                            chr_name = entry_list[1]
+
+                if feature_type == "chromosome" or feature_type == "plasmid" or feature_type == "region":
                     chr_dict[feature_scaffold] = OrderedDict()
+                    chr_dict[feature_scaffold]["Name"] = chr_name if chr_name else feature_scaffold
                     chr_dict[feature_scaffold]["Genes"] = OrderedDict()
                     chr_dict[feature_scaffold]["Length"] = int(feature_end)
                     if chr_dict[feature_scaffold]["Length"] > max_chr_len:
@@ -72,6 +90,7 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
                         chr_number += 1
                 elif feature_type == "centromere":
                     # add check for case when centromere line is first in gff file
+
                     chr_dict[feature_scaffold]["Centromere"] = [int(feature_start), int(feature_end)]
         print chr_dict
         if genes_gff:
@@ -79,7 +98,7 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
                 for line in gene_fd:
                     if line[0] == "#":
                         continue
-                    line_list = line.split("\t")
+                    line_list = line.strip().split("\t")
                     feature_scaffold = line_list[0]
                     feature_type = line_list[2]
                     feature_start = line_list[3]
@@ -88,14 +107,23 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
                     description_list = line_list[-1].split(";")
 
                     entry_id = None
+                    alias_list = []
+                    print "AAAAAAAAAAA"
+                    print line
                     for entry in description_list:
-                        if entry[:3] == "ID=":
-                            entry_id = entry[3:]
+                        if entry[:len(id_field_in_gff)+1] == ("%s=" % id_field_in_gff):
+                            entry_id = entry[len(id_field_in_gff)+1:]
+                            alias_list.append(entry_id)
+                        for alias_id in alias_fields_in_gff:
+                            if entry[:len(alias_id)+1] == ("%s=" % alias_id):
+                                alias_list += entry.split("=")[1].split(",")
+                    print entry_id
                     if not entry_id:
                         continue
 
-                    chr_dict[feature_scaffold]["Genes"][entry_id] = [int(feature_start), int(feature_end), feature_strand]
+                    chr_dict[feature_scaffold]["Genes"][entry_id] = [int(feature_start), int(feature_end), feature_strand, alias_list]
 
+        print chr_dict
         centromere_radius = int(max_chr_len/100)
         distance_between_chromosome_and_gene = centromere_radius * 2
         distance_between_chromosomes = centromere_radius * 8
@@ -105,7 +133,7 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
 
         text_x_offset = -max_chr_len/15
         for chromosome in chr_dict:
-            print "Drawing chromosome %s" % chromosome
+            print "Drawing chromosome %s" % chr_dict[chromosome]["Name"]
             chromosome_position += distance_between_chromosomes
             chromosome_fragments_list = []
             if "Centromere" not in chr_dict[chromosome]:
@@ -133,21 +161,31 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
             for patch in chromosome_fragments_list:
                 subplot.add_patch(patch)
 
-            subplot.annotate(chromosome, xy=(text_x_offset, chromosome_position),
+            subplot.annotate(chr_dict[chromosome]["Name"], xy=(text_x_offset, chromosome_position),
                              xycoords='data', fontsize=label_fontsize,
                              ha='center', va='center')
 
             if chr_dict[chromosome]["Genes"]:
                 for gene in chr_dict[chromosome]["Genes"]:
-                    print "Adding feature %s: %i-%i, %s" % (gene, chr_dict[chromosome]["Genes"][gene][0],
-                                                            chr_dict[chromosome]["Genes"][gene][1],
-                                                            chr_dict[chromosome]["Genes"][gene][2])
-                    gene_color = sense_feature_color if chr_dict[chromosome]["Genes"][gene][2] == "+" else antisense_feature_color
-
+                    print "Adding feature %s: %i-%i, %s. Aliases: %s" % (gene, chr_dict[chromosome]["Genes"][gene][0],
+                                                                         chr_dict[chromosome]["Genes"][gene][1],
+                                                                         chr_dict[chromosome]["Genes"][gene][2],
+                                                                         ",".join(chr_dict[chromosome]["Genes"][gene][3]))
                     gene_start = chr_dict[chromosome]["Genes"][gene][0]
                     if "Centromere" in chr_dict[chromosome]:
                         if gene_start >= chr_dict[chromosome]["Centromere"][1]:
                             gene_start += centromere_radius * 2
+
+                    if deseq2_pwc_file and (coloring_mode == "expression"):
+                        for alias in chr_dict[chromosome]["Genes"][gene][3]:
+                            if alias in deseq2_pwc_collection:
+                                gene_log2foldchange = deseq2_pwc_collection[alias].log2foldchange
+                                break
+                        else:
+                            gene_log2foldchange = None
+                        gene_color = absent_expression_data_color if gene_log2foldchange is None else upregulated_color if gene_log2foldchange > 0 else downregulated_color
+                    else:
+                        gene_color = sense_feature_color if chr_dict[chromosome]["Genes"][gene][2] == "+" else antisense_feature_color
 
                     gene_patch = Rectangle((gene_start, chromosome_position + (1 if chr_dict[chromosome]["Genes"][gene][2] == "+" else -1) * distance_between_chromosome_and_gene),
                                            chr_dict[chromosome]["Genes"][gene][1] - chr_dict[chromosome]["Genes"][gene][0] + 1,

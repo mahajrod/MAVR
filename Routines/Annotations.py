@@ -168,3 +168,54 @@ class AnnotationsRoutines:
                         continue
 
                     out_fd.write(line)
+
+    @staticmethod
+    def add_alias_to_feature(input_gff, output_gff, syn_file, feature_type_list=(), name_field_list=("ID",),
+                             alias_field="Alias", key_column=0, value_column=1):
+        syn_dict = SynDict(filename=syn_file, comments_prefix="#", split_values=True,
+                           values_separator=",", key_index=key_column, value_index=value_column)
+        with open(input_gff, "r") as in_fd:
+            with open(output_gff, "w") as out_fd:
+                for line in in_fd:
+
+                    if line[0] == "#":
+                        out_fd.write(line)
+                        continue
+                    tmp = line.strip().split("\t")
+                    if feature_type_list:  # skip feature types not present in feature type list
+                        if tmp[2] not in feature_type_list:
+                            out_fd.write(line)
+                            continue
+                    description_list = tmp[8].split(";")
+
+                    feature_aliases = []
+                    for description_entry in description_list:
+                        entry_list = description_entry.split("=")
+                        if entry_list[0] not in name_field_list:
+                            continue
+                        feature_aliases += entry_list[1].split(",")
+
+                    if not feature_aliases:
+                        print("No ID was found for this line: \n%s" % line)
+
+                    feature_synonyms_list = []
+                    syn_lines = 0
+                    for name in feature_aliases:
+                        if name in syn_dict:
+                            feature_synonyms_list += syn_dict[name]
+                            syn_lines += 1
+                    #print syn_dict
+                    if syn_lines > 1:
+                        print "Warning!!!. For gene with names %s were found more 1 synonym group." % ",".join(feature_aliases)
+
+                    for i in range(0, len(description_list)):
+                        entry_list = description_list[i].split("=")
+                        if entry_list[0] != alias_field:
+                            continue
+
+                        alias_list = set(entry_list[1].split(",") + feature_synonyms_list)
+                        description_list[i] = "%s=%s" % (entry_list[0], ",".join(alias_list))
+                    else:
+                        description_list.append("%s=%s" % (alias_field, ",".join(feature_synonyms_list)))
+
+                    out_fd.write("\t".join(tmp[:8] + [";".join(description_list)]) + "\n")
