@@ -82,7 +82,7 @@ class Gblocks(Tool):
             directory, prefix, extension = self.split_filename(entry)
             os.system("ln -s %s %s/%s.%s" % (entry, data_dir, prefix, extension))
 
-        data_files_list = self.make_list_of_path_to_files(input_dir, return_absolute_paths=True)
+        data_files_list = self.make_list_of_path_to_files(data_dir, return_absolute_paths=True)
 
         common_options = self.parse_options(input_type=input_type,
                                             min_seq_number_for_conserved_position=min_seq_number_for_conserved_position,
