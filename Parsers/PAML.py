@@ -2,7 +2,7 @@
 
 from collections import OrderedDict
 
-from ete2 import Tree, TreeStyle, AttrFace, faces, NodeStyle
+from ete2 import Tree #, TreeStyle, AttrFace, faces, NodeStyle
 from CustomCollections.GeneralCollections import IdList, TwoLvlDict, SynDict
 
 
