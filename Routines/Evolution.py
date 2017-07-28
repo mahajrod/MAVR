@@ -7,9 +7,9 @@ class EvolutionRoutines(PhylogeneticsRoutines):
     def __init__(self):
         PhylogeneticsRoutines.__init__(self)
 
-    @staticmethod
-    def split_paml_bootstrap_samples(bootstrap_file, output_directory, output_prefix,
+    def split_paml_bootstrap_samples(self, bootstrap_file, output_directory, output_prefix,
                                      output_extension="phy"):
+        self.safe_mkdir(output_directory)
         counter = 1
         with open(bootstrap_file, "r") as bootstrap_fd:
             for line in bootstrap_fd:
