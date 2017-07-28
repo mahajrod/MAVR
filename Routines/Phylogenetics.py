@@ -16,8 +16,10 @@ class PhylogeneticsRoutines(MultipleAlignmentRoutines):
                             replicate_number, format="fasta"):
         alignment = AlignIO.read(alignment_file, format=format)
 
-        bootstrap_replicates = bootstrap(alignment, replicate_number)
+        bootstrap_replicate_generator = bootstrap(alignment, replicate_number)
 
-        for i in range(0, len(bootstrap_replicates)):
-            output_file = "%s/%s_%i.%s" % (output_directory, output_prefix, i+1, format)
-            AlignIO.write(bootstrap_replicates[i], output_file, format=format)
+        i = 0
+        for replicate in bootstrap_replicate_generator:
+            i += 1
+            output_file = "%s/%s_%i.%s" % (output_directory, output_prefix, i, format)
+            AlignIO.write(replicate, output_file, format=format)
