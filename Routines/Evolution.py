@@ -13,7 +13,7 @@ class EvolutionRoutines(PhylogeneticsRoutines):
         counter = 1
         with open(bootstrap_file, "r") as bootstrap_fd:
             for line in bootstrap_fd:
-
+                print line
                 seq_number, pos_number = map(int, line.strip().split())
 
                 output_file = "%s/%s_%i.%s" % (output_directory,
