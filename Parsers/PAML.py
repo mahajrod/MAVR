@@ -32,11 +32,14 @@ class CodeMLReport():
         if treefile:
             with open(treefile, "r") as tree_fd:
                 self.tree = Tree(tree_fd.readline())
+            i = 1
             if self.dStree and self.dNtree and self.Wtree:
                 for tree_node, dNnode, dSnode, Wnode in zip(self.tree.traverse(), self.dNtree.traverse(), self.dStree.traverse(), self.Wtree.traverse()):
                     tree_node.add_feature("dN", dNnode.dist)
                     tree_node.add_feature("dS", dSnode.dist)
                     tree_node.add_feature("W", Wnode.dist)
+                    tree_node.add_feature("id", i)
+                    i += 1
         else:
             self.tree = None
 
@@ -192,22 +195,34 @@ class CodeMLReport():
         return False
 
     def convert_trees_to_tsv(self, output_prefix):
-        i = 1
-        w_tab_file = "%s.w.tab" % output_prefix
+
+        w_tab_file = "%s.dn.ds.w.tab" % output_prefix
+        id_tree_file = "%s.id.nwk" % output_prefix
         with open(w_tab_file, 'w') as w_fd:
-            w_fd.write("#node_id\tnode_name\tdN\tdS\tw\n")
+            w_fd.write("#node_id\tnode_name\tdN\tdS\tW\n")
+            if self.tree:
+                for node in self.tree:
+                    w_fd.write("%i\t%s\t%f\t%f\t%f\n" % (node.id,
+                                                         node.name if node.name else ".",
+                                                         node.dN,
+                                                         node.dS,
+                                                         node.W))
+                    with open(id_tree_file, "w") as t_fd:
+                        t_fd.write(self.tree.write(format=format, features={"dN", "dS", "W", "id"}) + "\n")
+            else:
+                i = 1
+                for dNnode, dSnode, Wnode in zip(self.dNtree.traverse(), self.dStree.traverse(), self.Wtree.traverse()):
 
-            for dNnode, dSnode, Wnode in zip(self.dNtree.traverse(), self.dStree.traverse(), self.Wtree.traverse()):
+                    for node in dNnode, dSnode, Wnode:
+                        node.add_feature("id", i)
 
-                for node in dNnode, dSnode, Wnode:
-                    node.add_feature("id", i)
+                    w_fd.write("%i\t%s\t%f\t%f\t%f\n" % (node.id,
+                                                         node.name if node.name else ".",
+                                                         dNnode.dist,
+                                                         dSnode.dist,
+                                                         Wnode.dist))
+                    i += 1
 
-                w_fd.write("%i\t%s\t%f\t%f\t%f\n" % (node.id,
-                                                     node.name if node.name else ".",
-                                                     dNnode.dist,
-                                                     dSnode.dist,
-                                                     Wnode.dist))
-                i += 1
-
-
+                    with open(id_tree_file, "w") as t_fd:
+                        t_fd.write(self.dNtree.write(format=format, features={"id"}) + "\n")
 
