@@ -201,7 +201,7 @@ class CodeMLReport():
         with open(w_tab_file, 'w') as w_fd:
             w_fd.write("#node_id\tnode_name\tdN\tdS\tW\n")
             if self.tree:
-                for node in self.tree:
+                for node in self.tree.traverse():
                     w_fd.write("%i\t%s\t%f\t%f\t%f\n" % (node.id,
                                                          node.name if node.name else ".",
                                                          node.dN,
