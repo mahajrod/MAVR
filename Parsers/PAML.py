@@ -195,10 +195,18 @@ class CodeMLReport():
         i = 1
         w_tab_file = "%s.w.tab" % output_prefix
         with open(w_tab_file, 'w') as w_fd:
-            w_fd.write("#node_id\tnode_name\tw\n")
-            for node in self.Wtree.traverse():
-                node.add_feature("id", i)
-                w_fd.write("%i\t%s\t%f\n" % (node.id, node.name if node.name else ".", node.dist))
+            w_fd.write("#node_id\tnode_name\tdN\tdS\tw\n")
+
+            for dNnode, dSnode, Wnode in zip(self.dNtree.traverse(), self.dStree.traverse(), self.Wtree.traverse()):
+
+                for node in dNnode, dSnode, Wnode:
+                    node.add_feature("id", i)
+
+                w_fd.write("%i\t%s\t%f\t%f\t%f\n" % (node.id,
+                                                     node.name if node.name else ".",
+                                                     dNnode.dist,
+                                                     dSnode.dist,
+                                                     Wnode.dist))
                 i += 1
 
 
