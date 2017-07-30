@@ -27,6 +27,8 @@ codeml_report.get_leaf_values()
 if codeml_report.branches_with_positive_selection():
     sys.stderr.write("Presence of branches with positive selection\n")
 
+codeml_report.convert_trees_to_tsv(args.out_prefix)
+
 
 
 

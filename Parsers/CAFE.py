@@ -70,7 +70,7 @@ class GeneralDataCAFE():
             ts.layout_fn = layout_arg
             self.tree.render("%s_%s.png" % (out_file_prefix, feature), w=w, units=units, tree_style=ts)
 
-    def draw_expansion_contraction(self, outfile_prefix="expansion_contraction_tree.png"):
+    def draw_expansion_contraction(self, outfile_prefix="expansion_contraction_tree"):
 
         tree = self.tree
         for node in tree.traverse():
@@ -91,9 +91,10 @@ class GeneralDataCAFE():
         ts.branch_vertical_margin = 10
         ts.show_leaf_name = False
         #ts.allow_face_overlap =True
-        tree.render("%s.png" % outfile_prefix, w=200, units='mm', tree_style=ts, dpi=300)
+        tree.render("%s.png" % outfile_prefix, w=200, units='mm', tree_style=ts, dpi=1200)
+        tree.render("%s.svg" % outfile_prefix, w=200, units='mm', tree_style=ts, dpi=1200)
 
-    def draw_significant_expansion_contraction(self, outfile_prefix="significant_expansion_contraction_tree.png"):
+    def draw_significant_expansion_contraction(self, outfile_prefix="significant_expansion_contraction_tree"):
 
         tree = self.tree
         for node in tree.traverse():
@@ -103,8 +104,10 @@ class GeneralDataCAFE():
             if node.up is not None:
                 attr = AttrFace("significant_expansion", fsize=7, fgcolor="green", text_prefix="+")
                 faces.add_face_to_node(attr, node, 0, position="branch-top")
+
                 attr = AttrFace("significant_contraction", fsize=7, fgcolor="red", text_prefix="-")
                 faces.add_face_to_node(attr, node, 0, position="branch-bottom")
+
             if node.is_leaf():
                 attr = AttrFace("name", fsize=10, fgcolor="black", text_prefix="  ", fstyle="italic")
                 faces.add_face_to_node(attr, node, 0, position="aligned")
@@ -114,7 +117,8 @@ class GeneralDataCAFE():
         ts.branch_vertical_margin = 10
         ts.show_leaf_name = False
         #ts.allow_face_overlap =True
-        tree.render("%s.png" % outfile_prefix, w=200, units='mm', tree_style=ts, dpi=300)
+        tree.render("%s.png" % outfile_prefix, w=200, units='mm', tree_style=ts, dpi=1200)
+        tree.render("%s.svg" % outfile_prefix, w=200, units='mm', tree_style=ts, dpi=1200)
 
     def write_general_tree(self, out_file):
         with open(out_file, "w") as out_fd:

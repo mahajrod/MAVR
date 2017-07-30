@@ -190,3 +190,16 @@ class CodeMLReport():
             if node.dist > 1.0:
                 return True
         return False
+
+    def convert_trees_to_tsv(self, output_prefix):
+        i = 1
+        w_tab_file = "%s.w.tab" % output_prefix
+        with open(w_tab_file, 'w') as w_fd:
+            w_fd.write("#node_id\tnode_name\tw\n")
+            for node in self.Wtree.traverse():
+                node.add_feature("id", i)
+                w_fd.write("%i\t%s\t%f\n" % (node.id, node.name if node.name else ".", node.dist))
+                i += 1
+
+
+

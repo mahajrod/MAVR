@@ -174,6 +174,7 @@ if args.species_synonym_file:
 
 cafe_report.general_data.draw_expansion_contraction()
 cafe_report.general_data.draw_significant_expansion_contraction()
+
 """
 with open(background_genes_dir + "background_genes.t", "w") as back_fd:
     with open(background_genes_dir + "background_genes_list.txt", "w") as back_list_fd:
