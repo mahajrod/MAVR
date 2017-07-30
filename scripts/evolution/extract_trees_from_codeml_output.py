@@ -18,17 +18,4 @@ parser.add_argument("-t", "--tree", action="store", dest="tree",
 args = parser.parse_args()
 
 codeml_report = CodeMLReport(args.input, treefile=args.tree)
-codeml_report.write_trees(args.out_prefix)
-codeml_report.get_feature_values(mode="all")
-codeml_report.get_feature_values(mode="leaves")
-codeml_report.get_feature_values(mode="internal")
-codeml_report.get_all_values("dN_dS_W.t")
-codeml_report.get_leaf_values()
-if codeml_report.branches_with_positive_selection():
-    sys.stderr.write("Presence of branches with positive selection\n")
-
-codeml_report.convert_trees_to_tsv(args.out_prefix)
-
-
-
-
+codeml_report.extract_trees(args.out_prefix)

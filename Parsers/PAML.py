@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import sys
 from collections import OrderedDict
 
 from ete2 import Tree #, TreeStyle, AttrFace, faces, NodeStyle
@@ -225,4 +226,16 @@ class CodeMLReport():
 
                     with open(id_tree_file, "w") as t_fd:
                         t_fd.write(self.dNtree.write(format=format, features={"id"}) + "\n")
+
+    def extract_trees(self, out_prefix):
+        self.write_trees(out_prefix)
+        self.get_feature_values(mode="all")
+        self.get_feature_values(mode="leaves")
+        self.get_feature_values(mode="internal")
+        self.get_all_values("dN_dS_W.t")
+        self.get_leaf_values()
+        if self.branches_with_positive_selection():
+            sys.stderr.write("Presence of branches with positive selection\n")
+
+        self.convert_trees_to_tsv(out_prefix)
 
