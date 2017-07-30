@@ -208,7 +208,7 @@ class CodeMLReport():
                                                          node.dS,
                                                          node.W))
                     with open(id_tree_file, "w") as t_fd:
-                        t_fd.write(self.tree.write(format=format, features={"dN", "dS", "W", "id"}) + "\n")
+                        t_fd.write(self.tree.write(format=5, features={"dN", "dS", "W", "id"}) + "\n")
             else:
                 i = 1
                 for dNnode, dSnode, Wnode in zip(self.dNtree.traverse(), self.dStree.traverse(), self.Wtree.traverse()):
