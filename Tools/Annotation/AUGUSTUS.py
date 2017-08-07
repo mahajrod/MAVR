@@ -340,7 +340,7 @@ class AUGUSTUS(Tool):
         options += " --priority=%i" % priority if priority else ""
         options += " --minintronlen=%i" % min_intron_len if min_intron_len else ""
         options += " --maxintronlen=%i" % max_intron_len if max_intron_len else ""
-        options += " --CDSpart_cutoff=%i" % CDS_part_cutoff if CDS_part_cutoff else ""
+        options += " --CDSpart_cutoff=%i" % CDS_part_cutoff if CDS_part_cutoff is not None else ""
         options += " --source=%s" % source if source else ""
 
         self.execute(options, cmd="exonerate2hints.pl")
