@@ -15,14 +15,16 @@ parser.add_argument("-k", "--kingdom", action="store", dest="kingdom", default="
                     help="Kingdom to use for rrna annotation. Allowed: bac, euk, mito, arc."
                          "Default: euk")
 parser.add_argument("-l", "--length_cutoff", action="store", dest="length_cutoff", type=float,
-                    default=0.8, help="Annotated rRNAs with length below cutoff will be treated as partial")
+                    default=0.8, help="Annotated rRNAs with length below cutoff will be treated as partial. "
+                                      "Default: 0.8")
 parser.add_argument("-r", "--reject_cutoff", action="store", dest="reject_cutoff", type=float,
-                    default=0.001, help="Annotated rRNAs with length below cutoff will be rejected")
+                    default=0.001, help="Annotated rRNAs with length below cutoff will be rejected."
+                                        "Default: 0.001")
 parser.add_argument("-e", "--evalue_cutoff", action="store", dest="evalue_cutoff", type=float,
                     default=0.000001,
-                    help="Hits with evalue below cutoff will be ignored")
+                    help="Hits with evalue below cutoff will be ignored. Default: 0.000001")
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
-                    help="Number of threads to use")
+                    help="Number of threads to use. Default: 1")
 parser.add_argument("-b", "--barrnap_dir", action="store", dest="barrnap_dir", default="",
                     help="Path to Barrnap directory")
 
