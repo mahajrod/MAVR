@@ -3,7 +3,7 @@ __author__ = 'Sergei F. Kliver'
 
 import argparse
 
-from Tools.Annotation.Barrnap import Barrnap
+from Tools.Annotation import Barrnap
 
 parser = argparse.ArgumentParser()
 
