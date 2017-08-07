@@ -17,7 +17,7 @@ class Barrnap(Tool):
             raise ValueError("Wrong kingdom of life. Allowed: euk, bac, mito, arc")
 
         options = " --threads %i" % self.threads
-        options += " --kingdom" % kingdom
+        options += " --kingdom %s" % kingdom
         options += " --lencutoff %f" if length_cutoff else ""
         options += " --reject %f" if reject_cutoff else ""
         options += " --evalue %f" if evalue_cutoff else ""
