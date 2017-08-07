@@ -9,7 +9,6 @@ from Tools.Annotation.TransDecoder import TransDecoder
 SNPeff_path = ""
 SNPeff = SNPeff(jar_path=SNPeff_path)
 
-
 Barrnap = Barrnap()
 AUGUSTUS = AUGUSTUS()
 Exonerate = Exonerate()
