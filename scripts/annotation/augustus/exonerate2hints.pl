@@ -57,7 +57,7 @@ open(HINTS, ">$hintsfilename") || die "Could not open $hintsfilename";
 while (<XNT>) {
     s/#.*//;
     next unless /\S/;
-    next unless ((/\texonerate:cdna2genome:local\t/) or (/\texonerate:protein2genome:local\t/)); # modified by Sergei Kliver to handle exonerate output for cDNAs
+    next unless ((/\texonerate:cdna2genome\t/) or (/\texonerate:protein2genome:local\t/)); # modified by Sergei Kliver to handle exonerate output for cDNAs
    # print "I am in the file!\n";
     my @f = split /\t/, $_, 9;
     if (@f < 8) { warn "Not gff format"; next }
