@@ -377,5 +377,17 @@ class Exonerate(Tool):
         no_corresponding_cds_transcript_list.write(no_corresponding_cds_transcript_file)
         cds_not_found_transcript_list.write(cds_not_found_transcript_file)
 
+"""
+    @staticmethod
+    def remove_utrs_from_target_output(input_file, output_file):
+        with open(input_file, "r") as in_fd:
+            with open(output_file, "w") as out_fd:
+                for line in in_fd:
+                    line_list = line.split("\t")
+                    type = line_list[2]
+                    start = int(line_list[3])
+                    stop = int(line_list[4])
+"""
+
 if __name__ == "__main__":
     pass
