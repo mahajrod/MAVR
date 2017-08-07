@@ -24,6 +24,9 @@ class RepeatMasker(Tool):
                                                         "Helitron",
                                                         "Helitron\?"
                                                         ]
+        self.repeat_classes_used_for_gene_annotation_expanded_set = self.repeat_classes_used_for_gene_annotation + ["Unknown",
+                                                                                                                    "Other",
+                                                                                                                    "ARTEFACT"]
 
     @staticmethod
     def convert_rm_out_to_gff(input_file, output_file, annotated_repeat_classes_file, annotated_repeat_families_file):
@@ -57,8 +60,16 @@ class RepeatMasker(Tool):
         # awk -F'\t' '{print $9}' repeatmasker.selected_repeat_classes.gff | awk -F';' '{print $1}' | awk -F'=' '{print $2}' | sort | uniq
         os.system(sed_string)
 
-    def extract_repeats_used_for_gene_annotation(self, input_gff, output_gff):
-        grep_pattern = "|".join(self.repeat_classes_used_for_gene_annotation)
+    def extract_repeats_used_for_gene_annotation(self, input_gff, output_gff,
+                                                 use_expanded_set=False,
+                                                 retain_unknown_repeats=False):
+        if use_expanded_set:
+            grep_pattern = "|".join(self.repeat_classes_used_for_gene_annotation_expanded_set)
+        elif retain_unknown_repeats:
+            grep_pattern = "|".join(self.repeat_classes_used_for_gene_annotation + ["Unknown", ])
+        else:
+            grep_pattern = "|".join(self.repeat_classes_used_for_gene_annotation)
+
         grep_string = "grep -P '%s'" % grep_pattern
         grep_string += " %s" % input_gff
         grep_string += " > %s" % output_gff
