@@ -18,9 +18,9 @@ class Barrnap(Tool):
 
         options = " --threads %i" % self.threads
         options += " --kingdom %s" % kingdom
-        options += " --lencutoff %f" if length_cutoff else ""
-        options += " --reject %f" if reject_cutoff else ""
-        options += " --evalue %f" if evalue_cutoff else ""
+        options += " --lencutoff %f" % length_cutoff if length_cutoff else ""
+        options += " --reject %f" % reject_cutoff if reject_cutoff else ""
+        options += " --evalue %f" % evalue_cutoff if evalue_cutoff else ""
         options += " %s" % input_fasta
         options += " > %s " % gff_file
         options += " 2> %s" % log_file
