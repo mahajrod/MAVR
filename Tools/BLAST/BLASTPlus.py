@@ -665,11 +665,9 @@ class Windowmasker(Tool):
         masking_file = "%s.masking" % output_prefix
         masking_gff_file = "%s.masking.gff" % output_prefix
 
-        self.construct_counts_file(self, input_file, counts_file,
-                                   input_format=input_format, counts_format=counts_format)
+        self.construct_counts_file(input_file, counts_file, input_format=input_format, counts_format=counts_format)
 
-        self.mask(self, input_file, counts_file, masking_file,
-                  input_format="fasta", output_format=masking_format)
+        self.mask(input_file, counts_file, masking_file, input_format="fasta", output_format=masking_format)
 
         self.convert_interval_format_to_gff(masking_file, masking_gff_file, source=source, feature_type=feature_type)
 
