@@ -29,10 +29,10 @@ def get_list_of_files(list_of_dirs_and_files, expression=None, recursive=True):
 
 
 setup(name='MAVR',
-      version='0.56',
+      version='0.57',
       packages=find_packages(),
       author='Sergei F. Kliver',
       author_email='mahajrod@gmail.com',
-      install_requires=['scipy', 'numpy', 'matplotlib', 'ete2', 'biopython', 'xmltodict'],
+      install_requires=['scipy', 'numpy', 'matplotlib', 'ete2', 'biopython', 'xmltodict', 'bcbio-gff'],
       scripts=get_list_of_files("scripts/"),
       long_description=open(os.path.join(os.path.dirname(__file__), 'README.md')).read(),)
