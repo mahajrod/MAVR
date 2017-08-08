@@ -603,6 +603,77 @@ class BLASTDbCmd(Tool):
         self.execute(options)
 
 
+class Windowmasker(Tool):
+    def __init__(self, path="", max_threads=4):
+        Tool.__init__(self, "windowmasker", path=path, max_threads=max_threads)
+
+    def parse_options(self, mode, input_file, output_file, input_format="fasta", counts_format=None,
+                      parse_seqids=False, counts_file=None, output_format=None):
+        """
+        description https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/winmasker/
+        """
+        if mode == "counts":
+            options = " -mk_counts"
+        elif mode == "convert":
+            options = " -convert"
+        elif mode == "mask" :
+            if counts_file is None:
+                raise ValueError("Counts file was not set")
+            options = " -ustat %s " % counts_file
+        else:
+            raise ValueError("Wrong mode.")
+
+        options += " -parse_seqids" if parse_seqids else ""
+        options += " -in %s" % input_file
+        options += " -out %s" % output_file
+        options += " -infmt %s" % input_format if input_format else ""
+        options += " -sformat %s " % counts_format if counts_format else ""
+        options += " -outfmt %s" % output_format if output_format else ""
+
+        return options
+
+    def construct_counts_file(self, input_file, output_file, input_format="fasta", counts_format="obinary"):
+
+        options = self.parse_options("counts", input_file, output_file, input_format=input_format,
+                                     counts_format=counts_format, parse_seqids=True)
+        self.execute(options=options)
+
+    def mask(self, input_file, counts_file, output_file, input_format="fasta", output_format="interval"):
+        options = self.parse_options("mask", input_file, output_file, input_format=input_format,
+                                     output_format=output_format,
+                                     parse_seqids=True, counts_file=counts_file)
+        self.execute(options=options)
+
+    @staticmethod
+    def convert_interval_format_to_gff(input, output_gff, source="windowmasker", feature_type="gff"):
+        with open(input, "r") as in_fd:
+            with open(output_gff, "w") as out_fd:
+                #line = in_fd.next()
+                #seq_id = line.strip().split()[0][1:]
+                for line in in_fd:
+                    if line[0] == ">":
+                        seq_id = line.strip().split()[0][1:]
+                    else:
+                        start, stop = line.strip().split(" - ")
+                        gff_string = "%s\t%s\t%s\t%s\t%s\t.\t.\t.\t.\n" % (seq_id, source, feature_type, start, stop)
+                        out_fd.write(gff_string)
+
+    def masking(self, input_file, output_prefix, input_format="fasta", counts_format="obinary",
+                masking_format="interval", source="windowmasker", feature_type="repeat"):
+
+        counts_file = "%s.counts" % output_prefix
+        masking_file = "%s.masking" % output_prefix
+        masking_gff_file = "%s.masking.gff" % output_prefix
+
+        self.construct_counts_file(self, input_file, counts_file,
+                                   input_format=input_format, counts_format=counts_format)
+
+        self.mask(self, input_file, counts_file, masking_file,
+                  input_format="fasta", output_format=masking_format)
+
+        self.convert_interval_format_to_gff(masking_file, masking_gff_file, source=source, feature_type=feature_type)
+
+
 if __name__ == "__main__":
 
     blast_plus = BLASTPlus()
