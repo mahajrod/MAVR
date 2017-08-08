@@ -67,5 +67,5 @@ tool.parallel_execute(options_list)
 for filename in os.listdir(os.getcwd()):
     if ".sra" not in filename:
         continue
-    os.system("mv %s %s" % (filename, filename[:-4]))
+    os.system("mv %s %s/" % (filename, filename[:-4]))
 
