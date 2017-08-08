@@ -270,6 +270,35 @@ class AssemblySummaryList(list):
 class NCBIRoutines(FileRoutines):
     def __init__(self):
         FileRoutines.__init__(self)
+        self.ncbi_ftp = "ftp://ftp-trace.ncbi.nlm.nih.gov/"
+
+    def get_sra_ftp_path_from_id(self, sra_id):
+
+        sra_reads_dir = "sra/sra-instant/reads/"
+        id_code_dict = {
+            "DRR": "ByRun",
+            "ERR": "ByRun",
+            "SRR": "ByRun",
+
+            "DRX": "ByExp",
+            "ERX": "ByExp",
+            "SRX": "ByExp",
+
+            "DRS": "BySample",
+            "ERS": "BySample",
+            "SRS": "BySample",
+
+            "DRP": "ByStudy",
+            "ERP": "ByStudy",
+            "SRP": "ByStudy"
+        }
+        id_group = sra_id[:3]
+        id_subgroup = sra_id[:6]
+
+        id_type = id_code_dict[id_group]
+
+        return "%s%s%s/sra/%s/%s/%s/%s.sra" % (self.ncbi_ftp, sra_reads_dir, id_type, id_group,
+                                               id_subgroup, sra_id, sra_id)
 
     @staticmethod
     def efetch(database, id_list, out_file, retmode=None, rettype=None, seq_start=None, seq_stop=None, strand=None, verbose=False,

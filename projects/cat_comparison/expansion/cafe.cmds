@@ -1,0 +1,16 @@
+
+#skliver@dell:/mnt/peru/skliver/cat_comparison/families$ ~/Soft/cafe/cafe
+#load data and tree
+
+load -t 10 -l log.log -p 0.05 -i 13sp.cafe
+
+tree ((CroCro: 458, ((((AciJub: 45, PumCon: 45): 21, (((PriBen: 20, PriViv: 20): 36, FelCat: 56): 7, LynPar: 63): 3): 12, CarCar: 78): 17, ((PanOnc: 26, (PanLeo: 19, PanPar: 19): 7): 10, PanTig: 36): 59): 363): 141, CanFam: 599);
+
+#search lambda
+lambda -s
+
+#set lambda
+lambda -l 0.00063682355421
+
+report results
+

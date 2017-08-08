@@ -85,17 +85,14 @@ class RepeatMasker(Tool):
 
         self.execute(options=options, cmd="queryRepeatDatabase.pl")
 
-    def mask(self, list_of_fasta_files, output_dir="./", soft_masking=True, engine="ncbi", slow_search=True,
-             quick_search=False, rush_search=False, no_low_complexity=None, only_low_complexity=None,
+    def mask(self, list_of_fasta_files, output_dir="./", soft_masking=True, engine="ncbi",
+             search_speed="normal", no_low_complexity=None, only_low_complexity=None,
              no_interspersed=None, only_interspersed=None, no_rna=None, only_alu=None, custom_library=None,
              species=None, html_output=False, ace_output=False, gff_output=False):
 
-        if (slow_search and quick_search) or (rush_search and quick_search) or (slow_search and rush_search):
-            raise ValueError("Both quick search(-q) and slow search(-s) options were set. Choose ONE!")
-
         if species and custom_library:
-            tmp_repeat_file = "%s.repeats.tmp.fa" % species
-            tmp_repeats_all_file = "all.repeats.tmp.fasta"
+            tmp_repeat_file = "%s/%s.repeats.tmp.fa" % (output_dir, species)
+            tmp_repeats_all_file = "%s/all.repeats.tmp.fasta" % output_dir
             self.extract_repeats_from_database(tmp_repeat_file, species=species)
 
             cmd = "cat %s %s > %s" % (tmp_repeat_file, custom_library, tmp_repeats_all_file)
@@ -103,9 +100,14 @@ class RepeatMasker(Tool):
 
         options = " -pa %i" % self.threads
         options += " -e %s" % engine
-        options += " -s" if slow_search else ""
-        options += " -q" if quick_search else ""
-        options += " -qq" if rush_search else ""
+
+        if search_speed == "slow":
+            options += " -s"
+        elif search_speed == "quick":
+            options += " -q"
+        elif search_speed == "rush":
+            options += " -qq"
+
         options += " -nolow" if no_low_complexity else ""
         options += " -low" if only_low_complexity else ""
         options += " -noint" if no_interspersed else ""

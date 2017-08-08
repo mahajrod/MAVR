@@ -8,35 +8,10 @@ from CustomCollections.GeneralCollections import IdList
 
 from multiprocessing import Pool
 
-from Tools.Abstract import Tool
+#from Tools.Abstract import Tool
+#from Routines import NCBIRoutines
 
-
-def path_from_id(entry_id):
-    ncbi_ftp = "ftp://ftp-trace.ncbi.nlm.nih.gov/"
-    sra_reads_dir = "sra/sra-instant/reads/"
-    id_code_dict = {
-                "DRR": "ByRun",
-                "ERR": "ByRun",
-                "SRR": "ByRun",
-
-                "DRX": "ByExp",
-                "ERX": "ByExp",
-                "SRX": "ByExp",
-
-                "DRS": "BySample",
-                "ERS": "BySample",
-                "SRS": "BySample",
-
-                "DRP": "ByStudy",
-                "ERP": "ByStudy",
-                "SRP": "ByStudy"
-                }
-    id_group = entry_id[:3]
-    id_subgroup = entry_id[:6]
-
-    id_type = id_code_dict[id_group]
-
-    return "%s%s%s/sra/%s/%s/%s/%s.sra" % (ncbi_ftp, sra_reads_dir, id_type, id_group, id_subgroup, entry_id, entry_id)
+from Tools.LinuxTools import Wget
 
 parser = argparse.ArgumentParser()
 
@@ -56,12 +31,17 @@ if (not args.ids) and (not args.id_file):
 loader = IdList()
 id_list = loader.read(args.id_file) if args.id_file else args.ids
 
+Wget.threads = args.threads
+Wget.parallel_download_from_sra(id_list)
+
+"""
 options_list = []
 for entry_id in id_list:
-    ftp_path = path_from_id(entry_id)
+    ftp_path = NCBIRoutines.get_sra_ftp_path_from_id(entry_id)
     options_list.append("--no-host-directories -rc -t 500 %s" % ftp_path)
 
 
 tool = Tool(cmd="wget", max_threads=args.threads)
 
 tool.parallel_execute(options_list)
+"""

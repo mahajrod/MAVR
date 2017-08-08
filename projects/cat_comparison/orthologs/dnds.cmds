@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+cd /mnt/peru/skliver/cat_comparison/orthologs/conserved_blocks
+
+~/Soft/MAVR/scripts/evolution/parallel_extraction_of_conservative_blocks.py -t 40 -i ../monoclusters_cds_only_species_ids_only_aln/ -o ./ -p monoclusters_cds_only_species_ids_only_aln.gblocks -y codon -m 7 -f 7 -x 6 -n 4
+
+~/Soft/MAVR/scripts/multiple_alignment/merge_alignments.py -i results/ -o monoclusters_cds_only_species_ids_only_aln.gblocks.merged.fasta -c monoclusters_cds_only_species_ids_only_aln.gblocks.merged.coords
+
+
+
+
+cd /mnt/peru/skliver/cat_comparison/splited_bootstrap_samples_set_2_codeml
+
+for SP in sample_*; do echo ${SP}; cd ${SP}; ~/Soft/MAVR/scripts/evolution/extract_trees_from_codeml_output.py -i ${SP}.out  -o ${SP}.codeml -t ../../cats_gtr_gamma.unrooted.nwk ; cd ../; done

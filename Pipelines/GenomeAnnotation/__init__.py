@@ -1,4 +1,6 @@
 
+from Pipelines.GenomeAnnotation.RepeatAnnotation import RepeatAnnotation
 from Pipelines.GenomeAnnotation.ProteinCodingGeneAnnotation import ProteinCodingGeneAnnotation
 
+RepeatAnnotation = RepeatAnnotation()
 ProteinCodingGeneAnnotation = ProteinCodingGeneAnnotation()

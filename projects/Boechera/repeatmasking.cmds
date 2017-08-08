@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+cd /mnt/guatemala/skliver/Boechera/Boechera_holboellii/WGA/masking/repeatmasker/
+
+#RepeatMasker
+for SP in `ls`; do cd ${SP}; echo "Masking ${SP}"; RepeatMasker -dir ./ -pa 20 -lib /mnt/peru/skliver/Boechera/Boechera_holboellii/genome/annotations/final/repeat_library/all.fasta /mnt/guatemala/skliver/Boechera/Boechera_holboellii/WGA/genomes/${SP}/${SP}.fasta ; cd  ../; done
+
+#TRF
+#already done
+
+#windowmasker
+for SP in *; do echo "Masking ${SP}"; cd ${SP}; ~/Soft/MAVR/scripts/repeat_masking/windowmasker_repeat_masking.py -i ../../../genomes/${SP}/${SP}.fasta  -o ${SP} &  cd ../; done
