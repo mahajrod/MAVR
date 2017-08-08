@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
+import os
 import argparse
 
 from CustomCollections.GeneralCollections import IdList
@@ -47,7 +48,7 @@ parser.add_argument("-c", "--connections", action="store", dest="connections", t
                     help="Number of connections for each download")
 
 args = parser.parse_args()
-
+"""
 if (not args.ids) and (not args.id_file):
     raise ValueError("Both ids and id file were not set")
 
@@ -62,3 +63,9 @@ for entry_id in id_list:
 tool = Tool(cmd="axel", max_threads=args.threads)
 
 tool.parallel_execute(options_list)
+"""
+for filename in os.listdir(os.getcwd()):
+    if ".sra" not in filename:
+        continue
+    os.system("mv %s %s" % (filename, filename[:-4]))
+
