@@ -59,13 +59,14 @@ options_list = []
 for entry_id in id_list:
     ftp_path = path_from_id(entry_id)
     options_list.append("-n %i %s" % (args.connections, ftp_path))
-
+"""
 tool = Tool(cmd="axel", max_threads=args.threads)
-
+"""
 tool.parallel_execute(options_list)
 """
 for filename in os.listdir(os.getcwd()):
     if ".sra" not in filename:
         continue
+    tool.safe_mkdir(filename[:-4])
     os.system("mv %s %s/" % (filename, filename[:-4]))
 
