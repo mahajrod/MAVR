@@ -36,7 +36,7 @@ def path_from_id(entry_id):
 
     id_type = id_code_dict[id_group]
 
-    return "%s%s%s/sra/%s/%s/%s/" % (ncbi_ftp, sra_reads_dir, id_type, id_group, id_subgroup, entry_id)
+    return "%s%s%s/sra/%s/%s/%s/%s.sra" % (ncbi_ftp, sra_reads_dir, id_type, id_group, id_subgroup, entry_id, entry_id)
 
 parser = argparse.ArgumentParser()
 
