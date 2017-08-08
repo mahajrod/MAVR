@@ -635,13 +635,16 @@ class Windowmasker(Tool):
     def construct_counts_file(self, input_file, output_file, input_format="fasta", counts_format="obinary"):
 
         options = self.parse_options("counts", input_file, output_file, input_format=input_format,
-                                     counts_format=counts_format, parse_seqids=True)
+                                     counts_format=counts_format,
+                                     #parse_seqids=True
+                                     )
         self.execute(options=options)
 
     def mask(self, input_file, counts_file, output_file, input_format="fasta", output_format="interval"):
         options = self.parse_options("mask", input_file, output_file, input_format=input_format,
                                      output_format=output_format,
-                                     parse_seqids=True, counts_file=counts_file)
+                                     #parse_seqids=True,
+                                     counts_file=counts_file)
         self.execute(options=options)
 
     @staticmethod
