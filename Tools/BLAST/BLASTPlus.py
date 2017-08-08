@@ -654,8 +654,8 @@ class Windowmasker(Tool):
                     if line[0] == ">":
                         seq_id = line.strip().split()[0][1:]
                     else:
-                        start, stop = line.strip().split(" - ")
-                        gff_string = "%s\t%s\t%s\t%s\t%s\t.\t.\t.\t.\n" % (seq_id, source, feature_type, start, stop)
+                        start, stop = map(lambda s: int(s) + 1, line.strip().split(" - ")) # convert coordinates to 1-based
+                        gff_string = "%s\t%s\t%s\t%i\t%i\t.\t.\t.\t.\n" % (seq_id, source, feature_type, start, stop)
                         out_fd.write(gff_string)
 
     def masking(self, input_file, output_prefix, input_format="fasta", counts_format="obinary",
