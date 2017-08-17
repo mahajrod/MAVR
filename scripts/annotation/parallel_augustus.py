@@ -186,6 +186,7 @@ if args.swissprot_db:
 gene_ids_black_list = [genes_masked_ids] if args.masking else []
 gene_ids_white_list = []
 
+print("Combining database results...")
 if args.pfam_db and args.swissprot_db:
 
     gene_ids_white_list = [output_pfam_supported_genes_ids, output_swissprot_supported_genes_ids]
@@ -253,7 +254,10 @@ final_ids.read(final_genes_ids)
 
 
 AnnotationsRoutines.extract_annotation_from_gff(output_gff, final_ids, ["gene"], final_gff)
+print("Extracting CDS...")
 AUGUSTUS.extract_CDS_annotations_from_output(final_gff, final_CDS_gff)
+
+print("Drawing histograms...")
 
 for stat_file in output_evidence_stats, output_supported_stats, \
                  output_swissprot_pfam_or_hints_supported_transcripts_longest_pep_evidence, \
@@ -268,7 +272,7 @@ for stat_file in output_evidence_stats, output_supported_stats, \
                                                    extensions=("png", "svg"),
                                                    legend_location="upper center",
                                                    stats_as_legend=True)
-
+print("Creating final directories...")
 if args.pfam_db and args.swissprot_db:
     db_or_hints_dir = "supported_by_db_or_hints/"
     db_and_hints_dir = "supported_by_db_and_hints/"
