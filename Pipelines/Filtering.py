@@ -55,6 +55,7 @@ class FilteringPipeline(Pipeline):
         Trimmomatic.threads = threads
         FaCut.path = facut_dir
 
+        self.safe_mkdir(output_directory)
         """
         merged_raw_dir = "%s/merged/" % output_directory
         filtered_dir = "%s/filtered/" % output_directory
