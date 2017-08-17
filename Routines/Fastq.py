@@ -141,6 +141,8 @@ class FastQRoutines(FileRoutines):
                     return merged_forward, merged_reverse, merged_se
                 elif len(se_files) > 0:
                     os.system("%s %s > %s" % (command, " ".join(se_files), merged_se))
+                    return merged_forward, merged_reverse, merged_se
+                else:
                     return merged_forward, merged_reverse, None
             else:
                 if (len(forward_files) > 0) and (len(reverse_files) > 0):
