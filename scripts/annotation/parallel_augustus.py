@@ -197,20 +197,23 @@ if args.pfam_db and args.swissprot_db:
     HMMER3.intersect_ids_from_files(output_swissprot_pfam_supported_transcripts_ids, output_supported_stats_ids,
                                     output_swissprot_pfam_and_hints_supported_transcripts_ids, mode="common")
 
+    print("Extracting sequences...")
     SequenceRoutines.extract_sequence_by_ids(output_pep, output_swissprot_pfam_or_hints_supported_transcripts_ids,
                                              output_swissprot_pfam_or_hints_supported_transcripts_pep)
     SequenceRoutines.extract_sequence_by_ids(output_pep, output_swissprot_pfam_and_hints_supported_transcripts_ids,
                                              output_swissprot_pfam_and_hints_supported_transcripts_pep)
 
+    print("Extracting evidence...")
     AUGUSTUS.extract_evidence_by_ids(output_evidence_stats, output_swissprot_pfam_or_hints_supported_transcripts_ids,
                                      output_swissprot_pfam_or_hints_supported_transcripts_evidence)
     AUGUSTUS.extract_evidence_by_ids(output_evidence_stats, output_swissprot_pfam_and_hints_supported_transcripts_ids,
                                      output_swissprot_pfam_and_hints_supported_transcripts_evidence)
+    print("Extracting longest isoforms...")
     AUGUSTUS.extract_longest_isoforms(output_swissprot_pfam_or_hints_supported_transcripts_evidence,
                                       output_swissprot_pfam_or_hints_supported_transcripts_longest_pep_evidence)
     AUGUSTUS.extract_longest_isoforms(output_swissprot_pfam_and_hints_supported_transcripts_evidence,
                                       output_swissprot_pfam_and_hints_supported_transcripts_longest_pep_evidence)
-
+    print("Extracting evidence...")
     SequenceRoutines.extract_sequence_by_ids(output_pep, "%s.ids" % output_swissprot_pfam_or_hints_supported_transcripts_longest_pep_evidence,
                                              output_swissprot_pfam_or_hints_supported_transcripts_longest_pep)
     SequenceRoutines.extract_sequence_by_ids(output_pep, "%s.ids" % output_swissprot_pfam_and_hints_supported_transcripts_longest_pep_evidence,
