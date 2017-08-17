@@ -128,8 +128,14 @@ class FastQRoutines(FileRoutines):
             merged_se = "%s/%s.se.fq" % (output_directory, sample)
 
             if use_links_if_merge_not_necessary and (len(forward_files) == 1) and (len(reverse_files) == 1) and (uncompresed == True):
-                os.system("ln -s %s %s" % (forward_files[0], merged_forward))
-                os.system("ln -s %s %s" % (reverse_files[0], merged_reverse))
+                forward_string = "ln -s %s %s" % (forward_files[0], merged_forward)
+                reverse_string = "ln -s %s %s" % (reverse_files[0], merged_reverse)
+
+                print("Executing: %s" % forward_string)
+                os.system(forward_string)
+                print("Executing: %s" % reverse_string)
+                os.system(reverse_string)
+
                 if len(se_files) == 1:
                     os.system("ln -s %s %s" % (se_files[0], merged_se))
                     return merged_forward, merged_reverse, merged_se
