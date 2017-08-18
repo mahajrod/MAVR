@@ -486,8 +486,11 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
                 path, basename, extention = self.split_filename(filename)
                 labels.append(basename)
 
-        for filename in filelist:
-            data.append(np.fromfile(filename, sep=separator))
+        for filename, label in zip(filelist, labels):
+            filedata = np.fromfile(filename, sep=separator)
+            data.append(filedata)
+
+            print("%s\tmin %f\t max %f" % (label, np.min(filedata), np.max(filedata)))
 
         if xmin and xmax:
             bins = np.linspace(xmin, xmax, nbins + 1)
