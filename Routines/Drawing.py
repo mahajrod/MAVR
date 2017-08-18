@@ -497,7 +497,7 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
         else:
             bins = nbins
 
-        print nbins
+        print bins
 
         plt.hist(data, label=labels, bins=bins)
 
