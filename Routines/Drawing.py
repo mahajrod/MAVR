@@ -506,7 +506,6 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
         print xmax
         print bins
 
-        print np.histogram()
 
         plt.hist(data, label=labels, bins=bins, histtype=histtype)
 
