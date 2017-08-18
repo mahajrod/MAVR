@@ -492,7 +492,7 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
 
             print("%s\tmin %f\t max %f" % (label, np.min(filedata), np.max(filedata)))
 
-        if xmin and xmax:
+        if (xmin is not None) and (xmax is not None):
             bins = np.linspace(xmin, xmax, nbins + 1)
         else:
             bins = nbins
