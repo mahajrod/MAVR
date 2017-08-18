@@ -48,4 +48,5 @@ DrawingRoutines.draw_histogram_from_multiple_files(args.input, args.output_prefi
                                                    ylabel=args.ylabel,
                                                    extensions=args.extensions,
                                                    separator=args.separator,
-                                                   xmin=args.min, xmax=args.max)
+                                                   xmin=args.min, xmax=args.max,
+                                                   histtype="stepfilled")
