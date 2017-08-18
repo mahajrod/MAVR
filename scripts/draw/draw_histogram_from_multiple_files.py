@@ -6,7 +6,8 @@ from Routines import DrawingRoutines
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", "--input", action="store", dest="input", type=DrawingRoutines.make_list_of_path_to_files,
+parser.add_argument("-i", "--input", action="store", dest="input",
+                    type=lambda s: DrawingRoutines.make_list_of_path_to_files(s.split(",")),
                     help="Comma-separated list of files and directories")
 parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix",
                     help="Prefix of output files")
