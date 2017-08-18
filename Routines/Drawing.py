@@ -487,19 +487,23 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
                 path, basename, extention = self.split_filename(filename)
                 labels.append(basename)
 
+        if (xmin is not None) and (xmax is not None):
+            bins = np.linspace(xmin, xmax, nbins + 1)
+        else:
+            bins = nbins
+
         for filename, label in zip(filelist, labels):
             filedata = np.fromfile(filename, sep=separator)
             data.append(filedata)
 
             print("%s\tmin %f\t max %f" % (label, np.min(filedata), np.max(filedata)))
+            print np.histogram(filedata, bins)
 
-        if (xmin is not None) and (xmax is not None):
-            bins = np.linspace(xmin, xmax, nbins + 1)
-        else:
-            bins = nbins
         print xmin
         print xmax
         print bins
+
+        print np.histogram()
 
         plt.hist(data, label=labels, bins=bins, histtype=histtype)
 
