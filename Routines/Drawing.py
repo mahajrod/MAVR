@@ -498,9 +498,8 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
 
             print("%s\tmin %f\t max %f" % (label, np.min(filedata), np.max(filedata)))
 
-            a =  np.histogram(filedata, bins=bins)
+            a =  np.histogram(filedata, bins=bins, label=labels)
             print a
-
 
         print xmin
         print xmax
@@ -517,6 +516,7 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
             plt.title(title)
 
         plt.xlim(xmin=xmin, xmax=xmax)
+        plt.legend()
 
         for ext in extensions:
             plt.savefig("%s.%s" % (output_prefix, ext))
