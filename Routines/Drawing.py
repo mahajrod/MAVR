@@ -498,15 +498,16 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
 
             print("%s\tmin %f\t max %f" % (label, np.min(filedata), np.max(filedata)))
 
-            a =  np.histogram(filedata, bins=bins)
+            a = np.histogram(filedata, bins=bins)
             print a
 
         print xmin
         print xmax
         print bins
 
+        colors = plt.cm.jet(np.linspace(0, 1, len(filelist)))
 
-        plt.hist(data, label=labels, bins=bins, histtype=histtype)
+        plt.hist(data, label=labels, bins=bins, histtype=histtype, color=colors)
 
         if xlabel:
             plt.xlabel(xlabel)
