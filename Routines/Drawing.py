@@ -473,7 +473,7 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
 
     def draw_histogram_from_multiple_files(self, filelist, output_prefix,  filelabels=None, nbins=30,
                                            figsize=(5, 5), title=None, xlabel=None, ylabel=None,
-                                           extensions=("png", "svg"), separator="\n"):
+                                           extensions=("png", "svg"), separator="\n", xmin=None, xmax=None):
 
         figure = plt.figure(1, figsize=figsize)
         data = []
@@ -489,9 +489,12 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
         for filename in filelist:
             data.append(np.fromfile(filename, sep=separator))
 
-        print data
+        if xmin and xmax:
+            bins = np.linspace(xmin, xmax, nbins + 1)
+        else:
+            bins = nbins
 
-        plt.hist(data, label=labels, bins=nbins)
+        plt.hist(data, label=labels, bins=bins)
 
         if xlabel:
             plt.xlabel(xlabel)
@@ -499,6 +502,8 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
             plt.ylabel(ylabel)
         if title:
             plt.title(title)
+
+        plt.xlim(xmin=xmin, xmax=xmax)
 
         for ext in extensions:
             plt.savefig("%s.%s" % (output_prefix, ext))
