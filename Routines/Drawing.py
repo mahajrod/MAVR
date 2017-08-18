@@ -496,7 +496,8 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
             bins = np.linspace(xmin, xmax, nbins + 1)
         else:
             bins = nbins
-
+        print xmin
+        print xmax
         print bins
 
         plt.hist(data, label=labels, bins=bins)
