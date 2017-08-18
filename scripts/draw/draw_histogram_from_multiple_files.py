@@ -42,4 +42,5 @@ DrawingRoutines.draw_histogram_from_multiple_files(args.input, args.output_prefi
                                                    nbins=args.number_of_bins,
                                                    figsize=(5, 5), title=args.title, xlabel=args.xlabel,
                                                    ylabel=args.ylabel,
-                                                   extensions=args.extensions)
+                                                   extensions=args.extensions,
+                                                   separator=args.separator)
