@@ -18,10 +18,13 @@ parser.add_argument("-b", "--number_of_bins", action="store", dest="number_of_bi
 """
 parser.add_argument("-w", "--width_of_bins", action="store", dest="width_of_bins", type=float,
                     help="Width of bins in histogram. Incompatible with -b/--number_of_bins option. Not set by default")
-parser.add_argument("-n", "--min_value", action="store", dest="min_length", type=float, default=0,
+"""
+parser.add_argument("-n", "--min_value", action="store", dest="min", type=float, default=0,
                     help="Minimum value to show. Default - 1")
-parser.add_argument("-x", "--max_value", action="store", dest="max_length", type=float,
+parser.add_argument("-x", "--max_value", action="store", dest="max", type=float,
                     help="Maximum value to show. Default - length of longest sequence")
+
+"""
 parser.add_argument("-g", "--logbase", action="store", dest="logbase", type=int, default=10,
                     help="Logbase to use for log-scaled histograms")
 """
@@ -43,4 +46,5 @@ DrawingRoutines.draw_histogram_from_multiple_files(args.input, args.output_prefi
                                                    figsize=(5, 5), title=args.title, xlabel=args.xlabel,
                                                    ylabel=args.ylabel,
                                                    extensions=args.extensions,
-                                                   separator=args.separator)
+                                                   separator=args.separator,
+                                                   xmin=args.min, xmax=args.max)
