@@ -505,7 +505,7 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
         print xmax
         print bins
 
-        colors = plt.cm.jet(np.linspace(0, 1, 2*len(filelist)))
+        colors = plt.cm.jet(np.linspace(0, 0.5, len(filelist)))
 
         plt.hist(data, label=labels, bins=bins, histtype=histtype, color=colors)
 
