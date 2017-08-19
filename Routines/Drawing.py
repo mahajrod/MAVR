@@ -476,8 +476,10 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
                                            extensions=("png", "svg"), separator="\n", xmin=None, xmax=None,
                                            histtype="stepfilled"):
 
-        figure = plt.figure(1, figsize=figsize)
-        data = []
+        colors = ["aqua", "blue", "black", "brown",
+                  "red", "fuchsia", "maroon", "orange",
+                  "purple", "yellow", "sienna", "green",
+                  "olive"]
 
         if filelabels:
             labels = filelabels
@@ -489,9 +491,13 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
 
         if (xmin is not None) and (xmax is not None):
             bins = np.linspace(xmin, xmax, nbins + 1)
+            bin_middles = []
+            for i in range(0, len(bins) - 1):
+                bin_middles.append((bins[i] + bins[i+1])/2)
         else:
             bins = nbins
 
+        data = []
         for filename, label in zip(filelist, labels):
             filedata = np.fromfile(filename, sep=separator)
             data.append(filedata)
@@ -505,8 +511,9 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
         #print xmax
         #print bins
 
+        figure = plt.figure(1, figsize=figsize)
         ax = plt.axes()
-        ax.set_color_cycle(["aqua", "blue", "black", "brown", "red", "fuchsia", "maroon", "orange", "purple", "yellow", "sienna", "green", "olive"])
+        ax.set_color_cycle(colors)
 
         #colors = plt.cm.jet(np.linspace(0.2, 1, len(filelist)))
 
