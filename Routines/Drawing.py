@@ -506,7 +506,7 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
         print bins
 
         ax = plt.axes()
-        ax.set_color_cycle(["aqua", "azure", "black", "brown", "red", "fuchsia", "maroon", "orange", "purple", "yellow", "sienna", "green", "olive"])
+        ax.set_color_cycle(["aqua", "blue", "black", "brown", "red", "fuchsia", "maroon", "orange", "purple", "yellow", "sienna", "green", "olive"])
 
         #colors = plt.cm.jet(np.linspace(0.2, 1, len(filelist)))
 
