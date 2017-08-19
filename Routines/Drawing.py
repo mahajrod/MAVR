@@ -499,11 +499,11 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
             print("%s\tmin %f\t max %f" % (label, np.min(filedata), np.max(filedata)))
 
             a = np.histogram(filedata, bins=bins)
-            print a
+            #print a
 
-        print xmin
-        print xmax
-        print bins
+        #print xmin
+        #print xmax
+        #print bins
 
         ax = plt.axes()
         ax.set_color_cycle(["aqua", "blue", "black", "brown", "red", "fuchsia", "maroon", "orange", "purple", "yellow", "sienna", "green", "olive"])
@@ -524,21 +524,3 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
 
         for ext in extensions:
             plt.savefig("%s.%s" % (output_prefix, ext))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
