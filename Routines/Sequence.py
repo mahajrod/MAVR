@@ -1257,7 +1257,7 @@ class SequenceRoutines(FileRoutines):
         record_dict = self.parse_seq_file(input_file, mode=parse_mode, format=format, index_file=index_file)
 
         syn_dict = SynDict()
-        id_template = "%s0%i%%i" % (record_id_prefix, length_of_numerical_part)
+        id_template = "%s%%0%ii" % (record_id_prefix, length_of_numerical_part)
         i = 1
         for record_id in record_dict:
             syn_dict[record_id] = id_template % i
