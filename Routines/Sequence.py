@@ -461,13 +461,13 @@ class SequenceRoutines(FileRoutines):
 
     @staticmethod
     def parse_seq_file(input_file, mode, format="fasta", index_file=None):
-        if mode == "index_db":
+        if mode == "index_db" or ((not isinstance(input_file, str)) and (len(input_file) > 1)):
             index = index_file if index_file else "tmp.idx"
             seq_dict = SeqIO.index_db(index, [input_file] if isinstance(input_file, str) else input_file, format=format)
         elif mode == "index":
-            seq_dict = SeqIO.index(input_file, format=format)
+            seq_dict = SeqIO.index(input_file if isinstance(input_file, str) else input_file[0], format=format)
         elif mode == "parse":
-            seq_dict = SeqIO.to_dict(SeqIO.parse(input_file, format=format))
+            seq_dict = SeqIO.to_dict(SeqIO.parse(input_file if isinstance(input_file, str) else input_file[0], format=format))
 
         return seq_dict
 
