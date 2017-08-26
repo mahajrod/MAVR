@@ -1249,6 +1249,25 @@ class SequenceRoutines(FileRoutines):
 
         os.remove("temp.idx")
 
+    def rename_records_by_sequential_ids_from_files(self, input_file, output_file, output_syn_file, format="fasta",
+                                                    clear_description=False, record_id_prefix="SEQ",
+                                                    length_of_numerical_part=8, parse_mode="parse",
+                                                    index_file="temp.idx"):
+
+        record_dict = self.parse_seq_file(input_file, mode=parse_mode, format=format, index_file=index_file)
+
+        syn_dict = SynDict()
+        id_template = "%s0%i%%i" % (record_id_prefix, length_of_numerical_part)
+        i = 1
+        for record_id in record_dict:
+            syn_dict[record_id] = id_template % i
+            i += 1
+        syn_dict.write(output_syn_file)
+
+        SeqIO.write(self.renamed_records_generator(record_dict, syn_dict=syn_dict, expression=None,
+                                                   clear_description=clear_description),
+                    output_file, format=format)
+
     @staticmethod
     def trim_cds_and_remove_terminal_stop_codons_generator(record_dict, stop_codons_list=("TGA", "TAA", "TAG")):
 
