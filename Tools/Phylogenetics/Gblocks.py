@@ -105,7 +105,7 @@ class Gblocks(Tool):
 
         block_coordinates = OrderedDict()
 
-        skipped_ids_file = "%s.skipped.ids" % output_prefix
+        skipped_ids_file = "%s/%s.skipped.ids" % (output_dir, output_prefix)
         skipped_ids = IdList()
 
         for filename in data_files_list:
@@ -125,7 +125,7 @@ class Gblocks(Tool):
             self.convert_output_to_fasta(blocks_file, "%s/%s%s" % (results_dir, prefix, extension))
             os.remove(blocks_file)
 
-        block_coordinates_file = "%s.block.coordinates" % output_prefix
+        block_coordinates_file = "%s/%s.block.coordinates" % (output_dir, output_prefix)
         skipped_ids.write(skipped_ids_file)
         with open(block_coordinates_file, "w") as block_fd:
             for entry in block_coordinates:
