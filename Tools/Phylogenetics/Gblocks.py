@@ -117,6 +117,7 @@ class Gblocks(Tool):
             if (not os.path.exists(blocks_file)) or (not os.path.exists(htm_file)):
                 skipped_ids.append(prefix)
                 print("Warning!!! %s skipped..." % prefix)
+                continue
 
             block_coordinates[prefix] = self.extract_block_coordinates(htm_file)
             os.system("mv %s %s/%s.ps" % (postscript_file, postscript_dir, prefix))
