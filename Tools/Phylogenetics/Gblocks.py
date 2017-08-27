@@ -4,6 +4,8 @@ import os
 from Tools.Abstract import Tool
 from collections import OrderedDict
 
+from CustomCollections.GeneralCollections import IdList
+
 
 class Gblocks(Tool):
     def __init__(self, path="", max_threads=4):
@@ -103,11 +105,18 @@ class Gblocks(Tool):
 
         block_coordinates = OrderedDict()
 
+        skipped_ids_file = "%s.skipped.ids" % output_prefix
+        skipped_ids = IdList()
+
         for filename in data_files_list:
             data_dir, prefix, extension = self.split_filename(filename)
             blocks_file = "%s-gb" % filename
             htm_file = "%s-gb.htm" % filename
             postscript_file = "%s-gbPS" % filename
+
+            if (not os.path.exists(blocks_file)) or (not os.path.exists(htm_file)):
+                skipped_ids.append(prefix)
+                print("Warning!!! %s skipped..." % prefix)
 
             block_coordinates[prefix] = self.extract_block_coordinates(htm_file)
             os.system("mv %s %s/%s.ps" % (postscript_file, postscript_dir, prefix))
@@ -116,7 +125,7 @@ class Gblocks(Tool):
             os.remove(blocks_file)
 
         block_coordinates_file = "%s.block.coordinates" % output_prefix
-
+        skipped_ids.write(skipped_ids_file)
         with open(block_coordinates_file, "w") as block_fd:
             for entry in block_coordinates:
                 coordinates_string = ";".join(map(lambda s: "%i,%i" % (s[0], s[1]), block_coordinates[entry]))
