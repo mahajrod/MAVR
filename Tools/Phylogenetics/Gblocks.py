@@ -96,6 +96,7 @@ class Gblocks(Tool):
                                             output_type=output_type,
                                             concatenate_blocks_from_aignments=None)
         options_list = []
+
         for data_file in data_files_list:
             options = " %s" % data_file
             options += " %s" % common_options
