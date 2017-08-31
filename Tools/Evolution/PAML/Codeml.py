@@ -238,7 +238,7 @@ class Codeml(Tool):
 
         self.execute(options=options)
 
-    def parallel_codeml(self, in_dir, tree_file, out_dir, seq_type="codons", codon_frequency="F3X4", noisy=3,
+    def parallel_codeml(self, in_dir, tree_file, out_dir, seq_type="codons", codon_frequency="F3X4", noisy=0,
                           verbose="concise", runmode=0, clock=0, aminoacid_distance=None, model=1, nssites=0,
                           genetic_code=0, fix_kappa=False, kappa=5, fix_omega=False, omega=0.2, getSE=0, RateAncestor=0,
                           small_difference=0.000001, clean_data=True, method=0, Mgene=None):
