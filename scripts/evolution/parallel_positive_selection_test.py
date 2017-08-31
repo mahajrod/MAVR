@@ -41,7 +41,7 @@ Codeml.threads = args.threads
 Codeml.path = args.path
 
 Codeml.parallel_positive_selection_test(args.input_dir, args.tree, args.output_dir, args.results_file,
-                                        seq_type=args.seq_type, codon_frequency=args.codon_frequency, noisy=3,
+                                        seq_type=args.seq_type, codon_frequency=args.codon_frequency, noisy=0,
                                         verbose="much", runmode=0, clock=0, aminoacid_distance=None,
                                         genetic_code=args.genetic_code, fix_kappa=False, kappa=5,  getSE=0,
                                         RateAncestor=0, small_difference=args.small_difference,
