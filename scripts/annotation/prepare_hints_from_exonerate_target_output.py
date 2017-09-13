@@ -38,6 +38,9 @@ parser.add_argument("--source_for_top_hits", action="store", dest="source_for_to
                     help="Source for top hits. Default - 'EXNT'")
 parser.add_argument("--source_for_secondary_hits", action="store", dest="source_for_secondary_hits", default="EXNS",
                     help="Source for secondary hits. Default - 'EXNS'")
+parser.add_argument("-u", "--include_utr_hints", action="store_true", dest="include_utr_hints", default=False,
+                    help="Include hints for UTRs. Default - False")
+
 
 parser.add_argument("--max_intron_len", action="store", dest="max_intron_len", type=int,
                     help="Maximum length of intron")
@@ -59,9 +62,9 @@ AUGUSTUS.path = args.augustus_script_dir
 AUGUSTUS.exonerate_to_hints(top_hits_gff, top_hits_gff_hints, priority=args.top_hits_priority,
                             min_intron_len=args.min_intron_len, max_intron_len=args.max_intron_len,
                             CDS_part_cutoff=args.top_hits_CDS_part_cutoff, source=args.source_for_top_hits,
-                            with_utrs=False)
+                            with_utrs=args.include_utr_hints)
 
 AUGUSTUS.exonerate_to_hints(secondary_hits_gff, secondary_hits_gff_hints, priority=args.secondary_hits_priority,
                             min_intron_len=args.min_intron_len, max_intron_len=args.max_intron_len,
                             CDS_part_cutoff=args.secondary_hits_CDS_part_cutoff, source=args.source_for_secondary_hits,
-                            with_utrs=False)
+                            with_utrs=args.include_utr_hints)
