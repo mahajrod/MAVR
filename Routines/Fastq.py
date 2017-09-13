@@ -193,3 +193,24 @@ class FastQRoutines(FileRoutines):
                             filtered_out_fd.write(read)
                             filtered_out_fd.write(in_fd.next())
                             filtered_out_fd.write(in_fd.next())
+
+    @staticmethod
+    def split_illumina_fastq_by_lanes(input_fastq, output_dir, output_prefix=None):
+        out_fd_dict = OrderedDict()
+
+        with open(input_fastq, "r") as in_fd:
+            for line in in_fd:
+                tmp = line.split(":")
+                lane_id = ".".join(tmp[:4])[1:]
+
+                if lane_id not in out_fd_dict:
+                    out_fd_dict[lane_id] = open("%s/%s.fastq" % (output_dir, ((output_prefix + ".") if output_prefix else "") + lane_id), "w")
+
+                out_fd_dict[lane_id].write(line)
+
+                for i in range(0, 3):
+                    out_fd_dict[lane_id].write(in_fd.next())
+
+        for fd in out_fd_dict:
+            out_fd_dict[fd].close()
+
