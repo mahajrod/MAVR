@@ -33,15 +33,12 @@ parser.add_argument("--secondary_hits_CDS_part_cutoff", action="store", dest="se
                     type=int, default=9,
                     help="CDS part cutoff for secondary hits, this many bp are cut off of each CDSpart hint w.r.t. "
                          "the exonerate cds. Default: 9bp ")
-
 parser.add_argument("--source_for_top_hits", action="store", dest="source_for_top_hits", default="EXNT",
                     help="Source for top hits. Default - 'EXNT'")
 parser.add_argument("--source_for_secondary_hits", action="store", dest="source_for_secondary_hits", default="EXNS",
                     help="Source for secondary hits. Default - 'EXNS'")
 parser.add_argument("-u", "--include_utr_hints", action="store_true", dest="include_utr_hints", default=False,
                     help="Include hints for UTRs. Default - False")
-
-
 parser.add_argument("--max_intron_len", action="store", dest="max_intron_len", type=int,
                     help="Maximum length of intron")
 parser.add_argument("--min_intron_len", action="store", dest="min_intron_len", type=int,
