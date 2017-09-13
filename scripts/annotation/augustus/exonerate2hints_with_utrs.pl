@@ -3,7 +3,7 @@
 # generate hints from an Exonerate gff dump
 # Mario Stanke June, 2007
 
-# modified to handle output files for cDNAs
+# modified to handle output files for cDNAs (including UTRs)
 # Sergei Kliver August, 2017
 
 use strict;
@@ -88,8 +88,13 @@ while (<XNT>) {
 	    	$start = $end = int(($start+$end)/2);
 		}
 		print HINTS "$seqname\t$prgsrc\t$CDSpartid\t$start\t$end\t$score\t$strand\t.\tsrc=$source;grp=$prot;pri=$priority\n";
+    } if (($type eq "utr5") or ($type eq "utr3") or ($type eq"utr3b")) {
+
+	 	print HINTS "$seqname\t$prgsrc\tUTR\t$start\t$end\t$score\t$strand\t.\tsrc=$source;grp=$prot;pri=$priority\n";
+
+
     } elsif ($type eq "gene") {
-	/sequence (\S+) ; /;
-	$prot = $1;
+		/sequence (\S+) ; /;
+		$prot = $1;
     }
 }

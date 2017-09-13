@@ -58,8 +58,10 @@ Exonerate.extract_top_hits_from_target_gff(args.input, top_hits_gff, secondary_h
 AUGUSTUS.path = args.augustus_script_dir
 AUGUSTUS.exonerate_to_hints(top_hits_gff, top_hits_gff_hints, priority=args.top_hits_priority,
                             min_intron_len=args.min_intron_len, max_intron_len=args.max_intron_len,
-                            CDS_part_cutoff=args.top_hits_CDS_part_cutoff, source=args.source_for_top_hits)
+                            CDS_part_cutoff=args.top_hits_CDS_part_cutoff, source=args.source_for_top_hits,
+                            with_utrs=False)
 
 AUGUSTUS.exonerate_to_hints(secondary_hits_gff, secondary_hits_gff_hints, priority=args.secondary_hits_priority,
                             min_intron_len=args.min_intron_len, max_intron_len=args.max_intron_len,
-                            CDS_part_cutoff=args.secondary_hits_CDS_part_cutoff, source=args.source_for_secondary_hits)
+                            CDS_part_cutoff=args.secondary_hits_CDS_part_cutoff, source=args.source_for_secondary_hits,
+                            with_utrs=False)

@@ -240,8 +240,6 @@ if args.pfam_db and args.swissprot_db:
                                     cds_with_inframe_stop_codons_ids,
                                     output_swissprot_pfam_and_hints_supported_transcripts_inframe_stop_ids,
                                     mode="common")
-
-
 elif args.pfam_db:
     gene_ids_white_list = [output_pfam_supported_genes_ids]
 elif args.swissprot_db:

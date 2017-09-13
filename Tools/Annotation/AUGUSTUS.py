@@ -333,7 +333,7 @@ class AUGUSTUS(Tool):
                   grep_use_regexp=True)
 
     def exonerate_to_hints(self, exonerate_gff, hint_gff, priority=None, min_intron_len=None, max_intron_len=None,
-                           CDS_part_cutoff=None, source=None):
+                           CDS_part_cutoff=None, source=None, with_utrs=False):
 
         options = " --in=%s" % exonerate_gff
         options += " --out=%s" % hint_gff
@@ -343,7 +343,7 @@ class AUGUSTUS(Tool):
         options += " --CDSpart_cutoff=%i" % CDS_part_cutoff if CDS_part_cutoff is not None else ""
         options += " --source=%s" % source if source else ""
 
-        self.execute(options, cmd="exonerate2hints.pl")
+        self.execute(options, cmd="exonerate2hints_with_utrs.pl" if with_utrs else "exonerate2hints.pl")
 
     def join_multiple_hints(self, in_file, out_file):
         options = " > %s" % out_file
