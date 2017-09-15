@@ -22,4 +22,4 @@ parser.add_argument("-s", "--separator", action="store", dest="separator", defau
 
 args = parser.parse_args()
 MathRoutines.adjust_pvalues_from_file(args.input, args.pvalue_column, args.output,
-                                      header=True, comments_prefix=args.commants_prefix, separator=args.separator)
+                                      header=True, comments_prefix=args.comments_prefix, separator=args.separator)
