@@ -2,7 +2,7 @@
 import os
 from math import factorial
 from copy import deepcopy
-
+from statsmodels.sandbox.stats.multicomp import fdrcorrection0
 import numpy as np
 import scipy as scp
 
@@ -121,6 +121,32 @@ class MathRoutines:
             i += 1
 
         return number_of_values, plateau_list
+
+    def adjust_pvalues_from_file(self, input_file, column_with_raw_pvalues, output_file,
+                                 header=True, comments_prefix="#", separator="\t"):
+        lines_list = []
+        p_values = []
+
+        comments_prefix_length = len(comments_prefix)
+
+        with open(input_file, "r") as in_fd:
+            with open(output_file, "w") as out_fd:
+                if header:
+                    header = in_fd.readline().strip()
+                    new_header = header + "%sp-value_fdr_adjusted\n" % separator
+                    out_fd.write(new_header)
+
+                for line in in_fd:
+                    if line[:comments_prefix_length] == comments_prefix:
+                        continue
+                    tmp = line.strip()
+                    lines_list.append(tmp)
+                    p_values.append(float(tmp.split(separator)[column_with_raw_pvalues]))
+
+                rejected, p_values_adjusted = fdrcorrection0(p_values)
+
+            for i in range(0, len(lines_list)):
+                out_fd.write("%s\t%s\n" % (lines_list[i], p_values_adjusted[i]))
 
 
 class SmoothRoutines:
