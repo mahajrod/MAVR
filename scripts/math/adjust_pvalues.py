@@ -18,7 +18,7 @@ parser.add_argument("-m", "--max", action="store", dest="max", type=float,
 parser.add_argument("-c", "--comments_prefix", action="store", dest="comments_prefix", default="#",
                     help="Comments prefix. Default - '#'")
 parser.add_argument("-s", "--separator", action="store", dest="separator", default="\t",
-                    help="Separator used in input file. Default - \t")
+                    help="Separator used in input file. Default - \\t")
 
 args = parser.parse_args()
 MathRoutines.adjust_pvalues_from_file(args.input, args.pvalue_column, args.output,
