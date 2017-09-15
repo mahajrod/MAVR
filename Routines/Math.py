@@ -141,6 +141,7 @@ class MathRoutines:
                         continue
                     tmp = line.strip()
                     lines_list.append(tmp)
+                    print tmp
                     p_values.append(float(tmp.split(separator)[column_with_raw_pvalues]))
 
                 rejected, p_values_adjusted = fdrcorrection0(p_values)
