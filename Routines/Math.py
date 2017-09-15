@@ -141,13 +141,13 @@ class MathRoutines:
                         continue
                     tmp = line.strip()
                     lines_list.append(tmp)
-                    print tmp
+                    #print tmp
                     p_values.append(float(tmp.split(separator)[column_with_raw_pvalues]))
 
                 rejected, p_values_adjusted = fdrcorrection0(p_values)
 
-            for i in range(0, len(lines_list)):
-                out_fd.write("%s\t%s\n" % (lines_list[i], p_values_adjusted[i]))
+                for i in range(0, len(lines_list)):
+                    out_fd.write("%s\t%s\n" % (lines_list[i], p_values_adjusted[i]))
 
 
 class SmoothRoutines:
