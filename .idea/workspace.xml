@@ -6,13 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="c0228f51-6427-4ee3-99e4-0ca62a419e28" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup.py" afterPath="$PROJECT_DIR$/setup.py" />
     </list>
     <ignored path="MAVR.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
-    <ignored path="$PROJECT_DIR$/.idea/shelf/" />
+    <ignored path="$PROJECT_DIR$/.idea/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,11 +48,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="setup.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="setup.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/setup.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="439">
               <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="extract_top_hits_from_target_gff_exonerate.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/annotation/extract_top_hits_from_target_gff_exonerate.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="162">
+              <caret line="12" column="29" lean-forward="false" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="36">
+              <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -106,7 +124,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Graphics/Plots.py" />
         <option value="$PROJECT_DIR$/Parsers/Abstract.py" />
         <option value="$PROJECT_DIR$/Parsers/CCF.py" />
         <option value="$PROJECT_DIR$/examples/distances.py" />
@@ -154,9 +171,10 @@
         <option value="$PROJECT_DIR$/scripts/transcriptome/align_miRNA_by_star.py" />
         <option value="$PROJECT_DIR$/scripts/filter/filtering_mirna_pipeline.py" />
         <option value="$PROJECT_DIR$/Pipelines/Filtering.py" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/setup.py" />
+        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -191,6 +209,17 @@
             <path>
               <item name="MAVR" type="b2602c69:ProjectViewProjectNode" />
               <item name="MAVR" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MAVR" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MAVR" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MAVR" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MAVR" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="annotation" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -251,7 +280,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.DiffExpression">
+  <component name="RunManager" selected="Python.extract_top_hits_from_target_gff_exonerate">
     <configuration name="DiffExpression" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -284,24 +313,6 @@
       <module name="MAVR" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Routines/Drawing.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
-    <configuration name="HMMER3" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Tools/HMMER" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="MAVR" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Tools/HMMER/HMMER3.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -560,6 +571,24 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
+    <configuration name="extract_top_hits_from_target_gff_exonerate" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/annotation" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MAVR" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/annotation/extract_top_hits_from_target_gff_exonerate.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
     <configuration name="split_pashas_table" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -583,19 +612,19 @@
     <list size="7">
       <item index="0" class="java.lang.String" itemvalue="Python.SequenceCluster" />
       <item index="1" class="java.lang.String" itemvalue="Python.Drawing" />
-      <item index="2" class="java.lang.String" itemvalue="Python.HMMER3" />
-      <item index="3" class="java.lang.String" itemvalue="Python.split_pashas_table" />
-      <item index="4" class="java.lang.String" itemvalue="Python.__init__" />
-      <item index="5" class="java.lang.String" itemvalue="Python.NCBI" />
-      <item index="6" class="java.lang.String" itemvalue="Python.DiffExpression" />
+      <item index="2" class="java.lang.String" itemvalue="Python.split_pashas_table" />
+      <item index="3" class="java.lang.String" itemvalue="Python.__init__" />
+      <item index="4" class="java.lang.String" itemvalue="Python.NCBI" />
+      <item index="5" class="java.lang.String" itemvalue="Python.DiffExpression" />
+      <item index="6" class="java.lang.String" itemvalue="Python.extract_top_hits_from_target_gff_exonerate" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.DiffExpression" />
-        <item index="1" class="java.lang.String" itemvalue="Python.NCBI" />
-        <item index="2" class="java.lang.String" itemvalue="Python.__init__" />
-        <item index="3" class="java.lang.String" itemvalue="Python.split_pashas_table" />
-        <item index="4" class="java.lang.String" itemvalue="Python.HMMER3" />
+        <item index="0" class="java.lang.String" itemvalue="Python.extract_top_hits_from_target_gff_exonerate" />
+        <item index="1" class="java.lang.String" itemvalue="Python.DiffExpression" />
+        <item index="2" class="java.lang.String" itemvalue="Python.NCBI" />
+        <item index="3" class="java.lang.String" itemvalue="Python.__init__" />
+        <item index="4" class="java.lang.String" itemvalue="Python.split_pashas_table" />
       </list>
     </recent_temporary>
   </component>
@@ -612,34 +641,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1443270821851</updated>
-    </task>
-    <task id="LOCAL-01311" summary="changes">
-      <created>1497210735301</created>
-      <option name="number" value="01311" />
-      <option name="presentableId" value="LOCAL-01311" />
-      <option name="project" value="LOCAL" />
-      <updated>1497210735302</updated>
-    </task>
-    <task id="LOCAL-01312" summary="changes">
-      <created>1497215509261</created>
-      <option name="number" value="01312" />
-      <option name="presentableId" value="LOCAL-01312" />
-      <option name="project" value="LOCAL" />
-      <updated>1497215509261</updated>
-    </task>
-    <task id="LOCAL-01313" summary="changes">
-      <created>1497215748876</created>
-      <option name="number" value="01313" />
-      <option name="presentableId" value="LOCAL-01313" />
-      <option name="project" value="LOCAL" />
-      <updated>1497215748876</updated>
-    </task>
-    <task id="LOCAL-01314" summary="changes">
-      <created>1497215907200</created>
-      <option name="number" value="01314" />
-      <option name="presentableId" value="LOCAL-01314" />
-      <option name="project" value="LOCAL" />
-      <updated>1497215907200</updated>
     </task>
     <task id="LOCAL-01315" summary="changes">
       <created>1497215993990</created>
@@ -956,7 +957,35 @@
       <option name="project" value="LOCAL" />
       <updated>1505681614582</updated>
     </task>
-    <option name="localTasksCounter" value="1360" />
+    <task id="LOCAL-01360" summary="add .gitignore, ignore .idea folder">
+      <created>1505682355741</created>
+      <option name="number" value="01360" />
+      <option name="presentableId" value="LOCAL-01360" />
+      <option name="project" value="LOCAL" />
+      <updated>1505682355773</updated>
+    </task>
+    <task id="LOCAL-01361" summary="add statsmodels to list of dependencies">
+      <created>1505682393840</created>
+      <option name="number" value="01361" />
+      <option name="presentableId" value="LOCAL-01361" />
+      <option name="project" value="LOCAL" />
+      <updated>1505682393841</updated>
+    </task>
+    <task id="LOCAL-01362" summary="add installation instructions">
+      <created>1505682923788</created>
+      <option name="number" value="01362" />
+      <option name="presentableId" value="LOCAL-01362" />
+      <option name="project" value="LOCAL" />
+      <updated>1505682923788</updated>
+    </task>
+    <task id="LOCAL-01363" summary="remove workspace.xml and *.pyc files from version control">
+      <created>1505683223382</created>
+      <option name="number" value="01363" />
+      <option name="presentableId" value="LOCAL-01363" />
+      <option name="project" value="LOCAL" />
+      <updated>1505683223383</updated>
+    </task>
+    <option name="localTasksCounter" value="1364" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -985,7 +1014,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Debug Logs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.039445627" sideWeight="0.5134281" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14376996" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5570248" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.58842975" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -1064,7 +1093,10 @@
     <MESSAGE value="changes in parallel augustus" />
     <MESSAGE value="changes" />
     <MESSAGE value="add .gitignore, ignore .idea folder" />
-    <option name="LAST_COMMIT_MESSAGE" value="add .gitignore, ignore .idea folder" />
+    <MESSAGE value="add statsmodels to list of dependencies" />
+    <MESSAGE value="add installation instructions" />
+    <MESSAGE value="remove workspace.xml and *.pyc files from version control" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove workspace.xml and *.pyc files from version control" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1165,20 +1197,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Parsers/CCF.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parsers/GVF.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Parsers/VCF.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1505,14 +1523,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="6" lean-forward="false" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -1534,6 +1544,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="439">
           <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/annotation/extract_top_hits_from_target_gff_exonerate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="12" column="29" lean-forward="false" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="53" lean-forward="false" selection-start-line="8" selection-start-column="53" selection-end-line="8" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
         </state>
       </provider>
