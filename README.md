@@ -13,7 +13,8 @@ sudo apt install python-pip
 ```bash
 sudo pip install virtualenv  
 
-# create a virtual environment for MAVR, where all its package dependencies will be installed, we tell it to use python 2.7
+# create a virtual environment for MAVR, where all its package dependencies will be installed,
+# we tell it to use python 2.7
 virtualenv ~/.virtualenvs/MAVR --python=python2.7 
 
 # activates the MAVR virtual environment, now every "pip install" command will install packages into this virtual 
