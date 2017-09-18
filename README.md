@@ -1,22 +1,38 @@
 # MAVR v0.1
 
-## How to install on Manjaro Linux
+## How to install
+1. Install `pip` (python package manager)
+```bash
+# Manjaro Linux
+sudo pacman -S python-pip 
 
+# Ubuntu
+sudo apt install python-pip
 ```
-sudo pacman -S python-pip # installs pip, a python package manager
+2. Set up `virtualenv` (a tool for creating isolated directories for installing project-specific python dependencies)
+```bash
+sudo pip install virtualenv  
 
-sudo pip install virtualenv # installs virtualenv, a tool for creating isolated directories for installing project-specific python dependencies
+# create a virtual environment for MAVR, where all its package dependencies will be installed, we tell it to use python 2.7
+virtualenv ~/.virtualenvs/MAVR --python=python2.7 
 
-virtualenv ~/.virtualenvs/MAVR --python=python2.7 # creates a virtual environment for MAVR, where all its package dependencies will be installed. We tell it to use python 2.7
-
-. ~/.virtualenvs/MAVR/bin/activate # activates the MAVR virtual environment. now every "pip install" command will install packages into this virtual environment (folder), and every python execution will look up packages from this environment
-
-pip install -e git+https://github.com/mahajrod/MAVR#egg=MAVR # installs MAVR as a pip package
+# activates the MAVR virtual environment, now every "pip install" command will install packages into this virtual 
+# environment (folder), and every python execution will look up packages from this environment
+. ~/.virtualenvs/MAVR/bin/activate 
+```
+3. Use `pip` to install MAVR directly from GitHub
+```bash
+pip install -e git+https://github.com/mahajrod/MAVR#egg=MAVR 
 ```
 
-## Troubleshooting
-The following packages are required by some of the pip dependencies
-```
+### Troubleshooting
+The following packages are required by some of the pip dependencies: `gcc` and `tk`
+```bash
+# Manjaro Linux
 sudo pacman -S gcc # installs gcc which is required for one of the dependencies of MAVR
 sudo pacman -S tk # required by matplotlib
+
+# Ubuntu
+sudo apt install gcc
+sudo apt install tk
 ```
