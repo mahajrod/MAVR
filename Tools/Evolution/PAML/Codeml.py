@@ -8,8 +8,8 @@ import multiprocessing as mp
 from collections import OrderedDict
 
 from scipy.stats import chisqprob
+from statsmodels.sandbox.stats.multicomp import fdrcorrection0
 
-from Routines import File
 from Tools.Abstract import Tool
 from Parsers.PAML import CodeMLReport
 from Routines import FileRoutines
@@ -334,23 +334,45 @@ class Codeml(Tool):
         self.parallel_execute(options_list, dir_list=dir_list)
 
         results_dict = OrderedDict()
+        double_delta_dict = OrderedDict()
+        raw_pvalues_dict = OrderedDict()
+        raw_pvalues_list = []
+
         for basename in basename_dir_list:
             results_dict[basename] = OrderedDict()
             for model in model_list:
                 output_file = "%s/%s/%s/%s.out" % (out_dir, basename, model, basename)
                 codeml_report = CodeMLReport(output_file)
                 results_dict[basename][model] = codeml_report.LnL
+
+        for basename in basename_dir_list:
+            for model in model_list:
+                if results_dict[basename][model] is None:
+                    print("LnL was not calculated for %s" % basename)
+                    break
+            else:
+                doubled_delta = 2 * (results_dict[basename]["Model_A"] - results_dict[basename]["Model_A_null"])
+                p_value = chisqprob(doubled_delta, 1)  # degrees of freedom = 1
+
+                double_delta_dict[basename] = doubled_delta
+                raw_pvalues_dict[basename] = p_value
+                raw_pvalues_list.append(p_value)
+
+        adjusted_pvalues_list = fdrcorrection0(raw_pvalues_list)
+        i = 0
         with open(results_file, "w") as out_fd:
-            out_fd.write("id\tmodel_a_null,LnL\tmodel_a,LnL\t2*delta\tp-value\n")
+            out_fd.write("id\tmodel_a_null,LnL\tmodel_a,LnL\t2*delta\traw p-value\tadjusted p-value\n")
             for basename in basename_dir_list:
                 for model in model_list:
                     if results_dict[basename][model] is None:
                         print("LnL was not calculated for %s" % basename)
+                        i += 1
                         break
                 else:
-                    doubled_delta = 2 * (results_dict[basename]["Model_A"] - results_dict[basename]["Model_A_null"])
-                    p_value = chisqprob(doubled_delta, 1) # degrees of freedom = 1
-                    out_fd.write("%s\t%f\t%f\t%f\t%s\n" % (basename, results_dict[basename]["Model_A_null"],
-                                                           results_dict[basename]["Model_A"], doubled_delta,
-                                                           p_value))
+                    #doubled_delta = 2 * (results_dict[basename]["Model_A"] - results_dict[basename]["Model_A_null"])
+                    #p_value = chisqprob(doubled_delta, 1) # degrees of freedom = 1
+                    out_fd.write("%s\t%f\t%f\t%f\t%f\t%f\n" % (basename, results_dict[basename]["Model_A_null"],
+                                                           results_dict[basename]["Model_A"], double_delta_dict[basename],
+                                                           raw_pvalues_dict[basename], adjusted_pvalues_list[i]))
+                    i += 1
 
