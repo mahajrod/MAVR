@@ -368,8 +368,8 @@ class NCBIRoutines(FileRoutines):
     @staticmethod
     def get_longest_proteins_from_protein_tab_file(protein_tab_file, output_prefix):
         sorted_tab_file = "%s.sorted.tab" % output_prefix
-        longest_pep_tab_file = "%s.longest_pep.tab"
-        longest_pep_id_file = "%s.longest_pep.ids"
+        longest_pep_tab_file = "%s.longest_pep.tab" % output_prefix
+        longest_pep_id_file = "%s.longest_pep.ids" % output_prefix
 
         sort_string = "(head -n 1 %s && tail -n +2 %s | sort -k6,6 -k9,9nr) > %s" % (protein_tab_file,
                                                                                      protein_tab_file,
