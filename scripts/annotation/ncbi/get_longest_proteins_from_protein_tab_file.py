@@ -15,4 +15,4 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
 
 args = parser.parse_args()
 
-NCBIRoutines.et_longest_proteins_from_protein_tab_file(args.input, args.output_prefix)
+NCBIRoutines.get_longest_proteins_from_protein_tab_file(args.input, args.output_prefix)
