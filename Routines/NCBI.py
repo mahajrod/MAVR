@@ -371,9 +371,19 @@ class NCBIRoutines(FileRoutines):
         longest_pep_tab_file = "%s.longest_pep.tab" % output_prefix
         longest_pep_id_file = "%s.longest_pep.ids" % output_prefix
 
-        sort_string = "(head -n 1 %s && tail -n +2 %s | sort -k6,6 -k9,9nr) > %s" % (protein_tab_file,
-                                                                                     protein_tab_file,
-                                                                                     sorted_tab_file)
+        with open(protein_tab_file)as tmp_fd:
+            tmp = tmp_fd.readline().strip().split("\t")
+            gene_id_index = tmp.index("GeneID")
+            locus_tag_index = tmp.index("Locus tag")
+            length_index = tmp.index("Length")
+
+        sort_string = "(head -n 1 %s && tail -n +2 %s | sort -k%i,%i -k%i,%inr) > %s" % (protein_tab_file,
+                                                                                         protein_tab_file,
+                                                                                         gene_id_index + 1,
+                                                                                         gene_id_index + 1,
+                                                                                         length_index + 1,
+                                                                                         length_index + 1,
+                                                                                         sorted_tab_file)
 
         os.system(sort_string)
 
@@ -385,11 +395,11 @@ class NCBIRoutines(FileRoutines):
                 prev_gene = ""
                 for line in in_fd:
                     tmp = line.split("\t")
-                    if tmp[5] == prev_gene:
+                    if tmp[gene_id_index] == prev_gene:
                         continue
-                    prev_gene = tmp[5]
+                    prev_gene = tmp[gene_id_index]
                     out_fd.write(line)
-                    longest_pep_ids.append(tmp[7])
+                    longest_pep_ids.append(tmp[locus_tag_index])
 
         longest_pep_ids.write(longest_pep_id_file)
 
