@@ -374,7 +374,7 @@ class NCBIRoutines(FileRoutines):
         with open(protein_tab_file)as tmp_fd:
             tmp = tmp_fd.readline().strip().split("\t")
             gene_id_index = tmp.index("GeneID")
-            locus_tag_index = tmp.index("Locus tag")
+            protein_id_index = tmp.index("Protein product")
             length_index = tmp.index("Length")
 
         sort_string = "(head -n 1 %s && tail -n +2 %s | sort -k%i,%i -k%i,%inr) > %s" % (protein_tab_file,
@@ -399,7 +399,7 @@ class NCBIRoutines(FileRoutines):
                         continue
                     prev_gene = tmp[gene_id_index]
                     out_fd.write(line)
-                    longest_pep_ids.append(tmp[locus_tag_index])
+                    longest_pep_ids.append(tmp[protein_id_index])
 
         longest_pep_ids.write(longest_pep_id_file)
 

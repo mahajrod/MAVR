@@ -219,3 +219,42 @@ class AnnotationsRoutines:
                         description_list.append("%s=%s" % (alias_field, ",".join(feature_synonyms_list)))
 
                     out_fd.write("\t".join(tmp[:8] + [";".join(description_list)]) + "\n")
+
+    @staticmethod
+    def count_total_feature_length_from_gff(input_gff, output_prefix, features_to_count=None):
+        len_file = "%s.len" % output_prefix
+        stat_file = "%s.stat" % output_prefix
+
+        total_feature_length = 0
+        feature_number = 0
+
+        with open(input_gff, "r") as in_fd:
+            with open(len_file, "w") as len_fd:
+                for line in in_fd:
+                    if line[0] == "#":
+                        continue
+                    tmp = line.split("\t")
+                    feature = tmp[2]
+                    if features_to_count is not None:
+                        if feature not in features_to_count:
+                            continue
+
+                    start = int(tmp[3])
+                    end = int(tmp[4])
+
+                    feature_number += 1
+                    feature_length = end - start + 1
+
+                    len_fd.write("%i\n" % feature_length)
+
+                    total_feature_length += feature_length
+
+        stat_string = "Features\t%s\n" % (",".join(features_to_count) if features_to_count else "all")
+        stat_string += "Number of features\t%i\n" % feature_number
+        stat_string += "Total length\t%i\n" % total_feature_length
+
+        print(stat_string)
+        with open(stat_file, "w") as stat_fd:
+            stat_fd.write(stat_string)
+
+
