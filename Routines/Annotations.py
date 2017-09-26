@@ -257,4 +257,34 @@ class AnnotationsRoutines:
         with open(stat_file, "w") as stat_fd:
             stat_fd.write(stat_string)
 
+    @staticmethod
+    def get_feature_to_parent_correspondence_from_gff(input_gff, output, feature_list=("mRNA",),
+                                                      id_entry="ID", parental_id_entry="Parent"):
+        with open(input_gff, "r") as in_fd:
+            with open(output, "w") as out_fd:
+                for line in in_fd:
+                    if line[0] == "#":
+                        continue
+                    tmp = line.strip().split("\t")
+                    if tmp[2] not in feature_list:
+                        continue
+                    tmp = map(lambda s: s.split("="), tmp[-1].split(";"))
+
+                    feature_id = None
+                    parental_id = None
+
+                    for entry, value in tmp:
+                        if entry == id_entry:
+                            feature_id = value
+                        elif entry == parental_id_entry:
+                            parental_id = value
+                    if (parental_id is None) or (feature_id is None):
+                        print ("Absent feature id or parental id in following line:")
+                        print (line)
+                        continue
+                    out_fd.write("%s\t%s\n" % (parental_id, feature_id))
+
+
+
+
 
