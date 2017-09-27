@@ -28,7 +28,7 @@ class CoockiecutterReport(OrderedDict):
 
         self.match_key = "match" if "match" in self["left"] else "adapter"
         self.retained_pairs_key = "pe" if "pe" in self["left"] else "paired-end reads"
-        self.input_pairs = self["left"]["ok"] + self["left"][self.match_key] + self["left"]["n"]
+        self.input_pairs = self["left"]["ok"] + self["left"][self.match_key] + (self["left"]["n"] if "n" in self["left"] else 0)
         self.retained_pairs = self["left"][self.retained_pairs_key]
         self.retained_pairs_fraction = float(self.retained_pairs) / float(self.input_pairs)
 
