@@ -289,6 +289,7 @@ class AnnotationsRoutines:
 
         accordance_dict = SynDict(filename=accordance_file, allow_repeats_of_key=True)
         length_dict = SynDict(length_file, expression=int)
+        print length_dict
         longest_list = IdList()
 
         all_output_file = "%s.all.correspondence" % output_prefix
