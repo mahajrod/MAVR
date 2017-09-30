@@ -391,6 +391,7 @@ class SynDict(OrderedDict):
             if split_values or allow_repeats_of_key:
                 value = value.split(values_separator)
             if expression:
+                print key, value
                 if split_values or allow_repeats_of_key:
                     value = map(expression, value)
                 else:
