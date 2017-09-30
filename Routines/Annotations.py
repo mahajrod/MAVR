@@ -301,11 +301,10 @@ class AnnotationsRoutines:
                     current_transcript = None
                     current_length = 0
                     for transcript in accordance_dict[gene]:
-                        all_out_fd.write("%s\t%s\t%i\n" % (gene, transcript, length_dict[transcript]))
-
                         if length_dict[transcript] > current_length:
                             current_transcript = transcript
                             current_length = length_dict[transcript]
+                        all_out_fd.write("%s\t%s\t%i\n" % (gene, transcript, length_dict[transcript]))
 
                     longest_out_fd.write("%s\t%s\t%i\n" % (gene, current_transcript, current_length))
                     longest_list.append(current_transcript)
