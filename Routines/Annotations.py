@@ -288,7 +288,7 @@ class AnnotationsRoutines:
     def add_length_to_accordance_file(accordance_file, length_file, output_prefix):
 
         accordance_dict = SynDict(filename=accordance_file, allow_repeats_of_key=True)
-        length_dict = SynDict(length_file, expression=int)
+        length_dict = SynDict(filename=length_file, expression=int)
         print length_dict
         longest_list = IdList()
 
