@@ -5,7 +5,7 @@ from copy import deepcopy
 from Bio import SearchIO
 from BCBio import GFF
 
-from CustomCollections.GeneralCollections import IdSet, SynDict
+from CustomCollections.GeneralCollections import IdSet, SynDict, IdList
 
 
 class AnnotationsRoutines:
@@ -283,6 +283,45 @@ class AnnotationsRoutines:
                         print (line)
                         continue
                     out_fd.write("%s\t%s\n" % (parental_id, feature_id))
+
+    @staticmethod
+    def add_length_to_accordance_file(accordance_file, length_file, output_prefix):
+
+        accordance_dict = SynDict(filename=accordance_file)
+        length_dict = SynDict(length_file, expression=int)
+        longest_list = IdList()
+
+        all_output_file = "%s.all.correspondce" % output_prefix
+        longest_output_file = "%s.longest.correspondence" % output_prefix
+        longest_id_file = "%s.longest.ids" % output_prefix
+
+        current_gene = None
+        current_transcript = None
+        current_length = 0
+
+        with open(all_output_file, "w") as all_out_fd:
+            with open(longest_output_file, "w") as longest_out_fd:
+                for gene in accordance_dict:
+                    all_out_fd.write("%s\t%s\t%i\n" % (gene, accordance_dict[gene], length_dict[accordance_dict[gene]]))
+
+                    if current_gene and (gene != current_gene):
+                        longest_out_fd.write("%s\t%s\t%i\n" % (current_gene, current_transcript, current_length))
+                        longest_list.append(current_transcript)
+                        current_gene = gene
+                        current_transcript = accordance_dict[gene]
+                        current_length = length_dict[accordance_dict[gene]]
+                        continue
+
+                    if length_dict[accordance_dict[gene]] > current_length:
+                        current_gene = gene
+                        current_transcript = accordance_dict[gene]
+                        current_length = length_dict[accordance_dict[gene]]
+
+
+
+
+
+
 
 
 
