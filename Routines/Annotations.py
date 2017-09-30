@@ -317,13 +317,4 @@ class AnnotationsRoutines:
                         current_transcript = accordance_dict[gene]
                         current_length = length_dict[accordance_dict[gene]]
 
-
-
-
-
-
-
-
-
-
-
+        longest_list.write(longest_id_file)
