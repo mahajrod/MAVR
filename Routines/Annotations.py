@@ -291,7 +291,7 @@ class AnnotationsRoutines:
         length_dict = SynDict(length_file, expression=int)
         longest_list = IdList()
 
-        all_output_file = "%s.all.correspondce" % output_prefix
+        all_output_file = "%s.all.correspondence" % output_prefix
         longest_output_file = "%s.longest.correspondence" % output_prefix
         longest_id_file = "%s.longest.ids" % output_prefix
 
