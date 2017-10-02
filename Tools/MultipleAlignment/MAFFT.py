@@ -29,7 +29,7 @@ class MAFFT(Tool):
         self.execute(options)
 
     def parallel_align(self, list_of_files, output_directory, output_suffix="alignment", gap_open_penalty=None,
-                       offset=None, maxiterate=None, quiet=False, mode="globalpair", number_of_processes=1,
+                       offset=None, maxiterate=None, quiet=True, mode="globalpair", number_of_processes=1,
                        anysymbol=False):
         # TODO: add rest of options
 
