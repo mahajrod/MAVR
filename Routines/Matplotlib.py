@@ -256,7 +256,7 @@ class MatplotlibRoutines:
         else:
             filtered = data_array
         if not subplot:
-            figure = plt.figure(1, figsize=(6, 6))
+            figure = plt.figure(1, figsize=(6, 6),)
             subplott = plt.subplot(1, 1, 1)
 
         if number_of_bins:
