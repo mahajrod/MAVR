@@ -569,6 +569,9 @@ class NCBIRoutines(FileRoutines):
 
         return self.get_taxonomy(taxa_list, output_file, email, input_type=input_type)
 
+    def get_protein_info_from_ncbi_gff(self):
+
+
     def get_taxa_genomes_summary(self, taxa, email, output_directory, output_prefix,
                                  max_ids_per_query=8000, max_download_attempts=500,
                                  min_scaffold_n50=None, min_contig_n50=None, max_scaffold_l50=None,
