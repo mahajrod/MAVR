@@ -569,7 +569,7 @@ class NCBIRoutines(FileRoutines):
 
         return self.get_taxonomy(taxa_list, output_file, email, input_type=input_type)
 
-    def get_protein_info_from_ncbi_gff(self):
+    #def get_protein_info_from_ncbi_gff(self):
 
 
     def get_taxa_genomes_summary(self, taxa, email, output_directory, output_prefix,
