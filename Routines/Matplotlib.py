@@ -449,7 +449,7 @@ class MatplotlibRoutines:
 
         if min_length < 0:
             raise ValueError("Minimum length can't be negative")
-        if max_length < 0:
+        if (max_length is not None) and (max_length < 0):
             raise ValueError("Maximum length can't be negative")
 
         lengths = np.fromfile(input_file, sep=separator)
