@@ -9,7 +9,7 @@ from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
 from BCBio import GFF
-
+from Routines import SequenceRoutines
 
 from Routines.Sequence import record_generator
 
@@ -26,6 +26,10 @@ parser.add_argument("-t", "--type", action="store", dest="type", default="gene",
                     help="Types of sequences to extract")
 parser.add_argument("-g", "--gff_file", action="store", dest="gff_file",
                     help="Gff file with annotations to extract")
+parser.add_argument("-p", "--parsing_mode", action="store", dest="parsing_mode", default="index_db",
+                    help="Parsing mode for input sequence file. "
+                         "Possible variants: 'index_db'(default), 'index', 'parse'")
+
 
 args = parser.parse_args()
 
@@ -33,7 +37,7 @@ tmp_index_file = "temp.idx"
 args.type = args.type.split(",")
 
 print("Parsing %s..." % args.input_file)
-sequence_dict = SeqIO.index_db(tmp_index_file, args.input_file, format=args.format)
+sequence_dict = SequenceRoutines.parse_seq_file(args.input, args.parsing_mode, args.format, index_file=tmp_index_file ) # SeqIO.index_db(tmp_index_file, args.input_file, format=args.format)
 annotations_dict = SeqIO.to_dict(GFF.parse(open(args.gff_file)))
 
 SeqIO.write(record_generator(annotations_dict, sequence_dict, args.type), args.output_file, format=args.format)
