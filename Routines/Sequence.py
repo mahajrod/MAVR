@@ -1717,6 +1717,17 @@ class SequenceRoutines(FileRoutines):
         pass
 
     @staticmethod
+    def record_generator(annotations_dict, sequence_dict, feature_types_list):
+        for record_id in annotations_dict:
+            for feature in annotations_dict[record_id].features:
+                if feature.type in feature_types_list:
+                    sequence = feature.extract(sequence_dict[record_id].seq)
+                    record = SeqRecord(sequence, id=feature.id)
+                    print(record)
+                    yield SeqRecord(sequence, id=feature.id, description=feature.qualifiers["Name"][0] \
+                          if "Name" in feature.qualifiers else "")
+
+    @staticmethod
     def find_cds_coordinates_in_transcript_by_pep(transcript_dict, protein_dict, correspondence_dict,
                                                   verbose=True, genetic_code_table=1):
 
@@ -1987,16 +1998,7 @@ def record_by_expression_generator(record_dict, expression=None, id_file="passed
                 yield record_dict[record_id]
     id_fd.close()
 
-    @staticmethod
-    def record_generator(annotations_dict, sequence_dict, feature_types_list):
-        for record_id in annotations_dict:
-            for feature in annotations_dict[record_id].features:
-                if feature.type in feature_types_list:
-                    sequence = feature.extract(sequence_dict[record_id].seq)
-                    record = SeqRecord(sequence, id=feature.id)
-                    print(record)
-                    yield SeqRecord(sequence, id=feature.id, description=feature.qualifiers["Name"][0] \
-                          if "Name" in feature.qualifiers else "")
+
 
 
 def record_generator(annotations_dict, sequence_dict, feature_types_list):
