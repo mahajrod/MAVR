@@ -310,3 +310,5 @@ class AnnotationsRoutines:
                     longest_out_fd.write("%s\t%s\t%i\n" % (gene, current_transcript, current_length))
                     longest_list.append(current_transcript)
         longest_list.write(longest_id_file)
+
+

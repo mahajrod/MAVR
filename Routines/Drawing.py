@@ -531,3 +531,4 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
 
         for ext in extensions:
             plt.savefig("%s.%s" % (output_prefix, ext))
+

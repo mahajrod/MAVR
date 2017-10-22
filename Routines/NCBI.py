@@ -12,6 +12,7 @@ from collections import OrderedDict
 from Bio import SeqIO, Entrez
 from Bio.SeqRecord import SeqRecord
 from Routines.File import FileRoutines
+from Parsers.GFF import CollectionGFF
 from CustomCollections.GeneralCollections import IdList, SynDict, TwoLvlDict, IdSet
 
 from urllib2 import URLError
@@ -569,7 +570,11 @@ class NCBIRoutines(FileRoutines):
 
         return self.get_taxonomy(taxa_list, output_file, email, input_type=input_type)
 
-    #def get_protein_info_from_ncbi_gff(self):
+    def get_protein_info_from_ncbi_gff(self, ncbi_gff, output_prefix):
+        ncbi_gff_collection = CollectionGFF
+        for record in ncbi_gff_collection.gff_simple_generator(ncbi_gff):
+
+
 
 
     def get_taxa_genomes_summary(self, taxa, email, output_directory, output_prefix,
