@@ -36,7 +36,7 @@ args = parser.parse_args()
 tmp_index_file = "temp.idx"
 args.type = args.type.split(",")
 
-print("Parsing %s..." % args.input_file)
+print("Parsing %s..." % args.input)
 sequence_dict = SequenceRoutines.parse_seq_file(args.input, args.parsing_mode, args.format, index_file=tmp_index_file ) # SeqIO.index_db(tmp_index_file, args.input_file, format=args.format)
 annotations_dict = SeqIO.to_dict(GFF.parse(open(args.gff_file)))
 
