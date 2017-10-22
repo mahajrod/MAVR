@@ -41,7 +41,9 @@ sequence_dict = SequenceRoutines.parse_seq_file(args.input, args.parsing_mode, a
 annotations_dict = SeqIO.to_dict(GFF.parse(open(args.gff_file)))
 
 SeqIO.write(record_generator(annotations_dict, sequence_dict, args.type), args.output, format=args.format)
-os.remove(tmp_index_file)
+
+if args.parsing_mode == "index_db":
+    os.remove(tmp_index_file)
 
 
 
