@@ -573,6 +573,7 @@ class NCBIRoutines(FileRoutines):
     def get_protein_info_from_ncbi_gff(self, ncbi_gff, output_prefix):
         ncbi_gff_collection = CollectionGFF
         for record in ncbi_gff_collection.gff_simple_generator(ncbi_gff):
+            pass
 
 
 
