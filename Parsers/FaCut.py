@@ -7,6 +7,7 @@ from Routines import MatplotlibRoutines
 
 from CustomCollections.GeneralCollections import TwoLvlDict
 
+
 class FaCutReport:
     def __init__(self, facut_report_file):
         self.table_ids = OrderedDict({"instrument_id": 0,
