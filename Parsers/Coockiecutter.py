@@ -6,16 +6,17 @@ from CustomCollections.GeneralCollections import TwoLvlDict
 # adapter for 2 versions of Coockiecutter
 
 class CoockiecutterReport(OrderedDict):
-    def __init__(self, coockiecutter_report_file):
+    def __init__(self, coockiecutter_report_file, input_is_se=False):
         #self = OrderedDict()
         OrderedDict.__init__(self)
         self["left"] = OrderedDict()
         self["right"] = OrderedDict()
+        self["se"] = OrderedDict()
 
         with open(coockiecutter_report_file, "r") as in_fd:
             tmp = ""
 
-            for read_position in "left", "right":
+            for read_position in ("se", ) if input_is_se else ("left", "right"):
                 while "ok" not in tmp:
                     tmp = in_fd.readline()
 
@@ -27,10 +28,13 @@ class CoockiecutterReport(OrderedDict):
                         self[read_position][tmp[0]] = int(tmp[1])
                     tmp = in_fd.readline()
 
-        self.match_key = "match" if "match" in self["left"] else "adapter"
-        self.retained_pairs_key = "pe" if "pe" in self["left"] else "paired-end reads"
-        self.input_pairs = self["left"]["ok"] + self["left"][self.match_key] + (self["left"]["n"] if "n" in self["left"] else 0)
-        self.retained_pairs = self["left"][self.retained_pairs_key]
+        self.match_key = "match" if (("match" in self["left"]) or ("match" in self["se"]) ) else "adapter"
+        self.retained_pairs_key = "ok" if input_is_se else "pe" if "pe" in self["left"] else "paired-end reads"
+
+        pos = "se" if input_is_se else "left"
+
+        self.input_pairs = self[pos]["ok"] + self[pos][self.match_key] + (self[pos]["n"] if "n" in self[pos] else 0)
+        self.retained_pairs = self[pos][self.retained_pairs_key]
         self.retained_pairs_fraction = float(self.retained_pairs) / float(self.input_pairs)
 
 
