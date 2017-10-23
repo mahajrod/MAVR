@@ -73,7 +73,7 @@ class FilteringPipeline(Pipeline):
         filtering_statistics = TwoLvlDict()
 
         for sample in sample_list:
-            print "Handling sample %s" % sample
+            print ("Handling sample %s" % sample)
             filtering_statistics[sample] = OrderedDict()
             merged_raw_sample_dir = "%s/%s/" % (merged_raw_dir, sample)
             #merged_forward_reads = "%s/%s_1.fq" % (merged_raw_sample_dir, sample)
@@ -89,6 +89,7 @@ class FilteringPipeline(Pipeline):
             filtering_stat_sample_dir = "%s/%s" % (filtering_stat_dir, sample)
 
             #"""
+            print("Merging fastqs if necessary...")
             merged_forward_reads, merged_reverse_reads, merged_se_reads = self.combine_fastq_files(samples_directory,
                                                                                                    sample,
                                                                                                    merged_raw_sample_dir,
@@ -158,10 +159,11 @@ class FilteringPipeline(Pipeline):
             trimmomatic_report = TrimmomaticReport(trimmomatic_log)
             if skip_coockiecutter:
                 filtering_statistics[sample]["raw_pairs"] = trimmomatic_report.stats["input"]
-            filtering_statistics[sample]["pairs_after_trimmomatic"] = trimmomatic_report.stats["both_surviving"]
-            filtering_statistics[sample]["pairs_after_trimmomatic,%"] = trimmomatic_report.stats["both_surviving,%"]
 
-            if retain_single_end_reads:
+            filtering_statistics[sample]["pairs_after_trimmomatic"] =  trimmomatic_report.stats["surviving"] if input_is_se else trimmomatic_report.stats["both_surviving"]
+            filtering_statistics[sample]["pairs_after_trimmomatic,%"] = trimmomatic_report.stats["surviving,%"] if input_is_se else trimmomatic_report.stats["both_surviving,%"]
+
+            if retain_single_end_reads and not input_is_se:
                 filtering_statistics[sample]["forward_se_after_trimmomatic"] = trimmomatic_report.stats["forward_only_surviving"]
                 filtering_statistics[sample]["forward_se_after_trimmomatic,%"] = trimmomatic_report.stats["forward_only_surviving"]
 
