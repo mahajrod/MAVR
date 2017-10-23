@@ -89,7 +89,7 @@ class FilteringPipeline(Pipeline):
             filtering_stat_sample_dir = "%s/%s" % (filtering_stat_dir, sample)
 
             #"""
-            print("Merging fastqs if necessary...")
+            print("\tMerging fastqs if necessary...")
             merged_forward_reads, merged_reverse_reads, merged_se_reads = self.combine_fastq_files(samples_directory,
                                                                                                    sample,
                                                                                                    merged_raw_sample_dir,
@@ -97,7 +97,7 @@ class FilteringPipeline(Pipeline):
                                                                                                    input_is_se=input_is_se)
             if not skip_coockiecutter:
                 print("\tFiltering by Cookiecutter")
-                """
+
                 Cookiecutter.rm_reads(adapter_fragment_file,
                                       merged_forward_reads if merged_forward_reads else merged_se_reads,
                                       coockie_stats,
@@ -105,7 +105,7 @@ class FilteringPipeline(Pipeline):
                                       out_dir=coockie_filtered_sample_dir, use_dust_filter=False,
                                       dust_cutoff=None, dust_window_size=None, use_N_filter=False,
                                       read_length_cutoff=None, polyGC_length_cutoff=None)
-                """
+
                 #"""
                 print("\tParsing Cookiecutter report...")
                 coockiecutter_report = CoockiecutterReport(coockie_stats, input_is_se=input_is_se)
@@ -145,7 +145,7 @@ class FilteringPipeline(Pipeline):
                                    base_quality=base_quality)
 
             else:
-                print("Filtering by Trimmomatic...")
+                print("\tFiltering by Trimmomatic...")
                 Trimmomatic.filter(merged_forward_reads if skip_coockiecutter else coockie_filtered_paired_forward_reads,
                                    trimmomatic_output_prefix, output_extension="fq",
                                    right_reads=merged_reverse_reads if skip_coockiecutter else coockie_filtered_paired_reverse_reads,
