@@ -65,7 +65,7 @@ parser.add_argument("-z", "--read_name_type", action="store", dest="read_name_ty
 parser.add_argument("-y", "--dont_retain_single_ends", action="store", dest="dont_retain_single_ends", default=False,
                     help="Don't retain SE reads appeared during filtration. Default: False")
 
-parser.add_argument("--input_is_se", action="store", dest="input_is_se", default=False,
+parser.add_argument("--input_is_se", action="store_true", dest="input_is_se", default=False,
                     help="Input is single ended. Default: False")
 
 args = parser.parse_args()
