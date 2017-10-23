@@ -4,6 +4,7 @@ from collections import OrderedDict
 from CustomCollections.GeneralCollections import TwoLvlDict
 
 # adapter for 2 versions of Coockiecutter
+
 class CoockiecutterReport(OrderedDict):
     def __init__(self, coockiecutter_report_file):
         #self = OrderedDict()
