@@ -95,6 +95,7 @@ class FilteringPipeline(Pipeline):
                                                                                                    use_links_if_merge_not_necessary=True,
                                                                                                    input_is_se=input_is_se)
             if not skip_coockiecutter:
+                print("\tFiltering by Cookiecutter")
                 Cookiecutter.rm_reads(adapter_fragment_file,
                                       merged_forward_reads if merged_forward_reads else merged_se_reads,
                                       coockie_stats,
@@ -103,7 +104,8 @@ class FilteringPipeline(Pipeline):
                                       dust_cutoff=None, dust_window_size=None, use_N_filter=False,
                                       read_length_cutoff=None, polyGC_length_cutoff=None)
                 #"""
-                coockiecutter_report = CoockiecutterReport(coockie_stats)
+                print("\tParsing Cookiecutter report...")
+                coockiecutter_report = CoockiecutterReport(coockie_stats, input_is_se=input_is_se)
 
                 filtering_statistics[sample]["raw_pairs"] = coockiecutter_report.input_pairs
                 filtering_statistics[sample]["pairs_after_coockiecutter"] = coockiecutter_report.retained_pairs
@@ -114,6 +116,8 @@ class FilteringPipeline(Pipeline):
                 coockie_filtered_paired_forward_reads = "%s/%s_1.ok.fastq" % (coockie_filtered_sample_dir, sample)
                 coockie_filtered_paired_reverse_reads = "%s/%s_2.ok.fastq" % (coockie_filtered_sample_dir, sample)
                 coockie_filtered_paired_se_reads = ""
+
+                coockie_filtered_se_reads = "%s/%s.se.ok.fastq" % (coockie_filtered_sample_dir, sample)
             # se reads produced by Coockiecutter are ignored now!!
 
             #coockie_trimmomatic_filtered_sample_dir = "%s/%s/" % (coockie_trimmomatic_filtered_dir, sample)
@@ -121,7 +125,8 @@ class FilteringPipeline(Pipeline):
             trimmomatic_log = "%s.trimmomatic.log" % trimmomatic_output_prefix
             #"""
             if (merged_forward_reads is None) and (merged_reverse_reads is None):
-                Trimmomatic.filter(merged_se_reads if skip_coockiecutter else coockie_filtered_paired_se_reads,
+                print("Filtering by Trimmomatic...")
+                Trimmomatic.filter(merged_se_reads if skip_coockiecutter else coockie_filtered_se_reads,
                                    trimmomatic_output_prefix, output_extension="fq",
                                    right_reads=None,
                                    adapters_file=trimmomatic_adapter_file,
@@ -135,6 +140,7 @@ class FilteringPipeline(Pipeline):
                                    logfile=trimmomatic_log,
                                    base_quality=base_quality)
             else:
+                print("Filtering by Trimmomatic...")
                 Trimmomatic.filter(merged_forward_reads if skip_coockiecutter else coockie_filtered_paired_forward_reads,
                                    trimmomatic_output_prefix, output_extension="fq",
                                    right_reads=merged_reverse_reads if skip_coockiecutter else coockie_filtered_paired_reverse_reads,
