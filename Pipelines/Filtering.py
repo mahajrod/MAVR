@@ -257,7 +257,7 @@ class FilteringPipeline(Pipeline):
                     os.system("ln %s %s" % (coockie_trimmomatic_filtered_unpaired_forward_reads, final_forward_se_reads))
                     os.system("ln %s %s" % (coockie_trimmomatic_filtered_unpaired_reverse_reads, final_reverse_se_reads))
                     """
-                filtering_statistics[sample]["pairs_survived_after_filtration,%"] = float("%.2f" % (float(trimmomatic_report.stats["both_surviving"]) / filtering_statistics[sample]["raw_pairs"] * 100))
+                filtering_statistics[sample]["pairs_survived_after_filtration,%"] = float("%.2f" % (float(trimmomatic_report.stats["surviving" if input_is_se else "both_surviving"]) / filtering_statistics[sample]["raw_pairs"] * 100))
 
             print filtering_statistics.table_form()
 
