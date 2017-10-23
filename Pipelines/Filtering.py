@@ -129,7 +129,7 @@ class FilteringPipeline(Pipeline):
             #"""
             if (merged_forward_reads is None) and (merged_reverse_reads is None):
                 print("Filtering by Trimmomatic...")
-                """
+
                 Trimmomatic.filter(merged_se_reads if skip_coockiecutter else coockie_filtered_se_reads,
                                    trimmomatic_output_prefix, output_extension="fq",
                                    right_reads=None,
@@ -143,7 +143,7 @@ class FilteringPipeline(Pipeline):
                                    crop_length=crop_length, head_crop_length=head_crop_length, min_length=min_len,
                                    logfile=trimmomatic_log,
                                    base_quality=base_quality)
-                """
+
             else:
                 print("Filtering by Trimmomatic...")
                 Trimmomatic.filter(merged_forward_reads if skip_coockiecutter else coockie_filtered_paired_forward_reads,
@@ -215,6 +215,9 @@ class FilteringPipeline(Pipeline):
                                              quality_type=base_quality,
                                              stat_file=facut_reverse_se_stat_file, name_type=read_name_type)
                 #"""
+                #if input_is_se:
+
+                #else:
                 facut_report = FaCutReport(facut_pe_stat_file)
 
                 filtering_statistics[sample]["pairs_after_facut"] = facut_report.retained_pairs
