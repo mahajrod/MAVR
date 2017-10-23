@@ -46,10 +46,8 @@ parser.add_argument("-q", "--average_quality_threshold", action="store", dest="a
                          "Depends on -q/--average_quality_threshold option.Default - 20.")
 parser.add_argument("-b", "--base_quality", action="store", dest="base_quality", default="phred33",
                     help="Type of base quality. Possible variants: phred33, phred64. Default - phred33 ")
-
 parser.add_argument("-l", "--min_length", action="store", dest="min_len", type=int, default=50,
                     help="Minimum length of read to retain. Default - 50")
-
 parser.add_argument("-j", "--trimmomatic_dir", action="store", dest="trimmomatic_dir", default="",
                     help="Path to Trimmomatic directory")
 parser.add_argument("-c", "--coockiecutter_dir", action="store", dest="coockiecutter_dir", default="",
@@ -66,6 +64,9 @@ parser.add_argument("-z", "--read_name_type", action="store", dest="read_name_ty
                     help="Read name type")
 parser.add_argument("-y", "--dont_retain_single_ends", action="store", dest="dont_retain_single_ends", default=False,
                     help="Don't retain SE reads appeared during filtration. Default: False")
+
+parser.add_argument("--input_is_se", action="store", dest="input_is_se", default=False,
+                    help="Input is single ended. Default: False")
 
 args = parser.parse_args()
 
@@ -92,4 +93,5 @@ FilteringPipeline.filter(args.samples_dir, args.output_dir, args.adapter_kmers, 
                          base_quality=args.base_quality, read_name_type=args.read_name_type,
                          remove_intermediate_files=args.remove_intermediate_files,
                          skip_coockiecutter=args.skip_coockiecutter,
-                         retain_single_end_reads=not args.dont_retain_single_ends)
+                         retain_single_end_reads=not args.dont_retain_single_ends,
+                         input_is_se=args.input_is_se)

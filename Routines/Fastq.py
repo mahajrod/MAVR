@@ -107,10 +107,11 @@ class FastQRoutines(FileRoutines):
         filtered_out_reverse_se_fd.close()
 
     def combine_fastq_files(self, samples_directory, sample, output_directory,
-                            use_links_if_merge_not_necessary=True):
+                            use_links_if_merge_not_necessary=True, input_is_se=False):
         sample_dir = "%s/%s/" % (samples_directory, sample)
 
-        filetypes, forward_files, reverse_files, se_files = self.make_lists_forward_and_reverse_files(sample_dir)
+        filetypes, forward_files, reverse_files, se_files = self.make_lists_forward_and_reverse_files(sample_dir,
+                                                                                                      input_is_se=input_is_se)
 
         uncompresed = True
         if len(filetypes) == 1:

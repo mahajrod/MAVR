@@ -234,7 +234,7 @@ class FileRoutines:
         out_fd.close()
 
     @staticmethod
-    def make_lists_forward_and_reverse_files(sample_dir, filename_fragment_to_mark_se_reads=".se."):
+    def make_lists_forward_and_reverse_files(sample_dir, filename_fragment_to_mark_se_reads=".se.", input_is_se=False):
         file_list = sorted(os.listdir(sample_dir))
         filtered_filelist = []
         filetypes = set()
@@ -249,8 +249,12 @@ class FileRoutines:
                 continue
             filtered_filelist.append("%s/%s" % (sample_dir, entry))
 
+        if input_is_se:
+            return filetypes, [], [], filtered_filelist
+
         single_end_filelist = []
         paired_end_filelist = []
+
         for entry in filtered_filelist:
             if filename_fragment_to_mark_se_reads in entry:
                 single_end_filelist.append(entry)

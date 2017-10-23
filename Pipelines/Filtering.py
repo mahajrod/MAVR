@@ -48,7 +48,7 @@ class FilteringPipeline(Pipeline):
                leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
                crop_length=None, head_crop_length=None, min_len=50,
                remove_intermediate_files=False, skip_coockiecutter=False,
-               retain_single_end_reads=True):
+               retain_single_end_reads=True, input_is_se=False):
 
         Cookiecutter.path = coockiecutter_dir
         Trimmomatic.jar_path = trimmomatic_dir
@@ -89,10 +89,15 @@ class FilteringPipeline(Pipeline):
             filtering_stat_sample_dir = "%s/%s" % (filtering_stat_dir, sample)
 
             #"""
-            merged_forward_reads, merged_reverse_reads, merged_se_reads = self.combine_fastq_files(samples_directory, sample, merged_raw_sample_dir, use_links_if_merge_not_necessary=True)
-
+            merged_forward_reads, merged_reverse_reads, merged_se_reads = self.combine_fastq_files(samples_directory,
+                                                                                                   sample,
+                                                                                                   merged_raw_sample_dir,
+                                                                                                   use_links_if_merge_not_necessary=True,
+                                                                                                   input_is_se=input_is_se)
             if not skip_coockiecutter:
-                Cookiecutter.rm_reads(adapter_fragment_file, merged_forward_reads, coockie_stats,
+                Cookiecutter.rm_reads(adapter_fragment_file,
+                                      merged_forward_reads if merged_forward_reads else merged_se_reads,
+                                      coockie_stats,
                                       right_reads=merged_reverse_reads,
                                       out_dir=coockie_filtered_sample_dir, use_dust_filter=False,
                                       dust_cutoff=None, dust_window_size=None, use_N_filter=False,
