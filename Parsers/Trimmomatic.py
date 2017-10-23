@@ -30,7 +30,7 @@ class TrimmomaticReport:
 
             with open(trimmomatic_report, "r") as log_fd:
                 for line in log_fd:
-                    if line[:17] == "Input Reads:":
+                    if line[:12] == "Input Reads:":
                         parsed_list = pattern.parseString(line.strip())
 
             self.stats = {
