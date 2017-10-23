@@ -97,6 +97,7 @@ class FilteringPipeline(Pipeline):
                                                                                                    input_is_se=input_is_se)
             if not skip_coockiecutter:
                 print("\tFiltering by Cookiecutter")
+                """
                 Cookiecutter.rm_reads(adapter_fragment_file,
                                       merged_forward_reads if merged_forward_reads else merged_se_reads,
                                       coockie_stats,
@@ -104,6 +105,7 @@ class FilteringPipeline(Pipeline):
                                       out_dir=coockie_filtered_sample_dir, use_dust_filter=False,
                                       dust_cutoff=None, dust_window_size=None, use_N_filter=False,
                                       read_length_cutoff=None, polyGC_length_cutoff=None)
+                """
                 #"""
                 print("\tParsing Cookiecutter report...")
                 coockiecutter_report = CoockiecutterReport(coockie_stats, input_is_se=input_is_se)
@@ -127,6 +129,7 @@ class FilteringPipeline(Pipeline):
             #"""
             if (merged_forward_reads is None) and (merged_reverse_reads is None):
                 print("Filtering by Trimmomatic...")
+                """
                 Trimmomatic.filter(merged_se_reads if skip_coockiecutter else coockie_filtered_se_reads,
                                    trimmomatic_output_prefix, output_extension="fq",
                                    right_reads=None,
@@ -140,6 +143,7 @@ class FilteringPipeline(Pipeline):
                                    crop_length=crop_length, head_crop_length=head_crop_length, min_length=min_len,
                                    logfile=trimmomatic_log,
                                    base_quality=base_quality)
+                """
             else:
                 print("Filtering by Trimmomatic...")
                 Trimmomatic.filter(merged_forward_reads if skip_coockiecutter else coockie_filtered_paired_forward_reads,
