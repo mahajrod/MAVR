@@ -156,11 +156,11 @@ class FilteringPipeline(Pipeline):
                                    logfile=trimmomatic_log,
                                    base_quality=base_quality)
             #"""
-            trimmomatic_report = TrimmomaticReport(trimmomatic_log)
+            trimmomatic_report = TrimmomaticReport(trimmomatic_log, input_is_se=input_is_se)
             if skip_coockiecutter:
                 filtering_statistics[sample]["raw_pairs"] = trimmomatic_report.stats["input"]
 
-            filtering_statistics[sample]["pairs_after_trimmomatic"] =  trimmomatic_report.stats["surviving"] if input_is_se else trimmomatic_report.stats["both_surviving"]
+            filtering_statistics[sample]["pairs_after_trimmomatic"] = trimmomatic_report.stats["surviving"] if input_is_se else trimmomatic_report.stats["both_surviving"]
             filtering_statistics[sample]["pairs_after_trimmomatic,%"] = trimmomatic_report.stats["surviving,%"] if input_is_se else trimmomatic_report.stats["both_surviving,%"]
 
             if retain_single_end_reads and not input_is_se:
