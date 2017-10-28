@@ -182,11 +182,15 @@ class FilteringPipeline(Pipeline):
             coockie_trimmomatic_filtered_unpaired_forward_reads = "%s/%s_1.se.fq" % (coockie_trimmomatic_filtered_sample_dir, sample)
             coockie_trimmomatic_filtered_unpaired_reverse_reads = "%s/%s_2.se.fq" % (coockie_trimmomatic_filtered_sample_dir, sample)
 
+            coockie_trimmomatic_filtered_se_reads = "%s/%s.se.fq" % (coockie_trimmomatic_filtered_sample_dir, sample)
+
             final_forward_reads = "%s/%s.final_1.fastq" % (final_filtered_sample_dir, sample)
             final_reverse_reads = "%s/%s.final_2.fastq" % (final_filtered_sample_dir, sample)
 
             final_forward_se_reads = "%s/%s.final_1.se.fastq" % (final_filtered_sample_dir, sample)
             final_reverse_se_reads = "%s/%s.final_2.se.fastq" % (final_filtered_sample_dir, sample)
+
+            final_se_reads = "%s/%s.final.se.fastq" % (final_filtered_sample_dir, sample)
 
             if sliding_window_size is None:
                 facut_pe_output_prefix = "%s/%s.pe" % (coockie_trimmomatic_quality_filtered_sample_dir, sample)
@@ -239,24 +243,32 @@ class FilteringPipeline(Pipeline):
 
                 os.system("ln %s %s" % (facut_filtered_forward_reads, final_forward_reads))
                 os.system("ln %s %s" % (facut_filtered_reverse_reads, final_reverse_reads))
-                if retain_single_end_reads:
+                if retain_single_end_reads and not input_is_se:
                     os.system("cat %s %s > %s" % (facut_filtered_forward_se_reads,
                                                   facut_filtered_reverse_se_reads,
                                                   final_forward_se_reads))
+
                     #os.system("ln %s %s" % (facut_filtered_forward_se_reads, final_forward_se_reads))
                     #os.system("ln %s %s" % (facut_filtered_reverse_se_reads, final_reverse_se_reads))
+
+                if input_is_se:
+                    pass
+                    #os.system("ln %s %s" % (coockie_trimmomatic_filtered_se_reads, final_se_reads))
 
             else:
                 os.system("ln %s %s" % (coockie_trimmomatic_filtered_paired_forward_reads, final_forward_reads))
                 os.system("ln %s %s" % (coockie_trimmomatic_filtered_paired_reverse_reads, final_reverse_reads))
-                if retain_single_end_reads:
+                if retain_single_end_reads and not input_is_se:
                     os.system("cat %s %s > %s" % (coockie_trimmomatic_filtered_unpaired_forward_reads,
                                                   coockie_trimmomatic_filtered_unpaired_reverse_reads,
                                                   final_forward_se_reads))
                     """
                     os.system("ln %s %s" % (coockie_trimmomatic_filtered_unpaired_forward_reads, final_forward_se_reads))
                     os.system("ln %s %s" % (coockie_trimmomatic_filtered_unpaired_reverse_reads, final_reverse_se_reads))
+
                     """
+                if input_is_se:
+                    os.system("ln %s %s" % (coockie_trimmomatic_filtered_se_reads, final_se_reads))
                 filtering_statistics[sample]["pairs_survived_after_filtration,%"] = float("%.2f" % (float(trimmomatic_report.stats["surviving" if input_is_se else "both_surviving"]) / filtering_statistics[sample]["raw_pairs"] * 100))
 
             print filtering_statistics.table_form()
