@@ -586,9 +586,9 @@ class MatplotlibRoutines:
 
         plt.title(title)
 
-        print counts
         if show_colorbar:
             max_counts = np.nanmax(counts)
+            print max_counts
             cmap = plt.get_cmap('jet', max_counts)
             #cmap.set_under('gray')
             mappable = plt.cm.ScalarMappable(cmap=cmap)
