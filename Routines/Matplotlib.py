@@ -589,7 +589,7 @@ class MatplotlibRoutines:
         if show_colorbar:
             max_counts = np.nanmax(counts)
             print max_counts
-            plt.colorbar()
+            plt.colorbar(image,ax=ax)
             """
             cmap = plt.get_cmap('jet', max_counts)
             #cmap.set_under('gray')
