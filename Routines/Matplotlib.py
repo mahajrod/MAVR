@@ -537,6 +537,9 @@ class MatplotlibRoutines:
         min_x, max_x = min(x), max(x)
         min_y, max_y = min(y), max(y)
 
+        print min_x, max_x
+        print min_y, max_y
+
         if bin_width:
             print min_x, max_x
             xbins = self.generate_bin_array_by_width(min_x_value if min_x_value is not None else min_x,
