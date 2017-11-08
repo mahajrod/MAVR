@@ -575,8 +575,8 @@ class MatplotlibRoutines:
         fig, ax = plt.subplots(figsize=figsize)
         counts, xedges, yedges, image = ax.hist2d(x, y, bins, cmin=minimum_counts_to_show)
 
-        plt.xlim(xmin=min_x_value, xmax=max_x_value)
-        plt.ylim(ymin=min_y_value, ymax=max_y_value)
+        #plt.xlim(xmin=min_x_value, xmax=max_x_value)
+        #plt.ylim(ymin=min_y_value, ymax=max_y_value)
 
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
