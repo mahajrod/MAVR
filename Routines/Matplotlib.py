@@ -520,4 +520,99 @@ class MatplotlibRoutines:
         # save histo values
         np.savetxt("%s.histo" % output_prefix, zip(bin_centers, n), fmt="%i\t%i")
 
+    @staticmethod
+    def generate_bin_array_by_width(min_value, max_value, bin_width, add_max_value=True):
 
+        bin_array = np.arange(min_value, max_value, bin_width)
+        if add_max_value:
+            bin_array = np.append(bin_array, [max_value])
+
+        return bin_array
+
+    def generate_bin_array(self, x, y, bin_number=20, bin_width=None, bin_array=None,
+                           min_x_value=None, max_x_value=None, min_y_value=None, max_y_value=None, add_max_value=True):
+        if (bin_width is not None) and (bin_array is not None):
+            raise ValueError("Both bin width and bin array were set")
+
+        min_x, max_x = min(x), max(x)
+        min_y, max_y = min(y), max(y)
+
+        if bin_width:
+            xbins = self.generate_bin_array_by_width(min_x_value if min_x_value is not None else min_x,
+                                                     max_x_value if max_x_value is not None else max_x,
+                                                     bin_width,
+                                                     add_max_value=add_max_value)
+            ybins = self.generate_bin_array_by_width(min_y_value if min_y_value is not None else min_x,
+                                                     max_y_value if max_y_value is not None else max_x,
+                                                     bin_width,
+                                                     add_max_value=add_max_value)
+            bins = (xbins, ybins)
+
+        elif bin_array:
+            bins = bin_array
+        else:
+            xbins = np.linspace(min_x_value if min_x_value is not None else min_x,
+                                max_x_value if max_x_value is not None else max_x,
+                                bin_number if isinstance(bin_number, int) else bin_number[0])
+            ybins = np.linspace(min_y_value if min_y_value is not None else min_y,
+                                max_y_value if max_y_value is not None else max_y,
+                                bin_number if isinstance(bin_number, int) else bin_number[1])
+            bins = (xbins, ybins)
+
+        return bins
+
+    def draw_heatmap(self, x, y, output_prefix, xlabel=None, ylabel=None, title=None,
+                     figsize=(8, 8), minimum_counts_to_show=1,
+                     extensions=("png", "svg"), show_colorbar=True, bin_number=20, bin_width=None, bin_array=None,
+                     min_x_value=None, max_x_value=None, min_y_value=None, max_y_value=None, add_max_value=True):
+
+        bins = self.generate_bin_array(x, y, bin_number=bin_number, bin_width=bin_width, bin_array=bin_array,
+                                       min_x_value=min_x_value, max_x_value=max_x_value,
+                                       min_y_value=min_y_value, max_y_value=max_y_value,
+                                       add_max_value=add_max_value)
+
+        fig, ax = plt.subplots(figsize=figsize)
+        counts, xedges, yedges, image = ax.hist2d(x, y, bins, cmin=minimum_counts_to_show)
+
+        plt.xlim(xmin=min_x_value, xmax=max_x_value)
+        plt.ylim(ymin=min_y_value, ymax=max_y_value)
+
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
+
+        plt.title(title)
+        if show_colorbar:
+            max_counts = max(counts)
+            cmap = plt.get_cmap('jet', max_counts)
+            #cmap.set_under('gray')
+            mappable = plt.cm.ScalarMappable(cmap=cmap)
+            mappable.set_array([])
+            mappable.set_clim(1, max_counts + 1)
+            #mappable.set_array([])
+            #mappable.set_clim(-0.5, ncolors+0.5)
+            colorbar = plt.colorbar(mappable)
+            #colorbar.set_ticks(np.linspace(1 + 0.5, max_counts + 0.5, max_counts), minor=True)
+            decimal = int(max_counts / 10) + 1
+            max_major_tick = max_counts - (max_counts % decimal)
+            major_ticks = np.linspace(decimal + 0.5, max_major_tick + 0.5, int(max_major_tick / decimal))
+            colorbar.set_ticks(major_ticks)
+            colorbar.set_ticklabels(range(decimal, max_major_tick + decimal, decimal))
+
+        for ext in extensions:
+            plt.savefig("%s.%s" % (output_prefix, ext))
+
+    def draw_heatmap_from_file(self, input_file, output_prefix, x_column=0, y_column=1, xlabel=None, ylabel=None,
+                               title=None, figsize=(8, 8), minimum_counts_to_show=1, extensions=("png", "svg"),
+                               show_colorbar=True, bin_number=20, bin_width=None, bin_array=None,
+                               min_x_value=None, max_x_value=None, min_y_value=None, max_y_value=None,
+                               add_max_value=True):
+
+        x = np.loadtxt(input_file, usecols=(x_column,))
+        y = np.loadtxt(input_file, usecols=(y_column,))
+
+        self.draw_heatmap(x, y, output_prefix=output_prefix, xlabel=xlabel, ylabel=ylabel, title=None,
+                          figsize=figsize, minimum_counts_to_show=minimum_counts_to_show, extensions=extensions,
+                          show_colorbar=show_colorbar, bin_number=bin_number, bin_width=bin_width, bin_array=bin_array,
+                          min_x_value=min_x_value, max_x_value=max_x_value,
+                          min_y_value=min_y_value, max_y_value=max_y_value,
+                          add_max_value=add_max_value)
