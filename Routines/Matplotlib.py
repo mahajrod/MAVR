@@ -585,7 +585,8 @@ class MatplotlibRoutines:
         plt.ylabel(ylabel)
 
         plt.title(title)
-
+        np.sav
+        np.savetxt("tara.t", counts, delimiter='\n')
         if show_colorbar:
             max_counts = np.nanmax(counts)
             print max_counts
