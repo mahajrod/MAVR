@@ -581,15 +581,20 @@ class MatplotlibRoutines:
         plt.xlim(xmin=min_x_value, xmax=max_x_value)
         plt.ylim(ymin=min_y_value, ymax=max_y_value)
 
-        plt.xlabel(xlabel)
-        plt.ylabel(ylabel)
+        if xlabel:
+            plt.xlabel(xlabel)
 
-        plt.title(title)
-        np.savetxt("tara.t", counts, delimiter='\n')
+        if ylabel:
+            plt.ylabel(ylabel)
+
+        if title:
+            plt.title(title)
+
+        #np.savetxt("tara.t", counts, delimiter='\n')
         if show_colorbar:
             max_counts = np.nanmax(counts)
-            print max_counts
-            plt.colorbar(image,ax=ax)
+            #print max_counts
+            plt.colorbar(image, ax=ax)
             """
             cmap = plt.get_cmap('jet', max_counts)
             #cmap.set_under('gray')
