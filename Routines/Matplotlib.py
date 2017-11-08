@@ -589,6 +589,8 @@ class MatplotlibRoutines:
         if show_colorbar:
             max_counts = np.nanmax(counts)
             print max_counts
+            plt.colorbar()
+            """
             cmap = plt.get_cmap('jet', max_counts)
             #cmap.set_under('gray')
             mappable = plt.cm.ScalarMappable(cmap=cmap)
@@ -604,7 +606,7 @@ class MatplotlibRoutines:
             colorbar.set_ticks(major_ticks)
             print (decimal, max_major_tick + decimal, decimal)
             colorbar.set_ticklabels(range(decimal, int(max_major_tick + decimal), decimal))
-
+            """
         for ext in extensions:
             plt.savefig("%s.%s" % (output_prefix, ext))
 
