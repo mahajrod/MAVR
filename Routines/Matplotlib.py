@@ -571,7 +571,8 @@ class MatplotlibRoutines:
                                        min_x_value=min_x_value, max_x_value=max_x_value,
                                        min_y_value=min_y_value, max_y_value=max_y_value,
                                        add_max_value=add_max_value)
-
+        print bins[0]
+        print bins[1]
         fig, ax = plt.subplots(figsize=figsize)
         counts, xedges, yedges, image = ax.hist2d(x, y, bins, cmin=minimum_counts_to_show)
 
