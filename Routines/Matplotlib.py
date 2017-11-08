@@ -571,20 +571,22 @@ class MatplotlibRoutines:
                                        min_x_value=min_x_value, max_x_value=max_x_value,
                                        min_y_value=min_y_value, max_y_value=max_y_value,
                                        add_max_value=add_max_value)
-        print bins[0]
-        print bins[1]
+        #print bins[0]
+        #print bins[1]
         fig, ax = plt.subplots(figsize=figsize)
         counts, xedges, yedges, image = ax.hist2d(x, y, bins, cmin=minimum_counts_to_show)
-        print x
-        print y
-        print minimum_counts_to_show
-        #plt.xlim(xmin=min_x_value, xmax=max_x_value)
-        #plt.ylim(ymin=min_y_value, ymax=max_y_value)
+        #print x
+        #print y
+        #print minimum_counts_to_show
+        plt.xlim(xmin=min_x_value, xmax=max_x_value)
+        plt.ylim(ymin=min_y_value, ymax=max_y_value)
 
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
 
         plt.title(title)
+
+        print counts
         if show_colorbar:
             max_counts = np.max(counts)
             cmap = plt.get_cmap('jet', max_counts)
