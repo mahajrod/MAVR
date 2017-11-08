@@ -602,6 +602,7 @@ class MatplotlibRoutines:
             max_major_tick = max_counts - (max_counts % decimal)
             major_ticks = np.linspace(decimal + 0.5, max_major_tick + 0.5, int(max_major_tick / decimal))
             colorbar.set_ticks(major_ticks)
+            print (decimal, max_major_tick + decimal, decimal)
             colorbar.set_ticklabels(range(decimal, max_major_tick + decimal, decimal))
 
         for ext in extensions:
