@@ -27,6 +27,12 @@ class Wget(Tool):
             self.safe_mkdir(filename[:-4])
             os.system("mv %s %s/" % (filename, filename[:-4]))
 
+    def parallel_download(self, link_list):
+        options_list = []
+        for link in link_list:
+            options_list.append("--no-host-directories -rc -t 500 -nv %s" % link)
+
+        self.parallel_execute(options_list)
 
 class Axel(Tool):
     def __init__(self, path="", max_threads=4):

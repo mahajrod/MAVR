@@ -52,4 +52,46 @@ class CollectionGFF(Collection):
                     tmp[5] = float(tmp[5])
                 if tmp[7] != '.':
                     tmp[7] = float(tmp[7])
+                tmp[8] = tmp[8].split(";")
+                tmp[8] = dict(map(lambda s: s.split("="), tmp[8]))
+
                 self.records.append(RecordGFF(*tmp))
+
+    @staticmethod
+    def gff_simple_generator(input_file):
+
+        with open(input_file, "r") as in_fd:
+            for line in in_fd:
+                if line[0] == "#":
+                    continue
+                tmp = line.strip().split("\t")
+                #print(tmp)
+                tmp[3] = int(tmp[3])
+                tmp[4] = int(tmp[4])
+                if tmp[5] != '.':
+                    tmp[5] = float(tmp[5])
+                if tmp[7] != '.':
+                    tmp[7] = float(tmp[7])
+                tmp[8] = tmp[8].split(";")
+                tmp[8] = dict(map(lambda s: s.split("="), tmp[8]))
+                yield tmp
+
+    @staticmethod
+    def gff_simple_record_generator(input_file):
+
+        with open(input_file, "r") as in_fd:
+            for line in in_fd:
+                if line[0] == "#":
+                    continue
+                tmp = line.strip().split("\t")
+                #print(tmp)
+                tmp[3] = int(tmp[3])
+                tmp[4] = int(tmp[4])
+                if tmp[5] != '.':
+                    tmp[5] = float(tmp[5])
+                if tmp[7] != '.':
+                    tmp[7] = float(tmp[7])
+                tmp[8] = tmp[8].split(";")
+                tmp[8] = dict(map(lambda s: s.split("="), tmp[8]))
+
+                yield RecordGFF(*tmp)
