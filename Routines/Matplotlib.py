@@ -523,6 +523,7 @@ class MatplotlibRoutines:
     @staticmethod
     def generate_bin_array_by_width(min_value, max_value, bin_width, add_max_value=True):
 
+        print min_value, max_value, bin_width
         bin_array = np.arange(min_value, max_value, bin_width)
         if add_max_value:
             bin_array = np.append(bin_array, [max_value])
@@ -537,11 +538,7 @@ class MatplotlibRoutines:
         min_x, max_x = min(x), max(x)
         min_y, max_y = min(y), max(y)
 
-        print min_x, max_x
-        print min_y, max_y
-
         if bin_width:
-            print min_x, max_x
             xbins = self.generate_bin_array_by_width(min_x_value if min_x_value is not None else min_x,
                                                      max_x_value if max_x_value is not None else max_x,
                                                      bin_width,
