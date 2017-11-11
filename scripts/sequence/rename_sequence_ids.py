@@ -29,11 +29,16 @@ parser.add_argument("-e", "--header", action="store_true", dest="header", defaul
                     help="Header is present in synonyms file. Default - False")
 parser.add_argument("-l", "--clear_description", action="store_true", dest="clear_description", default=False,
                     help="Clear description. Default - False")
+parser.add_argument("-r", "--store_old_name_in_description", action="store_true", dest="store_old_name_in_description",
+                    default=False,
+                    help="Store old name in description. Default: False")
+
 args = parser.parse_args()
 
 SequenceRoutines.rename_records_from_files(args.input, args.output, args.syn_file, format=args.format,
                                            header=args.header, separator=args.separator, key_index=args.key_index,
                                            value_index=args.value_index, clear_description=args.clear_description,
+                                           store_old_name_in_description=args.store_old_name_in_description,
                                            comments_prefix=args.comments_prefix)
 
 
