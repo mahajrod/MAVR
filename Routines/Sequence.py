@@ -497,8 +497,11 @@ class SequenceRoutines(FileRoutines):
 
     def translate_sequences_from_file(self, input_file, output_file, format="fasta", id_expression=None,
                                       genetic_code_table=1, translate_to_stop=True,
-                                      prefix_of_file_inframe_stop_codons_seqs="cds_with_in_frame_stop_codons"):
-        cds_dict = SeqIO.index_db("tmp.idx", input_file, format=format)
+                                      prefix_of_file_inframe_stop_codons_seqs="cds_with_in_frame_stop_codons",
+                                      mode="parse", index_file="tmp.idx"):
+
+        cds_dict = self.parse_seq_file(input_file, mode, format=format, index_file=index_file)
+        #cds_dict = SeqIO.index_db("tmp.idx", input_file, format=format)
         SeqIO.write(self.translated_seq_generator(cds_dict, id_expression=id_expression,
                                                   genetic_code_table=genetic_code_table,
                                                   translate_to_stop=translate_to_stop,
@@ -1207,7 +1210,8 @@ class SequenceRoutines(FileRoutines):
             fd_list[i].close()
 
     @staticmethod
-    def renamed_records_generator(record_dict, syn_dict=None, expression=None, clear_description=False):
+    def renamed_records_generator(record_dict, syn_dict=None, expression=None, clear_description=False,
+                                  store_old_name_in_description=False):
         for record_id in record_dict:
             if syn_dict:
                 if record_id not in syn_dict:
@@ -1224,12 +1228,15 @@ class SequenceRoutines(FileRoutines):
 
             if clear_description:
                 record.description = ""
+            if store_old_name_in_description:
+                record.description += " old_name=%s" % record_id
 
             yield record
 
     def rename_records_from_files(self, input_file, output_file, synonyms_file=None, format="fasta", header=False,
                                   separator="\t", key_index=0, value_index=1, syn_expression=None, comments_prefix=None,
-                                  clear_description=False, record_id_expression=None):
+                                  clear_description=False, record_id_expression=None, store_old_name_in_description=False,
+                                  parsing_mode="parse"):
         if synonyms_file and record_id_expression:
             raise ValueError("Both synonyms file and record id expression were set")
         elif (not synonyms_file) and (not record_id_expression):
@@ -1241,13 +1248,15 @@ class SequenceRoutines(FileRoutines):
         else:
             syn_dict = None
 
-        record_dict = SeqIO.index_db("temp.idx", input_file, format=format)
+        record_dict = self.parse_seq_file(input_file, parsing_mode, format=format, index_file="temp.idx")
+        #SeqIO.index_db("temp.idx", input_file, format=format)
 
         SeqIO.write(self.renamed_records_generator(record_dict, syn_dict=syn_dict, expression=record_id_expression,
+                                                   store_old_name_in_description=store_old_name_in_description,
                                                    clear_description=clear_description),
                     output_file, format=format)
-
-        os.remove("temp.idx")
+        if parsing_mode == "index_db":
+            os.remove("temp.idx")
 
     def rename_records_by_sequential_ids_from_files(self, input_file, output_file, output_syn_file, format="fasta",
                                                     clear_description=False, record_id_prefix="SEQ",

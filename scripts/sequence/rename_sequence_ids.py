@@ -32,6 +32,10 @@ parser.add_argument("-l", "--clear_description", action="store_true", dest="clea
 parser.add_argument("-r", "--store_old_name_in_description", action="store_true", dest="store_old_name_in_description",
                     default=False,
                     help="Store old name in description. Default: False")
+parser.add_argument("-p", "--parsing_mode", action="store", dest="parsing_mode", default="parse",
+                    help="Parsing mode for input sequence file. "
+                         "Possible variants: 'index_db', 'index', 'parse'(default)")
+
 
 args = parser.parse_args()
 
@@ -39,7 +43,7 @@ SequenceRoutines.rename_records_from_files(args.input, args.output, args.syn_fil
                                            header=args.header, separator=args.separator, key_index=args.key_index,
                                            value_index=args.value_index, clear_description=args.clear_description,
                                            store_old_name_in_description=args.store_old_name_in_description,
-                                           comments_prefix=args.comments_prefix)
+                                           comments_prefix=args.comments_prefix,  parsing_mode=args.parsing_mode)
 
 
 

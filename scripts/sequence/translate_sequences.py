@@ -15,8 +15,13 @@ parser.add_argument("-g", "--genetic_code", action="store", dest="code", type=in
                     help="Genetic code to use. Set by number of ncbi code. Default - 1 (universal)")
 parser.add_argument("-s", "--translate_to_stop", action="store_true", dest="translate_to_stop",
                     help="Translate to first in-frame stop codon. Default - False(translate whole sequence)")
+parser.add_argument("-p", "--parsing_mode", action="store", dest="parsing_mode", default="parse",
+                    help="Parsing mode for input sequence file. "
+                         "Possible variants: 'index_db', 'index', 'parse'(default)")
+
 args = parser.parse_args()
 
 
 SequenceRoutines.translate_sequences_from_file(args.input, args.output, format="fasta", id_expression=None,
-                                               genetic_code_table=args.code, translate_to_stop=True)
+                                               genetic_code_table=args.code, translate_to_stop=True,
+                                               mode=args.parsing_mode, index_file="tmp.idx")
