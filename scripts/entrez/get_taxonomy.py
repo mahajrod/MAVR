@@ -8,7 +8,7 @@ from Routines import NCBIRoutines
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input", action="store", dest="input",
-                    help="Input file with latin names of taxa (one per line)")
+                    help="Input file with latin names or ids of taxa (one per line)")
 parser.add_argument("-o", "--output", action="store", dest="output",
                     help="Output file")
 parser.add_argument("-a", "--email", action="store", dest="email", required=True,
