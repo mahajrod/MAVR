@@ -2,6 +2,7 @@ __author__ = 'mahajrod'
 
 from copy import deepcopy
 
+from collections import OrderedDict
 from Bio import SearchIO
 from BCBio import GFF
 
@@ -311,4 +312,12 @@ class AnnotationsRoutines:
                     longest_list.append(current_transcript)
         longest_list.write(longest_id_file)
 
+    @staticmethod
+    def parse_gff_annotation_string_to_dict(gff_annotation_string):
 
+        annotation_dict = OrderedDict()
+        for entry in gff_annotation_string.split(";"):
+            key, value = entry.split("=")
+            annotation_dict[key] = value.split(",")
+
+        return annotation_dict

@@ -12,6 +12,7 @@ from collections import OrderedDict
 from Bio import SeqIO, Entrez
 from Bio.SeqRecord import SeqRecord
 from Routines.File import FileRoutines
+from Routines import AnnotationsRoutines
 from Parsers.GFF import CollectionGFF
 from CustomCollections.GeneralCollections import IdList, SynDict, TwoLvlDict, IdSet
 
@@ -575,8 +576,34 @@ class NCBIRoutines(FileRoutines):
         for record in ncbi_gff_collection.gff_simple_generator(ncbi_gff):
             pass
 
-
-
+    @staticmethod
+    def extract_gene_info_from_ncbi_gff(input_gff, output, feature_type_list=["gene"]):
+        with open(input_gff, "r") as in_fd:
+            with open(output, 'w') as out_fd:
+                out_fd.write("#GeneID\tName\tGeneSynonym\tGeneBiotype\tDbxref\tDescription\n")
+                for line in in_fd:
+                    if line[0] == "#":
+                        continue
+                    tmp_list = line.strip().split("\t")
+                    if tmp_list[2] not in feature_type_list:
+                        continue
+                    annotation_dict = AnnotationsRoutines.parse_gff_annotation_string_to_dict(tmp_list[8])
+                    if "Dbxref" in annotation_dict:
+                        for entry in annotation_dict["Dbxref"]:
+                            if "GeneID" in entry:
+                                geneid = entry.split(":")[1]
+                                break
+                            else:
+                                geneid = "."
+                        dbxref = ",".annotation_dict["Dbxref"]
+                    else:
+                        geneid = "."
+                        dbxref = "."
+                    name = ",".join(annotation_dict["Name"] if "Name" in annotation_dict else ".")
+                    description = ",".join(annotation_dict["description"] if "description" in annotation_dict else ".")
+                    gene_biotype = ",".join(annotation_dict["gene_biotype"] if "gene_biotype" in annotation_dict else ".")
+                    gene_synonym = ",".join(annotation_dict["gene_synonym"] if "gene_synonym" in annotation_dict else ".")
+                    out_fd.write("%s\t%s\t%s\t%s\t%s\t%s\n" % (geneid, name, gene_synonym, gene_biotype, dbxref, description))
 
     def get_taxa_genomes_summary(self, taxa, email, output_directory, output_prefix,
                                  max_ids_per_query=8000, max_download_attempts=500,
