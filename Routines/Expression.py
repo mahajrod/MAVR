@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'mahajrod'
 import numpy as np
-from CustomCollections.GeneralCollections import IdList
+from CustomCollections.GeneralCollections import IdList, SynDict
 
 
 class ExpressionRoutines:
@@ -158,3 +158,36 @@ class ExpressionRoutines:
 
         zero_max_base_lvl_list.write(zero_max_base_lvl_list_file)
         max_ratio_to_base_lvl_fd.close()
+
+    @staticmethod
+    def calculate_fpkm_for_count_table(count_table_file, transcript_length_file, output_file,
+                                       separator="\t"):
+        length_dict = SynDict(filename=transcript_length_file, expression=int, comments_prefix="#")
+
+        with open(count_table_file, "r") as in_fd:
+            header_list = in_fd.readline().strip().split(separator)
+
+            samples_list = header_list[1:]
+            gene_list = IdList()
+            count_list = []
+            for line in in_fd:
+                tmp = line.strip().split(separator)
+                gene_list.append(tmp[0])
+                count_list.append(map(float, tmp[1:]))
+
+            per_sample_total_counts = []
+
+            for sample_index in range(0, len(samples_list)):
+                total_counts = 0
+                for gene_index in range(0, len(count_list)):
+                    total_counts += count_list[gene_index][sample_index]
+                per_sample_total_counts.append(total_counts)
+
+        with open(output_file, "w") as out_fd:
+            out_fd.write(separator.join(header_list) + "\n")
+            for gene_index in range(0, len(count_list)):
+                normalized_counts_list = []
+                for sample_index in range(0, len(samples_list)):
+                    gene_count = count_list[gene_index][sample_index] * (10**9) / length_dict[gene_list[gene_index]] / per_sample_total_counts[sample_index]
+                    normalized_counts_list.append(gene_count)
+                out_fd.write("%s\t%s\n" % (gene_list[gene_index], "\t".join(map(str, normalized_counts_list))))
