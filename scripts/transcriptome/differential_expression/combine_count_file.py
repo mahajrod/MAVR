@@ -16,7 +16,7 @@ parser.add_argument("-o", "--output_file", action="store", dest="output", requir
 parser.add_argument("-s", "--sample_list", action="store", dest="sample_list",
                     type=lambda s: s.split(","),
                     help="Comma-separated list of sample names."
-                         "If not set filenames will e treated as sample names")
+                         "If not set filenames will be treated as sample names")
 
 
 args = parser.parse_args()
