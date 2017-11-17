@@ -23,7 +23,7 @@ parser.add_argument("-t", "--threads", action="store", dest="threads", default=1
 parser.add_argument("-a", "--annotation_gtf", action="store", dest="annotation_gtf", type=os.path.abspath,
                     help="Gtf file with annotations for STAR")
 parser.add_argument("-i", "--genome_size", action="store", dest="genome_size", type=int,
-                    help="Genome size. Required for constructing genome index")
+                    help="Genome size. Required to construct genome index")
 parser.add_argument("-j", "--junction_tab_file", action="store", dest="junction_tab_file",
                     help="Junction tab file")
 parser.add_argument("-r", "--star_dir", action="store", dest="star_dir", default="",
