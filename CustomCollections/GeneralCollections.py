@@ -1,12 +1,6 @@
 #!/usr/bin/env python
 
 from collections import OrderedDict, MutableSet, Iterable
-#from Routines.File import check_path
-"""
-class Graph(ig.Graph):
-    def read(self, in_file, format="ncol"):
-        self.Read(in_file, format=format)
-"""
 
 
 class TwoLvlDict(OrderedDict):
@@ -434,7 +428,7 @@ class SynDict(OrderedDict):
 
         for entry in self:
             out_fd.write("%s%s%s\n" % (entry, separator,
-                                       values_separator.join(self[entry]) if splited_values else self[entry]))
+                                       values_separator.join(map(str, self[entry])) if splited_values else str(self[entry])))
         if (not isinstance(filename, file)) or close_after_if_file_object:
             out_fd.close()
 
