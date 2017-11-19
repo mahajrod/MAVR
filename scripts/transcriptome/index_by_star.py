@@ -30,7 +30,7 @@ parser.add_argument("-r", "--star_dir", action="store", dest="star_dir", default
                     help="Directory with STAR binary")
 parser.add_argument("-b", "--genomeSAindexNbases", action="store", dest="genomeSAindexNbases", default=None, type=int,
                     help="Index word size. Adjust for small genomes. By default: is calculated from genome size")
-parser.add_argument("-c", "--genomeChrBinNbits", action="store", dest="genomeChrBinNbitss", default=None, type=int,
+parser.add_argument("-c", "--genomeChrBinNbits", action="store", dest="genomeChrBinNbits", default=None, type=int,
                     help="genomeChrBinNbits STAR option. Adjust for genomes with more than 5000 scaffolds."
                          "Use following formula min(18, log2(GenomeLength/NumberOfScaffolds))"
                          ". Default: 18")
@@ -65,4 +65,4 @@ STAR.path = args.star_dir
 
 STAR.index(args.genome_dir, args.genome_fasta, annotation_gtf=args.annotation_gtf,
            junction_tab_file=args.junction_tab_file, sjdboverhang=None,
-           genomeSAindexNbases=args.genomeSAindexNbase, genomeChrBinNbits=args.genomeChrBinNbits, genome_size=args.genome_size)
+           genomeSAindexNbases=args.genomeSAindexNbases, genomeChrBinNbits=args.genomeChrBinNbits, genome_size=args.genome_size)
