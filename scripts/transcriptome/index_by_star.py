@@ -28,7 +28,7 @@ parser.add_argument("-j", "--junction_tab_file", action="store", dest="junction_
                     help="Junction tab file")
 parser.add_argument("-r", "--star_dir", action="store", dest="star_dir", default="",
                     help="Directory with STAR binary")
-parser.add_argument("-a", "--genomeSAindexNbases", action="store", dest="genomeSAindexNbases", default=None, type=int,
+parser.add_argument("-b", "--genomeSAindexNbases", action="store", dest="genomeSAindexNbases", default=None, type=int,
                     help="Index word size. Adjust for small genomes. By default: is calculated from genome size")
 parser.add_argument("-c", "--genomeChrBinNbits", action="store", dest="genomeChrBinNbitss", default=None, type=int,
                     help="genomeChrBinNbits STAR option. Adjust for genomes with more than 5000 scaffolds."
