@@ -19,7 +19,7 @@ parser.add_argument("-c", "--comments_prefix", action="store", dest="comments_pr
                     help="Comments prefix. Default - '#'")
 parser.add_argument("-d", "--delimiter", action="store", dest="delimiter",
                     help="Value delimiter. Default - any space symbol")
-parser.add_argument("-l", "--columns", action="store", dest="columns", type=lambda s: s.split(","),
+parser.add_argument("-l", "--columns", action="store", dest="columns", type=lambda s: map(int, s.split(",")),
                     help="Comma-separated list of columns(0-based) with data. Default - all")
 
 args = parser.parse_args()
