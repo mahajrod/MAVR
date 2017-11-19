@@ -19,8 +19,10 @@ parser.add_argument("-c", "--comments_prefix", action="store", dest="comments_pr
                     help="Comments prefix. Default - '#'")
 parser.add_argument("-d", "--delimiter", action="store", dest="delimiter",
                     help="Value delimiter. Default - any space symbol")
+parser.add_argument("-l", "--columns", action="store", dest="columns", type=lambda s: s.split(","),
+                    help="Comma-separated list of columns with data. Default - all")
 
 args = parser.parse_args()
 MathRoutines.get_stats_from_file(args.input, minimum=args.min, maximum=args.max, dtype=float,
                                  comments=args.comments_prefix, delimiter=args.delimiter, converters=None, skiprows=0,
-                                 usecols=None, unpack=False, ndmin=0, output_file=args.output, verbose=True)
+                                 usecols=args.columns, unpack=False, ndmin=0, output_file=args.output, verbose=True)
