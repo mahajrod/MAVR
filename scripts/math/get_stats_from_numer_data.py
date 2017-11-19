@@ -20,7 +20,7 @@ parser.add_argument("-c", "--comments_prefix", action="store", dest="comments_pr
 parser.add_argument("-d", "--delimiter", action="store", dest="delimiter",
                     help="Value delimiter. Default - any space symbol")
 parser.add_argument("-l", "--columns", action="store", dest="columns", type=lambda s: s.split(","),
-                    help="Comma-separated list of columns with data. Default - all")
+                    help="Comma-separated list of columns(0-based) with data. Default - all")
 
 args = parser.parse_args()
 MathRoutines.get_stats_from_file(args.input, minimum=args.min, maximum=args.max, dtype=float,
