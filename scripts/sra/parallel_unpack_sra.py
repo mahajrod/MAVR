@@ -22,10 +22,11 @@ parser.add_argument("-u", "--unpaired", action="store_false", dest="paired", def
                     help="Sra archives contain unpaired reads")
 parser.add_argument("-p", "--fastq_dump_dir", action="store", dest="fastq_dump_dir", default="",
                     help="Path to directory with fastq-dump directory")
-
+parser.add_argument("-d", "--dont_retain_original_ids", action="store_false", dest="retain_original_ids", default=True,
+                    help="Don't retain original read ids, use sra ids instead")
 args = parser.parse_args()
 
 FastqDump.threads = args.threads
 FastqDump.path = args.fastq_dump_dir
 FastqDump.parallel_unpack(args.input_dir, args.output_dir, sra_id_list=args.sra_id_list, paired_input=args.paired,
-                          retain_original_ids=True)
+                          retain_original_ids=args.retain_original_ids)
