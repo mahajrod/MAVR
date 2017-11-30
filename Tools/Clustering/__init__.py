@@ -1,4 +1,4 @@
 
-from Tools.Clustering.CDhit import CDHit
+from Tools.Clustering.CDHit import CDHit
 
 CDHit = CDHit()

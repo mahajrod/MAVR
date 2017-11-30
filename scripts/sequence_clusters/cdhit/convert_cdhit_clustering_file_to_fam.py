@@ -3,7 +3,7 @@ __author__ = 'Sergei F. Kliver'
 import sys
 import argparse
 
-from Tools.Clustering import CDhit
+from Tools.Clustering import CDHit
 
 
 parser = argparse.ArgumentParser()
@@ -17,5 +17,4 @@ parser.add_argument("-o", "--output", action="store", dest="output", required=Tr
 args = parser.parse_args()
 
 
-CDhit.convert_clustering_to_fam(args.clustering_file, args.output)
-
+CDHit.convert_clustering_to_fam(args.clustering_file, args.output)
