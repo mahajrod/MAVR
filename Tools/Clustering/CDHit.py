@@ -20,7 +20,7 @@ class CDHit(Tool):
             for line in in_fd:
                 if line[0] == ">":
                     clusering_dict[cluster_id] = seq_list
-                    cluster_id = in_fd.next()[1:].strip().replace(" ", "_")
+                    cluster_id = line[1:].strip().replace(" ", "_")
                     seq_list = []
                     continue
                 seq_list.append(line.strip().split()[2][1:-3])
