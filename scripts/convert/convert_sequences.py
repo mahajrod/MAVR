@@ -21,4 +21,3 @@ args = parser.parse_args()
 
 SequenceConverters.convert_sequences(args.input, args.input_format, args.output, args.output_format,
                                      parsing_mode=args.parsing_mode, input_index="tmp.idx")
-
