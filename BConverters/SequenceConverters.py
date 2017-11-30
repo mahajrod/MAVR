@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 __author__ = 'mahajrod'
+import os
 import collections
 
 from Bio import SeqIO
@@ -82,16 +83,19 @@ class SequenceConverters(SequenceRoutines):
         #print(seq_list[0].seq)
         SeqIO.write(list(parsed_fasta.values()), output_fasta, "fasta")
 
-    @staticmethod
-    def convert_sequences(input_file, input_index, input_filetype, output_file, output_filetype):
+    def convert_sequences(self, input_file, input_filetype,
+                          output_file, output_filetype,
+                          parsing_mode="parse", input_index="tmp.idx"):
         #check if input is list-like object(checking for list methods in object)
         if isinstance(input_file, collections.MutableSequence):
             input_data = input_file
         else:
             input_data = [input_file]
 
-        record_dict = SeqIO.index_db(input_index, input_data, input_filetype)
+        record_dict = self.parse_seq_file(input_data, parsing_mode, format=input_filetype, index_file=input_index)#SeqIO.index_db(input_index, input_data, input_filetype)
         SeqIO.write(record_dict.values(), output_file, output_filetype)
+        if parsing_mode == "index_db":
+            os.remove(input_index)
 
     def sequence2fastq(self, sequence_file, output_file, mode, default_quality,
                        format="fasta", index_file=None, score_type=33):
