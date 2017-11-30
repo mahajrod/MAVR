@@ -22,7 +22,7 @@ class CDHit(Tool):
                     clusering_dict[cluster_id] = seq_list
                     cluster_id = in_fd.next()[1:].strip().replace(" ", "_")
                     seq_list = []
-                    break
+                    continue
                 seq_list.append(line.strip().split()[2][1:-3])
 
         clusering_dict.write(output_fam, splited_values=True)
