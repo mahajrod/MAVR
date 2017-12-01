@@ -19,7 +19,6 @@ from Bio.SeqFeature import SeqFeature, FeatureLocation
 
 from CustomCollections.GeneralCollections import TwoLvlDict, SynDict, IdList, IdSet
 from Routines.File import FileRoutines
-from Routines.Functions import output_dict
 
 
 class SequenceRoutines(FileRoutines):
@@ -181,6 +180,16 @@ class SequenceRoutines(FileRoutines):
         return lengths_dict
 
     @staticmethod
+    def get_first_seq_length_from_file(seq_file, format="fasta"):
+        for record in SeqIO.parse(seq_file, format=format):
+            return len(record.seq)
+
+    @staticmethod
+    def get_first_record_from_file(seq_file, format="fasta"):
+        for record in SeqIO.parse(seq_file, format=format):
+            return record.seq
+
+    @staticmethod
     def get_lengths_from_seq_file(input_file_list, format="fasta", out_file=None, close_after_if_file_object=False):
         record_dict = SeqIO.index_db("tmp.idx", input_file_list, format=format)
         lengths_dict = SynDict()
@@ -239,8 +248,8 @@ class SequenceRoutines(FileRoutines):
 
     def extract_sequence_by_ids(self, sequence_file, id_file, output_file, format="fasta", verbose=False,
                                 id_column_number=0, coincidence_mode="exact", allow_multiple_coincidence_report=False,
-                                syn_file=None):
-        tmp_index_file = "tmp.idx"
+                                syn_file=None, parsing_mode="parse", index_file="tmp.idx"):
+
         id_list = IdList()
         id_list.read(id_file, column_number=id_column_number)
 
@@ -259,12 +268,12 @@ class SequenceRoutines(FileRoutines):
         if verbose:
             print("Parsing %s..." % (sequence_file if isinstance(id_file, str) else ",".join(id_file)))
 
-        sequence_dict = SeqIO.index_db(tmp_index_file, sequence_file, format=format)
+        sequence_dict = self.parse_seq_file(sequence_file,parsing_mode, format=format, index_file=index_file) # SeqIO.index_db(tmp_index_file, sequence_file, format=format)
         SeqIO.write(self.record_by_id_generator(sequence_dict, id_list, verbose=verbose,
                                                 coincidence_mode=coincidence_mode,
                                                 allow_multiple_coincidence_report=allow_multiple_coincidence_report),
                     output_file, format=format)
-        os.remove(tmp_index_file)
+        os.remove(index_file)
 
     def extract_sequences_by_length_from_file(self, input_file, output_file, min_len=1, max_len=None, format="fasta",
                                               tmp_index_file="tmp.idx", id_file=None):
@@ -507,7 +516,8 @@ class SequenceRoutines(FileRoutines):
                                                   translate_to_stop=translate_to_stop,
                                                   prefix_of_file_inframe_stop_codons_seqs=prefix_of_file_inframe_stop_codons_seqs),
                     output_file, format=format)
-        os.remove("tmp.idx")
+        if mode == "index_db":
+            os.remove("tmp.idx")
 
     @staticmethod
     def compare_sequences(record_dict_1, record_dict_2):
@@ -1819,13 +1829,13 @@ class SequenceRoutines(FileRoutines):
 
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
-    lengths_dict = OrderedDict({})
+    lengths_dict = SynDict()
+    lengths_dict.header = "#record\tlength\n"
     for record_id in record_dict:
         lengths_dict[record_id] = len(record_dict[record_id])
 
     if write:
-        output_dict(lengths_dict, out_file=out_file, write=write,
-                    header_tuple=("record", "length") if write_header else None)
+        lengths_dict.write(out_file, header=write_header)
 
     return lengths_dict
 
