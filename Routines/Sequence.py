@@ -273,7 +273,8 @@ class SequenceRoutines(FileRoutines):
                                                 coincidence_mode=coincidence_mode,
                                                 allow_multiple_coincidence_report=allow_multiple_coincidence_report),
                     output_file, format=format)
-        os.remove(index_file)
+        if parsing_mode == "index_db":
+            os.remove(index_file)
 
     def extract_sequences_by_length_from_file(self, input_file, output_file, min_len=1, max_len=None, format="fasta",
                                               tmp_index_file="tmp.idx", id_file=None):
