@@ -24,6 +24,7 @@ parser.add_argument("-p", "--fastq_dump_dir", action="store", dest="fastq_dump_d
                     help="Path to directory with fastq-dump directory")
 parser.add_argument("-d", "--dont_retain_original_ids", action="store_false", dest="retain_original_ids", default=True,
                     help="Don't retain original read ids, use sra ids instead")
+
 args = parser.parse_args()
 
 FastqDump.threads = args.threads
