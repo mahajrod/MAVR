@@ -34,4 +34,5 @@ SequenceClusterRoutines.extract_sequences_from_selected_clusters(args.cluster_id
                                                                  seq_format=args.seq_file_format,
                                                                  out_prefix=args.output,
                                                                  create_dir_for_each_cluster=args.create_dir_for_each_cluster,
-                                                                 skip_cluster_if_no_sequence_for_element=not args.dont_skip_cluster_if_absent_element)
+                                                                 skip_cluster_if_no_sequence_for_element=not args.dont_skip_cluster_if_absent_element,
+                                                                 parsing_mode="parse")
