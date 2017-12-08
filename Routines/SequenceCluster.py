@@ -450,6 +450,7 @@ class SequenceClusterRoutines(FileRoutines):
                         if black_id_part in element_id:
                             break
                     else:
+                        print "aaaa"
                         elements.append(element_id)
                 else:
                     raise ValueError("Unknown mode for id comparison")
