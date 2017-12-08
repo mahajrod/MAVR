@@ -447,12 +447,12 @@ class SequenceClusterRoutines(FileRoutines):
                         elements.append(element_id)
                 elif mode == "partial":
                     for black_id_part in black_list:
-                        print black_list
+                        #print black_list
                         if black_id_part in element_id:
-                            print black_id_part, element_id
+                            #print black_id_part, element_id
                             break
                     else:
-                        print "aaaa"
+                        #print "aaaa"
                         elements.append(element_id)
                 else:
                     raise ValueError("Unknown mode for id comparison")
