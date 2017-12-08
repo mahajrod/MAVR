@@ -448,7 +448,7 @@ class SequenceClusterRoutines(FileRoutines):
                 elif mode == "partial":
                     for black_id_part in black_list:
                         if black_id_part in element_id:
-                            print "bbbb"
+                            print black_id_part, element_id
                             break
                     else:
                         print "aaaa"
