@@ -435,3 +435,38 @@ class SequenceClusterRoutines(FileRoutines):
 
         return sc_clusters_dict
 
+    @staticmethod
+    def remove_elements_by_ids(input_dict, black_list, mode="full"):
+        filtered_dict = SynDict()
+
+        for cluster_id in input_dict:
+            elements = []
+            for element_id in input_dict[cluster_id]:
+                if mode == "full":
+                    if element_id not in black_list:
+                        elements.append(element_id)
+                elif mode == "partial":
+                    for black_id_part in black_list:
+                        if black_id_part in element_id:
+                            break
+                    else:
+                        elements.append(element_id)
+                else:
+                    raise ValueError("Unknown mode for id comparison")
+            if elements:
+                filtered_dict[cluster_id] = elements
+
+        return filtered_dict
+
+    def remove_elements_by_ids_from_files(self, input_file, output_file, black_list_file, mode="full"):
+
+        cluster_dict = SynDict(filename=input_file, split_values=True)
+        black_list = IdList(filename=black_list_file)
+
+        filtered_dict = self.remove_elements_by_ids(cluster_dict, black_list, mode=mode)
+
+        filtered_dict.write(output_file, splited_values=True)
+
+
+
+
