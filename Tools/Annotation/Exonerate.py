@@ -197,6 +197,7 @@ class Exonerate(Tool):
                                 current_gene_id = tmp.strip().split("\t")[-1].split(";").split()[1]
                                 print current_gene_id
                             elif tmp[0] != "#":
+                                print tmp
                                 tmp = tmp.strip() + "; gene_id %s\n" % current_gene_id
                             fd_dict["gff"].write(tmp)
                             if index == 0:
