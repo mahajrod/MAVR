@@ -140,7 +140,7 @@ class Exonerate(Tool):
             #shutil.rmtree(converted_output_dir)
 
     @staticmethod
-    def split_output(exonerate_output_files, output_prefix):
+    def split_output(exonerate_output_files, output_prefix, gene_prefix="GEN", number_len=8):
         names_dict = {
                       "vulgar": "%s.vulgar" % output_prefix,
                       "cigar": "%s.cigar" % output_prefix,
@@ -169,6 +169,8 @@ class Exonerate(Tool):
 
         for filename in exonerate_output_files:
             index = 0
+            current_gene_index = 0
+            gene_prefix = "%s%%0%i" % (gene_prefix, number_len)
             with open(filename, "r") as in_fd:
                 #print u
                 #tmp = None
@@ -193,10 +195,16 @@ class Exonerate(Tool):
                         while True:
                             tmp = next(in_fd, "")
                             if ("\tgene\t" in tmp) and (index == 1):
-                                attr_list = map(lambda s: s.split(), tmp.strip().split("\t")[-1].split(";"))
-                                for entry_id, value in attr_list:
-                                    if entry_id == "gene_id":
-                                        current_gene_id = value
+                                current_gene_index += 1
+                                current_gene_id = gene_prefix % current_gene_index
+                                line_list = tmp.strip().split("\t")
+                                attr_list = map(lambda s: s.split(), line_list[-1].split(";"))
+                                for i in range(0, len(attr_list)):
+                                    if attr_list[i][0] == "gene_id":
+                                        attr_list[i][1] = current_gene_id
+
+                                line_list[-1] = ";".join(map(lambda s: " ".join(s), attr_list))
+                                tmp = "\t".join(line_list)
                                 #print current_gene_id
                             elif (tmp[0] != "#") and (index == 1):
                                 #print tmp
