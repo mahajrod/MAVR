@@ -188,6 +188,7 @@ class Exonerate(Tool):
                     if tmp == "# --- START OF GFF DUMP ---\n":
                         fd_dict["gff"].write(tmp)
                         if index == 0:
+
                             fd_dict["query_gff"].write(tmp)
                         else:
                             fd_dict["target_gff"].write(tmp)
