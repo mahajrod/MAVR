@@ -170,7 +170,7 @@ class Exonerate(Tool):
         for filename in exonerate_output_files:
             index = 0
             current_gene_index = 0
-            gene_prefix = "%s%%0%i" % (gene_prefix, number_len)
+            gene_prefix = "%s%%0%ii" % (gene_prefix, number_len)
             with open(filename, "r") as in_fd:
                 #print u
                 #tmp = None
