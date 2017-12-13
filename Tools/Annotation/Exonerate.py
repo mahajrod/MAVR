@@ -187,16 +187,15 @@ class Exonerate(Tool):
                     if tmp == "# --- START OF GFF DUMP ---\n":
                         fd_dict["gff"].write(tmp)
                         if index == 0:
-
                             fd_dict["query_gff"].write(tmp)
                         else:
                             fd_dict["target_gff"].write(tmp)
                         while True:
                             tmp = next(in_fd, "")
-                            if "\tgene\t" in tmp:
+                            if ("\tgene\t" in tmp) and (index == 1):
                                 current_gene_id = tmp.strip().split("\t")[-1].split(";").split()[1]
                                 print current_gene_id
-                            elif tmp[0] != "#":
+                            elif (tmp[0] != "#") and (index == 1):
                                 print tmp
                                 tmp = tmp.strip() + "; gene_id %s\n" % current_gene_id
                             fd_dict["gff"].write(tmp)
