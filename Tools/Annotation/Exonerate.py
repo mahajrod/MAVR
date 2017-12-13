@@ -205,7 +205,7 @@ class Exonerate(Tool):
                                 if ("\texon\t" in tmp) or ("\tcds\t" in tmp):
                                     tmp_list[-1] = ("gene_id %s ; transcript_id %s ; " % (current_gene_id, current_gene_id)) + tmp_list[-1]
                                 else:
-                                    tmp_list[-1] = ("gene_id %s;" % current_gene_id) + tmp_list[-1]
+                                    tmp_list[-1] = ("gene_id %s ; " % current_gene_id) + tmp_list[-1]
                                 tmp = "\t".join(tmp_list)
 
                             fd_dict["gff"].write(tmp)
