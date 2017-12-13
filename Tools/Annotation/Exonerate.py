@@ -197,10 +197,12 @@ class Exonerate(Tool):
                                 for entry_id, value in attr_list:
                                     if entry_id == "gene_id":
                                         current_gene_id = value
-                                print current_gene_id
+                                #print current_gene_id
                             elif (tmp[0] != "#") and (index == 1):
-                                print tmp
+                                #print tmp
                                 tmp = tmp.strip() + "; gene_id %s\n" % current_gene_id
+                            if ("\texon\t" in tmp) or ("\tcds\t" in tmp):
+                                tmp = tmp.strip() + "; transcript_id %s\n" % current_gene_id
                             fd_dict["gff"].write(tmp)
                             if index == 0:
                                 fd_dict["query_gff"].write(tmp)
@@ -210,11 +212,11 @@ class Exonerate(Tool):
                                 if "\tsplice" in tmp:
                                     fd_dict["splice"].write(tmp)
                                 elif "\texon\t" in tmp:
-                                    fd_dict["exon"].write(tmp.strip() + "; transcript_id %s\n" % current_gene_id)
+                                    fd_dict["exon"].write(tmp)
                                 elif "\tintron\t" in tmp:
                                     fd_dict["intron"].write(tmp)
                                 elif "\tcds\t" in tmp:
-                                    fd_dict["cds"].write(tmp.strip() + "; transcript_id %s\n" % current_gene_id)
+                                    fd_dict["cds"].write(tmp)
                                 elif "\tgene\t" in tmp:
                                     fd_dict["gene"].write(tmp)
 
