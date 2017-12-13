@@ -5,8 +5,16 @@ cd /mnt/guatemala/skliver/Boechera/Boechera_holboellii/WGA/masking/repeatmasker/
 #RepeatMasker
 for SP in `ls`; do cd ${SP}; echo "Masking ${SP}"; RepeatMasker -dir ./ -pa 20 -lib /mnt/peru/skliver/Boechera/Boechera_holboellii/genome/annotations/final/repeat_library/all.fasta /mnt/guatemala/skliver/Boechera/Boechera_holboellii/WGA/genomes/${SP}/${SP}.fasta ; cd  ../; done
 
+for SP in Alyr  Atha  Bret  Bstr  Chir  Crub  Esal; do ~/Soft/MAVR/scripts/repeat_masking/convert_rm_out_to_gff.py -i ${SP}/${SP}.fasta.out -p ${SP}/${SP} & done
+
 #TRF
 #already done
 
 #windowmasker
 for SP in *; do echo "Masking ${SP}"; cd ${SP}; ~/Soft/MAVR/scripts/repeat_masking/windowmasker_repeat_masking.py -i ../../../genomes/${SP}/${SP}.fasta  -o ${SP} &  cd ../; done
+
+cd /mnt/guatemala/skliver/Boechera/Boechera_holboellii/WGA/masking
+
+mkdir combined
+
+for SP in Alyr  Atha  Bret  Bstr  Chir  Crub  Esal; do cat windowmasker/${SP}/${SP}.masking.gff trf/${SP}/${SP}.gff repeatmasker/${SP}/${SP}.gff  | sort -s -k1,1 -k4,4n -k5,5n  > combined/${SP}.repeats.all.gff & done

@@ -10,4 +10,4 @@ for GENOME in `ls ${FUNGI_GENOMES_DIR}`;
     EXONERATE_OUTPUT=${WORKDIR}${GENOME}.MEX67.exonerate.out
     exonerate  --model protein2genome --showalignment --showquerygff --showtargetgff \
                -n 100 -q ${MEX67_PEP_FILE} -t ${GENOME_PATH} > ${EXONERATE_OUTPUT}
-    done
+    donehttps://scholar.google.ru/citations?hl=en&user=Ri-YMYgAAAAJ&view_op=list_works&sortby=pubdate

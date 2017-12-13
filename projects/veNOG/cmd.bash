@@ -24,7 +24,8 @@ sed 's/\ /_/' veNOG.species.ids.syn > veNOG.species.ids.no_space.syn
 
 
 cd /mnt/guatemala/skliver/white_shark_project/selection
-mkdir labeled_fam~/Soft/MAVR/scripts/sequence_clusters/expansion/prepare_cafe_input.py -i 9sp.fam  -c 9sp.cafe -s astyanax_mexicanus,callorhinchus_milii,carcharodon_carcharias,danio_rerio,latimeria_chalumnae,lepisosteus_oculatus,oreochromis_niloticus,poecilia_formosa,rhincodon_typus -e @
+mkdir labeled_fam
+~/Soft/MAVR/scripts/sequence_clusters/expansion/prepare_cafe_input.py -i 9sp.fam  -c 9sp.cafe -s astyanax_mexicanus,callorhinchus_milii,carcharodon_carcharias,danio_rerio,latimeria_chalumnae,lepisosteus_oculatus,oreochromis_niloticus,poecilia_formosa,rhincodon_typus -e @
 
 for FILE in `ls labeled_fam`; do sed 's/veNOG.//;s/.meta_raw//' fam/${FILE} > corrected_fam/${FILE}; done
 for FILE in `ls fam/`; do ~/Soft/MAVR/scripts/sequence_clusters/label_cluster_elements.py -i corrected_fam/${FILE} -o labeled_fam/${FILE}; done

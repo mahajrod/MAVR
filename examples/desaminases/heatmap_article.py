@@ -56,6 +56,7 @@ if __name__ == "__main__":
 
             rcParams.update({'font.size': 5})
 
+            # noinspection PyInterpreter
             for sample_set_name, letter in zip(sample_set_names_list, letter_list_part1):
                 #print(index)
                 if index == 7 or index == 10:

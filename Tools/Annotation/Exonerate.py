@@ -191,7 +191,6 @@ class Exonerate(Tool):
                             fd_dict["query_gff"].write(tmp)
                         else:
                             fd_dict["target_gff"].write(tmp)
-
                         while True:
                             tmp = next(in_fd, "")
                             if "\tgene\t" in tmp:
