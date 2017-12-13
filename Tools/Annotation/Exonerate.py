@@ -184,7 +184,6 @@ class Exonerate(Tool):
                             fd_dict["alignment"].write(tmp)
                             if tmp == "":
                                 break
-
                     if tmp == "# --- START OF GFF DUMP ---\n":
                         fd_dict["gff"].write(tmp)
                         if index == 0:
