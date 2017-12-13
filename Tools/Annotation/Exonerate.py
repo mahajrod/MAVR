@@ -200,9 +200,14 @@ class Exonerate(Tool):
                                 #print current_gene_id
                             elif (tmp[0] != "#") and (index == 1):
                                 #print tmp
-                                tmp = tmp.strip() + "; gene_id %s\n" % current_gene_id
-                            if ("\texon\t" in tmp) or ("\tcds\t" in tmp):
-                                tmp = tmp.strip() + "; transcript_id %s\n" % current_gene_id
+                                tmp_list = tmp.split("\t")
+
+                                if ("\texon\t" in tmp) or ("\tcds\t" in tmp):
+                                    tmp_list[-1] = ("gene_id %s ; transcript_id %s ; " % (current_gene_id, current_gene_id)) + tmp_list[-1]
+                                else:
+                                    tmp_list[-1] = ("gene_id %s;" % current_gene_id) + tmp_list[-1]
+                                tmp = "\t".join(tmp_list)
+
                             fd_dict["gff"].write(tmp)
                             if index == 0:
                                 fd_dict["query_gff"].write(tmp)
