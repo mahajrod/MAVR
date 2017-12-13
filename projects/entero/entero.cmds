@@ -1,0 +1,7 @@
+
+for FILE in *.clstr; do ~/soft/MAVR/scripts/sequence_clusters/cdhit/convert_cdhit_clustering_file_to_fam.py -i ${FILE} -o ${FILE}.fam;  done
+for FILE in *.fam; awk '{print $2}' ${FILE} | tr ',' '\n' | sort | uniq -d > ${FILE}.nonuniq.ids   ;done
+for FILE in *.fam; do awk '{print $2}' ${FILE} | tr ',' '\n' | sort | uniq -d > ${FILE}.nonuniq.ids   ;done
+
+
+skliver@supermicro:/mnt/genomerussia/skliver/entero/pep_clusters$ for FILE in `ls ../fam/`; do TAXID=`echo ${FILE} | sed 's/\..*//'`; echo ${TAXID}; mkdir ${TAXID}; ~/soft/MAVR/scripts/sequence_clusters/extract_sequences_from_selected_clusters.py -f ../fam/${TAXID}.all.pep.cdhit.clstr.fam -p ../all_pep/${TAXID}.all.pep -d ${TAXID};  done
