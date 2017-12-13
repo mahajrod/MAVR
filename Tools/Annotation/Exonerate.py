@@ -193,7 +193,10 @@ class Exonerate(Tool):
                         while True:
                             tmp = next(in_fd, "")
                             if ("\tgene\t" in tmp) and (index == 1):
-                                current_gene_id = tmp.strip().split("\t")[-1].split(";").split()[1]
+                                attr_list = map(lambda s: s.split(), tmp.strip().split("\t")[-1].split(";"))
+                                for entry_id, value in attr_list:
+                                    if entry_id == "gene_id":
+                                        current_gene_id = value
                                 print current_gene_id
                             elif (tmp[0] != "#") and (index == 1):
                                 print tmp
