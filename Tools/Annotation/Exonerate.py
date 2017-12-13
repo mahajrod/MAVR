@@ -205,8 +205,8 @@ class Exonerate(Tool):
 
                                 line_list[-1] = ";".join(map(lambda s: " ".join(s), attr_list))
                                 tmp = "\t".join(line_list)
-                                print current_gene_id
-                                print tmp
+                                #print current_gene_id
+                                #print tmp
                                 #print current_gene_id
                             elif (tmp[0] != "#") and (index == 1):
                                 #print tmp
