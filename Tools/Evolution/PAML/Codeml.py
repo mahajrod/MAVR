@@ -374,6 +374,9 @@ class Codeml(Tool):
                 else:
                     #doubled_delta = 2 * (results_dict[basename]["Model_A"] - results_dict[basename]["Model_A_null"])
                     #p_value = chisqprob(doubled_delta, 1) # degrees of freedom = 1
+
+                    print basename, results_dict[basename]["Model_A_null"],results_dict[basename]["Model_A"], double_delta_dict[basename], raw_pvalues_dict[basename], adjusted_pvalues_list[i]
+
                     out_fd.write("%s\t%f\t%f\t%f\t%f\t%f\n" % (basename, results_dict[basename]["Model_A_null"],
                                                            results_dict[basename]["Model_A"], double_delta_dict[basename],
                                                            raw_pvalues_dict[basename], adjusted_pvalues_list[i]))
