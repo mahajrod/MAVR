@@ -372,7 +372,6 @@ class Codeml(Tool):
                 for model in model_list:
                     if results_dict[basename][model] is None:
                         print("LnL was not calculated for %s" % basename)
-                        i += 1
                         break
                 else:
                     #doubled_delta = 2 * (results_dict[basename]["Model_A"] - results_dict[basename]["Model_A_null"])
