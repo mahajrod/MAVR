@@ -309,6 +309,7 @@ class Codeml(Tool):
         basename_dir_list = []
         model_list = ["Model_A", "Model_A_null"]
         fix_omega_dict = {"Model_A": False, "Model_A_null": True}
+        """
         for filename in alignment_files_list:
             directory, basename, extension = FileRoutines.split_filename(filename)
             filename_out_dir = os.path.abspath("%s/%s/" % (out_dir, basename))
@@ -332,7 +333,7 @@ class Codeml(Tool):
                                        RateAncestor=RateAncestor, Mgene=0,
                                        small_difference=small_difference, clean_data=clean_data, method=method)
         self.parallel_execute(options_list, dir_list=dir_list)
-
+        """
         results_dict = OrderedDict()
         double_delta_dict = OrderedDict()
         raw_pvalues_dict = OrderedDict()
