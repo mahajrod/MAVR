@@ -348,10 +348,12 @@ class Codeml(Tool):
                 codeml_report = CodeMLReport(output_file)
                 results_dict[basename][model] = codeml_report.LnL
 
+        skipped_genes_set = set()
         for basename in basename_dir_list:
             for model in model_list:
                 if results_dict[basename][model] is None:
                     print("LnL was not calculated for %s" % basename)
+                    skipped_genes_set.add(basename)
                     break
             else:
                 doubled_delta = 2 * (results_dict[basename]["Model_A"] - results_dict[basename]["Model_A_null"])
@@ -362,6 +364,7 @@ class Codeml(Tool):
                 raw_pvalues_list.append(p_value)
 
         adjusted_pvalues_list = fdrcorrection0(raw_pvalues_list)
+        print adjusted_pvalues_list
         i = 0
         with open(results_file, "w") as out_fd:
             out_fd.write("id\tmodel_a_null,LnL\tmodel_a,LnL\t2*delta\traw p-value\tadjusted p-value\n")
