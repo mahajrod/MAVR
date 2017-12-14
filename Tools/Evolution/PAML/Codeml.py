@@ -363,8 +363,8 @@ class Codeml(Tool):
                 raw_pvalues_dict[basename] = p_value
                 raw_pvalues_list.append(p_value)
 
-        adjusted_pvalues_list = fdrcorrection0(raw_pvalues_list)
-        print adjusted_pvalues_list
+        adjusted_pvalues_list = fdrcorrection0(raw_pvalues_list)[1]
+        #print adjusted_pvalues_list
         i = 0
         with open(results_file, "w") as out_fd:
             out_fd.write("id\tmodel_a_null,LnL\tmodel_a,LnL\t2*delta\traw p-value\tadjusted p-value\n")
@@ -378,7 +378,7 @@ class Codeml(Tool):
                     #doubled_delta = 2 * (results_dict[basename]["Model_A"] - results_dict[basename]["Model_A_null"])
                     #p_value = chisqprob(doubled_delta, 1) # degrees of freedom = 1
 
-                    print basename, results_dict[basename]["Model_A_null"],results_dict[basename]["Model_A"], double_delta_dict[basename], raw_pvalues_dict[basename], adjusted_pvalues_list[i]
+                    #print basename, results_dict[basename]["Model_A_null"],results_dict[basename]["Model_A"], double_delta_dict[basename], raw_pvalues_dict[basename], adjusted_pvalues_list[i]
 
                     out_fd.write("%s\t%f\t%f\t%f\t%f\t%f\n" % (basename, results_dict[basename]["Model_A_null"],
                                                            results_dict[basename]["Model_A"], double_delta_dict[basename],
