@@ -207,6 +207,7 @@ class Exonerate(Tool):
                                 tmp = "\t".join(line_list) + "\n"
 
                                 line_list[-1] = ("transcript_id %s ; " % current_gene_id) + line_list[-1]
+                                line_list[2] = "transcript"
                                 transcript_line = "\t".join(line_list) + "\n"
                                 #print current_gene_id
                                 #print tmp
