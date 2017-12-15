@@ -23,5 +23,5 @@ args = parser.parse_args()
 
 Clumpify.remove_optical_duplicates(args.forward_reads, args.output_prefix,
                                    reverse_reads=args.reverse_reads, gzip_output=args.gzip_output,
-                                   memory_limit="args.memory_limit")
+                                   memory_limit=args.memory_limit)
 
