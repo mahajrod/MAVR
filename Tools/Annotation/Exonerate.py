@@ -205,6 +205,9 @@ class Exonerate(Tool):
 
                                 line_list[-1] = ";".join(map(lambda s: " ".join(s), attr_list))
                                 tmp = "\t".join(line_list)
+
+                                line_list[-1] = ("transcript_id %s ; " % current_gene_id) + line_list[-1]
+                                transcript_line = "\t".join(line_list)
                                 #print current_gene_id
                                 #print tmp
                                 #print current_gene_id
@@ -223,6 +226,8 @@ class Exonerate(Tool):
                                 fd_dict["query_gff"].write(tmp)
                             else:
                                 fd_dict["target_gff"].write(tmp)
+                                if "\tgene\t" in tmp:
+                                    fd_dict["target_gff"].write(transcript_line)
                             if tmp[0] != "#":
                                 if "\tsplice" in tmp:
                                     fd_dict["splice"].write(tmp)
