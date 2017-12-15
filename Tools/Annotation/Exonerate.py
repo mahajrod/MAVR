@@ -204,10 +204,10 @@ class Exonerate(Tool):
                                         attr_list[i][1] = current_gene_id
 
                                 line_list[-1] = ";".join(map(lambda s: " ".join(s), attr_list))
-                                tmp = "\t".join(line_list)
+                                tmp = "\t".join(line_list) + "\n"
 
                                 line_list[-1] = ("transcript_id %s ; " % current_gene_id) + line_list[-1]
-                                transcript_line = "\t".join(line_list)
+                                transcript_line = "\t".join(line_list) + "\n"
                                 #print current_gene_id
                                 #print tmp
                                 #print current_gene_id
