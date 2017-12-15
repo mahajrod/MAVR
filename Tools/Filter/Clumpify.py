@@ -10,7 +10,8 @@ class Clumpify(Tool):
     def __init__(self, path="", max_threads=1):
         Tool.__init__(self, "clumpify.sh", path=path, max_threads=max_threads)
 
-    def remove_optical_duplicates(self, forward_reads, output_prefix, reverse_reads=None, gzip_output=False):
+    def remove_optical_duplicates(self, forward_reads, output_prefix, reverse_reads=None, gzip_output=False,
+                                  memory_limit="2g"):
 
         if reverse_reads:
             forward_output = "%s_1.fastq" % output_prefix + (".gz" if gzip_output else "")
@@ -23,7 +24,7 @@ class Clumpify(Tool):
 
         options += " dedupe"
         options += " optical"
-
+        options += " -Xmx %s" % str(memory_limit)
         self.execute(options=options)
 
 
