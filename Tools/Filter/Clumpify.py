@@ -24,7 +24,7 @@ class Clumpify(Tool):
 
         options += " dedupe"
         options += " optical"
-        options += " -Xmx %s" % str(memory_limit)
+        options += " -Xmx%s" % str(memory_limit)
         self.execute(options=options)
 
 
