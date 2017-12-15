@@ -140,7 +140,7 @@ class Exonerate(Tool):
             #shutil.rmtree(converted_output_dir)
 
     @staticmethod
-    def split_output(exonerate_output_files, output_prefix, gene_prefix="GEN", number_len=8):
+    def split_output(exonerate_output_files, output_prefix, gene_prefix="GEN", transcript_prefix="TR", number_len=8):
         names_dict = {
                       "vulgar": "%s.vulgar" % output_prefix,
                       "cigar": "%s.cigar" % output_prefix,
@@ -171,6 +171,7 @@ class Exonerate(Tool):
             index = 0
             current_gene_index = 0
             gene_prefix = "%s%%0%ii" % (gene_prefix, number_len)
+            transcript_prefix = "%s%%0%ii" % (transcript_prefix, number_len)
             with open(filename, "r") as in_fd:
                 #print u
                 #tmp = None
@@ -197,6 +198,7 @@ class Exonerate(Tool):
                             if ("\tgene\t" in tmp) and (index == 1):
                                 current_gene_index += 1
                                 current_gene_id = gene_prefix % current_gene_index
+                                current_transcript_id = transcript_prefix % current_gene_index
                                 line_list = tmp.strip().split("\t")
                                 attr_list = map(lambda s: s.split(), line_list[-1].split(";"))
                                 for i in range(0, len(attr_list)):
@@ -206,7 +208,7 @@ class Exonerate(Tool):
                                 line_list[-1] = ";".join(map(lambda s: " ".join(s), attr_list))
                                 tmp = "\t".join(line_list) + "\n"
 
-                                line_list[-1] = ("transcript_id %s ; " % current_gene_id) + line_list[-1]
+                                line_list[-1] = ("transcript_id %s ; " % current_transcript_id) + line_list[-1]
                                 line_list[2] = "transcript"
                                 transcript_line = "\t".join(line_list) + "\n"
                                 #print current_gene_id
@@ -217,7 +219,7 @@ class Exonerate(Tool):
                                 tmp_list = tmp.split("\t")
 
                                 if ("\texon\t" in tmp) or ("\tcds\t" in tmp):
-                                    tmp_list[-1] = ("gene_id %s ; transcript_id %s ; " % (current_gene_id, current_gene_id)) + tmp_list[-1]
+                                    tmp_list[-1] = ("gene_id %s ; transcript_id %s ; " % (current_gene_id, current_transcript_id)) + tmp_list[-1]
                                 else:
                                     tmp_list[-1] = ("gene_id %s ; " % current_gene_id) + tmp_list[-1]
                                 tmp = "\t".join(tmp_list)
