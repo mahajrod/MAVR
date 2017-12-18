@@ -256,9 +256,11 @@ class MatplotlibRoutines:
         else:
             filtered = data_array
         if not subplot:
+            #print "aaaaaaaaaa"
             figure = plt.figure(1, figsize=(6, 6),)
-            subplott = plt.subplot(1, 1, 1)
-
+            subplott = figure.add_subplot(1, 1, 1)
+        else:
+            plt.axes(subplot)
         if number_of_bins:
             bins = number_of_bins
         elif width_of_bins:
@@ -302,7 +304,7 @@ class MatplotlibRoutines:
                                      figsize=(10, 10), number_of_bins_list=None, width_of_bins_list=None,
                                      max_threshold_list=None, min_threshold_list=None, xlabel_list=None, ylabel_list=None,
                                      title_list=None, ylogbase_list=None, label_list=None,
-                                     extensions=("png",), suptitle=None):
+                                     extensions=("png",), suptitle=None, shared_scale=None):
         figure = plt.figure(1, figsize=figsize)
         if suptitle:
             plt.suptitle(suptitle)
@@ -318,18 +320,30 @@ class MatplotlibRoutines:
         parameters_list = [number_of_bins_list, width_of_bins_list, max_threshold_list, min_threshold_list,
                            xlabel_list, ylabel_list, title_list, ylogbase_list, label_list]
 
+        subplot_list = []
         for dataset_index in range(0, number_of_datasets):
             parameters = [None, None, None, None, None, None, None, None, None]
             for parameter_index in range(0, 9):
                 if parameters_list[parameter_index]:
                     if dataset_index < len(parameters_list[parameter_index]):
                         parameters[parameter_index] = parameters_list[parameter_index][dataset_index]
-
-            subplot = plt.subplot(subplot_tuple[0], subplot_tuple[1], dataset_index + 1)
+            if shared_scale and dataset_index > 0:
+                subplot_list.append(figure.add_subplot(subplot_tuple[0],
+                                                       subplot_tuple[1],
+                                                       dataset_index + 1,
+                                                       sharex=subplot_list[0],
+                                                       sharey=subplot_list[0]))
+            else:
+                subplot_list.append(figure.add_subplot(subplot_tuple[0],
+                                                       subplot_tuple[1],
+                                                       dataset_index + 1))
+        for dataset_index in range(0, number_of_datasets):
+            print subplot_list[dataset_index]
             histo = self.draw_histogram(list_of_data_arrays[dataset_index],  number_of_bins=parameters[0],
                                         width_of_bins=parameters[1], max_threshold=parameters[2],
                                         min_threshold=parameters[3], xlabel=parameters[4], ylabel=parameters[5],
-                                        title=parameters[6], extensions=("png",), ylogbase=parameters[7], subplot=subplot,
+                                        title=parameters[6], extensions=("png",), ylogbase=parameters[7],
+                                        subplot=subplot_list[dataset_index],
                                         suptitle=None)
             if output_prefix:
                 output_histo_file = "%s.%s.%shisto" % (output_prefix,
@@ -631,11 +645,12 @@ class MatplotlibRoutines:
                           min_y_value=min_y_value, max_y_value=max_y_value,
                           add_max_value=add_max_value)
 
-    def draw_double_histo_from_file(self, file_list, column_idx_list, subplot_tuple=(1, 2), output_prefix=None,
+    def draw_double_histo_from_file(self, file_list, column_idx_list, subplot_tuple=(2, 1), output_prefix=None,
                                     figsize=(5, 10), number_of_bins_list=None, width_of_bins_list=None,
                                     max_threshold_list=None, min_threshold_list=None, xlabel_list=None, ylabel_list=None,
                                     title_list=None, ylogbase_list=None, label_list=None,
-                                    extensions=("png",), suptitle=None, separator=None, comments='#'):
+                                    extensions=("png",), suptitle=None, separator=None, comments='#',
+                                    shared_scale=None):
         list_of_data_arrays = []
         for filename, column_idx in zip(file_list, column_idx_list):
             list_of_data_arrays.append(np.loadtxt(filename, usecols=(column_idx,),
@@ -647,4 +662,4 @@ class MatplotlibRoutines:
                                           max_threshold_list=max_threshold_list, min_threshold_list=min_threshold_list,
                                           xlabel_list=xlabel_list, ylabel_list=ylabel_list,
                                           title_list=title_list, ylogbase_list=ylogbase_list, label_list=label_list,
-                                          extensions=extensions, suptitle=suptitle)
+                                          extensions=extensions, suptitle=suptitle, shared_scale=shared_scale)
