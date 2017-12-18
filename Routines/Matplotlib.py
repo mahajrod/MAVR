@@ -630,3 +630,21 @@ class MatplotlibRoutines:
                           min_x_value=min_x_value, max_x_value=max_x_value,
                           min_y_value=min_y_value, max_y_value=max_y_value,
                           add_max_value=add_max_value)
+
+    def draw_double_histo_from_file(self, file_list, column_idx_list, subplot_tuple=(1, 2), output_prefix=None,
+                                    figsize=(5, 10), number_of_bins_list=None, width_of_bins_list=None,
+                                    max_threshold_list=None, min_threshold_list=None, xlabel_list=None, ylabel_list=None,
+                                    title_list=None, ylogbase_list=None, label_list=None,
+                                    extensions=("png",), suptitle=None, separator=None, comments='#'):
+        list_of_data_arrays = []
+        for filename, column_idx in zip(file_list, column_idx_list):
+            list_of_data_arrays.append(np.loadtxt(filename, usecols=(column_idx,),
+                                                  delimiter=separator, comments=comments))
+
+        self.draw_multi_histogram_picture(list_of_data_arrays, subplot_tuple, output_prefix=output_prefix,
+                                          figsize=figsize, number_of_bins_list=number_of_bins_list,
+                                          width_of_bins_list=width_of_bins_list,
+                                          max_threshold_list=max_threshold_list, min_threshold_list=min_threshold_list,
+                                          xlabel_list=xlabel_list, ylabel_list=ylabel_list,
+                                          title_list=title_list, ylogbase_list=ylogbase_list, label_list=label_list,
+                                          extensions=extensions, suptitle=suptitle)
