@@ -1738,25 +1738,31 @@ class SequenceRoutines(FileRoutines):
 
     @staticmethod
     def record_generator(annotations_dict, sequence_dict, feature_types_list):
+
+        def reccursive_subfeature_retrival(feature):
+            for subfeature in feature.sub_features:
+                print record_id, feature.id, subfeature.id
+                if subfeature.type in feature_types_list:
+                    # print subfeature
+                    sequence = subfeature.extract(sequence_dict[record_id].seq)
+                    #record = SeqRecord(sequence, id=subfeature.id)
+                    # print(record)
+                    yield SeqRecord(sequence, id=subfeature.id, description=subfeature.qualifiers["Name"][0] \
+                        if "Name" in subfeature.qualifiers else "")
+                else:
+                    reccursive_subfeature_retrival(subfeature)
+
         for record_id in annotations_dict:
             for feature in annotations_dict[record_id].features:
                 print record_id, feature.id
                 if feature.type in feature_types_list:
                     sequence = feature.extract(sequence_dict[record_id].seq)
-                    record = SeqRecord(sequence, id=feature.id)
+                    #record = SeqRecord(sequence, id=feature.id)
                     #print(record)
                     yield SeqRecord(sequence, id=feature.id, description=feature.qualifiers["Name"][0] \
                           if "Name" in feature.qualifiers else "")
                 else:
-                    for subfeature in feature.sub_features:
-                        print record_id, feature.id, subfeature.id
-                        if subfeature.type in feature_types_list:
-                            #print subfeature
-                            sequence = subfeature.extract(sequence_dict[record_id].seq)
-                            record = SeqRecord(sequence, id=subfeature.id)
-                            #print(record)
-                            yield SeqRecord(sequence, id=subfeature.id, description=subfeature.qualifiers["Name"][0] \
-                                if "Name" in subfeature.qualifiers else "")
+                    reccursive_subfeature_retrival(feature)
 
     @staticmethod
     def find_cds_coordinates_in_transcript_by_pep(transcript_dict, protein_dict, correspondence_dict,
