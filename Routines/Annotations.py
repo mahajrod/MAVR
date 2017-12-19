@@ -333,7 +333,7 @@ class AnnotationsRoutines(SequenceRoutines):
         annotations_dict = SeqIO.to_dict(GFF.parse(open(gff_file)))
         #print annotations_dict
         #print("Parsing %s..." % args.input)
-        sequence_dict = self.parse_seq_file(input_file, parsing_mode, format, ndex_file=tmp_index_file)  # SeqIO.index_db(tmp_index_file, args.input_file, format=args.format)
+        sequence_dict = self.parse_seq_file(input_file, parsing_mode, format, index_file=tmp_index_file)  # SeqIO.index_db(tmp_index_file, args.input_file, format=args.format)
 
         SeqIO.write(self.record_generator(annotations_dict, sequence_dict, type_list), output_file,
                     format=format)
