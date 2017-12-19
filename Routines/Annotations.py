@@ -6,12 +6,17 @@ from collections import OrderedDict
 from Bio import SearchIO
 from BCBio import GFF
 
+from Bio import SeqIO
+from Bio.Seq import Seq
+from Bio.SeqRecord import SeqRecord
+
+from Routines.Sequence import SequenceRoutines
 from CustomCollections.GeneralCollections import IdSet, SynDict, IdList
 
 
-class AnnotationsRoutines:
+class AnnotationsRoutines(SequenceRoutines):
     def __init__(self):
-        pass
+        SequenceRoutines.__init__(self)
 
     @staticmethod
     def record_with_extracted_annotations_generator(gff_file,
@@ -321,3 +326,17 @@ class AnnotationsRoutines:
             annotation_dict[key] = value.split(",")
 
         return annotation_dict
+
+    def extract_sequences_by_gff(self, input_file, gff_file, output_file, type_list=("gene",), parsing_mode="parse", tmp_index_file="temp.idx",
+                                 format="fasta"):
+
+        annotations_dict = SeqIO.to_dict(GFF.parse(open(gff_file)))
+        #print annotations_dict
+        #print("Parsing %s..." % args.input)
+        sequence_dict = self.parse_seq_file(input_file, parsing_mode, format, ndex_file=tmp_index_file)  # SeqIO.index_db(tmp_index_file, args.input_file, format=args.format)
+
+        SeqIO.write(self.record_generator(annotations_dict, sequence_dict, type_list), output_file,
+                    format=format)
+
+        if parsing_mode == "index_db":
+            os.remove(tmp_index_file)
