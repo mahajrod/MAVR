@@ -1740,7 +1740,7 @@ class SequenceRoutines(FileRoutines):
     def record_generator(annotations_dict, sequence_dict, feature_types_list):
         for record_id in annotations_dict:
             for feature in annotations_dict[record_id].features:
-                print record.id, feature.id
+                print record_id, feature.id
                 if feature.type in feature_types_list:
                     sequence = feature.extract(sequence_dict[record_id].seq)
                     record = SeqRecord(sequence, id=feature.id)
