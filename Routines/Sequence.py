@@ -1746,6 +1746,14 @@ class SequenceRoutines(FileRoutines):
                     print(record)
                     yield SeqRecord(sequence, id=feature.id, description=feature.qualifiers["Name"][0] \
                           if "Name" in feature.qualifiers else "")
+                else:
+                    for subfeature in feature.sub_features:
+                        if subfeature.type in feature_types_list:
+                            sequence = subfeature.extract(sequence_dict[record_id].seq)
+                            record = SeqRecord(sequence, id=feature.id)
+                            print(record)
+                            yield SeqRecord(sequence, id=subfeature.id, description=subfeature.qualifiers["Name"][0] \
+                                if "Name" in subfeature.qualifiers else "")
 
     @staticmethod
     def find_cds_coordinates_in_transcript_by_pep(transcript_dict, protein_dict, correspondence_dict,
