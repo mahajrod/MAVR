@@ -1740,7 +1740,7 @@ class SequenceRoutines(FileRoutines):
     def record_generator(annotations_dict, sequence_dict, feature_types_list):
 
         def reccursive_subfeature_retrival(feature):
-            print feature.sub_features
+            print "aaaaaaaaaaaaaaaaaaaa"
             for subfeature in feature.sub_features:
                 print record_id, feature.id, subfeature.id, subfeature.type, feature.sub_features
                 if subfeature.type in feature_types_list:
