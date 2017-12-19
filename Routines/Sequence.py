@@ -1741,6 +1741,7 @@ class SequenceRoutines(FileRoutines):
         for record_id in annotations_dict:
             print feature
             for feature in annotations_dict[record_id].features:
+                print record.id, feature.id
                 if feature.type in feature_types_list:
                     sequence = feature.extract(sequence_dict[record_id].seq)
                     record = SeqRecord(sequence, id=feature.id)
@@ -1749,11 +1750,12 @@ class SequenceRoutines(FileRoutines):
                           if "Name" in feature.qualifiers else "")
                 else:
                     for subfeature in feature.sub_features:
+                        print record.id, feature.id, subfeature.id
                         if subfeature.type in feature_types_list:
-                            print subfeature
+                            #print subfeature
                             sequence = subfeature.extract(sequence_dict[record_id].seq)
-                            record = SeqRecord(sequence, id=feature.id)
-                            print(record)
+                            record = SeqRecord(sequence, id=subfeature.id)
+                            #print(record)
                             yield SeqRecord(sequence, id=subfeature.id, description=subfeature.qualifiers["Name"][0] \
                                 if "Name" in subfeature.qualifiers else "")
 
