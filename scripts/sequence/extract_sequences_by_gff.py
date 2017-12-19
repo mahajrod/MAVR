@@ -4,12 +4,6 @@ __author__ = 'Sergei F. Kliver'
 import argparse
 import os
 
-from Bio import SeqIO
-from Bio.Seq import Seq
-from Bio.SeqRecord import SeqRecord
-
-from BCBio import GFF
-from Routines import SequenceRoutines
 
 #from Routines.Sequence import record_generator
 
@@ -22,17 +16,23 @@ parser.add_argument("-o", "--output_file", action="store", dest="output",
                     help="Output file with sequences")
 parser.add_argument("-f", "--format", action="store", dest="format", default="fasta",
                     help="Format of input and output files. Allowed formats genbank, fasta(default)")
-parser.add_argument("-t", "--type", action="store", dest="type", default="gene",
-                    help="Types of sequences to extract")
+parser.add_argument("-t", "--type", action="store", dest="type", default="gene", type=lambda s: s.split(","),
+                    help="Comma-separated list of feature types to extract")
 parser.add_argument("-g", "--gff_file", action="store", dest="gff_file",
                     help="Gff file with annotations to extract")
 parser.add_argument("-p", "--parsing_mode", action="store", dest="parsing_mode", default="index_db",
                     help="Parsing mode for input sequence file. "
                          "Possible variants: 'index_db'(default), 'index', 'parse'")
 
-
 args = parser.parse_args()
 
+
+AnnotationsRoutines.extract_sequences_by_gff(args.input, args.gff_file, args.output, type_list=args.type,
+                                             parsing_mode=args.parsing_mode, tmp_index_file="temp.idx",
+                                             format=args.format)
+
+
+"""
 tmp_index_file = "temp.idx"
 args.type = args.type.split(",")
 
@@ -47,6 +47,7 @@ SeqIO.write(SequenceRoutines.record_generator(annotations_dict, sequence_dict, a
 
 if args.parsing_mode == "index_db":
     os.remove(tmp_index_file)
+"""
 
 
 
