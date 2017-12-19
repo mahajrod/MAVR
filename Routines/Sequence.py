@@ -1741,7 +1741,7 @@ class SequenceRoutines(FileRoutines):
 
         def reccursive_subfeature_retrival(feature):
             for subfeature in feature.sub_features:
-                print record_id, feature.id, subfeature.id, subfeature.type
+                print record_id, feature.id, subfeature.id, subfeature.type, feature.sub_features
                 if subfeature.type in feature_types_list:
                     # print subfeature
                     sequence = subfeature.extract(sequence_dict[record_id].seq)
@@ -1761,8 +1761,8 @@ class SequenceRoutines(FileRoutines):
                     yield SeqRecord(sequence, id=feature.id, description=feature.qualifiers["Name"][0] \
                           if "Name" in feature.qualifiers else "")
                 else:
-                    print feature_types_list
-                    print feature.sub_features
+                    #print feature_types_list
+                    #print feature.sub_features
                     reccursive_subfeature_retrival(feature)
 
     @staticmethod
