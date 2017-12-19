@@ -1749,7 +1749,7 @@ class SequenceRoutines(FileRoutines):
                           if "Name" in feature.qualifiers else "")
                 else:
                     for subfeature in feature.sub_features:
-                        print record.id, feature.id, subfeature.id
+                        print record_id, feature.id, subfeature.id
                         if subfeature.type in feature_types_list:
                             #print subfeature
                             sequence = subfeature.extract(sequence_dict[record_id].seq)
