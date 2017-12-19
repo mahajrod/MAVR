@@ -327,11 +327,11 @@ class AnnotationsRoutines(SequenceRoutines):
 
         return annotation_dict
 
-    def extract_sequences_by_gff(self, input_file, gff_file, output_file, type_list=("gene",), parsing_mode="parse", tmp_index_file="temp.idx",
-                                 format="fasta"):
+    def extract_sequences_by_gff(self, input_file, gff_file, output_file, type_list=("gene",), parsing_mode="parse",
+                                 tmp_index_file="temp.idx", format="fasta"):
 
         annotations_dict = SeqIO.to_dict(GFF.parse(open(gff_file)))
-        #print annotations_dict
+        print annotations_dict
         #print("Parsing %s..." % args.input)
         sequence_dict = self.parse_seq_file(input_file, parsing_mode, format, index_file=tmp_index_file)  # SeqIO.index_db(tmp_index_file, args.input_file, format=args.format)
 
