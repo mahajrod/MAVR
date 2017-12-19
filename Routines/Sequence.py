@@ -1763,7 +1763,7 @@ class SequenceRoutines(FileRoutines):
                           if "Name" in feature.qualifiers else "")
                 else:
                     #print feature_types_list
-                    #print feature.sub_features
+                    print feature.sub_features
                     reccursive_subfeature_retrival(feature)
 
     @staticmethod
