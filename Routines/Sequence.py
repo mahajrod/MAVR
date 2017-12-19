@@ -1741,7 +1741,7 @@ class SequenceRoutines(FileRoutines):
 
         def reccursive_subfeature_retrival(feature):
             for subfeature in feature.sub_features:
-                print record_id, feature.id, subfeature.id
+                print record_id, feature.id, subfeature.id, subfeature.type
                 if subfeature.type in feature_types_list:
                     # print subfeature
                     sequence = subfeature.extract(sequence_dict[record_id].seq)
@@ -1754,7 +1754,7 @@ class SequenceRoutines(FileRoutines):
 
         for record_id in annotations_dict:
             for feature in annotations_dict[record_id].features:
-                print record_id, feature.id
+                print record_id, feature.id, feature.type
                 if feature.type in feature_types_list:
                     sequence = feature.extract(sequence_dict[record_id].seq)
                     #record = SeqRecord(sequence, id=feature.id)
