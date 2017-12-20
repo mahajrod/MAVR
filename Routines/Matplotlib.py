@@ -271,7 +271,7 @@ class MatplotlibRoutines:
         else:
             bins = 30
 
-        n, bins, patches = plt.hist(filtered, bins=bins)
+        n, bins, patches = plt.hist(filtered, bins=bins) # , log=False if ylogbase is None else True)
 
         bin_centers = (bins + ((bins[1] - bins[0])/2))[:-1]
         #print bin_centers
@@ -290,6 +290,7 @@ class MatplotlibRoutines:
 
         if ylogbase:
             subplot.set_yscale('log', basey=ylogbase)
+            plt.ylim(ymin=1)
 
         if output_prefix:
             for ext in extensions:
@@ -361,6 +362,7 @@ class MatplotlibRoutines:
                                         title=parameters[6], extensions=("png",), ylogbase=parameters[7],
                                         subplot=subplot_list[dataset_index],
                                         suptitle=None)
+            print histo
             if output_prefix:
                 output_histo_file = "%s.%s.%shisto" % (output_prefix,
                                                        dataset_index if parameters[8] is None else parameters[9],
@@ -377,47 +379,103 @@ class MatplotlibRoutines:
                                                 figsize=(10, 10), number_of_bins_list=None, width_of_bins_list=None,
                                                 max_threshold_list=None, min_threshold_list=None, xlabel=None, ylabel=None,
                                                 title_list=None, logbase=10, label_list=None,
-                                                extensions=("png",), suptitle=None):
+                                                extensions=("png",), suptitle=None, share_y_axis=False,
+                                                share_x_axis=False):
         subplot_tuple = (2, 2)
 
         none_list = [None, None, None, None]
 
         list_of_data = [list_of_data_arrays[0], list_of_data_arrays[1],
                         list_of_data_arrays[0], list_of_data_arrays[1]]
-        number_of_bins_listtt = [number_of_bins_list[0], number_of_bins_list[1],
-                                 number_of_bins_list[0], number_of_bins_list[1]] if number_of_bins_list else none_list
-        width_of_bins_listtt = [width_of_bins_list[0], width_of_bins_list[1],
-                                width_of_bins_list[0], width_of_bins_list[1]] if width_of_bins_list else none_list
-        max_threshold_listtt = [max_threshold_list[0], max_threshold_list[1],
-                                max_threshold_list[0], max_threshold_list[1]] if max_threshold_list else none_list
 
-        min_threshold_listtt = [min_threshold_list[0], min_threshold_list[1],
-                                min_threshold_list[0], min_threshold_list[1]] if min_threshold_list else none_list
+        number_of_bins_listtt = [number_of_bins_list if isinstance(number_of_bins_list, str) else number_of_bins_list[0],
+                                 number_of_bins_list if isinstance(number_of_bins_list, str) else number_of_bins_list[0] if len(number_of_bins_list) == 1 else number_of_bins_list[1],
+                                 number_of_bins_list if isinstance(number_of_bins_list, str) else number_of_bins_list[0],
+                                 number_of_bins_list if isinstance(number_of_bins_list, str) else number_of_bins_list[0] if len(number_of_bins_list) == 1 else number_of_bins_list[1]] if number_of_bins_list else none_list
+
+        width_of_bins_listtt = [width_of_bins_list if isinstance(width_of_bins_list, str) else width_of_bins_list[0],
+                                width_of_bins_list if isinstance(width_of_bins_list, str) else width_of_bins_list[0] if len(width_of_bins_list) == 1 else width_of_bins_list[1],
+                                width_of_bins_list if isinstance(width_of_bins_list, str) else width_of_bins_list[0],
+                                width_of_bins_list if isinstance(width_of_bins_list, str) else width_of_bins_list[0] if len(width_of_bins_list) == 1 else width_of_bins_list[1]] if width_of_bins_list else none_list
+
+        max_threshold_listtt = [max_threshold_list if isinstance(max_threshold_list, str) else max_threshold_list[0],
+                                max_threshold_list if isinstance(max_threshold_list, str) else max_threshold_list[0] if len(max_threshold_list) == 1 else max_threshold_list[1],
+                                max_threshold_list if isinstance(max_threshold_list, str) else max_threshold_list[0],
+                                max_threshold_list if isinstance(max_threshold_list, str) else max_threshold_list[0] if len(max_threshold_list) == 1 else max_threshold_list[1]] if max_threshold_list else none_list
+
+        min_threshold_listtt = [min_threshold_list if isinstance(min_threshold_list, str) else min_threshold_list[0],
+                                min_threshold_list if isinstance(min_threshold_list, str) else min_threshold_list[0] if len(min_threshold_list) == 1 else min_threshold_list[1],
+                                min_threshold_list if isinstance(min_threshold_list, str) else min_threshold_list[0],
+                                min_threshold_list if isinstance(min_threshold_list, str) else min_threshold_list[0] if len(min_threshold_list) == 1 else min_threshold_list[1]] if min_threshold_list else none_list
+
         title_listtt = [title_list[0], title_list[1],
-                        "%s, logscaled" % title_list[0], "%s, logscaled" % title_list[1]] if title_list else none_list
+                        "%s(logscaled)" % title_list[0], "%s(logscaled)" % title_list[1]] if title_list else none_list
 
         ylogbase_list = [None, None, logbase, logbase]
-        xlabel_list = [None, None, xlabel, xlabel]
-        ylabel_list = [ylabel, None, ylabel, None]
+
+        xlabel_list = [None,
+                       None,
+                       xlabel if isinstance(xlabel, str) else xlabel[0] if len(xlabel) == 1 else xlabel[0],
+                       xlabel if isinstance(xlabel, str) else xlabel[0] if len(xlabel) == 1 else xlabel[1]]
+
+        ylabel_list = [ylabel if isinstance(ylabel, str) else ylabel[0] if len(ylabel) == 1 else ylabel[0],
+                       None,
+                       ylabel if isinstance(ylabel, str) else ylabel[0] if len(ylabel) == 1 else ylabel[1],
+                       None]
+
         self.draw_multi_histogram_picture(list_of_data, subplot_tuple, output_prefix=output_prefix,
                                           figsize=figsize, number_of_bins_list=number_of_bins_listtt,
                                           width_of_bins_list=width_of_bins_listtt,
                                           max_threshold_list=max_threshold_listtt,
                                           min_threshold_list=min_threshold_listtt, xlabel_list=xlabel_list, ylabel_list=ylabel_list,
                                           title_list=title_listtt, ylogbase_list=ylogbase_list, label_list=None,
-                                          extensions=extensions, suptitle=suptitle)
+                                          extensions=extensions, suptitle=suptitle,
+                                          share_y_axis=share_y_axis, share_x_axis=share_x_axis)
 
     def draw_hexa_histogram_with_three_logscaled(self, list_of_data_arrays,  output_prefix=None,
                                                  figsize=(10, 15), number_of_bins_list=None, width_of_bins_list=None,
                                                  max_threshold_list=None, min_threshold_list=None, xlabel=None, ylabel=None,
                                                  title_list=None, logbase=10, label_list=None,
-                                                 extensions=("png",), suptitle=None):
+                                                 extensions=("png",), suptitle=None, share_y_axis=False,
+                                                 share_x_axis=False):
         subplot_tuple = (2, 3)
 
         none_list = [None, None, None, None, None, None]
 
         list_of_data = [list_of_data_arrays[0], list_of_data_arrays[1], list_of_data_arrays[2],
                         list_of_data_arrays[0], list_of_data_arrays[1], list_of_data_arrays[2]]
+
+        number_of_bins_listtt = [number_of_bins_list if isinstance(number_of_bins_list, str) else number_of_bins_list[0],
+                                 number_of_bins_list if isinstance(number_of_bins_list, str) else number_of_bins_list[0] if len(number_of_bins_list) == 1 else number_of_bins_list[1],
+                                 number_of_bins_list if isinstance(number_of_bins_list, str) else number_of_bins_list[0] if len(number_of_bins_list) == 1 else number_of_bins_list[2],
+                                 number_of_bins_list if isinstance(number_of_bins_list, str) else number_of_bins_list[0],
+                                 number_of_bins_list if isinstance(number_of_bins_list, str) else number_of_bins_list[0] if len(number_of_bins_list) == 1 else number_of_bins_list[1],
+                                 number_of_bins_list if isinstance(number_of_bins_list, str) else number_of_bins_list[0] if len(number_of_bins_list) == 1 else number_of_bins_list[2],] if number_of_bins_list else none_list
+
+        width_of_bins_listtt = [width_of_bins_list if isinstance(width_of_bins_list, str) else width_of_bins_list[0],
+                                width_of_bins_list if isinstance(width_of_bins_list, str) else width_of_bins_list[0] if len(width_of_bins_list) == 1 else width_of_bins_list[1],
+                                width_of_bins_list if isinstance(width_of_bins_list, str) else width_of_bins_list[0] if len(width_of_bins_list) == 1 else width_of_bins_list[2],
+                                width_of_bins_list if isinstance(width_of_bins_list, str) else width_of_bins_list[0],
+                                width_of_bins_list if isinstance(width_of_bins_list, str) else width_of_bins_list[0] if len(width_of_bins_list) == 1 else width_of_bins_list[1],
+                                width_of_bins_list if isinstance(width_of_bins_list, str) else width_of_bins_list[0] if len(width_of_bins_list) == 1 else width_of_bins_list[2]] if width_of_bins_list else none_list
+
+        max_threshold_listtt = [max_threshold_list if isinstance(max_threshold_list, str) else max_threshold_list[0],
+                                max_threshold_list if isinstance(max_threshold_list, str) else max_threshold_list[0] if len(max_threshold_list) == 1 else max_threshold_list[1],
+                                max_threshold_list if isinstance(max_threshold_list, str) else max_threshold_list[0] if len(max_threshold_list) == 1 else max_threshold_list[2],
+                                max_threshold_list if isinstance(max_threshold_list, str) else max_threshold_list[0],
+                                max_threshold_list if isinstance(max_threshold_list, str) else max_threshold_list[0] if len(max_threshold_list) == 1 else max_threshold_list[1],
+                                max_threshold_list if isinstance(max_threshold_list, str) else max_threshold_list[0] if len(max_threshold_list) == 1 else max_threshold_list[2]] if max_threshold_list else none_list
+
+        min_threshold_listtt = [min_threshold_list if isinstance(min_threshold_list, str) else min_threshold_list[0],
+                                min_threshold_list if isinstance(min_threshold_list, str) else min_threshold_list[0] if len(min_threshold_list) == 1 else min_threshold_list[1],
+                                min_threshold_list if isinstance(min_threshold_list, str) else min_threshold_list[0] if len(min_threshold_list) == 1 else min_threshold_list[2],
+                                min_threshold_list if isinstance(min_threshold_list, str) else min_threshold_list[0],
+                                min_threshold_list if isinstance(min_threshold_list, str) else min_threshold_list[0] if len(min_threshold_list) == 1 else min_threshold_list[1],
+                                min_threshold_list if isinstance(min_threshold_list, str) else min_threshold_list[0] if len(min_threshold_list) == 1 else min_threshold_list[2],] if min_threshold_list else none_list
+
+        """
+
+
         number_of_bins_listtt = [number_of_bins_list[0], number_of_bins_list[1], number_of_bins_list[2],
                                  number_of_bins_list[0], number_of_bins_list[1], number_of_bins_list[2]] if number_of_bins_list else none_list
         width_of_bins_listtt = [width_of_bins_list[0], width_of_bins_list[1], width_of_bins_list[2],
@@ -427,48 +485,98 @@ class MatplotlibRoutines:
 
         min_threshold_listtt = [min_threshold_list[0], min_threshold_list[1], min_threshold_list[2],
                                 min_threshold_list[0], min_threshold_list[1], min_threshold_list[2]] if min_threshold_list else none_list
+
+        """
+
         title_listtt = [title_list[0], title_list[1], title_list[2],
                         "%s, logscaled" % title_list[0], "%s, logscaled" % title_list[1], "%s, logscaled" % title_list[2]] if title_list else none_list
 
         ylogbase_list = [None, None, None, logbase, logbase, logbase]
-        xlabel_list = [None, None, None, xlabel, xlabel, xlabel]
-        ylabel_list = [ylabel, None, None, ylabel, None, None]
+
+        xlabel_list = [None,
+                       None,
+                       None,
+                       xlabel if isinstance(xlabel, str) else xlabel[0] if len(xlabel) == 1 else xlabel[0],
+                       xlabel if isinstance(xlabel, str) else xlabel[0] if len(xlabel) == 1 else xlabel[1],
+                       xlabel if isinstance(xlabel, str) else xlabel[0] if len(xlabel) == 1 else xlabel[2]]
+
+        ylabel_list = [ylabel if isinstance(ylabel, str) else ylabel[0] if len(ylabel) == 1 else ylabel[0],
+                       None,
+                       None,
+                       ylabel if isinstance(ylabel, str) else ylabel[0] if len(ylabel) == 1 else ylabel[1],
+                       None,
+                       None]
+
+        """
+        xlabel_list = [None,
+                       None,
+                       None,
+                       xlabel if isinstance(xlabel, str) else xlabel[0],
+                       xlabel if isinstance(xlabel, str) else xlabel[1],
+                       xlabel if isinstance(xlabel, str) else xlabel[2]]
+        ylabel_list = [ylabel if isinstance(ylabel, str) else ylabel[0],
+                       None,
+                       None,
+                       ylabel if isinstance(ylabel, str) else ylabel[1],
+                       None,
+                       None]
+        """
+
         self.draw_multi_histogram_picture(list_of_data, subplot_tuple, output_prefix=output_prefix,
                                           figsize=figsize, number_of_bins_list=number_of_bins_listtt,
                                           width_of_bins_list=width_of_bins_listtt,
                                           max_threshold_list=max_threshold_listtt,
                                           min_threshold_list=min_threshold_listtt, xlabel_list=xlabel_list, ylabel_list=ylabel_list,
                                           title_list=title_listtt, ylogbase_list=ylogbase_list, label_list=None,
-                                          extensions=extensions, suptitle=suptitle)
+                                          extensions=extensions, suptitle=suptitle, share_y_axis=share_y_axis,
+                                          share_x_axis=share_x_axis)
 
-    def draw_tetra_histogram_with_two_logscaled_from_file(self, list_of_files,  output_prefix,
+    def draw_tetra_histogram_with_two_logscaled_from_file(self, file_list,  column_idx_list, output_prefix,
                                                           figsize=(10, 10), number_of_bins_list=None, width_of_bins_list=None,
                                                           max_threshold_list=None, min_threshold_list=None, xlabel=None, ylabel=None,
                                                           title_list=None, logbase=10, label_list=None,
-                                                          extensions=("png",), suptitle=None, separator="\n"):
-        list_of_data = [np.fromfile(filename, sep=separator) for filename in list_of_files]
-        self.draw_tetra_histogram_with_two_logscaled(list_of_data,  output_prefix=output_prefix,
+                                                          extensions=("png",), suptitle=None, separator=None,
+                                                          share_y_axis=False, share_x_axis=False,
+                                                          comments="#"):
+
+        list_of_data_arrays = []
+        for filename, column_idx in zip(file_list, column_idx_list):
+            #print filename, column_idx
+            list_of_data_arrays.append(np.loadtxt(filename, usecols=(column_idx,),
+                                                  delimiter=separator, comments=comments))
+
+        self.draw_tetra_histogram_with_two_logscaled(list_of_data_arrays, output_prefix=output_prefix,
                                                      figsize=figsize, number_of_bins_list=number_of_bins_list,
                                                      width_of_bins_list=width_of_bins_list,
                                                      max_threshold_list=max_threshold_list,
                                                      min_threshold_list=min_threshold_list, xlabel=xlabel,
                                                      ylabel=ylabel, title_list=title_list, logbase=logbase,
-                                                     label_list=label_list, extensions=extensions, suptitle=suptitle)
+                                                     label_list=label_list, extensions=extensions, suptitle=suptitle,
+                                                     share_y_axis=share_y_axis, share_x_axis=share_x_axis)
 
-    def draw_hexa_histogram_with_three_logscaled_from_file(self, list_of_files,  output_prefix,
-                                                         figsize=(15, 10), number_of_bins_list=None, width_of_bins_list=None,
-                                                         max_threshold_list=None, min_threshold_list=None, xlabel=None, ylabel=None,
-                                                         title_list=None, logbase=10, label_list=None,
-                                                         extensions=("png",), suptitle=None, separator="\n"):
+    def draw_hexa_histogram_with_three_logscaled_from_file(self, list_of_files, column_idx_list, output_prefix,
+                                                           figsize=(15, 10), number_of_bins_list=None,
+                                                           width_of_bins_list=None,
+                                                           max_threshold_list=None, min_threshold_list=None,
+                                                           xlabel=None, ylabel=None,
+                                                           title_list=None, logbase=10, label_list=None,
+                                                           extensions=("png",), suptitle=None, separator=None,
+                                                           share_y_axis=False, share_x_axis=False,
+                                                           comments="#"):
 
-        list_of_data = [np.fromfile(filename, sep=separator) for filename in list_of_files]
-        self.draw_hexa_histogram_with_three_logscaled(list_of_data,  output_prefix=output_prefix,
-                                                     figsize=figsize, number_of_bins_list=number_of_bins_list,
-                                                     width_of_bins_list=width_of_bins_list,
-                                                     max_threshold_list=max_threshold_list,
-                                                     min_threshold_list=min_threshold_list, xlabel=xlabel,
-                                                     ylabel=ylabel, title_list=title_list, logbase=logbase,
-                                                     label_list=label_list, extensions=extensions, suptitle=suptitle)
+        list_of_data_arrays = []
+        for filename, column_idx in zip(list_of_files, column_idx_list):
+            list_of_data_arrays.append(np.loadtxt(filename, usecols=(column_idx,),
+                                                  delimiter=separator, comments=comments))
+
+        self.draw_hexa_histogram_with_three_logscaled(list_of_data_arrays,  output_prefix=output_prefix,
+                                                      figsize=figsize, number_of_bins_list=number_of_bins_list,
+                                                      width_of_bins_list=width_of_bins_list,
+                                                      max_threshold_list=max_threshold_list,
+                                                      min_threshold_list=min_threshold_list, xlabel=xlabel,
+                                                      ylabel=ylabel, title_list=title_list, logbase=logbase,
+                                                      label_list=label_list, extensions=extensions, suptitle=suptitle,
+                                                      share_y_axis=share_y_axis, share_x_axis=share_x_axis)
 
     @staticmethod
     def draw_histogram_from_file(input_file, output_prefix, number_of_bins=None, width_of_bins=None,
@@ -670,6 +778,7 @@ class MatplotlibRoutines:
                                     share_x_axis=False):
         list_of_data_arrays = []
         for filename, column_idx in zip(file_list, column_idx_list):
+            #print filename, column_idx
             list_of_data_arrays.append(np.loadtxt(filename, usecols=(column_idx,),
                                                   delimiter=separator, comments=comments))
 

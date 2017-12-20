@@ -29,10 +29,11 @@ parser.add_argument("-w", "--width_of_bins", action="store", dest="width_of_bins
                     type=lambda s: map(float, s.split(",")),
                     help="Comma-separated list of bin widths in histograms. "
                          "Incompatible with -b/--number_of_bins option. Not set by default")
-parser.add_argument("-n", "--min_value", action="store", dest="min_length", type=float, default=0,
-                    help="Minimum value to show. Default - 1")
-parser.add_argument("-x", "--max_value", action="store", dest="max_length", type=float,
-                    help="Maximum value to show. Default - length of longest sequence")
+parser.add_argument("-n", "--min_value", action="store", dest="min_value", type=lambda s: map(float, s.split(",")),
+                    default=0,
+                    help="Comma-separated list of minimum value to show. Default - 1")
+parser.add_argument("-x", "--max_value", action="store", dest="max_value", type=lambda s: map(float, s.split(",")),
+                    help="Comma-separated list of maximum value to show. Default - length of longest sequence")
 parser.add_argument("-g", "--logbase", action="store", dest="logbase", type=int, default=10,
                     help="Logbase to use for log-scaled histograms")
 parser.add_argument("-e", "--extensions", action="store", dest="extensions", type=lambda x: x.split(","),
@@ -50,12 +51,14 @@ args = parser.parse_args()
 
 if args.index is None:
     args.index = [None for i in range(0, len(args.input))]
+if args.max_value is None:
+    args.max_value = [None for i in range(0, len(args.input))]
 
 MatplotlibRoutines.draw_double_histo_from_file(args.input, args.index, subplot_tuple=(1, 2),
                                                output_prefix=args.output_prefix,
                                                figsize=(10, 5), number_of_bins_list=None,
                                                width_of_bins_list=args.width_of_bins,
-                                               max_threshold_list=None, min_threshold_list=None,
+                                               max_threshold_list=args.max_value, min_threshold_list=args.min_value,
                                                xlabel_list=args.xlabel, ylabel_list=args.ylabel,
                                                title_list=args.title_list, ylogbase_list=None, label_list=None,
                                                extensions=args.extensions, suptitle=None,
