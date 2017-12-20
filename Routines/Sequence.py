@@ -1751,7 +1751,8 @@ class SequenceRoutines(FileRoutines):
                     yield SeqRecord(sequence, id=subfeature.id, description=subfeature.qualifiers["Name"][0] \
                         if "Name" in subfeature.qualifiers else "")
                 else:
-                    reccursive_subfeature_retrival(subfeature)
+                    for record in reccursive_subfeature_retrival(subfeature):
+                        yield record
 
         for record_id in annotations_dict:
             for feature in annotations_dict[record_id].features:
