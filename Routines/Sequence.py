@@ -1764,8 +1764,9 @@ class SequenceRoutines(FileRoutines):
                           if "Name" in feature.qualifiers else "")
 
                     #print feature_types_list
-                print feature.sub_features
-                reccursive_subfeature_retrival(feature)
+                #print feature.sub_features
+                for record in reccursive_subfeature_retrival(feature):
+                    yield record
 
     @staticmethod
     def find_cds_coordinates_in_transcript_by_pep(transcript_dict, protein_dict, correspondence_dict,
