@@ -710,7 +710,7 @@ class MatplotlibRoutines:
                            max_y_value=None, add_max_value=True):
         if (bin_width is not None) and (bin_array is not None):
             raise ValueError("Both bin width and bin array were set")
-
+        print x_list
         min_x, max_x = min(map(min, x_list) if isinstance(x_list[0], Iterable) else x_list), \
                        max(map(max, x_list) if isinstance(x_list[0], Iterable) else x_list)
         if y_list:
@@ -732,13 +732,16 @@ class MatplotlibRoutines:
         elif bin_array:
             bins = bin_array
         else:
+            if bin_number is None:
+                print("WARNINNG!!! No bin_number or bin_width or bin_array were set. "
+                      "Instead default value(20) for bin number is used.")
             xbins = np.linspace(min_x_value if min_x_value is not None else min_x,
                                 max_x_value if max_x_value is not None else max_x,
-                                bin_number if isinstance(bin_number, int) else bin_number[0])
+                                20 if bin_number is None else bin_number if isinstance(bin_number, int) else bin_number[0])
             if y_list:
                 ybins = np.linspace(min_y_value if min_y_value is not None else min_y,
                                     max_y_value if max_y_value is not None else max_y,
-                                    bin_number if isinstance(bin_number, int) else bin_number[1])
+                                    20 if bin_number is None else bin_number if isinstance(bin_number, int) else bin_number[1])
             bins = (xbins, ybins) if y_list else xbins
 
         return bins
