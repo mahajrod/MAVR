@@ -1,0 +1,6 @@
+
+pip show [options] <package>
+    shows info about package, including installation directory
+
+pip freeze
+    shows list of installed packages
