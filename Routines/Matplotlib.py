@@ -225,7 +225,8 @@ class MatplotlibRoutines:
     @staticmethod
     def draw_histogram(data_array, output_prefix=None, number_of_bins=None, width_of_bins=None,
                        max_threshold=None, min_threshold=None, xlabel=None, ylabel=None,
-                       title=None, extensions=("png",), ylogbase=None, subplot=None, suptitle=None):
+                       title=None, extensions=("png",), ylogbase=None, subplot=None, suptitle=None,
+                       close_figure=False):
         if (number_of_bins is not None) and (width_of_bins is not None):
             raise AttributeError("Options -w/--width_of_bins and -b/--number_of_bins mustn't be set simultaneously")
 
@@ -255,7 +256,7 @@ class MatplotlibRoutines:
                     filtered.append(entry)
         else:
             filtered = data_array
-        if not subplot:
+        if subplot is None:
             #print "aaaaaaaaaa"
             figure = plt.figure(1, figsize=(6, 6),)
             subplott = figure.add_subplot(1, 1, 1)
@@ -298,6 +299,9 @@ class MatplotlibRoutines:
 
                 # save histo values
                 np.savetxt("%s.histo" % output_prefix, zip(bin_centers, n), fmt="%i\t%i")
+        if subplot is None:
+            if close_figure:
+                plt.close(figure)
 
         return zip(bin_centers, n)
 
@@ -362,7 +366,7 @@ class MatplotlibRoutines:
                                         title=parameters[6], extensions=("png",), ylogbase=parameters[7],
                                         subplot=subplot_list[dataset_index],
                                         suptitle=None)
-            print histo
+            #print histo
             if output_prefix:
                 output_histo_file = "%s.%s.%shisto" % (output_prefix,
                                                        dataset_index if parameters[8] is None else parameters[9],
@@ -667,7 +671,7 @@ class MatplotlibRoutines:
             bin_array = np.append(bin_array, [max_value])
 
         return bin_array
-
+    """
     def generate_bin_array(self, x, y, bin_number=20, bin_width=None, bin_array=None,
                            min_x_value=None, max_x_value=None, min_y_value=None, max_y_value=None, add_max_value=True):
         if (bin_width is not None) and (bin_array is not None):
@@ -697,6 +701,45 @@ class MatplotlibRoutines:
                                 max_y_value if max_y_value is not None else max_y,
                                 bin_number if isinstance(bin_number, int) else bin_number[1])
             bins = (xbins, ybins)
+
+        return bins
+    """
+
+    def generate_bin_array(self, x_list, y_list=None, bin_number=20, bin_width=None, bin_array=None,
+                           min_x_value=None, max_x_value=None, min_y_value=None,
+                           max_y_value=None, add_max_value=True):
+        if (bin_width is not None) and (bin_array is not None):
+            raise ValueError("Both bin width and bin array were set")
+
+        min_x, max_x = min(map(min, x_list) if isinstance(x_list[0], Iterable) else x_list), \
+                       max(map(max, x_list) if isinstance(x_list[0], Iterable) else x_list)
+        if y_list:
+            min_y, max_y = min(map(min, y_list) if isinstance(y_list[0], Iterable) else y_list), \
+                           max(map(max, y_list) if isinstance(y_list[0], Iterable) else y_list)
+
+        if bin_width:
+            xbins = self.generate_bin_array_by_width(min_x_value if min_x_value is not None else min_x,
+                                                     max_x_value if max_x_value is not None else max_x,
+                                                     bin_width if isinstance(bin_width, int) else bin_width[0],
+                                                     add_max_value=add_max_value)
+            if y_list:
+                ybins = self.generate_bin_array_by_width(min_y_value if min_y_value is not None else min_y,
+                                                         max_y_value if max_y_value is not None else max_y,
+                                                         bin_width if isinstance(bin_width, int) else bin_width[1],
+                                                         add_max_value=add_max_value)
+            bins = (xbins, ybins) if y_list else xbins
+
+        elif bin_array:
+            bins = bin_array
+        else:
+            xbins = np.linspace(min_x_value if min_x_value is not None else min_x,
+                                max_x_value if max_x_value is not None else max_x,
+                                bin_number if isinstance(bin_number, int) else bin_number[0])
+            if y_list:
+                ybins = np.linspace(min_y_value if min_y_value is not None else min_y,
+                                    max_y_value if max_y_value is not None else max_y,
+                                    bin_number if isinstance(bin_number, int) else bin_number[1])
+            bins = (xbins, ybins) if y_list else xbins
 
         return bins
 
