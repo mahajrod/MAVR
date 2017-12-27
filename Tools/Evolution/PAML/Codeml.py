@@ -324,7 +324,7 @@ class Codeml(Tool):
 
                 options_list.append("%s.ctl" % basename)
                 dir_list.append(model_dir)
-                """
+
                 self.generate_ctl_file(os.path.abspath(filename), tree_file_abs_path, out_file, ctl_file,
                                        seq_type=seq_type, codon_frequency=codon_frequency, noisy=noisy, verbose=verbose,
                                        runmode=runmode, clock=clock, aminoacid_distance=aminoacid_distance, model=2,
@@ -332,10 +332,9 @@ class Codeml(Tool):
                                        kappa=kappa, fix_omega=fix_omega_dict[model], omega=1, getSE=getSE,
                                        RateAncestor=RateAncestor, Mgene=0,
                                        small_difference=small_difference, clean_data=clean_data, method=method)
-                """
-        """
+
         self.parallel_execute(options_list, dir_list=dir_list)
-        """
+
         results_dict = OrderedDict()
         double_delta_dict = OrderedDict()
         raw_pvalues_dict = OrderedDict()
