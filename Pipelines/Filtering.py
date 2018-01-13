@@ -97,7 +97,7 @@ class FilteringPipeline(Pipeline):
                                                                                                    input_is_se=input_is_se)
             if not skip_coockiecutter:
                 print("\tFiltering by Cookiecutter")
-                """
+                #"""
                 Cookiecutter.rm_reads(adapter_fragment_file,
                                       merged_forward_reads if merged_forward_reads else merged_se_reads,
                                       coockie_stats,
