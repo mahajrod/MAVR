@@ -167,11 +167,13 @@ class Exonerate(Tool):
         for output_type in names_dict:
             fd_dict[output_type] = open(names_dict[output_type], "w")
 
+        current_gene_index = 0
+        gene_prefix = "%s%%0%ii" % (gene_prefix, number_len)
+        transcript_prefix = "%s%%0%ii" % (transcript_prefix, number_len)
+
         for filename in exonerate_output_files:
             index = 0
-            current_gene_index = 0
-            gene_prefix = "%s%%0%ii" % (gene_prefix, number_len)
-            transcript_prefix = "%s%%0%ii" % (transcript_prefix, number_len)
+
             with open(filename, "r") as in_fd:
                 #print u
                 #tmp = None
@@ -196,7 +198,9 @@ class Exonerate(Tool):
                         while True:
                             tmp = next(in_fd, "")
                             if ("\tgene\t" in tmp) and (index == 1):
+                                #print tmp
                                 current_gene_index += 1
+                                #print current_gene_index, gene_prefix
                                 current_gene_id = gene_prefix % current_gene_index
                                 current_transcript_id = transcript_prefix % current_gene_index
                                 line_list = tmp.strip().split("\t")

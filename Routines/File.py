@@ -27,11 +27,51 @@ class FileRoutines:
             return open(filename, flags)
 
     @staticmethod
-    def safe_mkdir(dirname):
+    def safe_mkdir(dirname, 
+                   description_filename=None, description_text=None,
+                   readme_filename=None, readme_text=None):
         try:
             os.mkdir(dirname)
         except OSError:
             pass
+        
+        if not(description_filename is None):
+            description_filename = "%s/%s" % (dirname, description_filename)
+    
+            if not os.path.isfile(description_filename):
+                with open(description_filename, "w") as descr_fd:
+                    if not (description_text is None):
+                        descr_fd.write(description_text)
+                        
+        if not(readme_filename is None):
+            readme_filename = "%s/%s" % (dirname, readme_filename)
+    
+            if not os.path.isfile(readme_filename):
+                with open(readme_filename, "w") as descr_fd:
+                    if not (readme_text is None):
+                        descr_fd.write(readme_text)
+
+    def recursive_mkdir(self, dir_dict, out_dir=None,
+                        description_filename=None, description_text=None,
+                        readme_filename=None, readme_text=None):
+        self.safe_mkdir(out_dir)
+        for directory in dir_dict:
+            dirname = directory if out_dir is None else "%s/%s" % (out_dir, directory)
+            self.safe_mkdir(dirname,
+                            description_filename=description_filename,
+                            description_text=description_text,
+                            readme_filename=readme_filename,
+                            readme_text=readme_text)
+
+            if isinstance(dir_dict[directory], dict):
+                self.recursive_mkdir(dir_dict[directory],
+                                     out_dir=dirname,
+                                     description_filename=description_filename,
+                                     description_text=description_text,
+                                     readme_filename=readme_filename,
+                                     readme_text=readme_text)
+
+
 
     def detect_filetype_by_extension(self, filename, filetypes_dict=None):
         filetypes = filetypes_dict if filetypes_dict else self.filetypes_dict

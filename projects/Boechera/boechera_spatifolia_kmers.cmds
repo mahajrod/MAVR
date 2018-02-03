@@ -1,0 +1,17 @@
+#hybrid sample is first
+
+~/Dropbox/KrATER/draw_kmer_distribution_from_histo.py -i histo/SRR5116731_23_mer.histo,histo/SRR5116729_23_mer.histo -a Alvarado1_2,Alvarado1_3 -o Alvarado1 -m 23 -u 2 -w 3
+
+~/Dropbox/KrATER/draw_kmer_distribution_from_histo.py -i histo/SRR5116733_23_mer.histo,histo/SRR5116728_23_mer.histo -a Alvarado2_2,Alvarado2_1 -o Alvarado2 -m 23 -u 1 -w 3
+
+~/Dropbox/KrATER/draw_kmer_distribution_from_histo.py -i histo/SRR5116725_23_mer.histo,histo/SRR5116732_23_mer.histo -a Chicago4,Chicago2 -o Chicago -m 23 -u 2 -w 3
+
+~/Dropbox/KrATER/draw_kmer_distribution_from_histo.py -i histo/SRR5116722_23_mer.histo,histo/SRR5116726_23_mer.histo -a Chiquito4,Chiquito7 -o Chiquito -m 23 -u 2 -w 2
+
+~/Dropbox/KrATER/draw_kmer_distribution_from_histo.py -i histo/SRR5116727_23_mer.histo,histo/SRR5116724_23_mer.histo -a Cripple7,Cripple6 -o Cripple -m 23 -u 2 -w 3
+
+~/Dropbox/KrATER/draw_kmer_distribution_from_histo.py -i histo/SRR5116720_23_mer.histo,histo/SRR5116719_23_mer.histo -a Rosita4,Rosita3 -o Rosita -m 23 -u 2 -w 3
+
+~/Dropbox/KrATER/draw_kmer_distribution_from_histo.py -i histo/SRR5116721_23_mer.histo,histo/SRR5116730_23_mer.histo -a Royal1,Royal2 -o Royal -m 23 -u 2 -w 3
+
+~/Dropbox/KrATER/draw_kmer_distribution_from_histo.py -i histo/SRR5116718_23_mer.histo,histo/SRR5116723_23_mer.histo -a Tiesiding7,Tiesiding2 -o Tiesiding -m 23 -u 2 -w 3

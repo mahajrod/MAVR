@@ -68,6 +68,10 @@ MatplotlibRoutines.draw_tetra_histogram_with_two_logscaled_from_file(args.input,
                                                                      share_y_axis=args.share_y_axis,
                                                                      share_x_axis=args.share_x_axis)
 """
+Example:
+~/Dropbox/MAVR/scripts/draw/draw_tetra_histogram_with_two_logscaled.py -i kirill.dn.ds.w.tab,solenodon.raw_alns.all.tab -d 3,3 -o dnds.ratio.log  -l 'dN/dS' -y "Number of genes" -w 20 -n 0 -x 999 -t "11 species,4 species"
+"""
+"""
 if (args.number_of_bins is not None) and (args.width_of_bins is not None):
     raise AttributeError("Options -w/--width_of_bins and -b/--number_of_bins mustn't be set simultaneously")
 

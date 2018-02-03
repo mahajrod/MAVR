@@ -1,0 +1,13 @@
+
+#supermicro
+~/soft/MAVR/scripts/filter/filtering_pipeline.py -d fastq/pe/ -x filtering.pe.stats -o filtered/ -t 30 -a ~/soft/Trimmomatic-0.35/adapters/TruSeq2-PE.fa  -k ~/data/service_seq/trueseq_adapters_with_rev_com_23_mer.kmer -g 20 -l 50 -r --skip_coockiecutter -j ~/soft/Trimmomatic-0.35/
+
+
+
+
+
+
+
+
+
+
