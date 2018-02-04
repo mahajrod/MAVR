@@ -255,6 +255,8 @@ class Exonerate(Tool):
                             elif "Raw score:" in tmp:
                                 current_raw_score = tmp.strip().split()[-1]
                             elif "Query range:" in tmp:
+                                print tmp
+                                print tmp.strip().split()[-1].split(" -> ")
                                 current_query_start, current_query_end = tmp.strip().split()[-1].split(" -> ")
                                 current_hit_length = int(current_query_end) - int(current_query_start)
                                 
