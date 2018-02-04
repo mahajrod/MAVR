@@ -258,7 +258,7 @@ class Exonerate(Tool):
                             elif "Query range:" in tmp:
                                 print tmp
                                 print tmp.strip().split()[-1].split(" -> ")
-                                current_query_start, current_query_end = tmp.strip().split()[-1].split(" -> ")
+                                current_query_start, current_query_end = tmp.strip().split("Query range: ")[-1].split(" -> ")
                                 current_hit_length = int(current_query_end) - int(current_query_start)
                                 
                                 precise_flag = True if current_hit_length == current_query_len else False
