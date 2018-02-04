@@ -256,8 +256,8 @@ class Exonerate(Tool):
                                 current_raw_score = tmp.strip().split()[-1]
                                 print current_raw_score
                             elif "Query range:" in tmp:
-                                print tmp
-                                print tmp.strip().split()[-1].split(" -> ")
+                                #print tmp
+                                #print tmp.strip("Query range: ").split()[-1].split(" -> ")
                                 current_query_start, current_query_end = tmp.strip().split("Query range: ")[-1].split(" -> ")
                                 current_hit_length = int(current_query_end) - int(current_query_start)
                                 
@@ -272,9 +272,9 @@ class Exonerate(Tool):
                                         output_type = "other_top"
                                 else:
                                     if precise_flag:
-                                        output_type = "alignment_precise_secondary"
+                                        output_type = "precise_secondary"
                                     else:
-                                        output_type = "alignment_other_secondary"
+                                        output_type = "other_secondary"
 
                                 fd_dict["alignment"].write(alignment_buffer)
                                 fd_dict["alignment_" + output_type].write(alignment_buffer)
