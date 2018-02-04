@@ -221,6 +221,8 @@ class Exonerate(Tool):
         transcript_prefix = "%s%%0%ii" % (transcript_prefix, number_len)
         precise_top_counter = 0
         other_top_counter = 0
+        precise_secondary_counter = 0
+        other_secondary_counter = 0
         previous_query_id = ""
         hit_counter = 0
         precise_flag = False
@@ -278,8 +280,10 @@ class Exonerate(Tool):
                                 else:
                                     if precise_flag:
                                         output_type = "precise_secondary"
+                                        precise_secondary_counter += 1
                                     else:
                                         output_type = "other_secondary"
+                                        other_secondary_counter += 1
 
                                 fd_dict["alignment"].write(alignment_buffer)
                                 fd_dict["alignment_" + output_type].write(alignment_buffer)
@@ -401,6 +405,8 @@ class Exonerate(Tool):
         print("Reference proteins:\t%i" % len(reference_protein_dict))
         print("Precise top hits:\t%i" % precise_top_counter)
         print("Other top hits:\t%i" % other_top_counter)
+        print("Precise secondary hits:\t%i" % precise_secondary_counter)
+        print("Other secondary hits:\t%i" % other_secondary_counter)
         print("Proteins without hits:\t%i" % (len(reference_protein_dict) - precise_top_counter - other_top_counter))
 
     @staticmethod
