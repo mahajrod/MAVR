@@ -292,7 +292,7 @@ class Exonerate(Tool):
                                 break
 
                             fd_dict["alignment"].write(tmp)
-                            fd_dict["alignment_" + output_type].write(alignment_buffer)
+                            fd_dict["alignment_" + output_type].write(tmp)
                             if tmp == "":
                                 break
                     if tmp == "# --- START OF GFF DUMP ---\n":
@@ -400,6 +400,7 @@ class Exonerate(Tool):
         print("Reference proteins:\t%i" % len(reference_protein_dict))
         print("Precise top hits:\t%i" % precise_top_counter)
         print("Other top hits:\t%i" % other_top_counter)
+        print("Proteins without hits:\t%i" % (len(reference_protein_dict) - precise_top_counter - other_top_counter))
 
     @staticmethod
     def extract_top_hits_from_target_gff(list_of_target_gff, top_hits_gff, secondary_hits_gff, id_white_list_file=None,
