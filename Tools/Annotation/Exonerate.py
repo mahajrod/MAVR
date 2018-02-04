@@ -253,7 +253,6 @@ class Exonerate(Tool):
                     if tmp[:13] == "C4 Alignment:":
                         alignment_buffer = tmp
 
-
                         while True:
                             tmp = in_fd.next()
                             alignment_buffer += tmp
@@ -262,12 +261,12 @@ class Exonerate(Tool):
                                 current_query_id = tmp.split()[1]
                                 if current_query_id != previous_query_id:
                                     if previous_query_id != "":
-                                        fd_dict["stats_hit"].write("%s\t%i\t%i\t%i\t%i\t%i\n" % previous_query_id,
-                                                                                                hit_counter,
-                                                                                                per_pep_precise_top_hit_number,
-                                                                                                per_pep_other_top_hit_number,
-                                                                                                per_pep_precise_secondary_hit_number,
-                                                                                                per_pep_other_secondary_hit_number)
+                                        fd_dict["stats_hit"].write("%s\t%i\t%i\t%i\t%i\t%i\n" % (previous_query_id,
+                                                                                                 hit_counter,
+                                                                                                 per_pep_precise_top_hit_number,
+                                                                                                 per_pep_other_top_hit_number,
+                                                                                                 per_pep_precise_secondary_hit_number,
+                                                                                                 per_pep_other_secondary_hit_number))
 
                                     previous_query_id = current_query_id
                                     hit_counter = 1
