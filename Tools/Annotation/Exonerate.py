@@ -197,6 +197,7 @@ class Exonerate(Tool):
                       "stats_precise_secondary": "%s.precise_secondary.stats" % output_prefix,
                       "stats_other_secondary": "%s.other_secondary.stats" % output_prefix,
                       "stats": "%s.stats" % output_prefix,
+                      "stats_hit": "%s.hit.stats" % output_prefix,
 
                       "top_hits_gff" : "%s.top_hits.gff" % output_prefix,
                       "top_hits_vulgar" : "%s.top_hits.vulgar" % output_prefix,
@@ -216,6 +217,8 @@ class Exonerate(Tool):
                                  "stats_precise_secondary", "stats_other_secondary", "stats":
             fd_dict[output_type_entry].write("#query_id\tquery_len\tscore\thit_len\tquery_start\tquery_end\tgene_id\n")
 
+        fd_dict["stats_hit"].write("#query_id\ttotal_hits\tprecise_top_hits\tother_top_hit\tprecise_secondary_hits\tother_secondary_hits\n")
+
         current_gene_index = 0
         gene_prefix = "%s%%0%ii" % (gene_prefix, number_len)
         transcript_prefix = "%s%%0%ii" % (transcript_prefix, number_len)
@@ -231,6 +234,11 @@ class Exonerate(Tool):
         current_query_start = 0
         current_query_end = 0
         current_hit_length = 0
+
+        per_pep_precise_top_hit_number = 0
+        per_pep_other_top_hit_number = 0
+        per_pep_precise_secondary_hit_number = 0
+        per_pep_other_secondary_hit_number = 0
 
         for filename in exonerate_output_files:
             index = 0
@@ -252,8 +260,22 @@ class Exonerate(Tool):
                             if "Query: " in tmp:
                                 current_query_id = tmp.split()[1]
                                 if current_query_id != previous_query_id:
+                                    if previous_query_id != "":
+                                        fd_dict["stats_hit"].write("%s\t%i\t%i\t%i\t%i\t%i\n" % previous_query_id,
+                                                                                                hit_counter,
+                                                                                                per_pep_precise_top_hit_number,
+                                                                                                per_pep_other_top_hit_number,
+                                                                                                per_pep_precise_secondary_hit_number,
+                                                                                                per_pep_other_secondary_hit_number)
+
                                     previous_query_id = current_query_id
                                     hit_counter = 1
+
+                                    per_pep_precise_top_hit_number = 0
+                                    per_pep_other_top_hit_number = 0
+                                    per_pep_precise_secondary_hit_number = 0
+                                    per_pep_other_secondary_hit_number = 0
+
                                     current_query_len = len(reference_protein_dict[current_query_id].seq)
                                 else:
                                     hit_counter += 1
@@ -274,16 +296,20 @@ class Exonerate(Tool):
                                     if precise_flag:
                                         output_type = "precise_top"
                                         precise_top_counter += 1
+                                        per_pep_precise_top_hit_number += 1
                                     else:
                                         other_top_counter += 1
                                         output_type = "other_top"
+                                        per_pep_other_top_hit_number += 1
                                 else:
                                     if precise_flag:
                                         output_type = "precise_secondary"
                                         precise_secondary_counter += 1
+                                        per_pep_precise_secondary_hit_number += 1
                                     else:
                                         output_type = "other_secondary"
                                         other_secondary_counter += 1
+                                        per_pep_other_secondary_hit_number += 1
 
                                 fd_dict["alignment"].write(alignment_buffer)
                                 fd_dict["alignment_" + output_type].write(alignment_buffer)
@@ -317,13 +343,13 @@ class Exonerate(Tool):
                                 current_gene_id = gene_prefix % current_gene_index
                                 current_transcript_id = transcript_prefix % current_gene_index
 
-                                hit_stat_str = "#%s\t%s\t%s\t%i\t%i\t%i\t%s\n" % (current_query_id,
-                                                                                  current_query_len,
-                                                                                  current_raw_score,
-                                                                                  current_hit_length,
-                                                                                  current_query_start + 1,
-                                                                                  current_query_end,
-                                                                                  current_gene_id)
+                                hit_stat_str = "%s\t%s\t%s\t%i\t%i\t%i\t%s\n" % (current_query_id,
+                                                                                 current_query_len,
+                                                                                 current_raw_score,
+                                                                                 current_hit_length,
+                                                                                 current_query_start + 1,
+                                                                                 current_query_end,
+                                                                                 current_gene_id)
                                 fd_dict["stats"].write(hit_stat_str)
                                 fd_dict["stats_" + output_type].write(hit_stat_str)
 
