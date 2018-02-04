@@ -10,6 +10,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-i", "--input", action="store", dest="input", required=True,
                     type=lambda s: make_list_of_path_to_files(s.split(",")),
                     help="Input comma-separated list of files/directories with exonerate output")
+parser.add_argument("-r", "--reference_protein_file", action="store", dest="reference_protein_file", required=True,
+                    help="File with reference proteins used for alignment")
 parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix",
                     help="Prefix of output files")
 parser.add_argument("-g", "--gene_id_prefix", action="store", dest="gene_id_prefix", default="GEN",
@@ -21,5 +23,5 @@ parser.add_argument("-n", "--number_digits_in_id", action="store", dest="number_
 
 args = parser.parse_args()
 
-Exonerate.split_output(args.input, args.output_prefix, gene_prefix=args.gene_id_prefix,
+Exonerate.split_output(args.input, args.output_prefix, args.reference_protein_file, gene_prefix=args.gene_id_prefix,
                        transcript_prefix=args.gene_id_prefix, number_len=args.number_digits_in_id)
