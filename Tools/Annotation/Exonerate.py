@@ -213,7 +213,7 @@ class Exonerate(Tool):
             fd_dict[output_type] = open(names_dict[output_type], "w")
             
         for output_type_entry in "stats_precise_top", "stats_other_top", \
-                                 "stats_precise_secondary", "stats_other_secondary_hit", "stats":
+                                 "stats_precise_secondary", "stats_other_secondary", "stats":
             fd_dict[output_type_entry].write("#query_id\tquery_len\tscore\thit_len\tquery_start\tquery_end\tgene_id\n")
 
         current_gene_index = 0
