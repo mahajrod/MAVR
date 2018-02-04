@@ -139,8 +139,12 @@ class Exonerate(Tool):
             #shutil.rmtree(splited_result_dir)
             #shutil.rmtree(converted_output_dir)
 
-    @staticmethod
-    def split_output(exonerate_output_files, output_prefix, gene_prefix="GEN", transcript_prefix="TR", number_len=8):
+    def split_output(self, exonerate_output_files, output_prefix, gene_prefix="GEN", transcript_prefix="TR", number_len=8,
+                     reference_protein_file=None):
+        """
+        precise hits - whole query was aligned
+        """
+        
         names_dict = {
                       "vulgar": "%s.vulgar" % output_prefix,
                       "cigar": "%s.cigar" % output_prefix,
@@ -155,17 +159,61 @@ class Exonerate(Tool):
                       "intron": "%s.intron.gff" % output_prefix,
                       "cds": "%s.cds.gff" % output_prefix,
                       "gene": "%s.gene.gff" % output_prefix,
-                      }
-        top_hits_gff = "%s.top_hits.gff" % output_prefix
-        top_hits_vulgar = "%s.top_hits.vulgar" % output_prefix
-        top_hits_sugar = "%s.top_hits.sugar" % output_prefix
-        top_hits_target_gff = "%s.top_hits.target.gff" % output_prefix
-        top_hits_query_gff = "%s.top_hits.query.gff" % output_prefix
-        top_hits_simple = "%s.top_hits.query.simple" % output_prefix
+            
+                      "vulgar_precise_top": "%s.precise_top.vulgar" % output_prefix,
+                      "cigar_precise_top": "%s.precise_top.cigar" % output_prefix,
+                      "sugar_precise_top": "%s.precise_top.sugar" % output_prefix,
+                      "alignment_precise_top": "%s.precise_top.alignment" % output_prefix,
+                      "gff_precise_top": "%s.precise_top.gff" % output_prefix,
+                      "target_gff_precise_top": "%s.precise_top.target.gff" % output_prefix,
+                      "query_gff_precise_top": "%s.precise_top.query.gff" % output_prefix,
+            
+                      "vulgar_other_top": "%s.other_top.vulgar" % output_prefix,
+                      "cigar_other_top": "%s.other_top.cigar" % output_prefix,
+                      "sugar_other_top": "%s.other_top.sugar" % output_prefix,
+                      "alignment_other_top": "%s.other_top.alignment" % output_prefix,
+                      "gff_other_top": "%s.other_top.gff" % output_prefix,
+                      "target_gff_other_top": "%s.other_top.target.gff" % output_prefix,
+                      "query_gff_other_top": "%s.other_top.query.gff" % output_prefix,
+            
+                      "vulgar_precise_secondary": "%s.precise_secondary.vulgar" % output_prefix,
+                      "cigar_precise_secondary": "%s.precise_secondary.cigar" % output_prefix,
+                      "sugar_precise_secondary": "%s.precise_secondary.sugar" % output_prefix,
+                      "alignment_precise_secondary": "%s.precise_secondary.alignment" % output_prefix,
+                      "gff_precise_secondary": "%s.precise_secondary.gff" % output_prefix,
+                      "target_gff_precise_secondary": "%s.precise_secondary.target.gff" % output_prefix,
+                      "query_gff_precise_secondary": "%s.precise_secondary.query.gff" % output_prefix,
+            
+                      "vulgar_other_secondary": "%s.other_secondary.vulgar" % output_prefix,
+                      "cigar_other_secondary": "%s.other_secondary.cigar" % output_prefix,
+                      "sugar_other_secondary": "%s.other_secondary.sugar" % output_prefix,
+                      "alignment_other_secondary": "%s.other_secondary.alignment" % output_prefix,
+                      "gff_other_secondary": "%s.other_secondary.gff" % output_prefix,
+                      "target_gff_other_secondary": "%s.other_secondary.target.gff" % output_prefix,
+                      "query_gff_other_secondary": "%s.other_secondary.query.gff" % output_prefix,
+
+                      "stats_precise_top": "%s.precise_top.stats" % output_prefix,
+                      "stats_other_top": "%s.other_top.stats" % output_prefix,
+                      "stats_precise_secondary": "%s.precise_secondary.stats" % output_prefix,
+                      "stats_other_secondary_hit": "%s.other_secondary.stats" % output_prefix,
+                      "stats": "%s.stats" % output_prefix,
+
+                      "top_hits_gff" : "%s.top_hits.gff" % output_prefix,
+                      "top_hits_vulgar" : "%s.top_hits.vulgar" % output_prefix,
+                      "top_hits_sugar" : "%s.top_hits.sugar" % output_prefix,
+                      "top_hits_target_gff" : "%s.top_hits.target.gff" % output_prefix,
+                      "top_hits_query_gff" : "%s.top_hits.query.gff" % output_prefix,
+                      "top_hits_simple" : "%s.top_hits.query.simple" % output_prefix,
+                    }
+        
+        reference_protein_dict = self.parse_seq_file(reference_protein_file, "parse", format="fasta")
 
         fd_dict = {}
         for output_type in names_dict:
             fd_dict[output_type] = open(names_dict[output_type], "w")
+            
+        for output_type_entry in "precise_hit_stats", "other_top_hit_stats", "secondary_hit_stats":
+            fd_dict[output_type_entry].write("#query_id\tquery_len\tscore\tquery_start\tquery_end\tgene_id\n")
 
         current_gene_index = 0
         gene_prefix = "%s%%0%ii" % (gene_prefix, number_len)
@@ -177,24 +225,75 @@ class Exonerate(Tool):
             with open(filename, "r") as in_fd:
                 #print u
                 #tmp = None
+                previous_query_id = ""
+                hit_counter = 0
+                precise_flag = False
+                current_query_len = 0
+                current_raw_score = 0
+                current_query_start = 0
+                current_query_end = 0
+                current_hit_length = 0
                 for line in in_fd:
                     tmp = line
+
                     if tmp[:13] == "C4 Alignment:":
-                        tmp = in_fd.next()
-                        fd_dict["alignment"].write(tmp)
+                        alignment_buffer = tmp
+
+                        while True:
+                            tmp = in_fd.next()
+                            alignment_buffer += tmp
+
+                            if "Query: " in tmp:
+                                current_query_id = tmp.split()[1]
+                                if current_query_id != previous_query_id:
+                                    previous_query_id = current_query_id
+                                    hit_counter = 1
+                                    current_query_len = len(reference_protein_dict[current_query_id].seq)
+                                else:
+                                    hit_counter += 1
+                            elif "Raw score:" in tmp:
+                                current_raw_score = tmp.strip().split()[-1]
+                            elif "Query range:" in tmp:
+                                current_query_start, current_query_end = tmp.strip().split()[-1].split(" -> ")
+                                current_hit_length = int(current_query_end) - int(current_query_start)
+                                
+                                precise_flag = True if current_hit_length == current_query_len else False
+                                
+                            elif "Target range:" in tmp:
+
+                                if hit_counter == 1:
+                                    if precise_flag:
+                                        output_type = "precise_top"
+                                    else:
+                                        output_type = "other_top"
+                                else:
+                                    if precise_flag:
+                                        output_type = "alignment_precise_secondary"
+                                    else:
+                                        output_type = "alignment_other_secondary"
+
+                                fd_dict["alignment"].write(alignment_buffer)
+                                fd_dict["alignment_" + output_type].write(alignment_buffer)
+                                
+                                break
+
                         while True:
                             tmp = next(in_fd, "")
                             if (tmp[0] == "c") or (tmp[0] == "v") or (tmp[0] == "s") or (tmp[0] == "#"):
                                 break
+
                             fd_dict["alignment"].write(tmp)
+                            fd_dict["alignment_" + output_type].write(alignment_buffer)
                             if tmp == "":
                                 break
                     if tmp == "# --- START OF GFF DUMP ---\n":
                         fd_dict["gff"].write(tmp)
                         if index == 0:
                             fd_dict["query_gff"].write(tmp)
+                            fd_dict["query_gff_" + output_type].write(tmp)
                         else:
                             fd_dict["target_gff"].write(tmp)
+                            fd_dict["target_gff_" + output_type].write(tmp)
                         while True:
                             tmp = next(in_fd, "")
                             if ("\tgene\t" in tmp) and (index == 1):
@@ -203,6 +302,16 @@ class Exonerate(Tool):
                                 #print current_gene_index, gene_prefix
                                 current_gene_id = gene_prefix % current_gene_index
                                 current_transcript_id = transcript_prefix % current_gene_index
+
+                                hit_stat_str = "#%s\t%s\t%s\t%s\t%s\t%s\n" % (current_query_id,
+                                                                              current_query_len,
+                                                                              current_raw_score,
+                                                                              current_query_start,
+                                                                              current_query_end,
+                                                                              current_gene_id)
+                                fd_dict["stats"].write(hit_stat_str)
+                                fd_dict["stats_" + output_type].write(hit_stat_str)
+
                                 line_list = tmp.strip().split("\t")
                                 attr_list = map(lambda s: s.split(), line_list[-1].split(";"))
                                 for i in range(0, len(attr_list)):
@@ -231,10 +340,13 @@ class Exonerate(Tool):
                             fd_dict["gff"].write(tmp)
                             if index == 0:
                                 fd_dict["query_gff"].write(tmp)
+                                fd_dict["query_gff_" + output_type].write(tmp)
                             else:
                                 fd_dict["target_gff"].write(tmp)
+                                fd_dict["target_gff_" + output_type].write(tmp)
                                 if "\tgene\t" in tmp:
                                     fd_dict["target_gff"].write(transcript_line)
+                                    fd_dict["target_gff_" + output_type].write(transcript_line)
                             if tmp[0] != "#":
                                 if "\tsplice" in tmp:
                                     fd_dict["splice"].write(tmp)
@@ -256,21 +368,24 @@ class Exonerate(Tool):
                         break
                     if tmp[:7] == "vulgar:":
                         fd_dict["vulgar"].write(tmp[7:])
+                        fd_dict["vulgar_" + output_type].write(tmp[7:])
                     elif tmp[:6] == "sugar:":
                         fd_dict["sugar"].write(tmp[6:])
+                        fd_dict["sugar_" + output_type].write(tmp[6:])
                     elif tmp[:6] == "cigar:":
                         fd_dict["cigar"].write(tmp[6:])
-        for output_type in fd_dict:
-            fd_dict[output_type].close()
+                        fd_dict["cigar" + output_type].write(tmp[6:])
+        for entry in fd_dict:
+            fd_dict[entry].close()
 
         # extract top hits from vulgar
         awk_string_prefix = "awk '{if (substr($0,0,1) != \"#\") {if ($1 != SEQ_ID) {print $0}; SEQ_ID=$1}}' "
-        os.system(awk_string_prefix + " %s > %s" % (names_dict["vulgar"], top_hits_vulgar))
-        os.system(awk_string_prefix + " %s > %s" % (names_dict["sugar"], top_hits_sugar))
-        os.system(awk_string_prefix + " %s > %s" % (names_dict["query_gff"], top_hits_query_gff))
+        os.system(awk_string_prefix + " %s > %s" % (names_dict["vulgar"], names_dict["top_hits_vulgar"]))
+        os.system(awk_string_prefix + " %s > %s" % (names_dict["sugar"], names_dict["top_hits_sugar"]))
+        os.system(awk_string_prefix + " %s > %s" % (names_dict["query_gff"], names_dict["top_hits_query_gff"]))
 
         awk_string_prefix = "awk -F'\\t' '{printf \"%s\\t%s\\t%s\\n\",$1,$4,$5}' "
-        os.system(awk_string_prefix + " %s > %s" % (top_hits_query_gff, top_hits_simple))
+        os.system(awk_string_prefix + " %s > %s" % (names_dict["top_hits_query_gff"], names_dict["top_hits_simple"]))
 
     @staticmethod
     def extract_top_hits_from_target_gff(list_of_target_gff, top_hits_gff, secondary_hits_gff, id_white_list_file=None,
