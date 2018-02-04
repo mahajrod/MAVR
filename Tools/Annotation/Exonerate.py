@@ -139,8 +139,8 @@ class Exonerate(Tool):
             #shutil.rmtree(splited_result_dir)
             #shutil.rmtree(converted_output_dir)
 
-    def split_output(self, exonerate_output_files, output_prefix, gene_prefix="GEN", transcript_prefix="TR", number_len=8,
-                     reference_protein_file=None):
+    def split_output(self, exonerate_output_files, output_prefix, reference_protein_file, gene_prefix="GEN", transcript_prefix="TR", number_len=8,
+                     ):
         """
         precise hits - whole query was aligned
         """
