@@ -195,7 +195,7 @@ class Exonerate(Tool):
                       "stats_precise_top": "%s.precise_top.stats" % output_prefix,
                       "stats_other_top": "%s.other_top.stats" % output_prefix,
                       "stats_precise_secondary": "%s.precise_secondary.stats" % output_prefix,
-                      "stats_other_secondary_hit": "%s.other_secondary.stats" % output_prefix,
+                      "stats_other_secondary": "%s.other_secondary.stats" % output_prefix,
                       "stats": "%s.stats" % output_prefix,
 
                       "top_hits_gff" : "%s.top_hits.gff" % output_prefix,
@@ -214,11 +214,21 @@ class Exonerate(Tool):
             
         for output_type_entry in "stats_precise_top", "stats_other_top", \
                                  "stats_precise_secondary", "stats_other_secondary_hit", "stats":
-            fd_dict[output_type_entry].write("#query_id\tquery_len\tscore\tquery_start\tquery_end\tgene_id\n")
+            fd_dict[output_type_entry].write("#query_id\tquery_len\tscore\thit_len\tquery_start\tquery_end\tgene_id\n")
 
         current_gene_index = 0
         gene_prefix = "%s%%0%ii" % (gene_prefix, number_len)
         transcript_prefix = "%s%%0%ii" % (transcript_prefix, number_len)
+        precise_top_counter = 0
+        other_top_counter = 0
+        previous_query_id = ""
+        hit_counter = 0
+        precise_flag = False
+        current_query_len = 0
+        current_raw_score = 0
+        current_query_start = 0
+        current_query_end = 0
+        current_hit_length = 0
 
         for filename in exonerate_output_files:
             index = 0
@@ -226,14 +236,7 @@ class Exonerate(Tool):
             with open(filename, "r") as in_fd:
                 #print u
                 #tmp = None
-                previous_query_id = ""
-                hit_counter = 0
-                precise_flag = False
-                current_query_len = 0
-                current_raw_score = 0
-                current_query_start = 0
-                current_query_end = 0
-                current_hit_length = 0
+
                 for line in in_fd:
                     tmp = line
 
@@ -258,8 +261,8 @@ class Exonerate(Tool):
                             elif "Query range:" in tmp:
                                 #print tmp
                                 #print tmp.strip("Query range: ").split()[-1].split(" -> ")
-                                current_query_start, current_query_end = tmp.strip().split("Query range: ")[-1].split(" -> ")
-                                current_hit_length = int(current_query_end) - int(current_query_start)
+                                current_query_start, current_query_end = map(int, tmp.strip().split("Query range: ")[-1].split(" -> "))
+                                current_hit_length = current_query_end - current_query_start
                                 
                                 precise_flag = True if current_hit_length == current_query_len else False
                                 
@@ -268,7 +271,9 @@ class Exonerate(Tool):
                                 if hit_counter == 1:
                                     if precise_flag:
                                         output_type = "precise_top"
+                                        precise_top_counter += 1
                                     else:
+                                        other_top_counter += 1
                                         output_type = "other_top"
                                 else:
                                     if precise_flag:
@@ -307,12 +312,13 @@ class Exonerate(Tool):
                                 current_gene_id = gene_prefix % current_gene_index
                                 current_transcript_id = transcript_prefix % current_gene_index
 
-                                hit_stat_str = "#%s\t%s\t%s\t%s\t%s\t%s\n" % (current_query_id,
-                                                                              current_query_len,
-                                                                              current_raw_score,
-                                                                              current_query_start,
-                                                                              current_query_end,
-                                                                              current_gene_id)
+                                hit_stat_str = "#%s\t%s\t%s\t%i\t%i\t%i\t%s\n" % (current_query_id,
+                                                                                  current_query_len,
+                                                                                  current_raw_score,
+                                                                                  current_hit_length,
+                                                                                  current_query_start + 1,
+                                                                                  current_query_end,
+                                                                                  current_gene_id)
                                 fd_dict["stats"].write(hit_stat_str)
                                 fd_dict["stats_" + output_type].write(hit_stat_str)
 
@@ -390,6 +396,10 @@ class Exonerate(Tool):
 
         awk_string_prefix = "awk -F'\\t' '{printf \"%s\\t%s\\t%s\\n\",$1,$4,$5}' "
         os.system(awk_string_prefix + " %s > %s" % (names_dict["top_hits_query_gff"], names_dict["top_hits_simple"]))
+
+        print("Reference proteins:\t%i" % len(reference_protein_dict))
+        print("Precise top hits:\t%i" % precise_top_counter)
+        print("Other top hits:\t%i" % other_top_counter)
 
     @staticmethod
     def extract_top_hits_from_target_gff(list_of_target_gff, top_hits_gff, secondary_hits_gff, id_white_list_file=None,
