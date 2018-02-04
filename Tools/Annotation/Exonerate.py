@@ -253,6 +253,7 @@ class Exonerate(Tool):
                     if tmp[:13] == "C4 Alignment:":
                         alignment_buffer = tmp
 
+
                         while True:
                             tmp = in_fd.next()
                             alignment_buffer += tmp
