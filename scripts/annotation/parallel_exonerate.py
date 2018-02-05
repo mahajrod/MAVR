@@ -15,6 +15,8 @@ parser.add_argument("-i", "--input", action="store", dest="input", required=True
                     help="Input fasta file with sequences")
 parser.add_argument("-a", "--target", action="store", dest="target", required=True,
                     help="File with target sequences")
+parser.add_argument("-x", "--annotation", action="store", dest="annotation",
+                    help="File with query annotation. Usually cds coordinates in transcript for cdna2genome model")
 parser.add_argument("-o", "--output", action="store", dest="output", #required=True,
                     help="Prefix of output files")
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
@@ -68,6 +70,7 @@ Exonerate.parallel_alignment(args.input, args.target, args.model, num_of_files=a
                              show_alignment=True, show_sugar=None, show_cigar=None,
                              show_vulgar=None, show_query_gff=True, show_target_gff=True,
                              store_intermediate_files=True,
+                             annotation_file=args.annotation,
                              splited_fasta_dir="splited_fasta_dir", splited_result_dir="splited_output",
                              number_of_results_to_report=args.num_of_results_to_report,
                              converted_output_dir="converted_output")

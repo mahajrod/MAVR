@@ -62,7 +62,7 @@ class Exonerate(Tool):
     def parse_common_options(model, query_type=None, target_type=None,
                              show_alignment=None, show_sugar=True, show_cigar=None,
                              show_vulgar=None, show_query_gff=None, show_target_gff=None,
-                             number_of_results_to_report=None, other_options=None):
+                             number_of_results_to_report=None, other_options=None, annotation_file=None):
 
         options = " --model %s" % model
         options += " --showalignment" if show_alignment else ""
@@ -75,6 +75,7 @@ class Exonerate(Tool):
         options += " -T %s" % target_type if target_type else ""
         options += " -n %i" % number_of_results_to_report if number_of_results_to_report else ""
         options += " %s" % other_options if other_options else ""
+        options += " --annotation %s" % annotation_file if annotation_file else ""
 
         return options
 
@@ -82,6 +83,7 @@ class Exonerate(Tool):
                            show_alignment=None, show_sugar=True, show_cigar=None,
                            show_vulgar=None, show_query_gff=None, show_target_gff=None,
                            store_intermediate_files=True,
+                           annotation_file=None,
                            splited_fasta_dir="splited_fasta_dir", splited_result_dir="splited_output",
                            number_of_results_to_report=None,
                            other_options=None,
@@ -98,7 +100,8 @@ class Exonerate(Tool):
                                                    show_vulgar=show_vulgar, show_query_gff=show_query_gff,
                                                    show_target_gff=show_target_gff,
                                                    number_of_results_to_report=number_of_results_to_report,
-                                                   other_options=other_options)
+                                                   other_options=other_options,
+                                                   annotation_file=annotation_file)
 
         options_list = []
         splited_files = os.listdir(splited_fasta_dir)
@@ -142,7 +145,7 @@ class Exonerate(Tool):
     def split_output(self, exonerate_output_files, output_prefix, reference_protein_file, gene_prefix="GEN", transcript_prefix="TR", number_len=8,
                      ):
         """
-        precise hits - whole query was aligned
+        full_length hits - whole query was aligned
         """
         
         names_dict = {
@@ -160,13 +163,13 @@ class Exonerate(Tool):
                       "cds": "%s.cds.gff" % output_prefix,
                       "gene": "%s.gene.gff" % output_prefix,
             
-                      "vulgar_precise_top": "%s.precise_top.vulgar" % output_prefix,
-                      "cigar_precise_top": "%s.precise_top.cigar" % output_prefix,
-                      "sugar_precise_top": "%s.precise_top.sugar" % output_prefix,
-                      "alignment_precise_top": "%s.precise_top.alignment" % output_prefix,
-                      "gff_precise_top": "%s.precise_top.gff" % output_prefix,
-                      "target_gff_precise_top": "%s.precise_top.target.gff" % output_prefix,
-                      "query_gff_precise_top": "%s.precise_top.query.gff" % output_prefix,
+                      "vulgar_full_length_top": "%s.full_length_top.vulgar" % output_prefix,
+                      "cigar_full_length_top": "%s.full_length_top.cigar" % output_prefix,
+                      "sugar_full_length_top": "%s.full_length_top.sugar" % output_prefix,
+                      "alignment_full_length_top": "%s.full_length_top.alignment" % output_prefix,
+                      "gff_full_length_top": "%s.full_length_top.gff" % output_prefix,
+                      "target_gff_full_length_top": "%s.full_length_top.target.gff" % output_prefix,
+                      "query_gff_full_length_top": "%s.full_length_top.query.gff" % output_prefix,
             
                       "vulgar_other_top": "%s.other_top.vulgar" % output_prefix,
                       "cigar_other_top": "%s.other_top.cigar" % output_prefix,
@@ -176,13 +179,13 @@ class Exonerate(Tool):
                       "target_gff_other_top": "%s.other_top.target.gff" % output_prefix,
                       "query_gff_other_top": "%s.other_top.query.gff" % output_prefix,
             
-                      "vulgar_precise_secondary": "%s.precise_secondary.vulgar" % output_prefix,
-                      "cigar_precise_secondary": "%s.precise_secondary.cigar" % output_prefix,
-                      "sugar_precise_secondary": "%s.precise_secondary.sugar" % output_prefix,
-                      "alignment_precise_secondary": "%s.precise_secondary.alignment" % output_prefix,
-                      "gff_precise_secondary": "%s.precise_secondary.gff" % output_prefix,
-                      "target_gff_precise_secondary": "%s.precise_secondary.target.gff" % output_prefix,
-                      "query_gff_precise_secondary": "%s.precise_secondary.query.gff" % output_prefix,
+                      "vulgar_full_length_secondary": "%s.full_length_secondary.vulgar" % output_prefix,
+                      "cigar_full_length_secondary": "%s.full_length_secondary.cigar" % output_prefix,
+                      "sugar_full_length_secondary": "%s.full_length_secondary.sugar" % output_prefix,
+                      "alignment_full_length_secondary": "%s.full_length_secondary.alignment" % output_prefix,
+                      "gff_full_length_secondary": "%s.full_length_secondary.gff" % output_prefix,
+                      "target_gff_full_length_secondary": "%s.full_length_secondary.target.gff" % output_prefix,
+                      "query_gff_full_length_secondary": "%s.full_length_secondary.query.gff" % output_prefix,
             
                       "vulgar_other_secondary": "%s.other_secondary.vulgar" % output_prefix,
                       "cigar_other_secondary": "%s.other_secondary.cigar" % output_prefix,
@@ -192,9 +195,9 @@ class Exonerate(Tool):
                       "target_gff_other_secondary": "%s.other_secondary.target.gff" % output_prefix,
                       "query_gff_other_secondary": "%s.other_secondary.query.gff" % output_prefix,
 
-                      "stats_precise_top": "%s.precise_top.stats" % output_prefix,
+                      "stats_full_length_top": "%s.full_length_top.stats" % output_prefix,
                       "stats_other_top": "%s.other_top.stats" % output_prefix,
-                      "stats_precise_secondary": "%s.precise_secondary.stats" % output_prefix,
+                      "stats_full_length_secondary": "%s.full_length_secondary.stats" % output_prefix,
                       "stats_other_secondary": "%s.other_secondary.stats" % output_prefix,
                       "stats": "%s.stats" % output_prefix,
                       "stats_hit": "%s.hit.stats" % output_prefix,
@@ -213,31 +216,31 @@ class Exonerate(Tool):
         for output_type in names_dict:
             fd_dict[output_type] = open(names_dict[output_type], "w")
             
-        for output_type_entry in "stats_precise_top", "stats_other_top", \
-                                 "stats_precise_secondary", "stats_other_secondary", "stats":
+        for output_type_entry in "stats_full_length_top", "stats_other_top", \
+                                 "stats_full_length_secondary", "stats_other_secondary", "stats":
             fd_dict[output_type_entry].write("#query_id\tquery_len\tscore\thit_len\tquery_start\tquery_end\tgene_id\n")
 
-        fd_dict["stats_hit"].write("#query_id\ttotal_hits\tprecise_top_hits\tother_top_hit\tprecise_secondary_hits\tother_secondary_hits\n")
+        fd_dict["stats_hit"].write("#query_id\ttotal_hits\tfull_length_top_hits\tother_top_hit\tfull_length_secondary_hits\tother_secondary_hits\n")
 
         current_gene_index = 0
         gene_prefix = "%s%%0%ii" % (gene_prefix, number_len)
         transcript_prefix = "%s%%0%ii" % (transcript_prefix, number_len)
-        precise_top_counter = 0
+        full_length_top_counter = 0
         other_top_counter = 0
-        precise_secondary_counter = 0
+        full_length_secondary_counter = 0
         other_secondary_counter = 0
         previous_query_id = ""
         hit_counter = 0
-        precise_flag = False
+        full_length_flag = False
         current_query_len = 0
         current_raw_score = 0
         current_query_start = 0
         current_query_end = 0
         current_hit_length = 0
 
-        per_pep_precise_top_hit_number = 0
+        per_pep_full_length_top_hit_number = 0
         per_pep_other_top_hit_number = 0
-        per_pep_precise_secondary_hit_number = 0
+        per_pep_full_length_secondary_hit_number = 0
         per_pep_other_secondary_hit_number = 0
 
         for filename in exonerate_output_files:
@@ -263,17 +266,17 @@ class Exonerate(Tool):
                                     if previous_query_id != "":
                                         fd_dict["stats_hit"].write("%s\t%i\t%i\t%i\t%i\t%i\n" % (previous_query_id,
                                                                                                  hit_counter,
-                                                                                                 per_pep_precise_top_hit_number,
+                                                                                                 per_pep_full_length_top_hit_number,
                                                                                                  per_pep_other_top_hit_number,
-                                                                                                 per_pep_precise_secondary_hit_number,
+                                                                                                 per_pep_full_length_secondary_hit_number,
                                                                                                  per_pep_other_secondary_hit_number))
 
                                     previous_query_id = current_query_id
                                     hit_counter = 1
 
-                                    per_pep_precise_top_hit_number = 0
+                                    per_pep_full_length_top_hit_number = 0
                                     per_pep_other_top_hit_number = 0
-                                    per_pep_precise_secondary_hit_number = 0
+                                    per_pep_full_length_secondary_hit_number = 0
                                     per_pep_other_secondary_hit_number = 0
 
                                     current_query_len = len(reference_protein_dict[current_query_id].seq)
@@ -288,24 +291,24 @@ class Exonerate(Tool):
                                 current_query_start, current_query_end = map(int, tmp.strip().split("Query range: ")[-1].split(" -> "))
                                 current_hit_length = current_query_end - current_query_start
                                 
-                                precise_flag = True if current_hit_length == current_query_len else False
+                                full_length_flag = True if current_hit_length == current_query_len else False
                                 
                             elif "Target range:" in tmp:
 
                                 if hit_counter == 1:
-                                    if precise_flag:
-                                        output_type = "precise_top"
-                                        precise_top_counter += 1
-                                        per_pep_precise_top_hit_number += 1
+                                    if full_length_flag:
+                                        output_type = "full_length_top"
+                                        full_length_top_counter += 1
+                                        per_pep_full_length_top_hit_number += 1
                                     else:
                                         other_top_counter += 1
                                         output_type = "other_top"
                                         per_pep_other_top_hit_number += 1
                                 else:
-                                    if precise_flag:
-                                        output_type = "precise_secondary"
-                                        precise_secondary_counter += 1
-                                        per_pep_precise_secondary_hit_number += 1
+                                    if full_length_flag:
+                                        output_type = "full_length_secondary"
+                                        full_length_secondary_counter += 1
+                                        per_pep_full_length_secondary_hit_number += 1
                                     else:
                                         output_type = "other_secondary"
                                         other_secondary_counter += 1
@@ -429,11 +432,11 @@ class Exonerate(Tool):
         os.system(awk_string_prefix + " %s > %s" % (names_dict["top_hits_query_gff"], names_dict["top_hits_simple"]))
 
         print("Reference proteins:\t%i" % len(reference_protein_dict))
-        print("Precise top hits:\t%i" % precise_top_counter)
+        print("Full length top hits:\t%i" % full_length_top_counter)
         print("Other top hits:\t%i" % other_top_counter)
-        print("Precise secondary hits:\t%i" % precise_secondary_counter)
+        print("Full length secondary hits:\t%i" % full_length_secondary_counter)
         print("Other secondary hits:\t%i" % other_secondary_counter)
-        print("Proteins without hits:\t%i" % (len(reference_protein_dict) - precise_top_counter - other_top_counter))
+        print("Proteins without hits:\t%i" % (len(reference_protein_dict) - full_length_top_counter - other_top_counter))
 
     @staticmethod
     def extract_top_hits_from_target_gff(list_of_target_gff, top_hits_gff, secondary_hits_gff, id_white_list_file=None,
