@@ -24,7 +24,7 @@ def execute(exe_string):
 class Tool(SequenceRoutines):
 
     def __init__(self, cmd, path="", max_threads=4, jar_path=None, jar=None,
-                 max_memory="500m", timelog=None):
+                 max_memory="500m", max_per_thread_memory="500m", timelog=None):
         SequenceRoutines.__init__(self)
         self.path = self.check_path(path)
         self.cmd = cmd
@@ -34,6 +34,7 @@ class Tool(SequenceRoutines):
         self.jar = jar
         self.max_memory = max_memory
         self.timelog = timelog
+        self.max_per_thread_memory = max_per_thread_memory
 
     def execute(self, options="", cmd=None, capture_output=False):
         command = cmd if cmd is not None else self.cmd

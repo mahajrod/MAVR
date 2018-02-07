@@ -93,7 +93,10 @@ class ProjectRoutines(FileRoutines):
                                 "assemblies": {},
                                 "annotation": {
                                     "protein_coding_genes": {},
-                                    "repeats": {},
+                                    "repeats": {
+                                        "repeatmasker": {},
+                                        "TRF": {},
+                                        "windowmasker": {}, },
                                     "ncRNA": {
                                         "tRNA": {},
                                         "rRNA": {},
