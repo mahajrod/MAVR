@@ -52,6 +52,7 @@ parser.add_argument("-d", "--picard_dir", action="store", dest="picard_dir", def
                     help="Path to Picard directory. Required to add read groups")
 parser.add_argument("-n", "--retain_intermediate_files", action="store_true", dest="retain_temp", default=False,
                     help="Retain intermediate files")
+"""
 parser.add_argument("-z", "--calculate_median_coverage", action="store_true", dest="calculate_median_coverage",
                     default=False,
                     help="Calculate median coverage")
@@ -61,6 +62,7 @@ parser.add_argument("-x", "--calculate_mean_coverage", action="store_true", dest
 parser.add_argument("-f", "--flanks_size", action="store", dest="flanks_size",
                     default=0, type=int,
                     help="Size of flanks to remove when calculating mean/median coverage")
+"""
 
 
 
@@ -70,6 +72,7 @@ parser.add_argument("-b", "--bed_with_regions", action="store", dest="bed",
 parser.add_argument("-c", "--black_flag_value", action="store", dest="black_flag_value", type=int,
                     help="Black bam flag value. By default unaligned, supplementary alignments and "
                          "nonprimary alignments will be removed")
+
 parser.add_argument("-e", "--white_flag_value", action="store", dest="white_flag_value", type=int,
                     help="White flag value")
 parser.add_argument("-m", "--max_memory", action="store", dest="max_memory", default="30g",
@@ -130,7 +133,8 @@ MarkDuplicates.run(sorted_alignment_picard_groups if sorted_alignment_picard_gro
 if args.alignment_format == "bam":
     SamtoolsV1.index(final_alignment)
 
-GenomeCov.get_coverage(final_alignment, coverage_file)
+"""
+GenomeCov.get_coverage(final_alignment, genome_bed, coverage_file)
 if not args.retain_temp:
     os.remove(sorted_alignment)
     if args.add_read_groups_by_picard:
@@ -152,3 +156,4 @@ if args.calculate_median_coverage or args.calculate_mean_coverage:
                 meana = mean(array(coverage_dict[region] if args.flanks_size == 0
                                    else coverage_dict[region][args.flanks_size:-args.flanks_size]))
                 out_fd.write("%s\t%f\n" % (region, meana))
+"""
