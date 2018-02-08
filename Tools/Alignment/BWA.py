@@ -52,7 +52,7 @@ class BWA(Tool):
         options = " -t %i" % self.threads
         options += " %s" % index
         options += " %s " % reads
-        options += " -R \"@RG\tID:%s\tPU:%s\tSM:%s\tPL:%s\tLB:%s\"" % (read_group_name, PU, SM, platform, LB)
+        options += " -R \'@RG\\tID:%s\\tPU:%s\\tSM:%s\\tPL:%s\\tLB:%s\'" % (read_group_name, PU, SM, platform, LB)
 
         if sort_by_coordinate or sort_by_name:
             if sort_by_coordinate and sort_by_name:
