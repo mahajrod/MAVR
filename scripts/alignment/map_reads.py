@@ -52,9 +52,6 @@ parser.add_argument("-d", "--picard_dir", action="store", dest="picard_dir",
                     help="Path to Picard directory. Required to add read groups")
 parser.add_argument("-n", "--retain_intermediate_files", action="store_true", dest="retain_temp", default=False,
                     help="Retain intermediate files")
-
-parser.add_argument("-y", "--coverage_bed", action="store", dest="coverage_bed", default="coverage.bed",
-                    help="Bed file with coverage")
 parser.add_argument("-z", "--calculate_median_coverage", action="store_true", dest="calculate_median_coverage",
                     default=False,
                     help="Calculate median coverage")
@@ -92,6 +89,7 @@ sorted_alignment_picard_groups = None
 
 final_alignment = "%s.mkdup.%s" % (args.prefix, args.alignment_format)
 duplicates_stat_file = "%s.duplicates.stat" % args.prefix
+coverage_file = "%s.coverage.bed" % args.prefix
 
 if args.aligner == "bowtie2":
     aligner = Bowtie2
@@ -134,7 +132,7 @@ MarkDuplicates.run(sorted_alignment_picard_groups if sorted_alignment_picard_gro
 if args.alignment_format == "bam":
     SamtoolsV1.index(final_alignment)
 
-GenomeCov.get_coverage(final_alignment, args.coverage_bed)
+GenomeCov.get_coverage(final_alignment, coverage_file)
 if not args.retain_temp:
     os.remove(sorted_alignment)
     if args.add_read_groups_by_picard:
@@ -142,7 +140,7 @@ if not args.retain_temp:
 
 if args.calculate_median_coverage or args.calculate_mean_coverage:
     coverage_dict = SynDict()
-    coverage_dict.read(args.coverage_bed, header=False, separator="\t", allow_repeats_of_key=True,
+    coverage_dict.read(coverage_file, header=False, separator="\t", allow_repeats_of_key=True,
                        values_separator=",", key_index=0, value_index=2, expression=int)
     if args.calculate_median_coverage:
         with open("%s_median_coverage.tab" % args.prefix, "w") as out_fd:
