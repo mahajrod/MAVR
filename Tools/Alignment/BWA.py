@@ -57,7 +57,7 @@ class BWA(Tool):
         if sort_by_coordinate or sort_by_name:
             if sort_by_coordinate and sort_by_name:
                 raise ValueError("Sorting by both coordinate and read name was requested")
-            options += " samtools sort"
+            options += " | samtools sort"
             if sort_by_name:
                 options += " -n"
             options += " -@ %i" % self.threads
