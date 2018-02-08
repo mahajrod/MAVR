@@ -42,7 +42,7 @@ parser.add_argument("-t", "--threads", action="store", dest="threads", default=4
 
 parser.add_argument("-q", "--quality", action="store", dest="quality", default="phred33",
                     help="Quality type. Possible variants phred33, phred64. Default: phred33")
-parser.add_argument("-a", "--alignment_format", action="store", dest="alignment_format", default="bam",
+parser.add_argument("-j", "--alignment_format", action="store", dest="alignment_format", default="bam",
                     help="Format of output alignments. Allowed: bam(default), sam, cram")
 
 
