@@ -277,7 +277,7 @@ class SamtoolsV0(SamtoolsV1, Tool):
     """
 
     def __init__(self, path="", max_threads=4):
-        SamtoolsV1.__init__(path=path, max_threads=max_threads)
+        SamtoolsV1.__init__(self, path=path, max_threads=max_threads)
 
     def view(self, input_file, output_file, sam_input=False, include_header_in_output=True,
              output_uncompressed_bam=False, output_bam=False, white_flag_value=None, black_flag_value=None,
