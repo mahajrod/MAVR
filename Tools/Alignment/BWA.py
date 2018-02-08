@@ -47,7 +47,7 @@ class BWA(Tool):
 
         reads = forward_reads_list[0]
         if reverse_reads_list:
-            reads += " %s" % reverse_reads[0]
+            reads += " %s" % reverse_reads_list[0]
 
         options = " -t %i" % self.threads
         options += " %s" % index
