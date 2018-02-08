@@ -82,7 +82,7 @@ args = parser.parse_args()
 
 black_flag_value = args.black_flag_value if args.black_flag_value else \
     SamtoolsV1.bam_flags["read_unmapped"] + SamtoolsV1.bam_flags["supplementary_alignment"] \
-    + SamtoolsV1.bam_flagss["not_primary_alignment"]
+    + SamtoolsV1.bam_flags["not_primary_alignment"]
 
 sorted_alignment = "%s.%s" % (args.prefix, args.alignment_format)
 sorted_alignment_picard_groups = None
