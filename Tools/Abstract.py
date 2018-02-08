@@ -23,7 +23,7 @@ def execute(exe_string):
 
 class Tool(SequenceRoutines):
 
-    def __init__(self, cmd, path="", max_threads=4, jar_path=None, jar=None,
+    def __init__(self, cmd, path="", max_threads=4, jar_path="", jar=None,
                  max_memory="500m", max_per_thread_memory="500m", timelog=None):
         SequenceRoutines.__init__(self)
         self.path = self.check_path(path)

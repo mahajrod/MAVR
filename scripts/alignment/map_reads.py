@@ -48,7 +48,7 @@ parser.add_argument("-j", "--alignment_format", action="store", dest="alignment_
 
 parser.add_argument("-g", "--add_read_groups_by_picard", action="store_true", dest="add_read_groups_by_picard", default=False,
                     help="Add read groups to final bam using PICARD. Use this option if aligner don't support adding readgroups itself")
-parser.add_argument("-d", "--picard_dir", action="store", dest="picard_dir",
+parser.add_argument("-d", "--picard_dir", action="store", dest="picard_dir", default="",
                     help="Path to Picard directory. Required to add read groups")
 parser.add_argument("-n", "--retain_intermediate_files", action="store_true", dest="retain_temp", default=False,
                     help="Retain intermediate files")
@@ -74,10 +74,6 @@ parser.add_argument("-e", "--white_flag_value", action="store", dest="white_flag
                     help="White flag value")
 
 
-
-
-
-
 args = parser.parse_args()
 
 black_flag_value = args.black_flag_value if args.black_flag_value else \
@@ -100,7 +96,8 @@ else:
     raise ValueError("")
 
 aligner.threads = args.threads
-
+MarkDuplicates.jar_path = args.picard_dir
+AddOrReplaceReadGroups.jar_path = args.picard_dir
 
 aligner.align(args.index, forward_reads_list=args.forward_reads, reverse_reads_list=args.reverse_reads,
               unpaired_reads_list=args.unpaired_reads, quality_score=args.quality, output_prefix=args.prefix,
@@ -117,7 +114,6 @@ aligner.align(args.index, forward_reads_list=args.forward_reads, reverse_reads_l
 
 if args.add_read_groups_by_picard:
     sorted_alignment_picard_groups = "%s.picard_groups.%s" % (args.prefix, args.alignment_format)
-    AddOrReplaceReadGroups.jar_path = args.picard_dir
     AddOrReplaceReadGroups.add_read_groups(sorted_alignment, sorted_alignment_picard_groups,
                                            RGID=args.prefix, RGLB=args.prefix, RGPL=args.prefix,
                                            RGSM=args.prefix, RGPU=args.prefix)
