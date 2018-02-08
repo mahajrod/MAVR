@@ -7,7 +7,7 @@ import argparse
 from numpy import mean, median, array
 
 from Tools.Alignment import *
-from Tools.Samtools import SamtoolsV1, SamtoolsV0
+from Tools.Samtools import SamtoolsV1
 from Tools.Picard import AddOrReplaceReadGroups, MarkDuplicates
 from Tools.Bedtools import GenomeCov
 
@@ -81,8 +81,8 @@ parser.add_argument("-e", "--white_flag_value", action="store", dest="white_flag
 args = parser.parse_args()
 
 black_flag_value = args.black_flag_value if args.black_flag_value else \
-    SamtoolsV0.bam_flag_values["unaligned"] + SamtoolsV0.bam_flag_values["supplementary_alignment"] \
-    + SamtoolsV0.bam_flag_values["non_primary_alignment"]
+    SamtoolsV1.bam_flag_values["unaligned"] + SamtoolsV1.bam_flag_values["supplementary_alignment"] \
+    + SamtoolsV1.bam_flag_values["non_primary_alignment"]
 
 sorted_alignment = "%s.%s" % (args.prefix, args.alignment_format)
 sorted_alignment_picard_groups = None

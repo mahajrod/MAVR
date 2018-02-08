@@ -276,6 +276,9 @@ class SamtoolsV0(SamtoolsV1, Tool):
     Several subcommands are not implemented
     """
 
+    def __init__(self, path="", max_threads=4):
+        SamtoolsV1.__init__(path=path, max_threads=max_threads)
+
     def view(self, input_file, output_file, sam_input=False, include_header_in_output=True,
              output_uncompressed_bam=False, output_bam=False, white_flag_value=None, black_flag_value=None,
              bed_file_with_regions_to_output=None):
