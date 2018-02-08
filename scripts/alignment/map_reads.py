@@ -72,7 +72,8 @@ parser.add_argument("-c", "--black_flag_value", action="store", dest="black_flag
                          "nonprimary alignments will be removed")
 parser.add_argument("-e", "--white_flag_value", action="store", dest="white_flag_value", type=int,
                     help="White flag value")
-
+parser.add_argument("-m", "--max_memory", action="store", dest="max_memory", default="30g",
+                    help="Maximum memory to use. Default: 30g")
 
 args = parser.parse_args()
 
@@ -97,6 +98,7 @@ else:
 
 aligner.threads = args.threads
 MarkDuplicates.jar_path = args.picard_dir
+MarkDuplicates.max_memory = args.max_memory
 AddOrReplaceReadGroups.jar_path = args.picard_dir
 
 aligner.align(args.index, forward_reads_list=args.forward_reads, reverse_reads_list=args.reverse_reads,
@@ -109,7 +111,7 @@ aligner.align(args.index, forward_reads_list=args.forward_reads, reverse_reads_l
               LB="x",
               sort_by_coordinate=True,
               sort_by_name=False,
-              max_per_sorting_thread_memory=None)
+              max_per_sorting_thread_memory="10G")
 
 
 if args.add_read_groups_by_picard:
