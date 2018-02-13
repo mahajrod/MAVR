@@ -17,7 +17,7 @@ class TenXAlignmentPipeline(Pipeline):
         self.longranger_dir = longranger_dir if not (longranger_dir is None) else ""
 
     def prepare_directories(self, output_directory, sample_list):
-
+        print output_directory
         directories_dict = {output_directory: OrderedDict()}
         for sample in sample_list:
             directories_dict[output_directory][sample] = OrderedDict()
