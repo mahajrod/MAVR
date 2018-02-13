@@ -33,7 +33,7 @@ parser.add_argument("-p", "--precalled_vcf", action="store", dest="precalled_vcf
                     help="Use this precalled vcf for phasing")
 parser.add_argument("-x", "--sex", action="store", dest="sex",
                     help="Sex of the sample. Allowed: m, f, male or female. Auto detection if not set")
-parser.add_argument("-l", "--longranger_dir", action="store", dest="longranger_dir", default=1,
+parser.add_argument("-l", "--longranger_dir", action="store", dest="longranger_dir",
                     help="Path to directory with LongRanger binary")
 parser.add_argument("-a", "--use_somatic_sv_caller", action="store_true", dest="use_somatic_sv_caller", default=False,
                     help="Use somatic structural variant caller")
