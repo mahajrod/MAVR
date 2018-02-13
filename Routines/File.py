@@ -54,7 +54,8 @@ class FileRoutines:
     def recursive_mkdir(self, dir_dict, out_dir=None,
                         description_filename=None, description_text=None,
                         readme_filename=None, readme_text=None):
-        self.safe_mkdir(out_dir)
+        if not(out_dir is None):
+            self.safe_mkdir(out_dir)
         for directory in dir_dict:
             dirname = directory if out_dir is None else "%s/%s" % (out_dir, directory)
             self.safe_mkdir(dirname,
