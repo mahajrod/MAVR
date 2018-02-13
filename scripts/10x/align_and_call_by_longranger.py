@@ -29,19 +29,14 @@ parser.add_argument("-g", "--gatk_jar", action="store", dest="gatk_jar",
                     help="Path to GATK jar. Required only if variant calling with GATK was chosen.")
 parser.add_argument("-m", "--max_memory", action="store", dest="max_memory", type=int, default=10,
                     help="Maximum memory usage allowed (in gigabytes). Default - 10.")
-
 parser.add_argument("-p", "--precalled_vcf", action="store", dest="precalled_vcf",
                     help="Use this precalled vcf for phasing")
-
 parser.add_argument("-x", "--sex", action="store", dest="sex",
                     help="Sex of the sample. Allowed: m, f, male or female. Auto detection if not set")
-
 parser.add_argument("-l", "--longranger_dir", action="store", dest="longranger_dir", default=1,
                     help="Path to directory with LongRanger binary")
-
 parser.add_argument("-a", "--use_somatic_sv_caller", action="store_true", dest="use_somatic_sv_caller", default=False,
                     help="Use somatic structural variant caller")
-
 parser.add_argument("-c", "--variant_calling_only", action="store_true", dest="variant_calling_only", default=False,
                     help="Call variants only. No structural variant calling of phasing")
 
@@ -49,11 +44,12 @@ parser.add_argument("-c", "--variant_calling_only", action="store_true", dest="v
 parser.add_argument("-x", "--general_stat_file", action="store", dest="general_stat_file", required=True,
                     help="File to write general statistics about filtration")
 """
+
 args = parser.parse_args()
 
 
 TenXAlignmentPipeline.threads = args.threads
-TenXAlignmentPipeline.max_memory = args.max_memmory
+TenXAlignmentPipeline.max_memory = args.max_memory
 TenXAlignmentPipeline.longranger_dir = args.longranger_dir
 TenXAlignmentPipeline.align_and_call(args.samples_dir, args.output_dir, args.reference, samples_to_handle=args.samples,
                                      variant_calling_mode=args.variant_calling_mode, gatk_jar_path=args.gatk_jar,
