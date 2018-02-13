@@ -7,6 +7,7 @@ from Tools.Alignment.STAR import STAR
 from Tools.Alignment.Tophat import Tophat
 from Tools.Alignment.Bowtie2 import Bowtie2
 from Tools.Alignment.Novoalign import Novoalign
+from Tools.Alignment.LongRanger import LongRanger
 
 max_threads = 4
 bowtie2_path = ""
@@ -23,3 +24,4 @@ STAR = STAR()
 Tophat = Tophat()
 Bowtie2 = Bowtie2(path=bowtie2_path, max_threads=max_threads)
 Novoalign = Novoalign(path=novoalign_path, max_threads=max_threads)
+LongRanger = LongRanger()

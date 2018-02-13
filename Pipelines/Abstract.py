@@ -14,5 +14,5 @@ from Routines.Fastq import FastQRoutines
 
 
 class Pipeline(Tool, MatplotlibRoutines, FastQRoutines):
-    def __init__(self):
-        Tool.__init__(self, cmd="")
+    def __init__(self, max_threads=1, max_memory=10):
+        Tool.__init__(self, cmd="", max_threads=max_threads, max_memory=max_memory)
