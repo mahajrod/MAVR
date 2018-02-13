@@ -42,7 +42,7 @@ class LongRanger(Tool):
 
         options += " --vconly" if variant_calling_only else ""
         options += " --localcores=%i" % (threads if threads else self.threads)
-        options += " --localmem=%i" % (str(max_memory) if max_memory else str(self.max_memory)) if max_memory or self.max_memory else ""
+        options += " --localmem=%s" % (str(max_memory) if max_memory else str(self.max_memory)) if max_memory or self.max_memory else ""
 
         return options
 
