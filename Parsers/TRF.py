@@ -32,7 +32,7 @@ class RecordTRF():
         self.tandem_repeat = tandem_repeat                          # str or None
 
     def attributes_string(self):
-        attributes_string = "ID=%s;" if self.id else ""
+        attributes_string = "ID=%s;" % self.id if self.id else ""
         attributes_string += "Period=%i;N_copies=%.1f;Pattern=%s;Cons_pat_size=%i;Pers_matches=%i;Pers_indels=%i;Align_score=%i" \
                              % (self.period, self.number_of_copies, self.pattern, self.consensus_pattern_size,
                                 self.percent_of_matches, self.percent_of_indels, self.alignment_score)
