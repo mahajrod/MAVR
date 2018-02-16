@@ -122,18 +122,21 @@ class TRF(Tool):
     def gff_filtering_expression(gff_description_dict, min_period=None, max_period=None, min_copy_number=None,
                                  max_copy_number=None, pattern=None, min_percentage_of_matches=None,
                                  max_percentage_of_indels=None, min_entropy=None, max_entropy=None):
+        """
+
+        """
+
+        """
         print "period:", min_period, max_period
         print "copy:", min_copy_number, max_copy_number
         print "pattern", pattern
         print gff_description_dict
-
+        """
         if not (min_period is None):
             if int(gff_description_dict["Period"]) < min_period:
-
                 return False
         if not (max_period is None):
             if int(gff_description_dict["Period"]) > max_period:
-
                 return False
         if not (min_copy_number is None):
             if float(gff_description_dict["N_copies"]) < min_copy_number:
