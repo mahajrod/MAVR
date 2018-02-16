@@ -123,38 +123,41 @@ class TRF(Tool):
                                  max_copy_number=None, pattern=None, min_percentage_of_matches=None,
                                  max_percentage_of_indels=None, min_entropy=None, max_entropy=None):
         print "period:", min_period, max_period
-        print "copy:", min_copy_number, max_copy_number,
-        print "pattern"
+        print "copy:", min_copy_number, max_copy_number
+        print "pattern", pattern
         print gff_description_dict
+
         if not (min_period is None):
             if int(gff_description_dict["Period"]) < min_period:
+
                 return False
-        elif not (max_period is None):
+        if not (max_period is None):
             if int(gff_description_dict["Period"]) > max_period:
+
                 return False
-        elif not (min_copy_number is None):
+        if not (min_copy_number is None):
             if float(gff_description_dict["N_copies"]) < min_copy_number:
                 return False
-        elif not (max_copy_number is None):
+        if not (max_copy_number is None):
             if float(gff_description_dict["N_copies"]) > max_copy_number:
                 return False
-        elif not (pattern is None):
+        if not (pattern is None):
             if gff_description_dict["Pattern"] != pattern:
                 return False
-        elif not (min_percentage_of_matches is None):
+        if not (min_percentage_of_matches is None):
             if int(gff_description_dict["Pers_matches"]) < min_percentage_of_matches:
                 return False
-        elif not (max_percentage_of_indels is None):
+        if not (max_percentage_of_indels is None):
             if int(gff_description_dict["Pers_indels"]) > max_percentage_of_indels:
                 return False
-        elif not (min_entropy is None):
+        if not (min_entropy is None):
             if float(gff_description_dict["Entropy"]) < min_entropy:
                 return False
-        elif not (max_entropy is None):
+        if not (max_entropy is None):
             if float(gff_description_dict["Entropy"]) > max_entropy:
                 return False
-        else:
-            return True
+
+        return True
 
     def filter_trf_gff(self, input_gff, output_gff, min_period=None, max_period=None, min_copy_number=None,
                        max_copy_number=None, pattern=None, min_percentage_of_matches=None,
