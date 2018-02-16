@@ -6,7 +6,7 @@ from Bio import  SeqRecord, SeqFeature
 class RecordTRF():
     def __init__(self, start, end, period, number_of_copies, consensus_pattern_size,
                  percent_of_matches, percent_of_indels, alignment_score, nucleotide_percent_list, entropy,
-                 pattern=None, tandem_repeat=None):
+                 pattern=None, tandem_repeat=None, record_id=None):
         # TRF repeat string description:
         # Indices of the repeat relative to the start of the sequence.
         # Period size of the repeat.
@@ -17,6 +17,7 @@ class RecordTRF():
         # Alignment score.
         # Percent composition for each of the four nucleotides.
         # Entropy measure based on percent composition.
+        self.id = record_id
         self.start = start                                          # int
         self.end = end                                              # int
         self.period = period                                        # int
@@ -31,14 +32,21 @@ class RecordTRF():
         self.tandem_repeat = tandem_repeat                          # str or None
 
     def attributes_string(self):
-        attributes_string = "Period=%i;N_copies=%.1f;Pattern=%s;Cons_pat_size=%i;Pers_matches=%i;Pers_indels=%i;Align_score=%i" \
-                            % (self.period, self.number_of_copies, self.pattern, self.consensus_pattern_size,
-                               self.percent_of_matches, self.percent_of_indels, self.alignment_score)
+        attributes_string = "ID=%s;" if self.id else ""
+        attributes_string += "Period=%i;N_copies=%.1f;Pattern=%s;Cons_pat_size=%i;Pers_matches=%i;Pers_indels=%i;Align_score=%i" \
+                             % (self.period, self.number_of_copies, self.pattern, self.consensus_pattern_size,
+                                self.percent_of_matches, self.percent_of_indels, self.alignment_score)
         nuc_composition = ",".join(map(lambda x: str(x), self.nucleotide_percent_list))
 
         attributes_string += ";Nuc_composition=%s;Entropy=%.2f" % (nuc_composition, self.entropy)
 
         return attributes_string
+
+    def atributes_string_with_rep_seq(self):
+        return self.attributes_string() + ";seq=%s" % self.tandem_repeat
+
+    def gff_str_with_rep_seq(self):
+        return "TRF\trepeat\t%i\t%i\t.\t.\t.\t%s" % (self.start, self.end, self.atributes_string_with_rep_seq())
 
     def gff_str(self):
         # seqid	source	type	start	end	score	strand	phase	attributes
@@ -70,8 +78,10 @@ class RecordTRF():
 
 class CollectionTRF():
 
-    def __init__(self, parameters=None, record_list=None, trf_file=None, from_file=True):
+    def __init__(self, parameters=None, record_list=None, trf_file=None, from_file=True, add_ids=True,
+                 record_id_prefix="TRF"):
         self.linkage_dict = None
+        record_index = 0
         if from_file:
             self.records = {}
             with open(trf_file, "r") as fd:
@@ -85,7 +95,8 @@ class CollectionTRF():
                     elif line[0:10] == "Parameters":
                         self.parameters = list(map(lambda x: int(x), line.strip().split()[1:]))
                     elif line != "\n":
-                        self._add_record(line, chrom)
+                        self._add_record(line, chrom, record_id="%s%i" % (record_id_prefix, record_index) if add_ids else None)
+                        record_index +=1
                 """
                 tmp = next(fd)
                 while tmp[0:8] != "Sequence":
@@ -116,7 +127,7 @@ class CollectionTRF():
             self.records = record_list
             self.parameters = parameters
 
-    def _add_record(self, line, chrom):
+    def _add_record(self, line, chrom, record_id=None):
         line_list = line.strip().split()
         start, end, period = list(map(lambda x: int(x), line_list[0:3]))
         consensus_pattern_size, percent_of_matches, percent_of_indels, alignment_score = \
@@ -126,10 +137,19 @@ class CollectionTRF():
                            percent_of_matches, percent_of_indels, alignment_score,
                            nucleotide_percent_list,
                            float(line_list[-3]),
-                           pattern=line_list[-2], tandem_repeat=line_list[-1])
+                           pattern=line_list[-2], tandem_repeat=line_list[-1],
+                           record_id=record_id)
         if chrom not in self.records:
             self.records[chrom] = []
         self.records[chrom].append(record)
+
+    def write_gff_with_rep_seqs(self, out_file, write_chr_string=False):
+        with open(out_file, "w") as out_fd:
+            for chrom in self.records:
+                if write_chr_string:
+                    out_fd.write("#%s\n" % chrom)
+                for record in self.records[chrom]:
+                    out_fd.write("%s\t%s\n" % (chrom, record.gff_str_with_rep_seq()))
 
     def write_gff(self, out_file, write_chr_string=False):
         with open(out_file, "w") as out_fd:
@@ -164,7 +184,7 @@ class CollectionTRF():
 
     def write_wide_table(self, out_file):
         with open(out_file, "w") as out_fd:
-            out_fd.write("#chrom\tstart\tend\tperiod\tnumber_of_copies\tconsensus_pattern_size\tpercent_of_matches\tpercent_of_indels\talignment_score\tnucleotide_composition\tentropy\tpattern\ttandem_repeat")
+            out_fd.write("#chrom\tstart\tend\tperiod\tnumber_of_copies\tconsensus_pattern_size\tpercent_of_matches\tpercent_of_indels\talignment_score\tnucleotide_composition\tentropy\tpattern\ttandem_repeat\n")
             for chrom in self.records:
                 for record in self.records[chrom]:
                     out_fd.write("%s\t%s\n" % (chrom, record.table_str_long()))
