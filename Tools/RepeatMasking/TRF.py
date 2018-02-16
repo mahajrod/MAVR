@@ -7,7 +7,7 @@ import shutil
 from Tools.Abstract import Tool
 
 from Parsers.TRF import CollectionTRF
-from Routines import FileRoutines
+from Routines import FileRoutines, AnnotationsRoutines
 from Tools.LinuxTools import CGAS
 
 
@@ -117,6 +117,57 @@ class TRF(Tool):
             shutil.rmtree(splited_fasta_dir)
             shutil.rmtree(splited_result_dir)
             shutil.rmtree(converted_output_dir)
+
+    @staticmethod
+    def gff_filtering_expression(gff_description_dict, min_period=None, max_period=None, min_number_of_copies=None,
+                                 max_number_of_copies=None, pattern=None, min_percentage_of_matches=None,
+                                 max_percentage_of_indels=None, min_entropy=None, max_entropy=None):
+        if not (min_period is None):
+            if int(gff_description_dict["Period"]) < min_period:
+                return False
+        elif not (max_period is None):
+            if int(gff_description_dict["Period"]) > max_period:
+                return False
+        elif not (min_number_of_copies is None):
+            if float(gff_description_dict["N_copies"]) < min_number_of_copies:
+                return False
+        elif not (max_number_of_copies is None):
+            if float(gff_description_dict["N_copies"]) > max_number_of_copies:
+                return False
+        elif not (pattern is None):
+            if gff_description_dict["Pattern"] != pattern:
+                return False
+        elif not (min_percentage_of_matches is None):
+            if int(gff_description_dict["Pers_matches"]) < min_percentage_of_matches:
+                return False
+        elif not (max_percentage_of_indels is None):
+            if int(gff_description_dict["Pers_indels"]) > max_percentage_of_indels:
+                return False
+        elif not (min_entropy is None):
+            if float(gff_description_dict["Entropy"]) < min_entropy:
+                return False
+        elif not (max_entropy is None):
+            if float(gff_description_dict["Entropy"]) > max_entropy:
+                return False
+        else:
+            return True
+
+    def filter_trf_gff(self, input_gff, output_gff, min_period=None, max_period=None, min_number_of_copies=None,
+                       max_number_of_copies=None, pattern=None, min_percentage_of_matches=None,
+                       max_percentage_of_indels=None, min_entropy=None, max_entropy=None):
+
+        def filtering_expression(gff_description_dict):
+            self.gff_filtering_expression(gff_description_dict, min_period=min_period, max_period=max_period,
+                                          min_number_of_copies=min_number_of_copies,
+                                          max_number_of_copies=max_number_of_copies,
+                                          pattern=pattern,
+                                          min_percentage_of_matches=min_percentage_of_matches,
+                                          max_percentage_of_indels=max_percentage_of_indels,
+                                          min_entropy=min_entropy,
+                                          max_entropy=max_entropy)
+
+        AnnotationsRoutines.filter_gff_by_description(input_gff, output_gff, expression=filtering_expression)
+
 
 if __name__ == "__main__":
     pass

@@ -1,5 +1,5 @@
 __author__ = 'mahajrod'
-
+import os
 from copy import deepcopy
 
 from collections import OrderedDict
@@ -340,3 +340,29 @@ class AnnotationsRoutines(SequenceRoutines):
 
         if parsing_mode == "index_db":
             os.remove(tmp_index_file)
+
+    @staticmethod
+    def get_description_dict_from_gff_string(gff_string):
+        if gff_string[0] == "#":
+            return None
+
+        description_list = gff_string.strip().split("\t")[-1].split(";")
+        description_dict = OrderedDict()
+
+        for entry in description_list:
+            key, value = entry.split("=")
+            description_dict[key] = value
+
+        return description_dict
+
+    def filter_gff_by_description(self, input_gff, output_gff, expression):
+
+        with open(input_gff, "r") as in_fd:
+            with open(output_gff, "r") as out_fd:
+                for line in in_fd:
+                    if line[0] == "#":
+                        out_fd.write(line)
+                        continue
+
+                    if expression(self.get_description_dict_from_gff_string(line)):
+                        out_fd.write(line)
