@@ -157,14 +157,14 @@ class TRF(Tool):
                        max_percentage_of_indels=None, min_entropy=None, max_entropy=None):
 
         def filtering_expression(gff_description_dict):
-            self.gff_filtering_expression(gff_description_dict, min_period=min_period, max_period=max_period,
-                                          min_copy_number=min_copy_number,
-                                          max_copy_number=max_copy_number,
-                                          pattern=pattern,
-                                          min_percentage_of_matches=min_percentage_of_matches,
-                                          max_percentage_of_indels=max_percentage_of_indels,
-                                          min_entropy=min_entropy,
-                                          max_entropy=max_entropy)
+            return self.gff_filtering_expression(gff_description_dict, min_period=min_period, max_period=max_period,
+                                                 min_copy_number=min_copy_number,
+                                                 max_copy_number=max_copy_number,
+                                                 pattern=pattern,
+                                                 min_percentage_of_matches=min_percentage_of_matches,
+                                                 max_percentage_of_indels=max_percentage_of_indels,
+                                                 min_entropy=min_entropy,
+                                                 max_entropy=max_entropy)
 
         AnnotationsRoutines.filter_gff_by_description(input_gff, output_gff, expression=filtering_expression)
 
