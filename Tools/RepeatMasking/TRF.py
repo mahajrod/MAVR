@@ -54,7 +54,7 @@ class TRF(Tool):
 
         trf_collection.write("%s.rep" % output_prefix)
         trf_collection.write_gff("%s.gff" % output_prefix)
-        trf_collection.write_gff_with_rep_seqs("%s.gff" % output_prefix)
+        trf_collection.write_gff_with_rep_seqs("%s.with_rep_seqs.gff" % output_prefix)
         trf_collection.write_simple_gff("%s.simple.gff" % output_prefix)
         trf_collection.write_short_table("%s.short.tab" % output_prefix)
         trf_collection.write_wide_table("%s.wide.tab" % output_prefix)
