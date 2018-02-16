@@ -46,7 +46,7 @@ args = parser.parse_args()
 #TRF.cmd = args.path_to_trf[1] + (args.path_to_trf[2] if args.path_to_trf[2] else "")
 
 TRF.filter_trf_gff(args.input, args.output, min_period=args.min_period, max_period=args.max_period,
-                   min_number_of_copies=args.min_copy_number, max_number_of_copies=args.max_number_of_copies,
+                   min_copy_number=args.min_copy_number, max_copy_number=args.max_copy_number,
                    pattern=args.pattern, min_percentage_of_matches=args.min_percentage_of_matches,
                    max_percentage_of_indels=args.max_percentage_of_indels, min_entropy=None, max_entropy=None)
 
