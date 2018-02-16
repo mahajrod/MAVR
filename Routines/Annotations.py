@@ -358,7 +358,7 @@ class AnnotationsRoutines(SequenceRoutines):
     def filter_gff_by_description(self, input_gff, output_gff, expression):
 
         with open(input_gff, "r") as in_fd:
-            with open(output_gff, "r") as out_fd:
+            with open(output_gff, "w") as out_fd:
                 for line in in_fd:
                     if line[0] == "#":
                         out_fd.write(line)
