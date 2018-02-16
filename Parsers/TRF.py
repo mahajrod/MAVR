@@ -189,6 +189,24 @@ class CollectionTRF():
                 for record in self.records[chrom]:
                     out_fd.write("%s\t%s\n" % (chrom, record.table_str_long()))
 
+    def write_fasta(self, out_file):
+        with open(out_file, "w") as out_fd:
+            for chrom in self.records:
+                for record in self.records[chrom]:
+                    if record.id and record.tandem_repeat:
+                        out_fd.write(">%s location:%s,%i,%i pattern:%s period:%i copies:%f matches,%%:%i "
+                                     "indels,%%:%i align_score:%i entropy:%f\n%s\n" % (record.id,
+                                                                                       chrom,
+                                                                                       record.start,
+                                                                                       record.end,
+                                                                                       record.pattern,
+                                                                                       record.period,
+                                                                                       record.number_of_copies,
+                                                                                       record.percent_of_matches,
+                                                                                       record.percent_of_indels,
+                                                                                       record.alignment_score,
+                                                                                       record.entropy,
+                                                                                       record.tandem_repeat))
 
 if __name__ == "__main__":
     trf_coll = CollectionTRF(trf_file="/home/mahajrod/genetics/desaminases/data/LAN210_v0.10m/masking/TRF/LAN210_v0.10m_masked_repeatmasker.fasta.2.7.7.80.10.50.500.dat", from_file=True)

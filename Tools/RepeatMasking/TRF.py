@@ -58,6 +58,7 @@ class TRF(Tool):
         trf_collection.write_simple_gff("%s.simple.gff" % output_prefix)
         trf_collection.write_short_table("%s.short.tab" % output_prefix)
         trf_collection.write_wide_table("%s.wide.tab" % output_prefix)
+        trf_collection.write_fasta("%s.fasta" % output_prefix)
 
     def parallel_search_tandem_repeat(self, query_file, output_prefix, matching_weight=2, mismatching_penalty=7,
                                       indel_penalty=7,
