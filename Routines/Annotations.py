@@ -364,5 +364,8 @@ class AnnotationsRoutines(SequenceRoutines):
                         out_fd.write(line)
                         continue
 
+                    print line
+                    print expression(self.get_description_dict_from_gff_string(line))
+
                     if expression(self.get_description_dict_from_gff_string(line)):
                         out_fd.write(line)
