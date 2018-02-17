@@ -189,9 +189,10 @@ class SequenceRoutines(FileRoutines):
         for record in SeqIO.parse(seq_file, format=format):
             return record.seq
 
-    @staticmethod
-    def get_lengths_from_seq_file(input_file_list, format="fasta", out_file=None, close_after_if_file_object=False):
-        record_dict = SeqIO.index_db("tmp.idx", input_file_list, format=format)
+    def get_lengths_from_seq_file(self, input_file_list, format="fasta", out_file=None, close_after_if_file_object=False,
+                                  parsing_mode="parse"):
+        record_dict = self.parse_seq_file(input_file_list, mode=parsing_mode, format=format, index_file="tmp.idx")
+
         lengths_dict = SynDict()
         for record_id in record_dict:
             lengths_dict[record_id] = len(record_dict[record_id])
@@ -199,8 +200,8 @@ class SequenceRoutines(FileRoutines):
         if out_file:
             lengths_dict.write(out_file, header=False, separator="\t", splited_values=False, values_separator=",",
                                close_after_if_file_object=close_after_if_file_object)
-
-        os.remove("tmp.idx")
+        if parsing_mode == "index_db":
+            os.remove("tmp.idx")
         return lengths_dict
 
     @staticmethod
