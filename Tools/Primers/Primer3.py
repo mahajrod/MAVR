@@ -101,6 +101,7 @@ class Primer3(Tool):
                                       mask_sequence=mask_sequence,
                                       directory_with_kmer_counts=directory_with_kmer_counts,
                                       kmer_file_prefix=kmer_file_prefix)
+        config += "=\n"
 
         with open(config_file, "w") as config_fd:
             config_fd.write(config)
