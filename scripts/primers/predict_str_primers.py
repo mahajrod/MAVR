@@ -20,6 +20,9 @@ parser.add_argument("-k", "--directory_with_kmer_counts", action="store", dest="
 parser.add_argument("-r", "--kmer_file_prefix", action="store", dest="kmer_file_prefix", required=True,
                     help="Prefix of files with kmer counts")
 
+parser.add_argument("-p", "--primer3_dir", action="store", dest="primer3_dir", default="",
+                    help="Directory with primer3_core binary")
+
 """
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
                     help="Number of threads. Default: 1")
@@ -30,6 +33,7 @@ parser.add_argument("-p", "--glistmaker_path", action="store", dest="glistmaker_
 """
 args = parser.parse_args()
 
+STRPrimerPipeline.primer3_dir = args.primer3_dir
 STRPrimerPipeline.predict_primers(args.trf_flank_gff, args.fasta_with_flanks, args.output_prefix,
                                   args.directory_with_kmer_counts, args.kmer_file_prefix, pcr_product_size_range=None,
                                   optimal_primer_len=None, min_primer_len=None, max_primer_len=None, max_ns_accepted=None,
