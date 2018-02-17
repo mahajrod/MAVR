@@ -355,17 +355,20 @@ class AnnotationsRoutines(SequenceRoutines):
 
         return description_dict
 
-    def filter_gff_by_description(self, input_gff, output_gff, expression):
+    def filter_gff_by_description(self, input_gff, output_gff, expression, filtered_out_gff):
 
         with open(input_gff, "r") as in_fd:
             with open(output_gff, "w") as out_fd:
-                for line in in_fd:
-                    if line[0] == "#":
-                        out_fd.write(line)
-                        continue
+                with open(filtered_out_gff, "w") as filtered_out_fd:
+                    for line in in_fd:
+                        if line[0] == "#":
+                            out_fd.write(line)
+                            continue
 
-                    #print line
-                    #print expression(self.get_description_dict_from_gff_string(line))
+                        #print line
+                        #print expression(self.get_description_dict_from_gff_string(line))
 
-                    if expression(self.get_description_dict_from_gff_string(line)):
-                        out_fd.write(line)
+                        if expression(self.get_description_dict_from_gff_string(line)):
+                            out_fd.write(line)
+                        else:
+                            filtered_out_fd.write(line)

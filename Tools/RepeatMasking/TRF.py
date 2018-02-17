@@ -164,7 +164,8 @@ class TRF(Tool):
 
         return True
 
-    def filter_trf_gff(self, input_gff, output_gff, min_period=None, max_period=None, min_copy_number=None,
+    def filter_trf_gff(self, input_gff, output_gff, filtered_out_gff, min_period=None, max_period=None,
+                       min_copy_number=None,
                        max_copy_number=None, pattern=None, min_percentage_of_matches=None,
                        max_percentage_of_indels=None, min_entropy=None, max_entropy=None):
 
@@ -178,7 +179,7 @@ class TRF(Tool):
                                                  min_entropy=min_entropy,
                                                  max_entropy=max_entropy)
 
-        AnnotationsRoutines.filter_gff_by_description(input_gff, output_gff, expression=filtering_expression)
+        AnnotationsRoutines.filter_gff_by_description(input_gff, output_gff, filtering_expression, filtered_out_gff)
 
 
 if __name__ == "__main__":
