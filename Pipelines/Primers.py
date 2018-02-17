@@ -41,7 +41,7 @@ class STRPrimerPipeline(Pipeline):
 
         number_of_sequences = len(sequence_dict)
 
-        with open(primer3_input_file) as primer3_in_fd:
+        with open(primer3_input_file, "w") as primer3_in_fd:
             with open(trf_flank_gff, "r") as trf_gff_fd:
                 for line in trf_gff_fd:
                     if line[0] == "#":
