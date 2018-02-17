@@ -23,5 +23,5 @@ parser.add_argument("-b", "--min_copy_number", action="store", dest="min_copy_nu
 args = parser.parse_args()
 
 
-TRF.filter_trf_gff_by_exact_copy_number(args.inpu, args.output, args.filtered_out, args.min_copy_number)
+TRF.filter_trf_gff_by_exact_copy_number(args.input, args.output, args.filtered_out, args.min_copy_number)
 
