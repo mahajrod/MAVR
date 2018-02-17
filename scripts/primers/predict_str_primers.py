@@ -24,6 +24,8 @@ parser.add_argument("-p", "--primer3_dir", action="store", dest="primer3_dir", d
                     help="Directory with primer3_core binary")
 parser.add_argument("-y", "--primer3_thermo_config_dir", action="store", dest="primer3_thermo_config_dir",
                     help="Directory with primer3 config for thermodynamic approach")
+parser.add_argument("-m", "--format_output", action="store_true", dest="format_output", default=False,
+                    help="Convert output to human readable form")
 
 """
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
@@ -42,5 +44,6 @@ STRPrimerPipeline.predict_primers(args.trf_flank_gff, args.fasta_with_flanks, ar
                                   softmasked_input=False, optimal_GC=None, min_GC=None, max_GC=None,
                                   optimal_melting_temperature=None, min_melting_temperature=None,
                                   max_melting_temperature=None, black_list_of_seqs_fasta=None,
-                                  thermodynamic_parameters_dir=args.primer3_thermo_config_dir)
+                                  thermodynamic_parameters_dir=args.primer3_thermo_config_dir,
+                                  format_output=args.format_output)
 
