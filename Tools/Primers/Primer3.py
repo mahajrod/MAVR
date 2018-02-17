@@ -2,13 +2,9 @@
 __author__ = 'Sergei F. Kliver'
 
 import os
-import shutil
+
 
 from Tools.Abstract import Tool
-
-
-from Routines import FileRoutines, AnnotationsRoutines
-from Tools.LinuxTools import CGAS
 
 
 class Primer3(Tool):
@@ -33,7 +29,7 @@ class Primer3(Tool):
                         optimal_primer_len=None, min_primer_len=None, max_primer_len=None, max_ns_accepted=None,
                         pcr_product_size_range=None, explain_primers=True, report_all_primers=True,
                         softmasked_input=False, optimal_GC=None, min_GC=None, max_GC=None,
-                        optimal_melting_temperature=None , min_melting_temperature=None,
+                        optimal_melting_temperature=None, min_melting_temperature=None,
                         max_melting_temperature=None, black_list_of_seqs_fasta=None, mask_sequence=False,
                         directory_with_kmer_counts=None, kmer_file_prefix=None):
         """
@@ -47,36 +43,62 @@ class Primer3(Tool):
         """
         config = ""
         config += "PRIMER_TASK=%s\n" % primer_task if primer_task else ""
-        config += "PRIMER_PICK_LEFT_PRIMER=%i" % (1 if pick_left_primer else 0)
-        config += "PRIMER_PICK_INTERNAL_OLIGO=%i" % (1 if pick_internal_oligo else 0)
-        config += "PRIMER_PICK_RIGHT_PRIMER=%i" % (1 if pick_right_primer else 0)
+        config += "PRIMER_PICK_LEFT_PRIMER=%i\n" % (1 if pick_left_primer else 0)
+        config += "PRIMER_PICK_INTERNAL_OLIGO=%i\n" % (1 if pick_internal_oligo else 0)
+        config += "PRIMER_PICK_RIGHT_PRIMER=%i\n" % (1 if pick_right_primer else 0)
 
-        config += "PRIMER_OPT_SIZE=%i" % optimal_primer_len if optimal_primer_len else ""
-        config += "PRIMER_MIN_SIZE=%i" % min_primer_len if min_primer_len else ""
-        config += "PRIMER_MAX_SIZE=%i" % max_primer_len if max_primer_len else ""
+        config += "PRIMER_OPT_SIZE=%i\n" % optimal_primer_len if optimal_primer_len else ""
+        config += "PRIMER_MIN_SIZE=%i\n" % min_primer_len if min_primer_len else ""
+        config += "PRIMER_MAX_SIZE=%i\n" % max_primer_len if max_primer_len else ""
 
-        config += "PRIMER_MAX_NS_ACCEPTED%i" % max_ns_accepted if max_ns_accepted else ""
-        config += "PRIMER_PRODUCT_SIZE_RANGE=%s" % ("-".join(pcr_product_size_range)) if pcr_product_size_range else ""
+        config += "PRIMER_MAX_NS_ACCEPTED=%i\n" % max_ns_accepted if max_ns_accepted else ""
+        config += "PRIMER_PRODUCT_SIZE_RANGE=%s\n" % ("-".join(map(str, pcr_product_size_range))) if pcr_product_size_range else ""
 
-        config += "PRIMER_EXPLAIN_FLAG=1" if explain_primers else ""
-        config += "P3_FILE_FLAG=1" if report_all_primers else ""
-        config += "PRIMER_LOWERCASE_MASKING=1" if softmasked_input else ""
+        config += "PRIMER_EXPLAIN_FLAG=1\n" if explain_primers else ""
+        config += "P3_FILE_FLAG=1\n" if report_all_primers else ""
+        config += "PRIMER_LOWERCASE_MASKING=1\n" if softmasked_input else ""
 
-        config += "PRIMER_OPT_GC_PERCENT=%f" % optimal_GC if optimal_GC else ""
-        config += "PRIMER_MIN_GC=%f" % min_GC if min_GC else ""
-        config += "PRIMER_MAX_GC=%f" % max_GC if max_GC else ""
+        config += "PRIMER_OPT_GC_PERCENT=%f\n" % optimal_GC if optimal_GC else ""
+        config += "PRIMER_MIN_GC=%f\n" % min_GC if min_GC else ""
+        config += "PRIMER_MAX_GC=%f\n" % max_GC if max_GC else ""
 
-        config += "PRIMER_OPT_TM=%f" % optimal_melting_temperature if optimal_melting_temperature else ""
-        config += "PRIMER_MIN_TM=%f" % min_melting_temperature if min_melting_temperature else ""
-        config += "PRIMER_MAX_TM=%f" % max_melting_temperature if max_melting_temperature else ""
+        config += "PRIMER_OPT_TM=%f\n" % optimal_melting_temperature if optimal_melting_temperature else ""
+        config += "PRIMER_MIN_TM=%f\n" % min_melting_temperature if min_melting_temperature else ""
+        config += "PRIMER_MAX_TM=%f\n" % max_melting_temperature if max_melting_temperature else ""
 
-        config += "PRIMER_MISPRIMING_LIBRARY=%s" % black_list_of_seqs_fasta if black_list_of_seqs_fasta else ""
-        config += "PRIMER_MASK_TEMPLATE=1" if mask_sequence else ""
+        config += "PRIMER_MISPRIMING_LIBRARY=%s\n" % black_list_of_seqs_fasta if black_list_of_seqs_fasta else ""
+        config += "PRIMER_MASK_TEMPLATE=1\n" if mask_sequence else ""
 
-        config += "PRIMER_MASK_KMERLIST_PATH=%s" % directory_with_kmer_counts if directory_with_kmer_counts else ""
-        config += "PRIMER_MASK_KMERLIST_PREFIX=%s" % kmer_file_prefix if kmer_file_prefix else ""
+        config += "PRIMER_MASK_KMERLIST_PATH=%s\n" % directory_with_kmer_counts if directory_with_kmer_counts else ""
+        config += "PRIMER_MASK_KMERLIST_PREFIX=%s\n" % kmer_file_prefix if kmer_file_prefix else ""
 
         return config
+
+    def write_config(self, config_file, primer_task="generic", pick_left_primer=True, pick_right_primer=True,
+                     pick_internal_oligo=False, optimal_primer_len=None, min_primer_len=None, max_primer_len=None,
+                     max_ns_accepted=None, pcr_product_size_range=None, explain_primers=True, report_all_primers=True,
+                     softmasked_input=False, optimal_GC=None, min_GC=None, max_GC=None,
+                     optimal_melting_temperature=None, min_melting_temperature=None,
+                     max_melting_temperature=None, black_list_of_seqs_fasta=None, mask_sequence=False,
+                     directory_with_kmer_counts=None, kmer_file_prefix=None):
+
+        config = self.generate_config(primer_task=primer_task, pick_left_primer=pick_left_primer,
+                                      pick_right_primer=pick_right_primer, pick_internal_oligo=pick_internal_oligo,
+                                      optimal_primer_len=optimal_primer_len, min_primer_len=min_primer_len,
+                                      max_primer_len=max_primer_len, max_ns_accepted=max_ns_accepted,
+                                      pcr_product_size_range=pcr_product_size_range, explain_primers=explain_primers,
+                                      report_all_primers=report_all_primers, softmasked_input=softmasked_input,
+                                      optimal_GC=optimal_GC, min_GC=min_GC, max_GC=max_GC,
+                                      optimal_melting_temperature=optimal_melting_temperature,
+                                      min_melting_temperature=min_melting_temperature,
+                                      max_melting_temperature=max_melting_temperature,
+                                      black_list_of_seqs_fasta=black_list_of_seqs_fasta,
+                                      mask_sequence=mask_sequence,
+                                      directory_with_kmer_counts=directory_with_kmer_counts,
+                                      kmer_file_prefix=kmer_file_prefix)
+
+        with open(config_file, "w") as config_fd:
+            config_fd.write(config)
 
     @staticmethod
     def generate_input_record(sequence_id, sequence,
@@ -116,7 +138,7 @@ class Primer3(Tool):
         """
 
         input_record = "SEQUENCE_ID=%s\n" % sequence_id
-        input_record += "SEQUENCE_TEMPLATE=%s\n" % sequence
+        input_record += "SEQUENCE_TEMPLATE=%s\n" % str(sequence)
         input_record += "SEQUENCE_TARGET=%s\n" % (" ".join(map(lambda s: "%s,%s" % (str(s[0]), str(s[1])), target_list))) if target_list else ""
         input_record += "SEQUENCE_INCLUDED_REGION=%s\n" % (" ".join(map(lambda s: "%s,%s" % (str(s[0]), str(s[1])), included_region_list))) if included_region_list else ""
         input_record += "SEQUENCE_EXCLUDED_REGION=%s\n" % (" ".join(map(lambda s: "%s,%s" % (str(s[0]), str(s[1])), excluded_region_list))) if excluded_region_list else ""
@@ -127,17 +149,30 @@ class Primer3(Tool):
         input_record += "SEQUENCE_PRIMER_REVCOMP=%s\n" % reverse_primer
         input_record += "SEQUENCE_INTERNAL_OLIGO=%s\n" % internal_oligo
 
-        input_record += "SEQUENCE_FORCE_LEFT_START=%i" % force_forward_start if force_forward_start else ""
-        input_record += "SEQUENCE_FORCE_LEFT_END=%i" % force_forward_end if force_forward_end else ""
-        input_record += "SEQUENCE_FORCE_RIGHT_START=%i" % force_reverse_start if force_reverse_start else ""
-        input_record += "SEQUENCE_FORCE_RIGHT_END=%i" % force_reverse_end if force_reverse_end else ""
+        input_record += "SEQUENCE_FORCE_LEFT_START=%i\n" % force_forward_start if force_forward_start else ""
+        input_record += "SEQUENCE_FORCE_LEFT_END=%i\n" % force_forward_end if force_forward_end else ""
+        input_record += "SEQUENCE_FORCE_RIGHT_START=%i\n" % force_reverse_start if force_reverse_start else ""
+        input_record += "SEQUENCE_FORCE_RIGHT_END=%i\n" % force_reverse_end if force_reverse_end else ""
 
         input_record += config
         input_record += "=\n"
 
         return input_record
 
+    def predict_primers(self, input_file, output_file=None, settings_file=None, format_output=None, strict_tags=True,
+                        error_file=None):
+        options = self.parse_options(input_file,
+                                     output_file=output_file,
+                                     settings_file=settings_file,
+                                     format_output=format_output,
+                                     strict_tags=strict_tags,
+                                     error_file=error_file)
 
+        self.execute(options=options)
+
+
+
+    """
     def search_tandem_repeats(self, query_file, matching_weight=2, mismatching_penalty=7, indel_penalty=7,
                               match_probability=80, indel_probability=10, min_alignment_score=50, max_period=500,
                               report_flanking_sequences=False, make_dat_file=True, disable_html_output=True):
@@ -191,7 +226,7 @@ class Primer3(Tool):
             options_list.append(file_options)
 
         self.parallel_execute(options_list)
-
+    """
 
 
 if __name__ == "__main__":

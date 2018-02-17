@@ -6,6 +6,7 @@
 from Tools.Abstract import Tool
 from Routines.Matplotlib import MatplotlibRoutines
 from Routines.Fastq import FastQRoutines
+from Routines.Annotations import AnnotationsRoutines
 #from Parsers.FaCut import FaCutReport
 #from Parsers.Coockiecutter import CoockiecutterReport
 #from Parsers.Trimmomatic import TrimmomaticReport
@@ -13,6 +14,6 @@ from Routines.Fastq import FastQRoutines
 #from CustomCollections.GeneralCollections import TwoLvlDict
 
 
-class Pipeline(Tool, MatplotlibRoutines, FastQRoutines):
+class Pipeline(Tool, MatplotlibRoutines, FastQRoutines, AnnotationsRoutines):
     def __init__(self, max_threads=1, max_memory=10):
         Tool.__init__(self, cmd="", max_threads=max_threads, max_memory=max_memory)
