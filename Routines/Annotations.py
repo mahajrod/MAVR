@@ -428,7 +428,7 @@ class AnnotationsRoutines(SequenceRoutines):
                     if (left_flank_length < left_flank_len) or (right_flank_length < right_flank_len):
                         shorter_flanks_dict[record_id] = "%i,%i" % (left_flank_length, right_flank_length)
 
-                    out_fd.write()
+                    out_fd.write("\t".join(line_list))
 
         shorter_flanks_dict.write(short_flanks_file)
 
