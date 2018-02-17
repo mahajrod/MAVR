@@ -418,6 +418,7 @@ class AnnotationsRoutines(SequenceRoutines):
                             left_flank_length = start - 1
                             line_list[3] = "1"
 
+
                         if end + right_flank_len <= sequence_length_dict[line_list[0]]:
                             line_list[4] = str(end + right_flank_len)
                             right_flank_length = right_flank_len
@@ -426,6 +427,7 @@ class AnnotationsRoutines(SequenceRoutines):
                             line_list[4] = sequence_length_dict[line_list[0]]
 
                     if (left_flank_length < left_flank_len) or (right_flank_length < right_flank_len):
+                        print("%s: Short flank" % record_id)
                         shorter_flanks_dict[record_id] = "%i,%i" % (left_flank_length, right_flank_length)
 
                     out_fd.write("\t".join(line_list))
