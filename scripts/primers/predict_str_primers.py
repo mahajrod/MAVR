@@ -22,6 +22,8 @@ parser.add_argument("-r", "--kmer_file_prefix", action="store", dest="kmer_file_
 
 parser.add_argument("-p", "--primer3_dir", action="store", dest="primer3_dir", default="",
                     help="Directory with primer3_core binary")
+parser.add_argument("-y", "--primer3_thermo_config_dir", action="store", dest="primer3_thermo_config_dir",
+                    help="Directory with primer3 config for thermodynamic approach")
 
 """
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
@@ -39,5 +41,6 @@ STRPrimerPipeline.predict_primers(args.trf_flank_gff, args.fasta_with_flanks, ar
                                   optimal_primer_len=None, min_primer_len=None, max_primer_len=None, max_ns_accepted=None,
                                   softmasked_input=False, optimal_GC=None, min_GC=None, max_GC=None,
                                   optimal_melting_temperature=None, min_melting_temperature=None,
-                                  max_melting_temperature=None, black_list_of_seqs_fasta=None)
+                                  max_melting_temperature=None, black_list_of_seqs_fasta=None,
+                                  thermodynamic_parameters_dir=args.primer3_thermo_config_dir)
 
