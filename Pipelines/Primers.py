@@ -117,7 +117,7 @@ class STRPrimerPipeline(Pipeline):
                                 output_file=primer3_output_file,
                                 settings_file=primer3_config_file,
                                 error_file=primer3_error_file,
-                                format_output=None, strict_tags=True
+                                format_output=None, strict_tags=False
                                 )
 
 
