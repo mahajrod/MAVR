@@ -182,15 +182,20 @@ class TRF(Tool):
         AnnotationsRoutines.filter_gff_by_description(input_gff, output_gff, filtered_out_gff, filtering_expression)
 
     @staticmethod
-    def filter_trf_gff_by_exact_copy_number(input_gff, output_gff, filtered_out_gff, min_copy_number):
+    def filter_trf_gff_by_exact_copy_number(input_gff, output_gff, filtered_out_gff, min_copy_number,
+                                            perfect_tandem=False):
 
-        def filtering_expression(gff_description_dict):
-            #print gff_description_dict["Pattern"] * min_copy_number
-            #print gff_description_dict["seq"]
+        if perfect_tandem:
+            def filtering_expression(gff_description_dict):
+                if (gff_description_dict["Pattern"] * min_copy_number) in gff_description_dict["seq"]:
+                    return True
+                return False
+        else:
+            def filtering_expression(gff_description_dict):
 
-            if (gff_description_dict["Pattern"] * min_copy_number) in gff_description_dict["seq"]:
-                return True
-            return False
+                if gff_description_dict["seq"].count(gff_description_dict["Pattern"]) >= min_copy_number:
+                    return True
+                return False
 
         AnnotationsRoutines.filter_gff_by_description(input_gff, output_gff, filtered_out_gff, filtering_expression)
 
