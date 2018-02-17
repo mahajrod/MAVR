@@ -9,7 +9,7 @@ from Tools.Abstract import Tool
 
 class Primer3(Tool):
     def __init__(self, path="", max_threads=4):
-        Tool.__init__(self, "trf", path=path, max_threads=max_threads)
+        Tool.__init__(self, "primer3_core", path=path, max_threads=max_threads)
 
     @staticmethod
     def parse_options(input_file, output_file=None, settings_file=None, format_output=None, strict_tags=True, error_file=None):
