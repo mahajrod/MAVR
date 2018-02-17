@@ -24,6 +24,7 @@ class STRPrimerPipeline(Pipeline):
                               softmasked_input=False, optimal_GC=None, min_GC=None, max_GC=None,
                               optimal_melting_temperature=None, min_melting_temperature=None,
                               max_melting_temperature=None, black_list_of_seqs_fasta=None,
+                              thermodynamic_parameters_dir=None
                               ):
 
         Primer3.write_config(primer3_config_file, primer_task="generic", pick_left_primer=True, pick_right_primer=True,
@@ -36,7 +37,8 @@ class STRPrimerPipeline(Pipeline):
                              min_melting_temperature=min_melting_temperature,
                              max_melting_temperature=max_melting_temperature,
                              black_list_of_seqs_fasta=black_list_of_seqs_fasta, mask_sequence=True,
-                             directory_with_kmer_counts=directory_with_kmer_counts, kmer_file_prefix=kmer_file_prefix)
+                             directory_with_kmer_counts=directory_with_kmer_counts, kmer_file_prefix=kmer_file_prefix,
+                             thermodynamic_parameters_dir=thermodynamic_parameters_dir)
 
         sequence_dict = self.parse_seq_file(fasta_with_flanks, "parse", format="fasta")
 
@@ -88,12 +90,12 @@ class STRPrimerPipeline(Pipeline):
                     primer3_in_fd.write(primer_input_record)
 
     def predict_primers(self, trf_flank_gff, fasta_with_flanks, output_prefix,
-                              directory_with_kmer_counts, kmer_file_prefix, pcr_product_size_range=None,
-                              optimal_primer_len=None, min_primer_len=None, max_primer_len=None, max_ns_accepted=None,
-                              softmasked_input=False, optimal_GC=None, min_GC=None, max_GC=None,
-                              optimal_melting_temperature=None, min_melting_temperature=None,
-                              max_melting_temperature=None, black_list_of_seqs_fasta=None,
-                              ):
+                        directory_with_kmer_counts, kmer_file_prefix, pcr_product_size_range=None,
+                        optimal_primer_len=None, min_primer_len=None, max_primer_len=None, max_ns_accepted=None,
+                        softmasked_input=False, optimal_GC=None, min_GC=None, max_GC=None,
+                        optimal_melting_temperature=None, min_melting_temperature=None,
+                        max_melting_temperature=None, black_list_of_seqs_fasta=None,
+                        thermodynamic_parameters_dir=None):
 
         primer3_config_file = "%s.primer3.config" % output_prefix
         primer3_input_file = "%s.primer3.input" % output_prefix
@@ -111,7 +113,8 @@ class STRPrimerPipeline(Pipeline):
                                    optimal_melting_temperature=optimal_melting_temperature,
                                    min_melting_temperature=min_melting_temperature,
                                    max_melting_temperature=max_melting_temperature,
-                                   black_list_of_seqs_fasta=black_list_of_seqs_fasta
+                                   black_list_of_seqs_fasta=black_list_of_seqs_fasta,
+                                   thermodynamic_parameters_dir=thermodynamic_parameters_dir
                                    )
         Primer3.path = self.primer3_dir
         Primer3.predict_primers(primer3_input_file,
