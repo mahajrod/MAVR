@@ -95,7 +95,7 @@ class STRPrimerPipeline(Pipeline):
                         softmasked_input=False, optimal_GC=None, min_GC=None, max_GC=None,
                         optimal_melting_temperature=None, min_melting_temperature=None,
                         max_melting_temperature=None, black_list_of_seqs_fasta=None,
-                        thermodynamic_parameters_dir=None):
+                        thermodynamic_parameters_dir=None, format_output=None):
 
         primer3_config_file = "%s.primer3.config" % output_prefix
         primer3_input_file = "%s.primer3.input" % output_prefix
@@ -121,7 +121,7 @@ class STRPrimerPipeline(Pipeline):
                                 output_file=primer3_output_file,
                                 settings_file=primer3_config_file,
                                 error_file=primer3_error_file,
-                                format_output=None, strict_tags=True
+                                format_output=output, strict_tags=True
                                 )
 
 
