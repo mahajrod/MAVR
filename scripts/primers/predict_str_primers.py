@@ -17,7 +17,7 @@ parser.add_argument("-s", "--fasta_with_flanks", action="store", dest="fasta_wit
                     help="Fasta file with flanked repeat sequences")
 parser.add_argument("-k", "--directory_with_kmer_counts", action="store", dest="directory_with_kmer_counts", required=True,
                     help="Directory with files containing kmer counts")
-parser.add_argument("-s", "--kmer_file_prefix", action="store", dest="kmer_file_prefix", required=True,
+parser.add_argument("-r", "--kmer_file_prefix", action="store", dest="kmer_file_prefix", required=True,
                     help="Prefix of files with kmer counts")
 
 """
