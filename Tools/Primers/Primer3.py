@@ -12,7 +12,7 @@ class Primer3(Tool):
         Tool.__init__(self, "primer3_core", path=path, max_threads=max_threads)
 
     @staticmethod
-    def parse_options(input_file, output_file=None, settings_file=None, format_output=None, strict_tags=True, error_file=None):
+    def parse_options(input_file, output_file=None, settings_file=None, format_output=None, strict_tags=False, error_file=None):
 
         options = " --format_output" if format_output else ""
         options += " --strict_tags" if strict_tags else ""
