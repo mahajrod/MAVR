@@ -82,7 +82,7 @@ class Primer3(Tool):
                      max_melting_temperature=None, black_list_of_seqs_fasta=None, mask_sequence=False,
                      directory_with_kmer_counts=None, kmer_file_prefix=None):
 
-        config = "Primer3 File - http://primer3.org\n"
+        config = "Primer3 File - http://primer3.sourceforge.net\n"
         config += "P3_FILE_TYPE=settings\n"
         config += "P3_FILE_ID=Description of the settings\n"
 
