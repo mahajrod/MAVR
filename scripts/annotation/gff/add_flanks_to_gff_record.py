@@ -26,7 +26,7 @@ parser.add_argument("-r", "--right_right_len", action="store", dest="right_flank
 
 args = parser.parse_args()
 
-AnnotationsRoutines.increase_gff_record_by_flanks(args.input_gff, args.output_prefix,
-                                                  args.left_flank_len, args.right_flank_len, args.fasta,
-                                                  coords_description_entry=args.coords_description_entry,
-                                                  id_description_entry=args.id_description_entry)
+AnnotationsRoutines.add_flanks_to_gff_record(args.input_gff, args.output_prefix,
+                                             args.left_flank_len, args.right_flank_len, args.fasta,
+                                             coords_description_entry=args.coords_description_entry,
+                                             id_description_entry=args.id_description_entry)

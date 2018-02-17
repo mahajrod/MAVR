@@ -373,8 +373,8 @@ class AnnotationsRoutines(SequenceRoutines):
                         else:
                             filtered_out_fd.write(line)
 
-    def increase_gff_record_by_flanks(self, input_gff, output_prefix, left_flank_len, right_flank_len, fasta_file,
-                                      coords_description_entry="core_seq_coords", id_description_entry="ID"):
+    def add_flanks_to_gff_record(self, input_gff, output_prefix, left_flank_len, right_flank_len, fasta_file,
+                                 coords_description_entry="core_seq_coords", id_description_entry="ID"):
         sequence_length_dict = self.get_lengths_from_seq_file(fasta_file)
         shorter_flanks_dict = SynDict()
 
