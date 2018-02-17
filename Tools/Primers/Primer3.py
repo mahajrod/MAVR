@@ -82,7 +82,11 @@ class Primer3(Tool):
                      max_melting_temperature=None, black_list_of_seqs_fasta=None, mask_sequence=False,
                      directory_with_kmer_counts=None, kmer_file_prefix=None):
 
-        config = self.generate_config(primer_task=primer_task, pick_left_primer=pick_left_primer,
+        config = "Primer3 File - http://primer3.org\n"
+        config += "P3_FILE_TYPE=settings\n"
+        config += "P3_FILE_ID=Description of the settings\n"
+
+        config += self.generate_config(primer_task=primer_task, pick_left_primer=pick_left_primer,
                                       pick_right_primer=pick_right_primer, pick_internal_oligo=pick_internal_oligo,
                                       optimal_primer_len=optimal_primer_len, min_primer_len=min_primer_len,
                                       max_primer_len=max_primer_len, max_ns_accepted=max_ns_accepted,
