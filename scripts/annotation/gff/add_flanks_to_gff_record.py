@@ -18,9 +18,9 @@ parser.add_argument("-c", "--coords_description_entry", action="store", dest="co
                     default="core_seq_coords",
                     help="Key for description entry with coordinates of core sequence in new feature")
 
-parser.add_argument("-l", "--left_flank_len", action="store", dest="left_flank_len", type=int, default=300,
+parser.add_argument("-l", "--left_flank_len", action="store", dest="left_flank_len", type=int, default=100,
                     help="Length of left flank. Default: 300")
-parser.add_argument("-r", "--right_right_len", action="store", dest="right_flank_len", type=int, default=300,
+parser.add_argument("-r", "--right_right_len", action="store", dest="right_flank_len", type=int, default=100,
                     help="Length of right flank. Default: 300")
 
 
