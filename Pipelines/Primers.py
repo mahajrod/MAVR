@@ -14,8 +14,9 @@ from Pipelines.Abstract import Pipeline
 
 class STRPrimerPipeline(Pipeline):
 
-    def __init__(self):
+    def __init__(self, primer3_dir=""):
         Pipeline.__init__(self)
+        self.primer3_dir = primer3_dir
 
     def prepare_primer3_files(self, trf_flank_gff, fasta_with_flanks, primer3_config_file, primer3_input_file,
                               directory_with_kmer_counts, kmer_file_prefix, pcr_product_size_range=None,
@@ -112,7 +113,7 @@ class STRPrimerPipeline(Pipeline):
                                    max_melting_temperature=max_melting_temperature,
                                    black_list_of_seqs_fasta=black_list_of_seqs_fasta
                                    )
-
+        Primer3.path = self.primer3_dir
         Primer3.predict_primers(primer3_input_file,
                                 output_file=primer3_output_file,
                                 settings_file=primer3_config_file,
