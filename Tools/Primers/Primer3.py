@@ -151,9 +151,9 @@ class Primer3(Tool):
         input_record += "SEQUENCE_INTERNAL_EXCLUDED_REGION=%s\n" % (" ".join(map(lambda s: "%s,%s" % (str(s[0]), str(s[1])), internal_oligo_excluded_region_list))) if internal_oligo_excluded_region_list else ""
         input_record += "SEQUENCE_OVERLAP_JUNCTION_LIST=%s\n" % (" ".join(map(str, overlap_junction_list))) if overlap_junction_list else ""
 
-        input_record += "SEQUENCE_PRIMER=%s\n" % forward_primer
-        input_record += "SEQUENCE_PRIMER_REVCOMP=%s\n" % reverse_primer
-        input_record += "SEQUENCE_INTERNAL_OLIGO=%s\n" % internal_oligo
+        input_record += "SEQUENCE_PRIMER=%s\n" % forward_primer if forward_primer else ""
+        input_record += "SEQUENCE_PRIMER_REVCOMP=%s\n" % reverse_primer if reverse_primer else ""
+        input_record += "SEQUENCE_INTERNAL_OLIGO=%s\n" % internal_oligo if internal_oligo else ""
 
         input_record += "SEQUENCE_FORCE_LEFT_START=%i\n" % force_forward_start if force_forward_start else ""
         input_record += "SEQUENCE_FORCE_LEFT_END=%i\n" % force_forward_end if force_forward_end else ""
