@@ -355,7 +355,7 @@ class AnnotationsRoutines(SequenceRoutines):
 
         return description_dict
 
-    def filter_gff_by_description(self, input_gff, output_gff, expression, filtered_out_gff):
+    def filter_gff_by_description(self, input_gff, output_gff, filtered_out_gff, expression):
 
         with open(input_gff, "r") as in_fd:
             with open(output_gff, "w") as out_fd:

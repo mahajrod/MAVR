@@ -179,8 +179,17 @@ class TRF(Tool):
                                                  min_entropy=min_entropy,
                                                  max_entropy=max_entropy)
 
-        AnnotationsRoutines.filter_gff_by_description(input_gff, output_gff, filtering_expression, filtered_out_gff)
+        AnnotationsRoutines.filter_gff_by_description(input_gff, output_gff, filtered_out_gff, filtering_expression)
 
+    @staticmethod
+    def filter_trf_gff_by_exact_copy_number(input_gff, output_gff, filtered_out_gff, min_copy_number):
+
+        def filtering_expression(gff_description_dict):
+            if (gff_description_dict["Pattern"] * min_copy_number) in gff_description_dict["seq"]:
+                return True
+            return False
+
+        AnnotationsRoutines.filter_gff_by_description(input_gff, output_gff, filtered_out_gff, filtering_expression)
 
 if __name__ == "__main__":
     pass
