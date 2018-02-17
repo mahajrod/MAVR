@@ -108,7 +108,7 @@ class TRF(Tool):
 
             self.convert_trf_report(trf_output_file, "%s/%s" % (converted_output_dir, filename))
 
-        for suffix in (".rep", ".gff", ".simple.gff", ".short.tab", ".wide.tab", ".with_rep_seqs.gff"):
+        for suffix in (".rep", ".gff", ".simple.gff", ".short.tab", ".wide.tab", ".with_rep_seqs.gff", ".fasta"):
             file_str = ""
             merged_file = "%s%s" % (output_prefix, suffix)
             for filename in splited_files:
