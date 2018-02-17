@@ -73,7 +73,7 @@ class STRPrimerPipeline(Pipeline):
                                                             directory_with_kmer_counts=None, kmer_file_prefix=None)
 
                     primer_input_record = Primer3.generate_input_record(repeat_id, sequence_dict[repeat_id].seq,
-                                                                        target_list=coordinates,
+                                                                        target_list=(coordinates, ),
                                                                         excluded_region_list=None,
                                                                         included_region_list=None,
                                                                         internal_oligo_excluded_region_list=None,
