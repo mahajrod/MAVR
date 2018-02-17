@@ -372,3 +372,65 @@ class AnnotationsRoutines(SequenceRoutines):
                             out_fd.write(line)
                         else:
                             filtered_out_fd.write(line)
+
+    def increase_gff_record_by_flanks(self, input_gff, output_prefix, left_flank_len, right_flank_len, fasta_file,
+                                      coords_description_entry="core_seq_coords", id_description_entry="ID"):
+        sequence_length_dict = self.get_lengths_from_seq_file(fasta_file)
+        shorter_flanks_dict = SynDict()
+
+        output_gff = "%s.gff" % output_prefix
+        short_flanks_file = "%s.short_flanks.dat" % output_prefix
+
+        with open(input_gff, "r") as in_fd:
+            with open(output_gff, "w") as out_fd:
+                for line in in_fd:
+                    if line[0] == "#":
+                        out_fd.write(line)
+                        continue
+                    line_list = line.strip().split("\t")
+                    scaffold = line_list[0]
+                    start = int(line_list[3])
+                    end = int(line_list[4])
+
+                    record_id = OrderedDict(map(lambda s: s.split("="), line_list[8].split(";")))[id_description_entry]
+
+                    line_list[8] += ";%s=%i,%i\n" % (coords_description_entry, start, end)
+
+                    if line_list[6] == "-":
+                        if start - right_flank_len > 0:
+                            line_list[3] = str(start - right_flank_len)
+                            right_flank_length = right_flank_len
+                        else:
+                            right_flank_length = start - 1
+                            line_list[3] = "1"
+
+                        if end + left_flank_len <= sequence_length_dict[line_list[0]]:
+                            line_list[4] = str(end + left_flank_len)
+                            left_flank_length = left_flank_len
+                        else:
+                            left_flank_length = sequence_length_dict[line_list[0]] - end
+                            line_list[4] = sequence_length_dict[line_list[0]]
+                    else:
+                        if start - left_flank_len > 0:
+                            line_list[3] = str(start - left_flank_len)
+                            left_flank_length = left_flank_len
+                        else:
+                            left_flank_length = start - 1
+                            line_list[3] = "1"
+
+                        if end + right_flank_len <= sequence_length_dict[line_list[0]]:
+                            line_list[4] = str(end + right_flank_len)
+                            right_flank_length = right_flank_len
+                        else:
+                            right_flank_length = sequence_length_dict[line_list[0]] - end
+                            line_list[4] = sequence_length_dict[line_list[0]]
+
+                    if (left_flank_length < left_flank_len) or (right_flank_length < right_flank_len):
+                        shorter_flanks_dict[record_id] = "%i,%i" % (left_flank_length, right_flank_length)
+
+                    out_fd.write()
+
+        shorter_flanks_dict.write(short_flanks_file)
+
+
+
