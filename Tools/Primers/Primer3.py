@@ -84,7 +84,8 @@ class Primer3(Tool):
 
         config = "Primer3 File - http://primer3.sourceforge.net\n"
         config += "P3_FILE_TYPE=settings\n"
-        config += "P3_FILE_ID=Description of the settings\n"
+        config += "\n"
+        config += "P3_FILE_ID=STR primers\n"
 
         config += self.generate_config(primer_task=primer_task, pick_left_primer=pick_left_primer,
                                       pick_right_primer=pick_right_primer, pick_internal_oligo=pick_internal_oligo,
