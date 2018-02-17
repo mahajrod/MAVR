@@ -165,7 +165,7 @@ class Primer3(Tool):
 
         return input_record
 
-    def predict_primers(self, input_file, output_file=None, settings_file=None, format_output=None, strict_tags=True,
+    def predict_primers(self, input_file, output_file=None, settings_file=None, format_output=None, strict_tags=False,
                         error_file=None):
         options = self.parse_options(input_file,
                                      output_file=output_file,
