@@ -428,9 +428,9 @@ class AnnotationsRoutines(SequenceRoutines):
                     if (left_flank_length < left_flank_len) or (right_flank_length < right_flank_len):
                         print("%s: Short flank" % record_id)
                         shorter_flanks_dict[record_id] = "%i,%i" % (left_flank_length, right_flank_length)
-                    line_list[8] += ";%s_relative=%i,%i" % (coords_description_entry,
-                                                            start + (right_flank_length if line_list[6] == "-" else left_flank_length),
-                                                            end + (right_flank_length if line_list[6] == "-" else left_flank_length))
+                    line_list[8] += ";%s_relative=%i,%i\n" % (coords_description_entry,
+                                                              1 + (right_flank_length if line_list[6] == "-" else left_flank_length),
+                                                              end - start + 1 + (right_flank_length if line_list[6] == "-" else left_flank_length))
                     out_fd.write("\t".join(line_list))
 
         shorter_flanks_dict.write(short_flanks_file)
