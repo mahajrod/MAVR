@@ -31,7 +31,7 @@ class Primer3(Tool):
                         softmasked_input=False, optimal_GC=None, min_GC=None, max_GC=None,
                         optimal_melting_temperature=None, min_melting_temperature=None,
                         max_melting_temperature=None, black_list_of_seqs_fasta=None, mask_sequence=False,
-                        directory_with_kmer_counts=None, kmer_file_prefix=None):
+                        directory_with_kmer_counts=None, kmer_file_prefix=None, thermodynamic_parameters_dir=None):
         """
         PRIMER_TASK:  generic,
                       check_primers,
@@ -71,6 +71,7 @@ class Primer3(Tool):
 
         config += "PRIMER_MASK_KMERLIST_PATH=%s\n" % directory_with_kmer_counts if directory_with_kmer_counts else ""
         config += "PRIMER_MASK_KMERLIST_PREFIX=%s\n" % kmer_file_prefix if kmer_file_prefix else ""
+        config += "PRIMER_THERMODYNAMIC_PARAMETERS_PATH=%s\n" % thermodynamic_parameters_dir if thermodynamic_parameters_dir else ""
 
         return config
 
@@ -80,7 +81,8 @@ class Primer3(Tool):
                      softmasked_input=False, optimal_GC=None, min_GC=None, max_GC=None,
                      optimal_melting_temperature=None, min_melting_temperature=None,
                      max_melting_temperature=None, black_list_of_seqs_fasta=None, mask_sequence=False,
-                     directory_with_kmer_counts=None, kmer_file_prefix=None):
+                     directory_with_kmer_counts=None, kmer_file_prefix=None,
+                     thermodynamic_parameters_dir=None):
 
         config = "Primer3 File - http://primer3.sourceforge.net\n"
         config += "P3_FILE_TYPE=settings\n"
@@ -88,19 +90,20 @@ class Primer3(Tool):
         config += "P3_FILE_ID=STR primers\n"
 
         config += self.generate_config(primer_task=primer_task, pick_left_primer=pick_left_primer,
-                                      pick_right_primer=pick_right_primer, pick_internal_oligo=pick_internal_oligo,
-                                      optimal_primer_len=optimal_primer_len, min_primer_len=min_primer_len,
-                                      max_primer_len=max_primer_len, max_ns_accepted=max_ns_accepted,
-                                      pcr_product_size_range=pcr_product_size_range, explain_primers=explain_primers,
-                                      report_all_primers=report_all_primers, softmasked_input=softmasked_input,
-                                      optimal_GC=optimal_GC, min_GC=min_GC, max_GC=max_GC,
-                                      optimal_melting_temperature=optimal_melting_temperature,
-                                      min_melting_temperature=min_melting_temperature,
-                                      max_melting_temperature=max_melting_temperature,
-                                      black_list_of_seqs_fasta=black_list_of_seqs_fasta,
-                                      mask_sequence=mask_sequence,
-                                      directory_with_kmer_counts=directory_with_kmer_counts,
-                                      kmer_file_prefix=kmer_file_prefix)
+                                       pick_right_primer=pick_right_primer, pick_internal_oligo=pick_internal_oligo,
+                                       optimal_primer_len=optimal_primer_len, min_primer_len=min_primer_len,
+                                       max_primer_len=max_primer_len, max_ns_accepted=max_ns_accepted,
+                                       pcr_product_size_range=pcr_product_size_range, explain_primers=explain_primers,
+                                       report_all_primers=report_all_primers, softmasked_input=softmasked_input,
+                                       optimal_GC=optimal_GC, min_GC=min_GC, max_GC=max_GC,
+                                       optimal_melting_temperature=optimal_melting_temperature,
+                                       min_melting_temperature=min_melting_temperature,
+                                       max_melting_temperature=max_melting_temperature,
+                                       black_list_of_seqs_fasta=black_list_of_seqs_fasta,
+                                       mask_sequence=mask_sequence,
+                                       directory_with_kmer_counts=directory_with_kmer_counts,
+                                       kmer_file_prefix=kmer_file_prefix,
+                                       thermodynamic_parameters_dir=thermodynamic_parameters_dir)
         config += "=\n"
 
         with open(config_file, "w") as config_fd:
