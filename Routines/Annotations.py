@@ -394,7 +394,7 @@ class AnnotationsRoutines(SequenceRoutines):
 
                     record_id = OrderedDict(map(lambda s: s.split("="), line_list[8].split(";")))[id_description_entry]
 
-                    line_list[8] += ";%s=%i,%i\n" % (coords_description_entry, start, end)
+                    line_list[8] += ";%s=%i,%i" % (coords_description_entry, start, end)
 
                     if line_list[6] == "-":
                         if start - right_flank_len > 0:
@@ -418,7 +418,6 @@ class AnnotationsRoutines(SequenceRoutines):
                             left_flank_length = start - 1
                             line_list[3] = "1"
 
-
                         if end + right_flank_len <= sequence_length_dict[line_list[0]]:
                             line_list[4] = str(end + right_flank_len)
                             right_flank_length = right_flank_len
@@ -429,7 +428,9 @@ class AnnotationsRoutines(SequenceRoutines):
                     if (left_flank_length < left_flank_len) or (right_flank_length < right_flank_len):
                         print("%s: Short flank" % record_id)
                         shorter_flanks_dict[record_id] = "%i,%i" % (left_flank_length, right_flank_length)
-
+                    line_list[8] += ";%s_relative=%i,%i" % (coords_description_entry,
+                                                            start + (right_flank_length if line_list[6] == "-" else left_flank_length),
+                                                            end + (right_flank_length if line_list[6] == "-" else left_flank_length))
                     out_fd.write("\t".join(line_list))
 
         shorter_flanks_dict.write(short_flanks_file)
