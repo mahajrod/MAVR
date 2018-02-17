@@ -17,7 +17,7 @@ parser.add_argument("-o", "--output", action="store", dest="output", required=Tr
                     help="Output gff with filtered repeats")
 parser.add_argument("-x", "--filtered_out", action="store", dest="filtered_out", required=True,
                     help="Gff with filtered out repeats")
-parser.add_argument("-b", "--min_copy_number", action="store", dest="min_copy_number", type=int,
+parser.add_argument("-b", "--min_copy_number", action="store", dest="min_copy_number", type=int, required=True,
                     help="Minimum number of consequent exact copies to extract")
 
 args = parser.parse_args()
