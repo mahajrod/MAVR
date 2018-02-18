@@ -32,7 +32,7 @@ class STRPrimerPipeline(Pipeline):
                               softmasked_input=False, optimal_GC=None, min_GC=None, max_GC=None,
                               optimal_melting_temperature=None, min_melting_temperature=None,
                               max_melting_temperature=None, black_list_of_seqs_fasta=None,
-                              thermodynamic_parameters_dir=None
+                              thermodynamic_parameters_dir=None, relative_core_seq_coords_relative_entry="core_seq_coords_relative"
                               ):
 
         Primer3.write_config(primer3_config_file, primer_task="generic", pick_left_primer=True, pick_right_primer=True,
@@ -60,7 +60,7 @@ class STRPrimerPipeline(Pipeline):
                     description_dict = self.get_description_dict_from_gff_string(line)
 
                     repeat_id = description_dict["ID"]
-                    coordinates = map(int, description_dict["core_seq_coords_relative"].split(","))
+                    coordinates = map(int, description_dict[relative_core_seq_coords_relative_entry].split(","))
                     repeat_length = coordinates[1] - coordinates[0] + 1
 
                     pcr_product_min_size = int(repeat_length + 20)
@@ -103,7 +103,8 @@ class STRPrimerPipeline(Pipeline):
                         softmasked_input=False, optimal_GC=None, min_GC=None, max_GC=None,
                         optimal_melting_temperature=None, min_melting_temperature=None,
                         max_melting_temperature=None, black_list_of_seqs_fasta=None,
-                        thermodynamic_parameters_dir=None, format_output=None):
+                        thermodynamic_parameters_dir=None, format_output=None,
+                        relative_core_seq_coords_relative_entry="core_seq_coords_relative"):
 
         primer3_config_file = "%s.primer3.config" % output_prefix
         primer3_input_file = "%s.primer3.input" % output_prefix
@@ -122,7 +123,8 @@ class STRPrimerPipeline(Pipeline):
                                    min_melting_temperature=min_melting_temperature,
                                    max_melting_temperature=max_melting_temperature,
                                    black_list_of_seqs_fasta=black_list_of_seqs_fasta,
-                                   thermodynamic_parameters_dir=thermodynamic_parameters_dir if thermodynamic_parameters_dir else self.primer3_thermo_config_dir
+                                   thermodynamic_parameters_dir=thermodynamic_parameters_dir if thermodynamic_parameters_dir else self.primer3_thermo_config_dir,
+                                   relative_core_seq_coords_relative_entry=relative_core_seq_coords_relative_entry
                                    )
         Primer3.path = self.primer3_dir
         Primer3.predict_primers(primer3_input_file,
@@ -135,7 +137,7 @@ class STRPrimerPipeline(Pipeline):
     def primer_prediction_pipeline(self, genome_fasta, output_prefix, trf_gff=None, min_str_period=3, max_str_period=5,
                                    min_copy_number=20, max_copy_number=None, pattern=None, min_perfect_copy_number=20,
                                    require_tandem_perfect_copies=True, left_flank_len=200, right_flank_len=200,
-                                   coords_description_entry="coords_description_entry", id_description_entry="ID",
+                                   core_seq_coords_entry="core_seq_coords", id_description_entry="ID",
                                    kmer_dir=None, kmer_file_prefix=None, count_kmers=False,
                                    min_percentage_of_matches=None, max_percentage_of_indels=None,
                                    optimal_primer_len=None, min_primer_len=None, max_primer_len=None, max_ns_accepted=None,
@@ -204,7 +206,7 @@ class STRPrimerPipeline(Pipeline):
 
         AnnotationsRoutines.add_flanks_to_gff_record(final_filtered_gff, output_prefix + ".with_flanks",
                                                      left_flank_len, right_flank_len, genome_fasta,
-                                                     coords_description_entry=coords_description_entry,
+                                                     coords_description_entry=core_seq_coords_entry,
                                                      id_description_entry=id_description_entry)
 
         AnnotationsRoutines.extract_sequences_by_gff(genome_fasta,
@@ -235,7 +237,8 @@ class STRPrimerPipeline(Pipeline):
                                  max_melting_temperature=max_melting_temperature,
                                  black_list_of_seqs_fasta=black_list_of_seqs_fasta,
                                  thermodynamic_parameters_dir=self.primer3_thermo_config_dir,
-                                 format_output=human_readable_output)
+                                 format_output=human_readable_output,
+                                 relative_core_seq_coords_relative_entry="%s_relative" % "core_seq_coords")
 
 
 
