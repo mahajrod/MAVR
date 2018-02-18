@@ -138,6 +138,10 @@ class STRPrimerPipeline(Pipeline):
                                    coords_description_entry="coords_description_entry", id_description_entry="ID",
                                    kmer_dir=None, kmer_file_prefix=None, count_kmers=False,
                                    min_percentage_of_matches=None, max_percentage_of_indels=None,
+                                   optimal_primer_len=None, min_primer_len=None, max_primer_len=None, max_ns_accepted=None,
+                                   softmasked_input=False, optimal_GC=None, min_GC=None, max_GC=None,
+                                   optimal_melting_temperature=None, min_melting_temperature=None,
+                                   max_melting_temperature=None, black_list_of_seqs_fasta=None,
                                    trf_matching_weight=2, trf_mismatching_penalty=7,
                                    trf_indel_penalty=7, trf_matching_probability=80, trf_indel_probability=10,
                                    trf_min_score=50, trf_max_period_size=500, threads=None):
@@ -218,10 +222,15 @@ class STRPrimerPipeline(Pipeline):
         for human_readable_output in False, True:
             self.predict_primers(with_flanks_gff, with_flanks_fasta, prime3_output_prefix,
                                  kmer_dir, kmer_file_prefix, pcr_product_size_range=None,
-                                 optimal_primer_len=None, min_primer_len=None, max_primer_len=None, max_ns_accepted=None,
-                                 softmasked_input=False, optimal_GC=None, min_GC=None, max_GC=None,
-                                 optimal_melting_temperature=None, min_melting_temperature=None,
-                                 max_melting_temperature=None, black_list_of_seqs_fasta=None,
+                                 optimal_primer_len=optimal_primer_len,
+                                 min_primer_len=min_primer_len, max_primer_len=max_primer_len,
+                                 max_ns_accepted=max_ns_accepted,
+                                 softmasked_input=softmasked_input,
+                                 optimal_GC=optimal_GC, min_GC=min_GC, max_GC=max_GC,
+                                 optimal_melting_temperature=optimal_melting_temperature,
+                                 min_melting_temperature=min_melting_temperature,
+                                 max_melting_temperature=max_melting_temperature,
+                                 black_list_of_seqs_fasta=black_list_of_seqs_fasta,
                                  thermodynamic_parameters_dir=self.primer3_thermo_config_dir,
                                  format_output=human_readable_output)
 
