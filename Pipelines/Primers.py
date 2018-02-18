@@ -183,6 +183,7 @@ class STRPrimerPipeline(Pipeline):
 
         prime3_output_prefix = "%s.primer3" % output_prefix
         if trf_gff is None:
+            print("Annotating repeats...")
             TRF.parallel_search_tandem_repeat(genome_fasta, output_prefix, matching_weight=trf_matching_weight,
                                               mismatching_penalty=trf_mismatching_penalty, indel_penalty=trf_indel_penalty,
                                               match_probability=trf_matching_probability,
@@ -190,9 +191,9 @@ class STRPrimerPipeline(Pipeline):
                                               max_period=trf_max_period_size,
                                               report_flanking_sequences=False,
                                               max_len_per_file=1000000, store_intermediate_files=False)
-
+        print("Filtering repeats...")
         TRF.filter_trf_gff(trf_output_gff, filtered_trf_gff, filtered_out_trf_gff, min_period=min_str_period,
-                           max_period=max_str_period,min_copy_number=min_copy_number, max_copy_number=max_copy_number,
+                           max_period=max_str_period, min_copy_number=min_copy_number, max_copy_number=max_copy_number,
                            pattern=pattern, min_percentage_of_matches=min_percentage_of_matches,
                            max_percentage_of_indels=max_percentage_of_indels, min_entropy=None, max_entropy=None)
 
@@ -214,11 +215,13 @@ class STRPrimerPipeline(Pipeline):
                                                      format="fasta")
 
         if count_kmers:
+            print("Counting kmers...")
             if (not kmer_file_prefix) or (not kmer_dir):
                 raise ValueError("No kmer file prefix of kmer directory was set")
             glistmaker_prefix = "%s/%s" % (kmer_dir, kmer_file_prefix)
             Glistmaker.generate_kmer_lists_for_primer3(genome_fasta, glistmaker_prefix, threads=None,
                                                        max_tmp_table_number=None, max_tmp_table_size=None)
+        print("Generating primers...")
         for human_readable_output in False, True:
             self.predict_primers(with_flanks_gff, with_flanks_fasta, prime3_output_prefix,
                                  kmer_dir, kmer_file_prefix, pcr_product_size_range=None,
