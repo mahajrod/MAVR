@@ -9,14 +9,22 @@ from Tools.Kmers import Glistmaker
 from Tools.Primers import Primer3
 from Tools.RepeatMasking import TRF
 
+from Routines import AnnotationsRoutines
 from Pipelines.Abstract import Pipeline
 
 
 class STRPrimerPipeline(Pipeline):
 
-    def __init__(self, primer3_dir=""):
+    def __init__(self, primer3_dir="", trf_dir="", primer3_bin="primer3_core", trf_bin="trf",
+                 glistmaker_dir="", glistmaker_bin="glistmaker", primer3_thermo_config_dir=None):
         Pipeline.__init__(self)
         self.primer3_dir = primer3_dir
+        self.trf_dir = trf_dir
+        self.primer3_bin = primer3_bin
+        self.trf_bin = trf_bin
+        self.glistmaker_dir = glistmaker_dir
+        self.glistmaker_bin = glistmaker_bin
+        self.primer3_thermo_config_dir = primer3_thermo_config_dir
 
     def prepare_primer3_files(self, trf_flank_gff, fasta_with_flanks, primer3_config_file, primer3_input_file,
                               directory_with_kmer_counts, kmer_file_prefix, pcr_product_size_range=None,
@@ -114,7 +122,7 @@ class STRPrimerPipeline(Pipeline):
                                    min_melting_temperature=min_melting_temperature,
                                    max_melting_temperature=max_melting_temperature,
                                    black_list_of_seqs_fasta=black_list_of_seqs_fasta,
-                                   thermodynamic_parameters_dir=thermodynamic_parameters_dir
+                                   thermodynamic_parameters_dir=thermodynamic_parameters_dir if thermodynamic_parameters_dir else self.primer3_thermo_config_dir
                                    )
         Primer3.path = self.primer3_dir
         Primer3.predict_primers(primer3_input_file,
@@ -124,6 +132,117 @@ class STRPrimerPipeline(Pipeline):
                                 format_output=format_output, strict_tags=True
                                 )
 
+    def primer_prediction_pipeline(self, genome_fasta, output_prefix, trf_gff=None, min_str_period=3, max_str_period=5,
+                                   min_copy_number=20, max_copy_number=None, pattern=None, min_perfect_copy_number=20,
+                                   require_tandem_perfect_copies=True, left_flank_len=200, right_flank_len=200,
+                                   coords_description_entry="coords_description_entry", id_description_entry="ID",
+                                   kmer_dir=None, kmer_file_prefix=None, count_kmers=False,
+                                   min_percentage_of_matches=None, max_percentage_of_indels=None,
+                                   trf_matching_weight=2, trf_mismatching_penalty=7,
+                                   trf_indel_penalty=7, trf_matching_probability=80, trf_indel_probability=10,
+                                   trf_min_score=50, trf_max_period_size=500, threads=None):
 
+        TRF.path = self.trf_dir
+        TRF.threads = threads if threads else self.threads
+
+        Primer3.path = self.primer3_dir
+        Primer3.threads = threads if threads else self.threads
+
+        Glistmaker.path = self.glistmaker_dir
+        Glistmaker.threads = threads if threads else self.threads
+
+        trf_output_gff = "assembly.hybrid.all.trf.with_rep_seqs.gff" if trf_gff is None else trf_gff
+
+        filtered_suffix = ""
+        filtered_suffix += ".min_period_%i" % min_str_period if min_str_period else ""
+        filtered_suffix += ".max_period_%i" % max_str_period if max_str_period else ""
+        filtered_suffix += ".min_copy_%i" % min_copy_number if min_copy_number else ""
+        filtered_suffix += ".max_copy_%i" % max_copy_number if max_copy_number else ""
+        filtered_suffix += ".pattern_%s" % pattern if pattern else ""
+
+        filtered_trf_gff = "%s.%s.gff" % (output_prefix, filtered_suffix)
+        filtered_out_trf_gff = "%s.%s.filtered_out.gff" % (output_prefix, filtered_suffix)
+
+        final_filtered_gff = filtered_trf_gff
+
+        if min_perfect_copy_number:
+            filtering_prefix = "%s.%s.%s" % (output_prefix, filtered_suffix,
+                                                            "min_tandem_perfect_copy_%i" % min_perfect_copy_number if require_tandem_perfect_copies else "min_perfect_copy_%i" % min_perfect_copy_number)
+
+            final_filtered_gff = "%s.gff" % filtering_prefix
+            filtered_out_exact_copy_trf_gff = "%s.filtered_out.gff" % filtering_prefix
+            #final_filtered_gff = filtered_exact_copy_trf_gff
+
+        with_flanks_prefix = "%s.with_flanks"
+        with_flanks_gff = "%s.gff" % with_flanks_prefix
+        with_flanks_fasta = "%s.fasta" % with_flanks_prefix
+
+        prime3_output_prefix = "%s.primer3" % output_prefix
+        if trf_gff is None:
+            TRF.parallel_search_tandem_repeat(genome_fasta, output_prefix, matching_weight=trf_matching_weight,
+                                              mismatching_penalty=trf_mismatching_penalty, indel_penalty=trf_indel_penalty,
+                                              match_probability=trf_matching_probability,
+                                              indel_probability=trf_indel_probability, min_alignment_score=trf_min_score,
+                                              max_period=trf_max_period_size,
+                                              report_flanking_sequences=False,
+                                              max_len_per_file=1000000, store_intermediate_files=False)
+
+        TRF.filter_trf_gff(trf_output_gff, filtered_trf_gff, filtered_out_trf_gff, min_period=min_str_period,
+                           max_period=max_str_period,min_copy_number=min_copy_number, max_copy_number=max_copy_number,
+                           pattern=pattern, min_percentage_of_matches=min_percentage_of_matches,
+                           max_percentage_of_indels=max_percentage_of_indels, min_entropy=None, max_entropy=None)
+
+        if min_perfect_copy_number:
+            TRF.filter_trf_gff_by_exact_copy_number(filtered_trf_gff, final_filtered_gff,
+                                                    filtered_out_exact_copy_trf_gff, min_perfect_copy_number,
+                                                    perfect_tandem=require_tandem_perfect_copies)
+
+        AnnotationsRoutines.add_flanks_to_gff_record(final_filtered_gff, output_prefix + ".with_flanks",
+                                                     left_flank_len, right_flank_len, genome_fasta,
+                                                     coords_description_entry=coords_description_entry,
+                                                     id_description_entry=id_description_entry)
+
+        AnnotationsRoutines.extract_sequences_by_gff(genome_fasta,
+                                                     with_flanks_gff,
+                                                     with_flanks_fasta,
+                                                     type_list="repeat",
+                                                     parsing_mode="parse",
+                                                     format="fasta")
+
+        if count_kmers:
+            if (not kmer_file_prefix) or (not kmer_dir):
+                raise ValueError("No kmer file prefix of kmer directory was set")
+            glistmaker_prefix = "%s/%s" % (kmer_dir, kmer_file_prefix)
+            Glistmaker.generate_kmer_lists_for_primer3(genome_fasta, glistmaker_prefix, threads=None,
+                                                       max_tmp_table_number=None, max_tmp_table_size=None)
+        for human_readable_output in False, True:
+            self.predict_primers(with_flanks_gff, with_flanks_fasta, prime3_output_prefix,
+                                 kmer_dir, kmer_file_prefix, pcr_product_size_range=None,
+                                 optimal_primer_len=None, min_primer_len=None, max_primer_len=None, max_ns_accepted=None,
+                                 softmasked_input=False, optimal_GC=None, min_GC=None, max_GC=None,
+                                 optimal_melting_temperature=None, min_melting_temperature=None,
+                                 max_melting_temperature=None, black_list_of_seqs_fasta=None,
+                                 thermodynamic_parameters_dir=self.primer3_thermo_config_dir,
+                                 format_output=human_readable_output)
+
+
+
+"""
+~/Soft/MAVR/scripts/repeat_masking/tandem_repeat_masking.py -i ../../../../assemblies/bionano/assemblies/hybrid_assembly/assembly.hybrid.all.fasta -o assembly.hybrid.all -t 30 -p ~/Soft/TRF/trf
+
+~/Soft/MAVR/scripts/repeat_masking/filter_trf_gff.py -i assembly.hybrid.all.trf.with_rep_seqs.gff -o assembly.hybrid.all.trf.with_rep_seqs.monomer_4.copy_no_less_20.gff -x assembly.hybrid.all.trf.with_rep_seqs.monomer_4.copy_no_less_20.filtered_out.gff -n 4 -m 4 -b 20
+
+~/Soft/MAVR/scripts/repeat_masking/filter_trf_gff_by_exact_copy_number.py -i assembly.hybrid.all.trf.with_rep_seqs.monomer_4.copy_no_less_20.gff -o assembly.hybrid.all.trf.with_rep_seqs.monomer_4.exact_tandem_copy_no_less_20.gff -x assembly.hybrid.all.trf.with_rep_seqs.monomer_4.exact_tandem_copy_no_less_20.filtered_out.gff -b 20 -p
+
+~/Soft/MAVR/scripts/repeat_masking/filter_trf_gff_by_exact_copy_number.py -i assembly.hybrid.all.trf.with_rep_seqs.monomer_4.copy_no_less_20.gff -o assembly.hybrid.all.trf.with_rep_seqs.monomer_4.exact_copy_no_less_20.gff -x assembly.hybrid.all.trf.with_rep_seqs.monomer_4.exact_copy_no_less_20.filtered_out.gff -b 20
+
+~/Soft/MAVR/scripts/annotation/gff/add_flanks_to_gff_record.py  -i assembly.hybrid.all.trf.with_rep_seqs.monomer_4.exact_tandem_copy_no_less_20.gff -o assembly.hybrid.all.trf.exact_tandem_copy_no_less_20.with_flanks -f ../../../../assemblies/bionano/assemblies/hybrid_assembly/assembly.hybrid.all.fasta
+
+~/Soft/MAVR/scripts/sequence/extract_sequences_by_gff.py -i ../../../../assemblies/bionano/assemblies/hybrid_assembly/assembly.hybrid.all.fasta -g assembly.hybrid.all.trf.exact_tandem_copy_no_less_20.with_flanks.gff -o assembly.hybrid.all.trf.exact_tandem_copy_no_less_20.with_flanks.fasta -t repeat
+
+~/Soft/MAVR/scripts/primers/predict_str_primers.py -f assembly.hybrid.all.trf.exact_tandem_copy_no_less_20.with_flanks.gff -s assembly.hybrid.all.trf.exact_tandem_copy_no_less_20.with_flanks.fasta -o assembly.hybrid.all.trf -k ../../../../assemblies/bionano/assemblies/hybrid_assembly/kmers/ -r mustela_nigripes_hybrid -p ~/Soft/primer3/src/ -y ~/Soft/primer3/src/primer3_config/ -m
+
+~/Soft/MAVR/scripts/primers/predict_str_primers.py -f assembly.hybrid.all.trf.exact_tandem_copy_no_less_20.with_flanks.gff -s assembly.hybrid.all.trf.exact_tandem_copy_no_less_20.with_flanks.fasta -o assembly.hybrid.all.trf -k ../../../../assemblies/bionano/assemblies/hybrid_assembly/kmers/ -r mustela_nigripes_hybrid -p ~/Soft/primer3/src/ -y ~/Soft/primer3/src/primer3_config/
+"""
 
 
