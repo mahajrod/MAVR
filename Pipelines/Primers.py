@@ -179,7 +179,7 @@ class STRPrimerPipeline(Pipeline):
             filtered_out_exact_copy_trf_gff = "%s.filtered_out.gff" % filtering_prefix
             #final_filtered_gff = filtered_exact_copy_trf_gff
 
-        with_flanks_prefix = "%s.with_flanks" % output_prefix
+        with_flanks_prefix = "%s.with_flanks" % final_filtered_gff[:-3]
         with_flanks_gff = "%s.gff" % with_flanks_prefix
         with_flanks_fasta = "%s.fasta" % with_flanks_prefix
 
