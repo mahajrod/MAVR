@@ -35,6 +35,7 @@ parser.add_argument("-p", "--glistmaker_path", action="store", dest="glistmaker_
                     type=FileRoutines.split_filename, default=["", "glistmaker", ""],
                     help="Path to Glistmaker binary")
 """
+
 args = parser.parse_args()
 
 STRPrimerPipeline.primer3_dir = args.primer3_dir
