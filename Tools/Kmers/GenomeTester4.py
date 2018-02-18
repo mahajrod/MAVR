@@ -35,13 +35,13 @@ class Glistmaker(Tool):
 
     def generate_kmer_lists_for_primer3(self, in_file_list, species_prefix, threads=None,
                                         max_tmp_table_number=None, max_tmp_table_size=None):
-        out_kmer_16 = "%s_16.list" % species_prefix
-        out_kmer_11 = "%s_11.list" % species_prefix
+        #out_kmer_16 = "%s_16.list" % species_prefix
+        #out_kmer_11 = "%s_11.list" % species_prefix
 
-        options_kmer_16 = self.parse_options(in_file_list, out_kmer_16, kmer_length=16, threads=threads,
+        options_kmer_16 = self.parse_options(in_file_list, species_prefix, kmer_length=16, threads=threads,
                                              max_tmp_table_number=max_tmp_table_number,
                                              max_tmp_table_size=max_tmp_table_size)
-        options_kmer_11 = self.parse_options(in_file_list, out_kmer_11, kmer_length=11, threads=threads,
+        options_kmer_11 = self.parse_options(in_file_list, species_prefix, kmer_length=11, threads=threads,
                                              max_tmp_table_number=max_tmp_table_number,
                                              max_tmp_table_size=max_tmp_table_size)
 
