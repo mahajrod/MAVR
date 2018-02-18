@@ -183,7 +183,7 @@ class STRPrimerPipeline(Pipeline):
         with_flanks_gff = "%s.gff" % with_flanks_prefix
         with_flanks_fasta = "%s.fasta" % with_flanks_prefix
 
-        prime3_output_prefix = "%s.primer3" % output_prefix
+        prime3_output_prefix = "%s.primer3" % final_filtered_gff[:-3]
         if trf_gff is None:
             print("Annotating repeats...")
             TRF.parallel_search_tandem_repeat(genome_fasta, output_prefix, matching_weight=trf_matching_weight,
