@@ -112,7 +112,7 @@ class STRPrimerPipeline(Pipeline):
         primer3_error_file = "%s.primer3.error" % output_prefix
 
         self.prepare_primer3_files(trf_flank_gff, fasta_with_flanks, primer3_config_file, primer3_input_file,
-                                   directory_with_kmer_counts, kmer_file_prefix,
+                                   self.check_dir_path(directory_with_kmer_counts), kmer_file_prefix,
                                    pcr_product_size_range=pcr_product_size_range,
                                    optimal_primer_len=optimal_primer_len,
                                    min_primer_len=min_primer_len, max_primer_len=max_primer_len,
