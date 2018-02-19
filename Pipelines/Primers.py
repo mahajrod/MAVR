@@ -221,6 +221,7 @@ class STRPrimerPipeline(Pipeline):
             if (not kmer_file_prefix) or (not kmer_dir):
                 raise ValueError("No kmer file prefix of kmer directory was set")
             glistmaker_prefix = "%s/%s" % (kmer_dir, kmer_file_prefix)
+            self.safe_mkdir(kmer_dir)
             Glistmaker.generate_kmer_lists_for_primer3(genome_fasta, glistmaker_prefix, threads=None,
                                                        max_tmp_table_number=None, max_tmp_table_size=None)
         print("Generating primers...")
