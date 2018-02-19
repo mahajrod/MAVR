@@ -86,7 +86,7 @@ STRPrimerPipeline.primer_prediction_pipeline(args.genome_fasta, args.output_pref
                                              min_perfect_copy_number=args.min_perfect_copy_number,
                                              require_tandem_perfect_copies=args.require_tandem_perfect_copies,
                                              left_flank_len=args.left_flank_len, right_flank_len=args.right_flank_len,
-                                             core_seq_coords_entry="coords_description_entry",
+                                             core_seq_coords_entry="core_seq_coords",
                                              id_description_entry="ID",
                                              kmer_dir=args.directory_with_kmer_counts,
                                              kmer_file_prefix=args.kmer_file_prefix,
