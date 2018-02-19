@@ -157,7 +157,7 @@ class STRPrimerPipeline(Pipeline):
         Glistmaker.path = self.glistmaker_dir
         Glistmaker.threads = threads if threads else self.threads
 
-        trf_output_gff = "assembly.hybrid.all.trf.with_rep_seqs.gff" if trf_gff is None else trf_gff
+        trf_output_gff = "%s.with_rep_seqs.gff" % output_prefix if trf_gff is None else trf_gff
 
         filtered_suffix = ""
         filtered_suffix += ".min_period_%i" % min_str_period if min_str_period else ""
@@ -166,13 +166,13 @@ class STRPrimerPipeline(Pipeline):
         filtered_suffix += ".max_copy_%i" % max_copy_number if max_copy_number else ""
         filtered_suffix += ".pattern_%s" % pattern if pattern else ""
 
-        filtered_trf_gff = "%s.%s.gff" % (output_prefix, filtered_suffix)
-        filtered_out_trf_gff = "%s.%s.filtered_out.gff" % (output_prefix, filtered_suffix)
+        filtered_trf_gff = "%s%s.gff" % (output_prefix, filtered_suffix)
+        filtered_out_trf_gff = "%s%s.filtered_out.gff" % (output_prefix, filtered_suffix)
 
         final_filtered_gff = filtered_trf_gff
 
         if min_perfect_copy_number:
-            filtering_prefix = "%s.%s.%s" % (output_prefix, filtered_suffix,
+            filtering_prefix = "%s%s.%s" % (output_prefix, filtered_suffix,
                                                             "min_tandem_perfect_copy_%i" % min_perfect_copy_number if require_tandem_perfect_copies else "min_perfect_copy_%i" % min_perfect_copy_number)
 
             final_filtered_gff = "%s.gff" % filtering_prefix
