@@ -204,7 +204,7 @@ class STRPrimerPipeline(Pipeline):
                                                     filtered_out_exact_copy_trf_gff, min_perfect_copy_number,
                                                     perfect_tandem=require_tandem_perfect_copies)
 
-        AnnotationsRoutines.add_flanks_to_gff_record(final_filtered_gff, output_prefix + ".with_flanks",
+        AnnotationsRoutines.add_flanks_to_gff_record(final_filtered_gff, with_flanks_prefix,
                                                      left_flank_len, right_flank_len, genome_fasta,
                                                      coords_description_entry=core_seq_coords_entry,
                                                      id_description_entry=id_description_entry)
