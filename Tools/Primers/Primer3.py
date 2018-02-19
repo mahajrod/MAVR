@@ -25,8 +25,8 @@ class Primer3(Tool):
 
         return options
 
-    @staticmethod
-    def generate_config(primer_task="generic", pick_left_primer=True, pick_right_primer=True, pick_internal_oligo=False,
+    def generate_config(self, primer_task="generic",
+                        pick_left_primer=True, pick_right_primer=True, pick_internal_oligo=False,
                         optimal_primer_len=None, min_primer_len=None, max_primer_len=None, max_ns_accepted=None,
                         pcr_product_size_range=None, explain_primers=True, report_all_primers=True,
                         softmasked_input=False, optimal_GC=None, min_GC=None, max_GC=None,
@@ -70,7 +70,7 @@ class Primer3(Tool):
         config += "PRIMER_MISPRIMING_LIBRARY=%s\n" % black_list_of_seqs_fasta if black_list_of_seqs_fasta else ""
         config += "PRIMER_MASK_TEMPLATE=1\n" if mask_sequence else ""
 
-        config += "PRIMER_MASK_KMERLIST_PATH=%s\n" % directory_with_kmer_counts if directory_with_kmer_counts else ""
+        config += "PRIMER_MASK_KMERLIST_PATH=%s\n" % self.check_dir_path(directory_with_kmer_counts) if directory_with_kmer_counts else ""
         config += "PRIMER_MASK_KMERLIST_PREFIX=%s\n" % kmer_file_prefix if kmer_file_prefix else ""
         config += "PRIMER_THERMODYNAMIC_PARAMETERS_PATH=%s\n" % thermodynamic_parameters_dir if thermodynamic_parameters_dir else ""
 
