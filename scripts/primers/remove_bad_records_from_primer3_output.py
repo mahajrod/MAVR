@@ -21,4 +21,3 @@ primer3_results = CollectionPrimer3(primer3_file=args.input, from_file=True)
 primer3_results.remove_primers_with_gaps_in_pcr_product(args.min_gap_len)
 primer3_results.filter_out_records_without_primers()
 primer3_results.write(args.output)
-
