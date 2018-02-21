@@ -65,6 +65,8 @@ class PrimerPairEntryPrimer3:
         string += "PRIMER_PAIR_%i_COMPL_END_TH=%f\n" % (self.id, self.compl_end_th) if self.compl_end_th else ""
         string += "PRIMER_PAIR_%i_PRODUCT_SIZE=%i\n" % (self.id, self.product_size)
 
+        return string
+
     def pcr_product_seq(self, seq):
         if self.left_primer and self.right_primer:
             return seq[self.left_primer.start:self.right_primer.start+1]
@@ -128,6 +130,8 @@ class RecordPrimer3:
             string += str(primer_pair)
 
         string += "=\n"
+
+        return string
 
     def remove_primers_with_gaps_in_pcr_product(self, min_gap_len=5):
         bad_primers_index_list = []
