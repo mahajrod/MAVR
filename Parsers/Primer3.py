@@ -270,6 +270,7 @@ class CollectionPrimer3(Collection):
     def write(self, out_file):
         with open(out_file, "w") as out_fd:
             for record in self.records:
+                """
                 print record.id                                                                    # str
                 print record.seq                                                                      # str
                 print record.target_start                                                    # int
@@ -288,6 +289,7 @@ class CollectionPrimer3(Collection):
                 print record.pair_choice_description                              # str
                 print record.primer_pair_list
                 print str(record)
+                """
                 out_fd.write(str(record))
 
     def filter_by_function(self, function):
