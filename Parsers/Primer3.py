@@ -266,6 +266,23 @@ class CollectionPrimer3(Collection):
     def write(self, out_file):
         with open(out_file, "w") as out_fd:
             for record in self.records:
+                print record.id                                                                    # str
+                print record.seq                                                                      # str
+                print record.target_start                                                    # int
+                print record.target_len                                                        # int
+                print record.pick_left_primer                                            # bool
+                print record.pick_internal_oligo                                      # bool
+                print record.pick_right_primer                                         # bool
+                print record.product_size_range                                        # (int, int)
+                print record.left_primer_count                                          # int
+                print record.internal_oligo_count                                    # int
+                print record.right_primer_count                                        # int
+                print record.primer_pair_countt                                          # int
+                print record.left_primer_choice_description                # str
+                print record.right_primer_choice_description              # str
+                print record.internal_oligo_choice_description         # str
+                print record.pair_choice_description                              # str
+                print record.primer_pair_list
                 print str(record)
                 out_fd.write(str(record))
 
