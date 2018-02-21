@@ -184,9 +184,20 @@ class Collection(Iterable):
         filtered_records = []
         filtered_out_records = []
         for record in self.records:
+            if eval(expression):
+                filtered_records.append(record)
+            else:
+                filtered_out_records.append(record)
+
+        return filtered_records, filtered_out_records
+
+    def filter_records_by_function(self, function):
+        filtered_records = []
+        filtered_out_records = []
+        for record in self.records:
             #print("a\na\na\na\na\na\na\na")
             #print(record.description["Power"])
-            if eval(expression):
+            if function(record):
                 filtered_records.append(record)
             else:
                 filtered_out_records.append(record)

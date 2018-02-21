@@ -70,6 +70,22 @@ parser.add_argument("-p", "--glistmaker_path", action="store", dest="glistmaker_
 """
 args = parser.parse_args()
 
+"""
+usage example(with only genome sequence as input, so trf and glistmaker will be started):
+time ~/Soft/MAVR/scripts/primers/generate_str_primers.py -o assembly.hybrid.all.trf
+                                                          -g ../../../../../assemblies/bionano/assemblies/hybrid_assembly/assembly.hybrid.all.fasta
+                                                          -k ./kmers/
+                                                          -x mustela_nigripes_hybrid
+                                                          --primer3_dir ~/Soft/primer3/src/
+                                                          --primer3_thermo_config_dir
+                                                          ~/Soft/primer3/src/primer3_config/
+                                                          -t 30
+                                                          --glistmaker_dir
+                                                          ~/Soft/GenomeTester4/bin/
+                                                          --trf_dir ~/Soft/TRF/
+                                                          -c 20 -b 20 -j -n 3 -m 5 -z
+
+"""
 
 STRPrimerPipeline.threads = args.threads
 
@@ -101,13 +117,4 @@ STRPrimerPipeline.primer_prediction_pipeline(args.genome_fasta, args.output_pref
                                              trf_matching_weight=2, trf_mismatching_penalty=7,
                                              trf_indel_penalty=7, trf_matching_probability=80, trf_indel_probability=10,
                                              trf_min_score=50, trf_max_period_size=500, threads=None)
-"""
-STRPrimerPipeline.predict_primers(args.trf_flank_gff, args.fasta_with_flanks, args.output_prefix,
-                                  args.directory_with_kmer_counts, args.kmer_file_prefix, pcr_product_size_range=None,
-                                  optimal_primer_len=None, min_primer_len=None, max_primer_len=None, max_ns_accepted=None,
-                                  softmasked_input=False, optimal_GC=None, min_GC=None, max_GC=None,
-                                  optimal_melting_temperature=None, min_melting_temperature=None,
-                                  max_melting_temperature=None, black_list_of_seqs_fasta=None,
-                                  thermodynamic_parameters_dir=args.primer3_thermo_config_dir,
-                                  format_output=args.format_output)
-"""
+
