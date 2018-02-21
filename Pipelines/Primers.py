@@ -9,6 +9,8 @@ from Tools.Kmers import Glistmaker
 from Tools.Primers import Primer3
 from Tools.RepeatMasking import TRF
 
+from Parsers.Primer3 import CollectionPrimer3
+
 from Routines import AnnotationsRoutines
 from Pipelines.Abstract import Pipeline
 
@@ -146,7 +148,7 @@ class STRPrimerPipeline(Pipeline):
                                    max_melting_temperature=None, black_list_of_seqs_fasta=None,
                                    trf_matching_weight=2, trf_mismatching_penalty=7,
                                    trf_indel_penalty=7, trf_matching_probability=80, trf_indel_probability=10,
-                                   trf_min_score=50, trf_max_period_size=500, threads=None):
+                                   trf_min_score=50, trf_max_period_size=500, threads=None, min_gap_len=5):
 
         TRF.path = self.trf_dir
         TRF.threads = threads if threads else self.threads
@@ -183,7 +185,7 @@ class STRPrimerPipeline(Pipeline):
         with_flanks_gff = "%s.gff" % with_flanks_prefix
         with_flanks_fasta = "%s.fasta" % with_flanks_prefix
 
-        prime3_output_prefix = "%s.primer3" % with_flanks_prefix
+        primer3_output_prefix = "%s.primer3" % with_flanks_prefix
         if trf_gff is None:
             print("Annotating repeats...")
             TRF.parallel_search_tandem_repeat(genome_fasta, output_prefix, matching_weight=trf_matching_weight,
@@ -226,7 +228,7 @@ class STRPrimerPipeline(Pipeline):
                                                        max_tmp_table_number=None, max_tmp_table_size=None)
         print("Generating primers...")
         for human_readable_output in False, True:
-            self.predict_primers(with_flanks_gff, with_flanks_fasta, prime3_output_prefix,
+            self.predict_primers(with_flanks_gff, with_flanks_fasta, primer3_output_prefix,
                                  kmer_dir, kmer_file_prefix, pcr_product_size_range=None,
                                  optimal_primer_len=optimal_primer_len,
                                  min_primer_len=min_primer_len, max_primer_len=max_primer_len,
@@ -240,6 +242,19 @@ class STRPrimerPipeline(Pipeline):
                                  thermodynamic_parameters_dir=self.primer3_thermo_config_dir,
                                  format_output=human_readable_output,
                                  relative_core_seq_coords_relative_entry="%s_relative" % core_seq_coords_entry)
+
+        primer3_output_file = "%s.out" % primer3_output_prefix
+
+        filtered_results_file = "%s.filtered.res" % primer3_output_prefix
+        filtered_out_results_file = "%s.filtered_out.res" % primer3_output_prefix
+
+        primer3_results = CollectionPrimer3(primer3_file=primer3_output_file, from_file=True)
+
+        primer3_results.remove_primers_with_gaps_in_pcr_product(min_gap_len)
+        primer3_filtered_results, primer3_filtered_out_results = primer3_results.filter_out_records_without_primers()
+
+        primer3_filtered_results.write(filtered_results_file)
+        primer3_filtered_out_results.write(filtered_out_results_file)
 
 
 
