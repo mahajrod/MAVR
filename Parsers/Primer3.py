@@ -266,6 +266,7 @@ class CollectionPrimer3(Collection):
     def write(self, out_file):
         with open(out_file, "w") as out_fd:
             for record in self.records:
+                print str(record)
                 out_fd.write(str(record))
 
     def filter_by_function(self, function):
