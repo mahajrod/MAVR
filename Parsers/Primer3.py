@@ -277,7 +277,7 @@ class CollectionPrimer3(Collection):
                 print record.left_primer_count                                          # int
                 print record.internal_oligo_count                                    # int
                 print record.right_primer_count                                        # int
-                print record.primer_pair_countt                                          # int
+                print record.primer_pair_count                                          # int
                 print record.left_primer_choice_description                # str
                 print record.right_primer_choice_description              # str
                 print record.internal_oligo_choice_description         # str
