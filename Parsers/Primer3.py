@@ -54,7 +54,7 @@ class PrimerPairEntryPrimer3:
 
         return string
 
-    def __str_(self):
+    def __str__(self):
         if self.id is None:
             return None
         string = "PRIMER_PAIR_%i_PENALTY=%f\n" % (self.id, self.penalty)
