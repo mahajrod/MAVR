@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
 import re
+
+from CustomCollections.GeneralCollections import IdList
+
 from Parsers.Abstract import Collection
 
 
@@ -311,5 +314,21 @@ class CollectionPrimer3(Collection):
     def remove_primers_with_gaps_in_pcr_product(self, min_gap_len=5):
         for record in self.records:
             record.remove_primers_with_gaps_in_pcr_product(min_gap_len=min_gap_len)
+
+    def seq_ids(self):
+        id_list = IdList()
+
+        for record in self.records:
+            id_list.append(record.id)
+
+        return id_list
+
+    def extract_records_by_ids(self, id_list):
+        extracted_record_list = []
+        for record in self.records:
+            if record.id in id_list:
+                extracted_record_list.append(record)
+
+        return CollectionPrimer3(from_file=False, record_list=extracted_record_list)
 
 
