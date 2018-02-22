@@ -6,6 +6,8 @@ from CustomCollections.GeneralCollections import IdList
 
 from Parsers.Abstract import Collection
 
+from Routines import SequenceRoutines
+
 
 class PrimerEntryPrimer3:
     def __init__(self, penalty, seq, start, length, melting_temperature, gc_content,
@@ -159,6 +161,90 @@ class RecordPrimer3:
 
         return len(bad_primers_index_list)
 
+    def table_form(self):
+        string = ""
+        if self.primer_pair_list:
+            metadata_str = "#SeqeunceID\t%s" % self.id
+            metadata_seq_str = "#Sequence\t%s" % self.seq
+            header_str = "Primer_pair"
+            pcr_product_size_str = "PCR product size"
+
+            primer_pair_penalty_str = "Primer pair penalty"
+            left_primer_penalty_str = "Left primer penalty"
+            right_primer_penalty_str = "Right primer penalty"
+
+            left_primer_seq_str = "Left primer seq"
+            right_primer_seq_str = "Right primer seq"
+            left_primer_tm_str = "Left primer melting temp"
+            right_primer_tm_str = "Right primer melting temp"
+            left_primer_gc_str = "Left primer GC,%"
+            right_primer_gc_str = "Right primer GC,%"
+
+            left_primer_start_str = "Left primer start(1-based)"
+            right_primer_start_str = "Right primer start(1-based)"
+
+            left_primer_len_str = "Left primer length"
+            right_primer_len_str = "Right primer length"
+
+            for primer_pair in self.primer_pair_list:
+                header_str += "\t%s" % str(primer_pair.id)
+                pcr_product_size_str += "\t%i" % primer_pair.product_size
+
+                primer_pair_penalty_str += "\t%f" % primer_pair.penalty
+                left_primer_penalty_str += "\t%s" % primer_pair.left_primer.penalty
+                right_primer_penalty_str += "\t%s" % primer_pair.right_primer.penalty
+
+                left_primer_seq_str += "\t%s" % primer_pair.left_primer.seq
+                right_primer_seq_str += "\t%s" % primer_pair.right_primer.seq
+
+                left_primer_tm_str += "\t%f" % primer_pair.left_primer.melting_temperature
+                right_primer_tm_str += "\t%f" % primer_pair.right_primer.melting_temperature
+
+                left_primer_gc_str += "\t%f" % primer_pair.left_primer.gc_content
+                right_primer_gc_str += "\t%f" % primer_pair.right_primer.gc_content
+
+                left_primer_start_str += "\t%i" % (primer_pair.left_primer.start + 1)
+                right_primer_start_str += "\t%i" % (primer_pair.right_primer.start + 1)
+
+                left_primer_len_str += "\t%i" % primer_pair.left_primer.length
+                right_primer_len_str += "\t%i" % primer_pair.right_primer.length
+
+            for table_string in (metadata_str, metadata_seq_str,
+                                 header_str, pcr_product_size_str, primer_pair_penalty_str,
+                                 left_primer_penalty_str, right_primer_penalty_str,
+                                 left_primer_seq_str, right_primer_seq_str,
+                                 left_primer_tm_str, right_primer_tm_str,
+                                 left_primer_gc_str, right_primer_gc_str,
+                                 left_primer_len_str, right_primer_len_str,
+                                 left_primer_start_str, right_primer_start_str):
+
+                string += table_string + "\n=\n"
+
+            return string
+        return string
+
+    def alignments_string(self, segment_length=120, left_primer_symbol=">",
+                          target_symbol="*", right_primer_symbol="<"):
+        string = ""
+        string += "#SeqeunceID\t%s" % self.id
+        string += "#Sequence\t%s" % self.seq
+
+        for primer_pair in self.primer_pair_list:
+            string += "#Primer pair %i\n" % primer_pair.id
+            string += "\n"
+
+            location_list = [(primer_pair.left_primer.start, primer_pair.left_primer.start + primer_pair.left_primer.len),
+                             (self.target_start, self.target_start + self.target_len),
+                             (primer_pair.right_primer.start - primer_pair.right_primer.len + 1, primer_pair.right_primer.start + 1)]
+
+            string += SequenceRoutines.draw_string_regions(self.seq, location_list,
+                                                           [left_primer_symbol, target_symbol, right_primer_symbol],
+                                                           overlap_symbol="#", line_per_record=False,
+                                                           segment_length=segment_length,
+                                                           num_of_spaces=3, num_of_space_lines=1, empty_symbol=" ")
+
+        return string
+
 
 class CollectionPrimer3(Collection):
 
@@ -273,27 +359,21 @@ class CollectionPrimer3(Collection):
     def write(self, out_file):
         with open(out_file, "w") as out_fd:
             for record in self.records:
-                """
-                print record.id                                                                    # str
-                print record.seq                                                                      # str
-                print record.target_start                                                    # int
-                print record.target_len                                                        # int
-                print record.pick_left_primer                                            # bool
-                print record.pick_internal_oligo                                      # bool
-                print record.pick_right_primer                                         # bool
-                print record.product_size_range                                        # (int, int)
-                print record.left_primer_count                                          # int
-                print record.internal_oligo_count                                    # int
-                print record.right_primer_count                                        # int
-                print record.primer_pair_count                                          # int
-                print record.left_primer_choice_description                # str
-                print record.right_primer_choice_description              # str
-                print record.internal_oligo_choice_description         # str
-                print record.pair_choice_description                              # str
-                print record.primer_pair_list
-                print str(record)
-                """
                 out_fd.write(str(record))
+
+    def write_table_form(self, out_file):
+        with open(out_file, "w") as out_fd:
+            for record in self.records:
+                out_fd.write(record.table_form())
+
+    def write_alignments(self, out_file, segment_length=120, left_primer_symbol=">",
+                         target_symbol="*", right_primer_symbol="<"):
+        with open(out_file, "w") as out_fd:
+            for record in self.records:
+                out_fd.write(record.alignments_string(segment_length=segment_length,
+                                                      left_primer_symbol=left_primer_symbol,
+                                                      target_symbol=target_symbol,
+                                                      right_primer_symbol=right_primer_symbol))
 
     def filter_by_function(self, function):
 
