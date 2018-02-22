@@ -1907,18 +1907,18 @@ class SequenceRoutines(FileRoutines):
 
         print number_of_full_segments
 
-        for i in range(0, number_of_full_segments):
+        for i in range(0, (number_of_full_segments + 1) if last_segment_len > 1 else number_of_full_segments):
             output_string += "%12i%s%s%s%12i\n" % (i * segment_length + 1,
                                                    " " * num_of_spaces,
                                                    sequence[i * segment_length: (i + 1) * segment_length],
                                                    " " * num_of_spaces,
-                                                   (i + 1) * segment_length)
+                                                   sequence_length if i == number_of_full_segments else ((i + 1) * segment_length))
 
-            regions_list = []
+            #regions_list = []
 
             #TODO: below is very stupid realization of possible overlap case, redo using analytical calculations
 
-            region_string = " " * segment_length
+            region_string = " " * last_segment_len if i == number_of_full_segments else " " * segment_length
 
             for location_dict, symbol in zip(location_dict_list, symbol_list):
                 if i in location_dict:
