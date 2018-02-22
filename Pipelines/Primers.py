@@ -237,7 +237,8 @@ class STRPrimerPipeline(Pipeline):
                                                        max_tmp_table_number=None, max_tmp_table_size=None)
         print("Generating primers...")
         for human_readable_output in False, True:
-            self.predict_primers(with_flanks_gff, with_flanks_fasta, with_flanks_prefix,
+            output_file_prefix = "%s.human_readable" % with_flanks_prefix if human_readable_output else with_flanks_prefix
+            self.predict_primers(with_flanks_gff, with_flanks_fasta, output_file_prefix,
                                  kmer_dir, kmer_file_prefix, pcr_product_size_range=None,
                                  optimal_primer_len=optimal_primer_len,
                                  min_primer_len=min_primer_len, max_primer_len=max_primer_len,
