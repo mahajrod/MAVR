@@ -1857,7 +1857,7 @@ class SequenceRoutines(FileRoutines):
             len_reverse_dict[length] = IdList(len_reverse_dict[length])
             out_file = "%s.%s.len" % (output_prefix, length)
             len_reverse_dict[length].write(out_file)
-
+        print len_reverse_dict
         return len_reverse_dict
 
 
