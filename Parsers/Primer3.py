@@ -218,7 +218,7 @@ class RecordPrimer3:
                                  left_primer_len_str, right_primer_len_str,
                                  left_primer_start_str, right_primer_start_str):
 
-                string += table_string + "\n=\n"
+                string += table_string + "\n"
 
             return string
         return string
@@ -247,6 +247,15 @@ class RecordPrimer3:
                                                            overlap_symbol="#", line_per_record=False,
                                                            segment_length=segment_length,
                                                            num_of_spaces=3, num_of_space_lines=1, empty_symbol=" ")
+
+        return string
+
+    def table_form_and_alignments(self, segment_length=120, left_primer_symbol=">",
+                          target_symbol="*", right_primer_symbol="<"):
+
+        string = self.table_form()
+        string += self.alignments_string(segment_length=segment_length, left_primer_symbol=left_primer_symbol,
+                                         target_symbol=target_symbol, right_primer_symbol=right_primer_symbol)
 
         return string
 
@@ -379,6 +388,15 @@ class CollectionPrimer3(Collection):
                                                       left_primer_symbol=left_primer_symbol,
                                                       target_symbol=target_symbol,
                                                       right_primer_symbol=right_primer_symbol))
+
+    def write_table_form_with_alignments(self, out_file, segment_length=120, left_primer_symbol=">",
+                                         target_symbol="*", right_primer_symbol="<"):
+        with open(out_file, "w") as out_fd:
+            for record in self.records:
+                out_fd.write(record.table_form_and_alignments(segment_length=segment_length,
+                                                              left_primer_symbol=left_primer_symbol,
+                                                              target_symbol=target_symbol,
+                                                              right_primer_symbol=right_primer_symbol))
 
     def filter_by_function(self, function):
 
