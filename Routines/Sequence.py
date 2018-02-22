@@ -1910,9 +1910,9 @@ class SequenceRoutines(FileRoutines):
         for i in range(0, number_of_full_segments):
             output_string += "%12i%s%s%s%12i\n" % (i * segment_length + 1,
                                                    " " * num_of_spaces,
-                                                   sequence[i * sequence_length: (i + 1) * sequence_length],
+                                                   sequence[i * segment_length: (i + 1) * segment_length],
                                                    " " * num_of_spaces,
-                                                   (i + 1) * sequence_length)
+                                                   (i + 1) * segment_length)
 
             regions_list = []
 
