@@ -389,6 +389,7 @@ class CollectionPrimer3(Collection):
                 return True
             return False
 
+
         return self.filter_by_function(record_with_primers)
 
     def remove_primers_with_gaps_in_pcr_product(self, min_gap_len=5):
