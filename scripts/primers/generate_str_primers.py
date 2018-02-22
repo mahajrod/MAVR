@@ -71,20 +71,34 @@ parser.add_argument("-s", "--split_output_by_monomer_len", action="store_true",
 args = parser.parse_args()
 
 """
-usage example(with only genome sequence as input, so trf and glistmaker will be started):
-time ~/Soft/MAVR/scripts/primers/generate_str_primers.py -o assembly.hybrid.all.trf
-                                                          -g ../../../../../assemblies/bionano/assemblies/hybrid_assembly/assembly.hybrid.all.fasta
-                                                          -k ./kmers/
-                                                          -x mustela_nigripes_hybrid
-                                                          --primer3_dir ~/Soft/primer3/src/
-                                                          --primer3_thermo_config_dir
-                                                          ~/Soft/primer3/src/primer3_config/
-                                                          -t 30
-                                                          --glistmaker_dir
-                                                          ~/Soft/GenomeTester4/bin/
-                                                          --trf_dir ~/Soft/TRF/
-                                                          -c 20 -b 20 -j -n 3 -m 5 -z
+#usage example(with only genome sequence as input, so trf and glistmaker will be started):
+time ~/Soft/MAVR/scripts/primers/generate_str_primers.py -o assembly.hybrid.all.trf \
+                                                          -g ../../../../../assemblies/bionano/assemblies/hybrid_assembly/assembly.hybrid.all.fasta \
+                                                          -k ./kmers/ \
+                                                          -x mustela_nigripes_hybrid \
+                                                          --primer3_dir ~/Soft/primer3/src/ \
+                                                          --primer3_thermo_config_dir ~/Soft/primer3/src/primer3_config/ \
+                                                          -t 30 \
+                                                          --glistmaker_dir ~/Soft/GenomeTester4/bin/ \
+                                                          --trf_dir ~/Soft/TRF/ \
+                                                          -c 20 -b 20 -j -n 3 -m 5 -z \
 
+#usage with trf gff as input with precounted kmer frequences:
+time ~/Soft/MAVR/scripts/primers/generate_str_primers.py -o assembly.hybrid.all.trf \
+                                                         -f ../assembly.hybrid.all.trf.with_rep_seqs.gff \
+                                                         -g ../../../../../assemblies/bionano/assemblies/hybrid_assembly/assembly.hybrid.all.fasta \
+                                                         -k ../../../../../assemblies/bionano/assemblies/hybrid_assembly/kmers/ \
+                                                         -x mustela_nigripes_hybrid \
+                                                         --primer3_dir ~/Soft/primer3/src/ \
+                                                         --primer3_thermo_config_dir ~/Soft/primer3/src/primer3_config/ \
+                                                         -t 30 \
+                                                         --glistmaker_dir ~/Soft/GenomeTester4/bin/ \
+                                                         --trf_dir ~/Soft/TRF/ \
+                                                         -c 20 -b 20 -j -n 3 -m 5
+
+real	1m47.007s
+user	1m26.900s
+sys	0m25.032s
 """
 
 STRPrimerPipeline.threads = args.threads
