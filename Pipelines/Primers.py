@@ -208,6 +208,8 @@ class STRPrimerPipeline(Pipeline):
                                                     filtered_out_exact_copy_trf_gff, min_perfect_copy_number,
                                                     perfect_tandem=require_tandem_perfect_copies)
 
+        print final_filtered_gff
+        print final_filtered_len_file
         TRF.get_monomer_len_file_from_trf_gff(final_filtered_gff, final_filtered_len_file)
 
         monomer_length_id_file_prefix = "%s.monomer_len" % final_filtered_gff[-4]
