@@ -424,7 +424,7 @@ class FileRoutines:
                     if previous_value and sorted_input:
                         out_fd_dict[previous_value].close()
                     suffix = line_str[column_number].replace(" ", "_")
-                    out_name = "%s.%s" % (suffix, extension) if use_column_value_as_prefix else "%s_%s.%s" % (out_prefix, suffix, extension)
+                    out_name = "%s.%s" % (suffix, extension) if use_column_value_as_prefix else "%s.%s.%s" % (out_prefix, suffix, extension)
                     out_fd_dict[line_str[column_number]] = open(out_name, "w")
                     if header:
                         out_fd_dict[line_str[column_number]].write(header_string)
