@@ -384,7 +384,7 @@ class SynDict(OrderedDict):
             #print line
             #print tmp
             key, value = tmp[key_index], tmp[value_index]
-            print key, value
+            #print key, value
             if split_values or allow_repeats_of_key:
                 value = value.split(values_separator)
             #print key, value
