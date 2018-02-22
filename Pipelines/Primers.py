@@ -181,6 +181,8 @@ class STRPrimerPipeline(Pipeline):
             filtered_out_exact_copy_trf_gff = "%s.filtered_out.gff" % filtering_prefix
             #final_filtered_gff = filtered_exact_copy_trf_gff
 
+        final_filtered_len_file = "%s.monomer_len.len" % final_filtered_gff[-4]
+
         with_flanks_prefix = "%s.with_flanks" % final_filtered_gff[:-4]
         with_flanks_gff = "%s.gff" % with_flanks_prefix
         with_flanks_fasta = "%s.fasta" % with_flanks_prefix
@@ -205,6 +207,13 @@ class STRPrimerPipeline(Pipeline):
             TRF.filter_trf_gff_by_exact_copy_number(filtered_trf_gff, final_filtered_gff,
                                                     filtered_out_exact_copy_trf_gff, min_perfect_copy_number,
                                                     perfect_tandem=require_tandem_perfect_copies)
+
+        TRF.get_monomer_len_file_from_trf_gff(final_filtered_gff, final_filtered_len_file)
+
+        monomer_length_id_file_prefix = "%s.monomer_len" % final_filtered_gff[-4]
+        monomer_length_id_dict = self.split_ids_from_len_file_by_len(final_filtered_len_file,
+                                                                     monomer_length_id_file_prefix,
+                                                                     len_column=1, id_column=0)
 
         AnnotationsRoutines.add_flanks_to_gff_record(final_filtered_gff, with_flanks_prefix,
                                                      left_flank_len, right_flank_len, genome_fasta,
@@ -256,7 +265,12 @@ class STRPrimerPipeline(Pipeline):
         primer3_filtered_results.write(filtered_results_file)
         primer3_filtered_out_results.write(filtered_out_results_file)
 
+        filtered_results_file_splited_by_len_prefix = "%s.filtered.monomer_len" % primer3_output_prefix
 
+        for monomer_length in monomer_length_id_dict:
+            primer3_monomer_len_results = primer3_filtered_results.extract_records_by_ids(self,
+                                                                                          monomer_length_id_dict[monomer_length])
+            primer3_monomer_len_results.write("%s.%s.res" % (filtered_results_file_splited_by_len_prefix, monomer_length))
 
 """
 ~/Soft/MAVR/scripts/repeat_masking/tandem_repeat_masking.py -i ../../../../assemblies/bionano/assemblies/hybrid_assembly/assembly.hybrid.all.fasta -o assembly.hybrid.all -t 30 -p ~/Soft/TRF/trf

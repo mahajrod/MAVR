@@ -10,6 +10,8 @@ from Parsers.TRF import CollectionTRF
 from Routines import FileRoutines, AnnotationsRoutines
 from Tools.LinuxTools import CGAS
 
+from CustomCollections.GeneralCollections import SynDict
+
 
 class TRF(Tool):
     def __init__(self, path="", max_threads=4):
@@ -180,6 +182,20 @@ class TRF(Tool):
                                                  max_entropy=max_entropy)
 
         AnnotationsRoutines.filter_gff_by_description(input_gff, output_gff, filtered_out_gff, filtering_expression)
+
+    @staticmethod
+    def get_monomer_len_file_from_trf_gff(trf_gff, len_file):
+        len_dict = SynDict()
+
+        with open(trf_gff, "r") as trf_fd:
+            for line in trf_fd:
+                if line[0] == "#":
+                    continue
+                description_dict = AnnotationsRoutines.get_description_dict_from_gff_string(line)
+                len_dict[description_dict["ID"]] = description_dict["Period"]
+
+        len_dict.write(len_file)
+
 
     @staticmethod
     def filter_trf_gff_by_exact_copy_number(input_gff, output_gff, filtered_out_gff, min_copy_number,

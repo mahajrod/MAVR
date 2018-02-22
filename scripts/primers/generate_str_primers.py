@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import sys
 import argparse
 
-from Routines import FileRoutines
 from Pipelines import STRPrimerPipeline
 
 parser = argparse.ArgumentParser()
@@ -50,6 +48,8 @@ parser.add_argument("-l", "--left_flank_len", action="store", dest="left_flank_l
 parser.add_argument("-r", "--right_right_len", action="store", dest="right_flank_len", type=int, default=200,
                     help="Length of right flank. Default: 200")
 
+parser.add_argument("--min_gap_len", action="store", dest="min_gap_len", default=5, type=int,
+                    help="Minimum length of polyN to be treated as gap. Default: 5")
 
 parser.add_argument("--primer3_dir", action="store", dest="primer3_dir", default="",
                     help="Directory with primer3_core binary")
@@ -63,10 +63,10 @@ parser.add_argument("--primer3_thermo_config_dir", action="store", dest="primer3
 
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
                     help="Number of threads. Default: 1")
-""""
-parser.add_argument("-p", "--glistmaker_path", action="store", dest="glistmaker_path",
-                    type=FileRoutines.split_filename, default=["", "glistmaker", ""],
-                    help="Path to Glistmaker binary")
+"""
+parser.add_argument("-s", "--split_output_by_monomer_len", action="store_true",
+                    dest="split_output_by_monomer_len", default=False,
+                    help="Split output by STR monomer length")
 """
 args = parser.parse_args()
 
@@ -116,5 +116,6 @@ STRPrimerPipeline.primer_prediction_pipeline(args.genome_fasta, args.output_pref
                                              max_melting_temperature=None, black_list_of_seqs_fasta=None,
                                              trf_matching_weight=2, trf_mismatching_penalty=7,
                                              trf_indel_penalty=7, trf_matching_probability=80, trf_indel_probability=10,
-                                             trf_min_score=50, trf_max_period_size=500, threads=None)
+                                             trf_min_score=50, trf_max_period_size=500, threads=None,
+                                             min_gap_len=args.min_gap_len)
 
