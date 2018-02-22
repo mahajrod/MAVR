@@ -1854,12 +1854,12 @@ class SequenceRoutines(FileRoutines):
     def split_ids_from_len_file_by_len(len_file, output_prefix, len_column=1, id_column=0):
         len_reverse_dict = SynDict(filename=len_file, allow_repeats_of_key=True,
                                    key_index=len_column, value_index=id_column, separator="\t")
-        print len_reverse_dict
+        #print len_reverse_dict
         for length in len_reverse_dict:
             len_reverse_dict[length] = IdList(len_reverse_dict[length])
-            out_file = "%s.%s.len" % (output_prefix, length)
+            out_file = "%s.%s.ids" % (output_prefix, length)
             len_reverse_dict[length].write(out_file)
-        print len_reverse_dict
+        #print len_reverse_dict
         return len_reverse_dict
 
 
