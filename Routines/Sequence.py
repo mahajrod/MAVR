@@ -1905,7 +1905,7 @@ class SequenceRoutines(FileRoutines):
 
         output_string = ""
 
-        print number_of_full_segments
+        #print number_of_full_segments
 
         for i in range(0, (number_of_full_segments + 1) if last_segment_len > 1 else number_of_full_segments):
             output_string += "%12i%s%s%s%12i\n" % (i * segment_length + 1,
