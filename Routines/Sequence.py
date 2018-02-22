@@ -1896,7 +1896,7 @@ class SequenceRoutines(FileRoutines):
         sequence_length = len(sequence)
 
         last_segment_len = sequence_length % segment_length
-        number_of_full_segments = (sequence_length - last_segment_len) / sequence_length
+        number_of_full_segments = (sequence_length - last_segment_len) / segment_length
 
         location_dict_list = []
 
@@ -1904,6 +1904,8 @@ class SequenceRoutines(FileRoutines):
             location_dict_list.append(self.get_region_position_dict(location, segment_length))
 
         output_string = ""
+
+        print number_of_full_segments
 
         for i in range(0, number_of_full_segments):
             output_string += "%12i%s%s%s%12i\n" % (i * segment_length + 1,
