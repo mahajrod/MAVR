@@ -240,8 +240,8 @@ class RecordPrimer3:
 
                              (primer_pair.right_primer.start - primer_pair.right_primer.length + 1,
                               primer_pair.right_primer.start + 1)]
-            print self.id
-            print location_list
+            #print self.id
+            #print location_list
             string += SequenceRoutines.draw_string_regions(self.seq, location_list,
                                                            [left_primer_symbol, target_symbol, right_primer_symbol],
                                                            overlap_symbol="#", line_per_record=False,
