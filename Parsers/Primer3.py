@@ -233,9 +233,13 @@ class RecordPrimer3:
             string += "#Primer pair %i\n" % primer_pair.id
             string += "\n"
 
-            location_list = [(primer_pair.left_primer.start, primer_pair.left_primer.start + primer_pair.left_primer.len),
+            location_list = [(primer_pair.left_primer.start,
+                              primer_pair.left_primer.start + primer_pair.left_primer.length),
+
                              (self.target_start, self.target_start + self.target_len),
-                             (primer_pair.right_primer.start - primer_pair.right_primer.len + 1, primer_pair.right_primer.start + 1)]
+
+                             (primer_pair.right_primer.start - primer_pair.right_primer.length + 1,
+                              primer_pair.right_primer.start + 1)]
 
             string += SequenceRoutines.draw_string_regions(self.seq, location_list,
                                                            [left_primer_symbol, target_symbol, right_primer_symbol],
@@ -388,7 +392,6 @@ class CollectionPrimer3(Collection):
             if record.primer_pair_count > 0:
                 return True
             return False
-
 
         return self.filter_by_function(record_with_primers)
 
