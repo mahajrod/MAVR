@@ -281,6 +281,8 @@ class STRPrimerPipeline(Pipeline):
             primer3_monomer_len_results.write_table_form("%s.%s.table_form.res" % (filtered_results_file_splited_by_len_prefix, monomer_length))
             primer3_monomer_len_results.write_table_form_with_alignments("%s.%s.table_form_with_aln.res" % (filtered_results_file_splited_by_len_prefix, monomer_length))
 
+            print "STR length %s: %i" % (str(monomer_length), len(primer3_monomer_len_results.records))
+
 
 """
 ~/Soft/MAVR/scripts/repeat_masking/tandem_repeat_masking.py -i ../../../../assemblies/bionano/assemblies/hybrid_assembly/assembly.hybrid.all.fasta -o assembly.hybrid.all -t 30 -p ~/Soft/TRF/trf
