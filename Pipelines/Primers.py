@@ -181,7 +181,7 @@ class STRPrimerPipeline(Pipeline):
             filtered_out_exact_copy_trf_gff = "%s.filtered_out.gff" % filtering_prefix
             #final_filtered_gff = filtered_exact_copy_trf_gff
 
-        final_filtered_len_file = "%s.monomer_len.len" % final_filtered_gff[-4]
+        final_filtered_len_file = "%s.monomer_len.len" % final_filtered_gff[:-4]
 
         with_flanks_prefix = "%s.with_flanks" % final_filtered_gff[:-4]
         with_flanks_gff = "%s.gff" % with_flanks_prefix
@@ -212,7 +212,7 @@ class STRPrimerPipeline(Pipeline):
         print final_filtered_len_file
         TRF.get_monomer_len_file_from_trf_gff(final_filtered_gff, final_filtered_len_file)
 
-        monomer_length_id_file_prefix = "%s.monomer_len" % final_filtered_gff[-4]
+        monomer_length_id_file_prefix = "%s.monomer_len" % final_filtered_gff[:-4]
         monomer_length_id_dict = self.split_ids_from_len_file_by_len(final_filtered_len_file,
                                                                      monomer_length_id_file_prefix,
                                                                      len_column=1, id_column=0)
