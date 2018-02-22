@@ -62,7 +62,8 @@ class STRPrimerPipeline(Pipeline):
                     description_dict = self.get_description_dict_from_gff_string(line)
 
                     repeat_id = description_dict["ID"]
-                    coordinates = map(int, description_dict[relative_core_seq_coords_relative_entry].split(","))
+                    # convert_coordinates to 0-based
+                    coordinates = map(lambda s: int(s) - 1, description_dict[relative_core_seq_coords_relative_entry].split(","))
                     repeat_length = coordinates[1] - coordinates[0] + 1
 
                     pcr_product_min_size = int(repeat_length + 20)
@@ -259,6 +260,7 @@ class STRPrimerPipeline(Pipeline):
 
         filtered_results_file = "%s.filtered.res" % primer3_output_prefix
         filtered_results_table_form_file = "%s.filtered.table_form.res" % primer3_output_prefix
+        filtered_results_table_form_with_aln_file = "%s.filtered.table_form_with_aln.res" % primer3_output_prefix
         filtered_out_results_file = "%s.filtered_out.res" % primer3_output_prefix
 
         primer3_results = CollectionPrimer3(primer3_file=primer3_output_file, from_file=True)
@@ -268,6 +270,7 @@ class STRPrimerPipeline(Pipeline):
 
         primer3_filtered_results.write(filtered_results_file)
         primer3_filtered_results.write_table_form(filtered_results_table_form_file)
+        primer3_filtered_results.write_table_form_with_alignments(filtered_results_table_form_with_aln_file)
         primer3_filtered_out_results.write(filtered_out_results_file)
 
         filtered_results_file_splited_by_len_prefix = "%s.filtered.monomer_len" % primer3_output_prefix
@@ -276,6 +279,8 @@ class STRPrimerPipeline(Pipeline):
             primer3_monomer_len_results = primer3_filtered_results.extract_records_by_ids(monomer_length_id_dict[monomer_length])
             primer3_monomer_len_results.write("%s.%s.res" % (filtered_results_file_splited_by_len_prefix, monomer_length))
             primer3_monomer_len_results.write_table_form("%s.%s.table_form.res" % (filtered_results_file_splited_by_len_prefix, monomer_length))
+            primer3_monomer_len_results.write_table_form_with_alignments("%s.%s.table_form_with_aln.res" % (filtered_results_file_splited_by_len_prefix, monomer_length))
+
 
 """
 ~/Soft/MAVR/scripts/repeat_masking/tandem_repeat_masking.py -i ../../../../assemblies/bionano/assemblies/hybrid_assembly/assembly.hybrid.all.fasta -o assembly.hybrid.all -t 30 -p ~/Soft/TRF/trf
