@@ -1862,6 +1862,81 @@ class SequenceRoutines(FileRoutines):
         #print len_reverse_dict
         return len_reverse_dict
 
+    @staticmethod
+    def get_region_position_dict(location, segment_length):
+        """
+        location = [start, end) python notation
+        """
+
+        position_dict = OrderedDict()
+
+        start_segment = int(location[0]/segment_length)
+        end_segment = int((location[1] - 1)/segment_length)
+
+        if start_segment == end_segment:
+            position_dict[start_segment] = (location[0] % segment_length, ((location[1] - 1) % segment_length) + 1)
+        elif end_segment - start_segment == 1:
+            position_dict[start_segment] = (location[0] % segment_length, segment_length)
+            position_dict[end_segment] = (0, ((location[1] - 1) % segment_length) + 1)
+        else:
+            position_dict[start_segment] = (location[0] % segment_length, segment_length)
+            for i in range(start_segment + 1, end_segment):
+                position_dict[i] = (0, segment_length)
+            position_dict[end_segment] = (0, ((location[1] - 1) % segment_length) + 1)
+
+        return position_dict
+
+    def draw_string_regions(self, sequence, location_list, symbol_list,
+                            overlap_symbol="#", line_per_record=False, segment_length=120,
+                            num_of_spaces=3, num_of_space_lines=1, empty_symbol=" "):
+        """
+        TODO: add check for overlaps
+        """
+
+        sequence_length = len(sequence)
+
+        last_segment_len = sequence_length % segment_length
+        number_of_full_segments = (sequence_length - last_segment_len) / sequence_length
+
+        location_dict_list = []
+
+        for location in location_list:
+            location_dict_list.append(self.get_region_position_dict(location, segment_length))
+
+        output_string = ""
+
+        for i in range(0, number_of_full_segments):
+            output_string += "%12i%s%s%s%12i\n" % (i * segment_length + 1,
+                                                   " " * num_of_spaces,
+                                                   sequence[i * sequence_length: (i + 1) * sequence_length],
+                                                   " " * num_of_spaces,
+                                                   (i + 1) * sequence_length)
+
+            regions_list = []
+
+            #TODO: below is very stupid realization of possible overlap case, redo using analytical calculations
+
+            region_string = " " * segment_length
+
+            for location_dict, symbol in zip(location_dict_list, symbol_list):
+                if i in location_dict:
+                    replacement = ""
+                    for pos_in_segment in range(location_dict[i][0], location_dict[i][1]):
+                        replacement += symbol if region_string[pos_in_segment] == empty_symbol else overlap_symbol
+                    region_string = region_string[0:location_dict[i][0]] + replacement + region_string[location_dict[i][1]:]
+
+            output_string += "%s%s%s%s%s\n" % (" " * 12,
+                                               " " * num_of_spaces,
+                                               region_string,
+                                               " " * num_of_spaces,
+                                               " " * 12)
+
+            output_string += "\n" * num_of_space_lines
+
+        return output_string
+
+
+
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
     lengths_dict = SynDict()
