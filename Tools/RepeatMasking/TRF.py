@@ -193,7 +193,7 @@ class TRF(Tool):
                     continue
                 description_dict = AnnotationsRoutines.get_description_dict_from_gff_string(line)
                 len_dict[description_dict["ID"]] = description_dict["Period"]
-        print len_dict
+        # print len_dict
         len_dict.write(len_file)
 
 
