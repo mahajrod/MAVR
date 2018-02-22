@@ -226,8 +226,8 @@ class RecordPrimer3:
     def alignments_string(self, segment_length=120, left_primer_symbol=">",
                           target_symbol="*", right_primer_symbol="<"):
         string = ""
-        string += "#SeqeunceID\t%s" % self.id
-        string += "#Sequence\t%s" % self.seq
+        string += "#SeqeunceID\t%s\n" % self.id
+        string += "#Sequence\t%s\n" % self.seq
 
         for primer_pair in self.primer_pair_list:
             string += "#Primer pair %i\n" % primer_pair.id
@@ -240,7 +240,8 @@ class RecordPrimer3:
 
                              (primer_pair.right_primer.start - primer_pair.right_primer.length + 1,
                               primer_pair.right_primer.start + 1)]
-
+            print self.id
+            print location_list
             string += SequenceRoutines.draw_string_regions(self.seq, location_list,
                                                            [left_primer_symbol, target_symbol, right_primer_symbol],
                                                            overlap_symbol="#", line_per_record=False,
