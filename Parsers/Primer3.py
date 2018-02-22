@@ -227,7 +227,7 @@ class RecordPrimer3:
                           target_symbol="*", right_primer_symbol="<"):
         string = ""
         string += "#SeqeunceID\t%s\n" % self.id
-        string += "#Sequence\t%s\n" % self.seq
+        #string += "#Sequence\t%s\n" % self.seq
 
         for primer_pair in self.primer_pair_list:
             string += "#Primer pair %i\n" % primer_pair.id
