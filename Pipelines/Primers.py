@@ -275,14 +275,20 @@ class STRPrimerPipeline(Pipeline):
 
         filtered_results_file_splited_by_len_prefix = "%s.filtered.monomer_len" % primer3_output_prefix
 
+        stat_fd = open("%s.stats" % output_prefix, "w")
+
         for monomer_length in monomer_length_id_dict:
             primer3_monomer_len_results = primer3_filtered_results.extract_records_by_ids(monomer_length_id_dict[monomer_length])
             primer3_monomer_len_results.write("%s.%s.res" % (filtered_results_file_splited_by_len_prefix, monomer_length))
             primer3_monomer_len_results.write_table_form("%s.%s.table_form.res" % (filtered_results_file_splited_by_len_prefix, monomer_length))
             primer3_monomer_len_results.write_table_form_with_alignments("%s.%s.table_form_with_aln.res" % (filtered_results_file_splited_by_len_prefix, monomer_length))
 
-            print "STR length %s: %i" % (str(monomer_length), len(primer3_monomer_len_results.records))
+            stat_string = "STR length %s: %i repeats with primers" % (str(monomer_length), len(primer3_monomer_len_results.records))
+            print stat_string
 
+            stat_fd.write(stat_string + "\n")
+
+        stat_fd.close()
 
 """
 ~/Soft/MAVR/scripts/repeat_masking/tandem_repeat_masking.py -i ../../../../assemblies/bionano/assemblies/hybrid_assembly/assembly.hybrid.all.fasta -o assembly.hybrid.all -t 30 -p ~/Soft/TRF/trf
