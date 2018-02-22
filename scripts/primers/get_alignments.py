@@ -16,5 +16,5 @@ args = parser.parse_args()
 
 primer3_collection = CollectionPrimer3(from_file=True, primer3_file=args.primer3_output)
 primer3_collection.write_alignments(args.alignments_file, segment_length=120, left_primer_symbol=">",
-                         target_symbol="*", right_primer_symbol="<")
+                                    target_symbol="*", right_primer_symbol="<")
 
