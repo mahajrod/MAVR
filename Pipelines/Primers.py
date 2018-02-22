@@ -208,8 +208,8 @@ class STRPrimerPipeline(Pipeline):
                                                     filtered_out_exact_copy_trf_gff, min_perfect_copy_number,
                                                     perfect_tandem=require_tandem_perfect_copies)
 
-        print final_filtered_gff
-        print final_filtered_len_file
+        #print final_filtered_gff
+        #print final_filtered_len_file
         TRF.get_monomer_len_file_from_trf_gff(final_filtered_gff, final_filtered_len_file)
 
         monomer_length_id_file_prefix = "%s.monomer_len" % final_filtered_gff[:-4]
@@ -271,8 +271,7 @@ class STRPrimerPipeline(Pipeline):
         filtered_results_file_splited_by_len_prefix = "%s.filtered.monomer_len" % primer3_output_prefix
 
         for monomer_length in monomer_length_id_dict:
-            primer3_monomer_len_results = primer3_filtered_results.extract_records_by_ids(self,
-                                                                                          monomer_length_id_dict[monomer_length])
+            primer3_monomer_len_results = primer3_filtered_results.extract_records_by_ids(monomer_length_id_dict[monomer_length])
             primer3_monomer_len_results.write("%s.%s.res" % (filtered_results_file_splited_by_len_prefix, monomer_length))
 
 """
