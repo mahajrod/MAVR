@@ -258,6 +258,7 @@ class STRPrimerPipeline(Pipeline):
         primer3_output_file = "%s.out" % primer3_output_prefix
 
         filtered_results_file = "%s.filtered.res" % primer3_output_prefix
+        filtered_results_table_form_file = "%s.filtered.table_form.res" % primer3_output_prefix
         filtered_out_results_file = "%s.filtered_out.res" % primer3_output_prefix
 
         primer3_results = CollectionPrimer3(primer3_file=primer3_output_file, from_file=True)
@@ -266,6 +267,7 @@ class STRPrimerPipeline(Pipeline):
         primer3_filtered_results, primer3_filtered_out_results = primer3_results.filter_out_records_without_primers()
 
         primer3_filtered_results.write(filtered_results_file)
+        primer3_filtered_results.write_table_form(filtered_results_table_form_file)
         primer3_filtered_out_results.write(filtered_out_results_file)
 
         filtered_results_file_splited_by_len_prefix = "%s.filtered.monomer_len" % primer3_output_prefix
@@ -273,6 +275,7 @@ class STRPrimerPipeline(Pipeline):
         for monomer_length in monomer_length_id_dict:
             primer3_monomer_len_results = primer3_filtered_results.extract_records_by_ids(monomer_length_id_dict[monomer_length])
             primer3_monomer_len_results.write("%s.%s.res" % (filtered_results_file_splited_by_len_prefix, monomer_length))
+            primer3_monomer_len_results.write_table_form("%s.%s.table_form.res" % (filtered_results_file_splited_by_len_prefix, monomer_length))
 
 """
 ~/Soft/MAVR/scripts/repeat_masking/tandem_repeat_masking.py -i ../../../../assemblies/bionano/assemblies/hybrid_assembly/assembly.hybrid.all.fasta -o assembly.hybrid.all -t 30 -p ~/Soft/TRF/trf
