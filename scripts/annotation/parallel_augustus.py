@@ -114,7 +114,7 @@ AUGUSTUS.path = args.augustus_dir
 AUGUSTUS.threads = args.threads
 
 print("Annotating genes...")
-"""
+
 AUGUSTUS.parallel_predict(args.species, args.input, output_raw_gff, strand=args.strand, gene_model=args.gene_model,
                           output_gff3=True, other_options=args.other_options, config_dir=args.config_dir,
                           use_softmasking=args.softmasking, hints_file=args.hintsfile,
@@ -183,7 +183,7 @@ if args.swissprot_db:
 
     for directory in ("splited_blastp_fasta", "splited_blastp_output_dir"):
         shutil.rmtree(directory)
-"""
+
 gene_ids_black_list = [genes_masked_ids] if args.masking else []
 gene_ids_white_list = []
 
