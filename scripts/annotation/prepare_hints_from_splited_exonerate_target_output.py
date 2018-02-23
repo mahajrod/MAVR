@@ -86,7 +86,7 @@ AUGUSTUS.exonerate_to_hints(input_precise_top_gff, precise_top_hints, priority=a
                             with_utrs=args.include_utr_hints)
 
 AUGUSTUS.exonerate_to_hints(input_precise_secondary_gff, precise_secondary_hints,
-                            priority=args.full_secondary_hits_priorit,
+                            priority=args.full_secondary_hits_priority,
                             min_intron_len=args.min_intron_len, max_intron_len=args.max_intron_len,
                             CDS_part_cutoff=args.full_secondary_hits_CDS_part_cutoff,
                             source=args.source_for_full_secondary_hits,
@@ -98,7 +98,7 @@ AUGUSTUS.exonerate_to_hints(input_other_top_gff, other_top_hints, priority=args.
                             with_utrs=args.include_utr_hints)
 
 AUGUSTUS.exonerate_to_hints(input_other_secondary_gff, other_secondary_hints,
-                            priority=args.other_secondary_hits_priorit,
+                            priority=args.other_secondary_hits_priority,
                             min_intron_len=args.min_intron_len, max_intron_len=args.max_intron_len,
                             CDS_part_cutoff=args.other_secondary_hits_CDS_part_cutoff,
                             source=args.source_for_other_secondary_hits,
