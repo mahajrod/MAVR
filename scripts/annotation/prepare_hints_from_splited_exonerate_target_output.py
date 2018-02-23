@@ -65,6 +65,13 @@ parser.add_argument("--min_intron_len", action="store", dest="min_intron_len", t
 
 args = parser.parse_args()
 
+"""
+Example:
+~/Soft/MAVR/scripts/annotation/prepare_hints_from_splited_exonerate_target_output.py -i mustela_putoris_furo \
+                                                                                     -e ~/Soft/augustus-3.2.1/scripts/ \
+                                                                                     -o mustela_putoris_furo
+"""
+
 input_precise_top_gff = "%s.precise_top.target.gff" % args.input_prefix
 input_precise_secondary_gff = "%s.precise_secondary.target.gff" % args.input_prefix
 
