@@ -71,11 +71,11 @@ input_precise_secondary_gff = "%s.precise_secondary.target.gff" % args.input_pre
 input_other_top_gff = "%s.other_top.target.gff" % args.input_prefix
 input_other_secondary_gff = "%s.other_secondary.target.gff" % args.input_prefix
 
-precise_top_hints = "%s.precise_top.target.hints.gff" % args.input_prefix
-precise_secondary_hints = "%s.precise_secondary.target.hints.gff" % args.input_prefix
+precise_top_hints = "%s.precise_top.target.hints.gff" % args.output_prefix
+precise_secondary_hints = "%s.precise_secondary.target.hints.gff" % args.output_prefix
 
-other_top_hints = "%s.other_top.target.hints.gff" % args.input_prefix
-other_secondary_hints = "%s.other_secondary.target.hints.gff" % args.input_prefix
+other_top_hints = "%s.other_top.target.hints.gff" % args.output_prefix
+other_secondary_hints = "%s.other_secondary.target.hints.gff" % args.output_prefix
 
 
 AUGUSTUS.path = args.augustus_script_dir
