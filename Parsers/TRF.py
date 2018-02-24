@@ -84,19 +84,20 @@ class CollectionTRF():
         record_index = 0
         if from_file:
             self.records = {}
-            with open(trf_file, "r") as fd:
-                chrom = None
-                for line in fd:
-                    #tmp = line.strip()
-                    if line[0:8] == "Sequence":
-                        chrom = line.strip().split()[1]
-                    elif not chrom:
-                        continue
-                    elif line[0:10] == "Parameters":
-                        self.parameters = list(map(lambda x: int(x), line.strip().split()[1:]))
-                    elif line != "\n":
-                        self._add_record(line, chrom, record_id="%s%i" % (record_id_prefix, record_index) if add_ids else None)
-                        record_index += 1
+            for trf_filename in [trf_file] if isinstance(trf_file, str) else trf_file:
+                with open(trf_filename, "r") as fd:
+                    chrom = None
+                    for line in fd:
+                        #tmp = line.strip()
+                        if line[0:8] == "Sequence":
+                            chrom = line.strip().split()[1]
+                        elif not chrom:
+                            continue
+                        elif line[0:10] == "Parameters":
+                            self.parameters = list(map(lambda x: int(x), line.strip().split()[1:]))
+                        elif line != "\n":
+                            self._add_record(line, chrom, record_id="%s%i" % (record_id_prefix, record_index) if add_ids else None)
+                            record_index += 1
                 """
                 tmp = next(fd)
                 while tmp[0:8] != "Sequence":
