@@ -100,6 +100,7 @@ class TRF(Tool):
         self.parallel_execute(options_list)
 
         os.chdir(work_dir)
+        trf_output_file_list = []
         for filename in splited_files:
 
             trf_output_file = "%s/%s.%i.%i.%i.%i.%i.%i.%i.dat" % (splited_result_dir, filename,
@@ -107,16 +108,17 @@ class TRF(Tool):
                                                                   indel_penalty, match_probability,
                                                                   indel_probability,
                                                                   min_alignment_score, max_period)
+            trf_output_file_list.append(trf_output_file)
 
-            self.convert_trf_report(trf_output_file, "%s/%s" % (converted_output_dir, filename))
-
+        self.convert_trf_report(trf_output_file_list, output_prefix)
+        """
         for suffix in (".rep", ".gff", ".simple.gff", ".short.tab", ".wide.tab", ".with_rep_seqs.gff", ".fasta"):
             file_str = ""
             merged_file = "%s%s" % (output_prefix, suffix)
             for filename in splited_files:
                 file_str += " %s/%s%s" % (converted_output_dir, filename, suffix)
             CGAS.cat(file_str, merged_file)
-
+        """
         if not store_intermediate_files:
             shutil.rmtree(splited_fasta_dir)
             shutil.rmtree(splited_result_dir)
