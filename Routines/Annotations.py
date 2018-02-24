@@ -431,6 +431,7 @@ class AnnotationsRoutines(SequenceRoutines):
                     line_list[8] += ";%s_relative=%i,%i\n" % (coords_description_entry,
                                                               1 + (right_flank_length if line_list[6] == "-" else left_flank_length),
                                                               end - start + 1 + (right_flank_length if line_list[6] == "-" else left_flank_length))
+                    print line
                     print line_list
                     out_fd.write("\t".join(line_list))
 
