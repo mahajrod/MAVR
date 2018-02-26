@@ -93,17 +93,12 @@ class SNPCallPipeline(Pipeline):
                 sample_alignment_prefix = "%s/%s/%s" % (sample_dir, sample, alignment_filename_prefix_template % sample)
 
             sample_alignment = "%s.%s" % (sample_alignment_prefix, input_filetype)
-
             sample_intervals_for_realignment = "%s.forIndelRealigner.intervals" % sample_alignment_prefix
-
             sample_realigned = "%s.realigned.%s" % (sample_alignment_prefix, input_filetype)
-
             sample_recall_table = "%s.recall_data.grp" % sample_alignment_prefix
-
             sample_recalled_reads_bam = "%s.recal_reads.bam" % sample_alignment_prefix
 
             vcf_prefix = "%s/SNPcall/%s/%s" % (outdir, sample, sample)
-
             raw_vcf = "%s.raw.vcf" % vcf_prefix
             raw_snp_vcf = "%s.raw.snp.vcf" % vcf_prefix
             raw_indel_vcf = "%s.raw.indel.vcf" % vcf_prefix
