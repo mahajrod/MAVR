@@ -49,6 +49,7 @@ SNPCallPipeline.threads = args.threads
 SNPCallPipeline.max_memory = args.memory
 SNPCallPipeline.GATK_dir = args.gatk_dir
 
+
 SNPCallPipeline.call_variants(args.sample_dir, args.reference, sample_list=args.sample_list, outdir=args.outdir,
                               suffix=args.suffix, input="alignment",
                               input_filetype="bam", threads=None, mark_duplicates=False,
