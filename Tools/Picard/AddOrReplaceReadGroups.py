@@ -7,8 +7,10 @@ from Tools.Abstract import JavaTool
 class AddOrReplaceReadGroups(JavaTool):
 
     def __init__(self, java_path="", max_threads=4, jar_path="", max_memory="1g"):
-        jar = "AddOrReplaceReadGroups.jar"
-        JavaTool.__init__(self, jar, java_path=java_path, max_threads=max_threads,
+
+        #JavaTool.__init__(self, "AddOrReplaceReadGroups.jar", java_path=java_path, max_threads=max_threads,
+        #                  jar_path=jar_path, max_memory=max_memory)
+        JavaTool.__init__(self, "picard.jar AddOrReplaceReadGroups", java_path=java_path, max_threads=max_threads,
                           jar_path=jar_path, max_memory=max_memory)
 
     def add_read_groups(self, input_bam, output_bam, RGID, RGLB, RGPL, RGSM, RGPU):

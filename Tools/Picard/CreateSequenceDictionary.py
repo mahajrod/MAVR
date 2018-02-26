@@ -7,7 +7,9 @@ from Tools.Abstract import JavaTool
 class CreateSequenceDictionary(JavaTool):
 
     def __init__(self, java_path="", max_threads=4, jar_path="", max_memory="1g"):
-        JavaTool.__init__(self, "CreateSequenceDictionary.jar", java_path=java_path, max_threads=max_threads,
+        #JavaTool.__init__(self, "CreateSequenceDictionary.jar", java_path=java_path, max_threads=max_threads,
+        #                  jar_path=jar_path, max_memory=max_memory)
+        JavaTool.__init__(self, "picard.jar CreateSequenceDictionary", java_path=java_path, max_threads=max_threads,
                           jar_path=jar_path, max_memory=max_memory)
 
     def make_fasta_dict(self, fasta_file, dict_name):
