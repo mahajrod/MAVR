@@ -94,8 +94,8 @@ class LongRanger(Tool):
 
         total_length_of_short_scaffolds_with_insertion = 0
         for i in range(499, number_of_scaffolds):
-            print length_dict[id_list[i]]
-            total_length_of_short_scaffolds_with_insertion += polyN_len + len(length_dict[id_list[i]])
+            #print length_dict[id_list[i]]
+            total_length_of_short_scaffolds_with_insertion += polyN_len + length_dict[id_list[i]]
 
         if total_length_of_short_scaffolds_with_insertion < max_scaffold_length:
             merged_record = SeqRecord(id="merged_samll_scaffolds", description="merged_records:%i-%i" % (500, number_of_scaffolds),
@@ -128,7 +128,6 @@ class LongRanger(Tool):
         All contigs must be no more than 2^29-1 bp, or 528Mb, in length; this is a limitation of BAM index file format
         All contigs must have no colons or spaces in their names.
         """
-
 
         record_dict = self.parse_seq_file(reference, mode="parse")
 
