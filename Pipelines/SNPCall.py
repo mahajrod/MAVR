@@ -15,17 +15,20 @@ from Pipelines.Abstract import Pipeline
 
 from Tools.Picard import MarkDuplicates
 from Tools.GATK import RealignerTargetCreator, IndelRealigner, BaseRecalibrator, PrintReads, HaplotypeCaller, SelectVariants
-
+from Tools.Picard import CreateSequenceDictionary
 
 # TODO: refactor, remove absolete functions and so on
 
+
 class SNPCallPipeline(Pipeline):
 
-    def __init__(self, max_threads=1, max_memory=10, GATK_dir="", GATK_jar="GenomeAnalysisTK.jar"):
+    def __init__(self, max_threads=1, max_memory=10, GATK_dir="", GATK_jar="GenomeAnalysisTK.jar",
+                 Picard_dir=""):
         Pipeline.__init__(self, max_threads=max_threads, max_memory=max_memory)
 
         self.GATK_dir = GATK_dir
         self.GATK_jar = GATK_jar
+        self.Picard_dir = Picard_dir
 
     def prepare_dirs(self, sample_list, outdir="./", include_alignment_dir=False):
         dir_dict = {
@@ -45,6 +48,9 @@ class SNPCallPipeline(Pipeline):
                       input_filetype="bam", threads=None, mark_duplicates=False,
                       genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
                       stand_emit_conf=40, stand_call_conf=100):
+
+        CreateSequenceDictionary.jar_path = self.Picard_dir
+        CreateSequenceDictionary.check_for_fasta_dict(reference)
 
         for tool in MarkDuplicates, \
                     RealignerTargetCreator, \
