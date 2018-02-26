@@ -28,7 +28,7 @@ parser.add_argument("-q", "--variant_emit_quality", action="store", dest="emit_q
 parser.add_argument("-u", "--variant_call_quality", action="store", dest="call_quality", default=100, type=int,
                     help="Minimum quality of variant to be called. Variant with quality between call and emit will "
                          "be present in vcf file but with filter 'low quality'")
-parser.add_argument("-u", "--suffix", action="store", dest="suffix", default="",
+parser.add_argument("-x", "--suffix", action="store", dest="suffix", default="",
                     help="Suffix of the input files. Default: ''")
 """
 parser.add_argument("--quality_to_change", action="store", dest="quality_to_change", default=None, type=int,
