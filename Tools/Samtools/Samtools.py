@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import os
 from Tools.Abstract import Tool
 from Routines import DrawingRoutines
 
@@ -156,6 +157,13 @@ class SamtoolsV1(Tool):
         options = " %s" % fasta_file
 
         self.execute(options, cmd="samtools faidx")
+
+    def check_for_fasta_index(self, fasta_file):
+        fasta_path_list = self.split_filename(fasta_file)
+        index_file = "%s/%s.fai" % (fasta_path_list[0], fasta_path_list[1])
+
+        if not os.path.exists(index_file):
+            self.faidx(self, fasta_file)
 
     def index(self, bam_file):
 
