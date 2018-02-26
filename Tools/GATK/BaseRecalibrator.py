@@ -2,14 +2,15 @@
 
 __author__ = 'mahajrod'
 
-from Tools.GATK.Abstract import GATKTool
+from Tools.Abstract import JavaTool
 
 
-class BaseRecalibrator(GATKTool):
+class BaseRecalibrator(JavaTool):
 
-    def __init__(self, java_path="", max_threads=4, jar_path="", max_memory="1g"):
-        GATKTool.__init__(self, java_path=java_path, max_threads=max_threads, jar_path=jar_path,
-                          max_memory=max_memory)
+    def __init__(self,  java_path="", max_threads=4, jar_path="", max_memory=None, timelog="tool_time.log"):
+        JavaTool.__init__(self, "GenomeAnalysisTK.jar -T BaseRecalibrator", java_path=java_path,
+                          max_threads=max_threads, jar_path=jar_path, max_memory=max_memory,
+                          timelog=timelog)
 
     def get_recalibration_table(self, reference, alignment, output_table="", known_sites_vcf=None):
 
@@ -21,7 +22,7 @@ class BaseRecalibrator(GATKTool):
         options += (" -knownSites %s" % known_sites_vcf if isinstance(known_sites_vcf, str) else " -knownSites ".join(known_sites_vcf)) if known_sites_vcf else ""
         options += " -o %s" % output_table
 
-        self.execute(options, cmd="-T BaseRecalibrator")
+        self.execute(options)
 
 if __name__ == "__main__":
     import os

@@ -2,16 +2,17 @@
 
 __author__ = 'mahajrod'
 
-from Tools.GATK.Abstract import GATKTool
+from Tools.Abstract import JavaTool
 
 import os
 from Routines.Functions import check_path
 
 
-class HaplotypeCaller(GATKTool):
-    def __init__(self, java_path="", max_threads=4, jar_path="", max_memory="1g"):
-        GATKTool.__init__(self, java_path=java_path, max_threads=max_threads, jar_path=jar_path,
-                          max_memory=max_memory)
+class HaplotypeCaller(JavaTool):
+    def __init__(self,  java_path="", max_threads=4, jar_path="", max_memory=None, timelog="tool_time.log"):
+        JavaTool.__init__(self, "GenomeAnalysisTK.jar -T HaplotypeCaller", java_path=java_path,
+                          max_threads=max_threads, jar_path=jar_path, max_memory=max_memory,
+                          timelog=timelog)
 
     def call(self, reference, alignment, output, genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
              stand_emit_conf=40, stand_call_conf=100):
@@ -34,7 +35,7 @@ class HaplotypeCaller(GATKTool):
         options += "-stand_call_conf %i" % stand_call_conf
         options += "-o %s" % output
 
-        self.execute(options, cmd="-T HaplotypeCaller")
+        self.execute(options)
 
     def variant_call(self,
                      alignment,

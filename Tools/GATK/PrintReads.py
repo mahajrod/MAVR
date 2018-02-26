@@ -2,13 +2,14 @@
 
 __author__ = 'mahajrod'
 
-from Tools.GATK.Abstract import GATKTool
+from Tools.Abstract import JavaTool
 
 
-class PrintReads(GATKTool):
-    def __init__(self, java_path="", max_threads=4, jar_path="", max_memory="1g"):
-        GATKTool.__init__(self, java_path=java_path, max_threads=max_threads, jar_path=jar_path,
-                          max_memory=max_memory)
+class PrintReads(JavaTool):
+    def __init__(self,  java_path="", max_threads=4, jar_path="", max_memory=None, timelog="tool_time.log"):
+        JavaTool.__init__(self, "GenomeAnalysisTK.jar -T PrintReads", java_path=java_path,
+                          max_threads=max_threads, jar_path=jar_path, max_memory=max_memory,
+                          timelog=timelog)
 
     def get_recalled_reads(self, reference, input_bam, recal_table, output_bam):
         options = " -nct %i" % self.threads
@@ -17,4 +18,4 @@ class PrintReads(GATKTool):
         options += " -BQSR %s" % recal_table
         options += " -o %s" % output_bam
 
-        self.execute(options, cmd="-T PrintReads")
+        self.execute(options)

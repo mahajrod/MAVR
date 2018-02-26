@@ -2,13 +2,14 @@
 __author__ = 'mahajrod'
 
 from Tools.Abstract import Tool
-from Tools.GATK.Abstract import GATKTool
+from Tools.Abstract import JavaTool
 
 
-class RealignerTargetCreator(GATKTool, Tool):
-    def __init__(self, java_path="", max_threads=4, jar_path="", max_memory="1g"):
-        GATKTool.__init__(self, java_path=java_path, max_threads=max_threads, jar_path=jar_path,
-                          max_memory=max_memory)
+class RealignerTargetCreator(JavaTool):
+    def __init__(self,  java_path="", max_threads=4, jar_path="", max_memory=None, timelog="tool_time.log"):
+        JavaTool.__init__(self, "GenomeAnalysisTK.jar -T RealignerTargetCreator", java_path=java_path,
+                          max_threads=max_threads, jar_path=jar_path, max_memory=max_memory,
+                          timelog=timelog)
 
     def create(self, reference, alignment, output="forIndelRealigner.intervals", known_indels_vcf=None,
                max_interval_size=None, min_reads_cov=None, mismatch_fraction=None, window_size=None,
@@ -25,7 +26,7 @@ class RealignerTargetCreator(GATKTool, Tool):
         options += " -window %i" % window_size if window_size else ""
         options += " --defaultBaseQualities %i" % default_base_qualities if default_base_qualities else ""
 
-        self.execute(options, cmd="-T RealignerTargetCreator")
+        self.execute(options)
 
 if __name__ == "__main__":
     import os

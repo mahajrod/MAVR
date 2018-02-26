@@ -2,13 +2,14 @@
 
 __author__ = 'mahajrod'
 
-from Tools.GATK.Abstract import GATKTool
+from Tools.Abstract import JavaTool
 
 
-class IndelRealigner(GATKTool):
-    def __init__(self, java_path="", max_threads=4, jar_path="", max_memory="1g"):
-        GATKTool.__init__(self, java_path=java_path, max_threads=max_threads, jar_path=jar_path,
-                          max_memory=max_memory)
+class IndelRealigner(JavaTool):
+    def __init__(self,  java_path="", max_threads=4, jar_path="", max_memory=None, timelog="tool_time.log"):
+        JavaTool.__init__(self, "GenomeAnalysisTK.jar -T IndelRealigner", java_path=java_path,
+                          max_threads=max_threads, jar_path=jar_path, max_memory=max_memory,
+                          timelog=timelog)
 
     # "find" method was renamed to realign
     def realign(self, reference, alignment, corrected_alignment, target_intervals="forIndelRealigner.intervals",
@@ -37,7 +38,7 @@ class IndelRealigner(GATKTool):
         options += " -noTags" if no_original_tags else ""
         options += " --defaultBaseQualities %i" % default_base_qualities if default_base_qualities else ""
 
-        self.execute(options, cmd="-T IndelRealigner")
+        self.execute(options)
 
 if __name__ == "__main__":
     import os
