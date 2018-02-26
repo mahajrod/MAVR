@@ -69,15 +69,6 @@ class SamtoolsV1(Tool):
             if include_expression(line.split()[0]):
                 output_sam_fd.write(line)
 
-
-
-
-
-
-
-
-
-
     def rmdup(self, input_bam, output_bam, remove_dup_for_se_reads=False, treat_both_pe_and_se_reads=False):
 
         options = " -s" if remove_dup_for_se_reads else ""
@@ -163,7 +154,7 @@ class SamtoolsV1(Tool):
         index_file = "%s/%s.fai" % (fasta_path_list[0], fasta_path_list[1])
 
         if not os.path.exists(index_file):
-            self.faidx(self, fasta_file)
+            self.faidx(fasta_file)
 
     def index(self, bam_file):
 
