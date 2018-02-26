@@ -14,7 +14,7 @@ parser.add_argument("-r", "--reference", action="store", dest="reference", requi
                     help="File with reference genome")
 parser.add_argument("-o", "--outdir", action="store", dest="outdir", default="./",
                     help="Output directory. Default: current directory")
-parser.add_argument("-s", "--samples_list", action="store", dest="samples_list",
+parser.add_argument("-s", "--sample_list", action="store", dest="sample_list",
                     help="List of samples to call variants for. Default: all samplews in sample directory")
 parser.add_argument("-g", "--gatk_directory", action="store", dest="gatk_dir", default="",
                     help="Directory with GATK jar")
