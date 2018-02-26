@@ -90,7 +90,7 @@ class SNPCallPipeline(Pipeline):
                 pass
                 # sample_alignment_prefix =
             else:
-                sample_alignment_prefix = "%s/%s" % (sample_dir, alignment_filename_prefix_template % sample)
+                sample_alignment_prefix = "%s/%s/%s" % (sample_dir, sample, alignment_filename_prefix_template % sample)
 
             sample_alignment = "%s.%s" % (sample_alignment_prefix, input_filetype)
 
