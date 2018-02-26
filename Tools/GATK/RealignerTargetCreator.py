@@ -11,7 +11,7 @@ class RealignerTargetCreator(GATKTool, Tool):
                max_interval_size=None, min_reads_cov=None, mismatch_fraction=None, window_size=None,
                default_base_qualities=None):
 
-        options = ""
+        options = " -nt %i" % self.threads
         options += " -R %s" % reference
         options += " -I %s" % alignment
         options += " -o %s" % output
