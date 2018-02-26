@@ -103,9 +103,10 @@ class LongRanger(Tool):
             output_dict[merged_record.id] = merged_record
 
             return output_dict
-        
-        raise ValueError("Following code have not been completed yet!!!!!!!!!")
+
         # TODO: following code have not been completed yet!!!!!!!!!
+        raise ValueError("Following code have not been completed yet!!!!!!!!!")
+
         number_of_merged_records = 0
         total_number_of_records = number_of_scaffolds
         records_to_merge_list = []
