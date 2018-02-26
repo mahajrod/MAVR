@@ -8,9 +8,9 @@ from Pipelines import SNPCallPipeline
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-d", "--sample_dir", action="store", dest="sample_dir", reqiured=True,
+parser.add_argument("-d", "--sample_dir", action="store", dest="sample_dir", required=True,
                     help="Directory with samples data")
-parser.add_argument("-r", "--reference", action="store", dest="reference", reqiured=True,
+parser.add_argument("-r", "--reference", action="store", dest="reference", required=True,
                     help="File with reference genome")
 parser.add_argument("-o", "--outdir", action="store", dest="outdir", default="./",
                     help="Output directory. Default: current directory")
