@@ -111,14 +111,19 @@ class SNPCallPipeline(Pipeline):
               -I ${bam%bam}rmdup.bam \
               -o ${bam%bam}target_intervals.list
             """
-            RealignerTargetCreator.create(reference, sample_alignment,
-                                          output=sample_intervals_for_realignment,
-                                          known_indels_vcf=None,
-                                          max_interval_size=None,
-                                          min_reads_cov=None,
-                                          mismatch_fraction=None,
-                                          window_size=None,
-                                          default_base_qualities=None)
+
+
+            #RealignerTargetCreator.create(reference, sample_alignment,
+            #                              output=sample_intervals_for_realignment,
+            #                              known_indels_vcf=None,
+            #                              max_interval_size=None,
+            #                              min_reads_cov=None,
+            #                              mismatch_fraction=None,
+            #                              window_size=None,
+            #                              default_base_qualities=None)
+
+
+
             """
             java -Xmx100g -jar ~/tools/GenomeAnalysisTK-3.7/GenomeAnalysisTK.jar \
               -T IndelRealigner \
