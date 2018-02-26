@@ -87,6 +87,7 @@ class LongRanger(Tool):
         number_of_scaffolds = len(length_dict)
         polyN_insersion = "N" * polyN_len
 
+        print id_list
         output_dict = OrderedDict()
         if number_of_scaffolds <= max_scaffold_number:
             return record_dict
