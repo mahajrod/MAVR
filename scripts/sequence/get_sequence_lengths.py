@@ -25,7 +25,10 @@ out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
 
 record_dict = SequenceRoutines.parse_seq_file(args.input, args.mode, format=args.format, index_file="temp_index.idx")
 lengths_dict = SequenceRoutines.get_lengths(record_dict, out_file=out_fd)
+
 print("Longest sequence: %i" % max(lengths_dict.values()))
 print("Shortest sequence: %i" % min(lengths_dict.values()))
 print("Total length: %i" % sum(lengths_dict.values()))
-os.remove("temp_index.idx")
+
+if args.mode == "index_db":
+    os.remove("temp_index.idx")
