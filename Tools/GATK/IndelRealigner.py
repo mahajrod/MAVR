@@ -7,20 +7,19 @@ from Tools.GATK.Abstract import GATKTool
 
 class IndelRealigner(GATKTool):
 
-    def find(self, reference, alignment, corrected_alignment, target_intervals="forIndelRealigner.intervals",
-             known_indels_vcf=None, model=None, lod_threshold=None, entropy_threshold=None, max_cons=None,
-             max_size_for_movement=None, max_pos_move=None, max_reads_for_cons=None,
-             max_reads_for_realignment=None, max_reads_in_memory=None, no_original_tags=False,
-             nway_out=False, default_base_qualities=None):
+    # "find" method was renamed to realign
+    def realign(self, reference, alignment, corrected_alignment, target_intervals="forIndelRealigner.intervals",
+                known_indels_vcf=None, model=None, lod_threshold=None, entropy_threshold=None, max_cons=None,
+                max_size_for_movement=None, max_pos_move=None, max_reads_for_cons=None,
+                max_reads_for_realignment=None, max_reads_in_memory=None, no_original_tags=False,
+                nway_out=False, default_base_qualities=None):
 
-        options = ""
+        options = " -nt %i" % self.threads
         options += " -R %s" % reference
         options += " -I %s" % alignment
         options += " -o %s" % corrected_alignment
         options += " -targetIntervals %s" % target_intervals
         options += " --known %s" % known_indels_vcf if known_indels_vcf else ""
-
-
         options += " -model %s" % model if model else ""
         options += " -LOD %i" % lod_threshold if lod_threshold else ""
         options += " -entropy %i" % entropy_threshold if entropy_threshold else ""
