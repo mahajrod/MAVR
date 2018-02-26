@@ -136,6 +136,6 @@ class LongRanger(Tool):
                                                                   max_scaffold_length=max_scaffold_length,
                                                                   max_scaffold_number=max_scaffold_number,
                                                                   polyN_len=polyN_len)
-        SeqIO.write(list(prepared_record_dict), prepared_reference, format='fasta')
+        SeqIO.write(self.record_from_dict_generator(prepared_record_dict), prepared_reference, format='fasta')
 
 
