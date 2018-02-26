@@ -14,7 +14,7 @@ class BaseRecalibrator(GATKTool):
         options += " -R %s" % reference
         options += " -I %s" % alignment
         options += " -nct %i" % self.threads
-        options += " -knownSites" + " -knownSites".join(known_sites_vcf) if isinstance(known_sites_vcf, list) else " -knownSites %s" % known_sites_vcf
+        options += (" -knownSites %s" % known_sites_vcf if isinstance(known_sites_vcf, str) else " -knownSites ".join(known_sites_vcf)) if known_sites_vcf else ""
         options += " -o %s" % output_table
 
         self.execute(options, cmd="-T BaseRecalibrator")
