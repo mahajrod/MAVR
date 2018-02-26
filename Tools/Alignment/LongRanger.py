@@ -129,6 +129,7 @@ class LongRanger(Tool):
         All contigs must have no colons or spaces in their names.
         """
 
+
         record_dict = self.parse_seq_file(reference, mode="parse")
 
         prepared_record_dict = self.prepare_record_dict_reference(record_dict,
