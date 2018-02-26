@@ -94,7 +94,7 @@ class SNPCallPipeline(Pipeline):
 
             sample_alignment = "%s.%s" % (sample_alignment_prefix, input_filetype)
 
-            sample_intervals_for_realignment = "%s.forIndelRealigner.intervals" % sample_alignment
+            sample_intervals_for_realignment = "%s.forIndelRealigner.intervals" % sample_alignment_prefix
 
             sample_realigned = "%s.realigned.%s" % (sample_alignment_prefix, input_filetype)
 
@@ -102,11 +102,11 @@ class SNPCallPipeline(Pipeline):
 
             sample_recalled_reads_bam = "%s.recal_reads.bam" % sample_alignment_prefix
 
-            raw_vcf = "%s/SNPcall/%s/%s.raw.vcf" % (outdir, sample, sample)
+            vcf_prefix = "%s/SNPcall/%s/%s" % (outdir, sample, sample)
 
-            raw_snp_vcf = "%s/SNPcall/%s/%s.raw.snp.vcf" % (outdir, sample, sample)
-
-            raw_indel_vcf = "%s/SNPcall/%s/%s.raw.indel.vcf" % (outdir, sample, sample)
+            raw_vcf = "%s.raw.vcf" % vcf_prefix
+            raw_snp_vcf = "%s.raw.snp.vcf" % vcf_prefix
+            raw_indel_vcf = "%s.raw.indel.vcf" % vcf_prefix
 
             """
             java -Xmx100g -jar ~/tools/GenomeAnalysisTK-3.7/GenomeAnalysisTK.jar \
