@@ -56,6 +56,7 @@ class SNPCallPipeline(Pipeline):
 
             tool.threads = threads if threads else self.threads
             tool.max_memory = "%ig" % self.max_memory
+            tool.jar_path = self.GATK_dir
 
         samples = self.get_sample_list(sample_dir, sample_list=sample_list)
 
