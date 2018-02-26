@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#import os
+import os
 #import shutil
 #from collections import OrderedDict
 #from Tools.Filter import Cookiecutter, Trimmomatic, FaCut
@@ -17,3 +17,16 @@ from Routines.Annotations import AnnotationsRoutines
 class Pipeline(Tool, MatplotlibRoutines, FastQRoutines, AnnotationsRoutines):
     def __init__(self, max_threads=1, max_memory=10):
         Tool.__init__(self, cmd="", max_threads=max_threads, max_memory=max_memory)
+
+    @staticmethod
+    def get_sample_list(sample_dir, sample_list=None):
+        samples = []
+        if sample_list:
+            return [sample_list] if isinstance(sample_list, str) else sample_list
+        else:
+            dir_list = os.listdir(sample_dir)
+            for directory in dir_list:
+                if os.path.isdir("%s/%s" % (sample_dir, directory)):
+                    samples.append(directory)
+
+            return samples
