@@ -175,7 +175,7 @@ class SequenceRoutines(FileRoutines):
             length_list.append((record_id, len(record_dict[record_id])))
             #lengths_dict[record_id] = len(record_dict[record_id])
 
-        length_list.sort(key=lambda s:s[1])
+        length_list.sort(key=lambda s:s[1], reverse=True)
         lengths_dict = SynDict(length_list)
         if out_file:
             lengths_dict.write(out_file, header=False, separator="\t", splited_values=False, values_separator=",",
