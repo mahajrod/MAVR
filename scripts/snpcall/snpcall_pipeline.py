@@ -18,6 +18,8 @@ parser.add_argument("-s", "--sample_list", action="store", dest="sample_list",
                     help="List of samples to call variants for. Default: all samplews in sample directory")
 parser.add_argument("-g", "--gatk_directory", action="store", dest="gatk_dir", default="",
                     help="Directory with GATK jar")
+parser.add_argument("-p", "--picard_directory", action="store", dest="picard_dir", default="",
+                    help="Directory with PICARD jar")
 
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=4, type=int,
                     help="Number of threads. Default: 4")
@@ -48,7 +50,7 @@ args = parser.parse_args()
 SNPCallPipeline.threads = args.threads
 SNPCallPipeline.max_memory = args.memory
 SNPCallPipeline.GATK_dir = args.gatk_dir
-
+SNPCallPipeline.Picard_dir = args.picard_dir
 
 SNPCallPipeline.call_variants(args.sample_dir, args.reference, sample_list=args.sample_list, outdir=args.outdir,
                               suffix=args.suffix, input="alignment",
