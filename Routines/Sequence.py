@@ -169,10 +169,14 @@ class SequenceRoutines(FileRoutines):
 
     @staticmethod
     def get_lengths(record_dict, out_file=None, close_after_if_file_object=False):
-        lengths_dict = SynDict()
+        #engths_dict = SynDict()
+        length_list = []
         for record_id in record_dict:
-            lengths_dict[record_id] = len(record_dict[record_id])
+            length_list.append((record_id, len(record_dict[record_id])))
+            #lengths_dict[record_id] = len(record_dict[record_id])
 
+        length_list.sort(key=lambda s:s[1])
+        lengths_dict = SynDict(length_list)
         if out_file:
             lengths_dict.write(out_file, header=False, separator="\t", splited_values=False, values_separator=",",
                                close_after_if_file_object=close_after_if_file_object)
