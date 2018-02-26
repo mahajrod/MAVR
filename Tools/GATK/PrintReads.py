@@ -13,5 +13,5 @@ class PrintReads(GATKTool):
         options += " -I %s" % input_bam
         options += " -BQSR %s" % recal_table
         options += " -o %s" % output_bam
-        
+
         self.execute(options, cmd="-T PrintReads")
