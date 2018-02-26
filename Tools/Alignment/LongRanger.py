@@ -99,7 +99,8 @@ class LongRanger(Tool):
 
         if total_length_of_short_scaffolds_with_insertion < max_scaffold_length:
             merged_record = SeqRecord(id="merged_samll_scaffolds", description="merged_records:%i-%i" % (500, number_of_scaffolds),
-                                      seq=polyN_insersion.join(map(lambda record_index: record_dict[id_list[record_index]], range(499, number_of_scaffolds))))
+                                      seq=polyN_insersion.join(map(lambda record_index: str(record_dict[id_list[record_index]]),
+                                                                   range(499, number_of_scaffolds))))
             for i in range(0, 499):
                 output_dict[id_list[i]] = record_dict[id_list[i]]
             output_dict[merged_record.id] = merged_record
