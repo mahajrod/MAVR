@@ -13,6 +13,7 @@ from Tools.Alignment import Bowtie2, BWA, Novoalign, TMAP
 
 from Pipelines.Abstract import Pipeline
 
+from Tools.Samtools import SamtoolsV1
 from Tools.Picard import MarkDuplicates
 from Tools.GATK import RealignerTargetCreator, IndelRealigner, BaseRecalibrator, PrintReads, HaplotypeCaller, SelectVariants
 from Tools.Picard import CreateSequenceDictionary
@@ -48,6 +49,8 @@ class SNPCallPipeline(Pipeline):
                       input_filetype="bam", threads=None, mark_duplicates=False,
                       genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
                       stand_emit_conf=40, stand_call_conf=100):
+
+        SamtoolsV1.check_for_fasta_index(reference)
 
         CreateSequenceDictionary.jar_path = self.Picard_dir
         CreateSequenceDictionary.check_for_fasta_dict(reference)
