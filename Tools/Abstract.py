@@ -30,7 +30,7 @@ class Tool(SequenceRoutines):
         self.cmd = cmd
         self.threads = max_threads
         #print(jar_path)
-        self.jar_path = self.check_path(jar_path) if jar_path else None
+        self.jar_path = self.check_path(jar_path) if jar_path else ""
         self.jar = jar
         self.max_memory = max_memory
         self.timelog = timelog
