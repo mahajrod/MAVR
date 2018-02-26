@@ -150,10 +150,7 @@ class SamtoolsV1(Tool):
         self.execute(options, cmd="samtools faidx")
 
     def check_for_fasta_index(self, fasta_file):
-        fasta_path_list = self.split_filename(fasta_file)
-        index_file = "%s/%s.fai" % (fasta_path_list[0], fasta_path_list[1])
-
-        if not os.path.exists(index_file):
+        if not os.path.exists(fasta_file + ".fai"):
             self.faidx(fasta_file)
 
     def index(self, bam_file):
