@@ -22,7 +22,7 @@ from Tools.GATK import RealignerTargetCreator, IndelRealigner, BaseRecalibrator,
 class SNPCallPipeline(Pipeline):
 
     def __init__(self, max_threads=1, max_memory=10, GATK_dir="", GATK_jar="GenomeAnalysisTK.jar"):
-        Pipeline.__init__(max_threads=max_threads, max_memory=max_memory)
+        Pipeline.__init__(self, max_threads=max_threads, max_memory=max_memory)
 
         self.GATK_dir = GATK_dir
         self.GATK_jar = GATK_jar
