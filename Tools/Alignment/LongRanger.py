@@ -94,6 +94,7 @@ class LongRanger(Tool):
 
         total_length_of_short_scaffolds_with_insertion = 0
         for i in range(499, number_of_scaffolds):
+            print length_dict[id_list[i]]
             total_length_of_short_scaffolds_with_insertion += polyN_len + len(length_dict[id_list[i]])
 
         if total_length_of_short_scaffolds_with_insertion < max_scaffold_length:
