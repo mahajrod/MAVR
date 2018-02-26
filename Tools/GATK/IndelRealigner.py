@@ -18,7 +18,7 @@ class IndelRealigner(JavaTool):
                 max_reads_for_realignment=None, max_reads_in_memory=None, no_original_tags=False,
                 nway_out=False, default_base_qualities=None):
 
-        options = " -nt %i" % self.threads
+        options = "" #" -nt %i" % self.threads
         options += " -R %s" % reference
         options += " -I %s" % alignment
         options += " -o %s" % corrected_alignment
