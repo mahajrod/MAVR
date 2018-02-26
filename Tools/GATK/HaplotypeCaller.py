@@ -1,9 +1,37 @@
+#!/usr/bin/env python
+
+__author__ = 'mahajrod'
+
+from Tools.GATK.Abstract import GATKTool
+
 import os
 from Routines.Functions import check_path
-from Tools.Abstract import Tool
 
 
-class HaplotypeCaller():
+class HaplotypeCaller(GATKTool):
+
+    def call(self, reference, alignment, output, genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
+             stand_emit_conf=40, stand_call_conf=100):
+        """
+            java -Xmx100g -jar ~/tools/GenomeAnalysisTK-3.7/GenomeAnalysisTK.jar \
+              -T HaplotypeCaller \
+              -R ${fasta} \
+              -I ${bam%bam}realigned.bam \
+              --genotyping_mode DISCOVERY \
+              --output_mode EMIT_VARIANTS_ONLY \
+              -stand_call_conf 30 \
+              -o ${bam%bam}raw.vcf
+        """
+        options = " -nt %i" % self.threads
+        options += " -R %s" % reference
+        options += " -I %s" % alignment
+        options += "--genotyping_mode %s" % genotyping_mode if genotyping_mode else ""
+        options += "--output_mode %s" % output_mode if output_mode else ""
+        options += "-stand_emit_conf %i" % stand_emit_conf
+        options += "-stand_call_conf %i" % stand_call_conf
+        options += "-o %s" % output
+
+        self.execute(options, cmd="-T HaplotypeCaller")
 
     def variant_call(self,
                      alignment,
@@ -28,6 +56,8 @@ class HaplotypeCaller():
         # GENERALPLOIDYSNP
         # GENERALPLOIDYINDEL
         # BOTH
+
+
         default_qualities = ""
         if default_base_qualities:
             default_qualities = "--defaultBaseQualities %i" % default_base_qualities
