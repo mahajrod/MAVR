@@ -3,14 +3,198 @@ import os
 import collections
 from Bio import SeqIO
 from Routines.Functions import check_path
-from Tools.Picard import add_header2bam
+#from Tools.Picard import add_header2bam
+from collections import OrderedDict
 #from MutAnalysis.Mutation import *
 from Tools.AssemblyTools import spades
-from Tools.FilterTools import trim_galore
+#from Tools.FilterTools import trim_galore
 #from Tools.AlignmentTools import Bowtie2, BWA
 from Tools.Alignment import Bowtie2, BWA, Novoalign, TMAP
 
+from Pipelines.Abstract import Pipeline
+
+from Tools.Picard import MarkDuplicates
+from Tools.GATK import RealignerTargetCreator, IndelRealigner, BaseRecalibrator, PrintReads, HaplotypeCaller, SelectVariants
+
+
 # TODO: refactor, remove absolete functions and so on
+
+class SNPCallPipeline(Pipeline):
+
+    def __init__(self, max_threads=1, max_memory=10, GATK_dir="", GATK_jar="GenomeAnalysisTK.jar"):
+        Pipeline.__init__(max_threads=max_threads, max_memory=max_memory)
+
+        self.GATK_dir = GATK_dir
+        self.GATK_jar = GATK_jar
+
+    def prepare_dirs(self, sample_list, outdir="./", include_alignment_dir=False):
+        dir_dict = {
+                    "SNPcall/": OrderedDict()
+                    }
+
+        if include_alignment_dir:
+            dir_dict["alignment/"] = OrderedDict()
+
+        for subdir in dir_dict:
+            for sample in sample_list:
+                dir_dict[subdir][sample] = OrderedDict()
+                
+        self.recursive_mkdir(dir_dict, out_dir=outdir)
+
+    def call_variants(self, sample_dir, reference, sample_list=None, outdir="./", suffix=None, input="alignment",
+                      input_filetype="bam", threads=None, mark_duplicates=False,
+                      genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
+                      stand_emit_conf=40, stand_call_conf=100):
+
+        for tool in MarkDuplicates, \
+                    RealignerTargetCreator, \
+                    IndelRealigner, \
+                    BaseRecalibrator, \
+                    PrintReads, \
+                    HaplotypeCaller, \
+                    SelectVariants:
+
+            tool.threads = threads if threads else self.threads
+            tool.max_memory = "%ig" % self.max_memory
+
+        samples = self.get_sample_list(sample_dir, sample_list=sample_list)
+
+        if input == "reads":
+            pass
+        elif input == "alignment":
+            alignment_filename_prefix_template = "%%s%s" % suffix
+
+        for sample in samples:
+            if mark_duplicates:
+                """
+                java -Xmx100g -jar ~/tools/picard-tools-2.5.0/picard.jar MarkDuplicates \
+                     I=${bam} \
+                     O=${bam%bam}rmdup.bam \
+                      M=${bam}.mark_dup_metrics.txt
+
+                java -jar ~/tools/picard-tools-2.5.0/picard.jar BuildBamIndex \
+                        INPUT=${bam%bam}rmdup.bam
+
+                """
+
+                pass
+                # sample_alignment_prefix =
+            else:
+                sample_alignment_prefix = "%s/%s" % (sample_dir, alignment_filename_prefix_template % sample)
+
+            sample_alignment = "%s.%s" % (sample_alignment_prefix, input_filetype)
+
+            sample_intervals_for_realignment = "%s.forIndelRealigner.intervals" % sample_alignment
+
+            sample_realigned = "%s.realigned.%s" % (sample_alignment_prefix, input_filetype)
+
+            sample_recall_table = "%s.recall_data.grp" % sample_alignment_prefix
+
+            sample_recalled_reads_bam = "%s.recal_reads.bam" % sample_alignment_prefix
+
+            raw_vcf = "%s/SNPcall/%s/%s.raw.vcf" % (outdir, sample, sample)
+
+            raw_snp_vcf = "%s/SNPcall/%s/%s.raw.snp.vcf" % (outdir, sample, sample)
+
+            raw_indel_vcf = "%s/SNPcall/%s/%s.raw.indel.vcf" % (outdir, sample, sample)
+
+            """
+            java -Xmx100g -jar ~/tools/GenomeAnalysisTK-3.7/GenomeAnalysisTK.jar \
+              -T RealignerTargetCreator \
+              -nt 8 \
+              -R ${fasta} \
+              -I ${bam%bam}rmdup.bam \
+              -o ${bam%bam}target_intervals.list
+            """
+            RealignerTargetCreator.create(reference, sample_alignment,
+                                          output=sample_intervals_for_realignment,
+                                          known_indels_vcf=None,
+                                          max_interval_size=None,
+                                          min_reads_cov=None,
+                                          mismatch_fraction=None,
+                                          window_size=None,
+                                          default_base_qualities=None)
+            """
+            java -Xmx100g -jar ~/tools/GenomeAnalysisTK-3.7/GenomeAnalysisTK.jar \
+              -T IndelRealigner \
+              -R ${fasta} \
+              -I ${bam%bam}rmdup.bam \
+              -targetIntervals ${bam%bam}target_intervals.list \
+              -o ${bam%bam}realigned.bam
+            """
+
+            IndelRealigner.realign(reference,
+                                   sample_alignment,
+                                   sample_realigned,
+                                   target_intervals=sample_intervals_for_realignment,
+                                   known_indels_vcf=None, model=None, lod_threshold=None,
+                                   entropy_threshold=None, max_cons=None,
+                                   max_size_for_movement=None, max_pos_move=None, max_reads_for_cons=None,
+                                   max_reads_for_realignment=None, max_reads_in_memory=None, no_original_tags=False,
+                                   nway_out=False, default_base_qualities=None)
+
+            """
+            java -Xmx100g -jar ~/tools/GenomeAnalysisTK-3.7/GenomeAnalysisTK.jar \
+              -T BaseRecalibrator \
+              -R ${fasta} \
+              -I ${bam%bam}realigned.bam \
+              -o ${bam%bam}recal_data.grp \
+            """
+
+            BaseRecalibrator.get_recalibration_table(reference,
+                                                     sample_realigned,
+                                                     output_table=sample_recall_table,
+                                                     known_sites_vcf=None)
+            """
+            java -Xmx100g -jar ~/tools/GenomeAnalysisTK-3.7/GenomeAnalysisTK.jar \
+              -T PrintReads \
+              -nct 4 \
+              -R ${fasta} \
+              -I ${bam%bam}realigned.bam \
+              -BQSR ${bam%bam}recal_data.grp \
+              -o ${bam%bam}recal_reads.bam
+            """
+
+            PrintReads.get_recalled_reads(reference, sample_realigned, sample_recall_table, sample_recalled_reads_bam)
+
+            """
+            java -Xmx100g -jar ~/tools/GenomeAnalysisTK-3.7/GenomeAnalysisTK.jar \
+              -T HaplotypeCaller \
+              -R ${fasta} \
+              -I ${bam%bam}realigned.bam \
+              --genotyping_mode DISCOVERY \
+              --output_mode EMIT_VARIANTS_ONLY \
+              -stand_call_conf 30 \
+              -o ${bam%bam}raw.vcf
+            """
+
+            # TODO: check for possibly missed step!!!!!!!!!!!It seems that recalled reads are not used
+
+            #HaplotypeCaller.call(reference, sample_realigned, raw_vcf, genotyping_mode=genotyping_mode,
+            #                     output_mode=output_mode, stand_emit_conf=stand_emit_conf, stand_call_conf=stand_call_conf)
+            HaplotypeCaller.call(reference, sample_recalled_reads_bam, raw_vcf, genotyping_mode=genotyping_mode,
+                                 output_mode=output_mode, stand_emit_conf=stand_emit_conf, stand_call_conf=stand_call_conf)
+            """
+            java -jar  ~/tools/GenomeAnalysisTK-3.7/GenomeAnalysisTK.jar \
+                -T SelectVariants \
+                -R ${fasta} \
+                -V ${bam%bam}raw.vcf \
+                -selectType SNP \
+                -o ${bam%bam}raw.snps.vcf
+            """
+            
+            SelectVariants.select_variants(reference, raw_vcf, raw_snp_vcf, vartype="SNP", varfilter=None)
+
+            """
+            java -jar  ~/tools/GenomeAnalysisTK-3.7/GenomeAnalysisTK.jar \
+                -T SelectVariants \
+                -R ${fasta} \
+                -V ${bam%bam}raw.vcf \
+                -selectType INDEL \
+                -o ${bam%bam}raw.indels.vcf
+
+            """
+            SelectVariants.select_variants(reference, raw_vcf, raw_indel_vcf, vartype="INDEL", varfilter=None)
 
 
 def get_chromosomes_bed(reference, reference_index, mitochondrial_region_name="mt",
