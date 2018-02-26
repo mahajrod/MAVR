@@ -88,7 +88,7 @@ class LongRanger(Tool):
         number_of_scaffolds = len(length_dict)
         polyN_insersion = "N" * polyN_len
 
-        print id_list
+        #print id_list
         output_dict = OrderedDict()
         if number_of_scaffolds <= max_scaffold_number:
             return record_dict
@@ -102,10 +102,11 @@ class LongRanger(Tool):
             merged_record = SeqRecord(id="merged_samll_scaffolds", description="merged_records:%i-%i" % (500, number_of_scaffolds),
                                       seq=Seq(polyN_insersion.join(map(lambda record_index: str(record_dict[id_list[record_index]]),
                                                                    range(499, number_of_scaffolds)))))
+            print merged_record
             for i in range(0, 499):
                 output_dict[id_list[i]] = record_dict[id_list[i]]
             output_dict[merged_record.id] = merged_record
-
+            print output_dict
             return output_dict
 
         # TODO: following code have not been completed yet!!!!!!!!!
