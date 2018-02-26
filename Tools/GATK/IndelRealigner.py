@@ -6,6 +6,9 @@ from Tools.GATK.Abstract import GATKTool
 
 
 class IndelRealigner(GATKTool):
+    def __init__(self, java_path="", max_threads=4, jar_path="", max_memory="1g"):
+        GATKTool.__init__(self, java_path=java_path, max_threads=max_threads, jar_path=jar_path,
+                          max_memory=max_memory)
 
     # "find" method was renamed to realign
     def realign(self, reference, alignment, corrected_alignment, target_intervals="forIndelRealigner.intervals",

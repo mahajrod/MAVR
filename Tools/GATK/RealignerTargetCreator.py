@@ -6,6 +6,9 @@ from Tools.GATK.Abstract import GATKTool
 
 
 class RealignerTargetCreator(GATKTool, Tool):
+    def __init__(self, java_path="", max_threads=4, jar_path="", max_memory="1g"):
+        GATKTool.__init__(self, java_path=java_path, max_threads=max_threads, jar_path=jar_path,
+                          max_memory=max_memory)
 
     def create(self, reference, alignment, output="forIndelRealigner.intervals", known_indels_vcf=None,
                max_interval_size=None, min_reads_cov=None, mismatch_fraction=None, window_size=None,

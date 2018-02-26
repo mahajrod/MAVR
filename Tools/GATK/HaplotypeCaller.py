@@ -9,6 +9,9 @@ from Routines.Functions import check_path
 
 
 class HaplotypeCaller(GATKTool):
+    def __init__(self, java_path="", max_threads=4, jar_path="", max_memory="1g"):
+        GATKTool.__init__(self, java_path=java_path, max_threads=max_threads, jar_path=jar_path,
+                          max_memory=max_memory)
 
     def call(self, reference, alignment, output, genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
              stand_emit_conf=40, stand_call_conf=100):
