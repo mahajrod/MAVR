@@ -208,7 +208,8 @@ class STRPrimerPipeline(Pipeline):
                            pattern=pattern, min_percentage_of_matches=min_percentage_of_matches,
                            max_percentage_of_indels=max_percentage_of_indels, min_entropy=None, max_entropy=None)
 
-        id_based_location_dict = AnnotationsRoutines.get_id_based_dict_from_gff(trf_output_gff, id_entry=id_description_entry) if trf_gff else trf_report.get_id_based_dict()
+        id_based_location_dict = AnnotationsRoutines.get_id_based_dict_from_gff(trf_output_gff,
+                                                                                id_entry=id_description_entry) if trf_gff else trf_report.get_id_based_dict()
 
         if min_perfect_copy_number:
             TRF.filter_trf_gff_by_exact_copy_number(filtered_trf_gff, final_filtered_gff,
