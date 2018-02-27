@@ -14,6 +14,22 @@ class HaplotypeCaller(JavaTool):
                           max_threads=max_threads, jar_path=jar_path, max_memory=max_memory,
                           timelog=timelog)
 
+    def parse_options(self, reference, alignment, output, genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
+                      stand_emit_conf=40, stand_call_conf=100, gvcf_mode=False):
+
+        options = " -nt %i" % self.threads
+        options += " -R %s" % reference
+        options += " -I %s" % alignment
+        options += " --genotyping_mode %s" % genotyping_mode if genotyping_mode else ""
+        options += " --output_mode %s" % output_mode if output_mode else ""
+        options += " -stand_emit_conf %i" % stand_emit_conf
+        options += " -stand_call_conf %i" % stand_call_conf
+        options += " --emitRefConfidence GVCF" if gvcf_mode else ""
+
+        options += "-o %s" % output
+
+        return options
+
     def call(self, reference, alignment, output, genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
              stand_emit_conf=40, stand_call_conf=100):
         """
@@ -26,14 +42,27 @@ class HaplotypeCaller(JavaTool):
               -stand_call_conf 30 \
               -o ${bam%bam}raw.vcf
         """
-        options = " -nt %i" % self.threads
-        options += " -R %s" % reference
-        options += " -I %s" % alignment
-        options += "--genotyping_mode %s" % genotyping_mode if genotyping_mode else ""
-        options += "--output_mode %s" % output_mode if output_mode else ""
-        options += "-stand_emit_conf %i" % stand_emit_conf
-        options += "-stand_call_conf %i" % stand_call_conf
-        options += "-o %s" % output
+        options = self.parse_options(reference, alignment, output, genotyping_mode=genotyping_mode,
+                                     output_mode=output_mode, stand_emit_conf=stand_emit_conf,
+                                     stand_call_conf=stand_call_conf, gvcf_mode=False)
+
+        self.execute(options)
+
+    def gvcf_call(self, reference, alignment, output, genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
+             stand_emit_conf=40, stand_call_conf=100):
+        """
+        java -jar GenomeAnalysisTK.jar \
+         -R reference.fasta \
+         -T HaplotypeCaller \
+         -I sample1.bam \
+         --emitRefConfidence GVCF \
+         [--dbsnp dbSNP.vcf] \
+         [-L targets.interval_list] \
+         -o output.raw.snps.indels.g.vcf
+        """
+        options = self.parse_options(reference, alignment, output, genotyping_mode=genotyping_mode,
+                                     output_mode=output_mode, stand_emit_conf=stand_emit_conf,
+                                     stand_call_conf=stand_call_conf, gvcf_mode=True)
 
         self.execute(options)
 
