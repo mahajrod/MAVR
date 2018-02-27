@@ -468,6 +468,7 @@ class AnnotationsRoutines(SequenceRoutines):
                 tmp_list = line.strip().split("\t")
                 description_dict = self.parse_gff_annotation_string_to_dict(tmp_list[-1])
 
-                id_based_dict[description_dict[id_entry]] = [tmp_list[0], tmp_list[3], tmp_list[4]]
+                #print description_dict[id_entry]
+                id_based_dict[description_dict[id_entry][0]] = [tmp_list[0], tmp_list[3], tmp_list[4]]
 
         return id_based_dict
