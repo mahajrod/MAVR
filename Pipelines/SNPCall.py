@@ -106,8 +106,6 @@ class SNPCallPipeline(Pipeline):
             sample_intervals_for_realignment = "%s.forIndelRealigner.intervals" % sample_alignment_prefix
             sample_realigned_bam = "%s.realigned.bam" % sample_alignment_prefix
 
-
-
             RealignerTargetCreator.create(reference, sample_alignment,
                                           output=sample_intervals_for_realignment,
                                           known_indels_vcf=None,
