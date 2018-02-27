@@ -1941,7 +1941,15 @@ class SequenceRoutines(FileRoutines):
 
         return output_string
 
+    def prepare_reference_for_GATK(self, reference, picard_dir="", samtools_dir=""):
+        from Tools.Samtools import SamtoolsV1
+        from Tools.Picard import CreateSequenceDictionary
 
+        SamtoolsV1.path = samtools_dir
+        CreateSequenceDictionary.path = picard_dir
+
+        SamtoolsV1.check_for_fasta_index(reference)
+        CreateSequenceDictionary.check_for_fasta_dict(reference)
 
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
