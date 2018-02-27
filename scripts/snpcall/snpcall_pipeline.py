@@ -14,7 +14,7 @@ parser.add_argument("-r", "--reference", action="store", dest="reference", requi
                     help="File with reference genome")
 parser.add_argument("-o", "--outdir", action="store", dest="outdir", default="./",
                     help="Output directory. Default: current directory")
-parser.add_argument("-p", "--output_prefix", action="store", dest="output_prefix", required=True,
+parser.add_argument("-e", "--output_prefix", action="store", dest="output_prefix", required=True,
                     help="Prefix of merged files")
 parser.add_argument("-s", "--sample_list", action="store", dest="sample_list",
                     help="List of samples to call variants for. Default: all samplews in sample directory")
