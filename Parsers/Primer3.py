@@ -6,7 +6,7 @@ from CustomCollections.GeneralCollections import IdList
 
 from Parsers.Abstract import Collection
 
-from Routines import SequenceRoutines
+from Routines import AnnotationsRoutines
 
 
 class PrimerEntryPrimer3:
@@ -93,7 +93,8 @@ class RecordPrimer3:
                  pick_left_primer, pick_internal_oligo, pick_right_primer, product_size_range,
                  left_primer_count, internal_oligo_count, right_primer_count, primer_pair_count, primer_pair_list=[],
                  left_primer_choice_description=None, right_primer_choice_description=None,
-                 internal_oligo_choice_description=None, pair_choice_description=None):
+                 internal_oligo_choice_description=None, pair_choice_description=None, chrom=None,
+                 chrom_pos_start=None, chrom_pos_end=None):
 
         self.id = seq_id                                                                    # str
         self.seq = seq                                                                      # str
@@ -112,6 +113,10 @@ class RecordPrimer3:
         self.internal_oligo_choice_description = internal_oligo_choice_description          # str
         self.pair_choice_description = pair_choice_description                              # str
         self.primer_pair_list = primer_pair_list                                            # list of PrimerPairEntryPrimer3
+
+        self.chrom = chrom                                                                  # str
+        self.chrom_pos_start = chrom_pos_start                                              # int
+        self.chrom_pos_end = chrom_pos_end                                                  # int
 
     def __str__(self):
         string = ""
@@ -242,7 +247,7 @@ class RecordPrimer3:
                               primer_pair.right_primer.start + 1)]
             #print self.id
             #print location_list
-            string += SequenceRoutines.draw_string_regions(self.seq, location_list,
+            string += AnnotationsRoutines.draw_string_regions(self.seq, location_list,
                                                            [left_primer_symbol, target_symbol, right_primer_symbol],
                                                            overlap_symbol="#", line_per_record=False,
                                                            segment_length=segment_length,
@@ -262,7 +267,8 @@ class RecordPrimer3:
 
 class CollectionPrimer3(Collection):
 
-    def __init__(self, record_list=None, primer3_file=None, from_file=True):
+    def __init__(self, record_list=None, primer3_file=None, from_file=True, id_based_location_dict=None, 
+                 repeat_gff_file=None, id_description_entry="ID"):
         self.general_entry_list = ["SEQUENCE_ID",
                                    "SEQUENCE_TEMPLATE",
                                    "SEQUENCE_TARGET",
@@ -293,6 +299,13 @@ class CollectionPrimer3(Collection):
                                         "COMPL_ANY_TH",
                                         "COMPL_END_TH",
                                         "PRODUCT_SIZE"]
+
+        id_based_dict = id_based_location_dict
+
+        if repeat_gff_file:
+            id_based_dict = AnnotationsRoutines.get_id_based_dict_from_gff(repeat_gff_file,
+                                                                           id_entry=id_description_entry)
+
         if from_file:
             self.records = []
             with open(primer3_file, "r") as in_fd:
@@ -304,19 +317,28 @@ class CollectionPrimer3(Collection):
                         entry_dict[line_list[0]] = line_list[1]
                         lineeee = in_fd.next()
 
-                    self._add_record(entry_dict)
+                    self._add_record(entry_dict, id_based_location_dict=id_based_dict)
 
         else:
             self.records = record_list
 
-    def _add_record(self, entry_dict):
+    def _add_record(self, entry_dict, id_based_location_dict=None):
 
         target_start, target_len = map(int, entry_dict["SEQUENCE_TARGET"].split(","))
 
         primer_pair_number = int(entry_dict["PRIMER_PAIR_NUM_RETURNED"]) if "PRIMER_PAIR_NUM_RETURNED" in entry_dict else None
 
         primer_pair_list = []
-
+        
+        if id_based_location_dict:
+            chrom = id_based_location_dict["SEQUENCE_ID"][0]
+            start = int(id_based_location_dict["SEQUENCE_ID"][1]) 
+            end = int(id_based_location_dict["SEQUENCE_ID"][2])
+        else:
+            chrom = None
+            start = None
+            end = None
+        
         for primer_pair_index in range(0, primer_pair_number):
             left_primer_start, left_primer_len = map(int, entry_dict["PRIMER_LEFT_%i" % primer_pair_index].split(","))
             right_primer_start, right_primer_len = map(int, entry_dict["PRIMER_RIGHT_%i" % primer_pair_index].split(","))
@@ -366,7 +388,10 @@ class CollectionPrimer3(Collection):
                                left_primer_choice_description=entry_dict["PRIMER_LEFT_EXPLAIN"] if "PRIMER_LEFT_EXPLAIN" in entry_dict else None,
                                right_primer_choice_description=entry_dict["PRIMER_RIGHT_EXPLAIN"] if "PRIMER_RIGHT_EXPLAIN" in entry_dict else None,
                                internal_oligo_choice_description=entry_dict["PRIMER_INTERNAL_OLIGO_EXPLAIN"] if "PRIMER_INTERNAL_OLIGO_EXPLAIN" in entry_dict else None,
-                               pair_choice_description=entry_dict["PRIMER_PAIR_EXPLAIN"] if "PRIMER_PAIR_EXPLAIN" in entry_dict else None)
+                               pair_choice_description=entry_dict["PRIMER_PAIR_EXPLAIN"] if "PRIMER_PAIR_EXPLAIN" in entry_dict else None,
+                               chrom=chrom,
+                               chrom_pos_start=start,
+                               chrom_pos_end=end)
 
         self.records.append(record)
 

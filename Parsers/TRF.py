@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from Bio import  SeqRecord, SeqFeature
+from collections import OrderedDict
 
 
 class RecordTRF():
@@ -54,7 +54,8 @@ class RecordTRF():
 
     def simple_gff_str(self):
         # seqid	source	type	start	end	score	strand	phase	attributes
-        attributes_string = "Period=%i;N_copies=%.1f;Pattern=%s" % (self.period, self.number_of_copies, self.pattern)
+        attributes_string = "ID=%s;" % self.id if self.id else ""
+        attributes_string += "Period=%i;N_copies=%.1f;Pattern=%s" % (self.period, self.number_of_copies, self.pattern)
 
         return "TRF\trepeat\t%i\t%i\t.\t.\t.\t%s" % (self.start, self.end, attributes_string)
 
@@ -62,6 +63,10 @@ class RecordTRF():
 
         return "%i\t%i\t%i\t%.1f\t%s\t%s" % (self.start, self.end, self.period, self.number_of_copies,
                                              self.pattern, self.tandem_repeat)
+
+    def simple_bed_str(self):
+
+        return "%i\t%i\t%s\t.\t." % (self.start, self.end, self.id)
 
     def table_str_long(self):
 
@@ -176,6 +181,13 @@ class CollectionTRF():
                 for record in self.records[chrom]:
                     out_fd.write("\t%s\n" % record.table_str_short())
 
+    def write_bed(self, out_file):
+        with open(out_file, "w") as out_fd:
+            out_fd.write("#chrom\tstart\tend\tid\tscore\tstrand\n")
+            for chrom in self.records:
+                for record in self.records[chrom]:
+                    out_fd.write("%s\t%s\n" % (chrom, record.simple_bed_str()))
+
     def write_short_table(self, out_file):
         with open(out_file, "w") as out_fd:
             out_fd.write("#chrom\tstart\tend\tperiod\tnumber_of_copies\tpattern\ttandem_repeat\n")
@@ -208,6 +220,18 @@ class CollectionTRF():
                                                                                        record.alignment_score,
                                                                                        record.entropy,
                                                                                        record.tandem_repeat))
+
+    def get_id_based_dict(self):
+        """
+        returns following dictionary {trf_id: [chrom, start, end]}
+        """
+        id_based_dict = OrderedDict()
+        for chrom in self.records:
+            for record in self.records[chrom]:
+                id_based_dict[record.id] = [chrom, record.start, record.end]
+
+        return id_based_dict
+
 
 if __name__ == "__main__":
     trf_coll = CollectionTRF(trf_file="/home/mahajrod/genetics/desaminases/data/LAN210_v0.10m/masking/TRF/LAN210_v0.10m_masked_repeatmasker.fasta.2.7.7.80.10.50.500.dat", from_file=True)

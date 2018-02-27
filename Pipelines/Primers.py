@@ -191,18 +191,24 @@ class STRPrimerPipeline(Pipeline):
         primer3_output_prefix = "%s.primer3" % with_flanks_prefix
         if trf_gff is None:
             print("Annotating repeats...")
-            TRF.parallel_search_tandem_repeat(genome_fasta, output_prefix, matching_weight=trf_matching_weight,
-                                              mismatching_penalty=trf_mismatching_penalty, indel_penalty=trf_indel_penalty,
-                                              match_probability=trf_matching_probability,
-                                              indel_probability=trf_indel_probability, min_alignment_score=trf_min_score,
-                                              max_period=trf_max_period_size,
-                                              report_flanking_sequences=False,
-                                              max_len_per_file=1000000, store_intermediate_files=False)
+            trf_report = TRF.parallel_search_tandem_repeat(genome_fasta, output_prefix,
+                                                           matching_weight=trf_matching_weight,
+                                                           mismatching_penalty=trf_mismatching_penalty,
+                                                           indel_penalty=trf_indel_penalty,
+                                                           match_probability=trf_matching_probability,
+                                                           indel_probability=trf_indel_probability,
+                                                           min_alignment_score=trf_min_score,
+                                                           max_period=trf_max_period_size,
+                                                           report_flanking_sequences=False,
+                                                           max_len_per_file=1000000,
+                                                           store_intermediate_files=False)
         print("Filtering repeats...")
         TRF.filter_trf_gff(trf_output_gff, filtered_trf_gff, filtered_out_trf_gff, min_period=min_str_period,
                            max_period=max_str_period, min_copy_number=min_copy_number, max_copy_number=max_copy_number,
                            pattern=pattern, min_percentage_of_matches=min_percentage_of_matches,
                            max_percentage_of_indels=max_percentage_of_indels, min_entropy=None, max_entropy=None)
+
+        id_based_location_dict = AnnotationsRoutines.get_id_based_dict_from_gff(trf_output_gff, id_entry=id_description_entry) if trf_gff else trf_report.get_id_based_dict()
 
         if min_perfect_copy_number:
             TRF.filter_trf_gff_by_exact_copy_number(filtered_trf_gff, final_filtered_gff,
@@ -263,7 +269,7 @@ class STRPrimerPipeline(Pipeline):
         filtered_results_table_form_with_aln_file = "%s.filtered.table_form_with_aln.res" % primer3_output_prefix
         filtered_out_results_file = "%s.filtered_out.res" % primer3_output_prefix
 
-        primer3_results = CollectionPrimer3(primer3_file=primer3_output_file, from_file=True)
+        primer3_results = CollectionPrimer3(primer3_file=primer3_output_file, from_file=True, id_based_location_dict=id_based_location_dict)
 
         primer3_results.remove_primers_with_gaps_in_pcr_product(min_gap_len)
         primer3_filtered_results, primer3_filtered_out_results = primer3_results.filter_out_records_without_primers()

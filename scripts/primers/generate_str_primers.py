@@ -99,6 +99,19 @@ time ~/Soft/MAVR/scripts/primers/generate_str_primers.py -o assembly.hybrid.all.
 real	1m47.007s
 user	1m26.900s
 sys	0m25.032s
+
+time ~/Soft/MAVR/scripts/primers/generate_str_primers.py -o assembly.hybrid.all.trf \
+                                                         -f ../assembly.hybrid.all.trf.with_rep_seqs.gff \
+                                                         -g ../../../../../assemblies/bionano/assemblies/hybrid_assembly/assembly.hybrid.all.fasta \
+                                                         -k ../../../../../assemblies/bionano/assemblies/hybrid_assembly/kmers/ \
+                                                         -x mustela_nigripes_hybrid \
+                                                         --primer3_dir ~/Soft/primer3/src/ \
+                                                         --primer3_thermo_config_dir ~/Soft/primer3/src/primer3_config/ \
+                                                         -t 30 \
+                                                         --glistmaker_dir ~/Soft/GenomeTester4/bin/ \
+                                                         --trf_dir ~/Soft/TRF/ \
+                                                         -c 12 -b 12 -j -n 3 -m 6
+
 """
 
 STRPrimerPipeline.threads = args.threads
