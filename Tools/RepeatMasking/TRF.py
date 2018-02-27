@@ -61,6 +61,9 @@ class TRF(Tool):
         trf_collection.write_short_table("%s.short.tab" % output_prefix)
         trf_collection.write_wide_table("%s.wide.tab" % output_prefix)
         trf_collection.write_fasta("%s.fasta" % output_prefix)
+        trf_collection.write_bed("%s.simple.bed" % output_prefix)
+
+        return trf_collection
 
     def parallel_search_tandem_repeat(self, query_file, output_prefix, matching_weight=2, mismatching_penalty=7,
                                       indel_penalty=7,
@@ -110,7 +113,7 @@ class TRF(Tool):
                                                                   min_alignment_score, max_period)
             trf_output_file_list.append(trf_output_file)
 
-        self.convert_trf_report(trf_output_file_list, output_prefix)
+        trf_report = self.convert_trf_report(trf_output_file_list, output_prefix)
         """
         for suffix in (".rep", ".gff", ".simple.gff", ".short.tab", ".wide.tab", ".with_rep_seqs.gff", ".fasta"):
             file_str = ""
@@ -123,6 +126,8 @@ class TRF(Tool):
             shutil.rmtree(splited_fasta_dir)
             shutil.rmtree(splited_result_dir)
             shutil.rmtree(converted_output_dir)
+
+        return trf_report
 
     @staticmethod
     def gff_filtering_expression(gff_description_dict, min_period=None, max_period=None, min_copy_number=None,
