@@ -81,8 +81,8 @@ class LongRanger(Tool):
 
         self.execute(options=options)
 
-    def prepare_record_dict_reference(self, record_dict, max_scaffold_length=527000000, max_scaffold_number=500,
-                                      polyN_len=500):
+    def prepare_record_dict_reference(self, record_dict, coord_file=None, max_scaffold_length=527000000,
+                                      max_scaffold_number=500, polyN_len=500):
         length_dict = self.get_lengths(record_dict)
         id_list = length_dict.keys()
         number_of_scaffolds = len(length_dict)
@@ -102,11 +102,23 @@ class LongRanger(Tool):
             merged_record = SeqRecord(id="merged_samll_scaffolds", description="merged_records:%i-%i" % (500, number_of_scaffolds),
                                       seq=Seq(polyN_insersion.join(map(lambda record_index: str(record_dict[id_list[record_index]].seq),
                                                                    range(499, number_of_scaffolds)))))
-            print merged_record
+            if coord_file:
+                with open(coord_file, "w") as coord_fd:
+                    coord_fd.write("#id\tstart\tstop\n")
+                    coord_fd.write("#%s\t1\t%i\n" % (id_list[499], length_dict[id_list[499]]))
+                    prev_end = length_dict[id_list[499]]
+                    if number_of_scaffolds > 500:
+                        for i in range(500, number_of_scaffolds):
+                            coord_fd.write("#%s\t%i\t%i\n" % (id_list[i],
+                                                              prev_end + 1 + polyN_len,
+                                                              prev_end + length_dict[id_list[i]] + polyN_len))
+                            prev_end += length_dict[id_list[i]] + polyN_len
+
+            #print merged_record
             for i in range(0, 499):
                 output_dict[id_list[i]] = record_dict[id_list[i]]
             output_dict[merged_record.id] = merged_record
-            print output_dict
+            #print output_dict
             return output_dict
 
         # TODO: following code have not been completed yet!!!!!!!!!
@@ -124,7 +136,7 @@ class LongRanger(Tool):
                     pass
 
     def prepare_reference(self, reference, prepared_reference, max_scaffold_length=527000000, max_scaffold_number=500,
-                          polyN_len=500):
+                          polyN_len=500, coord_file=None):
         """
         Diploid genome — phasing algorithm currently assumes 2 haplotypes
         500 contigs or fewer — if your assembly has more than 500 contigs, concatenate smaller contigs together with 500 N's separating each original contig, until there are fewer than 500 contigs total
@@ -137,7 +149,8 @@ class LongRanger(Tool):
         prepared_record_dict = self.prepare_record_dict_reference(record_dict,
                                                                   max_scaffold_length=max_scaffold_length,
                                                                   max_scaffold_number=max_scaffold_number,
-                                                                  polyN_len=polyN_len)
+                                                                  polyN_len=polyN_len,
+                                                                  coord_file=coord_file)
         SeqIO.write(self.record_from_dict_generator(prepared_record_dict), prepared_reference, format='fasta')
 
 
