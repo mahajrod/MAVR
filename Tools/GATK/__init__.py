@@ -1,12 +1,14 @@
 __author__ = 'mahajrod'
 
 from Tools.GATK.PrintReads import PrintReads
+from Tools.GATK.GenotypeGVCFs import GenotypeGVCFs
 from Tools.GATK.IndelRealigner import IndelRealigner
 from Tools.GATK.SelectVariants import SelectVariants
 from Tools.GATK.CombineVariants import CombineVariants
 from Tools.GATK.HaplotypeCaller import HaplotypeCaller
 from Tools.GATK.BaseRecalibrator import BaseRecalibrator
 from Tools.GATK.UnifiedGenotyper import UnifiedGenotyper
+from Tools.GATK.AnalyzeCovariates import AnalyzeCovariates
 from Tools.GATK.VariantFiltration import VariantFiltration
 from Tools.GATK.ApplyRecalibration import ApplyRecalibration
 from Tools.GATK.VariantRecalibrator import VariantRecalibrator
@@ -15,12 +17,14 @@ from Tools.GATK.FastaAlternateReferenceMaker import FastaAlternateReferenceMaker
 
 
 PrintReads = PrintReads()
+GenotypeGVCFs = GenotypeGVCFs()
 IndelRealigner = IndelRealigner()
 SelectVariants = SelectVariants()
 CombineVariants = CombineVariants()
 HaplotypeCaller = HaplotypeCaller()
 BaseRecalibrator = BaseRecalibrator()
 UnifiedGenotyper = UnifiedGenotyper()
+AnalyzeCovariates = AnalyzeCovariates()
 VariantFiltration = VariantFiltration()
 ApplyRecalibration = ApplyRecalibration()
 VariantRecalibrator = VariantRecalibrator()
