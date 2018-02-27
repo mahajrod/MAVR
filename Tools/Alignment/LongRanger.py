@@ -7,6 +7,7 @@ from Bio.SeqRecord import SeqRecord
 from Bio import SeqIO
 from Bio.Seq import Seq
 
+
 class LongRanger(Tool):
 
     def __init__(self, path="", max_threads=4, max_memory=None):
@@ -153,4 +154,10 @@ class LongRanger(Tool):
                                                                   coord_file=coord_file)
         SeqIO.write(self.record_from_dict_generator(prepared_record_dict), prepared_reference, format='fasta')
 
+        self.index_reference(prepared_reference)
 
+    def index_reference(self, reference):
+
+        options = " mkref %s" % reference
+
+        self.execute(options=options)
