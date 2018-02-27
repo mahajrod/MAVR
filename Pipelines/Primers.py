@@ -284,7 +284,9 @@ class STRPrimerPipeline(Pipeline):
 
         stat_fd = open("%s.stats" % output_prefix, "w")
 
-        for monomer_length in monomer_length_id_dict:
+        sorted_monomer_length_list = map(str, sorted(map(int, monomer_length_id_dict.keys())))
+
+        for monomer_length in sorted_monomer_length_list:
             primer3_monomer_len_results = primer3_filtered_results.extract_records_by_ids(monomer_length_id_dict[monomer_length])
             primer3_monomer_len_results.write("%s.%s.res" % (filtered_results_file_splited_by_len_prefix, monomer_length))
             primer3_monomer_len_results.write_table_form("%s.%s.table_form.res" % (filtered_results_file_splited_by_len_prefix, monomer_length))
