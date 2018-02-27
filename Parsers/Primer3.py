@@ -168,8 +168,13 @@ class RecordPrimer3:
 
     def table_form(self):
         string = ""
+        metadata_location_str = "#Location"
         if self.primer_pair_list:
             metadata_str = "#SeqeunceID\t%s" % self.id
+            if self.chrom:
+                metadata_location_str += "\t%s" % self.chrom
+                if self.chrom_pos_start and self.chrom_pos_end:
+                    metadata_location_str += ":%i-%i" % (self.chrom_pos_start, self.chrom_pos_end)
             metadata_seq_str = "#Sequence\t%s" % self.seq
             header_str = "Primer_pair"
             pcr_product_size_str = "PCR product size"
@@ -214,7 +219,7 @@ class RecordPrimer3:
                 left_primer_len_str += "\t%i" % primer_pair.left_primer.length
                 right_primer_len_str += "\t%i" % primer_pair.right_primer.length
 
-            for table_string in (metadata_str, metadata_seq_str,
+            for table_string in (metadata_str, metadata_location_str, metadata_seq_str,
                                  header_str, pcr_product_size_str, primer_pair_penalty_str,
                                  left_primer_penalty_str, right_primer_penalty_str,
                                  left_primer_seq_str, right_primer_seq_str,
@@ -232,6 +237,12 @@ class RecordPrimer3:
                           target_symbol="*", right_primer_symbol="<"):
         string = ""
         string += "#SeqeunceID\t%s\n" % self.id
+        string += "#Location"
+        if self.chrom:
+            string += "\t%s" % self.chrom
+            if self.chrom_pos_start and self.chrom_pos_end:
+                string += ":%i-%i" % (self.chrom_pos_start, self.chrom_pos_end)
+        string += "\n"
         #string += "#Sequence\t%s\n" % self.seq
 
         for primer_pair in self.primer_pair_list:
