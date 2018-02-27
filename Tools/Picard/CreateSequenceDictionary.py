@@ -22,7 +22,7 @@ class CreateSequenceDictionary(JavaTool):
     def check_for_fasta_dict(self, fasta_file):
 
         fasta_path_list = self.split_filename(fasta_file)
-        dict_file = "%s/%s.dict" % (fasta_path_list[0], fasta_path_list[1])
+        dict_file = "%s%s%s.dict" % (fasta_path_list[0], "/" if fasta_path_list[0] != "" else "", fasta_path_list[1])
 
         if not os.path.exists(dict_file):
             self.make_fasta_dict(fasta_file, dict_file)
