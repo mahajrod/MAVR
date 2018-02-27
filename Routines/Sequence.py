@@ -1946,7 +1946,7 @@ class SequenceRoutines(FileRoutines):
         from Tools.Picard import CreateSequenceDictionary
 
         SamtoolsV1.path = samtools_dir
-        CreateSequenceDictionary.path = picard_dir
+        CreateSequenceDictionary.jar_path = picard_dir
 
         SamtoolsV1.check_for_fasta_index(reference)
         CreateSequenceDictionary.check_for_fasta_dict(reference)
