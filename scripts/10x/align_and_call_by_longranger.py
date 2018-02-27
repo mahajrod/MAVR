@@ -47,12 +47,15 @@ parser.add_argument("-x", "--general_stat_file", action="store", dest="general_s
 
 args = parser.parse_args()
 
+if args.gatk_jar:
+    args.variant_calling_mode = "gatk"
+
 
 TenXAlignmentPipeline.threads = args.threads
 TenXAlignmentPipeline.max_memory = args.max_memory
 TenXAlignmentPipeline.longranger_dir = args.longranger_dir
 TenXAlignmentPipeline.align_and_call(args.samples_dir, args.output_dir, args.reference, samples_to_handle=args.samples,
                                      variant_calling_mode=args.variant_calling_mode, gatk_jar_path=args.gatk_jar,
-                                     use_somatic_sv_caller=args.use_somatic_sv_caller, precalled_vcf=args.precalled_vcf, sample_sex=args.sex,
-                                     variant_calling_only=args.variant_calling_only)
+                                     use_somatic_sv_caller=args.use_somatic_sv_caller, precalled_vcf=args.precalled_vcf,
+                                     sample_sex=args.sex, variant_calling_only=args.variant_calling_only)
 
