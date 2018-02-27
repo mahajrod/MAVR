@@ -442,5 +442,32 @@ class AnnotationsRoutines(SequenceRoutines):
 
         shorter_flanks_dict.write(short_flanks_file)
 
+    def convert_gff_to_bed(self, input_gff, output_bed, id_entry="ID"):
+        with open(input_gff, "r") as gff_fd:
+            with open(output_bed, "w") as bed_fd:
+                for line in gff_fd:
+                    if line[0] == "#":
+                        continue
+                    tmp_list = line.strip().split("\t")
+                    description_dict = self.parse_gff_annotation_string_to_dict(tmp_list[-1])
 
+                    bed_fd.write("%s\t%s\t%s\t%s\t%s\t%s\n" % (tmp_list[0],
+                                                               tmp_list[3],
+                                                               tmp_list[4],
+                                                               description_dict[id_entry],
+                                                               tmp_list[5],
+                                                               tmp_list[6]))
 
+    def get_id_based_dict_from_gff(self, input_gff, id_entry="ID"):
+        id_based_dict = OrderedDict()
+
+        with open(input_gff, "r") as gff_fd:
+            for line in gff_fd:
+                if line[0] == "#":
+                    continue
+                tmp_list = line.strip().split("\t")
+                description_dict = self.parse_gff_annotation_string_to_dict(tmp_list[-1])
+
+                id_based_dict[description_dict[id_entry]] = [tmp_list[0], tmp_list[3], tmp_list[4]]
+
+        return id_based_dict
