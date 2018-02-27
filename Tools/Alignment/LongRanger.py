@@ -42,7 +42,7 @@ class LongRanger(Tool):
 
         options += " --somatic" if use_somatic_sv_caller else ""
         options += " --precalled=%s" % precalled_vcf if precalled_vcf else ""
-        options += " --sex=%s" if sample_sex else ""
+        options += " --sex=%s" % sample_sex if sample_sex else ""
 
         options += " --vconly" if variant_calling_only else ""
         options += " --localcores=%i" % (threads if threads else self.threads)
