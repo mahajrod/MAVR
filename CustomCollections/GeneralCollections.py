@@ -385,10 +385,16 @@ class SynDict(OrderedDict):
             #print tmp
             #print line
             #print tmp
-            key, value = tmp[key_index], tmp[value_index]
+            key, value = tmp[key_index], tmp[value_index] if isinstance(value_index, int) else [tmp[index_entry] for index_entry in value_index]
             #print key, value
             if split_values or allow_repeats_of_key:
-                value = value.split(values_separator)
+                if isinstance(value, str):
+                    value = value.split(values_separator)
+                else:
+                    tmp = []
+                    for entry in value:
+                        tmp += entry.split(values_separator)
+                    value = tmp
             #print key, value
             if expression:
                 if split_values or allow_repeats_of_key:
