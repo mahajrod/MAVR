@@ -56,4 +56,9 @@ SNPCallPipeline.call_variants(args.sample_dir, args.reference, sample_list=args.
                               suffix=args.suffix, input="alignment",
                               input_filetype="bam", threads=None, mark_duplicates=False,
                               genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
-                              stand_emit_conf=args.emit_quality, stand_call_conf=args.call_quality)
+                              stand_emit_conf=args.emit_quality, stand_call_conf=args.call_quality,
+                              skip_base_score_recalibration=False,
+                              iteration_number=3, SNP_QD=2.0, SNP_FS=30.0, SNP_MQ=40.0, SNP_MappingQualityRankSum=-12.5,
+                              SNP_ReadPosRankSum=-8.0, indel_QD=2.0, indel_ReadPosRankSum=-20.0, indel_FS=200.0,
+                              SNP_filter_name="ambiguous_snp", indel_filter_name="ambiguous_indel",
+                              analyze_covariates=True)
