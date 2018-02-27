@@ -105,11 +105,11 @@ class LongRanger(Tool):
             if coord_file:
                 with open(coord_file, "w") as coord_fd:
                     coord_fd.write("#id\tstart\tstop\n")
-                    coord_fd.write("#%s\t1\t%i\n" % (id_list[499], length_dict[id_list[499]]))
+                    coord_fd.write("%s\t1\t%i\n" % (id_list[499], length_dict[id_list[499]]))
                     prev_end = length_dict[id_list[499]]
                     if number_of_scaffolds > 500:
                         for i in range(500, number_of_scaffolds):
-                            coord_fd.write("#%s\t%i\t%i\n" % (id_list[i],
+                            coord_fd.write("%s\t%i\t%i\n" % (id_list[i],
                                                               prev_end + 1 + polyN_len,
                                                               prev_end + length_dict[id_list[i]] + polyN_len))
                             prev_end += length_dict[id_list[i]] + polyN_len
