@@ -14,6 +14,8 @@ parser.add_argument("-r", "--reference", action="store", dest="reference", requi
                     help="File with reference genome")
 parser.add_argument("-o", "--outdir", action="store", dest="outdir", default="./",
                     help="Output directory. Default: current directory")
+parser.add_argument("-p", "--output_prefix", action="store", dest="output_prefix", required=True,
+                    help="Prefix of merged files")
 parser.add_argument("-s", "--sample_list", action="store", dest="sample_list",
                     help="List of samples to call variants for. Default: all samplews in sample directory")
 parser.add_argument("-g", "--gatk_directory", action="store", dest="gatk_dir", default="",
@@ -52,7 +54,7 @@ SNPCallPipeline.max_memory = args.memory
 SNPCallPipeline.GATK_dir = args.gatk_dir
 SNPCallPipeline.Picard_dir = args.picard_dir
 
-SNPCallPipeline.call_variants(args.sample_dir, args.reference, sample_list=args.sample_list, outdir=args.outdir,
+SNPCallPipeline.call_variants(args.sample_dir, args.reference, args.output_prefix, sample_list=args.sample_list, outdir=args.outdir,
                               suffix=args.suffix, input="alignment",
                               input_filetype="bam", threads=None, mark_duplicates=False,
                               genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
