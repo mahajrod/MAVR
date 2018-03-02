@@ -75,6 +75,8 @@ class SNPCallPipeline(Pipeline):
 
         samples = self.get_sample_list(sample_dir, sample_list=sample_list)
 
+        self.prepare_dirs(samples, outdir=outdir, include_alignment_dir=input == "reads")
+
         if input == "reads":
             pass
         elif input == "alignment":
