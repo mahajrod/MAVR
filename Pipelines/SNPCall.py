@@ -48,7 +48,7 @@ class SNPCallPipeline(Pipeline):
     def call_variants(self, sample_dir, reference, merged_vcf_prefix, sample_list=None, outdir="./", suffix=None, input="alignment",
                       input_filetype="bam", threads=None, mark_duplicates=False, known_variants_vcf=None,
                       genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
-                      stand_emit_conf=40, stand_call_conf=100, skip_base_score_recalibration=False,
+                      stand_call_conf=30, skip_base_score_recalibration=False,
                       iteration_number=3, SNP_QD=2.0, SNP_FS=30.0, SNP_MQ=40.0, SNP_MappingQualityRankSum=-12.5,
                       SNP_ReadPosRankSum=-8.0, indel_QD=2.0, indel_ReadPosRankSum=-20.0, indel_FS=200.0,
                       SNP_filter_name="ambiguous_snp", indel_filter_name="ambiguous_indel",
@@ -181,12 +181,10 @@ class SNPCallPipeline(Pipeline):
                     #HaplotypeCaller.call(reference, sample_realigned, raw_vcf, genotyping_mode=genotyping_mode,
                     #                     output_mode=output_mode, stand_emit_conf=stand_emit_conf, stand_call_conf=stand_call_conf)
                     HaplotypeCaller.gvcf_call(reference, sample_recalled_reads_bam, gvcf, genotyping_mode=genotyping_mode,
-                                              output_mode=output_mode, stand_emit_conf=stand_emit_conf,
-                                              stand_call_conf=stand_call_conf)
+                                              output_mode=output_mode, stand_call_conf=stand_call_conf)
                 else:
                     HaplotypeCaller.gvcf_call(reference, sample_realigned_bam, gvcf, genotyping_mode=genotyping_mode,
-                                              output_mode=output_mode, stand_emit_conf=stand_emit_conf,
-                                              stand_call_conf=stand_call_conf)
+                                              output_mode=output_mode, stand_call_conf=stand_call_conf)
 
             GenotypeGVCFs.genotype(reference, gvcf_list, merged_raw_vcf)
 

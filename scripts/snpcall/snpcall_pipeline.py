@@ -27,11 +27,8 @@ parser.add_argument("-t", "--threads", action="store", dest="threads", default=4
                     help="Number of threads. Default: 4")
 parser.add_argument("-m", "--memory", action="store", dest="memory", default=10, type=int,
                     help="Maximum memory to use(in gigabytes). Default: 10")
-parser.add_argument("-q", "--variant_emit_quality", action="store", dest="emit_quality", default=40, type=int,
-                    help="Minimum quality of variant to be emitted")
-parser.add_argument("-u", "--variant_call_quality", action="store", dest="call_quality", default=100, type=int,
-                    help="Minimum quality of variant to be called. Variant with quality between call and emit will "
-                         "be present in vcf file but with filter 'low quality'")
+parser.add_argument("-u", "--variant_call_quality", action="store", dest="call_quality", default=30, type=int,
+                    help="Minimum quality of variant to be called.") # Variant with quality between call and emit will ""be present in vcf file but with filter 'low quality'")
 parser.add_argument("-x", "--suffix", action="store", dest="suffix", default="",
                     help="Suffix of the input files. Default: ''")
 """
@@ -58,7 +55,7 @@ SNPCallPipeline.call_variants(args.sample_dir, args.reference, args.output_prefi
                               suffix=args.suffix, input="alignment",
                               input_filetype="bam", threads=None, mark_duplicates=False,
                               genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
-                              stand_emit_conf=args.emit_quality, stand_call_conf=args.call_quality,
+                              stand_call_conf=args.call_quality,
                               skip_base_score_recalibration=False,
                               iteration_number=3, SNP_QD=2.0, SNP_FS=30.0, SNP_MQ=40.0, SNP_MappingQualityRankSum=-12.5,
                               SNP_ReadPosRankSum=-8.0, indel_QD=2.0, indel_ReadPosRankSum=-20.0, indel_FS=200.0,

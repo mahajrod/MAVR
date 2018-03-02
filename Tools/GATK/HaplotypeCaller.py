@@ -15,14 +15,14 @@ class HaplotypeCaller(JavaTool):
                           timelog=timelog)
 
     def parse_options(self, reference, alignment, output, genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
-                      stand_emit_conf=40, stand_call_conf=100, gvcf_mode=False):
+                      stand_call_conf=30, gvcf_mode=False):
 
         options = " -nt %i" % self.threads
         options += " -R %s" % reference
         options += " -I %s" % alignment
         options += " --genotyping_mode %s" % genotyping_mode if genotyping_mode else ""
         options += " --output_mode %s" % output_mode if output_mode else ""
-        options += " -stand_emit_conf %i" % stand_emit_conf
+        #options += " -stand_emit_conf %i" % stand_emit_conf
         options += " -stand_call_conf %i" % stand_call_conf
         options += " --emitRefConfidence GVCF" if gvcf_mode else ""
 
