@@ -153,7 +153,7 @@ class SNPCallPipeline(Pipeline):
 
             for sample in samples:
                 vcf_prefix = "%s/SNPcall/%s/%s.iteration%i" % (outdir, sample, sample, iteration_index)
-                gvcf = "%s.gvcf" % vcf_prefix
+                gvcf = "%s.g.vcf" % vcf_prefix
                 #raw_snp_vcf = "%s.raw.snp.gvcf" % vcf_prefix
                 #raw_indel_vcf = "%s.raw.indel.gvcf" % vcf_prefix
 
