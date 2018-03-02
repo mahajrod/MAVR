@@ -17,7 +17,7 @@ class HaplotypeCaller(JavaTool):
     def parse_options(self, reference, alignment, output, genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
                       stand_call_conf=30, gvcf_mode=False):
 
-        options = " -nt %i" % self.threads
+        options = " -nct %i" % self.threads
         options += " -R %s" % reference
         options += " -I %s" % alignment
         options += " --genotyping_mode %s" % genotyping_mode if genotyping_mode else ""
