@@ -106,6 +106,7 @@ class SNPCallPipeline(Pipeline):
             sample_intervals_for_realignment = "%s.forIndelRealigner.intervals" % sample_alignment_prefix
             sample_realigned_bam = "%s.realigned.bam" % sample_alignment_prefix
 
+            """
             RealignerTargetCreator.create(reference, sample_alignment,
                                           output=sample_intervals_for_realignment,
                                           known_indels_vcf=None,
@@ -124,7 +125,7 @@ class SNPCallPipeline(Pipeline):
                                    max_size_for_movement=None, max_pos_move=None, max_reads_for_cons=None,
                                    max_reads_for_realignment=None, max_reads_in_memory=None, no_original_tags=False,
                                    nway_out=False, default_base_qualities=None)
-
+            """
         for iteration_index in range(0, iterations):
             gvcf_list = []
 
@@ -156,7 +157,7 @@ class SNPCallPipeline(Pipeline):
 
                 gvcf_list.append(gvcf)
 
-                if (not skip_base_score_recalibration) or (iteration_index > 0):
+                if ((not skip_base_score_recalibration) and known_sites is not None) or (iteration_index > 0):
 
                     BaseRecalibrator.get_recalibration_table(reference,
                                                              sample_realigned_bam,
