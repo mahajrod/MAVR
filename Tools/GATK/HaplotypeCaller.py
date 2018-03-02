@@ -31,7 +31,7 @@ class HaplotypeCaller(JavaTool):
         return options
 
     def call(self, reference, alignment, output, genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
-             stand_emit_conf=40, stand_call_conf=100):
+             stand_call_conf=30):
         """
             java -Xmx100g -jar ~/tools/GenomeAnalysisTK-3.7/GenomeAnalysisTK.jar \
               -T HaplotypeCaller \
@@ -43,13 +43,13 @@ class HaplotypeCaller(JavaTool):
               -o ${bam%bam}raw.vcf
         """
         options = self.parse_options(reference, alignment, output, genotyping_mode=genotyping_mode,
-                                     output_mode=output_mode, stand_emit_conf=stand_emit_conf,
+                                     output_mode=output_mode,
                                      stand_call_conf=stand_call_conf, gvcf_mode=False)
 
         self.execute(options)
 
     def gvcf_call(self, reference, alignment, output, genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
-             stand_emit_conf=40, stand_call_conf=100):
+                  stand_call_conf=30):
         """
         java -jar GenomeAnalysisTK.jar \
          -R reference.fasta \
@@ -61,7 +61,7 @@ class HaplotypeCaller(JavaTool):
          -o output.raw.snps.indels.g.vcf
         """
         options = self.parse_options(reference, alignment, output, genotyping_mode=genotyping_mode,
-                                     output_mode=output_mode, stand_emit_conf=stand_emit_conf,
+                                     output_mode=output_mode,
                                      stand_call_conf=stand_call_conf, gvcf_mode=True)
 
         self.execute(options)
@@ -77,6 +77,9 @@ class HaplotypeCaller(JavaTool):
                      discovery_mode="BOTH",
                      output_file="GATK_raw.vcf",
                      default_base_qualities=None):
+        """
+        OBSOLETE FUNCTION!!! DOESN'T WORK
+        """
         # manual http://www.broadinstitute.org/gatk/gatkdocs/org_broadinstitute_gatk_tools_walkers_genotyper_UnifiedGenotyper.html
         # output_mode values:
         # EMIT_VARIANTS_ONLY
