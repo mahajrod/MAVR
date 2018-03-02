@@ -26,7 +26,7 @@ class HaplotypeCaller(JavaTool):
         options += " -stand_call_conf %i" % stand_call_conf
         options += " --emitRefConfidence GVCF" if gvcf_mode else ""
 
-        options += "-o %s" % output
+        options += " -o %s" % output
 
         return options
 
