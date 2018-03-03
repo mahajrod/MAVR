@@ -17,6 +17,7 @@ class GORoutines(SequenceClusterRoutines):
 
 
         GO_list = IdList(filename=GO_file)
+        print "GOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"
         print GO_list
 
         extracted_entries_file = "%s.annotations" % output_prefix
@@ -31,6 +32,7 @@ class GORoutines(SequenceClusterRoutines):
                         continue
                     line_list = line.strip().split(separator)
                     entry_GO_list = line_list[5].split(",")
+                    print entry_GO_list
                     for GO in entry_GO_list:
                         if GO in GO_list:
                             out_fd.write(line)
