@@ -15,7 +15,7 @@ class GORoutines(SequenceClusterRoutines):
                                                        comments_prefix="#", separator="\t",
                                                        ):
 
-        GO_list = IdList(filename=GO_file)
+        GO_list = IdList(filename=GO_file, column_number=0)
 
         print "GOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"
         print GO_list
