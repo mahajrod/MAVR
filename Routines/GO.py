@@ -17,8 +17,8 @@ class GORoutines(SequenceClusterRoutines):
 
         GO_list = IdList(filename=GO_file, column_number=0)
 
-        print "GOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"
-        print GO_list
+        #print "GOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"
+        #print GO_list
         print len(GO_list)
 
         extracted_entries_file = "%s.annotations" % output_prefix
