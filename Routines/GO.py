@@ -15,7 +15,9 @@ class GORoutines(SequenceClusterRoutines):
                                                        comments_prefix="#", separator="\t",
                                                        ):
 
+
         GO_list = IdList(filename=GO_file)
+        print GO_list
 
         extracted_entries_file = "%s.annotations" % output_prefix
 
