@@ -38,5 +38,5 @@ class GORoutines(SequenceClusterRoutines):
                         if GO in GO_list:
                             out_fd.write(line)
                             extracted_entries += 1
-
+                            break
         print("Extracted %i entries" % extracted_entries)
