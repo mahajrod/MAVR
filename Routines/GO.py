@@ -1,7 +1,7 @@
 __author__ = 'mahajrod'
 import os
 
-from Routines import SequenceClusterRoutines
+from Routines.SequenceCluster import SequenceClusterRoutines
 
 from CustomCollections.GeneralCollections import SynDict, IdList
 
