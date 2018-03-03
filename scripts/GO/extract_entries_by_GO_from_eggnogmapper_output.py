@@ -20,3 +20,4 @@ args = parser.parse_args()
 
 GORoutines.extract_entries_by_GO_from_eggnogmapper_output(args.input, args.go_file, args.output_prefix,
                                                           comments_prefix="#", separator="\t")
+
