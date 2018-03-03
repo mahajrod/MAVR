@@ -1,5 +1,6 @@
 __author__ = 'mahajrod'
 
+from Routines.GO import GORoutines
 from Routines.Math import MathRoutines
 from Routines.File import FileRoutines
 from Routines.Tree import TreeRoutines
@@ -24,6 +25,7 @@ from Routines.SequenceCluster import SequenceClusterRoutines
 from Routines.MultipleAlignment import MultipleAlignmentRoutines
 
 
+GORoutines = GORoutines()
 MathRoutines = MathRoutines()
 FileRoutines = FileRoutines()
 TreeRoutines = TreeRoutines()

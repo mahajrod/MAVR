@@ -306,13 +306,16 @@ class SequenceClusterRoutines(SequenceRoutines):
 
         return extracted_clusters
 
-    def extract_clusters_by_element_ids_from_file(self, cluster_file, element_file, output_file, mode="w"):
+    def extract_clusters_by_element_ids_from_file(self, cluster_file, element_file, output_file, mode="w",
+                                                  cluster_column=0, element_column=1, column_separator="\t",
+                                                  element_separator=","):
         """"
         mode: "w" - if elements from element_id_list are present in cluster extracts only that elements
               "a" - if elements from element_id_list are present in cluster extracts all elements
         """
-        cluster_dict = SynDict()
-        cluster_dict.read(cluster_file, split_values=True, comments_prefix="#")
+        cluster_dict = SynDict(filename=cluster_file, split_values=True, comments_prefix="#",
+                               key_index=cluster_column, value_index=element_column,
+                               separator=column_separator, values_separator=element_separator)
 
         element_id_list = IdList()
         element_id_list.read(element_file, comments_prefix="#")
