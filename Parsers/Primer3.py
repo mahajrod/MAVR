@@ -119,7 +119,7 @@ class RecordPrimer3:
         self.chrom_pos_end = chrom_pos_end                                                  # int
 
         self.monomer = monomer                                                              # str
-        self.total_monomer_number = self.total_monomer_number                               # float
+        self.total_monomer_number = total_monomer_number                                    # float
 
     def __str__(self):
         string = ""
@@ -237,45 +237,48 @@ class RecordPrimer3:
 
     def table_form2_short(self):
         """
-        header = "#STR_ID\tScaffold\tStart\tStop\tPRIMER_PAIR_NUMBER\tPRIMER_PAIR_ID\tPCR_PRODUCT_SIZE\tPRIMER_LEFT_TM\tPRIMER_RIGHT_TM\t" \
+        header = "#STR_ID\tScaffold\tStart\tStop\tMonomer\tCopy_number\tPRIMER_PAIR_NUMBER\tPRIMER_PAIR_ID\tPCR_PRODUCT_SIZE\tPRIMER_LEFT_TM\tPRIMER_RIGHT_TM\t" \
                  "PRIMER_LEFT_GC,%\tPRIMER_RIGHT_GC,%\tPRIMER_LEFT_SEQ\tPRIMER_RIGHT_SEQ\tTARGET_SEQ\n"
         """
         table_form2_short = ""
         for primer_pair in self.primer_pair_list:
 
-            table_form2_short += "#%s\t%s\t%i\t%i\t%i\t%i\t%i\t%f\t%f\t%f\t%f\t%s\t%s\n" % (self.id,
-                                                                                            self.chrom,
-                                                                                            self.chrom_pos_start,
-                                                                                            self.chrom_pos_end,
-                                                                                            self.primer_pair_count,
-                                                                                            primer_pair.id,
-                                                                                            primer_pair.product_size,
-                                                                                            primer_pair.left_primer.melting_temperature,
-                                                                                            primer_pair.right_primer.melting_temperature,
-                                                                                            primer_pair.left_primer.gc_content,
-                                                                                            primer_pair.right_primer.gc_content,
-                                                                                            primer_pair.left_primer.seq,
-                                                                                            primer_pair.right_primer.seq)
+            table_form2_short += "#%s\t%s\t%i\t%i\t%s\t%s\t%i\t%i\t%i\t%f\t%f\t%f\t%f\t%s\t%s\n" % (self.id,
+                                                                                                    self.chrom,
+                                                                                                    self.chrom_pos_start,
+                                                                                                    self.chrom_pos_end,
+                                                                                                    str(self.monomer) if not(self.monomer is None) else ".",
+                                                                                                    str(self.total_monomer_number) if not(self.total_monomer_number is None) else ".",
+                                                                                                    self.primer_pair_count,
+                                                                                                    primer_pair.id,
+                                                                                                    primer_pair.product_size,
+                                                                                                    primer_pair.left_primer.melting_temperature,
+                                                                                                    primer_pair.right_primer.melting_temperature,
+                                                                                                    primer_pair.left_primer.gc_content,
+                                                                                                    primer_pair.right_primer.gc_content,
+                                                                                                    primer_pair.left_primer.seq,
+                                                                                                    primer_pair.right_primer.seq)
         return table_form2_short
 
     def table_form2(self):
         """
         header = "#STR_ID\tScaffold\tStart\tStop\tPRIMER_PAIR_NUMBER\tPRIMER_PAIR_ID\tPCR_PRODUCT_SIZE\tPRIMER_LEFT_TM\tPRIMER_RIGHT_TM\t" \
-                 "PRIMER_LEFT_GC,%\tPRIMER_RIGHT_GC,%\tPRIMER_LEFT_SEQ\tPRIMER_RIGHT_SEQ\tTARGET_SEQ\t"
-
-                 "PRIMER_LEFT_SELF_ANY_TH\tPRIMER_RIGHT_SELF_ANY_TH\tPRIMER_LEFT_SELF_END_TH\tPRIMER_RIGHT_SELF_END_TH\t
-                 PRIMER_LEFT_HAIRPIN_TH\tPRIMER_RIGHT_HAIRPIN_TH\tPRIMER_LEFT_END_STABILITY\tPRIMER_RIGHT_END_STABILITY\n"
+                 "PRIMER_LEFT_GC,%\tPRIMER_RIGHT_GC,%\tPRIMER_LEFT_SEQ\tPRIMER_RIGHT_SEQ\tTARGET_SEQ\t" \
+                 "PRIMER_LEFT_SELF_ANY_TH\tPRIMER_RIGHT_SELF_ANY_TH\tPRIMER_LEFT_SELF_END_TH\tPRIMER_RIGHT_SELF_END_TH\t" \
+                 "PRIMER_LEFT_HAIRPIN_TH\tPRIMER_RIGHT_HAIRPIN_TH\tPRIMER_LEFT_END_STABILITY\tPRIMER_RIGHT_END_STABILITY\tREGION_SEQ\n"
 
 
         """
         table_form2 = ""
         for primer_pair in self.primer_pair_list:
 
-            table_form2 += "#%s\t%s\t%i\t%i\t%i\t%i\t%i\t%f\t%f\t%f\t%f\t" \
-                           "%s\t%s\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\n" % (self.id,
+            table_form2 += "#%s\t%s\t%i\t%i\t%s\t%s\t%i\t%i\t%i\t%f\t%f\t%f\t%f\t%s\t" \
+                           "%s\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%s\n" % (self.id,
                                                                          self.chrom,
                                                                          self.chrom_pos_start,
                                                                          self.chrom_pos_end,
+                                                                         str(self.monomer) if not(self.monomer is None) else ".",
+                                                                         str(self.total_monomer_number) if not(self.total_monomer_number is None) else ".",
                                                                          self.primer_pair_count,
                                                                          primer_pair.id,
                                                                          primer_pair.product_size,
@@ -292,7 +295,8 @@ class RecordPrimer3:
                                                                          primer_pair.left_primer.hairpin_th,
                                                                          primer_pair.right_primer.hairpin_th,
                                                                          primer_pair.left_primer.end_stability,
-                                                                         primer_pair.right_primer.end_stability)
+                                                                         primer_pair.right_primer.end_stability,
+                                                                         self.seq)
 
         return table_form2
 
@@ -409,10 +413,14 @@ class CollectionPrimer3(Collection):
             start = int(id_based_location_dict[entry_dict["SEQUENCE_ID"]][1])
             end = int(id_based_location_dict[entry_dict["SEQUENCE_ID"]][2])
 
+            monomer = id_based_location_dict[entry_dict["SEQUENCE_ID"]][3]["Pattern"] if "Pattern" in id_based_location_dict[entry_dict["SEQUENCE_ID"]][3] else None
+            total_monomer_number = float(id_based_location_dict[entry_dict["SEQUENCE_ID"]][3]["N_copies"]) if "N_copies" in id_based_location_dict[entry_dict["SEQUENCE_ID"]][3] else None
         else:
             chrom = None
             start = None
             end = None
+            monomer = None
+            total_monomer_number = None
         
         for primer_pair_index in range(0, primer_pair_number):
             left_primer_start, left_primer_len = map(int, entry_dict["PRIMER_LEFT_%i" % primer_pair_index].split(","))
@@ -466,7 +474,9 @@ class CollectionPrimer3(Collection):
                                pair_choice_description=entry_dict["PRIMER_PAIR_EXPLAIN"] if "PRIMER_PAIR_EXPLAIN" in entry_dict else None,
                                chrom=chrom,
                                chrom_pos_start=start,
-                               chrom_pos_end=end)
+                               chrom_pos_end=end,
+                               monomer=monomer,
+                               total_monomer_number=total_monomer_number)
 
         self.records.append(record)
 
