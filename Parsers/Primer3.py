@@ -243,7 +243,7 @@ class RecordPrimer3:
         table_form2_short = ""
         for primer_pair in self.primer_pair_list:
 
-            table_form2_short += "#%s\t%s\t%i\t%i\t%s\t%s\t%i\t%i\t%i\t%f\t%f\t%f\t%f\t%s\t%s\n" % (self.id,
+            table_form2_short += "%s\t%s\t%i\t%i\t%s\t%s\t%i\t%i\t%i\t%.3f\t%.3f\t%.3f\t%.3f\t%s\t%s\n" % (self.id,
                                                                                                     self.chrom,
                                                                                                     self.chrom_pos_start,
                                                                                                     self.chrom_pos_end,
@@ -272,8 +272,8 @@ class RecordPrimer3:
         table_form2 = ""
         for primer_pair in self.primer_pair_list:
 
-            table_form2 += "#%s\t%s\t%i\t%i\t%s\t%s\t%i\t%i\t%i\t%f\t%f\t%f\t%f\t%s\t" \
-                           "%s\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%s\n" % (self.id,
+            table_form2 += "%s\t%s\t%i\t%i\t%s\t%s\t%i\t%i\t%i\t%.3f\t%.3f\t%.3f\t%.3f\t%s\t%s\t.3%f\t%.3f\t" \
+                           "%.3f\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\t%s\n" % (self.id,
                                                                          self.chrom,
                                                                          self.chrom_pos_start,
                                                                          self.chrom_pos_end,
