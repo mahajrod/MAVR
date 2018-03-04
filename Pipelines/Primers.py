@@ -189,7 +189,7 @@ class STRPrimerPipeline(Pipeline):
         with_flanks_fasta = "%s.fasta" % with_flanks_prefix
 
         primer3_output_prefix = "%s.primer3" % with_flanks_prefix
-        """
+
         if trf_gff is None:
             print("Annotating repeats...")
             trf_report = TRF.parallel_search_tandem_repeat(genome_fasta, output_prefix,
@@ -208,15 +208,15 @@ class STRPrimerPipeline(Pipeline):
                            max_period=max_str_period, min_copy_number=min_copy_number, max_copy_number=max_copy_number,
                            pattern=pattern, min_percentage_of_matches=min_percentage_of_matches,
                            max_percentage_of_indels=max_percentage_of_indels, min_entropy=None, max_entropy=None)
-        """
+
         id_based_location_dict = AnnotationsRoutines.get_id_based_dict_from_gff(trf_output_gff,
                                                                                 id_entry=id_description_entry) if trf_gff else trf_report.get_id_based_dict()
-        """
+
         if min_perfect_copy_number:
             TRF.filter_trf_gff_by_exact_copy_number(filtered_trf_gff, final_filtered_gff,
                                                     filtered_out_exact_copy_trf_gff, min_perfect_copy_number,
                                                     perfect_tandem=require_tandem_perfect_copies)
-        """
+
         #print final_filtered_gff
         #print final_filtered_len_file
         TRF.get_monomer_len_file_from_trf_gff(final_filtered_gff, final_filtered_len_file)
@@ -225,7 +225,7 @@ class STRPrimerPipeline(Pipeline):
         monomer_length_id_dict = self.split_ids_from_len_file_by_len(final_filtered_len_file,
                                                                      monomer_length_id_file_prefix,
                                                                      len_column=1, id_column=0)
-        """
+
         AnnotationsRoutines.add_flanks_to_gff_record(final_filtered_gff, with_flanks_prefix,
                                                      left_flank_len, right_flank_len, genome_fasta,
                                                      coords_description_entry=core_seq_coords_entry,
@@ -237,7 +237,7 @@ class STRPrimerPipeline(Pipeline):
                                                      type_list="repeat",
                                                      parsing_mode="parse",
                                                      format="fasta")
-        """
+
         if count_kmers:
             print("Counting kmers...")
             if (not kmer_file_prefix) or (not kmer_dir):
