@@ -230,8 +230,68 @@ class RecordPrimer3:
 
                 string += table_string + "\n"
 
-            return string
         return string
+
+    def table_form2_short(self):
+        """
+        header = "#STR_ID\tScaffold\tStart\tStop\tPRIMER_PAIR_NUMBER\tPRIMER_PAIR_ID\tPCR_PRODUCT_SIZE\tPRIMER_LEFT_TM\tPRIMER_RIGHT_TM\t" \
+                 "PRIMER_LEFT_GC,%\tPRIMER_RIGHT_GC,%\tPRIMER_LEFT_SEQ\tPRIMER_RIGHT_SEQ\tTARGET_SEQ\n"
+        """
+        table_form2_short = ""
+        for primer_pair in self.primer_pair_list:
+
+            table_form2_short += "#%s\t%s\t%i\t%i\t%i\t%i\t%i\t%f\t%f\t%f\t%f\t%s\t%s\n" % (self.id,
+                                                                                            self.chrom,
+                                                                                            self.chrom_pos_start,
+                                                                                            self.chrom_pos_end,
+                                                                                            self.primer_pair_count,
+                                                                                            primer_pair.id,
+                                                                                            primer_pair.product_size,
+                                                                                            primer_pair.left_primer.melting_temperature,
+                                                                                            primer_pair.right_primer.melting_temperature,
+                                                                                            primer_pair.left_primer.gc_content,
+                                                                                            primer_pair.right_primer.gc_content,
+                                                                                            primer_pair.left_primer.seq,
+                                                                                            primer_pair.right_primer.seq)
+        return table_form2_short
+
+    def table_form2(self):
+        """
+        header = "#STR_ID\tScaffold\tStart\tStop\tPRIMER_PAIR_NUMBER\tPRIMER_PAIR_ID\tPCR_PRODUCT_SIZE\tPRIMER_LEFT_TM\tPRIMER_RIGHT_TM\t" \
+                 "PRIMER_LEFT_GC,%\tPRIMER_RIGHT_GC,%\tPRIMER_LEFT_SEQ\tPRIMER_RIGHT_SEQ\tTARGET_SEQ\t"
+
+                 "PRIMER_LEFT_SELF_ANY_TH\tPRIMER_RIGHT_SELF_ANY_TH\tPRIMER_LEFT_SELF_END_TH\tPRIMER_RIGHT_SELF_END_TH\t
+                 PRIMER_LEFT_HAIRPIN_TH\tPRIMER_RIGHT_HAIRPIN_TH\tPRIMER_LEFT_END_STABILITY\tPRIMER_RIGHT_END_STABILITY\n"
+
+
+        """
+        table_form2 = ""
+        for primer_pair in self.primer_pair_list:
+
+            table_form2 += "#%s\t%s\t%i\t%i\t%i\t%i\t%i\t%f\t%f\t%f\t%f\t" \
+                           "%s\t%s\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\n" % (self.id,
+                                                                         self.chrom,
+                                                                         self.chrom_pos_start,
+                                                                         self.chrom_pos_end,
+                                                                         self.primer_pair_count,
+                                                                         primer_pair.id,
+                                                                         primer_pair.product_size,
+                                                                         primer_pair.left_primer.melting_temperature,
+                                                                         primer_pair.right_primer.melting_temperature,
+                                                                         primer_pair.left_primer.gc_content,
+                                                                         primer_pair.right_primer.gc_content,
+                                                                         primer_pair.left_primer.seq,
+                                                                         primer_pair.right_primer.seq,
+                                                                         primer_pair.left_primer.self_any_th,
+                                                                         primer_pair.right_primer.self_any_th,
+                                                                         primer_pair.left_primer.self_end_th,
+                                                                         primer_pair.right_primer.self_end_th,
+                                                                         primer_pair.left_primer.hairpin_th,
+                                                                         primer_pair.right_primer.hairpin_th,
+                                                                         primer_pair.left_primer.end_stability,
+                                                                         primer_pair.right_primer.end_stability)
+
+        return table_form2
 
     def alignments_string(self, segment_length=120, left_primer_symbol=">",
                           target_symbol="*", right_primer_symbol="<"):
@@ -433,6 +493,28 @@ class CollectionPrimer3(Collection):
                                                               left_primer_symbol=left_primer_symbol,
                                                               target_symbol=target_symbol,
                                                               right_primer_symbol=right_primer_symbol))
+
+    def write_table_form2_short(self, out_file):
+
+        header = "#STR_ID\tScaffold\tStart\tStop\tPRIMER_PAIR_NUMBER\tPRIMER_PAIR_ID\tPCR_PRODUCT_SIZE\tPRIMER_LEFT_TM\tPRIMER_RIGHT_TM\t" \
+                 "PRIMER_LEFT_GC,%\tPRIMER_RIGHT_GC,%\tPRIMER_LEFT_SEQ\tPRIMER_RIGHT_SEQ\tTARGET_SEQ\n"
+
+        with open(out_file, "w") as out_fd:
+            out_fd.write(header)
+            for record in self.records:
+                out_fd.write(record.table_form2_short())
+
+    def write_table_form2(self, out_file):
+
+        header = "#STR_ID\tScaffold\tStart\tStop\tPRIMER_PAIR_NUMBER\tPRIMER_PAIR_ID\tPCR_PRODUCT_SIZE\tPRIMER_LEFT_TM\tPRIMER_RIGHT_TM\t" \
+                 "PRIMER_LEFT_GC,%\tPRIMER_RIGHT_GC,%\tPRIMER_LEFT_SEQ\tPRIMER_RIGHT_SEQ\tTARGET_SEQ\t" \
+                 "PRIMER_LEFT_SELF_ANY_TH\tPRIMER_RIGHT_SELF_ANY_TH\tPRIMER_LEFT_SELF_END_TH\tPRIMER_RIGHT_SELF_END_TH\t" \
+                 "PRIMER_LEFT_HAIRPIN_TH\tPRIMER_RIGHT_HAIRPIN_TH\tPRIMER_LEFT_END_STABILITY\tPRIMER_RIGHT_END_STABILITY\n"
+
+        with open(out_file, "w") as out_fd:
+            out_fd.write(header)
+            for record in self.records:
+                out_fd.write(record.table_form2())
 
     def filter_by_function(self, function):
 
