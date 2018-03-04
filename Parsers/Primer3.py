@@ -409,6 +409,7 @@ class CollectionPrimer3(Collection):
         primer_pair_list = []
         
         if id_based_location_dict:
+            print id_based_location_dict
             chrom = id_based_location_dict[entry_dict["SEQUENCE_ID"]][0]
             start = int(id_based_location_dict[entry_dict["SEQUENCE_ID"]][1])
             end = int(id_based_location_dict[entry_dict["SEQUENCE_ID"]][2])
