@@ -414,8 +414,8 @@ class CollectionPrimer3(Collection):
             start = int(id_based_location_dict[entry_dict["SEQUENCE_ID"]][1])
             end = int(id_based_location_dict[entry_dict["SEQUENCE_ID"]][2])
 
-            monomer = id_based_location_dict[entry_dict["SEQUENCE_ID"]][3]["Pattern"] if "Pattern" in id_based_location_dict[entry_dict["SEQUENCE_ID"]][3] else None
-            total_monomer_number = float(id_based_location_dict[entry_dict["SEQUENCE_ID"]][3]["N_copies"]) if "N_copies" in id_based_location_dict[entry_dict["SEQUENCE_ID"]][3] else None
+            monomer = id_based_location_dict[entry_dict["SEQUENCE_ID"]][3]["Pattern"][0] if "Pattern" in id_based_location_dict[entry_dict["SEQUENCE_ID"]][3] else None
+            total_monomer_number = float(id_based_location_dict[entry_dict["SEQUENCE_ID"]][3]["N_copies"][0]) if "N_copies" in id_based_location_dict[entry_dict["SEQUENCE_ID"]][3] else None
         else:
             chrom = None
             start = None
