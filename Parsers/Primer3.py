@@ -94,7 +94,7 @@ class RecordPrimer3:
                  left_primer_count, internal_oligo_count, right_primer_count, primer_pair_count, primer_pair_list=[],
                  left_primer_choice_description=None, right_primer_choice_description=None,
                  internal_oligo_choice_description=None, pair_choice_description=None, chrom=None,
-                 chrom_pos_start=None, chrom_pos_end=None):
+                 chrom_pos_start=None, chrom_pos_end=None, monomer=None, total_monomer_number=None):
 
         self.id = seq_id                                                                    # str
         self.seq = seq                                                                      # str
@@ -117,6 +117,9 @@ class RecordPrimer3:
         self.chrom = chrom                                                                  # str
         self.chrom_pos_start = chrom_pos_start                                              # int
         self.chrom_pos_end = chrom_pos_end                                                  # int
+
+        self.monomer = monomer                                                              # str
+        self.total_monomer_number = self.total_monomer_number                               # float
 
     def __str__(self):
         string = ""
@@ -405,6 +408,7 @@ class CollectionPrimer3(Collection):
             chrom = id_based_location_dict[entry_dict["SEQUENCE_ID"]][0]
             start = int(id_based_location_dict[entry_dict["SEQUENCE_ID"]][1])
             end = int(id_based_location_dict[entry_dict["SEQUENCE_ID"]][2])
+
         else:
             chrom = None
             start = None
