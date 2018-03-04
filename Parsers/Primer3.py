@@ -262,7 +262,7 @@ class RecordPrimer3:
 
     def table_form2(self):
         """
-        header = "#STR_ID\tScaffold\tStart\tStop\tPRIMER_PAIR_NUMBER\tPRIMER_PAIR_ID\tPCR_PRODUCT_SIZE\tPRIMER_LEFT_TM\tPRIMER_RIGHT_TM\t" \
+        header = "#STR_ID\tScaffold\tStart\tStop\tMonomer\tCopy_number\tPRIMER_PAIR_NUMBER\tPRIMER_PAIR_ID\tPCR_PRODUCT_SIZE\tPRIMER_LEFT_TM\tPRIMER_RIGHT_TM\t" \
                  "PRIMER_LEFT_GC,%\tPRIMER_RIGHT_GC,%\tPRIMER_LEFT_SEQ\tPRIMER_RIGHT_SEQ\tTARGET_SEQ\t" \
                  "PRIMER_LEFT_SELF_ANY_TH\tPRIMER_RIGHT_SELF_ANY_TH\tPRIMER_LEFT_SELF_END_TH\tPRIMER_RIGHT_SELF_END_TH\t" \
                  "PRIMER_LEFT_HAIRPIN_TH\tPRIMER_RIGHT_HAIRPIN_TH\tPRIMER_LEFT_END_STABILITY\tPRIMER_RIGHT_END_STABILITY\tREGION_SEQ\n"
@@ -511,7 +511,8 @@ class CollectionPrimer3(Collection):
 
     def write_table_form2_short(self, out_file):
 
-        header = "#STR_ID\tScaffold\tStart\tStop\tPRIMER_PAIR_NUMBER\tPRIMER_PAIR_ID\tPCR_PRODUCT_SIZE\tPRIMER_LEFT_TM\tPRIMER_RIGHT_TM\t" \
+        header = "#STR_ID\tScaffold\tStart\tStop\tMonomer\tCopy_number\tPRIMER_PAIR_NUMBER\tPRIMER_PAIR_ID" \
+                 "\tPCR_PRODUCT_SIZE\tPRIMER_LEFT_TM\tPRIMER_RIGHT_TM\t" \
                  "PRIMER_LEFT_GC,%\tPRIMER_RIGHT_GC,%\tPRIMER_LEFT_SEQ\tPRIMER_RIGHT_SEQ\tTARGET_SEQ\n"
 
         with open(out_file, "w") as out_fd:
@@ -521,7 +522,8 @@ class CollectionPrimer3(Collection):
 
     def write_table_form2(self, out_file):
 
-        header = "#STR_ID\tScaffold\tStart\tStop\tPRIMER_PAIR_NUMBER\tPRIMER_PAIR_ID\tPCR_PRODUCT_SIZE\tPRIMER_LEFT_TM\tPRIMER_RIGHT_TM\t" \
+        header = "#STR_ID\tScaffold\tStart\tStop\tMonomer\tCopy_number\tPRIMER_PAIR_NUMBER\tPRIMER_PAIR_ID" \
+                 "\tPCR_PRODUCT_SIZE\tPRIMER_LEFT_TM\tPRIMER_RIGHT_TM\t" \
                  "PRIMER_LEFT_GC,%\tPRIMER_RIGHT_GC,%\tPRIMER_LEFT_SEQ\tPRIMER_RIGHT_SEQ\tTARGET_SEQ\t" \
                  "PRIMER_LEFT_SELF_ANY_TH\tPRIMER_RIGHT_SELF_ANY_TH\tPRIMER_LEFT_SELF_END_TH\tPRIMER_RIGHT_SELF_END_TH\t" \
                  "PRIMER_LEFT_HAIRPIN_TH\tPRIMER_RIGHT_HAIRPIN_TH\tPRIMER_LEFT_END_STABILITY\tPRIMER_RIGHT_END_STABILITY\n"
