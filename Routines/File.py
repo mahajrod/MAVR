@@ -438,6 +438,19 @@ class FileRoutines:
                 out_fd_dict[entry].close()
 
     @staticmethod
+    def get_sample_list(sample_dir, sample_list=None):
+        samples = []
+        if sample_list:
+            return [sample_list] if isinstance(sample_list, str) else sample_list
+        else:
+            dir_list = os.listdir(sample_dir)
+            for directory in dir_list:
+                if os.path.isdir("%s/%s" % (sample_dir, directory)):
+                    samples.append(directory)
+
+            return samples
+
+    @staticmethod
     def replace_column_value_by_syn(input_file, syn_file, out_file, column=0, comment_prefix=None, separator="\t",
                                     syn_header=False, syn_separator="\t",
                                     syn_key_index=0, syn_value_index=1, syn_comment_prefix=None):
