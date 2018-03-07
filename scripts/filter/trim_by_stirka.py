@@ -5,13 +5,13 @@ from Tools.Stirka import Trimmer
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", "--input_dir", action="store", dest="input_dir", required=True,
+parser.add_argument("-i", "--input_dir", action="store", dest="input_dir", required=True, type=Trimmer.check_dir_path,
                     help="Input directory with samples. Files of each sample have to be located in its own dir")
 parser.add_argument("-s", "--sample_list", action="store", dest="sample_list",
                     help="Comma-separated list of samples to trim. Reads in sample directories have to be named in "
                          "following manner: <Sample_name>_1.fastq, <Sample_name>_2.fastq. If not set all directories in"
                          "input directory will be treated as sample dir")
-parser.add_argument("-o", "--output_dir", action="store", dest="output_dir", required=True,
+parser.add_argument("-o", "--output_dir", action="store", dest="output_dir", required=True, type=Trimmer.check_dir_path,
                     help="Input directory with samples. Files of each sample have to be located in its own dir")
 parser.add_argument("-a", "--adapters", action="store", dest="adapters", required=True,
                     help="File with adapter kmers")
