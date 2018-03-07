@@ -39,7 +39,7 @@ class Trimmer(Tool):
             sample_read_prefix = "%s/%s/%s" % (sample_dir, sample, sample)
             out_sample_dir = "%s/%s/" % (output_dir, sample)
             out_sample_prefix = "%s/%s" % (out_sample_dir, sample)
-            self.safe_mkdir(sample_dir)
+            self.safe_mkdir(out_sample_dir)
 
             self.trim_adapters(sample_read_prefix, adapter_kmer_file, out_sample_prefix,
                                write_fasta=write_fasta, input_format=input_format)
