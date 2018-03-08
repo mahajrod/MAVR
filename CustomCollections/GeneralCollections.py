@@ -383,12 +383,14 @@ class SynDict(OrderedDict):
             if comments_prefix:
                 if line[: com_pref_len] == comments_prefix:
                     continue
+            print line
 
             if include_line_expression:
                 if not include_line_expression(line):
+                    print line
                     continue
             #key, value = line.strip().split(separator)
-            #print line
+
             tmp = line.strip().split(separator) if separator else line.strip().split()
             #print tmp
             #print line
@@ -422,6 +424,7 @@ class SynDict(OrderedDict):
                         continue
                 else:
                     if not include_value_expression(value):
+                        print value
                         continue
 
             if key not in self:
