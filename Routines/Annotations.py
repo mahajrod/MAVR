@@ -472,3 +472,20 @@ class AnnotationsRoutines(SequenceRoutines):
                 id_based_dict[description_dict[id_entry][0]] = [tmp_list[0], tmp_list[3], tmp_list[4], description_dict]
 
         return id_based_dict
+
+    @staticmethod
+    def get_scaffold_ids_from_gff(gff_file, out_file=None):
+        scaffold_id_set = IdSet()
+
+        with open(gff_file, "r") as gff_fd:
+            for line in gff_fd:
+                if line[0] == "#":
+                    continue
+                scaffold_id = line.split("\t")[0]
+                scaffold_id_set.add(scaffold_id)
+
+        if out_file:
+            scaffold_id_set.write(out_file)
+
+        return scaffold_id_set
+
