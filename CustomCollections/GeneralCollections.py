@@ -390,6 +390,7 @@ class SynDict(OrderedDict):
                 if not include_line_expression(line):
                     if "\t0\t" in line:
                         print line
+                        include_line_expression(line)
                     continue
             #key, value = line.strip().split(separator)
 
