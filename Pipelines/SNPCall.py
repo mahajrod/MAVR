@@ -90,18 +90,18 @@ class SNPCallPipeline(Pipeline):
 
                 if scaffold in low_zero_coverage_fraction_dict:
                     if scaffold in white_scaffold_list:
-                        log_fd.write("%s\tRetained\t%i\tWhiteList,LowNomMaskedPercentage:%i\n" % (scaffold, length_dict[scaffold], low_zero_coverage_fraction_dict[scaffold]))
+                        log_fd.write("%s\tRetained\t%i\tWhiteList,LowNonMaskedPercentage:%f\n" % (scaffold, length_dict[scaffold], low_zero_coverage_fraction_dict[scaffold]))
                         continue
                     if scaffold in scaffold_with_annotation_set:
-                        log_fd.write("%s\tRetained\t%i\tWithAnnotations,LowNomMaskedPercentage:%i\n" % (scaffold, length_dict[scaffold], low_zero_coverage_fraction_dict[scaffold]))
+                        log_fd.write("%s\tRetained\t%i\tWithAnnotations,LonNonMaskedPercentage:%f\n" % (scaffold, length_dict[scaffold], low_zero_coverage_fraction_dict[scaffold]))
                         continue
                     if not(max_length is None):
                         if length_dict[scaffold] > max_length:
-                            log_fd.write("%s\tRetained\t%i\tLong,LowNomMaskedPercentage:%i\n" % (scaffold, length_dict[scaffold], low_zero_coverage_fraction_dict[scaffold]))
+                            log_fd.write("%s\tRetained\t%i\tLong,LowNonMaskedPercentage:%f\n" % (scaffold, length_dict[scaffold], low_zero_coverage_fraction_dict[scaffold]))
                         continue
 
                     scaffold_to_remove.add(scaffold)
-                    log_fd.write("%s\tRemoved\t%i\tLowNomMaskedPercentage:%i\n" % (scaffold, length_dict[scaffold], low_zero_coverage_fraction_dict[scaffold]))
+                    log_fd.write("%s\tRemoved\t%i\tLowNonMaskedPercentage:%f\n" % (scaffold, length_dict[scaffold], low_zero_coverage_fraction_dict[scaffold]))
                     continue
                 log_fd.write("%s\tRetained\t%i\tOK\n" % (scaffold, length_dict[scaffold]))
 
