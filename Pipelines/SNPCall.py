@@ -57,7 +57,7 @@ class SNPCallPipeline(Pipeline):
                                                                      sorted_combined_repeatmasking_gff)
         """
         self.execute(options=sorting_string, cmd="")
-        """
+
         print("Parsing reference...")
 
         reference_dict = self.parse_seq_file(reference, mode="parse")
@@ -67,8 +67,8 @@ class SNPCallPipeline(Pipeline):
         else:
             length_dict = SynDict(filename=reference_len_filename)
 
-        print("Calculating faraction of masked regions...")
-        """
+        print("Calculating fraction of masked regions...")
+
         GenomeCov.get_coverage_for_gff(sorted_combined_repeatmasking_gff, reference_len_filename,
                                        output=repeatmasking_coverage_file)
         """
