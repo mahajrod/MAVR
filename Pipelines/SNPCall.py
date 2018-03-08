@@ -57,7 +57,7 @@ class SNPCallPipeline(Pipeline):
                                                                      sorted_combined_repeatmasking_gff)
         """
         self.execute(options=sorting_string, cmd="")
-
+        """
         print("Parsing reference...")
 
         reference_dict = self.parse_seq_file(reference, mode="parse")
@@ -68,7 +68,7 @@ class SNPCallPipeline(Pipeline):
             length_dict = SynDict(filename=reference_len_filename)
 
         print("Calculating fraction of masked regions...")
-
+        """
         GenomeCov.get_coverage_for_gff(sorted_combined_repeatmasking_gff, reference_len_filename,
                                        output=repeatmasking_coverage_file)
         """
@@ -77,7 +77,7 @@ class SNPCallPipeline(Pipeline):
                                                   include_line_expression=lambda l: l.split("\t")[1] == "0",
                                                   expression=float,
                                                   include_value_expression=lambda v: v < (1.0 - max_masked_fraction))
-        print low_zero_coverage_fraction_dict
+        #print low_zero_coverage_fraction_dict
         scaffold_to_remove = IdSet()
 
         with open(filtering_log_file, "w") as log_fd:
