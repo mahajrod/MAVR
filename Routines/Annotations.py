@@ -489,3 +489,30 @@ class AnnotationsRoutines(SequenceRoutines):
 
         return scaffold_id_set
 
+    @staticmethod
+    def count_per_scaffold_feature_number(gff_file, out_file=None, feature_type_list=[]):
+        feature_count_dict = SynDict()
+
+        if feature_type_list:
+            def check_feature_type(feature_type):
+                return feature_type in feature_type_list
+        else:
+            def check_feature_type(feature_type):
+                return True
+
+        with open(gff_file, "r") as gff_fd:
+            for line in gff_fd:
+                if line[0] == "#":
+                    continue
+                line_list = line.split("\t")
+                if check_feature_type(line_list[2]):
+                    if line_list[0] in feature_count_dict:
+                        feature_count_dict[line_list[0]] += 1
+                    else:
+                        feature_count_dict[line_list[0]] = 1
+
+        if out_file:
+            feature_count_dict.write(out_file)
+
+        return feature_count_dict
+
