@@ -616,6 +616,7 @@ class NCBIRoutines(FileRoutines):
                                  max_unplaced_scaffolds=None, max_total_length=None, min_total_length=None,
                                  max_ungapped_length=None, min_ungapped_length=None,
                                  no_ambiguous_species=True):
+        self.safe_mkdir(output_directory)
         Entrez.email = email
         taxa_list = taxa if isinstance(taxa, Iterable) else [taxa]
 
