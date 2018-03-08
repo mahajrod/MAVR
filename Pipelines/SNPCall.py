@@ -38,7 +38,8 @@ class SNPCallPipeline(Pipeline):
         self.Picard_dir = Picard_dir
 
     def filter_reference(self, reference, repeatmasking_gff_list, output_prefix, reference_len_file=None,
-                         annotation_gff=None, max_masked_fraction=0.8, white_scaffold_list=(), black_scaffold_list=()):
+                         annotation_gff=None, max_masked_fraction=0.8, white_scaffold_list=(), black_scaffold_list=(),
+                         max_length=None):
         scaffold_with_annotation_file = "%s.scaffolds_with_annotations.ids" % output_prefix
         sorted_combined_repeatmasking_gff = "%s.sorted_combined_repeatmasking.gff" % output_prefix
         reference_len_filename = "%s.reference.len" % output_prefix if reference_len_file is None else reference_len_file
@@ -61,7 +62,9 @@ class SNPCallPipeline(Pipeline):
         reference_dict = self.parse_seq_file(reference, mode="parse")
 
         if reference_len_file is None:
-            self.get_lengths(reference_dict, out_file=reference_len_file)
+            length_dict = self.get_lengths(reference_dict, out_file=reference_len_file)
+        else:
+            length_dict = SynDict(filename=reference_len_file)
 
         print("Calculating coverage by masking...")
         GenomeCov.get_coverage_for_gff(sorted_combined_repeatmasking_gff, reference_len_filename,
@@ -75,24 +78,29 @@ class SNPCallPipeline(Pipeline):
         scaffold_to_remove = IdSet()
 
         with open(filtering_log_file, "w") as log_fd:
-
+            log_fd.write("#Scaffold\tStatus\tLength\tDescription\n")
             for scaffold in reference_dict:
                 if scaffold in black_scaffold_list:
                     scaffold_to_remove.add(scaffold)
-                    log_fd.write("%s\tRemoved\tBlackList\n" % scaffold)
+                    log_fd.write("%s\tRemoved\t%i\tBlackList\n" % (scaffold, length_dict[scaffold]))
                     continue
 
                 if scaffold in low_zero_coverage_fraction_dict:
                     if scaffold in white_scaffold_list:
-                        log_fd.write("%s\tRetained\tWhiteList,LowNomMaskedPercentage:%i\n" % (scaffold, low_zero_coverage_fraction_dict[scaffold]))
+                        log_fd.write("%s\tRetained\t%i\tWhiteList,LowNomMaskedPercentage:%i\n" % (scaffold, length_dict[scaffold], low_zero_coverage_fraction_dict[scaffold]))
                         continue
                     if scaffold in scaffold_with_annotation_set:
-                        log_fd.write("%s\tRetained\tWithAnnotations,LowNomMaskedPercentage:%i\n" % (scaffold, low_zero_coverage_fraction_dict[scaffold]))
+                        log_fd.write("%s\tRetained\t%i\tWithAnnotations,LowNomMaskedPercentage:%i\n" % (scaffold, length_dict[scaffold], low_zero_coverage_fraction_dict[scaffold]))
                         continue
+                    if not(max_length is None):
+                        if length_dict[scaffold] > max_length:
+                            log_fd.write("%s\tRetained\t%i\tLong,LowNomMaskedPercentage:%i\n" % (scaffold, length_dict[scaffold], low_zero_coverage_fraction_dict[scaffold]))
+                        continue
+
                     scaffold_to_remove.add(scaffold)
-                    log_fd.write("%s\tRemoved\tLowNomMaskedPercentage:%i\n" % (scaffold, low_zero_coverage_fraction_dict[scaffold]))
+                    log_fd.write("%s\tRemoved\t%i\tLowNomMaskedPercentage:%i\n" % (scaffold, length_dict[scaffold], low_zero_coverage_fraction_dict[scaffold]))
                     continue
-                log_fd.write("%s\tRetained\tOK\n" % scaffold)
+                log_fd.write("%s\tRetained\t%i\tOK\n" % (scaffold, length_dict[scaffold]))
 
         SeqIO.write(self.record_by_id_generator(reference_dict, scaffold_to_remove),
                     filtered_out_scaffolds_file, format="fasta")
