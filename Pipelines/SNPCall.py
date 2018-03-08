@@ -62,9 +62,9 @@ class SNPCallPipeline(Pipeline):
         reference_dict = self.parse_seq_file(reference, mode="parse")
 
         if reference_len_file is None:
-            length_dict = self.get_lengths(reference_dict, out_file=reference_len_file)
+            length_dict = self.get_lengths(reference_dict, out_file=reference_len_filename)
         else:
-            length_dict = SynDict(filename=reference_len_file)
+            length_dict = SynDict(filename=reference_len_filename)
 
         print("Calculating coverage by masking...")
         GenomeCov.get_coverage_for_gff(sorted_combined_repeatmasking_gff, reference_len_filename,
