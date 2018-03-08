@@ -385,7 +385,7 @@ class SynDict(OrderedDict):
                     continue
 
             if include_line_expression:
-                if not include_line_expression:
+                if not include_line_expression(line):
                     continue
             #key, value = line.strip().split(separator)
             #print line
