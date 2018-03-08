@@ -5,6 +5,9 @@ from Bio import SeqIO
 from Routines.Functions import check_path
 #from Tools.Picard import add_header2bam
 from collections import OrderedDict
+
+from Bio import SeqIO
+
 #from MutAnalysis.Mutation import *
 from Tools.AssemblyTools import spades
 #from Tools.FilterTools import trim_galore
@@ -13,10 +16,13 @@ from Tools.Alignment import Bowtie2, BWA, Novoalign, TMAP
 
 from Pipelines.Abstract import Pipeline
 
+from Tools.Bedtools import GenomeCov
 from Tools.Samtools import SamtoolsV1
 from Tools.Picard import MarkDuplicates
 from Tools.GATK import *
 from Tools.Picard import CreateSequenceDictionary
+
+from CustomCollections.GeneralCollections import SynDict, IdSet
 
 # TODO: refactor, remove absolete functions and so on
 
@@ -30,6 +36,63 @@ class SNPCallPipeline(Pipeline):
         self.GATK_dir = GATK_dir
         self.GATK_jar = GATK_jar
         self.Picard_dir = Picard_dir
+
+    def filter_reference(self, reference, repeatmasking_gff_list, output_prefix, reference_len_file=None,
+                         annotation_gff=None, max_masked_fraction=0.8, white_scaffold_list=(), black_scaffold_list=()):
+        scaffold_with_annotation_file = "%s.scaffolds_with_annotations.ids" % output_prefix
+        sorted_combined_repeatmasking_gff = "%s.sorted_combined_repeatmasking.gff" % output_prefix
+        reference_len_filename = "%s.reference.len" % output_prefix if reference_len_file is None else reference_len_file
+        repeatmasking_coverage_file = "%s.repeatmasking.coverage" % output_prefix
+        filtering_log_file = "%s.filtering.log" % output_prefix
+
+        filtered_scaffolds_file = "%s.filtered.fasta" % output_prefix
+        filtered_out_scaffolds_file = "%s.filtered_out.fasta" % output_prefix
+
+        scaffold_with_annotation_set = self.get_scaffold_ids_from_gff(annotation_gff,
+                                                                      out_file=scaffold_with_annotation_file)
+
+        sorting_string = "cat %s | sort -k1,1 -k4,4n -k5,5n > %s" % (repeatmasking_gff_list if isinstance(repeatmasking_gff_list, str) else" ".join(repeatmasking_gff_list),
+                                                                     sorted_combined_repeatmasking_gff)
+        self.execute(options=sorting_string, cmd="")
+
+        reference_dict = self.parse_seq_file(reference, mode="parse")
+        if reference_len_file is None:
+            self.get_lengths(reference_dict, out_file=reference_len_file)
+
+        GenomeCov.get_coverage_for_gff(sorted_combined_repeatmasking_gff, reference_len_filename,
+                                       output=repeatmasking_coverage_file)
+
+        low_zero_coverage_fraction_dict = SynDict(filename=repeatmasking_coverage_file, key_index=0, value_index=4,
+                                                  include_line_expression=lambda l: l.split("\t")[1] == 0,
+                                                  expression=float,
+                                                  include_value_expression=lambda v: v < (1.0 - max_masked_fraction))
+        scaffold_to_remove = IdSet()
+
+        with open(filtering_log_file, "w") as log_fd:
+
+            for scaffold in reference_dict:
+                if scaffold in black_scaffold_list:
+                    scaffold_to_remove.add(scaffold)
+                    log_fd.write("%s\tRemoved\tBlackList\n" % scaffold)
+                    continue
+
+                if scaffold in low_zero_coverage_fraction_dict:
+                    if scaffold in white_scaffold_list:
+                        log_fd.write("%s\tRetained\tWhiteList,LowNomMaskedPercentage:%i\n" % (scaffold, low_zero_coverage_fraction_dict[scaffold]))
+                        continue
+                    if scaffold in scaffold_with_annotation_set:
+                        log_fd.write("%s\tRetained\tWithAnnotations,LowNomMaskedPercentage:%i\n" % (scaffold, low_zero_coverage_fraction_dict[scaffold]))
+                        continue
+                    scaffold_to_remove.add(scaffold)
+                    log_fd.write("%s\tRemoved\tLowNomMaskedPercentage:%i\n" % (scaffold, low_zero_coverage_fraction_dict[scaffold]))
+                    continue
+                log_fd.write("%s\tRetained\tOK\n" % scaffold)
+
+        SeqIO.write(self.record_by_id_generator(reference_dict, scaffold_to_remove),
+                    filtered_out_scaffolds_file, format="fasta")
+        SeqIO.write(self.record_by_id_generator(reference_dict, IdSet(reference_dict.keys) - scaffold_to_remove),
+                    filtered_scaffolds_file, format="fasta")
+        print "Total scaffolds\t%i\nRemoved\t%i\n" % (len(reference_dict), len(scaffold_to_remove))
 
     def prepare_dirs(self, sample_list, outdir="./", include_alignment_dir=False):
         dir_dict = {

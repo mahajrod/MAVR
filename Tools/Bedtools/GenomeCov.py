@@ -15,6 +15,7 @@ class GenomeCov(Tool):
 
     def get_coverage(self, input_bam, genome_bed, output, report_zero_coverage=None, one_based_coordinates=True, scale=None):
 
+
         options = " -ibam %s" % input_bam
         # options += " -bga" if report_zero_coverage else " -bg"
         # options += " -bga" if report_zero_coverage else " -bg"
@@ -24,6 +25,14 @@ class GenomeCov(Tool):
         options += " > %s" % output
 
         self.execute(options)
+
+    def get_coverage_for_gff(self, input_file, genome_bed, output=None):
+
+        options = " -i %s" % input_file
+        options += " -g %s" % genome_bed
+        options += " > %s" % output if output else ""
+
+        self.execute(options=options)
 
     def collapse_coverage_file(self, coverage_file, output_file):
 
