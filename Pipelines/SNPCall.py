@@ -74,7 +74,7 @@ class SNPCallPipeline(Pipeline):
         """
         print("Filtering...")
         low_zero_coverage_fraction_dict = SynDict(filename=repeatmasking_coverage_file, key_index=0, value_index=4,
-                                                  include_line_expression=lambda l: l.split("\t")[1] == 0,
+                                                  include_line_expression=lambda l: l.split("\t")[1] == "0",
                                                   expression=float,
                                                   include_value_expression=lambda v: v < (1.0 - max_masked_fraction))
         print low_zero_coverage_fraction_dict
