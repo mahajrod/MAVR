@@ -427,7 +427,7 @@ class SynDict(OrderedDict):
                         continue
                 else:
                     if not include_value_expression(value):
-                        print value
+                        #print value
                         continue
 
             if key not in self:
