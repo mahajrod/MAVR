@@ -383,13 +383,13 @@ class SynDict(OrderedDict):
             if comments_prefix:
                 if line[: com_pref_len] == comments_prefix:
                     continue
-            if "\t0\t" in line:
-                print line
+            #if "\t0\t" in line:
+            #    print line
 
             if include_line_expression:
                 if not include_line_expression(line):
-                    if "\t0\t" in line:
-                        print line
+                    #if "\t0\t" in line:
+                    #    print line
                     continue
             #key, value = line.strip().split(separator)
 
