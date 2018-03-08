@@ -66,7 +66,7 @@ class SNPCallPipeline(Pipeline):
         else:
             length_dict = SynDict(filename=reference_len_filename)
 
-        print("Calculating coverage by masking...")
+        print("Calculating faraction of masked regions...")
         GenomeCov.get_coverage_for_gff(sorted_combined_repeatmasking_gff, reference_len_filename,
                                        output=repeatmasking_coverage_file)
 
