@@ -51,17 +51,23 @@ class SNPCallPipeline(Pipeline):
         scaffold_with_annotation_set = self.get_scaffold_ids_from_gff(annotation_gff,
                                                                       out_file=scaffold_with_annotation_file)
 
+        print("Sorting masking GFFs...")
         sorting_string = "cat %s | sort -k1,1 -k4,4n -k5,5n > %s" % (repeatmasking_gff_list if isinstance(repeatmasking_gff_list, str) else" ".join(repeatmasking_gff_list),
                                                                      sorted_combined_repeatmasking_gff)
         self.execute(options=sorting_string, cmd="")
 
+        print("Parsing reference...")
+
         reference_dict = self.parse_seq_file(reference, mode="parse")
+
         if reference_len_file is None:
             self.get_lengths(reference_dict, out_file=reference_len_file)
 
+        print("Calculating coverage by masking...")
         GenomeCov.get_coverage_for_gff(sorted_combined_repeatmasking_gff, reference_len_filename,
                                        output=repeatmasking_coverage_file)
 
+        print("Filtering...")
         low_zero_coverage_fraction_dict = SynDict(filename=repeatmasking_coverage_file, key_index=0, value_index=4,
                                                   include_line_expression=lambda l: l.split("\t")[1] == 0,
                                                   expression=float,
