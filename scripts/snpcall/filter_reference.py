@@ -25,6 +25,8 @@ parser.add_argument("-s", "--max_masked_fraction", action="store", dest="max_mas
                     help="Maximum masked fraction of scaffold to retain. Default: 0.8")
 parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix",
                     help="Prefix of output files")
+parser.add_argument("-x", "--max_len", action="store", dest="max_len", default=None, type=int,
+                    help="Maximum length of scaffold that can be removed. Default: not set")
 
 args = parser.parse_args()
 
@@ -33,4 +35,5 @@ SNPCallPipeline.filter_reference(args.reference, args.masking_gffs, args.output_
                                  annotation_gff=args.annotation_gff,
                                  max_masked_fraction=args.max_masked_fraction,
                                  white_scaffold_list=IdList(filename=args.white_ids_file) if args.white_ids_file else [],
-                                 black_scaffold_list=IdList(filename=args.black_ids_file) if args.black_ids_file else [])
+                                 black_scaffold_list=IdList(filename=args.black_ids_file) if args.black_ids_file else [],
+                                 max_length=args.max_len)
