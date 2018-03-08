@@ -388,9 +388,9 @@ class SynDict(OrderedDict):
 
             if include_line_expression:
                 if not include_line_expression(line):
-                    if "\t0\t" in line:
-                        print line
-                        include_line_expression(line)
+                    #if "\t0\t" in line:
+                    #    print line
+                    #    include_line_expression(line)
                     continue
             #key, value = line.strip().split(separator)
 
