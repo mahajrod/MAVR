@@ -326,7 +326,8 @@ class SynDict(OrderedDict):
 
     def __init__(self, input=None, filename=None, header=False, separator="\t", allow_repeats_of_key=False,
                  split_values=False, values_separator=",", key_index=0, value_index=1,
-                 close_after_if_file_object=False, expression=None, comments_prefix=None):
+                 close_after_if_file_object=False, expression=None, comments_prefix=None,
+                 include_line_expression=None, include_value_expression=None):
         OrderedDict.__init__(self)
 
         if filename:
@@ -335,7 +336,9 @@ class SynDict(OrderedDict):
                       split_values=split_values, values_separator=values_separator,
                       key_index=key_index, value_index=value_index,
                       close_after_if_file_object=close_after_if_file_object, expression=expression,
-                      comments_prefix=comments_prefix)
+                      comments_prefix=comments_prefix,
+                      include_line_expression=include_line_expression,
+                      include_value_expression=include_value_expression)
         elif input:
             OrderedDict.__init__(self, input)
 
@@ -351,7 +354,8 @@ class SynDict(OrderedDict):
 
     def read(self, filename, header=False, separator="\t", allow_repeats_of_key=False,
              split_values=False, values_separator=",", key_index=0, value_index=1,
-             close_after_if_file_object=False, expression=None, comments_prefix=None):
+             close_after_if_file_object=False, expression=None, comments_prefix=None,
+             include_line_expression=None, include_value_expression=None):
         #reads ids from file with one id per line
 
         """
@@ -379,6 +383,10 @@ class SynDict(OrderedDict):
             if comments_prefix:
                 if line[: com_pref_len] == comments_prefix:
                     continue
+
+            if include_line_expression:
+                if not include_line_expression:
+                    continue
             #key, value = line.strip().split(separator)
             #print line
             tmp = line.strip().split(separator) if separator else line.strip().split()
@@ -401,6 +409,21 @@ class SynDict(OrderedDict):
                     value = map(expression, value)
                 else:
                     value = expression(value)
+
+            if include_value_expression:
+                if split_values or allow_repeats_of_key:
+                    filtered_value_list = []
+                    for entry in value:
+                        if include_value_expression(entry):
+                            filtered_value_list.append(entry)
+                    if filtered_value_list:
+                        value = filtered_value_list
+                    else:
+                        continue
+                else:
+                    if not include_value_expression(value):
+                        continue
+
             if key not in self:
                 self[key] = value
             else:
