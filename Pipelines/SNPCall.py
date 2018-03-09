@@ -132,7 +132,7 @@ class SNPCallPipeline(Pipeline):
                       iteration_number=3, SNP_QD=2.0, SNP_FS=30.0, SNP_MQ=40.0, SNP_MappingQualityRankSum=-12.5,
                       SNP_ReadPosRankSum=-8.0, indel_QD=2.0, indel_ReadPosRankSum=-20.0, indel_FS=200.0,
                       SNP_filter_name="ambiguous_snp", indel_filter_name="ambiguous_indel",
-                      analyze_covariates=True):
+                      analyze_covariates=True, include_region_id_file=None, exclude_region_id_file=None):
 
         SamtoolsV1.check_for_fasta_index(reference)
 
@@ -244,13 +244,17 @@ class SNPCallPipeline(Pipeline):
                     BaseRecalibrator.get_recalibration_table(reference,
                                                              sample_realigned_bam,
                                                              sample_recall_table,
-                                                             known_sites)
+                                                             known_sites,
+                                                             include_region_id_file=include_region_id_file,
+                                                             exclude_region_id_file=exclude_region_id_file)
 
                     BaseRecalibrator.get_recalibration_table(reference,
                                                              sample_realigned_bam,
                                                              sample_postrecall_table,
                                                              known_sites,
-                                                             BQSR=sample_recall_table)
+                                                             BQSR=sample_recall_table,
+                                                             include_region_id_file=include_region_id_file,
+                                                             exclude_region_id_file=exclude_region_id_file)
                     if analyze_covariates:
                         AnalyzeCovariates.plot_two_recall_table(reference, sample_recall_table, sample_postrecall_table,
                                                                 sample_recall_plots, csv_out=sample_recall_csv)
@@ -263,10 +267,14 @@ class SNPCallPipeline(Pipeline):
                     #HaplotypeCaller.call(reference, sample_realigned, raw_vcf, genotyping_mode=genotyping_mode,
                     #                     output_mode=output_mode, stand_emit_conf=stand_emit_conf, stand_call_conf=stand_call_conf)
                     HaplotypeCaller.gvcf_call(reference, sample_recalled_reads_bam, gvcf, genotyping_mode=genotyping_mode,
-                                              output_mode=output_mode, stand_call_conf=stand_call_conf)
+                                              output_mode=output_mode, stand_call_conf=stand_call_conf,
+                                              include_region_id_file=include_region_id_file,
+                                              exclude_region_id_file=exclude_region_id_file)
                 else:
                     HaplotypeCaller.gvcf_call(reference, sample_realigned_bam, gvcf, genotyping_mode=genotyping_mode,
-                                              output_mode=output_mode, stand_call_conf=stand_call_conf)
+                                              output_mode=output_mode, stand_call_conf=stand_call_conf,
+                                              include_region_id_file=include_region_id_file,
+                                              exclude_region_id_file=exclude_region_id_file)
 
             GenotypeGVCFs.genotype(reference, gvcf_list, merged_raw_vcf)
 
