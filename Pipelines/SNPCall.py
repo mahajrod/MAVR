@@ -55,9 +55,9 @@ class SNPCallPipeline(Pipeline):
         print("Sorting GFFs with masking...")
         sorting_string = "cat %s | sort -k1,1 -k4,4n -k5,5n > %s" % (repeatmasking_gff_list if isinstance(repeatmasking_gff_list, str) else" ".join(repeatmasking_gff_list),
                                                                      sorted_combined_repeatmasking_gff)
-        """
+
         self.execute(options=sorting_string, cmd="")
-        """
+
         print("Parsing reference...")
 
         reference_dict = self.parse_seq_file(reference, mode="parse")
@@ -68,10 +68,10 @@ class SNPCallPipeline(Pipeline):
             length_dict = SynDict(filename=reference_len_filename)
 
         print("Calculating fraction of masked regions...")
-        """
+
         GenomeCov.get_coverage_for_gff(sorted_combined_repeatmasking_gff, reference_len_filename,
                                        output=repeatmasking_coverage_file)
-        """
+
         print("Filtering...")
         low_zero_coverage_fraction_dict = SynDict(filename=repeatmasking_coverage_file, key_index=0, value_index=4,
                                                   include_line_expression=lambda l: l.split("\t")[1] == "0",
@@ -188,7 +188,7 @@ class SNPCallPipeline(Pipeline):
             sample_intervals_for_realignment = "%s.forIndelRealigner.intervals" % sample_alignment_prefix
             sample_realigned_bam = "%s.realigned.bam" % sample_alignment_prefix
 
-            """
+
             RealignerTargetCreator.create(reference, sample_alignment,
                                           output=sample_intervals_for_realignment,
                                           known_indels_vcf=None,
@@ -207,7 +207,7 @@ class SNPCallPipeline(Pipeline):
                                    max_size_for_movement=None, max_pos_move=None, max_reads_for_cons=None,
                                    max_reads_for_realignment=None, max_reads_in_memory=None, no_original_tags=False,
                                    nway_out=False, default_base_qualities=None)
-            """
+
         for iteration_index in range(0, iterations):
             gvcf_list = []
 
