@@ -12,7 +12,8 @@ class BaseRecalibrator(JavaTool):
                           max_threads=max_threads, jar_path=jar_path, max_memory=max_memory,
                           timelog=timelog)
 
-    def get_recalibration_table(self, reference, alignment, output_table, known_sites_vcf, BQSR=None):
+    def get_recalibration_table(self, reference, alignment, output_table, known_sites_vcf, BQSR=None,
+                                include_region_id_file=None, exclude_region_id_file=None):
 
         # TODO: add rest of  options
         options = ""
@@ -21,6 +22,8 @@ class BaseRecalibrator(JavaTool):
         options += " -nct %i" % self.threads
         options += " -BQSR %s" % BQSR if BQSR else ""
         options += " -knownSites %s" % known_sites_vcf if isinstance(known_sites_vcf, str) else " -knownSites ".join(known_sites_vcf)
+        options += " -L %s" % include_region_id_file if include_region_id_file else ""
+        options += " -XL %s" % exclude_region_id_file if exclude_region_id_file else ""
         options += " -o %s" % output_table
 
         self.execute(options)
