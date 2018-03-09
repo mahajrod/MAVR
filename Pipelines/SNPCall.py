@@ -48,6 +48,7 @@ class SNPCallPipeline(Pipeline):
 
         filtered_scaffolds_file = "%s.filtered.fasta" % output_prefix
         filtered_out_scaffolds_file = "%s.filtered_out.fasta" % output_prefix
+        filtered_out_scaffolds_id_file = "%s.filtered_out.ids" % output_prefix
 
         scaffold_with_annotation_set = self.get_scaffold_ids_from_gff(annotation_gff,
                                                                       out_file=scaffold_with_annotation_file)
@@ -104,6 +105,8 @@ class SNPCallPipeline(Pipeline):
                     log_fd.write("%s\tRemoved\t%i\tLowNonMaskedPercentage:%f\n" % (scaffold, length_dict[scaffold], low_zero_coverage_fraction_dict[scaffold]))
                     continue
                 log_fd.write("%s\tRetained\t%i\tOK\n" % (scaffold, length_dict[scaffold]))
+
+        scaffold_to_remove.write(filename=filtered_out_scaffolds_id_file)
 
         SeqIO.write(self.record_by_id_generator(reference_dict, scaffold_to_remove),
                     filtered_out_scaffolds_file, format="fasta")
