@@ -31,6 +31,12 @@ parser.add_argument("-u", "--variant_call_quality", action="store", dest="call_q
                     help="Minimum quality of variant to be called.") # Variant with quality between call and emit will ""be present in vcf file but with filter 'low quality'")
 parser.add_argument("-x", "--suffix", action="store", dest="suffix", default="",
                     help="Suffix of the input files. Default: ''")
+
+parser.add_argument("-y", "--regions_to_include", action="store", dest="regions_to_include",
+                    help="File with regions to include in analysis")
+parser.add_argument("-z", "--regions_to_exclude", action="store", dest="regions_to_exclude",
+                    help="File with regions to exclude in analysis")
+
 """
 parser.add_argument("--quality_to_change", action="store", dest="quality_to_change", default=None, type=int,
                     help="Change quality of read alignment with this quality to quality set by "
@@ -60,4 +66,6 @@ SNPCallPipeline.call_variants(args.sample_dir, args.reference, args.output_prefi
                               iteration_number=3, SNP_QD=2.0, SNP_FS=30.0, SNP_MQ=40.0, SNP_MappingQualityRankSum=-12.5,
                               SNP_ReadPosRankSum=-8.0, indel_QD=2.0, indel_ReadPosRankSum=-20.0, indel_FS=200.0,
                               SNP_filter_name="ambiguous_snp", indel_filter_name="ambiguous_indel",
-                              analyze_covariates=True)
+                              analyze_covariates=True,
+                              include_region_id_file=args.regions_to_include,
+                              exclude_region_id_file=args.regions_to_exclude)
