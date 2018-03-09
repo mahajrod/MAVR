@@ -15,7 +15,7 @@ class HaplotypeCaller(JavaTool):
                           timelog=timelog)
 
     def parse_options(self, reference, alignment, output, genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
-                      stand_call_conf=30, gvcf_mode=False):
+                      stand_call_conf=30, gvcf_mode=False, include_region_id_file=None, exclude_region_id_file=None):
 
         options = " -nct %i" % self.threads
         options += " -R %s" % reference
@@ -25,13 +25,15 @@ class HaplotypeCaller(JavaTool):
         #options += " -stand_emit_conf %i" % stand_emit_conf
         options += " -stand_call_conf %i" % stand_call_conf
         options += " --emitRefConfidence GVCF" if gvcf_mode else ""
+        options += " -L %s" % include_region_id_file if include_region_id_file else ""
+        options += " -XL %s" % exclude_region_id_file if exclude_region_id_file else ""
 
         options += " -o %s" % output
 
         return options
 
     def call(self, reference, alignment, output, genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
-             stand_call_conf=30):
+             stand_call_conf=30, include_region_id_file=None, exclude_region_id_file=None):
         """
             java -Xmx100g -jar ~/tools/GenomeAnalysisTK-3.7/GenomeAnalysisTK.jar \
               -T HaplotypeCaller \
@@ -44,12 +46,14 @@ class HaplotypeCaller(JavaTool):
         """
         options = self.parse_options(reference, alignment, output, genotyping_mode=genotyping_mode,
                                      output_mode=output_mode,
-                                     stand_call_conf=stand_call_conf, gvcf_mode=False)
+                                     stand_call_conf=stand_call_conf, gvcf_mode=False,
+                                     include_region_id_file=include_region_id_file,
+                                     exclude_region_id_file=exclude_region_id_file)
 
         self.execute(options)
 
     def gvcf_call(self, reference, alignment, output, genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
-                  stand_call_conf=30):
+                  stand_call_conf=30, include_region_id_file=None, exclude_region_id_file=None):
         """
         java -jar GenomeAnalysisTK.jar \
          -R reference.fasta \
@@ -62,7 +66,9 @@ class HaplotypeCaller(JavaTool):
         """
         options = self.parse_options(reference, alignment, output, genotyping_mode=genotyping_mode,
                                      output_mode=output_mode,
-                                     stand_call_conf=stand_call_conf, gvcf_mode=True)
+                                     stand_call_conf=stand_call_conf, gvcf_mode=True,
+                                     include_region_id_file=include_region_id_file,
+                                     exclude_region_id_file=exclude_region_id_file)
 
         self.execute(options)
 
