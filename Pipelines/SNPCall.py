@@ -150,7 +150,8 @@ class SNPCallPipeline(Pipeline):
                     PrintReads, \
                     HaplotypeCaller, \
                     SelectVariants, \
-                    GenotypeGVCFs:
+                    GenotypeGVCFs,\
+                    CombineVariants:
 
             tool.threads = threads if threads else self.threads
             tool.max_memory = "%ig" % self.max_memory
