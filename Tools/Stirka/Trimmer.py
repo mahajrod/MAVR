@@ -18,6 +18,7 @@ class Trimmer(Tool):
         options += " %i" % (1 if write_fasta else 0)
         options += " %s" % input_format
         options += " %s" % kmer_file
+        options += " > %s.stats 2>&1" % output_prefix
 
         return options
 
