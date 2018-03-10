@@ -272,7 +272,7 @@ class RecordPrimer3:
         table_form2 = ""
         for primer_pair in self.primer_pair_list:
 
-            table_form2 += "%s\t%s\t%i\t%i\t%s\t%s\t%i\t%i\t%i\t%.3f\t%.3f\t%.3f\t%.3f\t%s\t%s\t.3%f\t%.3f\t" \
+            table_form2 += "%s\t%s\t%i\t%i\t%s\t%s\t%i\t%i\t%i\t%.3f\t%.3f\t%.3f\t%.3f\t%s\t%s\t%.3f\t%.3f\t" \
                            "%.3f\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\t%s\n" % (self.id,
                                                                          self.chrom,
                                                                          self.chrom_pos_start,
@@ -524,9 +524,9 @@ class CollectionPrimer3(Collection):
 
         header = "#STR_ID\tScaffold\tStart\tStop\tMonomer\tCopy_number\tPRIMER_PAIR_NUMBER\tPRIMER_PAIR_ID" \
                  "\tPCR_PRODUCT_SIZE\tPRIMER_LEFT_TM\tPRIMER_RIGHT_TM\t" \
-                 "PRIMER_LEFT_GC,%\tPRIMER_RIGHT_GC,%\tPRIMER_LEFT_SEQ\tPRIMER_RIGHT_SEQ\tTARGET_SEQ\t" \
+                 "PRIMER_LEFT_GC,%\tPRIMER_RIGHT_GC,%\tPRIMER_LEFT_SEQ\tPRIMER_RIGHT_SEQ\t" \
                  "PRIMER_LEFT_SELF_ANY_TH\tPRIMER_RIGHT_SELF_ANY_TH\tPRIMER_LEFT_SELF_END_TH\tPRIMER_RIGHT_SELF_END_TH\t" \
-                 "PRIMER_LEFT_HAIRPIN_TH\tPRIMER_RIGHT_HAIRPIN_TH\tPRIMER_LEFT_END_STABILITY\tPRIMER_RIGHT_END_STABILITY\n"
+                 "PRIMER_LEFT_HAIRPIN_TH\tPRIMER_RIGHT_HAIRPIN_TH\tPRIMER_LEFT_END_STABILITY\tPRIMER_RIGHT_END_STABILITY\tTARGET_SEQ\n"
 
         with open(out_file, "w") as out_fd:
             out_fd.write(header)
