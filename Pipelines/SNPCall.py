@@ -128,7 +128,7 @@ class SNPCallPipeline(Pipeline):
                 
         self.recursive_mkdir(dir_dict, out_dir=outdir)
 
-    def call_variants(self, sample_dir, reference, merged_vcf_prefix, sample_list=None, outdir="./", suffix=None, input="alignment",
+    def call_variants(self, sample_dir, reference, merged_prefix, sample_list=None, outdir="./", suffix=None, input="alignment",
                       input_filetype="bam", threads=None, mark_duplicates=False, known_variants_vcf=None,
                       genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
                       stand_call_conf=30, skip_base_score_recalibration=False,
@@ -222,7 +222,7 @@ class SNPCallPipeline(Pipeline):
 
             sample_recalled_reads_bam = "%s.recal_reads.iteration%i.bam" % (sample_alignment_prefix, iteration_index)
 
-            merged_vcf_prefix = "%s/SNPcall/%s.iteration%i" % (outdir, merged_vcf_prefix, iteration_index)
+            merged_vcf_prefix = "%s/SNPcall/%s.iteration%i" % (outdir, merged_prefix, iteration_index)
             merged_raw_vcf = "%s.raw.vcf" % merged_vcf_prefix
 
             merged_raw_snp_vcf = "%s.raw.snp.vcf" % merged_vcf_prefix
