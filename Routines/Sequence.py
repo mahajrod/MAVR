@@ -282,7 +282,7 @@ class SequenceRoutines(FileRoutines):
             os.remove(index_file)
 
     def extract_sequences_by_length_from_file(self, input_file, output_file, min_len=1, max_len=None, format="fasta",
-                                              tmp_index_file="tmp.idx", id_file=None):
+                                              tmp_index_file="tmp.idx", id_file=None, parsing_mode='parse'):
 
         if (min_len is None) and (max_len is None):
             raise ValueError("Both minimum and maximum lengths were not set")
@@ -293,7 +293,7 @@ class SequenceRoutines(FileRoutines):
         elif (max_len is not None) and (max_len < 0):
             raise ValueError("Maximum length is below zero")
 
-        sequence_dict = SeqIO.index_db(tmp_index_file, input_file, format=format)
+        sequence_dict = self.parse_seq_file(input_file, mode=parsing_mode, format=format, index_file=tmp_index_file) #        SeqIO.index_db(tmp_index_file, input_file, format=format)
 
         if (min_len is not None) and (min_len > 1) and (max_len is not None):
             length_expression = lambda record: min_len <= len(record.seq) <= max_len
