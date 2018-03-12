@@ -12,13 +12,15 @@ parser.add_argument("-o", "--output_file", action="store", dest="output_file",
                     help="Output file with sequences.")
 parser.add_argument("-f", "--format", action="store", dest="format", default="fasta",
                     help="Format of input and output files. Allowed formats genbank, fasta(default)")
-
 parser.add_argument("-n", "--min_length", action="store", dest="min_length", type=int,
                     help="Minimun length of sequence to store. Default: filter not used")
 parser.add_argument("-x", "--max_length", action="store", dest="max_length", type=int,
                     help="Maximum length of sequence to store. Default: filter not set")
 parser.add_argument("-d", "--id_file", action="store", dest="id_file",
                     help="File to write ids of extracted sequences. Default - don't write")
+parser.add_argument("-p", "--parsing_mode", action="store", dest="parsing_mode", default='parse',
+                    help="Parsing mode. Allowed: parse(default), index, index_db")
+
 args = parser.parse_args()
 
 
@@ -26,7 +28,8 @@ SequenceRoutines.extract_sequences_by_length_from_file(args.input_file, args.out
                                                        min_len=args.min_length,
                                                        max_len=args.max_length, format=args.format,
                                                        tmp_index_file="tmp.idx",
-                                                       id_file=args.id_file)
+                                                       id_file=args.id_file,
+                                                       parsing_mode=args.parsing_mode)
 
 """
 if (args.min_length is None) and (args.max_length is None):
