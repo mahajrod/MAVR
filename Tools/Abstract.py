@@ -99,7 +99,7 @@ class JavaTool(Tool):
         java_string = "java"
         java_string += " -Xmx%s" % str(self.max_memory) if self.max_memory else ""
         #print (self.jar_path)
-        java_string += " -jar %s%s" % (self.jar_path, self.jar)
+        java_string += " -jar %s%s" % (self.check_dir_path(self.jar_path) if self.jar_path else "", self.jar)
         java_string += " %s" % command
         java_string += " %s" % options
 
