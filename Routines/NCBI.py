@@ -389,7 +389,7 @@ class NCBIRoutines(FileRoutines):
 
         os.system(sort_string)
 
-        longest_pep_ids = IdList()
+        longest_pep_ids = IdSet()
 
         with open(sorted_tab_file, "r") as in_fd:
             with open(longest_pep_tab_file, "w") as out_fd:
