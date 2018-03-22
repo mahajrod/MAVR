@@ -34,6 +34,11 @@ parser.add_argument("-d", "--exonerate_dir", action="store", dest="exonerate_dir
 parser.add_argument("-e", "--num_of_splited_files", action="store", dest="num_of_splited_files",
                     type=int, default=None,
                     help="Number of splited files")
+parser.add_argument("-q", "--softmasked_input", action="store_true", dest="softmasked_input", default=False,
+                    help="Input sequences are softmasked")
+parser.add_argument("-s", "--softmasked_target", action="store_true", dest="softmasked_target", default=False,
+                    help="Target is softmasked")
+
 """
 parser.add_argument("-u", "--num_in_seq_per_file", action="store", dest="num_in_seq_per_file",
                     type=int, default=1000,
@@ -73,4 +78,6 @@ Exonerate.parallel_alignment(args.input, args.target, args.model, num_of_files=a
                              annotation_file=args.annotation,
                              splited_fasta_dir="splited_fasta_dir", splited_result_dir="splited_output",
                              number_of_results_to_report=args.num_of_results_to_report,
-                             converted_output_dir="converted_output")
+                             converted_output_dir="converted_output",
+                             softmasked_target=args.softmasked_target,
+                             softmasked_query=args.softmasked_input)
