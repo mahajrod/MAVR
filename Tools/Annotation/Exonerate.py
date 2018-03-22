@@ -4,11 +4,14 @@ __author__ = 'Sergei F. Kliver'
 import os
 import shutil
 
+from multiprocessing import Pool
 from collections import OrderedDict
 from Tools.Abstract import Tool
 
 from CustomCollections.GeneralCollections import SynDict, IdList
 
+
+from Bio import SeqIO
 
 class VulgarAlignment:
     def __init__(self, exonerate_vulgar_string):
@@ -62,7 +65,8 @@ class Exonerate(Tool):
     def parse_common_options(model, query_type=None, target_type=None,
                              show_alignment=None, show_sugar=True, show_cigar=None,
                              show_vulgar=None, show_query_gff=None, show_target_gff=None,
-                             number_of_results_to_report=None, other_options=None, annotation_file=None):
+                             number_of_results_to_report=None, other_options=None, annotation_file=None,
+                             softmasked_target=False, softmasked_query=False):
 
         options = " --model %s" % model
         options += " --showalignment" if show_alignment else ""
@@ -71,6 +75,8 @@ class Exonerate(Tool):
         options += " --showvulgar" if show_vulgar else ""
         options += " --showquerygff" if show_query_gff else ""
         options += " --showtargetgff" if show_target_gff else ""
+        options += " --softmasktarget" if softmasked_target else ""
+        options += " --softmaskquery" if softmasked_query else ""
         options += " -Q %s" % query_type if query_type else ""
         options += " -T %s" % target_type if target_type else ""
         options += " -n %i" % number_of_results_to_report if number_of_results_to_report else ""
@@ -88,7 +94,99 @@ class Exonerate(Tool):
                            number_of_results_to_report=None,
                            other_options=None,
                            num_of_files=None,
-                           converted_output_dir="converted_output", parsing_mode="parse", index_file=None):
+                           converted_output_dir="converted_output", parsing_mode="parse", index_file=None,
+                           external_process_pool=None,
+                           softmasked_target=False, softmasked_query=False):
+        splited_filename = self.split_filename(query_file)
+        self.split_fasta(query_file, splited_fasta_dir, num_of_recs_per_file=num_of_recs_per_file,
+                         num_of_files=num_of_files,
+                         output_prefix=splited_filename[1],
+                         parsing_mode=parsing_mode, index_file=index_file)
+
+        common_options = self.parse_common_options(model, show_alignment=show_alignment,
+                                                   show_sugar=show_sugar, show_cigar=show_cigar,
+                                                   show_vulgar=show_vulgar, show_query_gff=show_query_gff,
+                                                   show_target_gff=show_target_gff,
+                                                   number_of_results_to_report=number_of_results_to_report,
+                                                   other_options=other_options,
+                                                   annotation_file=annotation_file,
+                                                   softmasked_target=softmasked_target,
+                                                   softmasked_query=softmasked_query)
+
+        options_list = []
+        splited_files = os.listdir(splited_fasta_dir)
+
+        self.safe_mkdir(splited_result_dir)
+        #save_mkdir(converted_output_dir)
+
+        for filename in splited_files:
+            filename_list = self.split_filename(filename)
+            options = common_options
+            options += " -q %s/%s" % (splited_fasta_dir, filename)
+            options += " -t %s" % target_file
+            options += " > %s/%s.output" % (splited_result_dir, filename_list[1])
+            options_list.append(options)
+
+        self.parallel_execute(options_list, external_process_pool=external_process_pool)
+
+        if not store_intermediate_files:
+            shutil.rmtree(splited_fasta_dir)
+            #shutil.rmtree(splited_result_dir)
+            #shutil.rmtree(converted_output_dir)
+
+    def prepare_index(self, list_of_files, output_prefix, translated_index=None, memory_limit=1024):
+        pass
+
+    def parallel_alignment_server_mode(self, query_file, target_file, model, num_of_recs_per_file=None,
+                                       show_alignment=None, show_sugar=True, show_cigar=None,
+                                       show_vulgar=None, show_query_gff=None, show_target_gff=None,
+                                       store_intermediate_files=True,
+                                       annotation_file=None,
+                                       splited_fasta_dir="splited_fasta_dir", splited_result_dir="splited_output",
+                                       number_of_results_to_report=None,
+                                       other_options=None,
+                                       num_of_files=None,
+                                       converted_output_dir="converted_output", parsing_mode="parse", index_file=None,
+                                       external_process_pool=None):
+        
+
+
+        pass
+
+    def prepare_data_for_target_alignment(self, query_fasta, target_fasta, correspondence_file, out_dir,
+                                          correspondence_query_column=0, correspondence_target_column=1):
+
+        query_dict = self.parse_seq_file(query_fasta, "parse")
+        target_dict = self.parse_seq_file(target_fasta, "parse")
+
+        self.safe_mkdir(out_dir)
+
+        correspondence_dict = SynDict(filename=correspondence_file, allow_repeats_of_key=True,
+                                      key_index=correspondence_query_column, value_index=correspondence_target_column)
+
+        for query_id in correspondence_dict:
+            query_outfile = "%s/%s.query.fasta" % (out_dir, query_id)
+            target_outfile = "%s/%s.target.fasta" % (out_dir, query_id)
+
+            SeqIO.write(self.record_by_id_generator(query_dict, [query_id]), query_outfile, format="fasta")
+            SeqIO.write(self.record_by_id_generator(target_dict, correspondence_dict[query_id]),
+                        target_outfile, format="fasta")
+
+        queries_with_targets_set = set(correspondence_dict.keys())
+        queries_set = set(query_dict.keys())
+
+        return queries_with_targets_set, queries_set - queries_with_targets_set
+    """
+    def parallel_target_alignment(self, query_file, target_file, model, num_of_recs_per_file=None,
+                                   show_alignment=None, show_sugar=True, show_cigar=None,
+                                   show_vulgar=None, show_query_gff=None, show_target_gff=None,
+                                   store_intermediate_files=True,
+                                   annotation_file=None,
+                                   splited_fasta_dir="splited_fasta_dir", splited_result_dir="splited_output",
+                                   number_of_results_to_report=None,
+                                   other_options=None,
+                                   num_of_files=None,
+                                   converted_output_dir="converted_output", parsing_mode="parse", index_file=None):
         splited_filename = self.split_filename(query_file)
         self.split_fasta(query_file, splited_fasta_dir, num_of_recs_per_file=num_of_recs_per_file,
                          num_of_files=num_of_files,
@@ -119,28 +217,12 @@ class Exonerate(Tool):
 
         self.parallel_execute(options_list)
 
-        """
-        for filename in splited_files:
-
-            trf_output_file = "%s/%s.%i.%i.%i.%i.%i.%i.%i.dat" % (splited_result_dir, filename,
-                                                                  matching_weight, mismatching_penalty,
-                                                                  indel_penalty, match_probability,
-                                                                  indel_probability,
-                                                                  min_alignment_score, max_period)
-
-            self.convert_trf_report(trf_output_file, "%s/%s" % (converted_output_dir, filename))
-
-        for suffix in (".rep", ".gff", ".simple.gff", ".short.tab", ".wide.tab"):
-            file_str = ""
-            merged_file = "%s%s" % (output_prefix, suffix)
-            for filename in splited_files:
-                file_str += " %s/%s%s" % (converted_output_dir, filename, suffix)
-            CGAS.cat(file_str, merged_file)
-        """
         if not store_intermediate_files:
             shutil.rmtree(splited_fasta_dir)
             #shutil.rmtree(splited_result_dir)
             #shutil.rmtree(converted_output_dir)
+
+    """
 
     def split_output(self, exonerate_output_files, output_prefix, reference_protein_file, gene_prefix="GEN", transcript_prefix="TR", number_len=8,
                      ):
