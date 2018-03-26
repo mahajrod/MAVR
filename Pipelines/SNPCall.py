@@ -192,7 +192,7 @@ class SNPCallPipeline(Pipeline):
             sample_intervals_for_realignment = "%s.forIndelRealigner.intervals" % sample_alignment_prefix
             sample_realigned_bam = "%s.realigned.bam" % sample_alignment_prefix
 
-
+            """
             RealignerTargetCreator.create(reference, sample_alignment,
                                           output=sample_intervals_for_realignment,
                                           known_indels_vcf=None,
@@ -211,7 +211,7 @@ class SNPCallPipeline(Pipeline):
                                    max_size_for_movement=None, max_pos_move=None, max_reads_for_cons=None,
                                    max_reads_for_realignment=None, max_reads_in_memory=None, no_original_tags=False,
                                    nway_out=False, default_base_qualities=None)
-
+            """
         for iteration_index in range(0, iterations):
             gvcf_list = []
 
@@ -270,16 +270,19 @@ class SNPCallPipeline(Pipeline):
 
                     #HaplotypeCaller.call(reference, sample_realigned, raw_vcf, genotyping_mode=genotyping_mode,
                     #                     output_mode=output_mode, stand_emit_conf=stand_emit_conf, stand_call_conf=stand_call_conf)
+                    """
                     HaplotypeCaller.gvcf_call(reference, sample_recalled_reads_bam, gvcf, genotyping_mode=genotyping_mode,
                                               output_mode=output_mode, stand_call_conf=stand_call_conf,
                                               include_region_id_file=include_region_id_file,
                                               exclude_region_id_file=exclude_region_id_file)
+                    """
                 else:
+                    """
                     HaplotypeCaller.gvcf_call(reference, sample_realigned_bam, gvcf, genotyping_mode=genotyping_mode,
                                               output_mode=output_mode, stand_call_conf=stand_call_conf,
                                               include_region_id_file=include_region_id_file,
                                               exclude_region_id_file=exclude_region_id_file)
-
+                    """
             GenotypeGVCFs.genotype(reference, gvcf_list, merged_raw_vcf)
 
             SelectVariants.select_variants(reference, merged_raw_vcf, merged_raw_snp_vcf, vartype="SNP", varfilter=None)
