@@ -22,7 +22,7 @@ class GenotypeGVCFs(JavaTool):
         for gvcf in gvcf_list:
             options += " --variant %s" % gvcf
 
-        options += "-o %s" % output
+        options += " -o %s" % output
 
         return options
 
