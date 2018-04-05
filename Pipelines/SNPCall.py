@@ -241,6 +241,9 @@ class SNPCallPipeline(Pipeline):
                 #raw_snp_vcf = "%s.raw.snp.gvcf" % vcf_prefix
                 #raw_indel_vcf = "%s.raw.indel.gvcf" % vcf_prefix
 
+                sample_alignment_prefix = "%s/%s/%s" % (sample_dir, sample, alignment_filename_prefix_template % sample)
+                sample_realigned_bam = "%s.realigned.bam" % sample_alignment_prefix
+
                 gvcf_list.append(gvcf)
 
                 if ((not skip_base_score_recalibration) and known_sites is not None) or (iteration_index > 0):
@@ -277,14 +280,22 @@ class SNPCallPipeline(Pipeline):
                                               exclude_region_id_file=exclude_region_id_file)
                     """
                 else:
-                    """
+
                     HaplotypeCaller.gvcf_call(reference, sample_realigned_bam, gvcf, genotyping_mode=genotyping_mode,
                                               output_mode=output_mode, stand_call_conf=stand_call_conf,
                                               include_region_id_file=include_region_id_file,
                                               exclude_region_id_file=exclude_region_id_file)
-                    """
+
             GenotypeGVCFs.genotype(reference, gvcf_list, merged_raw_vcf)
 
+            self.hardfilter_variants(reference, merged_raw_vcf, merged_vcf_prefix, SNP_QD=SNP_QD, SNP_FS=SNP_FS,
+                                     SNP_MQ=SNP_MQ, SNP_MappingQualityRankSum=SNP_MappingQualityRankSum,
+                                     SNP_ReadPosRankSum=SNP_ReadPosRankSum, indel_QD=indel_QD,
+                                     indel_ReadPosRankSum=indel_ReadPosRankSum, indel_FS=indel_FS,
+                                     SNP_filter_name=SNP_filter_name, indel_filter_name=indel_filter_name,
+                                     threads=threads)
+
+            """
             SelectVariants.select_variants(reference, merged_raw_vcf, merged_raw_snp_vcf, vartype="SNP", varfilter=None)
             SelectVariants.select_variants(reference, merged_raw_vcf, merged_raw_indel_vcf, vartype="INDEL", varfilter=None)
 
@@ -303,7 +314,7 @@ class SNPCallPipeline(Pipeline):
             CombineVariants.combine_from_same_source(reference,
                                                      [merged_filtered_snp_vcf, merged_filtered_indel_vcf],
                                                      merged_filtered_combined_vcf)
-
+            """
             known_sites = merged_filtered_combined_vcf
 
     def hardfilter_variants(self, reference, raw_vcf, output_prefix, SNP_QD=2.0, SNP_FS=30.0, SNP_MQ=40.0,
