@@ -16,8 +16,8 @@ class GenotypeGVCFs(JavaTool):
 
     def parse_options(self, reference, gvcf_list, output):
 
-        options = " -nt %i" % self.threads
-        options += " -R %s" % reference
+        #options = " -nt %i" % self.threads # bugs in tool - fails in multithreading mode
+        options = " -R %s" % reference
 
         for gvcf in gvcf_list:
             options += " --variant %s" % gvcf
