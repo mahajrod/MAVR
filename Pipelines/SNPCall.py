@@ -306,7 +306,45 @@ class SNPCallPipeline(Pipeline):
 
             known_sites = merged_filtered_combined_vcf
 
+    def hardfilter_variants(self, reference, raw_vcf, output_prefix, SNP_QD=2.0, SNP_FS=30.0, SNP_MQ=40.0,
+                            SNP_MappingQualityRankSum=-12.5,
+                            SNP_ReadPosRankSum=-8.0, indel_QD=2.0, indel_ReadPosRankSum=-20.0, indel_FS=200.0,
+                            SNP_filter_name="ambiguous_snp", indel_filter_name="ambiguous_indel", threads=None):
 
+        raw_snp_vcf = "%s.raw.snp.vcf" % output_prefix
+        raw_indel_vcf = "%s.raw.indel.vcf" % output_prefix
+        with_filters_snp_vcf = "%s.with_filters.snp.vcf" % output_prefix
+        with_filters_indel_vcf = "%s.with_filters.indel.vcf" % output_prefix
+        filtered_snp_vcf = "%s.filtered.snp.vcf" % output_prefix
+        filtered_indel_vcf = "%s.filtered.indel.vcf" % output_prefix
+        filtered_combined_vcf = "%s.filtered.combined.vcf" % output_prefix
+
+        for tool in VariantFiltration, \
+                    SelectVariants, \
+                    CombineVariants:
+
+            tool.threads = threads if threads else self.threads
+            tool.max_memory = "%ig" % self.max_memory
+            tool.jar_path = self.GATK_dir
+
+        SelectVariants.select_variants(reference, raw_vcf, raw_snp_vcf, vartype="SNP", varfilter=None)
+        SelectVariants.select_variants(reference, raw_vcf, raw_indel_vcf, vartype="INDEL", varfilter=None)
+
+        VariantFiltration.filter_bad_SNP(reference, raw_snp_vcf, with_filters_snp_vcf,
+                                         filter_name=SNP_filter_name,
+                                         QD=SNP_QD, FS=SNP_FS, MQ=SNP_MQ,
+                                         MappingQualityRankSum=SNP_MappingQualityRankSum,
+                                         ReadPosRankSum=SNP_ReadPosRankSum)
+        VariantFiltration.filter_bad_indel(reference, raw_indel_vcf, with_filters_indel_vcf,
+                                           filter_name=indel_filter_name, QD=indel_QD,
+                                           ReadPosRankSum=indel_ReadPosRankSum, FS=indel_FS)
+
+        SelectVariants.remove_entries_with_filters(reference, with_filters_snp_vcf, filtered_snp_vcf)
+        SelectVariants.remove_entries_with_filters(reference, with_filters_indel_vcf, filtered_indel_vcf)
+
+        CombineVariants.combine_from_same_source(reference,
+                                                 [filtered_snp_vcf, filtered_indel_vcf],
+                                                 filtered_combined_vcf)
 
 
 def get_chromosomes_bed(reference, reference_index, mitochondrial_region_name="mt",
