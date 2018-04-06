@@ -484,13 +484,18 @@ class AnnotationsRoutines(SequenceRoutines):
                                                                tmp_list[6]))
 
     @staticmethod
-    def convert_gff_to_simple_bed(input_gff, output_bed, feature_type_list=[]):
+    def convert_gff_to_simple_bed(input_gff, output_bed, feature_type_list=[], scaffold_id_file=None):
+        if scaffold_id_file:
+            scaffolds_id_list = IdList(filename=scaffold_id_file)
         with open(input_gff, "r") as gff_fd:
             with open(output_bed, "w") as bed_fd:
                 for line in gff_fd:
                     if line[0] == "#":
                         continue
                     tmp_list = line.strip().split("\t")
+                    if scaffold_id_file:
+                        if tmp_list[0] not in scaffolds_id_list:
+                            continue
                     if feature_type_list:
                         if tmp_list[2] not in feature_type_list:
                             continue
