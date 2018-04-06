@@ -401,7 +401,7 @@ class NCBIRoutines(FileRoutines):
                         continue
                     prev_gene = tmp[gene_id_index]
                     out_fd.write(line)
-                    longest_pep_ids.append(tmp[protein_id_index])
+                    longest_pep_ids.add(tmp[protein_id_index])
 
         longest_pep_ids.write(longest_pep_id_file)
 

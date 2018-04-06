@@ -341,8 +341,30 @@ class AnnotationsRoutines(SequenceRoutines):
         if parsing_mode == "index_db":
             os.remove(tmp_index_file)
 
+    def extract_gff_records_by_description_value(self, input_gff, output_gff, field_id_list, value_list,
+                                                retain_comments=False):
+        with open(input_gff, "r") as in_fd:
+            with open(output_gff, "w") as out_fd:
+                for line in in_fd:
+                    if line[0] == "#":
+                        if retain_comments:
+                            out_fd.write(line)
+                        continue
+                    description_dict = self.get_description_dict_from_gff_string(line, split_values=True, value_separator=",")
+                    found = False
+                    for field_id in field_id_list:
+                        if field_id in description_dict:
+                            #print "aaaaa"
+                            for value in description_dict[field_id]:
+                                if value in value_list:
+                                    out_fd.write(line)
+                                    found = True
+                                    break
+                            if found:
+                                break
+
     @staticmethod
-    def get_description_dict_from_gff_string(gff_string):
+    def get_description_dict_from_gff_string(gff_string, split_values=False, value_separator=","):
         if gff_string[0] == "#":
             return None
 
@@ -351,7 +373,7 @@ class AnnotationsRoutines(SequenceRoutines):
 
         for entry in description_list:
             key, value = entry.split("=")
-            description_dict[key] = value
+            description_dict[key] = value.split(value_separator) if split_values else value
 
         return description_dict
 
