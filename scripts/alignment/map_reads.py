@@ -21,7 +21,8 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-p", "--prefix", action="store", dest="prefix", required=True,
                     help="Prefix of output files")
-
+parser.add_argument("-n", "--sample_name", action="store", dest="sample_name", required=True,
+                    help="Sample name")
 parser.add_argument("-r", "--forward_reads", action="store", dest="forward_reads",
                     type=make_list_from_comma_sep_string,
                     help="Comma-separated list of files with forward reads")
@@ -109,7 +110,7 @@ aligner.align(args.index, forward_reads_list=args.forward_reads, reverse_reads_l
               output_format=args.alignment_format,
               read_group_name="reads",
               PU="x",
-              SM="sample",
+              SM=args.sample_name,
               platform="Illumina",
               LB="x",
               sort_by_coordinate=True,
