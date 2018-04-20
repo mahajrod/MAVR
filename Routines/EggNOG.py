@@ -121,8 +121,8 @@ class EggNOGRoutines(SequenceClusterRoutines):
                     else:
                         common_protein_names_to_families_dict[common_protein_name].append(transposed_eggnog_fam_dict[extended_protein_id])
                         common_names_to_eggnog_proteins_syn_dict[common_protein_name].append(extended_protein_id)
-                    if transposed_eggnog_fam_dict[extended_protein_id] not in extracted_families:
-                        extracted_families[transposed_eggnog_fam_dict[extended_protein_id]] = eggnog_fam_dict[transposed_eggnog_fam_dict[extended_protein_id]]
+                    if transposed_eggnog_fam_dict[extended_protein_id][0] not in extracted_families:
+                        extracted_families[transposed_eggnog_fam_dict[extended_protein_id][0]] = eggnog_fam_dict[transposed_eggnog_fam_dict[extended_protein_id][0]]
 
             if not_found:
                 not_found_proteins_common_names.append(common_protein_name)
