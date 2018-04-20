@@ -20,10 +20,13 @@ parser.add_argument("-s", "--species_id", action="store", dest="species_id",
                          "If not set ensembl ids will be treated as already labeled by species id")
 parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", required=True,
                     help="Output_prefix")
+parser.add_argument("-r", "--allow_repeating_of_keys", action="store_true", dest="allow_repeating_of_keys",
+                    help="Allow repeating of keys in synonym file")
 
 args = parser.parse_args()
 
-EggNOGRoutines.extract_eggnog_fam_by_protein_syn_dict(SynDict(filename=args.input, split_values=True),
+EggNOGRoutines.extract_eggnog_fam_by_protein_syn_dict(SynDict(filename=args.input, split_values=True,
+                                                              allow_repeats_of_key=args.allow_repeating_of_keys),
                                                       SynDict(filename=args.protein_common_names_synonyms,
                                                               split_values=True),
                                                       output_prefix=args.output_prefix,
