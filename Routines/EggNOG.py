@@ -131,7 +131,7 @@ class EggNOGRoutines(SequenceClusterRoutines):
             extracted_families.write(filename="%s.extracted_families.fam" % output_prefix, splited_values=True)
             common_protein_names_to_families_dict.write(filename="%s.common_protein_names_to_families.correspondence" % output_prefix, splited_values=True)
             common_names_to_eggnog_proteins_syn_dict.write(filename="%s.common_protein_names_to_eggnog_proteins.correspondence" % output_prefix, splited_values=True)
-            not_found_proteins_common_names.write(filename="%s.not_found.common_names")
+            not_found_proteins_common_names.write(filename="%s.not_found.common_names" % output_prefix)
 
         return extracted_families, common_protein_names_to_families_dict, \
                common_names_to_eggnog_proteins_syn_dict, not_found_proteins_common_names
