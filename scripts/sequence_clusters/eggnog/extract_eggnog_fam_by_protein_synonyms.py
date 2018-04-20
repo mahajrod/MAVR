@@ -25,9 +25,9 @@ parser.add_argument("-r", "--allow_repeating_of_keys", action="store_true", dest
 
 args = parser.parse_args()
 
-EggNOGRoutines.extract_eggnog_fam_by_protein_syn_dict(SynDict(filename=args.input, split_values=True,
-                                                              allow_repeats_of_key=args.allow_repeating_of_keys),
+EggNOGRoutines.extract_eggnog_fam_by_protein_syn_dict(SynDict(filename=args.input, split_values=True),
                                                       SynDict(filename=args.protein_common_names_synonyms,
-                                                              split_values=True),
+                                                              split_values=True,
+                                                              allow_repeats_of_key=args.allow_repeating_of_keys),
                                                       output_prefix=args.output_prefix,
                                                       species_id=args.species_id)
