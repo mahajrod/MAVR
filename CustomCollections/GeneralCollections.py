@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+import sys
 from collections import OrderedDict, MutableSet, Iterable
 
 
@@ -107,7 +107,7 @@ class TwoLvlDict(OrderedDict):
                     filtered_out[fl_key][sl_key] = self[fl_key].pop(sl_key, None)
         return filtered_out
 
-    def write(self, out_filename, absent_symbol="0", close_after_if_file_object=False, sort=True):
+    def write(self, out_filename=sys.stdout, absent_symbol="0", close_after_if_file_object=False, sort=True):
         if isinstance(out_filename, file):
             out_filename.write(self.table_form(absent_symbol=absent_symbol, sort=sort))
             if close_after_if_file_object:
@@ -243,7 +243,7 @@ class IdList(list):
             in_fd.close()
         return self
     
-    def write(self, filename, header=False, close_after_if_file_object=False):
+    def write(self, filename=sys.stdout, header=False, close_after_if_file_object=False):
         out_fd = filename if isinstance(filename, file) else open(filename, "w")
 
         if header:
@@ -295,7 +295,7 @@ class IdSet(OrderedSet):
             in_fd.close()
         return self
 
-    def write(self, filename, header=False, close_after_if_file_object=False, sort=True):
+    def write(self, filename=sys.stdout, header=False, close_after_if_file_object=False, sort=True):
         
         out_fd = filename if isinstance(filename, file) else open(filename, "w")
         if header:
@@ -309,7 +309,7 @@ class IdSet(OrderedSet):
             
 
 class WDict(OrderedDict):
-    def write(self, outfile, header=None, separator="\t", close_after_if_file_object=False):
+    def write(self, outfile=sys.stdout, header=None, separator="\t", close_after_if_file_object=False):
         
         out_fd = outfile if isinstance(outfile, file) else open(outfile, "w")
         if header:
@@ -455,7 +455,7 @@ class SynDict(OrderedDict):
 
         return number
 
-    def write(self, filename, header=False, separator="\t",
+    def write(self, filename=sys.stdout, header=False, separator="\t",
               splited_values=False, values_separator=",",
               close_after_if_file_object=False):
 
@@ -478,3 +478,15 @@ class SynDict(OrderedDict):
         for key in self:
             collapsed_dict[key] = set(self[key])
         return collapsed_dict
+
+    def exchange_key_and_value(self):
+        output_dict = SynDict()
+
+        for key in self:
+            for value in self[key] if isinstance(self[key], list) else [self[key]]:
+                if value not in output_dict:
+                    output_dict[value] = [key]
+                else:
+                    output_dict[value].append(key)
+
+        return output_dict

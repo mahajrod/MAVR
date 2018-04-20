@@ -1,0 +1,12 @@
+http://amigo.geneontology.org/goose?query=SELECT+DISTINCT+descendant.acc%2C+descendant.name%2C+descendant.term_typeFROM+term+INNER+JOIN+graph_path+ON+(term.id%3Dgraph_path.term1_id)+INNER+JOIN+term+AS+descendant+ON+(descendant.id%3Dgraph_path.term2_id)WHERE+term.name%3D'reproduction'+AND+distance+<>+1%3B&mirror=bbop&limit=0
+
+
+Get all descendant terms of GO:00000003 Reproduction via GOOSE interface
+
+SELECT DISTINCT descendant.acc, descendant.name, descendant.term_type
+FROM
+ term
+ INNER JOIN graph_path ON (term.id=graph_path.term1_id)
+ INNER JOIN term AS descendant ON (descendant.id=graph_path.term2_id)
+WHERE term.name='reproduction' AND distance <> 0;
+
