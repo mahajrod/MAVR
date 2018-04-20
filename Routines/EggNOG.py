@@ -99,10 +99,41 @@ class EggNOGRoutines(SequenceClusterRoutines):
 
         species.write("%s.replaced_spaces.species" % output_prefix, splited_values=True)
 
+    def extract_eggnog_fam_by_protein_syn_dict(self, eggnog_fam_dict, protein_syn_dict, output_prefix=None, species_id=None):
 
+        extracted_families = SynDict()
+        common_protein_names_to_families_dict = SynDict()
+        common_names_to_eggnog_proteins_syn_dict = SynDict()
 
+        not_found_proteins_common_names = IdList()
 
+        transposed_eggnog_fam_dict = eggnog_fam_dict.exchange_key_and_value()
 
+        for common_protein_name in protein_syn_dict:
+            not_found = True
+            for protein_id in protein_syn_dict[common_protein_name]:
+                extended_protein_id = protein_id if species_id is None else species_id + "." + protein_id
+                if extended_protein_id in transposed_eggnog_fam_dict:
+                    not_found = False
+                    if common_protein_name not in common_protein_names_to_families_dict:
+                        common_protein_names_to_families_dict[common_protein_name] = [transposed_eggnog_fam_dict[extended_protein_id]]
+                        common_names_to_eggnog_proteins_syn_dict[common_protein_name] = [extended_protein_id]
+                    else:
+                        common_protein_names_to_families_dict[common_protein_name].append(transposed_eggnog_fam_dict[extended_protein_id])
+                        common_names_to_eggnog_proteins_syn_dict[common_protein_name].append(extended_protein_id)
+                    if transposed_eggnog_fam_dict[extended_protein_id] not in extracted_families:
+                        extracted_families[transposed_eggnog_fam_dict[extended_protein_id]] = eggnog_fam_dict[transposed_eggnog_fam_dict[extended_protein_id]]
 
+            if not_found:
+                not_found_proteins_common_names.append(common_protein_name)
+
+        if output_prefix:
+            extracted_families.write(filename="%s.extracted_families.fam" % output_prefix, splited_values=True)
+            common_protein_names_to_families_dict.write(filename="%s.common_protein_names_to_families.correspondence" % output_prefix, splited_values=True)
+            common_names_to_eggnog_proteins_syn_dict.write(filename="%s.common_protein_names_to_eggnog_proteins.correspondence" % output_prefix, splited_values=True)
+            not_found_proteins_common_names.write(filename="%s.not_found.common_names")
+
+        return extracted_families, common_protein_names_to_families_dict, \
+               common_names_to_eggnog_proteins_syn_dict, not_found_proteins_common_names
 
 
