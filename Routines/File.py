@@ -483,6 +483,51 @@ class FileRoutines:
 
         sys.stderr.write("Replaced: %i\nNot replaced: %i\n" % (replaced, not_replaced))
 
+    @staticmethod
+    def combine_syn_dicts(list_of_syn_dict):
+        combined_dict = SynDict()
+        for syn_dict in list_of_syn_dict:
+            for key in syn_dict:
+                if key in combined_dict:
+                    combined_dict[key] += syn_dict[key]
+                else:
+                    combined_dict[key] = syn_dict[key]
+
+        return combined_dict
+
+    def combine_syn_dicts_from_file(self, list_of_syndict_files, output, key_index=0, value_index=1, separator="\t",
+                                    values_separator=","):
+        list_of_syn_dicts = []
+        for filename in list_of_syndict_files:
+            list_of_syn_dicts.append(SynDict(filename=filename, key_index=key_index, value_index=value_index,
+                                             separator=separator, values_separator=values_separator, split_values=True))
+
+        merged_dict = self.combine_syn_dicts(list_of_syn_dicts)
+
+        merged_dict.write(output, splited_values=True)
+
+    @staticmethod
+    def label_column_in_file(input_file, label, column_index, output_file, column_separator="\t",
+                             label_position="first", label_separator="@",
+                             comments_prefix="#"):
+        with open(input_file, "r") as in_fd:
+            with open(output_file, "w") as out_fd:
+                for line in in_fd:
+                    if line[0] == comments_prefix:
+                        out_fd.write(line)
+                        continue
+
+                    line_list = line.strip().split(column_separator)
+                    if label_position == "first":
+                        line_list[column_index] = "%s%s%s" % (label, label_separator, line_list[column_index])
+                    elif label_position == "last":
+                        line_list[column_index] = "%s%s%s" % (line_list[column_index], label_separator, label)
+                    else:
+                        raise ValueError("ERROR!!!Unrecognized label position")
+
+                    out_fd.write(column_separator.join(line_list) + "\n")
+
+
 filetypes_dict = {"fasta": [".fa", ".fasta", ".fa", ".pep", ".cds"],
                   "fastq": [".fastq", ".fq"],
                   "genbank": [".gb", ".genbank"],
