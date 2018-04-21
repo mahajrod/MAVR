@@ -490,7 +490,7 @@ class SequenceClusterRoutines(SequenceRoutines):
         elif label_position == "last":
             return [element_list[1], element_list[0]]
 
-    def extract_clusters_by_labels(self, cluster_dict, label_list, separator="@", label_position="first"):
+    def extract_clusters_and_elements_by_labels(self, cluster_dict, label_list, separator="@", label_position="first"):
         filtered_dict = SynDict()
 
         for cluster_id in cluster_dict:
@@ -505,7 +505,7 @@ class SequenceClusterRoutines(SequenceRoutines):
 
         return filtered_dict
 
-    def extract_clusters_by_labels_from_files(self, cluster_file, label_file, output_file,
+    def extract_clusters_and_elements_by_labels_from_files(self, cluster_file, label_file, output_file,
                                               separator="@", label_position="first"):
         cluster_dict = SynDict(filename=cluster_file)
         label_list = IdList(filename=label_file)

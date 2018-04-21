@@ -21,6 +21,6 @@ parser.add_argument("-s", "--separator", action="store", dest="separator", defau
 
 args = parser.parse_args()
 
-SequenceClusterRoutines.extract_clusters_by_labels_from_files(args.input, args.label_file, args.output,
-                                                              separator=args.separator,
-                                                              label_position=args.label_position)
+SequenceClusterRoutines.extract_clusters_and_elements_by_labels_from_files(args.input, args.label_file, args.output,
+                                                                           separator=args.separator,
+                                                                           label_position=args.label_position)
