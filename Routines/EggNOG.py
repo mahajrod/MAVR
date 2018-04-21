@@ -133,6 +133,8 @@ class EggNOGRoutines(SequenceClusterRoutines):
             common_names_to_eggnog_proteins_syn_dict.write(filename="%s.common_protein_names_to_eggnog_proteins.correspondence" % output_prefix, splited_values=True)
             not_found_proteins_common_names.write(filename="%s.not_found.common_names" % output_prefix)
 
+            print common_names_to_eggnog_proteins_syn_dict
+            print common_protein_names_to_families_dict
         return extracted_families, common_protein_names_to_families_dict, \
                common_names_to_eggnog_proteins_syn_dict, not_found_proteins_common_names
 
