@@ -481,13 +481,17 @@ class SequenceClusterRoutines(SequenceRoutines):
     @staticmethod
     def split_element_id(element_id, separator="@", label_position="first"):
         element_list = element_id.split(separator)
-        if len(element_list) > 2:
-            raise ValueError("Multiple separators in element id(%s)" % element_id)
-        elif len(element_list) < 2:
+        #if len(element_list) > 2:
+        #    raise ValueError("Multiple separators in element id(%s)" % element_id)
+        if len(element_list) < 2:
             raise ValueError("No separator was found in element id(%s)" % element_id)
         if label_position == "first":
+            if len(element_list) > 2:
+                return [element_list[0], separator.join(element_list[1:])]
             return element_list
         elif label_position == "last":
+            if len(element_list) > 2:
+                return [element_list[-1], separator.join(element_list[:-1])]
             return [element_list[1], element_list[0]]
 
     def extract_clusters_and_elements_by_labels(self, cluster_dict, label_list, separator="@", label_position="first"):
