@@ -500,7 +500,8 @@ class FileRoutines:
         list_of_syn_dicts = []
         for filename in list_of_syndict_files:
             list_of_syn_dicts.append(SynDict(filename=filename, key_index=key_index, value_index=value_index,
-                                             separator=separator, values_separator=values_separator, split_values=True))
+                                             separator=separator, values_separator=values_separator, split_values=True,
+                                             allow_repeats_of_key=True))
 
         merged_dict = self.combine_syn_dicts(list_of_syn_dicts)
 
