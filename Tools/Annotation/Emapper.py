@@ -82,11 +82,11 @@ class Emapper(Tool):
 
         return extract_predicted_gene_names_dict
 
-    def converrt_emapper_annotation_file(self, emapper_annotation_file, output_prefix, eggnogdb_prefix=None,
+    def convert_emapper_annotation_file(self, emapper_annotation_file, output_prefix, eggnogdb_prefix=None,
                                          species_name=None, label_separator="."):
         fam_file = "%s.fam" % output_prefix
         GO_terms_file = "%s.GO" % output_prefix
-        predicted_gene_names_file = "%s.GO" % output_prefix
+        predicted_gene_names_file = "%s.predicted_gene_names" % output_prefix
 
         self.convert_egemapper_annotation_file_to_fam(emapper_annotation_file, fam_file,
                                                       eggnogdb_prefix=eggnogdb_prefix,
