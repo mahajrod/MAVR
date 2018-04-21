@@ -25,7 +25,7 @@ parser.add_argument("-e", "--value_separator", action="store", dest="value_separ
 args = parser.parse_args()
 
 FileRoutines.combine_syn_dicts_from_file(args.input, args.output,
-                                         key_index=args.key_colum,
+                                         key_index=args.key_column,
                                          value_index=args.value_column,
                                          separator=args.separator,
                                          values_separator=args.value_separator)
