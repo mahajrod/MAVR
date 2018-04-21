@@ -481,7 +481,8 @@ class SequenceClusterRoutines(SequenceRoutines):
     @staticmethod
     def split_element_id(element_id, separator="@", label_position="first"):
         element_list = element_id.split(separator)
-        #if len(element_list) > 2:
+        if len(element_list) > 2:
+            print("WARNING!!! Multiple separators in element id(%s)" % element_id)
         #    raise ValueError("Multiple separators in element id(%s)" % element_id)
         if len(element_list) < 2:
             raise ValueError("No separator was found in element id(%s)" % element_id)
