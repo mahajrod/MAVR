@@ -116,10 +116,10 @@ class EggNOGRoutines(SequenceClusterRoutines):
                 if extended_protein_id in transposed_eggnog_fam_dict:
                     not_found = False
                     if common_protein_name not in common_protein_names_to_families_dict:
-                        common_protein_names_to_families_dict[common_protein_name] = [transposed_eggnog_fam_dict[extended_protein_id]]
+                        common_protein_names_to_families_dict[common_protein_name] = [transposed_eggnog_fam_dict[extended_protein_id][0]]
                         common_names_to_eggnog_proteins_syn_dict[common_protein_name] = [extended_protein_id]
                     else:
-                        common_protein_names_to_families_dict[common_protein_name].append(transposed_eggnog_fam_dict[extended_protein_id])
+                        common_protein_names_to_families_dict[common_protein_name].append(transposed_eggnog_fam_dict[extended_protein_id][0])
                         common_names_to_eggnog_proteins_syn_dict[common_protein_name].append(extended_protein_id)
                     if transposed_eggnog_fam_dict[extended_protein_id][0] not in extracted_families:
                         extracted_families[transposed_eggnog_fam_dict[extended_protein_id][0]] = eggnog_fam_dict[transposed_eggnog_fam_dict[extended_protein_id][0]]
@@ -133,8 +133,8 @@ class EggNOGRoutines(SequenceClusterRoutines):
             common_names_to_eggnog_proteins_syn_dict.write(filename="%s.common_protein_names_to_eggnog_proteins.correspondence" % output_prefix, splited_values=True)
             not_found_proteins_common_names.write(filename="%s.not_found.common_names" % output_prefix)
 
-            print common_names_to_eggnog_proteins_syn_dict
-            print common_protein_names_to_families_dict
+            #print common_names_to_eggnog_proteins_syn_dict
+            #print common_protein_names_to_families_dict
         return extracted_families, common_protein_names_to_families_dict, \
                common_names_to_eggnog_proteins_syn_dict, not_found_proteins_common_names
 
