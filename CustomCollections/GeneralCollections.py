@@ -394,7 +394,7 @@ class SynDict(OrderedDict):
                     continue
             #key, value = line.strip().split(separator)
 
-            tmp = line.strip().split(separator) if separator else line.strip().split()
+            tmp = line.strip("\n").split(separator) if separator else line.strip().split()
             #print tmp
             #print line
             #print tmp
