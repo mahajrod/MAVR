@@ -518,7 +518,7 @@ class FileRoutines:
                         out_fd.write(line)
                         continue
 
-                    line_list = line.strip().split(column_separator)
+                    line_list = line.strip("\n").split(column_separator)
                     if label_position == "first":
                         line_list[column_index] = "%s%s%s" % (label, label_separator, line_list[column_index])
                     elif label_position == "last":
