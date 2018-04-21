@@ -12,8 +12,8 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input", action="store", dest="input", required=True,
                     help="File with emapper annotations")
-parser.add_argument("-o", "--output", action="store", dest="output", required=True,
-                    help="Output fam file")
+parser.add_argument("-o", "--output_prefix", action="store", dest="output", required=True,
+                    help="Prefix of output files")
 parser.add_argument("-p", "--eggnogdb_prefix", action="store", dest="eggnogdb_prefix",
                     help="EggNOG database prefix for clusters. Default: None")
 parser.add_argument("-s", "--species_name", action="store", dest="species_name",
@@ -22,5 +22,5 @@ parser.add_argument("-s", "--species_name", action="store", dest="species_name",
 
 args = parser.parse_args()
 
-Emapper.convert_egemapper_annotation_file_to_fam(args.input, args.output, eggnogdb_prefix=args.eggnogdb_prefix,
-                                                 species_name=None, label_separator=args.species_name)
+Emapper.converrt_emapper_annotation_file(args.input, args.output, eggnogdb_prefix=args.eggnogdb_prefix,
+                                         species_name=None, label_separator=args.species_name)
