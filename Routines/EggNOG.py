@@ -136,4 +136,28 @@ class EggNOGRoutines(SequenceClusterRoutines):
         return extracted_families, common_protein_names_to_families_dict, \
                common_names_to_eggnog_proteins_syn_dict, not_found_proteins_common_names
 
+    @staticmethod
+    def convert_egemapper_annotation_file_to_fam(emapper_annotation_file, output_fam, eggnogdb_prefix=None,
+                                                 species_name=None, label_separator="."):
+        fam_dict = SynDict()
+        with open(emapper_annotation_file, "r") as annotations_fd:
+            for line in annotations_fd:
+                if line[0] == "#":
+                    continue
+                line_list = line.split("\t")
+
+                fam_id = line_list[10].split("|")[0]
+                if not(eggnogdb_prefix is None):
+                    fam_id = eggnogdb_prefix + fam_id
+
+                gene_id = "%s%s%s" % (species_name, label_separator, line_list[0]) if species_name else line_list[0]
+
+                if fam_id in fam_dict:
+                    fam_dict[fam_id].append(gene_id)
+                else:
+                    fam_dict[fam_id] = [gene_id]
+
+        fam_dict.write(filename=output_fam, splited_values=True)
+
+
 
