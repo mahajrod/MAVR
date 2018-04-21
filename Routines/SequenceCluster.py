@@ -508,7 +508,7 @@ class SequenceClusterRoutines(SequenceRoutines):
     def extract_clusters_and_elements_by_labels_from_files(self, cluster_file, label_file, output_file,
                                               separator="@", label_position="first"):
         cluster_dict = SynDict(filename=cluster_file)
-        label_list = IdList(filename=label_file)
+        label_list = IdList(filename=label_file) if isinstance(label_file, str) else label_file
 
         output_dict = self.extract_clusters_by_labels(cluster_dict, label_list, separator=separator,
                                                       label_position=label_position)
