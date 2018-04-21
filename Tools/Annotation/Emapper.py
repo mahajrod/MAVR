@@ -65,7 +65,8 @@ class Emapper(Tool):
     @staticmethod
     def extract_GO_terms_from_emapper_annotation_file(emapper_annotation_file, output_file):
         GO_terms_dict = SynDict(filename=emapper_annotation_file, key_index=0, value_index=5,
-                                split_values=True, values_separator=",")
+                                split_values=True, values_separator=",", comments_prefix="#",
+                                separator="\t")
         GO_terms_dict.header = "#protein_id\tGO_terms"
         GO_terms_dict.write(output_file, header=True, splited_values=True)
 
@@ -73,8 +74,9 @@ class Emapper(Tool):
 
     @staticmethod
     def extract_predicted_gene_names_from_emapper_annotation_file(emapper_annotation_file, output_file):
-        extract_predicted_gene_names_dict = SynDict(filename=emapper_annotation_file, key_index=0, value_index=5,
-                                                    split_values=True, values_separator=",")
+        extract_predicted_gene_names_dict = SynDict(filename=emapper_annotation_file, key_index=0, value_index=4,
+                                                    split_values=True, values_separator=",", comments_prefix="#",
+                                                    separator="\t")
         extract_predicted_gene_names_dict.header = "#protein_id\tpredicted_gene_name"
         extract_predicted_gene_names_dict.write(output_file, header=True, splited_values=True)
 
