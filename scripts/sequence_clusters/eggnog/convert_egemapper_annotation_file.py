@@ -23,4 +23,4 @@ parser.add_argument("-s", "--species_name", action="store", dest="species_name",
 args = parser.parse_args()
 
 Emapper.convert_emapper_annotation_file(args.input, args.output, eggnogdb_prefix=args.eggnogdb_prefix,
-                                        species_name=args.specie_name, label_separator=".")
+                                        species_name=args.species_name, label_separator=".")
