@@ -496,7 +496,7 @@ class SequenceClusterRoutines(SequenceRoutines):
         for cluster_id in cluster_dict:
             for element_id in cluster_dict[cluster_id]:
                 label, element = self.split_element_id(element_id, separator=separator,
-                                                          label_position=label_position)
+                                                       label_position=label_position)
                 if label in label_list:
                     if cluster_id in filtered_dict:
                         filtered_dict[cluster_id].append(element_id)
@@ -506,8 +506,8 @@ class SequenceClusterRoutines(SequenceRoutines):
         return filtered_dict
 
     def extract_clusters_and_elements_by_labels_from_files(self, cluster_file, label_file, output_file,
-                                              separator="@", label_position="first"):
-        cluster_dict = SynDict(filename=cluster_file)
+                                                           separator="@", label_position="first"):
+        cluster_dict = SynDict(filename=cluster_file, split_values=True)
         label_list = IdList(filename=label_file) if isinstance(label_file, str) else label_file
 
         output_dict = self.extract_clusters_and_elements_by_labels(cluster_dict, label_list, separator=separator,
