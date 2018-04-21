@@ -9,8 +9,8 @@ from Routines import FileRoutines
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input", action="store", dest="input", required=True,
-                    type=lambda s:s.split(","),
-                    help="Comma-separated list of syn files")
+                    type=FileRoutines.make_list_of_path_to_files_from_string,
+                    help="Comma-separated list of syn files/directories containing syn files")
 parser.add_argument("-o", "--output", action="store", dest="output", default=sys.stdout,
                     help="Output merged syn file")
 parser.add_argument("-k", "--key_column", action="store", dest="key_column", default=0, type=int,
