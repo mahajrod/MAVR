@@ -518,7 +518,7 @@ class SequenceClusterRoutines(SequenceRoutines):
         output_dict = self.extract_clusters_and_elements_by_labels(cluster_dict, label_list, separator=separator,
                                                                    label_position=label_position)
 
-        output_dict.write(output_file)
+        output_dict.write(output_file, splited_values=True)
 
 
 
