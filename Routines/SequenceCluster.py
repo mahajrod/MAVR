@@ -478,6 +478,43 @@ class SequenceClusterRoutines(SequenceRoutines):
 
         filtered_dict.write(output_file, splited_values=True)
 
+    @staticmethod
+    def split_element_id(element_id, separator="@", label_position="first"):
+        element_list = element_id.split(separator)
+        if len(element_list) > 2:
+            raise ValueError("Multiple separators in element id(%s)" % element_id)
+        elif len(element_list) < 2:
+            raise ValueError("No separator was found in element id(%s)" % element_id)
+        if label_position == "first":
+            return element_list
+        elif label_position == "last":
+            return [element_list[1], element_list[0]]
+
+    def extract_clusters_by_labels(self, cluster_dict, label_list, separator="@", label_position="first"):
+        filtered_dict = SynDict()
+
+        for cluster_id in cluster_dict:
+            for element_id in cluster_dict[cluster_id]:
+                label, element = self.split_element_id(element_id, separator=separator,
+                                                          label_position=label_position)
+                if label in label_list:
+                    if cluster_id in filtered_dict:
+                        filtered_dict[cluster_id].append(element_id)
+                    else:
+                        filtered_dict[cluster_id] = [element_id]
+
+        return filtered_dict
+
+    def extract_clusters_by_labels_from_files(self, cluster_file, label_file, output_file,
+                                              separator="@", label_position="first"):
+        cluster_dict = SynDict(filename=cluster_file)
+        label_list = IdList(filename=label_file)
+
+        output_dict = self.extract_clusters_by_labels(cluster_dict, label_list, separator=separator,
+                                                      label_position=label_position)
+
+        output_dict.write(output_file)
+
 
 
 

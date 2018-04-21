@@ -1,1 +1,6 @@
 ~/Soft/MAVR/scripts/annotation/parallel_augustus.py  -i assembly.hybrif.all.softmasked.fasta  -o mustela_nigripes_3_sp -t 20 -x MUSNIG -s human -c ~/Soft/augustus-3.2.1/config/ -p /mnt/guatemala/skliver/data/Pfam-31/Pfam-A.hmm -w /mnt/guatemala/skliver/data/SwissProt/swissprot --softmasking --hintsfile all.hints.gff --extrinsicCfgFile ~/Soft/augustus-3.2.1/config/extrinsic/extrinsic.RM.EXNT.EXNS.cfg  -a ~/Soft/augustus-3.2.1/bin/
+
+
+~/Soft/MAVR/scripts/sequence_clusters/eggnog/convert_egemapper_annotation_file_to_fam.py -i  mustela_nigripes.orthologs.maNOG.emapper.annotations -o mustela_nigripes.orthologs.maNOG.emapper.fam -p ENOG41 -s mustela_nigripes
+~/Soft/MAVR/scripts/sequence_clusters/eggnog/extract_GO_terms_from_emapper_annotation_file.bash mustela_nigripes.orthologs.maNOG.emapper.annotations > mustela_nigripes.orthologs.maNOG.emapper.GO
+~/Soft/MAVR/scripts/sequence_clusters/eggnog/extract_predicted_gene_names_from_emapper_annotation_file.bash mustela_nigripes.orthologs.maNOG.emapper.annotations > mustela_nigripes.orthologs.maNOG.emapper.predicted_gene_names
