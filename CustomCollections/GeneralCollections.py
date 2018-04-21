@@ -394,9 +394,9 @@ class SynDict(OrderedDict):
                     continue
             #key, value = line.strip().split(separator)
 
-            tmp = line.strip("\n").split(separator) if separator else line.strip().split()
+            tmp = line.strip("\n").split(separator) if separator else line.strip("\n").split()
             #print line
-            print tmp
+            #print tmp
             key, value = tmp[key_index], tmp[value_index] if isinstance(value_index, int) else [tmp[index_entry] for index_entry in value_index]
             #print key, value
             if split_values or allow_repeats_of_key:
