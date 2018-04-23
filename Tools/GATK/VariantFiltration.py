@@ -62,7 +62,7 @@ class VariantFiltration(JavaTool):
         SelectVariants.get_indel(reference_file, input_vcf, indel_raw_vcf)
 
         self.filter_bad_SNP(reference_file, snp_raw_vcf, snp_filtered_vcf, filter_name=snp_filter_name, QD=snp_QD,
-                            FS=snp_FS, MQ=snp_MQ, HaplotypeScore=snp_HaplotypeScore,
+                            FS=snp_FS, MQ=snp_MQ, #HaplotypeScore=snp_HaplotypeScore,
                             MappingQualityRankSum=snp_MappingQualityRankSum, ReadPosRankSum=snp_ReadPosRankSum)
         self.filter_bad_indel(reference_file, indel_raw_vcf, indel_filtered_vcf, filter_name=indel_filter_name,
                               QD=indel_QD, ReadPosRankSum=indel_ReadPosRankSum, FS=indel_FS)
