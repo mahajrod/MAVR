@@ -23,8 +23,8 @@ parser.add_argument("--snp_FS", action="store", dest="snp_FS", type=float, defau
                     help="SNP FS threshold. Default -   60.0")
 parser.add_argument("--snp_MQ", action="store", dest="snp_MQ", type=float, default=40.0,
                     help="SNP MQ threshold. Default -  40.0")
-parser.add_argument("--snp_HaplotypeScore", action="store", dest="snp_HaplotypeScore", type=float, default=13.0,
-                    help="SNP HaplotypeScore threshold. Default -  13.0")
+#parser.add_argument("--snp_HaplotypeScore", action="store", dest="snp_HaplotypeScore", type=float, default=13.0,
+#                    help="SNP HaplotypeScore threshold. Default -  13.0")
 parser.add_argument("--snp_MappingQualityRankSum", action="store", dest="snp_MappingQualityRankSum", type=float,
                     default=-12.5, help="SNP MappingQualityRankSum threshold. Default - -12.5")
 parser.add_argument("--snp_ReadPosRankSum", action="store", dest="snp_ReadPosRankSum", type=float, default=-8.0,
@@ -35,8 +35,8 @@ parser.add_argument("--indel_QD", action="store", dest="indel_QD", type=float, d
                     help="Indel QD threshold. Default - 2.0")
 parser.add_argument("--indel_ReadPosRankSum", action="store", dest="indel_ReadPosRankSum", type=float, default=-20.0,
                     help="Indel ReadPosRankSum threshold. Default -   -20.0")
-parser.add_argument("--indel_InbreedingCoeff", action="store", dest="indel_InbreedingCoeff", type=float, default=-0.8,
-                    help="Indel InbreedingCoeff threshold. Default -   -0.8")
+#parser.add_argument("--indel_InbreedingCoeff", action="store", dest="indel_InbreedingCoeff", type=float, default=-0.8,
+#                    help="Indel InbreedingCoeff threshold. Default -   -0.8")
 parser.add_argument("--indel_FS", action="store", dest="indel_FS", type=float, default=200.0,
                     help="Indel FS threshold. Default - 200.0")
 
@@ -47,10 +47,11 @@ VariantFiltration.jar_path = FileRoutines.check_path(args.gatk_dir)
 VariantFiltration.filter_bad_variants(args.reference, args.input_vcf, args.output_prefix,
                                       snp_filter_name=args.snp_filter_name, snp_QD=args.snp_QD,
                                       snp_FS=args.snp_FS, snp_MQ=args.snp_MQ,
-                                      snp_HaplotypeScore=args.snp_HaplotypeScore,
+                                      #snp_HaplotypeScore=args.snp_HaplotypeScore,
                                       snp_MappingQualityRankSum=args.snp_MappingQualityRankSum,
                                       snp_ReadPosRankSum=args.snp_ReadPosRankSum,
                                       indel_filter_name=args.indel_filter_name, indel_QD=args.indel_QD,
                                       indel_ReadPosRankSum=args.indel_ReadPosRankSum,
-                                      indel_InbreedingCoeff=args.indel_InbreedingCoeff, indel_FS=args.indel_FS)
+                                      indel_FS=args.indel_FS)
+                                      #indel_InbreedingCoeff=args.indel_InbreedingCoeff, )
 
