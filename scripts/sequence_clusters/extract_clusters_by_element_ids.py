@@ -25,4 +25,4 @@ args = parser.parse_args()
 
 
 SequenceClusterRoutines.extract_clusters_by_element_ids_from_file(args.cluster_file, args.element_file, args.output,
-                                                                  mode=args.mode, id_column=None)
+                                                                  mode=args.mode, id_column=args.id_column_index)
