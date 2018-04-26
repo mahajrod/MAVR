@@ -308,7 +308,7 @@ class SequenceClusterRoutines(SequenceRoutines):
 
     def extract_clusters_by_element_ids_from_file(self, cluster_file, element_file, output_file, mode="w",
                                                   cluster_column=0, element_column=1, column_separator="\t",
-                                                  element_separator=","):
+                                                  element_separator=",", id_column=None):
         """"
         mode: "w" - if elements from element_id_list are present in cluster extracts only that elements
               "a" - if elements from element_id_list are present in cluster extracts all elements
@@ -317,8 +317,7 @@ class SequenceClusterRoutines(SequenceRoutines):
                                key_index=cluster_column, value_index=element_column,
                                separator=column_separator, values_separator=element_separator)
 
-        element_id_list = IdList()
-        element_id_list.read(element_file, comments_prefix="#")
+        element_id_list = IdList(filename=element_file, comments_prefix="#", column_number=id_column)
         extracted_clusters = self.extract_clusters_by_element_ids(cluster_dict, element_id_list, mode=mode)
         extracted_clusters.write(output_file, splited_values=True)
 
