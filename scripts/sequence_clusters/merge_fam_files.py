@@ -21,6 +21,8 @@ parser.add_argument("-k", "--key_column_index", action="store", dest="key_column
                     help="Index of key column in synonym file. Default: 0")
 parser.add_argument("-v", "--value_column_index", action="store", dest="value_column_index", type=int, default=1,
                     help="Index of value column in synonym file.Default: 1")
+parser.add_argument("-a", "--allow_repeats_of_key", action="store_true", dest="allow_repeats_of_key", default=False,
+                    help="Allow repeats of keys. Default: False")
 
 parser.add_argument("-o", "--output_file", action="store", dest="output", default="stdout",
                     help="Output file")
@@ -34,7 +36,8 @@ family_dict = SynDict()
 
 for filename in args.input:
     fam_dict = SynDict()
-    fam_dict.read(filename, split_values=True, key_index=args.key_column_index, value_index=args.value_column_index)
+    fam_dict.read(filename, split_values=True, allow_repeats_of_key=args.allow_repeats_of_key,
+                  key_index=args.key_column_index, value_index=args.value_column_index)
     for family in fam_dict:
         if family not in family_dict:
             family_dict[family] = fam_dict[family]
