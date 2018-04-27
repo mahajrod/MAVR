@@ -336,9 +336,10 @@ class SequenceClusterRoutines(SequenceRoutines):
 
         return labeled_cluster_dict
 
-    def label_cluster_elements_from_file(self, input_file, label, output_file, separator="@", label_position="first"):
-        input_dict = SynDict()
-        input_dict.read(input_file, split_values=True, comments_prefix="#")
+    def label_cluster_elements_from_file(self, input_file, label, output_file, separator="@", label_position="first",
+                                         key_index=0, value_index=1):
+        input_dict = SynDict(filename=input_file, split_values=True, comments_prefix="#",
+                             key_index=key_index, value_index=value_index)
 
         output_dict = self.label_cluster_elements(input_dict, label, separator=separator,
                                                   label_position=label_position)
