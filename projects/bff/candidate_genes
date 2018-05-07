@@ -1,0 +1,10 @@
+
+#dell
+
+cd ~/projects/mustelidae/analysis/candidate_genes
+mkdir candidate_predicted_gene_names species_candidate_GO
+
+for SP in enhydra_lutris mustela_nigripes mustela_putoris; do for GROUP in aggresive_behavior developmental_process gamete_generation reproduction behavior embryo_development immune_system_process reproductive_behavior; do  ~/Soft/MAVR/scripts/sequence_clusters/extract_clusters_by_element_ids.py -i species_GO/${SP}.longest_pep.orthologs.maNOG.emapper.GO -d candidate_GO/${GROUP}.descendants.tab -c 0 -o species_candidate_GO/${SP}.longest_pep.${GROUP}.GO & done; done
+
+for SP in enhydra_lutris mustela_nigripes mustela_putoris; do for GROUP in aggresive_behavior developmental_process gamete_generation reproduction behavior embryo_development immune_system_process reproductive_behavior; do  ~/Soft/MAVR/scripts/sequence_clusters/extract_selected_families_from_fam_file.py -i species_predicted_gene_names/${SP}.longest_pep.orthologs.maNOG.emapper.predicted_gene_names -c 0 -d  species_candidate_GO/${SP}.longest_pep.${GROUP}.GO -o candidate_predicted_gene_names/${SP}.longest_pep.${GROUP}.predicted_gene_names & done; done
+

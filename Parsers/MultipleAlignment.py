@@ -1,5 +1,6 @@
 __author__ = 'mahajrod'
 import os
+import math
 from collections import Iterable, OrderedDict
 from math import sqrt
 
@@ -39,15 +40,18 @@ class MultipleAlignmentStatRecord(Record):
 
         """
 
-        return "%s\t%i\t%i\t%i\t%f\t%i\t%f\t%i\t%f\t%i\t%f\n" % (self.id, self.number_of_sequences, self.length,
-                                                                 max(self.unique_pos_matrix_count[0, ]),
-                                                                 max(self.unique_pos_matrix_count_percent[0, ]),
-                                                                 max(self.unique_pos_matrix_count[1, ]),
-                                                                 max(self.unique_pos_matrix_count_percent[1, ]),
-                                                                 max(self.unique_pos_matrix_count[2, ]),
-                                                                 max(self.unique_pos_matrix_count_percent[2, ]),
-                                                                 max(self.unique_pos_matrix_count[3, ]),
-                                                                 max(self.unique_pos_matrix_count_percent[3, ]),)
+        return "%s\t%i\t%i\t%i\t%i\t%i\t%f\t%i\t%f\t%i\t%f\t%i\t%f\n" % (self.id, self.number_of_sequences, self.length,
+                                                                         min(self.seq_lengths.values()),
+                                                                         max(self.seq_lengths.values()),
+                                                                         max(self.unique_pos_matrix_count[:, 0]),
+                                                                         max(self.unique_pos_matrix_count_percent[:, 0]),
+                                                                         max(self.unique_pos_matrix_count[:, 1]),
+                                                                         max(self.unique_pos_matrix_count_percent[:, 1]),
+                                                                         max(self.unique_pos_matrix_count[:, 2]) if math.fabs(max(self.unique_pos_matrix_count[:, 2])) > math.fabs(min(self.unique_pos_matrix_count[:, 2])) else min(self.unique_pos_matrix_count[:, 2]),
+                                                                         max(self.unique_pos_matrix_count_percent[:, 2]) if math.fabs(max(self.unique_pos_matrix_count_percent[:, 2])) > math.fabs(min(self.unique_pos_matrix_count_percent[:, 2])) else min(self.unique_pos_matrix_count_percent[:, 2]),
+                                                                         max(self.unique_pos_matrix_count[:, 3]) if math.fabs(max(self.unique_pos_matrix_count[:, 3])) > math.fabs(min(self.unique_pos_matrix_count[:, 3])) else min(self.unique_pos_matrix_count[:, 3]),
+                                                                         max(self.unique_pos_matrix_count_percent[:, 3]) if math.fabs(max(self.unique_pos_matrix_count_percent[:, 3])) > math.fabs(min(self.unique_pos_matrix_count_percent[:, 3])) else min(self.unique_pos_matrix_count_percent[:, 3]),
+                                                                         )
 
     def count_gaps(self):
 
@@ -143,9 +147,6 @@ class MultipleAlignmentStatRecord(Record):
 
         #return unique_insertion_count_dict, unique_gap_count_dict, unique_leading_count_dict, unique_trailing_count_dict
 
-    def __str__(self):
-        pass
-
 
 class Metadata():
     def __init__(self, metadata=[]):
@@ -184,12 +185,13 @@ class MultipleAlignmentStatCollection(Collection):
         list_of_files = FileRoutines.make_list_of_path_to_files(input_file)
         for filename in list_of_files:
             directory, basename, extension = FileRoutines.split_filename(filename)
-            self.records[basename] = MultipleAlignmentStatRecord(basename, alignment=AlignIO.read(input_file, filetype))
+            self.records[basename] = MultipleAlignmentStatRecord(basename, alignment=AlignIO.read(filename, filetype))
         # collectiontype-dependent function
         pass
 
     def write_general_stats(self, output):
         header = "#aln_id\tseq_number\taln_length\t" \
+                 "min_seq_len\tmax_seq_len\t" \
                  "max_uniq_insertions\tmax_uniq_insertions,%\t" \
                  "max_unique_gaps\tmax_unique_gaps,%\t" \
                  "max_leaiding_unique_pos\tmax_leaiding_unique_pos,%\t" \
@@ -198,7 +200,8 @@ class MultipleAlignmentStatCollection(Collection):
         with open(output, "w") as out_fd:
             out_fd.write(header)
             for record_id in self.records:
-                out_fd.write(str(self.records[record_id]) + "\n")
+                #print self.records
+                out_fd.write(str(self.records[record_id]))
     """
     def __str__(self):
         collection_string = ""
