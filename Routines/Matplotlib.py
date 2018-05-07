@@ -663,6 +663,7 @@ class MatplotlibRoutines:
         # save histo values
         np.savetxt("%s.histo" % output_prefix, zip(bin_centers, n), fmt="%i\t%i")
         np.savetxt("%s.bins" % output_prefix, bins)
+        print bins
 
     @staticmethod
     def generate_bin_array_by_width(min_value, max_value, bin_width, add_max_value=True):
