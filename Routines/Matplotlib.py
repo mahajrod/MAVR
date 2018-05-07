@@ -601,8 +601,11 @@ class MatplotlibRoutines:
         min_lenn = min(lengths)
         print min_length
 
-        max_len = max_length if (max_length is not None) and (max_length < max_lenn) else max_lenn
-        min_len = min_length if (min_length is not None) and min_lenn < min_length else min_lenn
+        #max_len = max_length if (max_length is not None) and (max_length < max_lenn) else max_lenn
+        #min_len = min_length if (min_length is not None) and min_lenn < min_length else min_lenn
+
+        max_len = max_length if (max_length is not None) else max_lenn
+        min_len = min_length if (min_length is not None) else min_lenn
 
         print min_len
         #print(lengths)
