@@ -644,7 +644,7 @@ class MatplotlibRoutines:
 
         n, bins, patches = plt.hist(filtered, bins=bins)
 
-        bin_centers = (bins + ((bins[1] - bins[0])/2))[:-1]
+        #bin_centers = (bins + ((bins[1] - bins[0])/2))[:-1]
         #print bin_centers
         #print len(n)
         #print len(bin_centers)
@@ -666,10 +666,10 @@ class MatplotlibRoutines:
             plt.savefig("%s.logscale.%s" % (output_prefix, ext))
 
         # save histo values
-        np.savetxt("%s.histo" % output_prefix, zip(bin_centers, n), fmt="%i\t%i")
+        np.savetxt("%s.histo" % output_prefix, zip(bins[:-1], n), fmt="%i\t%i")
         np.savetxt("%s.bins" % output_prefix, bins)
         print bins
-        print patches
+
 
     @staticmethod
     def generate_bin_array_by_width(min_value, max_value, bin_width, add_max_value=True):
