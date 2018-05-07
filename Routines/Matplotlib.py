@@ -299,6 +299,7 @@ class MatplotlibRoutines:
 
                 # save histo values
                 np.savetxt("%s.histo" % output_prefix, zip(bin_centers, n), fmt="%i\t%i")
+                np.savetxt("%s.bins" % output_prefix, bins, fmt="%i\t%i")
         if subplot is None:
             if close_figure:
                 plt.close(figure)
