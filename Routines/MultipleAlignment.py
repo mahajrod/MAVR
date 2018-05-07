@@ -1,6 +1,7 @@
 __author__ = 'mahajrod'
 import os
 
+from collections import OrderedDict
 import numpy as np
 
 from Bio.Seq import Seq
@@ -68,11 +69,11 @@ class MultipleAlignmentRoutines(SequenceRoutines):
         #print position_matrix
         return position_matrix
 
-    def count_unique_positions_per_sequence(self, alignment, gap_symbol="-", verbose=True):
+    def count_unique_positions_per_sequence(self, alignment, gap_symbol="-", verbose=True, ):
         number_of_sequences = len(alignment)
         alignment_length = len(alignment[0])
         position_presence_matrix = self.get_position_presence_matrix(alignment, gap_symbol=gap_symbol, verbose=verbose)
-        unique_position_count_dict = {}
+        unique_position_count_dict = OrderedDict()
 
         for row in range(0, number_of_sequences):
             sequence_id = alignment[row].id
@@ -103,7 +104,7 @@ class MultipleAlignmentRoutines(SequenceRoutines):
                     unique_positions += 1
 
             unique_position_count_dict[sequence_id] = unique_positions
-            unique_position_count_percent_dict[sequence_id] = 100 *  float(unique_positions) / (alignment_length - str(alignment[row].seq).count(gap_symbol))
+            unique_position_count_percent_dict[sequence_id] = 100 * float(unique_positions) / (alignment_length - str(alignment[row].seq).count(gap_symbol))
 
         unique_position_count_dict.write("%s.absolute_counts" % output_prefix)
         unique_position_count_percent_dict.write("%s.percent_counts" % output_prefix)
@@ -341,3 +342,22 @@ class MultipleAlignmentRoutines(SequenceRoutines):
                                 description=record.description)
 
         SeqIO.write(translated_record_generator(alignment), protein_alignment_file, format=format)
+
+    def gather_alignment_stats(self, alignment, gap_symbol="-", verbose=False):
+
+        number_of_sequences, alignment_length = self.get_general_statistics(alignment, verbose=verbose)
+
+        unique_position_count_dict = self.count_unique_positions_per_sequence(alignment, gap_symbol=gap_symbol,
+                                                                              verbose=verbose)
+
+
+    """
+    @staticmethod
+    def parse_alignment(input_file, filetype="fasta"):
+        print("Parsing alignment file %s" % input_file)
+        #print(input_file)
+        alignment = AlignIO.read(input_file, filetype)
+        #print(alignment)
+        print("Totaly %i sequences in alignment" % len(alignment))
+        return alignment
+    """
