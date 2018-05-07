@@ -169,22 +169,25 @@ class Header():
 
 class MultipleAlignmentStatCollection(Collection):
     # TODO: develop this class to minimize new code in various collections
-    def __init__(self, metadata=None, record_list=None, header=None, input_file=None, filetype="fasta"):
+    def __init__(self, metadata=None, record_list=None, header=None, input_file=None, filetype="fasta", verbose=False):
         # metadata should be Metadata class
         # header should be Header class
         # record_list should be list of Record class
         if not(input_file is None):
             self.records = OrderedDict()
-            self.read(input_file, filetype=filetype)
+            self.read(input_file, filetype=filetype, verbose=verbose)
         else:
             self.metadata = metadata
             self.records = record_list
             self.header = header
 
-    def read(self, input_file, filetype="fasta"):
+    def read(self, input_file, filetype="fasta", verbose=False):
         list_of_files = FileRoutines.make_list_of_path_to_files(input_file)
         for filename in list_of_files:
+            if verbose:
+                print("Parsing %s ..." % filename)
             directory, basename, extension = FileRoutines.split_filename(filename)
+
             self.records[basename] = MultipleAlignmentStatRecord(basename, alignment=AlignIO.read(filename, filetype))
         # collectiontype-dependent function
         pass

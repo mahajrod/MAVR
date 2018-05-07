@@ -14,6 +14,9 @@ parser.add_argument("-o", "--output_directory", action="store", dest="output", t
 """
 parser.add_argument("-o", "--output", action="store", dest="output", required=True,
                     help="Output file with results")
+parser.add_argument("-v", "--verbose", action="store_true", dest="verbose",
+                    help="Verbose parsing. Default: False")
+
 
 """
 parser.add_argument("-m", "--mode", action="store", dest="mode", default="globalpair",
@@ -29,5 +32,5 @@ parser.add_argument("-g", "--gap_open_penalty", action="store", dest="gap_open_p
 """
 args = parser.parse_args()
 
-stat_collection = MultipleAlignmentStatCollection(input_file=args.input)
+stat_collection = MultipleAlignmentStatCollection(input_file=args.input, verbose=args.verbose)
 stat_collection.write_general_stats(args.output)
