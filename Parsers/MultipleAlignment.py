@@ -105,7 +105,7 @@ class MultipleAlignmentStatRecord(Record):
                 max(self.unique_pos_matrix_count[:, 3]) if math.fabs(max(self.unique_pos_matrix_count[:, 3])) > math.fabs(min(self.unique_pos_matrix_count[:, 3])) else min(self.unique_pos_matrix_count[:, 3]),
                 max(self.unique_pos_matrix_count_percent[:, 3]) if math.fabs(max(self.unique_pos_matrix_count_percent[:, 3])) > math.fabs(min(self.unique_pos_matrix_count_percent[:, 3])) else min(self.unique_pos_matrix_count_percent[:, 3]),
                 max(self.unique_pos_matrix_count[:, 4]),
-                max(self.unique_pos_matrix_count[:, 5])]
+                max(self.unique_pos_matrix_count_percent[:, 4])]
 
     def count_unique_positions_per_sequence(self):
         unique_matrix_count = []
