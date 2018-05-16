@@ -203,7 +203,7 @@ class MultipleAlignmentStatCollection(Collection):
                                     "min_seq_len\tmax_seq_len\t" \
                                     "max_uniq_insertions\tmax_uniq_insertions,fraction\t" \
                                     "max_unique_gaps\tmax_unique_gaps,fraction\t" \
-                                    "max_leaiding_unique_pos\tmax_leaiding_unique_pos,fraction\t" \
+                                    "max_leading_unique_pos\tmax_leading_unique_pos,fraction\t" \
                                     "max_trailing_unique_pos\tmax_trailing_unique_pos,fraction\t" \
                                     "max_unique_pos\tmax_unique_pos,fraction\n"
         if not(input_file is None):
@@ -253,7 +253,7 @@ class MultipleAlignmentStatCollection(Collection):
         general_stats_list = []
         for record_id in self.records:
             #print self.records
-            general_stats_list.append(self.records[record_id].get_general_stats(self))
+            general_stats_list.append(self.records[record_id].get_general_stats())
         return np.array(general_stats_list)
 
     def write_general_stats(self, output):
@@ -315,11 +315,25 @@ class MultipleAlignmentStatCollection(Collection):
                                                 header="#left_xedge\tleft_yedge\tvalue",
                                                 save_histovalues_only=True)
 
+        # Heatmap; x: seq number, y: max_unique_pos_in_seq/aln_len
+        print("Heatmap: x: seq number, y: max_unique_pos_in_seq/aln_len")
+        MatplotlibRoutines.draw_heatmap(self.general_stats_table[:, 0], 100 * self.general_stats_table[:, 13],
+                                        output_prefix="%s.max_unique_pos_seq_number" % output_prefix,
+                                        xlabel="N of sequences\nin alignment",
+                                        ylabel="Max uniq positions, % of seq", title=None,
+                                        figsize=figsize, minimum_counts_to_show=1,
+                                        extensions=extensions, show_colorbar=True,
+                                        bin_number=(seq_bin_number, percent_histogram_bin_number),
+                                        bin_width=None, bin_array=None, min_x_value=min_seq_number_in_alignment,
+                                        max_x_value=max_seq_number_in_alignment, min_y_value=0, max_y_value=100,
+                                        add_max_value=True, subplot=ax_array[1, 1],
+                                        save_histovalues_only=True, header="#left_xedge\tleft_yedge\tcounts")
+
         # Heatmap; x: seq number, y: max_unique_insertions_in_seq/aln_len
         print("Heatmap: x: seq number, y: max_unique_insertions_in_seq/aln_len")
         MatplotlibRoutines.draw_heatmap(self.general_stats_table[:, 0], 100 * self.general_stats_table[:, 5],
                                         output_prefix="%s.max_unique_insertions_seq_number" % output_prefix,
-                                        xlabel="N of sequences\nin alignment",
+                                        xlabel=None, #"N of sequences\nin alignment",
                                         ylabel="Max uniq insertions, % of seq", title=None,
                                         figsize=figsize, minimum_counts_to_show=1,
                                         extensions=extensions, show_colorbar=True,
@@ -341,6 +355,35 @@ class MultipleAlignmentStatCollection(Collection):
                                         bin_width=None, bin_array=None, min_x_value=min_seq_number_in_alignment,
                                         max_x_value=max_seq_number_in_alignment, min_y_value=0, max_y_value=100,
                                         add_max_value=True, subplot=ax_array[1, 2],
+                                        save_histovalues_only=True, header="#left_xedge\tleft_yedge\tcounts")
+
+
+        # Heatmap; x: seq number, y: max_unique_leading_pos_in_seq/aln_len
+        print("Heatmap: x: seq number, y: max_unique_leading_pos_in_seq/aln_len")
+        MatplotlibRoutines.draw_heatmap(self.general_stats_table[:, 0], 100 * self.general_stats_table[:, 9],
+                                        output_prefix="%s.max_unique_leading_pos_seq_number" % output_prefix,
+                                        xlabel=None, #"N of sequences\nin alignment",
+                                        ylabel="Max uniq leading pos, % of seq", title=None,
+                                        figsize=figsize, minimum_counts_to_show=1,
+                                        extensions=extensions, show_colorbar=True,
+                                        bin_number=(seq_bin_number, percent_histogram_bin_number),
+                                        bin_width=None, bin_array=None, min_x_value=min_seq_number_in_alignment,
+                                        max_x_value=max_seq_number_in_alignment, min_y_value=0, max_y_value=100,
+                                        add_max_value=True, subplot=ax_array[0, 3],
+                                        save_histovalues_only=True, header="#left_xedge\tleft_yedge\tcounts")
+
+        # Heatmap: x: seq number, y: max_unique_trailing_pos_in_seq/aln_len
+        print("Heatmap: x: seq number, y: max_unique_trailing_pos_in_seq/aln_len")
+        MatplotlibRoutines.draw_heatmap(self.general_stats_table[:, 0], 100 * self.general_stats_table[:, 11],
+                                        output_prefix="%s.max_unique_trailing_pos_seq_number" % output_prefix,
+                                        xlabel="N of sequences\nin alignment",
+                                        ylabel="Max uniq trailing pos, % of seq", title=None,
+                                        figsize=figsize, minimum_counts_to_show=1,
+                                        extensions=extensions, show_colorbar=True,
+                                        bin_number=(seq_bin_number, percent_histogram_bin_number),
+                                        bin_width=None, bin_array=None, min_x_value=min_seq_number_in_alignment,
+                                        max_x_value=max_seq_number_in_alignment, min_y_value=0, max_y_value=100,
+                                        add_max_value=True, subplot=ax_array[1, 3],
                                         save_histovalues_only=True, header="#left_xedge\tleft_yedge\tcounts")
 
         plt.tight_layout()
