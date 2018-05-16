@@ -226,7 +226,8 @@ class MatplotlibRoutines:
     def draw_histogram(data_array, output_prefix=None, number_of_bins=None, width_of_bins=None,
                        max_threshold=None, min_threshold=None, xlabel=None, ylabel=None,
                        title=None, extensions=("png",), ylogbase=None, subplot=None, suptitle=None,
-                       close_figure=False):
+                       close_figure=False, save_histovalues_only=False, figsize=(6,6),
+                       header=None):
         if (number_of_bins is not None) and (width_of_bins is not None):
             raise AttributeError("Options -w/--width_of_bins and -b/--number_of_bins mustn't be set simultaneously")
 
@@ -238,8 +239,13 @@ class MatplotlibRoutines:
         max_lenn = max(data_array)
         min_lenn = min(data_array)
 
-        max_len = max_threshold if (max_threshold is not None) and (max_threshold < max_lenn) else max_lenn
-        min_len = min_threshold if (min_threshold is not None) and (min_lenn < min_threshold) else min_lenn
+        max_len = max_threshold if (max_threshold is not None) else max_lenn
+        min_len = min_threshold if (min_threshold is not None) else min_lenn
+
+
+        #max_len = max_threshold if (max_threshold is not None) and (max_threshold < max_lenn) else max_lenn
+        #min_len = min_threshold if (min_threshold is not None) and (min_lenn < min_threshold) else min_lenn
+
         filtered = []
 
         if (max_len < max_lenn) and (min_len > min_lenn):
@@ -258,7 +264,7 @@ class MatplotlibRoutines:
             filtered = data_array
         if subplot is None:
             #print "aaaaaaaaaa"
-            figure = plt.figure(1, figsize=(6, 6),)
+            figure = plt.figure(1, figsize=figsize,)
             subplott = figure.add_subplot(1, 1, 1)
         else:
             plt.axes(subplot)
@@ -278,6 +284,10 @@ class MatplotlibRoutines:
         #print bin_centers
         #print len(n)
         #print len(bin_centers)
+        print "Minimum x in histogram: %f" % float(min_len)
+        print "Maximum x in histogram: %f" % float(max_len)
+        print "Bins:"
+        print bins
 
         plt.xlim(xmin=min_len, xmax=max_len)
         if xlabel:
@@ -294,17 +304,20 @@ class MatplotlibRoutines:
             plt.ylim(ymin=1)
 
         if output_prefix:
-            for ext in extensions:
-                plt.savefig("%s.%s" % (output_prefix, ext))
+            if not save_histovalues_only:
+                for ext in extensions:
+                    plt.savefig("%s.%s" % (output_prefix, ext))
 
-                # save histo values
-                np.savetxt("%s.histo" % output_prefix, zip(bin_centers, n), fmt="%i\t%i")
-                np.savetxt("%s.bins" % output_prefix, bins, fmt="%i\t%i")
+            # save histo values
+            np.savetxt("%s.histo" % output_prefix, zip(bins[:-1], n), fmt="%i\t%i")
+            np.savetxt("%s.bins" % output_prefix, bins, fmt="%i")
         if subplot is None:
             if close_figure:
                 plt.close(figure)
 
-        return zip(bin_centers, n)
+        return n, bins
+
+        #return zip(bin_centers, n)
 
     def draw_multi_histogram_picture(self, list_of_data_arrays, subplot_tuple, output_prefix=None,
                                      figsize=(10, 10), number_of_bins_list=None, width_of_bins_list=None,
@@ -599,7 +612,6 @@ class MatplotlibRoutines:
 
         max_lenn = max(lengths)
         min_lenn = min(lengths)
-        print min_length
 
         #max_len = max_length if (max_length is not None) and (max_length < max_lenn) else max_lenn
         #min_len = min_length if (min_length is not None) and min_lenn < min_length else min_lenn
@@ -607,7 +619,6 @@ class MatplotlibRoutines:
         max_len = max_length if (max_length is not None) else max_lenn
         min_len = min_length if (min_length is not None) else min_lenn
 
-        print min_len
         #print(lengths)
         #print(max_len)
         #print(min_len)
@@ -644,6 +655,11 @@ class MatplotlibRoutines:
 
         n, bins, patches = plt.hist(filtered, bins=bins)
 
+        print "Minimum x in histogram: %f" % float(min_len)
+        print "Maximum x in histogram: %f" % float(max_len)
+        print "Bins:"
+        print bins
+
         #bin_centers = (bins + ((bins[1] - bins[0])/2))[:-1]
         #print bin_centers
         #print len(n)
@@ -668,8 +684,6 @@ class MatplotlibRoutines:
         # save histo values
         np.savetxt("%s.histo" % output_prefix, zip(bins[:-1], n), fmt="%i\t%i")
         np.savetxt("%s.bins" % output_prefix, bins)
-        print bins
-
 
     @staticmethod
     def generate_bin_array_by_width(min_value, max_value, bin_width, add_max_value=True):
@@ -722,7 +736,7 @@ class MatplotlibRoutines:
         print x_list
         min_x, max_x = min(map(min, x_list) if isinstance(x_list[0], Iterable) else x_list), \
                        max(map(max, x_list) if isinstance(x_list[0], Iterable) else x_list)
-        if y_list:
+        if not(y_list is None):
             min_y, max_y = min(map(min, y_list) if isinstance(y_list[0], Iterable) else y_list), \
                            max(map(max, y_list) if isinstance(y_list[0], Iterable) else y_list)
 
@@ -731,12 +745,12 @@ class MatplotlibRoutines:
                                                      max_x_value if max_x_value is not None else max_x,
                                                      bin_width if isinstance(bin_width, int) else bin_width[0],
                                                      add_max_value=add_max_value)
-            if y_list:
+            if not(y_list is None):
                 ybins = self.generate_bin_array_by_width(min_y_value if min_y_value is not None else min_y,
                                                          max_y_value if max_y_value is not None else max_y,
                                                          bin_width if isinstance(bin_width, int) else bin_width[1],
                                                          add_max_value=add_max_value)
-            bins = (xbins, ybins) if y_list else xbins
+            bins = (xbins, ybins) if not(y_list is None) else xbins
 
         elif bin_array:
             bins = bin_array
@@ -746,28 +760,47 @@ class MatplotlibRoutines:
                       "Instead default value(20) for bin number is used.")
             xbins = np.linspace(min_x_value if min_x_value is not None else min_x,
                                 max_x_value if max_x_value is not None else max_x,
-                                20 if bin_number is None else bin_number if isinstance(bin_number, int) else bin_number[0])
-            if y_list:
+                                21 if bin_number is None else bin_number + 1 if isinstance(bin_number, int) else bin_number[0] + 1)
+            if not(y_list is None):
                 ybins = np.linspace(min_y_value if min_y_value is not None else min_y,
                                     max_y_value if max_y_value is not None else max_y,
-                                    20 if bin_number is None else bin_number if isinstance(bin_number, int) else bin_number[1])
-            bins = (xbins, ybins) if y_list else xbins
+                                    21 if bin_number is None else bin_number + 1 if isinstance(bin_number, int) else bin_number[1] + 1)
+            bins = (xbins, ybins) if not(y_list is None) else xbins
 
         return bins
 
-    def draw_heatmap(self, x, y, output_prefix, xlabel=None, ylabel=None, title=None,
+    def draw_heatmap(self, x, y, output_prefix=None, xlabel=None, ylabel=None, title=None,
                      figsize=(8, 8), minimum_counts_to_show=1,
                      extensions=("png", "svg"), show_colorbar=True, bin_number=20, bin_width=None, bin_array=None,
-                     min_x_value=None, max_x_value=None, min_y_value=None, max_y_value=None, add_max_value=True):
+                     min_x_value=None, max_x_value=None, min_y_value=None, max_y_value=None, add_max_value=True,
+                     subplot=None, save_histovalues_only=False, header=None):
+        """
+        bin_width: numeric or tuple of two numerics
+        """
 
         bins = self.generate_bin_array(x, y, bin_number=bin_number, bin_width=bin_width, bin_array=bin_array,
                                        min_x_value=min_x_value, max_x_value=max_x_value,
                                        min_y_value=min_y_value, max_y_value=max_y_value,
                                        add_max_value=add_max_value)
+        #print "X axis bins:"
         #print bins[0]
+        #print "Y axis bins:"
         #print bins[1]
-        fig, ax = plt.subplots(figsize=figsize)
-        counts, xedges, yedges, image = ax.hist2d(x, y, bins, cmin=minimum_counts_to_show)
+
+        if subplot is None:
+            #print "aaaaaaaaaa"
+            #figure = plt.figure(1, figsize=figsize,)
+            #subplott = figure.add_subplot(1, 1, 1)
+            fig, ax = plt.subplots(figsize=figsize)
+        else:
+            ax = plt.axes(subplot)
+
+        counts, xedges, yedges, image = plt.hist2d(x, y, bins, cmin=minimum_counts_to_show)
+        print "X edges bins:"
+        print xedges
+        print "Y edges bins:"
+        print yedges
+        print counts
         #print x
         #print y
         #print minimum_counts_to_show
@@ -805,8 +838,42 @@ class MatplotlibRoutines:
             print (decimal, max_major_tick + decimal, decimal)
             colorbar.set_ticklabels(range(decimal, int(max_major_tick + decimal), decimal))
             """
-        for ext in extensions:
-            plt.savefig("%s.%s" % (output_prefix, ext))
+        if output_prefix:
+            if not save_histovalues_only:
+                for ext in extensions:
+                    plt.savefig("%s.%s" % (output_prefix, ext))
+            with open("%s.2d_histo" % output_prefix, "w") as out_fd:
+                if header:
+                    out_fd.write(header if header[-1] == "\n" else header + "\n")
+                for ix in range(0, len(xedges) - 1):
+                    for iy in range(0, len(yedges) - 1):
+                        out_fd.write("%d\t%d\t%d\n" % (xedges[ix], yedges[iy], 0 if np.isnan(counts[ix, iy]) else counts[ix, iy]))
+
+        return counts, xedges, yedges
+
+    def draw_percent_heatmap(self, x, y, output_prefix=None, xlabel=None, ylabel=None, title=None,
+                             figsize=(8, 8), minimum_counts_to_show=1,
+                             extensions=("png", "svg"), show_colorbar=True, bin_number=20, bin_width=None, bin_array=None,
+                             type="percent", add_max_value=True,
+                             subplot=None, save_histovalues_only=False, header=None):
+        if type == "percent":
+            return self.draw_heatmap(x, y, output_prefix, xlabel=xlabel, ylabel=ylabel, title=title,
+                                     figsize=figsize, minimum_counts_to_show=minimum_counts_to_show,
+                                     extensions=extensions, show_colorbar=show_colorbar, bin_number=bin_number,
+                                     bin_width=bin_width, bin_array=bin_array, min_x_value=0,
+                                     max_x_value=100, min_y_value=0, max_y_value=100,
+                                     add_max_value=add_max_value, subplot=subplot,
+                                     save_histovalues_only=save_histovalues_only, header=header)
+        elif type == "fraction":
+            return self.draw_heatmap(x, y, output_prefix, xlabel=xlabel, ylabel=ylabel, title=title,
+                                     figsize=figsize, minimum_counts_to_show=minimum_counts_to_show,
+                                     extensions=extensions, show_colorbar=show_colorbar, bin_number=bin_number,
+                                     bin_width=bin_width, bin_array=bin_array, min_x_value=0.0,
+                                     max_x_value=1.0, min_y_value=0.0, max_y_value=1.0,
+                                     add_max_value=add_max_value, subplot=subplot,
+                                     save_histovalues_only=save_histovalues_only, header=header)
+        else:
+            raise ValueError("Unrecognized type of percent histogram(neither fraction nor percent)")
 
     def draw_heatmap_from_file(self, input_file, output_prefix, x_column=0, y_column=1, xlabel=None, ylabel=None,
                                title=None, figsize=(8, 8), minimum_counts_to_show=1, extensions=("png", "svg"),

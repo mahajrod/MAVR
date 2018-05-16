@@ -12,7 +12,7 @@ import numpy as np
 
 from CustomCollections.GeneralCollections import TwoLvlDict, IdList, SynDict
 from Parsers.Abstract import Record, Collection
-from Routines import FileRoutines
+from Routines import FileRoutines, MatplotlibRoutines
 from Bio import AlignIO
 
 
@@ -39,8 +39,8 @@ class MultipleAlignmentStatRecord(Record):
         General stat string
 
         """
-
-        return "%s\t%i\t%i\t%i\t%i\t%i\t%f\t%i\t%f\t%i\t%f\t%i\t%f\n" % (self.id, self.number_of_sequences, self.length,
+        """
+        return "%s\t%i\t%i\t%i\t%i\t%i\t%f\t%i\t%f\t%i\t%f\t%i\t%f\t%i\t%f\n" % (self.id, self.number_of_sequences, self.length,
                                                                          min(self.seq_lengths.values()),
                                                                          max(self.seq_lengths.values()),
                                                                          max(self.unique_pos_matrix_count[:, 0]),
@@ -51,7 +51,10 @@ class MultipleAlignmentStatRecord(Record):
                                                                          max(self.unique_pos_matrix_count_percent[:, 2]) if math.fabs(max(self.unique_pos_matrix_count_percent[:, 2])) > math.fabs(min(self.unique_pos_matrix_count_percent[:, 2])) else min(self.unique_pos_matrix_count_percent[:, 2]),
                                                                          max(self.unique_pos_matrix_count[:, 3]) if math.fabs(max(self.unique_pos_matrix_count[:, 3])) > math.fabs(min(self.unique_pos_matrix_count[:, 3])) else min(self.unique_pos_matrix_count[:, 3]),
                                                                          max(self.unique_pos_matrix_count_percent[:, 3]) if math.fabs(max(self.unique_pos_matrix_count_percent[:, 3])) > math.fabs(min(self.unique_pos_matrix_count_percent[:, 3])) else min(self.unique_pos_matrix_count_percent[:, 3]),
-                                                                         )
+                                                                         max(self.unique_pos_matrix_count[:, 4]),
+                                                                         max(self.unique_pos_matrix_count[:, 5]))
+        """
+        return "%s\t%s\n" % (self.id, "\t".join(map(str, self.get_general_stats())))
 
     def count_gaps(self):
 
@@ -89,14 +92,29 @@ class MultipleAlignmentStatRecord(Record):
 
         return position_presence_array
 
+    def get_general_stats(self):
+        return [self.number_of_sequences, self.length,
+                min(self.seq_lengths.values()),
+                max(self.seq_lengths.values()),
+                max(self.unique_pos_matrix_count[:, 0]),
+                max(self.unique_pos_matrix_count_percent[:, 0]),
+                max(self.unique_pos_matrix_count[:, 1]),
+                max(self.unique_pos_matrix_count_percent[:, 1]),
+                max(self.unique_pos_matrix_count[:, 2]) if math.fabs(max(self.unique_pos_matrix_count[:, 2])) > math.fabs(min(self.unique_pos_matrix_count[:, 2])) else min(self.unique_pos_matrix_count[:, 2]),
+                max(self.unique_pos_matrix_count_percent[:, 2]) if math.fabs(max(self.unique_pos_matrix_count_percent[:, 2])) > math.fabs(min(self.unique_pos_matrix_count_percent[:, 2])) else min(self.unique_pos_matrix_count_percent[:, 2]),
+                max(self.unique_pos_matrix_count[:, 3]) if math.fabs(max(self.unique_pos_matrix_count[:, 3])) > math.fabs(min(self.unique_pos_matrix_count[:, 3])) else min(self.unique_pos_matrix_count[:, 3]),
+                max(self.unique_pos_matrix_count_percent[:, 3]) if math.fabs(max(self.unique_pos_matrix_count_percent[:, 3])) > math.fabs(min(self.unique_pos_matrix_count_percent[:, 3])) else min(self.unique_pos_matrix_count_percent[:, 3]),
+                max(self.unique_pos_matrix_count[:, 4]),
+                max(self.unique_pos_matrix_count[:, 5])]
+
     def count_unique_positions_per_sequence(self):
         unique_matrix_count = []
         unique_matrix_count_percent = []
-        unique_insertion_count_dict = SynDict()
-        unique_gap_count_dict = SynDict()
+        #unique_insertion_count_dict = SynDict()
+        #unique_gap_count_dict = SynDict()
 
-        unique_leading_count_dict = SynDict()
-        unique_trailing_count_dict = SynDict()
+        #unique_leading_count_dict = SynDict()
+        #unique_trailing_count_dict = SynDict()
 
         for row in range(0, self.number_of_sequences):
             sequence_id = self.alignment[row].id
@@ -104,11 +122,14 @@ class MultipleAlignmentStatRecord(Record):
             unique_insertions = 0
             leading_unique_positions = 0
             trailing_unique_positions = 0
+            unique_positions = 0
             for column in range(0, self.length):
                 if self.position_presence_matrix[row, column] == 1:
                     unique_insertions += 1
+                    unique_positions += 1
                 elif self.position_presence_matrix[row, column] == -1:
                     unique_gaps += 1
+                    unique_positions += 1
 
             if (self.position_presence_matrix[row, 0] == 1) or (self.position_presence_matrix[row, 0] == -1):
                 for column in range(0, self.length):
@@ -119,26 +140,29 @@ class MultipleAlignmentStatRecord(Record):
 
             if (self.position_presence_matrix[row, -1] == 1) or (self.position_presence_matrix[row, -1] == -1):
 
-                for column in range(-1, -self.length):
+                for column in range(-1, -self.length, -1):
                     if self.position_presence_matrix[row, -1] == self.position_presence_matrix[row, column]:
                         trailing_unique_positions += self.position_presence_matrix[row, column]
                     else:
                         break
 
-            unique_insertion_count_dict[sequence_id] = unique_insertions
-            unique_gap_count_dict[sequence_id] = unique_gaps
-            unique_leading_count_dict[sequence_id] = leading_unique_positions
-            unique_trailing_count_dict[sequence_id] = trailing_unique_positions
+            #unique_insertion_count_dict[sequence_id] = unique_insertions
+            #unique_gap_count_dict[sequence_id] = unique_gaps
+            #unique_leading_count_dict[sequence_id] = leading_unique_positions
+            #unique_trailing_count_dict[sequence_id] = trailing_unique_positions
+            #print unique_trailing_count_dict[sequence_id]
 
             unique_matrix_count.append([unique_insertions,
                                         unique_gaps,
                                         leading_unique_positions,
-                                        trailing_unique_positions])
+                                        trailing_unique_positions,
+                                        unique_positions])
 
             unique_matrix_count_percent.append([float(unique_insertions)/float(self.seq_lengths[sequence_id]),
                                                 float(unique_gaps)/float(self.seq_lengths[sequence_id]),
                                                 float(leading_unique_positions)/float(self.seq_lengths[sequence_id]),
-                                                float(trailing_unique_positions)/float(self.seq_lengths[sequence_id])])
+                                                float(trailing_unique_positions)/float(self.seq_lengths[sequence_id]),
+                                                float(unique_positions)/float(self.seq_lengths[sequence_id])])
 
         unique_matrix_count = np.array(unique_matrix_count, dtype=int)
         unique_matrix_count_percent = np.array(unique_matrix_count_percent, dtype=float)
@@ -169,13 +193,28 @@ class Header():
 
 class MultipleAlignmentStatCollection(Collection):
     # TODO: develop this class to minimize new code in various collections
-    def __init__(self, metadata=None, record_list=None, header=None, input_file=None, filetype="fasta", verbose=False):
+    def __init__(self, metadata=None, record_list=None, header=None, input_file=None, filetype="fasta", verbose=False,
+                 general_stats_input=False):
         # metadata should be Metadata class
         # header should be Header class
         # record_list should be list of Record class
+        self.general_stats_table = None
+        self.general_stats_header = "#aln_id\tseq_number\taln_length\t" \
+                                    "min_seq_len\tmax_seq_len\t" \
+                                    "max_uniq_insertions\tmax_uniq_insertions,fraction\t" \
+                                    "max_unique_gaps\tmax_unique_gaps,fraction\t" \
+                                    "max_leaiding_unique_pos\tmax_leaiding_unique_pos,fraction\t" \
+                                    "max_trailing_unique_pos\tmax_trailing_unique_pos,fraction\t" \
+                                    "max_unique_pos\tmax_unique_pos,fraction\n"
         if not(input_file is None):
             self.records = OrderedDict()
-            self.read(input_file, filetype=filetype, verbose=verbose)
+            self.record_id_list = []
+            if general_stats_input:
+                self.read_general_stats_file(input_file)
+
+            else:
+                self.read(input_file, filetype=filetype, verbose=verbose)
+                self.general_stats_table = self.get_general_stats()
         else:
             self.metadata = metadata
             self.records = record_list
@@ -187,24 +226,131 @@ class MultipleAlignmentStatCollection(Collection):
             if verbose:
                 print("Parsing %s ..." % filename)
             directory, basename, extension = FileRoutines.split_filename(filename)
-
-            self.records[basename] = MultipleAlignmentStatRecord(basename, alignment=AlignIO.read(filename, filetype))
+            try:
+                self.records[basename] = MultipleAlignmentStatRecord(basename, alignment=AlignIO.read(filename, filetype))
+                self.record_id_list.append(basename)
+            except:
+                raise ValueError("ERROR: Issues while parsing or calculating stats for %s!!!" % filename)
         # collectiontype-dependent function
         pass
 
-    def write_general_stats(self, output):
-        header = "#aln_id\tseq_number\taln_length\t" \
-                 "min_seq_len\tmax_seq_len\t" \
-                 "max_uniq_insertions\tmax_uniq_insertions,%\t" \
-                 "max_unique_gaps\tmax_unique_gaps,%\t" \
-                 "max_leaiding_unique_pos\tmax_leaiding_unique_pos,%\t" \
-                 "max_trailing_unique_pos\tmax_trailing_unique_pos,%\n"
+    def read_general_stats_file(self, general_stats_file):
+        self.record_id_list = []
+        general_stats_list = []
+        with open(general_stats_file, "r") as in_fd:
+            in_fd.readline()
+            for line in in_fd:
+                line_list = line.strip("\n").split("\t")
+                self.record_id_list.append(line_list[0])
+                for i in [1, 2, 3, 4, 5, 7, 9, 11, 13]:
+                    line_list[i] = int(line_list[i])
+                for i in [6, 8, 10, 12, 14]:
+                    line_list[i] = float(line_list[i])
+                general_stats_list.append(line_list[1:])
+        self.general_stats_table = np.array(general_stats_list)
 
+    def get_general_stats(self):
+        general_stats_list = []
+        for record_id in self.records:
+            #print self.records
+            general_stats_list.append(self.records[record_id].get_general_stats(self))
+        return np.array(general_stats_list)
+
+    def write_general_stats(self, output):
         with open(output, "w") as out_fd:
-            out_fd.write(header)
+            out_fd.write(self.general_stats_header)
             for record_id in self.records:
                 #print self.records
                 out_fd.write(str(self.records[record_id]))
+
+    def draw_general_stats_distributions(self, output_prefix, figsize=(12, 6), extensions=("png", "svg"), dpi=300):
+
+        nrows = 2
+        ncols = 4
+
+        #figure = plt.figure(figsize=(12, 6), dpi=dpi)
+        #ax_array = figure.subplots(nrows=nrows, ncols=ncols, squeeze=False)
+        percent_histogram_bin_number = 20
+
+        min_seq_number_in_alignment = min(self.general_stats_table[:, 0])
+        max_seq_number_in_alignment = max(self.general_stats_table[:, 0])
+        seq_bin_number = max_seq_number_in_alignment - min_seq_number_in_alignment
+
+        figure, ax_array = plt.subplots(nrows=nrows, ncols=ncols, figsize=figsize, squeeze=False, dpi=dpi)
+
+        # Histogram: distribution of sequence number in alignment
+        print("Histogram: distribution of sequence number in alignment")
+
+        MatplotlibRoutines.draw_histogram(self.general_stats_table[:, 0],
+                                          output_prefix="%s.seq_number_distibution" % output_prefix,
+                                          number_of_bins=None, width_of_bins=1,
+                                          max_threshold=None, min_threshold=None, xlabel=None, ylabel="N of alignments",
+                                          title="Distribution of\nsequence numbers",
+                                          extensions=("png",), ylogbase=None, subplot=ax_array[0, 0], suptitle=None,
+                                          close_figure=False, save_histovalues_only=True)
+        # Histogram(logscaled): distribution of sequence number in alignment
+
+        print("Histogram(logscaled): distribution of sequence number in alignment")
+        MatplotlibRoutines.draw_histogram(self.general_stats_table[:, 0], output_prefix=None,
+                                          number_of_bins=None, width_of_bins=1,
+                                          max_threshold=None, min_threshold=None,
+                                          xlabel="N of sequences\nin alignment", ylabel="N of alignments",
+                                          title=None,
+                                          extensions=("png",), ylogbase=10, subplot=ax_array[1, 0], suptitle=None,
+                                          close_figure=False)
+
+        #print self.general_stats_table[:, 4].astype(float) / self.general_stats_table[:, 2].astype(float) * 100
+
+        # Heatmap: x: max_seq_len/aln_len, y: min_seq_len/aln_len
+        print("Heatmap: x: max_seq_len/aln_len, y: min_seq_len/aln_len")
+        MatplotlibRoutines.draw_percent_heatmap(self.general_stats_table[:, 3].astype(float) / self.general_stats_table[:, 1].astype(float) * 100,
+                                                self.general_stats_table[:, 2].astype(float) / self.general_stats_table[:, 1].astype(float) * 100,
+                                                output_prefix="%s.min_max_seq_len" % output_prefix, xlabel="Min seq len, % of aln",
+                                                ylabel="Max seq len, % of aln", title=None,
+                                                figsize=(8, 8), minimum_counts_to_show=1,
+                                                extensions=("png", "svg"), show_colorbar=True,
+                                                bin_number=percent_histogram_bin_number, bin_width=None, bin_array=None,
+                                                type="percent", add_max_value=True,
+                                                subplot=ax_array[0, 1],
+                                                header="#left_xedge\tleft_yedge\tvalue",
+                                                save_histovalues_only=True)
+
+        # Heatmap; x: seq number, y: max_unique_insertions_in_seq/aln_len
+        print("Heatmap: x: seq number, y: max_unique_insertions_in_seq/aln_len")
+        MatplotlibRoutines.draw_heatmap(self.general_stats_table[:, 0], 100 * self.general_stats_table[:, 5],
+                                        output_prefix="%s.max_unique_insertions_seq_number" % output_prefix,
+                                        xlabel="N of sequences\nin alignment",
+                                        ylabel="Max uniq insertions, % of seq", title=None,
+                                        figsize=figsize, minimum_counts_to_show=1,
+                                        extensions=extensions, show_colorbar=True,
+                                        bin_number=(seq_bin_number, percent_histogram_bin_number),
+                                        bin_width=None, bin_array=None, min_x_value=min_seq_number_in_alignment,
+                                        max_x_value=max_seq_number_in_alignment, min_y_value=0, max_y_value=100,
+                                        add_max_value=True, subplot=ax_array[0, 2],
+                                        save_histovalues_only=True, header="#left_xedge\tleft_yedge\tcounts")
+
+        # Heatmap: x: seq number, y: max_unique_gaps_in_seq/aln_len
+        print("Heatmap: x: seq number, y: max_unique_gaps_in_seq/aln_len")
+        MatplotlibRoutines.draw_heatmap(self.general_stats_table[:, 0], 100 * self.general_stats_table[:, 7],
+                                        output_prefix="%s.max_unique_gaps_seq_number" % output_prefix,
+                                        xlabel="N of sequences\nin alignment",
+                                        ylabel="Max uniq gaps, % of seq", title=None,
+                                        figsize=figsize, minimum_counts_to_show=1,
+                                        extensions=extensions, show_colorbar=True,
+                                        bin_number=(seq_bin_number, percent_histogram_bin_number),
+                                        bin_width=None, bin_array=None, min_x_value=min_seq_number_in_alignment,
+                                        max_x_value=max_seq_number_in_alignment, min_y_value=0, max_y_value=100,
+                                        add_max_value=True, subplot=ax_array[1, 2],
+                                        save_histovalues_only=True, header="#left_xedge\tleft_yedge\tcounts")
+
+        plt.tight_layout()
+        #aaa = self.general_stats_table[:, 3].astype(float) / self.general_stats_table[:, 1].astype(float) * 100
+        #for i in range(0, len(aaa)):
+        #    print "%i\t%i\t%i\t%f" % (i, self.general_stats_table[:, 3][i], self.general_stats_table[:, 1][i], aaa[i])
+
+        for ext in extensions:
+            plt.savefig("%s.%s" % (output_prefix, ext))
+
     """
     def __str__(self):
         collection_string = ""
