@@ -263,7 +263,8 @@ class MultipleAlignmentStatCollection(Collection):
                 #print self.records
                 out_fd.write(str(self.records[record_id]))
 
-    def draw_general_stats_distributions(self, output_prefix, figsize=(12, 6), extensions=("png", "svg"), dpi=300):
+    def draw_general_stats_distributions(self, output_prefix, figsize=(12, 6), extensions=("png", "svg"), dpi=300,
+                                         logscale_heatmaps=True):
 
         nrows = 2
         ncols = 4
@@ -305,15 +306,16 @@ class MultipleAlignmentStatCollection(Collection):
         print("Heatmap: x: max_seq_len/aln_len, y: min_seq_len/aln_len")
         MatplotlibRoutines.draw_percent_heatmap(self.general_stats_table[:, 3].astype(float) / self.general_stats_table[:, 1].astype(float) * 100,
                                                 self.general_stats_table[:, 2].astype(float) / self.general_stats_table[:, 1].astype(float) * 100,
-                                                output_prefix="%s.min_max_seq_len" % output_prefix, xlabel="Min seq len, % of aln",
-                                                ylabel="Max seq len, % of aln", title=None,
+                                                output_prefix="%s.min_max_seq_len" % output_prefix, xlabel="Max seq len, % of aln",
+                                                ylabel="Min seq len, % of aln", title=None,
                                                 figsize=(8, 8), minimum_counts_to_show=1,
                                                 extensions=("png", "svg"), show_colorbar=True,
                                                 bin_number=percent_histogram_bin_number, bin_width=None, bin_array=None,
                                                 type="percent", add_max_value=True,
                                                 subplot=ax_array[0, 1],
                                                 header="#left_xedge\tleft_yedge\tvalue",
-                                                save_histovalues_only=True)
+                                                save_histovalues_only=True,
+                                                logscaled=logscale_heatmaps)
 
         # Heatmap; x: seq number, y: max_unique_pos_in_seq/aln_len
         print("Heatmap: x: seq number, y: max_unique_pos_in_seq/aln_len")
@@ -327,7 +329,8 @@ class MultipleAlignmentStatCollection(Collection):
                                         bin_width=None, bin_array=None, min_x_value=min_seq_number_in_alignment,
                                         max_x_value=max_seq_number_in_alignment, min_y_value=0, max_y_value=100,
                                         add_max_value=True, subplot=ax_array[1, 1],
-                                        save_histovalues_only=True, header="#left_xedge\tleft_yedge\tcounts")
+                                        save_histovalues_only=True, header="#left_xedge\tleft_yedge\tcounts",
+                                        logscaled=logscale_heatmaps)
 
         # Heatmap; x: seq number, y: max_unique_insertions_in_seq/aln_len
         print("Heatmap: x: seq number, y: max_unique_insertions_in_seq/aln_len")
@@ -341,7 +344,8 @@ class MultipleAlignmentStatCollection(Collection):
                                         bin_width=None, bin_array=None, min_x_value=min_seq_number_in_alignment,
                                         max_x_value=max_seq_number_in_alignment, min_y_value=0, max_y_value=100,
                                         add_max_value=True, subplot=ax_array[0, 2],
-                                        save_histovalues_only=True, header="#left_xedge\tleft_yedge\tcounts")
+                                        save_histovalues_only=True, header="#left_xedge\tleft_yedge\tcounts",
+                                        logscaled=logscale_heatmaps)
 
         # Heatmap: x: seq number, y: max_unique_gaps_in_seq/aln_len
         print("Heatmap: x: seq number, y: max_unique_gaps_in_seq/aln_len")
@@ -355,7 +359,8 @@ class MultipleAlignmentStatCollection(Collection):
                                         bin_width=None, bin_array=None, min_x_value=min_seq_number_in_alignment,
                                         max_x_value=max_seq_number_in_alignment, min_y_value=0, max_y_value=100,
                                         add_max_value=True, subplot=ax_array[1, 2],
-                                        save_histovalues_only=True, header="#left_xedge\tleft_yedge\tcounts")
+                                        save_histovalues_only=True, header="#left_xedge\tleft_yedge\tcounts",
+                                        logscaled=logscale_heatmaps)
 
 
         # Heatmap; x: seq number, y: max_unique_leading_pos_in_seq/aln_len
@@ -370,7 +375,8 @@ class MultipleAlignmentStatCollection(Collection):
                                         bin_width=None, bin_array=None, min_x_value=min_seq_number_in_alignment,
                                         max_x_value=max_seq_number_in_alignment, min_y_value=0, max_y_value=100,
                                         add_max_value=True, subplot=ax_array[0, 3],
-                                        save_histovalues_only=True, header="#left_xedge\tleft_yedge\tcounts")
+                                        save_histovalues_only=True, header="#left_xedge\tleft_yedge\tcounts",
+                                        logscaled=logscale_heatmaps)
 
         # Heatmap: x: seq number, y: max_unique_trailing_pos_in_seq/aln_len
         print("Heatmap: x: seq number, y: max_unique_trailing_pos_in_seq/aln_len")
@@ -384,7 +390,8 @@ class MultipleAlignmentStatCollection(Collection):
                                         bin_width=None, bin_array=None, min_x_value=min_seq_number_in_alignment,
                                         max_x_value=max_seq_number_in_alignment, min_y_value=0, max_y_value=100,
                                         add_max_value=True, subplot=ax_array[1, 3],
-                                        save_histovalues_only=True, header="#left_xedge\tleft_yedge\tcounts")
+                                        save_histovalues_only=True, header="#left_xedge\tleft_yedge\tcounts",
+                                        logscaled=logscale_heatmaps)
 
         plt.tight_layout()
         #aaa = self.general_stats_table[:, 3].astype(float) / self.general_stats_table[:, 1].astype(float) * 100
