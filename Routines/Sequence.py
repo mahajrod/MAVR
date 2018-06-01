@@ -579,18 +579,50 @@ class SequenceRoutines(FileRoutines):
                     continue
         return pep_with_stop_codons_ids
 
-    def check_proteins_for_stop_codons_from_file(self, pep_file, output_prefix, stop_codon_symbol_set=("*", "."), format="fasta"):
+    def check_proteins_for_stop_codons_from_file(self, pep_file, output_prefix, stop_codon_symbol_set=("*", "."), format="fasta",
+                                                 parsing_mode="parse"):
         pep_with_stop_codons_ids_file = "%s.ids" % output_prefix
         pep_with_stop_codons_seq_file = "%s.pep" % output_prefix
-        pep_dict = SeqIO.index_db("tmp.idx", pep_file, format=format)
+        pep_dict =  self.parse_seq_file(pep_file, parsing_mode, format=format, index_file="tmp.idx")
 
         pep_with_stop_codons_ids = self.check_proteins_for_stop_codons(pep_dict,
                                                                        stop_codon_symbol_set=stop_codon_symbol_set)
         pep_with_stop_codons_ids.write(pep_with_stop_codons_ids_file)
         SeqIO.write(self.record_by_id_generator(pep_dict, pep_with_stop_codons_ids), pep_with_stop_codons_seq_file,
                     format=format)
-        os.remove("tmp.idx")
+        if parsing_modemode == "index_db":
+            os.remove("tmp.idx")
         return pep_with_stop_codons_ids
+
+    @staticmethod
+    def trim_proteins_by_stop(record_dict, stop_codon_symbol_set=("*", ".")):
+        trimmed_record_dict = OrderedDict()
+        trimmed_ids = IdList()
+        stop_reg_exp = re.compile("|".join(stop_codon_symbol_set))
+        for record_id in record_dict:
+            stop_match = stop_reg_exp.match(record_dict[record_id].seq)
+            if stop_match:
+                trimmed_record_dict[record_id] = SeqRecord(id=record_dict[record_id].id,
+                                                           description=record_dict[record_id].description,
+                                                           seq=record_dict[record_id].seq[:stop_match.start])
+                trimmed_ids.append(record_id)
+            else:
+                trimmed_record_dict[record_id] = record_dict[record_id]
+        return trimmed_record_dict, trimmed_ids
+
+    def trim_proteins_by_stop_from_file(self, pep_file, output_prefix, stop_codon_symbol_set=("*", "."), format="fasta",
+                                        parsing_mode="parse"):
+        trimmed_pep_id_file = "%s.trimmed.ids" % output_prefix
+        trimmed_pep_file = "%s.pep" % output_prefix
+        pep_dict = self.parse_seq_file(pep_file, parsing_mode, format=format, index_file="tmp.idx")
+
+        trimmed_pep_dict, trimmed_pep_id_list = self. trim_proteins_by_stop(pep_dict, stop_codon_symbol_set)
+        trimmed_pep_id_list.write(trimmed_pep_id_file)
+        SeqIO.write(self.record_by_id_generator(trimmed_pep_dict), trimmed_pep_file,
+                    format=format)
+        if parsing_modemode == "index_db":
+            os.remove("tmp.idx")
+        return trimmed_pep_id_list
 
     @staticmethod
     def check_cds_for_in_frame_stop_codons(cds_dict, genetic_code_table=1):
