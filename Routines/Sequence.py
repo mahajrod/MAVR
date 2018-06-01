@@ -609,10 +609,10 @@ class SequenceRoutines(FileRoutines):
             stop_match = stop_reg_exp.search(str(record_dict[record_id].seq))
 
             if stop_match:
-                print stop_match.start
+                #print stop_match.start
                 trimmed_record_dict[record_id] = SeqRecord(id=record_dict[record_id].id,
                                                            description=record_dict[record_id].description,
-                                                           seq=record_dict[record_id].seq[:stop_match.start])
+                                                           seq=record_dict[record_id].seq[:stop_match.start()])
                 trimmed_ids.append(record_id)
             else:
                 trimmed_record_dict[record_id] = record_dict[record_id]
