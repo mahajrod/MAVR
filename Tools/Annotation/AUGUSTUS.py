@@ -3,6 +3,8 @@ import os
 import shutil
 import numpy as np
 
+from copy import deepcopy
+
 from Routines import FileRoutines, SequenceRoutines, MatplotlibRoutines, DrawingRoutines
 from CustomCollections.GeneralCollections import IdList, SynDict
 
@@ -597,6 +599,92 @@ class AUGUSTUS(Tool):
         DrawingRoutines.draw_heatmap_and_three_percent_histograms(total_support_list, cds_support_list,
                                                                   intron_support_list, output_prefix, figsize=(8, 8),
                                                                   extensions=("png", "svg"))
+
+    @staticmethod
+    def add_exon_lines_to_augustus_gff(augustus_gff, output_gff, number_of_digits_in_id=8, exon_id_prefix="EXON",
+                                       new_exon_numering=False):
+        transcript_cds_list = []
+        exon_index = 1
+        exon_prefix = "%sC%%0%ii" % (exon_id_prefix, number_of_digits_in_id)
+
+        def line_handler(line, in_fd, out_fd):
+            if line[0] == "#":
+                    out_fd.write(line)
+            else:
+                if "\ttranscript\t" in line:
+                    transcript_cds_list = []
+                    start_codon_line = None
+                    stop_codon_line = None
+
+                    out_fd.write(line)
+
+                    line = in_fd.next()
+
+                    while ("\tstop_codon\t" in line) or ("\tstart_codon\t" in line) or ("\tCDS\t" in line):
+
+                        if "\tstart_codon\t" in line:
+                            start_codon_line = line
+                        elif "\tstop_codon\t" in line:
+                            stop_codon_line = line
+                        else:
+                            transcript_cds_list.append(line)
+                        try:
+                            line = in_fd.next()
+                        except StopIteration:
+                            line = None
+                            break
+                    #stop_codon_line = line
+
+                    for CDS_line in transcript_cds_list:
+                        CDS_line_list = CDS_line.strip().split("\t")
+                        #print CDS_line
+                        CDS_description_list = map(lambda string: string.split("="),
+                                                   CDS_line_list[8].split(";"))
+                        CDS_id = None
+
+                        exon_description_list = deepcopy(CDS_description_list)
+                        for i in range(len(exon_description_list)):
+                            if exon_description_list[i][0] == "ID":
+                                CDS_id = exon_description_list[i][1]
+
+                                if new_exon_numering:
+                                    exon_description_list[i][1] = exon_id_prefix % exon_index
+                                    exon_index += 1
+                                else:
+                                    exon_description_list[i][1] = exon_prefix % int(CDS_id[-number_of_digits_in_id:])
+                                break
+                        else:
+                            #print CDS_line
+                            #print exon_description_list
+                            raise ValueError("No ID was found for CDS")
+
+                        exon_line = "%s\t%s\texon\t" % (CDS_line_list[0], CDS_line_list[1])
+                        exon_line += "\t".join(CDS_line_list[2:8])
+
+                        exon_description = ";".join(map(lambda s: "=".join(s), exon_description_list))
+                        exon_line += "\t%s\n" % exon_description
+                        out_fd.write(exon_line)
+                    if not(start_codon_line is None):
+                        out_fd.write(start_codon_line)
+
+                    for CDS_line in transcript_cds_list:
+                        out_fd.write(CDS_line)
+
+                    if not(stop_codon_line is None):
+                        out_fd.write(stop_codon_line)
+                if line is None:
+                    return 0
+
+                if "\ttranscript\t" in line:
+                    line_handler(line, in_fd, out_fd)
+                out_fd.write(line)
+
+        with open(augustus_gff, "r") as in_fd, open(output_gff, "w") as out_fd:
+            for line in in_fd:
+                line_handler(line, in_fd, out_fd)
+
+
+
 
 
 
