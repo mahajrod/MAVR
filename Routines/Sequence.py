@@ -594,7 +594,7 @@ class SequenceRoutines(FileRoutines):
         pep_with_stop_codons_ids.write(pep_with_stop_codons_ids_file)
         SeqIO.write(self.record_by_id_generator(pep_dict, pep_with_stop_codons_ids), pep_with_stop_codons_seq_file,
                     format=format)
-        if parsing_modemode == "index_db":
+        if parsing_mode == "index_db":
             os.remove("tmp.idx")
         return pep_with_stop_codons_ids
 
@@ -624,7 +624,7 @@ class SequenceRoutines(FileRoutines):
         trimmed_pep_id_list.write(trimmed_pep_id_file)
         SeqIO.write(self.record_by_id_generator(trimmed_pep_dict), trimmed_pep_file,
                     format=format)
-        if parsing_modemode == "index_db":
+        if parsing_mode == "index_db":
             os.remove("tmp.idx")
         return trimmed_pep_id_list
 
