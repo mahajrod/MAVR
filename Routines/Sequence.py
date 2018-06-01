@@ -602,7 +602,9 @@ class SequenceRoutines(FileRoutines):
     def trim_proteins_by_stop(record_dict, stop_codon_symbol_set=("*", ".")):
         trimmed_record_dict = OrderedDict()
         trimmed_ids = IdList()
-        stop_reg_exp = re.compile("|".join(map(lambda symbol: "\\" + symbol, stop_codon_symbol_set)))
+        reg_exp = "|".join(map(lambda symbol: "\\" + symbol, stop_codon_symbol_set))
+        print reg_exp
+        stop_reg_exp = re.compile(reg_exp)
         for record_id in record_dict:
             stop_match = stop_reg_exp.match(str(record_dict[record_id].seq))
             if stop_match:
