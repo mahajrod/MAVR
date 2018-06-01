@@ -600,7 +600,7 @@ class SequenceRoutines(FileRoutines):
         trimmed_ids = IdList()
         stop_reg_exp = re.compile("|".join(map(lambda symbol: "\\" + symbol, stop_codon_symbol_set)))
         for record_id in record_dict:
-            stop_match = stop_reg_exp.match(record_dict[record_id].seq)
+            stop_match = stop_reg_exp.match(str(record_dict[record_id].seq))
             if stop_match:
                 trimmed_record_dict[record_id] = SeqRecord(id=record_dict[record_id].id,
                                                            description=record_dict[record_id].description,
