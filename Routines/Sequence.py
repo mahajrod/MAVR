@@ -209,42 +209,46 @@ class SequenceRoutines(FileRoutines):
         return lengths_dict
 
     @staticmethod
-    def record_by_id_generator(record_dict, id_list, verbose=False, coincidence_mode="exact",
+    def record_by_id_generator(record_dict, id_list=[], verbose=False, coincidence_mode="exact",
                                allow_multiple_coincidence_report=False):
-        for record_id in id_list:
-            if coincidence_mode == "exact":
-                if record_id in record_dict:
-                    yield record_dict[record_id]
-                else:
-                    if verbose:
+        if id_list:
+            for record_id in id_list:
+                if coincidence_mode == "exact":
+                    if record_id in record_dict:
+                        yield record_dict[record_id]
+                    else:
+                        if verbose:
+                            sys.stderr.write("Not found: %s\n" % record_id)
+                elif coincidence_mode == "partial":
+                    #print "AAAAAA"
+                    entry_list = []
+                    if record_id in record_dict:
+                        #print "BBBBBB"
+                        yield record_dict[record_id]
+                    else:
+                        #print "CCCCCCCCCC"
+                        for dict_entry in record_dict:
+                            if record_id in dict_entry:
+                                entry_list.append(dict_entry)
+                        if len(entry_list) > 1:
+                            if allow_multiple_coincidence_report:
+                                sys.stderr.write("WARNING!!! Multiple coincidence for %s" % record_id)
+                                sys.stderr.write("\treporting all...")
+                            else:
+                                sys.stderr.write("ERROR!!! Multiple coincidence for %s" % record_id)
+                                raise ValueError("Multiple coincidence for %s" % record_id)
+                           # print entry_list
+                            for entry in entry_list:
+                                yield record_dict[entry]
+                        elif len(entry_list) == 1:
+                            yield record_dict[entry_list[0]]
+                    if (not entry_list) and verbose:
                         sys.stderr.write("Not found: %s\n" % record_id)
-            elif coincidence_mode == "partial":
-                #print "AAAAAA"
-                entry_list = []
-                if record_id in record_dict:
-                    #print "BBBBBB"
-                    yield record_dict[record_id]
                 else:
-                    #print "CCCCCCCCCC"
-                    for dict_entry in record_dict:
-                        if record_id in dict_entry:
-                            entry_list.append(dict_entry)
-                    if len(entry_list) > 1:
-                        if allow_multiple_coincidence_report:
-                            sys.stderr.write("WARNING!!! Multiple coincidence for %s" % record_id)
-                            sys.stderr.write("\treporting all...")
-                        else:
-                            sys.stderr.write("ERROR!!! Multiple coincidence for %s" % record_id)
-                            raise ValueError("Multiple coincidence for %s" % record_id)
-                       # print entry_list
-                        for entry in entry_list:
-                            yield record_dict[entry]
-                    elif len(entry_list) == 1:
-                        yield record_dict[entry_list[0]]
-                if (not entry_list) and verbose:
-                    sys.stderr.write("Not found: %s\n" % record_id)
-            else:
-                raise ValueError("Unknown coincidence mode: %s" % coincidence_mode)
+                    raise ValueError("Unknown coincidence mode: %s" % coincidence_mode)
+        else:
+            for record_id in record_dict:
+                yield record_dict[record_id]
 
     @staticmethod
     def record_from_dict_generator(record_dict):
