@@ -603,13 +603,13 @@ class SequenceRoutines(FileRoutines):
         trimmed_record_dict = OrderedDict()
         trimmed_ids = IdList()
         reg_exp = "|".join(map(lambda symbol: "\\" + symbol, stop_codon_symbol_set))
-        print reg_exp
+        #print reg_exp
         stop_reg_exp = re.compile(reg_exp)
         for record_id in record_dict:
             stop_match = stop_reg_exp.search(str(record_dict[record_id].seq))
 
             if stop_match:
-                print str(record_dict[record_id].seq)
+                print stop_match.start
                 trimmed_record_dict[record_id] = SeqRecord(id=record_dict[record_id].id,
                                                            description=record_dict[record_id].description,
                                                            seq=record_dict[record_id].seq[:stop_match.start])
