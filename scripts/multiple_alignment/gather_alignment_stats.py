@@ -12,8 +12,8 @@ parser.add_argument("-i", "--input", action="store", dest="input", type=lambda x
 parser.add_argument("-o", "--output_directory", action="store", dest="output", type=FileRoutines.check_path,
                     help="Output directory")
 """
-parser.add_argument("-o", "--output", action="store", dest="output", required=True,
-                    help="Output file with results")
+parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", required=True,
+                    help="Prefix of output files")
 parser.add_argument("-v", "--verbose", action="store_true", dest="verbose",
                     help="Verbose parsing. Default: False")
 
@@ -32,5 +32,8 @@ parser.add_argument("-g", "--gap_open_penalty", action="store", dest="gap_open_p
 """
 args = parser.parse_args()
 
+general_stat_file = "%s.general.stats" % args.output_prefix
+
 stat_collection = MultipleAlignmentStatCollection(input_file=args.input, verbose=args.verbose)
-stat_collection.write_general_stats(args.output)
+stat_collection.write_general_stats(general_stat_file)
+stat_collection.write_stats(args.output_prefix)
