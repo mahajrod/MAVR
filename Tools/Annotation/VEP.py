@@ -30,7 +30,7 @@ class VEP(Tool):
     def prepare_gff(self, input_gff_list, output_prefix):
 
         sorted_gff = "%s.sorted.gff" % output_prefix
-        bgzip_compressed_gff = "%s.sorted.gff.bz" % output_prefix
+        bgzip_compressed_gff = "%s.sorted.gff.gz" % output_prefix
         sorting_string = "cat %s | grep -v '#' | sort -k1,1 -k4,4n -k5,5n | tee %s | bgzip -c > %s" % (input_gff_list if isinstance(input_gff_list, str) else " ".join(input_gff_list),
                                                                                                                 sorted_gff,
                                                                                                                 bgzip_compressed_gff)
