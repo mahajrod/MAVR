@@ -659,7 +659,7 @@ class AUGUSTUS(Tool):
                             raise ValueError("No ID was found for CDS")
 
                         exon_line = "%s\t%s\texon\t" % (CDS_line_list[0], CDS_line_list[1])
-                        exon_line += "\t".join(CDS_line_list[2:8])
+                        exon_line += "\t".join(CDS_line_list[3:8])
 
                         exon_description = ";".join(map(lambda s: "=".join(s), exon_description_list))
                         exon_line += "\t%s\n" % exon_description
