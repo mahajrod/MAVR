@@ -29,6 +29,7 @@ class MultipleAlignmentStatRecord(Record):
 
         self.position_presence_matrix = self.get_position_presence_matrix(verbose=verbose)
         self.gap_counts, self.seq_lengths = self.count_gaps()
+        self.N_counts = self.count_Ns()
 
         self.unique_pos_matrix_count, self.unique_pos_matrix_count_percent = self.count_unique_positions_per_sequence()
 
@@ -91,6 +92,13 @@ class MultipleAlignmentStatRecord(Record):
                 position_presence_array[row, column] = -number_of_gaps if alignment_array[row, column] == self.gap_symbol else number_of_sequences - number_of_gaps
 
         return position_presence_array
+
+    def count_Ns(self):
+        Ns_dict = SynDict()
+        for row in range(0, self.number_of_sequences):
+            sequence_id = self.alignment[row].id
+            Ns_dict[sequence_id] = self.alignment[row].seq.count("N")
+        return Ns_dict
 
     def get_general_stats(self):
         return [self.number_of_sequences, self.length,
@@ -262,6 +270,17 @@ class MultipleAlignmentStatCollection(Collection):
             for record_id in self.records:
                 #print self.records
                 out_fd.write(str(self.records[record_id]))
+
+    def write_stats(self, output_prefix):
+        Ns_dict = TwoLvlDict()
+        gaps_dict = TwoLvlDict()
+        for record_id in self.records:
+            Ns_dict[self.records[record_id].id] = self.records[record_id].N_counts
+            gaps_dict[self.records[record_id].id] = self.records[record_id].gap_counts
+
+        Ns_dict.write(out_filename="%s.N_counts" % output_prefix)
+        gaps_dict.write(out_filename="%s.gaps_counts" % output_prefix)
+
 
     def draw_general_stats_distributions(self, output_prefix, figsize=(12, 6), extensions=("png", "svg"), dpi=300,
                                          logscale_heatmaps=True):
