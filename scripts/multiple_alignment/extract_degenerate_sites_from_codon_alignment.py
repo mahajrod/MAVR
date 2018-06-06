@@ -17,9 +17,12 @@ parser.add_argument("-f", "--format", action="store", dest="format", default="fa
 parser.add_argument("-g", "--genetic_code_table", action="store", dest="genetic_code_table", type=int,
                     default=1,
                     help="Genetic code table number")
+parser.add_argument("-r", "--remove_Ns", action="store_true", dest="remove_Ns", default=False,
+                    help="Remove codon columns with Ns. Default:False")
 
 args = parser.parse_args()
 
 MultipleAlignmentRoutines.extract_degenerate_sites_from_codon_alignment_from_file(args.input, args.output,
                                                                                   genetic_code_table=args.genetic_code_table,
-                                                                                  format=args.format)
+                                                                                  format=args.format,
+                                                                                  remove_codon_columns_with_Ns=args.remove_Ns)
