@@ -271,7 +271,8 @@ class MultipleAlignmentRoutines(SequenceRoutines):
                 coord_fd.write("%i\t%i\t%i\n" % (coord_tuple[1] - coord_tuple[0] + 1, coord_tuple[0], coord_tuple[1]))
         return merged_alignment, sequence_lengthes, sequence_coordinates
 
-    def extract_degenerate_sites_from_codon_alignment(self, alignment, genetic_code_table=1):
+    def extract_degenerate_sites_from_codon_alignment(self, alignment, genetic_code_table=1,
+                                                      remove_codon_columns_with_Ns=False):
         degenerate_codon_set = self.get_degenerate_codon_set(genetic_code_table)
         number_of_alignments = len(alignment)
         alignment_length = len(alignment[0])
@@ -284,6 +285,9 @@ class MultipleAlignmentRoutines(SequenceRoutines):
             position_strings = []
             for j in range(0, 3):
                 position_strings.append(list(set(alignment[:, 3*i + j])))
+            if remove_codon_columns_with_Ns:
+                if ("N" in position_strings[0]) or ("N" in position_strings[1]) or ("N" in position_strings[2]):
+                    continue
             if (len(position_strings[0]) > 1) or (len(position_strings[1]) > 1):
                 continue
             ambigious_codon = position_strings[0][0] + position_strings[1][0] + "N"
@@ -312,10 +316,12 @@ class MultipleAlignmentRoutines(SequenceRoutines):
         return degenerate_alignment
 
     def extract_degenerate_sites_from_codon_alignment_from_file(self, alignment_file, output_alignment_file,
-                                                                genetic_code_table=1, format="fasta"):
+                                                                genetic_code_table=1, format="fasta",
+                                                                remove_codon_columns_with_Ns=False):
         alignment = AlignIO.read(alignment_file, format=format)
         degenerate_alignment = self.extract_degenerate_sites_from_codon_alignment(alignment,
-                                                                                  genetic_code_table=genetic_code_table)
+                                                                                  genetic_code_table=genetic_code_table,
+                                                                                  remove_codon_columns_with_Ns=remove_codon_columns_with_Ns)
 
         AlignIO.write([degenerate_alignment], output_alignment_file, format=format)
 
