@@ -11,6 +11,7 @@ plt.ioff()
 from matplotlib.transforms import Bbox, TransformedBbox, blended_transform_factory
 from mpl_toolkits.axes_grid1.inset_locator import BboxPatch, BboxConnector, BboxConnectorPatch
 from matplotlib.lines import Line2D
+from matplotlib.colors import LogNorm
 
 import numpy as np
 
@@ -773,7 +774,7 @@ class MatplotlibRoutines:
                      figsize=(8, 8), minimum_counts_to_show=1,
                      extensions=("png", "svg"), show_colorbar=True, bin_number=20, bin_width=None, bin_array=None,
                      min_x_value=None, max_x_value=None, min_y_value=None, max_y_value=None, add_max_value=True,
-                     subplot=None, save_histovalues_only=False, header=None):
+                     subplot=None, save_histovalues_only=False, header=None, logscaled=False):
         """
         bin_width: numeric or tuple of two numerics
         """
@@ -795,7 +796,8 @@ class MatplotlibRoutines:
         else:
             ax = plt.axes(subplot)
 
-        counts, xedges, yedges, image = plt.hist2d(x, y, bins, cmin=minimum_counts_to_show)
+        counts, xedges, yedges, image = plt.hist2d(x, y, bins, cmin=minimum_counts_to_show,
+                                                   norm=LogNorm() if logscaled else None)
         print "X edges bins:"
         print xedges
         print "Y edges bins:"
@@ -855,7 +857,7 @@ class MatplotlibRoutines:
                              figsize=(8, 8), minimum_counts_to_show=1,
                              extensions=("png", "svg"), show_colorbar=True, bin_number=20, bin_width=None, bin_array=None,
                              type="percent", add_max_value=True,
-                             subplot=None, save_histovalues_only=False, header=None):
+                             subplot=None, save_histovalues_only=False, header=None, logscaled=False):
         if type == "percent":
             return self.draw_heatmap(x, y, output_prefix, xlabel=xlabel, ylabel=ylabel, title=title,
                                      figsize=figsize, minimum_counts_to_show=minimum_counts_to_show,
@@ -863,7 +865,8 @@ class MatplotlibRoutines:
                                      bin_width=bin_width, bin_array=bin_array, min_x_value=0,
                                      max_x_value=100, min_y_value=0, max_y_value=100,
                                      add_max_value=add_max_value, subplot=subplot,
-                                     save_histovalues_only=save_histovalues_only, header=header)
+                                     save_histovalues_only=save_histovalues_only, header=header,
+                                     logscaled=logscaled)
         elif type == "fraction":
             return self.draw_heatmap(x, y, output_prefix, xlabel=xlabel, ylabel=ylabel, title=title,
                                      figsize=figsize, minimum_counts_to_show=minimum_counts_to_show,
@@ -871,7 +874,8 @@ class MatplotlibRoutines:
                                      bin_width=bin_width, bin_array=bin_array, min_x_value=0.0,
                                      max_x_value=1.0, min_y_value=0.0, max_y_value=1.0,
                                      add_max_value=add_max_value, subplot=subplot,
-                                     save_histovalues_only=save_histovalues_only, header=header)
+                                     save_histovalues_only=save_histovalues_only, header=header,
+                                     logscaled=logscaled)
         else:
             raise ValueError("Unrecognized type of percent histogram(neither fraction nor percent)")
 

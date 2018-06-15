@@ -520,7 +520,21 @@ class SequenceClusterRoutines(SequenceRoutines):
 
         output_dict.write(output_file, splited_values=True)
 
+    @staticmethod
+    def create_per_cluster_element_id_files(cluster_dict, output_directory):
+        for cluster_id in cluster_dict:
+            cluster_element_id_list = IdList(cluster_dict[cluster_id])
+            cluster_element_id_list.write("%s/%s.ids" % output_directory, cluster_id)
 
+    def create_per_cluster_element_id_files_from_file(self, cluster_file, output_directory,
+                                                      cluster_column=0, element_column=1,
+                                                      column_separator="\t", element_separator=","):
+
+        cluster_dict = SynDict(filename=cluster_file, split_values=True, comments_prefix="#",
+                               key_index=cluster_column, value_index=element_column,
+                               separator=column_separator, values_separator=element_separator)
+
+        self.create_per_cluster_element_id_files(cluster_dict, output_directory)
 
 
 
