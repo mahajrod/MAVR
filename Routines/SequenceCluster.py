@@ -520,11 +520,12 @@ class SequenceClusterRoutines(SequenceRoutines):
 
         output_dict.write(output_file, splited_values=True)
 
-    @staticmethod
-    def create_per_cluster_element_id_files(cluster_dict, output_directory):
+    def create_per_cluster_element_id_files(self, cluster_dict, output_directory):
+        self.safe_mkdir(output_directory)
+
         for cluster_id in cluster_dict:
             cluster_element_id_list = IdList(cluster_dict[cluster_id])
-            cluster_element_id_list.write("%s/%s.ids" % output_directory, cluster_id)
+            cluster_element_id_list.write("%s/%s.ids" % (output_directory, cluster_id))
 
     def create_per_cluster_element_id_files_from_file(self, cluster_file, output_directory,
                                                       cluster_column=0, element_column=1,
@@ -535,6 +536,24 @@ class SequenceClusterRoutines(SequenceRoutines):
                                separator=column_separator, values_separator=element_separator)
 
         self.create_per_cluster_element_id_files(cluster_dict, output_directory)
+
+    def create_gvf_files_from_species_gene_fam_and_gene_GO_fam(self,
+                                                               species_gene_fam_file,
+                                                               gene_GO_fam_file,
+                                                               output_directory):
+        species_gene_dict = SynDict(filename=species_gene_fam_file, split_values=True)
+        gene_GO_dict = SynDict(filename=gene_GO_fam_file, split_values=True)
+
+        self.safe_mkdir(output_directory)
+
+        for species in species_gene_dict:
+            with open("%s/%s.gvf" % (output_directory, species), "w") as out_fd:
+                for gene in species_gene_dict[species]:
+                    if gene not in gene_GO_dict:
+                        print("WARNING gene %s for species %s is absent in gene_GO file" % (gene, species))
+                        continue
+                    out_fd.write("%s\t%s\n" % (gene, "\t".join(gene_GO_dict[gene])))
+
 
 
 
