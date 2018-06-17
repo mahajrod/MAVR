@@ -537,7 +537,7 @@ class NCBIRoutines(FileRoutines):
                     id_list = summary["IdList"]
                     species_syn_dict[taxon] = []
                     for id in id_list:
-                        print "handling %s" % id
+                        print "\tHandling %s" % id
                         record = Entrez.read(Entrez.efetch(db="taxonomy", id=id, retmode="xml"))
                         #print record
                         out_file.write("%s\t%s\t%s\t%s\n" % (taxon,
@@ -561,13 +561,52 @@ class NCBIRoutines(FileRoutines):
                 #print record[0]
                 species_syn_dict[taxon].append(record[0]['ScientificName'])
                 #species_set.add(record[0]["Species"])
+        out_file.close()
+        return species_syn_dict
 
+    @staticmethod
+    def get_subtaxa_for_taxa(taxa_list, email, output_prefix, subtaxa_rank=('species'), verbose=False):
+        Entrez.email = email
+        taxonomy_file = "%s.taxonomy" % output_prefix
+        species_syn_file = "%s.species.ids" % output_prefix
+
+        subtaxa_rank_list = subtaxa_rank.split(",") if isinstance(subtaxa_rank, str) else subtaxa_rank
+        species_syn_dict = SynDict()
+        with open(taxonomy_file, "w") as taxa_fd:
+            taxa_fd.write("#species\trank\tlatin_name\tcommon_name\tlineage\n")
+            for taxon in taxa_list:
+                print "Handling %s..." % taxon
+                summary = Entrez.read(Entrez.esearch(db="taxonomy",
+                                                     term="%s[subtree] AND (%s)" % (taxon, "[rank] OR ".join(subtaxa_rank_list) if len(subtaxa_rank_list) > 4 else "%s[rank]" % subtaxa_rank_list[0]), retmax=4000))
+
+                if verbose:
+                    print (summary)
+
+                if summary:
+                    id_list = summary["IdList"]
+                    for id in id_list:
+                        print "handling %s..." % id
+                        record = Entrez.read(Entrez.efetch(db="taxonomy", id=id, retmode="xml"))
+                        if verbose:
+                            print(record)
+                        common_name = "NA"
+                        if 'OtherNames' in record[0]:
+                            if "GenbankCommonName" in record[0]['OtherNames']:
+                                common_name = record[0]['OtherNames']["GenbankCommonName"]
+
+                        taxa_fd.write("%s\t%s\t%s\t%s\n" % (record[0]['ScientificName'],
+                                                                record[0]["Rank"],
+                                                                common_name,
+                                                                record[0]["Lineage"]))
+
+                        species_syn_dict[record[0]['ScientificName']] = common_name
+
+        species_syn_dict.write(filename=species_syn_file, header="#latin_name\tcommon_name\n")
         return species_syn_dict
 
     def get_taxonomy_from_id_file(self, taxa_file, output_file, email, input_type="latin"):
 
-        taxa_list = IdList()
-        taxa_list.read(taxa_file)
+        taxa_list = IdList(filename=taxa_file)
 
         return self.get_taxonomy(taxa_list, output_file, email, input_type=input_type)
 
