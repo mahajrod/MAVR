@@ -7,6 +7,8 @@ from Bio.SeqRecord import SeqRecord
 from Bio import SeqIO
 from Bio.Seq import Seq
 
+from CustomCollections.GeneralCollections import SynDict
+
 
 class LongRanger(Tool):
 
@@ -83,11 +85,12 @@ class LongRanger(Tool):
         self.execute(options=options)
 
     def prepare_record_dict_reference(self, record_dict, coord_file=None, max_scaffold_length=527000000,
-                                      max_scaffold_number=500, polyN_len=500):
+                                      max_scaffold_number=500, polyN_len=500, symbols_to_replace_list=[":"]):
         length_dict = self.get_lengths(record_dict)
         id_list = length_dict.keys()
         number_of_scaffolds = len(length_dict)
         polyN_insersion = "N" * polyN_len
+        renamed_scaffolds_syn_dict = SynDict()
 
         #print id_list
         output_dict = OrderedDict()
@@ -100,7 +103,7 @@ class LongRanger(Tool):
             total_length_of_short_scaffolds_with_insertion += polyN_len + length_dict[id_list[i]]
 
         if total_length_of_short_scaffolds_with_insertion < max_scaffold_length:
-            merged_record = SeqRecord(id="merged_samll_scaffolds", description="merged_records:%i-%i" % (500, number_of_scaffolds),
+            merged_record = SeqRecord(id="merged_small_scaffolds", description="merged_records:%i-%i" % (500, number_of_scaffolds),
                                       seq=Seq(polyN_insersion.join(map(lambda record_index: str(record_dict[id_list[record_index]].seq),
                                                                    range(499, number_of_scaffolds)))))
             if coord_file:
@@ -117,10 +120,17 @@ class LongRanger(Tool):
 
             #print merged_record
             for i in range(0, 499):
-                output_dict[id_list[i]] = record_dict[id_list[i]]
+                if ":" not in id_list[i]:
+                    output_dict[id_list[i]] = record_dict[id_list[i]]
+                else:
+                    new_id = id_list[i]
+                    for symbol in symbols_to_replace_list:
+                        new_id = new_id.replace(symbol, "_")
+                    SynDict[id_list[i]] = new_id
+                    output_dict[new_id] = SeqRecord(seq=record_dict[id_list[i]].seq, id=new_id, description=record_dict[id_list[i]].description)
             output_dict[merged_record.id] = merged_record
             #print output_dict
-            return output_dict
+            return output_dict, renamed_scaffolds_syn_dict
 
         # TODO: following code have not been completed yet!!!!!!!!!
         raise ValueError("Following code have not been completed yet!!!!!!!!!")
@@ -136,8 +146,9 @@ class LongRanger(Tool):
                 if tmp_length + len(length_dict[id_list[i]]) < max_scaffold_length:
                     pass
 
-    def prepare_reference(self, reference, prepared_reference, max_scaffold_length=527000000, max_scaffold_number=500,
-                          polyN_len=500, coord_file=None):
+    def prepare_reference(self, reference, prepared_reference, renamed_scaffolds_syn_file,
+                          max_scaffold_length=527000000, max_scaffold_number=500,
+                          polyN_len=500, coord_file=None, symbols_to_replace_list=[":"]):
         """
         Diploid genome — phasing algorithm currently assumes 2 haplotypes
         500 contigs or fewer — if your assembly has more than 500 contigs, concatenate smaller contigs together with 500 N's separating each original contig, until there are fewer than 500 contigs total
@@ -147,13 +158,14 @@ class LongRanger(Tool):
 
         record_dict = self.parse_seq_file(reference, mode="parse")
 
-        prepared_record_dict = self.prepare_record_dict_reference(record_dict,
-                                                                  max_scaffold_length=max_scaffold_length,
-                                                                  max_scaffold_number=max_scaffold_number,
-                                                                  polyN_len=polyN_len,
-                                                                  coord_file=coord_file)
+        prepared_record_dict, renamed_scaffolds_syn_dict = self.prepare_record_dict_reference(record_dict,
+                                                                                              max_scaffold_length=max_scaffold_length,
+                                                                                              max_scaffold_number=max_scaffold_number,
+                                                                                              polyN_len=polyN_len,
+                                                                                              coord_file=coord_file,
+                                                                                              symbols_to_replace_list=symbols_to_replace_list)
         SeqIO.write(self.record_from_dict_generator(prepared_record_dict), prepared_reference, format='fasta')
-
+        renamed_scaffolds_syn_dict.write(renamed_scaffolds_syn_file)
         self.index_reference(prepared_reference)
 
     def index_reference(self, reference):
