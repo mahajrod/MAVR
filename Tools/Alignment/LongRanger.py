@@ -126,7 +126,7 @@ class LongRanger(Tool):
                     new_id = id_list[i]
                     for symbol in symbols_to_replace_list:
                         new_id = new_id.replace(symbol, "_")
-                    SynDict[id_list[i]] = new_id
+                    renamed_scaffolds_syn_dict[id_list[i]] = new_id
                     output_dict[new_id] = SeqRecord(seq=record_dict[id_list[i]].seq, id=new_id, description=record_dict[id_list[i]].description)
             output_dict[merged_record.id] = merged_record
             #print output_dict
