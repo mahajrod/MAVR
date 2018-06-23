@@ -17,6 +17,9 @@ from Routines.Sequence import SequenceRoutines
 class MultipleAlignmentRoutines(SequenceRoutines):
     def __init__(self):
         SequenceRoutines.__init__(self)
+        self.tmp_count_dict = {"A": 0, "T": 0, "G": 0, "C": 0, "N": 0}
+        self.strict_nucleotide_list = ["A", "T", "G", "C"]
+        self.nucleotide_list = ["A", "T", "G", "C", "N"]
 
     @staticmethod
     def get_general_statistics(alignment, verbose=False):
@@ -281,6 +284,7 @@ class MultipleAlignmentRoutines(SequenceRoutines):
         else:
             number_of_codons = int(alignment_length / 3)
         degenerate_columns = []
+        degenerate_codons = []
         for i in range(0, number_of_codons):
             position_strings = []
             for j in range(0, 3):
@@ -300,30 +304,132 @@ class MultipleAlignmentRoutines(SequenceRoutines):
             """
             if ambigious_codon in degenerate_codon_set:
                 degenerate_columns.append(alignment[:, 3*i + 2])
-
+                for k in 0, 1, 2:
+                    degenerate_codons.append(alignment[:, 3*i + k])
         number_of_degenerate_columns = len(degenerate_columns)
         record_list = []
+        degenerate_codons_record_list = []
         for i in range(0, number_of_alignments):
             string = ""
             for j in range(0, number_of_degenerate_columns):
                 string += degenerate_columns[j][i]
-            record = SeqRecord(seq=Seq(string), id=alignment[i].id)
+            record = SeqRecord(seq=Seq(string), id=alignment[i].id, description=alignment[i].description)
             record_list.append(record)
+            string = ""
+            for j in range(0, 3 *number_of_degenerate_columns):
+                string += degenerate_codons[j][i]
+            record = SeqRecord(seq=Seq(string), id=alignment[i].id, description=alignment[i].description)
+            degenerate_codons_record_list.append(record)
+
 
         #print(number_of_alignments, alignment_length)
         degenerate_alignment = MultipleSeqAlignment(record_list)
+        degenerate_codons_alignment = MultipleSeqAlignment(degenerate_codons_record_list)
+        return degenerate_alignment, degenerate_codons_alignment
 
-        return degenerate_alignment
+    @staticmethod
+    def extract_sites_by_column_expression_from_alignment(alignment, expression, remove_columns_with_Ns=False):
+        number_of_alignments = len(alignment)
+        alignment_length = len(alignment[0])
+        extracted_columns = []
 
-    def extract_degenerate_sites_from_codon_alignment_from_file(self, alignment_file, output_alignment_file,
+        for i in range(0, alignment_length):
+            column_string = alignment[:, i]
+            if remove_columns_with_Ns and ("N" in column_string):
+                continue
+
+            if not expression(column_string):
+                continue
+
+            extracted_columns.append(column_string)
+
+        number_of_extracted_columns = len(extracted_columns)
+        record_list = []
+
+        for i in range(0, number_of_alignments):
+            string = ""
+            for j in range(0, number_of_extracted_columns):
+                string += extracted_columns[j][i]
+            record = SeqRecord(seq=Seq(string), id=alignment[i].id, description=alignment[i].description)
+            record_list.append(record)
+
+        #print(number_of_alignments, alignment_length)
+        extracted_alignment = MultipleSeqAlignment(record_list)
+
+        return extracted_alignment
+
+    def variable_alignment_column(self, column_string):
+        different_nucleotide_number = 0
+
+        for nucleotide in self.strict_nucleotide_list:
+            self.tmp_count_dict[nucleotide] = column_string.count(nucleotide)
+            if self.tmp_count_dict[nucleotide] > 0:
+                different_nucleotide_number += 1
+
+        return True if different_nucleotide_number > 1 else False
+
+    def parsimony_informative_column(self, column_string):
+        nucleotides_with_at_least_two_counts = 0
+
+        for nucleotide in self.strict_nucleotide_list:
+            self.tmp_count_dict[nucleotide] = column_string.count(nucleotide)
+            if self.tmp_count_dict[nucleotide] >= 2:
+                nucleotides_with_at_least_two_counts += 1
+
+        return True if nucleotides_with_at_least_two_counts >= 2 else False
+
+    def extract_variable_sites_from_alignment(self, alignment, remove_columns_with_Ns=False):
+
+        return self.extract_sites_by_column_expression_from_alignment(alignment,
+                                                                      self.variable_alignment_column,
+                                                                      remove_columns_with_Ns=remove_columns_with_Ns)
+
+    def extract_variable_sites_from_alignment_from_file(self,
+                                                        alignment_file,
+                                                        output_file,
+                                                        format="fasta",
+                                                        remove_columns_with_Ns=False):
+
+        alignment = AlignIO.read(alignment_file, format=format)
+        variable_sites_alignment = self.extract_variable_sites_from_alignment(alignment,
+                                                                              remove_columns_with_Ns=remove_columns_with_Ns)
+
+        AlignIO.write([variable_sites_alignment], output_file, format=format)
+
+
+    def extract_parsimony_informative_sites_from_alignment(self,
+                                                           alignment,
+                                                           remove_columns_with_Ns=False):
+
+        return self.extract_sites_by_column_expression_from_alignment(alignment,
+                                                                      self.parsimony_informative_column,
+                                                                      remove_columns_with_Ns=remove_columns_with_Ns)
+
+    def extract_parsimony_informative_sites_from_alignment_from_file(self,
+                                                                     alignment_file,
+                                                                     output_file,
+                                                                     format="fasta",
+                                                                     remove_columns_with_Ns=False):
+
+        alignment = AlignIO.read(alignment_file, format=format)
+        variable_sites_alignment = self.extract_parsimony_informative_sites_from_alignment(alignment,
+                                                                                           remove_columns_with_Ns=remove_columns_with_Ns)
+
+        AlignIO.write([variable_sites_alignment], output_file, format=format)
+
+    def extract_degenerate_sites_from_codon_alignment_from_file(self, alignment_file, output_prefix,
                                                                 genetic_code_table=1, format="fasta",
                                                                 remove_codon_columns_with_Ns=False):
         alignment = AlignIO.read(alignment_file, format=format)
-        degenerate_alignment = self.extract_degenerate_sites_from_codon_alignment(alignment,
-                                                                                  genetic_code_table=genetic_code_table,
-                                                                                  remove_codon_columns_with_Ns=remove_codon_columns_with_Ns)
+        degenerated_alignment, degenerate_codons_alignment = self.extract_degenerate_sites_from_codon_alignment(alignment,
+                                                                                                                genetic_code_table=genetic_code_table,
+                                                                                                                remove_codon_columns_with_Ns=remove_codon_columns_with_Ns)
 
-        AlignIO.write([degenerate_alignment], output_alignment_file, format=format)
+        output_alignment_file = "%s.4fold_degenerated_sites.fasta" % output_prefix
+        output_codon_alignment_file = "%s.codons_with_4fold_degenerated_sites.fasta" % output_prefix
+        AlignIO.write([degenerated_alignment], output_alignment_file, format=format)
+        AlignIO.write([degenerate_codons_alignment], output_codon_alignment_file, format=format)
+
 
     @staticmethod
     def sequences_from_alignment_generator(alignments, gap_symbol="-"):
