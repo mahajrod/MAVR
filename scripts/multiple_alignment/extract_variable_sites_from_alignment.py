@@ -19,6 +19,7 @@ parser.add_argument("-r", "--remove_Ns", action="store_true", dest="remove_Ns", 
 
 args = parser.parse_args()
 
+
 MultipleAlignmentRoutines.extract_variable_sites_from_alignment_from_file(args.input,
                                                                           args.output,
                                                                           format=args.format,
