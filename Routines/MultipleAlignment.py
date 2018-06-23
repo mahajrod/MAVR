@@ -19,7 +19,11 @@ class MultipleAlignmentRoutines(SequenceRoutines):
         SequenceRoutines.__init__(self)
         self.tmp_count_dict = {"A": 0, "T": 0, "G": 0, "C": 0, "N": 0}
         self.strict_nucleotide_list = ["A", "T", "G", "C"]
+        self.strict_nucleotide_set = {"A", "T", "G", "C", "N"}
         self.nucleotide_list = ["A", "T", "G", "C", "N"]
+        self.nucleotide_set = {"A", "T", "G", "C", "N"}
+
+
 
     @staticmethod
     def get_general_statistics(alignment, verbose=False):
@@ -327,8 +331,8 @@ class MultipleAlignmentRoutines(SequenceRoutines):
         degenerate_codons_alignment = MultipleSeqAlignment(degenerate_codons_record_list)
         return degenerate_alignment, degenerate_codons_alignment
 
-    @staticmethod
-    def extract_sites_by_column_expression_from_alignment(alignment, expression, remove_columns_with_Ns=False):
+    def extract_sites_by_column_expression_from_alignment(self, alignment, expression, remove_columns_with_Ns=False,
+                                                          remove_columns_with_ambigous_nucleotides=False):
         number_of_alignments = len(alignment)
         alignment_length = len(alignment[0])
         extracted_columns = []
@@ -338,6 +342,10 @@ class MultipleAlignmentRoutines(SequenceRoutines):
             if remove_columns_with_Ns and ("N" in column_string):
                 continue
 
+            if remove_columns_with_ambigous_nucleotides:
+                nucleotide_set = {s for s in column_string}
+                if nucleotide_set - self.nucleotide_set:
+                    continue
             if not expression(column_string):
                 continue
 
@@ -378,42 +386,51 @@ class MultipleAlignmentRoutines(SequenceRoutines):
 
         return True if nucleotides_with_at_least_two_counts >= 2 else False
 
-    def extract_variable_sites_from_alignment(self, alignment, remove_columns_with_Ns=False):
+    def extract_variable_sites_from_alignment(self,
+                                              alignment,
+                                              remove_columns_with_Ns=False,
+                                              remove_columns_with_ambigous_nucleotides=False):
 
         return self.extract_sites_by_column_expression_from_alignment(alignment,
                                                                       self.variable_alignment_column,
-                                                                      remove_columns_with_Ns=remove_columns_with_Ns)
+                                                                      remove_columns_with_Ns=remove_columns_with_Ns,
+                                                                      remove_columns_with_ambigous_nucleotides=remove_columns_with_ambigous_nucleotides)
 
     def extract_variable_sites_from_alignment_from_file(self,
                                                         alignment_file,
                                                         output_file,
                                                         format="fasta",
-                                                        remove_columns_with_Ns=False):
+                                                        remove_columns_with_Ns=False,
+                                                        remove_columns_with_ambigous_nucleotides=False):
 
         alignment = AlignIO.read(alignment_file, format=format)
         variable_sites_alignment = self.extract_variable_sites_from_alignment(alignment,
-                                                                              remove_columns_with_Ns=remove_columns_with_Ns)
+                                                                              remove_columns_with_Ns=remove_columns_with_Ns,
+                                                                              remove_columns_with_ambigous_nucleotides=remove_columns_with_ambigous_nucleotides)
 
         AlignIO.write([variable_sites_alignment], output_file, format=format)
 
-
     def extract_parsimony_informative_sites_from_alignment(self,
                                                            alignment,
-                                                           remove_columns_with_Ns=False):
+                                                           remove_columns_with_Ns=False,
+                                                           remove_columns_with_ambigous_nucleotides=False):
 
         return self.extract_sites_by_column_expression_from_alignment(alignment,
                                                                       self.parsimony_informative_column,
-                                                                      remove_columns_with_Ns=remove_columns_with_Ns)
+                                                                      remove_columns_with_Ns=remove_columns_with_Ns,
+                                                                      remove_columns_with_ambigous_nucleotides=remove_columns_with_ambigous_nucleotides)
 
     def extract_parsimony_informative_sites_from_alignment_from_file(self,
                                                                      alignment_file,
                                                                      output_file,
                                                                      format="fasta",
-                                                                     remove_columns_with_Ns=False):
+                                                                     remove_columns_with_Ns=False,
+                                                                     remove_columns_with_ambigous_nucleotides=False):
 
         alignment = AlignIO.read(alignment_file, format=format)
         variable_sites_alignment = self.extract_parsimony_informative_sites_from_alignment(alignment,
-                                                                                           remove_columns_with_Ns=remove_columns_with_Ns)
+                                                                                           remove_columns_with_Ns=remove_columns_with_Ns,
+                                                                                           remove_columns_with_ambigous_nucleotides=remove_columns_with_ambigous_nucleotides)
 
         AlignIO.write([variable_sites_alignment], output_file, format=format)
 
