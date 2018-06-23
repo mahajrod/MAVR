@@ -19,6 +19,7 @@ parser.add_argument("-r", "--remove_Ns", action="store_true", dest="remove_Ns", 
 parser.add_argument("-a", "--remove_columns_with_ambigous_nucleotides", action="store_true",
                     dest="remove_columns_with_ambigous_nucleotides", default=False,
                     help="Remove columns with a. Default:False")
+
 args = parser.parse_args()
 
 MultipleAlignmentRoutines.extract_variable_sites_from_alignment_from_file(args.input,
