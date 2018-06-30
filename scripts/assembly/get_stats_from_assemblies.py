@@ -104,8 +104,11 @@ plt.hist([assembly_length_array[assembly] for assembly in assembly_length_array]
 
 plt.xlabel("Sequence length")
 plt.ylabel("Number of sequences")
-plt.xscale('log', logbase=10)
-plt.yscale('log', logbase=10)
+#plt.xscale('log', logbase=10)
+#plt.yscale('log', logbase=10)
+plt.xscale('log', basex=10)
+plt.yscale('log', basey=10)
+
 
 plt.legend()
 
@@ -118,8 +121,8 @@ for assembly in assembly_contig_cumulative_length:
 
 plt.xlabel("Sequence length")
 plt.ylabel("Length of sequences")
-plt.xscale('log', logbase=10)
-
+#plt.xscale('log', logbase=10)
+plt.xscale('log', basex=10)
 plt.legend()
 
 for ext in ".png", ".svg":
@@ -128,5 +131,3 @@ for ext in ".png", ".svg":
 if args.parsing_mode == "index_db":
     for assembly_label in assemblies_dict:
         os.remove("%s.tmp.idx" % assembly_label)
-
-
