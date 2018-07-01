@@ -4,13 +4,14 @@ import os
 from collections import OrderedDict
 import numpy as np
 
-from Bio.Seq import Seq
 from Bio import SeqIO, AlignIO
-from Bio.SeqRecord import SeqRecord
+from Bio.Seq import Seq
+from Bio.Data import CodonTable
 from Bio.Align import MultipleSeqAlignment
 
-#from Routines import SequenceRoutines
-from CustomCollections.GeneralCollections import SynDict
+from Bio.SeqRecord import SeqRecord
+
+from CustomCollections.GeneralCollections import SynDict, TwoLvlDict
 from Routines.Sequence import SequenceRoutines
 
 
@@ -22,8 +23,6 @@ class MultipleAlignmentRoutines(SequenceRoutines):
         self.strict_nucleotide_set = {"A", "T", "G", "C", "N"}
         self.nucleotide_list = ["A", "T", "G", "C", "N"]
         self.nucleotide_set = {"A", "T", "G", "C", "N"}
-
-
 
     @staticmethod
     def get_general_statistics(alignment, verbose=False):
@@ -478,7 +477,86 @@ class MultipleAlignmentRoutines(SequenceRoutines):
 
         unique_position_count_dict = self.count_unique_positions_per_sequence(alignment, gap_symbol=gap_symbol,
                                                                               verbose=verbose)
+    @staticmethod
+    def get_seq_id_dict(alignment):
+        seq_id_index_dict = SynDict()
+        for i in range(0, len(alignment)):
+            seq_id_index_dict[i] = alignment[i].id
+        return seq_id_index_dict
 
+    def count_dNdS_by_reference_seq_in_codon_alignment(self, codon_alignment, reference_seq_id, genetic_code_table=1,
+                                                       gap_symbol_list=["-",], use_ambigious_table=False,
+                                                       output_file=None):
+
+        number_of_sequences = len(codon_alignment)
+        alignment_length = len(codon_alignment[0])
+        if alignment_length % 3 > 0:
+            raise ValueError("Length of alignment is not divisible by 3")
+        else:
+            number_of_codons = int(alignment_length / 3)
+
+        seq_id_index_dict = self.get_seq_id_dict(codon_alignment)
+        for i in range(0, number_of_sequences):
+            if seq_id_index_dict[i] == reference_seq_id:
+                reference_seq_index = i
+                break
+        else:
+            raise ValueError("Reference sequence id (%s) is absent in alignment" % reference_seq_id)
+
+        translation_table = CodonTable.ambiguous_dna_by_id[genetic_code_table] if use_ambigious_table else CodonTable.unambiguous_dna_by_id[genetic_code_table]
+        dN_dS_W_dict = TwoLvlDict()
+
+        for i in range(0, number_of_sequences):
+            if i != reference_seq_index:
+                dN_dS_W_dict[seq_id_index_dict[i]] = OrderedDict({"dN": 0, "dS": 0, "W": 'NA'})
+
+        for i in range(0, number_of_codons):
+            reference_codon = codon_alignment[reference_seq_index, i*3: (i+1) * 3]
+            for symbol in gap_symbol_list:
+                if symbol in reference_codon:
+                    break
+            else:
+                reference_aminoacid = translation_table.forward_table[reference_codon]
+                if reference_aminoacid == "X":
+                    continue
+                for j in range(0, number_of_sequences):
+                    if j == reference_seq_index:
+                        continue
+                    sequence_codon = codon_alignment[j, i * 3: (i + 1) * 3]
+                    for symbol in gap_symbol_list:
+                        if symbol in sequence_codon:
+                            break
+                    else:
+                        sequence_aminoacid = translation_table.forward_table[sequence_codon]
+                        if sequence_aminoacid == "X":
+                            continue
+
+                        if (sequence_aminoacid == reference_aminoacid) and (sequence_codon != reference_codon):
+                            dN_dS_W_dict[seq_id_index_dict[j]]["dS"] += 1
+                        elif sequence_aminoacid != reference_aminoacid:
+                            dN_dS_W_dict[seq_id_index_dict[j]]["dN"] += 1
+
+        for sequence_id in dN_dS_W_dict:
+            if dN_dS_W_dict[sequence_id]["dS"] != 0:
+                dN_dS_W_dict[sequence_id]["W"] = float(dN_dS_W_dict[sequence_id]["dN"]) / float(dN_dS_W_dict[sequence_id]["dS"])
+
+        if output_file:
+            dN_dS_W_dict.write(output_file, absent_symbol="NA")
+
+        return dN_dS_W_dict
+
+    def count_dNdS_by_reference_seq_in_codon_alignment_from_file(self, alignment_file, reference_seq_id,
+                                                                 genetic_code_table=1, gap_symbol_list=["-",],
+                                                                 use_ambigious_table=False, output_file=None,
+                                                                 format="fasta"):
+
+        codon_alignment = self.parse_alignment(alignment_file, filetype=format)
+
+        return self.count_dNdS_by_reference_seq_in_codon_alignment(codon_alignment, reference_seq_id,
+                                                                   genetic_code_table=genetic_code_table,
+                                                                   gap_symbol_list=gap_symbol_list,
+                                                                   use_ambigious_table=use_ambigious_table,
+                                                                   output_file=output_file)
 
     """
     @staticmethod

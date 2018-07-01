@@ -281,7 +281,6 @@ class MultipleAlignmentStatCollection(Collection):
         Ns_dict.write(out_filename="%s.N_counts" % output_prefix)
         gaps_dict.write(out_filename="%s.gaps_counts" % output_prefix)
 
-
     def draw_general_stats_distributions(self, output_prefix, figsize=(12, 6), extensions=("png", "svg"), dpi=300,
                                          logscale_heatmaps=True):
 

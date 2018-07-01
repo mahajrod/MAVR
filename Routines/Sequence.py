@@ -14,6 +14,7 @@ import numpy as np
 
 from Bio import SeqIO
 from Bio.Seq import Seq, MutableSeq
+from Bio.Data import CodonTable
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
 
