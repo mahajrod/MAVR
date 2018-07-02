@@ -126,7 +126,7 @@ plt.xscale('log', basex=10)
 plt.legend()
 
 for ext in ".png", ".svg":
-    plt.savefig("%s.%s" % (args.output_prefix, ext))
+    plt.savefig("%s%s" % (args.output_prefix, ext))
 
 if args.parsing_mode == "index_db":
     for assembly_label in assemblies_dict:
