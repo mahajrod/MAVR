@@ -19,7 +19,7 @@ parser.add_argument("-f", "--genome_fasta", action="store", dest="genome_fasta",
                     help="Path to genome fasta file. If set Star will construct genome index first"
                          "in directory set by -g/--genome_dir")
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=1, type=int,
-                    help="Number of threads to use in Trimmomatic. Default - 1.")
+                    help="Number of threads to use. Default - 1.")
 parser.add_argument("-a", "--annotation_gtf", action="store", dest="annotation_gtf", type=os.path.abspath,
                     help="Gtf file with annotations for STAR")
 parser.add_argument("-i", "--genome_size", action="store", dest="genome_size", type=int,
