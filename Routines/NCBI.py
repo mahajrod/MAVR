@@ -428,7 +428,8 @@ class NCBIRoutines(SequenceRoutines):
         for i in range(0, len(ranges)-1):
             print "Downloading chunk %i" % i
             pep_tmp_file = "%s/%s_%i" % (protein_temp_dir, pep_file, i)
-            self.efetch("protein", protein_id_list[ranges[i]:ranges[i+1]], pep_tmp_file, rettype="gb", retmode="text")
+            self.efetch("protein", protein_id_list[ranges[i]:ranges[i+1]], pep_tmp_file, rettype="gb", retmode="text",
+                        log_file="%s.pep.efetch.log" % output_prefix)
 
         os.system("cat %s/* > %s" % (protein_temp_dir, pep_file))
 
@@ -512,14 +513,16 @@ class NCBIRoutines(SequenceRoutines):
             print "Downloading chunk %i" % i
             transcript_tmp_file = "%s/%s_%i" % (transcript_temp_dir, transcript_file, i)
             self.efetch("nuccore", transcript_ids[transcript_ranges[i]:transcript_ranges[i+1]],
-                        transcript_tmp_file, rettype="gb", retmode="text")
+                        transcript_tmp_file, rettype="gb", retmode="text",
+                        log_file="%s.transcripts.efetch.log" % output_prefix)
 
         os.system("cat %s/* > %s" % (transcript_temp_dir, transcript_file))
 
         transcript_dict = SeqIO.index_db("tmp_1.idx", transcript_file, format="genbank")
 
         print "Downloading mitochondrial transcripts..."
-        self.efetch("nuccore", mito_transcript_ids, mito_transcript_file, rettype="gb", retmode="text")
+        self.efetch("nuccore", mito_transcript_ids, mito_transcript_file, rettype="gb", retmode="text",
+                    log_file="%s.mito.transcripts.efetch.log" % output_prefix)
         mito_transcript_dict = SeqIO.index_db("tmp_2.idx", mito_transcript_file, format="genbank")
 
         actual_protein_ids_from_transcripts = IdList()
