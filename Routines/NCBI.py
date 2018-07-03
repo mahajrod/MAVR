@@ -11,7 +11,7 @@ import numpy as np
 from collections import OrderedDict
 from Bio import SeqIO, Entrez
 from Bio.SeqRecord import SeqRecord
-from Routines.File import FileRoutines
+from Routines.Sequence import SequenceRoutines
 from Routines.Annotations import AnnotationsRoutines
 from Parsers.GFF import CollectionGFF
 from CustomCollections.GeneralCollections import IdList, SynDict, TwoLvlDict, IdSet
@@ -269,9 +269,9 @@ class AssemblySummaryList(list):
         return self.filter(expression)
 
 
-class NCBIRoutines(FileRoutines):
+class NCBIRoutines(SequenceRoutines):
     def __init__(self):
-        FileRoutines.__init__(self)
+        SequenceRoutines.__init__(self)
         self.ncbi_ftp = "ftp://ftp-trace.ncbi.nlm.nih.gov/"
 
     def get_sra_ftp_path_from_id(self, sra_id):
@@ -405,19 +405,22 @@ class NCBIRoutines(FileRoutines):
 
         longest_pep_ids.write(longest_pep_id_file)
 
-    def get_cds_for_proteins(self, protein_id_list, output_prefix, download_chunk_size=100, temp_dir_prefix="temp"):
+    def get_cds_for_proteins(self, protein_id_list, output_prefix, download_chunk_size=100, temp_dir_prefix="temp",
+                             keyword_for_mitochondrial_pep="mitochondrion"):
 
         from Tools.Abstract import Tool
 
         transcript_temp_dir = "%s_transcripts" % temp_dir_prefix
         protein_temp_dir = "%s_proteins" % temp_dir_prefix
         number_of_ids = len(protein_id_list)
+
         print "Total %i ids" % number_of_ids
 
         for directory in transcript_temp_dir, protein_temp_dir:
             self.safe_mkdir(directory)
         pep_file = "%s.pep.genbank" % output_prefix
         transcript_file = "%s.trascript.genbank" % output_prefix
+        mito_transcript_file = "%s.trascript.mito.genbank" % output_prefix
 
         ranges = np.append(np.arange(0, number_of_ids, download_chunk_size), [number_of_ids])
 
@@ -440,38 +443,67 @@ class NCBIRoutines(FileRoutines):
         print Tool.intersect_ids([protein_id_list], [downloaded_protein_ids], mode="count")
 
         pep_without_transcripts = IdList()
+        mito_pep_without_transcripts = IdList()
         pep_with_several_CDS_features = IdList()
+        mito_pep_with_several_CDS_features = IdList()
         pep_to_transcript_accordance = SynDict()
+        mito_pep_to_transcript_accordance = SynDict()
         transcript_ids = IdList()
-
+        mito_transcript_ids = IdList()
         print "Extracting transcript ids corresponding to proteins..."
+
         for pep_id in peptide_dict:
-            for feature in peptide_dict[pep_id].features:
-                if feature.type == "CDS":
-                    try:
-                        transcript_id = feature.qualifiers["coded_by"][0].split(":")[0]
-                        if pep_id not in pep_to_transcript_accordance:
-                            pep_to_transcript_accordance[pep_id] = [transcript_id]
-                        else:
-                            pep_to_transcript_accordance[pep_id].append(transcript_id)
-                            print("Genbank record for %s contains several CDS features" % pep_id)
-                            pep_with_several_CDS_features.append(pep_id)
-                        if transcript_id in transcript_ids:
-                            print "Repeated transcript id: %s" % transcript_id
-                            continue
-                        transcript_ids.append(transcript_id)
-                    except:
-                        print "Transcript id for %s was not found" % pep_id
-                        pep_without_transcripts.append(pep_id)
+            if keyword_for_mitochondrial_pep in peptide_dict[pep_id].annotations["source"]:
+                for feature in peptide_dict[pep_id].features:
+                    if feature.type == "CDS":
+                        try:
+                            transcript_id = feature.qualifiers["coded_by"][0].split(":")[0]
+                            if pep_id not in mito_pep_to_transcript_accordance:
+                                mito_pep_to_transcript_accordance[pep_id] = [transcript_id]
+                            else:
+                                mito_pep_to_transcript_accordance[pep_id].append(transcript_id)
+                                print("Genbank record for %s contains several CDS features" % pep_id)
+                                mito_pep_with_several_CDS_features.append(pep_id)
+                            if transcript_id in mito_transcript_ids:
+                                print "Repeated transcript id: %s" % transcript_id
+                                continue
+                            mito_transcript_ids.append(transcript_id)
+                        except:
+                            print "Transcript id for %s was not found" % pep_id
+                            mito_pep_without_transcripts.append(pep_id)
+
+            else:
+                for feature in peptide_dict[pep_id].features:
+                    if feature.type == "CDS":
+                        try:
+                            transcript_id = feature.qualifiers["coded_by"][0].split(":")[0]
+                            if pep_id not in pep_to_transcript_accordance:
+                                pep_to_transcript_accordance[pep_id] = [transcript_id]
+                            else:
+                                pep_to_transcript_accordance[pep_id].append(transcript_id)
+                                print("Genbank record for %s contains several CDS features" % pep_id)
+                                pep_with_several_CDS_features.append(pep_id)
+                            if transcript_id in transcript_ids:
+                                print "Repeated transcript id: %s" % transcript_id
+                                continue
+                            transcript_ids.append(transcript_id)
+                        except:
+                            print "Transcript id for %s was not found" % pep_id
+                            pep_without_transcripts.append(pep_id)
 
         pep_with_several_CDS_features.write("%s.pep_with_several_CDS.ids" % output_prefix)
         pep_without_transcripts.write("%s.pep_without_transcripts.ids" % output_prefix)
         transcript_ids.write("%s.transcripts.ids" % output_prefix)
 
-        number_of_transcripts = len(transcript_ids)
+        mito_pep_with_several_CDS_features.write("%s.mito.pep_with_several_CDS.ids" % output_prefix)
+        mito_pep_without_transcripts.write("%s.mito.pep_without_transcripts.ids" % output_prefix)
+        mito_transcript_ids.write("%s.mito.transcripts.ids" % output_prefix)
+
+        number_of_transcripts = len(transcript_ids) + len(mito_transcript_ids)
         print "%i transcripts were found" % number_of_transcripts
 
         pep_to_transcript_accordance.write("%s.pep_to_transcript.accordance" % output_prefix, splited_values=True)
+        mito_pep_to_transcript_accordance.write("%s.mito.pep_to_transcript.accordance" % output_prefix, splited_values=True)
 
         transcript_ranges = np.append(np.arange(0, number_of_transcripts, download_chunk_size), [number_of_transcripts])
 
@@ -484,35 +516,171 @@ class NCBIRoutines(FileRoutines):
 
         os.system("cat %s/* > %s" % (transcript_temp_dir, transcript_file))
 
-
         transcript_dict = SeqIO.index_db("tmp_1.idx", transcript_file, format="genbank")
 
-        cds_records_list = []
-        for transcript_id in transcript_dict:
-            for feature in transcript_dict[transcript_id].features:
-                CDS_counter = 1
-                if feature.type == "CDS":
-                    #print feature
+        print "Downloading mitochondrial transcripts..."
+        self.efetch("nuccore", mito_transcript_ids, mito_transcript_file, rettype="gb", retmode="text")
+        mito_transcript_dict = SeqIO.index_db("tmp_2.idx", mito_transcript_file, format="genbank")
 
-                    feature_seq = feature.extract(transcript_dict[transcript_id].seq)
-                    feature_id = transcript_id  # case with several CDS per transcripts is was not taken into account
-                    if "protein_id" in feature.qualifiers:
-                        description = "protein=%s" % feature.qualifiers["protein_id"][0]
-                    else:
-                        print "Corresponding protein id was not found for %s" % transcript_id
-                    cds_records_list.append(SeqRecord(seq=feature_seq, id=feature_id, description=description))
-        SeqIO.write(cds_records_list, "%s.cds" % output_prefix, format="fasta")
+        actual_protein_ids_from_transcripts = IdList()
+        actual_mito_protein_ids_from_transcripts = IdList()
+        actual_absent_protein_ids_from_transcripts = IdList()
+        actual_absent_mito_protein_ids_from_transcripts = IdList()
+        actual_pep_to_transcript_accordance = SynDict()
+        actual_mito_pep_to_transcript_accordance = SynDict()
+        actual_transcript_ids = IdList()
+        actual_mito_transcript_ids = IdList()
+
+        cds_records_dict = OrderedDict()
+        for transcript_id in transcript_dict:
+            CDS_number = 0
+            for feature in transcript_dict[transcript_id].features:
+                if feature.type == "CDS":
+                    CDS_number += 1
+            if CDS_number > 1:
+                CDS_counter = 1
+                for feature in transcript_dict[transcript_id].features:
+                    if feature.type == "CDS":
+                        feature_seq = feature.extract(transcript_dict[transcript_id].seq)
+                        feature_id = "%s.%i" % (transcript_id, CDS_counter)
+                        if "protein_id" in feature.qualifiers:
+                            description = "protein=%s" % feature.qualifiers["protein_id"][0]
+                            actual_protein_ids_from_transcripts.append(feature.qualifiers["protein_id"][0])
+                            actual_pep_to_transcript_accordance[feature.qualifiers["protein_id"][0]] = [feature_id]
+                            actual_transcript_ids.append(feature_id)
+                        else:
+                            print "Corresponding protein id was not found for %s " % transcript_id
+
+                        cds_records_dict[feature_id] = SeqRecord(seq=feature_seq, id=feature_id, description=description)
+                        CDS_counter += 1
+            else:
+                for feature in transcript_dict[transcript_id].features:
+                    if feature.type == "CDS":
+                        feature_seq = feature.extract(transcript_dict[transcript_id].seq)
+                        feature_id = transcript_id
+                        if "protein_id" in feature.qualifiers:
+                            description = "protein=%s" % feature.qualifiers["protein_id"][0]
+                            actual_protein_ids_from_transcripts.append(feature.qualifiers["protein_id"][0])
+                            actual_pep_to_transcript_accordance[feature.qualifiers["protein_id"][0]] = [feature_id]
+                            actual_transcript_ids.append(feature_id)
+                        else:
+                            print "Corresponding protein id was not found for %s " % transcript_id
+
+                        cds_records_dict[feature_id] = SeqRecord(seq=feature_seq, id=feature_id, description=description)
+                        break
+        SeqIO.write(self.record_by_id_generator(cds_records_dict), "%s.all.cds" % output_prefix, format="fasta")
+        SeqIO.write(self.record_by_id_generator(peptide_dict, id_list=actual_protein_ids_from_transcripts),
+                    "%s.with_cds.pep" % output_prefix, format="fasta")
+        SeqIO.write(self.record_by_id_generator(cds_records_dict, id_list=actual_transcript_ids),
+                    "%s.with_pep.cds" % output_prefix, format="fasta")
+
+        actual_pep_to_transcript_accordance.write("%s.pep_to_transcript.actual.accordance" % output_prefix, splited_values=True)
+
+        mito_cds_records_dict = OrderedDict()
+        for transcript_id in mito_transcript_dict:
+            CDS_number = 0
+            #print transcript_id
+            for feature in mito_transcript_dict[transcript_id].features:
+                if feature.type == "CDS":
+                    CDS_number += 1
+            print CDS_number
+            if CDS_number > 1:
+                CDS_counter = 1
+                for feature in mito_transcript_dict[transcript_id].features:
+                    if feature.type == "CDS":
+                        feature_seq = feature.extract(mito_transcript_dict[transcript_id].seq)
+                        feature_id = "%s.%i" % (transcript_id, CDS_counter)
+                        if "protein_id" in feature.qualifiers:
+                            description = "protein=%s" % feature.qualifiers["protein_id"][0]
+                            actual_mito_protein_ids_from_transcripts.append(feature.qualifiers["protein_id"][0])
+                            actual_mito_pep_to_transcript_accordance[feature.qualifiers["protein_id"][0]] = [feature_id]
+                            actual_mito_transcript_ids.append(feature_id)
+                        else:
+                            print "Corresponding protein id was not found for %s " % transcript_id
+
+                        mito_cds_records_dict[feature_id] = SeqRecord(seq=feature_seq, id=feature_id, description=description)
+
+            else:
+                for feature in mito_transcript_dict[transcript_id].features:
+                    if feature.type == "CDS":
+                        feature_seq = feature.extract(mito_transcript_dict[transcript_id].seq)
+                        feature_id = transcript_id
+                        if "protein_id" in feature.qualifiers:
+                            description = "protein=%s" % feature.qualifiers["protein_id"][0]
+                            actual_mito_protein_ids_from_transcripts.append(feature.qualifiers["protein_id"][0])
+                            actual_mito_pep_to_transcript_accordance[feature.qualifiers["protein_id"][0]] = [feature_id]
+                            actual_mito_transcript_ids.append(feature_id)
+                        else:
+                            print "Corresponding protein id was not found for %s " % transcript_id
+
+                        mito_cds_records_dict[feature_id] = SeqRecord(seq=feature_seq, id=feature_id, description=description)
+                        break
+        SeqIO.write(self.record_by_id_generator(mito_cds_records_dict), "%s.mito.all.cds" % output_prefix, format="fasta")
+        SeqIO.write(self.record_by_id_generator(peptide_dict, id_list=actual_mito_protein_ids_from_transcripts),
+                    "%s.mito.with_cds.pep" % output_prefix, format="fasta")
+        SeqIO.write(self.record_by_id_generator(mito_cds_records_dict, id_list=actual_mito_transcript_ids),
+                    "%s.mito.with_pep.cds" % output_prefix, format="fasta")
+
+        #print actual_mito_pep_to_transcript_accordance
+        actual_mito_pep_to_transcript_accordance.write("%s.mito.pep_to_transcript.actual.accordance" % output_prefix, splited_values=True)
 
         stat_string = "Input protein ids\t %i\n" % number_of_ids
-        stat_string += "Downloaded proteins\t%i\n" % number_of_transcripts
-        stat_string += "Downloaded transcripts\t%i\n" % len(transcript_dict)
-
+        stat_string += "Downloaded proteins\t%i\n" % len(downloaded_protein_ids)
+        stat_string += "Downloaded transcripts\t%i\n" % (len(transcript_dict) + len(mito_transcript_dict))
+        stat_string += "Valid protein and CDS pair\t%i\n" % (len(actual_pep_to_transcript_accordance) +
+                                                             len(actual_mito_pep_to_transcript_accordance))
         print stat_string
 
         with open("%s.stats" % output_prefix, "w") as stat_fd:
             stat_fd.write(stat_string)
 
-        for filename in "tmp.idx", "tmp_1.idx":
+        description_string = """DESCRIPTION OF FILES CREATED dURING DOWNLOADa AND EXTRACTION OF CDS FOR PROTEIN IDS FROM NCBI
+
+* - prefix of files
+
+RESULTING FILES
+*.with_cds.pep                                 Final protein set for nuclear genes
+*.with_pep.cds                                 Final CDS set for nuclear genes
+*.pep_to_transcript.actual.accordance          Correspondence file between proteins and CDSs for nuclear genes
+
+*.mito.with_cds.pep                            Final protein set for mitochondrial genes
+*.mito.with_pep.cds                            Final CDS set for mitochondrial genes
+*.mito.pep_to_transcript.actual.accordance     Correspondence file between proteins
+                                               and CDSs for mitochondrial genes
+
+INTERMIDIATE FILES AND DIRECTORIES
+
+temp_proteins/                                 Directory with downloaded proteins
+temp_transcripts/                              Directory with downloaded transcripts
+
+*.pep.genbank                                  Merged file with downloaded nucleolar proteins
+
+*.downloaded.ids                               Ids of downloaded proteins
+*.not_downloaded.ids                           Ids of not downloaded proteins
+
+*.trascript.genbank                            Merged file with downloaded nucleolar transcripts
+*.trascript.mito.genbank                       Merged file with downloaded mitochondrial
+                                               transcripts
+
+*.mito.all.cds
+*.mito.pep_to_transcript.accordance
+*.mito.pep_without_transcripts.ids
+*.mito.pep_with_several_CDS.ids
+*.mito.transcripts.ids
+
+*.all.cds
+*.pep_to_transcript.accordance
+*.pep_without_transcripts.ids
+*.pep_with_several_CDS.ids
+
+*.stats                                       Statistics
+*.transcripts.ids
+"""
+
+        with open("%sDESCRIPTION" % self.split_filename(output_prefix)[0], "w") as descr_fd:
+            descr_fd.write(description_string)
+
+        for filename in "tmp.idx", "tmp_1.idx", "tmp_2.idx":
             os.remove(filename)
 
     def get_cds_for_proteins_from_id_file(self, protein_id_file, output_prefix):

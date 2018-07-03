@@ -468,7 +468,7 @@ class SynDict(OrderedDict):
         for entry in self:
             #print "AAAAAAAAAAAAAA"
             out_fd.write("%s%s%s\n" % (entry, separator,
-                                       values_separator.join(map(str, self[entry])) if splited_values else str(self[entry])))
+                                       values_separator.join(self[entry] if isinstance(self[entry], str) else map(str, self[entry])) if splited_values else str(self[entry])))
         if (not isinstance(filename, file)) or close_after_if_file_object:
             out_fd.close()
 

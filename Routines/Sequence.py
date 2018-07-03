@@ -487,7 +487,10 @@ class SequenceRoutines(FileRoutines):
         elif mode == "index":
             seq_dict = SeqIO.index(input_file if isinstance(input_file, str) else input_file[0], format=format)
         elif mode == "parse":
-            seq_dict = SeqIO.to_dict(SeqIO.parse(input_file if isinstance(input_file, str) else input_file[0], format=format))
+            seq_dict = OrderedDict()
+            for record in SeqIO.parse(input_file if isinstance(input_file, str) else input_file[0], format=format):
+                seq_dict[record.id] = record
+            #seq_dict = SeqIO.to_dict(SeqIO.parse(input_file if isinstance(input_file, str) else input_file[0], format=format))
 
         return seq_dict
 
