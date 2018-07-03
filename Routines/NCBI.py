@@ -409,14 +409,15 @@ class NCBIRoutines(SequenceRoutines):
                              keyword_for_mitochondrial_pep="mitochondrion"):
 
         from Tools.Abstract import Tool
-
-        transcript_temp_dir = "%s_transcripts" % temp_dir_prefix
-        protein_temp_dir = "%s_proteins" % temp_dir_prefix
+        output_directory = self.check_dir_path(self.split_filename(output_prefix)[0])
+        transcript_temp_dir = "%s%s_transcripts" % (output_directory, temp_dir_prefix)
+        protein_temp_dir = "%s%s_proteins" % (output_directory, temp_dir_prefix)
         number_of_ids = len(protein_id_list)
 
         print "Total %i ids" % number_of_ids
 
         for directory in transcript_temp_dir, protein_temp_dir:
+            print directory
             self.safe_mkdir(directory)
         pep_file = "%s.pep.genbank" % output_prefix
         transcript_file = "%s.trascript.genbank" % output_prefix
@@ -427,13 +428,13 @@ class NCBIRoutines(SequenceRoutines):
         print "Downloading proteins..."
         for i in range(0, len(ranges)-1):
             print "Downloading chunk %i" % i
-            pep_tmp_file = "%s/%s_%i" % (protein_temp_dir, pep_file, i)
+            pep_tmp_file = "%s/chunk_%i" % (protein_temp_dir, i)
             self.efetch("protein", protein_id_list[ranges[i]:ranges[i+1]], pep_tmp_file, rettype="gb", retmode="text",
                         log_file="%s.pep.efetch.log" % output_prefix)
 
         os.system("cat %s/* > %s" % (protein_temp_dir, pep_file))
 
-        peptide_dict = SeqIO.index_db("tmp.idx", pep_file, format="genbank")
+        peptide_dict = SeqIO.index_db("%stmp.idx" % output_directory, pep_file, format="genbank")
         downloaded_protein_ids = IdList(peptide_dict.keys())
 
         print "%i proteins were downloaded" % len(downloaded_protein_ids)
@@ -511,19 +512,19 @@ class NCBIRoutines(SequenceRoutines):
         print "Downloading transcripts..."
         for i in range(0, len(transcript_ranges)-1):
             print "Downloading chunk %i" % i
-            transcript_tmp_file = "%s/%s_%i" % (transcript_temp_dir, transcript_file, i)
+            transcript_tmp_file = "%s/chunk_%i" % (transcript_temp_dir, i)
             self.efetch("nuccore", transcript_ids[transcript_ranges[i]:transcript_ranges[i+1]],
                         transcript_tmp_file, rettype="gb", retmode="text",
                         log_file="%s.transcripts.efetch.log" % output_prefix)
 
         os.system("cat %s/* > %s" % (transcript_temp_dir, transcript_file))
 
-        transcript_dict = SeqIO.index_db("tmp_1.idx", transcript_file, format="genbank")
+        transcript_dict = SeqIO.index_db("%stmp_1.idx" % output_directory, transcript_file, format="genbank")
 
         print "Downloading mitochondrial transcripts..."
         self.efetch("nuccore", mito_transcript_ids, mito_transcript_file, rettype="gb", retmode="text",
                     log_file="%s.mito.transcripts.efetch.log" % output_prefix)
-        mito_transcript_dict = SeqIO.index_db("tmp_2.idx", mito_transcript_file, format="genbank")
+        mito_transcript_dict = SeqIO.index_db("%stmp_2.idx" % output_directory, mito_transcript_file, format="genbank")
 
         actual_protein_ids_from_transcripts = IdList()
         actual_mito_protein_ids_from_transcripts = IdList()
@@ -680,11 +681,11 @@ temp_transcripts/                              Directory with downloaded transcr
 *.transcripts.ids
 """
 
-        with open("%sDESCRIPTION" % self.split_filename(output_prefix)[0], "w") as descr_fd:
+        with open("%sDESCRIPTION" % output_directory, "w") as descr_fd:
             descr_fd.write(description_string)
 
         for filename in "tmp.idx", "tmp_1.idx", "tmp_2.idx":
-            os.remove(filename)
+            os.remove("%s%s" % (output_directory, filename))
 
     def get_cds_for_proteins_from_id_file(self, protein_id_file, output_prefix):
         pep_ids = IdList()
