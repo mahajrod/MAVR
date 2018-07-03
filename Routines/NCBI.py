@@ -601,7 +601,7 @@ class NCBIRoutines(SequenceRoutines):
                             actual_mito_transcript_ids.append(feature_id)
                         else:
                             print "Corresponding protein id was not found for %s " % transcript_id
-
+                        CDS_counter += 1
                         mito_cds_records_dict[feature_id] = SeqRecord(seq=feature_seq, id=feature_id, description=description)
 
             else:
@@ -687,11 +687,11 @@ temp_transcripts/                              Directory with downloaded transcr
         for filename in "tmp.idx", "tmp_1.idx", "tmp_2.idx":
             os.remove("%s%s" % (output_directory, filename))
 
-    def get_cds_for_proteins_from_id_file(self, protein_id_file, output_prefix):
+    def get_cds_for_proteins_from_id_file(self, protein_id_file, output_prefix, download_chunk_size=100):
         pep_ids = IdList()
         pep_ids.read(protein_id_file)
 
-        self.get_cds_for_proteins(pep_ids, output_prefix)
+        self.get_cds_for_proteins(pep_ids, output_prefix, download_chunk_size=download_chunk_size)
 
     @staticmethod
     def get_taxonomy(taxa_list, output_file, email, input_type="latin"):
