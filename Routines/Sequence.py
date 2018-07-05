@@ -27,6 +27,42 @@ class SequenceRoutines(FileRoutines):
     def __init__(self):
         FileRoutines.__init__(self)
 
+        self.ambiguous_nucleotides_dict = OrderedDict({"R": {"A", "G"},
+                                                       "Y": {"C", "T"},
+                                                       "S": {"C", "G"},
+                                                       "W": {"A", "T"},
+                                                       "K": {"G", "T"},
+                                                       "M": {"A", "C"},
+                                                       "B": {"C", "G", "T"},
+                                                       "D": {"A", "G", "T"},
+                                                       "H": {"A", "C", "T"},
+                                                       "V": {"A", "C", "G"},
+                                                       "N": {"A", "C", "G", "T"}})
+
+        self.ambiguous_nucleotides_string_dict = OrderedDict({"R": "AG",
+                                                              "Y": "CT",
+                                                              "S": "CG",
+                                                              "W": "AT",
+                                                              "K": "GT",
+                                                              "M": "AC",
+                                                              "B": "CGT",
+                                                              "D": "AGT",
+                                                              "H": "ACT",
+                                                              "V": "ACG",
+                                                              "N": "ACGT"})
+
+        self.ambiguous_nucleotides_string_reverse_dict = OrderedDict({"AG": "R",
+                                                                      "CT": "Y",
+                                                                      "CG": "S",
+                                                                      "AT": "W",
+                                                                      "GT": "K",
+                                                                      "AC": "M",
+                                                                      "CGT": "B",
+                                                                      "AGT": "D",
+                                                                      "ACT": "H",
+                                                                      "ACG": "V",
+                                                                      "ACGT": "N"})
+
     def split_fasta(self, input_fasta, output_dir, num_of_recs_per_file=None, num_of_files=None, output_prefix=None,
                     parsing_mode="parse", index_file=None):
         """
