@@ -38,7 +38,7 @@ class Emapper(Tool):
                     continue
                 line_list = line.split("\t")
 
-                fam_id = line_list[10].split("|")[0]
+                fam_id = line_list[9].split("|")[0]
                 if not(eggnogdb_prefix is None):
                     fam_id = eggnogdb_prefix + fam_id
 
