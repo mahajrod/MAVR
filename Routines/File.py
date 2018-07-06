@@ -507,6 +507,18 @@ class FileRoutines:
 
         merged_dict.write(output, splited_values=True)
 
+    def add_add_new_column_by_key_column(self, table_file, syn_dict_file, key_column,  output_file, new_column_name=None,
+                                         separator='\t', absent_value="."):
+        column_syn_dict = SynDict(filename=syn_dict_file, allow_repeats_of_key=True, values_separator="@")
+        with open(table_file, "r") as in_fd, open(output_file, "w") as out_fd:
+            if new_column_name:
+                header_line = in_fd.readline().strip() + "\t%s\n" % new_column_name
+                out_fd.write(header_line)
+                        print line_list[key_column]
+                        print column_syn_dict[line_list[key_column]]
+                    line_list.append(absent_value if line_list[key_column] not in column_syn_dict else "|".join(column_syn_dict[line_list[key_column]]))
+                    out_fd.write(separator.join(line_list) + "\n")
+
     @staticmethod
     def label_column_in_file(input_file, label, column_index, output_file, column_separator="\t",
                              label_position="first", label_separator="@",
