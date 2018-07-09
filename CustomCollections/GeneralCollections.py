@@ -397,7 +397,11 @@ class SynDict(OrderedDict):
             tmp = line.strip("\n").split(separator) if separator else line.strip("\n").split()
             #print line
             #print tmp
-            key, value = tmp[key_index], tmp[value_index] if isinstance(value_index, int) else [tmp[index_entry] for index_entry in value_index]
+            try:
+                key, value = tmp[key_index], tmp[value_index] if isinstance(value_index, int) else [tmp[index_entry] for index_entry in value_index]
+            except:
+                print tmp
+                raise ValueError
             #print key, value
             if split_values or allow_repeats_of_key:
                 if isinstance(value, str):
