@@ -27,7 +27,7 @@ class ScaffoldingPipeline(Pipeline):
         sample_dir = os.path.abspath(sample_directory)
         output_pref = "%s/%s" % (sample_dir, output_prefix)
         min_contig_len_threshold = 3 * estimated_insert_size
-        region_bed_file = "%s/contig.bed" % sample_dir
+        region_bed_file = "%s/%s_contig.bed" % (sample_dir, output_prefix)
         self.make_region_bed_file_from_file(genome, region_bed_file, min_len=min_contig_len_threshold,
                                             parsing_mode=parsing_mode, input_format=genome_format)
 
