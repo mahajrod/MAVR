@@ -41,7 +41,7 @@ args = parser.parse_args()
 
 if (args.number_of_bins is not None) and (args.width_of_bins is not None):
     raise AttributeError("Options -w/--width_of_bins and -b/--number_of_bins mustn't be set simultaneously")
-sequence_dict = SeqIO.index_db("temp.idx", args.input_file, args.format)
+sequence_dict = DrawingRoutines.parse_seq_file(args.input_file, format=args.format, mode="parse")
 
 DrawingRoutines.draw_length_histogram(sequence_dict, args.output_prefix, number_of_bins=args.number_of_bins,
                                       width_of_bins=args.width_of_bins, min_length=args.min_length,
