@@ -413,8 +413,6 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
         for ext in extensions:
             plt.savefig("%s.%s" % (output_prefix, ext))
 
-        os.remove("temp.idx")
-
     def draw_heatmap_and_three_percent_histograms(self, first_histo_values, second_histo_values,
                                                   third_histo_values, output_prefix, figsize=(12, 12),
                                                   extensions=("png", "svg")):
