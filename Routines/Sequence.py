@@ -348,8 +348,8 @@ class SequenceRoutines(FileRoutines):
         SeqIO.write(self.record_by_expression_generator(sequence_dict, expression=length_expression,
                                                         id_file=id_file),
                     output_file, format=format)
-
-        os.remove(tmp_index_file)
+        if parsing_mode == "index_db":
+            os.remove(tmp_index_file)
 
     @staticmethod
     def find_gaps(record_dict):
