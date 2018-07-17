@@ -15,7 +15,9 @@ class FileRoutines:
         self.filetypes_dict = {"fasta": [".fa", ".fasta", ".fa", ".pep", ".cds"],
                                "fastq": [".fastq", ".fq"],
                                "genbank": [".gb", ".genbank"],
-                               "newick": [".nwk"]}
+                               "newick": [".nwk"],
+                               "gz": [".gz"],
+                               "bzip": [".bz2"]}
 
     @staticmethod
     def metaopen(filename, flags):
