@@ -23,7 +23,7 @@ PLINK.path = args.plink_bin_dir
 PLINK.test_roh_parameters(args.output_dir,
                           args.output_prefix,
                           args.input_vcf,
-                          allow_noncanonical_chromosome_names=None,
+                          allow_noncanonical_chromosome_names=True,
                           keep_autoconverted_files=None,
                           window_length_in_kb=None,
                           min_homozygous_snps_per_window=(2, 51, 1),
