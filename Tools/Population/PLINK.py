@@ -125,7 +125,7 @@ class PLINK(Tool):
                             output_dir,
                             output_prefix,
                             input_vcf_file,
-                            allow_noncanonical_chromosome_names=None,
+                            allow_noncanonical_chromosome_names=True,
                             keep_autoconverted_files=None,
                             window_length_in_kb=None,
                             min_homozygous_snps_per_window=(2, 51, 1),
