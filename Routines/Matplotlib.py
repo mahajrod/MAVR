@@ -81,6 +81,71 @@ class MatplotlibRoutines:
         return c1, c2, bbox_patch1, bbox_patch2, p
 
     @staticmethod
+    def annotated_heatmap(data, row_labels, column_labels, subplot=None, colorbar_kw={}, colorbar_label="",
+                          title=None, xlabel=None, ylabel=None,
+                          horizontal_ticks_angle=0, **kwargs):
+        """
+        Create a heatmap from a numpy array and two lists of labels.
+
+        Arguments:
+            data       : A 2D numpy array of shape (N,M)
+            row_labels : A list or array of length N with the labels
+                         for the rows
+            col_labels : A list or array of length M with the labels
+                         for the columns
+        Optional arguments:
+            ax         : A matplotlib.axes.Axes instance to which the heatmap
+                         is plotted. If not provided, use current axes or
+                         create a new one.
+            cbar_kw    : A dictionary with arguments to
+                         :meth:`matplotlib.Figure.colorbar`.
+            cbarlabel  : The label for the colorbar
+        All other arguments are directly passed on to the imshow call.
+        """
+
+        if not subplot:
+            subplot = plt.gca()
+
+        # Plot the heatmap
+        image = subplot.imshow(data, **kwargs)
+
+        # Create colorbar
+        colorbar = subplot.figure.colorbar(image, ax=subplot, **colorbar_kw)
+        colorbar.ax.set_ylabel(colorbar_label, rotation=-90, va="bottom")
+
+        # We want to show all ticks...
+        subplot.set_xticks(np.arange(data.shape[1]))
+        subplot.set_yticks(np.arange(data.shape[0]))
+        # ... and label them with the respective list entries.
+        subplot.set_xticklabels(column_labels)
+        subplot.set_yticklabels(row_labels)
+
+        # Let the horizontal axes labeling appear on top.
+        #subplot.tick_params(top=True, bottom=False, labeltop=True, labelbottom=False)
+
+        # Rotate the tick labels and set their alignment.
+        plt.setp(subplot.get_xticklabels(), rotation=horizontal_ticks_angle, ha="right",
+                 rotation_mode="anchor")
+
+        # Turn spines off and create white grid.
+        for edge, spine in subplot.spines.items():
+            spine.set_visible(False)
+
+        subplot.set_xticks(np.arange(data.shape[1]+1)-.5, minor=True)
+        subplot.set_yticks(np.arange(data.shape[0]+1)-.5, minor=True)
+        subplot.grid(which="minor", color="w", linestyle='-', linewidth=3)
+        subplot.tick_params(which="minor", bottom=False, left=False)
+
+        if title is not None:
+            plt.title(title)
+        if xlabel is not None:
+            plt.xlabel(xlabel)
+        if ylabel is not None:
+            plt.ylabel(ylabel)
+
+        return image, colorbar
+
+    @staticmethod
     def percent_histogram(data, output_prefix=None, n_bins=20, title="", xlabel="%", ylabel="Number", label=None,
                           extensions=("png", "svg"), legend=None, legend_location="best", input_mode="percent", xmax=None,
                           xmin=None):

@@ -1,6 +1,16 @@
-
+import os
 import numpy as np
 from collections import OrderedDict
+
+import matplotlib
+matplotlib.use('Agg')
+os.environ['MPLCONFIGDIR'] = '/tmp/'
+import matplotlib.pyplot as plt
+plt.ioff()
+from matplotlib.transforms import Bbox, TransformedBbox, blended_transform_factory
+from mpl_toolkits.axes_grid1.inset_locator import BboxPatch, BboxConnector, BboxConnectorPatch
+from matplotlib.lines import Line2D
+from matplotlib.colors import LogNorm
 
 from Bio import SeqIO
 from Bio.Seq import Seq
@@ -8,6 +18,9 @@ from Bio.SeqRecord import SeqRecord
 
 from Tools.Abstract import Tool
 from Parsers.PLINK import PLINKReport
+
+from Routines import MatplotlibRoutines
+
 
 class PLINK(Tool):
     def __init__(self, path="", max_threads=4, max_memory="100G", max_per_thread_memory="5G"):
@@ -19,7 +32,6 @@ class PLINK(Tool):
 
         # constans for PLINK bim file
         self.allel_columns_in_bim_file = (4, 5)
-
 
     def parse_common_options(self, output_prefix, input_vcf_file=None, allow_noncanonical_chromosome_names=None, keep_autoconverted_files=None):
 
@@ -123,44 +135,90 @@ class PLINK(Tool):
                             max_inverse_density_of_homozygous_snps_in_kb_per_snp=(50, 1000, 50),
                             ):
         self.safe_mkdir(output_dir)
+
         plink_report_dict = OrderedDict()
+        roh_count_array = np.zeros((len(range(*min_homozygous_snps_per_window)),
+                                    len(range(*max_heterozygous_snps_per_window)),
+                                    len(range(*min_homozygous_snps_in_roh)),
+                                    len(range(*max_heterozygous_snps)),
+                                    len(range(*max_inverse_density_of_homozygous_snps_in_kb_per_snp)),
+                                    ), dtype=int)
 
-        for i in range(*min_homozygous_snps_per_window):
+        i_ticks = range(*min_homozygous_snps_per_window)
+        j_ticks = range(*max_heterozygous_snps_per_window)
+        k_ticks = range(*min_homozygous_snps_in_roh)
+        l_ticks = range(*max_heterozygous_snps)
+        m_ticks = range(*max_inverse_density_of_homozygous_snps_in_kb_per_snp)
+
+        for i in i_ticks:
             plink_report_dict[i] = OrderedDict()
-            for j in range(*min_homozygous_snps_in_roh):
-                plink_report_dict[j] = OrderedDict()
-                for k in range(*max_heterozygous_snps_per_window):
-                    plink_report_dict[k] = OrderedDict()
-                    for l in range(*max_heterozygous_snps):
-                        plink_report_dict[l] = OrderedDict()
-                        for m in range(*max_inverse_density_of_homozygous_snps_in_kb_per_snp):
-
+            for j in j_ticks:
+                plink_report_dict[i][j] = OrderedDict()
+                for k in k_ticks:
+                    plink_report_dict[i][j][k] = OrderedDict()
+                    for l in l_ticks:
+                        plink_report_dict[i][j][k][l] = OrderedDict()
+                        for m in m_ticks:
                             dir_name = "%s/%i_%i_%i_%i_%i/" % (output_dir, i, j, k, l, m)
                             description_text = "Minimum homozygous SNPs per window:\t%i\n" % i
-                            description_text += "Minimum homozygous SNPs in ROh:\t%i\n" % j
-                            description_text += "Maximum heterozygous SNPs per window:\t%i\n" % k
+                            description_text += "Minimum homozygous SNPs in ROh:\t%i\n" % k
+                            description_text += "Maximum heterozygous SNPs per window:\t%i\n" % j
                             description_text += "Max heterozygous SNPs:\t%i\n" % l
                             description_text += "Max inverse density of homozygous SNPs(kb/SNP)" % m
                             self.safe_mkdir(dir_name, description_text=description_text, description_filename="DESCRIPTION")
-                            self.find_runs_of_homozygosity("%s/%s" % (output_dir, output_prefix),
+                            self.find_runs_of_homozygosity("%s/%s" % (dir_name, output_prefix),
                                                            input_vcf_file=input_vcf_file,
                                                            allow_noncanonical_chromosome_names=allow_noncanonical_chromosome_names,
                                                            keep_autoconverted_files=keep_autoconverted_files,
                                                            roh_calling_method=None,
                                                            window_length_in_kb=window_length_in_kb,
                                                            min_homozygous_snps_per_window=i,
-                                                           max_heterozygous_snps_per_window=k,
+                                                           max_heterozygous_snps_per_window=j,
                                                            max_missing_snps_per_window=None,
                                                            max_inverse_density_of_homozygous_snps_in_kb_per_snp=m,
                                                            max_internal_gap_in_kb=None,
                                                            min_roh_length=None,
-                                                           min_homozygous_snps_in_roh=j,
+                                                           min_homozygous_snps_in_roh=k,
                                                            min_scanning_window_hit_rate=None,
                                                            generate_overlapping_segments=False,
                                                            max_heterozygous_snps=l,
                                                            min_concordance_across_jointly_homozygous_variants=None,
                                                            homozygous_verbose=False)
-                            plink_report_dict[m] = PLINKReport("%s/%s" % (output_dir, output_prefix), report_type="ROH")
+                            plink_report_dict[i][j][k][l][m] = PLINKReport("%s/%s.hom" % (dir_name, output_prefix),
+                                                                           report_type="ROH")
+                            roh_count_array[i_ticks.index(i)][j_ticks.index(j)][k_ticks.index(k)][l_ticks.index(l)][m_ticks.index(m)] = len(plink_report_dict[i][j][k][l][m])
+        figure_dir = "%s/pic/" % output_dir
+        self.safe_mkdir(figure_dir)
+
+        num_k_ticks = len(k_ticks)
+        num_l_ticks = len(l_ticks)
+
+        for m in m_ticks:
+            figure, subplot_list = plt.subplots(num_k_ticks, num_l_ticks, sharex=True, sharey=True)
+            plt.suptitle("Number of ROH depending on several parameters")
+            for subplot_index in range(0, len(subplot_list)):
+                k = int(subplot_index / num_l_ticks)
+                l = subplot_index % num_l_ticks
+
+                roh_counts = roh_count_array[:, :, k, l, m]
+
+                title = "Max heterozygous SNPs: %i" % l_ticks[l] if k == 0 else None
+                xlabel = "Min homozygous SNPs per window" if k == num_k_ticks - 1 else None
+                ylabel = "" if l == 0 else None
+                image, colorbar = MatplotlibRoutines.annotated_heatmap(roh_counts, i_ticks, j_ticks, subplot=subplot_list[subplot_index],
+                                                                       title=title, xlabel=xlabel, ylabel=None)
+                """
+                heatmap = subplot_list[subplot_index].imshow(roh_counts)
+                subplot_list[subplot_index].set_xticks(np.arange(len(i_ticks)))
+                subplot_list[subplot_index].set_yticks(np.arange(len(j_ticks)))
+
+                subplot_list[subplot_index].set_xticklabels(i_ticks)
+                subplot_list[subplot_index].set_yticklabels(j_ticks)
+
+                colorbar = subplot_list[subplot_index].figure.colorbar(heatmap, ax=subplot_list[subplot_index])
+                """
+
+            plt.savefig("%s/%i.png" % figure_dir, m)
 
     @staticmethod
     def get_samples_list_from_plink_fam_file(plink_fam_file, verbose=False, sample_id_column=1):
