@@ -13,8 +13,11 @@ from mpl_toolkits.axes_grid1.inset_locator import BboxPatch, BboxConnector, Bbox
 from matplotlib.lines import Line2D
 from matplotlib.colors import LogNorm
 
+from matplotlib_venn import venn2, venn3
+
 import numpy as np
 
+from CustomCollections.GeneralCollections import IdList, SynDict, IdSet
 
 class MatplotlibRoutines:
     def __init__(self):
@@ -981,3 +984,30 @@ class MatplotlibRoutines:
                                           title_list=title_list, ylogbase_list=ylogbase_list, label_list=label_list,
                                           extensions=extensions, suptitle=suptitle,
                                           share_y_axis=share_y_axis, share_x_axis=share_x_axis)
+
+    @staticmethod
+    def venn_diagram_from_sets(set1, set2, set3=None, set_labels=None, set_colors=None,
+                               output_prefix=None, extensions=("png",), title=None):
+        if set3 is None:
+            diagramm = venn2(subsets=(set1, set2), set_labels=set_labels, set_colors=set_colors)
+        else:
+            diagramm = venn2(subsets=(set1, set2, set3), set_labels=set_labels, set_colors=set_colors)
+
+        if title:
+            plt.title(title)
+
+        if output_prefix:
+            for ext in extensions:
+                plt.savefig("%s.%s" % (output_prefix, ext))
+
+        return diagramm
+
+    def venn_diagram_from_sets_from_files(self, set1_file, set2_file, set3_file=None, set_labels=None, set_colors=None,
+                                          output_prefix=None, extensions=("png",), title=None):
+        set1 = IdSet(filename=set1_file)
+        set2 = IdSet(filename=set2_file)
+        set3 = IdSet(filename=set3_file) if set3_file else None
+
+        return self.venn_diagram_from_sets(set1, set2, set3=set3, set_labels=set_labels, set_colors=set_colors,
+                                           output_prefix=output_prefix, extensions=extensions, title=title)
+
