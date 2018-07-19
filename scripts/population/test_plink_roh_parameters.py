@@ -13,9 +13,13 @@ parser.add_argument("-o", "--output_dir", action="store", dest="output_dir", req
                     help="Output direct with sequences")
 parser.add_argument("-p", "--output_prefix", action="store", dest="output_prefix", required=True,
                     help="Output prefix")
+parser.add_argument("-d", "--plink_bin_dir", action="store", dest="plink_bin_dir", default="",
+                    help="Directory with PLINK binary")
+
 
 args = parser.parse_args()
 
+PLINK.path = args.plink_bin_dir
 PLINK.test_roh_parameters(args.output_dir,
                           args.output_prefix,
                           args.input_vcf,
