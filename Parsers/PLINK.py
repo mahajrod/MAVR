@@ -5,9 +5,9 @@ from collections import OrderedDict
 from CustomCollections.GeneralCollections import TwoLvlDict
 
 
-class PLINKReport(OrderedDict):
+class PLINKReport():
     def __init__(self, plink_report_file, report_type="ROH", separator="\s+"):
-        OrderedDict.__init__(self)
+        #OrderedDict.__init__(self)
         self.report_type = report_type
         self.families = None
         self.samples = None
@@ -42,6 +42,8 @@ class PLINKReport(OrderedDict):
                 for j in 6, 7, 9:
                     self[tmp[0]][tmp[1]][header_list[j]] = int(self[tmp[0]][tmp[1]][header_list[j]])
             """
+    def __len__(self):
+        return len(self.data)
 
     def get_roh_lengths(self, save=False):
         """
