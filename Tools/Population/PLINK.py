@@ -164,7 +164,7 @@ class PLINK(Tool):
                             description_text += "Minimum homozygous SNPs in ROh:\t%i\n" % k
                             description_text += "Maximum heterozygous SNPs per window:\t%i\n" % j
                             description_text += "Max heterozygous SNPs:\t%i\n" % l
-                            description_text += "Max inverse density of homozygous SNPs(kb/SNP)" % m
+                            description_text += "Max inverse density of homozygous SNPs(kb/SNP):\t%i\n" % m
                             self.safe_mkdir(dir_name, description_text=description_text, description_filename="DESCRIPTION")
                             self.find_runs_of_homozygosity("%s/%s" % (dir_name, output_prefix),
                                                            input_vcf_file=input_vcf_file,
