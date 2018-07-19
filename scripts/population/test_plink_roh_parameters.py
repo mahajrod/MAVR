@@ -18,7 +18,7 @@ args = parser.parse_args()
 
 PLINK.test_roh_parameters(args.output_dir,
                           args.output_prefix,
-                          args.vcf_file,
+                          args.input_vcf,
                           allow_noncanonical_chromosome_names=None,
                           keep_autoconverted_files=None,
                           window_length_in_kb=None,
