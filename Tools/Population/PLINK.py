@@ -298,3 +298,20 @@ class PLINK(Tool):
             #    print record_list[sample_index]
 
         SeqIO.write(record_list, output_file, format=output_format)
+
+    def convert_blocks_det_file_to_gff(self, list_of_det_files, output_file):
+
+        list_of_files = self.make_list_of_path_to_files(list_of_det_files)
+
+        with open(output_file, "w") as out_fd:
+            for filename in list_of_files:
+                with open(filename, "r") as in_fd:
+                    in_fd.readline()
+                    block_index = 1
+                    for line in in_fd:
+                        line.strip().split()
+                        out_fd.write("%s\tPLINK\thaploblock\t%s\t%s\t.\t.\t.\tID=HB%i;NSNPS=%s;SNPS=%s\n" % (line[0], line[1], line[2], block_index, line[4], line[5]))
+                        block_index += 1
+
+
+
