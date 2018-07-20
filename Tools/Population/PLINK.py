@@ -299,7 +299,7 @@ class PLINK(Tool):
 
         SeqIO.write(record_list, output_file, format=output_format)
 
-    def convert_blocks_det_file_to_gff(self, list_of_det_files, output_file):
+    def convert_blocks_det_file_to_gff(self, list_of_det_files, output_file, output_format="gff"):
 
         list_of_files = self.make_list_of_path_to_files(list_of_det_files)
 
@@ -309,8 +309,11 @@ class PLINK(Tool):
                     in_fd.readline()
                     block_index = 1
                     for line in in_fd:
-                        line.strip().split()
-                        out_fd.write("%s\tPLINK\thaploblock\t%s\t%s\t.\t.\t.\tID=HB%i;NSNPS=%s;SNPS=%s\n" % (line[0], line[1], line[2], block_index, line[4], line[5]))
+                        tmp = line.strip().split()
+                        if output_format == "gff":
+                            out_fd.write("%s\tPLINK\thaploblock\t%s\t%s\t.\t.\t.\tID=HB%i;NSNPS=%s;SNPS=%s\n" % (tmp[0], tmp[1], tmp[2], block_index, tmp[4], tmp[5]))
+                        elif output_format == "bed":
+                            out_fd.write("%s\t%s\t%s\tHB%i\t%s\t%s\n" % (tmp[0], tmp[1], tmp[2], block_index, tmp[4], tmp[5]))
                         block_index += 1
 
 
