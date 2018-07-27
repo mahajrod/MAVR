@@ -150,8 +150,9 @@ class LongRanger(Tool):
                           max_scaffold_length=527000000, max_scaffold_number=500,
                           polyN_len=500, coord_file=None, symbols_to_replace_list=[":"]):
         """
-        Diploid genome — phasing algorithm currently assumes 2 haplotypes
-        500 contigs or fewer — if your assembly has more than 500 contigs, concatenate smaller contigs together with 500 N's separating each original contig, until there are fewer than 500 contigs total
+        Diploid genome - phasing algorithm currently assumes 2 haplotypes
+        500 contigs or fewer - if your assembly has more than 500 contigs, concatenate smaller contigs together
+        with 500 Ns separating each original contig, until there are fewer than 500 contigs total
         All contigs must be no more than 2^29-1 bp, or 528Mb, in length; this is a limitation of BAM index file format
         All contigs must have no colons or spaces in their names.
         """
