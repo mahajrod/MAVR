@@ -10,7 +10,7 @@ from Routines.Functions import check_path
 
 class CatVariants(JavaTool):
     def __init__(self,  java_path="", max_threads=4, jar_path="", max_memory=None, timelog="tool_time.log"):
-        JavaTool.__init__(self, "GenomeAnalysisTK.jar -T CatVariants", java_path=java_path,
+        JavaTool.__init__(self, "GenomeAnalysisTK.jar -T org.broadinstitute.gatk.tools.CatVariants", java_path=java_path,
                           max_threads=max_threads, jar_path=jar_path, max_memory=max_memory,
                           timelog=timelog)
 
