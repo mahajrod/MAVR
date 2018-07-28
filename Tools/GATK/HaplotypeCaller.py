@@ -88,7 +88,7 @@ class HaplotypeCaller(JavaTool):
 
     def parallel_gvcf_call(self, reference, alignment, output_dir, output_prefix,
                            genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
-                           stand_call_conf=30, max_region_length=1000000, max_seqs_per_region=500,
+                           stand_call_conf=30, max_region_length=1000000, max_seqs_per_region=100,
                            length_dict=None, parsing_mode="parse", region_list=None, ):
         self.safe_mkdir(output_dir)
 
