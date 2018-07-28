@@ -1,6 +1,7 @@
 __author__ = 'mahajrod'
 
 from Tools.GATK.PrintReads import PrintReads
+from Tools.GATK.CatVariants import CatVariants
 from Tools.GATK.GenotypeGVCFs import GenotypeGVCFs
 from Tools.GATK.IndelRealigner import IndelRealigner
 from Tools.GATK.SelectVariants import SelectVariants
@@ -17,6 +18,7 @@ from Tools.GATK.FastaAlternateReferenceMaker import FastaAlternateReferenceMaker
 
 
 PrintReads = PrintReads()
+CatVariants = CatVariants()
 GenotypeGVCFs = GenotypeGVCFs()
 IndelRealigner = IndelRealigner()
 SelectVariants = SelectVariants()
