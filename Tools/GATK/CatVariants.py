@@ -39,5 +39,5 @@ class CatVariants(JavaTool):
         """
         options = self.parse_options(reference, gvcf_list, output, input_is_sorted)
 
-        self.execute(options)
+        self.execute(options, runtype="cp")
 
