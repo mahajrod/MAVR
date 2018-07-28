@@ -7,7 +7,12 @@ import multiprocessing as mp
 
 from collections import OrderedDict
 
-from scipy.stats import chisqprob
+#from scipy.stats import chisqprob
+from scipy import stats
+chisqprob = lambda chisq, df: stats.chi2.sf(chisq, df)
+
+
+#import scipy.stats.distributions.chi2.sf as chisqprob
 from statsmodels.sandbox.stats.multicomp import fdrcorrection0
 
 from Tools.Abstract import Tool

@@ -16,8 +16,9 @@ parser.add_argument("-g", "--output_format", action="store", dest="output_format
                     help="Format of output sequence file")
 parser.add_argument("-p", "--parsing_mode", action="store", dest="parsing_mode",
                     default="parse", help="Parsing mode. Allowed: parse(default), index, index_db")
-
+parser.add_argument("-a", "--alphabet", action="store", dest="alphabet",
+                    help="Sequence alphabet. Default: not set")
 args = parser.parse_args()
 
 SequenceConverters.convert_sequences(args.input, args.input_format, args.output, args.output_format,
-                                     parsing_mode=args.parsing_mode, input_index="tmp.idx")
+                                     parsing_mode=args.parsing_mode, input_index="tmp.idx", alphabet=args.alphabet)

@@ -17,6 +17,7 @@ from Bio.Seq import Seq, MutableSeq
 from Bio.Data import CodonTable
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
+from Bio.Alphabet import IUPAC
 
 from CustomCollections.GeneralCollections import TwoLvlDict, SynDict, IdList, IdSet
 from Routines.File import FileRoutines
@@ -94,6 +95,69 @@ class SequenceRoutines(FileRoutines):
                         "%s/%s_%i.fasta" % (output_dir, out_prefix, split_index), format="fasta")
         if index_file:
             os.remove(index_file)
+
+    def prepare_region_list_by_length(self, max_length=1000000, max_seq_number=500,
+                                      length_dict=None, reference=None, parsing_mode="parse", output_dir=None):
+
+        len_dict = length_dict if length_dict else self.get_lengths(record_dict=self.parse_seq_file(reference,
+                                                                                                    mode=parsing_mode),
+                                                                    out_file=None,
+                                                                    close_after_if_file_object=False)
+        max_length_soft_threshold = int(1.5 * max_length)
+        region_list = []
+
+        remnant_seq_list = []
+        remnant_seq_length = 0
+
+        for region in len_dict:
+            if len(remnant_seq_list) == max_seq_number:
+                region_list.append(remnant_seq_list)
+                remnant_seq_list = []
+                remnant_seq_length = 0
+
+            if len_dict[region] > max_length:
+                points = np.arange(0, len_dict[region], max_length)
+                if len(points) > 1:
+                    for i in range(0, len(points) - 1):
+                        region_list.append([[region, points[i] + 1, points[i+1]]])
+                    remnant = [region, points[-1], len_dict[region]]
+                    remnant_length = len_dict[region] - points[-1] + 1
+                    if remnant_length + max_length <= max_length_soft_threshold:
+                        region_list[-1][0][2] = len_dict[region]
+                        remnant = None
+                        remnant_length = 0
+                else:
+                    remnant = [region, 1, length_dict[region]]
+                    remnant_length = length_dict[region]
+
+            else:
+                remnant = [region, 1, length_dict[region]]
+                remnant_length = length_dict[region]
+
+            if remnant is None:
+                continue
+
+            if remnant_seq_length + remnant_length <= max_length_soft_threshold:
+                remnant_seq_list.append(remnant)
+                remnant_seq_length += remnant_length
+            else:
+                region_list.append(remnant_seq_list)
+                remnant_seq_list = [remnant]
+                remnant_seq_length = remnant_length
+
+        if output_dir:
+            self.safe_mkdir(output_dir)
+            index = 1
+            for regions in region_list:
+                with open("region_%i.t" % index , "w") as out_fd:
+                    for region in regions:
+                        out_fd.write("%s\t%s\t%s\n" % (region[0], region[1], region[2]))
+
+                index += 1
+        return region_list
+
+
+
 
     def split_fasta_by_seq_len(self, input_fasta, output_dir, max_len_per_file=None, output_prefix=None,
                                parsing_mode="parse", index_file='temp.idx'):
@@ -212,7 +276,7 @@ class SequenceRoutines(FileRoutines):
             length_list.append((record_id, len(record_dict[record_id])))
             #lengths_dict[record_id] = len(record_dict[record_id])
 
-        length_list.sort(key=lambda s:s[1], reverse=True)
+        length_list.sort(key=lambda s: s[1], reverse=True)
         lengths_dict = SynDict(length_list)
         if out_file:
             lengths_dict.write(out_file, header=False, separator="\t", splited_values=False, values_separator=",",

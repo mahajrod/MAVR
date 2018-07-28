@@ -14,6 +14,20 @@ class HaplotypeCaller(JavaTool):
                           max_threads=max_threads, jar_path=jar_path, max_memory=max_memory,
                           timelog=timelog)
 
+    @staticmethod
+    def parse_options_for_parallel_run(reference, alignment, genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
+                                       stand_call_conf=30, gvcf_mode=False):
+
+        options = " -R %s" % reference
+        options += " -I %s" % alignment
+        options += " --genotyping_mode %s" % genotyping_mode if genotyping_mode else ""
+        options += " --output_mode %s" % output_mode if output_mode else ""
+        #options += " -stand_emit_conf %i" % stand_emit_conf
+        options += " -stand_call_conf %i" % stand_call_conf
+        options += " --emitRefConfidence GVCF" if gvcf_mode else ""
+
+        return options
+
     def parse_options(self, reference, alignment, output, genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
                       stand_call_conf=30, gvcf_mode=False, include_region_id_file=None, exclude_region_id_file=None):
 
@@ -71,6 +85,37 @@ class HaplotypeCaller(JavaTool):
                                      exclude_region_id_file=exclude_region_id_file)
 
         self.execute(options)
+
+    def parallel_gvcf_call(self, reference, alignment, output_dir, output_prefix,
+                           genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
+                           stand_call_conf=30, max_region_length=1000000, max_seqs_per_region=500,
+                           length_dict=None, parsing_mode="parse", region_list=None, ):
+        self.safe_mkdir(output_dir)
+
+        region_list = self.prepare_region_list_by_length(max_length=max_region_length,
+                                                         max_seq_number=max_seqs_per_region,
+                                                         length_dict=length_dict,
+                                                         reference=None if length_dict is not None else reference,
+                                                         parsing_mode=parsing_mode,
+                                                         output_dir="%s/regions/" % output_dir) if region_list is None else region_list
+
+        options = self.parse_options_for_parallel_run(reference, alignment,
+                                                      genotyping_mode=genotyping_mode,
+                                                      output_mode=output_mode,
+                                                      stand_call_conf=stand_call_conf,
+                                                      gvcf_mode=True)
+        options_list = []
+
+        output_index = 1
+        for regions in region_list:
+            region_options = ""
+            for region in regions:
+                region_options += " -L %s:%i-%i" % (region[0], region[1], region[2])
+                region_options += " -o %s/%s_%i.g.vcf" % (output_dir, output_prefix, output_index)
+                options_list.append(options + region_options)
+                output_index += 1
+
+        self.parallel_execute(options_list)
 
     def variant_call(self,
                      alignment,

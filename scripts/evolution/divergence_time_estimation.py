@@ -48,7 +48,7 @@ parser.add_argument("--rgene_gamma_alpha", action="store", dest="rgene_gamma_alp
                     help="Specifies the shape(alpha) parameter in the gamma prior for the overall rate parameter mu"
                          "Default: 2")
 parser.add_argument("--rgene_gamma_beta", action="store", dest="rgene_gamma_beta", type=float, default=2.0,
-                    help="Specifies the scale(beta) parameterin the gamma prior for the overall rate parameter mu"
+                    help="Specifies the scale(beta) parameter in the gamma prior for the overall rate parameter mu"
                          "Default: 2")
 parser.add_argument("-d", "--directory_with_mcmctree_bin", action="store", dest="dir_path",
                     help="Path to directory with mcmctree binary")
