@@ -156,9 +156,6 @@ class SequenceRoutines(FileRoutines):
                 index += 1
         return region_list
 
-
-
-
     def split_fasta_by_seq_len(self, input_fasta, output_dir, max_len_per_file=None, output_prefix=None,
                                parsing_mode="parse", index_file='temp.idx'):
         """
