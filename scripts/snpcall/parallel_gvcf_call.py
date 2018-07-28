@@ -28,7 +28,7 @@ parser.add_argument("-m", "--memory", action="store", dest="memory", default=10,
 args = parser.parse_args()
 
 HaplotypeCaller.jar_path = args.gatk_dir
-HaplotypeCaller.path = args.path
+#HaplotypeCaller.path = args.path
 HaplotypeCaller.max_memory = args.memory
 
 HaplotypeCaller.parallel_gvcf_call(args.reference, args.alignment, args.output_dir, args.output_prefix,
