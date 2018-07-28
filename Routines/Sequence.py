@@ -144,6 +144,9 @@ class SequenceRoutines(FileRoutines):
                 region_list.append(remnant_seq_list)
                 remnant_seq_list = [remnant]
                 remnant_seq_length = remnant_length
+        else:
+            if remnant_seq_list:
+                region_list.append(remnant_seq_list)
 
         if output_dir:
             self.safe_mkdir(output_dir)
