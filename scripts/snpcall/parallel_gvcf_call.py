@@ -22,11 +22,15 @@ parser.add_argument("-t", "--threads", action="store", dest="threads", default=4
                     help="Number of threads. Default: 4")
 parser.add_argument("-q", "--variant_emit_quality", action="store", dest="emit_quality", default=30, type=int,
                     help="Minimum quality of variant to be emitted")
+parser.add_argument("-m", "--memory", action="store", dest="memory", default=10, type=int,
+                    help="Maximum memory to use(in gigabytes). Default: 10")
 
 args = parser.parse_args()
 
 HaplotypeCaller.jar_path(args.gatk_dir)
 HaplotypeCaller.path = args.path
+HaplotypeCaller.max_memory = args.memory
+
 HaplotypeCaller.parallel_gvcf_call(args.reference, args.alignment, args.output_dir, args.output_prefix,
                                    genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
                                    stand_call_conf=args.variant_emit_quality, max_region_length=1000000,
