@@ -137,7 +137,9 @@ class JavaTool(Tool):
                                  "Length of directory list is not equal to length of option list")
 
         else:
-            exe_string_list = [(self.check_path(self.path) if self.path else "") + command + " " + options
+            exe_string_list = [(self.check_path(self.path) if self.path else "")
+                               + " java -jar %s/%s" % (self.check_dir_path(self.jar_path) if self.jar_path else "", self.jar)
+                               + command + " " + options
                                for options in options_list]
 
         with open("exe_list.t", "a") as exe_fd:
