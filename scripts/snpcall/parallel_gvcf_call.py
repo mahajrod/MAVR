@@ -33,5 +33,5 @@ HaplotypeCaller.max_memory = args.memory
 
 HaplotypeCaller.parallel_gvcf_call(args.reference, args.alignment, args.output_dir, args.output_prefix,
                                    genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
-                                   stand_call_conf=args.variant_emit_quality, max_region_length=1000000,
+                                   stand_call_conf=args.emit_quality, max_region_length=1000000,
                                    max_seqs_per_region=500, length_dict=None, parsing_mode="parse", region_list=None)
