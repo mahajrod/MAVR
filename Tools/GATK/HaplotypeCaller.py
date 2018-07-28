@@ -104,16 +104,16 @@ class HaplotypeCaller(JavaTool):
                                                       output_mode=output_mode,
                                                       stand_call_conf=stand_call_conf,
                                                       gvcf_mode=True)
+        options += " -nct 1"
         options_list = []
 
         output_index = 1
         for regions in region_list:
-            region_options = ""
 
+            region_options = " -o %s/%s_%i.g.vcf" % (output_dir, output_prefix, output_index)
             for region in regions:
                 region_options += " -L %s:%i-%i" % (region[0], region[1], region[2])
 
-            region_options += " -o %s/%s_%i.g.vcf" % (output_dir, output_prefix, output_index)
             options_list.append(options + region_options)
             output_index += 1
 
