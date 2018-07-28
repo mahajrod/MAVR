@@ -149,7 +149,7 @@ class SequenceRoutines(FileRoutines):
             self.safe_mkdir(output_dir)
             index = 1
             for regions in region_list:
-                with open("region_%i.t" % index , "w") as out_fd:
+                with open("%sregion_%i.t" % (output_dir, index), "w") as out_fd:
                     for region in regions:
                         out_fd.write("%s\t%s\t%s\n" % (region[0], region[1], region[2]))
 
