@@ -93,13 +93,13 @@ class JavaTool(Tool):
         Tool.__init__(self, "java", path=java_path, max_threads=max_threads,
                       jar_path=jar_path, jar=jar, max_memory=max_memory, timelog=timelog)
 
-    def execute(self, options="", cmd=None, capture_output=False):
+    def execute(self, options="", cmd=None, capture_output=False, runtype="jar"):
         command = cmd if cmd is not None else ""
 
         java_string = "java"
         java_string += " -Xmx%s" % str(self.max_memory) if self.max_memory else ""
         #print (self.jar_path)
-        java_string += " -jar %s%s" % (self.check_dir_path(self.jar_path) if self.jar_path else "", self.jar)
+        java_string += " -%s %s%s" % (runtype, self.check_dir_path(self.jar_path) if self.jar_path else "", self.jar)
         java_string += " %s" % command
         java_string += " %s" % options
 
@@ -120,17 +120,17 @@ class JavaTool(Tool):
             return None
 
     def parallel_execute(self, options_list, cmd=None, capture_output=False, threads=None, dir_list=None,
-                         write_output_to_file=None, external_process_pool=None, async_run=False):
+                         write_output_to_file=None, external_process_pool=None, async_run=False, runtype="jar"):
         command = cmd if cmd is not None else self.cmd
         if dir_list:
             if isinstance(dir_list, str):
                 exe_string_list = [("cd %s && " % dir_list) + (self.check_path(self.path) if self.path else "")
-                                   + command + " -jar %s/%s" % (self.check_dir_path(self.jar_path) if self.jar_path else "", self.jar)
+                                   + command + " -%s %s/%s" % (runtype, self.check_dir_path(self.jar_path) if self.jar_path else "", self.jar)
                                    + " " + options for options in options_list]
 
             elif isinstance(dir_list, Iterable) and (len(options_list) == len(dir_list)):
                 exe_string_list = [("cd %s && " % directory) + (self.check_path(self.path) if self.path else "")
-                                   + command + " -jar %s/%s" % (self.check_dir_path(self.jar_path) if self.jar_path else "", self.jar)
+                                   + command + " -%s %s/%s" % (runtype, self.check_dir_path(self.jar_path) if self.jar_path else "", self.jar)
                                    + " " + options for options, directory in zip(options_list, dir_list)]
             else:
                 raise ValueError("Error during option parsing for parallel execution in different folders. "
@@ -138,7 +138,7 @@ class JavaTool(Tool):
 
         else:
             exe_string_list = [(self.check_path(self.path) if self.path else "")
-                               + command + " -jar %s/%s" % (self.check_dir_path(self.jar_path) if self.jar_path else "", self.jar)
+                               + command + " -%s %s/%s" % (runtype, self.check_dir_path(self.jar_path) if self.jar_path else "", self.jar)
                                + " " + options for options in options_list]
 
         with open("exe_list.t", "a") as exe_fd:
