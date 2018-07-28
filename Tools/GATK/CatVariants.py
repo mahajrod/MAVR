@@ -23,7 +23,7 @@ class CatVariants(JavaTool):
         for gvcf in gvcf_file_list:
             options += " -V %s" % gvcf
 
-        options += " -o %s" % output
+        options += " -out %s" % output
         options += " --assumeSorted" if input_is_sorted else ""
 
         return options
