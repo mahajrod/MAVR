@@ -56,7 +56,8 @@ class Tool(SequenceRoutines):
             return None
 
     def parallel_execute(self, options_list, cmd=None, capture_output=False, threads=None, dir_list=None,
-                         write_output_to_file=None, external_process_pool=None, async_run=False):
+                         write_output_to_file=None, external_process_pool=None, async_run=False,
+                         job_chunksize=1):
         command = cmd if cmd is not None else self.cmd
         if dir_list:
             if isinstance(dir_list, str):
@@ -78,7 +79,7 @@ class Tool(SequenceRoutines):
                 exe_fd.write("%s\n" % entry)
         process_pool = external_process_pool if external_process_pool else mp.Pool(threads if threads else self.threads)
 
-        results = process_pool.map_async(execute, exe_string_list) if async_run else process_pool.map(execute, exe_string_list)
+        results = process_pool.map_async(execute, exe_string_list, chunksize=job_chunksize) if async_run else process_pool.map(execute, exe_string_list, chunksize=job_chunksize)
         #process_pool.close()
         if write_output_to_file:
             with open(write_output_to_file, "w") as out_fd:
@@ -120,7 +121,8 @@ class JavaTool(Tool):
             return None
 
     def parallel_execute(self, options_list, cmd=None, capture_output=False, threads=None, dir_list=None,
-                         write_output_to_file=None, external_process_pool=None, async_run=False, runtype="jar"):
+                         write_output_to_file=None, external_process_pool=None, async_run=False, runtype="jar",
+                         job_chunksize=1):
         command = cmd if cmd is not None else self.cmd
         if dir_list:
             if isinstance(dir_list, str):
@@ -146,7 +148,7 @@ class JavaTool(Tool):
                 exe_fd.write("%s\n" % entry)
         process_pool = external_process_pool if external_process_pool else mp.Pool(threads if threads else self.threads)
 
-        results = process_pool.map_async(execute, exe_string_list) if async_run else process_pool.map(execute, exe_string_list)
+        results = process_pool.map_async(execute, exe_string_list, chunksize=job_chunksize) if async_run else process_pool.map(execute, exe_string_list, chunksize=job_chunksize)
         #process_pool.close()
         if write_output_to_file:
             with open(write_output_to_file, "w") as out_fd:
