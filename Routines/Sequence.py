@@ -127,12 +127,12 @@ class SequenceRoutines(FileRoutines):
                         remnant = None
                         remnant_length = 0
                 else:
-                    remnant = [region, 1, length_dict[region]]
-                    remnant_length = length_dict[region]
+                    remnant = [region, 1, len_dict[region]]
+                    remnant_length = len_dict[region]
 
             else:
-                remnant = [region, 1, length_dict[region]]
-                remnant_length = length_dict[region]
+                remnant = [region, 1, len_dict[region]]
+                remnant_length = len_dict[region]
 
             if remnant is None:
                 continue
