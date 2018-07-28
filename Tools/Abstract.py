@@ -125,12 +125,12 @@ class JavaTool(Tool):
         if dir_list:
             if isinstance(dir_list, str):
                 exe_string_list = [("cd %s && " % dir_list) + (self.check_path(self.path) if self.path else "")
-                                   + command + " java -jar %s/%s" % (self.check_dir_path(self.jar_path) if self.jar_path else "", self.jar)
+                                   + command + " -jar %s/%s" % (self.check_dir_path(self.jar_path) if self.jar_path else "", self.jar)
                                    + " " + options for options in options_list]
 
             elif isinstance(dir_list, Iterable) and (len(options_list) == len(dir_list)):
                 exe_string_list = [("cd %s && " % directory) + (self.check_path(self.path) if self.path else "")
-                                   + command + " java -jar %s/%s" % (self.check_dir_path(self.jar_path) if self.jar_path else "", self.jar)
+                                   + command + " -jar %s/%s" % (self.check_dir_path(self.jar_path) if self.jar_path else "", self.jar)
                                    + " " + options for options, directory in zip(options_list, dir_list)]
             else:
                 raise ValueError("Error during option parsing for parallel execution in different folders. "
@@ -138,7 +138,7 @@ class JavaTool(Tool):
 
         else:
             exe_string_list = [(self.check_path(self.path) if self.path else "")
-                               + command + " java -jar %s/%s" % (self.check_dir_path(self.jar_path) if self.jar_path else "", self.jar)
+                               + command + " -jar %s/%s" % (self.check_dir_path(self.jar_path) if self.jar_path else "", self.jar)
                                + " " + options for options in options_list]
 
         with open("exe_list.t", "a") as exe_fd:
