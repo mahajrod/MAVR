@@ -30,6 +30,7 @@ args = parser.parse_args()
 HaplotypeCaller.jar_path = args.gatk_dir
 #HaplotypeCaller.path = args.path
 HaplotypeCaller.max_memory = args.memory
+HaplotypeCaller.threads = args.threads
 
 HaplotypeCaller.parallel_gvcf_call(args.reference, args.alignment, args.output_dir, args.output_prefix,
                                    genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
