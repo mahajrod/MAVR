@@ -119,3 +119,35 @@ class JavaTool(Tool):
             os.system(exe_string)
             return None
 
+    def parallel_execute(self, options_list, cmd=None, capture_output=False, threads=None, dir_list=None,
+                         write_output_to_file=None, external_process_pool=None, async_run=False):
+        command = cmd if cmd is not None else self.cmd
+        if dir_list:
+            if isinstance(dir_list, str):
+                exe_string_list = [("cd %s && " % dir_list) + (self.check_path(self.path) if self.path else "")
+                                   + " java -jar %s/%s" % (self.check_dir_path(self.jar_path) if self.jar_path else "", self.jar)
+                                   + command + " " + options for options in options_list]
+
+            elif isinstance(dir_list, Iterable) and (len(options_list) == len(dir_list)):
+                exe_string_list = [("cd %s && " % directory) + (self.check_path(self.path) if self.path else "")
+                                   + " java -jar %s/%s" % (self.check_dir_path(self.jar_path) if self.jar_path else "", self.jar)
+                                   + command + " " + options for options, directory in zip(options_list, dir_list)]
+            else:
+                raise ValueError("Error during option parsing for parallel execution in different folders. "
+                                 "Length of directory list is not equal to length of option list")
+
+        else:
+            exe_string_list = [(self.check_path(self.path) if self.path else "") + command + " " + options
+                               for options in options_list]
+
+        with open("exe_list.t", "a") as exe_fd:
+            for entry in exe_string_list:
+                exe_fd.write("%s\n" % entry)
+        process_pool = external_process_pool if external_process_pool else mp.Pool(threads if threads else self.threads)
+
+        results = process_pool.map_async(execute, exe_string_list) if async_run else process_pool.map(execute, exe_string_list)
+        #process_pool.close()
+        if write_output_to_file:
+            with open(write_output_to_file, "w") as out_fd:
+                out_fd.write(results)
+        return results if capture_output else None
