@@ -109,11 +109,13 @@ class HaplotypeCaller(JavaTool):
         output_index = 1
         for regions in region_list:
             region_options = ""
+
             for region in regions:
                 region_options += " -L %s:%i-%i" % (region[0], region[1], region[2])
-                region_options += " -o %s/%s_%i.g.vcf" % (output_dir, output_prefix, output_index)
-                options_list.append(options + region_options)
-                output_index += 1
+
+            region_options += " -o %s/%s_%i.g.vcf" % (output_dir, output_prefix, output_index)
+            options_list.append(options + region_options)
+            output_index += 1
 
         self.parallel_execute(options_list)
 
