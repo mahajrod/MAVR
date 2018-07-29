@@ -4,7 +4,7 @@
 #SBATCH --job-name=Avent_trans_blood
 #SBATCH --ntasks=8
 #SBATCH --error=/work/toleksyk/toleksyk/errors/trimmomatic_blood.%A_%a.err
-#SBATCH --output/work/toleksyk/toleksyk/logs/trimmomatic_blood.%A_%a.out
+#SBATCH --output=/work/toleksyk/toleksyk/logs/trimmomatic_blood.%A_%a.out
 
 WORKDIR=/work/toleksyk/toleksyk/
 LOGDIR=${WORKDIR}/logs/
