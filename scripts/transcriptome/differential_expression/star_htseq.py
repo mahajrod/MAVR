@@ -113,7 +113,6 @@ cd ~/workdir/yeast/nizhnikov/good_run
                                                                         --feature_id_attribute_for_htseq Parent \
                                                                         -b all_samples_read_count.table
 """
-print args.samples_dir
 DiffExpressionPipeline.star_and_htseq(args.genome_dir, args.samples_dir, args.output_dir, args.gff_for_htseq,
                                       args.count_table_file_prefix, genome_fasta=args.genome_fasta,
                                       genome_size=args.genome_size, samples_to_handle=args.samples,

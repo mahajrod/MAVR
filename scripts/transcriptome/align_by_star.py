@@ -99,7 +99,7 @@ for sample in sample_list:
                                                                                                           filename_fragment_to_mark_se_reads=args.filename_fragment_to_mark_se_reads,
                                                                                                           input_is_se=args.input_is_se)
 
-    print "\tAligning reads..."
+    print("\tAligning reads...")
 
     STAR.align(args.genome_dir, forward_files if forward_files else se_files, reverse_read_list=reverse_files,
                annotation_gtf=args.annotation_gtf if not args.genome_fasta else None,
@@ -118,6 +118,6 @@ for sample in sample_list:
                output_unmapped_reads=args.include_unmapped_reads, output_dir=alignment_sample_dir,
                two_pass_mode=True, max_intron_length=args.max_intron_length)
 
-    print "\tIndexing bam file..."
+    print("\tIndexing bam file...")
     resulting_bam_file = "%s/Aligned.sortedByCoord.out.bam" % alignment_sample_dir
     SamtoolsV1.index(resulting_bam_file)

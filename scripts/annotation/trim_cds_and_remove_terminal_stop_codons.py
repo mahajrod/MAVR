@@ -16,5 +16,5 @@ parser.add_argument("-o", "--output", action="store", dest="output", required=Tr
                     help="Output file to write trimmed CDS")
 
 args = parser.parse_args()
-print "Using %s as stop codons" % ",".join(args.stop_codons_list)
+print("Using %s as stop codons" % ",".join(args.stop_codons_list))
 SequenceRoutines.trim_cds_and_remove_terminal_stop_codons(args.input, args.output, args.stop_codons_list)

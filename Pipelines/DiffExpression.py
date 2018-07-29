@@ -67,7 +67,7 @@ class DiffExpressionPipeline(FilteringPipeline):
             if se_files:
                 self.safe_mkdir(alignment_sample_se_dir)
 
-            print "\tAligning paired reads..."
+            print("\tAligning paired reads...")
             count_file = "%s/%s.htseq.count" % (alignment_sample_dir, sample)
             #"""
             STAR.align(genome_dir, forward_files, reverse_read_list=reverse_files, annotation_gtf=annotation_gtf,
@@ -88,10 +88,10 @@ class DiffExpressionPipeline(FilteringPipeline):
 
             alignment_file = "%s/Aligned.sortedByCoord.out.bam" % alignment_sample_dir
 
-            print "\tIndexing alignment file for paired reads..."
+            print("\tIndexing alignment file for paired reads...")
             os.system("samtools index %s" % alignment_file)
 
-            print "\tCounting paired reads aligned to features..."
+            print("\tCounting paired reads aligned to features...")
 
 
             HTSeq.count(alignment_file, gff_for_htseq, count_file, samtype="bam", order="pos",
@@ -105,7 +105,7 @@ class DiffExpressionPipeline(FilteringPipeline):
             count_pe_table[sample] = sample_counts
 
             if se_files:
-                print "\tAligning single reads..."
+                print("\tAligning single reads...")
                 count_se_file = "%s/%s.htseq.count" % (alignment_sample_se_dir, sample)
                 #"""
                 STAR.align(genome_dir, se_files, reverse_read_list=None, annotation_gtf=annotation_gtf,
@@ -126,10 +126,10 @@ class DiffExpressionPipeline(FilteringPipeline):
 
                 alignment_se_file = "%s/Aligned.sortedByCoord.out.bam" % alignment_sample_se_dir
 
-                print "\tIndexing alignment file for single reads..."
+                print("\tIndexing alignment file for single reads...")
                 os.system("samtools index %s" % alignment_se_file)
 
-                print "\tCounting single reads aligned to features..."
+                print("\tCounting single reads aligned to features...")
 
                 HTSeq.count(alignment_se_file, gff_for_htseq, count_se_file, samtype="bam", order="pos",
                             stranded_rnaseq=stranded_rnaseq, min_alignment_quality=min_alignment_quality,

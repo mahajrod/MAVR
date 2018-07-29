@@ -77,8 +77,8 @@ class MultipleAlignmentStatRecord(Record):
         alignment_array = np.array([list(rec) for rec in self.alignment], np.character, order="F")
 
         if verbose:
-            print "%i sequences in alignment" % number_of_sequences
-            print "%i columns in alignment" % alignment_length
+            print("%i sequences in alignment" % number_of_sequences)
+            print("%i columns in alignment" % alignment_length)
 
         position_presence_array = np.array([[0 for letter in rec.seq] for rec in self.alignment], int, order="F")
 

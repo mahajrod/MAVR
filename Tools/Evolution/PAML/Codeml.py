@@ -97,7 +97,6 @@ def results_extraction_listener(queue, output_file_prefix, selected_species_list
             error_fd.write("%s\t%i\n" % (result[0], result[1]))
             continue
         if result == 'finish':
-            print "AAA"
             positive_selection_dict.write("%s.all" % output_file_prefix, absent_symbol=".")
             if selected_species_list:
                 selected_species_positive_selection_dict.write("%s.selected_species" % output_file_prefix,
@@ -109,7 +108,6 @@ def results_extraction_listener(queue, output_file_prefix, selected_species_list
             if selected_species_list:
                 for species in selected_species_list:
                     if species in result[1]:
-                        print species
                         if result[0] not in selected_species_positive_selection_dict:
                             selected_species_positive_selection_dict[result[0]] = {}
                         selected_species_positive_selection_dict[result[0]][species] = result[1][species]

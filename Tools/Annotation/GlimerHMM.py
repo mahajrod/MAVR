@@ -11,7 +11,7 @@ def examine_gff(gff_file):
     examiner = GFFExaminer()
     in_handle = open(gff_file)
     pprint.pprint(examiner.available_limits(in_handle))
-    print ("")
+    print("")
     in_handle.close()
 
 
@@ -37,7 +37,7 @@ def make_glimmer_training_data(seq_file, seq_index, gff_file, out_transcript_fil
                 for feature in record.features:
                     #print (feature.type)
                     if feature.type == "transcript":
-                        print (feature)
+                        print(feature)
                         print(feature.sub_features)
                         exon_fd.write(feature.id + "\n")
                         exon_fd.write(str(feature.location))

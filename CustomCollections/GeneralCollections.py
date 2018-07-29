@@ -400,7 +400,7 @@ class SynDict(OrderedDict):
             try:
                 key, value = tmp[key_index], tmp[value_index] if isinstance(value_index, int) else [tmp[index_entry] for index_entry in value_index]
             except:
-                print tmp
+                print(tmp)
                 raise ValueError
             #print key, value
             if split_values or allow_repeats_of_key:
@@ -439,8 +439,8 @@ class SynDict(OrderedDict):
                 if allow_repeats_of_key:
                     self[key] += value
                 else:
-                    print "Repeated key: %s" % key
-                    print self[key]
+                    print("Repeated key: %s" % key)
+                    print(self[key])
                     raise ValueError("Error while reading to SynDit: key is repeated")
 
         if (not isinstance(filename, file)) or close_after_if_file_object:

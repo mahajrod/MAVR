@@ -5,6 +5,8 @@ import collections
 
 from Bio import SeqIO
 from Bio import AlignIO
+from Bio.Alphabet import IUPAC
+
 from Parsers.General import parse_metamiga_fasta
 from Routines.Sequence import SequenceRoutines
 
@@ -85,15 +87,19 @@ class SequenceConverters(SequenceRoutines):
 
     def convert_sequences(self, input_file, input_filetype,
                           output_file, output_filetype,
-                          parsing_mode="parse", input_index="tmp.idx"):
+                          parsing_mode="parse", input_index="tmp.idx", alphabet=None):
+
         #check if input is list-like object(checking for list methods in object)
         if isinstance(input_file, collections.MutableSequence):
             input_data = input_file
         else:
             input_data = [input_file]
 
-        record_dict = self.parse_seq_file(input_data, parsing_mode, format=input_filetype, index_file=input_index)#SeqIO.index_db(input_index, input_data, input_filetype)
-        SeqIO.write(record_dict.values(), output_file, output_filetype)
+        alphab = eval("IUPAC.%s" % alphabet) if alphabet is not None else None
+
+        #record_dict = self.parse_seq_file(input_data, parsing_mode, format=input_filetype, index_file=input_index)#SeqIO.index_db(input_index, input_data, input_filetype)
+        #SeqIO.write(record_dict.values(), output_file, output_filetype, alphabet=alphab)
+        SeqIO.convert(input_file, input_filetype, output_file, output_filetype, alphabet=alphab)
         if parsing_mode == "index_db":
             os.remove(input_index)
 

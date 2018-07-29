@@ -112,7 +112,7 @@ class SNPCallPipeline(Pipeline):
                     filtered_out_scaffolds_file, format="fasta")
         SeqIO.write(self.record_by_id_generator(reference_dict, IdSet(reference_dict.keys()) - scaffold_to_remove),
                     filtered_scaffolds_file, format="fasta")
-        print "Total scaffolds\t%i\nRemoved\t%i\n" % (len(reference_dict), len(scaffold_to_remove))
+        print("Total scaffolds\t%i\nRemoved\t%i\n" % (len(reference_dict), len(scaffold_to_remove)))
 
     def prepare_dirs(self, sample_list, outdir="./", include_alignment_dir=False):
         dir_dict = {

@@ -271,7 +271,7 @@ class FilteringPipeline(Pipeline):
                     os.system("ln %s %s" % (coockie_trimmomatic_filtered_se_reads, final_se_reads))
                 filtering_statistics[sample]["pairs_survived_after_filtration,%"] = float("%.2f" % (float(trimmomatic_report.stats["surviving" if input_is_se else "both_surviving"]) / filtering_statistics[sample]["raw_pairs"] * 100))
 
-            print filtering_statistics.table_form()
+            print(filtering_statistics.table_form())
 
             if remove_intermediate_files:
                 shutil.rmtree(merged_raw_sample_dir)
@@ -322,7 +322,7 @@ class FilteringPipeline(Pipeline):
         #filtering_statistics = TwoLvlDict()
 
         for sample in sample_list:
-            print "Handling sample %s" % sample
+            print("Handling sample %s" % sample)
             #filtering_statistics[sample] = OrderedDict()
             merged_raw_sample_dir = "%s/%s/" % (merged_raw_dir, sample)
 

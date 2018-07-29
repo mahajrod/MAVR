@@ -23,6 +23,5 @@ parser.add_argument("-d", "--description_fields", action="store",
 args = parser.parse_args()
 
 value_list = IdList(filename=args.value_file)
-print value_list
 AnnotationsRoutines.extract_gff_records_by_description_value(args.input_gff, args.output_gff, args.field_id_list, value_list,
                                                 retain_comments=False)

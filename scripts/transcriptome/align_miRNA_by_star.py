@@ -101,7 +101,7 @@ for sample in sample_list:
     FileRoutines.safe_mkdir(alignment_sample_dir)
     filetypes, forward_files, reverse_files, se_files = FileRoutines.make_lists_forward_and_reverse_files(sample_dir)
 
-    print "\tAligning reads..."
+    print("\tAligning reads...")
 
     STAR.align_miRNA(args.genome_dir, se_files,
                      output_dir=alignment_sample_dir,
@@ -112,6 +112,6 @@ for sample in sample_list:
                      max_number_of_mismatches=args.max_number_of_mismatches,
                      max_relative_number_of_mismatches=args.max_relative_number_of_mismatches)
 
-    print "\tIndexing bam file..."
+    print("\tIndexing bam file...")
     resulting_bam_file = "%s/Aligned.sortedByCoord.out.bam" % alignment_sample_dir
     SamtoolsV1.index(resulting_bam_file)

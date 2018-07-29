@@ -592,10 +592,10 @@ class AUGUSTUS(Tool):
                 else:
                     intron_support_list.append(intron_support_tmp[0] / intron_support_tmp[1] * 100)
 
-        print len(total_support_list)
-        print len(cds_support_list)
-        print len(intron_support_list)
-        print intron_support_list.count(-1)
+        print(len(total_support_list))
+        print(len(cds_support_list))
+        print(len(intron_support_list))
+        print(intron_support_list.count(-1))
         DrawingRoutines.draw_heatmap_and_three_percent_histograms(total_support_list, cds_support_list,
                                                                   intron_support_list, output_prefix, figsize=(8, 8),
                                                                   extensions=("png", "svg"))

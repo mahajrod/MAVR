@@ -94,7 +94,6 @@ with open(args.input, "r") as in_fd:
                 low_melting_temp_count += 1
                 continue
 
-            print "bbbbb"
             out_fd.write("%s\t%.2f\t%.2f\t%.2f\t%.2f\t%.2f\n" % (striped, min_GC_content, max_GC_content,
                                                                  melting_temperatures[0], melting_temperatures[1],
                                                                  melting_difference))

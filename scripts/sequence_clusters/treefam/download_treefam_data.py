@@ -84,7 +84,6 @@ for fam_id in family_ids:
         if os.path.getsize("%s%s.hmm" % (args.output_dir, fam_id)) == 0:
             absent_hmm_list.append(fam_id)
 
-print absent_alignment_list
 if absent_alignment_list:
     absent_alignment_list.write("absent_alignments.ids")
     print("%i alignments were not downloaded" % len(absent_alignment_list))

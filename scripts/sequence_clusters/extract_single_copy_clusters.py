@@ -27,4 +27,4 @@ single_copy_clusters = SequenceClusterRoutines.extract_single_copy_clusters_from
                                                                 label_elements=args.label, separator=args.separator,
                                                                 label_position=args.label_position)
 
-print "Was found %i single-copy clusters" % len(single_copy_clusters)
+print("Was found %i single-copy clusters" % len(single_copy_clusters))

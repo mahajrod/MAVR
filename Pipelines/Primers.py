@@ -297,7 +297,7 @@ class STRPrimerPipeline(Pipeline):
             primer3_monomer_len_results.write_table_form2_short("%s.%s.table_form2_short.res" % (filtered_results_file_splited_by_len_prefix, monomer_length))
 
             stat_string = "STR monomer length %s bp: %i repeats with primers" % (str(monomer_length), len(primer3_monomer_len_results.records))
-            print stat_string
+            print(stat_string)
 
             stat_fd.write(stat_string + "\n")
 

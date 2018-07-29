@@ -105,7 +105,7 @@ class STAR(Tool):
             FileRoutines.safe_mkdir(alignment_sample_dir)
             filetypes, forward_files, reverse_files, se_files = FileRoutines.make_lists_forward_and_reverse_files(sample_dir)
         
-            print "\tAligning reads..."
+            print("\tAligning reads...")
         
             STAR.align(genome_dir, forward_files, reverse_read_list=reverse_files,
                        annotation_gtf=annotation_gtf if not genome_fasta else None,
@@ -124,7 +124,7 @@ class STAR(Tool):
                        output_unmapped_reads=output_unmapped_reads, output_dir=alignment_sample_dir,
                        two_pass_mode=two_pass_mode, max_intron_length=max_intron_length)
         
-            print "\tIndexing bam file..."
+            print("\tIndexing bam file...")
             resulting_bam_file = "%s/Aligned.sortedByCoord.out.bam" % alignment_sample_dir
             SamtoolsV1.index(resulting_bam_file)
 
