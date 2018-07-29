@@ -17,8 +17,14 @@ parser.add_argument("-i", "--input_gvcf_list", action="store", dest="input_gvcf_
                     help="Comma-separated list of gvcf files to combine",  required=True,)
 parser.add_argument("-s", "--sorted", action="store_true", dest="sorted", default=False,
                     help="Input gvcf are coordinate sorted. Default: False")
+parser.add_argument("-e", "--extension_list", action="store", dest="extension_list", default=["g.vcf",],
+                    type=lambda s: s.split(","),
+                    help="Comma-separated list of extension of GVCF files. Default: g.vcf")
+
 args = parser.parse_args()
 
 CatVariants.jar_path = args.gatk_dir
 
-CatVariants.combine_gvcf(args.reference, args.input_gvcf_list, args.output, input_is_sorted=args.sorted)
+CatVariants.combine_gvcf(args.reference, args.input_gvcf_list, args.output,
+                         input_is_sorted=args.sorted,
+                         extension_list=args.extension_list)

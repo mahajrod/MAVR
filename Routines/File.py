@@ -137,26 +137,24 @@ class FileRoutines:
                                                expression=None, recursive=False):
         return self.make_list_of_path_to_files(input_string.split(file_separator), expression=expression, recursive=recursive)
 
-    """
-    def make_list_of_path_to_files(self, list_of_dirs_and_files, expression=None):
-        pathes_list = []
-        list_of_objects = [list_of_dirs_and_files] if isinstance(list_of_dirs_and_files, str) else \
-            list_of_dirs_and_files if isinstance(list_of_dirs_and_files, Iterable) else None
-        if not list_of_dirs_and_files:
-            raise ValueError("No input directory or file were set")
-        for entry in list_of_objects:
-            #print entry
-            if os.path.isdir(entry):
-                files_in_dir = sorted(filter(expression, os.listdir(entry)) if expression else os.listdir(entry))
-                for filename in files_in_dir:
-                    pathes_list.append("%s%s" % (self.check_path(entry), filename))
-            elif os.path.exists(entry):
-                pathes_list.append(os.path.abspath(entry))
-            else:
-                print("%s does not exist" % entry)
+    @staticmethod
+    def check_extension(filename, extension_list=[]):
+        if extension_list:
+            for extension in extension_list:
+                if extension == filename[-len(extension):]:
+                    return True
+        else:
+            return True
 
-        return pathes_list
-    """
+    def make_list_of_path_to_files_by_extension(self, list_of_dirs_and_files, extension_list=[], recursive=False,
+                                                return_absolute_paths=True):
+
+        def check_extension(filename):
+            return self.check_extension(filename, extension_list)
+
+        return self.make_list_of_path_to_files(list_of_dirs_and_files, expression=check_extension,
+                                               recursive=recursive, return_absolute_paths=return_absolute_paths)
+
     @staticmethod
     def read_synonyms_dict(filename, header=False, separator="\t",
                            split_values=False, values_separator=",", key_index=0, value_index=1):

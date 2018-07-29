@@ -36,4 +36,5 @@ HaplotypeCaller.threads = args.threads
 HaplotypeCaller.parallel_gvcf_call(args.reference, args.alignment, args.output_dir, args.output_prefix,
                                    genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
                                    stand_call_conf=args.emit_quality, max_region_length=500000,
-                                   max_seqs_per_region=25, length_dict=None, parsing_mode="parse", region_list=None)
+                                   max_seqs_per_region=25, length_dict=None, parsing_mode="parse", region_list=None,
+                                   )
