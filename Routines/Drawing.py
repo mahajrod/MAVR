@@ -92,7 +92,7 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
                     # add check for case when centromere line is first in gff file
 
                     chr_dict[feature_scaffold]["Centromere"] = [int(feature_start), int(feature_end)]
-        print chr_dict
+        #print chr_dict
         if genes_gff:
             with open(genes_gff, "r") as gene_fd:
                 for line in gene_fd:
@@ -108,8 +108,8 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
 
                     entry_id = None
                     alias_list = []
-                    print "AAAAAAAAAAA"
-                    print line
+                    #print "AAAAAAAAAAA"
+                    #print line
                     for entry in description_list:
                         if entry[:len(id_field_in_gff)+1] == ("%s=" % id_field_in_gff):
                             entry_id = entry[len(id_field_in_gff)+1:]
@@ -117,13 +117,13 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
                         for alias_id in alias_fields_in_gff:
                             if entry[:len(alias_id)+1] == ("%s=" % alias_id):
                                 alias_list += entry.split("=")[1].split(",")
-                    print entry_id
+                    #print entry_id
                     if not entry_id:
                         continue
 
                     chr_dict[feature_scaffold]["Genes"][entry_id] = [int(feature_start), int(feature_end), feature_strand, alias_list]
 
-        print chr_dict
+        #print chr_dict
         centromere_radius = int(max_chr_len/100)
         distance_between_chromosome_and_gene = centromere_radius * 2
         distance_between_chromosomes = centromere_radius * 8
@@ -142,7 +142,7 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
                                                            facecolor=chromosome_color))
             else:
                 # left arm of chromosome
-                print "Centromere"
+                #print "Centromere"
                 #print "Left arm"
                 #print (1, chromosome_position), chr_dict[chromosome]["Centromere"][0], chromosome_width
 
@@ -167,10 +167,10 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
 
             if chr_dict[chromosome]["Genes"]:
                 for gene in chr_dict[chromosome]["Genes"]:
-                    print "Adding feature %s: %i-%i, %s. Aliases: %s" % (gene, chr_dict[chromosome]["Genes"][gene][0],
+                    print("Adding feature %s: %i-%i, %s. Aliases: %s" % (gene, chr_dict[chromosome]["Genes"][gene][0],
                                                                          chr_dict[chromosome]["Genes"][gene][1],
                                                                          chr_dict[chromosome]["Genes"][gene][2],
-                                                                         ",".join(chr_dict[chromosome]["Genes"][gene][3]))
+                                                                         ",".join(chr_dict[chromosome]["Genes"][gene][3])))
                     gene_start = chr_dict[chromosome]["Genes"][gene][0]
                     if "Centromere" in chr_dict[chromosome]:
                         if gene_start >= chr_dict[chromosome]["Centromere"][1]:
@@ -309,7 +309,7 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
             i = 0
             for feature in features:
                 if (feature.type == "domen") or (feature.type == "domain"):
-                    print feature.id, feature.location
+                    #print feature.id, feature.location
                     if domain_style == "rectangle":
                         fragment = Rectangle((feature.location.start, start_y), len(feature)-1, protein_height, fill=False,
                                              facecolor="grey", edgecolor=domen_colors[i]) #edgecolor="green",
@@ -321,7 +321,7 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
 
         for feature in features:
             if feature.type == "domen":
-                print feature.id, feature.location
+                #print feature.id, feature.location
                 subplot.annotate(feature.id, xy=(feature.location.start + len(feature)/2, gap_y_start + protein_height),
                                  xycoords='data', fontsize=label_fontsize,
                                  xytext=(0, 1.5 * gap_line_y_shift), textcoords='offset points', ha='center', va='top')
@@ -435,7 +435,7 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
         bins = np.linspace(0, 100, 21)
 
         subplot = plt.subplot(2, 2, 4)
-        print bins
+        #print bins
         counts, xedges, yedges, image = plt.hist2d(second_histo_values,
                                                    third_histo_values,
                                                    bins=(bins, bins),

@@ -213,7 +213,7 @@ class MtDNARoutines(SequenceRoutines):
         nucleotide_exception_records = []
         protein_exception_records = []
         for record_id in record_dict:
-            print record_id
+            #print record_id
             if record_id in black_list:
                 continue
             nucleotide_record_features = {}

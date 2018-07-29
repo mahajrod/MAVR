@@ -242,8 +242,8 @@ class AssemblySummaryList(list):
     def filter_ambiguous_species(self, verbose=False):
         if verbose:
             for summary in self:
-                print "\tSpeciesName\tIsAmbigious"
-                print "\t%s\t%s" % (str(summary.SpeciesName), str(summary.ambiguous_species()))
+                print("\tSpeciesName\tIsAmbigious")
+                print("\t%s\t%s" % (str(summary.SpeciesName), str(summary.ambiguous_species())))
         return self.filter(lambda summary: not summary.ambiguous_species())
 
     def filter_by_integrity(self, min_scaffold_n50=None, min_contig_n50=None, max_scaffold_l50=None,
@@ -329,7 +329,7 @@ class NCBIRoutines(SequenceRoutines):
         with open(log_file, "a") as log_fd:
             log_fd.write(curl_string + "\n")
         if verbose:
-            print curl_string
+            print(curl_string)
         os.system(curl_string)
 
     def get_gene_sequences(self, email, query, retmax=100000, output_directory=None):
@@ -414,10 +414,10 @@ class NCBIRoutines(SequenceRoutines):
         protein_temp_dir = "%s%s_proteins" % (output_directory, temp_dir_prefix)
         number_of_ids = len(protein_id_list)
 
-        print "Total %i ids" % number_of_ids
+        print("Total %i ids" % number_of_ids)
 
         for directory in transcript_temp_dir, protein_temp_dir:
-            print directory
+            print(directory)
             self.safe_mkdir(directory)
         pep_file = "%s.pep.genbank" % output_prefix
         transcript_file = "%s.trascript.genbank" % output_prefix
@@ -425,9 +425,9 @@ class NCBIRoutines(SequenceRoutines):
 
         ranges = np.append(np.arange(0, number_of_ids, download_chunk_size), [number_of_ids])
 
-        print "Downloading proteins..."
+        print("Downloading proteins...")
         for i in range(0, len(ranges)-1):
-            print "Downloading chunk %i" % i
+            print("Downloading chunk %i" % i)
             pep_tmp_file = "%s/chunk_%i" % (protein_temp_dir, i)
             self.efetch("protein", protein_id_list[ranges[i]:ranges[i+1]], pep_tmp_file, rettype="gb", retmode="text",
                         log_file="%s.pep.efetch.log" % output_prefix)
@@ -437,12 +437,12 @@ class NCBIRoutines(SequenceRoutines):
         peptide_dict = SeqIO.index_db("%stmp.idx" % output_directory, pep_file, format="genbank")
         downloaded_protein_ids = IdList(peptide_dict.keys())
 
-        print "%i proteins were downloaded" % len(downloaded_protein_ids)
+        print("%i proteins were downloaded" % len(downloaded_protein_ids))
         not_downloaded_proteins_ids = Tool.intersect_ids([protein_id_list], [downloaded_protein_ids], mode="only_a")
-        print "%i proteins were not downloaded" % len(not_downloaded_proteins_ids)
+        print("%i proteins were not downloaded" % len(not_downloaded_proteins_ids))
         not_downloaded_proteins_ids.write("%s.not_downloaded.ids" % output_prefix)
         downloaded_protein_ids.write("%s.downloaded.ids" % output_prefix)
-        print Tool.intersect_ids([protein_id_list], [downloaded_protein_ids], mode="count")
+        print(Tool.intersect_ids([protein_id_list], [downloaded_protein_ids], mode="count"))
 
         pep_without_transcripts = IdList()
         mito_pep_without_transcripts = IdList()
@@ -452,7 +452,7 @@ class NCBIRoutines(SequenceRoutines):
         mito_pep_to_transcript_accordance = SynDict()
         transcript_ids = IdList()
         mito_transcript_ids = IdList()
-        print "Extracting transcript ids corresponding to proteins..."
+        print("Extracting transcript ids corresponding to proteins...")
 
         for pep_id in peptide_dict:
             if keyword_for_mitochondrial_pep in peptide_dict[pep_id].annotations["source"]:
@@ -467,11 +467,11 @@ class NCBIRoutines(SequenceRoutines):
                                 print("Genbank record for %s contains several CDS features" % pep_id)
                                 mito_pep_with_several_CDS_features.append(pep_id)
                             if transcript_id in mito_transcript_ids:
-                                print "Repeated transcript id: %s" % transcript_id
+                                print("Repeated transcript id: %s" % transcript_id)
                                 continue
                             mito_transcript_ids.append(transcript_id)
                         except:
-                            print "Transcript id for %s was not found" % pep_id
+                            print("Transcript id for %s was not found" % pep_id)
                             mito_pep_without_transcripts.append(pep_id)
 
             else:
@@ -486,11 +486,11 @@ class NCBIRoutines(SequenceRoutines):
                                 print("Genbank record for %s contains several CDS features" % pep_id)
                                 pep_with_several_CDS_features.append(pep_id)
                             if transcript_id in transcript_ids:
-                                print "Repeated transcript id: %s" % transcript_id
+                                print("Repeated transcript id: %s" % transcript_id)
                                 continue
                             transcript_ids.append(transcript_id)
                         except:
-                            print "Transcript id for %s was not found" % pep_id
+                            print("Transcript id for %s was not found" % pep_id)
                             pep_without_transcripts.append(pep_id)
 
         pep_with_several_CDS_features.write("%s.pep_with_several_CDS.ids" % output_prefix)
@@ -502,16 +502,16 @@ class NCBIRoutines(SequenceRoutines):
         mito_transcript_ids.write("%s.mito.transcripts.ids" % output_prefix)
 
         number_of_transcripts = len(transcript_ids) + len(mito_transcript_ids)
-        print "%i transcripts were found" % number_of_transcripts
+        print("%i transcripts were found" % number_of_transcripts)
 
         pep_to_transcript_accordance.write("%s.pep_to_transcript.accordance" % output_prefix, splited_values=True)
         mito_pep_to_transcript_accordance.write("%s.mito.pep_to_transcript.accordance" % output_prefix, splited_values=True)
 
         transcript_ranges = np.append(np.arange(0, number_of_transcripts, download_chunk_size), [number_of_transcripts])
 
-        print "Downloading transcripts..."
+        print("Downloading transcripts...")
         for i in range(0, len(transcript_ranges)-1):
-            print "Downloading chunk %i" % i
+            print("Downloading chunk %i" % i)
             transcript_tmp_file = "%s/chunk_%i" % (transcript_temp_dir, i)
             self.efetch("nuccore", transcript_ids[transcript_ranges[i]:transcript_ranges[i+1]],
                         transcript_tmp_file, rettype="gb", retmode="text",
@@ -521,7 +521,7 @@ class NCBIRoutines(SequenceRoutines):
 
         transcript_dict = SeqIO.index_db("%stmp_1.idx" % output_directory, transcript_file, format="genbank")
 
-        print "Downloading mitochondrial transcripts..."
+        print("Downloading mitochondrial transcripts...")
         self.efetch("nuccore", mito_transcript_ids, mito_transcript_file, rettype="gb", retmode="text",
                     log_file="%s.mito.transcripts.efetch.log" % output_prefix)
         mito_transcript_dict = SeqIO.index_db("%stmp_2.idx" % output_directory, mito_transcript_file, format="genbank")
@@ -553,7 +553,7 @@ class NCBIRoutines(SequenceRoutines):
                             actual_pep_to_transcript_accordance[feature.qualifiers["protein_id"][0]] = [feature_id]
                             actual_transcript_ids.append(feature_id)
                         else:
-                            print "Corresponding protein id was not found for %s " % transcript_id
+                            print("Corresponding protein id was not found for %s " % transcript_id)
 
                         cds_records_dict[feature_id] = SeqRecord(seq=feature_seq, id=feature_id, description=description)
                         CDS_counter += 1
@@ -568,7 +568,7 @@ class NCBIRoutines(SequenceRoutines):
                             actual_pep_to_transcript_accordance[feature.qualifiers["protein_id"][0]] = [feature_id]
                             actual_transcript_ids.append(feature_id)
                         else:
-                            print "Corresponding protein id was not found for %s " % transcript_id
+                            print("Corresponding protein id was not found for %s " % transcript_id)
 
                         cds_records_dict[feature_id] = SeqRecord(seq=feature_seq, id=feature_id, description=description)
                         break
@@ -587,7 +587,7 @@ class NCBIRoutines(SequenceRoutines):
             for feature in mito_transcript_dict[transcript_id].features:
                 if feature.type == "CDS":
                     CDS_number += 1
-            print CDS_number
+            #print CDS_number
             if CDS_number > 1:
                 CDS_counter = 1
                 for feature in mito_transcript_dict[transcript_id].features:
@@ -600,7 +600,7 @@ class NCBIRoutines(SequenceRoutines):
                             actual_mito_pep_to_transcript_accordance[feature.qualifiers["protein_id"][0]] = [feature_id]
                             actual_mito_transcript_ids.append(feature_id)
                         else:
-                            print "Corresponding protein id was not found for %s " % transcript_id
+                            print("Corresponding protein id was not found for %s " % transcript_id)
                         CDS_counter += 1
                         mito_cds_records_dict[feature_id] = SeqRecord(seq=feature_seq, id=feature_id, description=description)
 
@@ -615,7 +615,7 @@ class NCBIRoutines(SequenceRoutines):
                             actual_mito_pep_to_transcript_accordance[feature.qualifiers["protein_id"][0]] = [feature_id]
                             actual_mito_transcript_ids.append(feature_id)
                         else:
-                            print "Corresponding protein id was not found for %s " % transcript_id
+                            print("Corresponding protein id was not found for %s " % transcript_id)
 
                         mito_cds_records_dict[feature_id] = SeqRecord(seq=feature_seq, id=feature_id, description=description)
                         break
@@ -633,7 +633,7 @@ class NCBIRoutines(SequenceRoutines):
         stat_string += "Downloaded transcripts\t%i\n" % (len(transcript_dict) + len(mito_transcript_dict))
         stat_string += "Valid protein and CDS pair\t%i\n" % (len(actual_pep_to_transcript_accordance) +
                                                              len(actual_mito_pep_to_transcript_accordance))
-        print stat_string
+        print(stat_string)
 
         with open("%s.stats" % output_prefix, "w") as stat_fd:
             stat_fd.write(stat_string)
@@ -703,13 +703,13 @@ temp_transcripts/                              Directory with downloaded transcr
 
         if input_type == "latin":
             for taxon in taxa_list:
-                print "Handling %s" % taxon
+                print("Handling %s" % taxon)
                 summary = Entrez.read(Entrez.esearch(db="taxonomy", term=taxon))
                 if summary:
                     id_list = summary["IdList"]
                     species_syn_dict[taxon] = []
                     for id in id_list:
-                        print "\tHandling %s" % id
+                        print("\tHandling %s" % id)
                         record = Entrez.read(Entrez.efetch(db="taxonomy", id=id, retmode="xml"))
                         #print record
                         out_file.write("%s\t%s\t%s\t%s\n" % (taxon,
@@ -721,7 +721,7 @@ temp_transcripts/                              Directory with downloaded transcr
                         #species_set.add(record[0]["Species"])
         elif input_type == "id":
             for taxon in taxa_list:
-                print "Handling %s" % taxon
+                print("Handling %s" % taxon)
                 species_syn_dict[taxon] = []
                 #print taxon
                 record = Entrez.read(Entrez.efetch(db="taxonomy", id=taxon, retmode="xml"))
@@ -747,7 +747,7 @@ temp_transcripts/                              Directory with downloaded transcr
         with open(taxonomy_file, "w") as taxa_fd:
             taxa_fd.write("#species\trank\tlatin_name\tcommon_name\tlineage\n")
             for taxon in taxa_list:
-                print "Handling %s..." % taxon
+                print("Handling %s..." % taxon)
                 summary = Entrez.read(Entrez.esearch(db="taxonomy",
                                                      term="%s[subtree] AND (%s)" % (taxon, "[rank] OR ".join(subtaxa_rank_list) if len(subtaxa_rank_list) > 4 else "%s[rank]" % subtaxa_rank_list[0]), retmax=4000))
 
@@ -757,7 +757,7 @@ temp_transcripts/                              Directory with downloaded transcr
                 if summary:
                     id_list = summary["IdList"]
                     for id in id_list:
-                        print "handling %s..." % id
+                        print("handling %s..." % id)
                         record = Entrez.read(Entrez.efetch(db="taxonomy", id=id, retmode="xml"))
                         if verbose:
                             print(record)
@@ -867,17 +867,17 @@ temp_transcripts/                              Directory with downloaded transcr
                 except URLError:
                     if attempt_counter > max_download_attempts:
                         URLError("Network problems. Maximum attempt number is exceeded")
-                    print "URLError. Retrying... Attempt %i" % attempt_counter
+                    print("URLError. Retrying... Attempt %i" % attempt_counter)
                     attempt_counter += 1
 
-            print "Were found %s species" % summary["Count"]
+            print("Were found %s species" % summary["Count"])
             #print summary
 
             taxon_stat_file = "%s/%s.stat" % (taxa_stat_dir, taxon.replace(" ", "_"))
             taxon_stat_dict = TwoLvlDict()
 
             for species_id in summary["IdList"]: #[167] :
-                print "Handling species id %s " % species_id
+                print("Handling species id %s " % species_id)
 
                 species_stat_file = "%s/%s.stat" % (stat_dir, species_id)
                 species_stat_dict = TwoLvlDict()
@@ -902,7 +902,7 @@ temp_transcripts/                              Directory with downloaded transcr
                     except URLError:
                         if attempt_counter > max_download_attempts:
                             URLError("Network problems. Maximum attempt number is exceeded")
-                        print "URLError. Retrying... Attempt %i" % attempt_counter
+                        print("URLError. Retrying... Attempt %i" % attempt_counter)
                         attempt_counter += 1
 
                 assembly_number = len(assembly_links)
@@ -923,7 +923,7 @@ temp_transcripts/                              Directory with downloaded transcr
                     continue
                 number_of_ids = len(assembly_ids)
 
-                print "\tFound %i assemblies" % number_of_ids
+                print("\tFound %i assemblies" % number_of_ids)
 
                 id_group_edges = np.arange(0, number_of_ids+1, max_ids_per_query)
 
@@ -941,7 +941,7 @@ temp_transcripts/                              Directory with downloaded transcr
 
                 summary_list = None
                 for i in range(0, number_of_id_groups):
-                    print "\tDownloading summary about assemblies %i - %i" % (id_group_edges[i]+1, id_group_edges[i+1])
+                    print("\tDownloading summary about assemblies %i - %i" % (id_group_edges[i]+1, id_group_edges[i+1]))
                     #print len(assembly_ids[id_group_edges[i]:id_group_edges[i+1]])
                     summaries = Entrez.read(Entrez.esummary(db="assembly",
                                                             id=",".join(assembly_ids[id_group_edges[i]:id_group_edges[i+1]]),
@@ -949,12 +949,12 @@ temp_transcripts/                              Directory with downloaded transcr
                     tmp_summary_list = AssemblySummaryList(entrez_summary_biopython=summaries)
                     summary_list = (summary_list + tmp_summary_list) if summary_list else tmp_summary_list
 
-                print "\tDownloaded %i" % len(summary_list)
+                print("\tDownloaded %i" % len(summary_list))
 
                 if len(summary_list) != number_of_ids:
-                    print "\tWARNING:Not all assemblies were downloaded"
+                    print("\tWARNING:Not all assemblies were downloaded")
                     """
-                    print "\tFollowing assemblies were not downloaded(ids):%s" % ",".join(set())
+                    print("\tFollowing assemblies were not downloaded(ids):%s" % ",".join(set()))
                     """
 
                 if summary_list:
@@ -990,7 +990,7 @@ temp_transcripts/                              Directory with downloaded transcr
                     #print(len(nonambiguous_species_summary_list), len(ambiguous_species_summary_list))
                     species_stat_dict[species_id]["nonambiguous_species"] = len(nonambiguous_species_summary_list)
                     species_stat_dict[species_id]["ambiguous_species"] = len(ambiguous_species_summary_list)
-                    print "\tAmbiguous species %i" % species_stat_dict[species_id]["ambiguous_species"]
+                    print("\tAmbiguous species %i" % species_stat_dict[species_id]["ambiguous_species"])
                     if nonambiguous_species_summary_list:
                         nonambiguous_species_summary_list.write(nonambiguous_species_output_file)
                     if ambiguous_species_summary_list:
@@ -1020,10 +1020,10 @@ temp_transcripts/                              Directory with downloaded transcr
                             filtered_by_integrity.write(filtered_by_integrity_file)
                         if filtered_out_by_integrity:
                             filtered_out_by_integrity.write(filtered_out_by_integrity_file)
-                        print "\tPassed integrity filters %i" % species_stat_dict[species_id]["filtered_by_integrity"]
+                        print("\tPassed integrity filters %i" % species_stat_dict[species_id]["filtered_by_integrity"])
                 species_stat_dict.write(species_stat_file)
 
-                print "\n\n"
+                print("\n\n")
 
             taxon_stat_dict.write(taxon_stat_file)
 

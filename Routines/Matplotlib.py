@@ -353,10 +353,10 @@ class MatplotlibRoutines:
         #print bin_centers
         #print len(n)
         #print len(bin_centers)
-        print "Minimum x in histogram: %f" % float(min_len)
-        print "Maximum x in histogram: %f" % float(max_len)
-        print "Bins:"
-        print bins
+        print ("Minimum x in histogram: %f" % float(min_len))
+        print ("Maximum x in histogram: %f" % float(max_len))
+        print ("Bins:")
+        print (bins)
 
         plt.xlim(xmin=min_len, xmax=max_len)
         if xlabel:
@@ -724,10 +724,10 @@ class MatplotlibRoutines:
 
         n, bins, patches = plt.hist(filtered, bins=bins)
 
-        print "Minimum x in histogram: %f" % float(min_len)
-        print "Maximum x in histogram: %f" % float(max_len)
-        print "Bins:"
-        print bins
+        print("Minimum x in histogram: %f" % float(min_len))
+        print("Maximum x in histogram: %f" % float(max_len))
+        print("Bins:")
+        print(bins)
 
         #bin_centers = (bins + ((bins[1] - bins[0])/2))[:-1]
         #print bin_centers
@@ -802,7 +802,7 @@ class MatplotlibRoutines:
                            max_y_value=None, add_max_value=True):
         if (bin_width is not None) and (bin_array is not None):
             raise ValueError("Both bin width and bin array were set")
-        print x_list
+        #print(x_list)
         min_x, max_x = min(map(min, x_list) if isinstance(x_list[0], Iterable) else x_list), \
                        max(map(max, x_list) if isinstance(x_list[0], Iterable) else x_list)
         if not(y_list is None):
@@ -866,11 +866,11 @@ class MatplotlibRoutines:
 
         counts, xedges, yedges, image = plt.hist2d(x, y, bins, cmin=minimum_counts_to_show,
                                                    norm=LogNorm() if logscaled else None)
-        print "X edges bins:"
-        print xedges
-        print "Y edges bins:"
-        print yedges
-        print counts
+        print("X edges bins:")
+        print(xedges)
+        print("Y edges bins:")
+        print(yedges)
+        print(counts)
         #print x
         #print y
         #print minimum_counts_to_show

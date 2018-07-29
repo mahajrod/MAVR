@@ -212,7 +212,7 @@ class AnnotationsRoutines(SequenceRoutines):
                             syn_lines += 1
                     #print syn_dict
                     if syn_lines > 1:
-                        print "Warning!!!. For gene with names %s were found more 1 synonym group." % ",".join(feature_aliases)
+                        print("Warning!!!. For gene with names %s were found more 1 synonym group." % ",".join(feature_aliases))
 
                     for i in range(0, len(description_list)):
                         entry_list = description_list[i].split("=")

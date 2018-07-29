@@ -1157,7 +1157,7 @@ class SequenceRoutines(FileRoutines):
 
         with open(output, "w") as out_fd:
             for record_id in accordance_dict:
-                print record_id, accordance_dict[record_id]
+                print(record_id, accordance_dict[record_id])
                 out_fd.write("%s\t%s\n" % (record_id, accordance_dict[record_id]))
 
         return accordance_dict
@@ -1808,7 +1808,7 @@ class SequenceRoutines(FileRoutines):
         ignored_protein_counter = 0
         for record_id in record_dict:
             if verbose:
-                print "Handling %s" % record_id
+                print("Handling %s" % record_id)
             for feature in record_dict[record_id].features:
 
                 if feature.type == "CDS":
@@ -1819,7 +1819,7 @@ class SequenceRoutines(FileRoutines):
                     translation = translation[:-1] if translation[-1] == stop_codon_symbol else translation
 
                     if verbose:
-                        print "\t" + protein_id
+                        print("\t" + protein_id)
                     #print gene_id
                     #print translation
                     CDS_len = len(feature.location)
@@ -1874,16 +1874,15 @@ class SequenceRoutines(FileRoutines):
                     #print output_string
 
                     if translation != CDS_translation:
-                        print "\tWARNING!!! Translational discrepancy in %s! Ignoring..." % protein_id
+                        print("\tWARNING!!! Translational discrepancy in %s! Ignoring..." % protein_id)
 
-                        print output_full_string
+                        print(output_full_string)
                         ignored_protein_counter += 1
                         continue
                     out_full_fd.write(output_full_string)
                     out_simple_fd.write(output_simple_string)
 
-        print "\n\n%i proteins were ignored due to translational discrepancy" % ignored_protein_counter
-        pass
+        print("\n\n%i proteins were ignored due to translational discrepancy" % ignored_protein_counter)
 
     @staticmethod
     def record_generator(annotations_dict, sequence_dict, feature_types_list):

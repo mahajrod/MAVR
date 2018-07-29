@@ -519,8 +519,8 @@ class FileRoutines:
                 for line in in_fd:
                     line_list = line.strip().split(separator)
                     if line_list[key_column] in column_syn_dict:
-                        print line_list[key_column]
-                        print column_syn_dict[line_list[key_column]]
+                        print (line_list[key_column])
+                        print (column_syn_dict[line_list[key_column]])
                     line_list.append(absent_value if line_list[key_column] not in column_syn_dict else "|".join(column_syn_dict[line_list[key_column]]))
                     out_fd.write(separator.join(line_list) + "\n")
 

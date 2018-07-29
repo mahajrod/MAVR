@@ -67,7 +67,7 @@ class MathRoutines:
         output_string = "Max\t%f\nMin\t%f\nMean\t%f\nMedian\t%f\nStandard deviation\t%f\nVariation coefficient\t%f\n" \
                         % (maximum, minimum, mean, median, std, var_coeff)
         if verbose:
-            print output_string
+            print (output_string)
 
         if output_file:
             with open(output_file, "w") as out_fd:

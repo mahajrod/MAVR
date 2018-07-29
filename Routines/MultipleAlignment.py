@@ -43,8 +43,8 @@ class MultipleAlignmentRoutines(SequenceRoutines):
         alignment_array = np.array([list(rec) for rec in alignment], np.character, order="F")
 
         if verbose:
-            print "%i sequences in alignment" % number_of_sequences
-            print "%i columns in alignment" % alignment_length
+            print("%i sequences in alignment" % number_of_sequences)
+            print("%i columns in alignment" % alignment_length)
 
         position_presence_array = np.array([[0 for letter in rec.seq] for rec in alignment], int, order="F")
 
@@ -147,7 +147,7 @@ class MultipleAlignmentRoutines(SequenceRoutines):
             raise ValueError("Allowed number of sequences with gap is bigger than number of sequences")
         if maximum_number_of_gaps_in_column == num_of_sequences:
             if verbose:
-                print "Alignment was not filtered: allowed number of sequence with gaps is equal to number of sequences"
+                print("Alignment was not filtered: allowed number of sequence with gaps is equal to number of sequences")
             return alignment
 
         columns_without_gaps_list = []
