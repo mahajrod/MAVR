@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #SBATCH --time=100:00:00         # Run time in hh:mm:ss
-#SBATCH --mem-per-cpu=4192       # Minimum memory required per CPU (in megabytes)
+#SBATCH --mem-per-cpu=8192       # Minimum memory required per CPU (in megabytes)
 #SBATCH --job-name=Avent_trans_blood
-#SBATCH --ntasks=8
+#SBATCH --ntasks=4
 #SBATCH --error=/work/toleksyk/toleksyk/errors/trimmomatic_blood.%A_%a.err
 #SBATCH --output=/work/toleksyk/toleksyk/logs/trimmomatic_blood.%A_%a.out
 
@@ -15,9 +15,9 @@ OUTDIR=${WORKDIR}/parrots/amazona_ventralis/transcriptome/reads/filtered/blood/t
 
 SOFTDIR=${WORKDIR}/soft/
 
-module load trimmomatic/0.36
+#module load trimmomatic/0.36
 
-THREADS=8
+THREADS=1
 TRIMMOMATIC_ADAPTERS=${SOFTDIR}/Trimmomatic-0.38/adapters/TruSeq2-PE.fa
 
 mkdir -p ${OUTDIR}
