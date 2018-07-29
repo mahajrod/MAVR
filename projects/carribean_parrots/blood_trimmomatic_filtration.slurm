@@ -18,7 +18,7 @@ SOFTDIR=${WORKDIR}/soft/
 module load trimmomatic/0.36
 
 THREADS=8
-TRIMMOMATIC_ADAPTERS=${SOFT}/Trimmomatic-0.38/adapters/TruSeq2-PE.fa
+TRIMMOMATIC_ADAPTERS=${SOFTDIR}/Trimmomatic-0.38/adapters/TruSeq2-PE.fa
 
 mkdir -p ${OUTDIR}
 
