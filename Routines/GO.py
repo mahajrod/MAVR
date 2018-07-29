@@ -19,7 +19,7 @@ class GORoutines(SequenceClusterRoutines):
 
         #print "GOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"
         #print GO_list
-        print len(GO_list)
+        print (len(GO_list))
 
         extracted_entries_file = "%s.annotations" % output_prefix
 
