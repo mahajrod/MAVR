@@ -6,11 +6,13 @@
 #SBATCH --error=/work/toleksyk/toleksyk/errors/Yam_melopsitacus.%A_%a.err
 #SBATCH --output=/work/toleksyk/toleksyk/logs/Yam_melopsitacus.%A_%a.out
 
-source ${PROFILE}
+
 
 PROFILE=/home/toleksyk/toleksyk/.profile
 WORKDIR=/work/toleksyk/toleksyk/
 SOFTDIR=${WORKDIR}/soft/
+#EXONERATE_DIR
+source ${PROFILE}
 
 REFERENCE_SPECIES=melopsittacus_undulatus
 
