@@ -261,7 +261,7 @@ class SequenceClusterRoutines(SequenceRoutines):
             if skip_cluster_if_no_sequence_for_element:
                 absent_elements = self.check_absence_of_cluster_elements(cluster_dict[fam_id], protein_dict)
                 if absent_elements:
-                    print "Skipping cluster %s due to absent element(%s)" % (fam_id, ",".join(absent_elements))
+                    print("Skipping cluster %s due to absent element(%s)" % (fam_id, ",".join(absent_elements)))
                     number_of_skipped_clusters += 1
                     continue
 
@@ -278,7 +278,7 @@ class SequenceClusterRoutines(SequenceRoutines):
 
         if (len(protein_files) > 1) or (parsing_mode == "index_db"):
             os.remove("tmp.idx")
-        print "%i of %i clusters were skipped due to absent elements" % (number_of_skipped_clusters, len(cluster_dict))
+        print ("%i of %i clusters were skipped due to absent elements" % (number_of_skipped_clusters, len(cluster_dict)))
 
         return number_of_skipped_clusters
 
