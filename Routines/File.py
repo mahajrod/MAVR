@@ -130,6 +130,8 @@ class FileRoutines:
                 if expression:
                     if expression(os.path.abspath(entry)):
                         file_list.append(os.path.abspath(entry))
+                    else:
+                        print entry
                 else:
                     file_list.append(os.path.abspath(entry))
             else:
@@ -139,7 +141,9 @@ class FileRoutines:
 
     def make_list_of_path_to_files_from_string(self, input_string, file_separator=",",
                                                expression=None, recursive=False):
-        return self.make_list_of_path_to_files(input_string.split(file_separator), expression=expression, recursive=recursive)
+        return self.make_list_of_path_to_files(input_string.split(file_separator),
+                                               expression=expression,
+                                               recursive=recursive)
 
     @staticmethod
     def check_extension(filename, extension_list=[]):
