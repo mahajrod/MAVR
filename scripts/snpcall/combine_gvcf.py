@@ -34,7 +34,7 @@ args = parser.parse_args()
 
 CatVariants.jar_path = args.gatk_dir
 CatVariants.threads = args.threads
-print args.extension_list
+#print args.extension_list
 CatVariants.combine_gvcf(args.reference, args.input_gvcf_list, args.output,
                          input_is_sorted=args.sorted,
                          extension_list=args.extension_list,

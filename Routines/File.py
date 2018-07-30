@@ -74,8 +74,6 @@ class FileRoutines:
                                      readme_filename=readme_filename,
                                      readme_text=readme_text)
 
-
-
     def detect_filetype_by_extension(self, filename, filetypes_dict=None):
         filetypes = filetypes_dict if filetypes_dict else self.filetypes_dict
         directory, prefix, extension = split_filename(filename)
@@ -130,11 +128,13 @@ class FileRoutines:
                 if expression:
                     if expression(os.path.abspath(entry)):
                         file_list.append(os.path.abspath(entry))
+                        """
                         print "BBBBBBBBBBBBBB"
                         print entry
                     else:
                         print "AAAAAAAAAAA"
                         print entry
+                        """
                 else:
                     file_list.append(os.path.abspath(entry))
             else:
@@ -152,12 +152,12 @@ class FileRoutines:
     def check_extension(filename, extension_list=[]):
         if extension_list:
             for extension in extension_list:
-                print extension, filename[-len(extension):]
+                #print extension, filename[-len(extension):]
                 if extension == filename[-len(extension):]:
                     return True
         else:
-            print "CCCCCCCCCCCCCCCCC"
-            print filename
+            #print "CCCCCCCCCCCCCCCCC"
+            #print filename
             return True
 
         return False
@@ -166,8 +166,8 @@ class FileRoutines:
                                                 return_absolute_paths=True):
 
         def check_extension(filename):
-            print "UUUUUUUUUUUUUUU"
-            print extension_list
+            #print "UUUUUUUUUUUUUUU"
+            #print extension_list
             return self.check_extension(filename, extension_list)
 
         return self.make_list_of_path_to_files(list_of_dirs_and_files, expression=check_extension,

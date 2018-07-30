@@ -18,8 +18,8 @@ class CatVariants(JavaTool):
         options = " -R %s" % reference
 
         #gvcf_file_list = self.make_list_of_path_to_files(gvcf_list)
-        print "GGGGGGGGGGGGGGGGGGG"
-        print extension_list
+        #print "GGGGGGGGGGGGGGGGGGG"
+        #print extension_list
         gvcf_file_list = self.make_list_of_path_to_files_by_extension(gvcf_list, extension_list=extension_list,
                                                                       recursive=False, return_absolute_paths=True)
 
@@ -42,8 +42,8 @@ class CatVariants(JavaTool):
            --variant sample2.g.vcf \
            -o output.vcf
         """
-        print "YYYYYYYYYYYYYYYYYYYYYY"
-        print extension_list
+        #print "YYYYYYYYYYYYYYYYYYYYYY"
+        #print extension_list
         if len(gvcf_list) <= max_files_per_merging:
             options = self.parse_options(reference, gvcf_list, output, input_is_sorted, extension_list=extension_list)
             self.execute(options, runtype="cp")
@@ -58,7 +58,7 @@ class CatVariants(JavaTool):
             number_of_files = len(gvcf_list)
 
             bins = np.arange(0, number_of_files, max_files_per_merging)
-            print(bins)
+            #print(bins)
             if bins[-1] != number_of_files:
                 bins = np.append(bins, number_of_files)
 
@@ -67,12 +67,12 @@ class CatVariants(JavaTool):
             for i in range(0, len(bins)-1):
                 output_file = "%s/%i.g.vcf" % (iteration_dir, i)
                 output_file_list.append(output_file)
-                print(bins[i], bins[i+1])
+                #print(bins[i], bins[i+1])
 
                 options_list.append(self.parse_options(reference,
                                                        gvcf_list[bins[i]:bins[i+1]],
                                                        output_file,
-                                                       input_is_sorted, extension_list=[]))
+                                                       input_is_sorted, extension_list=extension_list))
 
             self.parallel_execute(options_list, threads=threads)
 
