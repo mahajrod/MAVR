@@ -166,6 +166,7 @@ class FileRoutines:
                                                 return_absolute_paths=True):
 
         def check_extension(filename):
+            print "UUUUUUUUUUUUUUU"
             print extension_list
             return self.check_extension(filename, extension_list)
 
