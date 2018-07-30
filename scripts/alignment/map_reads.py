@@ -51,7 +51,7 @@ parser.add_argument("-g", "--add_read_groups_by_picard", action="store_true", de
                     help="Add read groups to final bam using PICARD. Use this option if aligner don't support adding readgroups itself")
 parser.add_argument("-d", "--picard_dir", action="store", dest="picard_dir", default="",
                     help="Path to Picard directory. Required to add read groups")
-parser.add_argument("-n", "--retain_intermediate_files", action="store_true", dest="retain_temp", default=False,
+parser.add_argument("-e", "--retain_intermediate_files", action="store_true", dest="retain_temp", default=False,
                     help="Retain intermediate files")
 """
 parser.add_argument("-z", "--calculate_median_coverage", action="store_true", dest="calculate_median_coverage",
@@ -108,7 +108,7 @@ AddOrReplaceReadGroups.jar_path = args.picard_dir
 aligner.align(args.index, forward_reads_list=args.forward_reads, reverse_reads_list=args.reverse_reads,
               unpaired_reads_list=args.unpaired_reads, quality_score=args.quality, output_prefix=args.prefix,
               output_format=args.alignment_format,
-              read_group_name="reads",
+              read_group_name=args.sample_name,
               PU="x",
               SM=args.sample_name,
               platform="Illumina",

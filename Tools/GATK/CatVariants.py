@@ -32,7 +32,8 @@ class CatVariants(JavaTool):
 
         return options
 
-    def combine_gvcf(self, reference, gvcf_list, output, input_is_sorted=False, extension_list=["g.vcf",]):
+    def combine_gvcf(self, reference, gvcf_list, output, input_is_sorted=False, extension_list=["g.vcf",],
+                     tmp_dir="tmp_combine_gvcf", max_files_per_merge=50):
         """
         java -jar GenomeAnalysisTK.jar \
            -T GenotypeGVCFs \
@@ -41,7 +42,9 @@ class CatVariants(JavaTool):
            --variant sample2.g.vcf \
            -o output.vcf
         """
-        options = self.parse_options(reference, gvcf_list, output, input_is_sorted, extension_list=extension_list)
-
-        self.execute(options, runtype="cp")
+        if len(gvcf_list) <= max_files_per_merge:
+            options = self.parse_options(reference, gvcf_list, output, input_is_sorted, extension_list=extension_list)
+            self.execute(options, runtype="cp")
+        else:
+            pass
 
