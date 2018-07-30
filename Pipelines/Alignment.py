@@ -74,7 +74,7 @@ class AlignmentPipeline(Pipeline):
         for sample in samples:
             read_prefix = "%s/%s/%s%s" % (sample_dir, sample, sample, read_suffix)
             forward_reads = "%s_1.%s" % (read_prefix, read_extension)
-            reverse_reads = "%s_1.%s" % (read_prefix, read_extension)
+            reverse_reads = "%s_2.%s" % (read_prefix, read_extension)
 
             output_prefix = "%s/%s/%s" % (outdir, sample, sample)
 
