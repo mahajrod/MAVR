@@ -56,7 +56,7 @@ class CatVariants(JavaTool):
 
             bins = np.arange(0, number_of_files, 1)
             if bins[-1] != number_of_files:
-                bins = np.append(bins, number_of_files, 1)
+                bins = np.append(bins, number_of_files)
 
             output_file_list = []
             options_list = []
