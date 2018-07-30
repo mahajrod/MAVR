@@ -23,8 +23,6 @@ class CatVariants(JavaTool):
                                                                       recursive=False, return_absolute_paths=True)
 
         for gvcf in gvcf_file_list:
-            if ".idx" in gvcf:
-                print gvcf
             options += " -V %s" % gvcf
 
         options += " -out %s" % output
