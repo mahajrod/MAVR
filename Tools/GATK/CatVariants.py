@@ -18,7 +18,8 @@ class CatVariants(JavaTool):
         options = " -R %s" % reference
 
         #gvcf_file_list = self.make_list_of_path_to_files(gvcf_list)
-
+        print "GGGGGGGGGGGGGGGGGGG"
+        print extension_list
         gvcf_file_list = self.make_list_of_path_to_files_by_extension(gvcf_list, extension_list=extension_list,
                                                                       recursive=False, return_absolute_paths=True)
 
