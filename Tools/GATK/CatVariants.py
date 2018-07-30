@@ -42,6 +42,8 @@ class CatVariants(JavaTool):
            --variant sample2.g.vcf \
            -o output.vcf
         """
+        print "YYYYYYYYYYYYYYYYYYYYYY"
+        print extension_list
         if len(gvcf_list) <= max_files_per_merging:
             options = self.parse_options(reference, gvcf_list, output, input_is_sorted, extension_list=extension_list)
             self.execute(options, runtype="cp")
