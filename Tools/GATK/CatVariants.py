@@ -44,8 +44,15 @@ class CatVariants(JavaTool):
         """
         #print "YYYYYYYYYYYYYYYYYYYYYY"
         #print extension_list
-        if len(gvcf_list) <= max_files_per_merging:
-            options = self.parse_options(reference, gvcf_list, output, input_is_sorted, extension_list=extension_list)
+        filtered_gvcf_list = []
+        for filename in gvcf_list:
+            for extension in extension_list:
+                if extension == filename[-len(extension):]:
+                    filtered_gvcf_list.append(filename)
+                    break
+                
+        if len(filtered_gvcf_list) <= max_files_per_merging:
+            options = self.parse_options(reference, filtered_gvcf_list, output, input_is_sorted, extension_list=extension_list)
             self.execute(options, runtype="cp")
             if remove_intermediate_files:
                 shutil.rmtree(tmp_dir, ignore_errors=True)
@@ -55,7 +62,7 @@ class CatVariants(JavaTool):
             iteration_dir = "%s/iteration_%i/" % (tmp_dir, iteration)
             self.safe_mkdir(iteration_dir)
 
-            number_of_files = len(gvcf_list)
+            number_of_files = len(filtered_gvcf_list)
 
             bins = np.arange(0, number_of_files, max_files_per_merging)
             #print(bins)
@@ -76,7 +83,7 @@ class CatVariants(JavaTool):
 
                 merged_files += bins[i+1] - bins[i]
                 options_list.append(self.parse_options(reference,
-                                                       gvcf_list[bins[i]:bins[i+1]],
+                                                       filtered_gvcf_list[bins[i]:bins[i+1]],
                                                        output_file,
                                                        input_is_sorted, extension_list=extension_list))
             print("%i/%i files will be merged" % (merged_files, number_of_files))
