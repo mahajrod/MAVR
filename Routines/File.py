@@ -152,9 +152,12 @@ class FileRoutines:
     def check_extension(filename, extension_list=[]):
         if extension_list:
             for extension in extension_list:
+                print extension, filename[-len(extension):]
                 if extension == filename[-len(extension):]:
                     return True
         else:
+            print "CCCCCCCCCCCCCCCCC"
+            print filename
             return True
 
         return False
