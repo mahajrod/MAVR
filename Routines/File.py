@@ -157,6 +157,8 @@ class FileRoutines:
         else:
             return True
 
+        return False
+
     def make_list_of_path_to_files_by_extension(self, list_of_dirs_and_files, extension_list=[], recursive=False,
                                                 return_absolute_paths=True):
 
