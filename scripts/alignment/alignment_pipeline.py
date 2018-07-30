@@ -11,7 +11,7 @@ parser.add_argument("-d", "--sample_dir", action="store", dest="sample_dir", req
                     help="Directory with samples data")
 parser.add_argument("-o", "--outdir", action="store", dest="outdir", default="./",
                     help="Output directory. Default: current directory")
-parser.add_argument("-s", "--sample_list", action="store", dest="sample_list",
+parser.add_argument("-s", "--sample_list", action="store", dest="sample_list",  type=lambda s: s.split(","),
                     help="List of samples to call variants for. Default: all samplews in sample directory")
 parser.add_argument("-i", "--aligner_index", action="store", dest="index",
                     help="Aligner-specific index")
