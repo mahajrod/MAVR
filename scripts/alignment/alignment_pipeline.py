@@ -27,7 +27,7 @@ parser.add_argument("-g", "--add_read_groups_by_picard", action="store_true",
                     dest="add_read_groups_by_picard", default=False,
                     help="Add read groups to final bam using PICARD. Use this option "
                          "if aligner don't support adding readgroups itself")
-parser.add_argument("-d", "--picard_dir", action="store", dest="picard_dir", default="",
+parser.add_argument("-c", "--picard_dir", action="store", dest="picard_dir", default="",
                     help="Path to Picard directory. Required to add read groups and mark duplicates")
 parser.add_argument("-l", "--aligner_dir", action="store", dest="aligner_dir", default="",
                     help="Path to aligner directory")
