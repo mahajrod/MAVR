@@ -74,7 +74,7 @@ class CatVariants(JavaTool):
                                                        output_file,
                                                        input_is_sorted, extension_list=extension_list))
 
-            self.parallel_execute(options_list, threads=threads)
+            self.parallel_execute(options_list, threads=threads, runtype="cp")
 
             self.combine_gvcf(reference, output_file_list, output, input_is_sorted=input_is_sorted,
                               extension_list=extension_list,
