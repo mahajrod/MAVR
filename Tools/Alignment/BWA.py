@@ -45,9 +45,9 @@ class BWA(Tool):
         if (not forward_reads_list) and (not reverse_reads_list):
             raise ValueError("No read files were given")
 
-        reads = forward_reads_list[0]
+        reads = forward_reads_list if isinstance(forward_reads_list, str) else  forward_reads_list[0]
         if reverse_reads_list:
-            reads += " %s" % reverse_reads_list[0]
+            reads += " %s" % reverse_reads_list[0] if isinstance(reverse_reads_list, str) else reverse_reads_list[0]
 
         options = " -t %i" % self.threads
         options += " %s" % index
