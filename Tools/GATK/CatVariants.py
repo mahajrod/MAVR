@@ -60,19 +60,26 @@ class CatVariants(JavaTool):
             bins = np.arange(0, number_of_files, max_files_per_merging)
             #print(bins)
             if bins[-1] != number_of_files:
-                bins = np.append(bins, number_of_files)
+                if number_of_files - bins[-1] < 2:
+                    bins[-1] = number_of_files
+                else:
+                    bins = np.append(bins, number_of_files)
 
             output_file_list = []
             options_list = []
+
+            merged_files = 0
             for i in range(0, len(bins)-1):
                 output_file = "%s/%i.g.vcf" % (iteration_dir, i)
                 output_file_list.append(output_file)
                 #print(bins[i], bins[i+1])
 
+                merged_files += bins[i+1] - bins[i]
                 options_list.append(self.parse_options(reference,
                                                        gvcf_list[bins[i]:bins[i+1]],
                                                        output_file,
                                                        input_is_sorted, extension_list=extension_list))
+            print("%i/%i files will be merged" % (merged_files, number_of_files))
 
             self.parallel_execute(options_list, threads=threads, runtype="cp")
 
