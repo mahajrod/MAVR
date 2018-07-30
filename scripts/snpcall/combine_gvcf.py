@@ -13,7 +13,8 @@ parser.add_argument("-r", "--reference", action="store", dest="reference", requi
                     help="Fasta with reference genome")
 parser.add_argument("-g", "--gatk_directory", action="store", dest="gatk_dir", default="",
                     help="Directory with GATK jar")
-parser.add_argument("-i", "--input_gvcf_list", action="store", dest="input_gvcf_list", type=lambda s: s.split(","),
+parser.add_argument("-i", "--input_gvcf_list", action="store", dest="input_gvcf_list",
+                    type=CatVariants.make_list_of_path_to_files_from_string,
                     help="Comma-separated list of gvcf files to combine",  required=True,)
 parser.add_argument("-s", "--sorted", action="store_true", dest="sorted", default=False,
                     help="Input gvcf are coordinate sorted. Default: False")
