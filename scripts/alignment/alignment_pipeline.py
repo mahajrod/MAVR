@@ -31,6 +31,12 @@ parser.add_argument("-c", "--picard_dir", action="store", dest="picard_dir", def
                     help="Path to Picard directory. Required to add read groups and mark duplicates")
 parser.add_argument("-l", "--aligner_dir", action="store", dest="aligner_dir", default="",
                     help="Path to aligner directory")
+parser.add_argument("-u", "--read_file_suffix", action="store", dest="read_file_suffix", default="",
+                    help="Suffix of read files, i.e forward read file have folling name"
+                         " <sample><read_suffix>_1.<extension> Default: ''")
+parser.add_argument("-x", "--read_file_extension", action="store", dest="read_file_extension", default="fastq",
+                    help="Extension of read files, i.e forward read file have folling name"
+                         " <sample><read_suffix>_1.<extension> Default: 'fastq'")
 
 """
 parser.add_argument("-z", "--calculate_median_coverage", action="store_true", dest="calculate_median_coverage",
@@ -57,6 +63,7 @@ AlignmentPipeline.bowtie2_dir = args.aligner_dir
 AlignmentPipeline.Picard_dir = args.picard_dir
 
 AlignmentPipeline.align(args.sample_dir, args.index, aligner=args.aligner, sample_list=args.sample_list,
-                        outdir=args.outdir, quality_score_type=args.quality, read_suffix="", read_extension="fastq",
-                        alignment_format=args.alignment_format, threads=None, mark_duplicates=True, platform="Illumina",
+                        outdir=args.outdir, quality_score_type=args.quality, read_suffix=args.read_file_suffix,
+                        read_extension=args.read_file_extension, alignment_format=args.alignment_format,
+                        threads=None, mark_duplicates=True, platform="Illumina",
                         add_read_groups_by_picard=args.add_read_groups_by_picard)
