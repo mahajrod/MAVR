@@ -127,7 +127,11 @@ class FileRoutines:
                 else:
                     file_list += files_in_dir
             elif os.path.exists(entry):
-                file_list.append(os.path.abspath(entry))
+                if expression:
+                    if expression(os.path.abspath(entry)):
+                        file_list.append(os.path.abspath(entry))
+                else:
+                    file_list.append(os.path.abspath(entry))
             else:
                 print("%s does not exist" % entry)
 
