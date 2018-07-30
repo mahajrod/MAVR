@@ -22,9 +22,6 @@ parser.add_argument("-e", "--extension_list", action="store", dest="extension_li
                     help="Comma-separated list of extension of GVCF files. Default: g.vcf")
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=4, type=int,
                     help="Number of threads. Default: 4")
-parser.add_argument("-e", "--extension_list", action="store", dest="extension_list", default=["g.vcf",],
-                    type=lambda s: s.split(","),
-                    help="Comma-separated list of extension of GVCF files. Default: g.vcf")
 parser.add_argument("-m", "--remove_intermediate_files", action="store_true", dest="remove_intermediate_files", default=False,
                     help="Remove intermediate files. Default: False")
 parser.add_argument("-d", "--tmp_dir", action="store", dest="tmp_dir", default="./tmp_combine_gvcf/",
