@@ -54,7 +54,8 @@ class CatVariants(JavaTool):
 
             number_of_files = len(gvcf_list)
 
-            bins = np.arange(0, number_of_files, 1)
+            bins = np.arange(0, number_of_files, max_files_per_merging)
+            print(bins)
             if bins[-1] != number_of_files:
                 bins = np.append(bins, number_of_files)
 
@@ -63,6 +64,7 @@ class CatVariants(JavaTool):
             for i in range(0, len(bins)-1):
                 output_file = "%s/%i.g.vcf" % (iteration_dir, i)
                 output_file_list.append(output_file)
+                print(bins[i], bins[i+1])
 
                 options_list.append(self.parse_options(reference,
                                                        gvcf_list[bins[i]:bins[i+1]],
