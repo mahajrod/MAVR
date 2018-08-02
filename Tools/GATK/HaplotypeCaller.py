@@ -66,7 +66,7 @@ class HaplotypeCaller(JavaTool):
 
         self.execute(options)
 
-    def gvcf_call(self, reference, alignment, output, genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
+    def gvcf_call(self, reference, alignment, output, genotyping_mode="DISCOVERY",
                   stand_call_conf=30, include_region_id_file=None, exclude_region_id_file=None):
         """
         java -jar GenomeAnalysisTK.jar \
@@ -87,7 +87,7 @@ class HaplotypeCaller(JavaTool):
         self.execute(options)
 
     def parallel_gvcf_call(self, reference, alignment, output_dir, output_prefix,
-                           genotyping_mode="DISCOVERY", output_mode="EMIT_VARIANTS_ONLY",
+                           genotyping_mode="DISCOVERY",
                            stand_call_conf=30, max_region_length=1000000, max_seqs_per_region=100,
                            length_dict=None, parsing_mode="parse", region_list=None, ):
         self.safe_mkdir(output_dir)
