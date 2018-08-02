@@ -101,7 +101,6 @@ class HaplotypeCaller(JavaTool):
 
         options = self.parse_options_for_parallel_run(reference, alignment,
                                                       genotyping_mode=genotyping_mode,
-                                                      output_mode=output_mode,
                                                       stand_call_conf=stand_call_conf,
                                                       gvcf_mode=True)
         options += " -nct 1"
