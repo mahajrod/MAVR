@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #SBATCH --time=100:00:00         # Run time in hh:mm:ss
-#SBATCH --mem-per-cpu=4192       # Minimum memory required per CPU (in megabytes)
+#SBATCH --mem-per-cpu=1192       # Minimum memory required per CPU (in megabytes)
 #SBATCH --job-name=Avent_trans_blood
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
