@@ -221,7 +221,7 @@ class FastQRoutines(FileRoutines):
     def find_tiles(self, fastq_file, output_file):
         with open(fastq_file, "r") as fastq_fd, (output_file if isinstance(output_file, file) else open(output_file, "w")) as out_fd:
             out_fd.write("#Machine\tRun\tFlowcellID\tLane\tTile\n")
-            tile_set = {}
+            tile_set = set()
 
             for line in fastq_fd:
                 read_name_list = self.parse_illumina_name(line)[:5]
