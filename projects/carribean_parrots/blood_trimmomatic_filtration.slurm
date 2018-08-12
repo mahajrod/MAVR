@@ -66,7 +66,7 @@ for SAMPLE in Parrot13;
 DATADIR2=${WORKDIR}/parrots/amazona_ventralis/transcriptome/reads/filtered/liver/stirka/
 OUTDIR2=${WORKDIR}/parrots/amazona_ventralis/transcriptome/reads/filtered/liver/trimmomatic/
 
-for SAMPLE in Parrot13;
+for SAMPLE in Parrot336;
     do
     mkdir -p ${OUTDIR2}/${SAMPLE}/
 
