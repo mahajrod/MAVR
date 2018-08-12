@@ -226,7 +226,7 @@ class FastQRoutines(FileRoutines):
             for line in fastq_fd:
                 read_name_tuple = self.parse_illumina_name(line)[:5]
                 tile_set.add(read_name_tuple)
-                for i in 0,1,2:
+                for i in 0, 1, 2:
                     fastq_fd.next()
 
             tile_list = list(tile_set)
@@ -236,4 +236,23 @@ class FastQRoutines(FileRoutines):
                 out_fd.write("\t".join(tile))
                 out_fd.write("\n")
 
+    def count_reads_in_tiles(self, fastq_file, output_file):
+        with open(fastq_file, "r") as fastq_fd, (output_file if isinstance(output_file, file) else open(output_file, "w")) as out_fd:
+            out_fd.write("#Machine\tRun\tFlowcellID\tLane\tTile\tReadNumber\n")
+            tile_dict = OrderedDict
 
+            for line in fastq_fd:
+                tile_name = "\t".join(self.parse_illumina_name(line)[:5])
+                if tile_name in tile_dict:
+                    tile_dict[tile_name] += 1
+                else:
+                    tile_dict[tile_name] = 1
+
+                for i in 0, 1, 2:
+                    fastq_fd.next()
+
+            for tile_name in sorted(tile_dict.keys()):
+                out_fd.write(tile_name)
+                out_fd.write("\t")
+                out_fd.write(str(tile_dict[tile_name]))
+                out_fd.write("\n")
