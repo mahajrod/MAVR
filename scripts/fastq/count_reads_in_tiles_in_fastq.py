@@ -1,0 +1,18 @@
+#!/usr/bin/env python
+__author__ = 'Sergei F. Kliver'
+
+import sys
+import argparse
+
+from Routines import FastQRoutines
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument("-i", "--input", action="store", dest="input", required=True,
+                    help="Input fastq file")
+parser.add_argument("-o", "--output", action="store", dest="output", default=sys.stdout,
+                    help="Output file with tiles. Default: stdout")
+
+args = parser.parse_args()
+
+FastQRoutines.count_reads_in_tiles(args.input, args.output)
