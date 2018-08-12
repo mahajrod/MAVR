@@ -39,6 +39,7 @@ class FastQRoutines(FileRoutines):
     @staticmethod
     def parse_illumina_name(string):
         name_list = string[1:].split(" ")
+        return name_list[0].split(":")
 
     def remove_tiles_from_fastq(self, forward_reads, black_list_forward_tiles_list,
                                 reverse_reads, black_list_reverse_tiles_list, output_prefix):
@@ -216,4 +217,23 @@ class FastQRoutines(FileRoutines):
 
         for fd in out_fd_dict:
             out_fd_dict[fd].close()
+
+    def find_tiles(self, fastq_file, output_file):
+        with open(fastq_file, "r") as fastq_fd, (output_file if isinstance(output_file, file) else open(output_file, "w")) as out_fd:
+            out_fd.write("#Machine\tRun\tFlowcellID\tLane\tTile\n")
+            tile_set = {}
+
+            for line in fastq_fd:
+                read_name_list = self.parse_illumina_name(line)[:5]
+                tile_set.add(read_name_list)
+                for i in 0,1,2:
+                    fastq_fd.next()
+
+            tile_list = list(tile_set)
+            tile_list.sort()
+
+            for tile in tile_list:
+                out_fd.write("\t".join(tile))
+                out_fd.write("\n")
+
 
