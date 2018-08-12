@@ -39,7 +39,7 @@ class FastQRoutines(FileRoutines):
     @staticmethod
     def parse_illumina_name(string):
         name_list = string[1:].split(" ")
-        return name_list[0].split(":")
+        return tuple(name_list[0].split(":"))
 
     def remove_tiles_from_fastq(self, forward_reads, black_list_forward_tiles_list,
                                 reverse_reads, black_list_reverse_tiles_list, output_prefix):
@@ -224,8 +224,8 @@ class FastQRoutines(FileRoutines):
             tile_set = set()
 
             for line in fastq_fd:
-                read_name_list = self.parse_illumina_name(line)[:5]
-                tile_set.add(read_name_list)
+                read_name_tuple = self.parse_illumina_name(line)[:5]
+                tile_set.add(read_name_tuple)
                 for i in 0,1,2:
                     fastq_fd.next()
 
