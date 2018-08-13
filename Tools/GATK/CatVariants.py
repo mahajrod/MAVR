@@ -111,7 +111,7 @@ class CatVariants(JavaTool):
             prev_scaffold = ""
 
             for line in gvcf_fd:
-
+                print line
                 if line[0] == "#":
                     continue
 
@@ -124,6 +124,8 @@ class CatVariants(JavaTool):
                     end = int(format[0].split("=")[1])
                 else:
                     end = start
+                print line_list
+                print scaffold, start, end, format
 
                 if scaffold not in scaffold_dict:
                     scaffold_dict[scaffold] = []
@@ -140,7 +142,7 @@ class CatVariants(JavaTool):
         fragmented_scaffolds = IdList()
         scaffolds_with_absent_fragments = IdList()
 
-        with open("%s.scaffold_regions", "w") as scaf_reg_fd:
+        with open("%s.scaffold_regions" % output_prefix, "w") as scaf_reg_fd:
 
             for scaffold in scaffold_dict:
                 if len(scaffold_dict[scaffold]) > 1:
