@@ -129,7 +129,7 @@ class SequenceRoutines(FileRoutines):
                 else:
                     bunch_list.append(region)
                     bunch_length += len_dict[region]
-                    if bunch_length >= max_length:
+                    if (bunch_length >= max_length) or (len(bunch_list) == max_seq_number):
                         region_list.append(bunch_list)
                         bunch_length = 0
                         bunch_list = []
