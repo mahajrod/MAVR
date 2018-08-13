@@ -133,10 +133,12 @@ class CatVariants(JavaTool):
                 if scaffold != prev_scaffold:
                     scaffold_dict[scaffold].append([start, end])
                 else:
+                    print scaffold_dict[scaffold][-1][1]
                     if scaffold_dict[scaffold][-1][1] + 1 == start:
                         scaffold_dict[scaffold][-1][1] = end
                     else:
                         scaffold_dict[scaffold].append([start, end])
+                prev_scaffold = scaffold
 
         complete_scaffolds = IdList()
         fragmented_scaffolds = IdList()
