@@ -123,7 +123,7 @@ class CatVariants(JavaTool):
                 if (len(format) == 1) and (format[0][0:3] == "END"):
                     end = int(format[0].split("=")[1])
                 else:
-                    end = start
+                    end = start + len(line[3]) - 1
                 print line_list
                 print scaffold, start, end, format
 
@@ -155,7 +155,7 @@ class CatVariants(JavaTool):
                     scaffolds_with_absent_fragments.append(scaffold)
                 else:
                     complete_scaffolds.append(scaffold)
-            scaf_reg_fd.write("%s\t%s\n" % (scaffold, ",".join(map(lambda s: "-".join(map(str,s)), scaffold_dict[scaffold]))))
+                scaf_reg_fd.write("%s\t%s\n" % (scaffold, ",".join(map(lambda s: "-".join(map(str,s)), scaffold_dict[scaffold]))))
 
         complete_scaffolds.write("%s.complete_scaffolds" % output_prefix)
         fragmented_scaffolds.write("%s.fragmented_scaffolds" % output_prefix)
