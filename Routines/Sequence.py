@@ -96,57 +96,87 @@ class SequenceRoutines(FileRoutines):
         if index_file:
             os.remove(index_file)
 
-    def prepare_region_list_by_length(self, max_length=1000000, max_seq_number=500,
-                                      length_dict=None, reference=None, parsing_mode="parse", output_dir=None):
+    def prepare_region_list_by_length(self, max_length=500000, max_seq_number=10,
+                                      length_dict=None, reference=None, parsing_mode="parse", output_dir=None,
+                                      split_scaffolds=True):
 
         len_dict = length_dict if length_dict else self.get_lengths(record_dict=self.parse_seq_file(reference,
                                                                                                     mode=parsing_mode),
                                                                     out_file=None,
                                                                     close_after_if_file_object=False)
-        max_length_soft_threshold = int(1.5 * max_length)
+        number_of_scaffolds = len(len_dict)
+        max_length_soft_threshold = None if max_length is None else int(1.5 * max_length)
         region_list = []
 
         remnant_seq_list = []
         remnant_seq_length = 0
 
-        for region in len_dict:
-            if len(remnant_seq_list) == max_seq_number:
-                region_list.append(remnant_seq_list)
-                remnant_seq_list = []
-                remnant_seq_length = 0
+        if max_length_soft_threshold is None:
+            key_list = list(len_dict.keys())
+            bins = np.arange(0, number_of_scaffolds, max_seq_number)
+            bins = bins if bins[-1] == number_of_scaffolds else np.append(bins, number_of_scaffolds)
 
-            if len_dict[region] > max_length:
-                points = np.arange(0, len_dict[region], max_length)
-                if len(points) > 1:
-                    for i in range(0, len(points) - 1):
-                        region_list.append([[region, points[i] + 1, points[i+1]]])
-                    remnant = [region, points[-1] + 1, len_dict[region]]
-                    remnant_length = len_dict[region] - points[-1]
-                    if remnant_length + max_length <= max_length_soft_threshold:
-                        region_list[-1][0][2] = len_dict[region]
-                        remnant = None
-                        remnant_length = 0
+            for i in range(0, len(bins)-1):
+                region_list.append(key_list[bins[i]:bins[i+1]])
+
+        elif not split_scaffolds:
+            bunch_length = 0
+            bunch_list = []
+
+            for region in len_dict:
+                if len(len_dict[region]) >= max_length:
+                    region_list.append([region])
+                else:
+                    bunch_list.append(region)
+                    bunch_length += len_dict[region]
+                    if bunch_length >= max_length:
+                        region_list.append(bunch_list)
+                        bunch_length = 0
+                        bunch_list = []
+            if bunch_list:
+                region_list.append(bunch_list)
+                bunch_length = 0
+                bunch_list = []
+        else:
+
+            for region in len_dict:
+                if len(remnant_seq_list) == max_seq_number:
+                    region_list.append(remnant_seq_list)
+                    remnant_seq_list = []
+                    remnant_seq_length = 0
+
+                if len_dict[region] > max_length:
+                    points = np.arange(0, len_dict[region], max_length)
+                    if len(points) > 1:
+                        for i in range(0, len(points) - 1):
+                            region_list.append([[region, points[i] + 1, points[i+1]]])
+                        remnant = [region, points[-1] + 1, len_dict[region]]
+                        remnant_length = len_dict[region] - points[-1]
+                        if remnant_length + max_length <= max_length_soft_threshold:
+                            region_list[-1][0][2] = len_dict[region]
+                            remnant = None
+                            remnant_length = 0
+                    else:
+                        remnant = [region, 1, len_dict[region]]
+                        remnant_length = len_dict[region]
+
                 else:
                     remnant = [region, 1, len_dict[region]]
                     remnant_length = len_dict[region]
 
-            else:
-                remnant = [region, 1, len_dict[region]]
-                remnant_length = len_dict[region]
+                if remnant is None:
+                    continue
 
-            if remnant is None:
-                continue
-
-            if remnant_seq_length + remnant_length <= max_length_soft_threshold:
-                remnant_seq_list.append(remnant)
-                remnant_seq_length += remnant_length
+                if remnant_seq_length + remnant_length <= max_length_soft_threshold:
+                    remnant_seq_list.append(remnant)
+                    remnant_seq_length += remnant_length
+                else:
+                    region_list.append(remnant_seq_list)
+                    remnant_seq_list = [remnant]
+                    remnant_seq_length = remnant_length
             else:
-                region_list.append(remnant_seq_list)
-                remnant_seq_list = [remnant]
-                remnant_seq_length = remnant_length
-        else:
-            if remnant_seq_list:
-                region_list.append(remnant_seq_list)
+                if remnant_seq_list:
+                    region_list.append(remnant_seq_list)
 
         if output_dir:
             self.safe_mkdir(output_dir)
@@ -154,7 +184,15 @@ class SequenceRoutines(FileRoutines):
             for regions in region_list:
                 with open("%sregion_%i.t" % (output_dir, index), "w") as out_fd:
                     for region in regions:
-                        out_fd.write("%s\t%s\t%s\n" % (region[0], region[1], region[2]))
+                        if isinstance(region, str):
+                            out_fd.write(region)
+                            out_fd.write("\n")
+                        else:
+                            if len(region) == 3:
+                                out_fd.write("%s\t%s\t%s\n" % (region[0], region[1], region[2]))
+                            elif len(region) == 1:
+                                out_fd.write(region[0])
+                                out_fd.write("\n")
 
                 index += 1
         return region_list
