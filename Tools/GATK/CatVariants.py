@@ -120,7 +120,7 @@ class CatVariants(JavaTool):
                 start = int(line_list[1])
                 format = line_list[7].split(";")
 
-                if (len(format) == 1) and (format[0:3] == "END"):
+                if (len(format) == 1) and (format[0][0:3] == "END"):
                     end = int(format[0].split("=")[1])
                 else:
                     end = start
