@@ -134,8 +134,8 @@ class CatVariants(JavaTool):
                     scaffold_dict[scaffold].append([start, end])
                 else:
                     print scaffold_dict[scaffold][-1][1]
-                    if scaffold_dict[scaffold][-1][1] + 1 == start:
-                        scaffold_dict[scaffold][-1][1] = end
+                    if scaffold_dict[scaffold][-1][1] + 1 >= start:
+                        scaffold_dict[scaffold][-1][1] = max(end, scaffold_dict[scaffold][-1][1])
                     else:
                         scaffold_dict[scaffold].append([start, end])
                 prev_scaffold = scaffold
