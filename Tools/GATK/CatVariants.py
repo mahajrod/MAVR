@@ -123,7 +123,7 @@ class CatVariants(JavaTool):
                 if (len(format) == 1) and (format[0][0:3] == "END"):
                     end = int(format[0].split("=")[1])
                 else:
-                    end = start + len(line[3]) - 1
+                    end = start + len(line_list[3]) - 1
                 print line_list
                 print scaffold, start, end, format
 
