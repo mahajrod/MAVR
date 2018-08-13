@@ -111,7 +111,7 @@ class CatVariants(JavaTool):
             prev_scaffold = ""
 
             for line in gvcf_fd:
-                print line
+                #print line
                 if line[0] == "#":
                     continue
 
@@ -124,8 +124,8 @@ class CatVariants(JavaTool):
                     end = int(format[0].split("=")[1])
                 else:
                     end = start + len(line_list[3]) - 1
-                print line_list
-                print scaffold, start, end, format
+                #print line_list
+                #print scaffold, start, end, format
 
                 if scaffold not in scaffold_dict:
                     scaffold_dict[scaffold] = []
@@ -133,7 +133,7 @@ class CatVariants(JavaTool):
                 if scaffold != prev_scaffold:
                     scaffold_dict[scaffold].append([start, end])
                 else:
-                    print scaffold_dict[scaffold][-1][1]
+                    #print scaffold_dict[scaffold][-1][1]
                     if scaffold_dict[scaffold][-1][1] + 1 >= start:
                         scaffold_dict[scaffold][-1][1] = max(end, scaffold_dict[scaffold][-1][1])
                     else:
