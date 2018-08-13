@@ -2,7 +2,11 @@
 
 __author__ = 'mahajrod'
 import shutil
+from collections import OrderedDict
+from CustomCollections.GeneralCollections import IdList
+
 import numpy as np
+
 from Tools.Abstract import JavaTool
 
 
@@ -94,5 +98,65 @@ class CatVariants(JavaTool):
                               extension_list=extension_list,
                               tmp_dir=tmp_dir,
                               max_files_per_merging=max_files_per_merging, iteration=iteration+1)
+
+    def check_gvcf_integrity(self, gvcf_file, output_prefix, reference=None, length_dict=None, parsing_mode="parse"):
+        len_dict = length_dict if length_dict else self.get_lengths(record_dict=self.parse_seq_file(reference,
+                                                                                                    mode=parsing_mode),
+                                                                    out_file=None,
+                                                                    close_after_if_file_object=False)
+
+        scaffold_dict = OrderedDict()
+
+        with self.metaopen(gvcf_file, "r") as gvcf_fd:
+            prev_scaffold = ""
+
+            for line in gvcf_fd:
+
+                if line[0] == "#":
+                    continue
+
+                line_list = line.split("\t")
+                scaffold = line_list[0]
+                start = int(line_list[1])
+                format = line_list[7].split(";")
+
+                if (len(format) == 1) and (format[0:3] == "END"):
+                    end = int(format[0].split("=")[1])
+                else:
+                    end = start
+
+                if scaffold not in scaffold_dict:
+                    scaffold_dict[scaffold] = []
+
+                if scaffold != prev_scaffold:
+                    scaffold_dict[scaffold].append([start, end])
+                else:
+                    if scaffold_dict[scaffold][-1][1] + 1 == start:
+                        scaffold_dict[scaffold][-1][1] = end
+                    else:
+                        scaffold_dict[scaffold].append([start, end])
+
+        complete_scaffolds = IdList()
+        fragmented_scaffolds = IdList()
+        scaffolds_with_absent_fragments = IdList()
+
+        with open("%s.scaffold_regions", "w") as scaf_reg_fd:
+
+            for scaffold in scaffold_dict:
+                if len(scaffold_dict[scaffold]) > 1:
+                    fragmented_scaffolds.append(scaffold)
+
+                scaffold_length = sum(map(lambda s: s[1] - s[0] + 1, scaffold_dict[scaffold]))
+                if scaffold_length != len_dict[scaffold]:
+                    scaffolds_with_absent_fragments.append(scaffold)
+                else:
+                    complete_scaffolds.append(scaffold)
+            scaf_reg_fd.write("%s\t%s\n" % (scaffold, ",".join(map(lambda s: "-".join(s), scaffold_dict[scaffold]))))
+
+        complete_scaffolds.write("%s.complete_scaffolds" % output_prefix)
+        fragmented_scaffolds.write("%s.fragmented_scaffolds" % output_prefix)
+        scaffolds_with_absent_fragments.write("%s.scaffolds_with_absent_fragments" % output_prefix)
+
+
 
 
