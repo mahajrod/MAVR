@@ -1,5 +1,5 @@
 
-from Routines import SequenceRoutines
+from Routines.Sequence import SequenceRoutines
 
 
 class VCFRoutines(SequenceRoutines):
