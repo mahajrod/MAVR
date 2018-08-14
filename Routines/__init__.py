@@ -27,6 +27,7 @@ from Routines.MultipleAlignment import MultipleAlignmentRoutines
 
 
 GORoutines = GORoutines()
+VCFRoutines = VCFRoutines()
 MathRoutines = MathRoutines()
 FileRoutines = FileRoutines()
 TreeRoutines = TreeRoutines()
