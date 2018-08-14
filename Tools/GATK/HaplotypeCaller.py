@@ -2,9 +2,13 @@
 
 __author__ = 'mahajrod'
 
+import os
+
 from Tools.Abstract import JavaTool
 
-import os
+from Tools.GATK import CatVariants
+
+
 from Routines.Functions import check_path
 
 
@@ -79,17 +83,17 @@ class HaplotypeCaller(JavaTool):
          -o output.raw.snps.indels.g.vcf
         """
         options = self.parse_options(reference, alignment, output, genotyping_mode=genotyping_mode,
-                                     output_mode=output_mode,
                                      stand_call_conf=stand_call_conf, gvcf_mode=True,
                                      include_region_id_file=include_region_id_file,
                                      exclude_region_id_file=exclude_region_id_file)
 
         self.execute(options)
 
-    def parallel_gvcf_call(self, reference, alignment, output_dir, output_prefix,
+    def parallel_gvcf_call(self, reference, alignment, output_dir, output_prefix, output,
                            genotyping_mode="DISCOVERY",
                            stand_call_conf=30, max_region_length=1000000, max_seqs_per_region=100,
-                           length_dict=None, parsing_mode="parse", region_list=None, ):
+                           length_dict=None, parsing_mode="parse", region_list=None,
+                           tmp_subdir="tmp_combine_gvcf/", remove_intermediate_files=False):
         self.safe_mkdir(output_dir)
 
         region_list = self.prepare_region_list_by_length(max_length=max_region_length,
@@ -110,13 +114,29 @@ class HaplotypeCaller(JavaTool):
         for regions in region_list:
 
             region_options = " -o %s/%s_%i.g.vcf" % (output_dir, output_prefix, output_index)
+            #for region in regions:
+            #    region_options += " -L %s:%i-%i" % (region[0], region[1], region[2])
+
             for region in regions:
-                region_options += " -L %s:%i-%i" % (region[0], region[1], region[2])
+                if isinstance(region, str):
+                    region_options += " -L %s" % region
+                elif len(region) == 1:
+                    region_options += " -L %s" % region[0]
+                elif len(region) == 3:
+                    region_options += " -L %s:%i-%i" % (region[0], region[1], region[2])
 
             options_list.append(options + region_options)
             output_index += 1
 
         self.parallel_execute(options_list)
+
+        CatVariants.threads = max(8, self.threads)
+        CatVariants.combine_gvcf(reference, output_dir, output, input_is_sorted=False, extension_list=["g.vcf",],
+                                 tmp_dir="%s/%s/" % (output_dir, tmp_subdir),
+                                 max_files_per_merging=100, iteration=0, threads=None,
+                                 remove_intermediate_files=remove_intermediate_files)
+
+
 
     def variant_call(self,
                      alignment,
