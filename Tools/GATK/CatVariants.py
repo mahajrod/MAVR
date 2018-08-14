@@ -43,8 +43,7 @@ class CatVariants(JavaTool):
            --variant sample2.g.vcf \
            -o output.vcf
         """
-        #print "YYYYYYYYYYYYYYYYYYYYYY"
-        #print extension_list
+
         filtered_gvcf_list = []
         for filename in gvcf_list:
             for extension in extension_list:
