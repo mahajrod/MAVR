@@ -150,15 +150,18 @@ class SequenceRoutines(FileRoutines):
                     if len(points) > 1:
                         for i in range(0, len(points) - 1):
                             region_list.append([[region, points[i] + 1, points[i+1]]])
-                        remnant = [region, points[-1] + 1, len_dict[region]]
+                        #remnant = [region, points[-1] + 1, len_dict[region]]
                         remnant_length = len_dict[region] - points[-1]
                         if remnant_length + max_length <= max_length_soft_threshold:
                             region_list[-1][0][2] = len_dict[region]
-                            remnant = None
-                            remnant_length = 0
+                            #remnant = None
+                            #remnant_length = 0
+                        else:
+                            region_list.append([[region, points[-1] + 1, len_dict[region]]])
                     else:
-                        remnant = [region, 1, len_dict[region]]
-                        remnant_length = len_dict[region]
+                        #remnant = [region, 1, len_dict[region]]
+                        #remnant_length = len_dict[region]
+                        region_list.append([[region, 1, len_dict[region]]])
 
                 else:
                     remnant = [region, 1, len_dict[region]]
