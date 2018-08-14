@@ -1,6 +1,7 @@
 __author__ = 'mahajrod'
 
 from Routines.GO import GORoutines
+from Routines.VCF import VCFRoutines
 from Routines.Math import MathRoutines
 from Routines.File import FileRoutines
 from Routines.Tree import TreeRoutines
