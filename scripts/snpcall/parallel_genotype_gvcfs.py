@@ -6,7 +6,7 @@ from Tools.GATK import GenotypeGVCFs
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-d", "--splited_prefix", action="store", dest="splited_prefix", required=True,
+parser.add_argument("-s", "--splited_prefix", action="store", dest="splited_prefix", required=True,
                     help="Prefix of splited output files")
 parser.add_argument("-d", "--splited_dir", action="store", dest="splited_dir", required=True,
                     help="Directory to write splited vcf files")
