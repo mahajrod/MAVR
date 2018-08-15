@@ -59,7 +59,7 @@ class GenotypeGVCFs(JavaTool):
                                                           length_dict=length_dict,
                                                           reference=None if length_dict is not None else reference,
                                                           parsing_mode=parsing_mode,
-                                                          output_dir="%s/regions/" % output_dir,
+                                                          output_dir="%s/regions/" % splited_dir,
                                                           split_scaffolds=False) if region_list is None else region_list
 
         options = self.parse_options_for_parallel_run(reference, gvcf_list, extension_list=extension_list)
