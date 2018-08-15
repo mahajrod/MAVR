@@ -4,7 +4,7 @@ __author__ = 'mahajrod'
 
 from Tools.Abstract import JavaTool
 
-from Tools.GATK import CatVariants
+from Routines import VCFRoutines
 
 
 class GenotypeGVCFs(JavaTool):
@@ -68,8 +68,11 @@ class GenotypeGVCFs(JavaTool):
         output_index = 1
         options_list = []
 
+        region_vcf_list = []
+
         for regions in regions_list:
             region_options = " -o %s/%s_%i.vcf" % (output_dir, output_prefix, output_index)
+            region_vcf_list.append("%s/%s_%i.vcf" % (output_dir, output_prefix, output_index))
             for region in regions:
                 if isinstance(region, str):
                     region_options += " -L %s" % region
@@ -83,6 +86,12 @@ class GenotypeGVCFs(JavaTool):
 
         self.parallel_execute(options_list)
 
+        VCFRoutines.combine_same_samples_vcfs(region_vcf_list,
+                                              "%s.vcf" % output_prefix,
+                                              close_fd_after=False,
+                                              extension_list=[".vcf", ])
+
+        """
         CatVariants.threads = max(8, self.threads)
         CatVariants.max_memory = self.max_memory
 
@@ -94,3 +103,5 @@ class GenotypeGVCFs(JavaTool):
                                  iteration=0,
                                  threads=None,
                                  remove_intermediate_files=remove_intermediate_files)
+
+        """
