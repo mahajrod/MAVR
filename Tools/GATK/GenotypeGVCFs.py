@@ -6,6 +6,8 @@ from Tools.Abstract import JavaTool
 
 from Routines import VCFRoutines
 
+from Tools.GATK import ValidateVariants
+
 
 class GenotypeGVCFs(JavaTool):
     def __init__(self,  java_path="", max_threads=4, jar_path="", max_memory=None, timelog="tool_time.log"):
@@ -89,3 +91,5 @@ class GenotypeGVCFs(JavaTool):
                                               output_vcf,
                                               close_fd_after=False,
                                               extension_list=[".vcf", ])
+
+        ValidateVariants.index_vcf(reference, output_vcf)
