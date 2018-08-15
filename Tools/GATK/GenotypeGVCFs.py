@@ -52,7 +52,7 @@ class GenotypeGVCFs(JavaTool):
                           parsing_mode="parse", region_list=None,
                           extension_list=["g.vcf",]):
 
-        self.safe_mkdir(output_dir)
+        self.safe_mkdir(splited_dir)
 
         regions_list = self.prepare_region_list_by_length(max_length=max_total_scaffold_length_per_chunk,
                                                           max_seq_number=max_scaffold_number_per_chunk,
