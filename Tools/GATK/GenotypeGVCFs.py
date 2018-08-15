@@ -46,7 +46,7 @@ class GenotypeGVCFs(JavaTool):
 
         self.execute(options)
 
-    def parallel_genotype(self, reference, gvcf_list, output_dir, output_prefix,
+    def parallel_genotype(self, reference, gvcf_list, splited_dir, splited_prefix, output_vcf,
                           max_total_scaffold_length_per_chunk=100000,
                           max_scaffold_number_per_chunk=5, length_dict=None,
                           parsing_mode="parse", region_list=None,
@@ -70,8 +70,8 @@ class GenotypeGVCFs(JavaTool):
         region_vcf_list = []
 
         for regions in regions_list:
-            region_options = " -o %s/%s_%i.vcf" % (output_dir, output_prefix, output_index)
-            region_vcf_list.append("%s/%s_%i.vcf" % (output_dir, output_prefix, output_index))
+            region_options = " -o %s/%s_%i.vcf" % (splited_dir, splited_prefix, output_index)
+            region_vcf_list.append("%s/%s_%i.vcf" % (splited_dir, splited_prefix, output_index))
             for region in regions:
                 if isinstance(region, str):
                     region_options += " -L %s" % region
@@ -86,21 +86,6 @@ class GenotypeGVCFs(JavaTool):
         self.parallel_execute(options_list)
 
         VCFRoutines.combine_same_samples_vcfs(region_vcf_list,
-                                              "%s.vcf" % output_prefix,
+                                              output_vcf,
                                               close_fd_after=False,
                                               extension_list=[".vcf", ])
-
-        """
-        CatVariants.threads = max(8, self.threads)
-        CatVariants.max_memory = self.max_memory
-
-        CatVariants.combine_gvcf(reference, output_dir, "%s.vcf" % output_prefix,
-                                 input_is_sorted=True,
-                                 extension_list=["vcf", ],
-                                 tmp_dir="%s/%s/" %(output_dir, tmp_subdir),
-                                 max_files_per_merging=100,
-                                 iteration=0,
-                                 threads=None,
-                                 remove_intermediate_files=remove_intermediate_files)
-
-        """
