@@ -50,8 +50,7 @@ class GenotypeGVCFs(JavaTool):
                           max_total_scaffold_length_per_chunk=100000,
                           max_scaffold_number_per_chunk=5, length_dict=None,
                           parsing_mode="parse", region_list=None,
-                          extension_list=["g.vcf",], tmp_subdir="merging_tmp/",
-                          remove_intermediate_files=False):
+                          extension_list=["g.vcf",]):
 
         self.safe_mkdir(output_dir)
 
