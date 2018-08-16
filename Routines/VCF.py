@@ -21,11 +21,17 @@ class VCFRoutines(SequenceRoutines):
             vcf_files.sort()
 
         if sort:
+            unsorted_file = "unsorted.tmp"
+            with open(unsorted_file, "w") as out_fd:
+                pass
+            for filename in vcf_files:
+                string = "sed -n '/^[^#]/p' %s >> %s" % (filename, unsorted_file)
+                print(string)
+                os.system(string)
 
-            sorting_string = "(sed '/^[^#]/Q' %s; cat %s | sed -n '/^[^#]/p' | sort -k1,1 -k2,2n) > %s" % (vcf_files[0],
-
-                                                                                                           " ".join(vcf_files),
-                                                                                                           output)
+            sorting_string = "(sed '/^[^#]/Q' %s; sort -k1,1 -k2,2n %s) > %s" % (vcf_files[0],
+                                                                                 unsorted_file,
+                                                                                 output)
             print(sorting_string)
 
             os.system(sorting_string)
