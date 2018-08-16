@@ -21,7 +21,7 @@ class VCFRoutines(SequenceRoutines):
             vcf_files.sort()
 
         if sort:
-            unsorted_file = "unsorted.tmp"
+            unsorted_file = "%s.unsorted.tmp" % output
             with open(unsorted_file, "w") as out_fd:
                 pass
             for filename in vcf_files:
