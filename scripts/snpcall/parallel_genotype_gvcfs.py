@@ -24,6 +24,8 @@ parser.add_argument("-e", "--extension_list", action="store", dest="extension_li
                     help="Comma-separated list of extension of GVCF files. Default: g.vcf")
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=4, type=int,
                     help="Number of threads. Default: 4")
+parser.add_argument("-m", "--max_alternate_alleles", action="store", dest="max_alternate_alleles", type=int,
+                    help="Maximum number of alternative allels. Default: GATK default")
 
 #parser.add_argument("-m", "--remove_intermediate_files", action="store_true", dest="remove_intermediate_files", default=False,
 #                    help="Remove intermediate files. Default: False")
@@ -36,4 +38,5 @@ GenotypeGVCFs.parallel_genotype(args.reference, args.gvcf_list, args.splited_dir
                                 max_total_scaffold_length_per_chunk=100000,
                                 max_scaffold_number_per_chunk=5, length_dict=None,
                                 parsing_mode="parse", region_list=None,
-                                extension_list=args.extension_list)
+                                extension_list=args.extension_list,
+                                max_alternate_alleles=args.max_alternate_alleles)
