@@ -23,8 +23,9 @@ class VCFRoutines(SequenceRoutines):
         if sort:
 
             sorting_string = "(sed '/^[^#]/Q' %s; cat %s | sed -n '/^[^#]/p' | sort -k1,1 -k2,2n) > %s" % (vcf_files[0],
-                                                                                                           output,
-                                                                                                           " ".join(vcf_files))
+
+                                                                                                           " ".join(vcf_files),
+                                                                                                           output)
             print(sorting_string)
 
             os.system(sorting_string)
