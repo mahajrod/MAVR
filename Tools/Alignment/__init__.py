@@ -1,5 +1,6 @@
 __author__ = 'mahajrod'
 
+from Tools.Alignment.GEM import GEM
 from Tools.Alignment.BWA import BWA
 from Tools.Alignment.BLAT import BLAT
 from Tools.Alignment.TMAP import TMAP
@@ -16,7 +17,7 @@ novoalign_path = ""
 tmap_path = ""
 prank_path = ""
 
-
+GEM = GEM()
 BWA = BWA(path=bwa_path, max_threads=max_threads)
 TMAP = TMAP(path=novoalign_path, max_threads=max_threads)
 BLAT = BLAT()

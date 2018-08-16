@@ -149,6 +149,16 @@ class FileRoutines:
                                                recursive=recursive)
 
     @staticmethod
+    def split_string_by_separator(string, separator):
+        return string.split(separator)
+
+    def split_string_by_comma(self, string):
+        return self.split_string_by_separator(string, separator=",")
+
+    def split_string_by_colon(self, string):
+        return self.split_string_by_separator(string, separator=":")
+
+    @staticmethod
     def check_extension(filename, extension_list=[]):
         if extension_list:
             for extension in extension_list:
