@@ -17,7 +17,7 @@ class ValidateVariants(JavaTool):
         options += " -V %s" % input_vcf
         options += " --dbsnp %s" % dbsnp if dbsnp else ""
         for entry in exclude_list:
-            options += " ----validationTypeToExclude %s" % entry
+            options += " --validationTypeToExclude %s" % entry
 
         options += " --validateGVCF" if input_is_gvcf else ""
 
