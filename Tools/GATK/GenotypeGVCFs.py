@@ -103,4 +103,7 @@ class GenotypeGVCFs(JavaTool):
                                               close_fd_after=False,
                                               extension_list=[".vcf", ])
 
+        ValidateVariants.jar_path = self.jar_path
+        ValidateVariants.jar = self.jar
+
         ValidateVariants.index_vcf(reference, output_vcf)
