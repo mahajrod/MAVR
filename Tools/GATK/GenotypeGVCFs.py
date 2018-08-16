@@ -28,6 +28,7 @@ class GenotypeGVCFs(JavaTool):
                                        disable_auto_index_creation_and_locking_when_reading_rods=True):
 
         options = " -R %s" % reference
+        options += " -nct 1"
 
         options += " --disable_auto_index_creation_and_locking_when_reading_rods" if disable_auto_index_creation_and_locking_when_reading_rods else ""
 
