@@ -12,7 +12,7 @@ parser.add_argument("-i", "--gem_index", action="store", dest="gem_index",
 parser.add_argument("-r", "--reference", action="store", dest="reference",
                     help="Fasta file with reference")
 parser.add_argument("-k", "--kmer_list", action="store", dest="kmer_list", default=[50, 75, 100, 125, 150],
-                    type=GEM.split_string_by_comma,
+                    type=lambda s: map(int, GEM.split_string_by_comma(s)),
                     help="Comma-separated list of kmers. Default: 50, 75, 100, 125, 150")
 
 parser.add_argument("-g", "--gem_dir", action="store", dest="gem_dir",
