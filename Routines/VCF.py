@@ -21,8 +21,12 @@ class VCFRoutines(SequenceRoutines):
             vcf_files.sort()
 
         if sort:
-            self.safe_mkdir(sorting_tmp_dir)
-            sorting_string = "(sed '/^[^#]/Q' %s; cat %s | sed -n '/^[^#]/p' | sort -k1,1 -k2,2n) > %s" % (vcf_files[0], output, " ".join(vcf_files))
+
+            sorting_string = "(sed '/^[^#]/Q' %s; cat %s | sed -n '/^[^#]/p' | sort -k1,1 -k2,2n) > %s" % (vcf_files[0],
+                                                                                                           output,
+                                                                                                           " ".join(vcf_files))
+            print(sorting_string)
+
             os.system(sorting_string)
 
         else:
