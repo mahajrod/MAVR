@@ -111,6 +111,9 @@ class SequenceRoutines(FileRoutines):
         remnant_seq_list = []
         remnant_seq_length = 0
 
+        scaffold_to_region_correspondence_dict = SynDict()
+        region_index = 0
+
         if max_length_soft_threshold is None:
             key_list = list(len_dict.keys())
             bins = np.arange(0, number_of_scaffolds, max_seq_number)
@@ -118,6 +121,8 @@ class SequenceRoutines(FileRoutines):
 
             for i in range(0, len(bins)-1):
                 region_list.append(key_list[bins[i]:bins[i+1]])
+                for scaffold in key_list[bins[i]:bins[i+1]]:
+                    scaffold_to_region_correspondence_dict[scaffold] = [i]
 
         elif not split_scaffolds:
             bunch_length = 0
@@ -126,15 +131,23 @@ class SequenceRoutines(FileRoutines):
             for region in len_dict:
                 if len_dict[region] >= max_length:
                     region_list.append([region])
+                    scaffold_to_region_correspondence_dict[region] = [region_index]
+                    region_index += 1
                 else:
                     bunch_list.append(region)
                     bunch_length += len_dict[region]
                     if (bunch_length >= max_length) or (len(bunch_list) == max_seq_number):
                         region_list.append(bunch_list)
+                        for scaffold in bunch_list:
+                            scaffold_to_region_correspondence_dict[scaffold] = [region_index]
+                        region_index += 1
                         bunch_length = 0
                         bunch_list = []
             if bunch_list:
                 region_list.append(bunch_list)
+                for scaffold in bunch_list:
+                    scaffold_to_region_correspondence_dict[scaffold] = [region_index]
+                region_index += 1
                 bunch_length = 0
                 bunch_list = []
         else:
@@ -142,14 +155,23 @@ class SequenceRoutines(FileRoutines):
             for region in len_dict:
                 if len(remnant_seq_list) == max_seq_number:
                     region_list.append(remnant_seq_list)
+                    for scaffold in remnant_seq_list:
+                        if scaffold in scaffold_to_region_correspondence_dict:
+                            scaffold_to_region_correspondence_dict[scaffold].append(region_index)
+                        else:
+                            scaffold_to_region_correspondence_dict[scaffold] = [region_index]
+                    region_index += 1
                     remnant_seq_list = []
                     remnant_seq_length = 0
 
                 if len_dict[region] > max_length:
                     points = np.arange(0, len_dict[region], max_length)
                     if len(points) > 1:
+                        scaffold_to_region_correspondence_dict[region] = list(np.arange(region_index, region_index + len(points) - 1))
+                        region_index += len(points) - 1
                         for i in range(0, len(points) - 1):
                             region_list.append([[region, points[i] + 1, points[i+1]]])
+
                         #remnant = [region, points[-1] + 1, len_dict[region]]
                         remnant_length = len_dict[region] - points[-1]
                         if remnant_length + max_length <= max_length_soft_threshold:
@@ -158,10 +180,14 @@ class SequenceRoutines(FileRoutines):
                             #remnant_length = 0
                         else:
                             region_list.append([[region, points[-1] + 1, len_dict[region]]])
+                            scaffold_to_region_correspondence_dict[region].append(region_index)
+                            region_index += 1
                     else:
                         #remnant = [region, 1, len_dict[region]]
                         #remnant_length = len_dict[region]
                         region_list.append([[region, 1, len_dict[region]]])
+                        scaffold_to_region_correspondence_dict[region] = [region_index]
+                        region_index += 1
 
                 else:
                     remnant = [region, 1, len_dict[region]]
@@ -175,17 +201,32 @@ class SequenceRoutines(FileRoutines):
                     remnant_seq_length += remnant_length
                 else:
                     region_list.append(remnant_seq_list)
+                    for scaffold in remnant_seq_list:
+                        if scaffold in scaffold_to_region_correspondence_dict:
+                            scaffold_to_region_correspondence_dict[scaffold].append(region_index)
+                        else:
+                            scaffold_to_region_correspondence_dict[scaffold] = [region_index]
+                    region_index += 1
+
                     remnant_seq_list = [remnant]
                     remnant_seq_length = remnant_length
             else:
                 if remnant_seq_list:
                     region_list.append(remnant_seq_list)
+                    for scaffold in remnant_seq_list:
+                        if scaffold in scaffold_to_region_correspondence_dict:
+                            scaffold_to_region_correspondence_dict[scaffold].append(region_index)
+                        else:
+                            scaffold_to_region_correspondence_dict[scaffold] = [region_index]
+                    region_index += 1
 
         if output_dir:
-            self.safe_mkdir(output_dir)
+            for directory in output_dir, "%s/splited/" % output_dir:
+                self.safe_mkdir(directory)
+
             index = 1
             for regions in region_list:
-                with open("%s/region_%i.t" % (output_dir, index), "w") as out_fd:
+                with open("%s/splited/region_%i.t" % (output_dir, index), "w") as out_fd:
                     for region in regions:
                         if isinstance(region, str):
                             out_fd.write(region)
@@ -198,7 +239,9 @@ class SequenceRoutines(FileRoutines):
                                 out_fd.write("\n")
 
                 index += 1
-        return region_list
+            scaffold_to_region_correspondence_dict.write("%s/SCAFFOLD_TO_REGION.correspondence" % output_dir,
+                                                         splited_values=True)
+        return region_list, scaffold_to_region_correspondence_dict
 
     def split_fasta_by_seq_len(self, input_fasta, output_dir, max_len_per_file=None, output_prefix=None,
                                parsing_mode="parse", index_file='temp.idx'):

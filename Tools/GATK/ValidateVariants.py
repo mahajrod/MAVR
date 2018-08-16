@@ -12,22 +12,23 @@ class ValidateVariants(JavaTool):
                           timelog=timelog)
 
     @staticmethod
-    def parse_common_options(reference, input_vcf, exclude_list=[], dbsnp=None):
+    def parse_common_options(reference, input_vcf, exclude_list=[], dbsnp=None, input_is_gvcf=False):
         options = " -R %s" % reference
         options += " -V %s" % input_vcf
         options += " --dbsnp %s" % dbsnp if dbsnp else ""
         for entry in exclude_list:
             options += " ----validationTypeToExclude %s" % entry
 
+        options += " --validateGVCF" if input_is_gvcf else ""
 
         return options
 
-    def test_vcf_format(self, reference, input_vcf):
+    def test_vcf_format(self, reference, input_vcf, input_is_gvcf=False):
 
-        options = self.parse_common_options(reference, input_vcf, exclude_list=["ALL", ])
+        options = self.parse_common_options(reference, input_vcf, exclude_list=["ALL", ], input_is_gvcf=input_is_gvcf)
 
         self.execute(options=options)
 
-    def index_vcf(self, reference, input_vcf):
-        self.test_vcf_format(reference, input_vcf)
+    def index_vcf(self, reference, input_vcf, input_is_gvcf=False):
+        self.test_vcf_format(reference, input_vcf, input_is_gvcf=input_is_gvcf)
 

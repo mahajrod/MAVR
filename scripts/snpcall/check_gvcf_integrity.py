@@ -2,7 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 import argparse
 
-from Tools.GATK import CatVariants
+from Routines import VCFRoutines
 
 
 parser = argparse.ArgumentParser()
@@ -16,7 +16,7 @@ parser.add_argument("-r", "--reference", action="store", dest="reference", requi
 
 args = parser.parse_args()
 
-CatVariants.check_gvcf_integrity(args.input_gvcf,
+VCFRoutines.check_gvcf_integrity(args.input_gvcf,
                                  args.output_prefix,
                                  reference=args.reference,
                                  length_dict=None,
