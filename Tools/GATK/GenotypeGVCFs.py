@@ -30,7 +30,7 @@ class GenotypeGVCFs(JavaTool):
 
         options = " -R %s" % reference
 
-        options += "--max_alternate_alleles %i" % max_alternate_alleles if max_alternate_alleles else ""
+        options += " --max_alternate_alleles %i" % max_alternate_alleles if max_alternate_alleles else ""
 
         options += " --disable_auto_index_creation_and_locking_when_reading_rods" if disable_auto_index_creation_and_locking_when_reading_rods else ""
 
