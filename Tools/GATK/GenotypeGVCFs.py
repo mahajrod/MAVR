@@ -24,9 +24,12 @@ class GenotypeGVCFs(JavaTool):
 
         return options
 
-    def parse_options_for_parallel_run(self, reference, gvcf_list, extension_list=["g.vcf",]):
+    def parse_options_for_parallel_run(self, reference, gvcf_list, extension_list=["g.vcf",],
+                                       disable_auto_index_creation_and_locking_when_reading_rods=True):
 
         options = " -R %s" % reference
+
+        options += " --disable_auto_index_creation_and_locking_when_reading_rods" if disable_auto_index_creation_and_locking_when_reading_rods else ""
 
         for gvcf in self.make_list_of_path_to_files_by_extension(gvcf_list,
                                                                  extension_list=extension_list,
@@ -52,7 +55,8 @@ class GenotypeGVCFs(JavaTool):
                           max_total_scaffold_length_per_chunk=100000,
                           max_scaffold_number_per_chunk=5, length_dict=None,
                           parsing_mode="parse", region_list=None,
-                          extension_list=["g.vcf",]):
+                          extension_list=["g.vcf",],
+                          disable_auto_index_creation_and_locking_when_reading_rods=True):
 
         self.safe_mkdir(splited_dir)
 
@@ -65,7 +69,8 @@ class GenotypeGVCFs(JavaTool):
                                                                                         output_dir="%s/regions/" % splited_dir,
                                                                                         split_scaffolds=False) if region_list is None else region_list
 
-        options = self.parse_options_for_parallel_run(reference, gvcf_list, extension_list=extension_list)
+        options = self.parse_options_for_parallel_run(reference, gvcf_list, extension_list=extension_list,
+                                                      disable_auto_index_creation_and_locking_when_reading_rods=disable_auto_index_creation_and_locking_when_reading_rods)
 
         output_index = 1
         options_list = []
