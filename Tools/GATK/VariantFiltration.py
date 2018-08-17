@@ -60,7 +60,7 @@ class VariantFiltration(JavaTool):
         indel_good_vcf = "%s.indel.good.vcf" % output_prefix
 
         combined_filtered_vcf = "%s.combined.with_filters.vcf" % output_prefix
-        combined_good_vcf = "%s.combined.with_filters.vcf" % output_prefix
+        combined_good_vcf = "%s.combined.good.vcf" % output_prefix
 
         SelectVariants.jar_path = self.jar_path
         CombineVariants.jar_path = self.jar_path
