@@ -62,8 +62,10 @@ class VariantFiltration(JavaTool):
         combined_filtered_vcf = "%s.combined.with_filters.vcf" % output_prefix
         combined_good_vcf = "%s.combined.good.vcf" % output_prefix
 
+
         SelectVariants.jar_path = self.jar_path
         CombineVariants.jar_path = self.jar_path
+        """
         SelectVariants.get_SNP(reference_file, input_vcf, snp_raw_vcf)
         SelectVariants.get_indel(reference_file, input_vcf, indel_raw_vcf)
 
@@ -75,7 +77,7 @@ class VariantFiltration(JavaTool):
 
         SelectVariants.remove_entries_with_filters(reference_file, snp_filtered_vcf, snp_good_vcf)
         SelectVariants.remove_entries_with_filters(reference_file, indel_filtered_vcf, indel_good_vcf)
-
+        """
         CombineVariants.combine_from_same_source(reference_file, [snp_filtered_vcf, indel_filtered_vcf],
                                                  combined_filtered_vcf)
 
