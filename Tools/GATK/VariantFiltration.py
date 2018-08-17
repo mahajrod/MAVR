@@ -65,7 +65,7 @@ class VariantFiltration(JavaTool):
 
         SelectVariants.jar_path = self.jar_path
         CombineVariants.jar_path = self.jar_path
-        """
+
         SelectVariants.get_SNP(reference_file, input_vcf, snp_raw_vcf)
         SelectVariants.get_indel(reference_file, input_vcf, indel_raw_vcf)
 
@@ -77,33 +77,10 @@ class VariantFiltration(JavaTool):
 
         SelectVariants.remove_entries_with_filters(reference_file, snp_filtered_vcf, snp_good_vcf)
         SelectVariants.remove_entries_with_filters(reference_file, indel_filtered_vcf, indel_good_vcf)
-        """
+
         CombineVariants.combine_from_same_source(reference_file, [snp_filtered_vcf, indel_filtered_vcf],
                                                  combined_filtered_vcf)
 
         CombineVariants.combine_from_same_source(reference_file, [snp_good_vcf, indel_good_vcf],
                                                  combined_good_vcf)
-
-    """
-    def filter(self, gatk_dir, reference_file, input_vcf, filter_expresion, filter_name, output_vcf):
-        #print("java -jar %sGenomeAnalysisTK.jar -T VariantFiltration -R %s -V %s --filterExpression \'%s\' --filterName %s -o %s"
-        #          % (gatk_dir, reference_file, input_vcf, filter_expresion, filter_name, output_vcf))
-        os.system("java -jar %sGenomeAnalysisTK.jar -T VariantFiltration -R %s -V %s --filterExpression \'%s\' --filterName %s -o %s"
-                  % (gatk_dir, reference_file, input_vcf, filter_expresion, filter_name, output_vcf))
-
-    def filter_bad_SNP(self, gatk_dir, reference_file, input_vcf, output_vcf, QD=2.0, FS=60.0, MQ=40.0,
-                       HaplotypeScore=13.0, MappingQualityRankSum=-12.5, ReadPosRankSum=-8.0):
-        filter_expresion = 'QD < %f || FS > %f || MQ < %f || HaplotypeScore > %f || MappingQualityRankSum < %f || ReadPosRankSum < %f' \
-                           % (QD, FS, MQ, HaplotypeScore, MappingQualityRankSum, ReadPosRankSum)
-        print(filter_expresion)
-        filter_name = 'ambigious_snp'
-        self.filter(gatk_dir, reference_file, input_vcf, filter_expresion, filter_name, output_vcf)
-
-    def filter_bad_indel(self, gatk_dir, reference_file, input_vcf, output_vcf, QD=2.0,
-                         ReadPosRankSum=-20.0, InbreedingCoeff=-0.8, FS=200.0):
-        filter_expresion = "QD < %f || ReadPosRankSum < %f || InbreedingCoeff < %f || FS > %f" \
-                           % (QD, ReadPosRankSum, InbreedingCoeff, FS)
-        filter_name = 'ambigious_indel'
-        self.filter(gatk_dir, reference_file, input_vcf, filter_expresion, filter_name, output_vcf)
-    """
 
