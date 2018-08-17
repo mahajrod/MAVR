@@ -52,10 +52,15 @@ class VariantFiltration(JavaTool):
         snp_raw_vcf = "%s.snp.raw.vcf" % output_prefix
         indel_raw_vcf = "%s.indel.raw.vcf" % output_prefix
 
-        snp_filtered_vcf = "%s.snp.filtered.vcf" % output_prefix
-        indel_filtered_vcf = "%s.indel.filtered.vcf" % output_prefix
+        snp_filtered_vcf = "%s.snp.with_filters.vcf" % output_prefix
+        indel_filtered_vcf = "%s.indel.with_filters.vcf" % output_prefix
 
-        combined_filtered_vcf = "%s.combined.filtered.vcf" % output_prefix
+        snp_good_vcf = "%s.snp.good.vcf" % output_prefix
+        indel_good_vcf = "%s.indel.good.vcf" % output_prefix
+
+        combined_filtered_vcf = "%s.combined.with_filters.vcf" % output_prefix
+        combined_good_vcf = "%s.combined.with_filters.vcf" % output_prefix
+
         SelectVariants.jar_path = self.jar_path
         CombineVariants.jar_path = self.jar_path
         SelectVariants.get_SNP(reference_file, input_vcf, snp_raw_vcf)
@@ -66,8 +71,15 @@ class VariantFiltration(JavaTool):
                             MappingQualityRankSum=snp_MappingQualityRankSum, ReadPosRankSum=snp_ReadPosRankSum)
         self.filter_bad_indel(reference_file, indel_raw_vcf, indel_filtered_vcf, filter_name=indel_filter_name,
                               QD=indel_QD, ReadPosRankSum=indel_ReadPosRankSum, FS=indel_FS)
+
+        SelectVariants.remove_entries_with_filters(reference_file, snp_filtered_vcf, snp_good_vcf)
+        SelectVariants.remove_entries_with_filters(reference_file, indel_filtered_vcf, indel_good_vcf)
+
         CombineVariants.combine_from_same_source(reference_file, [snp_filtered_vcf, indel_filtered_vcf],
                                                  combined_filtered_vcf)
+
+        CombineVariants.combine_from_same_source(reference_file, [snp_good_vcf, indel_good_vcf],
+                                                 combined_good_vcf)
 
     """
     def filter(self, gatk_dir, reference_file, input_vcf, filter_expresion, filter_name, output_vcf):
