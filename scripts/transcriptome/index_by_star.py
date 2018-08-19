@@ -28,6 +28,8 @@ parser.add_argument("-j", "--junction_tab_file", action="store", dest="junction_
                     help="Junction tab file")
 parser.add_argument("-r", "--star_dir", action="store", dest="star_dir", default="",
                     help="Directory with STAR binary")
+parser.add_argument("-e", "--feature_from_gtf_to_use_as_exon", action="store", dest="feature_from_gtf_to_use_as_exon",
+                    help="Feature from gtf to use as exon.Default: exon")
 parser.add_argument("-b", "--genomeSAindexNbases", action="store", dest="genomeSAindexNbases", default=None, type=int,
                     help="Index word size. Adjust for small genomes. By default: is calculated from genome size")
 parser.add_argument("-c", "--genomeChrBinNbits", action="store", dest="genomeChrBinNbits", default=None, type=int,
@@ -64,5 +66,6 @@ STAR.threads = args.threads
 STAR.path = args.star_dir
 
 STAR.index(args.genome_dir, args.genome_fasta, annotation_gtf=args.annotation_gtf,
+           feature_from_gtf_to_use_as_exon=args.feature_from_gtf_to_use_as_exon,
            junction_tab_file=args.junction_tab_file, sjdboverhang=None,
            genomeSAindexNbases=args.genomeSAindexNbases, genomeChrBinNbits=args.genomeChrBinNbits, genome_size=args.genome_size)
