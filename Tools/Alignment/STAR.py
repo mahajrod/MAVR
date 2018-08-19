@@ -14,7 +14,7 @@ class STAR(Tool):
     def __init__(self, path="", max_threads=4):
         Tool.__init__(self, "STAR", path=path, max_threads=max_threads)
 
-    def index(self, genome_dir, genome_fasta, annotation_gtf=None, junction_tab_file=None, sjdboverhang=None,
+    def index(self, genome_dir, genome_fasta, annotation_gtf=None, feature_from_gtf_to_use_as_exon=None, junction_tab_file=None, sjdboverhang=None,
               genomeSAindexNbases=None, genomeChrBinNbits=None, genome_size=None):
 
         FileRoutines.safe_mkdir(genome_dir)
@@ -32,6 +32,7 @@ class STAR(Tool):
             options += " --genomeSAindexNbases %i" % genomeSAindexNbases if genomeSAindexNbases else "" # size of k-mers used for preindexing of suffix array
         options += " --genomeChrBinNbits %i" % genomeChrBinNbits if genomeChrBinNbits else "" # padding size (log2) of reference sequences. 18 by default
         # recommended value min(18, log2(GenomeLength/NumberOfScaffolds))
+        options += " --sjdbGTFfeatureExon %s" % feature_from_gtf_to_use_as_exon if feature_from_gtf_to_use_as_exon else ""
         self.execute(options)
 
     def align(self, genome_dir, forward_read_list, reverse_read_list=None, annotation_gtf=None,
