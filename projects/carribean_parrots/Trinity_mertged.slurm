@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #SBATCH --time=100:00:00         # Run time in hh:mm:ss
 #SBATCH --mem-per-cpu=1192       # Minimum memory required per CPU (in megabytes)
-#SBATCH --job-name=Tri_blood
+#SBATCH --job-name=Tri_merged
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
 #SBATCH --error=/work/toleksyk/toleksyk/errors/trinity_blood.%A_%a.err
@@ -11,13 +11,13 @@ WORKDIR=/work/toleksyk/toleksyk/
 LOGDIR=${WORKDIR}/logs/
 ERRORDIR=${WORKDIR}/errors/
 
-DATADIR=${WORKDIR}/parrots/amazona_ventralis/transcriptome/reads/filtered/blood/trimmomatic/merged/
+DATADIR=${WORKDIR}/parrots/amazona_ventralis/transcriptome/reads/filtered/merged/
 
-FORWARD=${DATADIR}/blood.pe_1.fastq
-REVERSE=${DATADIR}/blood.pe_2.fastq
+FORWARD=${DATADIR}/merged.pe_1.fastq
+REVERSE=${DATADIR}/merged.pe_2.fastq
 
 
-OUTDIR=${WORKDIR}/parrots/amazona_ventralis/transcriptome/assemblies/blood/
+OUTDIR=${WORKDIR}/parrots/amazona_ventralis/transcriptome/assemblies/merged/
 TRINITY_WORKDIR=${OUTPUT}/work/
 mkdir -p ${OUTDIR}
 
@@ -25,9 +25,11 @@ SOFTDIR=${WORKDIR}/soft/
 
 THREADS=8
 GRID_NODE_THREADS=1
-GRID_NODE_MAX_MEMORY=4G
+GRID_NODE_MAX_MEMORY=10G
 GRID_EXEC=sbatch
-GRID_CONF_FILE=
+GRID_CONF_FILE=AAA
+
+
 
 
 Trinity --seqType fq \
