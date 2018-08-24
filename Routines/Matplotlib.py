@@ -956,12 +956,12 @@ class MatplotlibRoutines:
         x = np.loadtxt(input_file, usecols=(x_column,))
         y = np.loadtxt(input_file, usecols=(y_column,))
 
-        self.draw_heatmap(x, y, output_prefix=output_prefix, xlabel=xlabel, ylabel=ylabel, title=None,
+        self.draw_heatmap(x, y, output_prefix=output_prefix, xlabel=xlabel, ylabel=ylabel, title=title,
                           figsize=figsize, minimum_counts_to_show=minimum_counts_to_show, extensions=extensions,
                           show_colorbar=show_colorbar, bin_number=bin_number, bin_width=bin_width, bin_array=bin_array,
                           min_x_value=min_x_value, max_x_value=max_x_value,
                           min_y_value=min_y_value, max_y_value=max_y_value,
-                          add_max_value=add_max_value)
+                          add_max_value=add_max_value,)
 
     def draw_double_histo_from_file(self, file_list, column_idx_list, subplot_tuple=(2, 1), output_prefix=None,
                                     figsize=(5, 10), number_of_bins_list=None, width_of_bins_list=None,
