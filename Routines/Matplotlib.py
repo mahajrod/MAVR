@@ -851,10 +851,10 @@ class MatplotlibRoutines:
                                        min_x_value=min_x_value, max_x_value=max_x_value,
                                        min_y_value=min_y_value, max_y_value=max_y_value,
                                        add_max_value=add_max_value)
-        #print "X axis bins:"
-        #print bins[0]
-        #print "Y axis bins:"
-        #print bins[1]
+        print("X axis bins:")
+        print(bins[0])
+        print("Y axis bins:")
+        print(bins[1])
 
         if subplot is None:
             #print "aaaaaaaaaa"
