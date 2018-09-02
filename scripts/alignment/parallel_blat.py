@@ -33,6 +33,6 @@ BLAT.threads = args.threads
 BLAT.path = args.path_to_blat_dir
 BLAT.parallel_align(args.database, args.query_fasta, args.output, split_dir="splited_input/",
                     splited_output_dir="splited_output_dir/",
-                    database_type=args.databse_type, query_type=args.query_type, add_header=not args.no_header,
+                    database_type=args.database_type, query_type=args.query_type, add_header=not args.no_header,
                     threads=None, remove_tmp_dirs=True,
                     async_run=False, external_process_pool=None)
