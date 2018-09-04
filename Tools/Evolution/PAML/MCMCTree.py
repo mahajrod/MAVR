@@ -19,7 +19,7 @@ class MCMCTree(Tool):
          clock = 2    * 1: global clock; 2: independent rates; 3: correlated rates
        RootAge = '<1.0'  * safe constraint on root age, used if no fossil for root.
 
-         model = 0    * 0:JC69, 1:K80, 2:F81, 3:F84, 4:HKY85
+         model = 0    * 0:JC69, 1:K80, 2:F81, 3:F84, 4:HKY85, 5:TC92, 6: TN93, 7: GTR, 8: UNREST, 9:REVu, 10: UNSETu
          alpha = 0    * alpha for gamma rates at sites
          ncatG = 5    * No. categories in discrete gamma
 
@@ -76,7 +76,7 @@ class MCMCTree(Tool):
             clock_type = 3
         else:
             raise(ValueError, "Wrong clock type was set")    
-            
+
         if model == "JC69":
             model_type = 0
         elif model == "K80":
@@ -87,6 +87,19 @@ class MCMCTree(Tool):
             model_type = 3
         elif model == "HKY85":
             model_type = 4
+        elif model == "TC92":
+            model_type = 5
+        elif model == "TN93":
+            model_type = 6
+        elif model == "GTR":
+            model_type = 7
+        elif model == "UNREST":
+            model_type = 8
+        elif model == "REVu":
+            model_type = 9
+        elif model == "UNSETu":
+            model_type = 10
+
         else:
             raise(ValueError, "Wrong model was set")       
             
