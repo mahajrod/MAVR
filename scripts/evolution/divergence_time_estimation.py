@@ -27,7 +27,8 @@ parser.add_argument("--clock_type", action="store", dest="clock_type", default="
                     help="Clock type for partitions. Allowed: global, independent, correlated."
                          "Default: global")
 parser.add_argument("-m", "--model", action="store", dest="model", required=True,
-                    help="Model of substitutions to use. Allowed: JC69, K80, F81, F84, HKY85")
+                    help="Model of substitutions to use. "
+                         "Allowed: JC69, K80, F81, F84, HKY85, TC92, TN93, GTR, UNREST, REVu, UNSETu")
 parser.add_argument("--alpha_for_gamma_rates_at_sites", action="store", dest="alpha_for_gamma_rates_at_sites",
                     type=float, default=0.5,
                     help="Alpha for gamma rates at sites. If alpha != 0, the program will assume a gamma-rates "
