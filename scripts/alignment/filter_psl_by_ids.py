@@ -1,16 +1,16 @@
 #!/usr/bin/env python
 __author__ = 'mahajrod'
-
+import sys
 import argparse
 
 from Routines import AlignmentRoutines
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", "--input", action="store", dest="input", required=True,
-                    help="Input PSL file with")
-parser.add_argument("-o", "--output", action="store", dest="output", required=True,
-                    help="Output file")
+parser.add_argument("-i", "--input", action="store", dest="input", default=sys.stdin,
+                    help="Input PSL file with. Default: stdin")
+parser.add_argument("-o", "--output", action="store", dest="output", default=sys.stdout,
+                    help="Output file. Default: stdout")
 
 parser.add_argument("-w", "--white_query_id_file", action="store", dest="white_query_id_file",
                     help="File with query ids from white list")
