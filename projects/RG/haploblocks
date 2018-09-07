@@ -1,0 +1,25 @@
+#skliver@supermicro:~/workdir/RG/hapmap/new_plink_blocks$
+
+for POP in psk nov new_psk+nov; do for CHR in `seq 1 22`; do for DET in `ls ${POP}/*_chr${CHR}.blocks.det`; do ~/soft/MAVR/scripts/population/convert_block_det_file_to_gff.py -i ${DET} -o ${DET}.gff -f gff -b ${POP}.chr${CHR}.HB; done; done; done
+
+for CHR in `seq 1 22`;
+    do
+    #ignore nonoverlapping features
+    bedtools intersect -wo -a nov/haploblocks_plink_NOV_chr${CHR}.blocks.det.gff -b psk/haploblocks_plink_PSK_chr${CHR}.blocks.det.gff > intersect_nov_psk/intersect_nov_vs_psk.chr${CHR}.tab;
+    bedtools intersect -wo -b nov/haploblocks_plink_NOV_chr${CHR}.blocks.det.gff -a psk/haploblocks_plink_PSK_chr${CHR}.blocks.det.gff > intersect_psk_nov/intersect_psk_vs_nov.chr${CHR}.tab;
+    done
+
+for CHR in `seq 1 22`;
+    do
+    awk -F'\t' '{ALEN=$5-$4+1; BLEN=$14-$13+1; OVERLAPLEN=$19; printf "%s\t%s\t%s\t%s\t%s\t%f\t%f\n", $9, ALEN, $18, BLEN, OVERLAPLEN, OVERLAPLEN/ALEN, OVERLAPLEN/BLEN}' intersect_nov_psk/intersect_nov_vs_psk.chr${CHR}.tab | sed 's/ID=//g;s/;[^\t]\+//g' > intersect_nov_psk/intersect_nov_vs_psk.chr${CHR}.tab.overlaps;
+    awk -F'\t' '{ALEN=$5-$4+1; BLEN=$14-$13+1; OVERLAPLEN=$19; printf "%s\t%s\t%s\t%s\t%s\t%f\t%f\n", $9, ALEN, $18, BLEN, OVERLAPLEN, OVERLAPLEN/ALEN, OVERLAPLEN/BLEN}' intersect_psk_nov/intersect_psk_vs_nov.chr${CHR}.tab | sed 's/ID=//g;s/;[^\t]\+//g' > intersect_psk_nov/intersect_psk_vs_nov.chr${CHR}.tab.overlaps;
+    done
+
+for CHR in `seq 1 22`;
+    do
+    ~/soft/MAVR/scripts/draw/draw_heatmap.py -i intersect_nov_psk/intersect_nov_vs_psk.chr${CHR}.tab.overlaps -c 5 -d 6 -o intersect_nov_psk/intersect_nov_vs_psk.chr${CHR}.tab.overlaps.heatmap -b 20,20 -n 0 -x 1 -z 0 -q 1 -l  NOV -y PSK -t "Haploblock overlaps";
+    ~/soft/MAVR/scripts/draw/draw_heatmap.py -i intersect_psk_nov/intersect_psk_vs_nov.chr${CHR}.tab.overlaps -c 5 -d 6 -o intersect_psk_nov/intersect_psk_vs_nov.chr${CHR}.tab.overlaps.heatmap -b 20,20 -n 0 -x 1 -z 0 -q 1 -l  PSK -y NOV -t "Haploblock overlaps";
+
+    done
+
+

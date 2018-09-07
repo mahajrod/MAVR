@@ -29,9 +29,6 @@ GRID_NODE_MAX_MEMORY=10G
 GRID_EXEC=sbatch
 GRID_CONF_FILE=AAA
 
-
-
-
 Trinity --seqType fq \
         --SS_lib_type RF \
         --left ${FORWARD} \
