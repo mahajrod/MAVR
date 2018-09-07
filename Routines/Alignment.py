@@ -208,3 +208,6 @@ class AlignmentRoutines(SequenceRoutines):
                                black_query_id_list=IdList(filename=black_query_id_file) if black_query_id_file else (),
                                white_target_id_list=IdList(filename=white_target_id_file) if white_target_id_file else (),
                                black_target_id_list=IdList(filename=black_target_id_file) if black_target_id_file else ())
+
+    def filter_psl_by_target_len(self, psl_file, output_file, min_target_len=None, max_target_len=None):
+        pass
