@@ -51,9 +51,16 @@ class BLAT(Tool):
 
         self.parallel_execute(options_list, cmd="blat", threads=threads, async_run=async_run,
                               external_process_pool=external_process_pool)
-
-        cat_string = "cat %s > %s" % ("\t".join(output_file_list), output)
-        os.system(cat_string)
+        if add_header:
+            with open(output, "w") as out_fd:
+                pass
+            os.system("cat %s > %s" % (output_file_list[0], output))
+            for filename in output_file_list[1:]:
+                sed_string = "sed -n 6,$p %s > %s" % (filename, output)
+                os.system(sed_string)
+        else:
+            cat_string = "cat %s > %s" % ("\t".join(output_file_list), output)
+            os.system(cat_string)
 
         if remove_tmp_dirs:
             shutil.rmtree(splited_dir, ignore_errors=True)
