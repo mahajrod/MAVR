@@ -7,12 +7,15 @@ from Bio.Align import MultipleSeqAlignment
 
 from Routines import SequenceRoutines
 from Data.Nucleotides import back_degenerate_nucleotides
-from CustomCollections.GeneralCollections import SynDict
+from CustomCollections.GeneralCollections import SynDict, IdList
 
 
 class AlignmentRoutines(SequenceRoutines):
     def __init__(self):
+        self.psl_query_id_column = 9           # zero-based
+        self.psl_target_id_column = 13         # zero-based
         pass
+
     """
     @staticmethod
     def get_db_ids(search_dict):
@@ -166,3 +169,42 @@ class AlignmentRoutines(SequenceRoutines):
         SeqIO.write(self.sequences_from_alignment_generator(alignments, gap_symbol=gap_symbol),
                     output_file, format=output_format)
     """
+
+    def filter_psl_by_ids(self, psl_file, output_file,
+                          white_query_id_list=(),
+                          black_query_id_list=(),
+                          white_target_id_list=(),
+                          black_target_id_list=()):
+
+        with self.metaopen(psl_file, "r") as in_fd, \
+             self.metaopen(output_file, "w") as out_fd:
+
+            for i in range(0, 20):
+                line = in_fd.readline()
+                if line[:3] == "---":
+                    break
+            else:
+                in_fd.seek(0)
+
+            for line in in_fd:
+                tmp_line = line.split("\t")
+                if self.check_id(tmp_line[self.psl_query_id_column],
+                                 white_query_id_list,
+                                 black_query_id_list) and \
+                   self.check_id(tmp_line[self.psl_target_id_column],
+                                 white_target_id_list,
+                                 black_target_id_list):
+
+                    out_fd.write(line)
+
+    def filter_psl_by_ids_from_file(self, psl_file, output_file,
+                                    white_query_id_file=None,
+                                    black_query_id_file=None,
+                                    white_target_id_file=None,
+                                    black_target_id_file=None):
+
+        self.filter_psl_by_ids(psl_file, output_file,
+                               white_query_id_list=IdList(filename=white_query_id_file) if white_query_id_file else (),
+                               black_query_id_list=IdList(filename=black_query_id_file) if black_query_id_file else (),
+                               white_target_id_list=IdList(filename=white_target_id_file) if white_target_id_file else (),
+                               black_target_id_list=IdList(filename=black_target_id_file) if black_target_id_file else ())

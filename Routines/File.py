@@ -21,7 +21,9 @@ class FileRoutines:
 
     @staticmethod
     def metaopen(filename, flags):
-        if filename[-3:] == ".gz":
+        if isinstance(filename, file):
+            return filename
+        elif filename[-3:] == ".gz":
             return gzip.open(filename, flags)
         elif filename[-4:] == ".bz2":
             return bz2.open(filename, flags)
@@ -90,6 +92,19 @@ class FileRoutines:
             if path_to_check[-1] != "/":
                 return path_to_check + "/"
         return path_to_check
+
+    @staticmethod
+    def check_id(id, white_list=(), black_list=()):
+        if white_list and black_list:
+            if (id in white_list) and (id not in black_list):
+                return True
+            return False
+        elif white_list:
+            return True if (id in white_list) else False
+        elif black_list:
+            return False if (id in black_list) else True
+        else:
+            return True
 
     @staticmethod
     def check_dir_path(path_to_check):

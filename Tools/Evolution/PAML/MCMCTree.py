@@ -26,11 +26,11 @@ class MCMCTree(Tool):
      cleandata = 0    * remove sites with ambiguity data (1:yes, 0:no)?
 
        BDparas = 1 1 0.1   * birth, death, sampling
-   kappa_gamma = 6 2      * gamma prior for kappa
-   alpha_gamma = 1 1      * gamma prior for alpha
+    kappa_gamma = 6 2      * gamma prior for kappa
+    alpha_gamma = 1 1      * gamma prior for alpha
 
-   rgene_gamma = 2 20    * gammaDir prior for rate for genes
-  sigma2_gamma = 1 10   * gammaDir prior for sigma^2     (for clock=2 or 3)
+    rgene_gamma = 2 20    * gammaDir prior for rate for genes
+    sigma2_gamma = 1 10   * gammaDir prior for sigma^2     (for clock=2 or 3)
 
       finetune = 1: .1 .1 .1 .1 .1 .1 * auto (0 or 1): times, musigma2, rates, mixing, paras, FossilErr
 
@@ -87,18 +87,18 @@ class MCMCTree(Tool):
             model_type = 3
         elif model == "HKY85":
             model_type = 4
-        elif model == "TC92":
-            model_type = 5
-        elif model == "TN93":
-            model_type = 6
-        elif model == "GTR":
-            model_type = 7
-        elif model == "UNREST":
-            model_type = 8
-        elif model == "REVu":
-            model_type = 9
-        elif model == "UNSETu":
-            model_type = 10
+        #elif model == "TC92":
+        #    model_type = 5
+        #elif model == "TN93":
+        #    model_type = 6
+        #elif model == "GTR":
+        #    model_type = 7
+        #elif model == "UNREST":
+        #    model_type = 8
+        #elif model == "REVu":
+        #    model_type = 9
+        #elif model == "UNSETu":
+        #    model_type = 10
 
         else:
             raise(ValueError, "Wrong model was set")       
