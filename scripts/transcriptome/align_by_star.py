@@ -112,12 +112,12 @@ for sample in sample_list:
                adapter_seq_for_three_prime_clip=None,
                max_mismatch_percent_for_adapter_trimming=None,
                three_prime_trim_after_adapter_clip=None,
-               output_type="BAM", sort_bam=True,
+               output_type="BAM", sort_bam=False,
                max_memory_for_bam_sorting=args.max_memory_for_bam_sorting,
                include_unmapped_reads_in_bam=args.include_unmapped_reads,
                output_unmapped_reads=args.include_unmapped_reads, output_dir=alignment_sample_dir,
                two_pass_mode=True, max_intron_length=args.max_intron_length)
 
-    print("\tIndexing bam file...")
-    resulting_bam_file = "%s/Aligned.sortedByCoord.out.bam" % alignment_sample_dir
-    SamtoolsV1.index(resulting_bam_file)
+    #print("\tIndexing bam file...")
+    #resulting_bam_file = "%s/Aligned.sortedByCoord.out.bam" % alignment_sample_dir
+    #SamtoolsV1.index(resulting_bam_file)
