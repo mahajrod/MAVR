@@ -25,7 +25,7 @@ for SP in amazona_agilis;
 
     mkdir -p ${EXONERATE_OUTPUT_DIR}
 
-    EXONERATE_OUTPUT_FILE=${EXONERATE_OUTPUT_DIR}${REFERENCE_SPECIES}_rerun/${SLURM_ARRAY_TASK_ID}.exonerate.out
+    EXONERATE_OUTPUT_FILE=${EXONERATE_OUTPUT_DIR}${REFERENCE_SPECIES}_rerun_${SLURM_ARRAY_TASK_ID}.exonerate.out
 
 
     exonerate  --model protein2genome --showalignment --showquerygff --showtargetgff \
