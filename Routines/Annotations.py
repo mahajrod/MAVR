@@ -599,7 +599,7 @@ class AnnotationsRoutines(SequenceRoutines):
 
         for filename in filtered_chunk_files:
             full_filename = "%s/%s" % (chunk_dir, filename)
-            chunk_number = filename.strip(chunk_filename_suffix).split(separator)[-1] if chunk_filename_prefix else filename.split(separator)[-1]
+            chunk_number = int(filename.strip(chunk_filename_suffix).split(separator)[-1]) if chunk_filename_prefix else int(filename.split(separator)[-1])
             chunk_numbers.append(chunk_number)
 
             if os.path.getsize(full_filename) < minimum_chunk_size:
