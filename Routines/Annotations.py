@@ -559,3 +559,74 @@ class AnnotationsRoutines(SequenceRoutines):
 
         return feature_count_dict
 
+    @staticmethod
+    def check_chunks(chunk_dir, number_of_chunks, minimum_chunk_size, separator="_",
+                     chunk_filename_suffix=None, chunk_filename_prefix=None):
+        chunk_files = os.listdir(chunk_dir)
+        filtered_chunk_files = []
+        too_small_chunks = []
+        chunk_numbers = []
+
+        suffix_length = len(chunk_filename_suffix) if chunk_filename_suffix else None
+        prefix_length = len(chunk_filename_prefix) if chunk_filename_prefix else None
+
+        for filename in chunk_files:
+            filename_length = len(filename)
+            full_filename = "%s/%s" % (chunk_dir, filename)
+
+            if os.path.isdir(full_filename):
+                continue
+
+            if chunk_filename_suffix and chunk_filename_prefix:
+                if (filename_length <= suffix_length) or (filename_length <= prefix_length):
+                    continue
+                if (filename[0:prefix_length] == chunk_filename_prefix) and (filename[-suffix_length:] == chunk_filename_suffix):
+                    filtered_chunk_files.append(filename)
+
+            elif chunk_filename_prefix:
+                if filename_length <= prefix_length:
+                    continue
+                if filename[0:prefix_length] == chunk_filename_prefix:
+                    filtered_chunk_files.append(filename)
+
+            elif chunk_filename_suffix:
+                if filename_length <= suffix_length:
+                    continue
+                if filename[-suffix_length:] == chunk_filename_suffix:
+                    filtered_chunk_files.append(filename)
+            else:
+                filtered_chunk_files.append(filename)
+
+        for filename in filtered_chunk_files:
+            full_filename = "%s/%s" % (chunk_dir, filename)
+            chunk_number = filename.strip(chunk_filename_suffix).split(separator)[-1] if chunk_filename_prefix else filename.split(separator)[-1]
+            chunk_numbers.append(chunk_number)
+
+            if os.path.getsize(full_filename) < minimum_chunk_size:
+                too_small_chunks.append(chunk_number)
+
+        chunk_numbers.sort()
+        too_small_chunks.sort()
+
+        if chunk_numbers[-1] > number_of_chunks:
+            print("Largest number of present chunks(%i) is larger than expected(%i)" % (chunk_numbers[-1],
+                                                                                        number_of_chunks))
+
+        absent_chunks = []
+        for i in range(1, number_of_chunks + 1):
+            if i not in chunk_numbers:
+                absent_chunks.append(i)
+
+        if absent_chunks:
+            print("Absent chunks(total %i): " % len(absent_chunks))
+            for k in absent_chunks:
+                print(k)
+        else:
+            print("No absent chunks")
+
+        if too_small_chunks:
+            print("Too small chunks (total %i): " % len(too_small_chunks))
+            for k in too_small_chunks:
+                print(k)
+        else:
+            print("No too small chunks")
