@@ -40,7 +40,7 @@ class STAR(Tool):
               exon_tag_to_use_as_gene_id=None, length_of_sequences_flanking_junction=None, junction_tab_file_list=None,
               three_prime_trim=None, five_prime_trim=None, adapter_seq_for_three_prime_clip=None,
               max_mismatch_percent_for_adapter_trimming=None, three_prime_trim_after_adapter_clip=None,
-              output_type="BAM", sort_bam=True, max_memory_for_bam_sorting=8000000000, include_unmapped_reads_in_bam=True,
+              output_type="BAM", sort_bam=True, max_memory_per_thread_for_bam_sorting="4G", include_unmapped_reads_in_bam=True,
               output_unmapped_reads=True, output_dir="./", two_pass_mode=False, max_intron_length=None):
         if reverse_read_list:
             if len(forward_read_list) != len(reverse_read_list):
@@ -66,16 +66,26 @@ class STAR(Tool):
         options += " --clip3pAdapterMMp %f" % max_mismatch_percent_for_adapter_trimming if max_mismatch_percent_for_adapter_trimming else ""
         options += " --clip3pAfterAdapterNbases %i" % three_prime_trim_after_adapter_clip if three_prime_trim_after_adapter_clip else ""
 
-        options += " --outSAMtype %s %s" % (output_type, "SortedByCoordinate" if sort_bam else "Unsorted")
-        options += " --limitBAMsortRAM %i" % max_memory_for_bam_sorting if max_memory_for_bam_sorting else ""
+        options += " --outSAMtype %s %s" % (output_type, "Unsorted") # "SortedByCoordinate" if sort_bam else "Unsorted")
+        #options += " --limitBAMsortRAM %i" % max_memory_for_bam_sorting if max_memory_for_bam_sorting else ""
         options += " --outSAMunmapped Within" if include_unmapped_reads_in_bam else ""
         options += " --outReadsUnmapped Fastx" if output_unmapped_reads else ""
         options += " --outFileNamePrefix %s" % output_dir if output_dir else ""
         options += " --twopassMode Basic" if two_pass_mode else ""
         options += " --alignIntronMax %i" % max_intron_length if max_intron_length else ""
 
-        self.execute(options)
-        
+        #self.execute(options)
+
+        if sort_bam:
+            print("\tSorting...")
+            unsorted_bam = "%s/Aligned.out.bam" % output_dir
+            sorted_bam = "%s/Aligned.sortedByCoord.out.bam" % output_dir
+            SamtoolsV1.threads = self.threads
+            SamtoolsV1.sort(unsorted_bam, sorted_bam, max_memory_per_thread=max_memory_per_thread_for_bam_sorting)
+
+            print("\tIndexing bam file...")
+            SamtoolsV1.index(sorted_bam)
+
     def align_samples(self, samples_dir, output_dir, genome_dir, genome_fasta=None, samples=None,
                       annotation_gtf=None,  sjdboverhang=None,
                       genomeSAindexNbases=None, genomeChrBinNbits=None, genome_size=None,
@@ -84,7 +94,7 @@ class STAR(Tool):
                       junction_tab_file_list=None, three_prime_trim=None, five_prime_trim=None,
                       adapter_seq_for_three_prime_clip=None, max_mismatch_percent_for_adapter_trimming=None,
                       three_prime_trim_after_adapter_clip=None, output_type="BAM", sort_bam=True,
-                      max_memory_for_bam_sorting=8000000000, include_unmapped_reads_in_bam=True,
+                      max_memory_per_thread_for_bam_sorting="4G", include_unmapped_reads_in_bam=True,
                       output_unmapped_reads=True, two_pass_mode=True, max_intron_length=None):
         #STAR.threads = threads
         #STAR.path = star_dir
@@ -120,14 +130,10 @@ class STAR(Tool):
                        max_mismatch_percent_for_adapter_trimming=max_mismatch_percent_for_adapter_trimming,
                        three_prime_trim_after_adapter_clip=three_prime_trim_after_adapter_clip,
                        output_type=output_type, sort_bam=sort_bam,
-                       max_memory_for_bam_sorting=max_memory_for_bam_sorting,
+                       max_memory_per_thread_for_bam_sorting=max_memory_per_thread_for_bam_sorting,
                        include_unmapped_reads_in_bam=include_unmapped_reads_in_bam,
                        output_unmapped_reads=output_unmapped_reads, output_dir=alignment_sample_dir,
                        two_pass_mode=two_pass_mode, max_intron_length=max_intron_length)
-        
-            print("\tIndexing bam file...")
-            resulting_bam_file = "%s/Aligned.sortedByCoord.out.bam" % alignment_sample_dir
-            SamtoolsV1.index(resulting_bam_file)
 
     def align_miRNA(self, genome_dir, se_read_list, annotation_gtf=None, output_dir="./",
                     max_memory_for_bam_sorting=8000000000, max_alignments_per_read=10, no_soft_clip=True,
