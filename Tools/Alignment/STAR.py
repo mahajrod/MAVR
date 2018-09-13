@@ -118,7 +118,7 @@ class STAR(Tool):
         
             print("\tAligning reads...")
         
-            STAR.align(genome_dir, forward_files, reverse_read_list=reverse_files,
+            self.align(genome_dir, forward_files, reverse_read_list=reverse_files,
                        annotation_gtf=annotation_gtf if not genome_fasta else None,
                        feature_from_gtf_to_use_as_exon=feature_from_gtf_to_use_as_exon,
                        exon_tag_to_use_as_transcript_id=exon_tag_to_use_as_transcript_id,
