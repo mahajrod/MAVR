@@ -283,6 +283,7 @@ class Exonerate(Tool):
                       "stats_other_secondary": "%s.other_secondary.stats" % output_prefix,
                       "stats": "%s.stats" % output_prefix,
                       "stats_hit": "%s.hit.stats" % output_prefix,
+                      "stats_general": "%s.general.stats" % output_prefix,
 
                       "top_hits_gff" : "%s.top_hits.gff" % output_prefix,
                       "top_hits_vulgar" : "%s.top_hits.vulgar" % output_prefix,
@@ -501,8 +502,6 @@ class Exonerate(Tool):
                     elif tmp[:6] == "cigar:":
                         fd_dict["cigar"].write(tmp[6:])
                         fd_dict["cigar" + output_type].write(tmp[6:])
-        for entry in fd_dict:
-            fd_dict[entry].close()
 
         # extract top hits from vulgar
         awk_string_prefix = "awk '{if (substr($0,0,1) != \"#\") {if ($1 != SEQ_ID) {print $0}; SEQ_ID=$1}}' "
@@ -513,12 +512,21 @@ class Exonerate(Tool):
         awk_string_prefix = "awk -F'\\t' '{printf \"%s\\t%s\\t%s\\n\",$1,$4,$5}' "
         os.system(awk_string_prefix + " %s > %s" % (names_dict["top_hits_query_gff"], names_dict["top_hits_simple"]))
 
-        print("Reference proteins:\t%i" % len(reference_protein_dict))
-        print("Full length top hits:\t%i" % full_length_top_counter)
-        print("Other top hits:\t%i" % other_top_counter)
-        print("Full length secondary hits:\t%i" % full_length_secondary_counter)
-        print("Other secondary hits:\t%i" % other_secondary_counter)
-        print("Proteins without hits:\t%i" % (len(reference_protein_dict) - full_length_top_counter - other_top_counter))
+        stat_string = ""
+
+        stat_string += "Reference proteins:\t%i\n" % len(reference_protein_dict)
+        stat_string += "Full length top hits:\t%i\n" % full_length_top_counter
+        stat_string += "Other top hits:\t%i\n" % other_top_counter
+        stat_string += "Full length secondary hits:\t%i\n" % full_length_secondary_counter
+        stat_string += "Other secondary hits:\t%i\n" % other_secondary_counter
+        stat_string += "Proteins without hits:\t%i\n" % (len(reference_protein_dict) - full_length_top_counter - other_top_counter)
+
+        print(stat_string)
+
+        fd_dict["stats_general"].write(stat_string)
+
+        for entry in fd_dict:
+            fd_dict[entry].close()
 
     @staticmethod
     def extract_top_hits_from_target_gff(list_of_target_gff, top_hits_gff, secondary_hits_gff, id_white_list_file=None,
