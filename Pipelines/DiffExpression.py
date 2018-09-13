@@ -32,7 +32,7 @@ class DiffExpressionPipeline(FilteringPipeline):
                        junction_tab_file_list=None,
                        three_prime_trim=None, five_prime_trim=None, adapter_seq_for_three_prime_clip=None,
                        max_mismatch_percent_for_adapter_trimming=None, three_prime_trim_after_adapter_clip=None,
-                       output_type="BAM", sort_bam=True, max_memory_for_bam_sorting=None,
+                       output_type="BAM", sort_bam=True, max_memory_per_thread_for_bam_sorting="4G",
                        include_unmapped_reads_in_bam=True, output_unmapped_reads=True,
                        two_pass_mode=False, star_dir=None, threads=1, max_intron_length=None,
                        stranded_rnaseq="yes",  min_alignment_quality=10, feature_type_for_htseq="exon",
@@ -54,7 +54,7 @@ class DiffExpressionPipeline(FilteringPipeline):
         count_se_table = TwoLvlDict()
         count_all_table = TwoLvlDict()
         count_pe_table_file = "%s/%s.pe.tab" % (output_directory, count_table_file_prefix)
-        count_se_table_file = "%%s/s.se.tab" % (output_directory, count_table_file_prefix)
+        count_se_table_file = "%%s/%s.se.tab" % (output_directory, count_table_file_prefix)
         count_all_table_file = "%s/%s.all.tab" % (output_directory, count_table_file_prefix)
 
         for sample in sample_list:
@@ -81,7 +81,7 @@ class DiffExpressionPipeline(FilteringPipeline):
                        max_mismatch_percent_for_adapter_trimming=max_mismatch_percent_for_adapter_trimming,
                        three_prime_trim_after_adapter_clip=three_prime_trim_after_adapter_clip,
                        output_type=output_type, sort_bam=sort_bam,
-                       max_memory_for_bam_sorting=max_memory_for_bam_sorting,
+                       max_memory_per_thread_for_bam_sorting=max_memory_per_thread_for_bam_sorting,
                        include_unmapped_reads_in_bam=include_unmapped_reads_in_bam,
                        output_unmapped_reads=output_unmapped_reads, output_dir=alignment_sample_dir,
                        two_pass_mode=two_pass_mode, max_intron_length=max_intron_length)
@@ -119,7 +119,7 @@ class DiffExpressionPipeline(FilteringPipeline):
                            max_mismatch_percent_for_adapter_trimming=max_mismatch_percent_for_adapter_trimming,
                            three_prime_trim_after_adapter_clip=three_prime_trim_after_adapter_clip,
                            output_type=output_type, sort_bam=sort_bam,
-                           max_memory_for_bam_sorting=max_memory_for_bam_sorting,
+                           max_memory_per_thread_for_bam_sorting=max_memory_per_thread_for_bam_sorting,
                            include_unmapped_reads_in_bam=include_unmapped_reads_in_bam,
                            output_unmapped_reads=output_unmapped_reads, output_dir=alignment_sample_se_dir,
                            two_pass_mode=two_pass_mode, max_intron_length=max_intron_length)
