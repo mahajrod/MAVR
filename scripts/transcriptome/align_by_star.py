@@ -40,9 +40,9 @@ parser.add_argument("-r", "--star_dir", action="store", dest="star_dir", default
 parser.add_argument("-u", "--include_unmapped_reads", action="store_true",
                     dest="include_unmapped_reads", default=False,
                     help="Include unmapped reads in Bam file")
-parser.add_argument("-m", "--max_memory_for_bam_sorting", action="store", type=int,
-                    dest="max_memory_for_bam_sorting", default=8000000000,
-                    help="Max memory for bam sorting")
+parser.add_argument("-m", "--max_memory_per_thread_for_bam_sorting", action="store",
+                    dest="max_memory_per_thread_for_bam_sorting", default="4G",
+                    help="Max memory per thread for bam sorting. Default: 4G")
 parser.add_argument("-x", "--max_intron_length", action="store", dest="max_intron_length", type=int,
                     help="Maximum intron length. Default: not set")
 parser.add_argument("--input_is_se", action="store_true", dest="input_is_se", default=False,
@@ -63,7 +63,7 @@ skliver@dcdell:/mnt/guatemala/skliver/Pusa_sibirica/transcriptome/own/alignment/
     -t 30 \
     -o alignment/ \
     -i 2400000000 \
-    -m 100000000000 \
+    -m 4G \
     -r ~/Soft/STAR/bin/Linux_x86_64/
 
 ~/Soft/MAVR/scripts/transcriptome/align_by_star.py \
@@ -73,7 +73,7 @@ skliver@dcdell:/mnt/guatemala/skliver/Pusa_sibirica/transcriptome/own/alignment/
     -t 30 \
     -o alignment/ \
     -i 2400000000 \
-    -m 100000000000 \
+    -m 4G \
     -r ~/Soft/STAR/bin/Linux_x86_64/
 
 """
@@ -81,6 +81,31 @@ skliver@dcdell:/mnt/guatemala/skliver/Pusa_sibirica/transcriptome/own/alignment/
 STAR.threads = args.threads
 STAR.path = args.star_dir
 
+STAR.align_samples(args.samples_dir, args.output_dir, args.genome_dir,
+                   genome_fasta=args.genome_fasta,
+                   samples=args.samples,
+                   annotation_gtf=args.annotation_gtf,
+                   sjdboverhang=None,
+                   genomeSAindexNbases=None,
+                   genomeChrBinNbits=None, genome_size=args.genome_size,
+                   feature_from_gtf_to_use_as_exon=None,
+                   exon_tag_to_use_as_transcript_id=None,
+                   exon_tag_to_use_as_gene_id=None,
+                   length_of_sequences_flanking_junction=None,
+                   junction_tab_file_list=args.junction_tab_file,
+                   three_prime_trim=None,
+                   five_prime_trim=None,
+                   adapter_seq_for_three_prime_clip=None,
+                   max_mismatch_percent_for_adapter_trimming=None,
+                   three_prime_trim_after_adapter_clip=None,
+                   output_type="BAM", sort_bam=True,
+                   max_memory_per_thread_for_bam_sorting=args.max_memory_per_thread_for_bam_sorting,
+                   include_unmapped_reads_in_bam=args.include_unmapped_reads,
+                   output_unmapped_reads=args.include_unmapped_reads,
+                   two_pass_mode=True,
+                   max_intron_length=args.max_intron_length)
+
+"""
 if args.genome_fasta:
     STAR.index(args.genome_dir, args.genome_fasta, annotation_gtf=args.annotation_gtf,
                junction_tab_file=args.junction_tab_file, sjdboverhang=None,
@@ -89,6 +114,10 @@ if args.genome_fasta:
 sample_list = args.samples if args.samples else Pipeline.get_sample_list(args.samples_dir)
 
 FileRoutines.safe_mkdir(args.output_dir)
+
+
+
+
 
 for sample in sample_list:
     print ("Handling %s" % sample)
@@ -121,3 +150,6 @@ for sample in sample_list:
     #print("\tIndexing bam file...")
     #resulting_bam_file = "%s/Aligned.sortedByCoord.out.bam" % alignment_sample_dir
     #SamtoolsV1.index(resulting_bam_file)
+
+
+    """
