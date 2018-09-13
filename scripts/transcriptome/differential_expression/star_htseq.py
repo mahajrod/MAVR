@@ -61,9 +61,9 @@ parser.add_argument("-r", "--star_dir", action="store", dest="star_dir", default
 parser.add_argument("-u", "--include_unmapped_reads", action="store_true",
                     dest="include_unmapped_reads", default=False,
                     help="Include unmapped reads in Bam file")
-parser.add_argument("-m", "--max_memory_for_bam_sorting", action="store", type=int,
-                    dest="max_memory_for_bam_sorting", default=8000000000,
-                    help="Max memory for bam sorting")
+parser.add_argument("-m", "--max_memory_per_thread_for_bam_sorting", action="store",
+                    dest="max_memory_per_thread_for_bam_sorting", default="4G",
+                    help="Max memory per thread for bam sorting. Default: 4G")
 parser.add_argument("-x", "--max_intron_length", action="store", dest="max_intron_length", type=int,
                     help="Maximum intron length. Default: not set")
 
@@ -125,7 +125,7 @@ DiffExpressionPipeline.star_and_htseq(args.genome_dir, args.samples_dir, args.ou
                                       max_mismatch_percent_for_adapter_trimming=None,
                                       three_prime_trim_after_adapter_clip=None,
                                       output_type="BAM", sort_bam=True,
-                                      max_memory_for_bam_sorting=args.max_memory_for_bam_sorting,
+                                      max_memory_per_thread_for_bam_sorting=args.max_memory_per_thread_for_bam_sorting,
                                       include_unmapped_reads_in_bam=args.include_unmapped_reads,
                                       output_unmapped_reads=True,  two_pass_mode=False, star_dir=args.star_dir,
                                       threads=args.threads, max_intron_length=args.max_intron_length,
