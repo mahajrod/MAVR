@@ -14,6 +14,8 @@ from Routines.SequenceCluster import SequenceClusterRoutines
 class EggNOGRoutines(SequenceClusterRoutines):
     def __init__(self):
         SequenceClusterRoutines.__init__(self)
+        self.members_tsv_family_column = 1
+        self.members_tsv_sequence_id_column = 5
 
     @staticmethod
     def edit_profile_names_in_fam_file(input_fam_file, output_fam_file, comments_prefix="#"):
@@ -80,7 +82,10 @@ class EggNOGRoutines(SequenceClusterRoutines):
 
     def get_species_from_eggnog_tsv(self, eggnog_tsv, output_prefix, email=None):
 
-        cluster_dict = SynDict(filename=eggnog_tsv, key_index=1, value_index=5, split_values=True)
+        cluster_dict = SynDict(filename=eggnog_tsv,
+                               key_index=self.members_tsv_family_column,
+                               value_index=self.members_tsv_sequence_id_column,
+                               split_values=True)
 
         species_ids = self.extract_labels_from_cluster_elements(cluster_dict, separator=".", label_position="first")
         print("Input species ids: %s" % " ".join(species_ids))
