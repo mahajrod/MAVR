@@ -91,8 +91,6 @@ class SNPeff(JavaTool):
                 tmp.append(synonym_dict[gene_name] if gene_name in synonym_dict else "")
                 out_fd.write("\t".join(tmp) + "\n")
 
-            if "MUSNIGT00040372" in synonym_dict:
-                print "AAAAAAAAAAAAAAAAAAA"
 
 if __name__ == "__main__":
     import os
