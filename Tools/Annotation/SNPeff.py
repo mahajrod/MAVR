@@ -85,7 +85,8 @@ class SNPeff(JavaTool):
                 #print tmp
                 gene_name = tmp[snpeff_tab_column_id_column]
                 #print gene_name
-
+                print gene_name
+                print synonym_dict[gene_name]
                 if gene_name in synonym_dict:
                     print gene_name, synonym_dict[gene_name]
                 tmp.append(synonym_dict[gene_name] if gene_name in synonym_dict else "")
