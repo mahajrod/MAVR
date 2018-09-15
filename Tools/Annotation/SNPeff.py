@@ -83,7 +83,7 @@ class SNPeff(JavaTool):
             for line in in_fd:
                 tmp = line.strip().split("\t")
                 gene_name = tmp[8]
-                tmp.append(synonym_dict[gene_name])
+                tmp.append(synonym_dict[gene_name] if gene_name in synonym_dict else "")
                 out_fd.write("\t".join(tmp) + "\n")
 
 if __name__ == "__main__":
