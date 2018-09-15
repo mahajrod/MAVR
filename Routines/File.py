@@ -284,8 +284,8 @@ class FileRoutines:
                                     header=False, outfile_prefix=None, comments_prefix="#"):
         # column number should start from 0
         # column_value should be string or list of strings
-
-        splited_name = tsv_file.split(".")
+        if not isinstance(tsv_file, file):
+            splited_name = tsv_file.split(".")
 
         comments_prefix_len = len(comments_prefix)
 
