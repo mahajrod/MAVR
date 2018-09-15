@@ -280,22 +280,15 @@ class FileRoutines:
         for entry in out_fd_dict:
             out_fd_dict[entry].close()
 
-    def tsv_extract_by_column_value(self, tsv_file, column_number, column_value, separator="\t",
-                                    header=False, outfile_prefix=None, comments_prefix="#"):
+    def tsv_extract_by_column_value(self, tsv_file, column_number, column_value,
+                                    output_file, comments_prefix="#", header=False, separator="\t"):
         # column number should start from 0
         # column_value should be string or list of strings
-        if not isinstance(tsv_file, file):
-            splited_name = tsv_file.split(".")
 
         comments_prefix_len = len(comments_prefix)
 
-        extension = splited_name[-1] if len(splited_name) > 1 else ""
-        out_prefix = outfile_prefix if outfile_prefix is not None \
-            else ".".join(splited_name[:-1]) if len(splited_name) > 1 else splited_name[0]
-        out_fd = open("%s.%s" % (out_prefix, extension), "w")
-
         column_value_list = column_value if isinstance(column_value, Iterable) else []
-        with self.metaopen(tsv_file, "r") as in_fd:
+        with self.metaopen(tsv_file, "r") as in_fd, self.metaopen(output_file, "w") as out_fd:
             if header:
                 out_fd.write(in_fd.readline())
             for line in in_fd:
