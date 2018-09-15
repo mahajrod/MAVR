@@ -21,9 +21,12 @@ parser.add_argument("-k", "--key_index", action="store", dest="key_index", type=
                     help="Key column in file with synonyms(0-based). Default: 0")
 parser.add_argument("-v", "--value_index", action="store", dest="value_index", type=int, default=1,
                     help="Value column in file with synonyms(0-based). Default: 1")
+parser.add_argument("-a", "--snpeff_tab_column_id_column", action="store", dest="snpeff_tab_column_id_column", type=int, default=8,
+                    help="SNPeff tab file ID column. Default: 0")
 
 args = parser.parse_args()
 
 SNPeff.add_gene_synonyms(args.input, args.output, args.synonym_file,
                          key_column=args.key_index, value_column=args.value_index,
-                         header_name_for_synonym=args.header_name_for_synonym)
+                         header_name_for_synonym=args.header_name_for_synonym,
+                         snpeff_tab_column_id_column=8)
