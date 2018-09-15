@@ -19,8 +19,8 @@ parser.add_argument("-f", "--values_file", action="store", dest="values_file",
                     help="File with values. Ignored if -v/--values is set")
 parser.add_argument("-s", "--separator", action="store", dest="separator", default="\t",
                     help="Separator used in input file. Default: '\t'")
-parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", default=None,
-                    help="Output_prefix")
+parser.add_argument("-o", "--output", action="store", dest="output", default=sys.stdout,
+                    help="Output file. Default: stdout")
 parser.add_argument("-e", "--header", action="store_true", dest="header", default=False,
                     help="Set if header is present in input file")
 
@@ -31,5 +31,5 @@ if (not args.values) and (not args.values_file):
 
 values = args.values.split(",") if args.values else IdList(filename=args.values_file)
 
-FileRoutines.tsv_extract_by_column_value(args.input_file, args.column_number, values, separator=args.separator,
-                                         header=args.header, outfile_prefix=args.output_prefix)
+FileRoutines.tsv_extract_by_column_value(args.input_file, args.column_number, values, args.output,
+                                         separator=args.separator, header=args.header)
