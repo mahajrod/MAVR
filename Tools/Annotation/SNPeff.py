@@ -70,7 +70,7 @@ class SNPeff(JavaTool):
         self.execute(options, cmd="")
 
     def add_gene_synonyms(self, input_file, output_file, synonym_file, key_column=0, value_column=1,
-                          header_name_for_synonym="Common_name"):
+                          header_name_for_synonym="Common_name", snpeff_tab_column_id_column=8):
         synonym_dict = SynDict(filename=synonym_file,
                                key_index=key_column,
                                value_index=value_column,
@@ -82,7 +82,7 @@ class SNPeff(JavaTool):
 
             for line in in_fd:
                 tmp = line.strip().split("\t")
-                gene_name = tmp[8]
+                gene_name = tmp[snpeff_tab_column_id_column]
                 tmp.append(synonym_dict[gene_name] if gene_name in synonym_dict else "")
                 out_fd.write("\t".join(tmp) + "\n")
 
