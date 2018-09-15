@@ -71,7 +71,10 @@ class SNPeff(JavaTool):
 
     def add_gene_synonyms(self, input_file, output_file, synonym_file, key_column=0, value_column=1,
                           header_name_for_synonym="Common_name"):
-        synonym_dict = SynDict(filename=synonym_file, key_index=key_column, value_index=value_column)
+        synonym_dict = SynDict(filename=synonym_file,
+                               key_index=key_column,
+                               value_index=value_column,
+                               comments_prefix="#")
 
         with open(input_file, "r") as in_fd, open(output_file, "w") as out_fd:
             header = in_fd.readline().strip() + "\t%s\n" % header_name_for_synonym
@@ -82,11 +85,6 @@ class SNPeff(JavaTool):
                 gene_name = tmp[8]
                 tmp.append(synonym_dict[gene_name])
                 out_fd.write("\t".join(tmp) + "\n")
-
-
-
-
-
 
 if __name__ == "__main__":
     import os
