@@ -24,8 +24,6 @@ parser.add_argument("-v", "--value_index", action="store", dest="value_index", t
 
 args = parser.parse_args()
 
-SNPeff.jar_path = args.snpeff_dir
-SNPeff.max_memory = args.memory
 SNPeff.add_gene_synonyms(args.input, args.output, args.synonym_file,
                          key_column=args.key_index, value_column=args.value_index,
                          header_name_for_synonym=args.header_name_for_synonym)
