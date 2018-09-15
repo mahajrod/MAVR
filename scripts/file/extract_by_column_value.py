@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-
+import sys
 import argparse
 from CustomCollections.GeneralCollections import IdList
 from Routines import FileRoutines
@@ -8,8 +8,8 @@ from Routines import FileRoutines
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", "--input_file", action="store", dest="input_file",
-                    help="Input file")
+parser.add_argument("-i", "--input_file", action="store", dest="input_file", default=sys.stdin,
+                    help="Input file. Default: stdin")
 parser.add_argument("-c", "--column_number", action="store", dest="column_number", type=int,
                     help="Column number(0-based)")
 parser.add_argument("-v", "--values", action="store", dest="values",
