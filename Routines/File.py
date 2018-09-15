@@ -281,11 +281,14 @@ class FileRoutines:
             out_fd_dict[entry].close()
 
     def tsv_extract_by_column_value(self, tsv_file, column_number, column_value, separator="\t",
-                                    header=False, outfile_prefix=None):
+                                    header=False, outfile_prefix=None, comments_prefix="#"):
         # column number should start from 0
         # column_value should be string or list of strings
 
         splited_name = tsv_file.split(".")
+
+        comments_prefix_len = len(comments_prefix)
+
         extension = splited_name[-1] if len(splited_name) > 1 else ""
         out_prefix = outfile_prefix if outfile_prefix is not None \
             else ".".join(splited_name[:-1]) if len(splited_name) > 1 else splited_name[0]
@@ -296,6 +299,8 @@ class FileRoutines:
             if header:
                 out_fd.write(in_fd.readline())
             for line in in_fd:
+                if line[:comments_prefix_len] == comments_prefix:
+                    out_fd.write(line)
                 line_str = line.strip().split(separator)
                 if line_str[column_number] in column_value_list:
                     out_fd.write(line)
