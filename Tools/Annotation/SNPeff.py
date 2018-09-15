@@ -75,7 +75,7 @@ class SNPeff(JavaTool):
                                key_index=key_column,
                                value_index=value_column,
                                comments_prefix="#")
-        #print synonym_dict
+        print synonym_dict
         with open(input_file, "r") as in_fd, open(output_file, "w") as out_fd:
             header = in_fd.readline().strip() + "\t%s\n" % header_name_for_synonym
             out_fd.write(header)
