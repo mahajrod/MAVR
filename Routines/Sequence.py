@@ -2191,7 +2191,7 @@ class SequenceRoutines(FileRoutines):
             total_softmasked_nucleotides += softmasked_nucleotides_dict[record_id]
             total_length += record_len
 
-            percent_softmasked_nucleotides_dict[record_dict] = float(softmasked_nucleotides_dict[record_id]) / float(record_len)
+            percent_softmasked_nucleotides_dict[record_id] = float(softmasked_nucleotides_dict[record_id]) / float(record_len)
 
         stats_string = "Total length: %i\n" % total_length
         stats_string += "Softmasked nucleotides: %i\n" % total_softmasked_nucleotides
