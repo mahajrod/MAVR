@@ -2178,6 +2178,52 @@ class SequenceRoutines(FileRoutines):
         SamtoolsV1.check_for_fasta_index(reference)
         CreateSequenceDictionary.check_for_fasta_dict(reference)
 
+    def count_softmasked_nucleotides(self, record_dict, verbose=False, stats_file=None):
+
+        total_softmasked_nucleotides = 0
+        total_length = 0
+        softmasked_nucleotides_dict = SynDict()
+        percent_softmasked_nucleotides_dict = SynDict()
+
+        for record_id in record_dict:
+            record_len = len(record_dict[record_id].seq)
+            softmasked_nucleotides_dict[record_id] = sum(c.islower() for c in record_dict[record_id].seq)
+            total_softmasked_nucleotides += softmasked_nucleotides_dict[record_id]
+            total_length += record_len
+
+            percent_softmasked_nucleotides_dict[record_dict] = float(softmasked_nucleotides_dict[record_id]) / float(record_len)
+
+        stats_string = "Total length: %i\n" % total_length
+        stats_string += "Softmasked nucleotides: %i\n" % total_softmasked_nucleotides
+        stats_string += "Softmasked: %.2f\n" % (float(total_softmasked_nucleotides) / float(total_length))
+
+        if verbose:
+            print(stats_string)
+
+        if stats_file:
+            with self.metaopen(stats_file, "w") as out_fd:
+                out_fd.write(stats_string)
+
+        return softmasked_nucleotides_dict, percent_softmasked_nucleotides_dict
+
+    def count_softmasked_nucleotides_from_file(self, sequence_file, output_prefix, verbose=False, parsing_mode="parse",
+                                               format="fasta", index_file=None):
+
+        record_dict = self.parse_seq_file(sequence_file, parsing_mode, format, index_file=index_file)
+
+        softmasked_counts_file = "%s.sofmasking.counts" % output_prefix
+        softmasked_percent_file = "%s.sofmasking.persent" % output_prefix
+        softmasked_stats_file = "%s.sofmasking.stats" % output_prefix
+
+        softmasked_nucleotides_dict, percent_softmasked_nucleotides_dict = self.count_softmasked_nucleotides(record_dict,
+                                                                                                             verbose=verbose,
+                                                                                                             stats_file=softmasked_stats_file)
+        softmasked_nucleotides_dict.write(softmasked_counts_file)
+        percent_softmasked_nucleotides_dict.write(softmasked_percent_file)
+
+        return softmasked_nucleotides_dict, percent_softmasked_nucleotides_dict
+
+
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
     lengths_dict = SynDict()
