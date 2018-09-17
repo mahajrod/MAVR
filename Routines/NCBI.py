@@ -407,13 +407,25 @@ class NCBIRoutines(SequenceRoutines):
 
     def get_cds_for_proteins(self, protein_id_list, output_prefix, download_chunk_size=100, temp_dir_prefix="temp",
                              keyword_for_mitochondrial_pep="mitochondrion"):
+        duplicated_protein_id_list = IdList()
+        protein_id_uniq_list = IdList()
 
-        protein_id_uniq_list = list(set(protein_id_list))
+        prev_protein_id = ""
+        for protein_id in sorted(protein_id_list):
+            if protein_id != prev_protein_id:
+                protein_id_uniq_list.append(protein_id_uniq_list)
+                prev_protein_id = protein_id
 
-        if len(protein_id_list) != len(protein_id_uniq_list):
+            else:
+                duplicated_protein_id_list.append(protein_id)
+
+        duplicated_protein_id_list.write("%s.duplicated.pep.ids" % output_prefix)
+        if duplicated_protein_id_list:
             print("WARNING!!! Duplicated protein ids were detected...")
-            with open("%s.warnings" % output_prefix) as warn_fd:
+            with self.metaopen("%s.warnings" % output_prefix, "w") as warn_fd:
                 warn_fd.write("WARNING!!! Duplicated protein ids were detected...")
+
+
 
         from Tools.Abstract import Tool
         output_directory = self.check_dir_path(self.split_filename(output_prefix)[0])
