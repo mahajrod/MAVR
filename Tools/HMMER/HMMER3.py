@@ -237,9 +237,8 @@ class HMMER3(Tool):
 
         self.execute(options, cmd="hmmscan")
 
-    def parallel_hmmscan(self, hmmfile, seqfile, outfile, num_of_seqs_per_scan=None, split_dir="splited_fasta",
+    def parallel_hmmscan(self, hmmfile, seqfile, output_prefix, output_dir, num_of_seqs_per_scan=None, split_dir="splited_fasta",
                          splited_output_dir="splited_output_dir",
-                         tblout_outfile=None, domtblout_outfile=None, pfamtblout_outfile=None,
                          splited_tblout_dir=None, splited_domtblout_dir=None, splited_pfamtblout_dir=None,
                          dont_output_alignments=False, model_evalue_threshold=None, model_score_threshold=None,
                          domain_evalue_threshold=None, domain_score_threshold=None,
@@ -254,7 +253,20 @@ class HMMER3(Tool):
                          input_format=None, threads=None, combine_output_to_single_file=True,
                          biopython_165_compartibility=False,
                          remove_tmp_dirs=True,
-                         async_run=False, external_process_pool=None
+                         async_run=False, external_process_pool=None,
+                         cpu_per_task=1,
+                         handling_mode="local",
+                         job_name=None,
+                         log_prefix=None,
+                         task_commands=None,
+                         error_log_prefix=None,
+                         job_array_script_file=None,
+                         #task_index_list=None,
+                         #start_task_index=None,
+                         #end_task_index=None,
+                         max_running_jobs=None,
+                         max_running_time=None,
+                         max_memmory_per_cpu=None,
                          ):
 
         splited_dir = self.check_path(split_dir)
@@ -268,22 +280,6 @@ class HMMER3(Tool):
             self.safe_mkdir(splited_domtblout_dir)
         if splited_pfamtblout_dir:
             self.safe_mkdir(splited_pfamtblout_dir)
-
-        number_of_files = num_of_seqs_per_scan if num_of_seqs_per_scan else 5 * threads if threads else 5 * self.threads
-        self.split_fasta(seqfile, splited_dir, num_of_files=number_of_files)
-        input_list_of_files = sorted(os.listdir(splited_dir))
-        list_of_files = []
-
-        for filename in input_list_of_files:
-            filename_prefix = self.split_filename(filename)[1]
-
-            input_file = "%s%s" % (splited_dir, filename)
-            output_file = "%s%s.hits" % (splited_out_dir, filename_prefix)
-            tblout_file = "%s%s.hits" % (splited_tblout_dir, filename_prefix) if splited_tblout_dir else None
-            domtblout_file = "%s%s.hits" % (splited_domtblout_dir, filename_prefix) if splited_domtblout_dir else None
-            pfamtblout_file = "%s%s.hits" % (splited_pfamtblout_dir, filename_prefix) if splited_pfamtblout_dir else None
-
-            list_of_files.append((input_file, output_file, tblout_file, domtblout_file, pfamtblout_file))
 
         common_options = self.__parse_hmmsxxx_common_options(tblout=None, domtblout=None,
                                                              pfamtblout=None,
@@ -304,55 +300,102 @@ class HMMER3(Tool):
                                                              MSV_threshold=MSV_threshold, Vit_threshold=Vit_threshold,
                                                              Fwd_threshold=Fwd_threshold,
                                                              turn_off_biased_composition_score_corrections=turn_off_biased_composition_score_corrections)
-        common_options += " --cpu %i" % 5
+        common_options += " --cpu %i" % cpu_per_task
         common_options += " --qformat %s" if input_format else ""
-        options_list = []
-        out_files = []
-        tblout_files = []
-        domtblout_files = []
-        pfamtblout_files = []
 
-        for in_file, out_filename, tblout_file, domtblout_file, pfamtblout_file in list_of_files:
-            options = common_options
+        if handling_mode == "local":
+            number_of_files = num_of_seqs_per_scan if num_of_seqs_per_scan else 5 * threads if threads else 5 * self.threads
+            self.split_fasta(seqfile, splited_dir, num_of_files=number_of_files, output_prefix=output_prefix)
+            input_list_of_files = sorted(os.listdir(splited_dir))
+            list_of_files = []
 
-            options += " --tblout %s" % tblout_file if tblout_file else ""
-            options += " --domtblout %s" % domtblout_file if domtblout_file else ""
-            options += " --pfamtblout %s" % pfamtblout_file if pfamtblout_file else ""
-            options += " -o %s" % out_filename
+            for filename in input_list_of_files:
+                filename_prefix = self.split_filename(filename)[1]
 
-            options += " %s" % hmmfile
-            options += " %s" % in_file
+                input_file = "%s%s" % (splited_dir, filename)
+                output_file = "%s%s.hits" % (splited_out_dir, filename_prefix)
+                tblout_file = "%s%s.tblout" % (splited_tblout_dir, filename_prefix) if splited_tblout_dir else None
+                domtblout_file = "%s%s.domtblout" % (splited_domtblout_dir, filename_prefix) if splited_domtblout_dir else None
+                pfamtblout_file = "%s%s.pfamtblout" % (splited_pfamtblout_dir, filename_prefix) if splited_pfamtblout_dir else None
 
-            options_list.append(options)
-            out_files.append(out_filename)
-            tblout_files.append(tblout_file)
-            domtblout_files.append(domtblout_file)
-            pfamtblout_files.append(pfamtblout_file)
+                list_of_files.append((input_file, output_file, tblout_file, domtblout_file, pfamtblout_file))
 
-        self.parallel_execute(options_list, cmd="hmmscan", threads=threads, async_run=async_run,
-                              external_process_pool=external_process_pool)
+            options_list = []
+            out_files = []
+            tblout_files = []
+            domtblout_files = []
+            pfamtblout_files = []
 
-        if combine_output_to_single_file:
-            if biopython_165_compartibility:
-                CGAS.cgas(out_files, sed_string="s/^Description:.*/Description: <unknown description>/", output=outfile)
-            else:
-                CGAS.cat(out_files, output=outfile)
-        if tblout_outfile:
-            CGAS.cat(tblout_files, output=tblout_outfile)
-        if domtblout_outfile:
-            CGAS.cat(domtblout_files, output=domtblout_outfile)
-        if pfamtblout_outfile:
-            CGAS.cat(pfamtblout_files, output=pfamtblout_outfile)
+            for in_file, out_filename, tblout_file, domtblout_file, pfamtblout_file in list_of_files:
+                options = common_options
 
-        if remove_tmp_dirs:
+                options += " --tblout %s" % tblout_file if tblout_file else ""
+                options += " --domtblout %s" % domtblout_file if domtblout_file else ""
+                options += " --pfamtblout %s" % pfamtblout_file if pfamtblout_file else ""
+                options += " -o %s" % out_filename
+
+                options += " %s" % hmmfile
+                options += " %s" % in_file
+
+                options_list.append(options)
+                out_files.append(out_filename)
+                tblout_files.append(tblout_file)
+                domtblout_files.append(domtblout_file)
+                pfamtblout_files.append(pfamtblout_file)
+
+            self.parallel_execute(options_list, cmd="hmmscan", threads=threads, async_run=async_run,
+                                  external_process_pool=external_process_pool)
+
+            if combine_output_to_single_file:
+                if biopython_165_compartibility:
+                    CGAS.cgas(out_files, sed_string="s/^Description:.*/Description: <unknown description>/",
+                              output="%s.hits" % output_prefix)
+                else:
+                    CGAS.cat(out_files, output="%s.hits" % output_prefix)
             if splited_tblout_dir:
-                shutil.rmtree(splited_tblout_dir)
+                CGAS.cat(tblout_files, output="%s.tblout" % output_prefix)
             if splited_domtblout_dir:
-                shutil.rmtree(splited_domtblout_dir)
+                CGAS.cat(domtblout_files, output="%s.domtblout" % output_prefix)
             if splited_pfamtblout_dir:
-                shutil.rmtree(splited_pfamtblout_dir)
-            for tmp_dir in splited_dir, splited_out_dir:
-                shutil.rmtree(tmp_dir)
+                CGAS.cat(pfamtblout_files, output="%s.pfamtblout" % output_prefix)
+
+            if remove_tmp_dirs:
+                if splited_tblout_dir:
+                    shutil.rmtree(splited_tblout_dir)
+                if splited_domtblout_dir:
+                    shutil.rmtree(splited_domtblout_dir)
+                if splited_pfamtblout_dir:
+                    shutil.rmtree(splited_pfamtblout_dir)
+                for tmp_dir in splited_dir, splited_out_dir:
+                    shutil.rmtree(tmp_dir)
+
+        elif handling_mode == "slurm":
+            number_of_files = self.split_fasta(seqfile, splited_dir, num_of_files=threads if threads else self.threads,
+                                               output_prefix=output_prefix)
+
+            slurm_cmd_options = "hmmscan %s" % common_options
+
+            slurm_cmd_options += " --tblout %s/%s_${SLURM_ARRAY_TASK_ID}.tblout" % (splited_tblout_dir, output_prefix) if splited_tblout_dir else ""
+            slurm_cmd_options += " --domtblout %s/%s_${SLURM_ARRAY_TASK_ID}.domtblout" % (splited_domtblout_dir, output_prefix) if splited_domtblout_dir else ""
+            slurm_cmd_options += " --pfamtblout %s/%s_${SLURM_ARRAY_TASK_ID}.pfamtblout" % (splited_pfamtblout_dir, output_prefix) if splited_pfamtblout_dir else ""
+            slurm_cmd_options += " -o %s/%s_${SLURM_ARRAY_TASK_ID}.hits" % (splited_out_dir, output_prefix)
+
+            slurm_cmd_options += " %s" % hmmfile
+            slurm_cmd_options += " %s/%s_${SLURM_ARRAY_TASK_ID}.fasta" % (splited_dir, output_prefix)
+
+            self.generate_slurm_job_array_script(job_name,
+                                                 log_prefix,
+                                                 task_commands,
+                                                 error_log_prefix,
+                                                 job_array_script_file=job_array_script_file,
+                                                 task_index_list=None,
+                                                 start_task_index=1,
+                                                 end_task_index=number_of_files,
+                                                 max_running_jobs=max_running_jobs,
+                                                 max_running_time=max_running_time,
+                                                 max_memmory_per_cpu=max_memmory_per_cpu)
+
+            self.slurm_run_job_array(job_array_script_file)
 
     def hmmsearch(self, hmmfile, seqfile, outfile, multialignout=None, tblout=None, domtblout=None, pfamtblout=None,
                   dont_output_alignments=False, model_evalue_threshold=None, model_score_threshold=None,
