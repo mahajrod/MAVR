@@ -382,6 +382,7 @@ class HMMER3(Tool):
             slurm_cmd_options += " %s" % hmmfile
             slurm_cmd_options += " %s/%s_${SLURM_ARRAY_TASK_ID}.fasta" % (splited_dir, output_prefix)
 
+            print number_of_files
             self.generate_slurm_job_array_script(job_name,
                                                  log_prefix,
                                                  slurm_cmd_options,
