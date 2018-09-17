@@ -74,7 +74,7 @@ HMMER3.parallel_hmmscan(args.input, args.input_seq, args.output_prefix, "./", nu
                         job_name=args.slurm_job_name,
                         log_prefix=args.slurm_log_prefix,
                         error_log_prefix=args.slurm_error_log_prefix,
-                        job_array_script_file=args.slurm_job_array_script_file,
+                        job_array_script_file="%s.slurm" % args.output_prefix,
                          #task_index_list=None,
                          #start_task_index=None,
                          #end_task_index=None,
