@@ -412,6 +412,8 @@ class NCBIRoutines(SequenceRoutines):
 
         if len(protein_id_list) != len(protein_id_uniq_list):
             print("WARNING!!! Duplicated protein ids were detected...")
+            with open("%s.warnings" % output_prefix) as warn_fd:
+                warn_fd.write("WARNING!!! Duplicated protein ids were detected...")
 
         from Tools.Abstract import Tool
         output_directory = self.check_dir_path(self.split_filename(output_prefix)[0])
