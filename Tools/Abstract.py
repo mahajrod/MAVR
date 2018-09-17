@@ -86,7 +86,48 @@ class Tool(SequenceRoutines):
                 out_fd.write(results)
         return results if capture_output else None
 
-    
+    def generate_slurm_job_array_script(self,
+                                        job_name,
+                                        log_prefix,
+                                        task_commands,
+                                        error_log_prefix,
+                                        job_array_script_file=None,
+                                        task_index_list=None,
+                                        start_task_index=None,
+                                        end_task_index=None,
+                                        max_running_jobs=None,
+                                        max_running_time=None,
+                                        max_memmory_per_cpu=None):
+
+        if (not task_index_list) and ((not start_task_index) or (not end_task_index)):
+            raise ValueError("Neither task index list nor start or end task index were set")
+
+        script = "#!/usr/bin/env bash\n"
+
+        script += "#SBATCH --array=%s" % (",".join(map(str, task_index_list)) if task_index_list else "%s-%s" % (str(start_task_index),
+                                                                                                                 str(end_task_index)))
+        script += "%s\n" % ("%%%i" % max_running_jobs if max_running_jobs else "")
+        script += "#SBATCH --time=%s         # Run time in hh:mm:ss\n" % max_running_time if max_running_time else ""
+        script += "#SBATCH --mem-per-cpu=%i       # Minimum memory required per CPU (in megabytes)\n" % max_memmory_per_cpu if max_memmory_per_cpu else ""
+        script += "#SBATCH --job-name=%s\n" % job_name if job_name else ""
+        script += "#SBATCH --error=%s.%%A_%%a.err\n" % error_log_prefix
+        script += "#SBATCH --output=%s.%%A_%%a.log\n" % log_prefix
+
+        script += "%s\n" % task_commands
+
+        if job_array_script_file:
+            with open(job_array_script_file, "w") as job_fd:
+                job_fd.write(script)
+
+        return script
+
+    def slurm_run_job_array(self, job_array_script):
+
+        job_id = Popen(["sbatch %s" % job_array_script], shell=True, stdout=PIPE).stdout.readline().strip().split()[-1]
+
+        return job_id
+
+
 class JavaTool(Tool):
 
     def __init__(self, jar, java_path="", max_threads=4, jar_path="", max_memory=None, timelog="tool_time.log"):
