@@ -408,11 +408,16 @@ class NCBIRoutines(SequenceRoutines):
     def get_cds_for_proteins(self, protein_id_list, output_prefix, download_chunk_size=100, temp_dir_prefix="temp",
                              keyword_for_mitochondrial_pep="mitochondrion"):
 
+        protein_id_uniq_list = list(set(protein_id_list))
+
+        if len(protein_id_list) != len(protein_id_uniq_list):
+            print("WARNING!!! Duplicated protein ids were detected...")
+
         from Tools.Abstract import Tool
         output_directory = self.check_dir_path(self.split_filename(output_prefix)[0])
         transcript_temp_dir = "%s%s_transcripts" % (output_directory, temp_dir_prefix)
         protein_temp_dir = "%s%s_proteins" % (output_directory, temp_dir_prefix)
-        number_of_ids = len(protein_id_list)
+        number_of_ids = len(protein_id_uniq_list)
 
         print("Total %i ids" % number_of_ids)
 
@@ -429,7 +434,7 @@ class NCBIRoutines(SequenceRoutines):
         for i in range(0, len(ranges)-1):
             print("Downloading chunk %i" % i)
             pep_tmp_file = "%s/chunk_%i" % (protein_temp_dir, i)
-            self.efetch("protein", protein_id_list[ranges[i]:ranges[i+1]], pep_tmp_file, rettype="gb", retmode="text",
+            self.efetch("protein", protein_id_uniq_list[ranges[i]:ranges[i+1]], pep_tmp_file, rettype="gb", retmode="text",
                         log_file="%s.pep.efetch.log" % output_prefix)
 
         os.system("cat %s/* > %s" % (protein_temp_dir, pep_file))
@@ -438,11 +443,11 @@ class NCBIRoutines(SequenceRoutines):
         downloaded_protein_ids = IdList(peptide_dict.keys())
 
         print("%i proteins were downloaded" % len(downloaded_protein_ids))
-        not_downloaded_proteins_ids = Tool.intersect_ids([protein_id_list], [downloaded_protein_ids], mode="only_a")
+        not_downloaded_proteins_ids = Tool.intersect_ids([protein_id_uniq_list], [downloaded_protein_ids], mode="only_a")
         print("%i proteins were not downloaded" % len(not_downloaded_proteins_ids))
         not_downloaded_proteins_ids.write("%s.not_downloaded.ids" % output_prefix)
         downloaded_protein_ids.write("%s.downloaded.ids" % output_prefix)
-        print(Tool.intersect_ids([protein_id_list], [downloaded_protein_ids], mode="count"))
+        print(Tool.intersect_ids([protein_id_uniq_list], [downloaded_protein_ids], mode="count"))
 
         pep_without_transcripts = IdList()
         mito_pep_without_transcripts = IdList()
@@ -638,7 +643,7 @@ class NCBIRoutines(SequenceRoutines):
         with open("%s.stats" % output_prefix, "w") as stat_fd:
             stat_fd.write(stat_string)
 
-        description_string = """DESCRIPTION OF FILES CREATED dURING DOWNLOADa AND EXTRACTION OF CDS FOR PROTEIN IDS FROM NCBI
+        description_string = """DESCRIPTION OF FILES CREATED DURING DOWNLOADa AND EXTRACTION OF CDS FOR PROTEIN IDS FROM NCBI
 
 * - prefix of files
 
