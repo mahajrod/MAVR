@@ -50,7 +50,7 @@ parser.add_argument("-l", "--slurm_log_prefix", action="store", dest="slurm_log_
                     help="Slurm log prefix. ")
 parser.add_argument("-e", "--slurm_error_log_prefix", action="store", dest="slurm_error_log_prefix",
                     help="Slurm error log prefix")
-parser.add_argument("-m", "--slurm_max_running_jobs", action="store", dest="slurm_max_running_jobs",
+parser.add_argument("-x", "--slurm_max_running_jobs", action="store", dest="slurm_max_running_jobs",
                     default=300, type=int,
                     help="Slurm max running jobs. Default: 300")
 parser.add_argument("-a", "--slurm_max_running_time", action="store", dest="slurm_max_running_time", default="100:00:00",
