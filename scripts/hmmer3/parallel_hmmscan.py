@@ -55,7 +55,7 @@ parser.add_argument("-x", "--slurm_max_running_jobs", action="store", dest="slur
                     help="Slurm max running jobs. Default: 300")
 parser.add_argument("-a", "--slurm_max_running_time", action="store", dest="slurm_max_running_time", default="100:00:00",
                     help="Slurm max running time in hh:mm:ss format. Default: 100:00:00")
-parser.add_argument("-j", "--slurm_job_name", action="store", dest="slurm_job_name", default="JOB",
+parser.add_argument("-n", "--slurm_job_name", action="store", dest="slurm_job_name", default="JOB",
                     help="Slurm job name. Default: JOB")
 parser.add_argument("-u", "--slurm_max_memmory_per_cpu", action="store", dest="slurm_max_memmory_per_cpu",
                     default=4000, type=int,
