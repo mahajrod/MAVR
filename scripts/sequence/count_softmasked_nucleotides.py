@@ -18,5 +18,5 @@ parser.add_argument("-p", "--print_stats", action="store_true", dest="print_stat
 
 args = parser.parse_args()
 
-SequenceRoutines.count_softmasked_nucleotides_from_file(args.input, args.output_prefix, verbose=False, parsing_mode="parse",
+SequenceRoutines.count_softmasked_nucleotides_from_file(args.input, args.output_prefix, verbose=args.print_stats, parsing_mode="parse",
                                                         format=args.format, index_file=None)
