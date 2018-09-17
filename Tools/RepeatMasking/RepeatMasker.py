@@ -80,7 +80,7 @@ class RepeatMasker(Tool):
         options = " -species %s" % species if species else ""
         options += " -clade %s" % clade if clade else ""
         options += " -stat" if stat_mode else ""
-        options += " | awk 'NR > 1 {print $0}'" if not stat_mode else ""
+        #options += " | awk 'NR > 1 {print $0}'" if not stat_mode else ""
         options += " > %s" % output_file
 
         self.execute(options=options, cmd="queryRepeatDatabase.pl")
