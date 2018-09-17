@@ -70,7 +70,7 @@ HMMER3.parallel_hmmscan(args.input, args.input_seq, args.output_prefix, "./", nu
                         combine_output_to_single_file=args.combine_output, dont_output_alignments=args.no_alignment,
                         splited_tblout_dir=args.tblout_dir, splited_domtblout_dir=args.domtblout_dir,
                         splited_pfamtblout_dir=args.pfamtblout_dir,
-                        handling_mode="local",
+                        handling_mode=args.handling_mode,
                         job_name=args.slurm_job_name,
                         log_prefix=args.slurm_log_prefix,
                         error_log_prefix=args.slurm_error_log_prefix,
