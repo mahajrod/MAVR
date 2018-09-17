@@ -413,7 +413,7 @@ class NCBIRoutines(SequenceRoutines):
         prev_protein_id = ""
         for protein_id in sorted(protein_id_list):
             if protein_id != prev_protein_id:
-                protein_id_uniq_list.append(protein_id_uniq_list)
+                protein_id_uniq_list.append(protein_id)
                 prev_protein_id = protein_id
 
             else:
@@ -424,8 +424,6 @@ class NCBIRoutines(SequenceRoutines):
             print("WARNING!!! Duplicated protein ids were detected...")
             with self.metaopen("%s.warnings" % output_prefix, "w") as warn_fd:
                 warn_fd.write("WARNING!!! Duplicated protein ids were detected...")
-
-
 
         from Tools.Abstract import Tool
         output_directory = self.check_dir_path(self.split_filename(output_prefix)[0])
