@@ -11,8 +11,8 @@ parser.add_argument("-i", "--input_hmm", action="store", dest="input",
                     help="Input hmm3 file")
 parser.add_argument("-s", "--input_seq", action="store", dest="input_seq",
                     help="Input file with sequences")
-parser.add_argument("-o", "--output_file", action="store", dest="output",
-                    help="Output file")
+parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix",
+                    help="Prefix of output files")
 parser.add_argument("-c", "--combine_output", action="store_true", dest="combine_output",
                     help="Combine output files to single")
 parser.add_argument("--no_ali", action="store_true", dest="no_alignment",
@@ -46,11 +46,9 @@ args = parser.parse_args()
 
 HMMER3.threads = 1
 HMMER3.path = args.path
-HMMER3.parallel_hmmscan(args.input, args.input_seq, args.output, num_of_seqs_per_scan=None, split_dir="splited_fasta",
+HMMER3.parallel_hmmscan(args.input, args.input_seq, args.output_prefix, "./", num_of_seqs_per_scan=None, split_dir="splited_fasta",
                         splited_output_dir=args.hmmscan_output_dir, threads=args.threads,
                         combine_output_to_single_file=args.combine_output, dont_output_alignments=args.no_alignment,
-                        tblout_outfile=args.tblout, domtblout_outfile=args.domtblout,
-                        pfamtblout_outfile=args.pfamtblout,
                         splited_tblout_dir=args.tblout_dir, splited_domtblout_dir=args.domtblout_dir,
                         splited_pfamtblout_dir=args.pfamtblout_dir
                         )
