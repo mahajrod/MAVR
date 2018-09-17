@@ -258,7 +258,6 @@ class HMMER3(Tool):
                          handling_mode="local",
                          job_name=None,
                          log_prefix=None,
-                         task_commands=None,
                          error_log_prefix=None,
                          job_array_script_file=None,
                          #task_index_list=None,
@@ -349,15 +348,15 @@ class HMMER3(Tool):
             if combine_output_to_single_file:
                 if biopython_165_compartibility:
                     CGAS.cgas(out_files, sed_string="s/^Description:.*/Description: <unknown description>/",
-                              output="%s.hits" % output_prefix)
+                              output="%s/%s.hits" % (output_dir,output_prefix))
                 else:
-                    CGAS.cat(out_files, output="%s.hits" % output_prefix)
+                    CGAS.cat(out_files, output="%s/%s.hits" % (output_dir,output_prefix))
             if splited_tblout_dir:
-                CGAS.cat(tblout_files, output="%s.tblout" % output_prefix)
+                CGAS.cat(tblout_files, output="%s/%s.tblout" % (output_dir,output_prefix))
             if splited_domtblout_dir:
-                CGAS.cat(domtblout_files, output="%s.domtblout" % output_prefix)
+                CGAS.cat(domtblout_files, output="%s/%s.domtblout" % (output_dir,output_prefix))
             if splited_pfamtblout_dir:
-                CGAS.cat(pfamtblout_files, output="%s.pfamtblout" % output_prefix)
+                CGAS.cat(pfamtblout_files, output="%s/%s.pfamtblout" % (output_dir,output_prefix))
 
             if remove_tmp_dirs:
                 if splited_tblout_dir:
@@ -385,7 +384,7 @@ class HMMER3(Tool):
 
             self.generate_slurm_job_array_script(job_name,
                                                  log_prefix,
-                                                 task_commands,
+                                                 slurm_cmd_options,
                                                  error_log_prefix,
                                                  job_array_script_file=job_array_script_file,
                                                  task_index_list=None,
