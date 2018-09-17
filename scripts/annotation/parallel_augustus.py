@@ -67,8 +67,8 @@ output_evidence_stats_longest_pep = "%s.transcript.evidence.longest_pep" % args.
 output_supported_stats = "%s.transcript.supported" % args.output
 output_supported_stats_ids = "%s.transcript.supported.ids" % args.output
 output_supported_stats_longest_pep = "%s.transcript.supported.longest_pep" % args.output
-output_hmmscan = "%s.hmmscan.hits" % args.output
-output_domtblout = "%s.domtblout" % args.output
+output_prefix_hmmscan = "%s.hmmscan" % args.output
+output_domtblout = "%s.hmmscan.domtblout" % args.output
 output_pfam_annotated_dom_ids = "%s.pfam.dom_ids" % args.output
 #output_pfam_supported_ids = "%s.supported.pfam.ids" % args.output
 output_pfam_supported_transcripts_ids = "%s.supported.transcripts.pfam.ids" % args.output
@@ -155,10 +155,10 @@ os.system("awk -F'\\t' 'NR==1 {}; NR > 1 {print $2}' %s > %s" % (output_supporte
 if args.pfam_db:
     print("Annotating domains(Pfam database)...")
     HMMER3.threads = args.threads
-    HMMER3.parallel_hmmscan(args.pfam_db, output_pep, output_hmmscan, num_of_seqs_per_scan=None,
+    HMMER3.parallel_hmmscan(args.pfam_db, output_pep, output_prefix_hmmscan, "./", #output_hmmscan,
+                            num_of_seqs_per_scan=None,
                             split_dir="splited_hmmscan_fasta/",
                             splited_output_dir="splited_hmmscan_output_dir",
-                            tblout_outfile=None, domtblout_outfile=output_domtblout, pfamtblout_outfile=None,
                             splited_tblout_dir=None, splited_domtblout_dir="hmmscan_domtblout/")
     HMMER3.extract_dom_ids_hits_from_domtblout(output_domtblout, output_pfam_annotated_dom_ids)
     hits_dict = HMMER3.extract_dom_names_hits_from_domtblout(output_domtblout, output_pfam_annotated_dom_names)
