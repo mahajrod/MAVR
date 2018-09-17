@@ -34,24 +34,20 @@ parser.add_argument("--hmmer_dir", action="store", dest="path", default="",
 
 args = parser.parse_args()
 
+output_dir = "./"
 hits_file = "%s.hits" % args.output_prefix
 top_hits_file = "%s.top_hits" % args.output_prefix
 not_significant_ids_file = "%s.not_significant" % args.output_prefix
 not_found_ids_file = "%s.not_found" % args.output_prefix
 fam_file = "%s.fam" % args.output_prefix
-tblout_file = "%s.tblout" % args.output_prefix
-domtblout_file = "%s.domtblout" % args.output_prefix
-pfamtblout_file = "%s.pfamtblout" % args.output_prefix
 
 HMMER3.threads = 1
 HMMER3.path = args.path
 HMMER3.timelog = "%s.timelog" % args.output_prefix
 
-HMMER3.parallel_hmmscan(args.input, args.input_seq, hits_file, num_of_seqs_per_scan=None, split_dir="splited_fasta",
+HMMER3.parallel_hmmscan(args.input, args.input_seq, args.output_prefix, output_dir, num_of_seqs_per_scan=None, split_dir="splited_fasta",
                         splited_output_dir=args.hmmscan_output_dir, threads=args.threads,
                         combine_output_to_single_file=True, dont_output_alignments=args.no_alignment,
-                        tblout_outfile=tblout_file, domtblout_outfile=domtblout_file,
-                        pfamtblout_outfile=pfamtblout_file,
                         splited_tblout_dir=args.tblout_dir, splited_domtblout_dir=args.domtblout_dir,
                         splited_pfamtblout_dir=args.pfamtblout_dir,
                         biopython_165_compartibility=True
