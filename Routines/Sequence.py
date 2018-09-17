@@ -75,26 +75,29 @@ class SequenceRoutines(FileRoutines):
 
         sequence_dict = self.parse_seq_file(input_fasta, parsing_mode, format="fasta", index_file=index_file) # SeqIO.index_db("temp.idx", input_fasta, "fasta")
 
-        split_index = 1
+        split_index = 0
         records_written = 0
         record_ids_list = list(sequence_dict.keys())
         number_of_records = len(record_ids_list)
 
         num_of_recs = int(number_of_records/num_of_files) + 1 if num_of_files else num_of_recs_per_file
         while (records_written + num_of_recs) <= number_of_records:
-
+            split_index += 1
             SeqIO.write(self.record_by_id_generator(sequence_dict,
                                                     record_ids_list[records_written:records_written+num_of_recs]),
                         "%s/%s_%i.fasta" % (output_dir, out_prefix, split_index), format="fasta")
-            split_index += 1
+
             records_written += num_of_recs
 
         if records_written != number_of_records:
+            split_index += 1
             SeqIO.write(self.record_by_id_generator(sequence_dict,
                                                     record_ids_list[records_written:]),
                         "%s/%s_%i.fasta" % (output_dir, out_prefix, split_index), format="fasta")
         if index_file:
             os.remove(index_file)
+
+        return split_index
 
     def prepare_region_list_by_length(self, max_length=500000, max_seq_number=10,
                                       length_dict=None, reference=None, parsing_mode="parse", output_dir=None,
