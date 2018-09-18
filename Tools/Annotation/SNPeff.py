@@ -2,7 +2,7 @@
 
 from Tools.Abstract import JavaTool
 
-from CustomCollections.GeneralCollections import SynDict
+from CustomCollections.GeneralCollections import SynDict, IdList
 from collections import Iterable
 from Routines.Functions import check_path
 
@@ -75,7 +75,7 @@ class SNPeff(JavaTool):
                                key_index=key_column,
                                value_index=value_column,
                                comments_prefix="#")
-        #print synonym_dict
+        #print synonym_dic
         with open(input_file, "r") as in_fd, open(output_file, "w") as out_fd:
             header = in_fd.readline().strip() + "\t%s\n" % header_name_for_synonym
             out_fd.write(header)
@@ -92,6 +92,7 @@ class SNPeff(JavaTool):
                 #    print "AAAAAAAA"
                 tmp.append(synonym_dict[gene_name] if gene_name in synonym_dict else "")
                 out_fd.write("\t".join(tmp) + "\n")
+
 
 
 if __name__ == "__main__":
