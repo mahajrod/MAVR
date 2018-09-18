@@ -13,8 +13,6 @@ parser.add_argument("-s", "--input_seq", action="store", dest="input_seq",
                     help="Input file with sequences")
 parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix",
                     help="Prefix of output files")
-parser.add_argument("-c", "--combine_output", action="store_true", dest="combine_output",
-                    help="Combine output files to single")
 parser.add_argument("--no_ali", action="store_true", dest="no_alignment",
                     help="Dont save alignments to minimize output")
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
@@ -61,7 +59,7 @@ HMMER3.path = args.path
 HMMER3.parallel_hmmscan(args.input, args.input_seq, args.output_prefix, args.output_dir,
                         num_of_seqs_per_scan=None,
                         threads=args.threads,
-                        combine_output_to_single_file=args.combine_output,
+                        combine_output_to_single_file=True,
                         dont_output_alignments=args.no_alignment,
                         handling_mode=args.handling_mode,
                         job_name=args.slurm_job_name,
@@ -73,4 +71,6 @@ HMMER3.parallel_hmmscan(args.input, args.input_seq, args.output_prefix, args.out
                         MAVR_scripts_dir=args.MAVR_script_dir,
                         hmm_hit_parsing_mode=args.parsing_mode,
                         modules_list=args.slurm_modules_list,
+                        extract_top_hits=True,
+                        get_clusters_from_top_hits=True
                         )
