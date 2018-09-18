@@ -276,5 +276,6 @@ class FastQRoutines(FileRoutines):
 
         counts.write()
 
+
         if stat_file:
             counts.write(stat_file)
