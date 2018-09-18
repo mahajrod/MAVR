@@ -274,6 +274,9 @@ class FastQRoutines(FileRoutines):
                     fastq_fd.next()
                     fastq_fd.next()
 
+                # to take into account "\n" at the end of each line
+                counts[fastq_file]["Bases"] = counts[fastq_file]["Bases"] - counts[fastq_file]["Reads"]
+
         counts.write()
 
         if stat_file:
