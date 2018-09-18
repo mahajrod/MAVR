@@ -24,10 +24,9 @@ class FastQRoutines(FileRoutines):
     def __init__(self):
         pass
 
-    @staticmethod
-    def reverse_complement(in_file, out_file):
-        with open(in_file, "r") as in_fd:
-            with open(out_file, "w") as out_fd:
+    def reverse_complement(self, in_file, out_file):
+        with self.metaopen(in_file, "r") as in_fd:
+            with self.metaopen(out_file, "w") as out_fd:
                 for line in in_fd:
                     out_fd.write(line)
                     out_fd.write(str(Seq(in_fd.next().strip()).reverse_complement()))
@@ -196,11 +195,10 @@ class FastQRoutines(FileRoutines):
                             filtered_out_fd.write(in_fd.next())
                             filtered_out_fd.write(in_fd.next())
 
-    @staticmethod
-    def split_illumina_fastq_by_lanes(input_fastq, output_dir, output_prefix=None, output_suffix=".fastq"):
+    def split_illumina_fastq_by_lanes(self, input_fastq, output_dir, output_prefix=None, output_suffix=".fastq"):
         out_fd_dict = OrderedDict()
 
-        with open(input_fastq, "r") as in_fd:
+        with self.metaopen(input_fastq, "r") as in_fd:
             for line in in_fd:
                 tmp = line.split(":")
                 lane_id = ".".join(tmp[:4])[1:]
@@ -219,7 +217,7 @@ class FastQRoutines(FileRoutines):
             out_fd_dict[fd].close()
 
     def find_tiles(self, fastq_file, output_file):
-        with open(fastq_file, "r") as fastq_fd, (output_file if isinstance(output_file, file) else open(output_file, "w")) as out_fd:
+        with self.metaopen(fastq_file, "r") as fastq_fd, (output_file if isinstance(output_file, file) else open(output_file, "w")) as out_fd:
             out_fd.write("#Machine\tRun\tFlowcellID\tLane\tTile\n")
             tile_set = set()
 
@@ -237,7 +235,7 @@ class FastQRoutines(FileRoutines):
                 out_fd.write("\n")
 
     def count_reads_in_tiles(self, fastq_file, output_file):
-        with open(fastq_file, "r") as fastq_fd, (output_file if isinstance(output_file, file) else open(output_file, "w")) as out_fd:
+        with self.metaopen(fastq_file, "r") as fastq_fd, (output_file if isinstance(output_file, file) else open(output_file, "w")) as out_fd:
             out_fd.write("#Machine\tRun\tFlowcellID\tLane\tTile\tReadNumber\n")
             tile_dict = OrderedDict
 
@@ -256,3 +254,27 @@ class FastQRoutines(FileRoutines):
                 out_fd.write("\t")
                 out_fd.write(str(tile_dict[tile_name]))
                 out_fd.write("\n")
+
+    def count_reads_and_bases(self, fastq_file_list, stat_file=None):
+
+        fastq_list = [fastq_file_list] if isinstance(fastq_file_list, str) else fastq_file_list
+
+        counts = TwoLvlDict()
+
+        for fastq_file in fastq_list:
+            counts[fastq_file] = OrderedDict()
+            counts[fastq_file]["Reads"] = 0
+            counts[fastq_file]["Bases"] = 0
+
+        for fastq_file in fastq_list:
+            with self.metaopen(fastq_file, "r") as fastq_fd:
+                for line in fastq_fd:
+                    counts[fastq_file]["Bases"] += len(fastq_fd.next())
+                    counts[fastq_file]["Reads"] += 1
+                    fastq_fd.next()
+                    fastq_fd.next()
+
+        counts.write()
+
+        if stat_file:
+            counts.write(stat_file)
