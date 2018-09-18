@@ -30,8 +30,8 @@ args = parser.parse_args()
 
 hits_file = "%s/%s.hits" % (args.output_dir, args.output_prefix)
 top_hits_file = "%s/%s.top_hits" % (args.output_dir, args.output_prefix)
-fam_file = "%s/%s.fam" %  (args.output_dir, args.output_prefix)
-ortholog_file = "%s/%s.orthologs" %  (args.output_dir, args.output_prefix)
+fam_file = "%s/%s.fam" % (args.output_dir, args.output_prefix)
+ortholog_file = "%s/%s.orthologs" % (args.output_dir, args.output_prefix)
 
 
 HMMER3.threads = 1
