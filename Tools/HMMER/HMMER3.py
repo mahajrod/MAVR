@@ -441,7 +441,7 @@ class HMMER3(Tool):
                                                        modules_list=modules_list,
                                                        environment_variables_dict=environment_variables_dict,
                                                        afterok_job_id_list=last_job_id)
-
+                print("Submitted job  %s" % last_job_id)
 
             """
             self.generate_slurm_job_array_script(job_name,
