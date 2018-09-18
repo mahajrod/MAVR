@@ -7,6 +7,7 @@ from collections import Iterable
 
 
 from Routines.Sequence import SequenceRoutines
+from Routines.Alignment import AlignmentRoutines
 
 print_mutex = mp.Lock()
 
@@ -21,7 +22,7 @@ def execute(exe_string):
     os.system(exe_string)
 
 
-class Tool(SequenceRoutines):
+class Tool(SequenceRoutines, AlignmentRoutines):
 
     def __init__(self, cmd, path="", max_threads=4, jar_path="", jar=None,
                  max_memory="500m", max_per_thread_memory="500m", timelog=None):
@@ -91,13 +92,16 @@ class Tool(SequenceRoutines):
                                         log_prefix,
                                         task_commands,
                                         error_log_prefix,
-                                        job_array_script_file=None,
+                                        job_array_script=None,
                                         task_index_list=None,
                                         start_task_index=None,
                                         end_task_index=None,
                                         max_running_jobs=None,
                                         max_running_time=None,
-                                        max_memmory_per_cpu=None):
+                                        cpus_per_task=None,
+                                        max_memmory_per_cpu=None,
+                                        modules_list=None,
+                                        environment_variables_dict=None):
 
         if (not task_index_list) and ((not start_task_index) or (not end_task_index)):
             raise ValueError("Neither task index list nor start or end task index were set")
@@ -109,24 +113,84 @@ class Tool(SequenceRoutines):
         script += "%s\n" % ("%%%i" % max_running_jobs if max_running_jobs else "")
         script += "#SBATCH --time=%s         # Run time in hh:mm:ss\n" % max_running_time if max_running_time else ""
         script += "#SBATCH --mem-per-cpu=%i       # Minimum memory required per CPU (in megabytes)\n" % max_memmory_per_cpu if max_memmory_per_cpu else ""
+        script += "#SBATCH --cpus-per-task=%i\n" % cpus_per_task if cpus_per_task else ""
         script += "#SBATCH --job-name=%s\n" % job_name if job_name else ""
         script += "#SBATCH --error=%s.%%A_%%a.err\n" % error_log_prefix
         script += "#SBATCH --output=%s.%%A_%%a.log\n" % log_prefix
 
+        script += "\n"
+
+        if environment_variables_dict:
+            script += "#--------------Environment variables--------------\n\n"
+            for variable in environment_variables_dict:
+                script += "%s=%s\n" % (variable, environment_variables_dict[variable])
+            script += "#-------------------------------------------\n\n"
+
+        if modules_list:
+            script += "#--------------Loading modules--------------\n\n"
+            modules_to_load = [modules_list] if isinstance(modules_list, str) else list(modules_list)
+            for module in modules_to_load:
+                script += "module load %s\n" % module
+
+            script += "#-------------------------------------------\n\n"
+
+        script += "#--------------Running commands--------------\n\n"
+
         script += "%s\n" % task_commands
 
-        if job_array_script_file:
-            with open(job_array_script_file, "w") as job_fd:
+        script += "#-------------------------------------------\n\n"
+
+        if job_array_script:
+            with open(job_array_script, "w") as job_fd:
                 job_fd.write(script)
 
         return script
 
-    def slurm_run_job_array(self, job_array_script):
+    def slurm_run_job_array_from_script(self, job_array_script, print_current_status=True):
 
         # Popen.stdout returns file object
         job_id = Popen(["sbatch %s" % job_array_script], shell=True, stdout=PIPE).stdout.readline().strip().split()[-1]
 
+        if print_current_status:
+            print ("\nCurrent status:\n")
+            #show the current status with 'sjobs'
+            os.system("sjobs")
+
         return job_id
+
+    def slurm_run_job_array(self,
+                            job_name,
+                            log_prefix,
+                            task_commands,
+                            error_log_prefix,
+                            job_array_script,
+                            task_index_list=None,
+                            start_task_index=None,
+                            end_task_index=None,
+                            max_running_jobs=None,
+                            max_running_time=None,
+                            cpus_per_task=None,
+                            max_memmory_per_cpu=None,
+                            modules_list=None,
+                            environment_variables_dict=None,
+                            print_current_status=True):
+
+        self.generate_slurm_job_array_script(job_name,
+                                             log_prefix,
+                                             task_commands,
+                                             error_log_prefix,
+                                             job_array_script=job_array_script,
+                                             task_index_list=task_index_list,
+                                             start_task_index=start_task_index,
+                                             end_task_index=end_task_index,
+                                             max_running_jobs=max_running_jobs,
+                                             max_running_time=max_running_time,
+                                             cpus_per_task=cpus_per_task,
+                                             max_memmory_per_cpu=max_memmory_per_cpu,
+                                             modules_list=modules_list,
+                                             environment_variables_dict=environment_variables_dict)
+
+        self.slurm_run_job_array_from_script(job_array_script, print_current_status=print_current_status)
 
 
 class JavaTool(Tool):
