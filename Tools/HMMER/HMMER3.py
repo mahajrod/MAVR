@@ -411,7 +411,7 @@ class HMMER3(Tool):
                                                    max_memmory_per_cpu=max_memmory_per_cpu,
                                                    modules_list=modules_list,
                                                    environment_variables_dict=environment_variables_dict)
-            print last_job_id
+            print "Last job id", last_job_id
 
             if combine_output_to_single_file:
                 if biopython_165_compartibility:
