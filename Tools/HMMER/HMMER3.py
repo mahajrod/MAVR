@@ -210,7 +210,7 @@ class HMMER3(Tool):
                 turn_off_biased_composition_score_corrections=None,
                 input_format=None):
 
-        options = self.__parse_hmmsxxx_common_options(outfile, tblout=tblout, domtblout=domtblout,
+        options = self.__parse_hmmsxxx_common_options(tblout=tblout, domtblout=domtblout,
                                                       pfamtblout=pfamtblout,
                                                       dont_output_alignments=dont_output_alignments,
                                                       model_evalue_threshold=model_evalue_threshold,
@@ -237,10 +237,10 @@ class HMMER3(Tool):
 
         self.execute(options, cmd="hmmscan")
 
-    def parallel_hmmscan(self, hmmfile, seqfile, output_prefix, output_dir, num_of_seqs_per_scan=None, split_dir="splited_fasta",
-                         splited_output_dir="splited_output_dir",
-                         splited_tblout_dir=None, splited_domtblout_dir=None, splited_pfamtblout_dir=None,
-                         dont_output_alignments=False, model_evalue_threshold=None, model_score_threshold=None,
+    def parallel_hmmscan(self, hmmfile, seqfile, output_prefix, output_dir="./",
+                         num_of_seqs_per_scan=None,
+                         dont_output_alignments=False,
+                         model_evalue_threshold=None, model_score_threshold=None,
                          domain_evalue_threshold=None, domain_score_threshold=None,
                          model_evalue_significant_threshold=None, model_score_significant_threshold=None,
                          domain_evalue_significant_threshold=None, domain_score_significant_threshold=None,
@@ -250,7 +250,8 @@ class HMMER3(Tool):
                          turn_off_all_heruristics=False, turn_off_bias_filter=False,
                          MSV_threshold=None, Vit_threshold=None, Fwd_threshold=None,
                          turn_off_biased_composition_score_corrections=None,
-                         input_format=None, threads=None, combine_output_to_single_file=True,
+                         input_format=None, threads=None,
+                         combine_output_to_single_file=True,
                          biopython_165_compartibility=False,
                          remove_tmp_dirs=True,
                          async_run=False, external_process_pool=None,
@@ -259,26 +260,29 @@ class HMMER3(Tool):
                          job_name=None,
                          log_prefix=None,
                          error_log_prefix=None,
-                         job_array_script_file=None,
-                         #task_index_list=None,
-                         #start_task_index=None,
-                         #end_task_index=None,
                          max_running_jobs=None,
                          max_running_time=None,
+                         cpus_per_task=None,
                          max_memmory_per_cpu=None,
+                         modules_list=None,
+                         environment_variables_dict=None
                          ):
+        splited_fasta_dir = "%s/splited_fasta/" % output_dir
+        splited_output_dir = "%s/splited_output/" % output_dir
+        splited_tblout_dir = "%s/splited_tblout/" % output_dir
+        splited_domtblout_dir = "%s/splited_domtblout/" % output_dir
+        splited_pfamtblout_dir = "%s/splited_pfamtblout/" % output_dir
 
-        splited_dir = self.check_path(split_dir)
-        splited_out_dir = self.check_path(splited_output_dir)
-        self.safe_mkdir(splited_dir)
-        self.safe_mkdir(splited_out_dir)
+        directory_list = [
+                         splited_fasta_dir,
+                         splited_output_dir,
+                         splited_tblout_dir,
+                         splited_domtblout_dir,
+                         splited_pfamtblout_dir
+                         ]
 
-        if splited_tblout_dir:
-            self.safe_mkdir(splited_tblout_dir)
-        if splited_domtblout_dir:
-            self.safe_mkdir(splited_domtblout_dir)
-        if splited_pfamtblout_dir:
-            self.safe_mkdir(splited_pfamtblout_dir)
+        for directory in directory_list:
+            self.safe_mkdir(directory)
 
         common_options = self.__parse_hmmsxxx_common_options(tblout=None, domtblout=None,
                                                              pfamtblout=None,
@@ -304,15 +308,15 @@ class HMMER3(Tool):
 
         if handling_mode == "local":
             number_of_files = num_of_seqs_per_scan if num_of_seqs_per_scan else 5 * threads if threads else 5 * self.threads
-            self.split_fasta(seqfile, splited_dir, num_of_files=number_of_files, output_prefix=output_prefix)
-            input_list_of_files = sorted(os.listdir(splited_dir))
+            self.split_fasta(seqfile, splited_fasta_dir, num_of_files=number_of_files, output_prefix=output_prefix)
+            input_list_of_files = sorted(os.listdir(splited_fasta_dir))
             list_of_files = []
 
             for filename in input_list_of_files:
                 filename_prefix = self.split_filename(filename)[1]
 
-                input_file = "%s%s" % (splited_dir, filename)
-                output_file = "%s%s.hits" % (splited_out_dir, filename_prefix)
+                input_file = "%s%s" % (splited_fasta_dir, filename)
+                output_file = "%s%s.hits" % (splited_output_dir, filename_prefix)
                 tblout_file = "%s%s.tblout" % (splited_tblout_dir, filename_prefix) if splited_tblout_dir else None
                 domtblout_file = "%s%s.domtblout" % (splited_domtblout_dir, filename_prefix) if splited_domtblout_dir else None
                 pfamtblout_file = "%s%s.pfamtblout" % (splited_pfamtblout_dir, filename_prefix) if splited_pfamtblout_dir else None
@@ -350,26 +354,17 @@ class HMMER3(Tool):
                     CGAS.cgas(out_files, sed_string="s/^Description:.*/Description: <unknown description>/",
                               output="%s/%s.hits" % (output_dir,output_prefix))
                 else:
-                    CGAS.cat(out_files, output="%s/%s.hits" % (output_dir,output_prefix))
-            if splited_tblout_dir:
-                CGAS.cat(tblout_files, output="%s/%s.tblout" % (output_dir,output_prefix))
-            if splited_domtblout_dir:
+                    CGAS.cat(out_files, output="%s/%s.hits" % (output_dir, output_prefix))
+                CGAS.cat(tblout_files, output="%s/%s.tblout" % (output_dir, output_prefix))
                 CGAS.cat(domtblout_files, output="%s/%s.domtblout" % (output_dir,output_prefix))
-            if splited_pfamtblout_dir:
                 CGAS.cat(pfamtblout_files, output="%s/%s.pfamtblout" % (output_dir,output_prefix))
 
             if remove_tmp_dirs:
-                if splited_tblout_dir:
-                    shutil.rmtree(splited_tblout_dir)
-                if splited_domtblout_dir:
-                    shutil.rmtree(splited_domtblout_dir)
-                if splited_pfamtblout_dir:
-                    shutil.rmtree(splited_pfamtblout_dir)
-                for tmp_dir in splited_dir, splited_out_dir:
+                for tmp_dir in directory_list :
                     shutil.rmtree(tmp_dir)
 
         elif handling_mode == "slurm":
-            number_of_files = self.split_fasta(seqfile, splited_dir, num_of_files=threads if threads else self.threads,
+            number_of_files = self.split_fasta(seqfile, splited_fasta_dir, num_of_files=threads if threads else self.threads,
                                                output_prefix=output_prefix)
 
             slurm_cmd_options = "hmmscan %s" % common_options
@@ -377,12 +372,29 @@ class HMMER3(Tool):
             slurm_cmd_options += " --tblout %s/%s_${SLURM_ARRAY_TASK_ID}.tblout" % (splited_tblout_dir, output_prefix) if splited_tblout_dir else ""
             slurm_cmd_options += " --domtblout %s/%s_${SLURM_ARRAY_TASK_ID}.domtblout" % (splited_domtblout_dir, output_prefix) if splited_domtblout_dir else ""
             slurm_cmd_options += " --pfamtblout %s/%s_${SLURM_ARRAY_TASK_ID}.pfamtblout" % (splited_pfamtblout_dir, output_prefix) if splited_pfamtblout_dir else ""
-            slurm_cmd_options += " -o %s/%s_${SLURM_ARRAY_TASK_ID}.hits" % (splited_out_dir, output_prefix)
+            slurm_cmd_options += " -o %s/%s_${SLURM_ARRAY_TASK_ID}.hits" % (splited_output_dir, output_prefix)
 
             slurm_cmd_options += " %s" % hmmfile
-            slurm_cmd_options += " %s/%s_${SLURM_ARRAY_TASK_ID}.fasta" % (splited_dir, output_prefix)
+            slurm_cmd_options += " %s/%s_${SLURM_ARRAY_TASK_ID}.fasta" % (splited_fasta_dir, output_prefix)
 
-            print number_of_files
+            #print number_of_files
+
+            return self.slurm_run_job_array(job_name,
+                                            log_prefix,
+                                            slurm_cmd_options,
+                                            error_log_prefix,
+                                            "%s%s.slurm" % (output_dir, output_prefix),
+                                            task_index_list=None,
+                                            start_task_index=1,
+                                            end_task_index=number_of_files,
+                                            max_running_jobs=max_running_jobs,
+                                            max_running_time=max_running_time,
+                                            cpus_per_task=cpu_per_task,
+                                            max_memmory_per_cpu=max_memmory_per_cpu,
+                                            modules_list=modules_list,
+                                            environment_variables_dict=environment_variables_dict)
+
+            """
             self.generate_slurm_job_array_script(job_name,
                                                  log_prefix,
                                                  slurm_cmd_options,
@@ -395,7 +407,10 @@ class HMMER3(Tool):
                                                  max_running_time=max_running_time,
                                                  max_memmory_per_cpu=max_memmory_per_cpu)
 
-            self.slurm_run_job_array(job_array_script_file)
+            job_array_id = self.slurm_run_job_array(job_array_script_file)
+
+            return job_array_id
+            """
 
     def hmmsearch(self, hmmfile, seqfile, outfile, multialignout=None, tblout=None, domtblout=None, pfamtblout=None,
                   dont_output_alignments=False, model_evalue_threshold=None, model_score_threshold=None,
@@ -460,40 +475,43 @@ class HMMER3(Tool):
         return self.extract_ids_from_file(domtblout_file, output_file=output_file, header=False, column_separator=" ",
                                           comments_prefix="#", column_number=0)
 
-    @staticmethod
-    def extract_top_hits(hmmer_hits, top_hits_file, top_hits_ids_file=None,
-                         not_significant_ids_file=None, not_found_ids_file=None):
+    def extract_top_hits(self, hmmer_hits, output_prefix, parsing_mode="index_db"): #top_hits_file, top_hits_ids_file=None,not_significant_ids_file=None, not_found_ids_file=None):
+
         top_hits_ids = IdList()
         not_significant_ids = IdList()
         not_found_ids = IdList()
 
-        index_file = "hmmer_hits.tmp.idx"
-        hmm_dict = SearchIO.index_db(index_file, hmmer_hits, "hmmer3-text")
+        top_hits_file = "%s.top_hits" % output_prefix
+        top_hits_ids_file = "%s.top_hits.ids" % output_prefix
+        not_significant_ids_file = "%s.not_significant.ids" % output_prefix
+        not_found_ids_file = "%s.not_found.ids" % output_prefix
 
-        out_fd = open(top_hits_file, "w")
-        out_fd.write("#query\thit\tevalue\tbitscore\n")
+        index_file = "%s.hmmer_hits.tmp.idx" % output_prefix
 
-        for query in hmm_dict:
-            if hmm_dict[query].hits:
-                if hmm_dict[query][0].is_included:
-                    out_fd.write("%s\t%s\t%s\t%s\n" % (query, hmm_dict[query][0].id, hmm_dict[query][0].evalue,
-                                                       hmm_dict[query][0].bitscore))
-                    top_hits_ids.append(query)
+        #hmm_dict = SearchIO.index_db(index_file, hmmer_hits, "hmmer3-text")
+
+        hmm_dict = self.parse_search_file(hmmer_hits, parsing_mode, format="hmmer3-text", index_file=None)
+
+        with open(top_hits_file, "w") as out_fd:
+            out_fd.write("#query\thit\tevalue\tbitscore\n")
+
+            for query in hmm_dict:
+                if hmm_dict[query].hits:
+                    if hmm_dict[query][0].is_included:
+                        out_fd.write("%s\t%s\t%s\t%s\n" % (query, hmm_dict[query][0].id, hmm_dict[query][0].evalue,
+                                                           hmm_dict[query][0].bitscore))
+                        top_hits_ids.append(query)
+                    else:
+                        not_significant_ids.append(query)
                 else:
-                    not_significant_ids.append(query)
-            else:
-                not_found_ids.append(query)
+                    not_found_ids.append(query)
 
         os.remove(index_file)
 
-        if not_significant_ids_file:
-            not_significant_ids.write(not_significant_ids_file)
+        for id_list, id_file in zip([not_significant_ids, not_found_ids_file, top_hits_ids_file],
+                                    [not_significant_ids_file, not_found_ids_file, top_hits_ids_file]):
+            id_file.write(id_file)
 
-        if not_found_ids_file:
-            not_found_ids.write(not_found_ids_file)
-
-        if top_hits_ids_file:
-            top_hits_ids.write(top_hits_ids_file)
 
     @staticmethod
     def get_families_from_top_hits(top_hits_file, fam_file):
