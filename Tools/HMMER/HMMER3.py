@@ -388,7 +388,7 @@ class HMMER3(Tool):
             slurm_cmd_options += "\n\n"
 
             if extract_top_hits:
-                slurm_cmd_options += "%shmmer/extract_top_hits.py " % self.check_dir_path(MAVR_scripts_dir)
+                slurm_cmd_options += "%shmmer3/extract_top_hits.py " % self.check_dir_path(MAVR_scripts_dir)
                 slurm_cmd_options += " -i %s/%s_${SLURM_ARRAY_TASK_ID}.hits" % (splited_output_dir, output_prefix)
                 slurm_cmd_options += " -p %s/%s_${SLURM_ARRAY_TASK_ID}" % (splited_hit_info, output_prefix)
                 slurm_cmd_options += " -a %s" % hmm_hit_parsing_mode
