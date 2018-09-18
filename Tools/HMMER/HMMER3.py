@@ -253,32 +253,36 @@ class HMMER3(Tool):
                          input_format=None, threads=None,
                          combine_output_to_single_file=True,
                          biopython_165_compartibility=False,
+                         extract_top_hits=True,
                          remove_tmp_dirs=True,
                          async_run=False, external_process_pool=None,
-                         cpu_per_task=1,
+                         cpus_per_task=1,
                          handling_mode="local",
                          job_name=None,
                          log_prefix=None,
                          error_log_prefix=None,
                          max_running_jobs=None,
                          max_running_time=None,
-                         cpus_per_task=None,
                          max_memmory_per_cpu=None,
                          modules_list=None,
-                         environment_variables_dict=None
+                         environment_variables_dict=None,
+                         MAVR_scripts_dir="",
+                         hmm_hit_parsing_mode="parse",
                          ):
         splited_fasta_dir = "%s/splited_fasta/" % output_dir
         splited_output_dir = "%s/splited_output/" % output_dir
         splited_tblout_dir = "%s/splited_tblout/" % output_dir
         splited_domtblout_dir = "%s/splited_domtblout/" % output_dir
         splited_pfamtblout_dir = "%s/splited_pfamtblout/" % output_dir
+        splited_hit_info = "%s/splited_hit_info/" % output_dir
 
         directory_list = [
                          splited_fasta_dir,
                          splited_output_dir,
                          splited_tblout_dir,
                          splited_domtblout_dir,
-                         splited_pfamtblout_dir
+                         splited_pfamtblout_dir,
+                         splited_hit_info
                          ]
 
         for directory in directory_list:
@@ -303,7 +307,7 @@ class HMMER3(Tool):
                                                              MSV_threshold=MSV_threshold, Vit_threshold=Vit_threshold,
                                                              Fwd_threshold=Fwd_threshold,
                                                              turn_off_biased_composition_score_corrections=turn_off_biased_composition_score_corrections)
-        common_options += " --cpu %i" % cpu_per_task
+        common_options += " --cpu %i" % cpus_per_task
         common_options += " --qformat %s" if input_format else ""
 
         if handling_mode == "local":
@@ -352,15 +356,20 @@ class HMMER3(Tool):
             if combine_output_to_single_file:
                 if biopython_165_compartibility:
                     CGAS.cgas(out_files, sed_string="s/^Description:.*/Description: <unknown description>/",
-                              output="%s/%s.hits" % (output_dir,output_prefix))
+                              output="%s/%s.hits" % (output_dir, output_prefix))
                 else:
                     CGAS.cat(out_files, output="%s/%s.hits" % (output_dir, output_prefix))
+
                 CGAS.cat(tblout_files, output="%s/%s.tblout" % (output_dir, output_prefix))
-                CGAS.cat(domtblout_files, output="%s/%s.domtblout" % (output_dir,output_prefix))
-                CGAS.cat(pfamtblout_files, output="%s/%s.pfamtblout" % (output_dir,output_prefix))
+                CGAS.cat(domtblout_files, output="%s/%s.domtblout" % (output_dir, output_prefix))
+                CGAS.cat(pfamtblout_files, output="%s/%s.pfamtblout" % (output_dir, output_prefix))
+
+            if extract_top_hits:
+                for suffix in ".top_hits", ".top_hits.ids", ".not_significant.ids", ".not_found.ids":
+                    os.system("cat %s/*%s > %s/%s%s\n" % (splited_hit_info, suffix, output_dir, output_prefix, suffix))
 
             if remove_tmp_dirs:
-                for tmp_dir in directory_list :
+                for tmp_dir in directory_list:
                     shutil.rmtree(tmp_dir)
 
         elif handling_mode == "slurm":
@@ -376,23 +385,61 @@ class HMMER3(Tool):
 
             slurm_cmd_options += " %s" % hmmfile
             slurm_cmd_options += " %s/%s_${SLURM_ARRAY_TASK_ID}.fasta" % (splited_fasta_dir, output_prefix)
+            slurm_cmd_options += "\n\n"
+
+            if extract_top_hits:
+                slurm_cmd_options += "%shmmer/extract_top_hits.py " % self.check_dir_path(MAVR_scripts_dir)
+                slurm_cmd_options += " -i %s/%s_${SLURM_ARRAY_TASK_ID}.hits" % (splited_output_dir, output_prefix)
+                slurm_cmd_options += " -p %s/%s_${SLURM_ARRAY_TASK_ID}" % (splited_hit_info, output_prefix)
+                slurm_cmd_options += " -a %s" % hmm_hit_parsing_mode
+
+                slurm_cmd_options += "\n\n"
 
             #print number_of_files
 
-            return self.slurm_run_job_array(job_name,
-                                            log_prefix,
-                                            slurm_cmd_options,
-                                            error_log_prefix,
-                                            "%s%s.slurm" % (output_dir, output_prefix),
-                                            task_index_list=None,
-                                            start_task_index=1,
-                                            end_task_index=number_of_files,
-                                            max_running_jobs=max_running_jobs,
-                                            max_running_time=max_running_time,
-                                            cpus_per_task=cpu_per_task,
-                                            max_memmory_per_cpu=max_memmory_per_cpu,
-                                            modules_list=modules_list,
-                                            environment_variables_dict=environment_variables_dict)
+            last_job_id = self.slurm_run_job_array(job_name,
+                                                   log_prefix,
+                                                   slurm_cmd_options,
+                                                   error_log_prefix,
+                                                   "%s%s.slurm" % (output_dir, output_prefix),
+                                                   task_index_list=None,
+                                                   start_task_index=1,
+                                                   end_task_index=number_of_files,
+                                                   max_running_jobs=max_running_jobs,
+                                                   max_running_time=max_running_time,
+                                                   cpus_per_task=cpus_per_task,
+                                                   max_memmory_per_cpu=max_memmory_per_cpu,
+                                                   modules_list=modules_list,
+                                                   environment_variables_dict=environment_variables_dict)
+
+            if combine_output_to_single_file:
+                if biopython_165_compartibility:
+                    slurm_merging_cmd = "cat %s/* | sed 's/^Description:.*/Description: <unknown description>/' > %s/%s.hits\n" % (splited_output_dir, output_dir, output_prefix)
+                else:
+                    slurm_merging_cmd = "cat %s/* > %s/%s.hits\n" % (splited_output_dir, output_dir, output_prefix)
+                slurm_merging_cmd += "cat %s/* > %s/%s.tblout\n" % (splited_tblout_dir, output_dir, output_prefix)
+                slurm_merging_cmd += "cat %s/* > %s/%s.domtblout\n" % (splited_domtblout_dir, output_dir, output_prefix)
+                slurm_merging_cmd += "cat %s/* > %s/%s.pfamtblout\n" % (splited_pfamtblout_dir, output_dir, output_prefix)
+
+                if extract_top_hits:
+                    for suffix in ".top_hits", ".top_hits.ids", ".not_significant.ids", ".not_found.ids":
+                        slurm_merging_cmd = "cat %s/*%s > %s/%s%s\n" % (splited_hit_info, suffix, output_dir, output_prefix, suffix)
+
+                last_job_id = self.slurm_run_job_array("merge_%s" % job_name,
+                                                       log_prefix + "_merge",
+                                                       slurm_merging_cmd,
+                                                       error_log_prefix + "_merge",
+                                                       "%s%s_merge.slurm" % (output_dir, output_prefix),
+                                                       task_index_list=None,
+                                                       start_task_index=1,
+                                                       end_task_index=1,
+                                                       max_running_jobs=1,
+                                                       max_running_time=max_running_time,
+                                                       cpus_per_task=1,
+                                                       max_memmory_per_cpu=max_memmory_per_cpu,
+                                                       modules_list=modules_list,
+                                                       environment_variables_dict=environment_variables_dict)
+
 
             """
             self.generate_slurm_job_array_script(job_name,
@@ -411,6 +458,8 @@ class HMMER3(Tool):
 
             return job_array_id
             """
+
+            return last_job_id
 
     def hmmsearch(self, hmmfile, seqfile, outfile, multialignout=None, tblout=None, domtblout=None, pfamtblout=None,
                   dont_output_alignments=False, model_evalue_threshold=None, model_score_threshold=None,
