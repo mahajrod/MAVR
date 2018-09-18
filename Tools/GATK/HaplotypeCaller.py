@@ -142,6 +142,9 @@ class HaplotypeCaller(JavaTool):
                                               output,
                                               close_fd_after=False,
                                               extension_list=gvcf_extension_list)
+
+
+
     def variant_call(self,
                      alignment,
                      reference_file,
