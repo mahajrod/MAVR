@@ -188,7 +188,7 @@ class Tool(SequenceRoutines, AlignmentRoutines):
         # Popen.stdout returns file object
         print(command)
         job_id = Popen([command], shell=True, stdout=PIPE).stdout.readline().strip().split()[-1]
-
+        print job_id
         """
         if print_current_status:
             print ("\nCurrent status:\n")
