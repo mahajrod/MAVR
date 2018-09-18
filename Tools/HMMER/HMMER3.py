@@ -423,7 +423,7 @@ class HMMER3(Tool):
 
                 if extract_top_hits:
                     for suffix in ".top_hits", ".top_hits.ids", ".not_significant.ids", ".not_found.ids":
-                        slurm_merging_cmd = "cat %s/*%s > %s/%s%s\n" % (splited_hit_info, suffix, output_dir, output_prefix, suffix)
+                        slurm_merging_cmd += "cat %s/*%s > %s/%s%s\n" % (splited_hit_info, suffix, output_dir, output_prefix, suffix)
 
                 last_job_id = self.slurm_run_job_array("merge_%s" % job_name,
                                                        log_prefix + "_merge",
