@@ -170,6 +170,7 @@ class Tool(SequenceRoutines, AlignmentRoutines):
         if afternotok_job_id_list:
             dependencies_option_list.append("afternotok:%s" % (afternotok_job_id_list if isinstance(afternotok_job_id_list, str) else ":".join(afternotok_job_id_list)))
         if afterok_job_id_list:
+            print afterok_job_id_list
             dependencies_option_list.append("afterok:%s" % (afterok_job_id_list if isinstance(afterok_job_id_list, str) else ":".join(afterok_job_id_list)))
         if singleton:
             dependencies_option_list.append("singleton")
