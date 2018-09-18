@@ -3,6 +3,7 @@ __author__ = 'Sergei F. Kliver'
 import os
 import argparse
 
+from CustomCollections.GeneralCollections import IdList
 from Routines import SequenceRoutines
 
 
@@ -18,6 +19,11 @@ parser.add_argument("-m", "--max_length", action="store", dest="max_length", typ
                     help="Soft maximum length of region(1.5x longer regions are allowed). Default: not set")
 parser.add_argument("-n", "--max_seq_number", action="store", dest="max_seq_number", type=int, default=1,
                     help="Maximum number of sequences per region. Default: 1")
+parser.add_argument("-b", "--scaffold_black_list_file", action="store", dest="scaffold_black_list_file",
+                    type=lambda s: IdList(filename=s),
+                    help="File with scaffolds from black list")
+parser.add_argument("-x", "--min_scaffold_len", action="store", dest="min_scaffold_len", type=int, default=None,
+                    help="Minimum length of scaffold to be included in regions. Default: not set")
 
 args = parser.parse_args()
 
@@ -28,6 +34,8 @@ SequenceRoutines.prepare_region_list_by_length(max_length=args.max_length,
                                                reference=args.reference,
                                                parsing_mode="parse",
                                                output_dir=args.output_dir,
-                                               split_scaffolds=args.split_scaffolds)
+                                               split_scaffolds=args.split_scaffolds,
+                                               min_scaffold_length=args.min_scaffold_len,
+                                               black_list_scaffolds=None)
 
 
