@@ -123,6 +123,7 @@ class Tool(SequenceRoutines):
 
     def slurm_run_job_array(self, job_array_script):
 
+        # Popen.stdout returns file object
         job_id = Popen(["sbatch %s" % job_array_script], shell=True, stdout=PIPE).stdout.readline().strip().split()[-1]
 
         return job_id
