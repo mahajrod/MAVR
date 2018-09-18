@@ -146,10 +146,43 @@ class Tool(SequenceRoutines, AlignmentRoutines):
 
         return script
 
-    def slurm_run_job_array_from_script(self, job_array_script, print_current_status=True):
+    def slurm_run_job_array_from_script(self, job_array_script, print_current_status=True,
+                                        after_job_id_list=[],
+                                        afterany_job_id_list=[],
+                                        afternotok_job_id_list=[],
+                                        afterok_job_id_list=[],
+                                        singleton=False):
+        """
+        after:jobid[:jobid...]	    job can begin after the specified jobs have started
+        afterany:jobid[:jobid...]	job can begin after the specified jobs have terminated
+        afternotok:jobid[:jobid...]	job can begin after the specified jobs have failed
+        afterok:jobid[:jobid...]	job can begin after the specified jobs have run to completion with an exit code of zero (see the user guide for caveats).
+        singleton	                jobs can begin execution after all previously launched jobs with the same name and user have ended. This is useful to collate results of a swarm or to send a notification at the end of a swarm.
+
+        """
+
+        dependencies_option_list = []
+
+        if after_job_id_list:
+            dependencies_option_list.append("after:%s" % (after_job_id_list if isinstance(after_job_id_list, str) else ":".join(after_job_id_list)))
+        if afterany_job_id_list:
+            dependencies_option_list.append("afterany:%s" % (afterany_job_id_list if isinstance(afterany_job_id_list, str) else ":".join(afterany_job_id_list)))
+        if afternotok_job_id_list:
+            dependencies_option_list.append("afternotok:%s" % (afternotok_job_id_list if isinstance(afternotok_job_id_list, str) else ":".join(afternotok_job_id_list)))
+        if afterok_job_id_list:
+            dependencies_option_list.append("afterok:%s" % (afterok_job_id_list if isinstance(afterok_job_id_list, str) else ":".join(afterok_job_id_list)))
+        if singleton:
+            dependencies_option_list.append("singleton")
+
+        dependencies_option = ",".join(dependencies_option_list)
+
+        options = " --dependency=%s" % dependencies_option
+        options += " %s" % job_array_script
+
+        command = "sbatch %s " % options
 
         # Popen.stdout returns file object
-        job_id = Popen(["sbatch %s" % job_array_script], shell=True, stdout=PIPE).stdout.readline().strip().split()[-1]
+        job_id = Popen([command], shell=True, stdout=PIPE).stdout.readline().strip().split()[-1]
 
         if print_current_status:
             print ("\nCurrent status:\n")
@@ -173,7 +206,12 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                             max_memmory_per_cpu=None,
                             modules_list=None,
                             environment_variables_dict=None,
-                            print_current_status=True):
+                            print_current_status=True,
+                            after_job_id_list=[],
+                            afterany_job_id_list=[],
+                            afternotok_job_id_list=[],
+                            afterok_job_id_list=[],
+                            singleton=False):
 
         self.generate_slurm_job_array_script(job_name,
                                              log_prefix,
@@ -190,7 +228,12 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                                              modules_list=modules_list,
                                              environment_variables_dict=environment_variables_dict)
 
-        self.slurm_run_job_array_from_script(job_array_script, print_current_status=print_current_status)
+        self.slurm_run_job_array_from_script(job_array_script, print_current_status=print_current_status,
+                                             after_job_id_list=after_job_id_list,
+                                             afterany_job_id_list=afterany_job_id_list,
+                                             afternotok_job_id_list=afternotok_job_id_list,
+                                             afterok_job_id_list=afterok_job_id_list,
+                                             singleton=singleton)
 
 
 class JavaTool(Tool):
