@@ -188,7 +188,7 @@ class Tool(SequenceRoutines, AlignmentRoutines):
         # Popen.stdout returns file object
         print(command)
         job_id = Popen([command], shell=True, stdout=PIPE).stdout.readline().strip().split()[-1]
-        print job_id
+        print "Job id", job_id
         """
         if print_current_status:
             print ("\nCurrent status:\n")
@@ -234,12 +234,12 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                                              modules_list=modules_list,
                                              environment_variables_dict=environment_variables_dict)
 
-        self.slurm_run_job_array_from_script(job_array_script, print_current_status=print_current_status,
-                                             after_job_id_list=after_job_id_list,
-                                             afterany_job_id_list=afterany_job_id_list,
-                                             afternotok_job_id_list=afternotok_job_id_list,
-                                             afterok_job_id_list=afterok_job_id_list,
-                                             singleton=singleton)
+        return self.slurm_run_job_array_from_script(job_array_script, print_current_status=print_current_status,
+                                                    after_job_id_list=after_job_id_list,
+                                                    afterany_job_id_list=afterany_job_id_list,
+                                                    afternotok_job_id_list=afternotok_job_id_list,
+                                                    afterok_job_id_list=afterok_job_id_list,
+                                                    singleton=singleton)
 
 
 class JavaTool(Tool):
