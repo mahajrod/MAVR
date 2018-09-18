@@ -556,8 +556,8 @@ class HMMER3(Tool):
                         not_significant_ids.append(query)
                 else:
                     not_found_ids.append(query)
-
-        os.remove(index_file)
+        if parsing_mode == "index_db":
+            os.remove(index_file)
 
         for id_list, id_file in zip([not_significant_ids, not_found_ids_file, top_hits_ids_file],
                                     [not_significant_ids_file, not_found_ids_file, top_hits_ids_file]):
