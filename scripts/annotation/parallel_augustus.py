@@ -156,10 +156,7 @@ if args.pfam_db:
     print("Annotating domains(Pfam database)...")
     HMMER3.threads = args.threads
     HMMER3.parallel_hmmscan(args.pfam_db, output_pep, output_prefix_hmmscan, "./", #output_hmmscan,
-                            num_of_seqs_per_scan=None,
-                            split_dir="splited_hmmscan_fasta/",
-                            splited_output_dir="splited_hmmscan_output_dir",
-                            splited_tblout_dir=None, splited_domtblout_dir="hmmscan_domtblout/")
+                            num_of_seqs_per_scan=None) # TODO CHECK!!!!!!!!!!!!!!!!!!!!!!!!!!
     HMMER3.extract_dom_ids_hits_from_domtblout(output_domtblout, output_pfam_annotated_dom_ids)
     hits_dict = HMMER3.extract_dom_names_hits_from_domtblout(output_domtblout, output_pfam_annotated_dom_names)
     supported_ids = IdSet(hits_dict.keys())
