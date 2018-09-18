@@ -9,8 +9,6 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input", action="store", dest="input", required=True,
                     help="File with hmm hits")
-#parser.add_argument("-f", "--format", action="store", dest="format",
-#                    help="Format of input hmm file.")
 parser.add_argument("-p", "--output_prefix", action="store", dest="output_prefix",
                     help="Prefix of output file")
 parser.add_argument("-a", "--parsing_mode", action="store", dest="parsing_mode", default="index_db",
