@@ -174,9 +174,12 @@ class Tool(SequenceRoutines, AlignmentRoutines):
         if singleton:
             dependencies_option_list.append("singleton")
 
-        dependencies_option = ",".join(dependencies_option_list)
+        options = ""
 
-        options = " --dependency=%s" % dependencies_option
+        if dependencies_option_list:
+            dependencies_option = ",".join(dependencies_option_list)
+            options += " --dependency=%s" % dependencies_option
+
         options += " %s" % job_array_script
 
         command = "sbatch %s " % options
