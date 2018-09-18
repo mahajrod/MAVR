@@ -19,19 +19,9 @@ parser.add_argument("--no_ali", action="store_true", dest="no_alignment",
                     help="Dont save alignments to minimize output")
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
                     help="Number of threads")
-parser.add_argument("-d", "--hmmscan_output_dir", action="store", dest="hmmscan_output_dir",
-                    default="hmmscan_output_dir/", type=check_path,
-                    help="Directory to write intermediate(splited) output")
-
-parser.add_argument("--tblout_dir", action="store", dest="tblout_dir",
-                    default="tblout_dir", type=check_path,
-                    help="Directory to write intermediate(splited) parseable table of per-sequence hits")
-parser.add_argument("--domtblout_dir", action="store", dest="domtblout_dir",
-                    default="domtblout_dir", type=check_path,
-                    help="Directory to write intermediate(splited) parseable table of per-domain hits")
-parser.add_argument("--pfamtblout_dir", action="store", dest="pfamtblout_dir",
-                    default="pfamtblout_dir", type=check_path,
-                    help="Directory to write intermediate(splited) table of hits and domains to file, in Pfam format ")
+parser.add_argument("-d", "--output_dir", action="store", dest="output_dir",
+                    default="./", type=check_path,
+                    help="Directory to write output. Default: current directory")
 
 #parser.add_argument("--tblout", action="store", dest="tblout",
 #                    help="File to save parseable table of per-sequence hits")
@@ -65,19 +55,15 @@ args = parser.parse_args()
 
 HMMER3.threads = 1
 HMMER3.path = args.path
-HMMER3.parallel_hmmscan(args.input, args.input_seq, args.output_prefix, "./", num_of_seqs_per_scan=None, split_dir="splited_fasta",
-                        splited_output_dir=args.hmmscan_output_dir, threads=args.threads,
-                        combine_output_to_single_file=args.combine_output, dont_output_alignments=args.no_alignment,
-                        splited_tblout_dir=args.tblout_dir, splited_domtblout_dir=args.domtblout_dir,
-                        splited_pfamtblout_dir=args.pfamtblout_dir,
+HMMER3.parallel_hmmscan(args.input, args.input_seq, args.output_prefix, args.output_dir,
+                        num_of_seqs_per_scan=None,
+                        threads=args.threads,
+                        combine_output_to_single_file=args.combine_output,
+                        dont_output_alignments=args.no_alignment,
                         handling_mode=args.handling_mode,
                         job_name=args.slurm_job_name,
                         log_prefix=args.slurm_log_prefix,
                         error_log_prefix=args.slurm_error_log_prefix,
-                        job_array_script_file="%s.slurm" % args.output_prefix,
-                         #task_index_list=None,
-                         #start_task_index=None,
-                         #end_task_index=None,
                         max_running_jobs=args.slurm_max_running_jobs,
                         max_running_time=args.slurm_max_running_time,
                         max_memmory_per_cpu=args.slurm_max_memmory_per_cpu
