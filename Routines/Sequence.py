@@ -101,12 +101,35 @@ class SequenceRoutines(FileRoutines):
 
     def prepare_region_list_by_length(self, max_length=500000, max_seq_number=10,
                                       length_dict=None, reference=None, parsing_mode="parse", output_dir=None,
-                                      split_scaffolds=True):
+                                      split_scaffolds=True, min_scaffold_length=None, black_list_scaffolds=None):
 
-        len_dict = length_dict if length_dict else self.get_lengths(record_dict=self.parse_seq_file(reference,
-                                                                                                    mode=parsing_mode),
-                                                                    out_file=None,
-                                                                    close_after_if_file_object=False)
+        raw_len_dict = length_dict if length_dict else self.get_lengths(record_dict=self.parse_seq_file(reference,
+                                                                                                        mode=parsing_mode),
+                                                                        out_file=None,
+                                                                        close_after_if_file_object=False)
+        len_dict = OrderedDict()
+
+        if black_list_scaffolds and min_scaffold_length:
+            for scaffold_id in raw_len_dict:
+                if (scaffold_id in black_list_scaffolds) or (raw_len_dict[scaffold_id] < min_scaffold_length):
+                    continue
+                len_dict[scaffold_id] = raw_len_dict[scaffold_id]
+
+        elif black_list_scaffolds:
+            for scaffold_id in raw_len_dict:
+                if scaffold_id in black_list_scaffolds:
+                    continue
+                len_dict[scaffold_id] = raw_len_dict[scaffold_id]
+
+        elif min_scaffold_length:
+            for scaffold_id in raw_len_dict:
+                if raw_len_dict[scaffold_id] < min_scaffold_length:
+                    continue
+                len_dict[scaffold_id] = raw_len_dict[scaffold_id]
+
+        else:
+            len_dict = raw_len_dict
+
         number_of_scaffolds = len(len_dict)
         max_length_soft_threshold = None if max_length is None else int(1.5 * max_length)
         region_list = []
