@@ -438,7 +438,8 @@ class HMMER3(Tool):
                                                        cpus_per_task=1,
                                                        max_memmory_per_cpu=max_memmory_per_cpu,
                                                        modules_list=modules_list,
-                                                       environment_variables_dict=environment_variables_dict)
+                                                       environment_variables_dict=environment_variables_dict,
+                                                       afterok_job_id_list=last_job_id)
 
 
             """
