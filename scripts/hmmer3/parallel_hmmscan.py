@@ -72,5 +72,7 @@ HMMER3.parallel_hmmscan(args.input, args.input_seq, args.output_prefix, args.out
                         MAVR_scripts_dir=args.MAVR_script_dir,
                         hmm_hit_parsing_mode=args.parsing_mode,
                         modules_list=args.slurm_modules_list,
+                        extract_top_hits=False,
+                        get_clusters_from_top_hits=False
                         )
 
