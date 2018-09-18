@@ -127,14 +127,14 @@ class Tool(SequenceRoutines, AlignmentRoutines):
             script += "#-------------------------------------------\n\n"
 
         if modules_list:
-            script += "#--------------Loading modules--------------\n\n"
+            script += "#--------------Modules--------------\n\n"
             modules_to_load = [modules_list] if isinstance(modules_list, str) else list(modules_list)
             for module in modules_to_load:
                 script += "module load %s\n" % module
 
             script += "#-------------------------------------------\n\n"
 
-        script += "#--------------Running commands--------------\n\n"
+        script += "#--------------Commands--------------\n\n"
 
         script += "%s\n" % task_commands
 
