@@ -254,6 +254,7 @@ class HMMER3(Tool):
                          combine_output_to_single_file=True,
                          biopython_165_compartibility=False,
                          extract_top_hits=True,
+                         get_clusters_from_top_hits=True,
                          remove_tmp_dirs=True,
                          async_run=False, external_process_pool=None,
                          cpus_per_task=1,
@@ -387,7 +388,7 @@ class HMMER3(Tool):
             slurm_cmd_options += " %s/%s_${SLURM_ARRAY_TASK_ID}.fasta" % (splited_fasta_dir, output_prefix)
             slurm_cmd_options += "\n\n"
 
-            if extract_top_hits:
+            if extract_top_hits or get_clusters_from_top_hits:
                 slurm_cmd_options += "%shmmer3/extract_top_hits.py " % self.check_dir_path(MAVR_scripts_dir)
                 slurm_cmd_options += " -i %s/%s_${SLURM_ARRAY_TASK_ID}.hits" % (splited_output_dir, output_prefix)
                 slurm_cmd_options += " -p %s/%s_${SLURM_ARRAY_TASK_ID}" % (splited_hit_info, output_prefix)
@@ -422,9 +423,14 @@ class HMMER3(Tool):
                 slurm_merging_cmd += "cat %s/* > %s/%s.domtblout\n" % (splited_domtblout_dir, output_dir, output_prefix)
                 slurm_merging_cmd += "cat %s/* > %s/%s.pfamtblout\n" % (splited_pfamtblout_dir, output_dir, output_prefix)
 
-                if extract_top_hits:
+                if extract_top_hits or get_clusters_from_top_hits:
                     for suffix in ".top_hits", ".top_hits.ids", ".not_significant.ids", ".not_found.ids":
                         slurm_merging_cmd += "cat %s/*%s > %s/%s%s\n" % (splited_hit_info, suffix, output_dir, output_prefix, suffix)
+
+                    if get_clusters_from_top_hits:
+                        slurm_merging_cmd += "%shmmer3/get_clusters_from_top_hits.py " % self.check_dir_path(MAVR_scripts_dir)
+                        slurm_merging_cmd += " -i %s/%s.top_hits" % (output_dir, output_prefix)
+                        slurm_merging_cmd += " -o %s/%s.fam\n" % (output_dir, output_prefix)
 
                 last_job_id = self.slurm_run_job_array("merge_%s" % job_name,
                                                        log_prefix + "_merge",
@@ -442,6 +448,9 @@ class HMMER3(Tool):
                                                        environment_variables_dict=environment_variables_dict,
                                                        afterok_job_id_list=last_job_id)
                 print("Submitted job  %s" % last_job_id)
+
+
+
 
             """
             self.generate_slurm_job_array_script(job_name,
