@@ -182,13 +182,15 @@ class Tool(SequenceRoutines, AlignmentRoutines):
         command = "sbatch %s " % options
 
         # Popen.stdout returns file object
+        print(command)
         job_id = Popen([command], shell=True, stdout=PIPE).stdout.readline().strip().split()[-1]
 
+        """
         if print_current_status:
             print ("\nCurrent status:\n")
             #show the current status with 'sjobs'
             os.system("sjobs")
-
+        """
         return job_id
 
     def slurm_run_job_array(self,
