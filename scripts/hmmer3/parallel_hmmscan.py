@@ -22,13 +22,6 @@ parser.add_argument("-t", "--threads", action="store", dest="threads", type=int,
 parser.add_argument("-d", "--output_dir", action="store", dest="output_dir",
                     default="./", type=check_path,
                     help="Directory to write output. Default: current directory")
-
-#parser.add_argument("--tblout", action="store", dest="tblout",
-#                    help="File to save parseable table of per-sequence hits")
-#parser.add_argument("--domtblout", action="store", dest="domtblout",
-#                    help="File to save parseable table of per-domain hits")
-#parser.add_argument("--pfamtblout", action="store", dest="pfamtblout",
-#                    help="File to save table of hits and domains to file, in Pfam format ")
 parser.add_argument("--hmmer_dir", action="store", dest="path", default="",
                     help="Path to directory with hmmer3.1 binaries")
 parser.add_argument("-m", "--handling_mode", action="store", dest="handling_mode", default="local",
@@ -49,6 +42,15 @@ parser.add_argument("-a", "--slurm_max_running_time", action="store", dest="slur
 parser.add_argument("-u", "--slurm_max_memmory_per_cpu", action="store", dest="slurm_max_memmory_per_cpu",
                     default=4000, type=int,
                     help="Slurm maximum memmory per cpu in megabytes. Default: 4000")
+parser.add_argument("-q", "--slurm_modules_list", action="store", dest="slurm_modules_list", default=[],
+                    type=lambda s: s.split(","),
+                    help="Comma-separated list of modules to load. Set modules for hmmer and python")
+
+parser.add_argument("-r", "--MAVR_script_dir", action="store", dest="MAVR_script_dir", default="",
+                    help="MAVR scrip dir. Default: ''")
+
+parser.add_argument("-g", "--parsing_mode", action="store", dest="parsing_mode", default="index_db",
+                    help="Parsing mode for hmmer hits file. Allowed: parse, index, index_db(default)")
 
 args = parser.parse_args()
 
@@ -66,6 +68,9 @@ HMMER3.parallel_hmmscan(args.input, args.input_seq, args.output_prefix, args.out
                         error_log_prefix=args.slurm_error_log_prefix,
                         max_running_jobs=args.slurm_max_running_jobs,
                         max_running_time=args.slurm_max_running_time,
-                        max_memmory_per_cpu=args.slurm_max_memmory_per_cpu
+                        max_memmory_per_cpu=args.slurm_max_memmory_per_cpu,
+                        MAVR_scripts_dir=args.MAVR_script_dir,
+                        hmm_hit_parsing_mode=args.parsing_mode,
+                        modules_list=args.slurm_modules_list,
                         )
 
