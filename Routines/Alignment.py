@@ -1,5 +1,7 @@
 __author__ = 'mahajrod'
 import os
+
+from collections import OrderedDict
 from Bio import SearchIO, SeqIO, AlignIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
@@ -211,3 +213,18 @@ class AlignmentRoutines(SequenceRoutines):
 
     def filter_psl_by_target_len(self, psl_file, output_file, min_target_len=None, max_target_len=None):
         pass
+
+    @staticmethod
+    def parse_search_file(input_file, mode, format="fasta", index_file=None):
+        if mode == "index_db" or ((not isinstance(input_file, str)) and (len(input_file) > 1)):
+            index = index_file if index_file else "tmp.idx"
+            seq_dict = SearchIO.index_db(index, [input_file] if isinstance(input_file, str) else input_file, format=format)
+        elif mode == "index":
+            seq_dict = SearchIO.index(input_file if isinstance(input_file, str) else input_file[0], format=format)
+        elif mode == "parse":
+            seq_dict = OrderedDict()
+            for record in SearchIO.parse(input_file if isinstance(input_file, str) else input_file[0], format=format):
+                seq_dict[record.id] = record
+            #seq_dict = SeqIO.to_dict(SeqIO.parse(input_file if isinstance(input_file, str) else input_file[0], format=format))
+
+        return seq_dict
