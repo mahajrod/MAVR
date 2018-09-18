@@ -215,7 +215,7 @@ class AlignmentRoutines(SequenceRoutines):
         pass
 
     @staticmethod
-    def parse_search_file(input_file, mode, format="fasta", index_file=None):
+    def parse_search_file(input_file, mode, format="hmmer3-text", index_file=None):
         if mode == "index_db" or ((not isinstance(input_file, str)) and (len(input_file) > 1)):
             index = index_file if index_file else "tmp.idx"
             seq_dict = SearchIO.index_db(index, [input_file] if isinstance(input_file, str) else input_file, format=format)
