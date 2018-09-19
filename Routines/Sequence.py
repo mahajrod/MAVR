@@ -2309,7 +2309,7 @@ class SequenceRoutines(FileRoutines):
             skipped_seq_ids.write("%s.skipped_seqs.ids" % output_prefix)
             unchanged_seq_ids.write("%s.unchanged_seqs.ids" % output_prefix)
 
-            with self.metaopen("%s.retained_segments.bed", "w") as out_fd:
+            with self.metaopen("%s.retained_segments.bed" % output_prefix, "w") as out_fd:
                 for seq_id in retained_segments_dict:
                     for region in retained_segments_dict[seq_id]:
                         out_fd.write("\t".join(map(str,
