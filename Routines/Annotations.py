@@ -705,6 +705,7 @@ class AnnotationsRoutines(SequenceRoutines):
                 else: # d <= b
                     pass
                 i += 1
+            print unified_dict[scaffold]
         #print unified_dict
         #print merged_dict
         if output_file:
