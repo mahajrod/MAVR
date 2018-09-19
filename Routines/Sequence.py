@@ -2339,7 +2339,7 @@ class SequenceRoutines(FileRoutines):
                                                                output_prefix=output_prefix)
 
         SeqIO.write(self.record_by_expression_generator(splited_sequence_dict, id_file=None),
-                    "%s.%s" % (output_prefix, self.split_filename(sequence_file)[-1]),
+                    "%s%s" % (output_prefix, self.split_filename(sequence_file)[-1]),
                     format=sequence_format)
 
 
