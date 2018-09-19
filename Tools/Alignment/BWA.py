@@ -65,7 +65,7 @@ class BWA(Tool):
             options += " -O %s" % output_format.upper()
 
         options += " > %s.%s" % (output_prefix, output_format)
-
+        print("AAAAAAAAAAAAA")
         self.execute(options, cmd="bwa mem")
 
 
