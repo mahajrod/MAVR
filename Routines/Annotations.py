@@ -649,8 +649,10 @@ class AnnotationsRoutines(SequenceRoutines):
             for line_list in self.file_line_as_list_generator(filename,
                                                               comments_prefix=comments_prefix,
                                                               separator=input_separator):
-                record_dict_list[-1][line_list[scaffold_id_column]] = [(int(feature_start_column) - 1 if coordinates_type == "1-based" else int(feature_start_column)),
-                                                                       feature_end_column]
+                if line_list[scaffold_id_column] not in record_dict_list[-1]:
+                    record_dict_list[-1][line_list[scaffold_id_column]] = []
+                record_dict_list[-1][line_list[scaffold_id_column]].append([(int(feature_start_column) - 1 if coordinates_type == "1-based" else int(feature_start_column)),
+                                                                       feature_end_column])
 
         unified_dict = OrderedDict()
         merged_dict = OrderedDict()
@@ -658,7 +660,6 @@ class AnnotationsRoutines(SequenceRoutines):
         scaffold_set = set()
         for record_dict in record_dict_list:
             scaffold_set |= set(record_dict.keys())
-
 
         for scaffold in scaffold_set:
             unified_dict[scaffold] = []
