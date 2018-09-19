@@ -657,6 +657,8 @@ class AnnotationsRoutines(SequenceRoutines):
         unified_dict = OrderedDict()
         merged_dict = OrderedDict()
 
+        print record_dict_list[0]
+
         scaffold_set = set()
         for record_dict in record_dict_list:
             scaffold_set |= set(record_dict.keys())
@@ -669,7 +671,8 @@ class AnnotationsRoutines(SequenceRoutines):
             for scaffold in record_dict:
 
                 unified_dict[scaffold] += record_dict[scaffold]
-                print scaffold, unified_dict[scaffold]
+                print "AAAAAAAAAA"
+                print scaffold, unified_dict[scaffold], record_dict[scaffold]
 
         for scaffold in unified_dict:
             if unified_dict[scaffold]:
@@ -697,7 +700,7 @@ class AnnotationsRoutines(SequenceRoutines):
                 else: # d <= b
                     pass
                 i += 1
-        print unified_dict
+        #print unified_dict
         #print merged_dict
         if output_file:
             with self.metaopen(output_file, "w") as out_fd:
