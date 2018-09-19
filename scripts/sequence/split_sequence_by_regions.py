@@ -16,7 +16,7 @@ parser.add_argument("-m", "--min_length", action="store", dest="min_length",
                     type=int, default=1,
                     help="Minimum length of splited region to retain")
 
-parser.add_argument("-r", "--scaffold_column_id", action="store", dest="scaffold_column_id",
+parser.add_argument("-c", "--scaffold_column_id", action="store", dest="scaffold_column_id",
                     type=int, default=0,
                     help="0-based index of column with scaffold id. Default: 0")
 parser.add_argument("-s", "--start_column_id", action="store", dest="start_column_id",
