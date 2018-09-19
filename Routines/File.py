@@ -581,6 +581,15 @@ class FileRoutines:
 
                     out_fd.write(column_separator.join(line_list) + "\n")
 
+    def file_line_as_list_generator(self, input_file, comments_prefix="#", separator="\t"):
+        comments_prefix_len = len(comments_prefix)
+
+        with self.metaopen(input_file, "w") as in_fd:
+            for line in in_fd:
+                if line[:comments_prefix_len] == comments_prefix:
+                    continue
+                yield line.strip().split(separator)
+
 
 filetypes_dict = {"fasta": [".fa", ".fasta", ".fa", ".pep", ".cds"],
                   "fastq": [".fastq", ".fq"],

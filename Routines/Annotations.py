@@ -8,6 +8,7 @@ from BCBio import GFF
 
 from Bio import SeqIO
 from Bio.Seq import Seq
+from Bio.SeqFeature import SeqFeature, FeatureLocation
 from Bio.SeqRecord import SeqRecord
 
 from Routines.Sequence import SequenceRoutines
@@ -630,3 +631,91 @@ class AnnotationsRoutines(SequenceRoutines):
                 print(k)
         else:
             print("No too small chunks")
+
+    def merge_overlapping_feature_in_simple_format(self,
+                                                   input_file_file_list, scaffold_id_column,
+                                                   feature_start_column, feature_end_column,
+                                                   output_file=None, output_separator="\t",
+                                                   comments_prefix="#", input_separator="\t",
+                                                   coordinates_type="1-based", return_seqfeature_dict=False,
+                                                   feature_type=None):
+
+        file_list = [input_file_file_list] if isinstance(input_file_file_list, str) else input_file_file_list
+
+        record_dict_list = []
+
+        for filename in file_list:
+            record_dict_list.append(OrderedDict())
+            for line_list in self.file_line_as_list_generator(filename,
+                                                              comments_prefix=comments_prefix,
+                                                              separator=input_separator):
+                record_dict_list[-1][line_list[scaffold_id_column]] = [(int(feature_start_column) - 1 if coordinates_type == "1-based" else int(feature_start_column)),
+                                                                       feature_end_column]
+
+        unified_dict = OrderedDict()
+        merged_dict = OrderedDict()
+
+        scaffold_set = set()
+        for record_dict in record_dict_list:
+            scaffold_set |= set(record_dict.keys())
+
+        scaffold_set = set()
+        #print feature_dict_list
+
+        for scaffold in scaffold_set:
+            unified_dict[scaffold] = []
+            merged_dict[scaffold] = []
+
+        for record_dict in record_dict_list:
+            for scaffold in record_dict:
+                unified_dict[scaffold] += record_dict[scaffold]
+
+        for scaffold in unified_dict:
+            if unified_dict[scaffold]:
+                unified_dict[scaffold].sort()
+            if unified_dict[scaffold] is None:
+                print scaffold
+
+        for scaffold in unified_dict:
+            number_of_records = len(unified_dict[scaffold])
+            if number_of_records == 0:
+                continue
+
+            # [a, b) [c, d), a < b, c < d
+            # after sorting c >= a
+            i = 1
+
+            prev_coordinates = unified_dict[scaffold][0]
+
+            while i < number_of_records:
+                if unified_dict[scaffold][i][0] > prev_coordinates[1]: # c > b
+                    merged_dict[scaffold].append(prev_coordinates)
+                    prev_coordinates = unified_dict[scaffold][i]
+                elif unified_dict[scaffold][i][1] > prev_coordinates[1]: # d > b; c<=b
+                    prev_coordinates[1] = unified_dict[scaffold][i][1]
+                else: # d <= b
+                    pass
+                i += 1
+
+        if output_file:
+            with self.metaopen(output_file, "w") as out_fd:
+                for record in merged_dict:
+                    out_fd.write(output_separator.join(map(str,
+                                                           [record,
+                                                            merged_dict[record][0] + 1 if coordinates_type == "1-based" else merged_dict[record][0],
+                                                            merged_dict[record][1]])))
+
+        if return_seqfeature_dict and feature_type:
+            feature_dict = OrderedDict()
+            for region in merged_dict:
+                feature_dict[region] = []
+                for (start, stop) in merged_dict[region]:
+                    feature_dict[region].append(SeqFeature(FeatureLocation(start, stop),
+                                                           type=feature_type,
+                                                           strand=None))
+            return feature_dict
+        elif return_seqfeature_dict and (not feature_type):
+            raise ValueError("ERROR!!! Feature type for seqfeature records was not set!")
+        else:
+            return merged_dict
+
