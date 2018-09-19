@@ -667,8 +667,9 @@ class AnnotationsRoutines(SequenceRoutines):
 
         for record_dict in record_dict_list:
             for scaffold in record_dict:
-                print scaffold, unified_dict[scaffold]
+
                 unified_dict[scaffold] += record_dict[scaffold]
+                print scaffold, unified_dict[scaffold]
 
         for scaffold in unified_dict:
             if unified_dict[scaffold]:
