@@ -2,7 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 import argparse
 
-from Routines import AlignmentRoutines
+from Routines import AnnotationsRoutines
 
 parser = argparse.ArgumentParser()
 
@@ -28,14 +28,14 @@ parser.add_argument("-n", "--coordinates_type", action="store", dest="coordinate
 
 args = parser.parse_args()
 
-AlignmentRoutines.merge_overlapping_feature_in_simple_format(args.input,
-                                                             args.scaffold_column_id,
-                                                             args.start_column_id,
-                                                             args.end_column_id,
-                                                             output_file=args.output,
-                                                             output_separator="\t",
-                                                             comments_prefix="#",
-                                                             input_separator="\t",
-                                                             coordinates_type=args.coordinates_type,
-                                                             return_seqfeature_dict=False,
-                                                             feature_type=None)
+AnnotationsRoutines.merge_overlapping_feature_in_simple_format(args.input,
+                                                               args.scaffold_column_id,
+                                                               args.start_column_id,
+                                                               args.end_column_id,
+                                                               output_file=args.output,
+                                                               output_separator="\t",
+                                                               comments_prefix="#",
+                                                               input_separator="\t",
+                                                               coordinates_type=args.coordinates_type,
+                                                               return_seqfeature_dict=False,
+                                                               feature_type=None)
