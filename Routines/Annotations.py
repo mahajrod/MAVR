@@ -704,10 +704,10 @@ class AnnotationsRoutines(SequenceRoutines):
                     prev_coordinates = deepcopy(unified_dict[scaffold][i])
 
                 elif unified_dict[scaffold][i][1] > prev_coordinates[1]: # d > b; c<=b
-                    print "AAAAAA", "\t",prev_coordinates, unified_dict[scaffold][i]
+                    print "BBBBBB", "\t",prev_coordinates, unified_dict[scaffold][i]
                     prev_coordinates[1] = deepcopy(unified_dict[scaffold][i][1])
                 else: # d <= b
-                    print "AAAAAA", "\t",prev_coordinates, unified_dict[scaffold][i]
+                    print "CCCCCC", "\t",prev_coordinates, unified_dict[scaffold][i]
                     pass
                 i += 1
             if merged_dict[scaffold]:
