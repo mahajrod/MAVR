@@ -659,8 +659,6 @@ class AnnotationsRoutines(SequenceRoutines):
         for record_dict in record_dict_list:
             scaffold_set |= set(record_dict.keys())
 
-        scaffold_set = set()
-        #print feature_dict_list
 
         for scaffold in scaffold_set:
             unified_dict[scaffold] = []
