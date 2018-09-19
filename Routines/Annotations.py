@@ -727,7 +727,7 @@ class AnnotationsRoutines(SequenceRoutines):
                         out_fd.write(output_separator.join(map(str,
                                                                [scaffold,
                                                                 feature[0] + 1 if coordinates_type == "1-based" else feature[0],
-                                                                feature[1]])))
+                                                                feature[1]])) + "\n")
 
         if return_seqfeature_dict and feature_type:
             feature_dict = OrderedDict()
