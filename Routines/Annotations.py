@@ -706,10 +706,12 @@ class AnnotationsRoutines(SequenceRoutines):
                 else: # d <= b
                     pass
                 i += 1
-
-            if prev_coordinates != merged_dict[scaffold][-1]:
+            if merged_dict[scaffold]:
+                if prev_coordinates != merged_dict[scaffold][-1]:
+                    merged_dict[scaffold].append(prev_coordinates)
+            else:
                 merged_dict[scaffold].append(prev_coordinates)
-
+                                             
             print "\t", unified_dict[scaffold]
             print "\t", merged_dict[scaffold]
         #print unified_dict
