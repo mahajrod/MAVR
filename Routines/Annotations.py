@@ -651,8 +651,8 @@ class AnnotationsRoutines(SequenceRoutines):
                                                               separator=input_separator):
                 if line_list[scaffold_id_column] not in record_dict_list[-1]:
                     record_dict_list[-1][line_list[scaffold_id_column]] = []
-                record_dict_list[-1][line_list[scaffold_id_column]].append([(int(feature_start_column) - 1 if coordinates_type == "1-based" else int(feature_start_column)),
-                                                                       feature_end_column])
+                record_dict_list[-1][line_list[scaffold_id_column]].append([(int(line_list[feature_start_column]) - 1 if coordinates_type == "1-based" else int(line_list[feature_start_column])),
+                                                                            line_list[feature_end_column]])
 
         unified_dict = OrderedDict()
         merged_dict = OrderedDict()
