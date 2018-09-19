@@ -2249,6 +2249,98 @@ class SequenceRoutines(FileRoutines):
 
         return softmasked_nucleotides_dict, percent_softmasked_nucleotides_dict
 
+    @staticmethod
+    def generated_splited_regions(regions_list, sequence_len, min_length=1):
+        sorted_region_list = sorted(regions_list)
+
+        if sorted_region_list[-1][-1] > sequence_len:
+            raise ValueError("ERROR!!! Last region is out of sequence!")
+
+        splited_regions = []
+
+        prev_end = 0
+
+        for region in regions_list:
+            if region[0] - prev_end >= min_length:
+                splited_regions.append([prev_end, region[0]])
+            prev_end = region[1]
+
+        if sequence_len - prev_end >= min_length:
+            splited_regions.append([prev_end, sequence_len])
+
+        return splited_regions
+
+    def split_sequence_by_regions(self, sequence_dict, regions_dict, retain_description=False,
+                                  min_length=1, output_prefix=None):
+
+        splited_sequence_dict = OrderedDict()
+
+        splited_seq_ids = IdList()
+        skipped_seq_ids = IdList()
+        unchanged_seq_ids = IdList()
+
+        for seq_id in sequence_dict:
+            if seq_id not in regions_dict:
+                splited_sequence_dict[seq_id] = sequence_dict[seq_id]
+                unchanged_seq_ids.append(seq_id)
+                continue
+
+            splited_regions = self.generated_splited_regions(regions_dict[seq_id],
+                                                             sequence_len=len(sequence_dict[seq_id].seq),
+                                                             min_length=min_length)
+            if not splited_regions:
+                skipped_seq_ids.append(seq_id)
+                continue
+
+            splited_seq_ids.append(seq_id)
+
+            for i in range(1, len(splited_regions) + 1):
+                region_id = "%s_%i" % (seq_id, i)
+                splited_sequence_dict[region_id] = SeqRecord(seq=Seq(sequence_dict[seq_id].seq[splited_regions[i][0]:splited_regions[i][1]]),
+                                                             id=region_id,
+                                                             description=sequence_dict[seq_id].description if retain_description else "")
+
+        if output_prefix:
+            splited_seq_ids.write("%s.splited_seqs.ids" % output_prefix)
+            skipped_seq_ids.write("%s.skipped_seqs.ids" % output_prefix)
+            unchanged_seq_ids.write("%s.unchanged_seqs.ids" % output_prefix)
+
+        return splited_sequence_dict
+
+    def split_sequence_by_regions_from_file(self, sequence_file, regions_file, output_prefix,
+                                            retain_description=False,
+                                            min_length=1, parsing_mode="parse",
+                                            scaffold_column_index=0,
+                                            start_column_index=1,
+                                            end_column_index=2,
+                                            coordinates_type="1-based",
+                                            input_separator="\t",
+                                            sequence_format="fasta"):
+
+        from Routines import AnnotationsRoutines
+
+        sequence_dict = self.parse_seq_file(sequence_file, parsing_mode, format=sequence_format)
+
+        regions_dict = AnnotationsRoutines.merge_overlapping_feature_in_simple_format(regions_file,
+                                                                                      scaffold_column_index,
+                                                                                      start_column_index,
+                                                                                      end_column_index,
+                                                                                      output_file=None,
+                                                                                      output_separator="\t",
+                                                                                      comments_prefix="#",
+                                                                                      input_separator=input_separator,
+                                                                                      coordinates_type=coordinates_type,
+                                                                                      return_seqfeature_dict=False,
+                                                                                      feature_type=None)
+
+        splited_sequence_dict = self.split_sequence_by_regions(sequence_dict, regions_dict,
+                                                               retain_description=retain_description,
+                                                               min_length=min_length,
+                                                               output_prefix=output_prefix)
+
+        SeqIO.write(self.record_by_expression_generator(splited_sequence_dict, id_file=None),
+                    "%s.%s" % (output_prefix, self.split_filename(sequence_file)[-1]),
+                    format=sequence_format)
 
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
