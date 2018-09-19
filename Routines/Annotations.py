@@ -696,7 +696,7 @@ class AnnotationsRoutines(SequenceRoutines):
 
 
             print scaffold, number_of_records, prev_coordinates
-            print "\t", unified_dict[scaffold
+            print "\t", unified_dict[scaffold]
             while i < number_of_records:
                 if unified_dict[scaffold][i][0] > prev_coordinates[1]: # c > b
                     merged_dict[scaffold].append(prev_coordinates)
