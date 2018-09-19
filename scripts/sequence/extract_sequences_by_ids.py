@@ -27,10 +27,13 @@ parser.add_argument("-a", "--allow_multiple_coincidence_report", action="store_t
                          "By default an error is raised")
 parser.add_argument("-s", "--syn_file", action="store", dest="syn_file",
                     help="File with synonyms of ids to use. Default - not set")
+parser.add_argument("-r", "--invert_match", action="store_true", dest="invert_match",
+                    help="Invert match, i. e. remove sequences. Default - not set")
 
 args = parser.parse_args()
 
 SequenceRoutines.extract_sequence_by_ids(args.input, args.id_file, args.output, format=args.format, verbose=True,
                                          id_column_number=args.id_column, coincidence_mode=args.coincidence_mode,
                                          allow_multiple_coincidence_report=args.allow_multiple_coincidence_report,
-                                         syn_file=args.syn_file, parsing_mode="parse", index_file="tmp.idx")
+                                         syn_file=args.syn_file, parsing_mode="parse", index_file="tmp.idx",
+                                         invert_match=args.invert_match)
