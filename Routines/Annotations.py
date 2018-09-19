@@ -696,7 +696,7 @@ class AnnotationsRoutines(SequenceRoutines):
                     pass
                 i += 1
         print unified_dict
-        print merged_dict
+        #print merged_dict
         if output_file:
             with self.metaopen(output_file, "w") as out_fd:
                 for scaffold in merged_dict:
