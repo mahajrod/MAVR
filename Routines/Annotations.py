@@ -652,7 +652,7 @@ class AnnotationsRoutines(SequenceRoutines):
                 if line_list[scaffold_id_column] not in record_dict_list[-1]:
                     record_dict_list[-1][line_list[scaffold_id_column]] = []
                 record_dict_list[-1][line_list[scaffold_id_column]].append([(int(line_list[feature_start_column]) - 1 if coordinates_type == "1-based" else int(line_list[feature_start_column])),
-                                                                            line_list[feature_end_column]])
+                                                                            int(line_list[feature_end_column])])
 
         unified_dict = OrderedDict()
         merged_dict = OrderedDict()
@@ -699,7 +699,7 @@ class AnnotationsRoutines(SequenceRoutines):
 
             while i < number_of_records:
                 if unified_dict[scaffold][i][0] > prev_coordinates[1]: # c > b
-                    print "AAAAAA", "\t",prev_coordinates, unified_dict[scaffold][i]
+                    print "AAAAAA", "\t", prev_coordinates, unified_dict[scaffold][i]
                     merged_dict[scaffold].append(deepcopy(prev_coordinates))
                     prev_coordinates = deepcopy(unified_dict[scaffold][i])
 
