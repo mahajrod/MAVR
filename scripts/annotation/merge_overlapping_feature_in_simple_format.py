@@ -24,7 +24,7 @@ parser.add_argument("-e", "--end_column_id", action="store", dest="end_column_id
                     help="0-based index of column with feature end. Default: 2")
 parser.add_argument("-n", "--coordinates_type", action="store", dest="coordinates_type",
                     default="1-based",
-                    help="Type of coordinates. Allowed: 0-based(default), 1-based")
+                    help="Type of coordinates. Allowed: 0-based, 1-based(default)")
 
 args = parser.parse_args()
 
