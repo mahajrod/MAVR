@@ -692,8 +692,7 @@ class AnnotationsRoutines(SequenceRoutines):
             # after sorting c >= a
             i = 1
 
-            prev_coordinates = unified_dict[scaffold][0]
-
+            prev_coordinates = deepcopy(unified_dict[scaffold][0])
 
             print scaffold, number_of_records, prev_coordinates
             print "\t", unified_dict[scaffold]
