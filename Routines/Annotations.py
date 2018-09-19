@@ -680,9 +680,10 @@ class AnnotationsRoutines(SequenceRoutines):
             if unified_dict[scaffold] is None:
                 print scaffold
 
-        print unified_dict
+        #print unified_dict
 
         for scaffold in unified_dict:
+
             number_of_records = len(unified_dict[scaffold])
             if number_of_records == 0:
                 continue
@@ -692,6 +693,8 @@ class AnnotationsRoutines(SequenceRoutines):
             i = 1
 
             prev_coordinates = unified_dict[scaffold][0]
+
+            print scaffold, number_of_records, prev_coordinates
 
             while i < number_of_records:
                 if unified_dict[scaffold][i][0] > prev_coordinates[1]: # c > b
