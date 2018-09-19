@@ -65,9 +65,7 @@ class BWA(Tool):
             options += " -O %s" % output_format.upper()
 
         options += " > %s.%s" % (output_prefix, output_format)
-        print("AAAAAAAAAAAAA")
         self.execute(options, cmd="bwa mem")
-
 
     def aln(self, in_db_fasta, in_query_fastq, out_sai, max_edit_dist=0.04, max_gaps=1, max_gap_ext=-1, disallow_lond_del_limit=16,
             disallow_indel_limit=5, max_seed_edit_dist=2, mismatch_penalty=3, gap_open_penalty=11,
