@@ -7,7 +7,7 @@ from Routines import AnnotationsRoutines
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input", action="store", dest="input", required=True,
-                    type=AlignmentRoutines.make_list_of_path_to_files_from_string,
+                    type=AnnotationsRoutines.make_list_of_path_to_files_from_string,
                     help="Comma-separated list of files or directories with files"
                          "containing annotations with three columnst: <scaffold>, <start>, <stop>")
 parser.add_argument("-o", "--output", action="store", dest="output", required=True,
