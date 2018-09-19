@@ -2279,6 +2279,8 @@ class SequenceRoutines(FileRoutines):
         skipped_seq_ids = IdList()
         unchanged_seq_ids = IdList()
 
+        retained_segments_dict = OrderedDict()
+
         for seq_id in sequence_dict:
             if seq_id not in regions_dict:
                 splited_sequence_dict[seq_id] = sequence_dict[seq_id]
@@ -2293,8 +2295,10 @@ class SequenceRoutines(FileRoutines):
                 continue
 
             splited_seq_ids.append(seq_id)
+            retained_segments_dict[seq_id] = deepcopy(splited_regions)
 
             for i in range(0, len(splited_regions)):
+
                 region_id = "%s_%i" % (seq_id, i + 1)
                 splited_sequence_dict[region_id] = SeqRecord(seq=sequence_dict[seq_id].seq[splited_regions[i][0]:splited_regions[i][1]],
                                                              id=region_id,
@@ -2304,6 +2308,15 @@ class SequenceRoutines(FileRoutines):
             splited_seq_ids.write("%s.splited_seqs.ids" % output_prefix)
             skipped_seq_ids.write("%s.skipped_seqs.ids" % output_prefix)
             unchanged_seq_ids.write("%s.unchanged_seqs.ids" % output_prefix)
+
+            with self.metaopen("%s.retained_segments.tab", "w") as out_fd:
+                for seq_id in retained_segments_dict:
+                    for region in retained_segments_dict[seq_id]:
+                        out_fd.write("\t".join(map(str,
+                                                   [seq_id,
+                                                    region[0] + 1,
+                                                    region[1]])) + "\n")
+
 
         return splited_sequence_dict
 
@@ -2336,7 +2349,8 @@ class SequenceRoutines(FileRoutines):
         splited_sequence_dict = self.split_sequence_by_regions(sequence_dict, regions_dict,
                                                                retain_description=retain_description,
                                                                min_length=min_length,
-                                                               output_prefix=output_prefix)
+                                                               output_prefix=output_prefix,
+                                                               )
 
         SeqIO.write(self.record_by_expression_generator(splited_sequence_dict, id_file=None),
                     "%s%s" % (output_prefix, self.split_filename(sequence_file)[-1]),
