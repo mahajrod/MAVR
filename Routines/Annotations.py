@@ -698,11 +698,12 @@ class AnnotationsRoutines(SequenceRoutines):
 
         if output_file:
             with self.metaopen(output_file, "w") as out_fd:
-                for record in merged_dict:
-                    out_fd.write(output_separator.join(map(str,
-                                                           [record,
-                                                            merged_dict[record][0] + 1 if coordinates_type == "1-based" else merged_dict[record][0],
-                                                            merged_dict[record][1]])))
+                for scaffold in merged_dict:
+                    for feature in merged_dict[scaffold]:
+                        out_fd.write(output_separator.join(map(str,
+                                                               [scaffold,
+                                                                feature[0] + 1 if coordinates_type == "1-based" else feature[0],
+                                                                feature[1]])))
 
         if return_seqfeature_dict and feature_type:
             feature_dict = OrderedDict()
