@@ -421,42 +421,47 @@ class SequenceRoutines(FileRoutines):
 
     @staticmethod
     def record_by_id_generator(record_dict, id_list=[], verbose=False, coincidence_mode="exact",
-                               allow_multiple_coincidence_report=False):
+                               allow_multiple_coincidence_report=False, invert_match=False):
         if id_list:
-            for record_id in id_list:
-                if coincidence_mode == "exact":
-                    if record_id in record_dict:
+            if invert_match:
+                for record_id in record_dict:
+                    if record_id not in id_list:
                         yield record_dict[record_id]
-                    else:
-                        if verbose:
+            else:
+                for record_id in id_list:
+                    if coincidence_mode == "exact":
+                        if record_id in record_dict:
+                            yield record_dict[record_id]
+                        else:
+                            if verbose:
+                                sys.stderr.write("Not found: %s\n" % record_id)
+                    elif coincidence_mode == "partial":
+                        #print "AAAAAA"
+                        entry_list = []
+                        if record_id in record_dict:
+                            #print "BBBBBB"
+                            yield record_dict[record_id]
+                        else:
+                            #print "CCCCCCCCCC"
+                            for dict_entry in record_dict:
+                                if record_id in dict_entry:
+                                    entry_list.append(dict_entry)
+                            if len(entry_list) > 1:
+                                if allow_multiple_coincidence_report:
+                                    sys.stderr.write("WARNING!!! Multiple coincidence for %s" % record_id)
+                                    sys.stderr.write("\treporting all...")
+                                else:
+                                    sys.stderr.write("ERROR!!! Multiple coincidence for %s" % record_id)
+                                    raise ValueError("Multiple coincidence for %s" % record_id)
+                               # print entry_list
+                                for entry in entry_list:
+                                    yield record_dict[entry]
+                            elif len(entry_list) == 1:
+                                yield record_dict[entry_list[0]]
+                        if (not entry_list) and verbose:
                             sys.stderr.write("Not found: %s\n" % record_id)
-                elif coincidence_mode == "partial":
-                    #print "AAAAAA"
-                    entry_list = []
-                    if record_id in record_dict:
-                        #print "BBBBBB"
-                        yield record_dict[record_id]
                     else:
-                        #print "CCCCCCCCCC"
-                        for dict_entry in record_dict:
-                            if record_id in dict_entry:
-                                entry_list.append(dict_entry)
-                        if len(entry_list) > 1:
-                            if allow_multiple_coincidence_report:
-                                sys.stderr.write("WARNING!!! Multiple coincidence for %s" % record_id)
-                                sys.stderr.write("\treporting all...")
-                            else:
-                                sys.stderr.write("ERROR!!! Multiple coincidence for %s" % record_id)
-                                raise ValueError("Multiple coincidence for %s" % record_id)
-                           # print entry_list
-                            for entry in entry_list:
-                                yield record_dict[entry]
-                        elif len(entry_list) == 1:
-                            yield record_dict[entry_list[0]]
-                    if (not entry_list) and verbose:
-                        sys.stderr.write("Not found: %s\n" % record_id)
-                else:
-                    raise ValueError("Unknown coincidence mode: %s" % coincidence_mode)
+                        raise ValueError("Unknown coincidence mode: %s" % coincidence_mode)
         else:
             for record_id in record_dict:
                 yield record_dict[record_id]
@@ -468,7 +473,7 @@ class SequenceRoutines(FileRoutines):
 
     def extract_sequence_by_ids(self, sequence_file, id_file, output_file, format="fasta", verbose=False,
                                 id_column_number=0, coincidence_mode="exact", allow_multiple_coincidence_report=False,
-                                syn_file=None, parsing_mode="parse", index_file="tmp.idx"):
+                                syn_file=None, parsing_mode="parse", index_file="tmp.idx", invert_match=False):
 
         id_list = IdList()
         id_list.read(id_file, column_number=id_column_number)
@@ -491,7 +496,8 @@ class SequenceRoutines(FileRoutines):
         sequence_dict = self.parse_seq_file(sequence_file,parsing_mode, format=format, index_file=index_file) # SeqIO.index_db(tmp_index_file, sequence_file, format=format)
         SeqIO.write(self.record_by_id_generator(sequence_dict, id_list, verbose=verbose,
                                                 coincidence_mode=coincidence_mode,
-                                                allow_multiple_coincidence_report=allow_multiple_coincidence_report),
+                                                allow_multiple_coincidence_report=allow_multiple_coincidence_report,
+                                                invert_match=invert_match),
                     output_file, format=format)
         if parsing_mode == "index_db":
             os.remove(index_file)
