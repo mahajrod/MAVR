@@ -2294,8 +2294,8 @@ class SequenceRoutines(FileRoutines):
 
             splited_seq_ids.append(seq_id)
 
-            for i in range(1, len(splited_regions) + 1):
-                region_id = "%s_%i" % (seq_id, i)
+            for i in range(0, len(splited_regions)):
+                region_id = "%s_%i" % (seq_id, i + 1)
                 splited_sequence_dict[region_id] = SeqRecord(seq=sequence_dict[seq_id].seq[splited_regions[i][0]:splited_regions[i][1]],
                                                              id=region_id,
                                                              description=sequence_dict[seq_id].description if retain_description else "")
