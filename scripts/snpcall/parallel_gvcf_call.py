@@ -21,7 +21,7 @@ parser.add_argument("-g", "--gatk_directory", action="store", dest="gatk_dir", d
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=4, type=int,
                     help="Number of threads. Default: 4")
 parser.add_argument("-q", "--variant_emit_quality", action="store", dest="emit_quality", default=30, type=int,
-                    help="Minimum quality of variant to be emitted")
+                    help="Minimum quality of variant to be emitted. Default: 30")
 parser.add_argument("-m", "--memory", action="store", dest="memory", default=10, type=int,
                     help="Maximum memory to use(in gigabytes). Default: 10")
 parser.add_argument("-x", "--max_seq_per_region", action="store", dest="max_seq_per_region", default=10, type=int,
