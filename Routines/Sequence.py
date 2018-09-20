@@ -224,7 +224,7 @@ class SequenceRoutines(FileRoutines):
                 else:
                     region_list.append(remnant_seq_list)
                     for remnant in remnant_seq_list:
-                        print scaffold
+                        #print scaffold
                         if remnant[0] in scaffold_to_region_correspondence_dict:
                             scaffold_to_region_correspondence_dict[remnant[0]].append(region_index)
                         else:
