@@ -15,4 +15,4 @@ parser.add_argument("-s", "--syn_file", action="store", dest="syn_file", require
 
 args = parser.parse_args()
 
-AnnotationsRoutines.rename_scaffolds_in_gff(args.nput_gff, args.syn_file, args.output_prefix)
+AnnotationsRoutines.rename_scaffolds_in_gff(args.input_gff, args.syn_file, args.output_prefix)
