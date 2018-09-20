@@ -743,3 +743,31 @@ class AnnotationsRoutines(SequenceRoutines):
         else:
             return merged_dict
 
+    def rename_scaffolds_in_gff(self, input_gff, syn_file, output_prefix):
+
+        syn_dict = SynDict(syn_file)
+        skipped_id_list = IdList()
+
+        output_gff = "%s.renamed.gff" % output_prefix
+        skipped_gff = "%s.skipped.gff" % output_prefix
+        skipped_id_file = "%s.skipped_scaffolds.ids" % output_prefix
+
+        with self.metaopen(input_gff, "r") as in_fd, \
+             self.metaopen(output_gff, "w") as out_fd, \
+             self.metaopen(skipped_gff, "w") as skipped_fd:
+
+            for line in in_fd:
+                if line[0] == "#":
+                    out_fd.write(line)
+                gff_list = line.split("\t")
+                if gff_list[0] in syn_dict:
+                    gff_list[0] = syn_dict[gff_list[0]]
+                    out_fd.write("\t".join(gff_list))
+                else:
+                    skipped_fd.write(line)
+                    skipped_id_list.append(gff_list[0])
+
+        skipped_id_list.write(skipped_id_file)
+
+
+
