@@ -180,14 +180,14 @@ class SequenceRoutines(FileRoutines):
 
             for region in len_dict:
                 if len(remnant_seq_list) == max_seq_number:
-                    print region_list
-                    print remnant_seq_list
+                    #print region_list
+                    #print remnant_seq_list
                     region_list.append(remnant_seq_list)
-                    for scaffold in remnant_seq_list:
-                        if scaffold in scaffold_to_region_correspondence_dict:
-                            scaffold_to_region_correspondence_dict[scaffold].append(region_index)
+                    for remnant in remnant_seq_list:
+                        if remnant[0] in scaffold_to_region_correspondence_dict:
+                            scaffold_to_region_correspondence_dict[remnant[0]].append(region_index)
                         else:
-                            scaffold_to_region_correspondence_dict[scaffold] = [region_index]
+                            scaffold_to_region_correspondence_dict[remnant[0]] = [region_index]
                     region_index += 1
                     remnant_seq_list = []
                     remnant_seq_length = 0
