@@ -743,7 +743,7 @@ class AnnotationsRoutines(SequenceRoutines):
         else:
             return merged_dict
 
-    def rename_scaffolds_in_gff(self, input_gff, syn_file, output_prefix):
+    def rename_scaffolds_in_gff(self, input_gff, syn_file, output_prefix, verbose=True):
 
         syn_dict = SynDict(syn_file)
         skipped_id_list = IdList()
@@ -766,6 +766,9 @@ class AnnotationsRoutines(SequenceRoutines):
                 else:
                     skipped_fd.write(line)
                     skipped_id_list.append(gff_list[0])
+
+        if verbose:
+            print("Not renamed scaffolds: %i" % len(skipped_id_list))
 
         skipped_id_list.write(skipped_id_file)
 
