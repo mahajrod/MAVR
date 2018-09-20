@@ -202,7 +202,6 @@ class SequenceRoutines(FileRoutines):
                         remnant_length = len_dict[region] - points[-1]
                         if remnant_length + max_length <= max_length_soft_threshold:
                             region_list[-1][0][2] = len_dict[region]
-                            #remnant = None
                             #remnant_length = 0
                         else:
                             region_list.append([[region, points[-1] + 1, len_dict[region]]])
@@ -214,13 +213,10 @@ class SequenceRoutines(FileRoutines):
                         region_list.append([[region, 1, len_dict[region]]])
                         scaffold_to_region_correspondence_dict[region] = [region_index]
                         region_index += 1
-
+                    continue
                 else:
                     remnant = [region, 1, len_dict[region]]
                     remnant_length = len_dict[region]
-
-                if remnant is None:
-                    continue
 
                 if remnant_seq_length + remnant_length <= max_length_soft_threshold:
                     remnant_seq_list.append(remnant)
