@@ -554,6 +554,30 @@ class SequenceClusterRoutines(SequenceRoutines):
                         continue
                     out_fd.write("%s\t%s\n" % (gene, "\t".join(gene_GO_dict[gene])))
 
+    def cluster_sequence_names_by_id_fragment(self, seq_id_list, id_element_index, id_separator="_", output_prefix=None):
+        cluster_dict = SynDict()
+        skipped_id_list = IdList()
 
+        for seq_id in seq_id_list:
+            seq_id_splited = seq_id.split(id_separator)
+            if id_element_index < len(seq_id_splited):
+                if seq_id_list[id_element_index] in cluster_dict:
+                    cluster_dict[seq_id_list[id_element_index]].append(seq_id)
+                else:
+                    cluster_dict[seq_id_list[id_element_index]] = [seq_id]
+            else:
+                skipped_id_list.append(seq_id)
 
+        if output_prefix:
+            cluster_dict.write("%s.seqid.clusters" % output_prefix, splited_values=True)
+            skipped_id_list.write("%s.seqid.skipped.ids" % output_prefix)
 
+        return cluster_dict
+
+    def cluster_sequence_names_by_id_fragment_from_file(self, seq_id_file, id_element_index,
+                                                        id_separator="_", output_prefix=None):
+
+        seq_id_list = IdList(filename=seq_id_file)
+
+        self.cluster_sequence_names_by_id_fragment(seq_id_list, id_element_index,
+                                                   id_separator=id_separator, output_prefix=output_prefix)
