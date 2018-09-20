@@ -180,6 +180,8 @@ class SequenceRoutines(FileRoutines):
 
             for region in len_dict:
                 if len(remnant_seq_list) == max_seq_number:
+                    print region_list
+                    print remnant_seq_list
                     region_list.append(remnant_seq_list)
                     for scaffold in remnant_seq_list:
                         if scaffold in scaffold_to_region_correspondence_dict:
