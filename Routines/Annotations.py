@@ -746,7 +746,7 @@ class AnnotationsRoutines(SequenceRoutines):
     def rename_scaffolds_in_gff(self, input_gff, syn_file, output_prefix, verbose=True):
 
         syn_dict = SynDict(filename=syn_file)
-        skipped_id_list = IdList()
+        skipped_id_list = IdSet()
 
         output_gff = "%s.renamed.gff" % output_prefix
         skipped_gff = "%s.skipped.gff" % output_prefix
@@ -765,7 +765,7 @@ class AnnotationsRoutines(SequenceRoutines):
                     out_fd.write("\t".join(gff_list))
                 else:
                     skipped_fd.write(line)
-                    skipped_id_list.append(gff_list[0])
+                    skipped_id_list.add(gff_list[0])
 
         if verbose:
             print("Not renamed scaffolds: %i" % len(skipped_id_list))
