@@ -38,8 +38,17 @@ HaplotypeCaller.max_memory = args.memory
 HaplotypeCaller.threads = args.threads
 
 HaplotypeCaller.parallel_gvcf_call(args.reference, args.alignment, args.output_dir, args.output_prefix,
+                                   "%s.combined.g.vcf" % args.output_prefix,
                                    genotyping_mode="DISCOVERY",
                                    stand_call_conf=args.emit_quality, max_region_length=args.max_region_len,
                                    max_seqs_per_region=args.max_seq_per_region, length_dict=None,
                                    parsing_mode="parse", region_list=None,
                                    )
+
+"""
+parallel_gvcf_call(self, reference, alignment, output_dir, output_prefix, output,
+                           genotyping_mode="DISCOVERY",
+                           stand_call_conf=30, max_region_length=1000000, max_seqs_per_region=100,
+                           length_dict=None, parsing_mode="parse", region_list=None, remove_intermediate_files=False,
+                           gvcf_extension_list=["g.vcf", ],)
+                           """
