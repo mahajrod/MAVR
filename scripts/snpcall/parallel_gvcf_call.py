@@ -24,6 +24,10 @@ parser.add_argument("-q", "--variant_emit_quality", action="store", dest="emit_q
                     help="Minimum quality of variant to be emitted")
 parser.add_argument("-m", "--memory", action="store", dest="memory", default=10, type=int,
                     help="Maximum memory to use(in gigabytes). Default: 10")
+parser.add_argument("-x", "--max_seq_per_region", action="store", dest="max_seq_per_region", default=10, type=int,
+                    help="Maximum sequences per region. Default: 10")
+parser.add_argument("-l", "--max_region_len", action="store", dest="max_region_len", default=50000, type=int,
+                    help="Maximum region length. Default: 50000")
 
 args = parser.parse_args()
 
@@ -35,6 +39,7 @@ HaplotypeCaller.threads = args.threads
 
 HaplotypeCaller.parallel_gvcf_call(args.reference, args.alignment, args.output_dir, args.output_prefix,
                                    genotyping_mode="DISCOVERY",
-                                   stand_call_conf=args.emit_quality, max_region_length=500000,
-                                   max_seqs_per_region=10, length_dict=None, parsing_mode="parse", region_list=None,
+                                   stand_call_conf=args.emit_quality, max_region_length=args.max_region_len,
+                                   max_seqs_per_region=args.max_seq_per_region, length_dict=None,
+                                   parsing_mode="parse", region_list=None,
                                    )
