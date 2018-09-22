@@ -415,7 +415,7 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
 
     def draw_heatmap_and_three_percent_histograms(self, first_histo_values, second_histo_values,
                                                   third_histo_values, output_prefix, figsize=(12, 12),
-                                                  extensions=("png", "svg")):
+                                                  extensions=("png", "svg"), stats_as_legend=True):
         """
         second_histo_values and third_histo_values are used to build heatmap
         """
@@ -430,7 +430,7 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
             self.percent_histogram(histo_values, output_prefix=None, n_bins=20, title=title, xlabel="%",
                                    ylabel="Number of transcripts", label=None, extensions=("png", "svg"),
                                    legend=None, legend_location="best", input_mode="percent", xmax=None,
-                                   xmin=None)
+                                   xmin=None, stats_as_legend=stats_as_legend)
 
         bins = np.linspace(0, 100, 21)
 

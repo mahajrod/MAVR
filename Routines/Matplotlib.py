@@ -151,7 +151,7 @@ class MatplotlibRoutines:
     @staticmethod
     def percent_histogram(data, output_prefix=None, n_bins=20, title="", xlabel="%", ylabel="Number", label=None,
                           extensions=("png", "svg"), legend=None, legend_location="best", input_mode="percent", xmax=None,
-                          xmin=None):
+                          xmin=None, stats_as_legend=True):
         if output_prefix:
             figure = plt.figure()
             subplot = plt.subplot(1, 1, 1)
@@ -183,8 +183,13 @@ class MatplotlibRoutines:
         if ylabel:
             plt.ylabel(ylabel)
 
-        if legend:
-            plt.legend((legend,), loc=legend_location)
+        if stats_as_legend:
+            legenda = "Total: %i\nMean: %.2f %%\nMedian: %.2f %%" if input_mode == "percent" else "Total: %i\nMean: %.2f\nMedian: %.2f"
+            legenda = legenda % (len(data), np.mean(data), np.median(data)) if stats_as_legend else legend
+            plt.legend((legenda,), loc=legend_location)
+        else:
+            if legend:
+                plt.legend((legend,), loc=legend_location)
         if label:
             plt.legend(loc=legend_location)
 
@@ -204,12 +209,12 @@ class MatplotlibRoutines:
             n_bins = np.linspace(0, 1.0, n_bins+1)
         else:
             raise ValueError("Unrecognized type of input data(neither percents nor fractions)")
-        legenda = "Total: %i\nMean: %.2f %%\nMedian: %.2f %%" if input_mode == "percent" else "Total: %i\nMean: %.2f\nMedian: %.2f"
-        legenda = legenda % (len(data), np.mean(data), np.median(data)) if stats_as_legend else legend
+        #legenda = "Total: %i\nMean: %.2f %%\nMedian: %.2f %%" if input_mode == "percent" else "Total: %i\nMean: %.2f\nMedian: %.2f"
+        #legenda = legenda % (len(data), np.mean(data), np.median(data)) if stats_as_legend else legend
         
         self.percent_histogram(data, output_prefix=output_prefix, n_bins=n_bins, title=title, xlabel=xlabel,
-                               ylabel=ylabel, extensions=extensions, legend=legenda, legend_location=legend_location,
-                               input_mode=input_mode, label=label)
+                               ylabel=ylabel, extensions=extensions, legend=legend, legend_location=legend_location,
+                               input_mode=input_mode, label=label, stats_as_legend=stats_as_legend)
 
     @staticmethod
     def add_line(axes, start, end, color):

@@ -570,7 +570,7 @@ class AUGUSTUS(Tool):
                                                                                                  priority))
 
     @staticmethod
-    def draw_evidence_figures(evidence_file, output_prefix):
+    def draw_evidence_figures(evidence_file, output_prefix, stats_as_legend=True):
 
         total_support_list = []
 
@@ -598,7 +598,7 @@ class AUGUSTUS(Tool):
         print(intron_support_list.count(-1))
         DrawingRoutines.draw_heatmap_and_three_percent_histograms(total_support_list, cds_support_list,
                                                                   intron_support_list, output_prefix, figsize=(8, 8),
-                                                                  extensions=("png", "svg"))
+                                                                  extensions=("png", "svg"), stats_as_legend=stats_as_legend)
 
     @staticmethod
     def add_exon_lines_to_augustus_gff(augustus_gff, output_gff, number_of_digits_in_id=8, exon_id_prefix="EXON",
