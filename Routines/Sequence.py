@@ -252,7 +252,7 @@ class SequenceRoutines(FileRoutines):
 
             index = 1
             for regions in region_list:
-                with open("%s/splited/region_%i.t" % (output_dir, index), "w") as out_fd:
+                with open("%s/splited/region_%i.list" % (output_dir, index), "w") as out_fd:
                     for region in regions:
                         if isinstance(region, str):
                             out_fd.write(region)
