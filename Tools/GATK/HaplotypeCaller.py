@@ -158,7 +158,7 @@ class HaplotypeCaller(JavaTool):
                                                   close_fd_after=False,
                                                   extension_list=gvcf_extension_list)
         elif handling_mode == 'slurm':
-            number_of_regions = len(region_list)
+            number_of_regions =  len(region_list)
 
             region_file = "%s/splited/region_${SLURM_ARRAY_TASK_ID}.list" % regions_dir
             output_file = "%s/%s_${SLURM_ARRAY_TASK_ID}.g.vcf" % (splited_dir, output_prefix)
