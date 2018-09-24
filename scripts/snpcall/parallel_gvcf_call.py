@@ -29,6 +29,28 @@ parser.add_argument("-x", "--max_seq_per_region", action="store", dest="max_seq_
 parser.add_argument("-l", "--max_region_len", action="store", dest="max_region_len", default=50000, type=int,
                     help="Maximum region length. Default: 50000")
 
+parser.add_argument("-m", "--handling_mode", action="store", dest="handling_mode", default="local",
+                    help="Handling mode. Allowed: local(default), slurm")
+parser.add_argument("-j", "--slurm_job_name", action="store", dest="slurm_job_name", default="JOB",
+                    help="Slurm job name. Default: JOB")
+
+parser.add_argument("-l", "--slurm_log_prefix", action="store", dest="slurm_log_prefix",
+                    help="Slurm log prefix. ")
+parser.add_argument("-e", "--slurm_error_log_prefix", action="store", dest="slurm_error_log_prefix",
+                    help="Slurm error log prefix")
+parser.add_argument("-x", "--slurm_max_running_jobs", action="store", dest="slurm_max_running_jobs",
+                    default=300, type=int,
+                    help="Slurm max running jobs. Default: 300")
+parser.add_argument("-a", "--slurm_max_running_time", action="store", dest="slurm_max_running_time", default="100:00:00",
+                    help="Slurm max running time in hh:mm:ss format. Default: 100:00:00")
+
+parser.add_argument("-u", "--slurm_max_memmory_per_cpu", action="store", dest="slurm_max_memmory_per_cpu",
+                    default=4000, type=int,
+                    help="Slurm maximum memmory per cpu in megabytes. Default: 4000")
+parser.add_argument("-q", "--slurm_modules_list", action="store", dest="slurm_modules_list", default=[],
+                    type=lambda s: s.split(","),
+                    help="Comma-separated list of modules to load. Set modules for hmmer and python")
+
 args = parser.parse_args()
 
 
@@ -43,7 +65,13 @@ HaplotypeCaller.parallel_gvcf_call(args.reference, args.alignment, args.output_d
                                    stand_call_conf=args.emit_quality, max_region_length=args.max_region_len,
                                    max_seqs_per_region=args.max_seq_per_region, length_dict=None,
                                    parsing_mode="parse", region_list=None,
-                                   )
+                                   handling_mode=args.handling_mode,
+                                   job_name=args.slurm_job_name,
+                                   log_prefix=args.slurm_log_prefix,
+                                   error_log_prefix=args.slurm_error_log_prefix,
+                                   max_running_jobs=args.slurm_max_running_jobs,
+                                   max_running_time=args.slurm_max_running_time,
+                                   max_memmory_per_cpu=args.slurm_max_memmory_per_cpu,)
 
 """
 parallel_gvcf_call(self, reference, alignment, output_dir, output_prefix, output,
