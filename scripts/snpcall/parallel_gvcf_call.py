@@ -47,7 +47,7 @@ parser.add_argument("-a", "--slurm_max_running_time", action="store", dest="slur
 parser.add_argument("-u", "--slurm_max_memmory_per_cpu", action="store", dest="slurm_max_memmory_per_cpu",
                     default=4000, type=int,
                     help="Slurm maximum memmory per cpu in megabytes. Default: 4000")
-parser.add_argument("-q", "--slurm_modules_list", action="store", dest="slurm_modules_list", default=[],
+parser.add_argument("-w", "--slurm_modules_list", action="store", dest="slurm_modules_list", default=[],
                     type=lambda s: s.split(","),
                     help="Comma-separated list of modules to load. Set modules for hmmer and python")
 
