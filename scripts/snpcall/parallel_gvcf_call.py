@@ -34,11 +34,11 @@ parser.add_argument("-d", "--handling_mode", action="store", dest="handling_mode
 parser.add_argument("-j", "--slurm_job_name", action="store", dest="slurm_job_name", default="JOB",
                     help="Slurm job name. Default: JOB")
 
-parser.add_argument("-l", "--slurm_log_prefix", action="store", dest="slurm_log_prefix",
+parser.add_argument("-y", "--slurm_log_prefix", action="store", dest="slurm_log_prefix",
                     help="Slurm log prefix. ")
 parser.add_argument("-e", "--slurm_error_log_prefix", action="store", dest="slurm_error_log_prefix",
                     help="Slurm error log prefix")
-parser.add_argument("-x", "--slurm_max_running_jobs", action="store", dest="slurm_max_running_jobs",
+parser.add_argument("-z", "--slurm_max_running_jobs", action="store", dest="slurm_max_running_jobs",
                     default=300, type=int,
                     help="Slurm max running jobs. Default: 300")
 parser.add_argument("-a", "--slurm_max_running_time", action="store", dest="slurm_max_running_time", default="100:00:00",
