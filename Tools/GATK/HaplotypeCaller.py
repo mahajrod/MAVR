@@ -160,7 +160,7 @@ class HaplotypeCaller(JavaTool):
         elif handling_mode == 'slurm':
             number_of_regions = len(region_list)
 
-            region_file = "%s/splited/region_${SLURM_ARRAY_TASK_ID.list" % regions_dir
+            region_file = "%s/splited/region_${SLURM_ARRAY_TASK_ID}.list" % regions_dir
             output_file = "%s/%s_${SLURM_ARRAY_TASK_ID}.g.vcf" % (splited_dir, output_prefix)
             options += " -o %s" % output_file
             options += " -L %s" % region_file
