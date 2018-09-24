@@ -71,7 +71,8 @@ HaplotypeCaller.parallel_gvcf_call(args.reference, args.alignment, args.output_d
                                    error_log_prefix=args.slurm_error_log_prefix,
                                    max_running_jobs=args.slurm_max_running_jobs,
                                    max_running_time=args.slurm_max_running_time,
-                                   max_memmory_per_cpu=args.slurm_max_memmory_per_cpu,)
+                                   max_memmory_per_cpu=args.slurm_max_memmory_per_cpu,
+                                   modules_list=args.slurm_modules_list)
 
 """
 parallel_gvcf_call(self, reference, alignment, output_dir, output_prefix, output,
