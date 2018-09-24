@@ -24,10 +24,10 @@ parser.add_argument("-q", "--variant_emit_quality", action="store", dest="emit_q
                     help="Minimum quality of variant to be emitted. Default: 30")
 parser.add_argument("-m", "--memory", action="store", dest="memory", default=10, type=int,
                     help="Maximum memory to use(in gigabytes). Default: 10")
-parser.add_argument("-x", "--max_seq_per_region", action="store", dest="max_seq_per_region", default=10, type=int,
-                    help="Maximum sequences per region. Default: 10")
-parser.add_argument("-l", "--max_region_len", action="store", dest="max_region_len", default=50000, type=int,
-                    help="Maximum region length. Default: 50000")
+parser.add_argument("-x", "--max_seq_per_region", action="store", dest="max_seq_per_region", default=100, type=int,
+                    help="Maximum sequences per region. Default: 100")
+parser.add_argument("-l", "--max_region_len", action="store", dest="max_region_len", default=200000, type=int,
+                    help="Maximum region length. Default: 200000")
 
 parser.add_argument("-d", "--handling_mode", action="store", dest="handling_mode", default="local",
                     help="Handling mode. Allowed: local(default), slurm")
