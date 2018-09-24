@@ -101,7 +101,8 @@ class SequenceRoutines(FileRoutines):
 
     def prepare_region_list_by_length(self, max_length=500000, max_seq_number=10,
                                       length_dict=None, reference=None, parsing_mode="parse", output_dir=None,
-                                      split_scaffolds=True, min_scaffold_length=None, black_list_scaffolds=None):
+                                      split_scaffolds=True, min_scaffold_length=None, black_list_scaffolds=None,
+                                      region_file_format='simple'):
 
         raw_len_dict = length_dict if length_dict else self.get_lengths(record_dict=self.parse_seq_file(reference,
                                                                                                         mode=parsing_mode),
@@ -257,11 +258,18 @@ class SequenceRoutines(FileRoutines):
                             out_fd.write(region)
                             out_fd.write("\n")
                         else:
-                            if len(region) == 3:
-                                out_fd.write("%s\t%s\t%s\n" % (region[0], region[1], region[2]))
-                            elif len(region) == 1:
-                                out_fd.write(region[0])
-                                out_fd.write("\n")
+                            if region_file_format == 'simple':
+                                if len(region) == 3:
+                                    out_fd.write("%s\t%s\t%s\n" % (region[0], region[1], region[2]))
+                                elif len(region) == 1:
+                                    out_fd.write(region[0])
+                                    out_fd.write("\n")
+                            elif region_file_format == 'GATK':
+                                if len(region) == 3:
+                                    out_fd.write("%s:%s-%s\n" % (region[0], region[1], region[2]))
+                                elif len(region) == 1:
+                                    out_fd.write(region[0])
+                                    out_fd.write("\n")
 
                 index += 1
             scaffold_to_region_correspondence_dict.write("%s/SCAFFOLD_TO_REGION.correspondence" % output_dir,
