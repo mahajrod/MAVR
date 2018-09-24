@@ -29,7 +29,7 @@ parser.add_argument("-x", "--max_seq_per_region", action="store", dest="max_seq_
 parser.add_argument("-l", "--max_region_len", action="store", dest="max_region_len", default=50000, type=int,
                     help="Maximum region length. Default: 50000")
 
-parser.add_argument("-m", "--handling_mode", action="store", dest="handling_mode", default="local",
+parser.add_argument("-d", "--handling_mode", action="store", dest="handling_mode", default="local",
                     help="Handling mode. Allowed: local(default), slurm")
 parser.add_argument("-j", "--slurm_job_name", action="store", dest="slurm_job_name", default="JOB",
                     help="Slurm job name. Default: JOB")
