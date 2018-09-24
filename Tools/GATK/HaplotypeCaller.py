@@ -165,7 +165,7 @@ class HaplotypeCaller(JavaTool):
             options += " -o %s" % output_file
             options += " -L %s" % region_file
 
-            slurm_cmd = "java -jar %s/%s %s" % (self.jar_path, self.jar, options)
+            slurm_cmd = "java -Xmx%s -jar %s/%s %s" % (self.max_memory, self.jar_path, self.jar, options)
 
             last_job_id = self.slurm_run_job_array(job_name,
                                                    log_prefix,
