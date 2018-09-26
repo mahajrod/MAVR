@@ -110,6 +110,8 @@ class SequenceRoutines(FileRoutines):
                                                                         close_after_if_file_object=False)
         len_dict = OrderedDict()
 
+
+
         if black_list_scaffolds and min_scaffold_length:
             for scaffold_id in raw_len_dict:
                 if (scaffold_id in black_list_scaffolds) or (raw_len_dict[scaffold_id] < min_scaffold_length):
@@ -130,6 +132,9 @@ class SequenceRoutines(FileRoutines):
 
         else:
             len_dict = raw_len_dict
+
+        scaffold_ids = IdList(len_dict)
+        scaffold_ids.write("%s/scaffold.ids" % output_dir)
 
         number_of_scaffolds = len(len_dict)
         max_length_soft_threshold = None if max_length is None else int(1.5 * max_length)
