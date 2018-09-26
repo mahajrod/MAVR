@@ -590,6 +590,56 @@ class FileRoutines:
                     continue
                 yield line.strip().split(separator)
 
+    @staticmethod
+    def combine_files_with_header(file_list, output_file, header_prefix="#", sorting_options=None):
+
+        #list_of_files = self.make_list_of_path_to_files(file_list)
+        unsorted_file = "%s.unsorted.tmp" % output_file
+
+        string = "cat %s > %s" % (file_list[0], unsorted_file if sorting_options else output_file)
+        os.system(string)
+
+        for filename in file_list[1:]:
+            string = "sed -n '/^[^%s]/p' %s >> %s" % (header_prefix,
+                                                      filename,
+                                                      unsorted_file if sorting_options else output_file)
+            print(string)
+            os.system(string)
+
+        if sorting_options:
+            sorting_string = "(sed '/^[^#]/Q' %s; sort %s %s) > %s" % (unsorted_file,
+                                                                       sorting_options,
+                                                                       unsorted_file,
+                                                                       output_file)
+            print(sorting_string)
+
+            os.system(sorting_string)
+
+    def combine_chunks_with_header(self, chunks_dir, chunks_prefix, output_file,
+                                   starting_chunk=None, end_chunk=None, chunk_number_list=None,
+                                   chunks_suffix=None, header_prefix="#", sorting_options=None,
+                                   separator="_"):
+
+        if chunk_number_list:
+            file_list = []
+            for chunk_n in chunk_number_list:
+                file_list.append("%s/%s%s%s%s" % (chunks_dir, chunks_prefix, separator,
+                                                  str(chunk_n), chunks_suffix))
+
+        elif starting_chunk or end_chunk:
+            if starting_chunk and end_chunk:
+                file_list = []
+                for chunk_n in range(starting_chunk, end_chunk + 1):
+                    file_list.append("%s/%s%s%s%s" % (chunks_dir, chunks_prefix, separator,
+                                                      str(chunk_n), chunks_suffix))
+            else:
+                raise ValueError("Either starting or end chunks was not set")
+        else:
+            file_list = self.make_list_of_path_to_files(chunks_dir)
+
+        self.combine_files_with_header(file_list, output_file,
+                                       header_prefix=header_prefix, sorting_options=sorting_options)
+
 
 filetypes_dict = {"fasta": [".fa", ".fasta", ".fa", ".pep", ".cds"],
                   "fastq": [".fastq", ".fq"],
