@@ -22,9 +22,13 @@ class VCFRoutines(SequenceRoutines):
 
         if sort:
             unsorted_file = "%s.unsorted.tmp" % output
-            with open(unsorted_file, "w") as out_fd:
-                pass
-            for filename in vcf_files:
+
+            string = "cat %s > %s" % (vcf_files[0], unsorted_file)
+            os.system(string)
+            #with open(unsorted_file, "w") as out_fd:
+            #    pass
+
+            for filename in vcf_files[1:]:
                 string = "sed -n '/^[^#]/p' %s >> %s" % (filename, unsorted_file)
                 print(string)
                 os.system(string)
