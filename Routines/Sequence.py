@@ -185,6 +185,7 @@ class SequenceRoutines(FileRoutines):
         else:
             remnant_seq_length = 0
             for region in len_dict:
+                print region
                 if len(remnant_seq_list) == max_seq_number:
                     #print region_list
                     #print remnant_seq_list
@@ -223,6 +224,8 @@ class SequenceRoutines(FileRoutines):
                         region_index += 1
                     continue
                 else:
+                    print "BBBBB"
+                    print remnant
                     remnant = [region, 1, len_dict[region]]
                     remnant_length = len_dict[region]
 
