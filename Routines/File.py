@@ -624,14 +624,14 @@ class FileRoutines:
             file_list = []
             for chunk_n in chunk_number_list:
                 file_list.append("%s/%s%s%s%s" % (chunks_dir, chunks_prefix, separator,
-                                                  str(chunk_n), chunks_suffix))
+                                                  str(chunk_n), chunks_suffix if chunks_suffix else ""))
 
         elif starting_chunk or end_chunk:
             if starting_chunk and end_chunk:
                 file_list = []
                 for chunk_n in range(starting_chunk, end_chunk + 1):
                     file_list.append("%s/%s%s%s%s" % (chunks_dir, chunks_prefix, separator,
-                                                      str(chunk_n), chunks_suffix))
+                                                      str(chunk_n), chunks_suffix if chunks_suffix else ""))
             else:
                 raise ValueError("Either starting or end chunks was not set")
         else:
