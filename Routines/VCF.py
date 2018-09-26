@@ -1,5 +1,7 @@
 import os
 
+from copy import deepcopy
+
 from collections import OrderedDict
 
 from CustomCollections.GeneralCollections import IdList, SynDict
@@ -92,13 +94,13 @@ class VCFRoutines(SequenceRoutines):
                     scaffold_dict[scaffold] = []
 
                 if scaffold != prev_scaffold:
-                    scaffold_dict[scaffold].append([start, end])
+                    scaffold_dict[scaffold].append([deepcopy(start), deepcopy(end)])
                 else:
                     #print scaffold_dict[scaffold][-1][1]
                     if scaffold_dict[scaffold][-1][1] + 1 >= start:
-                        scaffold_dict[scaffold][-1][1] = max(end, scaffold_dict[scaffold][-1][1])
+                        scaffold_dict[scaffold][-1][1] = deepcopy(max(end, scaffold_dict[scaffold][-1][1]))
                     else:
-                        scaffold_dict[scaffold].append([start, end])
+                        scaffold_dict[scaffold].append([deepcopy(start), deepcopy(end)])
                 prev_scaffold = scaffold
 
         complete_scaffolds = IdList()
