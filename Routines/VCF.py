@@ -100,6 +100,7 @@ class VCFRoutines(SequenceRoutines):
                     if scaffold_dict[scaffold][-1][1] + 1 >= start:
                         scaffold_dict[scaffold][-1][1] = deepcopy(max(end, scaffold_dict[scaffold][-1][1]))
                     else:
+                        print scaffold_dict[scaffold]
                         scaffold_dict[scaffold].append([deepcopy(start), deepcopy(end)])
                 prev_scaffold = scaffold
 
