@@ -23,8 +23,8 @@ class VCFRoutines(SequenceRoutines):
         if sort:
             unsorted_file = "%s.unsorted.tmp" % output
 
-            string = "cat %s > %s" % (vcf_files[0], unsorted_file)
-            os.system(string)
+            #string = "cat %s > %s" % (vcf_files[0], unsorted_file)
+            #os.system(string)
             #with open(unsorted_file, "w") as out_fd:
             #    pass
 
