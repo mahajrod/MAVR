@@ -178,7 +178,7 @@ class SequenceRoutines(FileRoutines):
                 bunch_length = 0
                 bunch_list = []
         else:
-
+            remnant_seq_length = 0
             for region in len_dict:
                 if len(remnant_seq_list) == max_seq_number:
                     #print region_list
