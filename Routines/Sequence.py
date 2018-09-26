@@ -131,9 +131,7 @@ class SequenceRoutines(FileRoutines):
         else:
             len_dict = raw_len_dict
 
-        scaffold_ids = IdList(len_dict)
-        scaffold_ids.write("%s/scaffold.ids" % output_dir)
-        len_dict.write("%s/scaffold.len" % output_dir)
+
 
         number_of_scaffolds = len(len_dict)
         max_length_soft_threshold = None if max_length is None else int(1.5 * max_length)
@@ -223,20 +221,20 @@ class SequenceRoutines(FileRoutines):
                         region_index += 1
                     continue
                 else:
-                    print "BBBBB"
+                    #print "BBBBB"
 
                     remnant = [region, 1, len_dict[region]]
                     remnant_length = len_dict[region]
-                    print remnant, remnant_length
-                    print "\n"
+                    #print remnant, remnant_length
+                    #print "\n"
 
                 if remnant_seq_length + remnant_length <= max_length_soft_threshold:
-                    print "AAAAA"
-                    print remnant_seq_length, remnant_length, max_length_soft_threshold
+                    #print "AAAAA"
+                    #print remnant_seq_length, remnant_length, max_length_soft_threshold
                     remnant_seq_list.append(remnant)
                     remnant_seq_length += remnant_length
-                    print remnant_seq_list
-                    print "\n"
+                    #print remnant_seq_list
+                    #print "\n"
                 else:
                     region_list.append(remnant_seq_list)
                     for remnant_entry in remnant_seq_list:
@@ -246,12 +244,12 @@ class SequenceRoutines(FileRoutines):
                         else:
                             scaffold_to_region_correspondence_dict[remnant_entry[0]] = [region_index]
                     region_index += 1
-                    print "CCCCCCCCC"
+                    #print "CCCCCCCCC"
                     remnant_seq_list = [remnant]
                     remnant_seq_length = remnant_length
-                    print remnant_seq_list
-                    print remnant_seq_length
-                    print "\n"
+                    #print remnant_seq_list
+                    #print remnant_seq_length
+                    #print "\n"
             else:
                 if remnant_seq_list:
                     region_list.append(remnant_seq_list)
@@ -265,7 +263,9 @@ class SequenceRoutines(FileRoutines):
         if output_dir:
             for directory in output_dir, "%s/splited/" % output_dir:
                 self.safe_mkdir(directory)
-
+            scaffold_ids = IdList(len_dict)
+            scaffold_ids.write("%s/scaffold.ids" % output_dir)
+            len_dict.write("%s/scaffold.len" % output_dir)
             index = 1
             for regions in region_list:
                 with open("%s/splited/region_%i.list" % (output_dir, index), "w") as out_fd:
