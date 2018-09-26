@@ -10,16 +10,16 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-c", "--chunks_dir", action="store", dest="chunks_dir", required=True,
                     help="Directory with chunks")
-parser.add_argument("-p", "--chunk_prefix", action="store", dest="chunks_prefix",
+parser.add_argument("-p", "--chunks_prefix", action="store", dest="chunks_prefix",
                     help="Prefix of chunk files")
 parser.add_argument("-u", "--chunks_suffix", action="store", dest="chunks_suffix",
                     help="Suffix of chunk files")
 
-parser.add_argument("-a", "--starting_chunk_number", action="store", dest="starting_chunk_number", type=int,
+parser.add_argument("-a", "--starting_chunks_number", action="store", dest="starting_chunks_number", type=int,
                     help="Starting chunk number")
-parser.add_argument("-b", "--ending_chunk_number", action="store", dest="ending_chunk_number", type=int,
+parser.add_argument("-b", "--ending_chunks_number", action="store", dest="ending_chunks_number", type=int,
                     help="Ending chunk number")
-parser.add_argument("-n", "--chunks_number_list", action="store", dest="chunk_number_list",
+parser.add_argument("-n", "--chunks_number_list", action="store", dest="chunks_number_list",
                     type=lambda s: s.split(","),
                     help="Comma-separated list of  chunk numbers")
 
@@ -37,8 +37,8 @@ args = parser.parse_args()
 FileRoutines.combine_chunks_with_header(args.chunks_dir,
                                         args.chunks_prefix,
                                         args.output,
-                                        starting_chunk=args.starting_chunk_number,
-                                        end_chunk=args.ending_chunk_number,
+                                        starting_chunk=args.starting_chunks_number,
+                                        end_chunk=args.ending_chunks_number,
                                         chunk_number_list=args.chunks_number_list,
                                         chunks_suffix=args.chunks_suffix,
                                         header_prefix=args.header_prefix,
