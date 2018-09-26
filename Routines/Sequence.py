@@ -222,10 +222,10 @@ class SequenceRoutines(FileRoutines):
                     remnant_length = len_dict[region]
 
                 if remnant_seq_length + remnant_length <= max_length_soft_threshold:
-
+                    print "AAAAA"
                     remnant_seq_list.append(remnant)
                     remnant_seq_length += remnant_length
-                    print "AAAAA"
+                    print remnant_seq_length, remnant_length, max_length_soft_threshold
                     print remnant_seq_list
                 else:
                     region_list.append(remnant_seq_list)
