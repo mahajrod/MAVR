@@ -19,7 +19,7 @@ parser.add_argument("-a", "--starting_chunk_number", action="store", dest="start
                     help="Starting chunk number")
 parser.add_argument("-b", "--ending_chunk_number", action="store", dest="ending_chunk_number", type=int,
                     help="Ending chunk number")
-parser.add_argument("-n", "--chunk_number_list", action="store", dest="chunk_number_list",
+parser.add_argument("-n", "--chunks_number_list", action="store", dest="chunk_number_list",
                     type=lambda s: s.split(","),
                     help="Comma-separated list of  chunk numbers")
 
@@ -38,9 +38,9 @@ FileRoutines.combine_chunks_with_header(args.chunks_dir,
                                         args.chunks_prefix,
                                         args.output,
                                         starting_chunk=args.starting_chunk_number,
-                                        end_chunk=args.ending_chunk_number,
-                                        chunk_number_list=args.chunk_number_list,
-                                        chunks_suffix=args.chunk_number_list,
+                                        end_chunk=args.ending_chunks_number,
+                                        chunk_number_list=args.chunks_number_list,
+                                        chunks_suffix=args.chunks_suffix,
                                         header_prefix=args.header_prefix,
                                         sorting_options=args.sorting_options,
                                         separator=args.separator)
