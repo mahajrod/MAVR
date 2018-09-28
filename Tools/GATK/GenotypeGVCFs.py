@@ -71,6 +71,7 @@ class GenotypeGVCFs(JavaTool):
         if handling_mode == 'local':
             self.execute(options)
         elif handling_mode == "slurm":
+            self.timelog = None
             slurm_cmd = self.execute(options, capture_output=False, runtype="jar", generate_cmd_string_only=True)
 
             last_job_id = self.slurm_run_job(job_name,
