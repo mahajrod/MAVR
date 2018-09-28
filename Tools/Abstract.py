@@ -37,7 +37,7 @@ class Tool(SequenceRoutines, AlignmentRoutines):
         self.timelog = timelog
         self.max_per_thread_memory = max_per_thread_memory
 
-    def execute(self, options="", cmd=None, capture_output=False):
+    def execute(self, options="", cmd=None, capture_output=False, generate_cmd_string_only=False):
         command = cmd if cmd is not None else self.cmd
 
         exe_string = (self.check_path(self.path) if self.path else "") + command + " " + options
@@ -49,6 +49,9 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                 time_fd.write("Command\t%s\n" % exe_string)
 
         exe_string = "time -f 'Time\\t%%E real,\\t%%U user,\\t%%S sys' -a -o %s %s" % (self.timelog, exe_string) if self.timelog else exe_string
+
+        if generate_cmd_string_only:
+            return exe_string
 
         if capture_output:
             return Popen([exe_string], shell=True, stdout=PIPE).stdout  # returns file object
@@ -87,21 +90,30 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                 out_fd.write(results)
         return results if capture_output else None
 
-    def generate_slurm_job_array_script(self,
-                                        job_name,
-                                        log_prefix,
-                                        task_commands,
-                                        error_log_prefix,
-                                        job_array_script=None,
-                                        task_index_list=None,
-                                        start_task_index=None,
-                                        end_task_index=None,
-                                        max_running_jobs=None,
-                                        max_running_time=None,
-                                        cpus_per_task=None,
-                                        max_memmory_per_cpu=None,
-                                        modules_list=None,
-                                        environment_variables_dict=None):
+    def generate_slurm_job_script(self,
+                                  job_name,
+                                  log_prefix,
+                                  task_commands,
+                                  error_log_prefix,
+                                  node_number=None,
+                                  partition=None,
+                                  qos=None,
+                                  cpus_per_node=None,
+                                  node_type=None,
+                                  max_memory_per_node=None,
+                                  stdout_file=None,
+                                  email=None,
+                                  mail_type=None,
+                                  job_script=None,
+                                  task_index_list=None,
+                                  start_task_index=None,
+                                  end_task_index=None,
+                                  max_running_jobs=None,
+                                  max_running_time=None,
+                                  cpus_per_task=None,
+                                  max_memmory_per_cpu=None,
+                                  modules_list=None,
+                                  environment_variables_dict=None):
 
         if (not task_index_list) and ((not start_task_index) or (not end_task_index)):
             raise ValueError("Neither task index list nor start or end task index were set")
@@ -117,6 +129,18 @@ class Tool(SequenceRoutines, AlignmentRoutines):
         script += "#SBATCH --job-name=%s\n" % job_name if job_name else ""
         script += "#SBATCH --error=%s.%%A_%%a.err\n" % error_log_prefix
         script += "#SBATCH --output=%s.%%A_%%a.log\n" % log_prefix
+
+        script += "#SBATCH --nodes=%i\n" % node_number if node_number else ""
+        script += "#SBATCH --partition=%s\n" % partition if partition else ""
+        script += "#SBATCH --ntasks-per-nod=%i\n" % cpus_per_node if cpus_per_node else ""
+
+        script += "#SBATCH --node_type=%s\n" % node_type if node_type else ""
+        script += "#SBATCH --ntasks-per-nod=%i\n" % cpus_per_node if cpus_per_node else ""
+
+        script += "#SBATCH --mem=%i\n" % max_memory_per_node if max_memory_per_node else ""
+        script += "#SBATCH --mail-user=%s\n" % email if email else ""
+        script += "#SBATCH --mail-type=%s\n" % mail_type if mail_type else ""
+        script += "#SBATCH --output=%s\n" % stdout_file if stdout_file else ""
 
         script += "\n"
 
@@ -140,18 +164,19 @@ class Tool(SequenceRoutines, AlignmentRoutines):
 
         script += "#-------------------------------------------\n\n"
 
-        if job_array_script:
-            with open(job_array_script, "w") as job_fd:
+        if job_script:
+            with open(job_script, "w") as job_fd:
                 job_fd.write(script)
 
         return script
 
-    def slurm_run_job_array_from_script(self, job_array_script, print_current_status=True,
-                                        after_job_id_list=[],
-                                        afterany_job_id_list=[],
-                                        afternotok_job_id_list=[],
-                                        afterok_job_id_list=[],
-                                        singleton=False):
+    def slurm_run_job_from_script(self,
+                                  job_array_script,
+                                  after_job_id_list=[],
+                                  afterany_job_id_list=[],
+                                  afternotok_job_id_list=[],
+                                  afterok_job_id_list=[],
+                                  singleton=False):
         """
         after:jobid[:jobid...]	    job can begin after the specified jobs have started
         afterany:jobid[:jobid...]	job can begin after the specified jobs have terminated
@@ -189,57 +214,68 @@ class Tool(SequenceRoutines, AlignmentRoutines):
         print(command)
         job_id = Popen([command], shell=True, stdout=PIPE).stdout.readline().strip().split()[-1]
         #print "Job id", job_id
-        """
-        if print_current_status:
-            print ("\nCurrent status:\n")
-            #show the current status with 'sjobs'
-            os.system("sjobs")
-        """
         return job_id
 
-    def slurm_run_job_array(self,
-                            job_name,
-                            log_prefix,
-                            task_commands,
-                            error_log_prefix,
-                            job_array_script,
-                            task_index_list=None,
-                            start_task_index=None,
-                            end_task_index=None,
-                            max_running_jobs=None,
-                            max_running_time=None,
-                            cpus_per_task=None,
-                            max_memmory_per_cpu=None,
-                            modules_list=None,
-                            environment_variables_dict=None,
-                            print_current_status=True,
-                            after_job_id_list=[],
-                            afterany_job_id_list=[],
-                            afternotok_job_id_list=[],
-                            afterok_job_id_list=[],
-                            singleton=False):
+    def slurm_run_job(self,
+                      job_name,
+                      log_prefix,
+                      task_commands,
+                      error_log_prefix,
+                      job_script,
+                      node_number=None,
+                      partition=None,
+                      qos=None,
+                      cpus_per_node=None,
+                      node_type=None,
+                      max_memory_per_node=None,
+                      stdout_file=None,
+                      email=None,
+                      mail_type=None,
+                      task_index_list=None,
+                      start_task_index=None,
+                      end_task_index=None,
+                      max_running_jobs=None,
+                      max_running_time=None,
+                      cpus_per_task=None,
+                      max_memmory_per_cpu=None,
+                      modules_list=None,
+                      environment_variables_dict=None,
+                      after_job_id_list=[],
+                      afterany_job_id_list=[],
+                      afternotok_job_id_list=[],
+                      afterok_job_id_list=[],
+                      singleton=False):
 
-        self.generate_slurm_job_array_script(job_name,
-                                             log_prefix,
-                                             task_commands,
-                                             error_log_prefix,
-                                             job_array_script=job_array_script,
-                                             task_index_list=task_index_list,
-                                             start_task_index=start_task_index,
-                                             end_task_index=end_task_index,
-                                             max_running_jobs=max_running_jobs,
-                                             max_running_time=max_running_time,
-                                             cpus_per_task=cpus_per_task,
-                                             max_memmory_per_cpu=max_memmory_per_cpu,
-                                             modules_list=modules_list,
-                                             environment_variables_dict=environment_variables_dict)
+        self.generate_slurm_job_script(job_name,
+                                       log_prefix,
+                                       task_commands,
+                                       error_log_prefix,
+                                       node_number=node_number,
+                                       partition=partition,
+                                       qos=qos,
+                                       cpus_per_node=cpus_per_node,
+                                       node_type=node_type,
+                                       max_memory_per_node=max_memory_per_node,
+                                       stdout_file=stdout_file,
+                                       email=email,
+                                       mail_type=mail_type,
+                                       job_script=job_script,
+                                       task_index_list=task_index_list,
+                                       start_task_index=start_task_index,
+                                       end_task_index=end_task_index,
+                                       max_running_jobs=max_running_jobs,
+                                       max_running_time=max_running_time,
+                                       cpus_per_task=cpus_per_task,
+                                       max_memmory_per_cpu=max_memmory_per_cpu,
+                                       modules_list=modules_list,
+                                       environment_variables_dict=environment_variables_dict)
 
-        return self.slurm_run_job_array_from_script(job_array_script, print_current_status=print_current_status,
-                                                    after_job_id_list=after_job_id_list,
-                                                    afterany_job_id_list=afterany_job_id_list,
-                                                    afternotok_job_id_list=afternotok_job_id_list,
-                                                    afterok_job_id_list=afterok_job_id_list,
-                                                    singleton=singleton)
+        return self.slurm_run_job_from_script(job_script,
+                                              after_job_id_list=after_job_id_list,
+                                              afterany_job_id_list=afterany_job_id_list,
+                                              afternotok_job_id_list=afternotok_job_id_list,
+                                              afterok_job_id_list=afterok_job_id_list,
+                                              singleton=singleton)
 
 
 class JavaTool(Tool):
@@ -249,7 +285,7 @@ class JavaTool(Tool):
         Tool.__init__(self, "java", path=java_path, max_threads=max_threads,
                       jar_path=jar_path, jar=jar, max_memory=max_memory, timelog=timelog)
 
-    def execute(self, options="", cmd=None, capture_output=False, runtype="jar"):
+    def execute(self, options="", cmd=None, capture_output=False, runtype="jar", generate_cmd_string_only=False):
         command = cmd if cmd is not None else ""
 
         java_string = "java"
@@ -268,6 +304,9 @@ class JavaTool(Tool):
                 time_fd.write("Command\t%s\n" % exe_string)
 
         exe_string = "time -f 'Time\\t%%E real,\\t%%U user,\\t%%S sys' -a -o %s %s" % (self.timelog, exe_string) if self.timelog else exe_string
+
+        if generate_cmd_string_only:
+            return exe_string
 
         if capture_output:
             return Popen([exe_string], shell=True, stdout=PIPE).stdout  # returns file object
