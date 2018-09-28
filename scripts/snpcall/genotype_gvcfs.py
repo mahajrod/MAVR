@@ -24,7 +24,7 @@ parser.add_argument("-e", "--extension_list", action="store", dest="extension_li
 parser.add_argument("-x", "--max_alternate_alleles", action="store", dest="max_alternate_alleles", type=int,
                     help="Maximum number of alternative allels. Default: GATK default")
 
-parser.add_argument("-m", "--memory", action="store", dest="memory", default="10000m", type=lambda s: s + "m",
+parser.add_argument("-m", "--memory", action="store", dest="memory", default="10000", type=lambda s: s + "m",
                     help="Maximum memory to use in megabytes. Default: 10000")
 
 parser.add_argument("-d", "--handling_mode", action="store", dest="handling_mode", default="local",
@@ -47,6 +47,7 @@ args = parser.parse_args()
 
 GenotypeGVCFs.jar_path = args.gatk_dir
 GenotypeGVCFs.threads = 1
+GenotypeGVCFs.max_memory = args.memory
 
 GenotypeGVCFs.genotype(args.reference,
                        args.gvcf_list,
