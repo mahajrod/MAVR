@@ -167,20 +167,20 @@ class HaplotypeCaller(JavaTool):
 
             slurm_cmd = "java -Xmx%s -jar %s/%s %s" % (self.max_memory, self.jar_path, self.jar, options)
 
-            last_job_id = self.slurm_run_job_array(job_name,
-                                                   log_prefix,
-                                                   slurm_cmd,
-                                                   error_log_prefix,
-                                                   "%s%s.slurm" % (output_dir, output_prefix),
-                                                   task_index_list=None,
-                                                   start_task_index=1,
-                                                   end_task_index=number_of_regions,
-                                                   max_running_jobs=max_running_jobs,
-                                                   max_running_time=max_running_time,
-                                                   cpus_per_task=cpus_per_task,
-                                                   max_memmory_per_cpu=max_memmory_per_cpu,
-                                                   modules_list=modules_list,
-                                                   environment_variables_dict=environment_variables_dict)
+            last_job_id = self.slurm_run_job(job_name,
+                                             log_prefix,
+                                             slurm_cmd,
+                                             error_log_prefix,
+                                             "%s%s.slurm" % (output_dir, output_prefix),
+                                             task_index_list=None,
+                                             start_task_index=1,
+                                             end_task_index=number_of_regions,
+                                             max_running_jobs=max_running_jobs,
+                                             max_running_time=max_running_time,
+                                             cpus_per_task=cpus_per_task,
+                                             max_memmory_per_cpu=max_memmory_per_cpu,
+                                             modules_list=modules_list,
+                                             environment_variables_dict=environment_variables_dict)
 
             print("Submitted job  %s" % last_job_id)
 
