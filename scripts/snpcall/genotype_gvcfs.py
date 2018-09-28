@@ -43,10 +43,10 @@ parser.add_argument("-a", "--slurm_max_running_time", action="store", dest="slur
 parser.add_argument("-w", "--slurm_modules_list", action="store", dest="slurm_modules_list", default=[],
                     type=lambda s: s.split(","),
                     help="Comma-separated list of modules to load. Set modules for hmmer and python")
-
 args = parser.parse_args()
 
 GenotypeGVCFs.jar_path = args.gatk_dir
+GenotypeGVCFs.threads = 1
 
 GenotypeGVCFs.genotype(args.reference,
                        args.gvcf_list,
