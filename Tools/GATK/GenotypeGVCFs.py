@@ -15,33 +15,47 @@ class GenotypeGVCFs(JavaTool):
                           max_threads=max_threads, jar_path=jar_path, max_memory=max_memory,
                           timelog=timelog)
 
-    def parse_options(self, reference, gvcf_list, output, extension_list=["g.vcf",]):
-        options = self.parse_options_for_parallel_run(reference,
-                                                      gvcf_list,
-                                                      extension_list=extension_list)
-
-        options += " -o %s" % output
-
-        return options
-
     def parse_options_for_parallel_run(self, reference, gvcf_list, extension_list=["g.vcf",],
                                        disable_auto_index_creation_and_locking_when_reading_rods=True,
-                                       max_alternate_alleles=None):
+                                       max_alternate_alleles=None, ):
 
         options = " -R %s" % reference
-
         options += " --max_alternate_alleles %i" % max_alternate_alleles if max_alternate_alleles else ""
-
         options += " --disable_auto_index_creation_and_locking_when_reading_rods" if disable_auto_index_creation_and_locking_when_reading_rods else ""
 
         for gvcf in self.make_list_of_path_to_files_by_extension(gvcf_list,
                                                                  extension_list=extension_list,
                                                                  recursive=False, return_absolute_paths=True):
             options += " --variant %s" % gvcf
+        return options
+
+    def parse_options(self, reference, gvcf_list, output, extension_list=["g.vcf",],
+                      disable_auto_index_creation_and_locking_when_reading_rods=True,
+                      max_alternate_alleles=None):
+        options = self.parse_options_for_parallel_run(reference,
+                                                      gvcf_list,
+                                                      extension_list=extension_list,
+                                                      disable_auto_index_creation_and_locking_when_reading_rods=disable_auto_index_creation_and_locking_when_reading_rods,
+                                                      max_alternate_alleles=max_alternate_alleles)
+
+        options += " -o %s" % output
 
         return options
 
-    def genotype(self, reference, gvcf_list, output, extension_list=["g.vcf",]):
+    def genotype(self,
+                 reference,
+                 gvcf_list,
+                 output_prefix,
+                 extension_list=["g.vcf",],
+                 handling_mode="local",
+                 max_memory_per_node=None,
+                 job_name=None,
+                 log_prefix=None,
+                 error_log_prefix=None,
+                 modules_list=None,
+                 environment_variables_dict=None,
+                 max_alternate_alleles=None,
+                 max_running_time=None):
         """
         java -jar GenomeAnalysisTK.jar \
            -T GenotypeGVCFs \
@@ -50,9 +64,26 @@ class GenotypeGVCFs(JavaTool):
            --variant sample2.g.vcf \
            -o output.vcf
         """
-        options = self.parse_options(reference, gvcf_list, output, extension_list=extension_list)
+        output = "%s.vcf" % output_prefix
+        options = self.parse_options(reference, gvcf_list, output, extension_list=extension_list,
+                                     max_alternate_alleles=max_alternate_alleles)
 
-        self.execute(options)
+        if handling_mode == 'local':
+            self.execute(options)
+        elif handling_mode == "slurm":
+            slurm_cmd = self.execute(options, capture_output=False, runtype="jar", generate_cmd_string_only=True)
+
+            last_job_id = self.slurm_run_job(job_name,
+                                             log_prefix,
+                                             slurm_cmd,
+                                             error_log_prefix,
+                                             "%s.slurm" % output_prefix,
+                                             modules_list=modules_list,
+                                             max_running_time=max_running_time,
+                                             environment_variables_dict=environment_variables_dict,
+                                             max_memory_per_node=max_memory_per_node)
+
+            return last_job_id
 
     def parallel_genotype(self, reference, gvcf_list, splited_dir, splited_prefix, output_vcf,
                           max_total_scaffold_length_per_chunk=100000,
