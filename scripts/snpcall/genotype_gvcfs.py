@@ -46,8 +46,6 @@ parser.add_argument("-w", "--slurm_modules_list", action="store", dest="slurm_mo
 args = parser.parse_args()
 
 GenotypeGVCFs.jar_path = args.gatk_dir
-GenotypeGVCFs.threads = args.threads
-
 
 GenotypeGVCFs.genotype(args.reference,
                        args.gvcf_list,
