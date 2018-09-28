@@ -115,8 +115,8 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                                   modules_list=None,
                                   environment_variables_dict=None):
 
-        if (not task_index_list) and ((not start_task_index) or (not end_task_index)):
-            raise ValueError("Neither task index list nor start or end task index were set")
+        #if (not task_index_list) and ((not start_task_index) or (not end_task_index)):
+        #    raise ValueError("Neither task index list nor start or end task index were set")
 
         script = "#!/usr/bin/env bash\n"
 
