@@ -119,9 +119,9 @@ class Tool(SequenceRoutines, AlignmentRoutines):
         #    raise ValueError("Neither task index list nor start or end task index were set")
 
         script = "#!/usr/bin/env bash\n"
-
-        script += "#SBATCH --array=%s" % (",".join(map(str, task_index_list)) if task_index_list else "%s-%s" % (str(start_task_index),
-                                                                                                                 str(end_task_index)))
+        if task_index_list or start_task_index or end_task_index:
+            script += "#SBATCH --array=%s" % (",".join(map(str, task_index_list)) if task_index_list else "%s-%s" % (str(start_task_index),
+                                                                                                                     str(end_task_index)))
         script += "%s\n" % ("%%%i" % max_running_jobs if max_running_jobs else "")
         script += "#SBATCH --time=%s         # Run time in hh:mm:ss\n" % max_running_time if max_running_time else ""
         script += "#SBATCH --mem-per-cpu=%i       # Minimum memory required per CPU (in megabytes)\n" % max_memmory_per_cpu if max_memmory_per_cpu else ""
