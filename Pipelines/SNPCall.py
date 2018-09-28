@@ -223,7 +223,8 @@ class SNPCallPipeline(Pipeline):
             sample_recalled_reads_bam = "%s.recal_reads.iteration%i.bam" % (sample_alignment_prefix, iteration_index)
 
             merged_vcf_prefix = "%s/SNPcall/%s.iteration%i" % (outdir, merged_prefix, iteration_index)
-            merged_raw_vcf = "%s.raw.vcf" % merged_vcf_prefix
+            merged_raw_vcf_prefix = "%s.raw" % merged_vcf_prefix
+            merged_raw_vcf = "%s.vcf" % merged_raw_vcf_prefix
 
             merged_raw_snp_vcf = "%s.raw.snp.vcf" % merged_vcf_prefix
             merged_with_filters_snp_vcf = "%s.with_filters.snp.vcf" % merged_vcf_prefix
@@ -286,7 +287,7 @@ class SNPCallPipeline(Pipeline):
                                               include_region_id_file=include_region_id_file,
                                               exclude_region_id_file=exclude_region_id_file)
 
-            GenotypeGVCFs.genotype(reference, gvcf_list, merged_raw_vcf)
+            GenotypeGVCFs.genotype(reference, gvcf_list, merged_raw_vcf_prefix)
 
             self.hardfilter_variants(reference, merged_raw_vcf, merged_vcf_prefix, SNP_QD=SNP_QD, SNP_FS=SNP_FS,
                                      SNP_MQ=SNP_MQ, SNP_MappingQualityRankSum=SNP_MappingQualityRankSum,
