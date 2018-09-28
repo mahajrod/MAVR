@@ -137,7 +137,7 @@ class Tool(SequenceRoutines, AlignmentRoutines):
         script += "#SBATCH --node_type=%s\n" % node_type if node_type else ""
         script += "#SBATCH --ntasks-per-nod=%i\n" % cpus_per_node if cpus_per_node else ""
 
-        script += "#SBATCH --mem=%i\n" % max_memory_per_node if max_memory_per_node else ""
+        script += "#SBATCH --mem=%s\n" % str(max_memory_per_node) if max_memory_per_node else ""
         script += "#SBATCH --mail-user=%s\n" % email if email else ""
         script += "#SBATCH --mail-type=%s\n" % mail_type if mail_type else ""
         script += "#SBATCH --output=%s\n" % stdout_file if stdout_file else ""
