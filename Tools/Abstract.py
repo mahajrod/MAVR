@@ -25,7 +25,7 @@ def execute(exe_string):
 class Tool(SequenceRoutines, AlignmentRoutines):
 
     def __init__(self, cmd, path="", max_threads=4, jar_path="", jar=None,
-                 max_memory="500m", max_per_thread_memory="500m", timelog=None):
+                 max_memory="500m", max_per_thread_memory="500m", timelog=None, tmp_dir=None):
         SequenceRoutines.__init__(self)
         self.path = self.check_path(path)
         self.cmd = cmd
@@ -36,6 +36,7 @@ class Tool(SequenceRoutines, AlignmentRoutines):
         self.max_memory = max_memory
         self.timelog = timelog
         self.max_per_thread_memory = max_per_thread_memory
+        self.tmp_dir = tmp_dir
 
     def execute(self, options="", cmd=None, capture_output=False, generate_cmd_string_only=False):
         command = cmd if cmd is not None else self.cmd
@@ -283,13 +284,14 @@ class JavaTool(Tool):
     def __init__(self, jar, java_path="", max_threads=4, jar_path="", max_memory=None, timelog="tool_time.log"):
 
         Tool.__init__(self, "java", path=java_path, max_threads=max_threads,
-                      jar_path=jar_path, jar=jar, max_memory=max_memory, timelog=timelog)
+                      jar_path=jar_path, jar=jar, max_memory=max_memory, timelog=timelog, tmp_dir=None)
 
     def execute(self, options="", cmd=None, capture_output=False, runtype="jar", generate_cmd_string_only=False):
         command = cmd if cmd is not None else ""
 
         java_string = "java"
         java_string += " -Xmx%s" % str(self.max_memory) if self.max_memory else ""
+        java_string += " -Djava.io.tmpdir=%s" % self.tmp_dir if self.tmp_dir else ""
         #print (self.jar_path)
         java_string += " -%s %s%s" % (runtype, self.check_dir_path(self.jar_path) if self.jar_path else "", self.jar)
         java_string += " %s" % command
