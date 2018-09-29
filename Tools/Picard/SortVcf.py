@@ -35,6 +35,7 @@ class SortVcf(JavaTool):
         if handling_mode == 'local':
             self.execute(options=options)
         elif handling_mode == 'slurm':
+            self.timelog = None
             slurm_cmd = self.execute(options=options, generate_cmd_string_only=True)
 
             job_id = self.slurm_run_job(job_name, log_prefix, slurm_cmd, error_log_prefix,
