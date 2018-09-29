@@ -17,7 +17,7 @@ parser.add_argument("-i", "--gvcf_list", action="store", dest="gvcf_list",
                     type=GenotypeGVCFs.make_list_of_path_to_files_from_string,
                     help="Comma-separated list of gvcf files to genotype",  required=True,)
 
-parser.add_argument("-e", "--extension_list", action="store", dest="extension_list", default=["g.vcf",],
+parser.add_argument("-s", "--extension_list", action="store", dest="extension_list", default=["g.vcf",],
                     type=lambda s: s.split(","),
                     help="Comma-separated list of extension of GVCF files. Default: g.vcf")
 
@@ -43,11 +43,15 @@ parser.add_argument("-a", "--slurm_max_running_time", action="store", dest="slur
 parser.add_argument("-w", "--slurm_modules_list", action="store", dest="slurm_modules_list", default=[],
                     type=lambda s: s.split(","),
                     help="Comma-separated list of modules to load. Set modules for hmmer and python")
+parser.add_argument("-e", "--tmp_dir", action="store", dest="tmp_dir",
+                    help="Temporary directory")
+
 args = parser.parse_args()
 
 GenotypeGVCFs.jar_path = args.gatk_dir
 GenotypeGVCFs.threads = 1
 GenotypeGVCFs.max_memory = args.memory
+GenotypeGVCFs.tmp_dir = args.tmp_dir
 
 GenotypeGVCFs.genotype(args.reference,
                        args.gvcf_list,
