@@ -35,11 +35,15 @@ parser.add_argument("-a", "--slurm_max_running_time", action="store", dest="slur
 parser.add_argument("-w", "--slurm_modules_list", action="store", dest="slurm_modules_list", default=[],
                     type=lambda s: s.split(","),
                     help="Comma-separated list of modules to load. Set modules for hmmer and python")
+parser.add_argument("-e", "--tmp_dir", action="store", dest="tmp_dir",
+                    help="Temporary directory")
+
 args = parser.parse_args()
 
 SortVcf.jar_path = args.picard_dir
 SortVcf.threads = 1
 SortVcf.max_memory = args.memory
+SortVcf.tmp_dir = args.tmp_dir
 
 SortVcf.sort_vcf(args.input, args.output, seq_dict=args.sequence_dict,
                  handling_mode=args.handling_mode,
