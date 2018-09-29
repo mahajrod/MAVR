@@ -41,7 +41,7 @@ SortVcf.jar_path = args.picard_dir
 SortVcf.threads = 1
 SortVcf.max_memory = args.memory
 
-SortVcf.genotype(args.input, args.output, seq_dict=args.sequence_dict,
+SortVcf.sort_vcf(args.input, args.output, seq_dict=args.sequence_dict,
                  handling_mode=args.handling_mode,
                  max_memory_per_node=args.memory,
                  max_running_time=args.slurm_max_running_time,
