@@ -20,9 +20,6 @@ parser.add_argument("-i", "--input_seq", action="store", dest="input",
                     help="Input file with sequences")
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
                     help="Number of threads")
-parser.add_argument("-o", "--output_dir", action="store", dest="output_dir", default="./",
-                    type=Emapper.check_path,
-                    help="Directory to write output")
 parser.add_argument("-p", "--output_prefix", action="store", dest="output_prefix", required=True,
                     help="Prefix of output files")
 parser.add_argument("--emapper_dir", action="store", dest="path", default="",
