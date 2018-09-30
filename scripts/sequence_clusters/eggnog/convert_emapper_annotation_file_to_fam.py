@@ -22,5 +22,5 @@ parser.add_argument("-s", "--species_name", action="store", dest="species_name",
 
 args = parser.parse_args()
 
-Emapper.convert_egemapper_annotation_file_to_fam(args.input, args.output, eggnogdb_prefix=args.eggnogdb_prefix,
+Emapper.convert_emapper_annotation_file_to_fam(args.input, args.output, eggnogdb_prefix=args.eggnogdb_prefix,
                                                  species_name=None, label_separator=args.species_name)
