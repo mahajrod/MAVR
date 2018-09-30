@@ -32,6 +32,11 @@ parser.add_argument("--temp_dir", action="store", dest="temp_dir",
 
 args = parser.parse_args()
 
+"""
+Usage:
+assign_orthologs_emapper.py -d veNOG -o amazona_vittata.longest_pep -t 30 -i amazona_vittata.longest_pep.pep
+"""
+
 Emapper.threads = args.threads
 Emapper.path = args.path
 Emapper.timelog = None
