@@ -63,8 +63,8 @@ class Emapper(Tool):
                                              label_separator=label_separator)
 
     @staticmethod
-    def convert_egemapper_annotation_file_to_fam(emapper_annotation_file, output_fam, eggnogdb_prefix=None,
-                                                 species_name=None, label_separator="."):
+    def convert_emapper_annotation_file_to_fam(emapper_annotation_file, output_fam, eggnogdb_prefix=None,
+                                               species_name=None, label_separator="."):
         fam_dict = SynDict()
         with open(emapper_annotation_file, "r") as annotations_fd:
             for line in annotations_fd:
@@ -86,7 +86,7 @@ class Emapper(Tool):
         fam_dict.write(filename=output_fam, splited_values=True)
 
     @staticmethod
-    def extract_eggnogmapper_annotations_by_protein_ids(emapper_annotation_file, protein_id_file, output_annotations):
+    def extract_emapper_annotations_by_protein_ids(emapper_annotation_file, protein_id_file, output_annotations):
         protein_ids = IdList(filename=protein_id_file)
         with open(emapper_annotation_file, "r") as ann_fd:
             with open(output_annotations, "w") as out_fd:
@@ -122,10 +122,10 @@ class Emapper(Tool):
         GO_terms_file = "%s.GO" % output_prefix
         predicted_gene_names_file = "%s.predicted_gene_names" % output_prefix
 
-        self.convert_egemapper_annotation_file_to_fam(emapper_annotation_file, fam_file,
-                                                      eggnogdb_prefix=eggnogdb_prefix,
-                                                      species_name=species_name,
-                                                      label_separator=label_separator)
+        self.convert_emapper_annotation_file_to_fam(emapper_annotation_file, fam_file,
+                                                    eggnogdb_prefix=eggnogdb_prefix,
+                                                    species_name=species_name,
+                                                    label_separator=label_separator)
         self.extract_GO_terms_from_emapper_annotation_file(emapper_annotation_file, GO_terms_file)
 
         self. extract_predicted_gene_names_from_emapper_annotation_file(emapper_annotation_file,
