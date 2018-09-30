@@ -9,24 +9,58 @@ class Emapper(Tool):
     def __init__(self, path="", max_threads=4):
         Tool.__init__(self, "emapper.py", path=path, max_threads=max_threads)
 
-    """
-    def parse_options(self, input_fasta, kingdom, gff_file, log_file, length_cutoff=None, reject_cutoff=None,
-                      evalue_cutoff=None):
+    def parse_options(self, input, database, output_prefix, db_type=None, query_type=None, target_orthologs=None,
+                      resume=None, report_orthologs=True, override_last_run=None, no_comments_in_output=None,
+                      no_refine=None, no_annotation=None, no_search=None, usemem=True):
 
-        if kingdom not in self.kingdoms:
-            raise ValueError("Wrong kingdom of life. Allowed: euk, bac, mito, arc")
+        options = " -i %s" % input
+        options += " --cpu %i" % self.threads
+        options += " --usemem" if usemem else ""
+        options += " --temp_dir %s" % self.tmp_dir if self.tmp_dir else ""
+        options += " --database %s" % database
+        options += " --dbtype %s" % db_type if db_type else ""
+        options += " --qtype %s" % query_type if query_type else ""
+        options += " --target_orthologs %s" % target_orthologs if target_orthologs else ""
 
-        options = " --threads %i" % self.threads
-        options += " --kingdom %s" % kingdom
-        options += " --lencutoff %f" % length_cutoff if length_cutoff else ""
-        options += " --reject %f" % reject_cutoff if reject_cutoff else ""
-        options += " --evalue %f" % evalue_cutoff if evalue_cutoff else ""
-        options += " %s" % input_fasta
-        options += " > %s " % gff_file
-        options += " 2> %s" % log_file
+        options += " -o %s" % output_prefix if output_prefix else ""
+
+        options += " --resume" if resume else ""
+        options += " --override" if override_last_run else ""
+        options += " --no_refine" if no_refine else ""
+        options += " --no_annot" if no_annotation else ""
+        options += " --no_search" if no_search else ""
+        options += " --no_file_comments" if no_comments_in_output else ""
+        options += " --report_orthologs" if report_orthologs else ""
 
         return options
-    """
+
+    def assign_orthologs(self, input, database, output_prefix, db_type=None, query_type=None, target_orthologs=None,
+                         resume=None, report_orthologs=True, override_last_run=None, no_comments_in_output=None,
+                         no_refine=None, no_annotation=None, no_search=None, usemem=True,
+                         eggnogdb_prefix=None, species_name=None, label_separator="."):
+
+        options = self.parse_options(input, database, output_prefix,
+                                     db_type=db_type,
+                                     query_type=query_type,
+                                     target_orthologs=target_orthologs,
+                                     resume=resume,
+                                     report_orthologs=report_orthologs,
+                                     override_last_run=override_last_run,
+                                     no_comments_in_output=no_comments_in_output,
+                                     no_refine=no_refine,
+                                     no_annotation=no_annotation,
+                                     no_search=no_search,
+                                     usemem=usemem)
+
+        self.execute(options)
+
+        emapper_annotation_file = "%s.emapper.annotations" % output_prefix
+
+        self.convert_emapper_annotation_file(emapper_annotation_file,
+                                             output_prefix,
+                                             eggnogdb_prefix=eggnogdb_prefix,
+                                             species_name=species_name,
+                                             label_separator=label_separator)
 
     @staticmethod
     def convert_egemapper_annotation_file_to_fam(emapper_annotation_file, output_fam, eggnogdb_prefix=None,
