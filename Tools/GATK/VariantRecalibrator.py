@@ -7,7 +7,7 @@ class VariantRecalibrator(JavaTool):
     # TODO: fix problems with unrecognized data
     # http://www.broadinstitute.org/gatk/gatkdocs/org_broadinstitute_gatk_tools_walkers_variantrecalibration_VariantRecalibrator.html
 
-    def __init__(self,  java_path="", max_threads=4, jar_path="", max_memory=None, timelog="tool_time.log"):
+    def __init__(self,  java_path="", max_threads=4, jar_path="", max_memory=None, timelog=None):
         JavaTool.__init__(self, "GenomeAnalysisTK.jar -T VariantRecalibrator", java_path=java_path,
                           max_threads=max_threads, jar_path=jar_path, max_memory=max_memory,
                           timelog=timelog)
