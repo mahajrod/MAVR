@@ -21,11 +21,47 @@ parser.add_argument("-t", "--tree_file", action="store", dest="tree_file",
 parser.add_argument("-s", "--suffix", action="store", dest="suffix", default="",
                     help="Suffix of basename of output_files")
 
+
+parser.add_argument("-d", "--handling_mode", action="store", dest="handling_mode", default="local",
+                    help="Handling mode. Allowed: local(default), slurm")
+parser.add_argument("-j", "--slurm_job_name", action="store", dest="slurm_job_name", default="JOB",
+                    help="Slurm job name. Default: JOB")
+parser.add_argument("-m", "--slurm_max_jobs", action="store", dest="slurm_max_jobs", default=1000, type=int,
+                    help="Slurm max jobs. Default: 1000")
+parser.add_argument("-y", "--slurm_log_prefix", action="store", dest="slurm_log_prefix",
+                    help="Slurm log prefix. ")
+parser.add_argument("-l", "--slurm_error_log_prefix", action="store", dest="slurm_error_log_prefix",
+                    help="Slurm error log prefix")
+parser.add_argument("-e", "--max_memory_per_task", action="store", dest="max_memory_per_task", default="5000",
+                    help="Maximum memory per task. Default: 5000m")
+
+parser.add_argument("-a", "--slurm_max_running_time", action="store", dest="slurm_max_running_time", default="100:00:00",
+                    help="Slurm max running time in hh:mm:ss format. Default: 100:00:00")
+
+parser.add_argument("-w", "--slurm_modules_list", action="store", dest="slurm_modules_list", default=[],
+                    type=lambda s: s.split(","),
+                    help="Comma-separated list of modules to load. Set modules for hmmer and python")
+#parser.add_argument("-e", "--tmp_dir", action="store", dest="tmp_dir",
+#                    help="Temporary directory")
+
+
 args = parser.parse_args()
 
 PRANK.threads = args.processes
 PRANK.parallel_codon_alignment(args.input, args.output, output_suffix=args.suffix, tree_file=args.tree_file,
                                output_format=None, show_xml=None,
                                show_tree=None, show_ancestral_sequences=None, show_evolutionary_events=None,
-                               showall=None, compute_posterior_support=None, njtree=None)
+                               showall=None, compute_posterior_support=None, njtree=None,
+                               cmd_log_file=None,
+                               cpus_per_task=1,
+                               handling_mode=args.handling_mode,
+                               job_name=args.slurm_job_name,
+                               log_prefix=args.slurm_log_prefix,
+                               error_log_prefix=args.slurm_error_log_prefix,
+                               max_jobs=args.slurm_max_jobs,
+                               max_running_time=args.slurm_max_running_time,
+                               max_memory_per_node=None,
+                               max_memmory_per_cpu=None,
+                               modules_list=args.slurm_modules_list,
+                               environment_variables_dict=None)
 
