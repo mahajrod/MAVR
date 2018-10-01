@@ -27,7 +27,6 @@ args = parser.parse_args()
 
 
 FastaAlternateReferenceMaker.jar_path = args.gatk_dir
-FastaAlternateReferenceMaker.correct_reference(args.reference, args.output, args.vcf)
 
 FastaAlternateReferenceMaker.correct_regions_from_gff(args.reference,
                                                       args.vcf,
