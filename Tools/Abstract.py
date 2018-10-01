@@ -281,7 +281,7 @@ class Tool(SequenceRoutines, AlignmentRoutines):
 
 class JavaTool(Tool):
 
-    def __init__(self, jar, java_path="", max_threads=4, jar_path="", max_memory=None, timelog="tool_time.log"):
+    def __init__(self, jar, java_path="", max_threads=4, jar_path="", max_memory=None, timelog=None):
 
         Tool.__init__(self, "java", path=java_path, max_threads=max_threads,
                       jar_path=jar_path, jar=jar, max_memory=max_memory, timelog=timelog, tmp_dir=None)
