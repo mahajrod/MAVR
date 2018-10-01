@@ -15,7 +15,9 @@ class GenomeCov(Tool):
 
     @staticmethod
     def parse_options(input_bam=None, report_zero_coverage=None,
-                      one_based_coordinates=None, scale=None, bedgraph_output=False):
+                      one_based_coordinates=None, scale=None, bedgraph_output=False,
+                      genome_bed=None):
+
         options = " -ibam %s" % input_bam
         if bedgraph_output and report_zero_coverage:
             options += " -bga"
@@ -23,15 +25,17 @@ class GenomeCov(Tool):
             options += " -bg"
         options += " -d" if one_based_coordinates else " -dz"
         options += " -scale %f" % scale if scale else ""
+        options += " -g %s" % genome_bed if genome_bed else ""
 
         return options
 
     def get_coverage(self, output, input_bam=None, report_zero_coverage=None,
-                     one_based_coordinates=None, scale=None, bedgraph_output=False):
+                     one_based_coordinates=None, scale=None, bedgraph_output=False,
+                     genome_bed=None):
 
         options = self.parse_options(input_bam=input_bam, report_zero_coverage=report_zero_coverage,
                                      one_based_coordinates=one_based_coordinates, scale=scale,
-                                     bedgraph_output=bedgraph_output)
+                                     bedgraph_output=bedgraph_output, genome_bed=genome_bed)
         options += " > %s" % output
 
         self.execute(options)
@@ -43,6 +47,22 @@ class GenomeCov(Tool):
         options += " > %s" % output if output else ""
 
         self.execute(options=options)
+
+    def get_bam_coverage_stats(self, input_bam, output_prefix, genome_bed=None):
+        #options_list = []
+
+        each_position_options = self.parse_options(input_bam=input_bam, report_zero_coverage=True,
+                                                   one_based_coordinates=True, genome_bed=genome_bed)
+        each_position_options += " > %s.tab" % output_prefix
+
+        region_options = self.parse_options(input_bam=input_bam, report_zero_coverage=True,
+                                            bedgraph_output=True, genome_bed=genome_bed)
+
+        region_options += " > %s.bedgraph" % output_prefix
+
+        options_list = [each_position_options, region_options]
+
+        self.parallel_execute(options_list, threads=2)
 
     def collapse_coverage_file(self, coverage_file, output_file):
 
