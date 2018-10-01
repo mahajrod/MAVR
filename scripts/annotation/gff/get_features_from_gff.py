@@ -14,7 +14,7 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
 parser.add_argument("-t", "--feature_types", action="store", dest="feature_types",
                     type=lambda s: s.split(","), default=["CDS"],
                     help="Comma-separated list of feature types to extract. "
-                         "Default: all feature types")
+                         "Default: CDS only")
 
 parser.add_argument("-u", "--unification_key", action="store",
                     dest="unification_key",
