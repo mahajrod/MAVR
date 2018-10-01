@@ -2,6 +2,7 @@
 import sys
 from collections import OrderedDict, MutableSet, Iterable
 
+import numpy as np
 
 class TwoLvlDict(OrderedDict):
 
@@ -458,9 +459,41 @@ class SynDict(OrderedDict):
 
         return number
 
+    @staticmethod
+    def generate_split_list(entry_number, max_entries_per_split=None, max_splits=None):
+        if max_entries_per_split:
+            split_array = np.arange(0, entry_number, max_entries_per_split)
+            if split_array[-1] != entry_number:
+                split_array = np.append(split_array, entry_number)
+            return split_array
+
+        elif max_splits:
+            split_array = np.linspace(0, entry_number, max_splits + 1, dtype=int)
+            return split_array
+
+        else:
+            raise ValueError("ERROR!!! Neither maximum entries per split nor maximum splits was set...")
+
+    def split(self, max_keys_per_dict=None, max_dicts=None):
+        key_list = list(self.keys())
+        number_of_entries = len(key_list)
+
+        split_array = self.generate_split_list(number_of_entries,
+                                               max_entries_per_split=max_keys_per_dict,
+                                               max_splits=max_dicts)
+
+        splited_dict_list = []
+
+        for i in range(0, len(split_array) - 1):
+            splited_dict_list.append(SynDict())
+            for key_index in (split_array[i], split_array[i+1]):
+                splited_dict_list[-1][key_list[key_index]] = self[key_list[key_index]]
+
+        return splited_dict_list
+
     def write(self, filename=sys.stdout, header=False, separator="\t",
               splited_values=False, values_separator=",",
-              close_after_if_file_object=False, value_expression=None, line_per_value=False):
+              close_after_if_file_object=False, value_expression=None, line_per_value=False, values_only=False):
 
         # reads synonyms from file
         out_fd = filename if isinstance(filename, file) else open(filename, "w")
@@ -472,21 +505,20 @@ class SynDict(OrderedDict):
         if line_per_value:
             for entry in self:
                 for value in self[entry]:
-                    out_fd.write("%s%s%s\n" % (entry,
-                                               separator,
-                                               value_expression(value) if value_expression else str(value)
-                                               )
+                    out_fd.write("%s%s\n" % ("" if values_only else entry + separator,
+                                             value_expression(value) if value_expression else str(value)
+                                             )
                                  )
         else:
             if value_expression:
                 for entry in self:
-                    out_fd.write("%s%s%s\n" % (entry, separator,
-                                               values_separator.join(map(value_expression, self[entry])) if splited_values else value_expression(self[entry])))
+                    out_fd.write("%s%s\n" % ("" if values_only else entry + separator,
+                                             values_separator.join(map(value_expression, self[entry])) if splited_values else value_expression(self[entry])))
 
             else:
                 for entry in self:
-                    out_fd.write("%s%s%s\n" % (entry, separator,
-                                               values_separator.join(self[entry] if isinstance(self[entry], str) else map(str, self[entry])) if splited_values else str(self[entry])))
+                    out_fd.write("%s%s\n" % ("" if values_only else entry + separator,
+                                             values_separator.join(self[entry] if isinstance(self[entry], str) else map(str, self[entry])) if splited_values else str(self[entry])))
 
         if (not isinstance(filename, file)) or close_after_if_file_object:
             out_fd.close()
