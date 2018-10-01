@@ -5,6 +5,7 @@ import multiprocessing as mp
 from subprocess import PIPE, Popen
 from collections import Iterable
 
+import numpy as np
 
 from Routines.Sequence import SequenceRoutines
 from Routines.Alignment import AlignmentRoutines
@@ -123,7 +124,8 @@ class Tool(SequenceRoutines, AlignmentRoutines):
         if task_index_list or start_task_index or end_task_index:
             script += "#SBATCH --array=%s" % (",".join(map(str, task_index_list)) if task_index_list else "%s-%s" % (str(start_task_index),
                                                                                                                      str(end_task_index)))
-        script += "%s\n" % ("%%%i" % max_running_jobs if max_running_jobs else "")
+            script += "%s\n" % ("%%%i" % max_running_jobs if max_running_jobs else "")
+
         script += "#SBATCH --time=%s         # Run time in hh:mm:ss\n" % max_running_time if max_running_time else ""
         script += "#SBATCH --mem-per-cpu=%i       # Minimum memory required per CPU (in megabytes)\n" % max_memmory_per_cpu if max_memmory_per_cpu else ""
         script += "#SBATCH --cpus-per-task=%i\n" % cpus_per_task if cpus_per_task else ""
@@ -136,7 +138,6 @@ class Tool(SequenceRoutines, AlignmentRoutines):
         script += "#SBATCH --ntasks-per-nod=%i\n" % cpus_per_node if cpus_per_node else ""
 
         script += "#SBATCH --node_type=%s\n" % node_type if node_type else ""
-        script += "#SBATCH --ntasks-per-nod=%i\n" % cpus_per_node if cpus_per_node else ""
 
         script += "#SBATCH --mem=%s\n" % str(max_memory_per_node) if max_memory_per_node else ""
         script += "#SBATCH --mail-user=%s\n" % email if email else ""
@@ -277,6 +278,126 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                                               afternotok_job_id_list=afternotok_job_id_list,
                                               afterok_job_id_list=afterok_job_id_list,
                                               singleton=singleton)
+
+    def parse_sbatch_options(self,
+                             job_name=None,
+                             log_prefix=None,
+                             error_log_prefix=None,
+                             node_number=None,
+                             partition=None,
+                             cpus_per_node=None,
+                             node_type=None,
+                             max_memory_per_node=None,
+                             stdout_file=None,
+                             email=None,
+                             mail_type=None,
+                             task_index_list=None,
+                             start_task_index=None,
+                             end_task_index=None,
+                             max_running_jobs=None,
+                             max_running_time=None,
+                             cpus_per_task=None,
+                             max_memmory_per_cpu=None,
+                             ):
+
+        options = ""
+        if task_index_list or start_task_index or end_task_index:
+            options += " --array=%s" % (",".join(map(str, task_index_list)) if task_index_list else "%s-%s" % (str(start_task_index),
+                                                                                                                     str(end_task_index)))
+            options += "%s" % ("%%%i" % max_running_jobs if max_running_jobs else "")
+
+        options += " --time=%s         # Run time in hh:mm:ss\n" % max_running_time if max_running_time else ""
+        options += " --mem-per-cpu=%i       # Minimum memory required per CPU (in megabytes)\n" % max_memmory_per_cpu if max_memmory_per_cpu else ""
+        options += " --cpus-per-task=%i" % cpus_per_task if cpus_per_task else ""
+        options += " --job-name=%s" % job_name if job_name else ""
+        options += " --error=%s.%%A_%%a.err" % error_log_prefix if error_log_prefix else ""
+        options += " --output=%s.%%A_%%a.log" % log_prefix if log_prefix else ""
+
+        options += " --nodes=%i" % node_number if node_number else ""
+        options += " --partition=%s" % partition if partition else ""
+        options += " --ntasks-per-nod=%i" % cpus_per_node if cpus_per_node else ""
+
+        options += " --node_type=%s" % node_type if node_type else ""
+
+        options += " --mem=%s" % str(max_memory_per_node) if max_memory_per_node else ""
+        options += " --mail-user=%s" % email if email else ""
+        options += " --mail-type=%s" % mail_type if mail_type else ""
+        options += " --output=%s" % stdout_file if stdout_file else ""
+
+        return options
+
+    def slurm_run_multiple_jobs_in_wrap_mode(self,
+                                             cmd_list,
+                                             cmd_log,
+                                             max_jobs=None,
+                                             job_name=None,
+                                             log_prefix=None,
+                                             error_log_prefix=None,
+                                             node_number=None,
+                                             partition=None,
+                                             cpus_per_node=None,
+                                             node_type=None,
+                                             max_memory_per_node=None,
+                                             stdout_file=None,
+                                             email=None,
+                                             mail_type=None,
+                                             task_index_list=None,
+                                             start_task_index=None,
+                                             end_task_index=None,
+                                             max_running_jobs=None,
+                                             max_running_time=None,
+                                             cpus_per_task=None,
+                                             max_memmory_per_cpu=None,
+                                             modules_list=None,
+                                             environment_variables_dict=None):
+
+        with open(cmd_log, "w") as cmd_fd:
+            cmd_log.write("#job_id\tcmd_ids\tsbatch_cmd\n")
+            environment_variables_cmd = ""
+            modules_cmd = ""
+
+            if environment_variables_dict:
+                for variable in environment_variables_dict:
+                    environment_variables_cmd += " %s=%s; " % (variable, environment_variables_dict[variable])
+
+            if modules_list:
+                modules_to_load = [modules_list] if isinstance(modules_list, str) else list(modules_list)
+                for module in modules_to_load:
+                    modules_cmd += " module load %s; " % module
+
+            sbatch_options = self.parse_sbatch_options(job_name=job_name,
+                                                       log_prefix=log_prefix,
+                                                       error_log_prefix=error_log_prefix,
+                                                       node_number=node_number,
+                                                       partition=partition,
+                                                       cpus_per_node=cpus_per_node,
+                                                       node_type=node_type,
+                                                       max_memory_per_node=max_memory_per_node,
+                                                       stdout_file=stdout_file,
+                                                       email=email,
+                                                       mail_type=mail_type,
+                                                       task_index_list=task_index_list,
+                                                       start_task_index=start_task_index,
+                                                       end_task_index=end_task_index,
+                                                       max_running_jobs=max_running_jobs,
+                                                       max_running_time=max_running_time,
+                                                       cpus_per_task=cpus_per_task,
+                                                       max_memmory_per_cpu=max_memmory_per_cpu)
+
+            job_submit_index_array = np.linspace(0, len(cmd_list), max_jobs, dtype=int)
+
+            for job_index in range(0, len(job_submit_index_array) - 1):
+
+                options = "%s" % sbatch_options
+                options += " --wrap \"%s %s %s\"" % (environment_variables_cmd,
+                                                     modules_cmd,
+                                                     cmd_list[job_submit_index_array[job_index]:job_submit_index_array[job_index+1]])
+                command = "sbatch %s" % options
+
+                job_id = Popen([command], shell=True, stdout=PIPE).stdout.readline().strip().split()[-1]
+                cmd_fd.write("%s\t%i-%i\t%s\n" % (job_id,
+                                                  job_submit_index_array[job_index],
+                                                  job_submit_index_array[job_index+1] - 1, command))
 
 
 class JavaTool(Tool):
