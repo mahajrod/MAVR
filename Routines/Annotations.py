@@ -785,11 +785,16 @@ class AnnotationsRoutines(SequenceRoutines):
 
     @staticmethod
     def feature_list_entry_to_tab_str(feature_entry):
-        return "%s\t%s\t%s" % (feature_entry[0], str(feature_entry[1]), str(feature_entry[2]))
+        return "%s\t%s\t%s\t%s" % (feature_entry[0],
+                                   str(feature_entry[1]),
+                                   str(feature_entry[2]),
+                                   str(feature_entry[3]))
 
     @staticmethod
     def feature_list_entry_to_gatk_interval_str(feature_entry):
-        return "%s:%s-%s" % (feature_entry[0], str(feature_entry[1]), str(feature_entry[2]))
+        return "%s:%s-%s" % (feature_entry[0],
+                             str(feature_entry[1]),
+                             str(feature_entry[2]))
 
     def get_feature_dict(self, input_gff, output_prefix=None, feature_type_list=["CDS"], unification_key="Parent"):
 
@@ -808,7 +813,8 @@ class AnnotationsRoutines(SequenceRoutines):
 
             feature_dict[annotation_dict[unification_key]].append([line_list[self.gff_scaffold_column],
                                                                    line_list[self.gff_start_column],
-                                                                   line_list[self.gff_end_column]])
+                                                                   line_list[self.gff_end_column],
+                                                                   line_list[self.gff_strand_column]])
 
         if output_prefix:
             feature_dict.write("%s.tab" % output_prefix,
