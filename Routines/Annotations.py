@@ -807,6 +807,9 @@ class AnnotationsRoutines(SequenceRoutines):
 
             if unification_key not in annotation_dict:
                 continue
+            print unification_key
+            print(annotation_dict)
+
 
             if annotation_dict[unification_key] not in feature_dict:
                 feature_dict[annotation_dict[unification_key]] = []
