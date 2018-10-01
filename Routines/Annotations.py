@@ -807,17 +807,16 @@ class AnnotationsRoutines(SequenceRoutines):
 
             if unification_key not in annotation_dict:
                 continue
-            print unification_key
-            print(annotation_dict)
+            #print unification_key
+            #print(annotation_dict)
 
-
-            if annotation_dict[unification_key] not in feature_dict:
+            if annotation_dict[unification_key][0] not in feature_dict:
                 feature_dict[annotation_dict[unification_key]] = []
 
-            feature_dict[annotation_dict[unification_key]].append([line_list[self.gff_scaffold_column],
-                                                                   line_list[self.gff_start_column],
-                                                                   line_list[self.gff_end_column],
-                                                                   line_list[self.gff_strand_column]])
+            feature_dict[annotation_dict[unification_key][0]].append([line_list[self.gff_scaffold_column],
+                                                                     line_list[self.gff_start_column],
+                                                                     line_list[self.gff_end_column],
+                                                                     line_list[self.gff_strand_column]])
 
         if output_prefix:
             feature_dict.write("%s.tab" % output_prefix,
