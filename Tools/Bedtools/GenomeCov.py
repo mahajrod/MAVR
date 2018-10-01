@@ -13,15 +13,25 @@ class GenomeCov(Tool):
     def __init__(self, path="", max_threads=4):
         Tool.__init__(self, "bedtools genomecov", path=path, max_threads=max_threads)
 
-    def get_coverage(self, input_bam, genome_bed, output, report_zero_coverage=None, one_based_coordinates=True, scale=None):
-
-
+    @staticmethod
+    def parse_options(input_bam=None, report_zero_coverage=None,
+                      one_based_coordinates=None, scale=None, bedgraph_output=False):
         options = " -ibam %s" % input_bam
-        # options += " -bga" if report_zero_coverage else " -bg"
-        # options += " -bga" if report_zero_coverage else " -bg"
+        if bedgraph_output and report_zero_coverage:
+            options += " -bga"
+        elif bedgraph_output:
+            options += " -bg"
         options += " -d" if one_based_coordinates else " -dz"
         options += " -scale %f" % scale if scale else ""
-        options += " -g %s" % genome_bed
+
+        return options
+
+    def get_coverage(self, output, input_bam=None, report_zero_coverage=None,
+                     one_based_coordinates=None, scale=None, bedgraph_output=False):
+
+        options = self.parse_options(input_bam=input_bam, report_zero_coverage=report_zero_coverage,
+                                     one_based_coordinates=one_based_coordinates, scale=scale,
+                                     bedgraph_output=bedgraph_output)
         options += " > %s" % output
 
         self.execute(options)
