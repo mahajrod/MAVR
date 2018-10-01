@@ -16,7 +16,7 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
                     help="Prefix of output files")
 
 parser.add_argument("--snp_filter_name", action="store", dest="snp_filter_name", type=str,
-                    default="ambiguous_snp", help="SNP filter name")
+                    default="ambiguous_snp", help="SNP filter name. Default: ambiguous_snp")
 parser.add_argument("--snp_QD", action="store", dest="snp_QD", type=float, default=2.0,
                     help="SNP QD threshold. Default -  2.0")
 parser.add_argument("--snp_FS", action="store", dest="snp_FS", type=float, default=30.0,
@@ -29,7 +29,7 @@ parser.add_argument("--snp_ReadPosRankSum", action="store", dest="snp_ReadPosRan
                     help="SNP ReadPosRankSum threshold. Default -   -8.0")
 
 parser.add_argument("--indel_filter_name", action="store", dest="indel_filter_name", type=str,
-                    default="ambiguous_indel", help="Indel filter name")
+                    default="ambiguous_indel", help="Indel filter name. Default: ambiguous indel")
 parser.add_argument("--indel_QD", action="store", dest="indel_QD", type=float, default=2.0,
                     help="Indel QD threshold. Default - 2.0")
 parser.add_argument("--indel_ReadPosRankSum", action="store", dest="indel_ReadPosRankSum", type=float, default=-20.0,
