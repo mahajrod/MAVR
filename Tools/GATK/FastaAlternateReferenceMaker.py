@@ -21,14 +21,14 @@ class FastaAlternateReferenceMaker(JavaTool):
 
     @staticmethod
     def parse_options(reference, new_reference, variants_vcf, raw_seq_per_line=False, vcf_with_masking=None,
-                      override_vcf_by_mask=None, use_ambigious_nuccleotides=None, interval_list=None):
+                      override_vcf_by_mask=None, use_ambiguous_nuccleotides=None, interval_list=None):
         options = " -R %s" % reference
         options += " -o %s" % new_reference
         options += " --variant %s" % variants_vcf
         options += " --rawOnelineSeq" if raw_seq_per_line else ""
         options += " --snpmask %s" % vcf_with_masking if vcf_with_masking else ""
         options += " --snpmaskPriority" if override_vcf_by_mask else ""
-        options += " --use_IUPAC" if use_ambigious_nuccleotides else ""
+        options += " --use_IUPAC" if use_ambiguous_nuccleotides else ""
 
         if interval_list:
             if isinstance(interval_list, str):
@@ -73,7 +73,7 @@ class FastaAlternateReferenceMaker(JavaTool):
                                  #raw_seq_per_line=False,
                                  vcf_with_masking=None,
                                  override_vcf_by_mask=None,
-                                 use_ambigious_nuccleotides=None):
+                                 use_ambiguous_nuccleotides=None):
 
         feature_dict = AnnotationsRoutines.get_feature_dict(gff_file,
                                                             output_prefix=output_prefix,
@@ -90,7 +90,7 @@ class FastaAlternateReferenceMaker(JavaTool):
                                raw_seq_per_line=True,
                                vcf_with_masking=vcf_with_masking,
                                override_vcf_by_mask=override_vcf_by_mask,
-                               use_ambigious_nuccleotides=use_ambigious_nuccleotides,
+                               use_ambiguous_nuccleotides=use_ambiguous_nuccleotides,
                                interval_list=region_file)
 
         def new_regions_generator():
