@@ -811,7 +811,7 @@ class AnnotationsRoutines(SequenceRoutines):
             #print(annotation_dict)
 
             if annotation_dict[unification_key][0] not in feature_dict:
-                feature_dict[annotation_dict[unification_key]] = []
+                feature_dict[annotation_dict[unification_key][0]] = []
 
             feature_dict[annotation_dict[unification_key][0]].append([line_list[self.gff_scaffold_column],
                                                                      line_list[self.gff_start_column],
