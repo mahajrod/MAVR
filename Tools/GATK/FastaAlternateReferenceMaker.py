@@ -46,7 +46,7 @@ class FastaAlternateReferenceMaker(JavaTool):
                           raw_seq_per_line=False,
                           vcf_with_masking=None,
                           override_vcf_by_mask=None,
-                          use_ambigious_nuccleotides=None,
+                          use_ambiguous_nuccleotides=None,
                           interval_list=None):
 
         options = self.parse_options(reference,
@@ -55,7 +55,7 @@ class FastaAlternateReferenceMaker(JavaTool):
                                      raw_seq_per_line=raw_seq_per_line,
                                      vcf_with_masking=vcf_with_masking,
                                      override_vcf_by_mask=override_vcf_by_mask,
-                                     use_ambigious_nuccleotides=use_ambigious_nuccleotides,
+                                     use_ambiguous_nuccleotides=use_ambiguous_nuccleotides,
                                      interval_list=interval_list)
 
         self.execute(options=options)
