@@ -48,7 +48,19 @@ class PRANK(Tool):
     def parallel_align(self, list_of_files, output_directory, output_suffix=None, tree_file=None, output_format=None, show_xml=None,
                        show_tree=None, show_ancestral_sequences=None, show_evolutionary_events=None,
                        showall=None, compute_posterior_support=None, njtree=None, skip_insertions=False,
-                       codon_alignment=None, translated_alignment=None):
+                       codon_alignment=None, translated_alignment=None,
+                       cmd_log_file=None,
+                       cpus_per_task=1,
+                       handling_mode="local",
+                       job_name=None,
+                       log_prefix=None,
+                       error_log_prefix=None,
+                       max_jobs=None,
+                       max_running_time=None,
+                       max_memory_per_node=None,
+                       max_memmory_per_cpu=None,
+                       modules_list=None,
+                       environment_variables_dict=None):
 
         common_options = self.parse_common_options(tree_file=tree_file, output_format=output_format, show_xml=show_xml,
                                                    show_tree=show_tree, show_ancestral_sequences=show_ancestral_sequences,
@@ -66,16 +78,58 @@ class PRANK(Tool):
             op += " -o=%s/%s.fasta" % (output_directory,
                                        ("%s_%s" % (basename, output_suffix)) if output_suffix else basename)
             options_list.append(op)
+        if handling_mode == "local":
+            self.parallel_execute(options_list)
+        elif handling_mode == "slurm":
 
-        self.parallel_execute(options_list)
+            cmd_list = ["%s %s" % (self.cmd, options) for options in options_list]
+            self.slurm_run_multiple_jobs_in_wrap_mode(cmd_list,
+                                                      cmd_log_file,
+                                                      max_jobs=max_jobs,
+                                                      job_name=job_name,
+                                                      log_prefix=log_prefix,
+                                                      error_log_prefix=error_log_prefix,
+                                                      cpus_per_node=None,
+                                                      max_memory_per_node=None,
+                                                      max_running_jobs=None,
+                                                      max_running_time=max_running_time,
+                                                      cpus_per_task=cpus_per_task,
+                                                      max_memory_per_node=max_memory_per_node,
+                                                      max_memmory_per_cpu=max_memmory_per_cpu,
+                                                      modules_list=modules_list,
+                                                      environment_variables_dict=environment_variables_dict)
 
     def parallel_codon_alignment(self, list_of_files, output_directory, output_suffix=None, tree_file=None, output_format=None, show_xml=None,
-                       show_tree=None, show_ancestral_sequences=None, show_evolutionary_events=None,
-                       showall=None, compute_posterior_support=None, njtree=None):
+                                 show_tree=None, show_ancestral_sequences=None, show_evolutionary_events=None,
+                                 showall=None, compute_posterior_support=None, njtree=None,
+                                 cmd_log_file=None,
+                                 cpus_per_task=1,
+                                 handling_mode="local",
+                                 job_name=None,
+                                 log_prefix=None,
+                                 error_log_prefix=None,
+                                 max_jobs=None,
+                                 max_running_time=None,
+                                 max_memory_per_node=None,
+                                 max_memmory_per_cpu=None,
+                                 modules_list=None,
+                                 environment_variables_dict=None):
 
         self.parallel_align(list_of_files, output_directory, output_suffix=output_suffix, tree_file=tree_file,
                             output_format=output_format, show_xml=show_xml, show_tree=show_tree,
                             show_ancestral_sequences=show_ancestral_sequences,
                             show_evolutionary_events=show_evolutionary_events, showall=showall,
                             compute_posterior_support=compute_posterior_support, njtree=njtree, skip_insertions=True,
-                            codon_alignment=True)
+                            codon_alignment=True,
+                            cmd_log_file=cmd_log_file,
+                            cpus_per_task=cpus_per_task,
+                            handling_mode=handling_mode,
+                            job_name=job_name,
+                            log_prefix=log_prefix,
+                            error_log_prefix=error_log_prefix,
+                            max_jobs=max_jobs,
+                            max_running_time=max_running_time,
+                            max_memory_per_node=max_memory_per_node,
+                            max_memmory_per_cpu=max_memmory_per_cpu,
+                            modules_list=modules_list,
+                            environment_variables_dict=environment_variables_dict)
