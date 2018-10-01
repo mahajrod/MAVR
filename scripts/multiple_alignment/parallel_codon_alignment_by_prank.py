@@ -30,10 +30,12 @@ parser.add_argument("-m", "--slurm_max_jobs", action="store", dest="slurm_max_jo
                     help="Slurm max jobs. Default: 1000")
 parser.add_argument("-y", "--slurm_log_prefix", action="store", dest="slurm_log_prefix",
                     help="Slurm log prefix. ")
+parser.add_argument("-z", "--slurm_cmd_log_file", action="store", dest="slurm_cmd_log_file",
+                    help="Slurm cmd logfile")
 parser.add_argument("-l", "--slurm_error_log_prefix", action="store", dest="slurm_error_log_prefix",
                     help="Slurm error log prefix")
 parser.add_argument("-e", "--max_memory_per_task", action="store", dest="max_memory_per_task", default="5000",
-                    help="Maximum memory per task. Default: 5000m")
+                    help="Maximum memory per task in megabytes. Default: 5000")
 
 parser.add_argument("-a", "--slurm_max_running_time", action="store", dest="slurm_max_running_time", default="100:00:00",
                     help="Slurm max running time in hh:mm:ss format. Default: 100:00:00")
@@ -60,8 +62,7 @@ PRANK.parallel_codon_alignment(args.input, args.output, output_suffix=args.suffi
                                error_log_prefix=args.slurm_error_log_prefix,
                                max_jobs=args.slurm_max_jobs,
                                max_running_time=args.slurm_max_running_time,
-                               max_memory_per_node=None,
-                               max_memmory_per_cpu=None,
+                               max_memory_per_node=args.max_memory_per_task,
                                modules_list=args.slurm_modules_list,
                                environment_variables_dict=None)
 
