@@ -460,7 +460,7 @@ class SynDict(OrderedDict):
 
     def write(self, filename=sys.stdout, header=False, separator="\t",
               splited_values=False, values_separator=",",
-              close_after_if_file_object=False):
+              close_after_if_file_object=False, value_expression=None, line_per_value=False):
 
         # reads synonyms from file
         out_fd = filename if isinstance(filename, file) else open(filename, "w")
@@ -469,10 +469,25 @@ class SynDict(OrderedDict):
                 if header is True and self.header:
                     out_fd.write(self.header + "\n")
 
-        for entry in self:
-            #print "AAAAAAAAAAAAAA"
-            out_fd.write("%s%s%s\n" % (entry, separator,
-                                       values_separator.join(self[entry] if isinstance(self[entry], str) else map(str, self[entry])) if splited_values else str(self[entry])))
+        if line_per_value:
+            for entry in self:
+                for value in self[entry]:
+                    out_fd.write("%s%s%s\n" % (entry,
+                                               separator,
+                                               value_expression(value) if value_expression else str(value)
+                                               )
+                                 )
+        else:
+            if value_expression:
+                for entry in self:
+                    out_fd.write("%s%s%s\n" % (entry, separator,
+                                               values_separator.join(map(value_expression, self[entry])) if splited_values else value_expression(self[entry])))
+
+            else:
+                for entry in self:
+                    out_fd.write("%s%s%s\n" % (entry, separator,
+                                               values_separator.join(self[entry] if isinstance(self[entry], str) else map(str, self[entry])) if splited_values else str(self[entry])))
+
         if (not isinstance(filename, file)) or close_after_if_file_object:
             out_fd.close()
 
