@@ -19,6 +19,17 @@ class AnnotationsRoutines(SequenceRoutines):
     def __init__(self):
         SequenceRoutines.__init__(self)
 
+        self.gff_scaffold_column = 0
+        self.gff_source_column = 1
+        self.gff_featuretype_column = 2
+        self.gff_start_column = 3
+        self.gff_end_column = 4
+        self.gff_score_column = 5
+        self.gff_strand_column = 6
+        self.gff_phase_column = 7
+        self.gff_attribute_column = 8
+
+
     @staticmethod
     def record_with_extracted_annotations_generator(gff_file,
                                                     annotation_ids,
@@ -771,6 +782,56 @@ class AnnotationsRoutines(SequenceRoutines):
             print("Not renamed scaffolds: %i" % len(skipped_id_list))
 
         skipped_id_list.write(skipped_id_file)
+
+    @staticmethod
+    def feature_list_entry_to_tab_str(feature_entry):
+        return "%s\t%s\t%s" % (feature_entry[0], str(feature_entry[1]), str(feature_entry[2]))
+
+    @staticmethod
+    def feature_list_entry_to_gatk_interval_str(feature_entry):
+        return "%s:%s-%s" % (feature_entry[0], str(feature_entry[1]), str(feature_entry[2]))
+
+    def get_feature_dict(self, input_gff, output_prefix=None, feature_type_list=["CDS"], unification_key="Parent"):
+
+        feature_dict = SynDict()
+        for line_list in self.file_line_as_list_generator(input_gff, comments_prefix="#", separator="\t"):
+            annotation_dict = self.parse_gff_annotation_string_to_dict(line_list[self.gff_attribute_column])
+
+            if line_list[self.gff_featuretype_column] not in feature_type_list:
+                continue
+
+            if unification_key not in annotation_dict:
+                continue
+
+            if annotation_dict[unification_key] not in feature_dict:
+                feature_dict[annotation_dict[unification_key]] = []
+
+            feature_dict[annotation_dict[unification_key]].append([line_list[self.gff_scaffold_column],
+                                                                   line_list[self.gff_start_column],
+                                                                   line_list[self.gff_end_column]])
+
+        if output_prefix:
+            feature_dict.write("%s.tab" % output_prefix,
+                               value_expression=self.feature_list_entry_to_tab_str,
+                               line_per_value=True)
+            feature_dict.write("%s.coordinates_only.tab" % output_prefix,
+                               value_expression=self.feature_list_entry_to_tab_str,
+                               line_per_value=True,
+                               values_only=True)
+
+            feature_dict.write("%s.list" % output_prefix,
+                               value_expression=self.feature_list_entry_to_gatk_interval_str,
+                               line_per_value=True)
+            feature_dict.write("%s.coordinates_only.list" % output_prefix,
+                               value_expression=self.feature_list_entry_to_gatk_interval_str,
+                               line_per_value=True,
+                               values_only=True)
+
+        return feature_dict
+
+
+
+
 
 
 
