@@ -11,11 +11,44 @@ class FastaAlternateReferenceMaker(JavaTool):
                           max_threads=max_threads, jar_path=jar_path, max_memory=max_memory,
                           timelog=timelog)
 
-    def correct_reference(self, reference, new_reference, variants_vcf):
-
+    @staticmethod
+    def parse_options(reference, new_reference, variants_vcf, raw_seq_per_line=False, vcf_with_masking=None,
+                      override_vcf_by_mask=None, use_ambigious_nuccleotides=None, interval_list=None):
         options = " -R %s" % reference
         options += " -o %s" % new_reference
         options += " --variant %s" % variants_vcf
+        options += " --rawOnelineSeq" if raw_seq_per_line else ""
+        options += " --snpmask %s" % vcf_with_masking if vcf_with_masking else ""
+        options += " --snpmaskPriority" if override_vcf_by_mask else ""
+        options += " --use_IUPAC" if use_ambigious_nuccleotides else ""
+
+        if interval_list:
+            if isinstance(interval_list, str):
+                options += " -L %s" % interval_list
+            else:
+                for entry in interval_list:
+                    options += " -L %s" % entry
+
+        return options
+
+    def correct_reference(self,
+                          reference,
+                          new_reference,
+                          variants_vcf,
+                          raw_seq_per_line=False,
+                          vcf_with_masking=None,
+                          override_vcf_by_mask=None,
+                          use_ambigious_nuccleotides=None,
+                          interval_list=None):
+
+        options = self.parse_options(reference,
+                                     new_reference,
+                                     variants_vcf,
+                                     raw_seq_per_line=raw_seq_per_line,
+                                     vcf_with_masking=vcf_with_masking,
+                                     override_vcf_by_mask=override_vcf_by_mask,
+                                     use_ambigious_nuccleotides=use_ambigious_nuccleotides,
+                                     interval_list=interval_list)
 
         self.execute(options=options)
 
