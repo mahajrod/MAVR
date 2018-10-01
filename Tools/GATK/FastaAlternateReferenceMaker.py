@@ -1,6 +1,14 @@
 #!/usr/bin/env python
 import os
+
+from Bio.Seq import Seq
+from Bio.SeqRecord import SeqRecord
+from Bio import SeqIO
+
 from Tools.Abstract import JavaTool
+
+from Routines import AnnotationsRoutines
+
 
 
 class FastaAlternateReferenceMaker(JavaTool):
@@ -54,6 +62,48 @@ class FastaAlternateReferenceMaker(JavaTool):
 
         #os.system("java -Xmx2g -jar %sGenomeAnalysisTK.jar -R %s -T FastaAlternateReferenceMaker -o %s --variant %s"
         #          % (gatk_dir, reference, new_reference, variants_vcf))
+
+    def correct_regions_from_gff(self,
+                                 reference,
+                                 variants_vcf,
+                                 gff_file,
+                                 output_prefix=None,
+                                 feature_type_list=["CDS"],
+                                 unification_key="Parent",
+                                 #raw_seq_per_line=False,
+                                 vcf_with_masking=None,
+                                 override_vcf_by_mask=None,
+                                 use_ambigious_nuccleotides=None):
+
+        feature_dict = AnnotationsRoutines.get_feature_dict(gff_file,
+                                                            output_prefix=output_prefix,
+                                                            feature_type_list=feature_type_list,
+                                                            unification_key=unification_key)
+        region_file = "%s.coordinates_only.list" % output_prefix
+
+        raw_regions = "%s.raw.seq" % output_prefix
+        final_regions = "%s.fasta" % output_prefix
+
+        self.correct_reference(reference,
+                               raw_regions,
+                               variants_vcf,
+                               raw_seq_per_line=True,
+                               vcf_with_masking=vcf_with_masking,
+                               override_vcf_by_mask=override_vcf_by_mask,
+                               use_ambigious_nuccleotides=use_ambigious_nuccleotides,
+                               interval_list=region_file)
+
+        def new_regions_generator():
+            with open(raw_regions, "r") as in_fd:
+                for region_id in feature_dict:
+                    seq = ""
+                    for i in range(0, len(feature_dict[region_id])):
+                        seq += in_fd.readline().strip()
+                    yield SeqRecord(seq=Seq(seq) if feature_dict[region_id][0][3] == "+" else Seq(seq).reverse_complement(),
+                                    id=region_id,
+                                    description="")
+
+        SeqIO.write(new_regions_generator(), final_regions, format="fasta")
 
     def restore_names(self, reference, new_reference, corrected_reference, sed_script="sed_script.scr", names_file="chr_name_lines.t"):
         os.system("grep '>' %s > %s" % (reference, names_file))
