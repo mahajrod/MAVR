@@ -23,7 +23,8 @@ class GenomeCov(Tool):
             options += " -bga"
         elif bedgraph_output:
             options += " -bg"
-        options += " -d" if one_based_coordinates else " -dz"
+        else:
+            options += " -d" if one_based_coordinates else " -dz"
         options += " -scale %f" % scale if scale else ""
         options += " -g %s" % genome_bed if genome_bed else ""
 
