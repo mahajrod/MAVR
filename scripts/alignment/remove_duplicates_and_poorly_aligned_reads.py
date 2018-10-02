@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-i", "--input_bam", action="store", dest="input_bam",
                     help="Input bam. Default: stdout")
 parser.add_argument("-q", "--min_map_quality", action="store", dest="min_map_quality", default=20, type=int,
-                    help="Minimum mapping quality to retain read")
+                    help="Minimum mapping quality to retain read. Default: 20")
 parser.add_argument("-o", "--output_bam", action="store", dest="output_bam",
                     help="Output bam. Default: stdout")
 
