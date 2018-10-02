@@ -275,7 +275,7 @@ class SamtoolsV1(Tool):
         options += " -o %s" % output_bam if output_bam else ""
         options += " %s" % input_bam if input_bam else " -"
 
-        self.execute(options)
+        self.execute(options, cmd="samtools view ")
 
 
 class SamtoolsV0(SamtoolsV1, Tool):
