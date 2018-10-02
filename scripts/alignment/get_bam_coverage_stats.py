@@ -15,6 +15,6 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
 
 args = parser.parse_args()
 
-GenomeCov.threads = args.threads
+#GenomeCov.threads = args.threads
 GenomeCov.get_bam_coverage_stats(args.input_bam, args.output_prefix, genome_bed=None)
 
