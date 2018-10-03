@@ -83,6 +83,17 @@ class GenomeCov(Tool):
 
         self.execute(options="", cmd=awk_string)
 
+    def convert_per_base_coverage_file_to_vcf(self, coverage_file, output_vcf, sample_name):
+        vcf_header = "##fileformat=VCFv4.2\n"
+        vcf_header += '##FORMAT=<ID=DP,Number=1,Type=Integer,Description="Approximate read depth">\n'
+        vcf_header += "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\t%s\n" % sample_name
+
+        with self.metaopen(output_vcf, "w") as out_fd:
+            out_fd.write(vcf_header)
+
+            for line_list in self.file_line_as_list_generator(coverage_file):
+                out_fd.write("%s\t%s\t.\t.\t.\t.\t.\t.\tDP\t%s\n" % (line_list[0], line_list[1], line_list[2]))
+
     @staticmethod
     def extract_data_for_cds_from_collapsed_coverage_file(collapsed_coverage_file, cds_bed_file, output_file,
                                                           skip_transcript_with_no_cds=False):
