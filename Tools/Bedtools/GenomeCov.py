@@ -49,12 +49,16 @@ class GenomeCov(Tool):
 
         self.execute(options=options)
 
-    def get_bam_coverage_stats(self, input_bam, output_prefix, genome_bed=None):
+    def get_bam_coverage_stats(self, input_bam, output_prefix, genome_bed=None, max_coverage=None, min_coverage=None,
+                               verbose=True):
         #options_list = []
+
+        each_position_coverage_file = "%s.tab" % output_prefix
+        coverage_stat_file = "%s.stat" % output_prefix
 
         each_position_options = self.parse_options(input_bam=input_bam, report_zero_coverage=True,
                                                    one_based_coordinates=True, genome_bed=genome_bed)
-        each_position_options += " > %s.tab" % output_prefix
+        each_position_options += " > %s" % each_position_coverage_file
 
         region_options = self.parse_options(input_bam=input_bam, report_zero_coverage=True,
                                             bedgraph_output=True, genome_bed=genome_bed)
@@ -64,6 +68,13 @@ class GenomeCov(Tool):
         options_list = [each_position_options, region_options]
 
         self.parallel_execute(options_list, threads=2)
+
+        #~/Soft/MAVR/scripts/math/get_stats_from_numer_data.py -i A_ventralis_pe.nodup.q20.tab -o A_ventralis_pe.nodup.q20.stat -l 2
+
+        MathRoutines.get_stats_from_file(each_position_coverage_file, minimum=min_coverage, maximum=max_coverage,
+                                         dtype=int, comments="#", delimiter="\t", converters=None, skiprows=0,
+                                         usecols=2, unpack=False, ndmin=0, output_file=coverage_stat_file,
+                                         verbose=verbose)
 
     def collapse_coverage_file(self, coverage_file, output_file):
 
