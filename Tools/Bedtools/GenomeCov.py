@@ -49,7 +49,8 @@ class GenomeCov(Tool):
 
         self.execute(options=options)
 
-    def get_bam_coverage_stats(self, input_bam, output_prefix, genome_bed=None, max_coverage=None, min_coverage=None,
+    def get_bam_coverage_stats(self, input_bam, output_prefix, genome_bed=None,
+                               max_coverage=None, min_coverage=None,
                                verbose=True):
         #options_list = []
 
@@ -72,7 +73,7 @@ class GenomeCov(Tool):
         #~/Soft/MAVR/scripts/math/get_stats_from_numer_data.py -i A_ventralis_pe.nodup.q20.tab -o A_ventralis_pe.nodup.q20.stat -l 2
 
         MathRoutines.get_stats_from_file(each_position_coverage_file, minimum=min_coverage, maximum=max_coverage,
-                                         dtype=int, comments="#", delimiter="\t", converters=None, skiprows=0,
+                                         dtype=float, comments="#", delimiter="\t", converters=None, skiprows=0,
                                          usecols=2, unpack=False, ndmin=0, output_file=coverage_stat_file,
                                          verbose=verbose)
 
