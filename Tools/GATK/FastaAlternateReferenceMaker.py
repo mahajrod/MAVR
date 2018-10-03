@@ -84,6 +84,8 @@ class FastaAlternateReferenceMaker(JavaTool):
         raw_regions = "%s.raw.seq" % output_prefix
         final_regions = "%s.fasta" % output_prefix
 
+        regions_with_frameshift_file = "%s.frameshifts.region.ids" % output_prefix
+
         self.correct_reference(reference,
                                raw_regions,
                                variants_vcf,
@@ -112,6 +114,7 @@ class FastaAlternateReferenceMaker(JavaTool):
                                     description="")
 
         SeqIO.write(new_regions_generator(), final_regions, format="fasta")
+        region_with_frameshift.write(regions_with_frameshift_file, splited_values=True)
 
     def restore_names(self, reference, new_reference, corrected_reference, sed_script="sed_script.scr", names_file="chr_name_lines.t"):
         os.system("grep '>' %s > %s" % (reference, names_file))
