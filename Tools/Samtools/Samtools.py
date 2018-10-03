@@ -266,11 +266,11 @@ class SamtoolsV1(Tool):
                                                                            suptitle="Insert size distribution",
                                                                            separator=separator)
 
-    def remove_duplicates_and_poorly_aligned_reads(self, input_bam=None, output_bam=None, min_mapping_quality=20):
+    def remove_duplicates_and_poorly_aligned_reads(self, input_bam=None, output_bam=None, min_mapping_quality=None):
 
         options = " -b"
         options += " -@ %i" % self.threads
-        options += " -q %i" % min_mapping_quality
+        options += " -q %i" % min_mapping_quality if min_mapping_quality else ""
         options += " -F %i" % self.bam_flags["read_is_PCR_or_optical_duplicate"]
         options += " -o %s" % output_bam if output_bam else ""
         options += " %s" % input_bam if input_bam else " -"
