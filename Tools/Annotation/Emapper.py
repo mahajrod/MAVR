@@ -2,6 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 
 from Tools.Abstract import Tool
+
 from CustomCollections.GeneralCollections import SynDict, IdList
 
 
