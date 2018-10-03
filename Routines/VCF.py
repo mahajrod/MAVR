@@ -125,3 +125,11 @@ class VCFRoutines(SequenceRoutines):
         complete_scaffolds.write("%s.complete_scaffolds" % output_prefix)
         fragmented_scaffolds.write("%s.fragmented_scaffolds" % output_prefix)
         scaffolds_with_absent_fragments.write("%s.scaffolds_with_absent_fragments" % output_prefix)
+
+    """
+    @staticmethod
+    def convert_gvcf_to_coverage_file(self, gvcf_file, coverage_file):
+        with self.metaopen(coverage_file, "w") as out_fd:
+            for line_list in self.file_line_as_list_generator(gvcf_file, comments_prefix="#", separator="\t"):
+                scaffold = line
+    """
