@@ -590,6 +590,15 @@ class FileRoutines:
                     continue
                 yield line.strip().split(separator)
 
+    def file_line_generator(self, input_file, comments_prefix="#"):
+        comments_prefix_len = len(comments_prefix)
+
+        with self.metaopen(input_file, "r") as in_fd:
+            for line in in_fd:
+                if line[:comments_prefix_len] == comments_prefix:
+                    continue
+                yield line.strip()
+
     @staticmethod
     def combine_files_with_header(file_list, output_file, header_prefix="#", sorting_options=None):
 
