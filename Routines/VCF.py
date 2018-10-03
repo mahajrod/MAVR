@@ -6,6 +6,7 @@ from collections import OrderedDict
 
 from CustomCollections.GeneralCollections import IdList, SynDict
 from Routines.Sequence import SequenceRoutines
+from Tools.Picard import SortVcf
 
 
 class VCFRoutines(SequenceRoutines):
@@ -41,6 +42,7 @@ class VCFRoutines(SequenceRoutines):
             print(sorting_string)
 
             os.system(sorting_string)
+            os.remove(unsorted_file)
 
         else:
             with open(vcf_files[0], "r") as in_fd:
