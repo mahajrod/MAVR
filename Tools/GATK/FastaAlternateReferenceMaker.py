@@ -8,7 +8,7 @@ from Bio import SeqIO
 from Tools.Abstract import JavaTool
 
 from Routines import AnnotationsRoutines
-
+from CustomCollections.GeneralCollections import SynDict
 
 
 class FastaAlternateReferenceMaker(JavaTool):
@@ -93,12 +93,20 @@ class FastaAlternateReferenceMaker(JavaTool):
                                use_ambiguous_nuccleotides=use_ambiguous_nuccleotides,
                                interval_list=region_file)
 
+        region_with_frameshift = SynDict()
+
         def new_regions_generator():
             with open(raw_regions, "r") as in_fd:
                 for region_id in feature_dict:
                     seq = ""
                     for i in range(0, len(feature_dict[region_id])):
-                        seq += in_fd.readline().strip()
+                        seq_fragment = in_fd.readline().strip()
+                        if ((int(feature_dict[region_id][i][2]) - int(feature_dict[region_id][i][1]) + 1) - len(seq_fragment)) % 3 != 0:
+                            if region_id not in region_with_frameshift:
+                                region_with_frameshift[region_id] = [i]
+                            else:
+                                region_with_frameshift[region_id].append(i)
+                        seq += seq_fragment
                     yield SeqRecord(seq=Seq(seq) if feature_dict[region_id][0][3] == "+" else Seq(seq).reverse_complement(),
                                     id=region_id,
                                     description="")
