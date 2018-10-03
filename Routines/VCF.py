@@ -6,7 +6,6 @@ from collections import OrderedDict
 
 from CustomCollections.GeneralCollections import IdList, SynDict
 from Routines.Sequence import SequenceRoutines
-from Tools.Picard import SortVcf
 
 
 class VCFRoutines(SequenceRoutines):
