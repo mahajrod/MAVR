@@ -95,7 +95,7 @@ class GenomeCov(Tool):
             out_fd.write(vcf_header)
 
             for line_list in self.file_line_as_list_generator(coverage_file):
-                out_fd.write("%s\t%s\t.\t%s\t.\t.\t.\t.\tDP\t%s\n" % (line_list[0], line_list[1], str(reference_dict[line_list[0]].seq[line_list[1]-1]), line_list[2]))
+                out_fd.write("%s\t%s\t.\t%s\t.\t.\t.\t.\tDP\t%s\n" % (line_list[0], line_list[1], str(reference_dict[line_list[0]].seq[int(line_list[1])-1]), line_list[2]))
 
     @staticmethod
     def extract_data_for_cds_from_collapsed_coverage_file(collapsed_coverage_file, cds_bed_file, output_file,
