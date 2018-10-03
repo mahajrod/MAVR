@@ -13,7 +13,11 @@ parser.add_argument("-s", "--sample_name", action="store", dest="sample_name", r
                     help="Sample name for vcf file")
 parser.add_argument("-o", "--output", action="store", dest="output", required=True,
                     help="Output vcf")
+parser.add_argument("-r", "--reference", action="store", dest="reference", required=True,
+                    help="Fasta file with reference")
 
 args = parser.parse_args()
 
-GenomeCov.convert_per_base_coverage_file_to_vcf(args.input, args.output, args.sample_name)
+GenomeCov.convert_per_base_coverage_file_to_vcf(args.input, args.output, args.sample_name,
+                                                args.reference,
+                                                parsing_mode="parse", format="fasta")
