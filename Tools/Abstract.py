@@ -306,8 +306,8 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                                                                                                                      str(end_task_index)))
             options += "%s" % ("%%%i" % max_running_jobs if max_running_jobs else "")
 
-        options += " --time=%s         # Run time in hh:mm:ss\n" % max_running_time if max_running_time else ""
-        options += " --mem-per-cpu=%i       # Minimum memory required per CPU (in megabytes)\n" % max_memmory_per_cpu if max_memmory_per_cpu else ""
+        options += " --time=%s" % max_running_time if max_running_time else ""
+        options += " --mem-per-cpu=%i" % max_memmory_per_cpu if max_memmory_per_cpu else ""
         options += " --cpus-per-task=%i" % cpus_per_task if cpus_per_task else ""
         options += " --job-name=%s" % job_name if job_name else ""
         options += " --error=%s.%%A_%%a.err" % error_log_prefix if error_log_prefix else ""
@@ -391,7 +391,7 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                 options = "%s" % sbatch_options
                 options += " --wrap \"%s %s %s\"" % (environment_variables_cmd,
                                                      modules_cmd,
-                                                     cmd_list[job_submit_index_array[job_index]:job_submit_index_array[job_index+1]])
+                                                     ";".join(cmd_list[job_submit_index_array[job_index]:job_submit_index_array[job_index+1]]))
                 command = "sbatch %s" % options
 
                 print command
