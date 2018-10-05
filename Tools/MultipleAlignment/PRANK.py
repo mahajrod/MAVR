@@ -90,7 +90,6 @@ class PRANK(Tool):
                                                       log_prefix=log_prefix,
                                                       error_log_prefix=error_log_prefix,
                                                       cpus_per_node=None,
-                                                      max_memory_per_node=None,
                                                       max_running_jobs=None,
                                                       max_running_time=max_running_time,
                                                       cpus_per_task=cpus_per_task,
