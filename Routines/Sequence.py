@@ -1633,9 +1633,10 @@ class SequenceRoutines(FileRoutines):
 
             yield new_record
 
-    def trim_cds_and_remove_terminal_stop_codons(self, input_file, output_file, stop_codons_list=("TGA", "TAA", "TAG")):
+    def trim_cds_and_remove_terminal_stop_codons(self, input_file, output_file, stop_codons_list=("TGA", "TAA", "TAG"), format="fasta",
+                                                 parsing_mode="parse", index_file="tmp.idx"):
 
-        record_dict = SeqIO.index_db("tmp.idx", input_file, format="fasta")
+        record_dict = self.parse_seq_file(input_file, parsing_mode, index_file=index_file)
 
         SeqIO.write(self.trim_cds_and_remove_terminal_stop_codons_generator(record_dict,
                                                                             stop_codons_list=stop_codons_list),
