@@ -241,6 +241,8 @@ class GenomeCov(Tool):
                 else:
                     prev_end = end
 
+            out_fd.write("%s\t%i\t%i\n" % (prev_scaffold, prev_start, prev_end))
+
 
 
 
