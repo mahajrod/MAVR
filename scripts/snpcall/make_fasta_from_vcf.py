@@ -18,11 +18,16 @@ parser.add_argument("-g", "--gatk_directory", action="store", dest="gatk_dir", d
                     help="Directory with GATK jar")
 parser.add_argument("-m", "--memory", action="store", dest="memory", default="10g",
                     help="Maximum memory to use. Default: 10g")
-
+parser.add_argument("-a", "--mask", action="store", dest="mask",
+                    help="Vcf file with masking")
+parser.add_argument("-u", "--use_ambiguous_nucleotides", action="store_true", dest="use_ambiguous_nucleotides",
+                    help="Use ambiguous nucleotides for heterozygous positions")
 args = parser.parse_args()
 
 
 FastaAlternateReferenceMaker.jar_path = args.gatk_dir
 FastaAlternateReferenceMaker.max_memory = args.memory
 
-FastaAlternateReferenceMaker.correct_reference(args.reference, args.output, args.vcf)
+FastaAlternateReferenceMaker.correct_reference(args.reference, args.output, args.vcf,
+                                               vcf_with_masking=args.mask,
+                                               use_ambiguous_nuccleotides=args.use_ambiguous_nucleotides)
