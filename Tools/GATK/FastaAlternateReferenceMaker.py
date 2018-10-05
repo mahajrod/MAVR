@@ -126,6 +126,16 @@ class FastaAlternateReferenceMaker(JavaTool):
                     line_number += 1
         os.system("sed -f %s %s > %s" % (sed_script, new_reference, corrected_reference))
 
+    def convert_picard_dict_to_syn_file(self, picard_dict, output):
+        with self.metaopen(picard_dict, "r") as in_fd, self.metaopen(output, "w") as out_fd:
+            index = 1
+            for line in in_fd:
+                if line[:3] != "@SQ":
+                    continue
+                seq_id = line.split()[1][3:]
+                out_fd.write("%s\t%i\n" % (seq_id, index))
+                index += 1
+
 if __name__ == "__main__":
     workdir = "/home/mahajrod/genetics/desaminases/data/LAN210_v0.9m/align_LAN210_reads_to_LAN210v0.9"
     os.chdir(workdir)
