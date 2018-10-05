@@ -352,7 +352,7 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                                              environment_variables_dict=None):
 
         with open(cmd_log, "w") as cmd_fd:
-            cmd_log.write("#job_id\tcmd_ids\tsbatch_cmd\n")
+            cmd_fd.write("#job_id\tcmd_ids\tsbatch_cmd\n")
             environment_variables_cmd = ""
             modules_cmd = ""
 
