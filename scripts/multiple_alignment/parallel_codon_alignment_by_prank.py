@@ -54,7 +54,7 @@ PRANK.parallel_codon_alignment(args.input, args.output, output_suffix=args.suffi
                                output_format=None, show_xml=None,
                                show_tree=None, show_ancestral_sequences=None, show_evolutionary_events=None,
                                showall=None, compute_posterior_support=None, njtree=None,
-                               cmd_log_file=None,
+                               cmd_log_file=args.slurm_cmd_log_file,
                                cpus_per_task=1,
                                handling_mode=args.handling_mode,
                                job_name=args.slurm_job_name,
