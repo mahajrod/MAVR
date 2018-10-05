@@ -773,6 +773,32 @@ class SequenceRoutines(FileRoutines):
             os.remove("tmp.idx")
 
     @staticmethod
+    def compare_sequences_by_length(record_dict_1, record_dict_2, output_prefix):
+
+        record_dict_1_idset = IdSet(record_dict_1.keys())
+        record_dict_2_idset = IdSet(record_dict_2.keys())
+
+        common_seq_ids = record_dict_1_idset & record_dict_2_idset
+        only_a_seq_ids = record_dict_1_idset - common_seq_ids
+        only_b_seq_ids = record_dict_2_idset - common_seq_ids
+
+        same_length_ids = IdList()
+        different_length_ids = IdList()
+
+        for record_id in common_seq_ids:
+            if len(record_dict_1[record_id].seq) == len(record_dict_2[record_id].seq):
+                same_length_ids.append(record_id)
+            else:
+                different_length_ids.append(record_id)
+
+        only_a_seq_ids.write("%s.only_a.ids" % output_prefix)
+        only_b_seq_ids.write("%s.only_b.ids" % output_prefix)
+        same_length_ids.write("%s.same_len.ids" % output_prefix)
+        different_length_ids.write("%s.different_len.ids" % output_prefix)
+
+
+
+    @staticmethod
     def compare_sequences(record_dict_1, record_dict_2):
         id_set_dict_1 = IdSet(record_dict_1.keys())
         id_set_dict_2 = IdSet(record_dict_2.keys())
