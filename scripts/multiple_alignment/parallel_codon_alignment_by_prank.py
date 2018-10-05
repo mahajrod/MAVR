@@ -45,11 +45,13 @@ parser.add_argument("-w", "--slurm_modules_list", action="store", dest="slurm_mo
                     help="Comma-separated list of modules to load. Set modules for hmmer and python")
 #parser.add_argument("-e", "--tmp_dir", action="store", dest="tmp_dir",
 #                    help="Temporary directory")
-
+parser.add_argument("-u", "--prank_dir", action="store", dest="prank_dir", default="",
+                    help="Path to directory with PRANK binary. ")
 
 args = parser.parse_args()
 
 PRANK.threads = args.processes
+PRANK.path = args.prank_dir
 PRANK.parallel_codon_alignment(args.input, args.output, output_suffix=args.suffix, tree_file=args.tree_file,
                                output_format=None, show_xml=None,
                                show_tree=None, show_ancestral_sequences=None, show_evolutionary_events=None,
