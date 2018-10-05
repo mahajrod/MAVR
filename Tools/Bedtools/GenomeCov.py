@@ -95,7 +95,10 @@ class GenomeCov(Tool):
             out_fd.write(vcf_header)
 
             for line_list in self.file_line_as_list_generator(coverage_file):
-                out_fd.write("%s\t%s\t.\t%s\t.\t.\t.\t.\tDP\t%s\n" % (line_list[0], line_list[1], str(reference_dict[line_list[0]].seq[int(line_list[1])-1]), line_list[2]))
+                out_fd.write("%s\t%s\t.\t%s\t.\t.\t.\t.\tDP\t%s\n" % (line_list[0],
+                                                                      line_list[1],
+                                                                      str(reference_dict[line_list[0]].seq[int(line_list[1])-1]),
+                                                                      line_list[2]))
 
     @staticmethod
     def extract_data_for_cds_from_collapsed_coverage_file(collapsed_coverage_file, cds_bed_file, output_file,
@@ -215,5 +218,31 @@ class GenomeCov(Tool):
                                                                                                            median_coverage_without_zero_coverage_ends,
                                                                                                            length_without_zerocoveraged_ends
                                                                                                            ))
+
+    def collapse_bedgraph(self, input_file, output_file):
+        with self.metaopen(output_file, "w") as out_fd:
+            line_list_generator = self.file_line_as_list_generator(input_file, separator="\t")
+
+            prev_scaffold, prev_start, prev_end = line_list_generator.next()[:3]
+            prev_start = int(prev_start)
+            prev_end = int(prev_end)
+
+            for line in line_list_generator:
+
+                scaffold = line[0]
+                start = int(line[1])
+                end = int(line[2])
+
+                if (scaffold != prev_scaffold) or (start != prev_end):
+                    out_fd.write("%s\t%i\t%i\n" % (prev_scaffold, prev_start, prev_end))
+                    prev_scaffold = scaffold
+                    prev_start = start
+                    prev_end = end
+                else:
+                    prev_end = end
+
+
+
+
 
 
