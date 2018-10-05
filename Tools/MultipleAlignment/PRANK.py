@@ -82,7 +82,7 @@ class PRANK(Tool):
             self.parallel_execute(options_list)
         elif handling_mode == "slurm":
 
-            cmd_list = ["%s %s" % (self.cmd, options) for options in options_list]
+            cmd_list = ["%s%s %s" % ((self.path + "/") if self.path else "", self.cmd, options) for options in options_list]
             self.slurm_run_multiple_jobs_in_wrap_mode(cmd_list,
                                                       cmd_log_file,
                                                       max_jobs=max_jobs,
