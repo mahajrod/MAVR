@@ -796,10 +796,10 @@ class SequenceRoutines(FileRoutines):
         same_length_ids.write("%s.same_len.ids" % output_prefix)
         different_length_ids.write("%s.different_len.ids" % output_prefix)
 
-    def compare_sequences_by_length_from_file(self, seq_file_1, seq_file_2, output_prefix):
+    def compare_sequences_by_length_from_file(self, seq_file_1, seq_file_2, output_prefix, parsing_mode="parse"):
 
-        record_dict_1 = self.parse_seq_file(seq_file_1)
-        record_dict_2 = self.parse_seq_file(seq_file_2)
+        record_dict_1 = self.parse_seq_file(seq_file_1, mode=parsing_mode)
+        record_dict_2 = self.parse_seq_file(seq_file_2, mode=parsing_mode)
 
         self.compare_sequences_by_length(record_dict_1, record_dict_2, output_prefix)
 
