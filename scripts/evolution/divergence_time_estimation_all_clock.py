@@ -21,9 +21,6 @@ parser.add_argument("--root_age", action="store", dest="root_age",
 parser.add_argument("--num_of_partitions", action="store", dest="num_of_partitions", type=int,
                     default=1,
                     help="Number of partitions in alignment. Default: 1")
-parser.add_argument("--clock_type", action="store", dest="clock_type", default="global",
-                    help="Clock type for partitions. Allowed: global, independent, correlated."
-                         "Default: global")
 parser.add_argument("-m", "--model", action="store", dest="model", required=True,
                     help="Model of substitutions to use. "
                          "Allowed: JC69, K80, F81, F84, HKY85") #, TC92, TN93, GTR, UNREST, REVu, UNSETu")
