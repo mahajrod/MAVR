@@ -57,7 +57,7 @@ parser.add_argument("-d", "--directory_with_mcmctree_bin", action="store", dest=
 args = parser.parse_args()
 
 MCMCTree.path = args.dir_path
-MCMCTree.timelog = "mcmctree.timelog"
+#MCMCTree.timelog = "mcmctree.timelog"
 MCMCTree.run(args.input, args.tree, args.output, args.ctl_file, seed=-1, num_of_partitions=args.num_of_partitions,
              seq_type=args.seq_type, use_data=1, clock=args.clock_type, root_age=args.root_age,
              model=args.model, ncatG=5, alpha_for_gamma_rates_at_sites=args.alpha_for_gamma_rates_at_sites,
