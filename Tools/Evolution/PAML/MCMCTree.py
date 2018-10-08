@@ -261,8 +261,8 @@ class MCMCTree(Tool):
 
             self.safe_mkdir(out_dir)
 
-            out_file = "%s%s.out" % ("%s." % output_prefix if output_prefix else "", clock)
-            ctl_file = "%s%s.ctl" % ("%s." % output_prefix if output_prefix else "", clock)
+            out_file = "%s/%s%s.out" % (out_dir, "%s." % output_prefix if output_prefix else "", clock)
+            ctl_file = "%s/%s%s.ctl" % (out_dir, "%s." % output_prefix if output_prefix else "", clock)
             self.generate_ctl_file(seq_file, tree_file, out_file, ctl_file,
                                    seed=seed, num_of_partitions=num_of_partitions,
                                    seq_type=seq_type, use_data=use_data, clock=clock, root_age=root_age,
