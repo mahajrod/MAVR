@@ -287,7 +287,7 @@ class MCMCTree(Tool):
             cmd_list = []
             for options, directory in zip(options_list, dir_list):
 
-                cmd = " cd %s; "
+                cmd = " cd %s; " % directory
                 cmd += "%s%s %s" % ((self.path + "/") if self.path else "", self.cmd, options)
                 cmd_list.append(cmd)
 
