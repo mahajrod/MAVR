@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 
+import os
 from Tools.Abstract import Tool
 
 
@@ -227,3 +228,80 @@ class MCMCTree(Tool):
         options = " %s" % ctl_file
 
         self.execute(options=options)
+
+    def run_all_clocks(self, seq_file, tree_file, output_directory, output_prefix=None, seed=-1, num_of_partitions=1,
+                       seq_type="nucleotides", use_data=1,root_age=None,
+                       model="HKY85", ncatG=5, alpha_for_gamma_rates_at_sites=0.5,
+                       birth=1.0, death=1.0, sampling=0.1,
+                       alpha_gamma_alpha=1.0, alpha_gamma_beta=1.0, kappa_gamma_alpha=6.0, kappa_gamma_beta=2.0,
+                       rgene_gamma_alpha=2.0, rgene_gamma_beta=2.0, sigma2_gamma_alpha=1.0, sigma2_gamma_beta=10.0,
+                       remove_ambiguity_sites=False,
+                       auto_finetune=True, times=0.1, rates=0.1, mixing=0.1, paras=0.1, RateParas=0.1, FossilErr=0.1,
+                       num_of_burning=2000, sampling_frequency=2, number_of_samples=20000,
+                       cmd_log_file=None,
+                       cpus_per_task=1,
+                       handling_mode="local",
+                       job_name=None,
+                       log_prefix=None,
+                       error_log_prefix=None,
+                       max_jobs=None,
+                       max_running_time=None,
+                       max_memory_per_node=None,
+                       max_memmory_per_cpu=None,
+                       modules_list=None,
+                       environment_variables_dict=None):
+
+        self.safe_mkdir(output_directory)
+
+        dir_list = []
+        options_list = []
+
+        for clock in "global", "independent", "correlated":
+            out_dir = os.path.abspath("%s/%s/" % (output_directory, clock))
+
+            self.safe_mkdir(out_dir)
+
+            out_file = "%s%s.out" % ("%s." % output_prefix if output_prefix else "", clock)
+            ctl_file = "%s%s.ctl" % ("%s." % output_prefix if output_prefix else "", clock)
+            self.generate_ctl_file(seq_file, tree_file, out_file, ctl_file,
+                                   seed=seed, num_of_partitions=num_of_partitions,
+                                   seq_type=seq_type, use_data=use_data, clock=clock, root_age=root_age,
+                                   model=model, ncatG=ncatG,
+                                   alpha_for_gamma_rates_at_sites=alpha_for_gamma_rates_at_sites,
+                                   birth=birth, death=death, sampling=sampling,
+                                   alpha_gamma_alpha=alpha_gamma_alpha, alpha_gamma_beta=alpha_gamma_beta,
+                                   kappa_gamma_alpha=kappa_gamma_alpha, kappa_gamma_beta=kappa_gamma_beta,
+                                   rgene_gamma_alpha=rgene_gamma_alpha, rgene_gamma_beta=rgene_gamma_beta,
+                                   sigma2_gamma_alpha=sigma2_gamma_alpha, sigma2_gamma_beta=sigma2_gamma_beta,
+                                   remove_ambiguity_sites=remove_ambiguity_sites,
+                                   auto_finetune=auto_finetune, times=times, rates=rates, mixing=mixing, paras=paras,
+                                   RateParas=RateParas, FossilErr=FossilErr,
+                                   num_of_burning=num_of_burning, sampling_frequency=sampling_frequency,
+                                   number_of_samples=number_of_samples)
+            dir_list.append(out_dir)
+            options_list.append(" %s" % ctl_file)
+
+        if handling_mode == "local":
+            self.parallel_execute(options_list, dir_list=dir_list, threads=3)
+        elif handling_mode == "slurm":
+            cmd_list = []
+            for options, directory in zip(options_list, dir_list):
+
+                cmd = " cd %s; "
+                cmd += "%s%s %s" % ((self.path + "/") if self.path else "", self.cmd, options)
+                cmd_list.append(cmd)
+
+            self.slurm_run_multiple_jobs_in_wrap_mode(cmd_list,
+                                                      cmd_log_file,
+                                                      max_jobs=max_jobs,
+                                                      job_name=job_name,
+                                                      log_prefix=log_prefix,
+                                                      error_log_prefix=error_log_prefix,
+                                                      cpus_per_node=None,
+                                                      max_running_jobs=None,
+                                                      max_running_time=max_running_time,
+                                                      cpus_per_task=cpus_per_task,
+                                                      max_memory_per_node=max_memory_per_node,
+                                                      max_memmory_per_cpu=max_memmory_per_cpu,
+                                                      modules_list=modules_list,
+                                                      environment_variables_dict=environment_variables_dict)
