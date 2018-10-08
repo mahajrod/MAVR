@@ -266,7 +266,8 @@ class MCMCTree(Tool):
 
             out_file = "%s%s.out" % ("%s." % output_prefix if output_prefix else "", clock)
             ctl_file = "%s/%s%s.ctl" % (out_dir, "%s." % output_prefix if output_prefix else "", clock)
-            self.generate_ctl_file(seq_file, tree_file, out_file, ctl_file,
+            self.generate_ctl_file(seq_file, self.split_filename(tree_file)[1] + self.split_filename(tree_file)[2],
+                                   out_file, ctl_file,
                                    seed=seed, num_of_partitions=num_of_partitions,
                                    seq_type=seq_type, use_data=use_data, clock=clock, root_age=root_age,
                                    model=model, ncatG=ncatG,
