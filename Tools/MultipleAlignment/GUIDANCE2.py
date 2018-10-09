@@ -28,6 +28,8 @@ class GUIDANCE2(Tool):
         """
         options = " --outDir %s" % output_dir if output_dir else ""
         options += " --program %s" % program if program else ""
+        print threads, self.threds
+        print type(threads), type(self.threads)
         options += " --proc_num %i" % threads if threads else self.threads
         options += " --msaProgram %s" % msa_tool
         options += " --MSA_Param %s" % msa_tool_options if msa_tool_options else ""
