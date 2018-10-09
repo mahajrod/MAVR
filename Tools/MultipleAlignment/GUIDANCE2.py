@@ -31,7 +31,7 @@ class GUIDANCE2(Tool):
         options += " --proc_num %i" % (threads if threads else self.threads)
         options += " --msaProgram %s" % msa_tool
         options += " --MSA_Param %s" % msa_tool_options if msa_tool_options else ""
-        options += " --seqType %s" % seq_type
+        options += " --seqType %s" % seq_type if seq_type else ""
         options += " --bootstraps %i" % bootstrap_number if bootstrap_number else ""
         options += " --genCode %i" % genetic_code if genetic_code else ""
         options += " --seqCutoff %f" % seq_cutoff if seq_cutoff else ""
