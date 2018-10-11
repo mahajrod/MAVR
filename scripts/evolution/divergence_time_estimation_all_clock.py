@@ -13,6 +13,8 @@ parser.add_argument("-t", "--tree_file", action="store", dest="tree",
                     help="File with phylogenetic tree with calibrations")
 parser.add_argument("-o", "--outdir", action="store", dest="outdir", default="./",
                     help="Output directory. Default: ./")
+parser.add_argument("-p", "--output_prefix", action="store", dest="output_prefix", default="divtime",
+                    help="Prefix of output files. Default: divtime")
 parser.add_argument("--seq_type", action="store", dest="seq_type", default="nucleotides",
                     help="Type of input sequences. Allowed: nucleotides, codons, aminoacids."
                          "Default: nucleotides")
@@ -74,7 +76,7 @@ parser.add_argument("-w", "--slurm_modules_list", action="store", dest="slurm_mo
 args = parser.parse_args()
 
 MCMCTree.path = args.dir_path
-MCMCTree.run_all_clocks(args.input, args.tree, args.outdir, output_prefix=None, seed=-1,
+MCMCTree.run_all_clocks(args.input, args.tree, args.outdir, output_prefix=args.output_prefix, seed=-1,
                         num_of_partitions=args.num_of_partitions,
                         seq_type=args.seq_type, use_data=1, root_age=args.root_age,
                         model=args.model, ncatG=5,
@@ -88,12 +90,10 @@ MCMCTree.run_all_clocks(args.input, args.tree, args.outdir, output_prefix=None, 
                         num_of_burning=args.num_of_burning,
                         sampling_frequency=args.sampling_frequency,
                         number_of_samples=args.number_of_samples,
-                        cmd_log_file=args.slurm_cmd_log_file,
                         cpus_per_task=1,
                         handling_mode=args.handling_mode,
                         job_name=args.slurm_job_name,
-                        log_prefix=args.slurm_log_prefix,
-                        error_log_prefix=args.slurm_error_log_prefix,
+
                         max_jobs=None,
                         max_running_time=args.slurm_max_running_time,
                         max_memory_per_node=args.max_memory_per_task,
