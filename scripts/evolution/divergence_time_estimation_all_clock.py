@@ -57,12 +57,14 @@ parser.add_argument("-j", "--slurm_job_name", action="store", dest="slurm_job_na
                     help="Slurm job name. Default: JOB")
 #parser.add_argument("-m", "--slurm_max_jobs", action="store", dest="slurm_max_jobs", default=1000, type=int,
 #                    help="Slurm max jobs. Default: 1000")
+"""
 parser.add_argument("-y", "--slurm_log_prefix", action="store", dest="slurm_log_prefix",
                     help="Slurm log prefix. ")
 parser.add_argument("-z", "--slurm_cmd_log_file", action="store", dest="slurm_cmd_log_file",
                     help="Slurm cmd logfile")
 parser.add_argument("-l", "--slurm_error_log_prefix", action="store", dest="slurm_error_log_prefix",
                     help="Slurm error log prefix")
+"""
 parser.add_argument("-e", "--max_memory_per_task", action="store", dest="max_memory_per_task", default="3000",
                     help="Maximum memory per task in megabytes. Default: 3000")
 
