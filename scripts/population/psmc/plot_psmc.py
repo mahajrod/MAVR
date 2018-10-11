@@ -13,6 +13,8 @@ parser.add_argument("-s", "--sample_label_list", action="store", dest="sample_la
 parser.add_argument("-p", "--psmc_list", action="store", dest="psmc_list", required=True,
                     type=lambda s: s.split(","),
                     help="Comma-separated list of PSMC files corresponding to sample labels")
+parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", required=True,
+                    help="Prefix of output files")
 parser.add_argument("-t", "--generation_time", action="store", dest="generation_time",
                     required=True, type=int,
                     help="Generation time in years(int)")
@@ -27,4 +29,4 @@ args = parser.parse_args()
 
 PSMC.path = args.psmc_dir
 PSMC.psmc_plot(args.sample_label_list, args.psmc_list, args.generation_time,
-               args.mutation_rate, plot_grid=args.plot_grid)
+               args.mutation_rate, args.output_prefix, plot_grid=args.plot_grid)
