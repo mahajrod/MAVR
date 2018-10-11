@@ -239,6 +239,7 @@ class MCMCTree(Tool):
                        auto_finetune=True, times=0.1, rates=0.1, mixing=0.1, paras=0.1, RateParas=0.1, FossilErr=0.1,
                        num_of_burning=2000, sampling_frequency=2, number_of_samples=20000,
                        cpus_per_task=1,
+                       duplicate_to_stdout=False,
                        handling_mode="local",
                        job_name="divtime",
                        max_jobs=None,
@@ -295,7 +296,8 @@ class MCMCTree(Tool):
             stdout_file_list.append("%s%s.stdout" % ("%s." % prefix if prefix else "", clock))
 
         if handling_mode == "local":
-            self.parallel_execute(options_list, dir_list=dir_list, threads=3, output_file_list=stdout_file_list)
+            self.parallel_execute(options_list, dir_list=dir_list, threads=3, output_file_list=stdout_file_list,
+                                  duplicate_to_stdout=duplicate_to_stdout)
         elif handling_mode == "slurm":
             cmd_list = []
             for options, directory, output_pref in zip(options_list, dir_list, output_prefix_list):
