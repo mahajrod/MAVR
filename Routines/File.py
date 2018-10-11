@@ -119,7 +119,11 @@ class FileRoutines:
     def split_filename(filepath):
         directory, basename = os.path.split(filepath)
         prefix, extension = os.path.splitext(basename)
-        return directory, prefix, extension
+        return directory, prefix, extension if filepath else None
+
+    @staticmethod
+    def get_basename(filepath):
+        return os.path.split(filepath)[-1] if filepath else None
 
     def make_list_of_path_to_files(self, list_of_dirs_and_files, expression=None, recursive=False,
                                    return_absolute_paths=True):
