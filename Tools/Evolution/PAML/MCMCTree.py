@@ -297,7 +297,7 @@ class MCMCTree(Tool):
             for options, directory, output_pref in zip(options_list, dir_list, output_prefix_list):
 
                 cmd = " cd %s; " % directory
-                cmd += "%s%s %s > %s.stdout" % ((self.path + "/") if self.path else "",
+                cmd += "%s%s %s > %s.stdout 2>&1" % ((self.path + "/") if self.path else "",
                                                 self.cmd, options, output_pref)
                 cmd_list.append(cmd)
 
