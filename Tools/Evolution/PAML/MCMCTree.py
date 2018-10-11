@@ -255,6 +255,7 @@ class MCMCTree(Tool):
         dir_list = []
         options_list = []
         output_prefix_list = []
+        stdout_file_list = []
 
         cmd_log_file = "%s/%s.cmd" % (output_directory, prefix)
         log_prefix = "%s/%s" % (output_directory, prefix)
@@ -291,9 +292,10 @@ class MCMCTree(Tool):
             dir_list.append(out_dir)
             output_prefix_list.append(out_pref)
             options_list.append(" %s" % ctl_file)
+            stdout_file_list.append("%s%s.stdout" % ("%s." % prefix if prefix else "", clock))
 
         if handling_mode == "local":
-            self.parallel_execute(options_list, dir_list=dir_list, threads=3)
+            self.parallel_execute(options_list, dir_list=dir_list, threads=3, output_file_list=stdout_file_list)
         elif handling_mode == "slurm":
             cmd_list = []
             for options, directory, output_pref in zip(options_list, dir_list, output_prefix_list):
