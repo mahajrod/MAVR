@@ -63,7 +63,7 @@ class Tool(SequenceRoutines, AlignmentRoutines):
 
     def parallel_execute(self, options_list, cmd=None, capture_output=False, threads=None, dir_list=None,
                          write_output_to_file=None, external_process_pool=None, async_run=False,
-                         job_chunksize=1):
+                         job_chunksize=1, output_file_list=None):
         command = cmd if cmd is not None else self.cmd
         if dir_list:
             if isinstance(dir_list, str):
@@ -79,6 +79,9 @@ class Tool(SequenceRoutines, AlignmentRoutines):
         else:
             exe_string_list = [(self.check_path(self.path) if self.path else "") + command + " " + options
                                for options in options_list]
+        if output_file_list:
+            exe_string_list = [options + " > %s 2>&1" % output for options, output in zip(options_list,
+                                                                                          output_file_list)]
 
         with open("exe_list.t", "a") as exe_fd:
             for entry in exe_string_list:
