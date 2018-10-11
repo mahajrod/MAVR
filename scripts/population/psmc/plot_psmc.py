@@ -20,7 +20,11 @@ parser.add_argument("-a", "--mutation_rate", action="store", dest="mutation_rate
                     help="Absolute mutation rate per year per nucleotide")
 parser.add_argument("-g", "--plot_grid", action="store_true", dest="plot_grid",
                     help="Plot grid. Default: False")
+parser.add_argument("-l", "--psmc_dir", action="store", dest="psmc_dir", default="",
+                    help="Path to directory with psmc_plot.pl script")
+
 args = parser.parse_args()
 
+PSMC.path = args.psmc_dir
 PSMC.psmc_plot(args.sample_label_list, args.psmc_list, args.generation_time,
                args.mutation_rate, plot_grid=args.plot_grid)
