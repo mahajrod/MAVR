@@ -40,7 +40,7 @@ class PSMC(Tool):
         """
 
         options = " -g %i" % generation_time
-        options += " -u %f" % absolute_mutation_rate
+        options += " -u %e" % absolute_mutation_rate
         options += " -p" # TODO: find sence of this options
         options += " -G" if plot_grid else ""
         options += " -M %s" % ",".join(sample_label_list)
