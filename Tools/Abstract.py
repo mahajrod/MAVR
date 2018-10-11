@@ -67,21 +67,31 @@ class Tool(SequenceRoutines, AlignmentRoutines):
         command = cmd if cmd is not None else self.cmd
         if dir_list:
             if isinstance(dir_list, str):
-                exe_string_list = [("cd %s && " % dir_list) + (self.check_path(self.path) if self.path else "")
-                                   + command + " " + options for options in options_list]
+                if output_file_list:
+                    exe_string_list = [("cd %s && " % dir_list) + (self.check_path(self.path) if self.path else "")
+                                       + command + " " + options + " > %s/%s 2>&1" % (dir_list, output) for options, output in zip(options_list, output_file_list)]
+                else:
+                    exe_string_list = [("cd %s && " % dir_list) + (self.check_path(self.path) if self.path else "")
+                                       + command + " " + options for options in options_list]
             elif isinstance(dir_list, Iterable) and (len(options_list) == len(dir_list)):
-                exe_string_list = [("cd %s && " % directory) + (self.check_path(self.path) if self.path else "")
-                                   + command + " " + options for options, directory in zip(options_list, dir_list)]
+                if output_file_list:
+                    exe_string_list = [("cd %s && " % directory) + (self.check_path(self.path) if self.path else "")
+                                       + command + " " + options + " > %s/%s 2>&1" % (directory, output) for options, directory, output in zip(options_list, dir_list, output_file_list)]
+                else:
+
+                    exe_string_list = [("cd %s && " % directory) + (self.check_path(self.path) if self.path else "")
+                                       + command + " " + options for options, directory in zip(options_list, dir_list)]
             else:
                 raise ValueError("Error during option parsing for parallel execution in different folders. "
                                  "Length of directory list is not equal to length of option list")
+        elif output_file_list:
+            exe_string_list = [(self.check_path(self.path) if self.path else "") + command + " " + options +
+                               " > %s 2>&1" % output for options, output in zip(options_list, output_file_list)]
 
         else:
             exe_string_list = [(self.check_path(self.path) if self.path else "") + command + " " + options
                                for options in options_list]
-        if output_file_list:
-            exe_string_list = [options + " > %s 2>&1" % output for options, output in zip(options_list,
-                                                                                          output_file_list)]
+
 
         with open("exe_list.t", "a") as exe_fd:
             for entry in exe_string_list:
