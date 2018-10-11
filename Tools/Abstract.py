@@ -63,34 +63,100 @@ class Tool(SequenceRoutines, AlignmentRoutines):
 
     def parallel_execute(self, options_list, cmd=None, capture_output=False, threads=None, dir_list=None,
                          write_output_to_file=None, external_process_pool=None, async_run=False,
-                         job_chunksize=1, output_file_list=None):
+                         job_chunksize=1, output_file_list=None, duplicate_to_stdout=False):
+
         command = cmd if cmd is not None else self.cmd
+
+        exe_string_list = []
+
         if dir_list:
             if isinstance(dir_list, str):
                 if output_file_list:
+                    for options, output in zip(options_list, output_file_list):
+                        com = ""
+                        com += " cd %s && " % dir_list
+                        com += " %s" % self.check_path(self.path) if self.path else ""
+                        com += " %s" % command
+                        com += " %s" % options
+                        com += " | tee %s/%s" % (dir_list, output) if duplicate_to_stdout else " > %s/%s 2>&1" % (dir_list, output)
+
+                        exe_string_list.append(com)
+                        """
                     exe_string_list = [("cd %s && " % dir_list) + (self.check_path(self.path) if self.path else "")
-                                       + command + " " + options + " > %s/%s 2>&1" % (dir_list, output) for options, output in zip(options_list, output_file_list)]
+                                       + command + " " + options +
+                                       (" | tee %s/%s" % (dir_list, output) if duplicate_to_stdout else " > %s/%s 2>&1" % (dir_list, output)) for options, output in zip(options_list, output_file_list)]
+                        """
+
                 else:
+                    for options in options_list:
+                        com = ""
+                        com += " cd %s && " % dir_list
+                        com += " %s" % self.check_path(self.path) if self.path else ""
+                        com += " %s" % command
+                        com += " %s" % options
+
+                        exe_string_list.append(com)
+                        """
                     exe_string_list = [("cd %s && " % dir_list) + (self.check_path(self.path) if self.path else "")
                                        + command + " " + options for options in options_list]
+                        """
             elif isinstance(dir_list, Iterable) and (len(options_list) == len(dir_list)):
                 if output_file_list:
-                    exe_string_list = [("cd %s && " % directory) + (self.check_path(self.path) if self.path else "")
-                                       + command + " " + options + " > %s/%s 2>&1" % (directory, output) for options, directory, output in zip(options_list, dir_list, output_file_list)]
-                else:
+                    for options, directory, output in zip(options_list, dir_list, output_file_list):
+                        com = ""
+                        com += " cd %s && " % directory
+                        com += " %s" % self.check_path(self.path) if self.path else ""
+                        com += " %s" % command
+                        com += " %s" % options
+                        com += " | tee %s/%s" % (directory, output) if duplicate_to_stdout else " > %s/%s 2>&1" % (directory, output)
 
+                        exe_string_list.append(com)
+                        """
+                    exe_string_list = [("cd %s && " % directory) + (self.check_path(self.path) if self.path else "")
+                                       + command + " " + options +
+                                       (" | tee %s/%s" % (directory, output) if duplicate_to_stdout else " > %s/%s 2>&1" % (directory, output)) for options, directory, output in zip(options_list, dir_list, output_file_list)]
+                        """
+                else:
+                    for options, directory in zip(options_list, dir_list):
+                        com = ""
+                        com += " cd %s && " % directory
+                        com += " %s" % self.check_path(self.path) if self.path else ""
+                        com += " %s" % command
+                        com += " %s" % options
+
+                        exe_string_list.append(com)
+                        """
                     exe_string_list = [("cd %s && " % directory) + (self.check_path(self.path) if self.path else "")
                                        + command + " " + options for options, directory in zip(options_list, dir_list)]
+                        """
             else:
                 raise ValueError("Error during option parsing for parallel execution in different folders. "
                                  "Length of directory list is not equal to length of option list")
         elif output_file_list:
-            exe_string_list = [(self.check_path(self.path) if self.path else "") + command + " " + options +
-                               " > %s 2>&1" % output for options, output in zip(options_list, output_file_list)]
+            for options, output in zip(options_list, output_file_list):
+                com = ""
+                com += " %s" % self.check_path(self.path) if self.path else ""
+                com += " %s" % command
+                com += " %s" % options
+                com += " | tee %s" % output if duplicate_to_stdout else " > %s 2>&1" % output
 
+                exe_string_list.append(com)
+                """
+            exe_string_list = [(self.check_path(self.path) if self.path else "") + command + " " + options +
+                               (" | tee %s" % output if duplicate_to_stdout else " > %s 2>&1" % output) for options, output in zip(options_list, output_file_list)]
+                """
         else:
+            for options in options_list:
+                com = ""
+                com += " %s" % self.check_path(self.path) if self.path else ""
+                com += " %s" % command
+                com += " %s" % options
+
+                exe_string_list.append(com)
+                """
             exe_string_list = [(self.check_path(self.path) if self.path else "") + command + " " + options
                                for options in options_list]
+                """
 
         with open("exe_list.t", "a") as exe_fd:
             for entry in exe_string_list:
