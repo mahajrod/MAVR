@@ -92,7 +92,7 @@ class Tool(SequenceRoutines, AlignmentRoutines):
 
         for options, directory, output in zip(options_list, directory_list, out_list):
             com = ""
-            com += " cd %s && " % directory if directory else ""
+            com += " cd %s && " % self.check_dir_path(directory) if directory else ""
             com += " %s%s" % (self.check_path(self.path) if self.path else "", command)
             com += " %s" % options
 
