@@ -37,6 +37,7 @@ class PSMC(Tool):
          -R         do not remove temporary files
          -G         plot grid
         """
+
         options = " -g %i" % generation_time
         options += " -u %f" % absolute_mutation_rate
         options += " -p" # TODO: find sence of this options
