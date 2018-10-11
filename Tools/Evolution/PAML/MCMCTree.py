@@ -229,7 +229,7 @@ class MCMCTree(Tool):
 
         self.execute(options=options)
 
-    def run_all_clocks(self, seq_file, tree_file, output_directory, output_prefix=None, seed=-1, num_of_partitions=1,
+    def run_all_clocks(self, seq_file, tree_file, output_directory, output_prefix="divtime", seed=-1, num_of_partitions=1,
                        seq_type="nucleotides", use_data=1,root_age=None,
                        model="HKY85", ncatG=5, alpha_for_gamma_rates_at_sites=0.5,
                        birth=1.0, death=1.0, sampling=0.1,
@@ -238,12 +238,9 @@ class MCMCTree(Tool):
                        remove_ambiguity_sites=False,
                        auto_finetune=True, times=0.1, rates=0.1, mixing=0.1, paras=0.1, RateParas=0.1, FossilErr=0.1,
                        num_of_burning=2000, sampling_frequency=2, number_of_samples=20000,
-                       cmd_log_file=None,
                        cpus_per_task=1,
                        handling_mode="local",
-                       job_name=None,
-                       log_prefix=None,
-                       error_log_prefix=None,
+                       job_name="divtime",
                        max_jobs=None,
                        max_running_time=None,
                        max_memory_per_node=None,
@@ -255,6 +252,11 @@ class MCMCTree(Tool):
 
         dir_list = []
         options_list = []
+        output_prefix_list = []
+
+        cmd_log_file = "%s/%s.cmd" % (output_directory, output_prefix)
+        log_prefix = "%s/%s" % (output_directory, output_prefix)
+        error_log_prefix = "%s/%s" % (output_directory, output_prefix)
 
         for clock in "global", "independent", "correlated":
             out_dir = os.path.abspath("%s/%s/" % (output_directory, clock))
@@ -265,7 +267,9 @@ class MCMCTree(Tool):
                 os.system("ln %s %s " % (filename, out_dir))
 
             out_file = "%s%s.out" % ("%s." % output_prefix if output_prefix else "", clock)
-            ctl_file = "%s/%s%s.ctl" % (out_dir, "%s." % output_prefix if output_prefix else "", clock)
+            out_pref = "%s/%s%s" % (out_dir, "%s." % output_prefix if output_prefix else "", clock)
+            ctl_file = "%s.ctl" % out_pref
+
             self.generate_ctl_file(seq_file, self.split_filename(tree_file)[1] + self.split_filename(tree_file)[2],
                                    out_file, ctl_file,
                                    seed=seed, num_of_partitions=num_of_partitions,
@@ -283,16 +287,18 @@ class MCMCTree(Tool):
                                    num_of_burning=num_of_burning, sampling_frequency=sampling_frequency,
                                    number_of_samples=number_of_samples)
             dir_list.append(out_dir)
+            output_prefix_list.append(out_pref)
             options_list.append(" %s" % ctl_file)
 
         if handling_mode == "local":
             self.parallel_execute(options_list, dir_list=dir_list, threads=3)
         elif handling_mode == "slurm":
             cmd_list = []
-            for options, directory in zip(options_list, dir_list):
+            for options, directory, output_pref in zip(options_list, dir_list, output_prefix_list):
 
                 cmd = " cd %s; " % directory
-                cmd += "%s%s %s" % ((self.path + "/") if self.path else "", self.cmd, options)
+                cmd += "%s%s %s > %s.stdout" % ((self.path + "/") if self.path else "",
+                                                self.cmd, options, output_pref)
                 cmd_list.append(cmd)
 
             self.slurm_run_multiple_jobs_in_wrap_mode(cmd_list,
