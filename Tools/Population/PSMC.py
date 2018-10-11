@@ -7,19 +7,8 @@ matplotlib.use('Agg')
 os.environ['MPLCONFIGDIR'] = '/tmp/'
 import matplotlib.pyplot as plt
 plt.ioff()
-from matplotlib.transforms import Bbox, TransformedBbox, blended_transform_factory
-from mpl_toolkits.axes_grid1.inset_locator import BboxPatch, BboxConnector, BboxConnectorPatch
-from matplotlib.lines import Line2D
-from matplotlib.colors import LogNorm
-
-from Bio import SeqIO
-from Bio.Seq import Seq
-from Bio.SeqRecord import SeqRecord
 
 from Tools.Abstract import Tool
-from Parsers.PLINK import PLINKReport
-
-from Routines import MatplotlibRoutines
 
 
 class PSMC(Tool):
