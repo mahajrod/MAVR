@@ -95,13 +95,13 @@ MCMCTree.run_all_clocks(args.input, args.tree, args.outdir, output_prefix=args.o
                         cpus_per_task=1,
                         handling_mode=args.handling_mode,
                         job_name=args.slurm_job_name,
-
                         max_jobs=None,
                         max_running_time=args.slurm_max_running_time,
                         max_memory_per_node=args.max_memory_per_task,
                         max_memmory_per_cpu=None,
                         modules_list=args.slurm_modules_list,
-                        environment_variables_dict=None)
+                        environment_variables_dict=None,
+                        duplicate_to_stdout=True)
 
 """
 MCMCTree.run(args.input, args.tree, args.output, args.ctl_file, seed=-1, num_of_partitions=args.num_of_partitions,
