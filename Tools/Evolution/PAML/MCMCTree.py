@@ -250,13 +250,15 @@ class MCMCTree(Tool):
 
         self.safe_mkdir(output_directory)
 
+        prefix = self.get_basename(output_prefix)
+
         dir_list = []
         options_list = []
         output_prefix_list = []
 
-        cmd_log_file = "%s/%s.cmd" % (output_directory, output_prefix)
-        log_prefix = "%s/%s" % (output_directory, output_prefix)
-        error_log_prefix = "%s/%s" % (output_directory, output_prefix)
+        cmd_log_file = "%s/%s.cmd" % (output_directory, prefix)
+        log_prefix = "%s/%s" % (output_directory, prefix)
+        error_log_prefix = "%s/%s" % (output_directory, prefix)
 
         for clock in "global", "independent", "correlated":
             out_dir = os.path.abspath("%s/%s/" % (output_directory, clock))
@@ -266,11 +268,11 @@ class MCMCTree(Tool):
             for filename in tree_file, seq_file:
                 os.system("ln %s %s " % (filename, out_dir))
 
-            out_file = "%s%s.out" % ("%s." % output_prefix if output_prefix else "", clock)
-            out_pref = "%s/%s%s" % (out_dir, "%s." % output_prefix if output_prefix else "", clock)
+            out_file = "%s%s.out" % ("%s." % prefix if prefix else "", clock)
+            out_pref = "%s/%s%s" % (out_dir, "%s." % prefix if prefix else "", clock)
             ctl_file = "%s.ctl" % out_pref
 
-            self.generate_ctl_file(seq_file, self.split_filename(tree_file)[1] + self.split_filename(tree_file)[2],
+            self.generate_ctl_file(self.get_basename(seq_file), self.get_basename(tree_file),
                                    out_file, ctl_file,
                                    seed=seed, num_of_partitions=num_of_partitions,
                                    seq_type=seq_type, use_data=use_data, clock=clock, root_age=root_age,
@@ -298,7 +300,7 @@ class MCMCTree(Tool):
 
                 cmd = " cd %s; " % directory
                 cmd += "%s%s %s > %s.stdout 2>&1" % ((self.path + "/") if self.path else "",
-                                                self.cmd, options, output_pref)
+                                                     self.cmd, options, output_pref)
                 cmd_list.append(cmd)
 
             self.slurm_run_multiple_jobs_in_wrap_mode(cmd_list,
