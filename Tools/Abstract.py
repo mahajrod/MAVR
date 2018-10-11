@@ -66,9 +66,41 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                          job_chunksize=1, output_file_list=None, duplicate_to_stdout=False):
 
         command = cmd if cmd is not None else self.cmd
+        number_of_commands = len(options_list)
+
+        if dir_list:
+            if isinstance(dir_list, str):
+                directory_list = [dir_list for i in range(0, number_of_commands)]
+            elif len(dir_list) == number_of_commands:
+                directory_list = [directory for directory in dir_list]
+            else:
+                raise ValueError("Error during option parsing for parallel execution in different folders. "
+                                 "Length of directory list is not equal to length of option list")
+        else:
+            directory_list = [None for i in range(0, number_of_commands)]
+
+        if output_file_list:
+            if len(dir_list) == number_of_commands:
+                out_list = [out_file for out_file in output_file_list]
+            else:
+                raise ValueError("Error during option parsing for parallel execution with storing stdout and stderr. "
+                                 "Length of output file list is not equal to length of option list")
+        else:
+            out_list = [None for i in range(0, number_of_commands)]
 
         exe_string_list = []
 
+        for options, directory, output in zip(options_list, directory_list, out_list):
+            com = ""
+            com += " cd %s && " % directory if directory else ""
+            com += " %s" % self.check_path(self.path) if self.path else ""
+            com += " %s" % command
+            com += " %s" % options
+            if output:
+                com += " | tee %s/%s" % (directory, output) if duplicate_to_stdout else " > %s/%s 2>&1" % (directory, output)
+
+            exe_string_list.append(com)
+        """
         if dir_list:
             if isinstance(dir_list, str):
                 if output_file_list:
@@ -81,12 +113,10 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                         com += " | tee %s/%s" % (dir_list, output) if duplicate_to_stdout else " > %s/%s 2>&1" % (dir_list, output)
 
                         exe_string_list.append(com)
-                        """
-                    exe_string_list = [("cd %s && " % dir_list) + (self.check_path(self.path) if self.path else "")
-                                       + command + " " + options +
-                                       (" | tee %s/%s" % (dir_list, output) if duplicate_to_stdout else " > %s/%s 2>&1" % (dir_list, output)) for options, output in zip(options_list, output_file_list)]
-                        """
 
+                        #exe_string_list = [("cd %s && " % dir_list) + (self.check_path(self.path) if self.path else "")
+                        #               + command + " " + options +
+                        #               (" | tee %s/%s" % (dir_list, output) if duplicate_to_stdout else " > %s/%s 2>&1" % (dir_list, output)) for options, output in zip(options_list, output_file_list)]
                 else:
                     for options in options_list:
                         com = ""
@@ -96,10 +126,10 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                         com += " %s" % options
 
                         exe_string_list.append(com)
-                        """
-                    exe_string_list = [("cd %s && " % dir_list) + (self.check_path(self.path) if self.path else "")
-                                       + command + " " + options for options in options_list]
-                        """
+
+                        #exe_string_list = [("cd %s && " % dir_list) + (self.check_path(self.path) if self.path else "")
+                        #               + command + " " + options for options in options_list]
+
             elif isinstance(dir_list, Iterable) and (len(options_list) == len(dir_list)):
                 if output_file_list:
                     for options, directory, output in zip(options_list, dir_list, output_file_list):
@@ -111,11 +141,11 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                         com += " | tee %s/%s" % (directory, output) if duplicate_to_stdout else " > %s/%s 2>&1" % (directory, output)
 
                         exe_string_list.append(com)
-                        """
-                    exe_string_list = [("cd %s && " % directory) + (self.check_path(self.path) if self.path else "")
-                                       + command + " " + options +
-                                       (" | tee %s/%s" % (directory, output) if duplicate_to_stdout else " > %s/%s 2>&1" % (directory, output)) for options, directory, output in zip(options_list, dir_list, output_file_list)]
-                        """
+
+                        #exe_string_list = [("cd %s && " % directory) + (self.check_path(self.path) if self.path else "")
+                        #               + command + " " + options +
+                        #               (" | tee %s/%s" % (directory, output) if duplicate_to_stdout else " > %s/%s 2>&1" % (directory, output)) for options, directory, output in zip(options_list, dir_list, output_file_list)]
+
                 else:
                     for options, directory in zip(options_list, dir_list):
                         com = ""
@@ -125,10 +155,10 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                         com += " %s" % options
 
                         exe_string_list.append(com)
-                        """
-                    exe_string_list = [("cd %s && " % directory) + (self.check_path(self.path) if self.path else "")
-                                       + command + " " + options for options, directory in zip(options_list, dir_list)]
-                        """
+
+                        #exe_string_list = [("cd %s && " % directory) + (self.check_path(self.path) if self.path else "")
+                        #               + command + " " + options for options, directory in zip(options_list, dir_list)]
+
             else:
                 raise ValueError("Error during option parsing for parallel execution in different folders. "
                                  "Length of directory list is not equal to length of option list")
@@ -141,10 +171,10 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                 com += " | tee %s" % output if duplicate_to_stdout else " > %s 2>&1" % output
 
                 exe_string_list.append(com)
-                """
-            exe_string_list = [(self.check_path(self.path) if self.path else "") + command + " " + options +
-                               (" | tee %s" % output if duplicate_to_stdout else " > %s 2>&1" % output) for options, output in zip(options_list, output_file_list)]
-                """
+
+                #exe_string_list = [(self.check_path(self.path) if self.path else "") + command + " " + options +
+                #               (" | tee %s" % output if duplicate_to_stdout else " > %s 2>&1" % output) for options, output in zip(options_list, output_file_list)]
+
         else:
             for options in options_list:
                 com = ""
@@ -153,10 +183,11 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                 com += " %s" % options
 
                 exe_string_list.append(com)
-                """
-            exe_string_list = [(self.check_path(self.path) if self.path else "") + command + " " + options
-                               for options in options_list]
-                """
+
+                #exe_string_list = [(self.check_path(self.path) if self.path else "") + command + " " + options
+                #               for options in options_list]
+
+        """
 
         with open("exe_list.t", "a") as exe_fd:
             for entry in exe_string_list:
