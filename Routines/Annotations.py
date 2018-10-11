@@ -495,6 +495,16 @@ class AnnotationsRoutines(SequenceRoutines):
                                                                tmp_list[5],
                                                                tmp_list[6]))
 
+    def convert_bedgraph_to_gff(self,input_bed, output_gff, feature_type, id_prefix="ID", source="source"):
+        with self.metaopen(output_gff, "w") as out_fd:
+            index = 1
+            for line_list in self.file_line_as_list_generator(input_bed):
+                out_fd.write("%s\t%s\t%s\t%i\t%i\t.\t.\t.\tID=%s%i\n" % (line_list[0], source, feature_type,
+                                                                         int(line_list[1]) + 1, int(line_list[2]),
+                                                                         id_prefix, index
+                                                                         ))
+                index += 1
+
     @staticmethod
     def convert_gff_to_simple_bed(input_gff, output_bed, feature_type_list=[], scaffold_id_file=None):
         if scaffold_id_file:
