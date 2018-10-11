@@ -92,7 +92,6 @@ class Tool(SequenceRoutines, AlignmentRoutines):
             exe_string_list = [(self.check_path(self.path) if self.path else "") + command + " " + options
                                for options in options_list]
 
-
         with open("exe_list.t", "a") as exe_fd:
             for entry in exe_string_list:
                 exe_fd.write("%s\n" % entry)
