@@ -93,9 +93,9 @@ class Tool(SequenceRoutines, AlignmentRoutines):
         for options, directory, output in zip(options_list, directory_list, out_list):
             com = ""
             com += " cd %s && " % directory if directory else ""
-            com += " %s" % self.check_path(self.path) if self.path else ""
-            com += " %s" % command
+            com += " %s%s" % (self.check_path(self.path) if self.path else "", command)
             com += " %s" % options
+
             if output:
                 com += " | tee %s/%s" % (directory, output) if duplicate_to_stdout else " > %s/%s 2>&1" % (directory, output)
 
