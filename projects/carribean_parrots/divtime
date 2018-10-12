@@ -1,0 +1,1 @@
+for SET in set2 set3 set4 set5; do ~/soft/MAVR/scripts/evolution/divergence_time_estimation_all_clock.py -s ${SET}.4fold_degenerated_sites.fasta -t ${SET}.nwk -o ${SET}_200k_it2 -m HKY85 -d ~/soft/PAML/paml4.7a/src/ --number_of_samples 200000 --num_of_burning 20000 &  done
