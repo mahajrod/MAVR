@@ -558,6 +558,21 @@ class MultipleAlignmentRoutines(SequenceRoutines):
                                                                    use_ambigious_table=use_ambigious_table,
                                                                    output_file=output_file)
 
+    @staticmethod
+    def extract_codon_positions(alignment):
+
+        return [alignment[:, i::3] for i in 0, 1, 2]
+
+    def extract_codon_positions_from_file(self, alignment_file, output_prefix, format="fasta"):
+        alignment = self.parse_alignment(alignment_file, filetype="fasta")
+
+        codon_position_alignments = self.extract_codon_positions(alignment)
+
+        for position in 0, 1, 2:
+            output_file = "%s.pos_%i%s" % (output_prefix, position + 1, self.split_filename(alignment_file)[-1])
+            AlignIO.write(codon_position_alignments[i], output_file, format=format)
+
+
     """
     @staticmethod
     def parse_alignment(input_file, filetype="fasta"):
