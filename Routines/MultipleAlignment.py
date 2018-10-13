@@ -570,7 +570,7 @@ class MultipleAlignmentRoutines(SequenceRoutines):
 
         for position in 0, 1, 2:
             output_file = "%s.pos_%i%s" % (output_prefix, position + 1, self.split_filename(alignment_file)[-1])
-            AlignIO.write(codon_position_alignments[i], output_file, format=format)
+            AlignIO.write(codon_position_alignments[position], output_file, format=format)
 
 
     """
