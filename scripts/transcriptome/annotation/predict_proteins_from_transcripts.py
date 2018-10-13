@@ -76,8 +76,10 @@ FileRoutines.safe_mkdir(blastp_dir)
 
 hmmscan_splited_fasta_dir = "%ssplited_fasta_dir/" % hmmscan_dir
 splited_domtblout_dir = "%ssplited_domtblout_dir/" % hmmscan_dir
-hmmscan_vs_pfam_output = "%s%s.pfam.hits" % (hmmscan_dir, input_filename)
-domtblout_outfile = "%s%s.pfam.domtblout" % (hmmscan_dir, input_filename) if args.pfam_database else None
+
+hmmscan_vs_pfam_prefix = "%s.pfam" % input_filename
+hmmscan_vs_pfam_output = "%s/%s.hits" % (hmmscan_dir, hmmscan_vs_pfam_prefix)
+domtblout_outfile = "%s/%s.domtblout" % (hmmscan_dir, hmmscan_vs_pfam_prefix)
 
 blastp_outfile = "%s%s.blastp.hits" % (blastp_dir, input_filename) if args.blast_database else None
 blastp_split_dir = "%ssplited_fasta_dir/" % blastp_dir
@@ -86,20 +88,19 @@ HMMER3.path = args.hmmer_dir
 HMMER3.threads = args.threads
 BLASTp.path = args.blast_dir
 BLASTp.threads = args.threads
-"""
+
 TransDecoder.extract_longest_orfs(args.input, genetic_code=args.genetic_code,
                                   analyze_only_top_strand=args.analyze_only_top_strand,
                                   minimum_protein_length=args.min_prot_len)
 if args.pfam_database:
-    HMMER3.parallel_hmmscan(args.pfam_database, pep_from_longest_orfs, hmmscan_vs_pfam_output,
-                            split_dir=hmmscan_splited_fasta_dir, splited_domtblout_dir=splited_domtblout_dir,
-                            domtblout_outfile=domtblout_outfile, dont_output_alignments=True)
+    HMMER3.parallel_hmmscan(args.pfam_database, pep_from_longest_orfs, hmmscan_vs_pfam_prefix,
+                            hmmscan_dir, dont_output_alignments=True)
 if args.blast_database:
     BLASTp.parallel_blastp(pep_from_longest_orfs, args.blast_database, outfile=blastp_outfile,
                            evalue=0.00001, output_format=6, blast_options=" -max_target_seqs 1",
                            combine_output_to_single_file=True, split_dir=blastp_split_dir,
                            splited_output_dir=blastp_splited_output_dir)
-"""
+
 TransDecoder.predict_pep(args.input, pfam_hits=domtblout_outfile,
                          blastp_hits=blastp_outfile,
                          minimum_orf_length_if_no_other_evidence=args.min_orf_len_if_no_other_evidence,
