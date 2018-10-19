@@ -2506,10 +2506,10 @@ class SequenceRoutines(FileRoutines):
 
         regions_to_trim_dict = AnnotationsRoutines.parse_regions(regions_to_trim_file,
                                                                  format="bed",
-                                                                 bed_format="0-based")
+                                                                 bed_format="0-based") if regions_to_trim_file else None
         regions_to_mask_dict = AnnotationsRoutines.parse_regions(regions_to_mask_file,
                                                                  format="bed",
-                                                                 bed_format="0-based")
+                                                                 bed_format="0-based") if regions_to_mask_dict else None
 
         corrected_record_dict = self.correct_sequences(record_dict,
                                                        black_list_ids=black_list_ids,
@@ -2518,6 +2518,8 @@ class SequenceRoutines(FileRoutines):
                                                        regions_to_mask_dict=regions_to_mask_dict)
 
         SeqIO.write(self.record_from_dict_generator(corrected_record_dict), output_file, format)
+
+        return corrected_record_dict
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
     lengths_dict = SynDict()
