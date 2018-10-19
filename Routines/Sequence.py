@@ -2417,6 +2417,107 @@ class SequenceRoutines(FileRoutines):
                     "%s%s" % (output_prefix, self.split_filename(sequence_file)[-1]),
                     format=sequence_format)
 
+    @staticmethod
+    def mask_sequence(sequence, regions_to_mask_list=None):
+        if not regions_to_mask_list:
+            return sequence
+
+        masked_sequence = Seq("")
+
+        if regions_to_mask_list[0][0] != 0:
+            masked_sequence += sequence[:regions_to_mask_list[0][0]]
+
+        for i in range(0, len(regions_to_mask_list) - 1):
+            masked_sequence += Seq("N" * (regions_to_mask_list[i][1] - regions_to_mask_list[i][0]))
+            masked_sequence += sequence[regions_to_mask_list[i][1] : regions_to_mask_list[i+1][0]]
+
+        masked_sequence += Seq("N" * (regions_to_mask_list[-1][1] - regions_to_mask_list[-1][0]))
+        if regions_to_mask_list[-1][1] != len(sequence):
+            masked_sequence += sequence[regions_to_mask_list[-1][1]:]
+
+        return masked_sequence
+
+    @staticmethod
+    def trim_sequence(sequence, regions_to_trim_list=None):
+        if not regions_to_trim_list:
+            return sequence
+
+        if len(regions_to_trim_list) > 2:
+            raise ValueError("ERROR!!! More than two regions to trim!")
+
+        elif len(regions_to_trim_list) == 2:
+            if regions_to_trim_list[0][0] != 0:
+                raise ValueError("ERROR!!! Left trim region doesn't start at the beginning of sequence!")
+            elif regions_to_trim_list[1][1] != len(sequence):
+                raise ValueError("ERROR!!! Right trim region doesn't end at the ending of sequence!")
+            else:
+                return sequence[regions_to_trim_list[0][1] : regions_to_trim_list[1][0]]
+        else:
+            if (regions_to_trim_list[0][0] != 0) and (regions_to_trim_list[0][1] != len(sequence)):
+                raise ValueError("ERROR!!! Trim region isn't terminal region!")
+            elif regions_to_trim_list[0][0] == 0:
+                return sequence[regions_to_trim_list[0][1]:]
+            else:
+                return sequence[:regions_to_trim_list[0][0]]
+
+    def correct_sequences(self, record_dict, black_list_ids=None, white_list_ids=None,
+                          regions_to_trim_dict=None, regions_to_mask_dict=None):
+        """
+        all  coordinates are assumed to be 0-based
+        """
+        corrected_records = OrderedDict()
+
+        for record_id in record_dict:
+            if black_list_ids and white_list_ids:
+                if record_id in black_list_ids:
+                    continue
+                if record_id not in white_list_ids:
+                    continue
+            elif black_list_ids:
+                if record_id in black_list_ids:
+                    continue
+            elif white_list_ids:
+                if record_id not in white_list_ids:
+                    continue
+            sequence = record_dict[record_id].seq
+            if regions_to_mask_dict:
+                if record_id in regions_to_mask_dict:
+                    masking_list = sorted(regions_to_mask_dict[record_id])
+                    sequence = self.mask_sequence(sequence, regions_to_mask_list=masking_list)
+
+            if regions_to_trim_dict:
+                if record_id in regions_to_trim_dict:
+                    trim_list = sorted(regions_to_trim_dict[record_id])
+                    sequence = self.trim_sequence(sequence, trim_list)
+
+            corrected_records[record_id] = SeqRecord(seq=sequence, description=record_dict[record_id].description,
+                                                     id=record_id)
+
+        return corrected_records
+
+    def correct_sequences_from_file(self, seq_file, output_file, black_list_file=None, white_list_file=None,
+                                    regions_to_trim_file=None, regions_to_mask_file=None, parsing_mode="parse",
+                                    format="fasta"):
+        from Routines import AnnotationsRoutines
+        record_dict = self.parse_seq_file(seq_file, mode=parsing_mode)
+
+        black_list_ids = IdList(filename=black_list_file) if black_list_file else None
+        white_list_ids = IdList(filename=white_list_file) if white_list_file else None
+
+        regions_to_trim_dict = AnnotationsRoutines.parse_regions(regions_to_trim_file,
+                                                                 format="bed",
+                                                                 bed_format="0-based")
+        regions_to_mask_dict = AnnotationsRoutines.parse_regions(regions_to_mask_file,
+                                                                 format="bed",
+                                                                 bed_format="0-based")
+
+        corrected_record_dict = self.correct_sequences(record_dict,
+                                                       black_list_ids=black_list_ids,
+                                                       white_list_ids=white_list_ids,
+                                                       regions_to_trim_dict=regions_to_trim_dict,
+                                                       regions_to_mask_dict=regions_to_mask_dict)
+
+        SeqIO.write(self.record_from_dict_generator(corrected_record_dict), output_file, format)
 
 def get_lengths(record_dict, out_file="lengths.t", write=False, write_header=True):
     lengths_dict = SynDict()

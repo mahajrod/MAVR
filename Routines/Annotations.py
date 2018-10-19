@@ -29,6 +29,10 @@ class AnnotationsRoutines(SequenceRoutines):
         self.gff_phase_column = 7
         self.gff_attribute_column = 8
 
+        self.bed_scaffold_column = 0
+        self.bed_start_column = 1
+        self.bed_end_column = 2
+
 
     @staticmethod
     def record_with_extracted_annotations_generator(gff_file,
@@ -847,9 +851,29 @@ class AnnotationsRoutines(SequenceRoutines):
 
         return feature_dict
 
+    def parse_regions(self, input_file, format="gff", comment_prefix="#", separator="\t", bed_format="0-based"):
+        region_dict = SynDict()
+        # All coordinates are converted to 0-based in python notation
 
+        if format == "gff":
+            for line in self.file_line_as_list_generator(input_file, comments_prefix="#", separator="\t"):
+                if line[self.gff_scaffold_column] not in region_dict:
+                    region_dict[line[self.gff_scaffold_column]] = [[int(line[self.gff_start_column]) - 1,
+                                                                    int(line[self.gff_end_column])]]
+                else:
+                    region_dict[line[self.gff_scaffold_column]].append([int(line[self.gff_start_column]) - 1,
+                                                                        int(line[self.gff_end_column])])
 
+        elif format == "bed":
+            for line in self.file_line_as_list_generator(input_file, comments_prefix="#", separator="\t"):
+                if line[self.bed_scaffold_column] not in region_dict:
+                    region_dict[line[self.bed_scaffold_column]] = [[(int(line[self.bed_start_column]) - 1) if bed_format == "1-based" else int(line[self.bed_start_column]),
+                                                                    int(line[self.bed_end_column])]]
+                else:
+                    region_dict[line[self.bed_scaffold_column]].append([(int(line[self.bed_start_column]) - 1) if bed_format == "1-based" else int(line[self.bed_start_column]),
+                                                                        int(line[self.bed_end_column])])
 
+        elif format == "gatk":
+            pass
 
-
-
+        return region_dict
