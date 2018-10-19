@@ -2454,6 +2454,8 @@ class SequenceRoutines(FileRoutines):
                 return sequence[regions_to_trim_list[0][1] : regions_to_trim_list[1][0]]
         else:
             if (regions_to_trim_list[0][0] != 0) and (regions_to_trim_list[0][1] != len(sequence)):
+                print("Seq len: %i" % len(sequence))
+                print(regions_to_trim_list)
                 raise ValueError("ERROR!!! Trim region isn't terminal region!")
             elif regions_to_trim_list[0][0] == 0:
                 return sequence[regions_to_trim_list[0][1]:]
@@ -2468,6 +2470,7 @@ class SequenceRoutines(FileRoutines):
         corrected_records = OrderedDict()
 
         for record_id in record_dict:
+            print("Handling %s" % record_id)
             if black_list_ids and white_list_ids:
                 if record_id in black_list_ids:
                     continue
