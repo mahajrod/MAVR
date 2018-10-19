@@ -2509,7 +2509,7 @@ class SequenceRoutines(FileRoutines):
                                                                  bed_format="0-based") if regions_to_trim_file else None
         regions_to_mask_dict = AnnotationsRoutines.parse_regions(regions_to_mask_file,
                                                                  format="bed",
-                                                                 bed_format="0-based") if regions_to_mask_dict else None
+                                                                 bed_format="0-based") if regions_to_mask_file else None
 
         corrected_record_dict = self.correct_sequences(record_dict,
                                                        black_list_ids=black_list_ids,
