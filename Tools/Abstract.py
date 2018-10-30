@@ -39,10 +39,10 @@ class Tool(SequenceRoutines, AlignmentRoutines):
         self.max_per_thread_memory = max_per_thread_memory
         self.tmp_dir = tmp_dir
 
-    def execute(self, options="", cmd=None, capture_output=False, generate_cmd_string_only=False):
+    def execute(self, options="", cmd=None, capture_output=False, generate_cmd_string_only=False, intepreter=None):
         command = cmd if cmd is not None else self.cmd
 
-        exe_string = (self.check_path(self.path) if self.path else "") + command + " " + options
+        exe_string = ("%s " % intepreter if intepreter else "") + (self.check_path(self.path) if self.path else "") + command + " " + options
 
         sys.stdout.write("Executing:\n\t%s\n" % exe_string)
         if self.timelog:
@@ -63,7 +63,7 @@ class Tool(SequenceRoutines, AlignmentRoutines):
 
     def parallel_execute(self, options_list, cmd=None, capture_output=False, threads=None, dir_list=None,
                          write_output_to_file=None, external_process_pool=None, async_run=False,
-                         job_chunksize=1, output_file_list=None, duplicate_to_stdout=False):
+                         job_chunksize=1, output_file_list=None, duplicate_to_stdout=False, intepreter=None):
 
         command = cmd if cmd is not None else self.cmd
         number_of_commands = len(options_list)
@@ -93,7 +93,7 @@ class Tool(SequenceRoutines, AlignmentRoutines):
         for options, directory, output in zip(options_list, directory_list, out_list):
             com = ""
             com += " cd %s && " % self.check_dir_path(directory) if directory else ""
-            com += " %s%s" % (self.check_path(self.path) if self.path else "", command)
+            com += ("%s " % intepreter if intepreter else "") + " %s%s" % (self.check_path(self.path) if self.path else "", command)
             com += " %s" % options
 
             if output:
