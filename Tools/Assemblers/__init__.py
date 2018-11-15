@@ -5,9 +5,10 @@ from Tools.Assemblers.Quast import Quast
 from Tools.Assemblers.Spades import Spades
 from Tools.Assemblers.MaSuRCA import MaSuRCA
 from Tools.Assemblers.Supernova import Supernova
-
+from Tools.Assemblers.BionanoSolve import BionanoSolve
 
 Quast = Quast()
 Spades = Spades()
 MaSuRCA = MaSuRCA()
 Supernova = Supernova()
+BionanoSolve = BionanoSolve()

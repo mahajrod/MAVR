@@ -1,6 +1,7 @@
 __author__ = 'mahajrod'
 
 from Tools.Annotation.VEP import VEP
+from Tools.Annotation.BUSCO import BUSCO
 from Tools.Annotation.SNPeff import SNPeff
 from Tools.Annotation.Barrnap import Barrnap
 from Tools.Annotation.Emapper import Emapper
@@ -12,6 +13,7 @@ SNPeff_path = ""
 SNPeff = SNPeff(jar_path=SNPeff_path)
 
 VEP = VEP()
+BUSCO = BUSCO()
 Barrnap = Barrnap()
 Emapper = Emapper()
 AUGUSTUS = AUGUSTUS()

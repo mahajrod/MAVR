@@ -39,10 +39,12 @@ class Tool(SequenceRoutines, AlignmentRoutines):
         self.max_per_thread_memory = max_per_thread_memory
         self.tmp_dir = tmp_dir
 
-    def execute(self, options="", cmd=None, capture_output=False, generate_cmd_string_only=False, intepreter=None):
+    def execute(self, options="", cmd=None, directory=None, capture_output=False, generate_cmd_string_only=False, intepreter=None):
         command = cmd if cmd is not None else self.cmd
 
-        exe_string = ("%s " % intepreter if intepreter else "") + (self.check_path(self.path) if self.path else "") + command + " " + options
+        exe_string = ""
+        exe_string += " cd %s && " % self.check_dir_path(directory) if directory else ""
+        exe_string += ("%s " % intepreter if intepreter else "") + (self.check_path(self.path) if self.path else "") + command + " " + options
 
         sys.stdout.write("Executing:\n\t%s\n" % exe_string)
         if self.timelog:
