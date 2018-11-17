@@ -56,7 +56,7 @@ class AlignmentPipeline(Pipeline):
     def align(self, sample_dir, reference_index, aligner="bwa", sample_list=None, outdir="./",
               quality_score_type="phred33", read_suffix="", read_extension="fastq",
               alignment_format="bam", threads=None, mark_duplicates=True, platform="Illumina",
-              add_read_groups_by_picard=False):
+              add_read_groups_by_picard=False, gzipped_reads=False):
 
         self.init_tools(threads=threads)
 
@@ -73,8 +73,8 @@ class AlignmentPipeline(Pipeline):
 
         for sample in samples:
             read_prefix = "%s/%s/%s%s" % (sample_dir, sample, sample, read_suffix)
-            forward_reads = "%s_1.%s" % (read_prefix, read_extension)
-            reverse_reads = "%s_2.%s" % (read_prefix, read_extension)
+            forward_reads = "%s_1.%s%s" % (read_prefix, read_extension, ".gz" if gzipped_reads else "")
+            reverse_reads = "%s_2.%s%s" % (read_prefix, read_extension, ".gz" if gzipped_reads else "")
 
             output_prefix = "%s/%s/%s" % (outdir, sample, sample)
 

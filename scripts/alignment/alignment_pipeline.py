@@ -37,7 +37,8 @@ parser.add_argument("-u", "--read_file_suffix", action="store", dest="read_file_
 parser.add_argument("-x", "--read_file_extension", action="store", dest="read_file_extension", default="fastq",
                     help="Extension of read files, i.e forward read file have folling name"
                          " <sample><read_suffix>_1.<extension> Default: 'fastq'")
-
+parser.add_argument("-z", "--gzipped_reads", action="store_true", dest="gzipped_reads", default=False,
+                    help="Reads are gzipped")
 """
 parser.add_argument("-z", "--calculate_median_coverage", action="store_true", dest="calculate_median_coverage",
                     default=False,
@@ -66,4 +67,4 @@ AlignmentPipeline.align(args.sample_dir, args.index, aligner=args.aligner, sampl
                         outdir=args.outdir, quality_score_type=args.quality, read_suffix=args.read_file_suffix,
                         read_extension=args.read_file_extension, alignment_format=args.alignment_format,
                         threads=None, mark_duplicates=True, platform="Illumina",
-                        add_read_groups_by_picard=args.add_read_groups_by_picard)
+                        add_read_groups_by_picard=args.add_read_groups_by_picard, gzipped_reads=args.gzipped_reads)
