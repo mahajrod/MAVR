@@ -3,8 +3,8 @@
 #SBATCH --time=120:00:00         # Run time in hh:mm:ss
 #SBATCH --mem-per-cpu=6192       # Minimum memory required per CPU (in megabytes)
 #SBATCH --job-name=bff_mus
-#SBATCH --error=/work/toleksyk/toleksyk/tmp/mustela_nigripes/bff_mus.%A_%a.err
-#SBATCH --output=/work/toleksyk/toleksyk/tmp/mustela_nigripes/bff_musl.%A_%a.out
+#SBATCH --error=/work/toleksyk/toleksyk/tmp/mustela_nigripes/log/bff_mus.%A_%a.err
+#SBATCH --output=/work/toleksyk/toleksyk/tmp/mustela_nigripes/log/bff_musl.%A_%a.out
 
 
 
