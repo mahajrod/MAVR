@@ -7,7 +7,7 @@ from copy import deepcopy
 from Bio import SeqIO
 from Bio.Seq import Seq
 
-from Routines.Sequence import record_by_expression_generator
+from Routines import SequenceRoutines
 
 
 parser = argparse.ArgumentParser()
@@ -31,7 +31,7 @@ args.aminoacids = args.aminoacids.upper() + args.aminoacids.lower()
 tmp_index_file = "temp.idx"
 
 print("Parsing %s..." % args.input_file)
-sequence_dict = SeqIO.index_db(tmp_index_file, args.input_file, format=args.format)
+sequence_dict = SequenceRoutines.parse_seq_file(args.input_file, "parse")#SeqIO.index_db(tmp_index_file, args.input_file, format=args.format)
 
 def record_with_replacenment_generator(sequence_dict):
     for record_id in sequence_dict:
