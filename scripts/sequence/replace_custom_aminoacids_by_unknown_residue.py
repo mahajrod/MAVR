@@ -45,5 +45,5 @@ def record_with_replacenment_generator(sequence_dict):
         yield new_record
 
 SeqIO.write(record_with_replacenment_generator(sequence_dict), args.output, args.format)
-os.remove(tmp_index_file)
+#os.remove(tmp_index_file)
 
