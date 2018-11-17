@@ -1,0 +1,35 @@
+
+
+~/Soft/krater/draw_kmer_distribution_from_fastq.py -s 5G -m 53 -b -w 1 --dont_show_genome_size_on_plot -t 60 -i ../../genome_denovo/assemblies/fermi_SSPACE_gapcloser_LRNA_scaf/L_RNA_scaffolder.fasta -o fermi_SSPACE_gapcloser_LRNA_scaf
+mkdir adapter_contamination.53.scan
+cd adapter_contamination.53.scan
+~/Soft/krater/scan_for_contamination.py -i ~/kmers/service/trueseq_adapters.fasta -j ../fermi_SSPACE_gapcloser_LRNA_scaf_53_mer.jf -r -o adapter_contamination.53.scan -t 20
+
+
+
+
+cd /home/projects/carribean_parrots/amazona_vittata/skliver/genome_denovo/assemblies/fermi_SSPACE_gapcloser_LRNA_scaf/blast_adapters
+
+
+cd /home/projects/carribean_parrots/amazona_vittata/skliver/genome_denovo/assemblies/fermi_SSPACE_gapcloser_LRNA_scaf/blast_adapters/
+
+~/Soft/MAVR/scripts/blast/parallel_blast_commands.py -c blastn -n 1 -o blast_adapters -t 30 -i ~/kmers/service/trueseq_adapters.fasta  -m " -db ../blast_db/L_RNA_scaffolder -task blastn-short -evalue 0.01  -num_threads 10 -outfmt '6 qseqid sseqid qlen slen pident length mismatch gapopen qstart qend sstart send evalue bitscore'"
+
+
+
+#---------------Scan for adapter contamination-------------------------------
+mkdir blast_db
+cd blast_db/
+
+~/Soft/MAVR/scripts/blast/make_blastplus_db.py -h
+~/Soft/MAVR/scripts/blast/make_blastplus_db.py -i ../L_RNA_scaffolder.fasta -t L_RNA_scaffolder -n L_RNA_scaffolder -y nucleotide
+cd ../
+mkdir blast_adapters
+cd blast_adapters/
+
+
+awk '{if ($4< 1000) print $2}' blast_adapters.hits > scaffolds.with_adapters.less1000.ids
+
+awk '{if ($4>= 1000) print $0}' blast_adapters.hits > blast_adapters.scaffolds.with_adapters.1000+.hits
+
+awk -F'\t' '{ if ($11 < $12) {printf"%s\t%s\t%s\n",$2,$11,$12} else {printf"%s\t%s\t%s\n",$2,$12,$11}}' blast_adapters.scaffolds.with_adapters.1000+.hits  | sort -k1,1 -k2,2n -k3,3n | uniq > blast_adapters.scaffolds.with_adapters.1000+.sorted.coords
