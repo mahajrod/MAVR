@@ -96,7 +96,7 @@ class AlignmentPipeline(Pipeline):
                                LB="x",
                                sort_by_coordinate=True,
                                sort_by_name=False,
-                               max_per_sorting_thread_memory=str(int(self.max_memory/self.threads)) + "G")
+                               max_per_sorting_thread_memory=str(max(int(self.max_memory/self.threads), 1)) + "G")
 
             if add_read_groups_by_picard:
                 sorted_alignment_picard_groups = "%s.picard_groups.%s" % (output_prefix, alignment_format)
