@@ -225,7 +225,7 @@ class Exonerate(Tool):
     """
 
     def split_output(self, exonerate_output_files, output_prefix, reference_protein_file, gene_prefix="GEN", transcript_prefix="TR", number_len=8,
-                     ):
+                     query_gff_presence=False):
         """
         full_length hits - whole query was aligned
         """
@@ -414,7 +414,7 @@ class Exonerate(Tool):
                     if tmp == "# --- START OF GFF DUMP ---\n":
                         fd_dict["gff"].write(tmp)
                         fd_dict["gff_" + output_type].write(tmp)
-                        if index == 0:
+                        if (index == 0) and query_gff_presence:
                             fd_dict["query_gff"].write(tmp)
                             fd_dict["query_gff_" + output_type].write(tmp)
                         else:
@@ -422,7 +422,7 @@ class Exonerate(Tool):
                             fd_dict["target_gff_" + output_type].write(tmp)
                         while True:
                             tmp = next(in_fd, "")
-                            if ("\tgene\t" in tmp) and (index == 1):
+                            if ("\tgene\t" in tmp) and ((index == 1) or (not query_gff_presence)):
                                 #print tmp
                                 current_gene_index += 1
                                 #print current_gene_index, gene_prefix
@@ -454,7 +454,7 @@ class Exonerate(Tool):
                                 #print current_gene_id
                                 #print tmp
                                 #print current_gene_id
-                            elif (tmp[0] != "#") and (index == 1):
+                            elif (tmp[0] != "#") and ((index == 1) or (not query_gff_presence)):
                                 #print tmp
                                 tmp_list = tmp.split("\t")
 
@@ -465,7 +465,7 @@ class Exonerate(Tool):
                                 tmp = "\t".join(tmp_list)
 
                             fd_dict["gff"].write(tmp)
-                            if index == 0:
+                            if index == 0 and query_gff_presence:
                                 fd_dict["query_gff"].write(tmp)
                                 fd_dict["query_gff_" + output_type].write(tmp)
                             else:

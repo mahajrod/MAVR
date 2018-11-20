@@ -20,8 +20,10 @@ parser.add_argument("-t", "--transcript_id_prefix", action="store", dest="transc
                     help="Prefix of transcript id to use. Default: TR")
 parser.add_argument("-n", "--number_digits_in_id", action="store", dest="number_digits_in_id", default=8, type=int,
                     help="Number of digits in id. Default: 8")
-
+parser.add_argument("-q", "--query_gff_presence", action="store_true", dest="query_gff_presence",
+                    help="Presence of query gff in input file. Default: False")
 args = parser.parse_args()
 
 Exonerate.split_output(args.input, args.output_prefix, args.reference_protein_file, gene_prefix=args.gene_id_prefix,
-                       transcript_prefix=args.gene_id_prefix, number_len=args.number_digits_in_id)
+                       transcript_prefix=args.gene_id_prefix, number_len=args.number_digits_in_id,
+                       query_gff_presence=args.query_gff_presence)
