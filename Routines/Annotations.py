@@ -2,6 +2,8 @@ __author__ = 'mahajrod'
 import os
 from copy import deepcopy
 
+import numpy as np
+
 from collections import OrderedDict
 from Bio import SearchIO
 from BCBio import GFF
@@ -12,6 +14,7 @@ from Bio.SeqFeature import SeqFeature, FeatureLocation
 from Bio.SeqRecord import SeqRecord
 
 from Routines.Sequence import SequenceRoutines
+from Routines import MatplotlibRoutines
 from CustomCollections.GeneralCollections import IdSet, SynDict, IdList
 
 
@@ -278,6 +281,61 @@ class AnnotationsRoutines(SequenceRoutines):
         print(stat_string)
         with open(stat_file, "w") as stat_fd:
             stat_fd.write(stat_string)
+
+    @staticmethod
+    def get_feature_length_distribution_from_gff(input_gff, output_prefix, feature_list=None):
+        len_file = "%s.len" % output_prefix
+        stat_file = "%s.stat" % output_prefix
+
+        feature_length_list = []
+        total_feature_length = 0
+        feature_number = 0
+
+        with open(input_gff, "r") as in_fd:
+            with open(len_file, "w") as len_fd:
+                for line in in_fd:
+                    if line[0] == "#":
+                        continue
+                    tmp = line.split("\t")
+                    feature = tmp[2]
+                    if feature_list is not None:
+                        if feature not in feature_list:
+                            continue
+
+                    start = int(tmp[3])
+                    end = int(tmp[4])
+
+                    feature_number += 1
+                    feature_length = end - start + 1
+                    feature_length_list.append(feature_length)
+                    #len_fd.write("%i\n" % feature_length)
+
+                    total_feature_length += feature_length
+
+        stat_string = "Features\t%s\n" % (",".join(feature_list) if feature_list else "all")
+        stat_string += "Number of features\t%i\n" % feature_number
+        stat_string += "Total length\t%i\n" % total_feature_length
+
+        print(stat_string)
+        with open(stat_file, "w") as stat_fd:
+            stat_fd.write(stat_string)
+
+        feature_length_list = np.array(feature_length_list)
+        np.savetxt(len_file, feature_length_list, fmt='%i', delimiter=' ', newline='\n', header='', footer='', comments='# ', encoding=None)
+
+        feature_name = "feature"
+        if feature_list is None:
+            feature_name = "feature"
+        elif isinstance(feature_list, str):
+            feature_name = feature_list
+        elif len(feature_list) == 1:
+            feature_name = feature_list[0]
+        else:
+            feature_name = "feature"
+
+        MatplotlibRoutines.draw_histogram(feature_length_list, output_prefix=output_prefix, width_of_bins=50,
+                                          xlabel="Feature length", ylabel="N of features",
+                                          title="Distribution of %s lengths" % feature_name)
 
     @staticmethod
     def get_feature_to_parent_correspondence_from_gff(input_gff, output, feature_list=("mRNA",),
