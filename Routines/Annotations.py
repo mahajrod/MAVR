@@ -326,7 +326,7 @@ class AnnotationsRoutines(SequenceRoutines):
             stat_fd.write(stat_string)
 
         feature_length_list = np.array(feature_length_list)
-        np.savetxt(len_file, feature_length_list, fmt='%i', delimiter=' ', newline='\n', header='', footer='', comments='# ', encoding=None)
+        np.savetxt(len_file, feature_length_list, fmt='%i')
 
         feature_name = "feature"
 
@@ -341,9 +341,24 @@ class AnnotationsRoutines(SequenceRoutines):
         else:
             feature_name = "feature"
 
-        MatplotlibRoutines.draw_histogram(feature_length_list, output_prefix=output_prefix, width_of_bins=50,
+        MatplotlibRoutines.draw_histogram(feature_length_list, output_prefix=output_prefix + ".all",
                                           xlabel="Feature length", ylabel="N of features",
-                                          title="Distribution of %s lengths" % feature_name)
+                                          title="Distribution of %s lengths" % feature_name,
+                                          ylogbase=10, xlogbase=10,
+                                          bins_list=[1, 10, 100, 1000, 10000, 100000, 1000000, 10000000],
+                                          close_figure=True)
+
+        MatplotlibRoutines.draw_histogram(feature_length_list, output_prefix=output_prefix + ".max_10000",
+                                          width_of_bins=100, max_threshold=10000, min_threshold=1,
+                                          xlabel="Feature length", ylabel="N of features",
+                                          title="Distribution of %s lengths" % feature_name,
+                                          close_figure=True)
+
+        MatplotlibRoutines.draw_histogram(feature_length_list, output_prefix=output_prefix + ".max_1000",
+                                          width_of_bins=10, max_threshold=1000, min_threshold=1,
+                                          xlabel="Feature length", ylabel="N of features",
+                                          title="Distribution of %s lengths" % feature_name,
+                                          close_figure=True)
 
     @staticmethod
     def get_feature_to_parent_correspondence_from_gff(input_gff, output, feature_list=("mRNA",),
