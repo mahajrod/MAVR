@@ -14,7 +14,6 @@ from Bio.SeqFeature import SeqFeature, FeatureLocation
 from Bio.SeqRecord import SeqRecord
 
 from Routines.Sequence import SequenceRoutines
-from Routines import MatplotlibRoutines
 from CustomCollections.GeneralCollections import IdSet, SynDict, IdList
 
 
@@ -283,6 +282,8 @@ class AnnotationsRoutines(SequenceRoutines):
             stat_fd.write(stat_string)
 
     def get_feature_length_distribution_from_gff(self, input_gff, output_prefix, feature_list=None):
+        from Routines import MatplotlibRoutines
+
         len_file = "%s.len" % output_prefix
         stat_file = "%s.stat" % output_prefix
 
