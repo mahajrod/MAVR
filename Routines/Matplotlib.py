@@ -297,10 +297,10 @@ class MatplotlibRoutines:
             plt.savefig("%s.%s" % (output_prefix, ext))
 
     @staticmethod
-    def draw_histogram(data_array, output_prefix=None, number_of_bins=None, width_of_bins=None,
+    def draw_histogram(data_array, output_prefix=None, number_of_bins=None, width_of_bins=None, bins_list=None,
                        max_threshold=None, min_threshold=None, xlabel=None, ylabel=None,
-                       title=None, extensions=("png",), ylogbase=None, subplot=None, suptitle=None,
-                       close_figure=False, save_histovalues_only=False, figsize=(6,6),
+                       title=None, extensions=("png",), ylogbase=None, xlogbase=None, subplot=None, suptitle=None,
+                       close_figure=False, save_histovalues_only=False, figsize=(6, 6),
                        header=None):
         if (number_of_bins is not None) and (width_of_bins is not None):
             raise AttributeError("Options -w/--width_of_bins and -b/--number_of_bins mustn't be set simultaneously")
@@ -339,10 +339,13 @@ class MatplotlibRoutines:
         if subplot is None:
             #print "aaaaaaaaaa"
             figure = plt.figure(1, figsize=figsize,)
-            subplott = figure.add_subplot(1, 1, 1)
+            subplot = figure.add_subplot(1, 1, 1)
         else:
             plt.axes(subplot)
-        if number_of_bins:
+
+        if bins_list:
+            bins = bins_list
+        elif number_of_bins:
             bins = number_of_bins
         elif width_of_bins:
             bins = np.arange(min_len, max_len, width_of_bins)
@@ -377,6 +380,10 @@ class MatplotlibRoutines:
             subplot.set_yscale('log', basey=ylogbase)
             plt.ylim(ymin=1)
 
+        if xlogbase:
+            subplot.set_xscale('log', basex=xlogbase)
+            plt.xlim(xmin=1)
+
         if output_prefix:
             if not save_histovalues_only:
                 for ext in extensions:
@@ -385,9 +392,8 @@ class MatplotlibRoutines:
             # save histo values
             np.savetxt("%s.histo" % output_prefix, zip(bins[:-1], n), fmt="%i\t%i")
             np.savetxt("%s.bins" % output_prefix, bins, fmt="%i")
-        if subplot is None:
-            if close_figure:
-                plt.close(figure)
+        if close_figure:
+            plt.close(figure)
 
         return n, bins
 
