@@ -282,35 +282,39 @@ class AnnotationsRoutines(SequenceRoutines):
         with open(stat_file, "w") as stat_fd:
             stat_fd.write(stat_string)
 
-    @staticmethod
-    def get_feature_length_distribution_from_gff(input_gff, output_prefix, feature_list=None):
+    def get_feature_length_distribution_from_gff(self, input_gff, output_prefix, feature_list=None):
         len_file = "%s.len" % output_prefix
         stat_file = "%s.stat" % output_prefix
 
         feature_length_list = []
         total_feature_length = 0
         feature_number = 0
+        feature_type_set = set()
 
         with open(input_gff, "r") as in_fd:
-            with open(len_file, "w") as len_fd:
-                for line in in_fd:
-                    if line[0] == "#":
-                        continue
-                    tmp = line.split("\t")
-                    feature = tmp[2]
-                    if feature_list is not None:
+            for line in in_fd:
+                if line[0] == "#":
+                    continue
+                tmp = line.split("\t")
+                feature = tmp[self.gff_featuretype_column]
+                feature_type_set.add(feature)
+                if feature_list is not None:
+                    if isinstance(feature_list, str):
+                        if feature != feature_list:
+                            continue
+                    else:
                         if feature not in feature_list:
                             continue
 
-                    start = int(tmp[3])
-                    end = int(tmp[4])
+                start = int(tmp[self.gff_start_column])
+                end = int(tmp[self.gff_end_column])
 
-                    feature_number += 1
-                    feature_length = end - start + 1
-                    feature_length_list.append(feature_length)
-                    #len_fd.write("%i\n" % feature_length)
+                feature_number += 1
+                feature_length = end - start + 1
+                feature_length_list.append(feature_length)
+                #len_fd.write("%i\n" % feature_length)
 
-                    total_feature_length += feature_length
+                total_feature_length += feature_length
 
         stat_string = "Features\t%s\n" % (",".join(feature_list) if feature_list else "all")
         stat_string += "Number of features\t%i\n" % feature_number
@@ -324,7 +328,10 @@ class AnnotationsRoutines(SequenceRoutines):
         np.savetxt(len_file, feature_length_list, fmt='%i', delimiter=' ', newline='\n', header='', footer='', comments='# ', encoding=None)
 
         feature_name = "feature"
-        if feature_list is None:
+
+        if len(feature_type_set) == 1:
+            feature_name = list(feature_type_set)[0]
+        elif feature_list is None:
             feature_name = "feature"
         elif isinstance(feature_list, str):
             feature_name = feature_list
