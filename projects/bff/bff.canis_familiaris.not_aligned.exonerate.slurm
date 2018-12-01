@@ -16,7 +16,7 @@ source ${PROFILE}
 
 REFERENCE_SPECIES=canis_familiaris
 
-SPLITED_PEP_DIR=${WORKDIR}/data/db/proteins/${REFERENCE_SPECIES}/ncbi/not_aligned.splited_pep
+SPLITED_PEP_DIR=${WORKDIR}/data/db/proteins/${REFERENCE_SPECIES}/ncbi/not_aligned.splited_pep/
 PEP_FILE="${SPLITED_PEP_DIR}${REFERENCE_SPECIES}.not_aligned_${SLURM_ARRAY_TASK_ID}.fasta"
 
 
