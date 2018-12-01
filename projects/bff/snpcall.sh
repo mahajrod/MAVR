@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+for SP in SRR1508214  SRR1508215  SRR1508749  SRR1508750 SB7462  SB8055 SB6536; do mkdir -p ${SP}/splited_gvcf; cd ${SP}/splited_gvcf; ~/Soft/MAVR/scripts/snpcall/parallel_gvcf_call.py -b /home/projects/mustelidae/skliver/mustela_nigripes/genome_ref_assisted/alignment/10x_bionano_hic/${SP}/${SP}.mkdup.bam -o ./ -p ${SP} -r /home/projects/mustelidae/skliver/mustela_nigripes/genome_denovo/assemblies/10x_bionano_hic/mustela_nigripes.v2.smithsonian.fasta -g ~/Soft/GenomeAnalysisTK-3.7/ -t 40 -m 280g -x 15 -l 300000 ; cd ../../; done
