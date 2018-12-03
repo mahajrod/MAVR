@@ -39,6 +39,32 @@ parser.add_argument("-q", "--softmasked_input", action="store_true", dest="softm
 parser.add_argument("-s", "--softmasked_target", action="store_true", dest="softmasked_target", default=False,
                     help="Target is softmasked")
 
+parser.add_argument("-d", "--handling_mode", action="store", dest="handling_mode", default="local",
+                    help="Handling mode. Allowed: local(default), slurm")
+parser.add_argument("-j", "--slurm_job_name", action="store", dest="slurm_job_name", default="JOB",
+                    help="Slurm job name. Default: JOB")
+parser.add_argument("-b", "--slurm_max_jobs", action="store", dest="slurm_max_jobs", default=1000, type=int,
+                    help="Slurm max jobs. Default: 1000")
+parser.add_argument("-y", "--slurm_log_prefix", action="store", dest="slurm_log_prefix",
+                    help="Slurm log prefix. ")
+parser.add_argument("-z", "--slurm_cmd_log_file", action="store", dest="slurm_cmd_log_file",
+                    help="Slurm cmd logfile")
+parser.add_argument("-l", "--slurm_error_log_prefix", action="store", dest="slurm_error_log_prefix",
+                    help="Slurm error log prefix")
+parser.add_argument("-k", "--max_memory_per_task", action="store", dest="max_memory_per_task", default="5000",
+                    help="Maximum memory per task in megabytes. Default: 5000")
+
+parser.add_argument("-r", "--slurm_max_running_time", action="store", dest="slurm_max_running_time", default="100:00:00",
+                    help="Slurm max running time in hh:mm:ss format. Default: 100:00:00")
+
+parser.add_argument("-w", "--slurm_modules_list", action="store", dest="slurm_modules_list", default=[],
+                    type=lambda s: s.split(","),
+                    help="Comma-separated list of modules to load. Set modules for hmmer and python")
+
+
+
+
+
 """
 parser.add_argument("-u", "--num_in_seq_per_file", action="store", dest="num_in_seq_per_file",
                     type=int, default=1000,
@@ -80,4 +106,18 @@ Exonerate.parallel_alignment(args.input, args.target, args.model, num_of_files=a
                              number_of_results_to_report=args.num_of_results_to_report,
                              converted_output_dir="converted_output",
                              softmasked_target=args.softmasked_target,
-                             softmasked_query=args.softmasked_input)
+                             softmasked_query=args.softmasked_input,
+                             cmd_log_file=args.slurm_cmd_log_file,
+                             cpus_per_task=1,
+                             handling_mode=args.handling_mode,
+                             job_name=args.slurm_job_name,
+                             log_prefix=args.slurm_log_prefix,
+                             error_log_prefix=args.slurm_error_log_prefix,
+                             max_jobs=args.slurm_max_jobs,
+                             max_running_time=args.slurm_max_running_time,
+                             max_memory_per_node=args.max_memory_per_task,
+                             modules_list=args.slurm_modules_list,
+                             environment_variables_dict=None,
+                             length_thresholds=(600, 1000),
+                             memory_thresholds=(6100, 9000, 20000))
+
