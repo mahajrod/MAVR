@@ -13,6 +13,7 @@ from CustomCollections.GeneralCollections import SynDict, IdList
 
 from Bio import SeqIO
 
+
 class VulgarAlignment:
     def __init__(self, exonerate_vulgar_string):
         string_list = exonerate_vulgar_string.split()
@@ -96,12 +97,22 @@ class Exonerate(Tool):
                            num_of_files=None,
                            converted_output_dir="converted_output", parsing_mode="parse", index_file=None,
                            external_process_pool=None,
-                           softmasked_target=False, softmasked_query=False):
-        splited_filename = self.split_filename(query_file)
-        self.split_fasta(query_file, splited_fasta_dir, num_of_recs_per_file=num_of_recs_per_file,
-                         num_of_files=num_of_files,
-                         output_prefix=splited_filename[1],
-                         parsing_mode=parsing_mode, index_file=index_file)
+                           softmasked_target=False, softmasked_query=False,
+                           cmd_log_file=None,
+                           cpus_per_task=1,
+                           handling_mode="local",
+                           job_name=None,
+                           log_prefix=None,
+                           error_log_prefix=None,
+                           max_jobs=None,
+                           max_running_time=None,
+                           max_memory_per_node=None,
+                           max_memmory_per_cpu=None,
+                           modules_list=None,
+                           environment_variables_dict=None,
+                           length_thresholds=(600, 1000),
+                           memory_thresholds=(6100, 9000, 20000)
+                           ):
 
         common_options = self.parse_common_options(model, show_alignment=show_alignment,
                                                    show_sugar=show_sugar, show_cigar=show_cigar,
@@ -114,12 +125,31 @@ class Exonerate(Tool):
                                                    softmasked_query=softmasked_query)
 
         options_list = []
+        max_memory_per_cpu_per_task_list = []
+
+        splited_filename = self.split_filename(query_file)
+        self.split_fasta(query_file, splited_fasta_dir, num_of_recs_per_file=num_of_recs_per_file,
+                         num_of_files=num_of_files,
+                         output_prefix=splited_filename[1],
+                         parsing_mode=parsing_mode, index_file=index_file)
         splited_files = os.listdir(splited_fasta_dir)
 
         self.safe_mkdir(splited_result_dir)
         #save_mkdir(converted_output_dir)
 
         for filename in splited_files:
+            if handling_mode == "slurm":
+                max_seq_length = max(self.get_lengths_from_seq_file("%s/%s" % (splited_fasta_dir, filename)).values())
+
+                if max_seq_length <= length_thresholds[0]:
+                    max_memory = memory_thresholds[0]
+                elif max_seq_length <= length_thresholds[1]:
+                    max_memory = memory_thresholds[1]
+                else:
+                    max_memory = memory_thresholds[2]
+
+                max_memory_per_cpu_per_task_list.append(max_memory)
+
             filename_list = self.split_filename(filename)
             options = common_options
             options += " -q %s/%s" % (splited_fasta_dir, filename)
@@ -127,12 +157,30 @@ class Exonerate(Tool):
             options += " > %s/%s.output" % (splited_result_dir, filename_list[1])
             options_list.append(options)
 
-        self.parallel_execute(options_list, external_process_pool=external_process_pool)
+        if handling_mode == "local":
+            self.parallel_execute(options_list, external_process_pool=external_process_pool)
 
-        if not store_intermediate_files:
-            shutil.rmtree(splited_fasta_dir)
-            #shutil.rmtree(splited_result_dir)
-            #shutil.rmtree(converted_output_dir)
+            if not store_intermediate_files:
+                shutil.rmtree(splited_fasta_dir)
+                #shutil.rmtree(splited_result_dir)
+                #shutil.rmtree(converted_output_dir)
+        else:
+            cmd_list = ["%s%s %s" % ((self.path + "/") if self.path else "", self.cmd, options) for options in options_list]
+            self.slurm_run_multiple_jobs_in_wrap_mode(cmd_list,
+                                                      cmd_log_file,
+                                                      max_jobs=max_jobs,
+                                                      job_name=job_name,
+                                                      log_prefix=log_prefix,
+                                                      error_log_prefix=error_log_prefix,
+                                                      cpus_per_node=None,
+                                                      max_running_jobs=None,
+                                                      max_running_time=max_running_time,
+                                                      cpus_per_task=cpus_per_task,
+                                                      max_memory_per_node=max_memory_per_node,
+                                                      max_memmory_per_cpu=max_memmory_per_cpu,
+                                                      max_memory_per_cpu_per_task_list=max_memory_per_cpu_per_task_list,
+                                                      modules_list=modules_list,
+                                                      environment_variables_dict=environment_variables_dict)
 
     def prepare_index(self, list_of_files, output_prefix, translated_index=None, memory_limit=1024):
         pass
