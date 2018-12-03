@@ -503,11 +503,11 @@ class Tool(SequenceRoutines, AlignmentRoutines):
             for job_index in range(0, len(job_submit_index_array) - 1):
 
                 if max_memory_per_cpu_per_task_list:
-                    print "----------------------------"
-                    print max_memory_per_cpu_per_task_list
-                    print job_submit_index_array
-                    print job_index
-                    print "============================"
+                    #print "----------------------------"
+                    #print max_memory_per_cpu_per_task_list
+                    #print job_submit_index_array
+                    #print job_index
+                    #print "============================"
                     max_memory_per_cpu_for_job = max(max_memory_per_cpu_per_task_list[job_submit_index_array[job_index]:job_submit_index_array[job_index+1]])
 
                     sbatch_options = self.parse_sbatch_options(job_name=job_name,
