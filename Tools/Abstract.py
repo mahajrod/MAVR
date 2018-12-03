@@ -501,8 +501,14 @@ class Tool(SequenceRoutines, AlignmentRoutines):
             job_submit_index_array = np.linspace(0, len(cmd_list), max_jobs, dtype=int) if max_jobs else [i for i in range(0, len(cmd_list) + 1)]
 
             for job_index in range(0, len(job_submit_index_array) - 1):
+
                 if max_memory_per_cpu_per_task_list:
                     max_memory_per_cpu_for_job = max(max_memory_per_cpu_per_task_list[job_submit_index_array[job_index]:job_submit_index_array[job_index+1]])
+                    print "----------------------------"
+                    print max_memory_per_cpu_per_task_list
+                    print job_submit_index_array
+                    print job_index
+                    print "============================"
                     sbatch_options = self.parse_sbatch_options(job_name=job_name,
                                                                log_prefix=log_prefix,
                                                                error_log_prefix=error_log_prefix,
