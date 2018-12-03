@@ -463,7 +463,7 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                                              environment_variables_dict=None):
         if max_memory_per_cpu_per_task_list is not None:
             if len(max_memory_per_cpu_per_task_list) != cmd_list:
-                raise ValueError("Length of cmd_list is noq equal to max_memory_per_cpu_per_task_list")
+                raise ValueError("Length of cmd_list(%i) is noq equal to max_memory_per_cpu_per_task_list(%i)" % (len(cmd_list), len(max_memory_per_cpu_per_task_list)))
 
         with open(cmd_log, "w") as cmd_fd:
             cmd_fd.write("#job_id\tcmd_ids\tsbatch_cmd\n")
