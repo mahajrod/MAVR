@@ -498,7 +498,7 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                                                        cpus_per_task=cpus_per_task,
                                                        max_memmory_per_cpu=max_memmory_per_cpu)
 
-            job_submit_index_array = np.linspace(0, len(cmd_list), max_jobs, dtype=int) if max_jobs else [i for i in range(0, len(cmd_list) + 1)]
+            job_submit_index_array = np.linspace(0, len(cmd_list), max_jobs, dtype=int) if max_jobs and (max_jobs < len(cmd_list)) else [i for i in range(0, len(cmd_list) + 1)]
 
             for job_index in range(0, len(job_submit_index_array) - 1):
 
