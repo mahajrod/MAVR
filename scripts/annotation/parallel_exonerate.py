@@ -39,7 +39,7 @@ parser.add_argument("-q", "--softmasked_input", action="store_true", dest="softm
 parser.add_argument("-s", "--softmasked_target", action="store_true", dest="softmasked_target", default=False,
                     help="Target is softmasked")
 
-parser.add_argument("-d", "--handling_mode", action="store", dest="handling_mode", default="local",
+parser.add_argument("-p", "--handling_mode", action="store", dest="handling_mode", default="local",
                     help="Handling mode. Allowed: local(default), slurm")
 parser.add_argument("-j", "--slurm_job_name", action="store", dest="slurm_job_name", default="JOB",
                     help="Slurm job name. Default: JOB")
