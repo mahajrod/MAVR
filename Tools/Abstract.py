@@ -408,8 +408,7 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                              max_running_jobs=None,
                              max_running_time=None,
                              cpus_per_task=None,
-                             max_memmory_per_cpu=None,
-                             ):
+                             max_memmory_per_cpu=None):
 
         options = ""
         if task_index_list or start_task_index or end_task_index:
@@ -459,8 +458,12 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                                              max_running_time=None,
                                              cpus_per_task=None,
                                              max_memmory_per_cpu=None,
+                                             max_memory_per_cpu_per_task_list=None,
                                              modules_list=None,
                                              environment_variables_dict=None):
+        if max_memory_per_cpu_per_task_list is not None:
+            if len(max_memory_per_cpu_per_task_list) != cmd_list:
+                raise ValueError("Length of cmd_list is noq equal to max_memory_per_cpu_per_task_list")
 
         with open(cmd_log, "w") as cmd_fd:
             cmd_fd.write("#job_id\tcmd_ids\tsbatch_cmd\n")
@@ -498,6 +501,26 @@ class Tool(SequenceRoutines, AlignmentRoutines):
             job_submit_index_array = np.linspace(0, len(cmd_list), max_jobs, dtype=int) if max_jobs else [i for i in range(0, len(cmd_list) + 1)]
 
             for job_index in range(0, len(job_submit_index_array) - 1):
+                if max_memory_per_cpu_per_task_list:
+                    max_memory_per_cpu_for_job = max(max_memory_per_cpu_per_task_list[job_submit_index_array[job_index]:job_submit_index_array[job_index+1]])
+                    sbatch_options = self.parse_sbatch_options(job_name=job_name,
+                                                               log_prefix=log_prefix,
+                                                               error_log_prefix=error_log_prefix,
+                                                               node_number=node_number,
+                                                               partition=partition,
+                                                               cpus_per_node=cpus_per_node,
+                                                               node_type=node_type,
+                                                               max_memory_per_node=max_memory_per_node,
+                                                               stdout_file=stdout_file,
+                                                               email=email,
+                                                               mail_type=mail_type,
+                                                               task_index_list=task_index_list,
+                                                               start_task_index=start_task_index,
+                                                               end_task_index=end_task_index,
+                                                               max_running_jobs=max_running_jobs,
+                                                               max_running_time=max_running_time,
+                                                               cpus_per_task=cpus_per_task,
+                                                               max_memmory_per_cpu=max_memory_per_cpu_for_job)
 
                 options = "%s" % sbatch_options
                 options += " --wrap \"%s %s %s\"" % (environment_variables_cmd,
