@@ -78,7 +78,7 @@ class FileRoutines:
 
     def detect_filetype_by_extension(self, filename, filetypes_dict=None):
         filetypes = filetypes_dict if filetypes_dict else self.filetypes_dict
-        directory, prefix, extension = split_filename(filename)
+        directory, prefix, extension = self.split_filename(filename)
         for filetype in filetypes:
             if extension in filetypes[filetype]:
                 return filetype
