@@ -21,20 +21,19 @@ class AnnotationsRoutines(SequenceRoutines):
     def __init__(self):
         SequenceRoutines.__init__(self)
 
-        self.gff_scaffold_column = 0
-        self.gff_source_column = 1
-        self.gff_featuretype_column = 2
-        self.gff_start_column = 3
-        self.gff_end_column = 4
-        self.gff_score_column = 5
-        self.gff_strand_column = 6
-        self.gff_phase_column = 7
-        self.gff_attribute_column = 8
+        self.GFF_SCAFFOLD_COLUMN = 0
+        self.GFF_SOURCE_COLUMN = 1
+        self.GFF_FEATURETYPE_COLUMN = 2
+        self.GFF_START_COLUMN = 3
+        self.GFF_END_COLUMN = 4
+        self.GFF_SCORE_COLUMN = 5
+        self.GFF_STRAND_COLUMN = 6
+        self.GFF_PHASE_COLUMN = 7
+        self.GFF_ATTRIBUTE_COLUMN = 8
 
-        self.bed_scaffold_column = 0
-        self.bed_start_column = 1
-        self.bed_end_column = 2
-
+        self.BED_SCAFFOLD_COLUMN = 0
+        self.BED_START_COLUMN = 1
+        self.BED_END_COLUMN = 2
 
     @staticmethod
     def record_with_extracted_annotations_generator(gff_file,
@@ -297,7 +296,7 @@ class AnnotationsRoutines(SequenceRoutines):
                 if line[0] == "#":
                     continue
                 tmp = line.split("\t")
-                feature = tmp[self.gff_featuretype_column]
+                feature = tmp[self.GFF_FEATURETYPE_COLUMN]
                 feature_type_set.add(feature)
                 if feature_list is not None:
                     if isinstance(feature_list, str):
@@ -307,8 +306,8 @@ class AnnotationsRoutines(SequenceRoutines):
                         if feature not in feature_list:
                             continue
 
-                start = int(tmp[self.gff_start_column])
-                end = int(tmp[self.gff_end_column])
+                start = int(tmp[self.GFF_START_COLUMN])
+                end = int(tmp[self.GFF_END_COLUMN])
 
                 feature_number += 1
                 feature_length = end - start + 1
@@ -895,9 +894,9 @@ class AnnotationsRoutines(SequenceRoutines):
 
         feature_dict = SynDict()
         for line_list in self.file_line_as_list_generator(input_gff, comments_prefix="#", separator="\t"):
-            annotation_dict = self.parse_gff_annotation_string_to_dict(line_list[self.gff_attribute_column])
+            annotation_dict = self.parse_gff_annotation_string_to_dict(line_list[self.GFF_ATTRIBUTE_COLUMN])
 
-            if line_list[self.gff_featuretype_column] not in feature_type_list:
+            if line_list[self.GFF_FEATURETYPE_COLUMN] not in feature_type_list:
                 continue
 
             if unification_key not in annotation_dict:
@@ -908,10 +907,10 @@ class AnnotationsRoutines(SequenceRoutines):
             if annotation_dict[unification_key][0] not in feature_dict:
                 feature_dict[annotation_dict[unification_key][0]] = []
 
-            feature_dict[annotation_dict[unification_key][0]].append([line_list[self.gff_scaffold_column],
-                                                                     line_list[self.gff_start_column],
-                                                                     line_list[self.gff_end_column],
-                                                                     line_list[self.gff_strand_column]])
+            feature_dict[annotation_dict[unification_key][0]].append([line_list[self.GFF_SCAFFOLD_COLUMN],
+                                                                     line_list[self.GFF_START_COLUMN],
+                                                                     line_list[self.GFF_END_COLUMN],
+                                                                     line_list[self.GFF_STRAND_COLUMN]])
 
         if output_prefix:
             feature_dict.write("%s.tab" % output_prefix,
@@ -938,21 +937,21 @@ class AnnotationsRoutines(SequenceRoutines):
 
         if format == "gff":
             for line in self.file_line_as_list_generator(input_file, comments_prefix="#", separator="\t"):
-                if line[self.gff_scaffold_column] not in region_dict:
-                    region_dict[line[self.gff_scaffold_column]] = [[int(line[self.gff_start_column]) - 1,
-                                                                    int(line[self.gff_end_column])]]
+                if line[self.GFF_SCAFFOLD_COLUMN] not in region_dict:
+                    region_dict[line[self.GFF_SCAFFOLD_COLUMN]] = [[int(line[self.GFF_START_COLUMN]) - 1,
+                                                                    int(line[self.GFF_END_COLUMN])]]
                 else:
-                    region_dict[line[self.gff_scaffold_column]].append([int(line[self.gff_start_column]) - 1,
-                                                                        int(line[self.gff_end_column])])
+                    region_dict[line[self.GFF_SCAFFOLD_COLUMN]].append([int(line[self.GFF_START_COLUMN]) - 1,
+                                                                        int(line[self.GFF_END_COLUMN])])
 
         elif format == "bed":
             for line in self.file_line_as_list_generator(input_file, comments_prefix="#", separator="\t"):
-                if line[self.bed_scaffold_column] not in region_dict:
-                    region_dict[line[self.bed_scaffold_column]] = [[(int(line[self.bed_start_column]) - 1) if bed_format == "1-based" else int(line[self.bed_start_column]),
-                                                                    int(line[self.bed_end_column])]]
+                if line[self.BED_SCAFFOLD_COLUMN] not in region_dict:
+                    region_dict[line[self.BED_SCAFFOLD_COLUMN]] = [[(int(line[self.BED_START_COLUMN]) - 1) if bed_format == "1-based" else int(line[self.BED_START_COLUMN]),
+                                                                    int(line[self.BED_END_COLUMN])]]
                 else:
-                    region_dict[line[self.bed_scaffold_column]].append([(int(line[self.bed_start_column]) - 1) if bed_format == "1-based" else int(line[self.bed_start_column]),
-                                                                        int(line[self.bed_end_column])])
+                    region_dict[line[self.BED_SCAFFOLD_COLUMN]].append([(int(line[self.BED_START_COLUMN]) - 1) if bed_format == "1-based" else int(line[self.BED_START_COLUMN]),
+                                                                        int(line[self.BED_END_COLUMN])])
 
         elif format == "gatk":
             pass
