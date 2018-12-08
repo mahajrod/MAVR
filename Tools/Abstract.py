@@ -460,7 +460,8 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                                              max_memmory_per_cpu=None,
                                              max_memory_per_cpu_per_task_list=None,
                                              modules_list=None,
-                                             environment_variables_dict=None):
+                                             environment_variables_dict=None,
+                                             verbose=False):
         if max_memory_per_cpu_per_task_list is not None:
             if len(max_memory_per_cpu_per_task_list) != len(cmd_list):
                 raise ValueError("Length of cmd_list(%i) is noq equal to max_memory_per_cpu_per_task_list(%i)" % (len(cmd_list), len(max_memory_per_cpu_per_task_list)))
@@ -535,7 +536,8 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                                                      ";".join(cmd_list[job_submit_index_array[job_index]:job_submit_index_array[job_index+1]]))
                 command = "sbatch %s" % options
 
-                #print command
+                if verbose:
+                    print(command)
 
                 job_id = Popen([command], shell=True, stdout=PIPE).stdout.readline().strip().split()[-1]
                 cmd_fd.write("%s\t%i-%i\t%s\n" % (job_id,
