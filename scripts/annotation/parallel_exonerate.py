@@ -118,6 +118,6 @@ Exonerate.parallel_alignment(args.input, args.target, args.model, num_of_files=a
                              max_memory_per_node=args.max_memory_per_task,
                              modules_list=args.slurm_modules_list,
                              environment_variables_dict=None,
-                             length_thresholds=(600, 1000),
+                             length_thresholds=(800, 1500),
                              memory_thresholds=(6100, 9000, 20000))
 
