@@ -535,7 +535,7 @@ class Tool(SequenceRoutines, AlignmentRoutines):
                                                      ";".join(cmd_list[job_submit_index_array[job_index]:job_submit_index_array[job_index+1]]))
                 command = "sbatch %s" % options
 
-                print command
+                #print command
 
                 job_id = Popen([command], shell=True, stdout=PIPE).stdout.readline().strip().split()[-1]
                 cmd_fd.write("%s\t%i-%i\t%s\n" % (job_id,
