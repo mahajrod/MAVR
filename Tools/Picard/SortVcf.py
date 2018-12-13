@@ -22,7 +22,7 @@ class SortVcf(JavaTool):
                  environment_variables_dict=None,
                  max_running_time=None):
 
-        input_file_list = [input_file] if isinstance(input_file, str) else input_file
+        input_file_list = self.make_list_of_path_to_files_from_string(input_file) if isinstance(input_file, str) else self.make_list_of_path_to_files(input_file)
 
         options = ""
 
