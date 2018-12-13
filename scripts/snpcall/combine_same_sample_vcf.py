@@ -18,5 +18,5 @@ parser.add_argument("-s", "--sort", action="store_true", dest="sort", default=Fa
 
 args = parser.parse_args()
 
-VCFRoutines.combine_same_samples_vcfs(args.vcf_list, args.output, close_fd_after=False, extension_list=[".vcf", ],
+VCFRoutines.combine_same_samples_vcfs(args.output, vcf_list=args.vcf_list, close_fd_after=False, extension_list=[".vcf", ],
                                       order_vcf_files=False, sort=args.sort)

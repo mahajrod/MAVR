@@ -43,6 +43,3 @@ CatVariants.combine_gvcf(args.reference, args.input_gvcf_list, args.output,
                          iteration=0,
                          threads=None,
                          remove_intermediate_files=args.remove_intermediate_files)
-
-
-

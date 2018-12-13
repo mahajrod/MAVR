@@ -7,22 +7,26 @@ from collections import OrderedDict
 from CustomCollections.GeneralCollections import IdList, SynDict
 from Routines.Sequence import SequenceRoutines
 
-from Tools.Picard import SortVcf
-
 
 class VCFRoutines(SequenceRoutines):
     def __init__(self):
         SequenceRoutines.__init__(self)
 
-    def combine_same_samples_vcfs(self, vcf_list, output, close_fd_after=False, extension_list=[".vcf", ],
-                                  order_vcf_files=False, sort=False):
+    def combine_same_samples_vcfs(self, output, vcf_list=None,
+                                  order_vcf_files=False, sort=False, chunk_folder=None, chunk_prefix=None,
+                                  chunk_suffix=None, starting_chunk=None, chunk_number_list=None,
+                                  close_fd_after=False, extension_list=[".vcf", ]):
 
         output_fd = output if isinstance(output, file) else open(output, "w")
 
-        vcf_files = self.make_list_of_path_to_files_by_extension(vcf_list, extension_list=extension_list,
-                                                                 recursive=False, return_absolute_paths=True)
+        if vcf_list:
+            vcf_files = self.make_list_of_path_to_files_by_extension(vcf_list, extension_list=extension_list,
+                                                                     recursive=False, return_absolute_paths=True)
+        else:
+            pass
+
         if order_vcf_files:
-            vcf_files.sort()
+            vcf_files.sort(key=self.natural_keys_int)
 
         if sort:
             unsorted_file = "%s.unsorted.tmp" % output

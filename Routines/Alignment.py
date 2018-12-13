@@ -7,7 +7,7 @@ from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.Align import MultipleSeqAlignment
 
-from Routines import SequenceRoutines
+from Routines.Sequence import SequenceRoutines
 from Data.Nucleotides import back_degenerate_nucleotides
 from CustomCollections.GeneralCollections import SynDict, IdList
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'mahajrod'
 
+import re
 import os
 import sys
 import bz2
@@ -652,6 +653,37 @@ class FileRoutines:
 
         self.combine_files_with_header(file_list, output_file,
                                        header_prefix=header_prefix, sorting_options=sorting_options)
+
+    @staticmethod
+    def string2float(string):
+        try:
+            retval = float(string)
+        except ValueError:
+            retval = string
+        return retval
+
+    @staticmethod
+    def string2int(string):
+        return int(string) if string.isdigit() else string
+
+    def natural_keys_int(self, string):
+        """
+        alist.sort(key=natural_keys) sorts in human order
+        http://nedbatchelder.com/blog/200712/human_sorting.html
+        (See Toothy's implementation in the comments)
+        """
+
+        return [self.string2int(c) for c in re.split('(\d+)', string)]
+
+    def natural_keys_float(self, string):
+        """
+        alist.sort(key=natural_keys) sorts in human order
+        http://nedbatchelder.com/blog/200712/human_sorting.html
+        (See Toothy's implementation in the comments)
+        float regex comes from https://stackoverflow.com/a/12643073/190597
+        """
+        return [self.string2float(c) for c in re.split(r'[+-]?([0-9]+(?:[.][0-9]*)?|[.][0-9]+)', string)]
+
 
 
 filetypes_dict = {"fasta": [".fa", ".fasta", ".fa", ".pep", ".cds"],
