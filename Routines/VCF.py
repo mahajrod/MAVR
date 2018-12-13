@@ -26,6 +26,7 @@ class VCFRoutines(SequenceRoutines):
             pass
 
         if order_vcf_files:
+            
             vcf_files.sort(key=self.natural_keys_int)
 
         if sort:
