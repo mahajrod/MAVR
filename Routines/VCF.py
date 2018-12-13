@@ -7,6 +7,8 @@ from collections import OrderedDict
 from CustomCollections.GeneralCollections import IdList, SynDict
 from Routines.Sequence import SequenceRoutines
 
+from Tools.Picard import SortVcf
+
 
 class VCFRoutines(SequenceRoutines):
     def __init__(self):
@@ -26,6 +28,7 @@ class VCFRoutines(SequenceRoutines):
             unsorted_file = "%s.unsorted.tmp" % output
 
             string = "cat %s > %s" % (vcf_files[0], unsorted_file)
+            print(string)
             os.system(string)
             #with open(unsorted_file, "w") as out_fd:
             #    pass
