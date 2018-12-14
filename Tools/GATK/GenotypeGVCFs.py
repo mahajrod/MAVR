@@ -130,8 +130,9 @@ class GenotypeGVCFs(JavaTool):
 
         self.parallel_execute(options_list)
 
-        VCFRoutines.combine_same_samples_vcfs(region_vcf_list,
-                                              output_vcf,
+        VCFRoutines.combine_same_samples_vcfs(output_vcf,
+                                              vcf_list=region_vcf_list,
+                                              order_vcf_files=True,
                                               close_fd_after=False,
                                               extension_list=[".vcf", ])
 
