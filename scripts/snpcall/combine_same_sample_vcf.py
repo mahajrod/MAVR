@@ -15,8 +15,10 @@ parser.add_argument("-i", "--vcf_list", action="store", dest="vcf_list", require
                     help="Comma-separated list of vcf files")
 parser.add_argument("-s", "--sort", action="store_true", dest="sort", default=False,
                     help="Sort vcf files. Default:False")
+parser.add_argument("-r", "--order_vcf_files", action="store_true", dest="order_vcf_files", default=False,
+                    help="Order vcf files by name using natural sorting. Default:False")
 
 args = parser.parse_args()
 
 VCFRoutines.combine_same_samples_vcfs(args.output, vcf_list=args.vcf_list, close_fd_after=False, extension_list=[".vcf", ],
-                                      order_vcf_files=args.sort, sort=args.sort)
+                                      order_vcf_files=args.order_vcf_files, sort=args.sort)
