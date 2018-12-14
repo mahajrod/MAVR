@@ -52,12 +52,14 @@ class VCFRoutines(SequenceRoutines):
             os.remove(unsorted_file)
 
         else:
+            print("Handling file %s ..." % vcf_files[0])
             with open(vcf_files[0], "r") as in_fd:
                 for line in in_fd:
                     output_fd.write(line)
 
             if len(vcf_files) > 1:
                 for filename in vcf_files[1:]:
+                    print("Handling file %s ..." % filename)
                     with open(filename, "r") as in_fd:
                         for line in in_fd:
                             if line[0] == "#":
