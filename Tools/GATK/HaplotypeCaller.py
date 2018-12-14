@@ -153,10 +153,12 @@ class HaplotypeCaller(JavaTool):
 
             self.parallel_execute(options_list)
 
-            VCFRoutines.combine_same_samples_vcfs(output_file_list,
-                                                  output,
+            VCFRoutines.combine_same_samples_vcfs(output,
+                                                  vcf_list=output_file_list,
+                                                  order_vcf_files=True,
                                                   close_fd_after=False,
                                                   extension_list=gvcf_extension_list)
+
         elif handling_mode == 'slurm':
             number_of_regions = len(region_list)
 
