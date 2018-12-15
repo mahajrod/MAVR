@@ -688,18 +688,37 @@ class FileRoutines:
                                        separator="\t", comments_prefix="#", verbose=False):
 
         column_value_set = IdSet([line_list[column_number] for line_list in self.file_line_as_list_generator(input_file,
-                                                                                                      separator=separator,
-                                                                                                      comments_prefix=comments_prefix)])
+                                                                                                             separator=separator,
+                                                                                                             comments_prefix=comments_prefix)])
         if output_file:
             column_value_set.write(output_file)
 
         if verbose:
             print("#Column %i (0-based) contains %i different values" % (column_number, len(column_value_set)))
-            for element in column_value_set:
-                print(element)
 
         return column_value_set
 
+    def count_column_values_from_file(self, input_file, column_number, output_file=None,
+                                      separator="\t", comments_prefix="#", verbose=False):
+
+        column_value_dict = SynDict()
+
+        for line_list in self.file_line_as_list_generator(input_file,
+                                                          separator=separator,
+                                                          comments_prefix=comments_prefix):
+
+            if line_list[column_number] in column_value_dict:
+                column_value_dict[line_list[column_number]] += 1
+            else:
+                column_value_dict[line_list[column_number]] = 1
+
+        if output_file:
+            column_value_dict.write(output_file)
+
+        if verbose:
+            print("#Column %i (0-based) contains %i different values" % (column_number, len(column_value_set)))
+
+        return column_value_dict
 
 filetypes_dict = {"fasta": [".fa", ".fasta", ".fa", ".pep", ".cds"],
                   "fastq": [".fastq", ".fq"],
