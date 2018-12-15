@@ -52,6 +52,7 @@ if args.database_type == "nucleotide":
                            evalue=args.evalue, output_format=args.output_format,
                            threads=args.threads,
                            combine_output_to_single_file=True)
+
 elif args.database_type == "protein":
     MakeBLASTDb.make_protein_db(args.input, args.name, mask_file if args.mask else None,
                                 output_file=args.name)
