@@ -26,6 +26,5 @@ repeat_families = "%s.repeat_families" % args.output_prefix
 extracted_gff = "%s.selected_repeat_classes.gff" % args.output_prefix
 
 RepeatMasker.convert_rm_out_to_gff(args.input, output_gff, repeat_classes, repeat_families)
-
 RepeatMasker.extract_repeats_used_for_gene_annotation(output_gff, extracted_gff, use_expanded_set=args.expanded_set,
                                                       retain_unknown_repeats=args.unknown)
