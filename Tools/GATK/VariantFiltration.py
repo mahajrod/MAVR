@@ -93,9 +93,9 @@ class VariantFiltration(JavaTool):
                                                   order_vcf_files=False, sort=True, chunk_folder=None, chunk_prefix=None,
                                                   chunk_suffix=None, starting_chunk=None, chunk_number_list=None,
                                                   close_fd_after=False, extension_list=[".vcf", ])
-
-            SortVcf.sort_vcf(unsorted_combined_filtered_vcf, combined_filtered_vcf, seq_dict=sequence_dict_file)
-            SortVcf.sort_vcf(unsorted_combined_good_vcf, combined_good_vcf, seq_dict=sequence_dict_file)
+            if sequence_dict_file:
+                SortVcf.sort_vcf(unsorted_combined_filtered_vcf, combined_filtered_vcf, seq_dict=sequence_dict_file)
+                SortVcf.sort_vcf(unsorted_combined_good_vcf, combined_good_vcf, seq_dict=sequence_dict_file)
             """
             #CombineVariants IS TOO SLOW!!!! It takes DAYS to merge VCFs
             CombineVariants.combine_from_same_source(reference_file, [snp_filtered_vcf, indel_filtered_vcf],
