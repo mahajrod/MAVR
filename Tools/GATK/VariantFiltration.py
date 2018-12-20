@@ -1,6 +1,7 @@
 #!/usr/bin/env python
-import os
+
 from Tools.Abstract import JavaTool
+from Routines import VCFRoutines
 
 
 class VariantFiltration(JavaTool):
@@ -47,9 +48,10 @@ class VariantFiltration(JavaTool):
     def filter_bad_variants(self, reference_file, input_vcf, output_prefix, snp_filter_name='ambiguous_snp', snp_QD=2.0,
                             snp_FS=60.0, snp_MQ=40.0, snp_HaplotypeScore=13.0, snp_MappingQualityRankSum=-12.5,
                             snp_ReadPosRankSum=-8.0, indel_filter_name='ambiguous_indel', indel_QD=2.0,
-                            indel_ReadPosRankSum=-20.0, indel_FS=200.0):
+                            indel_ReadPosRankSum=-20.0, indel_FS=200.0, combine_vcf=False, sequence_dict_file=None):
 
-        from Tools.GATK import SelectVariants, CombineVariants
+        from Tools.GATK import SelectVariants
+        from Tools.Picard import SortVcf
         snp_raw_vcf = "%s.snp.raw.vcf" % output_prefix
         indel_raw_vcf = "%s.indel.raw.vcf" % output_prefix
 
@@ -59,12 +61,15 @@ class VariantFiltration(JavaTool):
         snp_good_vcf = "%s.snp.good.vcf" % output_prefix
         indel_good_vcf = "%s.indel.good.vcf" % output_prefix
 
+        unsorted_combined_filtered_vcf = "%s.combined.with_filters.vcf" % output_prefix
+        unsorted_combined_good_vcf = "%s.combined.good.vcf" % output_prefix
+
         combined_filtered_vcf = "%s.combined.with_filters.vcf" % output_prefix
         combined_good_vcf = "%s.combined.good.vcf" % output_prefix
 
 
         SelectVariants.jar_path = self.jar_path
-        CombineVariants.jar_path = self.jar_path
+        #CombineVariants.jar_path = self.jar_path
 
         SelectVariants.get_SNP(reference_file, input_vcf, snp_raw_vcf)
         SelectVariants.get_indel(reference_file, input_vcf, indel_raw_vcf)
@@ -77,11 +82,25 @@ class VariantFiltration(JavaTool):
 
         SelectVariants.remove_entries_with_filters(reference_file, snp_filtered_vcf, snp_good_vcf)
         SelectVariants.remove_entries_with_filters(reference_file, indel_filtered_vcf, indel_good_vcf)
-        """
-        #CombineVariants IS TOO SLOW!!!! It takes DAYS to merge VCFs
-        CombineVariants.combine_from_same_source(reference_file, [snp_filtered_vcf, indel_filtered_vcf],
-                                                 combined_filtered_vcf)
 
-        CombineVariants.combine_from_same_source(reference_file, [snp_good_vcf, indel_good_vcf],
-                                                 combined_good_vcf)
-        """
+        if combine_vcf:
+            VCFRoutines.combine_same_samples_vcfs(unsorted_combined_filtered_vcf, vcf_list=[snp_filtered_vcf, indel_filtered_vcf],
+                                                  order_vcf_files=False, sort=True, chunk_folder=None, chunk_prefix=None,
+                                                  chunk_suffix=None, starting_chunk=None, chunk_number_list=None,
+                                                  close_fd_after=False, extension_list=[".vcf", ])
+
+            VCFRoutines.combine_same_samples_vcfs(unsorted_combined_good_vcf, vcf_list=[snp_good_vcf, indel_good_vcf],
+                                                  order_vcf_files=False, sort=True, chunk_folder=None, chunk_prefix=None,
+                                                  chunk_suffix=None, starting_chunk=None, chunk_number_list=None,
+                                                  close_fd_after=False, extension_list=[".vcf", ])
+
+            SortVcf.sort_vcf(unsorted_combined_filtered_vcf, combined_filtered_vcf, seq_dict=sequence_dict_file)
+            SortVcf.sort_vcf(unsorted_combined_good_vcf, combined_good_vcf, seq_dict=sequence_dict_file)
+            """
+            #CombineVariants IS TOO SLOW!!!! It takes DAYS to merge VCFs
+            CombineVariants.combine_from_same_source(reference_file, [snp_filtered_vcf, indel_filtered_vcf],
+                                                     combined_filtered_vcf)
+
+            CombineVariants.combine_from_same_source(reference_file, [snp_good_vcf, indel_good_vcf],
+                                                     combined_good_vcf)
+            """

@@ -43,9 +43,12 @@ class VCFRoutines(SequenceRoutines):
                 print(string)
                 os.system(string)
 
+            sorting_string = "awk -F'\\t' '{if (substr($1,1,1) == \"#\") {print $0} else {print $0 | \"sort -k1,1 -k2,2n\"} }' %s > %s" % (unsorted_file, output)
+            """
             sorting_string = "(sed '/^[^#]/Q' %s; sort -k1,1 -k2,2n %s) > %s" % (vcf_files[0],
                                                                                  unsorted_file,
                                                                                  output)
+            """
             print(sorting_string)
 
             os.system(sorting_string)

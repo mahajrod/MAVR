@@ -13,8 +13,13 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
                     help="Prefix of output files")
 parser.add_argument("-r", "--reference", action="store", dest="reference", required=True,
                     help="Fasta with reference genome")
+parser.add_argument("-c", "--combine", action="store_true", dest="combine",
+                    help="Combine indel and SNP vcfs after filtration")
+parser.add_argument("-s", "--sequence_dict_file", action="store", dest="sequence_dict_file",
+                    help="Sequence dictionary file. Required for sorting of merged files according to the dict")
 parser.add_argument("-g", "--gatk_directory", action="store", dest="gatk_dir", default="",
                     help="Directory with GATK jar")
+
 parser.add_argument("--snp_filter_name", action="store", dest="snp_filter_name", type=str,
                     default="ambiguous_snp", help="SNP filter name")
 parser.add_argument("--snp_QD", action="store", dest="snp_QD", type=float, default=2.0,
@@ -52,6 +57,7 @@ VariantFiltration.filter_bad_variants(args.reference, args.input_vcf, args.outpu
                                       snp_ReadPosRankSum=args.snp_ReadPosRankSum,
                                       indel_filter_name=args.indel_filter_name, indel_QD=args.indel_QD,
                                       indel_ReadPosRankSum=args.indel_ReadPosRankSum,
-                                      indel_FS=args.indel_FS)
+                                      indel_FS=args.indel_FS,
+                                      combine_vcf=args.combine, sequence_dict_file=args.sequence_dict_file)
                                       #indel_InbreedingCoeff=args.indel_InbreedingCoeff, )
 
