@@ -48,7 +48,8 @@ class VariantFiltration(JavaTool):
     def filter_bad_variants(self, reference_file, input_vcf, output_prefix, snp_filter_name='ambiguous_snp', snp_QD=2.0,
                             snp_FS=60.0, snp_MQ=40.0, snp_HaplotypeScore=13.0, snp_MappingQualityRankSum=-12.5,
                             snp_ReadPosRankSum=-8.0, indel_filter_name='ambiguous_indel', indel_QD=2.0,
-                            indel_ReadPosRankSum=-20.0, indel_FS=200.0, combine_vcf=False, sequence_dict_file=None):
+                            indel_ReadPosRankSum=-20.0, indel_FS=200.0, combine_vcf=False, sequence_dict_file=None,
+                            picard_memory="1g", picard_dir=None):
 
         from Tools.GATK import SelectVariants
         from Tools.Picard import SortVcf
@@ -61,14 +62,16 @@ class VariantFiltration(JavaTool):
         snp_good_vcf = "%s.snp.good.vcf" % output_prefix
         indel_good_vcf = "%s.indel.good.vcf" % output_prefix
 
-        unsorted_combined_filtered_vcf = "%s.combined.with_filters.vcf" % output_prefix
-        unsorted_combined_good_vcf = "%s.combined.good.vcf" % output_prefix
+        unsorted_combined_filtered_vcf = "%s.combined.with_filters.unsorted.vcf" % output_prefix
+        unsorted_combined_good_vcf = "%s.combined.good.unsorted.vcf" % output_prefix
 
-        combined_filtered_vcf = "%s.combined.with_filters.vcf" % output_prefix
-        combined_good_vcf = "%s.combined.good.vcf" % output_prefix
+        combined_filtered_vcf = "%s.combined.with_filters.sorted.vcf" % output_prefix
+        combined_good_vcf = "%s.combined.good.sorted.vcf" % output_prefix
 
 
         SelectVariants.jar_path = self.jar_path
+        SortVcf.jar_path = picard_dir
+        SortVcf.max_memory = picard_memory
         #CombineVariants.jar_path = self.jar_path
 
         SelectVariants.get_SNP(reference_file, input_vcf, snp_raw_vcf)

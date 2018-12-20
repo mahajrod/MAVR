@@ -19,6 +19,11 @@ parser.add_argument("-s", "--sequence_dict_file", action="store", dest="sequence
                     help="Sequence dictionary file. Required for sorting of merged files according to the dict")
 parser.add_argument("-g", "--gatk_directory", action="store", dest="gatk_dir", default="",
                     help="Directory with GATK jar")
+parser.add_argument("-p", "--picard_directory", action="store", dest="picard_dir", default="",
+                    help="Directory with Picard jar")
+
+parser.add_argument("-m", "--memory", action="store", dest="memory", default="10000", type=lambda s: s + "m",
+                    help="Maximum memory to use in megabytes. Default: 10000")
 
 parser.add_argument("--snp_filter_name", action="store", dest="snp_filter_name", type=str,
                     default="ambiguous_snp", help="SNP filter name")
@@ -45,6 +50,7 @@ parser.add_argument("--indel_ReadPosRankSum", action="store", dest="indel_ReadPo
 parser.add_argument("--indel_FS", action="store", dest="indel_FS", type=float, default=200.0,
                     help="Indel FS threshold. Default - 200.0")
 
+
 args = parser.parse_args()
 
 VariantFiltration.jar_path = FileRoutines.check_path(args.gatk_dir)
@@ -58,6 +64,7 @@ VariantFiltration.filter_bad_variants(args.reference, args.input_vcf, args.outpu
                                       indel_filter_name=args.indel_filter_name, indel_QD=args.indel_QD,
                                       indel_ReadPosRankSum=args.indel_ReadPosRankSum,
                                       indel_FS=args.indel_FS,
-                                      combine_vcf=args.combine, sequence_dict_file=args.sequence_dict_file)
+                                      combine_vcf=args.combine, sequence_dict_file=args.sequence_dict_file,
+                                      picard_memory=args.memory, picard_dir=args.picard_dir)
                                       #indel_InbreedingCoeff=args.indel_InbreedingCoeff, )
 
