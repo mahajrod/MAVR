@@ -77,10 +77,11 @@ class VariantFiltration(JavaTool):
 
         SelectVariants.remove_entries_with_filters(reference_file, snp_filtered_vcf, snp_good_vcf)
         SelectVariants.remove_entries_with_filters(reference_file, indel_filtered_vcf, indel_good_vcf)
-
+        """
+        #CombineVariants IS TOO SLOW!!!! It takes DAYS to merge VCFs
         CombineVariants.combine_from_same_source(reference_file, [snp_filtered_vcf, indel_filtered_vcf],
                                                  combined_filtered_vcf)
 
         CombineVariants.combine_from_same_source(reference_file, [snp_good_vcf, indel_good_vcf],
                                                  combined_good_vcf)
-
+        """
