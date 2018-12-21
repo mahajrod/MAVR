@@ -1641,7 +1641,8 @@ class SequenceRoutines(FileRoutines):
         SeqIO.write(self.trim_cds_and_remove_terminal_stop_codons_generator(record_dict,
                                                                             stop_codons_list=stop_codons_list),
                     output_file, format="fasta")
-        os.remove("tmp.idx")
+        if parsing_mode == "index_db":
+            os.remove("tmp.idx")
 
     # --------------------Search--------------------------
     #              !!!!IMPORTANT!!!!!!
