@@ -941,15 +941,16 @@ class SequenceRoutines(FileRoutines):
 
         return selenocystein_ids
 
-    def check_selenocystein_presence_from_file(self, pep_file, output_prefix, format="fasta"):
+    def check_selenocystein_presence_from_file(self, pep_file, output_prefix, format="fasta", parsing_mode="parse"):
         selenocystein_ids_file = "%s.ids" % output_prefix
         selenocystein_pep_file = "%s.pep" % output_prefix
-        pep_dict = SeqIO.index_db("tmp.idx", pep_file, format=format)
+        pep_dict = self.parse_seq_file(pep_file, mode=parsing_mode, format=format, index_file="tmp.idx") #SeqIO.index_db("tmp.idx", pep_file, format=format)
 
         selenocystein_ids = self.check_for_selenocystein_presence(pep_dict)
         selenocystein_ids.write(selenocystein_ids_file)
         SeqIO.write(self.record_by_id_generator(pep_dict, selenocystein_ids), selenocystein_pep_file, format=format)
-        os.remove("tmp.idx")
+        if parsing_mode == "index_db":
+            os.remove("tmp.idx")
         return selenocystein_ids
 
     @staticmethod
