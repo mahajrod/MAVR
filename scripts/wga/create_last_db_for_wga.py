@@ -13,7 +13,7 @@ parser.add_argument("-i", "--input_fasta_list", action="store", dest="input_fast
                     help="Comma-separated list of input files")
 parser.add_argument("-p", "--db_prefix", action="store", dest="db_prefix", required=True,
                     help="Prefix of  LAST database")
-parser.add_argument("-v", "--verbose", action="store", dest="verbose",
+parser.add_argument("-v", "--verbose", action="store_true", dest="verbose",
                     help="Verbose output")
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=4, type=int,
                     help="Number of threads. Default: 4")

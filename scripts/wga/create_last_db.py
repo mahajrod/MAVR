@@ -18,7 +18,7 @@ parser.add_argument("-s", "--softmasking", action="store_true", dest="softmaskin
 parser.add_argument("-e", "--seeding_scheme", action="store", dest="seeding_scheme",
                     default="YASS",
                     help="Seeding scheme to use. Default: YASS")
-parser.add_argument("-v", "--verbose", action="store", dest="verbose",
+parser.add_argument("-v", "--verbose", action="store_true", dest="verbose",
                     help="Verbose output")
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=4, type=int,
                     help="Number of threads. Default: 4")

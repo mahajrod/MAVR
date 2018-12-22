@@ -19,7 +19,7 @@ parser.add_argument("-f", "--format", action="store", dest="format", default="MA
 parser.add_argument("-e", "--per_thread_memory", action="store", dest="per_thread_memory",
                     default="4G",
                     help="Per thread memory. Default: 4G")
-parser.add_argument("-v", "--verbose", action="store", dest="verbose",
+parser.add_argument("-v", "--verbose", action="store_true", dest="verbose",
                     help="Verbose output")
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=4, type=int,
                     help="Number of threads. Default: 4")
