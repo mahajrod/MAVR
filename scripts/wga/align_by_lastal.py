@@ -16,7 +16,7 @@ parser.add_argument("-o", "--output", action="store", dest="output", required=Tr
                     help="Output file with hits")
 parser.add_argument("-f", "--format", action="store", dest="format", default="MAF",
                     help="Format of output file. Allowed: MAF(default), TAB, BlastTab, BlastTab+")
-parser.add_argument("-m", "--per_thread_memory", action="store", dest="per_thread_memory",
+parser.add_argument("-e", "--per_thread_memory", action="store", dest="per_thread_memory",
                     default="4G",
                     help="Per thread memory. Default: 4G")
 parser.add_argument("-v", "--verbose", action="store", dest="verbose",
