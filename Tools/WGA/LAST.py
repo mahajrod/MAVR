@@ -40,3 +40,31 @@ class LAST(Tool):
 
         self.execute(options=options, cmd="lastdb")
 
+    def parse_lastal_options(self, lastdb, query, output, verbose=True,
+                             keep_preliminary_masking=True, mask_simple_repeats=True,
+                             output_format="MAF", per_thread_memory="4G"):
+
+        options = " -P %i" % self.threads
+
+        options += " -v" if verbose else verbose
+        options += " -R%i%i" % (1 if keep_preliminary_masking else 0,
+                                1 if mask_simple_repeats else 0)
+        options += " -f %s" % output_format if output_format else ""
+        options += " -i %s" % per_thread_memory if per_thread_memory else ""
+
+        options += " %s" % lastdb
+        options += " %s" % query
+        options += " > %s" % output
+        return options
+
+    def lastal(self, lastdb, query, output, verbose=True,
+               keep_preliminary_masking=True, mask_simple_repeats=True,
+               output_format="MAF", per_thread_memory="4G"):
+
+        options = self.parse_lastal_options(lastdb, query, output, verbose=verbose,
+                                            keep_preliminary_masking=keep_preliminary_masking,
+                                            mask_simple_repeats=mask_simple_repeats,
+                                            output_format=output_format,
+                                            per_thread_memory=per_thread_memory)
+
+        self.execute(options=options, cmd="lastdb")
