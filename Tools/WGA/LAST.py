@@ -13,7 +13,7 @@ class LAST(Tool):
     def __init__(self, path="", max_threads=4):
         Tool.__init__(self, "last", path=path, max_threads=max_threads)
 
-    def parse_lastdb_options(self, output, input_fasta_list, softmasking=True, seeding_scheme="YASS",
+    def parse_lastdb_options(self, db_prefix, input_fasta_list, softmasking=True, seeding_scheme="YASS",
                              verbose=True, keep_preliminary_masking=True,
                              mask_simple_repeats=True):
         options = " -P %i" % self.threads
@@ -24,15 +24,15 @@ class LAST(Tool):
 
         options += " -v" if verbose else verbose
 
-        options += " %s" % output
+        options += " %s" % db_prefix
         options += " %s" % (input_fasta_list if isinstance(input_fasta_list, str) else " ".join(input_fasta_list))
 
         return options
 
-    def create_last_db(self, output, input_fasta_list, softmasking=True, seeding_scheme="YASS",
+    def create_last_db(self, db_prefix, input_fasta_list, softmasking=True, seeding_scheme="YASS",
                        verbose=True, keep_preliminary_masking=True, mask_simple_repeats=True):
 
-        options = self.parse_lastdb_options(output, input_fasta_list=input_fasta_list,
+        options = self.parse_lastdb_options(db_prefix, input_fasta_list=input_fasta_list,
                                             softmasking=softmasking,
                                             seeding_scheme=seeding_scheme, verbose=verbose,
                                             keep_preliminary_masking=keep_preliminary_masking,

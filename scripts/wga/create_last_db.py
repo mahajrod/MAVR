@@ -11,8 +11,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-i", "--input_fasta_list", action="store", dest="input_fasta_list", required=True,
                     type=LAST.make_list_of_path_to_files_from_string,
                     help="Comma-separated list of input files")
-parser.add_argument("-o", "--output", action="store", dest="output", required=True,
-                    help="Output LAST database")
+parser.add_argument("-p", "--db_prefix", action="store", dest="db_prefix", required=True,
+                    help="Prefix of  LAST database")
 parser.add_argument("-s", "--softmasking", action="store_true", dest="softmasking",
                     help="Use softmasking. Default: False")
 parser.add_argument("-e", "--seeding_scheme", action="store", dest="seeding_scheme",
@@ -55,7 +55,7 @@ parser.add_argument("-w", "--slurm_modules_list", action="store", dest="slurm_mo
 args = parser.parse_args()
 
 LAST.threads = args.threads
-LAST.create_last_db(args.output, args.input_fasta_list, softmasking=args.softmasking,
+LAST.create_last_db(args.db_prefix, args.input_fasta_list, softmasking=args.softmasking,
                     seeding_scheme=args.seeding_scheme,
                     verbose=args.verbose, keep_preliminary_masking=args.keep_preliminary_masking,
                     mask_simple_repeats=args.mask_simple_repeats)

@@ -11,8 +11,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-i", "--input_fasta_list", action="store", dest="input_fasta_list", required=True,
                     type=LAST.make_list_of_path_to_files_from_string,
                     help="Comma-separated list of input files")
-parser.add_argument("-o", "--output", action="store", dest="output", required=True,
-                    help="Output LAST database")
+parser.add_argument("-p", "--db_prefix", action="store", dest="db_prefix", required=True,
+                    help="Prefix of  LAST database")
 parser.add_argument("-v", "--verbose", action="store", dest="verbose",
                     help="Verbose output")
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=4, type=int,
@@ -45,7 +45,7 @@ parser.add_argument("-w", "--slurm_modules_list", action="store", dest="slurm_mo
 args = parser.parse_args()
 
 LAST.threads = args.threads
-LAST.create_last_db(args.output,
+LAST.create_last_db(args.db_prefix,
                     args.input_fasta_list,
                     softmasking=True,
                     seeding_scheme="YASS",
