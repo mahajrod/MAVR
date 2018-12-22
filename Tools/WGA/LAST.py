@@ -67,4 +67,4 @@ class LAST(Tool):
                                             output_format=output_format,
                                             per_thread_memory=per_thread_memory)
 
-        self.execute(options=options, cmd="lastdb")
+        self.execute(options=options, cmd="lastal")
