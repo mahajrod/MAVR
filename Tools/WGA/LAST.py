@@ -54,7 +54,10 @@ class LAST(Tool):
 
         options += " %s" % lastdb
         options += " %s" % query
-        options += " > %s" % output
+        if output_format == "MAF":
+            options += " | tee %s | maf-convert tab > %s.tab" % (output_format, output_format)
+        else:
+            options += " > %s" % output
         return options
 
     def lastal(self, lastdb, query, output, verbose=True,
@@ -68,3 +71,10 @@ class LAST(Tool):
                                             per_thread_memory=per_thread_memory)
 
         self.execute(options=options, cmd="lastal")
+
+    def convert_maf(self, maf_file, output_file, format="TAB"):
+        options = " %s" % format
+        options += " %s" % maf_file
+        options += " > %s" % output_file
+
+        self.execute(options=options, cmd="maf-convert")
