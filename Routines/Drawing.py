@@ -530,3 +530,27 @@ class DrawingRoutines(MatplotlibRoutines, SequenceRoutines):
         for ext in extensions:
             plt.savefig("%s.%s" % (output_prefix, ext))
 
+    def test_colormap(self, colormap_name, color_number=10, output_prefix=None, extension_list=("png",), side=10):
+        cmap = plt.get_cmap(colormap_name, color_number)
+        figure = plt.figure(figsize=(4, 4))
+        subplot = plt.subplot(1, 1, 1)
+        subplot.get_yaxis().set_visible(False)
+        subplot.get_xaxis().set_visible(False)
+
+        posx = 0
+        posy = 0
+        for i in range(0, color_number):
+            fragment = Rectangle((posx, posy), side, side, fill=True, edgecolor="black",
+                                 facecolor=cmap(i), linewidth=0.5)
+            posy += side
+            subplot.add_patch(fragment)
+        plt.ylim(ymin=0, ymax=posy)
+        plt.title("Colormap %s" % colormap_name)
+
+        if output_prefix:
+            for ext in extension_list:
+                plt.savefig("%s.%s" % (output_prefix, ext))
+        else:
+            plt.show()
+
+
