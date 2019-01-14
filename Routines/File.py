@@ -119,6 +119,9 @@ class FileRoutines:
     @staticmethod
     def split_filename(filepath):
         directory, basename = os.path.split(filepath)
+        if directory:
+            if directory[-1] != "/":
+                directory += "/"
         prefix, extension = os.path.splitext(basename)
         return directory, prefix, extension if filepath else None
 

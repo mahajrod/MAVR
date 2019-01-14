@@ -572,6 +572,167 @@ class MultipleAlignmentRoutines(SequenceRoutines):
             output_file = "%s.pos_%i%s" % (output_prefix, position + 1, self.split_filename(alignment_file)[-1])
             AlignIO.write(codon_position_alignments[position], output_file, format=format)
 
+    @staticmethod
+    def get_position_correspondence_matrix(alignment, gap_symbol="-", verbose=True):
+
+        number_of_sequences = len(alignment)
+        alignment_length = len(alignment[0])
+        # converting alignment to numpy letter array stored by columns!
+        alignment_array = np.array([list(rec) for rec in alignment], np.character, order="F")
+
+        if verbose:
+            print("%i sequences in alignment" % number_of_sequences)
+            print("%i columns in alignment" % alignment_length)
+
+        position_correspondence_array = np.array([[0 for letter in rec.seq] for rec in alignment], int, order="F")
+
+        current_row_index_list = [0 for rec in alignment]
+        for column in range(0, alignment_length):
+            for row in range(0, number_of_sequences):
+                if alignment_array[row, column] == gap_symbol:
+                    position_correspondence_array[row, column] = -1
+
+                else:
+                    position_correspondence_array[row, column] = current_row_index_list[row]
+                    current_row_index_list[row] += 1
+
+        #for row in range(0, number_of_sequences):
+        #    for column in range(0, alignment_length):
+        #print alignment_array[0, ]
+        #print alignment_array[:, 1]
+        #print alignment_array
+        #print position_presence_array
+        return position_correspondence_array
+
+    def get_position_correspondence_matrix_fom_file(self, alignment_file, output_file, format="fasta", gap_symbol="-",
+                                                    verbose=True):
+
+        alignment = AlignIO.read(alignment_file, format=format)
+
+        position_matrix = self.get_position_correspondence_matrix(alignment, gap_symbol, verbose=verbose)
+        np.savetxt(output_file, position_matrix, fmt="%i", delimiter='\t')
+        #print position_matrix
+        return position_matrix
+
+    def get_specific_positions(self, alignment_file, reference_sequence_id, reference_position_list, output_prefix,
+                               format="fasta", gap_symbol="-", verbose=True, alignment_type="nucleotide", flank_length=0):
+        alignment = AlignIO.read(alignment_file, format=format)
+
+        alignment_length = len(alignment[0].seq)
+        record_id_list = [record.id for record in alignment]
+        record_number = len(alignment)
+
+        record_seq_nogaps_list = [record.seq.ungap(gap=gap_symbol) for record in alignment]
+        sequence_len_list = [len(record_seq) for record_seq in record_seq_nogaps_list]
+
+        position_list = [reference_position_list] if isinstance(reference_position_list, int) else reference_position_list
+        position_list.sort()
+        position_list = np.array(position_list) - 1 # convertion to 0-based
+        print position_list
+
+        if alignment_type == "codon":
+            position_list *= 3
+
+        position_matrix = self.get_position_correspondence_matrix(alignment, gap_symbol, verbose=verbose)
+        np.savetxt("%s.position_matrix" % output_prefix, position_matrix, fmt="%i", delimiter='\t')
+
+        reference_sequence_index = 0
+        for record in alignment:
+            if record.id == reference_sequence_id:
+                break
+            reference_sequence_index += 1
+
+        alignment_position_list = []
+        prev_ref_pos_col = 0
+        for pos in position_list:
+            for col_index in range(prev_ref_pos_col, alignment_length):
+                if position_matrix[reference_sequence_index, col_index] == pos:
+                    prev_ref_pos_col = col_index
+                    alignment_position_list.append(col_index)
+                    break
+
+        header = "#alignment_pos"
+        for record_id in record_id_list:
+            header += "\t%s" % record_id
+        for record_id in record_id_list:
+            header += "\t%s,%s" % (record_id, alignment_type)
+        if flank_length > 0:
+            for record_id in record_id_list:
+                for flank_pos in "upstream", "downstream":
+                    header += "\t%s,%s" % (record_id, flank_pos)
+        if flank_length > 0:
+            for record_id in record_id_list:
+                for flank_pos in "upstream", "downstream":
+                    header += "\t%s,%s(no_gaps)" % (record_id, flank_pos)
+        header += "\n"
+
+        results_list = []
+
+        for alignment_pos in alignment_position_list:
+
+            results = [alignment_pos / 3 + 1] if alignment_type == "codon" else [alignment_pos + 1]  # conversion to 1-based
+            for row_index in range(0, record_number):
+                sequence_pos_list = [(pos/3 + 1) if alignment_type == "codon" else (pos + 1) for pos in position_matrix[:, alignment_pos]] # conversion to 1-based
+            alignment_nucleotide_list = []
+            flank_list = []
+            flank_list_no_gaps = []
+            if alignment_type == "codon":
+                for record_index in range(0, record_number):
+                    alignment_nucleotide_list.append(str(alignment[record_index, alignment_pos:alignment_pos+3].seq))
+            else:
+                alignment_nucleotide_list = [letter for letter in alignment[:, alignment_pos]]
+            if flank_length > 0:
+                for record_index in range(0, record_number):
+                    sequence_pos = position_matrix[record_index, alignment_pos]
+
+                    # upstream flank extraction
+                    flank_list.append(str(alignment[record_index, max((0, alignment_pos - flank_length)):alignment_pos].seq))
+                    #print record_seq_nogaps_list[record_index]
+                    if sequence_pos == -1: # empty flanks with no_gaps if position is in gap
+                        flank_list_no_gaps.append("")
+                    else:
+                        flank_list_no_gaps.append(str(record_seq_nogaps_list[record_index][max((0, sequence_pos - flank_length)):sequence_pos]))
+                    #downstream flank extraction
+                    if alignment_type == "codon":
+                        flank_list.append(str(alignment[record_index, alignment_pos + 3:min(alignment_length, alignment_pos + 3 + flank_length)].seq))
+                        if sequence_pos == -1: # empty flanks with no_gaps if position is in gap
+                            flank_list_no_gaps.append("")
+                        else:
+                            flank_list_no_gaps.append(str(record_seq_nogaps_list[record_index][sequence_pos + 3:min(sequence_len_list[record_index], sequence_pos + 3 + flank_length)]))
+                    else:
+                        flank_list.append(str(alignment[record_index, alignment_pos + 1:min(alignment_length, alignment_pos + 1 + flank_length)].seq))
+                        if sequence_pos == -1: # empty flanks with no_gaps if position is in gap
+                            flank_list_no_gaps.append("")
+                        else:
+                            flank_list_no_gaps.append(str(record_seq_nogaps_list[record_index][sequence_pos + 1:min(sequence_len_list[record_index], sequence_pos + 1 + flank_length)]))
+            results_list.append(results + sequence_pos_list + alignment_nucleotide_list + flank_list + flank_list_no_gaps)
+            #print "\n"
+        with open("%s.output" % output_prefix, "w") as out_fd:
+            out_fd.write(header)
+            for entry in results_list:
+                out_fd.write("\t".join(map(str, entry)) + "\n")
+
+        return results_list
+
+    def get_specific_positions_for_multiple_files(self, alignment_dir, position_file, reference_sequence_id, output_dir, alignment_file_suffix="",
+                                                  format="fasta", gap_symbol="-", verbose=True, alignment_type="nucleotide", flank_length=0):
+
+        position_dict = SynDict(filename=position_file, split_values=True, expression=int)
+
+        self.safe_mkdir(output_dir)
+
+        file_list = ["%s/%s" % (alignment_dir, filename) for filename in os.listdir(alignment_dir)]
+
+        for alignment_name in position_dict:
+            alignment_file = "%s/%s%s" % (alignment_dir, alignment_name, alignment_file_suffix)
+            output_prefix = "%s/%s" % (output_dir, alignment_name)
+            if alignment_file not in file_list:
+                print("WARNING!!! No file for %s. Skipping..." % alignment_name)
+                break
+            self.get_specific_positions(alignment_file, reference_sequence_id, position_dict[alignment_name],
+                                        output_prefix, format=format, gap_symbol=gap_symbol, verbose=verbose,
+                                        alignment_type=alignment_type, flank_length=flank_length)
+
 
     """
     @staticmethod

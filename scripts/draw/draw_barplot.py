@@ -46,15 +46,16 @@ data = np.loadtxt(args.input_file, comments="#", usecols=args.column_index_list)
 if args.min_value and args.max_value:
     data = data[(data <= args.min_value) & (data >= args.max_value)]
 elif args.max_value:
-    data = data[data <= args.min_value]
-elif args.max_value:
-    data = data[data >= args.max_value]
+    data = data[data <= args.max_value]
+elif args.min_value:
+    data = data[data >= args.min_value]
 
 plt.figure(1, figsize=(6, 6))
 plt.subplot(1, 1, 1)
-
+print data
+print len(data)
 plt.bar(np.arange(1, len(data) + 1, 1), data)
-plt.xlim(xmin=min(data), xmax=max(data))
+plt.xlim(xmin=0, xmax=len(data))
 
 if args.xlabel:
     plt.xlabel(args.xlabel)
@@ -63,4 +64,5 @@ if args.ylabel:
 if args.title:
     plt.title(args.title)
 
-
+for ext in args.extensions:
+    plt.savefig("%s.%s" % (args.output_prefix, ext))
