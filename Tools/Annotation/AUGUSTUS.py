@@ -347,10 +347,10 @@ class AUGUSTUS(Tool):
 
         self.execute(options, cmd="exonerate2hints_with_utrs.pl" if with_utrs else "exonerate2hints.pl")
 
-    def join_multiple_hints(self, in_file, out_file):
+    def join_multiple_hints(self, in_file, out_file, separator=","):
         options = " > %s" % out_file
         # sorting of hints is necessary before merging
-        cmd = "cat %s | sort -n -k 4,4 | sort -s -n -k 5,5 | sort -s -k 3,3 | sort -s -k 1,1 | join_mult_hints.pl" % (in_file if isinstance(in_file, str) else " ".join([in_file]))
+        cmd = "cat %s | sort -n -k 4,4 | sort -s -n -k 5,5 | sort -s -k 3,3 | sort -s -k 1,1 | join_mult_hints.pl" % (" ".join(in_file.split(separator) if isinstance(in_file, str) else in_file))
         self.execute(options, cmd=cmd)
 
     def assign_synonyms_to_features_from_augustus_gff(self, input_gff, output_file, prefix,
