@@ -260,7 +260,7 @@ class IdList(list):
 class IdSet(OrderedSet):
 
     def __init__(self, idset=None, filename=None, header=False, close_after_if_file_object=False, column_number=None,
-                 column_separator="\t", comments_prefix=None, id_in_column_separator=None):
+                 column_separator="\t", comments_prefix=None, id_in_column_separator=None, expression=None):
         OrderedSet.__init__(self)
 
         if filename:
@@ -272,7 +272,7 @@ class IdSet(OrderedSet):
                 self.add(element)
 
     def read(self, filename, header=False, close_after_if_file_object=False, column_number=None, column_separator="\t",
-             comments_prefix=None, id_in_column_separator=None):
+             comments_prefix=None, id_in_column_separator=None, expression=None):
         #reads ids from file with one id per line
         
         in_fd = filename if isinstance(filename, file) else open(filename, "r")
@@ -285,6 +285,8 @@ class IdSet(OrderedSet):
                 if line[: com_pref_len] == comments_prefix:
                     continue
             ids = line.strip().split(column_separator)[column_number] if column_number is not None else line.strip()
+            if expression:
+                ids = map(expression, ids)
             if id_in_column_separator:
                 ids = set(ids.split(id_in_column_separator))
                 for entry in ids:
