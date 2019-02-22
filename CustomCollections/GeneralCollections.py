@@ -285,14 +285,12 @@ class IdSet(OrderedSet):
                 if line[: com_pref_len] == comments_prefix:
                     continue
             ids = line.strip().split(column_separator)[column_number] if column_number is not None else line.strip()
-            if expression:
-                ids = map(expression, ids)
             if id_in_column_separator:
-                ids = set(ids.split(id_in_column_separator))
+                ids = set(map(expression, ids.split(id_in_column_separator)) if expression else ids.split(id_in_column_separator))
                 for entry in ids:
                     self.add(entry)
             else:
-                self.add(ids)
+                self.add(expression(ids) if expression else ids)
 
         if (not isinstance(filename, file)) or close_after_if_file_object:
             in_fd.close()

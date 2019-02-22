@@ -386,7 +386,7 @@ class FileRoutines:
 
     @staticmethod
     def intersect_ids_from_files(files_with_ids_from_group_a, files_with_ids_from_group_b,
-                                 result_file=None, mode="common"):
+                                 result_file=None, mode="common", case_insensitive=False):
         a = IdSet()
         b = IdSet()
 
@@ -404,14 +404,13 @@ class FileRoutines:
         #print(files_with_ids_from_group_a)
         for filename in [files_with_ids_from_group_a] if isinstance(files_with_ids_from_group_a, str) else files_with_ids_from_group_a:
             id_set = IdSet()
-            id_set.read(filename, comments_prefix="#")
+            id_set.read(filename, comments_prefix="#", expression=(lambda s: s.upper()) if case_insensitive else None)
             a = a | id_set
 
         for filename in [files_with_ids_from_group_b] if isinstance(files_with_ids_from_group_b, str) else files_with_ids_from_group_b:
             id_set = IdSet()
-            id_set.read(filename, comments_prefix="#")
+            id_set.read(filename, comments_prefix="#", expression=(lambda s: s.upper()) if case_insensitive else None)
             b = b | id_set
-
         result_fd = open(result_file, "w") if result_file else sys.stdout
         if mode != "count":
             final_set = IdSet(expression(a, b))
@@ -656,6 +655,70 @@ class FileRoutines:
 
         self.combine_files_with_header(file_list, output_file,
                                        header_prefix=header_prefix, sorting_options=sorting_options)
+
+    def merge_files_by_columns(self, file_list, column_index_list,  output_file, separator="\t", column_names_list=None,
+                               comment_prefix="#", header=False):
+        comment_prefix_len = len(comment_prefix)
+        number_of_files = len(file_list)
+
+        if len(column_index_list) != number_of_files:
+            raise ValueError("ERROR!!! Column indexes either were not specified for some files "
+                             "or specified too many of them")
+
+        combined_header_list = []
+
+        file_line_dict_list = []
+
+        for file_index in range(0, number_of_files):
+            file_line_dict_list.append(OrderedDict())
+
+            with self.metaopen(file_list[file_index], "r") as file_fd:
+                if header:
+                    header_list = file_fd.readline().strip("\n").split()
+                    for i in range(0, len(header_list)):
+                        if i in column_index_list[file_index]:
+                            continue
+                        combined_header_list.append(header_list[i])
+
+                for line in file_fd:
+                    if line[0:comment_prefix_len] == comment_prefix:
+                        continue
+                    line_list = line.strip().split(separator)
+
+                    line_combined_id = ""
+                    for column_index in column_index_list[file_index]:
+                        line_combined_id += line_list[column_index]
+                    file_line_dict_list[-1][line_combined_id] = line_list
+
+        file_line_dict_line_len = []
+        for file_dict in file_line_dict_list:
+            file_line_dict_line_len.append(len(file_dict[list(file_dict.keys())[0]]))
+
+        with self.metaopen(output_file, "w") as out_fd:
+            if header:
+                out_fd.write(separator.join(column_names_list + combined_header_list) + "\n")
+
+            for line_id in file_line_dict_list[0]:
+                for j in range(1, len(file_line_dict_list)):
+                    if line_id not in file_line_dict_list[j]:
+                        break
+                else:
+                    output_line_list = []
+                    for column_index in column_index_list[0]:
+                        output_line_list.append(file_line_dict_list[0][line_id][column_index])
+
+                    for file_dict_index in range(0, len(file_line_dict_list)):
+                        for column_index in range(0, file_line_dict_line_len[file_dict_index]):
+                            if column_index in column_index_list[file_dict_index]:
+                                continue
+                            output_line_list.append(file_line_dict_list[file_dict_index][line_id][column_index])
+
+                    out_fd.write(separator.join(output_line_list) + "\n")
+
+
+
+
+
 
     @staticmethod
     def string2float(string):

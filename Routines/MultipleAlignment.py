@@ -3,6 +3,7 @@ import os
 
 from collections import OrderedDict
 import numpy as np
+import pandas as pd
 
 from Bio import SeqIO, AlignIO
 from Bio.Seq import Seq
@@ -733,14 +734,204 @@ class MultipleAlignmentRoutines(SequenceRoutines):
                                         output_prefix, format=format, gap_symbol=gap_symbol, verbose=verbose,
                                         alignment_type=alignment_type, flank_length=flank_length)
 
+    def call_variants_from_multiple_alignment(self, alignment, reference_sequence_id, gap_symbol="-",
+                                              verbose=True, output_prefix=None, align_variants=False,
+                                              output_type="hgvs", variant_separator=",", target_sequence_id=None,
+                                              absent_symbol=""):
+        alignment_length = len(alignment[0].seq)
+        record_id_list = [record.id for record in alignment]
+        record_number = len(alignment)
 
-    """
-    @staticmethod
-    def parse_alignment(input_file, filetype="fasta"):
-        print("Parsing alignment file %s" % input_file)
-        #print(input_file)
-        alignment = AlignIO.read(input_file, filetype)
-        #print(alignment)
-        print("Totaly %i sequences in alignment" % len(alignment))
-        return alignment
-    """
+        record_seq_nogaps_list = [record.seq.ungap(gap=gap_symbol) for record in alignment]
+        sequence_len_list = [len(record_seq) for record_seq in record_seq_nogaps_list]
+
+        reference_sequence_index = 0
+        for record in alignment:
+            if record.id == reference_sequence_id:
+                break
+            reference_sequence_index += 1
+
+        pos_cor_matrix = self.get_position_correspondence_matrix(alignment, gap_symbol=gap_symbol, verbose=verbose)
+        alignment_array = np.array([list(rec) for rec in alignment], np.character, order="F")
+
+        variant_dict = OrderedDict()
+
+        for record_index in range(0, record_number):
+            if record_index == reference_sequence_index:
+                continue
+            variant_dict[record_id_list[record_index]] = []
+            pos_index = 0
+
+            while pos_index < alignment_length:
+                if alignment_array[record_index, pos_index] == alignment_array[reference_sequence_index, pos_index]:
+                    pos_index += 1
+                    continue
+
+                if (alignment_array[record_index, pos_index] == gap_symbol) or (alignment_array[reference_sequence_index, pos_index] == gap_symbol):
+                    # indel start
+                    #print "aaa"
+                    if alignment_array[reference_sequence_index, pos_index] == gap_symbol and pos_index > 0:
+
+                        indel_start_pos = pos_index -1
+                    else:
+                        indel_start_pos = pos_index
+
+                    if alignment_array[record_index, pos_index] == gap_symbol:
+                        deletion_length = 1
+                        insertion_length = 0
+                        deletion_seq = alignment_array[reference_sequence_index, pos_index]
+                        insertion_seq = ""
+                    else:
+                        deletion_length = 0
+                        insertion_length = 1
+                        deletion_seq = ""
+                        insertion_seq = alignment_array[record_index, pos_index]
+                        
+                    pos_index += 1
+
+                    while pos_index < alignment_length:
+
+                        if (alignment_array[record_index, pos_index] == gap_symbol) and \
+                           (alignment_array[reference_sequence_index, pos_index] == gap_symbol):
+                            pass
+                        elif alignment_array[record_index, pos_index] == gap_symbol:
+                            deletion_length += 1
+                            deletion_seq += alignment_array[reference_sequence_index, pos_index]
+
+                        elif alignment_array[reference_sequence_index, pos_index] == gap_symbol:
+                            insertion_length += 1
+                            insertion_seq += alignment_array[record_index, pos_index]
+
+                        else:
+                            break
+                        pos_index += 1
+
+                    if deletion_length + insertion_length == 1:
+                        indel_end_ref_coord = None
+                    else:
+                        indel_end_ref_coord = pos_cor_matrix[reference_sequence_index, pos_index - 1] + 1
+
+                    if pos_cor_matrix[reference_sequence_index, indel_start_pos] > -1:
+                        #print pos_cor_matrix[reference_sequence_index, indel_start_pos]
+                        indel_start_ref_coord = pos_cor_matrix[reference_sequence_index, indel_start_pos] + 1
+                    else:
+                        #print pos_cor_matrix[reference_sequence_index, indel_start_pos]
+                        #print indel_start_pos
+                        indel_start_ref_coord = -1
+
+
+                    variant_type = 'del' if insertion_length == 0 else 'ins' if deletion_length == 0 else 'delins'
+                    variant_dict[record_id_list[record_index]].append([variant_type,
+                                                                       indel_start_ref_coord,
+                                                                       None if variant_type == 'ins' else indel_end_ref_coord,
+                                                                       deletion_seq if deletion_length > 0 else None,
+                                                                       insertion_seq if insertion_length > 0 else None])
+                    #print variant_dict[record_id_list[record_index]][-1]
+                else:
+                    variant_dict[record_id_list[record_index]].append(['snp',
+                                                                       pos_cor_matrix[reference_sequence_index, pos_index] + 1,
+                                                                       None,
+                                                                       alignment_array[reference_sequence_index, pos_index],
+                                                                       alignment_array[record_index, pos_index]])
+                    pos_index += 1
+
+        #print variant_dict
+        if output_prefix and (output_type == 'hgvs'):
+            with self.metaopen("%s.variants.tab" % output_prefix, "w") as out_fd:
+                out_fd.write("#seq_id\tvariants\n")
+                record_string_dict = OrderedDict()
+                if align_variants:
+                    variant_start_coordinates = []
+                    variant_count_dict = OrderedDict()
+                    for record_id in variant_dict:
+
+                        for variant_entry in variant_dict[record_id]:
+                            variant_start_coordinates.append(variant_entry[1])
+
+                        variant_count_dict[record_id] = len(variant_dict[record_id])
+                    variant_start_coordinates = list(set(variant_start_coordinates))
+                    variant_start_coordinates.sort()
+                    print("%s variants with different start coordinates" % len(variant_start_coordinates))
+                    for record_id in variant_count_dict:
+                        print("%s: %i" % (record_id, variant_count_dict[record_id]))
+                        #print variant_dict[record_id]
+
+                    for record_id in variant_dict:
+                        variant_list = []
+                        variant_index = 0
+                        for i in range(0, len(variant_start_coordinates)):
+                            if variant_index < variant_count_dict[record_id] and (variant_start_coordinates[i] == variant_dict[record_id][variant_index][1]):
+                                variant_list.append(self.hgvsall_from_variant_list_entry(variant_dict[record_id][variant_index]))
+                                variant_index += 1
+                            else:
+                                #print "bbbb"
+                                #print variant_start_coordinates[i] ,  variant_dict[record_id][variant_index][1]
+                                variant_list.append("")
+                        record_string_dict[record_id] = variant_list
+
+                    record_df = pd.DataFrame.from_dict(record_string_dict)
+                    record_df.to_csv("%s.all.variants" % output_prefix, sep="\t", index=False,
+                                     header=True)
+                    if target_sequence_id:
+                        rows_to_extract_list = []
+
+                    print record_df
+                    print record_df["mustela_nigripes"][[220, 225]]
+                    print "\n", record_df.shape[0]
+                else:
+                    for record_id in variant_dict:
+                        variant_list = []
+                        for variant in variant_dict[record_id]:
+                            variant_list.append(self.hgvsall_from_variant_list_entry(variant))
+                        record_string_dict[record_id] = variant_list
+
+                for record_id in record_string_dict:
+                    record_string = "%s\t" % record_id
+                    record_string += variant_separator.join(record_string_dict[record_id])
+                    record_string += "\n"
+                    out_fd.write(record_string)
+
+        return variant_dict
+
+    def hgvsall_from_variant_list_entry(self, variant):
+        if variant[0] == 'snp':
+            return '%i%sto%s' % (variant[1], variant[3], variant[4])
+        elif variant[0] == 'delins':
+            return '%i_%idel%sins%s' % (variant[1], variant[2], variant[3], variant[4])
+        elif variant[0] == 'del':
+            return '%i_%i%s%s' % (variant[1],
+                                  variant[2],
+                                  variant[0],
+                                  variant[3] if variant[4] is None else variant[4])
+        elif variant[0] == 'ins':
+            return '%i%s%s' % (variant[1],
+                               variant[0],
+                               variant[3] if variant[4] is None else variant[4])
+        else:
+            raise ValueError("ERROR!!! Unrecognized variant type! %s" % str(variant))
+
+    def call_variants_from_multiple_alignment_from_file(self,
+                                                        alignment_file,
+                                                        output_prefix,
+                                                        reference_sequence_id,
+                                                        gap_symbol="-",
+                                                        verbose=True,
+                                                        format="fasta",
+                                                        align_variants=False,
+                                                        output_type="hgvs",
+                                                        variant_separator=",",
+                                                        target_sequence_id=None,
+                                                        absent_symbol=""):
+
+        alignment_dict = AlignIO.read(alignment_file, format=format)
+        self.call_variants_from_multiple_alignment(alignment_dict,
+                                                   reference_sequence_id,
+                                                   gap_symbol=gap_symbol,
+                                                   verbose=verbose,
+                                                   output_prefix=output_prefix,
+                                                   align_variants=align_variants,
+                                                   output_type=output_type,
+                                                   variant_separator=variant_separator,
+                                                   target_sequence_id=target_sequence_id,
+                                                   absent_symbol=absent_symbol)
+

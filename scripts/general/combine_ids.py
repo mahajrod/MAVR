@@ -4,7 +4,6 @@ import argparse
 
 from Tools.Abstract import Tool
 from Routines.File import make_list_of_path_to_files
-from CustomCollections.GeneralCollections import IdSet
 
 
 parser = argparse.ArgumentParser()
@@ -20,29 +19,12 @@ parser.add_argument("-o", "--output", action="store", dest="output",
 parser.add_argument("-m", "--mode", action="store", dest="mode", default="common",
                     help="Operation mode. Possible variants: common, only_a, only_b, not_common, combine, count"
                          ". Default - common")
+parser.add_argument("-c", "--case_insensitive", action="store_true", dest="case_insensitive",
+                    help="Case insensitive comparison. With this flag all ids are converted to upper case "
+                         "before comparison and are reported in upper case too. Default - False")
 
 args = parser.parse_args()
 
-#white_lists = []
-#black_lists = []
 
-Tool.intersect_ids_from_files(args.group_a_list, args.group_b_list, args.output, mode=args.mode)
-
-"""
-white_set = IdSet()
-black_set = IdSet()
-
-for filename in args.white_list:
-    id_set = IdSet()
-    id_set.read(filename, comments_prefix="#")
-    white_set = white_set | id_set
-
-for filename in args.black_list:
-    id_set = IdSet()
-    id_set.read(filename, comments_prefix="#")
-    black_set = black_set | id_set
-
-final_set = IdSet(white_set - black_set)
-
-final_set.write(args.output)
-"""
+Tool.intersect_ids_from_files(args.group_a_list, args.group_b_list, args.output, mode=args.mode,
+                              case_insensitive=args.case_insensitive)

@@ -55,7 +55,9 @@ class LAST(Tool):
         options += " %s" % lastdb
         options += " %s" % query
         if output_format == "MAF":
-            options += " | tee %s | maf-convert tab > %s.tab" % (output_format, output_format)
+            output_filename_list = self.split_filename(output)
+            tab_filename = output + ".tab" if output_filename_list[-1] != "maf" else output_filename_list[0] + output_filename_list[1] + ".tab"
+            options += " | tee %s | maf-convert tab > %s" % (output_format, tab_filename)
         else:
             options += " > %s" % output
         return options
@@ -73,6 +75,7 @@ class LAST(Tool):
         self.execute(options=options, cmd="lastal")
 
     def convert_maf(self, maf_file, output_file, format="TAB"):
+
         options = " %s" % format
         options += " %s" % maf_file
         options += " > %s" % output_file
