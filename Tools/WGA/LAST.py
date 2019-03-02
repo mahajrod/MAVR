@@ -46,7 +46,7 @@ class LAST(Tool):
 
         options = " -P %i" % self.threads
 
-        options += " -v" if verbose else verbose
+        options += " -v" if verbose else ""
         options += " -R%i%i" % (1 if keep_preliminary_masking else 0,
                                 1 if mask_simple_repeats else 0)
         options += " -f %s" % output_format if output_format else ""
