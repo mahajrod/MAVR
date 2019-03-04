@@ -1,0 +1,5 @@
+dustmasker -in ../../../mustela_nigripes.v2.smithsonian.chr.masked.fasta -infmt fasta -parse_seqids -outfmt maskinfo_asn1_bin -out mustela_nigripes.dustmasker.asnb
+
+convert2blastmask -in ../../../mustela_nigripes.v2.smithsonian.chr.masked.fasta -parse_seqids -masking_algorithm repeat -masking_options "repeatmasker, default" -outfmt maskinfo_asn1_bin -out mustela_nigripes.repeatmasker.asnb
+
+makeblastdb -in ../../../mustela_nigripes.v2.smithsonian.chr.masked.fasta –input_type fasta -dbtype nucl -parse_seqids -mask_data mustela_nigripes.dustmasker.asnb,mustela_nigripes.repeatmasker.asnb -out mustela_nigripes_chr -title mustela_nigripes_chr
