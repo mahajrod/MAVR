@@ -20,9 +20,9 @@ parser.add_argument("-t", "--type", action="store", dest="type", default="gene",
                     help="Comma-separated list of feature types to extract")
 parser.add_argument("-g", "--gff_file", action="store", dest="gff_file",
                     help="Gff file with annotations to extract")
-parser.add_argument("-p", "--parsing_mode", action="store", dest="parsing_mode", default="index_db",
+parser.add_argument("-p", "--parsing_mode", action="store", dest="parsing_mode", default="parse",
                     help="Parsing mode for input sequence file. "
-                         "Possible variants: 'index_db'(default), 'index', 'parse'")
+                         "Possible variants: 'index_db', 'index'(default), 'parse'")
 
 args = parser.parse_args()
 
