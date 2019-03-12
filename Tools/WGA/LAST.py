@@ -57,7 +57,8 @@ class LAST(Tool):
         if output_format == "MAF":
             output_filename_list = self.split_filename(output)
             tab_filename = output + ".tab" if output_filename_list[-1] != "maf" else output_filename_list[0] + output_filename_list[1] + ".tab"
-            options += " | tee %s | maf-convert tab > %s" % (output_format, tab_filename)
+            maf_filename = output + ".maf" if output_filename_list[-1] != "maf" else output
+            options += " | tee %s | maf-convert tab > %s" % (maf_filename, tab_filename)
         else:
             options += " > %s" % output
         return options
