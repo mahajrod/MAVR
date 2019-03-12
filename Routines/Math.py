@@ -1,7 +1,5 @@
 #!/usr/bin/env python
-import os
 from math import factorial
-from copy import deepcopy
 from statsmodels.sandbox.stats.multicomp import fdrcorrection0
 import numpy as np
 import scipy as scp

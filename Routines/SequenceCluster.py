@@ -5,8 +5,6 @@ from collections import OrderedDict
 
 from Bio import SeqIO
 
-#from Routines import FileRoutines
-#from Routines.File import FileRoutines
 from Routines.Sequence import SequenceRoutines
 from CustomCollections.GeneralCollections import SynDict, IdSet, IdList
 

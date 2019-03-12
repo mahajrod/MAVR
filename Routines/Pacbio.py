@@ -1,16 +1,6 @@
 #!/usr/bin/env python
-import os
-import re
-import time
-import xmltodict
 
-from collections import Iterable
-
-import numpy as np
-
-from Tools.Samtools import SamtoolsV1
 from Routines.Alignment import AlignmentRoutines
-from CustomCollections.GeneralCollections import IdList
 
 
 class PacBioRoutines(AlignmentRoutines):

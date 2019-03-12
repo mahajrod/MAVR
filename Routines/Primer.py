@@ -1,8 +1,5 @@
 __author__ = 'mahajrod'
 
-from Bio import SeqIO
-from Bio import AlignIO
-
 from Data.Nucleotides import degenerated_nucleotides
 
 

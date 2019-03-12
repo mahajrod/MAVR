@@ -1,14 +1,8 @@
 #!/usr/bin/env python
 
 import os
-import pickle
-import re
-import matplotlib.pyplot as pyplot
-
-
 from Bio import SeqIO
 from Bio.Seq import Seq
-from Bio.SeqFeature import SeqFeature, FeatureLocation
 from Bio.SeqRecord import SeqRecord
 from Bio.Alphabet import IUPAC
 

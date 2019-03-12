@@ -866,18 +866,28 @@ class MultipleAlignmentRoutines(SequenceRoutines):
                             else:
                                 #print "bbbb"
                                 #print variant_start_coordinates[i] ,  variant_dict[record_id][variant_index][1]
-                                variant_list.append("")
+                                variant_list.append(np.NaN)
                         record_string_dict[record_id] = variant_list
 
                     record_df = pd.DataFrame.from_dict(record_string_dict)
                     record_df.to_csv("%s.all.variants" % output_prefix, sep="\t", index=False,
-                                     header=True)
-                    if target_sequence_id:
-                        rows_to_extract_list = []
+                                     header=True, na_rep=absent_symbol)
 
-                    print record_df
-                    print record_df["mustela_nigripes"][[220, 225]]
-                    print "\n", record_df.shape[0]
+                    if target_sequence_id:
+                        boolean_comparison_array = ~pd.isnull(record_df[target_sequence_id])
+                        for record_id in record_id_list:
+                            if (record_id == reference_sequence_id) or (record_id == target_sequence_id):
+                                continue
+                            boolean_comparison_array &= np.not_equal(record_df[target_sequence_id],
+                                                                     record_df[record_id]) #numexpr.evaluate('(a==b)|((a!=a)&(b!=b))') &=
+
+                        filtered_df = record_df[boolean_comparison_array]
+                        filtered_df.to_csv("%s.target_specific.variants" % output_prefix, sep="\t", index=False,
+                                           header=True, na_rep=absent_symbol)
+                    #print record_df
+                    #print record_df["mustela_nigripes"][[220, 225]]
+                    #print ~pd.isnull(record_df["mustela_nigripes"]) &
+                        print filtered_df
                 else:
                     for record_id in variant_dict:
                         variant_list = []
@@ -887,7 +897,8 @@ class MultipleAlignmentRoutines(SequenceRoutines):
 
                 for record_id in record_string_dict:
                     record_string = "%s\t" % record_id
-                    record_string += variant_separator.join(record_string_dict[record_id])
+                    record_string += variant_separator.join(map(lambda s: "" if (s is None) or (s is np.NaN) else s,
+                                                                record_string_dict[record_id]))
                     record_string += "\n"
                     out_fd.write(record_string)
 

@@ -1,21 +1,10 @@
 __author__ = 'mahajrod'
 import os
-import re
-import sys
-import pickle
 
-from copy import deepcopy
 from collections import OrderedDict
-
-import numpy as np
-
-from Bio import SeqIO
 from Bio.Seq import Seq
-from Bio.SeqRecord import SeqRecord
-from Bio.SeqFeature import SeqFeature, FeatureLocation
 
-from CustomCollections.GeneralCollections import TwoLvlDict, SynDict, IdList, IdSet
-from Routines.Functions import output_dict
+from CustomCollections.GeneralCollections import TwoLvlDict
 from Routines.File import FileRoutines
 
 
