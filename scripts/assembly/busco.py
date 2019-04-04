@@ -41,5 +41,6 @@ parser.add_argument("-u", "--busco_dir", action="store", dest="busco_dir",
 args = parser.parse_args()
 
 BUSCO.path = args.busco_dir
-BUSCO.assess_multiple_genomes(args.input_fasta_list, args.label_list, args.busco_db, args.species,
+BUSCO.assess_multiple_genomes(args.input_fasta_list, args.busco_db, args.species,
+                              label_list=args.label_list,
                               output_dir=args.output_dir, mode=args.mode)
