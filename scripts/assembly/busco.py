@@ -35,7 +35,11 @@ parser.add_argument("-o", "--output_dir", action="store", dest="output_dir", def
 parser.add_argument("-m", "--mode", action="store", dest="mode", default="genome",
                     help="BUSCO mode. Allowed: genome(default), transcriptome, proteins")
 
+parser.add_argument("-u", "--busco_dir", action="store", dest="busco_dir",
+                    help="Path to directory with BUSCO script")
+
 args = parser.parse_args()
 
+BUSCO.path = args.busco_dir
 BUSCO.assess_multiple_genomes(args.input_fasta_list, args.label_list, args.busco_db, args.species,
                               output_dir=args.output_dir, mode=args.mode)
