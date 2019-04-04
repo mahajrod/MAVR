@@ -37,10 +37,12 @@ parser.add_argument("-m", "--mode", action="store", dest="mode", default="genome
 
 parser.add_argument("-u", "--busco_dir", action="store", dest="busco_dir",
                     help="Path to directory with BUSCO script")
-
+parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=4,
+                    help="Number of threads to use")
 args = parser.parse_args()
 
 BUSCO.path = args.busco_dir
+BUSCO.threads = args.threads
 BUSCO.assess_multiple_genomes(args.input_fasta_list, args.busco_db, args.species,
                               label_list=args.label_list,
                               output_dir=args.output_dir, mode=args.mode)
