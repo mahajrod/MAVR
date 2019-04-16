@@ -11,6 +11,7 @@ PROFILE=/home/toleksyk/toleksyk/.profile
 WORKDIR=/work/toleksyk/toleksyk/
 SOFTDIR=${WORKDIR}/soft/
 GENOMEDIR=${WORK}/genome/
+
 EXONERATEDIR=${WORKDIR}/exonerate/
 source ${PROFILE}
 
