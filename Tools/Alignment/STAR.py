@@ -3,8 +3,8 @@ import os
 from math import log, floor
 from Tools.Abstract import Tool
 from Routines import FileRoutines
-
 from Tools.Samtools import SamtoolsV1
+
 
 
 class STAR(Tool):
@@ -13,6 +13,30 @@ class STAR(Tool):
     """
     def __init__(self, path="", max_threads=4):
         Tool.__init__(self, "STAR", path=path, max_threads=max_threads)
+
+    # TODO: methods below are temporarly! Remove them when switch to RouToolPa will be finished
+    @staticmethod
+    def add_external_extraction_to_filename(filename):
+        if filename[-3:] == ".gz":
+            return "<(gunzip -c %s)" % filename
+        elif filename[-4:] == ".bz2":
+            return "<(bunzip2 -c %s)" % filename
+        else:
+            return filename
+
+    @staticmethod
+    def add_external_extraction_to_filelist(filelist):
+        new_filelist = []
+
+        for filename in filelist:
+            if filename[-3:] == ".gz":
+                new_filelist.append("<(gunzip -c %s)" % filename)
+            elif filename[-4:] == ".bz2":
+                new_filelist.append("<(bunzip2 -c %s)" % filename)
+            else:
+                new_filelist.append(filename)
+
+        return new_filelist
 
     def index(self, genome_dir, genome_fasta, annotation_gtf=None, feature_from_gtf_to_use_as_exon=None, junction_tab_file=None, sjdboverhang=None,
               genomeSAindexNbases=None, genomeChrBinNbits=None, genome_size=None):
@@ -54,11 +78,17 @@ class STAR(Tool):
         options += " --sjdbGTFfeatureExon %s" % feature_from_gtf_to_use_as_exon if feature_from_gtf_to_use_as_exon else ""
 
         options += " --sjdbOverhang %i" % length_of_sequences_flanking_junction if length_of_sequences_flanking_junction else ""
-
         options += (" --sjdbFileChrStartEnd %s" % (os.path.abspath(junction_tab_file_list) if isinstance(junction_tab_file_list, str) else " ".join(map(os.path.abspath, junction_tab_file_list)))) if junction_tab_file_list else ""
 
-        options += " --readFilesIn %s" % (os.path.abspath(forward_read_list) if isinstance(forward_read_list, str) else " ".join(map(os.path.abspath, forward_read_list)))
-        options += " %s" % ("" if not reverse_read_list else os.path.abspath(reverse_read_list) if isinstance(reverse_read_list, str) else " ".join(map(os.path.abspath, reverse_read_list)))
+        forward_read_abs_path_list = [os.path.abspath(forward_read_list)] if isinstance(forward_read_list, str) else map(os.path.abspath, reverse_read_list)
+        reverse_read_abs_path_list = ([os.path.abspath(reverse_read_list)] if isinstance(reverse_read_list, str) else map(os.path.abspath, reverse_read_list)) if reverse_read_list else None
+
+        forward_read_abs_path_list = self.add_external_extraction_to_filelist(forward_read_abs_path_list)
+        reverse_read_abs_path_list = self.add_external_extraction_to_filelist(reverse_read_abs_path_list)
+
+        options += " --readFilesIn %s" % " ".join(forward_read_abs_path_list)
+
+        options += " %s" % " ".join(reverse_read_abs_path_list) if reverse_read_abs_path_list else ""
 
         options += " --clip3pNbases %i" % three_prime_trim if three_prime_trim else ""
         options += " --clip5pNbases %i" % five_prime_trim if five_prime_trim else ""
