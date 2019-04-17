@@ -1,13 +1,11 @@
 #!/usr/bin/env python2
 import os
 from collections import OrderedDict
-
 from BCBio import GFF
-
+from RouToolPa.Collections.General import TwoLvlDict
 from Parsers.VCF import ReferenceGenome, CollectionVCF, ref_alt_variants
-from Parsers.CCF import CollectionCCF
 from Parsers.GFF import CollectionGFF
-from CustomCollections.GeneralCollections import TwoLvlDict
+
 if __name__ == "__main__":
     workdir = "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/combined_vcf/"
 

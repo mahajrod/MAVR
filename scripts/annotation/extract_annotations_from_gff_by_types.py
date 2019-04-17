@@ -4,7 +4,6 @@ import argparse
 from copy import deepcopy
 from BCBio import GFF
 
-from CustomCollections.GeneralCollections import IdList
 
 
 def record_with_extracted_annotations_generator(gff_file, white_list_of_annotation_types):

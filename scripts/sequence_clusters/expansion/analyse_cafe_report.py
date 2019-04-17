@@ -7,14 +7,15 @@ import matplotlib
 
 
 
+
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 plt.ioff()
 from numpy import linspace, arange
 
 from collections import OrderedDict
-from CustomCollections.GeneralCollections import TwoLvlDict
-from Parsers.CAFE import ReportCAFE
+from RouToolPa.Collections.General import TwoLvlDict
+from RouToolPa.Parsers.CAFE import ReportCAFE
 from RouToolPa.Routines.File import read_synonyms_dict
 
 parser = argparse.ArgumentParser()

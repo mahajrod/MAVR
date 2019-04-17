@@ -4,8 +4,9 @@ __author__ = 'Sergei F. Kliver'
 import os
 import argparse
 from multiprocessing import Pool
-from CustomCollections.GeneralCollections import SynDict
+from RouToolPa.Collections.General import SynDict
 from RouToolPa.Routines.File import check_path
+
 
 """
 

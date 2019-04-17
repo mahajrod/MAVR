@@ -11,7 +11,7 @@ os.environ['MPLCONFIGDIR'] = '/tmp/'
 import matplotlib.pyplot as plt
 plt.ioff()
 
-from Parsers.VCF import CollectionVCF
+from RouToolPa.Parsers.VCF import CollectionVCF
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-f", "--gff", action="store", dest="gff",

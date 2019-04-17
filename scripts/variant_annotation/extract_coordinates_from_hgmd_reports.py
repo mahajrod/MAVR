@@ -2,7 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 import sys
 import argparse
-from Parsers.HGMD import HGMDvariants
+from RouToolPa.Parsers.HGMD import HGMDvariants
 
 
 

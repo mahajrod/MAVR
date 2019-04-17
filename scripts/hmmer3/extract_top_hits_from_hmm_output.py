@@ -6,8 +6,9 @@ import shutil
 import argparse
 from multiprocessing import Pool
 from Bio import SearchIO
-from CustomCollections.GeneralCollections import IdList
+from RouToolPa.Collections.General import IdList
 from RouToolPa.Routines import FileRoutines  #make_list_of_path_to_files, split_filename, check_path, save_mkdir
+
 
 
 

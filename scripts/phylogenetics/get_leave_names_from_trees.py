@@ -5,7 +5,8 @@ import sys
 import argparse
 from ete2 import Tree
 from RouToolPa.Routines.File import check_path, split_filename
-from CustomCollections.GeneralCollections import SynDict
+from RouToolPa.Collections.General import SynDict
+
 
 
 parser = argparse.ArgumentParser()

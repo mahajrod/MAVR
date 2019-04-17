@@ -5,13 +5,14 @@ import argparse
 from collections import OrderedDict
 import matplotlib
 
+
 matplotlib.use('Agg')
 os.environ['MPLCONFIGDIR'] = '/tmp/'
 
 import matplotlib.pyplot as plt
 plt.ioff()
 from RouToolPa.Routines import SequenceRoutines
-from CustomCollections.GeneralCollections import TwoLvlDict
+from RouToolPa.Collections.General import TwoLvlDict
 
 parser = argparse.ArgumentParser()
 

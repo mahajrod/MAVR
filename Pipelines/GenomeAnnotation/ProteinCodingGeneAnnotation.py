@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 import os
 from RouToolPa.Tools.BLAST import BLASTp
-from CustomCollections.GeneralCollections import IdSet
+from RouToolPa.Collections.General import IdSet
 from RouToolPa.Tools.Annotation import AUGUSTUS
 from RouToolPa.Tools.Expression import Gffread
 from RouToolPa.Tools.Alignment import STAR
 from RouToolPa.Tools.HMMER import HMMER3
 from Pipelines.Filtering import FilteringPipeline
+
 
 
 

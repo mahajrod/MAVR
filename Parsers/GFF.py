@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from Parsers.Abstract import Record, Metadata, Collection
+from RouToolPa.Parsers.Abstract import Record, Metadata, Collection
 
 
 class MetadataGFF(Metadata):

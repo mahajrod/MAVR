@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
-import sys
 import argparse
+from RouToolPa.Collections.General import IdList
 from Pipelines import SNPCallPipeline
 
-from CustomCollections.GeneralCollections import IdList
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-r", "--reference", action="store", dest="reference", required=True,

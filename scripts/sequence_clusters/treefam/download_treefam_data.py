@@ -4,8 +4,9 @@ import os
 import sys
 import argparse
 from multiprocessing import Pool
-from CustomCollections.GeneralCollections import IdList
+from RouToolPa.Collections.General import IdList
 from RouToolPa.Routines import FileRoutines
+
 
 
 parser = argparse.ArgumentParser()

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-from Parsers.MultipleAlignment import MultipleAlignmentStatCollection
+from RouToolPa.Parsers.MultipleAlignment import MultipleAlignmentStatCollection
 
 parser = argparse.ArgumentParser()
 

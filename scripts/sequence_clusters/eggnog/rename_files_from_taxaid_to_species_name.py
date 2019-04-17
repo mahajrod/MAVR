@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import os
-import sys
 import shutil
 import argparse
+from RouToolPa.Routines import FileRoutines
+from RouToolPa.Collections.General import SynDict
 
-from RouToolPa.Routines import EggNOGRoutines, FileRoutines
-from CustomCollections.GeneralCollections import SynDict
 
 
 parser = argparse.ArgumentParser()

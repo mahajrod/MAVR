@@ -7,6 +7,7 @@ from collections import OrderedDict
 import matplotlib
 
 
+
 matplotlib.use('Agg')
 os.environ['MPLCONFIGDIR'] = '/tmp/'
 import matplotlib.pyplot as plt
@@ -15,7 +16,7 @@ import numpy as np
 
 from BCBio.GFF import GFFExaminer
 from BCBio import GFF
-from CustomCollections.GeneralCollections import TwoLvlDict
+from RouToolPa.Collections.General import TwoLvlDict
 from RouToolPa.Routines.Sequence import get_feature_lengths, get_total_feature_lengths, feature_lengths_collapse_records
 
 parser = argparse.ArgumentParser()

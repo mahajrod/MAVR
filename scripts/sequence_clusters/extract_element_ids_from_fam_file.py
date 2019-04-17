@@ -2,8 +2,8 @@
 __author__ = 'Sergei F. Kliver'
 import sys
 import argparse
+from RouToolPa.Collections.General import IdList
 
-from CustomCollections.GeneralCollections import IdList
 
 
 parser = argparse.ArgumentParser()

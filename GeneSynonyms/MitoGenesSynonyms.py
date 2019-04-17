@@ -1,6 +1,6 @@
 __author__ = 'mahajrod'
 
-from CustomCollections.GeneralCollections import SynDict
+from RouToolPa.Collections.General import SynDict
 
 
 mithochondrioal_genes_syndict = SynDict({"12S_rRNA":

@@ -4,11 +4,12 @@ import os
 import shutil
 from collections import OrderedDict
 from RouToolPa.Tools.Filter import Cookiecutter, Trimmomatic, FaCut, Cutadapt
-from Pipelines.Abstract import Pipeline
 from RouToolPa.Parsers.FaCut import FaCutReport
 from RouToolPa.Parsers.Coockiecutter import CoockiecutterReport
 from RouToolPa.Parsers.Trimmomatic import TrimmomaticReport
-from CustomCollections.GeneralCollections import TwoLvlDict
+from RouToolPa.Collections.General import TwoLvlDict
+from Pipelines.Abstract import Pipeline
+
 
 
 

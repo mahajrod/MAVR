@@ -2,10 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-
-from Bio import SeqIO
-
-from CustomCollections.GeneralCollections import SynDict, IdSet
+from RouToolPa.Collections.General import SynDict, IdSet
 
 
 parser = argparse.ArgumentParser()

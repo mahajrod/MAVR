@@ -11,7 +11,7 @@ from RouToolPa.Routines.Annotations import AnnotationsRoutines
 #from Parsers.Coockiecutter import CoockiecutterReport
 #from Parsers.Trimmomatic import TrimmomaticReport
 
-#from CustomCollections.GeneralCollections import TwoLvlDict
+#from RouToolPa.Collections.General import TwoLvlDict
 
 
 class Pipeline(Tool, MatplotlibRoutines, FastQRoutines, AnnotationsRoutines):

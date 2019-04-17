@@ -4,7 +4,7 @@ import os
 import collections
 from Bio import SeqIO
 from Bio import AlignIO
-from Parsers.General import parse_metamiga_fasta
+from RouToolPa.Parsers.General import parse_metamiga_fasta
 from RouToolPa.Routines.Sequence import SequenceRoutines
 
 

@@ -2,7 +2,8 @@
 __author__ = 'Sergei F. Kliver'
 import sys
 import argparse
-from CustomCollections.GeneralCollections import TwoLvlDict
+from RouToolPa.Collections.General import TwoLvlDict
+
 
 
 

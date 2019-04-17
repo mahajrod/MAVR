@@ -6,6 +6,7 @@ from RouToolPa.Routines.Functions import check_path
 
 
 
+
 #from RouToolPa.Tools.Picard import add_header2bam
 from collections import OrderedDict
 
@@ -25,7 +26,7 @@ from RouToolPa.Tools.Picard import MarkDuplicates
 from RouToolPa.Tools.GATK import *
 from RouToolPa.Tools.Picard import CreateSequenceDictionary
 
-from CustomCollections.GeneralCollections import SynDict, IdSet
+from RouToolPa.Collections.General import SynDict, IdSet
 
 # TODO: refactor, remove absolete functions and so on
 

@@ -2,10 +2,10 @@
 __author__ = 'Sergei F. Kliver'
 
 import os
-from scipy import stats
 from collections import OrderedDict
+from scipy import stats
+from RouToolPa.Collections.General  import TwoLvlDict
 
-from CustomCollections.GeneralCollections import TwoLvlDict
 
 
 def read_data(filename):

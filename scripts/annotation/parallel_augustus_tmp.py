@@ -9,7 +9,8 @@ from RouToolPa.Tools.Bedtools import Intersect
 from RouToolPa.Tools.Annotation import AUGUSTUS
 from RouToolPa.Tools.Expression import Gffread
 from RouToolPa.Routines import AnnotationsRoutines, MatplotlibRoutines, SequenceRoutines, FileRoutines
-from CustomCollections.GeneralCollections import IdSet
+from RouToolPa.Collections.General import IdSet
+
 
 
 

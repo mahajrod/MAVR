@@ -3,12 +3,12 @@
 from collections import Iterable, OrderedDict
 import numpy as np
 import matplotlib
+
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 plt.ioff()
-from matplotlib import colors
-from Parsers.Abstract import Record, Collection, Metadata, Header
-from Parsers.VCF import CollectionVCF, MetadataVCF, HeaderVCF
+from RouToolPa.Parsers.Abstract import Record, Collection, Metadata, Header
+from RouToolPa.Parsers.VCF import CollectionVCF, MetadataVCF, HeaderVCF
 
 
 class RecordCCF(Record, Iterable):

@@ -3,7 +3,7 @@ __author__ = 'Sergei F. Kliver'
 
 import argparse
 from collections import OrderedDict
-from Parsers.Coockiecutter import CoockiecutterReportCollection
+from RouToolPa.Parsers.Coockiecutter import CoockiecutterReportCollection
 
 parser = argparse.ArgumentParser()
 

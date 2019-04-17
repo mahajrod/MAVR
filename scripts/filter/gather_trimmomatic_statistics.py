@@ -3,8 +3,9 @@ __author__ = 'Sergei F. Kliver'
 import os
 import argparse
 from RouToolPa.Tools.Filter import Trimmomatic
-from CustomCollections.GeneralCollections import TwoLvlDict
+from RouToolPa.Collections.General import TwoLvlDict
 from RouToolPa.Routines.File import check_path
+
 
 
 

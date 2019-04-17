@@ -4,7 +4,8 @@ import sys
 import argparse
 from Bio import SeqIO
 from BCBio import GFF
-from CustomCollections.GeneralCollections import IdList
+from RouToolPa.Collections.General import IdList
+
 
 
 parser = argparse.ArgumentParser()

@@ -3,8 +3,9 @@ __author__ = 'Sergei F. Kliver'
 
 import sys
 import argparse
-from CustomCollections.GeneralCollections import SynDict
+from RouToolPa.Collections.General import SynDict
 from RouToolPa.Routines.File import make_list_of_path_to_files
+
 
 
 def make_list_of_path_to_files_from_comma_sep_string(string):

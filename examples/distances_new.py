@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 sys.path.append("../")
 
-from Parsers.R import *
+from RouToolPa.Parsers.R import *
 from SeqAnalysis.SeqAnalysis import get_taxonomy_from_genbank_files
 from Pipelines.Phylogeny import get_distances
 

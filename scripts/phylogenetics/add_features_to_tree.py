@@ -2,12 +2,9 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-
 from collections import OrderedDict
-
 from ete2 import Tree
-
-from CustomCollections.GeneralCollections import SynDict
+from RouToolPa.Collections.General import SynDict
 
 parser = argparse.ArgumentParser()
 

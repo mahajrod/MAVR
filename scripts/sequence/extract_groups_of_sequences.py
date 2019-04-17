@@ -3,8 +3,9 @@ __author__ = 'Sergei F. Kliver'
 import os
 import argparse
 from Bio import SeqIO
-from CustomCollections.GeneralCollections import SynDict, IdSet
+from RouToolPa.Collections.General import SynDict, IdSet
 from RouToolPa.Routines import FileRoutines
+
 
 #from RouToolPa.Routines.File import read_ids, make_list_of_path_to_files, check_path, save_mkdir
 from RouToolPa.Routines import SequenceRoutines

@@ -1,12 +1,9 @@
 #!/usr/bin/env python
 
 import os
-
-from Parsers.CCF import CollectionCCF
-from Parsers.VCF import CollectionVCF
-
-from CustomCollections.GeneralCollections import TwoLvlDict
 from collections import OrderedDict
+from RouToolPa.Collections.General import TwoLvlDict
+from Parsers.CCF import CollectionCCF
 
 workdir = "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/combined_vcf/clusters/"
 all_files_subdir = "all/all/"

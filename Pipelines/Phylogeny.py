@@ -1,8 +1,8 @@
 import os
 import numpy as np
 from Bio.Alphabet import IUPAC, Gapped
-from Converters.Converters import convert_alignment, convert_tree
-from Parsers.R import get_indices_from_names
+from BConverters.Converters import convert_alignment, convert_tree
+from RouToolPa.Parsers.R import get_indices_from_names
 
 
 

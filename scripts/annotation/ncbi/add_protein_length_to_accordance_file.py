@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-from CustomCollections.GeneralCollections import SynDict
+from RouToolPa.Collections.General import SynDict
+
 
 parser = argparse.ArgumentParser()
 

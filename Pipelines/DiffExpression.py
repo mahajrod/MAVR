@@ -2,8 +2,9 @@
 import os
 from RouToolPa.Tools.Alignment import STAR
 from RouToolPa.Tools.Expression import HTSeq
-from CustomCollections.GeneralCollections import TwoLvlDict, SynDict
+from RouToolPa.Collections.General import TwoLvlDict, SynDict
 from Pipelines.Filtering import FilteringPipeline
+
 
 
 class DiffExpressionPipeline(FilteringPipeline):

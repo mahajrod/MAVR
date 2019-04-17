@@ -3,7 +3,7 @@ __author__ = 'Sergei F. Kliver'
 
 import argparse
 from collections import OrderedDict
-from Parsers.FaCut import FaCutReportCollection
+from RouToolPa.Parsers.FaCut import FaCutReportCollection
 
 parser = argparse.ArgumentParser()
 

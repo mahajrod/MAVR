@@ -2,9 +2,10 @@
 __author__ = 'Sergei F. Kliver'
 import sys
 import argparse
-from CustomCollections.GeneralCollections import TwoLvlDict, IdList, IdSet, SynDict
+from RouToolPa.Collections.General import TwoLvlDict, IdList, IdSet, SynDict
 from RouToolPa.Routines.File import check_path
 from RouToolPa.Routines.File import read_synonyms_dict
+
 
 
 

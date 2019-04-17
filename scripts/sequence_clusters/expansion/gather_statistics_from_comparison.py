@@ -3,8 +3,9 @@ __author__ = 'Sergei F. Kliver'
 import sys
 import argparse
 from collections import OrderedDict
-from CustomCollections.GeneralCollections import TwoLvlDict
+from RouToolPa.Collections.General import TwoLvlDict
 from RouToolPa.Routines.File import check_path
+
 
 
 parser = argparse.ArgumentParser()

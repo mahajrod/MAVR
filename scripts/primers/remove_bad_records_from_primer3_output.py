@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-from Parsers.Primer3 import CollectionPrimer3
+from RouToolPa.Parsers.Primer3 import CollectionPrimer3
 
 parser = argparse.ArgumentParser()
 

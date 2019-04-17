@@ -2,8 +2,8 @@
 __author__ = 'Sergei F. Kliver'
 import sys
 import argparse
+from RouToolPa.Collections.General import IdList, SynDict
 
-from CustomCollections.GeneralCollections import IdList, SynDict
 # from RouToolPa.Routines.File import read_synonyms_dict
 
 parser = argparse.ArgumentParser()

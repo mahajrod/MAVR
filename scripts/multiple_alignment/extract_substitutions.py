@@ -2,15 +2,10 @@
 __author__ = 'Sergei F. Kliver'
 import sys
 import argparse
-
-from collections import OrderedDict
-
 import numpy as np
-
 from Bio import AlignIO
-from Bio.Align import AlignInfo
 
-from CustomCollections.GeneralCollections import SynDict
+
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_file", action="store", dest="input", required=True,

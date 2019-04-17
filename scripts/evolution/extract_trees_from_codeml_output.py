@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-from Parsers.PAML import CodeMLReport
+from RouToolPa.Parsers.PAML import CodeMLReport
 
 parser = argparse.ArgumentParser()
 

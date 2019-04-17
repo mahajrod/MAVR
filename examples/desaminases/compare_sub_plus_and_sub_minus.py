@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
 from collections import OrderedDict
 import matplotlib
+
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import scipy.stats as ss
 
-from CustomCollections.GeneralCollections import TwoLvlDict
+from RouToolPa.Collections.General import TwoLvlDict
 from Parsers.CCF import CollectionCCF
 
 
