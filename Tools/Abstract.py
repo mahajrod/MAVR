@@ -21,7 +21,7 @@ def execute(exe_string):
     print_mutex.release()
 
     #os.system(exe_string)
-    subprocess.call([SHELLPATH, '-c', exe_string])
+    subprocess.call(exe_string, shell=True, executable=SHELLPATH)
 
 
 class Tool(SequenceRoutines, AlignmentRoutines):
@@ -61,7 +61,7 @@ class Tool(SequenceRoutines, AlignmentRoutines):
         if capture_output:
             return Popen([exe_string], shell=True, stdout=PIPE).stdout  # returns file object
         else:
-            subprocess.call([SHELLPATH, exe_string])
+            subprocess.call(exe_string, shell=True, executable=SHELLPATH)
             return None
 
     def parallel_execute(self, options_list, cmd=None, capture_output=False, threads=None, dir_list=None,
@@ -326,7 +326,7 @@ class Tool(SequenceRoutines, AlignmentRoutines):
 
         # Popen.stdout returns file object
         print(command)
-        job_id = Popen([command], shell=True, stdout=PIPE).stdout.readline().strip().split()[-1]
+        job_id = Popen([command], shell=True, stdout=PIPE, executable=SHELLPATH).stdout.readline().strip().split()[-1]
         #print "Job id", job_id
         return job_id
 
@@ -578,9 +578,9 @@ class JavaTool(Tool):
             return exe_string
 
         if capture_output:
-            return Popen([exe_string], shell=True, stdout=PIPE).stdout  # returns file object
+            return Popen([exe_string], shell=True, stdout=PIPE, executable=SHELLPATH).stdout  # returns file object
         else:
-            subprocess.call([SHELLPATH, exe_string])
+            subprocess.call(exe_string, shell=True, executable=SHELLPATH)
             return None
 
     def parallel_execute(self, options_list, cmd=None, capture_output=False, threads=None, dir_list=None,
