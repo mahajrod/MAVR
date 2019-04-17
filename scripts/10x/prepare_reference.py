@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-from RouToolPa.Tools import LongRanger
+from RouToolPa.Tools.Alignment import LongRanger
 
 
 
