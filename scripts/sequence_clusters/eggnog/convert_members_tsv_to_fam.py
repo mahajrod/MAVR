@@ -2,8 +2,8 @@
 __author__ = 'Sergei F. Kliver'
 import sys
 import argparse
+from RouToolPa.Routines import EggNOGRoutines
 
-from Routines import EggNOGRoutines
 
 
 parser = argparse.ArgumentParser()

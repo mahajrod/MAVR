@@ -1,14 +1,10 @@
 #/usr/bin/env python
 
 from collections import OrderedDict
-
-from Tools.Alignment import Bowtie2, BWA, Novoalign
-
+from RouToolPa.Tools import Bowtie2, BWA, Novoalign
+from RouToolPa.Tools import SamtoolsV1
+from RouToolPa.Tools import MarkDuplicates, AddOrReplaceReadGroups
 from Pipelines.Abstract import Pipeline
-
-from Tools.Bedtools import GenomeCov
-from Tools.Samtools import SamtoolsV1
-from Tools.Picard import MarkDuplicates, AddOrReplaceReadGroups
 
 
 class AlignmentPipeline(Pipeline):

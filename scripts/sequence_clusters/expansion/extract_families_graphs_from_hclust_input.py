@@ -4,9 +4,9 @@ __author__ = 'Sergei F. Kliver'
 import os
 import argparse
 from multiprocessing import Pool
+from CustomCollections.GeneralCollections import SynDict
+from RouToolPa.Routines.File import check_path
 
-from CustomCollections.GeneralCollections import IdList, SynDict
-from Routines.File import check_path
 """
 
 def call_hcluster(input, output, edge_weight, edge_density):

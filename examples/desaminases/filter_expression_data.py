@@ -3,12 +3,6 @@
 __author__ = 'mahajrod'
 
 import os
-from collections import OrderedDict
-from copy import deepcopy
-
-import numpy as np
-
-from Parsers.VCF import CollectionVCF
 from Parsers.Cufflinks import CollectionFPKMTracking
 from Parsers.GFF import CollectionGFF
 

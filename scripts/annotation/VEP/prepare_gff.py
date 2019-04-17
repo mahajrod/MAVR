@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
-import sys
 import argparse
-
-from Tools.Annotation import VEP
+from RouToolPa.Tools.Annotation import VEP
 
 parser = argparse.ArgumentParser()
 

@@ -3,7 +3,8 @@ __author__ = 'Sergei F. Kliver'
 
 import argparse
 from CustomCollections.GeneralCollections import IdList
-from Routines import FileRoutines
+from RouToolPa.Routines import FileRoutines
+
 
 
 parser = argparse.ArgumentParser()

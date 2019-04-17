@@ -1,12 +1,8 @@
 #!/usr/bin/env python
 __author__ = 'mahajrod'
-import os
-import sys
 import argparse
-
 from Bio import SeqIO
-
-from Routines import SequenceRoutines
+from RouToolPa.Routines import SequenceRoutines
 
 parser = argparse.ArgumentParser()
 

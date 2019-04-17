@@ -5,7 +5,7 @@ import sys
 import shutil
 import argparse
 
-from Routines import EggNOGRoutines, FileRoutines
+from RouToolPa.Routines import EggNOGRoutines, FileRoutines
 from CustomCollections.GeneralCollections import SynDict
 
 

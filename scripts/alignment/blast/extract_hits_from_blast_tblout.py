@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-
-from Tools.BLAST import BLASTPlus
+from RouToolPa.Tools.BLAST import BLASTPlus
 
 parser = argparse.ArgumentParser()
 

@@ -2,10 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-
-from Bio import Entrez
-from Routines.File import read_ids
-from Routines import NCBIRoutines
+from RouToolPa.Routines import NCBIRoutines
 
 parser = argparse.ArgumentParser()
 

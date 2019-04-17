@@ -2,8 +2,8 @@
 __author__ = 'mahajrod'
 import sys
 import argparse
+from RouToolPa.Routines import AlignmentRoutines
 
-from Routines import AlignmentRoutines
 
 parser = argparse.ArgumentParser()
 

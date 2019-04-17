@@ -1,14 +1,11 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
 import sys
 import argparse
-
-from collections import OrderedDict
 from CustomCollections.GeneralCollections import TwoLvlDict, IdList, IdSet, SynDict
+from RouToolPa.Routines.File import check_path
+from RouToolPa.Routines.File import read_synonyms_dict
 
-from Routines.File import check_path
-from Routines.File import read_synonyms_dict
 
 
 def filter_nonassembled(families):

@@ -3,8 +3,10 @@ __author__ = 'mahajrod'
 import os
 import argparse
 from random import choice
-
 import matplotlib
+
+
+
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 plt.ioff()
@@ -13,7 +15,7 @@ from numpy import linspace, arange
 from collections import OrderedDict
 from CustomCollections.GeneralCollections import TwoLvlDict
 from Parsers.CAFE import ReportCAFE
-from Routines.File import read_synonyms_dict
+from RouToolPa.Routines.File import read_synonyms_dict
 
 parser = argparse.ArgumentParser()
 

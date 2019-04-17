@@ -2,11 +2,8 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-from collections import OrderedDict
-
 from ete2 import Tree
-
-from Routines.File import read_synonyms_dict
+from RouToolPa.Routines.File import read_synonyms_dict
 
 parser = argparse.ArgumentParser()
 

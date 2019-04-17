@@ -3,10 +3,11 @@ __author__ = 'Sergei F. Kliver'
 import os
 import shutil
 import argparse
+from RouToolPa.Tools.ImageMagick import Convert
+from RouToolPa.Tools.BioFormats import BioConvert
+from RouToolPa.Routines import FileRoutines
 
-from Tools.BioFormats import BioConvert
-from Tools.ImageMagick import Convert
-from Routines import FileRoutines
+
 
 
 parser = argparse.ArgumentParser()

@@ -1,14 +1,8 @@
 __author__ = 'mahajrod'
 
-import collections
-import os
 import re
-from Bio import SeqIO
-from Bio import AlignIO
 from Bio import Phylo
-from Bio.Alphabet import IUPAC, Gapped
-from BCBio import GFF
-from Parsers.General import parse_metamiga_fasta
+
 
 def convert_tree(input_file, input_filetype, output_file, output_filetype):
     #tree = Phylo.read(input_file, input_filetype)

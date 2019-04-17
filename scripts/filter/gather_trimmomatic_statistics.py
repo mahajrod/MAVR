@@ -1,15 +1,12 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import os
-import sys
 import argparse
-
+from RouToolPa.Tools.Filter import Trimmomatic
 from CustomCollections.GeneralCollections import TwoLvlDict
-from collections import OrderedDict
+from RouToolPa.Routines.File import check_path
 
-from Tools.Filter import Trimmomatic
 
-from Routines.File import check_path
 
 parser = argparse.ArgumentParser()
 

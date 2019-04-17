@@ -2,8 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-
-from Tools.Population import PLINK
+from RouToolPa.Tools.Population import PLINK
 
 parser = argparse.ArgumentParser()
 

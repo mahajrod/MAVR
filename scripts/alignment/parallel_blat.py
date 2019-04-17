@@ -2,8 +2,7 @@
 __author__ = 'mahajrod'
 
 import argparse
-
-from Tools.Alignment import BLAT
+from RouToolPa.Tools import BLAT
 
 parser = argparse.ArgumentParser()
 

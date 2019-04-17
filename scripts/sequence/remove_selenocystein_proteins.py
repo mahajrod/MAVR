@@ -3,10 +3,9 @@ __author__ = 'Sergei F. Kliver'
 
 import argparse
 import os
-
 from Bio import SeqIO
+from RouToolPa.Routines.Sequence import record_by_expression_generator
 
-from Routines.Sequence import record_by_expression_generator
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_file", action="store", dest="input_file", required=True,

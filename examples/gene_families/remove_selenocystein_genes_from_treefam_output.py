@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 
-import os, sys
+import os
+import sys
 from collections import OrderedDict
+from RouToolPa.Routines.File import read_ids
 
-from Routines.File import read_ids
 
 species_list = ["cat",
                 "cheetah",

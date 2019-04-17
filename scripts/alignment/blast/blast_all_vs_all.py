@@ -2,8 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-
-from Tools.BLAST import DustMasker, MakeBLASTDb, BLASTDbCmd, BLASTn, BLASTp
+from RouToolPa.Tools.BLAST import DustMasker, MakeBLASTDb, BLASTn, BLASTp
 
 parser = argparse.ArgumentParser()
 

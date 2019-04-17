@@ -1,13 +1,9 @@
 #!/usr/bin/env python
 
 import os
-import shutil
-
 from collections import OrderedDict
-
+from RouToolPa.Tools import LongRanger
 from Pipelines.Abstract import Pipeline
-
-from Tools.Alignment import LongRanger
 
 
 class TenXAlignmentPipeline(Pipeline):

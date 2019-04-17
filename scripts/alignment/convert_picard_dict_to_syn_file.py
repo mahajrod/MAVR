@@ -2,8 +2,7 @@
 __author__ = 'mahajrod'
 
 import argparse
-
-from Tools.GATK import FastaAlternateReferenceMaker
+from RouToolPa.Tools.GATK import FastaAlternateReferenceMaker
 
 parser = argparse.ArgumentParser()
 

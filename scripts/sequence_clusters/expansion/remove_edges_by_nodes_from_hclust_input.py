@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import sys
 import argparse
-
 from CustomCollections.GeneralCollections import IdList
-from Routines.File import read_synonyms_dict
 
 parser = argparse.ArgumentParser()
 

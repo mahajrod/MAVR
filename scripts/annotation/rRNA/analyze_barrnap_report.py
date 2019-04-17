@@ -2,8 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-
-from Tools.Annotation.Barrnap import Barrnap
+from RouToolPa.Tools.Annotation.Barrnap import Barrnap
 
 parser = argparse.ArgumentParser()
 

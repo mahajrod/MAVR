@@ -3,11 +3,10 @@ __author__ = 'Sergei F. Kliver'
 import os
 import sys
 import argparse
-
 from ete2 import Tree
-
-from Routines.File import check_path, split_filename
+from RouToolPa.Routines.File import check_path, split_filename
 from CustomCollections.GeneralCollections import SynDict
+
 
 parser = argparse.ArgumentParser()
 

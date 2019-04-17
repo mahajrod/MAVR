@@ -7,7 +7,7 @@ import os
 from Bio import SeqIO
 from BCBio import GFF
 
-from Routines import SequenceRoutines
+from RouToolPa.Routines import SequenceRoutines
 
 parser = argparse.ArgumentParser()
 

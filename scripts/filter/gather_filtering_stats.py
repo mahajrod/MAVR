@@ -2,13 +2,9 @@
 __author__ = 'Sergei F. Kliver'
 
 import os
-
 import argparse
-
 import numpy as np
-
-
-from Routines import FileRoutines
+from RouToolPa.Routines import FileRoutines
 
 parser = argparse.ArgumentParser()
 

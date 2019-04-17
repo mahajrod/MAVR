@@ -2,7 +2,8 @@
 __author__ = 'mahajrod'
 
 import os
-from Tools.Picard import make_fasta_dict
+from RouToolPa.Tools import make_fasta_dict
+
 
 
 def generate_mira_manifest_file(sample_name, reference_name, reference_file, read_group, fastq_file, out_file, technology, max_threads=5):

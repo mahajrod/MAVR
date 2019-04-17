@@ -7,7 +7,6 @@ from copy import deepcopy
 from Bio import SeqIO
 from Bio.Seq import Seq
 
-from Routines.Sequence import record_by_expression_generator
 
 
 parser = argparse.ArgumentParser()

@@ -2,8 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-
-from Tools.Population import PSMC
+from RouToolPa.Tools.Population import PSMC
 
 parser = argparse.ArgumentParser()
 

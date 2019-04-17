@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
 import argparse
-
-from Tools.WGA import LAST
+from RouToolPa.Tools import LAST
 
 
 parser = argparse.ArgumentParser()

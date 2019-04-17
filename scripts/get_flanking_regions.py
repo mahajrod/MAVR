@@ -2,11 +2,10 @@
 __author__ = 'mahajrod'
 
 import argparse
-
 from Bio import SeqIO
+from RouToolPa.Tools import Flank, GetFasta
+from RouToolPa.Routines.Sequence import SequenceRoutines
 
-from Routines.Sequence import SequenceRoutines
-from Tools.Bedtools import Flank, GetFasta
 
 
 parser = argparse.ArgumentParser()

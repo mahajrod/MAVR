@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import shutil
 import argparse
+from RouToolPa.Tools.HMMER import HMMER3
+from RouToolPa.Routines import EggNOGRoutines
 
-from Tools.HMMER import HMMER3
-from Routines import EggNOGRoutines
 
 parser = argparse.ArgumentParser()
 

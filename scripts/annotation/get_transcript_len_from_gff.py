@@ -2,16 +2,8 @@
 __author__ = 'Sergei F. Kliver'
 import sys
 import argparse
-import os
-
-from Bio import SeqIO
-from Bio.Seq import Seq
-from Bio.SeqRecord import SeqRecord
-
 from BCBio import GFF
 
-
-from Routines.Sequence import record_generator
 
 
 parser = argparse.ArgumentParser()

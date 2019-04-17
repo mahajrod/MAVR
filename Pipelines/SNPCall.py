@@ -1,26 +1,29 @@
 #/usr/bin/env python
 import os
 import collections
-from Bio import SeqIO
-from Routines.Functions import check_path
-#from Tools.Picard import add_header2bam
+from RouToolPa.Routines.Functions import check_path
+
+
+
+
+#from RouToolPa.Tools.Picard import add_header2bam
 from collections import OrderedDict
 
 from Bio import SeqIO
 
 #from MutAnalysis.Mutation import *
-from Tools.AssemblyTools import spades
-#from Tools.FilterTools import trim_galore
-#from Tools.AlignmentTools import Bowtie2, BWA
-from Tools.Alignment import Bowtie2, BWA, Novoalign, TMAP
+from RouToolPa.Tools.AssemblyTools import spades
+#from RouToolPa.Tools.FilterTools import trim_galore
+#from RouToolPa.Tools.AlignmentTools import Bowtie2, BWA
+from RouToolPa.Tools import Bowtie2, BWA, Novoalign, TMAP
 
 from Pipelines.Abstract import Pipeline
 
-from Tools.Bedtools import GenomeCov
-from Tools.Samtools import SamtoolsV1
-from Tools.Picard import MarkDuplicates
-from Tools.GATK import *
-from Tools.Picard import CreateSequenceDictionary
+from RouToolPa.Tools import GenomeCov
+from RouToolPa.Tools import SamtoolsV1
+from RouToolPa.Tools import MarkDuplicates
+from RouToolPa.Tools.GATK import *
+from RouToolPa.Tools import CreateSequenceDictionary
 
 from CustomCollections.GeneralCollections import SynDict, IdSet
 

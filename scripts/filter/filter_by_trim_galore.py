@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import os
-import sys
 import argparse
+from RouToolPa.Tools.Filter import TrimGalore
+from RouToolPa.Tools.Filter import FastQC
 
-from Tools.Filter import TrimGalore
-from Tools.Filter import FastQC
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-s", "--sample_directory", action="store", dest="sample_dir",

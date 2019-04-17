@@ -1,12 +1,10 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 
-import shutil
 import argparse
+from RouToolPa.Tools.RepeatMasking import TRF
+from RouToolPa.Routines.File import split_filename
 
-from Tools.RepeatMasking import TRF
-
-from Routines.File import split_filename
 
 
 parser = argparse.ArgumentParser()

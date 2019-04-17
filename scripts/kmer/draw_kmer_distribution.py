@@ -3,12 +3,12 @@ __author__ = 'Sergei F. Kliver'
 
 import os
 import argparse
-
 import matplotlib
+
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 plt.ioff()
-from Tools.Kmers import Jellyfish
+from RouToolPa.Tools import Jellyfish
 
 parser = argparse.ArgumentParser()
 

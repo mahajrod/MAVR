@@ -2,10 +2,9 @@
 __author__ = 'Sergei F. Kliver'
 import os
 import argparse
-
 from Pipelines import DiffExpressionPipeline
+from RouToolPa.Routines.File import check_path
 
-from Routines.File import check_path
 
 parser = argparse.ArgumentParser()
 

@@ -1,14 +1,11 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
-import sys
 import argparse
+from RouToolPa.Tools.BLAST import BLASTp
+from RouToolPa.Tools.HMMER import HMMER3
+from RouToolPa.Tools.Annotation import TransDecoder
+from RouToolPa.Routines import FileRoutines
 
-from Tools.HMMER import HMMER3
-from Tools.BLAST import BLASTp
-from Tools.Annotation import TransDecoder
-
-from Routines import FileRoutines
 
 parser = argparse.ArgumentParser()
 

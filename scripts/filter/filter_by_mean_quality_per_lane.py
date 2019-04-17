@@ -3,13 +3,13 @@ __author__ = 'Sergei F. Kliver'
 
 # TODO: WORKS only for PE DATA and for illumina data
 import os
-import sys
 import argparse
+from RouToolPa.Tools.Filter import FaCut
 
-from Tools.Filter import FaCut
-#from Tools.Filter import FastQC
 
-from Routines import FileRoutines
+#from RouToolPa.Tools.Filter import FastQC
+
+from RouToolPa.Routines import FileRoutines
 
 parser = argparse.ArgumentParser()
 

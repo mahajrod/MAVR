@@ -2,10 +2,8 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-
 from collections import OrderedDict
-
-from Routines import MultipleAlignmentRoutines, FileRoutines, MatplotlibRoutines
+from RouToolPa.Routines import MultipleAlignmentRoutines, FileRoutines, MatplotlibRoutines
 from CustomCollections.GeneralCollections import TwoLvlDict
 
 parser = argparse.ArgumentParser()

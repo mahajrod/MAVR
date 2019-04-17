@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
 import re
-import sys
 import argparse
+from RouToolPa.Routines.File import split_filename, check_path
 
-from Routines.File import split_filename, check_path
 
 
 def read_entry(in_fd):

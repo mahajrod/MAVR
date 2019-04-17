@@ -1,12 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
-import sys
-import shutil
 import argparse
-
-from Routines import EggNOGRoutines, FileRoutines
-from CustomCollections.GeneralCollections import SynDict
+from RouToolPa.Routines import EggNOGRoutines
 
 
 parser = argparse.ArgumentParser()

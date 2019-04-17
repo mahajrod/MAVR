@@ -1,14 +1,12 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
 import argparse
-
 from CustomCollections.GeneralCollections import IdList
 
-#from Tools.Abstract import Tool
-#from Routines import NCBIRoutines
+#from RouToolPa.Tools.Abstract import Tool
+#from RouToolPa.Routines import NCBIRoutines
 
-from Tools.LinuxTools import Axel
+from RouToolPa.Tools import Axel
 
 parser = argparse.ArgumentParser()
 

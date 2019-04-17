@@ -4,11 +4,9 @@ __author__ = 'Sergei F. Kliver'
 import os
 import sys
 import argparse
+from RouToolPa.Routines.File import check_path, split_filename
+from CustomCollections.GeneralCollections import SynDict
 
-from collections import OrderedDict
-
-from Routines.File import check_path, split_filename
-from CustomCollections.GeneralCollections import SynDict, TwoLvlDict, IdList
 
 parser = argparse.ArgumentParser()
 

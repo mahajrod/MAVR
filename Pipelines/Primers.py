@@ -1,18 +1,12 @@
 #!/usr/bin/env python
 
-import os
-import shutil
-
-from collections import OrderedDict
-
-from Tools.Kmers import Glistmaker
-from Tools.Primers import Primer3
-from Tools.RepeatMasking import TRF
-
+from RouToolPa.Tools.Primers import Primer3
+from RouToolPa.Tools.Kmers import Glistmaker
+from RouToolPa.Tools.RepeatMasking import TRF
 from Parsers.Primer3 import CollectionPrimer3
-
-from Routines import AnnotationsRoutines
+from RouToolPa.Routines import AnnotationsRoutines
 from Pipelines.Abstract import Pipeline
+
 
 
 class STRPrimerPipeline(Pipeline):

@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
 import argparse
 
-from Bio import SeqIO
 """
 from numpy import arange, int32, append
 import matplotlib
@@ -13,7 +11,7 @@ import matplotlib.pyplot as plt
 from CustomCollections.GeneralCollections import SynDict
 """""
 
-from Routines import DrawingRoutines
+from RouToolPa.Routines import DrawingRoutines
 
 parser = argparse.ArgumentParser()
 

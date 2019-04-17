@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
 import argparse
-
-from Tools.GATK import HaplotypeCaller
+from RouToolPa.Tools.GATK import HaplotypeCaller
 
 
 parser = argparse.ArgumentParser()

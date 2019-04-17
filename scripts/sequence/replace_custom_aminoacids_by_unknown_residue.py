@@ -2,12 +2,11 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-import os
 from copy import deepcopy
 from Bio import SeqIO
 from Bio.Seq import Seq
+from RouToolPa.Routines import SequenceRoutines
 
-from Routines import SequenceRoutines
 
 
 parser = argparse.ArgumentParser()

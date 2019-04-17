@@ -2,8 +2,7 @@
 __author__ = 'mahajrod'
 
 import argparse
-
-from Tools.Alignment import GEM
+from RouToolPa.Tools import GEM
 
 parser = argparse.ArgumentParser()
 

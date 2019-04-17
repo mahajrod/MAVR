@@ -3,6 +3,7 @@ __author__ = 'Sergei F. Kliver'
 import argparse
 from Parsers.FaCut import FaCutReport
 
+
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--facut_report", action="store", dest="facut_report", required=True,

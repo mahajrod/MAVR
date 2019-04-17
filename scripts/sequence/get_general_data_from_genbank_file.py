@@ -3,11 +3,9 @@ __author__ = 'Sergei F. Kliver'
 
 import argparse
 import os
-
 from Bio import SeqIO
-from BCBio import GFF
+from RouToolPa.Routines.Sequence import find_gaps
 
-from Routines.Sequence import record_by_id_generator, find_gaps
 
 parser = argparse.ArgumentParser()
 

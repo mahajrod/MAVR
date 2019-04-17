@@ -3,10 +3,8 @@ __author__ = 'mahajrod'
 import os
 import sys
 import argparse
+from RouToolPa.Routines.Sequence import SequenceRoutines
 
-from Bio import SeqIO
-
-from Routines.Sequence import SequenceRoutines
 
 parser = argparse.ArgumentParser()
 

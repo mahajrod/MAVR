@@ -1,14 +1,9 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
 import sys
 import argparse
+from CustomCollections.GeneralCollections import TwoLvlDict
 
-from collections import OrderedDict
-from CustomCollections.GeneralCollections import TwoLvlDict, IdList, IdSet, SynDict
-
-from Routines.File import check_path
-from Routines.File import read_synonyms_dict
 
 
 def is_assembled(families):

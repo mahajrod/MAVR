@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-
-from Routines import FastQRoutines
+from RouToolPa.Routines import FastQRoutines
 
 parser = argparse.ArgumentParser()
 

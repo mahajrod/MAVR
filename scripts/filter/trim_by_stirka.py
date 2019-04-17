@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-from Tools.Stirka import Trimmer
+from RouToolPa.Tools import Trimmer
+
 
 parser = argparse.ArgumentParser()
 

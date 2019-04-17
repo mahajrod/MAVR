@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
-import sys
 import argparse
-
-from Tools.Filter import Clumpify
+from RouToolPa.Tools.Filter import Clumpify
 
 parser = argparse.ArgumentParser()
 

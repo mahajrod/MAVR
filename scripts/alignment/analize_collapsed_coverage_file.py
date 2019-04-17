@@ -2,8 +2,8 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-from os import path
-from Tools.Bedtools import GenomeCov
+from RouToolPa.Tools import GenomeCov
+
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input", action="store", dest="input",

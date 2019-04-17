@@ -2,8 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-
-from Routines import MatplotlibRoutines
+from RouToolPa.Routines import MatplotlibRoutines
 
 parser = argparse.ArgumentParser()
 

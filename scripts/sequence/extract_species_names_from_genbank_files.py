@@ -3,10 +3,9 @@ __author__ = 'Sergei F. Kliver'
 import os
 import sys
 import argparse
-
 from Bio import SeqIO
+from RouToolPa.Routines.File import make_list_of_path_to_files
 
-from Routines.File import make_list_of_path_to_files
 
 
 parser = argparse.ArgumentParser()

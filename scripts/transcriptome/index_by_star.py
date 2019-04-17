@@ -2,12 +2,10 @@
 __author__ = 'Sergei F. Kliver'
 import os
 import argparse
+from RouToolPa.Tools import STAR
+from RouToolPa.Routines.File import check_path
 
-from Tools.Alignment import STAR
-from Tools.Samtools import SamtoolsV1
-from Pipelines import Pipeline
-from Routines import FileRoutines
-from Routines.File import check_path
+
 
 parser = argparse.ArgumentParser()
 

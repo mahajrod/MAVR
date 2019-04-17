@@ -2,18 +2,14 @@
 __author__ = 'Sergei F. Kliver'
 import os
 import argparse
-
-from collections import OrderedDict
-
-from Bio import SeqIO
-
 import matplotlib
+
 matplotlib.use('Agg')
 os.environ['MPLCONFIGDIR'] = '/tmp/'
 
 import matplotlib.pyplot as plt
 plt.ioff()
-from Tools.Annotation import BUSCO
+from RouToolPa.Tools.Annotation import BUSCO
 
 parser = argparse.ArgumentParser()
 

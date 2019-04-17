@@ -2,18 +2,15 @@
 __author__ = 'Sergei F. Kliver'
 import os
 import argparse
-
 from collections import OrderedDict
-
-from Bio import SeqIO
-
 import matplotlib
+
 matplotlib.use('Agg')
 os.environ['MPLCONFIGDIR'] = '/tmp/'
 
 import matplotlib.pyplot as plt
 plt.ioff()
-from Routines import SequenceRoutines
+from RouToolPa.Routines import SequenceRoutines
 from CustomCollections.GeneralCollections import TwoLvlDict
 
 parser = argparse.ArgumentParser()

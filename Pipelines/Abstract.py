@@ -2,11 +2,11 @@
 import os
 #import shutil
 #from collections import OrderedDict
-#from Tools.Filter import Cookiecutter, Trimmomatic, FaCut
-from Tools.Abstract import Tool
-from Routines.Matplotlib import MatplotlibRoutines
-from Routines.Fastq import FastQRoutines
-from Routines.Annotations import AnnotationsRoutines
+#from RouToolPa.Tools.Filter import Cookiecutter, Trimmomatic, FaCut
+from RouToolPa.Tools.Abstract import Tool
+from RouToolPa.Routines.Matplotlib import MatplotlibRoutines
+from RouToolPa.Routines.Fastq import FastQRoutines
+from RouToolPa.Routines.Annotations import AnnotationsRoutines
 #from Parsers.FaCut import FaCutReport
 #from Parsers.Coockiecutter import CoockiecutterReport
 #from Parsers.Trimmomatic import TrimmomaticReport

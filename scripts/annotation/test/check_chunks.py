@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'mahajrod'
-import os
 import argparse
-
-from Routines import AnnotationsRoutines
+from RouToolPa.Routines import AnnotationsRoutines
 
 parser = argparse.ArgumentParser()
 

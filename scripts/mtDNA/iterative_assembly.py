@@ -3,14 +3,14 @@ __author__ = 'Sergei F. Kliver'
 import os
 import shutil
 import argparse
-
 from Bio import SeqIO
+from RouToolPa.Tools.Filter import Cookiecutter
+from RouToolPa.Routines.Sequence import rev_com_generator
+from RouToolPa.Routines.File import check_path, split_filename
+from RouToolPa.Tools.Kmers import Jellyfish
+from RouToolPa.Tools.Assemblers import MaSuRCA
 
-from Routines.Sequence import rev_com_generator
-from Routines.File import check_path, split_filename
-from Tools.Kmers import Jellyfish
-from Tools.Filter import Cookiecutter
-from Tools.Assemblers import MaSuRCA, Quast
+
 
 
 parser = argparse.ArgumentParser()

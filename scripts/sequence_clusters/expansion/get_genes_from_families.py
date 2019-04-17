@@ -4,7 +4,7 @@ import sys
 import argparse
 
 from CustomCollections.GeneralCollections import IdList, SynDict
-# from Routines.File import read_synonyms_dict
+# from RouToolPa.Routines.File import read_synonyms_dict
 
 parser = argparse.ArgumentParser()
 

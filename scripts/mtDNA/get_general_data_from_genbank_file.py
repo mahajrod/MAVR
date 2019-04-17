@@ -3,13 +3,10 @@ __author__ = 'Sergei F. Kliver'
 
 import argparse
 import os
-
 from Bio import SeqIO
-from BCBio import GFF
-
-from Routines import SequenceRoutines #  record_by_id_generator, find_gaps
-
+from RouToolPa.Routines import SequenceRoutines #  record_by_id_generator, find_gaps
 from GeneSynonyms.MitoGenesSynonyms import mithochondrioal_genes_syndict
+
 
 
 parser = argparse.ArgumentParser()

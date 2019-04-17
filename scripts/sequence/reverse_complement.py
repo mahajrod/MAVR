@@ -2,10 +2,9 @@
 __author__ = 'mahajrod'
 import os
 import argparse
-
 from Bio import SeqIO
+from RouToolPa.Routines.Sequence import rev_com_generator
 
-from Routines.Sequence import rev_com_generator
 
 
 parser = argparse.ArgumentParser()

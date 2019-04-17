@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os, sys
+import sys
 import argparse
-
 from Bio import SeqIO
-from Routines.File import make_list_of_path_to_files, detect_filetype_by_extension, split_filename
+from RouToolPa.Routines.File import make_list_of_path_to_files, detect_filetype_by_extension, split_filename
+
 
 
 def file_filter(filename):

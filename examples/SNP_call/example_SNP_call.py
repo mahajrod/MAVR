@@ -1,9 +1,9 @@
 #!/usr/bin/env python
+from RouToolPa.Tools.GATK import UnifiedGenotyper, SelectVariants, VariantFiltration, CombineVariants
 from Pipelines.SNPCall import *
-from Tools.Picard import *
-from Tools.GATK import UnifiedGenotyper, SelectVariants, VariantFiltration, CombineVariants
 from Parsers.VCF import CollectionVCF
-from Routines.Functions import check_path
+from RouToolPa.Routines.Functions import check_path
+
 #in case reads are already trimmed and corrected
 
 

@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 import sys
 from collections import OrderedDict, MutableSet, Iterable
-
 import numpy as np
+
+
 
 class TwoLvlDict(OrderedDict):
 
@@ -118,7 +119,7 @@ class TwoLvlDict(OrderedDict):
                 out_fd.write(self.table_form(absent_symbol=absent_symbol, sort=sort))
 
     def write_splited(self, out_dir="./", extension="t", value_separator=","):
-        from Routines.File import check_path
+        from RouToolPa.Routines.File import check_path
         for fl_key in self:
             with open("%s%s.%s" % (check_path(out_dir), fl_key, extension), "w") as out_fd:
                 for sl_key in self[fl_key]:

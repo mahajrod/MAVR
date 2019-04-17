@@ -2,8 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-
-from Tools.RepeatMasking import TRF
+from RouToolPa.Tools.RepeatMasking import TRF
 
 parser = argparse.ArgumentParser()
 

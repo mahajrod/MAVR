@@ -2,13 +2,12 @@
 __author__ = 'mahajrod'
 import os
 import collections
-
 from Bio import SeqIO
 from Bio import AlignIO
-from Bio.Alphabet import IUPAC
-
 from Parsers.General import parse_metamiga_fasta
-from Routines.Sequence import SequenceRoutines
+from RouToolPa.Routines.Sequence import SequenceRoutines
+
+
 
 
 class SequenceConverters(SequenceRoutines):

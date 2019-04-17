@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
+from RouToolPa.Tools.Abstract import Tool
+from RouToolPa.Routines.File import make_list_of_path_to_files
 
-from Tools.Abstract import Tool
-from Routines.File import make_list_of_path_to_files
 
 
 parser = argparse.ArgumentParser()

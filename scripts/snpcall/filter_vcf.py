@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
+from RouToolPa.Tools.GATK import VariantFiltration
+from RouToolPa.Routines import FileRoutines
 
-from Routines import FileRoutines
-from Tools.GATK import VariantFiltration
 
 parser = argparse.ArgumentParser()
 

@@ -2,8 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-
-from Routines import DrawingRoutines
+from RouToolPa.Routines import DrawingRoutines
 
 parser = argparse.ArgumentParser()
 

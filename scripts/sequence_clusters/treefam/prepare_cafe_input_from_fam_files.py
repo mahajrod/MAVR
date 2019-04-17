@@ -4,13 +4,9 @@ __author__ = 'Sergei F. Kliver'
 This scripts assumes that genes are named in following manner: species_geneid
 """
 
-import os
-import sys
 import argparse
-
 from collections import OrderedDict
-
-from Routines import FileRoutines
+from RouToolPa.Routines import FileRoutines
 from CustomCollections.GeneralCollections import SynDict, TwoLvlDict, IdList
 
 parser = argparse.ArgumentParser()

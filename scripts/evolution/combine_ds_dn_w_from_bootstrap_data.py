@@ -2,7 +2,8 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-from Routines import EvolutionRoutines
+from RouToolPa.Routines import EvolutionRoutines
+
 
 parser = argparse.ArgumentParser()
 

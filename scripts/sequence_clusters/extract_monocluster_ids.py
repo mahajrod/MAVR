@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-
-from Routines import SequenceClusterRoutines, FileRoutines
+from RouToolPa.Routines import SequenceClusterRoutines, FileRoutines
 
 
 parser = argparse.ArgumentParser()

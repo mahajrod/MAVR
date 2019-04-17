@@ -1,14 +1,9 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
-import sys
 import argparse
-
-from collections import OrderedDict
-from CustomCollections.GeneralCollections import TwoLvlDict, IdList, IdSet, SynDict
-
-from Routines import FileRoutines
-from Routines.File import read_synonyms_dict
+from CustomCollections.GeneralCollections import TwoLvlDict, IdSet
+from RouToolPa.Routines import FileRoutines
+from RouToolPa.Routines.File import read_synonyms_dict
 
 
 def is_assembled(families):

@@ -3,7 +3,7 @@ __author__ = 'Sergei F. Kliver'
 import sys
 import argparse
 
-from Routines import EggNOGRoutines
+from RouToolPa.Routines import EggNOGRoutines
 
 from CustomCollections.GeneralCollections import SynDict
 

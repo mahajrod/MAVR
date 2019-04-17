@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-
-from Tools.Annotation import Exonerate
+from RouToolPa.Tools.Annotation import Exonerate
 
 parser = argparse.ArgumentParser()
 

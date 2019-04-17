@@ -2,8 +2,7 @@
 __author__ = 'mahajrod'
 
 import argparse
-
-from Routines import SequenceRoutines
+from RouToolPa.Routines import SequenceRoutines
 
 parser = argparse.ArgumentParser()
 

@@ -2,10 +2,8 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-
-from Routines import DrawingRoutines
-
 import matplotlib
+from RouToolPa.Routines import DrawingRoutines
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 plt.ioff()

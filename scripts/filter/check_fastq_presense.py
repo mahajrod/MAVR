@@ -2,11 +2,9 @@
 __author__ = 'Sergei F. Kliver'
 
 import os
-import sys
 import argparse
+from RouToolPa.Routines.File import check_path
 
-
-from Routines.File import check_path
 
 def check_if_files_form_pair(first_filename, second_filename, name_type):
     first_list = first_filename.split("_")

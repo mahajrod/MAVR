@@ -1,12 +1,9 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
 import sys
 import argparse
-
 from Bio import SearchIO
-from Bio.SearchIO import QueryResult
-from Routines.File import read_ids
+
 
 parser = argparse.ArgumentParser()
 

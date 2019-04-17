@@ -1,10 +1,9 @@
 import os
 import numpy as np
-
 from Bio.Alphabet import IUPAC, Gapped
-
 from Converters.Converters import convert_alignment, convert_tree
 from Parsers.R import get_indices_from_names
+
 
 
 def generate_partition_finder_control_file(alignment_file_name,

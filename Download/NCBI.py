@@ -2,6 +2,7 @@
 
 from Bio import Entrez
 from Parsers.General import parse_sv
+
 """
 def download_genes_by_name(email, gene_name, output_filename, output_type):
     Entrez.email = email

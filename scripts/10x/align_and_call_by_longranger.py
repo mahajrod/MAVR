@@ -2,9 +2,9 @@
 __author__ = 'Sergei F. Kliver'
 import os
 import argparse
-
 from Pipelines.TenX import TenXAlignmentPipeline
-from Routines import FileRoutines
+from RouToolPa.Routines import FileRoutines
+
 
 
 parser = argparse.ArgumentParser()

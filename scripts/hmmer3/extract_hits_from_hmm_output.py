@@ -3,13 +3,12 @@ __author__ = 'Sergei F. Kliver'
 import os
 import sys
 import argparse
-
 from multiprocessing import Pool
-
 from Bio import SearchIO
+from RouToolPa.Tools import CGAS
+from RouToolPa.Routines import FileRoutines # make_list_of_path_to_files, split_filename, check_path, save_mkdir
 
-from Routines import FileRoutines # make_list_of_path_to_files, split_filename, check_path, save_mkdir
-from Tools.LinuxTools import CGAS
+
 
 def make_list_of_path_to_files_from_comma_sep_string(string):
     return FileRoutines.make_list_of_path_to_files(string.split(","))

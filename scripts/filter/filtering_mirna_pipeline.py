@@ -2,9 +2,9 @@
 __author__ = 'Sergei F. Kliver'
 import os
 import argparse
-
 from Pipelines import FilteringPipeline
-from Routines.File import check_path
+from RouToolPa.Routines.File import check_path
+
 
 parser = argparse.ArgumentParser()
 

@@ -1,12 +1,8 @@
 #!/usr/bin/env python
 import os
-from copy import deepcopy
-
+from RouToolPa.Tools import STAR
+from RouToolPa.Tools import HTSeq
 from CustomCollections.GeneralCollections import TwoLvlDict, SynDict
-
-from Tools.Alignment import STAR
-from Tools.Expression import HTSeq
-
 from Pipelines.Filtering import FilteringPipeline
 
 

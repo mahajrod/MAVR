@@ -2,7 +2,8 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-from Tools.Samtools import SamtoolsV1
+from RouToolPa.Tools import SamtoolsV1
+
 
 parser = argparse.ArgumentParser()
 

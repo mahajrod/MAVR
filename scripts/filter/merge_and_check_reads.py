@@ -1,15 +1,10 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import os
-import sys
 import argparse
-
 from multiprocessing import Pool
+from RouToolPa.Routines import FileRoutines
 
-from Tools.Filter import Trimmomatic
-from Tools.Filter import FastQC
-
-from Routines import FileRoutines
 
 
 parser = argparse.ArgumentParser()

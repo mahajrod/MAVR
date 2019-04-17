@@ -2,12 +2,11 @@
 __author__ = 'Sergei F. Kliver'
 import os
 import argparse
-from os import path
-
 from Bio import SeqIO
-from Tools.BLAST import BLASTp
-from Tools.LinuxTools import CGAS
-from Routines.Sequence import get_kmer_dict_as_seq_records, record_by_expression_generator
+from RouToolPa.Tools.BLAST import BLASTp
+from RouToolPa.Routines.Sequence import get_kmer_dict_as_seq_records, record_by_expression_generator
+
+
 
 
 parser = argparse.ArgumentParser()

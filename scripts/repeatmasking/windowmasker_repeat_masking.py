@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 
-import shutil
 import argparse
-
-from Tools.BLAST import Windowmasker
+from RouToolPa.Tools.BLAST import Windowmasker
 
 parser = argparse.ArgumentParser()
 

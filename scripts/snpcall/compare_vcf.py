@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
-import sys
 import argparse
-from Tools.Bedtools import Intersect
+from RouToolPa.Tools import Intersect
+
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-a", "--first_vcf", action="store", dest="first_vcf",

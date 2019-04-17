@@ -2,8 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-
-from Tools.Annotation import AUGUSTUS
+from RouToolPa.Tools.Annotation import AUGUSTUS
 
 parser = argparse.ArgumentParser()
 

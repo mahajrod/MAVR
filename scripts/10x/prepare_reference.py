@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
 import argparse
+from RouToolPa.Tools import LongRanger
 
-from Tools.Alignment import LongRanger
-from Routines import FileRoutines
 
 
 parser = argparse.ArgumentParser()

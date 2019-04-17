@@ -2,8 +2,8 @@
 __author__ = 'Sergei F. Kliver'
 import sys
 import argparse
-
 from Parsers.HGMD import HGMDvariants
+
 
 
 parser = argparse.ArgumentParser()

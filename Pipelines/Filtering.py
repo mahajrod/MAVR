@@ -2,18 +2,15 @@
 
 import os
 import shutil
-
 from collections import OrderedDict
-
+from RouToolPa.Tools.Filter import Cookiecutter, Trimmomatic, FaCut, Cutadapt
 from Pipelines.Abstract import Pipeline
-
-from Tools.Filter import Cookiecutter, Trimmomatic, FaCut, Cutadapt
-
 from Parsers.FaCut import FaCutReport
 from Parsers.Coockiecutter import CoockiecutterReport
 from Parsers.Trimmomatic import TrimmomaticReport
-
 from CustomCollections.GeneralCollections import TwoLvlDict
+
+
 
 
 class FilteringPipeline(Pipeline):

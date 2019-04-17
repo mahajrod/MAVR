@@ -12,11 +12,11 @@ import argparse
 
 from Bio import SeqIO
 
-#from Routines import MatplotlibRoutines
-from Routines.Sequence import rev_com_generator
-from Routines.File import make_list_of_path_to_files
+#from RouToolPa.Routines import MatplotlibRoutines
+from RouToolPa.Routines.Sequence import rev_com_generator
+from RouToolPa.Routines.File import make_list_of_path_to_files
 
-from Tools.Kmers import Jellyfish
+from RouToolPa.Tools import Jellyfish
 
 
 parser = argparse.ArgumentParser()

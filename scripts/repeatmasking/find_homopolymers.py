@@ -2,14 +2,14 @@
 __author__ = 'mahajrod'
 import os
 import argparse
-
 import numpy as np
 import matplotlib
+
 matplotlib.use('Agg')
 os.environ['MPLCONFIGDIR'] = '/tmp/'
 import matplotlib.pyplot as plt
 plt.ioff()
-from Routines import SequenceRoutines
+from RouToolPa.Routines import SequenceRoutines
 
 parser = argparse.ArgumentParser()
 

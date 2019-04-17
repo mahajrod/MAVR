@@ -11,7 +11,7 @@ import argparse
 
 from Bio import SeqIO
 
-from Routines import SequenceRoutines
+from RouToolPa.Routines import SequenceRoutines
 
 
 def get_list_from_string(s):

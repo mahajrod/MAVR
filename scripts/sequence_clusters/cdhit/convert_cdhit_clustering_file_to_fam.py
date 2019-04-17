@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import sys
 import argparse
-
-from Tools.Clustering import CDHit
+from RouToolPa.Tools.Clustering import CDHit
 
 
 parser = argparse.ArgumentParser()

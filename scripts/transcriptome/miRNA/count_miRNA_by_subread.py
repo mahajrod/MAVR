@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
 import argparse
-
-from Tools.Expression import Subread
+from RouToolPa.Tools import Subread
 
 parser = argparse.ArgumentParser()
 

@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import sys
 import argparse
-
-from Routines import GORoutines
+from RouToolPa.Routines import GORoutines
 
 
 parser = argparse.ArgumentParser()

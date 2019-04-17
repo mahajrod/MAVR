@@ -2,8 +2,10 @@
 __author__ = 'mahajrod'
 
 
-import os, sys
+import os
+import sys
 import matplotlib
+
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 plt.ioff()

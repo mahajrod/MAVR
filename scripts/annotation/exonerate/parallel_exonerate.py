@@ -2,12 +2,8 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
+from RouToolPa.Tools.Annotation import Exonerate
 
-from Tools.Annotation import Exonerate
-
-from Routines import AnnotationsRoutines
-
-from CustomCollections.GeneralCollections import IdSet
 
 parser = argparse.ArgumentParser()
 

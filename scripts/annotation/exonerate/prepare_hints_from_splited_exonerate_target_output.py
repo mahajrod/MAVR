@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
+from RouToolPa.Tools.Annotation import AUGUSTUS
 
-from Tools.Annotation import Exonerate, AUGUSTUS
-from Routines.File import make_list_of_path_to_files
 
 parser = argparse.ArgumentParser()
 

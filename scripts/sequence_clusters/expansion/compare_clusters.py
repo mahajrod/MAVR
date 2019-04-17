@@ -1,12 +1,8 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
-import sys
 import argparse
-
 from collections import OrderedDict
-
-from Routines import FileRoutines
+from RouToolPa.Routines import FileRoutines
 
 def read_cluster_file(filename, with_counts=False):
     cluster_dict = OrderedDict()

@@ -2,10 +2,8 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-
 from ete2 import Tree
-
-from Routines.File import read_ids
+from RouToolPa.Routines.File import read_ids
 
 parser = argparse.ArgumentParser()
 

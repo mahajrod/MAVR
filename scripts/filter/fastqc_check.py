@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import os
-import sys
 import argparse
+from RouToolPa.Tools.Filter import Trimmomatic
 
-from Tools.Filter import Trimmomatic
-#from Tools.Filter import FastQC
 
-from Routines.File import check_path, safe_mkdir
+
+#from RouToolPa.Tools.Filter import FastQC
+
+from RouToolPa.Routines.File import check_path, safe_mkdir
 
 parser = argparse.ArgumentParser()
 

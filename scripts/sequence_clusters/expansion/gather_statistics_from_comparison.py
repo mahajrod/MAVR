@@ -1,13 +1,11 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
 import sys
 import argparse
-
 from collections import OrderedDict
 from CustomCollections.GeneralCollections import TwoLvlDict
+from RouToolPa.Routines.File import check_path
 
-from Routines.File import check_path
 
 parser = argparse.ArgumentParser()
 

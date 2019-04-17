@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
+from RouToolPa.Tools.HMMER import HMMER3
+from RouToolPa.Routines.File import check_path
 
-from Tools.HMMER import HMMER3
-from Routines.File import check_path
 
 parser = argparse.ArgumentParser()
 

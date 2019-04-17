@@ -2,10 +2,8 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-import os
-
-from Routines import AnnotationsRoutines
-#from Routines.Sequence import record_generator
+from RouToolPa.Routines import AnnotationsRoutines
+#from RouToolPa.Routines.Sequence import record_generator
 
 
 parser = argparse.ArgumentParser()

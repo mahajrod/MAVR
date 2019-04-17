@@ -2,8 +2,7 @@
 __author__ = 'mahajrod'
 
 import argparse
-
-from Tools.Bedtools import GenomeCov
+from RouToolPa.Tools import GenomeCov
 
 parser = argparse.ArgumentParser()
 

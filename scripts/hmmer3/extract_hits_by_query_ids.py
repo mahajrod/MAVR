@@ -2,9 +2,9 @@
 __author__ = 'Sergei F. Kliver'
 import sys
 import argparse
-
-from Tools.HMMER import HMMER3
+from RouToolPa.Tools.HMMER import HMMER3
 from CustomCollections.GeneralCollections import IdList
+
 
 parser = argparse.ArgumentParser()
 

@@ -2,13 +2,12 @@
 __author__ = 'Sergei F. Kliver'
 import os
 import argparse
-
 from Bio import SeqIO
-
 from CustomCollections.GeneralCollections import SynDict, IdSet
-from Routines import FileRoutines
-#from Routines.File import read_ids, make_list_of_path_to_files, check_path, save_mkdir
-from Routines import SequenceRoutines
+from RouToolPa.Routines import FileRoutines
+
+#from RouToolPa.Routines.File import read_ids, make_list_of_path_to_files, check_path, save_mkdir
+from RouToolPa.Routines import SequenceRoutines
 
 
 #def make_list_of_path_to_files_from_comma_sep_string(string):

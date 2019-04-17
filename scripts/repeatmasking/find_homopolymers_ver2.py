@@ -3,16 +3,16 @@ __author__ = 'mahajrod'
 # !!!!!!!!!! Input is normal fasta from flybase
 import argparse
 import os
-
 import numpy as np
 import matplotlib
+
 matplotlib.use('Agg')
 os.environ['MPLCONFIGDIR'] = '/tmp/'
 import matplotlib.pyplot as plt
 plt.ioff()
 from Bio import SeqIO
 
-from Routines import SequenceRoutines
+from RouToolPa.Routines import SequenceRoutines
 
 parser = argparse.ArgumentParser()
 

@@ -1,11 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
-import sys
-import shutil
 import argparse
-
-from Tools.Annotation import Emapper
+from RouToolPa.Tools.Annotation import Emapper
 
 
 parser = argparse.ArgumentParser()

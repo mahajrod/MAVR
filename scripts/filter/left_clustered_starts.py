@@ -1,13 +1,10 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
-import re
 import sys
 import argparse
-
 from collections import OrderedDict
+from RouToolPa.Routines.Functions import get_cigar_str_len
 
-from Routines.Functions import get_cigar_str_len
 
 
 parser = argparse.ArgumentParser()

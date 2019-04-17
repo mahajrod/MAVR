@@ -3,16 +3,15 @@ __author__ = 'Sergei F. Kliver'
 import os
 import shutil
 import argparse
-
-from Tools.HMMER import HMMER3
-from Tools.BLAST import BLASTp
-from Tools.Bedtools import Intersect
-from Tools.Annotation import AUGUSTUS
-from Tools.Expression import Gffread
-
-from Routines import AnnotationsRoutines, MatplotlibRoutines, SequenceRoutines, FileRoutines
-
+from RouToolPa.Tools.BLAST import BLASTp
+from RouToolPa.Tools.HMMER import HMMER3
+from RouToolPa.Tools.Bedtools import Intersect
+from RouToolPa.Tools.Annotation import AUGUSTUS
+from RouToolPa.Tools.Expression import Gffread
+from RouToolPa.Routines import AnnotationsRoutines, MatplotlibRoutines, SequenceRoutines, FileRoutines
 from CustomCollections.GeneralCollections import IdSet
+
+
 
 parser = argparse.ArgumentParser()
 

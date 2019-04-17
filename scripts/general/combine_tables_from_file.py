@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-
-from Routines import FileRoutines
+from RouToolPa.Routines import FileRoutines
 from CustomCollections.GeneralCollections import TwoLvlDict
 
 

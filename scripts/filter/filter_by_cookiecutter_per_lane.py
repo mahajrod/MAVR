@@ -3,13 +3,11 @@ __author__ = 'Sergei F. Kliver'
 
 # TODO: WORKS only for PE DATA and for illumina data
 import os
-import sys
 import argparse
+from RouToolPa.Tools.Filter import CookiecutterOld
+from RouToolPa.Routines.File import check_path, safe_mkdir
 
-from Tools.Filter import FaCut
-from Tools.Filter import CookiecutterOld
 
-from Routines.File import check_path, safe_mkdir
 
 parser = argparse.ArgumentParser()
 

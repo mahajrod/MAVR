@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
 import argparse
-
 from Bio import AlignIO
-from Routines import MultipleAlignmentRoutines, FileRoutines
+from RouToolPa.Routines import MultipleAlignmentRoutines, FileRoutines
 
 parser = argparse.ArgumentParser()
 

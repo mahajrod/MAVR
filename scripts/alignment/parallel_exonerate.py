@@ -2,9 +2,9 @@
 __author__ = 'mahajrod'
 
 import argparse
+from RouToolPa.Tools.Annotation import Exonerate
+from RouToolPa.Routines.File import split_filename
 
-from Routines.File import split_filename
-from Tools.Annotation import Exonerate
 
 parser = argparse.ArgumentParser()
 

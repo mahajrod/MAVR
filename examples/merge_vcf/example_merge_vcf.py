@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import os
-from Tools.GATK import CombineVariants
+from RouToolPa.Tools.GATK import CombineVariants
+
 
 
 PmCDA1_3d_list = ["N010-LAN210-Can-PmCDA1-NA-RUN2-D3",

@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
-import sys
 import argparse
-
-from Tools.Annotation import SNPeff
+from RouToolPa.Tools.Annotation import SNPeff
 
 parser = argparse.ArgumentParser()
 

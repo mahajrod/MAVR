@@ -3,7 +3,7 @@ __author__ = 'Sergei F. Kliver'
 import sys
 import argparse
 
-from Routines import FileRoutines
+from RouToolPa.Routines import FileRoutines
 from Pipelines import STRPrimerPipeline
 
 parser = argparse.ArgumentParser()

@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import os
+from RouToolPa.Tools.GATK import FastaAlternateReferenceMaker
+from RouToolPa.Routines.File import read_ids
 
-from BCBio import GFF
-
-from Tools.GATK import FastaAlternateReferenceMaker
-from Routines.File import read_ids
 
 
 

@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
 import argparse
-
-from Tools.GATK import FastaAlternateReferenceMaker
+from RouToolPa.Tools.GATK import FastaAlternateReferenceMaker
 
 
 parser = argparse.ArgumentParser()

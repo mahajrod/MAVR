@@ -1,17 +1,8 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
-import sys
 import argparse
-
-from numpy import mean, median, array
-
-from Tools.Alignment import *
-from Tools.Samtools import SamtoolsV1
-from Tools.Picard import AddOrReplaceReadGroups, MarkDuplicates
-from Tools.Bedtools import GenomeCov
-
-from CustomCollections.GeneralCollections import SynDict
+from RouToolPa.Tools import SamtoolsV1
+from RouToolPa.Tools import AddOrReplaceReadGroups, MarkDuplicates
 
 
 def make_list_from_comma_sep_string(s):

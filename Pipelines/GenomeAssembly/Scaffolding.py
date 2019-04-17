@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 import os
-from Tools.Samtools import SamtoolsV1
-
+from RouToolPa.Tools import SamtoolsV1
 from Pipelines.Abstract import Pipeline
+
 
 
 class ScaffoldingPipeline(Pipeline):

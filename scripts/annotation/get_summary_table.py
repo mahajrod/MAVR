@@ -1,16 +1,12 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
 import sys
 import argparse
-
 from collections import OrderedDict
-
-from Bio.SeqUtils import seq1, seq3
-from Bio.Alphabet import ProteinAlphabet, ThreeLetterProtein
-
-from Routines.File import make_list_of_path_to_files, split_filename
+from Bio.SeqUtils import seq1
+from RouToolPa.Routines.File import make_list_of_path_to_files, split_filename
 from CustomCollections.GeneralCollections import TwoLvlDict, SynDict
+
 
 parser = argparse.ArgumentParser()
 

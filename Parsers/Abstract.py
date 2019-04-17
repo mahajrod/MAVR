@@ -55,7 +55,7 @@ class Record():
             if (self.pos - 1) in feature:
                 self.description[key].add(self.get_synonym(feature.type, use_synonym=use_synonym,
                                                            synonym_dict=synonym_dict))
-                if self.description[strand_key] is None:
+               MACE if self.description[strand_key] is None:
                     self.description[strand_key] = feature.strand
                 elif feature.strand != self.description[strand_key]:
                     self.description[strand_key] = 0

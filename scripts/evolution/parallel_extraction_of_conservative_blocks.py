@@ -2,8 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-
-from Tools.Phylogenetics import Gblocks
+from RouToolPa.Tools.Phylogenetics import Gblocks
 
 
 parser = argparse.ArgumentParser()

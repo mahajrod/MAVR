@@ -3,8 +3,11 @@ __author__ = 'Sergei F. Kliver'
 
 import os
 import argparse
-
 from Bio import SeqIO
+
+
+
+
 
 os.environ['MPLCONFIGDIR'] = '/tmp/'
 import matplotlib
@@ -12,9 +15,9 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 plt.ioff()
 
-from Routines.File import make_list_of_path_to_files
-from Tools.Kmers import Jellyfish
-from Routines.Sequence import rev_com_generator
+from RouToolPa.Routines.File import make_list_of_path_to_files
+from RouToolPa.Tools import Jellyfish
+from RouToolPa.Routines.Sequence import rev_com_generator
 
 parser = argparse.ArgumentParser()
 

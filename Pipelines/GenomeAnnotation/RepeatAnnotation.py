@@ -1,15 +1,7 @@
 #!/usr/bin/env python
 import os
-import shutil
-
-from collections import OrderedDict
-
-from CustomCollections.GeneralCollections import TwoLvlDict, SynDict, IdSet
-
-
-from Tools.RepeatMasking import TRF, RepeatMasker
-from Tools.BLAST import Windowmasker
-
+from RouToolPa.Tools.BLAST import Windowmasker
+from RouToolPa.Tools.RepeatMasking import TRF, RepeatMasker
 from Pipelines.Filtering import FilteringPipeline
 
 

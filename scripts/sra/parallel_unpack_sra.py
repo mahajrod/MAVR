@@ -2,8 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-
-from Tools.SRAToolkit import FastqDump
+from RouToolPa.Tools.SRAToolkit import FastqDump
 
 
 parser = argparse.ArgumentParser()

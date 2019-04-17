@@ -2,9 +2,9 @@
 __author__ = 'Sergei F. Kliver'
 import os
 import argparse
-
 from Bio import SeqIO
-from Routines import MtDNARoutines, FileRoutines
+from RouToolPa.Routines import MtDNARoutines, FileRoutines
+
 
 parser = argparse.ArgumentParser()
 

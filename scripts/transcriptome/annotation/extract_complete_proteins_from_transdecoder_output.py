@@ -3,11 +3,10 @@ __author__ = 'Sergei F. Kliver'
 import os
 import sys
 import argparse
-
 from Bio import SeqIO
+from RouToolPa.Routines.File import make_list_of_path_to_files
+from RouToolPa.Routines.Sequence import record_by_expression_generator
 
-from Routines.File import read_ids, make_list_of_path_to_files
-from Routines.Sequence import record_by_expression_generator
 
 
 def check_if_protein_is_complete(record):

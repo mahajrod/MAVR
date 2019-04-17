@@ -1,24 +1,13 @@
 #!/usr/bin/env python
 import os
-import shutil
-
-from collections import OrderedDict
-
-from CustomCollections.GeneralCollections import TwoLvlDict, SynDict, IdSet
-
-from Tools.Annotation import AUGUSTUS
-from Tools.Expression import Gffread
-from Tools.Filter import Cookiecutter, Trimmomatic, FaCut
-from Tools.Alignment import STAR
-from Tools.HMMER import HMMER3
-from Tools.BLAST import BLASTp
-from Tools.Samtools import SamtoolsV1
-
-from Parsers.FaCut import FaCutReport
-from Parsers.Coockiecutter import CoockiecutterReport
-from Parsers.Trimmomatic import TrimmomaticReport
-
+from RouToolPa.Tools.BLAST import BLASTp
+from CustomCollections.GeneralCollections import IdSet
+from RouToolPa.Tools.Annotation import AUGUSTUS
+from RouToolPa.Tools.Expression import Gffread
+from RouToolPa.Tools.Alignment import STAR
+from RouToolPa.Tools.HMMER import HMMER3
 from Pipelines.Filtering import FilteringPipeline
+
 
 
 class ProteinCodingGeneAnnotation(FilteringPipeline):

@@ -3,8 +3,8 @@ __author__ = 'Sergei F. Kliver'
 
 import sys
 import argparse
+from RouToolPa.Routines import FastQRoutines
 
-from Routines import FastQRoutines
 
 parser = argparse.ArgumentParser()
 

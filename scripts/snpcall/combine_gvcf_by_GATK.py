@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-
-from Tools.GATK import CatVariants
+from RouToolPa.Tools.GATK import CatVariants
 
 
 parser = argparse.ArgumentParser()

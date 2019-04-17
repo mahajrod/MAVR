@@ -2,8 +2,8 @@
 __author__ = 'Sergei F. Kliver'
 import os
 import argparse
+from RouToolPa.Tools import Intersect
 
-from Tools.Bedtools import Intersect
 
 
 parser = argparse.ArgumentParser()
