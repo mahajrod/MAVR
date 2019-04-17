@@ -5,7 +5,7 @@ import sys
 import argparse
 from multiprocessing import Pool
 from Bio import SearchIO
-from RouToolPa.Tools import CGAS
+from RouToolPa.Tools.LinuxTools import CGAS
 from RouToolPa.Routines import FileRoutines # make_list_of_path_to_files, split_filename, check_path, save_mkdir
 
 

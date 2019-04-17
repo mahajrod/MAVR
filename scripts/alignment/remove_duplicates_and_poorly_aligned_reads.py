@@ -2,7 +2,7 @@
 __author__ = 'mahajrod'
 
 import argparse
-from RouToolPa.Tools import SamtoolsV1
+from RouToolPa.Tools.Samtools import SamtoolsV1
 
 parser = argparse.ArgumentParser()
 

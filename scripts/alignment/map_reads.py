@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-from RouToolPa.Tools import SamtoolsV1
-from RouToolPa.Tools import AddOrReplaceReadGroups, MarkDuplicates
+from RouToolPa.Tools.Samtools import SamtoolsV1
+from RouToolPa.Tools.Picard import AddOrReplaceReadGroups, MarkDuplicates
 
 
 def make_list_from_comma_sep_string(s):

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-from RouToolPa.Tools import MAFFT
+from RouToolPa.Tools.MultipleAlignment import MAFFT
 from RouToolPa.Routines import FileRoutines
 
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-from RouToolPa.Tools import Intersect
+from RouToolPa.Tools.Bedtools import Intersect
 
 parser = argparse.ArgumentParser()
 

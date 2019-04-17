@@ -3,7 +3,7 @@ __author__ = 'mahajrod'
 
 import argparse
 from Bio import SeqIO
-from RouToolPa.Tools import Flank, GetFasta
+from RouToolPa.Tools.Bedtools import Flank, GetFasta
 from RouToolPa.Routines.Sequence import SequenceRoutines
 
 

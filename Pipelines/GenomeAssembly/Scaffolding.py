@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import os
-from RouToolPa.Tools import SamtoolsV1
+from RouToolPa.Tools.Samtools import SamtoolsV1
 from Pipelines.Abstract import Pipeline
 
 

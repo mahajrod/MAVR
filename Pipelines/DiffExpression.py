@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
-from RouToolPa.Tools import STAR
-from RouToolPa.Tools import HTSeq
+from RouToolPa.Tools.Alignment import STAR
+from RouToolPa.Tools.Expression import HTSeq
 from CustomCollections.GeneralCollections import TwoLvlDict, SynDict
 from Pipelines.Filtering import FilteringPipeline
 

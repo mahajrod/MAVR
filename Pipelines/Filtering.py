@@ -5,9 +5,9 @@ import shutil
 from collections import OrderedDict
 from RouToolPa.Tools.Filter import Cookiecutter, Trimmomatic, FaCut, Cutadapt
 from Pipelines.Abstract import Pipeline
-from Parsers.FaCut import FaCutReport
-from Parsers.Coockiecutter import CoockiecutterReport
-from Parsers.Trimmomatic import TrimmomaticReport
+from RouToolPa.Parsers.FaCut import FaCutReport
+from RouToolPa.Parsers.Coockiecutter import CoockiecutterReport
+from RouToolPa.Parsers.Trimmomatic import TrimmomaticReport
 from CustomCollections.GeneralCollections import TwoLvlDict
 
 

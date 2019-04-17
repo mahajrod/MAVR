@@ -2,8 +2,8 @@
 __author__ = 'mahajrod'
 import argparse
 from subprocess import PIPE, Popen
-from RouToolPa.Tools import Intersect
-from Parsers.FastQC import FastQCReport
+from RouToolPa.Tools.Bedtools import Intersect
+from RouToolPa.Parsers.FastQC import FastQCReport
 
 
 

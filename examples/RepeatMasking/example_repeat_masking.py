@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 from RouToolPa.Tools import RepeatModeler_search, RepeatMasker_search, TRF_search, extract_repbase
-from Parsers.TRF import CollectionTRF
+from RouToolPa.Parsers.TRF import CollectionTRF
 
 
 

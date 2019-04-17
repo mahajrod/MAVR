@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 plt.ioff()
 
 from RouToolPa.Routines.File import make_list_of_path_to_files
-from RouToolPa.Tools import Jellyfish
+from RouToolPa.Tools.Kmers import Jellyfish
 from RouToolPa.Routines.Sequence import rev_com_generator
 
 parser = argparse.ArgumentParser()

@@ -6,7 +6,7 @@ from CustomCollections.GeneralCollections import IdList
 #from RouToolPa.Tools.Abstract import Tool
 #from RouToolPa.Routines import NCBIRoutines
 
-from RouToolPa.Tools import Axel
+from RouToolPa.Tools.LinuxTools import Axel
 
 parser = argparse.ArgumentParser()
 

@@ -8,7 +8,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 plt.ioff()
-from RouToolPa.Tools import Jellyfish
+from RouToolPa.Tools.Kmers import Jellyfish
 
 parser = argparse.ArgumentParser()
 

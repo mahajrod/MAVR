@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-from RouToolPa.Tools import Glistmaker
+from RouToolPa.Tools.Kmers import Glistmaker
 from RouToolPa.Routines import FileRoutines
 
 

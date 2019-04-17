@@ -2,7 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-from RouToolPa.Tools import GenomeCov
+from RouToolPa.Tools.Bedtools import GenomeCov
 
 parser = argparse.ArgumentParser()
 

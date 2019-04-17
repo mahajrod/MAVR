@@ -2,7 +2,7 @@
 __author__ = 'mahajrod'
 
 import argparse
-from RouToolPa.Tools import MarkDuplicates
+from RouToolPa.Tools.Picard import MarkDuplicates
 
 parser = argparse.ArgumentParser()
 

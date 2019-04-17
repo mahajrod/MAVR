@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-from RouToolPa.Tools import HTSeq
+from RouToolPa.Tools.Expression import HTSeq
 
 
 parser = argparse.ArgumentParser()

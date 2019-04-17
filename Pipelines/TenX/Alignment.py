@@ -2,7 +2,7 @@
 
 import os
 from collections import OrderedDict
-from RouToolPa.Tools import LongRanger
+from RouToolPa.Tools.Alignment import LongRanger
 from Pipelines.Abstract import Pipeline
 
 

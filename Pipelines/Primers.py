@@ -3,7 +3,7 @@
 from RouToolPa.Tools.Primers import Primer3
 from RouToolPa.Tools.Kmers import Glistmaker
 from RouToolPa.Tools.RepeatMasking import TRF
-from Parsers.Primer3 import CollectionPrimer3
+from RouToolPa.Parsers.Primer3 import CollectionPrimer3
 from RouToolPa.Routines import AnnotationsRoutines
 from Pipelines.Abstract import Pipeline
 

@@ -2,8 +2,8 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-from RouToolPa.Tools import SamtoolsV1
-from RouToolPa.Tools import BamToFastq
+from RouToolPa.Tools.Samtools import SamtoolsV1
+from RouToolPa.Tools.Bedtools import BamToFastq
 from RouToolPa.Routines import FileRoutines
 
 

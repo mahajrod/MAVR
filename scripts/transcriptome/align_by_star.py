@@ -2,7 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 import os
 import argparse
-from RouToolPa.Tools import STAR
+from RouToolPa.Tools.Alignment import STAR
 from RouToolPa.Routines.File import check_path
 
 

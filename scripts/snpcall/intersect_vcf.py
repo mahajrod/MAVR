@@ -2,7 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 import os
 import argparse
-from RouToolPa.Tools import Intersect
+from RouToolPa.Tools.Bedtools import Intersect
 
 
 

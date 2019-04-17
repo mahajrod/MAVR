@@ -1,9 +1,9 @@
 #/usr/bin/env python
 
 from collections import OrderedDict
-from RouToolPa.Tools import Bowtie2, BWA, Novoalign
-from RouToolPa.Tools import SamtoolsV1
-from RouToolPa.Tools import MarkDuplicates, AddOrReplaceReadGroups
+from RouToolPa.Tools.Alignment import Bowtie2, BWA, Novoalign
+from RouToolPa.Tools.Samtools import SamtoolsV1
+from RouToolPa.Tools.Picard import MarkDuplicates, AddOrReplaceReadGroups
 from Pipelines.Abstract import Pipeline
 
 

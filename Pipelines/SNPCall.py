@@ -15,15 +15,15 @@ from Bio import SeqIO
 from RouToolPa.Tools.AssemblyTools import spades
 #from RouToolPa.Tools.FilterTools import trim_galore
 #from RouToolPa.Tools.AlignmentTools import Bowtie2, BWA
-from RouToolPa.Tools import Bowtie2, BWA, Novoalign, TMAP
+from RouToolPa.Tools.Alignment import Bowtie2, BWA, Novoalign, TMAP
 
 from Pipelines.Abstract import Pipeline
 
-from RouToolPa.Tools import GenomeCov
-from RouToolPa.Tools import SamtoolsV1
-from RouToolPa.Tools import MarkDuplicates
+from RouToolPa.Tools.Bedtools import GenomeCov
+from RouToolPa.Tools.Samtools import SamtoolsV1
+from RouToolPa.Tools.Picard import MarkDuplicates
 from RouToolPa.Tools.GATK import *
-from RouToolPa.Tools import CreateSequenceDictionary
+from RouToolPa.Tools.Picard import CreateSequenceDictionary
 
 from CustomCollections.GeneralCollections import SynDict, IdSet
 
