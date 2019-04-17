@@ -11,7 +11,7 @@ from Routines.Alignment import AlignmentRoutines
 
 
 print_mutex = mp.Lock()
-
+SHELLPATH = "/bin/bash"
 
 def execute(exe_string):
     # this function is global because of stutid damned pickle mode in python!!!!!
@@ -21,7 +21,7 @@ def execute(exe_string):
     print_mutex.release()
 
     #os.system(exe_string)
-    subprocess.call(["/bin/bash", '-c', exe_string])
+    subprocess.call([SHELLPATH, '-c', exe_string])
 
 
 class Tool(SequenceRoutines, AlignmentRoutines):
@@ -61,7 +61,7 @@ class Tool(SequenceRoutines, AlignmentRoutines):
         if capture_output:
             return Popen([exe_string], shell=True, stdout=PIPE).stdout  # returns file object
         else:
-            subprocess.call(["/usr/bash", exe_string])
+            subprocess.call([SHELLPATH, exe_string])
             return None
 
     def parallel_execute(self, options_list, cmd=None, capture_output=False, threads=None, dir_list=None,
@@ -580,7 +580,7 @@ class JavaTool(Tool):
         if capture_output:
             return Popen([exe_string], shell=True, stdout=PIPE).stdout  # returns file object
         else:
-            subprocess.call(["/usr/bash", exe_string])
+            subprocess.call([SHELLPATH, exe_string])
             return None
 
     def parallel_execute(self, options_list, cmd=None, capture_output=False, threads=None, dir_list=None,
