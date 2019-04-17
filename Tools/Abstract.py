@@ -21,7 +21,7 @@ def execute(exe_string):
     print_mutex.release()
 
     #os.system(exe_string)
-    subprocess.call(["/usr/bash", '-c', exe_string])
+    subprocess.call(["/bin/bash", '-c', exe_string])
 
 
 class Tool(SequenceRoutines, AlignmentRoutines):
