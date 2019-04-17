@@ -3,12 +3,12 @@ import os
 import sys
 import multiprocessing as mp
 from subprocess import PIPE, Popen
+import subprocess
 from collections import Iterable
-
 import numpy as np
-
 from Routines.Sequence import SequenceRoutines
 from Routines.Alignment import AlignmentRoutines
+
 
 print_mutex = mp.Lock()
 
@@ -20,7 +20,8 @@ def execute(exe_string):
     sys.stdout.write("Executing:\n\t%s\n" % exe_string)
     print_mutex.release()
 
-    os.system(exe_string)
+    #os.system(exe_string)
+    subprocess.call(["/usr/bash", exe_string])
 
 
 class Tool(SequenceRoutines, AlignmentRoutines):
@@ -60,7 +61,7 @@ class Tool(SequenceRoutines, AlignmentRoutines):
         if capture_output:
             return Popen([exe_string], shell=True, stdout=PIPE).stdout  # returns file object
         else:
-            os.system(exe_string)
+            subprocess.call(["/usr/bash", exe_string])
             return None
 
     def parallel_execute(self, options_list, cmd=None, capture_output=False, threads=None, dir_list=None,
@@ -579,7 +580,7 @@ class JavaTool(Tool):
         if capture_output:
             return Popen([exe_string], shell=True, stdout=PIPE).stdout  # returns file object
         else:
-            os.system(exe_string)
+            subprocess.call(["/usr/bash", exe_string])
             return None
 
     def parallel_execute(self, options_list, cmd=None, capture_output=False, threads=None, dir_list=None,
