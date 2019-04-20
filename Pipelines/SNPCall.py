@@ -1,18 +1,16 @@
 #/usr/bin/env python
 import os
 import collections
-from RouToolPa.Routines.Functions import check_path
+from RouToolPa.Routines import FileRoutines
 
 
 
 
 
-#from RouToolPa.Tools.Picard import add_header2bam
 from collections import OrderedDict
 
 from Bio import SeqIO
 
-#from MutAnalysis.Mutation import *
 from RouToolPa.Tools.AssemblyTools import spades
 #from RouToolPa.Tools.FilterTools import trim_galore
 #from RouToolPa.Tools.AlignmentTools import Bowtie2, BWA
@@ -598,7 +596,7 @@ def snp_call_GATK(alignment,
                  skip_base_recalibration=False):
     #default filter expression
     #"QD < 2.0 || FS > 60.0 || MQ < 40.0 || HaplotypeScore > 13.0 || MappingQualityRankSum < -12.5 || ReadPosRankSum < -8.0"
-    gatk_dir = check_path(GATK_dir)
+    gatk_dir = FileRoutines.check_path(GATK_dir)
     intermediate_alignment = alignment
     if not skip_base_recalibration:
         intermediate_alignment = alignment + "_recal_reads.bam"
