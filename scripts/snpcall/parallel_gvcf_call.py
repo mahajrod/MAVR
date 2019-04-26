@@ -12,7 +12,7 @@ parser.add_argument("-o", "--output_dir", action="store", dest="output_dir", req
                     help="Output directory")
 parser.add_argument("-p", "--output_prefix", action="store", dest="output_prefix", required=True,
                     help="Prefix of output files")
-parser.add_argument("-r", "--reference", action="store", dest="reference",
+parser.add_argument("-r", "--reference", action="store", dest="reference", required=True,
                     help="Fasta with reference genome")
 parser.add_argument("-g", "--gatk_directory", action="store", dest="gatk_dir", default="",
                     help="Directory with GATK jar")
