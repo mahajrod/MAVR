@@ -4,8 +4,6 @@ import argparse
 from RouToolPa.Collections.General import IdList
 from RouToolPa.Tools.WGA import LAST
 
-
-
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_tab_file", action="store", dest="input_tab_file", required=True,
