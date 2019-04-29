@@ -16,15 +16,15 @@ parser.add_argument("-x", "--xsize", action="store", dest="xsize", default=2000,
 parser.add_argument("-y", "--ysize", action="store", dest="ysize", default=2000, type=int,
                     help="Y size of figure in pixels. Default: 2000")
 
-parser.add_argument("--seq_id_1", action="store", dest="seq_id_1", required=True,
+parser.add_argument("--seq_id_1", action="store", dest="seq_id_1",
                     type=LAST.split_string_by_comma,
                     help="Comma-separated list of sequence ids from genome one to show")
-parser.add_argument("--seq_id_2", action="store", dest="seq_id_2", required=True,
+parser.add_argument("--seq_id_2", action="store", dest="seq_id_2",
                     type=LAST.split_string_by_comma,
                     help="Comma-separated list of sequence ids from genome two to show")
-parser.add_argument("--seq_idfile_1", action="store", dest="seq_idfile_1", required=True,
+parser.add_argument("--seq_idfile_1", action="store", dest="seq_idfile_1",
                     help="File with sequence ids from genome one to show")
-parser.add_argument("--seq_idfile_2", action="store", dest="seq_idfile_2", required=True,
+parser.add_argument("--seq_idfile_2", action="store", dest="seq_idfile_2",
                     help="File with sequence ids from genome two to show")
 
 args = parser.parse_args()
