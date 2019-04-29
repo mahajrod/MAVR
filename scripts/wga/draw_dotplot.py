@@ -26,6 +26,11 @@ parser.add_argument("--seq_idfile_1", action="store", dest="seq_idfile_1",
                     help="File with sequence ids from genome one to show")
 parser.add_argument("--seq_idfile_2", action="store", dest="seq_idfile_2",
                     help="File with sequence ids from genome two to show")
+parser.add_argument("--seq_sort_1", action="store", dest="seq_sort_1", default="name",
+                    help="Sequence sorting for genome one. Allowed: input, name(default), length, alignment")
+parser.add_argument("--seq_sort_2", action="store", dest="seq_sort_2", default="name",
+                    help="Sequence sorting for genome two. Allowed: input, name(default), length, alignment")
+
 
 args = parser.parse_args()
 
@@ -33,4 +38,6 @@ args = parser.parse_args()
 LAST.plot(args.input_tab_file, args.output,
           first_genome_seq_id_list=args.seq_id_1 if args.seq_id_1 else IdList(filename=args.seq_idfile_1),
           second_genome_seq_id_list=args.seq_id_2 if args.seq_id_2 else IdList(filename=args.seq_idfile_2),
+          first_genome_seq_order=args.seq_sort_1,
+          second_genome_seq_order=args.seq_sort_2,
           xsize=args.xsize, ysize=args.ysize)
