@@ -10,10 +10,6 @@ from RouToolPa.Parsers.Trimmomatic import TrimmomaticReport
 from RouToolPa.Collections.General import TwoLvlDict
 from Pipelines.Abstract import Pipeline
 
-
-
-
-
 class FilteringPipeline(Pipeline):
 
     def __init__(self):
