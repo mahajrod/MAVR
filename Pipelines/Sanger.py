@@ -73,7 +73,7 @@ class SangerPipeline(Pipeline):
             record_trimmed_fasta = "%s/fastq/trimmed/%s.trimmed.fasta" % (self.workdir, filename_list[1])
             record_trimmed_qual_plot_prefix = "%s/qual_plot/raw/%s.trimmed.qual" % (self.workdir, filename_list[1])
 
-            record = SeqIO.read(self.metaopen(filename), format="ab1")
+            record = SeqIO.read(self.metaopen(filename, "rb"), format="abi")
             record_dict[record.id] = record
             SeqIO.write(record, record_raw_fastq, format="fastq")
             SeqIO.write(record, record_raw_fasta, format="fasta")
@@ -92,7 +92,7 @@ class SangerPipeline(Pipeline):
             MatplotlibRoutines.draw_bar_plot(record.letter_annotations["phred_quality"], record_raw_qual_plot_prefix,
                                              extentions=["png"], xlabel="Position", ylabel="Phred quality",
                                              title="Per base quality", min_value=None, max_value=None, new_figure=True,
-                                             figsize=(4, 3 * (int(len(record) / 100) + 1)))
+                                             figsize=(3 * (int(len(record) / 100) + 1), 3), close_figure=True)
 
             if stat_dict[record.id]["trimmed_len"] >= min_len:
                 if min_median_qual:
@@ -116,7 +116,8 @@ class SangerPipeline(Pipeline):
                                              record_trimmed_qual_plot_prefix,
                                              extentions=["png"], xlabel="Position", ylabel="Phred quality",
                                              title="Per base quality", min_value=None, max_value=None, new_figure=True,
-                                             figsize=(4, 3 * (int(len(record) / 100) + 1)))
+                                             figsize=(3 * (int(len(record) / 100) + 1), 3),
+                                             close_figure=True)
 
             trimmed_record_dict[record.id] = trimmed_record
 
