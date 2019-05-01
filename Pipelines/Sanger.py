@@ -70,8 +70,8 @@ class SangerPipeline(Pipeline):
             record_raw_qual_plot_prefix = "%s/qual_plot/raw/%s.raw.qual" % (self.workdir, filename_list[1])
 
             record_trimmed_fastq = "%s/fastq/trimmed/%s.trimmed.fastq" % (self.workdir, filename_list[1])
-            record_trimmed_fasta = "%s/fastq/trimmed/%s.trimmed.fasta" % (self.workdir, filename_list[1])
-            record_trimmed_qual_plot_prefix = "%s/qual_plot/raw/%s.trimmed.qual" % (self.workdir, filename_list[1])
+            record_trimmed_fasta = "%s/fasta/trimmed/%s.trimmed.fasta" % (self.workdir, filename_list[1])
+            record_trimmed_qual_plot_prefix = "%s/qual_plot/trimmed/%s.trimmed.qual" % (self.workdir, filename_list[1])
 
             record = SeqIO.read(self.metaopen(filename, "rb"), format="abi")
             record_dict[record.id] = record
