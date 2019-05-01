@@ -15,8 +15,10 @@ from RouToolPa.Routines.Annotations import AnnotationsRoutines
 
 
 class Pipeline(Tool, MatplotlibRoutines, FastQRoutines, AnnotationsRoutines):
-    def __init__(self, max_threads=1, max_memory=10):
+    def __init__(self, max_threads=1, max_memory=10, workdir="./"):
         Tool.__init__(self, cmd="", max_threads=max_threads, max_memory=max_memory)
+        self.workdir = workdir
+        self.dirs = None
 
     @staticmethod
     def get_sample_list(sample_dir, sample_list=None):
@@ -30,3 +32,10 @@ class Pipeline(Tool, MatplotlibRoutines, FastQRoutines, AnnotationsRoutines):
                     samples.append(directory)
 
             return samples
+
+    def prepare_dirs(self, dirs=None, workdir=None):
+
+        working_directory = workdir if workdir else self.workdir if self.workdir else "./"
+
+        self.recursive_mkdir(dir_dict=dirs if dirs else self.dirs,
+                             out_dir=working_directory)
