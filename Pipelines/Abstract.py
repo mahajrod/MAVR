@@ -33,7 +33,7 @@ class Pipeline(Tool, MatplotlibRoutines, FastQRoutines, AnnotationsRoutines):
 
             return samples
 
-    def prepare_dirs(self, dirs=None, workdir=None):
+    def init_dirs(self, dirs=None, workdir=None):
 
         working_directory = workdir if workdir else self.workdir if self.workdir else "./"
 
