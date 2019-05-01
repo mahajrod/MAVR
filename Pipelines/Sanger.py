@@ -34,7 +34,7 @@ class SangerPipeline(Pipeline):
 
     @staticmethod
     def is_sanger_file(filename):
-        if not os.path.isdir(filename) and ((filename[-3:] == ".ab1") or (filename[-6:] == ".ab1.gz") or (filename[-6:] == ".ab1.bz2")):
+        if not os.path.isdir(filename) and ((filename[-4:] == ".ab1") or (filename[-7:] == ".ab1.gz") or (filename[-7:] == ".ab1.bz2")):
             return True
         return False
 
@@ -49,7 +49,7 @@ class SangerPipeline(Pipeline):
                                                           expression=self.is_sanger_file,
                                                           recursive=read_subfolders,
                                                           return_absolute_paths=True)
-        stat_dict = TwoLvlDict
+        stat_dict = TwoLvlDict()
         record_dict = OrderedDict()
         trimmed_record_dict = OrderedDict()
         excluded_list = IdList()
