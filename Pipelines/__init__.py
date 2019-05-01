@@ -7,6 +7,7 @@ from Pipelines.Filtering import FilteringPipeline
 from Pipelines.DiffExpression import DiffExpressionPipeline
 
 Pipeline = Pipeline()
+SangerPipeline = SangerPipeline()
 SNPCallPipeline = SNPCallPipeline()
 AlignmentPipeline = AlignmentPipeline()
 FilteringPipeline = FilteringPipeline()
