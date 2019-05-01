@@ -131,5 +131,5 @@ class SangerPipeline(Pipeline):
         stat_dict.write(out_filename="%s.stats" % output_prefix)
 
         print("Excluded: %i" % excluded_counter)
-        print("\tToo short( <%i ): %i" % (min_len, too_short_counter))
-        print("\tLow quality(median < %i or mean < %i): %i" % (min_median_qual, min_mean_qual, low_quality_counter))
+        print("\tToo short( < %i ): %i" % (min_len, too_short_counter))
+        print("\tLow quality( median < %i or mean < %i ): %i" % (min_median_qual, min_mean_qual, low_quality_counter))
