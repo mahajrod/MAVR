@@ -15,7 +15,7 @@ parser.add_argument("-p", "--output_prefix", action="store", dest="output_prefix
 parser.add_argument("-r", "--read_subfolders", action="store_true", dest="read_subfolders", default=False,
                     help="Read data from subfolders of input directory")
 parser.add_argument("-l", "--min_length", action="store", dest="min_length", default=50, type=int,
-                    help="Minimum length of trimmed sequence to retain")
+                    help="Minimum length of trimmed sequence to retain. Default: 50")
 parser.add_argument("-n", "--min_median_qual", action="store", dest="min_median_qual", default=15, type=int,
                     help="Minimum median quality of sequence to retain. "
                          "Can be applied along with -k/--min_mean_qual option. Default: 15")
