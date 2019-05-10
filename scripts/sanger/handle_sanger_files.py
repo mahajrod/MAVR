@@ -10,7 +10,7 @@ parser.add_argument("-i", "--input_dir", action="store", dest="input_dir", requi
                     help="Input directory with Sanger (.ab1) files")
 parser.add_argument("-o", "--output_dir", action="store", dest="output_dir", default="./",
                     help="LAST database")
-parser.add_argument("-p", "--output_prefix", action="store", dest="output_prefix", required=True,
+parser.add_argument("-p", "--o utput_prefix", action="store", dest="output_prefix", required=True,
                     help="Prefix of output files")
 parser.add_argument("-r", "--read_subfolders", action="store_true", dest="read_subfolders", default=False,
                     help="Read data from subfolders of input directory")
