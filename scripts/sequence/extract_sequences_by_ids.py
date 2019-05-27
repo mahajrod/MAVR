@@ -15,7 +15,7 @@ parser.add_argument("-o", "--output_file", action="store", dest="output", defaul
 parser.add_argument("-f", "--format", action="store", dest="format", default="fasta",
                     help="Format of input and output files. Allowed formats genbank, fasta(default)")
 parser.add_argument("-d", "--id_file", action="store", dest="id_file",
-                    help="File with ids of sequences to extract")
+                    help="File with ids or comma-separated list of ids of sequences to extract")
 parser.add_argument("-c", "--id_column", action="store", dest="id_column", type=int, default=0,
                     help="Number of column with ids in id file (0-based). Default: 0")
 parser.add_argument("-e", "--extraction_mode", action="store", dest="coincidence_mode", default="exact",
