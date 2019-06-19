@@ -19,8 +19,5 @@ parser.add_argument("-v", "--value", action="store", dest="value", default=1, ty
 
 args = parser.parse_args()
 
-
-
-
 SequenceRoutines.make_fasta_by_correspondence(args.input, args.syn_file, args.output,
                                               key_column=args.key, value_column=args.value)
