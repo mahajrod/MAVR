@@ -65,7 +65,6 @@ Caller.threads = args.threads
 
 Caller.parallel_gvcf_call(args.reference, args.alignment, args.output_dir, args.output_prefix,
                           "%s.combined.g.vcf" % args.output_prefix,
-                          genotyping_mode="DISCOVERY",
                           stand_call_conf=args.emit_quality, max_region_length=args.max_region_len,
                           max_seqs_per_region=args.max_seq_per_region, length_dict=None,
                           parsing_mode="parse", region_list=None,
