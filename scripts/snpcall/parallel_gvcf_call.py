@@ -41,7 +41,8 @@ parser.add_argument("-e", "--slurm_error_log_prefix", action="store", dest="slur
 parser.add_argument("-z", "--slurm_max_running_jobs", action="store", dest="slurm_max_running_jobs",
                     default=300, type=int,
                     help="Slurm max running jobs. Default: 300")
-parser.add_argument("-a", "--slurm_max_running_time", action="store", dest="slurm_max_running_time", default="100:00:00",
+parser.add_argument("-a", "--slurm_max_running_time", action="store", dest="slurm_max_running_time",
+                    default="100:00:00",
                     help="Slurm max running time in hh:mm:ss format. Default: 100:00:00")
 
 parser.add_argument("-u", "--slurm_max_memmory_per_cpu", action="store", dest="slurm_max_memmory_per_cpu",
@@ -53,8 +54,8 @@ parser.add_argument("-w", "--slurm_modules_list", action="store", dest="slurm_mo
 
 args = parser.parse_args()
 
-Caller = HaplotypeCaller4 if args.gatk_version == 4 else HaplotypeCaller
-if args.gatk_version == 4:
+Caller = HaplotypeCaller4 if args.gatk_version == "4" else HaplotypeCaller
+if args.gatk_version == "4":
     Caller.path = args.gatk_dir
 else:
     Caller.jar_path = args.gatk_dir
