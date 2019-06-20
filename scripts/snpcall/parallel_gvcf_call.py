@@ -2,7 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 import argparse
 from RouToolPa.Tools.GATK import HaplotypeCaller
-
+from RouToolPa.Tools.GATK4 import HaplotypeCaller4
 
 parser = argparse.ArgumentParser()
 
@@ -14,8 +14,10 @@ parser.add_argument("-p", "--output_prefix", action="store", dest="output_prefix
                     help="Prefix of output files")
 parser.add_argument("-r", "--reference", action="store", dest="reference", required=True,
                     help="Fasta with reference genome")
+parser.add_argument("-v", "--gatk_version", action="store", dest="gatk_version", default="4",
+                    help="Major version of GATK. Allowed: 4(default), 3 ")
 parser.add_argument("-g", "--gatk_directory", action="store", dest="gatk_dir", default="",
-                    help="Directory with GATK jar")
+                    help="Directory with GATK")
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=4, type=int,
                     help="Number of threads. Default: 4")
 parser.add_argument("-q", "--variant_emit_quality", action="store", dest="emit_quality", default=30, type=int,
@@ -51,26 +53,29 @@ parser.add_argument("-w", "--slurm_modules_list", action="store", dest="slurm_mo
 
 args = parser.parse_args()
 
+Caller = HaplotypeCaller4 if args.gatk_version == 4 else HaplotypeCaller
+if args.gatk_version == 4:
+    Caller.path = args.gatk_dir
+else:
+    Caller.jar_path = args.gatk_dir
 
-HaplotypeCaller.jar_path = args.gatk_dir
-#HaplotypeCaller.path = args.path
-HaplotypeCaller.max_memory = args.memory
-HaplotypeCaller.threads = args.threads
+Caller.max_memory = args.memory
+Caller.threads = args.threads
 
-HaplotypeCaller.parallel_gvcf_call(args.reference, args.alignment, args.output_dir, args.output_prefix,
-                                   "%s.combined.g.vcf" % args.output_prefix,
-                                   genotyping_mode="DISCOVERY",
-                                   stand_call_conf=args.emit_quality, max_region_length=args.max_region_len,
-                                   max_seqs_per_region=args.max_seq_per_region, length_dict=None,
-                                   parsing_mode="parse", region_list=None,
-                                   handling_mode=args.handling_mode,
-                                   job_name=args.slurm_job_name,
-                                   log_prefix=args.slurm_log_prefix,
-                                   error_log_prefix=args.slurm_error_log_prefix,
-                                   max_running_jobs=args.slurm_max_running_jobs,
-                                   max_running_time=args.slurm_max_running_time,
-                                   max_memmory_per_cpu=args.slurm_max_memmory_per_cpu,
-                                   modules_list=args.slurm_modules_list)
+Caller.parallel_gvcf_call(args.reference, args.alignment, args.output_dir, args.output_prefix,
+                          "%s.combined.g.vcf" % args.output_prefix,
+                          genotyping_mode="DISCOVERY",
+                          stand_call_conf=args.emit_quality, max_region_length=args.max_region_len,
+                          max_seqs_per_region=args.max_seq_per_region, length_dict=None,
+                          parsing_mode="parse", region_list=None,
+                          handling_mode=args.handling_mode,
+                          job_name=args.slurm_job_name,
+                          log_prefix=args.slurm_log_prefix,
+                          error_log_prefix=args.slurm_error_log_prefix,
+                          max_running_jobs=args.slurm_max_running_jobs,
+                          max_running_time=args.slurm_max_running_time,
+                          max_memmory_per_cpu=args.slurm_max_memmory_per_cpu,
+                          modules_list=args.slurm_modules_list)
 
 """
 parallel_gvcf_call(self, reference, alignment, output_dir, output_prefix, output,
