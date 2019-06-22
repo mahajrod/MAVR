@@ -3,7 +3,7 @@
 #SBATCH --time=120:00:00         # Run time in hh:mm:ss
 #SBATCH --mem-per-cpu=16192       # Minimum memory required per CPU (in megabytes)
 #SBATCH --job-name=sol_con
-#SBbATCH --error=/work/toleksyk/toleksyk/errors/sol_con.%A_%a.err
+#SBATCH --error=/work/toleksyk/toleksyk/errors/sol_con.%A_%a.err
 #SBATCH --output=/work/toleksyk/toleksyk/logs/sol_con.%A_%a.out
 
 
