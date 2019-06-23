@@ -15,8 +15,8 @@ parser.add_argument("-s", "--sequence_dict", action="store", dest="sequence_dict
 parser.add_argument("-g", "--gatk_directory", action="store", dest="gatk_dir", default="",
                     help="Directory with GATK")
 
-parser.add_argument("-m", "--memory", action="store", dest="memory", default="10000", type=lambda s: s + "m",
-                    help="Maximum memory to use in megabytes. Default: 10000")
+parser.add_argument("-m", "--memory", action="store", dest="memory", default="10g",
+                    help="Maximum memory to use. Default: 10g")
 
 parser.add_argument("-d", "--handling_mode", action="store", dest="handling_mode", default="local",
                     help="Handling mode. Allowed: local(default), slurm")
