@@ -15,7 +15,7 @@ GENOMEDIR=${WORK}/genome/
 EXONERATEDIR=${WORKDIR}/exonerate/
 source ${PROFILE}
 
-REFERENCE_SPECIES=condylura_cristata
+REFERENCE_SPECIES=condylura_cristatab
 
 SPLITED_PEP_DIR=${WORKDIR}/data/db/proteins/${REFERENCE_SPECIES}/ncbi/ConCri1.0/splited_pep/
 PEP_FILE="${SPLITED_PEP_DIR}${REFERENCE_SPECIES}_${SLURM_ARRAY_TASK_ID}.fasta"
