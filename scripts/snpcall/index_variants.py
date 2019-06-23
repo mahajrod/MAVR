@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-from RouToolPa.Tools.GATK import ValidateVariants
+from RouToolPa.Tools.GATK4 import ValidateVariants4
 
 
 parser = argparse.ArgumentParser()
@@ -13,10 +13,10 @@ parser.add_argument("-r", "--reference", action="store", dest="reference", requi
 parser.add_argument("-c", "--gvcf_input", action="store_true", dest="gvcf_input", default=False,
                     help="Input is gvcf")
 parser.add_argument("-g", "--gatk_directory", action="store", dest="gatk_dir", default="",
-                    help="Directory with GATK jar")
+                    help="Directory with GATK")
 
 args = parser.parse_args()
 
 
-ValidateVariants.jar_path = args.gatk_dir
-ValidateVariants.index_vcf(args.reference, args.input_vcf, input_is_gvcf=args.gvcf_input)
+ValidateVariants4.path = args.gatk_dir
+ValidateVariants4.index_vcf(args.reference, args.input_vcf, input_is_gvcf=args.gvcf_input)

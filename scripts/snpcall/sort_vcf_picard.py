@@ -12,7 +12,7 @@ parser.add_argument("-i", "--input", action="store", dest="input", required=True
 
 parser.add_argument("-s", "--sequence_dict", action="store", dest="sequence_dict",
                     help="File with sequence dict corresponding to the reference genome")
-parser.add_argument("-p", "--picard_directory", action="store", dest="picard_dir", default="",
+parser.add_argument("-g", "--picard_directory", action="store", dest="picard_dir", default="",
                     help="Directory with Picard jar")
 
 parser.add_argument("-m", "--memory", action="store", dest="memory", default="10000", type=lambda s: s + "m",
