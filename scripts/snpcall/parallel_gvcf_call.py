@@ -55,32 +55,37 @@ parser.add_argument("-w", "--slurm_modules_list", action="store", dest="slurm_mo
 args = parser.parse_args()
 
 Caller = HaplotypeCaller4 if args.gatk_version == "4" else HaplotypeCaller
-if args.gatk_version == "4":
-    Caller.path = args.gatk_dir
-else:
-    Caller.jar_path = args.gatk_dir
-
 Caller.max_memory = args.memory
 Caller.threads = args.threads
+if args.gatk_version == "4":
+    Caller.path = args.gatk_dir
+    Caller.parallel_gvcf_call(args.reference, args.alignment, args.output_dir, args.output_prefix,
+                              stand_call_conf=args.emit_quality, max_region_length=args.max_region_len,
+                              max_seqs_per_region=args.max_seq_per_region, length_dict=None,
+                              parsing_mode="parse", region_list=None,
+                              handling_mode=args.handling_mode,
+                              job_name=args.slurm_job_name,
+                              log_prefix=args.slurm_log_prefix,
+                              error_log_prefix=args.slurm_error_log_prefix,
+                              max_running_jobs=args.slurm_max_running_jobs,
+                              max_running_time=args.slurm_max_running_time,
+                              max_memmory_per_cpu=args.slurm_max_memmory_per_cpu,
+                              modules_list=args.slurm_modules_list)
 
-Caller.parallel_gvcf_call(args.reference, args.alignment, args.output_dir, args.output_prefix,
-                          "%s.combined.g.vcf" % args.output_prefix,
-                          stand_call_conf=args.emit_quality, max_region_length=args.max_region_len,
-                          max_seqs_per_region=args.max_seq_per_region, length_dict=None,
-                          parsing_mode="parse", region_list=None,
-                          handling_mode=args.handling_mode,
-                          job_name=args.slurm_job_name,
-                          log_prefix=args.slurm_log_prefix,
-                          error_log_prefix=args.slurm_error_log_prefix,
-                          max_running_jobs=args.slurm_max_running_jobs,
-                          max_running_time=args.slurm_max_running_time,
-                          max_memmory_per_cpu=args.slurm_max_memmory_per_cpu,
-                          modules_list=args.slurm_modules_list)
 
-"""
-parallel_gvcf_call(self, reference, alignment, output_dir, output_prefix, output,
-                           genotyping_mode="DISCOVERY",
-                           stand_call_conf=30, max_region_length=1000000, max_seqs_per_region=100,
-                           length_dict=None, parsing_mode="parse", region_list=None, remove_intermediate_files=False,
-                           gvcf_extension_list=["g.vcf", ],)
-                           """
+else:
+    Caller.jar_path = args.gatk_dir
+    Caller.parallel_gvcf_call(args.reference, args.alignment, args.output_dir, args.output_prefix,
+                              "%s.combined.g.vcf" % args.output_prefix,
+                              stand_call_conf=args.emit_quality, max_region_length=args.max_region_len,
+                              max_seqs_per_region=args.max_seq_per_region, length_dict=None,
+                              parsing_mode="parse", region_list=None,
+                              handling_mode=args.handling_mode,
+                              job_name=args.slurm_job_name,
+                              log_prefix=args.slurm_log_prefix,
+                              error_log_prefix=args.slurm_error_log_prefix,
+                              max_running_jobs=args.slurm_max_running_jobs,
+                              max_running_time=args.slurm_max_running_time,
+                              max_memmory_per_cpu=args.slurm_max_memmory_per_cpu,
+                              modules_list=args.slurm_modules_list)
+
