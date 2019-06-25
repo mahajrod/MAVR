@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-from RouToolPa.Tools.GATK import GenotypeGVCFs
+from RouToolPa.Tools.GATK4 import GenotypeGVCFs4
 
 parser = argparse.ArgumentParser()
 
@@ -11,9 +11,9 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
 parser.add_argument("-r", "--reference", action="store", dest="reference", required=True,
                     help="Fasta with reference genome")
 parser.add_argument("-g", "--gatk_directory", action="store", dest="gatk_dir", default="",
-                    help="Directory with GATK jar")
+                    help="Directory with GATK")
 parser.add_argument("-i", "--gvcf_list", action="store", dest="gvcf_list",
-                    type=GenotypeGVCFs.make_list_of_path_to_files_from_string,
+                    type=GenotypeGVCFs4.make_list_of_path_to_files_from_string,
                     help="Comma-separated list of gvcf files to genotype",  required=True,)
 
 parser.add_argument("-s", "--extension_list", action="store", dest="extension_list", default=["g.vcf",],
@@ -47,12 +47,12 @@ parser.add_argument("-e", "--tmp_dir", action="store", dest="tmp_dir",
 
 args = parser.parse_args()
 
-GenotypeGVCFs.jar_path = args.gatk_dir
-GenotypeGVCFs.threads = 1
-GenotypeGVCFs.max_memory = args.memory
-GenotypeGVCFs.tmp_dir = args.tmp_dir
+GenotypeGVCFs4.path = args.gatk_dir
+GenotypeGVCFs4.threads = 1
+GenotypeGVCFs4.max_memory = args.memory
+GenotypeGVCFs4.tmp_dir = args.tmp_dir
 
-GenotypeGVCFs.genotype(args.reference,
+GenotypeGVCFs4.genotype(args.reference,
                        args.gvcf_list,
                        args.output_prefix,
                        extension_list=args.extension_list,
