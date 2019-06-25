@@ -28,9 +28,12 @@ parser.add_argument("-x", "--max_seq_per_region", action="store", dest="max_seq_
                     help="Maximum sequences per region. Default: 100")
 parser.add_argument("-l", "--max_region_len", action="store", dest="max_region_len", default=2000000, type=int,
                     help="Maximum region length. Default: 2000000")
+parser.add_argument("-k", "--black_list_scaffold_id_file", action="store", dest="black_list_scaffold_id_file",
+                    help="Id file with scaffolds from black list")
 
 parser.add_argument("-d", "--handling_mode", action="store", dest="handling_mode", default="local",
                     help="Handling mode. Allowed: local(default), slurm")
+
 parser.add_argument("-j", "--slurm_job_name", action="store", dest="slurm_job_name", default="JOB",
                     help="Slurm job name. Default: JOB")
 
@@ -70,8 +73,8 @@ if args.gatk_version == "4":
                               max_running_jobs=args.slurm_max_running_jobs,
                               max_running_time=args.slurm_max_running_time,
                               max_memmory_per_cpu=args.slurm_max_memmory_per_cpu,
-                              modules_list=args.slurm_modules_list)
-
+                              modules_list=args.slurm_modules_list,
+                              black_list_scaffold_id_file=args.black_list_scaffold_id_file)
 
 else:
     Caller.jar_path = args.gatk_dir
