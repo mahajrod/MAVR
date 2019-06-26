@@ -53,17 +53,17 @@ GenotypeGVCFs4.max_memory = args.memory
 GenotypeGVCFs4.tmp_dir = args.tmp_dir
 
 GenotypeGVCFs4.genotype(args.reference,
-                       args.gvcf_list,
-                       args.output_prefix,
-                       extension_list=args.extension_list,
-                       handling_mode=args.handling_mode,
-                       max_memory_per_node=args.memory,
-                       max_running_time=args.slurm_max_running_time,
-                       job_name=args.slurm_job_name,
-                       log_prefix=args.slurm_log_prefix,
-                       error_log_prefix=args.slurm_error_log_prefix,
-                       modules_list=args.slurm_modules_list,
-                       environment_variables_dict=None,
-                       max_alternate_alleles=args.max_alternate_alleles)
+                        args.gvcf_list,
+                        args.output_prefix,
+                        extension_list=args.extension_list,
+                        handling_mode=args.handling_mode,
+                        max_memory_per_node=args.memory,
+                        max_running_time=args.slurm_max_running_time,
+                        job_name=args.slurm_job_name,
+                        log_prefix=args.slurm_log_prefix,
+                        error_log_prefix=args.slurm_error_log_prefix,
+                        modules_list=args.slurm_modules_list,
+                        environment_variables_dict=None,
+                        max_alternate_alleles=args.max_alternate_alleles)
 
 
