@@ -1,30 +1,26 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-from RouToolPa.Tools.GATK4 import GenotypeGVCFs4
+from RouToolPa.Tools.GATK4 import GenomicsDBImport4
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", required=True,
-                    help="Prefix of output files")
-
-parser.add_argument("-r", "--reference", action="store", dest="reference", required=True,
-                    help="Fasta with reference genome")
+parser.add_argument("-o", "--output_dbi_dir", action="store", dest="output_dbi_dir", required=True,
+                    help="Output directory to write database")
 parser.add_argument("-g", "--gatk_directory", action="store", dest="gatk_dir", default="",
                     help="Directory with GATK")
 parser.add_argument("-i", "--gvcf_list", action="store", dest="gvcf_list",
-                    type=GenotypeGVCFs4.make_list_of_path_to_files_from_string,
-                    help="Comma-separated list of gvcf files to genotype",  required=True,)
-
+                    type=GenomicsDBImport4.make_list_of_path_to_files_from_string,
+                    help="Comma-separated list of gvcf files to include in database",
+                    required=True)
 parser.add_argument("-s", "--extension_list", action="store", dest="extension_list", default=["g.vcf",],
                     type=lambda s: s.split(","),
                     help="Comma-separated list of extension of GVCF files. Default: g.vcf")
-
-parser.add_argument("-x", "--max_alternate_alleles", action="store", dest="max_alternate_alleles", type=int,
-                    help="Maximum number of alternative allels. Default: GATK default")
-
 parser.add_argument("-m", "--memory", action="store", dest="memory", default="10g",
                     help="Maximum memory to use. Default: 10g")
+
+"""
+
 
 parser.add_argument("-d", "--handling_mode", action="store", dest="handling_mode", default="local",
                     help="Handling mode. Allowed: local(default), slurm")
@@ -44,26 +40,14 @@ parser.add_argument("-w", "--slurm_modules_list", action="store", dest="slurm_mo
                     help="Comma-separated list of modules to load. Set modules for hmmer and python")
 parser.add_argument("-e", "--tmp_dir", action="store", dest="tmp_dir",
                     help="Temporary directory")
-
+"""
 args = parser.parse_args()
 
-GenotypeGVCFs4.path = args.gatk_dir
-GenotypeGVCFs4.threads = 1
-GenotypeGVCFs4.max_memory = args.memory
-GenotypeGVCFs4.tmp_dir = args.tmp_dir
+GenomicsDBImport4.path = args.gatk_dir
+GenomicsDBImport4.threads = 1
+GenomicsDBImport4.max_memory = args.memory
 
-GenotypeGVCFs4.genotype(args.reference,
-                        args.gvcf_list,
-                        args.output_prefix,
-                        extension_list=args.extension_list,
-                        handling_mode=args.handling_mode,
-                        max_memory_per_node=args.memory,
-                        max_running_time=args.slurm_max_running_time,
-                        job_name=args.slurm_job_name,
-                        log_prefix=args.slurm_log_prefix,
-                        error_log_prefix=args.slurm_error_log_prefix,
-                        modules_list=args.slurm_modules_list,
-                        environment_variables_dict=None,
-                        max_alternate_alleles=args.max_alternate_alleles)
-
-
+GenomicsDBImport4.create_db(args.gvcf_list,
+                            args.output_dbi_dir,
+                            interval_list=None,
+                            extension_list=args.extension_list)
