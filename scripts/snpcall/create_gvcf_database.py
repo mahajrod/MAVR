@@ -13,6 +13,8 @@ parser.add_argument("-i", "--gvcf_list", action="store", dest="gvcf_list",
                     type=GenomicsDBImport4.make_list_of_path_to_files_from_string,
                     help="Comma-separated list of gvcf files to include in database",
                     required=True)
+parser.add_argument("-l", "--interval_list", action="store", dest="interval_list", required=True,
+                    help="Comma-separated list of intervals to import.")
 parser.add_argument("-s", "--extension_list", action="store", dest="extension_list", default=["g.vcf",],
                     type=lambda s: s.split(","),
                     help="Comma-separated list of extension of GVCF files. Default: g.vcf")
@@ -49,5 +51,5 @@ GenomicsDBImport4.max_memory = args.memory
 
 GenomicsDBImport4.create_db(args.gvcf_list,
                             args.output_dbi_dir,
-                            interval_list=None,
+                            interval_list=args.interval_list,
                             extension_list=args.extension_list)
