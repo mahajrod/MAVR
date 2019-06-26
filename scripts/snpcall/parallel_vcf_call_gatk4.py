@@ -7,7 +7,7 @@ from RouToolPa.Tools.GATK4 import HaplotypeCaller4
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-b", "--alignment_list", action="store", dest="alignment", required=True,
-                    default=HaplotypeCaller4.make_list_of_path_to_files_from_string,
+                    type=HaplotypeCaller4.make_list_of_path_to_files_from_string,
                     help="Comma-separated list of bams")
 parser.add_argument("-o", "--output_dir", action="store", dest="output_dir", required=True,
                     help="Output directory")
