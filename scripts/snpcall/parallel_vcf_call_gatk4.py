@@ -6,8 +6,9 @@ from RouToolPa.Tools.GATK4 import HaplotypeCaller4
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-b", "--bam_with alignment", action="store", dest="alignment", required=True,
-                    help="Bam file with alignment")
+parser.add_argument("-b", "--alignment_list", action="store", dest="alignment", required=True,
+                    default=HaplotypeCaller4.make_list_of_path_to_files_from_string,
+                    help="Comma-separated list of bams")
 parser.add_argument("-o", "--output_dir", action="store", dest="output_dir", required=True,
                     help="Output directory")
 parser.add_argument("-p", "--output_prefix", action="store", dest="output_prefix", required=True,
@@ -57,39 +58,20 @@ parser.add_argument("-w", "--slurm_modules_list", action="store", dest="slurm_mo
 
 args = parser.parse_args()
 
-Caller = HaplotypeCaller4 if args.gatk_version == "4" else HaplotypeCaller
-Caller.max_memory = args.memory
-Caller.threads = args.threads
-if args.gatk_version == "4":
-    Caller.path = args.gatk_dir
-    Caller.parallel_call(args.reference, args.alignment, args.output_dir, args.output_prefix,
-                         stand_call_conf=args.emit_quality, max_region_length=args.max_region_len,
-                         max_seqs_per_region=args.max_seq_per_region, length_dict=None,
-                         parsing_mode="parse", region_list=None,
-                         handling_mode=args.handling_mode,
-                         job_name=args.slurm_job_name,
-                         log_prefix=args.slurm_log_prefix,
-                         error_log_prefix=args.slurm_error_log_prefix,
-                         max_running_jobs=args.slurm_max_running_jobs,
-                         max_running_time=args.slurm_max_running_time,
-                         max_memmory_per_cpu=args.slurm_max_memmory_per_cpu,
-                         modules_list=args.slurm_modules_list,
-                         black_list_scaffold_id_file=args.black_list_scaffold_id_file,
-                         gvcf_mode=True)
-
-else:
-    Caller.jar_path = args.gatk_dir
-    Caller.parallel_gvcf_call(args.reference, args.alignment, args.output_dir, args.output_prefix,
-                              "%s.combined.g.vcf" % args.output_prefix,
-                              stand_call_conf=args.emit_quality, max_region_length=args.max_region_len,
-                              max_seqs_per_region=args.max_seq_per_region, length_dict=None,
-                              parsing_mode="parse", region_list=None,
-                              handling_mode=args.handling_mode,
-                              job_name=args.slurm_job_name,
-                              log_prefix=args.slurm_log_prefix,
-                              error_log_prefix=args.slurm_error_log_prefix,
-                              max_running_jobs=args.slurm_max_running_jobs,
-                              max_running_time=args.slurm_max_running_time,
-                              max_memmory_per_cpu=args.slurm_max_memmory_per_cpu,
-                              modules_list=args.slurm_modules_list)
-
+HaplotypeCaller4.max_memory = args.memory
+HaplotypeCaller4.threads = args.threads
+HaplotypeCaller4.path = args.gatk_dir
+HaplotypeCaller4.parallel_call(args.reference, args.alignment, args.output_dir, args.output_prefix,
+                               stand_call_conf=args.emit_quality, max_region_length=args.max_region_len,
+                               max_seqs_per_region=args.max_seq_per_region, length_dict=None,
+                               parsing_mode="parse", region_list=None,
+                               handling_mode=args.handling_mode,
+                               job_name=args.slurm_job_name,
+                               log_prefix=args.slurm_log_prefix,
+                               error_log_prefix=args.slurm_error_log_prefix,
+                               max_running_jobs=args.slurm_max_running_jobs,
+                               max_running_time=args.slurm_max_running_time,
+                               max_memmory_per_cpu=args.slurm_max_memmory_per_cpu,
+                               modules_list=args.slurm_modules_list,
+                               black_list_scaffold_id_file=args.black_list_scaffold_id_file,
+                               gvcf_mode=False)
