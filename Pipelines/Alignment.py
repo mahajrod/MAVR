@@ -1,4 +1,5 @@
 #/usr/bin/env python
+import os
 import shutil
 from collections import OrderedDict
 from RouToolPa.Tools.Alignment import Bowtie2, BWA, Novoalign
@@ -107,7 +108,7 @@ class AlignmentPipeline(Pipeline):
                 MarkDuplicates.run(sorted_alignment_picard_groups if sorted_alignment_picard_groups else raw_alignment,
                                    final_alignment,
                                    duplicates_stat_file)
-                shutil.rmtree(raw_alignment)
-                shutil.rmtree(raw_alignment + ".bai", ignore_errors=True)
+                os.remove(raw_alignment)
+                os.remove(raw_alignment + ".bai")
                 if alignment_format == "bam":
                     SamtoolsV1.index(final_alignment)
