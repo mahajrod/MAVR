@@ -5,10 +5,6 @@ import os
 import argparse
 from Bio import SeqIO
 
-
-
-
-
 os.environ['MPLCONFIGDIR'] = '/tmp/'
 import matplotlib
 matplotlib.use('Agg')
