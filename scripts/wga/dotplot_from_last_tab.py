@@ -48,7 +48,7 @@ parser.add_argument("--target_syn_file_value_column", action="store", dest="targ
 
 parser.add_argument("-l", "--target_label", action="store", dest="target_label",
                     help="Label for target genome(X axis)")
-parser.add_argument("-y", "--query_label", action="store", dest="query_label",
+parser.add_argument("-r", "--query_label", action="store", dest="query_label",
                     help="Label for query genome(Y axis)")
 parser.add_argument("-t", "--title", action="store", dest="title",
                     help="Title of dot plot")
