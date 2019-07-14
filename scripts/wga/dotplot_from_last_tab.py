@@ -129,9 +129,7 @@ last_collection = CollectionLast(args.input_last_tab,
                                  )
 
 last_collection.write("%s.syn.tab" % args.output_prefix)
-print target_white_list
-print "aaa"
-print query_white_list
+
 DrawingRoutines.draw_dot_plot_from_last_alignment(last_collection,
                                                   output_prefix=args.output_prefix,
                                                   extension_list=args.extensions,
