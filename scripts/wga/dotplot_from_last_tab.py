@@ -30,7 +30,7 @@ parser.add_argument("-z", "--query_order_file", action="store", dest="query_orde
 parser.add_argument("-s", "--query_syn_file", action="store", dest="query_syn_file",
                     help="File with query scaffold id synonyms")
 parser.add_argument("--query_syn_file_key_column", action="store", dest="query_syn_file_key_column",
-                    default=0, type=int, 
+                    default=0, type=int,
                     help="Column(0-based) with key(current id) for scaffolds in query synonym file")
 parser.add_argument("--query_syn_file_value_column", action="store", dest="query_syn_file_value_column",
                     default=1, type=int,
@@ -61,7 +61,7 @@ parser.add_argument("-d", "--dpi", action="store", dest="dpi", type=int, default
 parser.add_argument("-f", "--figsize", action="store", dest="figsize", type=DrawingRoutines.split_string_by_comma,
                     default=(12, 12),
                     help="Size of figure in inches(two comma-separated ints). Default: 12,12")
-parser.add_argument("-a", "--antialiasing", action="store_true", dest="antialiasing", default=None,
+parser.add_argument("-a", "--antialiasing", action="store_true", dest="antialiasing", default=False,
                     help="Enable antialiasing. Use this option only for small sequences, i.e segments of chromosomes ")
 
 parser.add_argument("--linewidth", action="store", dest="linewidth", type=float,
@@ -83,7 +83,7 @@ parser.add_argument("--diff_strand_color", action="store", dest="diff_strand_col
 args = parser.parse_args()
 
 if args.white_target_id_file:
-    target_white_list = IdList(filename=args.white_target_id_file) if  os.path.isfile(args.white_target_id_file) else IdList(args.white_target_id_file.split(","))
+    target_white_list = IdList(filename=args.white_target_id_file) if os.path.isfile(args.white_target_id_file) else IdList(args.white_target_id_file.split(","))
 else:
     target_white_list = IdList()
 
@@ -119,23 +119,24 @@ if args.query_order_file:
 else:
     query_order_list = IdList()
 
-last_collection = CollectionLast(args.white_target_id_file,
+last_collection = CollectionLast(args.input_last_tab,
                                  target_white_list=target_white_list,
                                  query_white_list=query_white_list,
                                  query_syn_dict=query_syn_dict,
                                  target_syn_dict=target_syn_dict
                                  )
 
-
 last_collection.write("%s.syn.tab" % args.output_prefix)
 
 DrawingRoutines.draw_dot_plot_from_last_alignment(last_collection,
                                                   output_prefix=args.output_prefix,
                                                   extension_list=args.extensions,
-                                                  target_black_list=target_black_list, target_white_list=target_white_list,
+                                                  target_black_list=target_black_list,
+                                                  #target_white_list=target_white_list,
                                                   target_ordered_list=target_order_list,
                                                   #target_reverse_list=(),
-                                                  query_black_list=query_black_list, query_white_list=query_white_list,
+                                                  query_black_list=query_black_list,
+                                                  #query_white_list=query_white_list,
                                                   query_ordered_list=query_order_list,
                                                   #query_reverse_list=(),
                                                   figsize=args.figsize, dpi=args.dpi,
