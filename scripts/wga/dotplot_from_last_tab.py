@@ -29,8 +29,22 @@ parser.add_argument("-z", "--query_order_file", action="store", dest="query_orde
 
 parser.add_argument("-s", "--query_syn_file", action="store", dest="query_syn_file",
                     help="File with query scaffold id synonyms")
+parser.add_argument("--query_syn_file_key_column", action="store", dest="query_syn_file_key_column",
+                    default=0,
+                    help="Column(0-based) with key(current id) for scaffolds in query synonym file")
+parser.add_argument("--query_syn_file_value_column", action="store", dest="query_syn_file_value_column",
+                    default=1,
+                    help="Column(0-based) with value(synonym id) for scaffolds in query synonym file synonym")
+
 parser.add_argument("-y", "--target_syn_file", action="store", dest="target_syn_file",
                     help="File with target scaffold id synonyms")
+parser.add_argument("--target_syn_file_key_column", action="store", dest="target_syn_file_key_column",
+                    default=0,
+                    help="Column(0-based) with key(current id) for scaffolds in target synonym file")
+parser.add_argument("--target_syn_file_value_column", action="store", dest="target_syn_file_value_column",
+                    default=1,
+                    help="Column(0-based) with value(synonym id) for scaffolds in target synonym file synonym")
+
 
 parser.add_argument("-l", "--target_label", action="store", dest="target_label",
                     help="Label for target genome(X axis)")
@@ -75,8 +89,12 @@ target_black_list = IdList(filename=args.black_target_id_file) if os.path.isfile
 query_white_list = IdList(filename=args.white_query_id_file) if os.path.isfile(args.white_query_id_file) else IdList(args.white_query_id_file.split(","))
 query_black_list = IdList(filename=args.black_query_id_file) if os.path.isfile(args.black_query_id_file) else IdList(args.black_query_id_file.split(",")) 
 
-query_syn_dict = SynDict(filename=args.query_syn_file, key_index=0, value_index=1)
-target_syn_dict = SynDict(filename=args.target_syn_file, key_index=0, value_index=1)
+query_syn_dict = SynDict(filename=args.query_syn_file,
+                         key_index=args.query_syn_file_key_column,
+                         value_index=args.query_syn_file_value_column)
+target_syn_dict = SynDict(filename=args.target_syn_file,
+                          key_index=args.target_syn_file_key_column,
+                          value_index=args.target_syn_file_value_column)
 
 target_order_list = IdList(filename=args.target_order_file) if os.path.isfile(args.target_order_file) else IdList(args.target_order_file.split(","))
 query_order_list = IdList(filename=args.query_order_file) if os.path.isfile(args.query_order_file) else IdList(args.query_order_file.split(","))
