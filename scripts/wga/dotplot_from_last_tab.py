@@ -30,19 +30,19 @@ parser.add_argument("-z", "--query_order_file", action="store", dest="query_orde
 parser.add_argument("-s", "--query_syn_file", action="store", dest="query_syn_file",
                     help="File with query scaffold id synonyms")
 parser.add_argument("--query_syn_file_key_column", action="store", dest="query_syn_file_key_column",
-                    default=0,
+                    default=0, type=int, 
                     help="Column(0-based) with key(current id) for scaffolds in query synonym file")
 parser.add_argument("--query_syn_file_value_column", action="store", dest="query_syn_file_value_column",
-                    default=1,
+                    default=1, type=int,
                     help="Column(0-based) with value(synonym id) for scaffolds in query synonym file synonym")
 
 parser.add_argument("-y", "--target_syn_file", action="store", dest="target_syn_file",
                     help="File with target scaffold id synonyms")
 parser.add_argument("--target_syn_file_key_column", action="store", dest="target_syn_file_key_column",
-                    default=0,
+                    default=0, type=int,
                     help="Column(0-based) with key(current id) for scaffolds in target synonym file")
 parser.add_argument("--target_syn_file_value_column", action="store", dest="target_syn_file_value_column",
-                    default=1,
+                    default=1, type=int,
                     help="Column(0-based) with value(synonym id) for scaffolds in target synonym file synonym")
 
 
@@ -54,7 +54,7 @@ parser.add_argument("-t", "--title", action="store", dest="title",
                     help="Title of dot plot")
 parser.add_argument("-e", "--extensions", action="store", dest="extensions", type=lambda x: x.split(","),
                     default=["png", ],
-                    help="Comma-separated list of extensions for histogram files")
+                    help="Comma-separated list of extensions for histogram files. Default: png")
 
 parser.add_argument("-d", "--dpi", action="store", dest="dpi", type=int, default=400,
                     help="DPI of figure. Default: 400")
@@ -82,12 +82,25 @@ parser.add_argument("--diff_strand_color", action="store", dest="diff_strand_col
 
 args = parser.parse_args()
 
+if args.white_target_id_file:
+    target_white_list = IdList(filename=args.white_target_id_file) if  os.path.isfile(args.white_target_id_file) else IdList(args.white_target_id_file.split(","))
+else:
+    target_white_list = IdList()
 
-target_white_list = IdList(filename=args.white_target_id_file) if os.path.isfile(args.white_target_id_file) else IdList(args.white_target_id_file.split(","))
-target_black_list = IdList(filename=args.black_target_id_file) if os.path.isfile(args.black_target_id_file) else IdList(args.black_target_id_file.split(","))
+if args.black_target_id_file:
+    target_black_list = IdList(filename=args.black_target_id_file) if os.path.isfile(args.black_target_id_file) else IdList(args.black_target_id_file.split(","))
+else:
+    target_black_list = IdList()
 
-query_white_list = IdList(filename=args.white_query_id_file) if os.path.isfile(args.white_query_id_file) else IdList(args.white_query_id_file.split(","))
-query_black_list = IdList(filename=args.black_query_id_file) if os.path.isfile(args.black_query_id_file) else IdList(args.black_query_id_file.split(",")) 
+if args.white_query_id_file:
+    query_white_list = IdList(filename=args.white_query_id_file) if os.path.isfile(args.white_query_id_file) else IdList(args.white_query_id_file.split(","))
+else:
+    query_white_list = IdList()
+
+if args.black_query_id_file:
+    query_black_list = IdList(filename=args.black_query_id_file) if os.path.isfile(args.black_query_id_file) else IdList(args.black_query_id_file.split(","))
+else:
+    query_black_list = IdList()
 
 query_syn_dict = SynDict(filename=args.query_syn_file,
                          key_index=args.query_syn_file_key_column,
@@ -96,8 +109,15 @@ target_syn_dict = SynDict(filename=args.target_syn_file,
                           key_index=args.target_syn_file_key_column,
                           value_index=args.target_syn_file_value_column)
 
-target_order_list = IdList(filename=args.target_order_file) if os.path.isfile(args.target_order_file) else IdList(args.target_order_file.split(","))
-query_order_list = IdList(filename=args.query_order_file) if os.path.isfile(args.query_order_file) else IdList(args.query_order_file.split(","))
+if args.target_order_file:
+    target_order_list = IdList(filename=args.target_order_file) if os.path.isfile(args.target_order_file) else IdList(args.target_order_file.split(","))
+else:
+    target_order_list = IdList()
+
+if args.query_order_file:
+    query_order_list = IdList(filename=args.query_order_file) if os.path.isfile(args.query_order_file) else IdList(args.query_order_file.split(","))
+else:
+    query_order_list = IdList()
 
 last_collection = CollectionLast(args.white_target_id_file,
                                  target_white_list=target_white_list,
