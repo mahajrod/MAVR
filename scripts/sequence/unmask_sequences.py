@@ -15,13 +15,13 @@ parser.add_argument("-i", "--input", action="store", dest="input", required=True
 parser.add_argument("-o", "--output", action="store", dest="output", default="out.t",
                     help="Output file - default: out.t.")
 parser.add_argument("-m", "--mode", action="store", dest="mode", default="parse",
-                    help="Parsing mode. Allowed: parse(default), index, index_db")
+                    help="Parsing mode. Allowed: parse(default), generator")
 
 args = parser.parse_args()
 
 out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
 
 seq_collection = CollectionSequence(in_file=args.input, format=args.format,
-                                    parsing_mode="parse")
+                                    parsing_mode=args.mode)
 seq_collection.unmask(in_place=True)
 seq_collection.write(args.output)
