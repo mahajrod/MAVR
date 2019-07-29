@@ -14,18 +14,18 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
                     help="Prefix of output files")
 
 parser.add_argument("-w", "--white_target_id_file", action="store", dest="white_target_id_file",
-                    help="File with target scaffold ids from white list or corresponding comma-separated list")
+                    help="File with target scaffold ids from white list or corresponding comma-separated list."
+                         "NOTE: filtering is done BEFORE renaming by synonyms!")
 parser.add_argument("-b", "--black_target_id_file", action="store", dest="black_target_id_file",
-                    help="File with target scaffold ids from black list or corresponding comma-separated list")
-parser.add_argument("-u", "--target_order_file", action="store", dest="target_order_file",
-                    help="File with order of target scaffolds or corresponding comma-separated list")
+                    help="File with target scaffold ids from black list or corresponding comma-separated list."
+                         "NOTE: filtering is done BEFORE renaming by synonyms!")
 
 parser.add_argument("-x", "--white_query_id_file", action="store", dest="white_query_id_file",
-                    help="File with query scaffold ids from white list or corresponding comma-separated list")
+                    help="File with query scaffold ids from white list or corresponding comma-separated list."
+                         "NOTE: filtering is done BEFORE renaming by synonyms!")
 parser.add_argument("-c", "--black_query_id_file", action="store", dest="black_query_id_file",
-                    help="File with query scaffold ids from black list or corresponding comma-separated list")
-parser.add_argument("-z", "--query_order_file", action="store", dest="query_order_file",
-                    help="File with order of query scaffolds or corresponding comma-separated list")
+                    help="File with query scaffold ids from black list or corresponding comma-separated list."
+                         "NOTE: filtering is done BEFORE renaming by synonyms!")
 
 parser.add_argument("-s", "--query_syn_file", action="store", dest="query_syn_file",
                     help="File with query scaffold id synonyms")
@@ -45,6 +45,12 @@ parser.add_argument("--target_syn_file_value_column", action="store", dest="targ
                     default=1, type=int,
                     help="Column(0-based) with value(synonym id) for scaffolds in target synonym file synonym")
 
+parser.add_argument("-u", "--target_order_file", action="store", dest="target_order_file",
+                    help="File with order of target scaffolds on the plot or corresponding comma-separated list."
+                         "NOTE: ordering is done AFTER renaming by synonyms!")
+parser.add_argument("-z", "--query_order_file", action="store", dest="query_order_file",
+                    help="File with order of query scaffolds on the plot or corresponding comma-separated list."
+                         "NOTE: ordering is done AFTER renaming by synonyms!")
 
 parser.add_argument("-l", "--target_label", action="store", dest="target_label",
                     help="Label for target genome(X axis)")
@@ -84,7 +90,7 @@ args = parser.parse_args()
 
 if args.white_target_id_file:
     target_white_list = IdList(filename=args.white_target_id_file) if os.path.isfile(args.white_target_id_file) else IdList(args.white_target_id_file.split(","))
-    print target_white_list
+    #print target_white_list
 else:
     target_white_list = IdList()
 
@@ -95,7 +101,7 @@ else:
 
 if args.white_query_id_file:
     query_white_list = IdList(filename=args.white_query_id_file) if os.path.isfile(args.white_query_id_file) else IdList(args.white_query_id_file.split(","))
-    print query_white_list
+    #print query_white_list
 else:
     query_white_list = IdList()
 
