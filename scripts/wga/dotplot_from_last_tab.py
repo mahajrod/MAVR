@@ -76,7 +76,9 @@ parser.add_argument("--linewidth", action="store", dest="linewidth", type=float,
 parser.add_argument("--gridwidth", action="store", dest="gridwidth", type=float,
                     default=1,
                     help="Width of grid lines. Default: 1")
-
+parser.add_argument("--scaffold_label_fontsize", action="store", dest="scaffold_label_fontsize", type=float,
+                    default=13,
+                    help="Fontsize for scaffold labels. Default: 13")
 parser.add_argument("--grid_color", action="store", dest="grid_color", default='black',
                     help="Color of grid lines. Default: 'black'")
 parser.add_argument("--bar_color", action="store", dest="bar_color", default='grey',
@@ -159,4 +161,5 @@ DrawingRoutines.draw_dot_plot_from_last_alignment(last_collection,
                                                   query_label=args.query_label,
                                                   linewidth=args.linewidth,
                                                   gridwidth=args.gridwidth,
-                                                  antialiased_lines=args.antialiasing)
+                                                  antialiased_lines=args.antialiasing,
+                                                  scaffold_label_fontsize=args.scaffold_label_fontsize)
