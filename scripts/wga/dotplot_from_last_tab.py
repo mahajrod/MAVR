@@ -84,6 +84,7 @@ args = parser.parse_args()
 
 if args.white_target_id_file:
     target_white_list = IdList(filename=args.white_target_id_file) if os.path.isfile(args.white_target_id_file) else IdList(args.white_target_id_file.split(","))
+    print target_white_list
 else:
     target_white_list = IdList()
 
@@ -94,6 +95,7 @@ else:
 
 if args.white_query_id_file:
     query_white_list = IdList(filename=args.white_query_id_file) if os.path.isfile(args.white_query_id_file) else IdList(args.white_query_id_file.split(","))
+    print query_white_list
 else:
     query_white_list = IdList()
 
