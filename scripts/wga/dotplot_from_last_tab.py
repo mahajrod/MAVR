@@ -6,6 +6,7 @@ from RouToolPa.Parsers.LAST import CollectionLast
 from RouToolPa.Collections.General import IdList, SynDict
 from RouToolPa.Routines import DrawingRoutines
 
+
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_last_tab", action="store", dest="input_last_tab", required=True,
@@ -88,6 +89,12 @@ parser.add_argument("--same_strand_color", action="store", dest="same_strand_col
 parser.add_argument("--diff_strand_color", action="store", dest="diff_strand_color", default='red',
                     help="Color of alignment line if query and target are in different strand. Default: 'red'")
 
+parser.add_argument("--target_scaffold_labels_angle", action="store", dest="target_scaffold_labels_angle",
+                    default=45, type=int,
+                    help="Angle for labels of target scaffolds. Default: 45")
+parser.add_argument("--query_scaffold_labels_angle", action="store", dest="query_scaffold_labels_angle",
+                    default=0, type=int,
+                    help="Angle for labels of query scaffolds. Default: 0")
 args = parser.parse_args()
 
 if args.white_target_id_file:
@@ -118,8 +125,6 @@ query_syn_dict = SynDict(filename=args.query_syn_file,
 target_syn_dict = SynDict(filename=args.target_syn_file,
                           key_index=args.target_syn_file_key_column,
                           value_index=args.target_syn_file_value_column)
-
-#print target_syn_dict
 
 if args.target_order_file:
     target_order_list = IdList(filename=args.target_order_file) if os.path.isfile(args.target_order_file) else IdList(args.target_order_file.split(","))
@@ -164,4 +169,6 @@ DrawingRoutines.draw_dot_plot_from_last_alignment(last_collection,
                                                   linewidth=args.linewidth,
                                                   gridwidth=args.gridwidth,
                                                   antialiased_lines=args.antialiasing,
-                                                  scaffold_label_fontsize=args.scaffold_label_fontsize)
+                                                  scaffold_label_fontsize=args.scaffold_label_fontsize,
+                                                  target_scaffold_labels_angle=args.target_scaffold_labels_angle,
+                                                  query_scaffold_labels_angle=args.query_scaffold_labels_angle)
