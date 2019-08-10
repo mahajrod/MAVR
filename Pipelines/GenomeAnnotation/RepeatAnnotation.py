@@ -28,7 +28,7 @@ class RepeatAnnotation(FilteringPipeline):
                          trf_matching_probability=80, trf_indel_probability=10, trf_min_score=50,
                          trf_max_period_size=500, trf_max_seq_len=100000, trf_store_intermediate_files=False,
                          trf_binary_path="",
-                         repeatmasker_soft_masking=True, repeatmasker_engine="ncbi", repeatmasker_search_speed="normal",
+                         repeatmasker_soft_masking=True, repeatmasker_engine=None, repeatmasker_search_speed=None,
                          repeatmasker_no_low_complexity=None, repeatmasker_only_low_complexity=None,
                          repeatmasker_no_interspersed=None, repeatmasker_only_interspersed=None,
                          repeatmasker_no_rna=None, repeatmasker_only_alu=None, repeatmasker_custom_library=None,
