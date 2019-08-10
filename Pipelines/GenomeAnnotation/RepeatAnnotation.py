@@ -20,7 +20,7 @@ class RepeatAnnotation(FilteringPipeline):
             if directory is not None:
                 self.safe_mkdir(directory)
 
-        return masking_dir, repeatmasker_dir, windowmasker_dir, trf_dir
+        return output_directory, repeatmasker_dir, windowmasker_dir, trf_dir
 
     def annotate_repeats(self, input_fasta, output_directory, output_prefix,
                          repeatmasker=True, trf=True, windowmasker=True, threads=1,
