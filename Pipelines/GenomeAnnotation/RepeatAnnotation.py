@@ -46,7 +46,7 @@ class RepeatAnnotation(FilteringPipeline):
             self.prepare_repeat_directories(output_directory, repeatmasker=repeatmasker,
                                             trf=trf, windowmasker=windowmasker)
 
-        trf_prefix = "%s/%s" % (trf_dir, output_prefix)
+        trf_prefix = "%s/%s.trf" % (trf_dir, output_prefix)
         windowmasker_prefix = "%s/%s" % (windowmasker_dir, output_prefix)
 
         Windowmasker.masking(input_fasta, windowmasker_prefix, input_format="fasta", counts_format="obinary",
@@ -72,8 +72,7 @@ class RepeatAnnotation(FilteringPipeline):
 
         repeatmasker_prefix = "%s/%s%s" % (repeatmasker_dir, self.split_filename(input_fasta)[1],
                                            self.split_filename(input_fasta)[2])
-        repeatmasker_out_file = "%s/%s.out" % (repeatmasker_prefix,
-                                               self.split_filename(input_fasta)[1] + self.split_filename(input_fasta)[2])
+        repeatmasker_out_file = "%s.out" % repeatmasker_prefix # self.split_filename(input_fasta)[1] + self.split_filename(input_fasta)[2])
 
         RepeatMasker.mask(input_fasta, output_dir=repeatmasker_dir, soft_masking=repeatmasker_soft_masking,
                           engine=repeatmasker_engine,
@@ -90,7 +89,7 @@ class RepeatAnnotation(FilteringPipeline):
                           ace_output=repeatmasker_ace_output,
                           gff_output=repeatmasker_gff_output)
 
-        repeatmasker_converted_prefix = "%s/%s.converted" % (repeatmasker_dir, self.split_filename(input_fasta)[1])
+        repeatmasker_converted_prefix = "%s/%s.repeatmasker" % (repeatmasker_dir, output_prefix)
 
         repeatmasker_converted_gff = "%s.gff" % repeatmasker_converted_prefix
         repeatmasker_repeat_classes_file = "%s.repeat_classes" % repeatmasker_converted_prefix
