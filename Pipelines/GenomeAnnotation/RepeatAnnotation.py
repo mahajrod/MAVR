@@ -12,13 +12,11 @@ class RepeatAnnotation(FilteringPipeline):
 
     def prepare_repeat_directories(self, output_directory, repeatmasker=True, trf=True, windowmasker=True):
 
-        masking_dir = "%s/masking/" % output_directory
+        repeatmasker_dir = "%s/repeatmasker/" % output_directory if repeatmasker else None
+        windowmasker_dir = "%s/windowmasker/" % output_directory if windowmasker else None
+        trf_dir = "%s/trf/" % output_directory if trf else None
 
-        repeatmasker_dir = "%s/repeatmasker/" % masking_dir if repeatmasker else None
-        windowmasker_dir = "%s/windowmasker/" % masking_dir if windowmasker else None
-        trf_dir = "%s/trf/" % masking_dir if trf else None
-
-        for directory in (masking_dir, repeatmasker_dir, windowmasker_dir, trf_dir):
+        for directory in (output_directory, repeatmasker_dir, windowmasker_dir, trf_dir):
             if directory is not None:
                 self.safe_mkdir(directory)
 
