@@ -14,7 +14,7 @@ parser.add_argument("-i", "--input", action="store", dest="input", required=True
 #parser.add_argument("-p", "--path_to_trf", action="store", dest="path_to_trf", default=["", "trf", None],
 #                    type=RepeatAnnotation.split_filename,
 #                    help="Path to TRF")
-parser.add_argument("-p", "--path_to_trf", action="store", dest="path_to_trf", default="trf",
+parser.add_argument("-f", "--path_to_trf", action="store", dest="path_to_trf", default="trf",
                     help="Path to TRF")
 parser.add_argument("-s", "--species", action="store", dest="species",
                     help="Species for RepeatMasker")
