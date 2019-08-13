@@ -87,6 +87,7 @@ class RepeatAnnotation(FilteringPipeline):
                           ace_output=repeatmasker_ace_output,
                           gff_output=repeatmasker_gff_output)
 
+
         repeatmasker_converted_prefix = "%s/%s.repeatmasker" % (repeatmasker_dir, output_prefix)
 
         repeatmasker_converted_gff = "%s.gff" % repeatmasker_converted_prefix
