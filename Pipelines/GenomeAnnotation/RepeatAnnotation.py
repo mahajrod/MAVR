@@ -47,8 +47,8 @@ class RepeatAnnotation(FilteringPipeline):
         trf_prefix = "%s/%s.trf" % (trf_dir, output_prefix)
         windowmasker_prefix = "%s/%s" % (windowmasker_dir, output_prefix)
 
-        #Windowmasker.masking(input_fasta, windowmasker_prefix, input_format="fasta", counts_format="obinary",
-        #                     masking_format="interval", source="windowmasker", feature_type="repeat")
+        Windowmasker.masking(input_fasta, windowmasker_prefix, input_format="fasta", counts_format="obinary",
+                             masking_format="interval", source="windowmasker", feature_type="repeat")
 
         TRF.threads = threads
         RepeatMasker.threads = threads
@@ -57,7 +57,7 @@ class RepeatAnnotation(FilteringPipeline):
 
             TRF.path = trf_path_list[0]
             TRF.cmd = trf_path_list[1] + (trf_path_list[2] if trf_path_list[2] else "")
-        """
+
         TRF.parallel_search_tandem_repeat(input_fasta, trf_prefix, matching_weight=trf_matching_weight,
                                           mismatching_penalty=trf_mismatching_penalty,
                                           indel_penalty=trf_indel_penalty,
@@ -67,7 +67,7 @@ class RepeatAnnotation(FilteringPipeline):
                                           report_flanking_sequences=False,
                                           max_len_per_file=trf_max_seq_len,
                                           store_intermediate_files=trf_store_intermediate_files)
-        """
+
         repeatmasker_prefix = "%s/%s%s" % (repeatmasker_dir, self.split_filename(input_fasta)[1],
                                            self.split_filename(input_fasta)[2])
         repeatmasker_out_file = "%s.out" % repeatmasker_prefix # self.split_filename(input_fasta)[1] + self.split_filename(input_fasta)[2])
@@ -98,3 +98,10 @@ class RepeatAnnotation(FilteringPipeline):
                                            repeatmasker_repeat_classes_file,
                                            repeatmasker_converted_repeat_families_file)
 
+        merged_output = "%s/%s.repeatmasker.trf.windowmasker.gff" % (output_directory, output_prefix)
+        merge_cmd = "sort -k1,1 -k4,4n -k5,5 %s.gff %s.gff %s.gff > %s" % (repeatmasker_converted_prefix,
+                                                                           trf_prefix,
+                                                                           windowmasker_prefix,
+                                                                           merged_output)
+
+        os.system(merge_cmd)
