@@ -2,6 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 import argparse
 from RouToolPa.Tools.GATK import VariantFiltration
+from RouToolPa.Tools.GATK4 import VariantFiltration4
 from RouToolPa.Routines import FileRoutines
 
 
@@ -49,13 +50,16 @@ parser.add_argument("--indel_ReadPosRankSum", action="store", dest="indel_ReadPo
 #                    help="Indel InbreedingCoeff threshold. Default -   -0.8")
 parser.add_argument("--indel_FS", action="store", dest="indel_FS", type=float, default=200.0,
                     help="Indel FS threshold. Default - 200.0")
-
+parser.add_argument("-v", "--gatk_version", action="store", dest="gatk_version", default="4",
+                    help="Major version of GATK. Allowed: 4(default), 3 ")
 
 args = parser.parse_args()
 
-VariantFiltration.jar_path = FileRoutines.check_path(args.gatk_dir)
+filtration_tool = VariantFiltration4 if args.gatk_version == "4" else VariantFiltration
 
-VariantFiltration.filter_bad_variants(args.reference, args.input_vcf, args.output_prefix,
+filtration_tool.jar_path = FileRoutines.check_path(args.gatk_dir)
+
+filtration_tool.filter_bad_variants(args.reference, args.input_vcf, args.output_prefix,
                                       snp_filter_name=args.snp_filter_name, snp_QD=args.snp_QD,
                                       snp_FS=args.snp_FS, snp_MQ=args.snp_MQ,
                                       #snp_HaplotypeScore=args.snp_HaplotypeScore,
