@@ -57,7 +57,7 @@ args = parser.parse_args()
 
 filtration_tool = VariantFiltration4 if args.gatk_version == "4" else VariantFiltration
 
-filtration_tool.jar_path = FileRoutines.check_path(args.gatk_dir)
+filtration_tool.path = FileRoutines.check_path(args.gatk_dir)
 
 filtration_tool.filter_bad_variants(args.reference, args.input_vcf, args.output_prefix,
                                       snp_filter_name=args.snp_filter_name, snp_QD=args.snp_QD,
