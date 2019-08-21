@@ -41,7 +41,7 @@ parser.add_argument("-x", "--max_seq_len", action="store", dest="max_seq_len", t
 parser.add_argument("-r", "--store_intermediate_file", action="store_true", dest="store",
                     help="Dont remove intermediate files")
 parser.add_argument("-g", "--max_repeat_length", action="store", dest="max_repeat_length", type=int,
-                    help="Maximum repeat length . Default: TRF default(500)")
+                    help="Maximum repeat length in Mbp(int). Default: TRF default(2)")
 
 args = parser.parse_args()
 
