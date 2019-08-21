@@ -40,6 +40,9 @@ parser.add_argument("-x", "--max_seq_len", action="store", dest="max_seq_len", t
                     help="Maximum total length of sequences per file")
 parser.add_argument("-r", "--store_intermediate_file", action="store_true", dest="store",
                     help="Dont remove intermediate files")
+parser.add_argument("-g", "--max_repeat_length", action="store", dest="max_repeat_length", type=int,
+                    help="Maximum repeat length . Default: TRF default(500)")
+
 args = parser.parse_args()
 
 TRF.threads = args.threads
@@ -52,7 +55,8 @@ if args.threads == 1:
                               match_probability=args.matching_probability, indel_probability=args.indel_probability,
                               min_alignment_score=args.min_score, max_period=args.max_period_size,
                               report_flanking_sequences=args.report_flanking_sequences, make_dat_file=True,
-                              disable_html_output=args.enable_html_output)
+                              disable_html_output=args.enable_html_output, suppress_html_output=True,
+                              max_repeat_length=args.max_repeat_length)
 
     trf_report = "%s.%i.%i.%i.%i.%i.%i.%i.dat" % (split_filename(args.input_file)[1] + split_filename(args.input_file)[2],
                                               args.matching_weight, args.mismatching_penalty,
@@ -68,7 +72,8 @@ else:
                                       indel_probability=args.indel_probability, min_alignment_score=args.min_score,
                                       max_period=args.max_period_size,
                                       report_flanking_sequences=args.report_flanking_sequences,
-                                      max_len_per_file=args.max_seq_len, store_intermediate_files=args.store)
+                                      max_len_per_file=args.max_seq_len, store_intermediate_files=args.store,
+                                      max_repeat_length=args.max_repeat_length)
 
 
 
