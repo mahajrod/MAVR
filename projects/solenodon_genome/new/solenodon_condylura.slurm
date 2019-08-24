@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #SBATCH --array=1-957%400
-#SBATCH --time=120:00:00         # Run time in hh:mm:ss
+#SBATCH --time=99:00:00         # Run time in hh:mm:ss
 #SBATCH --mem-per-cpu=8192       # Minimum memory required per CPU (in megabytes)
 #SBATCH --job-name=sol_con
 #SBbATCH --error=/work/toleksyk/toleksyk/errors/sol_mus.%A_%a.err
