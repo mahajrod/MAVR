@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#SBATCH --array=701-800%100
+#SBATCH --array=801-900%100
 #SBATCH --time=99:00:00         # Run time in hh:mm:ss
 #SBATCH --mem-per-cpu=8192       # Minimum memory required per CPU (in megabytes)
 #SBATCH --job-name=sol_con
