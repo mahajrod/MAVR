@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#SBATCH --array=1-973%973
+#SBATCH --array=1-957%957
 #SBATCH --time=120:00:00         # Run time in hh:mm:ss
 #SBATCH --mem-per-cpu=8192       # Minimum memory required per CPU (in megabytes)
 #SBATCH --job-name=sol_con
-#SBbATCH --error=/work/toleksyk/toleksyk/errors/sol_con.%A_%a.err
-#SBATCH --output=/work/toleksyk/toleksyk/logs/sol_con.%A_%a.out
+#SBbATCH --error=/work/toleksyk/toleksyk/errors/sol_mus.%A_%a.err
+#SBATCH --output=/work/toleksyk/toleksyk/logs/sol_mus.%A_%a.out
 
 
 PROFILE=/home/toleksyk/toleksyk/.profile
@@ -15,13 +15,13 @@ GENOMEDIR=${WORK}/genome/
 EXONERATEDIR=${WORKDIR}/exonerate/
 source ${PROFILE}
 
-REFERENCE_SPECIES=condylura_cristata
+REFERENCE_SPECIES=mus_musculus
 
-SPLITED_PEP_DIR=${WORKDIR}/data/db/proteins/${REFERENCE_SPECIES}/ncbi/ConCri1.0/splited_pep/
+SPLITED_PEP_DIR=${WORKDIR}/data/db/proteins/${REFERENCE_SPECIES}/ncbi/GRCm38.p6/mus_musculus.longest_pep
 PEP_FILE="${SPLITED_PEP_DIR}${REFERENCE_SPECIES}_${SLURM_ARRAY_TASK_ID}.fasta"
 
 SPECIES=solenodon_paradoxus
-for AS in broad dovetail fermi;
+for AS in dovetail;
     do
     GENOME=${GENOMEDIR}/${SPECIES}/${AS}/${AS}.fasta
     EXONERATE_OUTPUT_DIR=${EXONERATEDIR}/${SPECIES}/${AS}/${REFERENCE_SPECIES}/
