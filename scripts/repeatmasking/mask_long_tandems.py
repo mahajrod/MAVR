@@ -27,4 +27,4 @@ TRF.cmd = args.path_to_trf[1] + (args.path_to_trf[2] if args.path_to_trf[2] else
 TRF.parallel_search_long_tandem_repeat(args.input_file, args.output_prefix,
                                        report_flanking_sequences=True, splited_fasta_dir="splited_fasta_dir",
                                        splited_result_dir="splited_output", converted_output_dir="converted_output",
-                                       max_len_per_file=100000, store_intermediate_files=True, max_repeat_length=6)
+                                       max_len_per_file=100000, store_intermediate_files=False, max_repeat_length=6)
