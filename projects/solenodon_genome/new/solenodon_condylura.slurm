@@ -17,7 +17,7 @@ source ${PROFILE}
 
 REFERENCE_SPECIES=mus_musculus
 
-SPLITED_PEP_DIR=${WORKDIR}/data/db/proteins/${REFERENCE_SPECIES}/ncbi/GRCm38.p6/mus_musculus.longest_pep
+SPLITED_PEP_DIR=${WORKDIR}/data/db/proteins/${REFERENCE_SPECIES}/ncbi/GRCm38.p6/mus_musculus.longest_pep/
 PEP_FILE="${SPLITED_PEP_DIR}${REFERENCE_SPECIES}_${SLURM_ARRAY_TASK_ID}.fasta"
 
 SPECIES=solenodon_paradoxus
