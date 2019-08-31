@@ -18,7 +18,7 @@ source ${PROFILE}
 REFERENCE_SPECIES=homo_sapiens
 
 SPLITED_PEP_DIR=${WORKDIR}/data/db/proteins/${REFERENCE_SPECIES}/ncbi/splited_pep/
-PEP_FILE="${SPLITED_PEP_DIR}${REFERENCE_SPECIES}_${SLURM_ARRAY_TASK_ID}.fasta"
+PEP_FILE="${SPLITED_PEP_DIR}/${REFERENCE_SPECIES}_${SLURM_ARRAY_TASK_ID}.fasta"
 
 SPECIES=solenodon_paradoxus
 for AS in dovetail;
