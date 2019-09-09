@@ -36,12 +36,12 @@ parser.add_argument("--scaf_col", action="store", dest="scaf_col", type=int,
                     help="Index of scaffold column in coverage file (0-based). Default: 0")
 args = parser.parse_args()
 
-AlignmentRoutines.calculate_masking_from_coveraage_files(args.coverage_file_list, args.mean_coverage_list,
-                                                         args.output,
-                                                         sample_labels=args.sample_label_list,
-                                                         max_threshold=args.max_coverage_threshold,
-                                                         min_threshold=args.min_coverage_threshold,
-                                                         min_sample_number=args.min_sample_number,
-                                                         scaffold_column=args.scaf_col,
-                                                         position_column=args.pos_col,
-                                                         coverage_column=args.cov_col)
+AlignmentRoutines.calculate_masking_from_coverage_files(args.coverage_file_list, args.mean_coverage_list,
+                                                        args.output,
+                                                        sample_labels=args.sample_label_list,
+                                                        max_threshold=args.max_coverage_threshold,
+                                                        min_threshold=args.min_coverage_threshold,
+                                                        min_sample_number=args.min_sample_number,
+                                                        scaffold_column=args.scaf_col,
+                                                        position_column=args.pos_col,
+                                                        coverage_column=args.cov_col)
