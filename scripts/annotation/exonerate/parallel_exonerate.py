@@ -57,9 +57,12 @@ parser.add_argument("-w", "--slurm_modules_list", action="store", dest="slurm_mo
                     type=lambda s: s.split(","),
                     help="Comma-separated list of modules to load. Set modules for hmmer and python")
 
-
-
-
+parser.add_argument("--splited_fasta_dir", action="store", dest="splited_fasta_dir", default="splited_fasta_dir/",
+                    help="Directory to write splited fasta input. Default: splited_fasta_dir/")
+parser.add_argument("--splited_output", action="store", dest="splited_output", default="splited_output/",
+                    help="Directory to write splited output. Default: splited_output/")
+parser.add_argument("--converted_output", action="store", dest="converted_output", default="converted_output/",
+                    help="Directory to write converted output. Default: converted_output/")
 
 """
 parser.add_argument("-u", "--num_in_seq_per_file", action="store", dest="num_in_seq_per_file",
@@ -94,13 +97,15 @@ Exonerate.threads = args.threads
 Exonerate.path = args.exonerate_dir
 Exonerate.parallel_alignment(args.input, args.target, args.model, num_of_files=args.num_of_splited_files,
                              num_of_recs_per_file=args.num_of_seq_per_file,
-                             show_alignment=True, show_sugar=None, show_cigar=None,
-                             show_vulgar=None, show_query_gff=True, show_target_gff=True,
+                             show_alignment=True, show_sugar=True,
+                             show_cigar=True,
+                             show_vulgar=True, show_query_gff=True, show_target_gff=True,
                              store_intermediate_files=True,
                              annotation_file=args.annotation,
-                             splited_fasta_dir="splited_fasta_dir", splited_result_dir="splited_output",
+                             splited_fasta_dir=args.splited_fasta_dir,
+                             splited_result_dir=args.splited_output,
                              number_of_results_to_report=args.num_of_results_to_report,
-                             converted_output_dir="converted_output",
+                             converted_output_dir=args.converted_output,
                              softmasked_target=args.softmasked_target,
                              softmasked_query=args.softmasked_input,
                              cmd_log_file=args.slurm_cmd_log_file,
