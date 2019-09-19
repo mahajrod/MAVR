@@ -2,8 +2,6 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-#from RouToolPa.Tools.RepeatMasking import TRF
-#from RouToolPa.Routines.File import split_filename
 
 from Pipelines.GenomeAnnotation import RepeatAnnotation
 
@@ -11,11 +9,8 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input", action="store", dest="input", required=True,
                     help="Input  fasta file with sequences")
-#parser.add_argument("-p", "--path_to_trf", action="store", dest="path_to_trf", default=["", "trf", None],
-#                    type=RepeatAnnotation.split_filename,
-#                    help="Path to TRF")
 parser.add_argument("-f", "--path_to_trf", action="store", dest="path_to_trf", default="trf",
-                    help="Path to TRF")
+                    help="Path to TRF binary")
 parser.add_argument("-s", "--species", action="store", dest="species",
                     help="Species for RepeatMasker")
 parser.add_argument("-l", "--library", action="store", dest="library",
