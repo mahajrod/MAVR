@@ -29,7 +29,7 @@ parser.add_argument("-m", "--mask_simple_repeats", action="store_true", dest="ma
 parser.add_argument("-g", "--eg2", action="store", dest="eg2", default=None, type=float,
                     help="Maximum EG2 threshold (float). Default: not set")
 
-parser.add_argument("-c", "--threads", action="store", dest="threads", default=None, type=int,
+parser.add_argument("-c", "--cut", action="store", dest="threads", default=None, type=int,
                     help="Lastll -C option. Use it carefully. Default: not set")
 """
 parser.add_argument("-d", "--handling_mode", action="store", dest="handling_mode", default="local",
