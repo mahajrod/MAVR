@@ -10,8 +10,8 @@ parser.add_argument("-q", "--query_fasta", action="store", dest="query_fasta", r
                     help="Query fasta file")
 parser.add_argument("-d", "--db", action="store", dest="db", required=True,
                     help="LAST database")
-parser.add_argument("-o", "--output", action="store", dest="output", required=True,
-                    help="Output file with hits")
+parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", required=True,
+                    help="Prefix of output files")
 parser.add_argument("-f", "--format", action="store", dest="format", default="MAF",
                     help="Format of output file. Allowed: MAF(default), TAB, BlastTab, BlastTab+")
 parser.add_argument("-e", "--per_thread_memory", action="store", dest="per_thread_memory",
@@ -26,7 +26,11 @@ parser.add_argument("-k", "--keep_preliminary_masking", action="store_true",
 parser.add_argument("-m", "--mask_simple_repeats", action="store_true", dest="mask_simple_repeats",
                     help="Mask simple repeats. Default: False")
 
+parser.add_argument("-g", "--eg2", action="store", dest="eg2", default=None, type=float,
+                    help="Maximum EG2 threshold (float). Default: not set")
 
+parser.add_argument("-c", "--threads", action="store", dest="threads", default=None, type=int,
+                    help="Lastll -C option. Use it carefully. Default: not set")
 """
 parser.add_argument("-d", "--handling_mode", action="store", dest="handling_mode", default="local",
                     help="Handling mode. Allowed: local(default), slurm")
@@ -54,7 +58,8 @@ parser.add_argument("-w", "--slurm_modules_list", action="store", dest="slurm_mo
 args = parser.parse_args()
 
 LAST.threads = args.threads
-LAST.lastal(args.db, args.query_fasta, args.output, verbose=args.verbose,
+LAST.lastal(args.db, args.query_fasta, args.output_prefix, verbose=args.verbose,
             keep_preliminary_masking=args.keep_preliminary_masking,
             mask_simple_repeats=args.mask_simple_repeats,
-            output_format=args.format, per_thread_memory=args.per_thread_memory)
+            output_format=args.format, per_thread_memory=args.per_thread_memory,
+            eg2_threshold=None, discard_limit=None)
