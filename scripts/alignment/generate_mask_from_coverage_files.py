@@ -11,7 +11,7 @@ parser.add_argument("-c", "--coverage_file_list", action="store", dest="coverage
                     type=AlignmentRoutines.split_string_by_comma, required=True,
                     help="Comma-separated list of coverage files")
 parser.add_argument("-m", "--mean_coverage_list", action="store", dest="mean_coverage_list",
-                    type=lambda s: map(int, AlignmentRoutines.split_string_by_comma(s)), required=True,
+                    type=lambda s: list(map(int, AlignmentRoutines.split_string_by_comma(s))), required=True,
                     help="Comma-separated list of mean coverage.")
 parser.add_argument("-o", "--output", action="store", dest="output", required=True,
                     help="Output file with mask")
