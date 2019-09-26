@@ -30,7 +30,7 @@ parser.add_argument("-g", "--eg2", action="store", dest="eg2", default=None, typ
                     help="Maximum EG2 threshold (float). Default: not set")
 
 parser.add_argument("-c", "--cut", action="store", dest="threads", default=None, type=int,
-                    help="Lastll -C option. Use it carefully. Default: not set")
+                    help="Lastall -C option. Use it carefully. Default: not set")
 """
 parser.add_argument("-d", "--handling_mode", action="store", dest="handling_mode", default="local",
                     help="Handling mode. Allowed: local(default), slurm")
