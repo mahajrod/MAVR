@@ -13,6 +13,10 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
                     help="Prefix of output files")
 parser.add_argument("-c", "--coordinates", action="store", dest="coordinates",
                     help="File with coordinates of regions to amplify")
+parser.add_argument("--max_pcr_product_len", action="store", dest="max_pcr_product_len", type=int, default=4200,
+                    help="Maximum length of PCR product")
+parser.add_argument("--min_pcr_product_len", action="store", dest="min_pcr_product_len", type=int, default=4700,
+                    help="Minimumlength of PCR product")
 
 parser.add_argument("-k", "--directory_with_kmer_counts", action="store", dest="directory_with_kmer_counts", required=True,
                     help="Directory with files containing kmer counts")
@@ -49,7 +53,8 @@ MitochondrialAmplificationPrimerPipeline.primer_prediction_pipeline(args.coordin
                                                                     kmer_dir=args.directory_with_kmer_counts,
                                                                     kmer_file_prefix=args.kmer_file_prefix,
                                                                     count_kmers=args.count_kmers,
-                                                                    pcr_product_size_range=(4200, 4700),
+                                                                    pcr_product_size_range=(args.min_pcr_product_len,
+                                                                                            args.max_pcr_product_len),
                                                                     optimal_primer_len=None,
                                                                     min_primer_len=20,
                                                                     max_primer_len=28,
