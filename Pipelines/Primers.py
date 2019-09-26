@@ -416,7 +416,7 @@ class MitochondrialAmplificationPrimerPipeline(PrimerPipeline):
                     end = getattr(line_tuple, "end")
                     seq = sequences.records[record_id]
                     if start > end:
-                        start, end = end - rotation_dict[record_id], start + rotation_dict[record_id]
+                        start, end = start - rotation_dict[record_id], end + rotation_dict[record_id]
                         seq = half_rotated_sequences.records[record_id]
 
                     primer_input_record = Primer3.generate_input_record("%s.primer_%i" % (record_id, index),
