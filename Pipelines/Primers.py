@@ -421,7 +421,7 @@ class MitochondrialAmplificationPrimerPipeline(PrimerPipeline):
 
                     primer_input_record = Primer3.generate_input_record("%s.primer_%i" % (record_id, index),
                                                                         seq,
-                                                                        target_list=((start, end),),
+                                                                        target_list=((start, end - start),),
                                                                         excluded_region_list=None,
                                                                         included_region_list=None,
                                                                         internal_oligo_excluded_region_list=None,
