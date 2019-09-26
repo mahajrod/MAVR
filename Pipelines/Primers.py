@@ -514,6 +514,14 @@ class MitochondrialAmplificationPrimerPipeline(PrimerPipeline):
                                  black_list_of_seqs_fasta=black_list_of_seqs_fasta,
                                  thermodynamic_parameters_dir=self.primer3_thermo_config_dir,
                                  format_output=human_readable_output)
+        primer3_output_file = "%s.primer3.out" % output_prefix
+        primer3_results = CollectionPrimer3(primer3_file=primer3_output_file, from_file=True,
+                                            id_based_location_dict=None)
+
+        primer3_results.write_table_form("%s.table_form.res" % output_prefix)
+        primer3_results.write_table_form2("%s.table_form2.res" % output_prefix)
+        primer3_results.write_table_form2_short("%s.table_form2_short.res" % output_prefix)
+
         """
         primer3_output_file = "%s.out" % primer3_output_prefix
 
