@@ -1,26 +1,82 @@
 #!/usr/bin/env python
-
+from copy import deepcopy
+from collections import OrderedDict
 from RouToolPa.Tools.Primers import Primer3
 from RouToolPa.Tools.Kmers import Glistmaker
 from RouToolPa.Tools.RepeatMasking import TRF
 from RouToolPa.Parsers.Primer3 import CollectionPrimer3
 from RouToolPa.Routines import AnnotationsRoutines
+from RouToolPa.Parsers.Sequence import CollectionSequence
+from RouToolPa.Parsers.GFF import CollectionGFF
 from Pipelines.Abstract import Pipeline
 
 
+class PrimerPipeline(Pipeline):
 
-class STRPrimerPipeline(Pipeline):
-
-    def __init__(self, primer3_dir="", trf_dir="", primer3_bin="primer3_core", trf_bin="trf",
+    def __init__(self, primer3_dir="", primer3_bin="primer3_core",
                  glistmaker_dir="", glistmaker_bin="glistmaker", primer3_thermo_config_dir=None):
         Pipeline.__init__(self)
         self.primer3_dir = primer3_dir
-        self.trf_dir = trf_dir
         self.primer3_bin = primer3_bin
-        self.trf_bin = trf_bin
         self.glistmaker_dir = glistmaker_dir
         self.glistmaker_bin = glistmaker_bin
         self.primer3_thermo_config_dir = primer3_thermo_config_dir
+
+    def prepare_primer3_files(*args, **kwargs):
+        # Pipeline-specific function
+        pass
+
+    def predict_primers(self, coordinates_file, fasta_with_flanks, output_prefix,
+                        directory_with_kmer_counts, kmer_file_prefix, pcr_product_size_range=None,
+                        optimal_primer_len=None, min_primer_len=None, max_primer_len=None, max_ns_accepted=None,
+                        softmasked_input=False, optimal_GC=None, min_GC=None, max_GC=None,
+                        optimal_melting_temperature=None, min_melting_temperature=None,
+                        max_melting_temperature=None, black_list_of_seqs_fasta=None,
+                        thermodynamic_parameters_dir=None, format_output=None,
+                        coordinates_format="bed",
+                        relative_core_seq_coords_relative_entry="core_seq_coords_relative"
+                        ):
+
+        primer3_config_file = "%s.primer3.config" % output_prefix
+        primer3_input_file = "%s.primer3.input" % output_prefix
+        primer3_output_file = "%s.primer3.out" % output_prefix
+        primer3_error_file = "%s.primer3.error" % output_prefix
+
+        self.prepare_primer3_files(coordinates_file, fasta_with_flanks, primer3_config_file, primer3_input_file,
+                                   self.check_dir_path(directory_with_kmer_counts), kmer_file_prefix,
+                                   pcr_product_size_range=pcr_product_size_range,
+                                   optimal_primer_len=optimal_primer_len,
+                                   min_primer_len=min_primer_len, max_primer_len=max_primer_len,
+                                   max_ns_accepted=max_ns_accepted,
+                                   softmasked_input=softmasked_input,
+                                   optimal_GC=optimal_GC, min_GC=min_GC, max_GC=max_GC,
+                                   optimal_melting_temperature=optimal_melting_temperature,
+                                   min_melting_temperature=min_melting_temperature,
+                                   max_melting_temperature=max_melting_temperature,
+                                   black_list_of_seqs_fasta=black_list_of_seqs_fasta,
+                                   thermodynamic_parameters_dir=thermodynamic_parameters_dir if thermodynamic_parameters_dir else self.primer3_thermo_config_dir,
+                                   coordinates_format=coordinates_format)
+        Primer3.path = self.primer3_dir
+        Primer3.predict_primers(primer3_input_file,
+                                output_file=primer3_output_file,
+                                settings_file=primer3_config_file,
+                                error_file=primer3_error_file,
+                                format_output=format_output, strict_tags=True
+                                )
+
+
+class STRPrimerPipeline(PrimerPipeline):
+
+    def __init__(self, primer3_dir="", trf_dir="", primer3_bin="primer3_core", trf_bin="trf",
+                 glistmaker_dir="", glistmaker_bin="glistmaker", primer3_thermo_config_dir=None):
+
+        PrimerPipeline.__init__(self, primer3_dir=primer3_dir,
+                                primer3_bin=primer3_bin,
+                                glistmaker_dir=glistmaker_dir,
+                                glistmaker_bin=glistmaker_bin,
+                                primer3_thermo_config_dir=primer3_thermo_config_dir)
+        self.trf_dir = trf_dir
+        self.trf_bin = trf_bin
 
     def prepare_primer3_files(self, trf_flank_gff, fasta_with_flanks, primer3_config_file, primer3_input_file,
                               directory_with_kmer_counts, kmer_file_prefix, pcr_product_size_range=None,
@@ -101,6 +157,7 @@ class STRPrimerPipeline(Pipeline):
                         optimal_melting_temperature=None, min_melting_temperature=None,
                         max_melting_temperature=None, black_list_of_seqs_fasta=None,
                         thermodynamic_parameters_dir=None, format_output=None,
+                        coordinates_format="gff",
                         relative_core_seq_coords_relative_entry="core_seq_coords_relative"):
 
         primer3_config_file = "%s.primer3.config" % output_prefix
@@ -297,6 +354,205 @@ class STRPrimerPipeline(Pipeline):
 
         stat_fd.close()
 
+
+class MitochondrialAmplificationPrimerPipeline(PrimerPipeline):
+
+    def prepare_primer3_files(self, coordinates_file, sequence_file, primer3_config_file, primer3_input_file,
+                              directory_with_kmer_counts, kmer_file_prefix, pcr_product_size_range=(4200, 4700),
+                              optimal_primer_len=None, min_primer_len=None, max_primer_len=None, max_ns_accepted=0,
+                              softmasked_input=False, optimal_GC=None, min_GC=None, max_GC=None,
+                              optimal_melting_temperature=69, min_melting_temperature=68,
+                              max_melting_temperature=70, black_list_of_seqs_fasta=None,
+                              thermodynamic_parameters_dir=None,
+                              coordinates_format="bed",
+                              ):
+
+        Primer3.write_config(primer3_config_file, primer_task="generic", pick_left_primer=True, pick_right_primer=True,
+                             pick_internal_oligo=False, optimal_primer_len=optimal_primer_len,
+                             min_primer_len=min_primer_len, max_primer_len=max_primer_len,
+                             max_ns_accepted=max_ns_accepted, pcr_product_size_range=pcr_product_size_range,
+                             explain_primers=True, report_all_primers=True,
+                             softmasked_input=softmasked_input, optimal_GC=optimal_GC, min_GC=min_GC, max_GC=max_GC,
+                             optimal_melting_temperature=optimal_melting_temperature,
+                             min_melting_temperature=min_melting_temperature,
+                             max_melting_temperature=max_melting_temperature,
+                             black_list_of_seqs_fasta=black_list_of_seqs_fasta, mask_sequence=True,
+                             directory_with_kmer_counts=directory_with_kmer_counts, kmer_file_prefix=kmer_file_prefix,
+                             thermodynamic_parameters_dir=thermodynamic_parameters_dir)
+
+        sequences = CollectionSequence(sequence_file, parsing_mode="parse", format="fasta")
+        sequences.get_stats_and_features(count_gaps=False, sort=False)
+        half_rotated_sequences = deepcopy(sequences)
+        rotation_dict = OrderedDict()
+
+        for record_id in half_rotated_sequences.records:
+            rotation_dict[record_id] = int(sequences.length[record_id] / 2)
+            half_rotated_sequences.records[record_id] = half_rotated_sequences.records[record_id][rotation_dict[record_id]:] + half_rotated_sequences.records[record_id][:rotation_dict[record_id]]
+
+        coordinates = CollectionGFF(coordinates_file, format=coordinates_format)
+
+        record_config = Primer3.generate_config(primer_task=None,
+                                                pick_left_primer=True,
+                                                pick_right_primer=True,
+                                                pick_internal_oligo=False,
+                                                optimal_primer_len=None,
+                                                min_primer_len=None, max_primer_len=None,
+                                                max_ns_accepted=None,
+                                                pcr_product_size_range=None,
+                                                explain_primers=None, report_all_primers=None,
+                                                softmasked_input=False,
+                                                optimal_GC=None, min_GC=None, max_GC=None,
+                                                optimal_melting_temperature=None,
+                                                min_melting_temperature=None,
+                                                max_melting_temperature=None,
+                                                black_list_of_seqs_fasta=None, mask_sequence=False,
+                                                directory_with_kmer_counts=None, kmer_file_prefix=None)
+
+        with open(primer3_input_file, "w") as primer3_in_fd:
+            for record_id in sequences.records:
+                index = 1
+                for line_tuple in coordinates.records.loc[[record_id]].itertuples(index=False):
+                    start = getattr(line_tuple, "start")
+                    end = getattr(line_tuple, "end")
+                    seq = sequences.records[record_id]
+                    if start > end:
+                        start, end = end - rotation_dict[record_id], start + rotation_dict[record_id]
+                        seq = half_rotated_sequences.records[record_id]
+
+                    primer_input_record = Primer3.generate_input_record("%s.primer_%i" % (record_id, index),
+                                                                        seq,
+                                                                        target_list=((start, end),),
+                                                                        excluded_region_list=None,
+                                                                        included_region_list=None,
+                                                                        internal_oligo_excluded_region_list=None,
+                                                                        overlap_junction_list=None,
+                                                                        forward_primer=None,
+                                                                        reverse_primer=None,
+                                                                        internal_oligo=None,
+                                                                        force_forward_start=None,
+                                                                        force_forward_end=None,
+                                                                        force_reverse_start=None,
+                                                                        force_reverse_end=None,
+                                                                        config=record_config)
+                    primer3_in_fd.write(primer_input_record)
+
+                    index += 1
+
+    def predict_primers(self, coordinates_gff, fasta_file, output_prefix,
+                        directory_with_kmer_counts, kmer_file_prefix, pcr_product_size_range=None,
+                        optimal_primer_len=None, min_primer_len=None, max_primer_len=None, max_ns_accepted=None,
+                        softmasked_input=False, optimal_GC=None, min_GC=None, max_GC=None,
+                        optimal_melting_temperature=None, min_melting_temperature=None,
+                        max_melting_temperature=None, black_list_of_seqs_fasta=None,
+                        thermodynamic_parameters_dir=None, format_output=None,
+                        coordinates_format="gff",
+                        relative_core_seq_coords_relative_entry="core_seq_coords_relative"):
+
+        primer3_config_file = "%s.primer3.config" % output_prefix
+        primer3_input_file = "%s.primer3.input" % output_prefix
+        primer3_output_file = "%s.primer3.out" % output_prefix
+        primer3_error_file = "%s.primer3.error" % output_prefix
+
+        self.prepare_primer3_files(coordinates_gff, fasta_file, primer3_config_file, primer3_input_file,
+                                   self.check_dir_path(directory_with_kmer_counts), kmer_file_prefix,
+                                   pcr_product_size_range=pcr_product_size_range,
+                                   optimal_primer_len=optimal_primer_len,
+                                   min_primer_len=min_primer_len, max_primer_len=max_primer_len,
+                                   max_ns_accepted=max_ns_accepted,
+                                   softmasked_input=softmasked_input,
+                                   optimal_GC=optimal_GC, min_GC=min_GC, max_GC=max_GC,
+                                   optimal_melting_temperature=optimal_melting_temperature,
+                                   min_melting_temperature=min_melting_temperature,
+                                   max_melting_temperature=max_melting_temperature,
+                                   black_list_of_seqs_fasta=black_list_of_seqs_fasta,
+                                   thermodynamic_parameters_dir=thermodynamic_parameters_dir if thermodynamic_parameters_dir else self.primer3_thermo_config_dir,
+                                   )
+        Primer3.path = self.primer3_dir
+        Primer3.predict_primers(primer3_input_file,
+                                output_file=primer3_output_file,
+                                settings_file=primer3_config_file,
+                                error_file=primer3_error_file,
+                                format_output=format_output, strict_tags=True
+                                )
+
+    def primer_prediction_pipeline(self, coordinates_gff, mt_fasta, genome_fasta, output_prefix,
+                                   kmer_dir=None, kmer_file_prefix=None, count_kmers=False,
+                                   optimal_primer_len=None, min_primer_len=None, max_primer_len=None, max_ns_accepted=None,
+                                   softmasked_input=False, optimal_GC=None, min_GC=None, max_GC=None,
+                                   optimal_melting_temperature=None, min_melting_temperature=None,
+                                   max_melting_temperature=None, black_list_of_seqs_fasta=None,
+                                   threads=None,):
+
+        Primer3.path = self.primer3_dir
+        Primer3.threads = threads if threads else self.threads
+
+        Glistmaker.path = self.glistmaker_dir
+        Glistmaker.threads = threads if threads else self.threads
+
+        if count_kmers:
+            print("Counting kmers...")
+            if (not kmer_file_prefix) or (not kmer_dir):
+                raise ValueError("No kmer file prefix of kmer directory was set")
+            glistmaker_prefix = "%s/%s" % (kmer_dir, kmer_file_prefix)
+            self.safe_mkdir(kmer_dir)
+            Glistmaker.generate_kmer_lists_for_primer3(genome_fasta, glistmaker_prefix, threads=None,
+                                                       max_tmp_table_number=None, max_tmp_table_size=None)
+        print("Generating primers...")
+        for human_readable_output in False, True:
+            output_file_prefix = "%s.human_readable" % output_prefix if human_readable_output else output_prefix
+            self.predict_primers(coordinates_gff, mt_fasta, output_file_prefix,
+                                 kmer_dir, kmer_file_prefix, pcr_product_size_range=None,
+                                 optimal_primer_len=optimal_primer_len,
+                                 min_primer_len=min_primer_len, max_primer_len=max_primer_len,
+                                 max_ns_accepted=max_ns_accepted,
+                                 softmasked_input=softmasked_input,
+                                 optimal_GC=optimal_GC, min_GC=min_GC, max_GC=max_GC,
+                                 optimal_melting_temperature=optimal_melting_temperature,
+                                 min_melting_temperature=min_melting_temperature,
+                                 max_melting_temperature=max_melting_temperature,
+                                 black_list_of_seqs_fasta=black_list_of_seqs_fasta,
+                                 thermodynamic_parameters_dir=self.primer3_thermo_config_dir,
+                                 format_output=human_readable_output)
+        """
+        primer3_output_file = "%s.out" % primer3_output_prefix
+
+        filtered_results_file = "%s.filtered.res" % primer3_output_prefix
+        filtered_results_table_form_file = "%s.filtered.table_form.res" % primer3_output_prefix
+        filtered_results_table_form_with_aln_file = "%s.filtered.table_form_with_aln.res" % primer3_output_prefix
+        filtered_out_results_file = "%s.filtered_out.res" % primer3_output_prefix
+
+        primer3_results = CollectionPrimer3(primer3_file=primer3_output_file, from_file=True, id_based_location_dict=id_based_location_dict)
+
+        primer3_results.remove_primers_with_gaps_in_pcr_product(min_gap_len)
+        primer3_filtered_results, primer3_filtered_out_results = primer3_results.filter_out_records_without_primers()
+
+        primer3_filtered_results.write(filtered_results_file)
+        primer3_filtered_results.write_table_form(filtered_results_table_form_file)
+        primer3_filtered_results.write_table_form_with_alignments(filtered_results_table_form_with_aln_file)
+        primer3_filtered_out_results.write(filtered_out_results_file)
+
+        filtered_results_file_splited_by_len_prefix = "%s.filtered.monomer_len" % primer3_output_prefix
+
+        stat_fd = open("%s.stats" % output_prefix, "w")
+
+        sorted_monomer_length_list = map(str, sorted(map(int, monomer_length_id_dict.keys())))
+
+        for monomer_length in sorted_monomer_length_list:
+            primer3_monomer_len_results = primer3_filtered_results.extract_records_by_ids(monomer_length_id_dict[monomer_length])
+            primer3_monomer_len_results.write("%s.%s.res" % (filtered_results_file_splited_by_len_prefix, monomer_length))
+            primer3_monomer_len_results.write_table_form("%s.%s.table_form.res" % (filtered_results_file_splited_by_len_prefix, monomer_length))
+            primer3_monomer_len_results.write_table_form_with_alignments("%s.%s.table_form_with_aln.res" % (filtered_results_file_splited_by_len_prefix, monomer_length))
+
+            primer3_monomer_len_results.write_table_form2("%s.%s.table_form2.res" % (filtered_results_file_splited_by_len_prefix, monomer_length))
+            primer3_monomer_len_results.write_table_form2_short("%s.%s.table_form2_short.res" % (filtered_results_file_splited_by_len_prefix, monomer_length))
+
+            stat_string = "STR monomer length %s bp: %i repeats with primers" % (str(monomer_length), len(primer3_monomer_len_results.records))
+            print(stat_string)
+
+            stat_fd.write(stat_string + "\n")
+
+        stat_fd.close()
+        """
 """
 ~/Soft/MAVR/scripts/repeatmasking/tandem_repeat_masking.py -i ../../../../assemblies/bionano/assemblies/hybrid_assembly/assembly.hybrid.all.fasta -o assembly.hybrid.all -t 30 -p ~/Soft/TRF/trf
 
