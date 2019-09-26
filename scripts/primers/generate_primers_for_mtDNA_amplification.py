@@ -13,9 +13,9 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
                     help="Prefix of output files")
 parser.add_argument("-c", "--coordinates", action="store", dest="coordinates",
                     help="File with coordinates of regions to amplify")
-parser.add_argument("--max_pcr_product_len", action="store", dest="max_pcr_product_len", type=int, default=4200,
+parser.add_argument("--max_pcr_product_len", action="store", dest="max_pcr_product_len", type=int, default=4700,
                     help="Maximum length of PCR product")
-parser.add_argument("--min_pcr_product_len", action="store", dest="min_pcr_product_len", type=int, default=4700,
+parser.add_argument("--min_pcr_product_len", action="store", dest="min_pcr_product_len", type=int, default=4200,
                     help="Minimumlength of PCR product")
 
 parser.add_argument("-k", "--directory_with_kmer_counts", action="store", dest="directory_with_kmer_counts", required=True,
