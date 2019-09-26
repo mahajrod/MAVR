@@ -439,13 +439,13 @@ class MitochondrialAmplificationPrimerPipeline(PrimerPipeline):
                     index += 1
 
     def predict_primers(self, coordinates_gff, fasta_file, output_prefix,
-                        directory_with_kmer_counts, kmer_file_prefix, pcr_product_size_range=None,
+                        directory_with_kmer_counts, kmer_file_prefix, pcr_product_size_range=(4200, 4700),
                         optimal_primer_len=None, min_primer_len=None, max_primer_len=None, max_ns_accepted=None,
                         softmasked_input=False, optimal_GC=None, min_GC=None, max_GC=None,
-                        optimal_melting_temperature=None, min_melting_temperature=None,
-                        max_melting_temperature=None, black_list_of_seqs_fasta=None,
+                        optimal_melting_temperature=69, min_melting_temperature=68,
+                        max_melting_temperature=70, black_list_of_seqs_fasta=None,
                         thermodynamic_parameters_dir=None, format_output=None,
-                        coordinates_format="gff",
+                        coordinates_format="bed",
                         relative_core_seq_coords_relative_entry="core_seq_coords_relative"):
 
         primer3_config_file = "%s.primer3.config" % output_prefix
@@ -476,11 +476,12 @@ class MitochondrialAmplificationPrimerPipeline(PrimerPipeline):
                                 )
 
     def primer_prediction_pipeline(self, coordinates_gff, mt_fasta, genome_fasta, output_prefix,
-                                   kmer_dir=None, kmer_file_prefix=None, count_kmers=False,
+                                   kmer_dir=None, kmer_file_prefix=None, pcr_product_size_range=(4200, 4700),
+                                   count_kmers=False,
                                    optimal_primer_len=None, min_primer_len=None, max_primer_len=None, max_ns_accepted=None,
                                    softmasked_input=False, optimal_GC=None, min_GC=None, max_GC=None,
-                                   optimal_melting_temperature=None, min_melting_temperature=None,
-                                   max_melting_temperature=None, black_list_of_seqs_fasta=None,
+                                   optimal_melting_temperature=69, min_melting_temperature=68,
+                                   max_melting_temperature=70, black_list_of_seqs_fasta=None,
                                    threads=None,):
 
         Primer3.path = self.primer3_dir
@@ -501,7 +502,7 @@ class MitochondrialAmplificationPrimerPipeline(PrimerPipeline):
         for human_readable_output in False, True:
             output_file_prefix = "%s.human_readable" % output_prefix if human_readable_output else output_prefix
             self.predict_primers(coordinates_gff, mt_fasta, output_file_prefix,
-                                 kmer_dir, kmer_file_prefix, pcr_product_size_range=None,
+                                 kmer_dir, kmer_file_prefix, pcr_product_size_range=pcr_product_size_range,
                                  optimal_primer_len=optimal_primer_len,
                                  min_primer_len=min_primer_len, max_primer_len=max_primer_len,
                                  max_ns_accepted=max_ns_accepted,
