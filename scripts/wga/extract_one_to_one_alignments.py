@@ -17,5 +17,5 @@ parser.add_argument("-m", "--max_mismap_probability", action="store", dest="max_
 args = parser.parse_args()
 
 
-LAST.lextract_one_to_one_alignments(args.input, args.output_prefix,
-                                    max_mismap_probability=args.max_mismap_probability)
+LAST.extract_one_to_one_alignments(args.input, args.output_prefix,
+                                   max_mismap_probability=args.max_mismap_probability)
