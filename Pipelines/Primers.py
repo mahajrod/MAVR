@@ -489,7 +489,7 @@ class MitochondrialAmplificationPrimerPipeline(PrimerPipeline):
 
         Glistmaker.path = self.glistmaker_dir
         Glistmaker.threads = threads if threads else self.threads
-
+        sequences = CollectionSequence(mt_fasta, parsing_mode="parse", format="fasta")
         if count_kmers:
             print("Counting kmers...")
             if (not kmer_file_prefix) or (not kmer_dir):
@@ -517,7 +517,7 @@ class MitochondrialAmplificationPrimerPipeline(PrimerPipeline):
         primer3_output_file = "%s.primer3.out" % output_prefix
         primer3_results = CollectionPrimer3(primer3_file=primer3_output_file, from_file=True,
                                             id_based_location_dict=None)
-
+        primer3_results.correct_coordinates(sequences.records)
         primer3_results.write_table_form("%s.table_form.res" % output_prefix)
         primer3_results.write_table_form2("%s.table_form2.res" % output_prefix)
         primer3_results.write_table_form2_short("%s.table_form2_short.res" % output_prefix)
