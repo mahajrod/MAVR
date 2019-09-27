@@ -411,7 +411,7 @@ class MitochondrialAmplificationPrimerPipeline(PrimerPipeline):
         with open(primer3_input_file, "w") as primer3_in_fd:
             for record_id in sequences.records:
                 index = 1
-                for line_tuple in coordinates.records.loc[[record_id]].itertuples(index=False):
+                for line_tuple in coordinates.records.loc[record_id].itertuples(index=False):
                     start = getattr(line_tuple, "start")
                     end = getattr(line_tuple, "end")
                     seq = sequences.records[record_id]
