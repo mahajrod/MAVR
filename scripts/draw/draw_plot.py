@@ -79,7 +79,7 @@ print(stats.kendalltau(data[:, 0], data[:, 1]))
 print("Pearson's r")
 print(stats.pearsonr(data[:, 0], data[:, 1]))
 for ext in args.extensions:
-    plt.savefig("%s.%s" % (args.output_prefix, ext))
+    plt.savefig("%s.%s.%s" % (args.output_prefix, args.type, ext))
 
 plt.yscale("log", basey=args.ylogbase)
 
