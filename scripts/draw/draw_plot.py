@@ -81,7 +81,7 @@ print(stats.pearsonr(data[:, 0], data[:, 1]))
 for ext in args.extensions:
     plt.savefig("%s.%s.%s" % (args.output_prefix, args.type, ext))
 
-plt.yscale("log", basey=args.ylogbase)
+plt.yscale("log")
 
 for ext in args.extensions:
     plt.savefig("%s.%s.ylog%i.%s" % (args.output_prefix, args.type, args.ylogbase, ext))
