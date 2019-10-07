@@ -39,6 +39,8 @@ parser.add_argument("-x", "--read_file_extension", action="store", dest="read_fi
                          " <sample><read_suffix>_1.<extension> Default: 'fastq'")
 parser.add_argument("-z", "--gzipped_reads", action="store_true", dest="gzipped_reads", default=False,
                     help="Reads are gzipped")
+parser.add_argument("-k", "--skip_duplicates", action="store_true", dest="skip_duplicates", default=False,
+                    help="Skip duplicate marking")
 """
 parser.add_argument("-z", "--calculate_median_coverage", action="store_true", dest="calculate_median_coverage",
                     default=False,
@@ -66,5 +68,5 @@ AlignmentPipeline.Picard_dir = args.picard_dir
 AlignmentPipeline.align(args.sample_dir, args.index, aligner=args.aligner, sample_list=args.sample_list,
                         outdir=args.outdir, quality_score_type=args.quality, read_suffix=args.read_file_suffix,
                         read_extension=args.read_file_extension, alignment_format=args.alignment_format,
-                        threads=None, mark_duplicates=True, platform="Illumina",
+                        threads=None, mark_duplicates=~args.skip_duplicates, platform="Illumina",
                         add_read_groups_by_picard=args.add_read_groups_by_picard, gzipped_reads=args.gzipped_reads)
