@@ -58,10 +58,10 @@ if args.title:
     plt.title(args.title)
 
 print("Kendal's tau")
-print(stats.kendalltau(data[:, args.x_column_index], data[:, args.y_column_index]))
+print(stats.kendalltau(data[:, 0], data[:, 1]))
 
 print("Pearson's r")
-print(stats.pearsonr(data[:, args.x_column_index], data[:, args.y_column_index]))
+print(stats.pearsonr(data[:, 0], data[:, 1]))
 for ext in args.extensions:
     plt.savefig("%s.%s" % (args.output_prefix, ext))
 
