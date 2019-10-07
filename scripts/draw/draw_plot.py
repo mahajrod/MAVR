@@ -60,7 +60,7 @@ plt.subplot(1, 1, 1)
 
 plt.plot(data[:, 0], data[:, 1], markersize=args.markersize)
 plt.xlim(xmin=args.min_x, xmax=args.max_x)
-plt.ylim(ymin=args.min_y, xmax=args.max_y)
+plt.ylim(ymin=args.min_y, ymax=args.max_y)
 if args.xlabel:
     plt.xlabel(args.xlabel)
 if args.ylabel:
