@@ -23,7 +23,6 @@ parser.add_argument("-t", "--threads", action="store", dest="threads", default=1
                     help="Number of threads to use in Trimmomatic. Default - 1.")
 
 parser.add_argument("-a", "--adapters", action="store", dest="adapters", type=os.path.abspath,
-                    required=True,
                     help="File with adapters to trim by Trimmomatic")
 parser.add_argument("-k", "--adapter_kmers", action="store", dest="adapter_kmers", type=os.path.abspath,
                     required=True,
