@@ -26,10 +26,14 @@ parser.add_argument("-a", "--x_column_index", action="store", dest="x_column_ind
 parser.add_argument("-b", "--y_column_index", action="store", dest="y_column_index", type=int,
                     help="Index of column with y values. 0-based")
 
-parser.add_argument("-n", "--min_value", action="store", dest="min_length", type=float, default=0,
-                    help="Minimum value to show. Default - 1")
-parser.add_argument("-x", "--max_value", action="store", dest="max_length", type=float,
-                    help="Maximum value to show. Default - length of longest sequence")
+parser.add_argument("-n", "--min_x", action="store", dest="min_x", type=float,
+                    help="Minimum x value to show. Default - not set")
+parser.add_argument("-x", "--max_x", action="store", dest="max_x", type=float,
+                    help="Maximum x value to show. Default - not set")
+parser.add_argument("-q", "--min_y", action="store", dest="min_y", type=float,
+                    help="Minimum y value to show. Default - not set")
+parser.add_argument("-r", "--max_y", action="store", dest="max_y", type=float,
+                    help="Maximum y value to show. Default - not set")
 parser.add_argument("-e", "--extensions", action="store", dest="extensions", type=lambda x: x.split(","),
                     default=["png", "svg"],
                     help="Comma-separated list of extensions for histogram files")
@@ -39,17 +43,24 @@ parser.add_argument("-y", "--ylabel", action="store", dest="ylabel",
                     help="Y label")
 parser.add_argument("-t", "--title", action="store", dest="title",
                     help="Title of histogram")
+parser.add_argument("--width", action="store", dest="width", default=6, type=int,
+                    help="Figure width. Default: 6")
+parser.add_argument("--height", action="store", dest="height", default=6, type=int,
+                    help="Figure height. Default: 6")
+parser.add_argument("--m", action="store", dest="markersize", default=2, type=int,
+                    help="Size of marker. Default: 2")
 
 args = parser.parse_args()
 
 data = np.loadtxt(args.input_file, comments="#", usecols=(args.x_column_index, args.y_column_index))
 print
 
-plt.figure(1, figsize=(6, 6))
+plt.figure(1, figsize=(args.height, args.width), dpi=300)
 plt.subplot(1, 1, 1)
 
-plt.plot(data[:, 0], data[:, 1], "b.")
-plt.xlim(xmin=args.min_length, xmax=args.max_length)
+plt.plot(data[:, 0], data[:, 1], markersize=args.markersize)
+plt.xlim(xmin=args.min_x, xmax=args.max_x)
+plt.ylim(ymin=args.min_y, xmax=args.max_y)
 if args.xlabel:
     plt.xlabel(args.xlabel)
 if args.ylabel:
