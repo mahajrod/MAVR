@@ -51,15 +51,19 @@ parser.add_argument("-m", "--markersize", action="store", dest="markersize", def
                     help="Size of marker. Default: 2")
 parser.add_argument("--ylog", action="store", dest="ylogbase", default=10, type=int,
                     help="Log base for figure with logarithmic scale on y axis. Default: 10")
+parser.add_argument("--type", action="store", dest="type", default="plot",
+                    help="Type of figure. Allowed: plot(default), scatter")
+
 args = parser.parse_args()
 
 data = np.loadtxt(args.input_file, comments="#", usecols=(args.x_column_index, args.y_column_index))
-print
 
 plt.figure(1, figsize=(args.width, args.height), dpi=300)
 plt.subplot(1, 1, 1)
-
-plt.plot(data[:, 0], data[:, 1], markersize=args.markersize)
+if args.type == "plot":
+    plt.plot(data[:, 0], data[:, 1], markersize=args.markersize)
+elif args.type == "scatter":
+    plt.scatter(data[:, 0], data[:, 1], markersize=args.markersize)
 plt.xlim(xmin=args.min_x, xmax=args.max_x)
 plt.ylim(ymin=args.min_y, ymax=args.max_y)
 if args.xlabel:
@@ -80,4 +84,4 @@ for ext in args.extensions:
 plt.yscale("log", basey=args.ylogbase)
 
 for ext in args.extensions:
-    plt.savefig("%s.ylog%i.%s" % (args.output_prefix, args.ylogbase, ext))
+    plt.savefig("%s.%s.ylog%i.%s" % (args.output_prefix, args.type, args.ylogbase, ext))
