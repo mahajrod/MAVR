@@ -47,7 +47,7 @@ parser.add_argument("--width", action="store", dest="width", default=6, type=int
                     help="Figure width. Default: 6")
 parser.add_argument("--height", action="store", dest="height", default=6, type=int,
                     help="Figure height. Default: 6")
-parser.add_argument("--m", action="store", dest="markersize", default=2, type=int,
+parser.add_argument("-m", "--markersize", action="store", dest="markersize", default=2, type=int,
                     help="Size of marker. Default: 2")
 
 args = parser.parse_args()
