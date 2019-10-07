@@ -49,7 +49,8 @@ parser.add_argument("--height", action="store", dest="height", default=6, type=i
                     help="Figure height. Default: 6")
 parser.add_argument("-m", "--markersize", action="store", dest="markersize", default=2, type=int,
                     help="Size of marker. Default: 2")
-
+parser.add_argument("--ylog", action="store", dest="ylogbase", default=10, type=int,
+                    help="Log base for figure with logarithmic scale on y axis. Default: 10")
 args = parser.parse_args()
 
 data = np.loadtxt(args.input_file, comments="#", usecols=(args.x_column_index, args.y_column_index))
@@ -76,3 +77,7 @@ print(stats.pearsonr(data[:, 0], data[:, 1]))
 for ext in args.extensions:
     plt.savefig("%s.%s" % (args.output_prefix, ext))
 
+plt.yscale("log", basey=args.ylogbase)
+
+for ext in args.extensions:
+    plt.savefig("%s.ylog%i.%s" % (args.output_prefix, args.ylogbase, ext))
