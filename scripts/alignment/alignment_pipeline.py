@@ -64,10 +64,9 @@ AlignmentPipeline.threads = args.threads
 AlignmentPipeline.BWA_dir = args.aligner_dir
 AlignmentPipeline.bowtie2_dir = args.aligner_dir
 AlignmentPipeline.Picard_dir = args.picard_dir
-print args.skip_duplicates
-print ~args.skip_duplicates
+
 AlignmentPipeline.align(args.sample_dir, args.index, aligner=args.aligner, sample_list=args.sample_list,
                         outdir=args.outdir, quality_score_type=args.quality, read_suffix=args.read_file_suffix,
                         read_extension=args.read_file_extension, alignment_format=args.alignment_format,
-                        threads=None, mark_duplicates=~args.skip_duplicates, platform="Illumina",
+                        threads=None, mark_duplicates=not args.skip_duplicates, platform="Illumina",
                         add_read_groups_by_picard=args.add_read_groups_by_picard, gzipped_reads=args.gzipped_reads)
