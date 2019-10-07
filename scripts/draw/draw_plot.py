@@ -55,7 +55,7 @@ args = parser.parse_args()
 data = np.loadtxt(args.input_file, comments="#", usecols=(args.x_column_index, args.y_column_index))
 print
 
-plt.figure(1, figsize=(args.height, args.width), dpi=300)
+plt.figure(1, figsize=(args.width, args.height), dpi=300)
 plt.subplot(1, 1, 1)
 
 plt.plot(data[:, 0], data[:, 1], markersize=args.markersize)
