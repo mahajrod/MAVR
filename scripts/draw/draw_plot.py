@@ -63,7 +63,7 @@ plt.subplot(1, 1, 1)
 if args.type == "plot":
     plt.plot(data[:, 0], data[:, 1], markersize=args.markersize)
 elif args.type == "scatter":
-    plt.scatter(data[:, 0], data[:, 1], markersize=args.markersize)
+    plt.scatter(data[:, 0], data[:, 1], s=args.markersize)
 plt.xlim(xmin=args.min_x, xmax=args.max_x)
 plt.ylim(ymin=args.min_y, ymax=args.max_y)
 if args.xlabel:
