@@ -42,13 +42,13 @@ parser.add_argument("-t", "--title", action="store", dest="title",
 
 args = parser.parse_args()
 
-data = np.loadtxt(args.input_file, comments="#")
+data = np.loadtxt(args.input_file, comments="#", usecols=(args.x_column_index, args.y_column_index))
 print
 
 plt.figure(1, figsize=(6, 6))
 plt.subplot(1, 1, 1)
 
-plt.plot(data[:, args.x_column_index], data[:, args.y_column_index], "b.")
+plt.plot(data[:, 0], data[:, 1], "b.")
 plt.xlim(xmin=args.min_length, xmax=args.max_length)
 if args.xlabel:
     plt.xlabel(args.xlabel)
