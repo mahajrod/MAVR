@@ -25,7 +25,6 @@ parser.add_argument("-t", "--threads", action="store", dest="threads", default=1
 parser.add_argument("-a", "--adapters", action="store", dest="adapters", type=os.path.abspath,
                     help="File with adapters to trim by Trimmomatic")
 parser.add_argument("-k", "--adapter_kmers", action="store", dest="adapter_kmers", type=os.path.abspath,
-                    required=True,
                     help="File with adapter k-mers for Coockiecutter")
 
 parser.add_argument("-m", "--mismatch_number", action="store", dest="mismatch_number", type=int, default=2,
