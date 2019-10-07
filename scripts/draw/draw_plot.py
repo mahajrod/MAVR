@@ -53,7 +53,8 @@ parser.add_argument("--ylog", action="store", dest="ylogbase", default=10, type=
                     help="Log base for figure with logarithmic scale on y axis. Default: 10")
 parser.add_argument("--type", action="store", dest="type", default="plot",
                     help="Type of figure. Allowed: plot(default), scatter")
-
+parser.add_argument("-g", "--grid", action="store_true", dest="grid",
+                    help="Show grid. Default: False")
 args = parser.parse_args()
 
 data = np.loadtxt(args.input_file, comments="#", usecols=(args.x_column_index, args.y_column_index))
@@ -72,7 +73,8 @@ if args.ylabel:
     plt.ylabel(args.ylabel)
 if args.title:
     plt.title(args.title)
-
+if args.grid:
+    plt.grid()
 print("Kendal's tau")
 print(stats.kendalltau(data[:, 0], data[:, 1]))
 
