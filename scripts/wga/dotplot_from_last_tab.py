@@ -114,6 +114,13 @@ parser.add_argument("--left_offset", action="store", dest="left_offset",
 parser.add_argument("--right_offset", action="store", dest="right_offset",
                     default=0.9, type=float,
                     help="Right offset for subplot. Default: 0.9")
+parser.add_argument("--x_axis_visible", action="store_true", dest="x_axis_visible",
+                    default=False,
+                    help="Make X axis visible. Default: False")
+parser.add_argument("--y_axis_visible", action="store_true", dest="y_axis_visible",
+                    default=False,
+                    help="Make Y axis visible. Default: False")
+
 args = parser.parse_args()
 
 if args.white_target_id_file:
@@ -197,5 +204,7 @@ DrawingRoutines.draw_dot_plot_from_last_alignment(last_collection,
                                                   top_offset=args.top_offset,
                                                   bottom_offset=args.bottom_offset,
                                                   left_offset=args.left_offset,
-                                                  right_offset=args.right_offset
+                                                  right_offset=args.right_offset,
+                                                  x_axis_visible=args.x_axis_visible,
+                                                  y_axis_visible=args.y_axis_visible
                                                   )
