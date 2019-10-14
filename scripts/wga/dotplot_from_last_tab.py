@@ -144,7 +144,7 @@ last_collection = CollectionLast(args.input_last_tab,
                                  query_black_list=query_black_list,
                                  query_syn_dict=query_syn_dict,
                                  target_syn_dict=target_syn_dict,
-                                 format=
+                                 format=args.format
                                  )
 
 last_collection.write("%s.syn.tab" % args.output_prefix)
