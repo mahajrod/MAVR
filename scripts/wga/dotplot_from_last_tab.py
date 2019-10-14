@@ -103,7 +103,6 @@ args = parser.parse_args()
 
 if args.white_target_id_file:
     target_white_list = IdList(filename=args.white_target_id_file) if os.path.isfile(args.white_target_id_file) else IdList(args.white_target_id_file.split(","))
-    #print target_white_list
 else:
     target_white_list = IdList()
 
