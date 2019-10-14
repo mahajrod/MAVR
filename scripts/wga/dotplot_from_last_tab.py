@@ -102,7 +102,18 @@ parser.add_argument("--hide_target_labels", action="store_true", dest="hide_targ
                     help="Hide labels of target scaffolds. Default: False")
 parser.add_argument("--hide_query_labels", action="store_true", dest="hide_query_labels", default=False,
                     help="Hide labels of query scaffolds. Default: False")
-
+parser.add_argument("--bottom_offset", action="store", dest="bottom_offset",
+                    default=0.1, type=float,
+                    help="Bottom offset for subplot. Default: 0.1")
+parser.add_argument("--top_offset", action="store", dest="top_offset",
+                    default=0.9, type=float,
+                    help="Top offset for subplot. Default: 0.9")
+parser.add_argument("--left_offset", action="store", dest="left_offset",
+                    default=0.1, type=float,
+                    help="Left offset for subplot. Default: 0.1")
+parser.add_argument("--right_offset", action="store", dest="right_offset",
+                    default=0.9, type=float,
+                    help="Right offset for subplot. Default: 0.9")
 args = parser.parse_args()
 
 if args.white_target_id_file:
@@ -182,5 +193,9 @@ DrawingRoutines.draw_dot_plot_from_last_alignment(last_collection,
                                                   query_scaffold_labels_angle=args.query_scaffold_labels_angle,
                                                   show_grid=not args.hide_grid,
                                                   show_target_labels=not args.hide_target_labels,
-                                                  show_query_labels=not args.hide_query_labels
+                                                  show_query_labels=not args.hide_query_labels,
+                                                  top_offset=args.top_offset,
+                                                  bottom_offset=args.bottom_offset,
+                                                  left_offset=args.left_offset,
+                                                  right_offset=args.right_offset
                                                   )
