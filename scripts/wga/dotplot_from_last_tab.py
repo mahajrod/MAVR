@@ -66,7 +66,7 @@ parser.add_argument("-e", "--extensions", action="store", dest="extensions", typ
 
 parser.add_argument("-d", "--dpi", action="store", dest="dpi", type=int, default=400,
                     help="DPI of figure. Default: 400")
-parser.add_argument("-f", "--figsize", action="store", dest="figsize", type=DrawingRoutines.split_string_by_comma,
+parser.add_argument("-f", "--figsize", action="store", dest="figsize", type=lambda s: map(int, s.split(",")),
                     default=(12, 12),
                     help="Size of figure in inches(two comma-separated ints). Default: 12,12")
 parser.add_argument("-a", "--antialiasing", action="store_true", dest="antialiasing", default=False,
