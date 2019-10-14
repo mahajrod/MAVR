@@ -98,6 +98,10 @@ parser.add_argument("--target_scaffold_labels_angle", action="store", dest="targ
 parser.add_argument("--query_scaffold_labels_angle", action="store", dest="query_scaffold_labels_angle",
                     default=0, type=int,
                     help="Angle for labels of query scaffolds. Default: 0")
+parser.add_argument("--hide_target_labels", action="store_true", dest="hide_target_labels", default=False,
+                    help="Hide labels of target scaffolds. Default: False")
+parser.add_argument("--hide_query_labels", action="store_true", dest="hide_query_labels", default=False,
+                    help="Hide labels of query scaffolds. Default: False")
 
 args = parser.parse_args()
 
@@ -176,4 +180,7 @@ DrawingRoutines.draw_dot_plot_from_last_alignment(last_collection,
                                                   scaffold_label_fontsize=args.scaffold_label_fontsize,
                                                   target_scaffold_labels_angle=args.target_scaffold_labels_angle,
                                                   query_scaffold_labels_angle=args.query_scaffold_labels_angle,
-                                                  show_grid=not args.hide_grid)
+                                                  show_grid=not args.hide_grid,
+                                                  show_target_labels=not args.hide_target_labels,
+                                                  show_query_labels=not args.hide_query_labels
+                                                  )
