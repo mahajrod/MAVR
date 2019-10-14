@@ -83,6 +83,8 @@ parser.add_argument("--scaffold_label_fontsize", action="store", dest="scaffold_
                     help="Fontsize for scaffold labels. Default: 13")
 parser.add_argument("--grid_color", action="store", dest="grid_color", default='black',
                     help="Color of grid lines. Default: 'black'")
+parser.add_argument("--hide_grid", action="store_true", dest="hide_grid", default=False,
+                    help="Hide grid. Default: False")
 parser.add_argument("--bar_color", action="store", dest="bar_color", default='grey',
                     help="Color of bars. Default: 'grey'")
 parser.add_argument("--same_strand_color", action="store", dest="same_strand_color", default='blue',
@@ -96,6 +98,7 @@ parser.add_argument("--target_scaffold_labels_angle", action="store", dest="targ
 parser.add_argument("--query_scaffold_labels_angle", action="store", dest="query_scaffold_labels_angle",
                     default=0, type=int,
                     help="Angle for labels of query scaffolds. Default: 0")
+
 args = parser.parse_args()
 
 if args.white_target_id_file:
@@ -173,4 +176,5 @@ DrawingRoutines.draw_dot_plot_from_last_alignment(last_collection,
                                                   antialiased_lines=args.antialiasing,
                                                   scaffold_label_fontsize=args.scaffold_label_fontsize,
                                                   target_scaffold_labels_angle=args.target_scaffold_labels_angle,
-                                                  query_scaffold_labels_angle=args.query_scaffold_labels_angle)
+                                                  query_scaffold_labels_angle=args.query_scaffold_labels_angle,
+                                                  show_grid=not args.hide_grid)
