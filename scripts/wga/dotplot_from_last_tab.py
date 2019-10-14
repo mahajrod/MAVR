@@ -13,7 +13,8 @@ parser.add_argument("-i", "--input_last_tab", action="store", dest="input_last_t
                     help="File with LAST output in tab format")
 parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", required=True,
                     help="Prefix of output files")
-
+parser.add_argument("-f", "--format", action="store", dest="format", default="tab",
+                    help="Format of LAST alignments. Allowed: tab(default), tab_mismap")
 parser.add_argument("-w", "--white_target_id_file", action="store", dest="white_target_id_file",
                     help="File with target scaffold ids from white list or corresponding comma-separated list."
                          "NOTE: filtering is done BEFORE renaming by synonyms!")
@@ -142,7 +143,8 @@ last_collection = CollectionLast(args.input_last_tab,
                                  query_white_list=query_white_list,
                                  query_black_list=query_black_list,
                                  query_syn_dict=query_syn_dict,
-                                 target_syn_dict=target_syn_dict
+                                 target_syn_dict=target_syn_dict,
+                                 format=
                                  )
 
 last_collection.write("%s.syn.tab" % args.output_prefix)
