@@ -1,5 +1,6 @@
 __author__ = 'mahajrod'
 import os
+import sys
 from setuptools import setup, find_packages
 
 
@@ -28,11 +29,20 @@ def get_list_of_files(list_of_dirs_and_files, expression=None, recursive=True):
     return file_list
 
 
+dependencies = ['scipy', 'numpy', 'pandas', 'matplotlib', 'matplotlib-venn',
+                'biopython', 'xmltodict', 'bcbio-gff', 'statsmodels']
+if sys.version_info[0] == 3:
+    dependencies += ["ete3"]
+elif sys.version_info[0] == 3:
+    dependencies += ["ete2"]
+else:
+    raise ValueError("ERROR!!! Unsupported python version: %s" % str(sys.version_info[0]))
+
 setup(name='MAVR',
       version='0.58',
       packages=find_packages(),
       author='Sergei F. Kliver',
       author_email='mahajrod@gmail.com',
-      install_requires=['scipy', 'numpy', 'pandas', 'matplotlib', 'matplotlib-venn', 'ete2', 'biopython', 'xmltodict', 'bcbio-gff', 'statsmodels'],
+      install_requires=dependencies,
       scripts=get_list_of_files("scripts/"),
       long_description=open(os.path.join(os.path.dirname(__file__), 'README.md')).read(),)
