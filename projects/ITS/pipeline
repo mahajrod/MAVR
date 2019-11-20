@@ -1,0 +1,18 @@
+
+# 1 - adapter trimming by stirka
+
+# 2 - quality filtering by trimmomatic
+# 3 - alignment to reference
+~/Soft/MAVR/scripts/alignment/alignment_pipeline.py -o ./ -i ../reference/index/bwa/cluster -t 30 -m 100 -d ../reads/filtered/trimmomatic/filtered/final/ -u .final -k
+
+# 4 - coverage stats
+for SP in *; do ~/Soft/MAVR/scripts/alignment/get_bam_coverage_stats.py -i ${SP}/${SP}.bam -o ${SP}/${SP} & done
+
+# 5 - drawing coverage
+for SP in *; do ~/Soft/MAVR/scripts/draw/draw_plot.py -i ${SP}/${SP}.tab -o ${SP}/${SP} -a 1 -b 2 -y Coverage -l position -t "Coverage of ribosomal cluster monomer by ITS libs" -e png --width 12 -n 0 -q 1 --markersize 2 --type scatter -g &  done
+for SP in *; do ~/Soft/MAVR/scripts/draw/draw_plot.py -i ${SP}/${SP}.tab -o ${SP}/${SP} -a 1 -b 2 -y Coverage -l position -t "Coverage of ribosomal cluster monomer by ITS libs" -e png --width 12 -n 0 -q 1 --markersize 8 --type plot --grid &  done
+
+# 6 - variant calling
+
+bcftools mpileup --annotate FORMAT/AD,FORMAT/ADF,FORMAT/ADR,FORMAT/DP,FORMAT/SP --max-depth 1000000 --max-idepth 1000000 --threads 10 -O u -f ../reference/cluster.fa ../alignment/G1/G1.bam ../alignment/G2/G2.bam ../alignment/G3/G3.bam ../alignment/G4/G4.bam ../alignment/G5/G5.bam ../alignment/G6/G6.bam ../alignment/G7/G7.bam ../alignment/G8/G8.bam | bcftools call -mv -O v -o ITS_variants.vcf
+

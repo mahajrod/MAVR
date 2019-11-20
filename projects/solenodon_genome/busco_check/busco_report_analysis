@@ -1,0 +1,15 @@
+
+for FILE in `ls ../runs/fermi/busco/run_solenodon_paradoxus.dobby.v1/augustus_output/predicted_genes/ | grep -f busco.dobby.v1@Complete_vs_dobby.v2@Missing.ids`; do  cp ../runs/fermi/busco/run_solenodon_paradoxus.dobby.v1/augustus_output/predicted_genes/${FILE} fermi_augustus/; done
+for FILE in `ls ../runs/fermi/busco/run_solenodon_paradoxus.dobby.v1/augustus_output/predicted_genes/ | grep -f busco.dobby.v1@Fragmented_vs_dobby.v2@Missing.ids`; do  cp ../runs/fermi/busco/run_solenodon_paradoxus.dobby.v1/augustus_output/predicted_genes/${FILE} fermi_augustus/; done
+
+
+
+mahajrod@midgard:~/Dropbox/projects/solenodon/busco/lost_in_dobby.v2/fermi_augustus$ (for FILE in *; do SCAFFOLDS=`grep -vP "^#" ${FILE} | cut -f1 | sort | uniq | tr "\n" "," | sed s/,$//`; echo -e "${FILE}\t${SCAFFOLDS}"; done) > ../absent_in_dovetail_fermi_scaffolds
+
+
+ 123  cat busco.dobby.v1@Complete_vs_dobby.v2@Missing.ids busco.dobby.v1@Fragmented_vs_dobby.v2@Missing.ids > present_in_v1.absent_in_v2.ids
+  124  grep -f present_in_v1.absent_in_v2.ids ../runs/fermi/busco/run_solenodon_paradoxus.dobby.v1/full_table_solenodon_paradoxus.dobby.v1.tsv
+  125  grep -f present_in_v1.absent_in_v2.ids ../runs/fermi/busco/run_solenodon_paradoxus.dobby.v1/full_table_solenodon_paradoxus.dobby.v1.tsv > present_in_v1.absent_in_v2.ids.cordinates
+  126  grep -f present_in_v1.absent_in_v2.ids ../runs/fermi/busco/run_solenodon_paradoxus.dobby.v1/full_table_solenodon_paradoxus.dobby.v1.tsv cut -f3
+  127  grep -f present_in_v1.absent_in_v2.ids ../runs/fermi/busco/run_solenodon_paradoxus.dobby.v1/full_table_solenodon_paradoxus.dobby.v1.tsv |cut -f3
+  128  grep -f present_in_v1.absent_in_v2.ids ../runs/fermi/busco/run_solenodon_paradoxus.dobby.v1/full_table_solenodon_paradoxus.dobby.v1.tsv |cut -f3 > present_in_v1.absent_in_v2.scaffold.ids

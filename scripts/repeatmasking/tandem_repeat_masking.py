@@ -6,7 +6,6 @@ from RouToolPa.Tools.RepeatMasking import TRF
 from RouToolPa.Routines.File import split_filename
 
 
-
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_file", action="store", dest="input_file", required=True,

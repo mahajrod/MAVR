@@ -1,0 +1,22 @@
+#threshold tests
+#cheetah
+
+
+# inconsistency
+for SP in AJU171 AJU172 AJU173 AJU878 AJU884 AJU955 AJU981; do echo ${SP}; ~/Soft/MACE/scripts/test_clustering_thresholds.py -i ../acinonyx_jubatus.snp.good.no_repeats.${SP}.hetero.vcf -o acinonyx_jubatus.snp.good.no_repeats.${SP}.hetero -e inconsistent -m 0.1 -x 0.99 -s 0.01 -a acinonyx_jubatus.chr_scaffolds.ids --scaffold_syn_file acinonyx_jubatus.chromosome_names.syn --syn_file_key_column 1 --syn_file_value_column 0 -z acinonyx_jubatus.chr_scaffolds.ids; done
+
+#distance
+
+for SP in AJU171 AJU172 AJU173 AJU878 AJU884 AJU955 AJU981; do echo ${SP}; ~/Soft/MACE/scripts/test_clustering_thresholds.py -i ../acinonyx_jubatus.snp.good.no_repeats.${SP}.hetero.vcf -o acinonyx_jubatus.snp.good.no_repeats.${SP}.hetero -m 100 -x 10000 -s 100 -a acinonyx_jubatus.chr_scaffolds.ids --scaffold_syn_file acinonyx_jubatus.chromosome_names.syn --syn_file_key_column 1 --syn_file_value_column 0 -z acinonyx_jubatus.chr_scaffolds.ids; done
+
+# solenodon
+
+#inconsistency
+
+for SP in SRR5802907 SRR5802909 SRR5802910 SRR5802911 SRR5802912; do echo ${SP}; ~/Soft/MACE/scripts/test_clustering_thresholds.py -i ../5_indiv.dovetail.snp.good.no_repeats.${SP}.hetero.vcf -o 5_indiv.dovetail.snp.good.no_repeats.${SP}.hetero -e inconsistent -m 0.1 -x 0.99 -s 0.01 -a ../../../../../../denovo/assemblies/dovetail/solenodon_paradoxus.dobby.v2.renamed.10Mplus.ids  -z ../../../../../../denovo/assemblies/dovetail/solenodon_paradoxus.dobby.v2.renamed.10Mplus.ids; done
+
+#distance
+
+for SP in SRR5802907 SRR5802909 SRR5802910 SRR5802911 SRR5802912; do echo ${SP}; ~/Soft/MACE/scripts/test_clustering_thresholds.py -i ../5_indiv.dovetail.snp.good.no_repeats.${SP}.hetero.vcf -o 5_indiv.dovetail.snp.good.no_repeats.${SP}.hetero -m 100 -x 10000 -s 100 -a ../../../../../../denovo/assemblies/dovetail/solenodon_paradoxus.dobby.v2.renamed.10Mplus.ids  -z ../../../../../../denovo/assemblies/dovetail/solenodon_paradoxus.dobby.v2.renamed.10Mplus.ids; done
+
+# black footed ferret

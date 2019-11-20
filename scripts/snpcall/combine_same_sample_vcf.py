@@ -5,7 +5,6 @@ import argparse
 from RouToolPa.Routines import VCFRoutines
 
 
-
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-o", "--output", action="store", dest="output", default=sys.stdout,
