@@ -59,7 +59,7 @@ open(XNT, "<$exfile") || die "Couldn't open $exfile\n";
 open(HINTS, ">$hintsfilename") || die "Could not open $hintsfilename";
 
 print "$transcriptfeaturetype\n";
-print "UUUUU\n"
+print "UUUUU\n";
 
 
 while (<XNT>) {
