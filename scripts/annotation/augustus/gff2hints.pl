@@ -86,7 +86,7 @@ while (<XNT>) {
 		if ($end - $start + 1 >= $minintronlen && $end - $start + 1 <= $maxintronlen){
 	    	print HINTS "$seqname\t$prgsrc\tintron\t$start\t$end\t$score\t$strand\t.\tsrc=$source;grp=$prot;pri=$priority\n";
 		}
-    } elsif ($type eq "cds") {
+    } elsif ($type eq "CDS") {
 		$start += $CDSpart_cutoff;
 		$end -= $CDSpart_cutoff;
 		if ($start > $end) {
