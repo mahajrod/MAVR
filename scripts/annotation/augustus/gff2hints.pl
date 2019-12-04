@@ -58,6 +58,7 @@ GetOptions(
 open(XNT, "<$exfile") || die "Couldn't open $exfile\n";
 open(HINTS, ">$hintsfilename") || die "Could not open $hintsfilename";
 
+print "$transcriptfeaturetype"
 
 while (<XNT>) {
     s/#.*//;
@@ -95,6 +96,7 @@ while (<XNT>) {
 		print HINTS "$seqname\t$prgsrc\t$CDSpartid\t$start\t$end\t$score\t$strand\t.\tsrc=$source;grp=$prot;pri=$priority\n";
     } elsif ($type eq $transcriptfeaturetype) {
 	/sequence (\S+) ; /;
+	print "$1"
 	$prot = $1;
     }
 }
