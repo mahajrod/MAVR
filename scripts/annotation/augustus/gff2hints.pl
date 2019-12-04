@@ -20,10 +20,12 @@ $usage .= "  --maxintronlen=n   alignments with longer gaps are discarded (defau
 $usage .= "  --CDSpart_cutoff=n this many bp are cut off of each CDSpart hint w.r.t. the exonerate cds (default 9)\n";
 $usage .= "  --source=s         source identifier (default 'P')\n";
 $usage .= "  --hintid=s         hint identifier to use (default 'CDSpart')\n";
+$usage .= "  --transcriptfeaturetype=s         transcript feature type to use (default 'transcript')\n";
 #$usage .= "  --ssOn             include splice site (dss, ass) hints in output (default false)\n";
 
 my $exfile;
 my $hintsfilename;
+my $transcriptfeaturetype = "transcript";
 my $minintronlen = 41;
 my $maxintronlen = 350000;
 my $CDSpart_cutoff = 15;
@@ -50,6 +52,7 @@ GetOptions(
 	   'source:s'=>\$source,
 	   'priority:i'=>\$priority,
 	   'hintid:s'=>\$CDSpartid,
+	   'transcriptfeaturetype:s'=>\$transcriptfeaturetype,
 	   'ssOn!'=>\$ssOn);
 
 open(XNT, "<$exfile") || die "Couldn't open $exfile\n";
@@ -90,7 +93,7 @@ while (<XNT>) {
 	    	$start = $end = int(($start+$end)/2);
 		}
 		print HINTS "$seqname\t$prgsrc\t$CDSpartid\t$start\t$end\t$score\t$strand\t.\tsrc=$source;grp=$prot;pri=$priority\n";
-    } elsif ($type eq "gene") {
+    } elsif ($type eq $transcriptfeaturetype) {
 	/sequence (\S+) ; /;
 	$prot = $1;
     }
