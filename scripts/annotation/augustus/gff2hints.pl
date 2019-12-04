@@ -96,7 +96,7 @@ while (<XNT>) {
 		print HINTS "$seqname\t$prgsrc\t$CDSpartid\t$start\t$end\t$score\t$strand\t.\tsrc=$source;grp=$prot;pri=$priority\n";
     } elsif ($type eq $transcriptfeaturetype) {
 	/sequence (\S+) ; /;
-	print "$1"
+	print "$1";
 	$prot = $1;
     }
 }
