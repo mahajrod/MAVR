@@ -82,6 +82,7 @@ while (<XNT>) {
 	$start = $end;
 	$end = $tmp;
     }
+    print $type;
     if ($type eq "intron") {
 	# length in range?
 		if ($end - $start + 1 >= $minintronlen && $end - $start + 1 <= $maxintronlen){
