@@ -16,7 +16,7 @@ parser.add_argument("-s", "--species_name", action="store", dest="species_name",
                     help="Species name to use for labeling of proteins. Default: not set")
 parser.add_argument("-d", "--diamond", action="store_true", dest="diamond",
                     help="Annotation file was produced in diamond mode. Default: False")
-parser.add_argument("-db", action="store_true", dest="db",
+parser.add_argument("-db", action="store", dest="db",
                     help="Name of database used for annotation. Required in diamond mode, ignored in hmmer mode. "
                          "Default: not set")
 args = parser.parse_args()
