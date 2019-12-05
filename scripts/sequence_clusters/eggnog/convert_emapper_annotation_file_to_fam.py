@@ -22,6 +22,6 @@ parser.add_argument("-db", action="store", dest="db",
 args = parser.parse_args()
 
 Emapper.convert_emapper_annotation_file_to_fam(args.input, args.output, eggnogdb_prefix=args.eggnogdb_prefix,
-                                               species_name=None, label_separator=args.species_name,
+                                               species_name=args.species_name, label_separator=args.species_name,
                                                diamond_mode=args.diamond, database=args.db
                                                )
