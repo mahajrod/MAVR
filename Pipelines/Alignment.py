@@ -53,7 +53,7 @@ class AlignmentPipeline(Pipeline):
     def align(self, sample_dir, reference_index, aligner="bwa", sample_list=None, outdir="./",
               quality_score_type="phred33", read_suffix="", read_extension="fastq",
               alignment_format="bam", threads=None, mark_duplicates=True, platform="Illumina",
-              add_read_groups_by_picard=False, gzipped_reads=False):
+              add_read_groups_by_picard=False, gzipped_reads=False, keep_inremediate_files=False):
 
         self.init_tools(threads=threads)
 
@@ -108,7 +108,8 @@ class AlignmentPipeline(Pipeline):
                 MarkDuplicates.run(sorted_alignment_picard_groups if sorted_alignment_picard_groups else raw_alignment,
                                    final_alignment,
                                    duplicates_stat_file)
-                os.remove(raw_alignment)
-                os.remove(raw_alignment + ".bai")
+                if not keep_inremediate_files:
+                    os.remove(raw_alignment)
+                    os.remove(raw_alignment + ".bai")
                 if alignment_format == "bam":
                     SamtoolsV1.index(final_alignment)
