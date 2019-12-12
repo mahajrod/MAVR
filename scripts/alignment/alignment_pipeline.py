@@ -12,7 +12,7 @@ parser.add_argument("-d", "--sample_dir", action="store", dest="sample_dir", req
 parser.add_argument("-o", "--outdir", action="store", dest="outdir", default="./",
                     help="Output directory. Default: current directory")
 parser.add_argument("-s", "--sample_list", action="store", dest="sample_list",  type=lambda s: s.split(","),
-                    help="List of samples to call variants for. Default: all samplews in sample directory")
+                    help="List of samples to call variants for. Default: all samples in sample directory")
 parser.add_argument("-i", "--aligner_index", action="store", dest="index",
                     help="Aligner-specific index")
 parser.add_argument("-a", "--aligner", action="store", dest="aligner", default="bwa",
@@ -41,6 +41,9 @@ parser.add_argument("-z", "--gzipped_reads", action="store_true", dest="gzipped_
                     help="Reads are gzipped")
 parser.add_argument("-k", "--skip_duplicates", action="store_true", dest="skip_duplicates", default=False,
                     help="Skip duplicate marking")
+parser.add_argument("-r", "--retain_intermediate_files", action="store_true", dest="retain_intermediate_files",
+                    default=False,
+                    help="Retain intermediate files. Default: False")
 """
 parser.add_argument("-z", "--calculate_median_coverage", action="store_true", dest="calculate_median_coverage",
                     default=False,
@@ -69,4 +72,5 @@ AlignmentPipeline.align(args.sample_dir, args.index, aligner=args.aligner, sampl
                         outdir=args.outdir, quality_score_type=args.quality, read_suffix=args.read_file_suffix,
                         read_extension=args.read_file_extension, alignment_format=args.alignment_format,
                         threads=None, mark_duplicates=not args.skip_duplicates, platform="Illumina",
-                        add_read_groups_by_picard=args.add_read_groups_by_picard, gzipped_reads=args.gzipped_reads)
+                        add_read_groups_by_picard=args.add_read_groups_by_picard, gzipped_reads=args.gzipped_reads,
+                        keep_inremediate_files=args.retain_intermediate_files)
