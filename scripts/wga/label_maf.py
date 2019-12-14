@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-from RouToolPa.Routines.WGA import WGARoutines
+from RouToolPa.Routines import WGARoutines
 
 
 parser = argparse.ArgumentParser()
