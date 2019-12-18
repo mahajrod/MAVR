@@ -19,7 +19,7 @@ parser.add_argument("-t", "--tmp_dir", action="store", dest="tmp_dir",
 
 args = parser.parse_args()
 
-MarkDuplicates.path = args.picard_dir
+MarkDuplicates.jar_path = args.picard_dir
 MarkDuplicates.max_memory = args.memory
 MarkDuplicates.tmp_dir = args.tmp_dir
 
