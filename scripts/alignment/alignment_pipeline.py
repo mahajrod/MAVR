@@ -44,6 +44,8 @@ parser.add_argument("-k", "--skip_duplicates", action="store_true", dest="skip_d
 parser.add_argument("-r", "--retain_intermediate_files", action="store_true", dest="retain_intermediate_files",
                     default=False,
                     help="Retain intermediate files. Default: False")
+parser.add_argument("--tmp_dir", action="store", dest="tmp_dir",
+                    help="Directory for temporary files. Default: system default")
 """
 parser.add_argument("-z", "--calculate_median_coverage", action="store_true", dest="calculate_median_coverage",
                     default=False,
@@ -67,6 +69,7 @@ AlignmentPipeline.threads = args.threads
 AlignmentPipeline.BWA_dir = args.aligner_dir
 AlignmentPipeline.bowtie2_dir = args.aligner_dir
 AlignmentPipeline.Picard_dir = args.picard_dir
+AlignmentPipeline.tmp_dir = args.tmp_dir
 
 AlignmentPipeline.align(args.sample_dir, args.index, aligner=args.aligner, sample_list=args.sample_list,
                         outdir=args.outdir, quality_score_type=args.quality, read_suffix=args.read_file_suffix,
