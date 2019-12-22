@@ -24,7 +24,8 @@ parser.add_argument("-a", "--elements_without_synonyms_file", action="store", de
 parser.add_argument("-r", "--remove_clusters_with_not_renamed_elements", action="store_true",
                     dest="remove_clusters_with_not_renamed_elements",
                     help="Remove clusters with not renamed elements. Default: false ")
-
+parser.add_argument("-u", "--unique", action="store_true", dest="unique", default=False,
+                    help="Keep only unique elements in clusters. Default: false")
 args = parser.parse_args()
 
 SequenceClusterRoutines.rename_elements_in_clusters(args.input_cluster_file, args.syn_file, args.output_cluster_file,
@@ -32,4 +33,5 @@ SequenceClusterRoutines.rename_elements_in_clusters(args.input_cluster_file, arg
                                                     syn_file_key_column_index=args.key_column_index,
                                                     syn_file_value_column_index=args.value_column_index,
                                                     syn_file_column_separator=args.column_separator,
-                                                    elements_with_absent_synonyms_file=args.elements_without_synonyms_file)
+                                                    elements_with_absent_synonyms_file=args.elements_without_synonyms_file,
+                                                    keep_only_unique_elements=args.unique)
