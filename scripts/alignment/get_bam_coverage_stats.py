@@ -14,11 +14,12 @@ parser.add_argument("-n", "--min_coverage", action="store", dest="min_coverage",
                     help="Minimum coverage to use. Default - not set")
 parser.add_argument("-m", "--max_coverage", action="store", dest="max_coverage", type=float,
                     help="Maximum coverage to use. Default - not set")
-
+parser.add_argument("--no_stats", action="store_true", dest="no_stats", default=False,
+                    help="Do not calculate stats. Default: False, i.e. calculate ")
 args = parser.parse_args()
 
 #GenomeCov.threads = args.threads
 GenomeCov.get_bam_coverage_stats(args.input_bam, args.output_prefix, genome_bed=None,
                                  max_coverage=args.max_coverage, min_coverage=args.min_coverage,
-                                 verbose=True)
+                                 verbose=True, calc_stats=not args.no_stats)
 
