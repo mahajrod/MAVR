@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-from RouToolPa.Tools.Abstract import Tool
+from RouToolPa.Routines import FileRoutines
 from RouToolPa.Routines.File import make_list_of_path_to_files
-
 
 
 parser = argparse.ArgumentParser()
@@ -26,5 +25,5 @@ parser.add_argument("-c", "--case_insensitive", action="store_true", dest="case_
 args = parser.parse_args()
 
 
-Tool.intersect_ids_from_files(args.group_a_list, args.group_b_list, args.output, mode=args.mode,
-                              case_insensitive=args.case_insensitive)
+FileRoutines.intersect_ids_from_files(args.group_a_list, args.group_b_list, args.output, mode=args.mode,
+                                      case_insensitive=args.case_insensitive)

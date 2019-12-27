@@ -2,12 +2,8 @@
 __author__ = 'Sergei F. Kliver'
 import argparse
 from RouToolPa.Collections.General import IdList
+from RouToolPa.Tools.NCBIToolkit import FastqDump
 
-
-#from RouToolPa.Tools.Abstract import Tool
-#from RouToolPa.Routines import NCBIRoutines
-
-from RouToolPa.Tools.LinuxTools import Axel
 
 parser = argparse.ArgumentParser()
 
@@ -18,8 +14,8 @@ parser.add_argument("-f", "--id_file", action="store", dest="id_file",
                     help="File with SRA ids(one per line) to download")
 parser.add_argument("-t", "--threads", action="store", dest="threads", type=int, default=1,
                     help="Number of simultaneous downloads")
-parser.add_argument("-c", "--connections", action="store", dest="connections", type=int, default=8,
-                    help="Number of connections for each download")
+parser.add_argument("-o", "--out_dir", action="store", dest="out_dir", default="./",
+                    help="Output directory. Default: current directory")
 
 args = parser.parse_args()
 
@@ -28,21 +24,5 @@ if (not args.ids) and (not args.id_file):
 
 id_list = IdList(filename=args.id_file) if args.id_file else args.ids
 
-Axel.threads = args.threads
-Axel.parallel_download_from_sra(id_list, args.connections)
-"""
-options_list = []
-for entry_id in id_list:
-    ftp_path = NCBIRoutines.get_sra_ftp_path_from_id(entry_id)
-    options_list.append("-n %i %s" % (args.connections, ftp_path))
-
-tool = Tool(cmd="axel", max_threads=args.threads)
-
-tool.parallel_execute(options_list)
-
-for filename in os.listdir(os.getcwd()):
-    if ".sra" not in filename:
-        continue
-    tool.safe_mkdir(filename[:-4])
-    os.system("mv %s %s/" % (filename, filename[:-4]))
-"""
+FastqDump.threads = args.threads
+FastqDump.parallel_download(id_list, args.out_dir, split_pe=True, retain_original_ids=True)
