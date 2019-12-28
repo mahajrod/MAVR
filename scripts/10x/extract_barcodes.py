@@ -23,5 +23,5 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
 args = parser.parse_args()
 
 FastQRoutines.extract_10x_barcodes(args.forward_list, args.reverse_list, args.index_list, args.barcode_file,
-                                   args.output_prefix, buffering=100000000, read_index_length=16, linker_length=6,
+                                   args.output_prefix, buffering=1000000000, read_index_length=16, linker_length=6,
                                    min_forward_read_len=50)
