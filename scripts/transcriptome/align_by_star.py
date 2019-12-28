@@ -101,7 +101,9 @@ STAR.align_samples(args.samples_dir, args.output_dir, args.genome_dir,
                    include_unmapped_reads_in_bam=args.include_unmapped_reads,
                    output_unmapped_reads=args.include_unmapped_reads,
                    two_pass_mode=True,
-                   max_intron_length=args.max_intron_length)
+                   max_intron_length=args.max_intron_length,
+                   input_is_se=args.input_is_se,
+                   filename_fragment_to_mark_se_reads=args.filename_fragment_to_mark_se_reads)
 
 """
 if args.genome_fasta:
