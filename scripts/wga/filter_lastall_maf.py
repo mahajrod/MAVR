@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
+import sys
 import argparse
 from RouToolPa.Tools.WGA import LAST
 
@@ -8,7 +9,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input", action="store", dest="input", required=True,
                     help="Input MAF file")
-parser.add_argument("-o", "--output", action="store", dest="output", required=True,
+parser.add_argument("-o", "--output", action="store", dest="output", default=sys.stdout,
                     help="Output MAF file")
 
 parser.add_argument("-e", "--max_e", action="store", dest="max_e", type=float,
