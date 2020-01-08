@@ -7,7 +7,7 @@ from RouToolPa.Tools.Alignment import EMA
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", "--input", action="store", dest="input", required=True, default=sys.stdin,
+parser.add_argument("-i", "--input", action="store", dest="input", default=sys.stdin,
                     help="Input file with reads in EMA format. Default: stdin")
 parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", required=True,
                     help="Prefix of output files")
