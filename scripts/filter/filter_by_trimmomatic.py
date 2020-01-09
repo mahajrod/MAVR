@@ -59,7 +59,7 @@ Trimmomatic.threads = args.threads
 #print(Trimmomatic.path)
 #print(Trimmomatic.jar_path)
 samples = args.samples.split(",") if args.samples else os.listdir(args.samples_dir)
-
+Trimmomatic.safe_mkdir(args.output_dir)
 for sample in samples:
     print("Handling %s" % sample)
 
