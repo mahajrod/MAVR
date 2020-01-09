@@ -384,7 +384,6 @@ class MitochondrialAmplificationPrimerPipeline(PrimerPipeline):
         sequences.get_stats_and_features(count_gaps=False, sort=False)
         half_rotated_sequences = deepcopy(sequences)
         rotation_dict = OrderedDict()
-        print sequences.seq_lengths
         for record_id in half_rotated_sequences.records:
             rotation_dict[record_id] = int(sequences.seq_lengths["length"].loc[record_id] / 2)
             half_rotated_sequences.records[record_id] = half_rotated_sequences.records[record_id][rotation_dict[record_id]:] + half_rotated_sequences.records[record_id][:rotation_dict[record_id]]
