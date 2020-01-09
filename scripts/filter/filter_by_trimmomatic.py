@@ -77,13 +77,13 @@ for sample in samples:
     right_reads_file = None
 
     for filename in files_from_sample_dir:
-        if ("_1.fq" in filename) or ("_1.fastq" in filename):
+        if ("_1.fq" in filename) or ("_1.fastq" in filename) or ("_1.fq.gz" in filename) or ("_1.fastq.gz" in filename):
             left_reads_file = filename
-        elif ("_2.fq" in filename) or ("_2.fastq" in filename):
+        elif ("_2.fq" in filename) or ("_2.fastq" in filename) or ("_2.fq.gz" in filename) or ("_2.fastq.gz" in filename):
             right_reads_file = filename
     if (left_reads_file is None) and (right_reads_file is None):
         for filename in files_from_sample_dir:
-            if (".fq" in filename) or (".fastq" in filename):
+            if (".fq" in filename) or (".fastq" in filename) or (".fq.gz" in filename) or (".fastq.gz" in filename):
                 left_reads_file = filename
         if left_reads_file is None:
             raise ValueError("Files with neither paired nor single reads were found")
