@@ -5,18 +5,20 @@ from collections import OrderedDict
 from RouToolPa.Tools.Alignment import Bowtie2, BWA, Novoalign
 from RouToolPa.Tools.Samtools import SamtoolsV1
 from RouToolPa.Tools.Picard import MarkDuplicates, AddOrReplaceReadGroups
+from RouToolPa.Tools.Sambamba import Sambamba
 from Pipelines.Abstract import Pipeline
 
 
 class AlignmentPipeline(Pipeline):
 
     def __init__(self, max_threads=1, max_memory=10, BWA_dir="", BWA_binary=None, bowtie2_dir="", bowtie2_binary=None,
-                 Picard_dir=""):
+                 Picard_dir="", sambamba_dir=""):
         Pipeline.__init__(self, max_threads=max_threads, max_memory=max_memory)
 
         self.BWA_dir = BWA_dir
         self.bowtie2_dir = bowtie2_dir
         self.Picard_dir = Picard_dir
+        self.sambamba_dir = sambamba_dir
 
         self.BWA_binary = BWA_binary
         self.bowtie2_binary = bowtie2_binary
@@ -35,7 +37,8 @@ class AlignmentPipeline(Pipeline):
                      BWA,
                      Bowtie2,
                      Novoalign,
-                     SamtoolsV1):
+                     SamtoolsV1,
+                     Sambamba):
 
             tool.threads = threads if threads else self.threads
             tool.max_memory = "%ig" % self.max_memory
@@ -43,7 +46,9 @@ class AlignmentPipeline(Pipeline):
         BWA.path = self.BWA_dir
         Bowtie2.path = self.bowtie2_dir
         MarkDuplicates.jar_path = self.Picard_dir
+        MarkDuplicates.tmp_dir = self.tmp_dir
         AddOrReplaceReadGroups.jar_path = self.Picard_dir
+        Sambamba.path = self.sambamba_dir
 
         if self.BWA_binary:
             BWA.cmd = BWA.cmd
@@ -52,7 +57,8 @@ class AlignmentPipeline(Pipeline):
 
     def align(self, sample_dir, reference_index, aligner="bwa", sample_list=None, outdir="./",
               quality_score_type="phred33", read_suffix="", read_extension="fastq",
-              alignment_format="bam", threads=None, mark_duplicates=True, platform="Illumina",
+              alignment_format="bam", threads=None, mark_duplicates=True, mark_duplicates_tool="sambamba",
+              platform="Illumina",
               add_read_groups_by_picard=False, gzipped_reads=False, keep_inremediate_files=False):
 
         self.init_tools(threads=threads)
@@ -105,11 +111,19 @@ class AlignmentPipeline(Pipeline):
                 SamtoolsV1.index(sorted_alignment_picard_groups if sorted_alignment_picard_groups else raw_alignment)
 
             if mark_duplicates:
-                MarkDuplicates.run(sorted_alignment_picard_groups if sorted_alignment_picard_groups else raw_alignment,
-                                   final_alignment,
-                                   duplicates_stat_file)
+                if mark_duplicates_tool == "picard":
+                    MarkDuplicates.run(sorted_alignment_picard_groups if sorted_alignment_picard_groups else raw_alignment,
+                                       final_alignment,
+                                       duplicates_stat_file)
+                elif mark_duplicates_tool == "sambamba":
+                    Sambamba.mkdup(sorted_alignment_picard_groups if sorted_alignment_picard_groups else raw_alignment,
+                                   final_alignment)
                 if not keep_inremediate_files:
-                    os.remove(raw_alignment)
-                    os.remove(raw_alignment + ".bai")
+                    if os.stat(raw_alignment).st_size < os.stat(final_alignment).st_size:
+                        os.remove(raw_alignment)
+                        os.remove(raw_alignment + ".bai")
+                    else:
+                        raise ValueError("ERROR!!! Bam with duplicates marked is smaller that with unmarked! "
+                                         "Something have gone wrong. Oeiginal bam was kept.")
                 if alignment_format == "bam":
                     SamtoolsV1.index(final_alignment)

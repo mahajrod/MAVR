@@ -99,7 +99,7 @@ class RepeatAnnotation(FilteringPipeline):
                                            repeatmasker_converted_repeat_families_file)
 
         merged_output = "%s/%s.repeatmasker.trf.windowmasker.gff" % (output_directory, output_prefix)
-        merge_cmd = "sort -k1,1 -k4,4n -k5,5 %s.gff %s.gff %s.windowmasker.gff > %s" % (repeatmasker_converted_prefix,
+        merge_cmd = "sort -k1,1 -k4,4n -k5,5n %s.gff %s.gff %s.windowmasker.gff > %s" % (repeatmasker_converted_prefix,
                                                                            trf_prefix,
                                                                            windowmasker_prefix,
                                                                            merged_output)
