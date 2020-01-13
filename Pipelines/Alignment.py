@@ -57,7 +57,7 @@ class AlignmentPipeline(Pipeline):
 
     def align(self, sample_dir, reference_index, aligner="bwa", sample_list=None, outdir="./",
               quality_score_type="phred33", read_suffix="", read_extension="fastq",
-              alignment_format="bam", threads=None, mark_duplicates=True, mark_duplicates_tool="sambamba",
+              alignment_format="bam", threads=None, mark_duplicates=True, mark_duplicates_tool="samtools",
               platform="Illumina",
               add_read_groups_by_picard=False, gzipped_reads=False, keep_inremediate_files=False):
 
@@ -90,14 +90,16 @@ class AlignmentPipeline(Pipeline):
             sorted_alignment_picard_groups = None
 
             aligner_tool.align(reference_index, forward_reads_list=forward_reads, reverse_reads_list=reverse_reads,
-                               unpaired_reads_list=None, quality_score=quality_score_type, output_prefix=output_prefix,
+                               unpaired_reads_list=None, quality_score=quality_score_type,
+                               output_prefix=output_prefix if mark_duplicates and mark_duplicates != "samtools" else "%s.mkdup" % output_prefix,
                                output_format=alignment_format,
                                read_group_name=sample,
                                PU="x",
                                SM=sample,
                                platform=platform,
                                LB="x",
-                               sort_by_coordinate=True,
+                               mark_duplicates=True if mark_duplicates_tool == "samtools" else False,
+                               sort_by_coordinate=True if mark_duplicates != "samtools" else False,
                                sort_by_name=False,
                                max_per_sorting_thread_memory=str(max(int(self.max_memory/self.threads), 1)) + "G")
 
@@ -118,7 +120,8 @@ class AlignmentPipeline(Pipeline):
                 elif mark_duplicates_tool == "sambamba":
                     Sambamba.mkdup(sorted_alignment_picard_groups if sorted_alignment_picard_groups else raw_alignment,
                                    final_alignment)
-                if not keep_inremediate_files:
+
+                if not keep_inremediate_files and mark_duplicates != "samtools":
                     if os.stat(raw_alignment).st_size < os.stat(final_alignment).st_size:
                         os.remove(raw_alignment)
                         os.remove(raw_alignment + ".bai")
