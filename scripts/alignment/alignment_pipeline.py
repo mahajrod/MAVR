@@ -27,8 +27,8 @@ parser.add_argument("-g", "--add_read_groups_by_picard", action="store_true",
                     dest="add_read_groups_by_picard", default=False,
                     help="Add read groups to final bam using PICARD. Use this option "
                          "if aligner don't support adding readgroups itself")
-parser.add_argument("-e", "--mkdup_tool", action="store", dest="mkdup_tool", default="sambamba",
-                    help="Tool to use for duplicate marking. Allowed: sambamba(default), picard")
+parser.add_argument("-e", "--mkdup_tool", action="store", dest="mkdup_tool", default="samtools",
+                    help="Tool to use for duplicate marking. Allowed: samtools(default), sambamba, picard")
 parser.add_argument("-c", "--picard_dir", action="store", dest="picard_dir", default="",
                     help="Path to Picard directory. Required to add read groups and mark duplicates")
 parser.add_argument("-b", "--sambamba_dir", action="store", dest="sambamba_dir", default="",
