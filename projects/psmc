@@ -1,0 +1,1 @@
+~/Soft/MAVR/scripts/population/psmc/plot_psmc.py -s SB6536,SB8055,SB7462,SB6573,SB6815,SB10,SB2 -p SB6536.psmc,SB8055.psmc,SB7462.psmc,SRR1508214.psmc,SRR1508215.psmc,SRR1508750.psmc,SRR1508749.psmc -t 2 -m 1000 -x 50000  -a 2.5e-8 -o all.gen2.mut2.5e-8.min1000.max50000

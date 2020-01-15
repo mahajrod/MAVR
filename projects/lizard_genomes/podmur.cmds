@@ -1,0 +1,4 @@
+~/Soft/MAVR/scripts/alignment/alignment_pipeline.py  -d ~/projects/lizards/podarcis_muralis/genome/resequencing/reads/filtered/filtered/final -o alignment/ -i ~/data/genomes/podarcis_muralis/ncbi/PodMur_1.0/index/bwa/podarcis_muralis -t 25 -u .final -z -x fastq -m 100 -c ~/Soft/picard-2.18.11/ -r
+
+for SP in `ls`;
+do ~/Soft/MAVR/scripts/alignment/mark_duplicates.py -i ${SP}/${SP}.bam -o ${SP}/${SP}.mkdup -p ~/Soft/picard-2.18.11/ -m 100g -t ~/temp/; done
