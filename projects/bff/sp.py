@@ -13,12 +13,12 @@ from RouToolPa.Collections.General import IdList
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-g", "--genes", action="store", dest="genes", default=sys.stdin,
-                    help="File with names of genes to transfer. Default: stdin")
+parser.add_argument("-g", "--genes", action="store", dest="genes", type=lambda s: s.split(","), required=True,
+                    help="Comma-separated list of names of genes to transfer.")
 
 args = parser.parse_args()
 # /home/mahajrod/tmp/annotation
-gene_ids = IdList(filename=args.genes)
+gene_ids = args.genes
 print gene_ids
 
 target_seq = CollectionSequence(
