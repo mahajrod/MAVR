@@ -293,6 +293,7 @@ def transfer_coordinates(coordinates_tuple, verbose=False):
 # gene_name-> gene_id -> mRNA id list
 ids_dict = OrderedDict()
 
+
 # genes_indel_ids = IdList(filename="/home/mahajrod/tmp/annotation/deletiom.insertion.indel.ids")
 #all_ids = IdList(filename="/home/skliver/sp_spermatogenesis/all.ids")
 for gene_name in gene_ids:
