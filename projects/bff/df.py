@@ -21,7 +21,7 @@ args = parser.parse_args()
 gene_ids = args.genes
 """
 
-parser.add_argument("-g", "--genes", action="store", dest="genes",  required=True,
+parser.add_argument("-g", "--genes", action="store", dest="genes",  default=sys.stdout,
                     help="File with names of genes to transfer.")
 
 args = parser.parse_args()
