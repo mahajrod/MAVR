@@ -100,8 +100,8 @@ class AlignmentPipeline(Pipeline):
                                SM=sample,
                                platform=platform,
                                LB="x",
-                               mark_duplicates=True if mark_duplicates_tool == "samtools" else False,
-                               sort_by_coordinate=True if mark_duplicates != "samtools" else False,
+                               mark_duplicates=True if (mark_duplicates_tool == "samtools") and (mark_duplicates) else False,
+                               sort_by_coordinate=True if (mark_duplicates_tool != "samtools") or (not mark_duplicates) else False,
                                sort_by_name=False,
                                max_per_sorting_thread_memory=str(max(int(self.max_memory/self.threads), 1)) + "G")
 
