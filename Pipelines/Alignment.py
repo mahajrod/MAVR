@@ -6,6 +6,7 @@ from RouToolPa.Tools.Alignment import Bowtie2, BWA, Novoalign
 from RouToolPa.Tools.Samtools import SamtoolsV1
 from RouToolPa.Tools.Picard import MarkDuplicates, AddOrReplaceReadGroups
 from RouToolPa.Tools.Sambamba import Sambamba
+from RouToolPa.Tools.Bedtools import GenomeCov
 from Pipelines.Abstract import Pipeline
 
 
@@ -59,7 +60,8 @@ class AlignmentPipeline(Pipeline):
               quality_score_type="phred33", read_suffix="", read_extension="fastq",
               alignment_format="bam", threads=None, mark_duplicates=True, mark_duplicates_tool="samtools",
               platform="Illumina",
-              add_read_groups_by_picard=False, gzipped_reads=False, keep_inremediate_files=False):
+              add_read_groups_by_picard=False, gzipped_reads=False, keep_inremediate_files=False,
+              calculate_coverage=False):
 
         self.init_tools(threads=threads)
 
@@ -130,3 +132,9 @@ class AlignmentPipeline(Pipeline):
                                          "Something have gone wrong. Oeiginal bam was kept.")
                 if alignment_format == "bam":
                     SamtoolsV1.index(final_alignment)
+
+            if calculate_coverage:
+                GenomeCov.get_bam_coverage_stats(final_alignment if mark_duplicates else raw_alignment,
+                                                 output_prefix, genome_bed=None,
+                                                 max_coverage=None, min_coverage=None,
+                                                 verbose=True, calc_stats=False)
