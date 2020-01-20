@@ -78,6 +78,7 @@ AlignmentPipeline.Picard_dir = args.picard_dir
 AlignmentPipeline.sambamba_dir = args.sambamba_dir
 AlignmentPipeline.tmp_dir = args.tmp_dir
 
+
 AlignmentPipeline.align(args.sample_dir, args.index, aligner=args.aligner, sample_list=args.sample_list,
                         outdir=args.outdir, quality_score_type=args.quality, read_suffix=args.read_file_suffix,
                         read_extension=args.read_file_extension, alignment_format=args.alignment_format,
