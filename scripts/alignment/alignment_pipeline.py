@@ -50,6 +50,8 @@ parser.add_argument("-r", "--retain_intermediate_files", action="store_true", de
                     help="Retain intermediate files. Default: False")
 parser.add_argument("--tmp_dir", action="store", dest="tmp_dir",
                     help="Directory for temporary files. Default: system default")
+parser.add_argument("-w", "--calculate_coverage", action="store_true", dest="calculate_coverage", default=False,
+                    help="Calculate coverage. Default: False")
 """
 parser.add_argument("-z", "--calculate_median_coverage", action="store_true", dest="calculate_median_coverage",
                     default=False,
@@ -82,4 +84,5 @@ AlignmentPipeline.align(args.sample_dir, args.index, aligner=args.aligner, sampl
                         threads=None, mark_duplicates=not args.skip_duplicates, platform="Illumina",
                         add_read_groups_by_picard=args.add_read_groups_by_picard, gzipped_reads=args.gzipped_reads,
                         keep_inremediate_files=args.retain_intermediate_files,
-                        mark_duplicates_tool=args.mkdup_tool)
+                        mark_duplicates_tool=args.mkdup_tool,
+                        calculate_coverage=args.calculate_coverage)
