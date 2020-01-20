@@ -93,7 +93,7 @@ class AlignmentPipeline(Pipeline):
 
             aligner_tool.align(reference_index, forward_reads_list=forward_reads, reverse_reads_list=reverse_reads,
                                unpaired_reads_list=None, quality_score=quality_score_type,
-                               output_prefix=output_prefix if mark_duplicates and mark_duplicates != "samtools" else "%s.mkdup" % output_prefix,
+                               output_prefix=output_prefix if (mark_duplicates_tool != "samtools") or (not mark_duplicates) else "%s.mkdup" % output_prefix,
                                output_format=alignment_format,
                                read_group_name=sample,
                                PU="x",
