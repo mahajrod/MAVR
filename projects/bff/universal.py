@@ -29,7 +29,7 @@ parser.add_argument("-q", "--query_fasta", action="store", dest="query_fasta", r
                     help="Fasta with query seqs")
 parser.add_argument("-l", "--last_tab", action="store", dest="last_tab", required=True,
                     help="LAST tab file")
-parser.add_argument("-t", "--target_gff", action="store", dest="target_gff", required=True,
+parser.add_argument("-f", "--target_gff", action="store", dest="target_gff", required=True,
                     help="Target GFF")
 parser.add_argument("-o", "--out_dir", action="store", dest="out_dir", required=True,
                     help="Output directory")
