@@ -51,6 +51,8 @@ gff_coll = CollectionGFF(in_file=args.target_gff, # /home/skliver/df_spermatogen
 last_coll = CollectionLast(in_file=args.out_dir, # /home/skliver/df_spermatogenesis/mustela_putorius_furo.to.homo_sapiens.R11.tab.gz
                            parsing_mode="complete")
 output_dir = args.out_dir
+SequenceRoutines.safe_mkdir(output_dir)
+
 last_coll.records.index.name = "row"
 cds_coords_df = gff_coll.records["CDS"][gff_coll.records["CDS"]["source"] == "BestRefSeq"][
     ["start", "end", "strand", "ID", "Parent"]]
