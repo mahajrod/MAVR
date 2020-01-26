@@ -48,7 +48,7 @@ gff_coll = CollectionGFF(in_file=args.target_gff, # /home/skliver/df_spermatogen
                          featuretype_separation=True,
                          scaffold_syn_dict=None)
 
-last_coll = CollectionLast(in_file=args.out_dir, # /home/skliver/df_spermatogenesis/mustela_putorius_furo.to.homo_sapiens.R11.tab.gz
+last_coll = CollectionLast(in_file=args.last_tab, # /home/skliver/df_spermatogenesis/mustela_putorius_furo.to.homo_sapiens.R11.tab.gz
                            parsing_mode="complete")
 output_dir = args.out_dir
 SequenceRoutines.safe_mkdir(output_dir)
