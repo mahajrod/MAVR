@@ -50,7 +50,9 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
         vcf_prefix = "%s/%s" % (output_directory, output_prefix)
         general_stat_file = "%s/%s.filtering.stats" % (output_directory, output_prefix)
 
-        if not filtered_reads:
+        if filtered_reads:
+            filtered_reads_dir = samples_directory
+        else:
             self.stirka_trimmomatic(samples_directory, filtered_reads_dir, adapter_fragment_file, trimmomatic_adapter_file,
                                     general_stat_file,
                                     samples_to_handle=sample_list, threads=threads,
