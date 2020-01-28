@@ -45,7 +45,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
         tab_file = "%s.tab" % vcf_prefix
 
         general_stat_file = "%s/%s.filtering.stats" % (output_directory, output_prefix)
-        """
+
         if filtered_reads:
             filtered_reads_dir = samples_directory
         else:
@@ -118,7 +118,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                                   split_dir="%s/split/" % output_directory,
                                   max_coverage=10000000,
                                   min_base_quality=30, min_mapping_quality=30)
-        """
+
         vcf_coll = CollectionVCF(in_file=vcf_file, parsing_mode="complete")
 
         for sample in vcf_coll.samples:
