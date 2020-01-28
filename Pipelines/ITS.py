@@ -63,7 +63,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                                 crop_length=crop_length, head_crop_length=head_crop_length, min_len=min_len,
                                 remove_intermediate_files=remove_intermediate_files
                                 )
-        """
+        
         self.align(filtered_reads_dir, index, aligner="bwa", sample_list=sample_list,
                                 outdir=alignment_dir, quality_score_type=base_quality, read_suffix=filtered_reads_suffix,
                                 read_extension="fastq", alignment_format="bam",
@@ -73,6 +73,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                                 keep_inremediate_files=False,
                                 mark_duplicates_tool=False,
                                 calculate_coverage=True)
+        """
         clipped_bam_list = []
         for sample in sample_list:
             sample_dir = "%s/alignment/%s/" % (output_directory, sample)
