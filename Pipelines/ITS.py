@@ -1,20 +1,13 @@
 #!/usr/bin/env python
 
-import os
-from pandas import read_csv
-import shutil
-import datetime
-from collections import OrderedDict
-from RouToolPa.Tools.Filter import Cookiecutter, Trimmomatic, FaCut, Cutadapt
+import pandas as pd
+
 from RouToolPa.Tools.Alignment import BamUtil
 from RouToolPa.Tools.Samtools import SamtoolsV1, VariantCall
 from RouToolPa.Tools.Bedtools import GenomeCov
-
+from RouToolPa.Parsers.VCF import CollectionVCF
 from RouToolPa.Routines import DrawingRoutines
-from RouToolPa.Parsers.FaCut import FaCutReport
-from RouToolPa.Parsers.Coockiecutter import CoockiecutterReport
-from RouToolPa.Parsers.Trimmomatic import TrimmomaticReport
-from RouToolPa.Collections.General import TwoLvlDict
+
 from Pipelines.Filtering import FilteringPipeline
 from Pipelines.Alignment import AlignmentPipeline
 
@@ -48,8 +41,11 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
 
         filtered_reads_suffix = ".final"
         vcf_prefix = "%s/%s" % (output_directory, output_prefix)
-        general_stat_file = "%s/%s.filtering.stats" % (output_directory, output_prefix)
+        vcf_file = "%s.vcf.gz" % vcf_prefix
+        tab_file = "%s.tab" % vcf_prefix
 
+        general_stat_file = "%s/%s.filtering.stats" % (output_directory, output_prefix)
+        """
         if filtered_reads:
             filtered_reads_dir = samples_directory
         else:
@@ -122,3 +118,21 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                                   split_dir="%s/split/" % output_directory,
                                   max_coverage=10000000,
                                   min_base_quality=30, min_mapping_quality=30)
+        """
+        vcf_coll = CollectionVCF(in_file=vcf_file, parsing_mode="complete")
+
+        for sample in vcf_coll.samples:
+            vcf_coll.records[(sample, "ALT_FREQ", 0)] = vcf_coll.records[sample]["AD"][1] / (
+                    vcf_coll.records[sample]["AD"][1] + vcf_coll.records[sample]["AD"][0])
+        idx = pd.IndexSlice
+        short_coll = vcf_coll.records[vcf_coll.records[("INFO", "DP", 0)] > 100].loc[:, idx[:, ["POS", "REF", "ALT", "ALT_FREQ"], :]]
+        short_coll.columns = short_coll.columns.droplevel([1, 2])
+        short_coll.index = short_coll.index.droplevel(1)
+        short_coll["POS"] += 1
+
+        short_coll.to_csv(tab_file, sep="\t", )
+
+
+
+
+
