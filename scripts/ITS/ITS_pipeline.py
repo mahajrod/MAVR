@@ -14,6 +14,10 @@ parser.add_argument("-d", "--sample_directory", action="store", dest="samples_di
 parser.add_argument("-s", "--samples", action="store", dest="samples", type=lambda s: s.split(","),
                     help="Comma-separated list of subdirectories(one per sample) to handle. "
                          "If not set all subdirectories will be considered as containing samples")
+parser.add_argument("-f", "--filtered", action="store_true", dest="filtered", default=False,
+                    help="Input reads were already filtered and filenames follow convention."
+                         "Use this option if you have previously ran pipeline and wish to try new reference"
+                         "Default: False")
 parser.add_argument("--reference", action="store", dest="reference", required=True,
                     help="Reference fasta file")
 parser.add_argument("--index", action="store", dest="index", required=True,  help="BWA index")
@@ -87,6 +91,6 @@ ITSPipeline.pipeline(args.samples_dir, args.output_dir, args.adapter_kmers, args
                      leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
                      crop_length=None, head_crop_length=None, min_len=args.min_len,
                      base_quality=args.base_quality,
-                     remove_intermediate_files=False,)
+                     remove_intermediate_files=False, filtered_reads=args.filtered)
 
 
