@@ -33,7 +33,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                  average_quality_threshold=15, base_quality="phred33",
                  leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
                  crop_length=None, head_crop_length=None, min_len=50,
-                 remove_intermediate_files=True,):
+                 remove_intermediate_files=True, filtered_reads=False):
 
         BamUtil.path = bam_util_dir
 
@@ -50,19 +50,20 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
         vcf_prefix = "%s/%s" % (output_directory, output_prefix)
         general_stat_file = "%s/%s.filtering.stats" % (output_directory, output_prefix)
 
-        self.stirka_trimmomatic(samples_directory, filtered_reads_dir, adapter_fragment_file, trimmomatic_adapter_file,
-                                general_stat_file,
-                                samples_to_handle=sample_list, threads=threads,
-                                trimmomatic_dir=trimmomatic_dir, trimmer_dir=trimmer_dir,
-                                mismatch_number=mismatch_number, pe_reads_score=pe_reads_score,
-                                se_read_score=se_read_score,
-                                min_adapter_len=min_adapter_len, sliding_window_size=sliding_window_size,
-                                average_quality_threshold=average_quality_threshold, base_quality=base_quality,
-                                leading_base_quality_threshold=leading_base_quality_threshold,
-                                trailing_base_quality_threshold=trailing_base_quality_threshold,
-                                crop_length=crop_length, head_crop_length=head_crop_length, min_len=min_len,
-                                remove_intermediate_files=remove_intermediate_files
-                                )
+        if not filtered_reads:
+            self.stirka_trimmomatic(samples_directory, filtered_reads_dir, adapter_fragment_file, trimmomatic_adapter_file,
+                                    general_stat_file,
+                                    samples_to_handle=sample_list, threads=threads,
+                                    trimmomatic_dir=trimmomatic_dir, trimmer_dir=trimmer_dir,
+                                    mismatch_number=mismatch_number, pe_reads_score=pe_reads_score,
+                                    se_read_score=se_read_score,
+                                    min_adapter_len=min_adapter_len, sliding_window_size=sliding_window_size,
+                                    average_quality_threshold=average_quality_threshold, base_quality=base_quality,
+                                    leading_base_quality_threshold=leading_base_quality_threshold,
+                                    trailing_base_quality_threshold=trailing_base_quality_threshold,
+                                    crop_length=crop_length, head_crop_length=head_crop_length, min_len=min_len,
+                                    remove_intermediate_files=remove_intermediate_files
+                                    )
         
         self.align(filtered_reads_dir, index, aligner="bwa", sample_list=sample_list,
                    outdir=alignment_dir, quality_score_type=base_quality, read_suffix=filtered_reads_suffix,
