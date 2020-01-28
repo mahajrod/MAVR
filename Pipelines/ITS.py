@@ -65,14 +65,14 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                                 )
         
         self.align(filtered_reads_dir, index, aligner="bwa", sample_list=sample_list,
-                                outdir=alignment_dir, quality_score_type=base_quality, read_suffix=filtered_reads_suffix,
-                                read_extension="fastq", alignment_format="bam",
-                                threads=threads, mark_duplicates=False, platform="Illumina",
-                                add_read_groups_by_picard=False,
-                                gzipped_reads=False,
-                                keep_inremediate_files=False,
-                                mark_duplicates_tool=False,
-                                calculate_coverage=True)
+                   outdir=alignment_dir, quality_score_type=base_quality, read_suffix=filtered_reads_suffix,
+                   read_extension="fastq", alignment_format="bam",
+                   threads=threads, mark_duplicates=False, platform="Illumina",
+                   add_read_groups_by_picard=False,
+                   gzipped_reads=False,
+                   keep_inremediate_files=False,
+                   mark_duplicates_tool=False,
+                   calculate_coverage=True)
 
         clipped_bam_list = []
         for sample in sample_list:
