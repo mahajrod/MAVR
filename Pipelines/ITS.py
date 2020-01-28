@@ -98,7 +98,8 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                                       xlabel="coverage", ylabel="position",
                                       title="Coverage of ribosomal cluster monomer by ITS lib %s" % sample,
                                       width=12, height=6,
-                                      markersize=8, ylogbase=10, type="plot", grid=True, correlation=False)
+                                      markersize=8, ylogbase=10, type="plot", grid=True,
+                                      correlation=False, close_plot=True)
 
             GenomeCov.get_bam_coverage_stats(clipped_bam, clipped_prefix, genome_bed=None,
                                              verbose=True, calc_stats=False)
@@ -114,7 +115,8 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                                       xlabel="coverage", ylabel="position",
                                       title="Coverage of ribosomal cluster monomer by ITS lib %s" % sample, width=12,
                                       height=6,
-                                      markersize=8, ylogbase=10, type="plot", grid=True, correlation=False)
+                                      markersize=8, ylogbase=10, type="plot", grid=True,
+                                      correlation=False, close_plot=True)
         VariantCall.threads = threads
         VariantCall.call_variants(reference, vcf_prefix, clipped_bam_list, chunk_length=100,
                                   split_dir="%s/split/" % output_directory,
