@@ -19,7 +19,7 @@ from Pipelines.Filtering import FilteringPipeline
 from Pipelines.Alignment import AlignmentPipeline
 
 
-class ITSPipeline(FilteringPipeline):
+class ITSPipeline(FilteringPipeline, AlignmentPipeline):
 
     def __init__(self):
         FilteringPipeline.__init__(self)
@@ -62,7 +62,7 @@ class ITSPipeline(FilteringPipeline):
                                 remove_intermediate_files=remove_intermediate_files
                                 )
 
-        AlignmentPipeline.align(filtered_reads_dir, index, aligner="bwa", sample_list=sample_list,
+        self.align(filtered_reads_dir, index, aligner="bwa", sample_list=sample_list,
                                 outdir=alignment_dir, quality_score_type=base_quality, read_suffix=filtered_reads_suffix,
                                 read_extension="fastq", alignment_format="bam",
                                 threads=threads, mark_duplicates=False, platform="Illumina",
