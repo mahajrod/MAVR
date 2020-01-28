@@ -292,8 +292,7 @@ class FilteringPipeline(Pipeline):
                            average_quality_threshold=15, base_quality="phred33",
                            leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
                            crop_length=None, head_crop_length=None, min_len=50,
-                           remove_intermediate_files=False,
-                           retain_single_end_reads=True):
+                           remove_intermediate_files=False,):
 
         sample_list = samples_to_handle if samples_to_handle else self.get_sample_list(samples_directory)
         tmp_dir = "%s/tmp_dir/" % output_directory

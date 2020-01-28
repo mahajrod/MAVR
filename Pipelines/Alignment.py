@@ -61,7 +61,8 @@ class AlignmentPipeline(Pipeline):
               alignment_format="bam", threads=None, mark_duplicates=True, mark_duplicates_tool="samtools",
               platform="Illumina",
               add_read_groups_by_picard=False, gzipped_reads=False, keep_inremediate_files=False,
-              calculate_coverage=False):
+              calculate_coverage=False,
+              draw_coverage=False):
 
         self.init_tools(threads=threads)
 
@@ -138,3 +139,5 @@ class AlignmentPipeline(Pipeline):
                                                  output_prefix, genome_bed=None,
                                                  max_coverage=None, min_coverage=None,
                                                  verbose=True, calc_stats=False)
+                if draw_coverage:
+                    pass
