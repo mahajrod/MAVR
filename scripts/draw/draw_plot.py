@@ -3,14 +3,7 @@ __author__ = 'Sergei F. Kliver'
 
 import argparse
 
-import numpy as np
-import scipy.stats as stats
-
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-plt.ioff()
-
+from RouToolPa.Routines import DrawingRoutines
 
 parser = argparse.ArgumentParser()
 
@@ -20,12 +13,10 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
                     help="Prefix of output files")
 parser.add_argument("-s", "--separator", action="store", dest="separator", default="\t",
                     help="Separator between values in input file. Default - '\\t' ")
-
 parser.add_argument("-a", "--x_column_index", action="store", dest="x_column_index", type=int,
                     help="Index of column with x values. 0-based")
 parser.add_argument("-b", "--y_column_index", action="store", dest="y_column_index", type=int,
                     help="Index of column with y values. 0-based")
-
 parser.add_argument("-n", "--min_x", action="store", dest="min_x", type=float,
                     help="Minimum x value to show. Default - not set")
 parser.add_argument("-x", "--max_x", action="store", dest="max_x", type=float,
@@ -55,8 +46,18 @@ parser.add_argument("--type", action="store", dest="type", default="plot",
                     help="Type of figure. Allowed: plot(default), scatter")
 parser.add_argument("-g", "--grid", action="store_true", dest="grid",
                     help="Show grid. Default: False")
+
 args = parser.parse_args()
 
+DrawingRoutines.draw_plot(args.input_file, args.output_prefix,
+                          x_column_index=args.x_column_index, y_column_index=args.y_column_index,
+                          separator=args.separator, min_x=args.min_x,
+                          max_x=args.max_x, min_y=args.min_y, max_y=args.max_y,
+                          extensions=args.extensions, xlabel=args.xlabel, ylabel=args.ylabel,
+                          title=args.title, width=args.width, height=args.height,
+                          markersize=args.markersize, ylogbase=args.ylogbase, type=args.type,
+                          grid=args.grid, correlation=True)
+"""
 data = np.loadtxt(args.input_file, comments="#", usecols=(args.x_column_index, args.y_column_index))
 
 plt.figure(1, figsize=(args.width, args.height), dpi=300)
@@ -87,3 +88,4 @@ plt.yscale("log")
 
 for ext in args.extensions:
     plt.savefig("%s.%s.ylog%i.%s" % (args.output_prefix, args.type, args.ylogbase, ext))
+"""
