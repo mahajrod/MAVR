@@ -23,6 +23,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
 
     def __init__(self):
         FilteringPipeline.__init__(self)
+        AlignmentPipeline.__init__(self)
 
     def pipeline(self, samples_directory, output_directory, adapter_fragment_file, trimmomatic_adapter_file,
                  reference, index, output_prefix,
