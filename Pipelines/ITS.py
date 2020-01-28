@@ -33,7 +33,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                  average_quality_threshold=15, base_quality="phred33",
                  leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
                  crop_length=None, head_crop_length=None, min_len=50,
-                 remove_intermediate_files=False,):
+                 remove_intermediate_files=True,):
 
         BamUtil.path = bam_util_dir
 
@@ -49,7 +49,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
         filtered_reads_suffix = ".final"
         vcf_prefix = "%s/%s" % (output_directory, output_prefix)
         general_stat_file = "%s/%s.filtering.stats" % (output_directory, output_prefix)
-        """
+
         self.stirka_trimmomatic(samples_directory, filtered_reads_dir, adapter_fragment_file, trimmomatic_adapter_file,
                                 general_stat_file,
                                 samples_to_handle=sample_list, threads=threads,
@@ -73,7 +73,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                                 keep_inremediate_files=False,
                                 mark_duplicates_tool=False,
                                 calculate_coverage=True)
-        """
+
         clipped_bam_list = []
         for sample in sample_list:
             sample_dir = "%s/alignment/%s/" % (output_directory, sample)
