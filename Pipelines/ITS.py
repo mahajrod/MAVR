@@ -25,7 +25,7 @@ class ITSPipeline(FilteringPipeline):
         FilteringPipeline.__init__(self)
 
     def pipeline(self, samples_directory, output_directory, adapter_fragment_file, trimmomatic_adapter_file,
-                 general_stat_file, reference, index, output_prefix,
+                 reference, index, output_prefix,
                  samples_to_handle=None, threads=4, trimmomatic_dir="", trimmer_dir="", bam_util_dir="",
                  mismatch_number=2, pe_reads_score=30, se_read_score=10,
                  min_adapter_len=1, sliding_window_size=None,
@@ -47,7 +47,7 @@ class ITSPipeline(FilteringPipeline):
 
         filtered_reads_suffix = ".final"
         vcf_prefix = "%s/%s" % (output_directory, output_prefix)
-
+        general_stat_file = "%s/%s.filtering.stats" % (output_directory, output_prefix)
         self.stirka_trimmomatic(samples_directory, filtered_reads_dir, adapter_fragment_file, trimmomatic_adapter_file,
                                 general_stat_file,
                                 samples_to_handle=sample_list, threads=threads,
