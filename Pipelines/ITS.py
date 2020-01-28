@@ -49,6 +49,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
         filtered_reads_suffix = ".final"
         vcf_prefix = "%s/%s" % (output_directory, output_prefix)
         general_stat_file = "%s/%s.filtering.stats" % (output_directory, output_prefix)
+        """
         self.stirka_trimmomatic(samples_directory, filtered_reads_dir, adapter_fragment_file, trimmomatic_adapter_file,
                                 general_stat_file,
                                 samples_to_handle=sample_list, threads=threads,
@@ -62,7 +63,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                                 crop_length=crop_length, head_crop_length=head_crop_length, min_len=min_len,
                                 remove_intermediate_files=remove_intermediate_files
                                 )
-
+        """
         self.align(filtered_reads_dir, index, aligner="bwa", sample_list=sample_list,
                                 outdir=alignment_dir, quality_score_type=base_quality, read_suffix=filtered_reads_suffix,
                                 read_extension="fastq", alignment_format="bam",
