@@ -53,9 +53,10 @@ parser.add_argument("-l", "--min_length", action="store", dest="min_len", type=i
                     help="Minimum length of read to retain. Default - 50")
 parser.add_argument("-j", "--trimmomatic_dir", action="store", dest="trimmomatic_dir", default="",
                     help="Path to Trimmomatic directory")
-parser.add_argument("-c", "--coockiecutter_dir", action="store", dest="coockiecutter_dir", default="",
-                    help="Path to Coockiecutter directory")
-
+parser.add_argument("-c", "--trimmer_dir", action="store", dest="trimmer_dir", default="",
+                    help="Path to Trimmer directory")
+parser.add_argument("-w", "--bamutil_dir", action="store", dest="bamutil_dir", default="",
+                    help="Path to BamUtil directory")
 parser.add_argument("-r", "--remove_intermediate_files", action="store_true",
                     dest="remove_intermediate_files", default=False,
                     help="Remove intermediate files")
@@ -76,7 +77,7 @@ cd ~/workdir/yeast/nizhnikov/good_run/fastq
 ITSPipeline.pipeline(args.samples_dir, args.output_dir, args.adapter_kmers, args.adapters,
                      args.reference, args.index, args.output_prefix,
                      samples_to_handle=args.samples, threads=args.threads, trimmomatic_dir=args.trimmomatic_dir,
-                     trimmer_dir="", bam_util_dir="",
+                     trimmer_dir=args.trimmer_dir, bam_util_dir=args.bamutil_dir,
                      mismatch_number=args.mismatch_number, pe_reads_score=args.pe_score,
                      se_read_score=args.se_score, min_adapter_len=args.min_adapter_len,
                      sliding_window_size=args.sliding_window_size,
