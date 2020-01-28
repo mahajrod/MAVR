@@ -1,14 +1,18 @@
 #!/usr/bin/env python
 
 import os
+from pandas import read_csv
 import shutil
+import datetime
 from collections import OrderedDict
 from RouToolPa.Tools.Filter import Cookiecutter, Trimmomatic, FaCut, Cutadapt
+from RouToolPa.Tools.Stirka import Trimmer
 from RouToolPa.Parsers.FaCut import FaCutReport
 from RouToolPa.Parsers.Coockiecutter import CoockiecutterReport
 from RouToolPa.Parsers.Trimmomatic import TrimmomaticReport
 from RouToolPa.Collections.General import TwoLvlDict
 from Pipelines.Abstract import Pipeline
+
 
 class FilteringPipeline(Pipeline):
 
@@ -43,7 +47,6 @@ class FilteringPipeline(Pipeline):
                crop_length=None, head_crop_length=None, min_len=50,
                remove_intermediate_files=False, skip_coockiecutter=False,
                retain_single_end_reads=True, input_is_se=False):
-
         Cookiecutter.path = coockiecutter_dir
         Trimmomatic.jar_path = trimmomatic_dir
         Trimmomatic.threads = threads
@@ -278,6 +281,95 @@ class FilteringPipeline(Pipeline):
             shutil.rmtree(coockie_trimmomatic_filtered_dir)
             shutil.rmtree(coockie_trimmomatic_quality_filtered_dir)
             shutil.rmtree(merged_raw_dir)
+
+        filtering_statistics.write(general_stat_file, sort=False)
+
+    def stirka_trimmomatic(self, samples_directory, output_directory, adapter_fragment_file, trimmomatic_adapter_file,
+                           general_stat_file,
+                           samples_to_handle=None, threads=4, trimmomatic_dir="", trimmer_dir="",
+                           mismatch_number=2, pe_reads_score=30, se_read_score=10,
+                           min_adapter_len=1, sliding_window_size=None,
+                           average_quality_threshold=15, base_quality="phred33",
+                           leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
+                           crop_length=None, head_crop_length=None, min_len=50,
+                           remove_intermediate_files=False,
+                           retain_single_end_reads=True):
+
+        sample_list = samples_to_handle if samples_to_handle else self.get_sample_list(samples_directory)
+        tmp_dir = "%s/tmp_dir/" % output_directory
+        dir_dict = {
+                    "tmp_dir": {"merged": dict([(sample, {}) for sample in sample_list]),
+                                "stirka": dict([(sample, {}) for sample in sample_list]),
+                                "trimmomatic": dict([(sample, {}) for sample in sample_list])}
+                    }
+
+        self.init_dirs(dir_dict, workdir=output_directory)
+        Trimmer.path = trimmer_dir
+        Trimmer.threads = threads
+        Trimmomatic.jar_path = trimmomatic_dir
+        Trimmomatic.threads = threads
+
+        filtering_statistics = TwoLvlDict()
+
+        for sample in sample_list:
+            print ("%s\tHandling sample %s" % (str(datetime.datetime.now()), sample))
+            filtering_statistics[sample] = OrderedDict()
+            merged_raw_sample_dir = "%s/tmp_dir/merged/%s/" % (output_directory, sample)
+            stirka_trimmed_sample_dir = "%s/tmp_dir/stirka/%s/" % (output_directory, sample)
+            trimmomatic_trimmed_sample_dir = "%s/tmp_dir/trimmomatic/%s/" % (output_directory, sample)
+
+            print("\t%s\tMerging fastqs if necessary..." % str(datetime.datetime.now()))
+
+            dir_dict["tmp_dir"]["merged"][sample]["forward"], \
+                dir_dict["tmp_dir"]["merged"][sample]["reverse"],\
+                dir_dict["tmp_dir"]["merged"][sample]["se"] = self.combine_fastq_files(samples_directory,
+                                                                                       sample,
+                                                                                       merged_raw_sample_dir,
+                                                                                       use_links_if_merge_not_necessary=True,
+                                                                                       output_fastq_ext="fastq")
+
+            dir_dict["tmp_dir"]["stirka"][sample]["forward"] = "%s/%s.trim_1.fastq" % (stirka_trimmed_sample_dir, sample)
+            dir_dict["tmp_dir"]["stirka"][sample]["reverse"] = "%s/%s.trim_2.fastq" % (stirka_trimmed_sample_dir, sample)
+            dir_dict["tmp_dir"]["stirka"][sample]["stats"] = "%s/%s.stats" % (stirka_trimmed_sample_dir, sample)
+
+            print("\t%s\tTrimming by stirka..." % str(datetime.datetime.now()))
+            Trimmer.trim_adapters("%s/%s" % (merged_raw_sample_dir, sample), adapter_fragment_file, "%s/%s" % (stirka_trimmed_sample_dir, sample))
+            trimmer_report = read_csv(dir_dict["tmp_dir"]["stirka"][sample]["stats"], sep="\t",
+                                      index_col=0,
+                                      header=None,
+                                      names=["counts", ])
+
+            print("\t%s\tFiltering by Trimmomatic..." % str(datetime.datetime.now()))
+
+            dir_dict["tmp_dir"]["trimmomatic"][sample]["forward"] = "%s/%s_1.pe.fastq" % (trimmomatic_trimmed_sample_dir, sample)
+            dir_dict["tmp_dir"]["trimmomatic"][sample]["reverse"] = "%s/%s_2.pe.fastq" % (trimmomatic_trimmed_sample_dir, sample)
+            dir_dict["tmp_dir"]["trimmomatic"][sample]["stats"] = "%s/%s.log" % (trimmomatic_trimmed_sample_dir, sample)
+
+            Trimmomatic.filter(dir_dict["tmp_dir"]["stirka"][sample]["forward"],
+                               "%s/%s" % (trimmomatic_trimmed_sample_dir, sample), output_extension="fastq",
+                               right_reads=dir_dict["tmp_dir"]["stirka"][sample]["reverse"],
+                               adapters_file=trimmomatic_adapter_file,
+                               mismatch_number=mismatch_number, pe_reads_score=pe_reads_score,
+                               se_read_score=se_read_score,
+                               min_adapter_len=min_adapter_len, sliding_window_size=sliding_window_size,
+                               average_quality_threshold=average_quality_threshold,
+                               leading_base_quality_threshold=leading_base_quality_threshold,
+                               trailing_base_quality_threshold=trailing_base_quality_threshold,
+                               crop_length=crop_length, head_crop_length=head_crop_length, min_length=min_len,
+                               logfile=dir_dict["tmp_dir"]["trimmomatic"][sample]["stats"],
+                               base_quality=base_quality)
+            #"""
+            trimmomatic_report = TrimmomaticReport(dir_dict["tmp_dir"]["trimmomatic"][sample]["stats"], input_is_se=False)
+        for sample in sample_list:
+            final_sample_dir = "%s/%s" % (output_directory, sample)
+            self.safe_mkdir(final_sample_dir)
+            shutil.move(dir_dict["tmp_dir"]["trimmomatic"][sample]["forward"], "%s/%s.final_1.fastq" % (final_sample_dir, sample))
+            shutil.move(dir_dict["tmp_dir"]["trimmomatic"][sample]["reverse"], "%s/%s.final_2.fastq" % (final_sample_dir, sample))
+            shutil.move(dir_dict["tmp_dir"]["trimmomatic"][sample]["stats"], "%s/%s.trimmomatic.log" % (final_sample_dir, sample))
+            shutil.move(dir_dict["tmp_dir"]["stirka"][sample]["stats"], "%s/%s.stirka.stats" % (final_sample_dir, sample))
+
+        if remove_intermediate_files:
+            shutil.rmtree(tmp_dir)
 
         filtering_statistics.write(general_stat_file, sort=False)
 
