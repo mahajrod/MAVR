@@ -112,7 +112,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                                       title="Coverage of ribosomal cluster monomer by ITS lib %s" % sample, width=12,
                                       height=6,
                                       markersize=8, ylogbase=10, type="plot", grid=True, correlation=False)
-
+        VariantCall.threads = threads
         VariantCall.call_variants(reference, vcf_prefix, clipped_bam_list, chunk_length=100,
                                   split_dir="%s/split/" % output_directory,
                                   max_coverage=10000000,
