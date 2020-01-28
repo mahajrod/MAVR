@@ -97,7 +97,9 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                                       width=12, height=6,
                                       markersize=8, ylogbase=10, type="plot", grid=True, correlation=False)
 
-            GenomeCov.get_stats_from_coverage_file_stream_version(clipped_bam, clipped_prefix, verbose=False,
+            GenomeCov.get_bam_coverage_stats(clipped_bam, clipped_prefix, genome_bed=None,
+                                             verbose=True, calc_stats=False)
+            GenomeCov.get_stats_from_coverage_file_stream_version(clipped_bam_coverage, clipped_prefix, verbose=False,
                                                                   scaffold_column=0,
                                                                   coverage_column=1,
                                                                   separator="\t",
