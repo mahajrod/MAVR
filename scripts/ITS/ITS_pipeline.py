@@ -61,9 +61,9 @@ parser.add_argument("-c", "--trimmer_dir", action="store", dest="trimmer_dir", d
                     help="Path to Trimmer directory")
 parser.add_argument("-w", "--bamutil_dir", action="store", dest="bamutil_dir", default="",
                     help="Path to BamUtil directory")
-parser.add_argument("-r", "--remove_intermediate_files", action="store_true",
-                    dest="remove_intermediate_files", default=False,
-                    help="Remove intermediate files")
+parser.add_argument("-r", "--keep_intermediate_files", action="store_true",
+                    dest="keep_intermediate_files", default=False,
+                    help="Keep intermediate files.Default: False")
 
 args = parser.parse_args()
 
@@ -91,6 +91,6 @@ ITSPipeline.pipeline(args.samples_dir, args.output_dir, args.adapter_kmers, args
                      leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
                      crop_length=None, head_crop_length=None, min_len=args.min_len,
                      base_quality=args.base_quality,
-                     remove_intermediate_files=False, filtered_reads=args.filtered)
+                     remove_intermediate_files=not args.keep_intermediate_files, filtered_reads=args.filtered)
 
 
