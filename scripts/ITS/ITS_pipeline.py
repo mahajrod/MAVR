@@ -78,6 +78,24 @@ EXAMPLE
                                         -k ~/data/service_seq/illumina_adapters_with_rev_com_23_mer.kmer \
                                         --output_prefix acipenser_ruthenus.ITS \
                                         -j ~/Soft/Trimmomatic-0.36/
+                                        
+~/Soft/MAVR/scripts/ITS/ITS_pipeline.py -f -d ../acipenser_ruthenus/reads/filtered/ \
+                                        --reference ../reference/acipenser_baerii.ITS.fasta \
+                                        --index ../reference/acipenser_baerii.ITS.fasta \
+                                        -o ./ -t 20 \
+                                        -a ~/Soft/Trimmomatic-0.36/adapters/TruSeq2-PE.fa \
+                                        -k ~/data/service_seq/illumina_adapters_with_rev_com_23_mer.kmer \
+                                        --output_prefix acipenser_ruthenus.ITS \
+                                        -j ~/Soft/Trimmomatic-0.36/
+                                        
+~/Soft/MAVR/scripts/ITS/ITS_pipeline.py -d ../reads/raw/ \
+                                        --reference ../reference/acipenser_ruthenus.ITS.fasta \
+                                        --index ../reference/acipenser_ruthenus.ITS.fasta \
+                                        -o ./ -t 20 \
+                                        -a ~/Soft/Trimmomatic-0.36/adapters/TruSeq2-PE.fa \
+                                        -k ~/data/service_seq/illumina_adapters_with_rev_com_23_mer.kmer \
+                                        --output_prefix acipenser_ruthenus.ITS \
+                                        -j ~/Soft/Trimmomatic-0.36/                                       
 """
 
 ITSPipeline.pipeline(args.samples_dir, args.output_dir, args.adapter_kmers, args.adapters,
