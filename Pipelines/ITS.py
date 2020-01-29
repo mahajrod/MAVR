@@ -29,6 +29,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                  remove_intermediate_files=True, filtered_reads=False):
 
         BamUtil.path = bam_util_dir
+        BamUtil.threads = threads
 
         sample_list = samples_to_handle if samples_to_handle else self.get_sample_list(samples_directory)
         dir_dict = {"reads": {"filtered": []},
@@ -74,6 +75,9 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                    calculate_coverage=True)
 
         clipped_bam_list = []
+
+        BamUtil.parallel_clipoverlap(alignment_dir, alignment_dir, sample_list, bam_suffix="", poolsize=10000000)
+
         for sample in sample_list:
             sample_dir = "%s/alignment/%s/" % (output_directory, sample)
             sample_prefix = "%s/%s" % (sample_dir, sample)
@@ -85,12 +89,12 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
 
             clipped_bam_list.append(clipped_bam)
 
-            BamUtil.clipoverlap(raw_bam, clipped_bam, poolsize=1000000)
-            SamtoolsV1.index(clipped_bam)
+            #BamUtil.clipoverlap(raw_bam, clipped_bam, poolsize=1000000)
+            #SamtoolsV1.index(clipped_bam)
 
             DrawingRoutines.draw_plot(raw_bam_coverage, sample_prefix,
                                       x_column_index=1, y_column_index=2, separator="\t",
-                                      min_x=0,max_x=None, min_y=1, max_y=None, extensions=["png", ],
+                                      min_x=0, max_x=None, min_y=1, max_y=None, extensions=["png", ],
                                       xlabel="coverage", ylabel="position",
                                       title="Coverage of ribosomal cluster monomer by ITS lib %s" % sample,
                                       width=12, height=6,
@@ -113,6 +117,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                                       height=6,
                                       markersize=8, ylogbase=10, type="plot", grid=True,
                                       correlation=False, close_plot=True)
+
         VariantCall.threads = threads
         VariantCall.call_variants(reference, vcf_prefix, clipped_bam_list, chunk_length=100,
                                   split_dir="%s/split/" % output_directory,
