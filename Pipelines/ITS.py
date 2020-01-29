@@ -105,7 +105,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                                              verbose=True, calc_stats=False)
             GenomeCov.get_stats_from_coverage_file_stream_version(clipped_bam_coverage, clipped_prefix, verbose=False,
                                                                   scaffold_column=0,
-                                                                  coverage_column=1,
+                                                                  coverage_column=2,
                                                                   separator="\t",
                                                                   buffering=10000000)
 
