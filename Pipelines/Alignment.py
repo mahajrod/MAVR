@@ -62,7 +62,7 @@ class AlignmentPipeline(Pipeline):
               platform="Illumina",
               add_read_groups_by_picard=False, gzipped_reads=False, keep_inremediate_files=False,
               calculate_coverage=False,
-              draw_coverage=False):
+              draw_coverage=False, softclipping_penalty=None):
 
         self.init_tools(threads=threads)
 
@@ -104,7 +104,8 @@ class AlignmentPipeline(Pipeline):
                                mark_duplicates=True if (mark_duplicates_tool == "samtools") and (mark_duplicates) else False,
                                sort_by_coordinate=True if (mark_duplicates_tool != "samtools") or (not mark_duplicates) else False,
                                sort_by_name=False,
-                               max_per_sorting_thread_memory=str(max(int(self.max_memory/self.threads), 1)) + "G")
+                               max_per_sorting_thread_memory=str(max(int(self.max_memory/self.threads), 1)) + "G",
+                               softclipping_penalty=None)
 
             if add_read_groups_by_picard:
                 sorted_alignment_picard_groups = "%s.picard_groups.%s" % (output_prefix, alignment_format)
