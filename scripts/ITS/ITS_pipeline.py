@@ -114,6 +114,7 @@ ITSPipeline.pipeline(args.samples_dir, args.output_dir, args.adapter_kmers, args
                      leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
                      crop_length=None, head_crop_length=None, min_len=args.min_len,
                      base_quality=args.base_quality,
-                     remove_intermediate_files=not args.keep_intermediate_files, filtered_reads=args.filtered)
+                     remove_intermediate_files=not args.keep_intermediate_files, filtered_reads=args.filtered,
+                     max_insert_size=args.max_insert_size)
 
 
