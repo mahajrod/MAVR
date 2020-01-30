@@ -23,7 +23,7 @@ parser.add_argument("--reference", action="store", dest="reference", required=Tr
 parser.add_argument("--index", action="store", dest="index", required=True,  help="BWA index")
 parser.add_argument("--aligner", action="store", dest="aligner", default="bwa",
                     help="Aligner to use. Allowed: bwa(default), bowtie2")
-parser.add_argument("-x", "--max_insert_size", action="store", dest="max_insert_size",
+parser.add_argument("-x", "--max_insert_size", action="store", dest="max_insert_size", type=int,
                     help="Maximum insert size to treat read pair as concordant. Affects bowtie2 only.")
 
 parser.add_argument("-o", "--output_dir", action="store", dest="output_dir",
