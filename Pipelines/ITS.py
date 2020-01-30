@@ -26,7 +26,8 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                  average_quality_threshold=15, base_quality="phred33",
                  leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
                  crop_length=None, head_crop_length=None, min_len=50,
-                 remove_intermediate_files=True, filtered_reads=False):
+                 remove_intermediate_files=True, filtered_reads=False,
+                 max_insert_size=None):
 
         BamUtil.path = bam_util_dir
         BamUtil.threads = threads
@@ -72,7 +73,8 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                    gzipped_reads=False,
                    keep_inremediate_files=False,
                    mark_duplicates_tool=False,
-                   calculate_coverage=True)
+                   calculate_coverage=True,
+                   max_insert_size=max_insert_size)
 
         clipped_bam_list = []
 
