@@ -105,7 +105,7 @@ class AlignmentPipeline(Pipeline):
                                sort_by_coordinate=True if (mark_duplicates_tool != "samtools") or (not mark_duplicates) else False,
                                sort_by_name=False,
                                max_per_sorting_thread_memory=str(max(int(self.max_memory/self.threads), 1)) + "G",
-                               softclipping_penalty=None)
+                               softclipping_penalty=softclipping_penalty)
 
             if add_read_groups_by_picard:
                 sorted_alignment_picard_groups = "%s.picard_groups.%s" % (output_prefix, alignment_format)
