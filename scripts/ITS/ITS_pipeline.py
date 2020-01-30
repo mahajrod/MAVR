@@ -21,7 +21,8 @@ parser.add_argument("-f", "--filtered", action="store_true", dest="filtered", de
 parser.add_argument("--reference", action="store", dest="reference", required=True,
                     help="Reference fasta file")
 parser.add_argument("--index", action="store", dest="index", required=True,  help="BWA index")
-
+parser.add_argument("--aligner", action="store", dest="aligner", default="bwa",
+                    help="Aligner to use. Allowed: bwa(default), bowtie2")
 parser.add_argument("-o", "--output_dir", action="store", dest="output_dir",
                     type=lambda s: check_path(os.path.abspath(s)),
                     default="./", help="Directory to write output. Default: current directory")
@@ -100,6 +101,7 @@ EXAMPLE
 
 ITSPipeline.pipeline(args.samples_dir, args.output_dir, args.adapter_kmers, args.adapters,
                      args.reference, args.index, args.output_prefix,
+                     aligner=args.aligner,
                      samples_to_handle=args.samples, threads=args.threads, trimmomatic_dir=args.trimmomatic_dir,
                      trimmer_dir=args.trimmer_dir, bam_util_dir=args.bamutil_dir,
                      mismatch_number=args.mismatch_number, pe_reads_score=args.pe_score,
