@@ -67,7 +67,9 @@ parser.add_argument("-f", "--flanks_size", action="store", dest="flanks_size",
 
 parser.add_argument("-m", "--max_memory", action="store", dest="max_memory", default=30, type=int,
                     help="Maximum memory to use in gigabytes. Default: 30")
-
+parser.add_argument("--softclipping_penalty", action="store", dest="softclipping_penalty",
+                    type=lambda s: map(int, s.split(",")),
+                    help="Softclipping penalty for 5' and 3' end, separated by comma, i.e 5,5. Default: bwa default")
 args = parser.parse_args()
 
 AlignmentPipeline.max_memory = args.max_memory
@@ -86,4 +88,4 @@ AlignmentPipeline.align(args.sample_dir, args.index, aligner=args.aligner, sampl
                         add_read_groups_by_picard=args.add_read_groups_by_picard, gzipped_reads=args.gzipped_reads,
                         keep_inremediate_files=args.retain_intermediate_files,
                         mark_duplicates_tool=args.mkdup_tool,
-                        calculate_coverage=args.calculate_coverage)
+                        calculate_coverage=args.calculate_coverage, softclipping_penalty=args.softclipping_penalty)
