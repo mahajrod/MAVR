@@ -19,7 +19,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
         AlignmentPipeline.__init__(self)
 
     def pipeline(self, samples_directory, output_directory, adapter_fragment_file, trimmomatic_adapter_file,
-                 reference, index, output_prefix,
+                 reference, index, output_prefix, aligner="bwa",
                  samples_to_handle=None, threads=4, trimmomatic_dir="", trimmer_dir="", bam_util_dir="",
                  mismatch_number=2, pe_reads_score=30, se_read_score=10,
                  min_adapter_len=1, sliding_window_size=None,
@@ -64,7 +64,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                                     remove_intermediate_files=remove_intermediate_files
                                     )
         
-        self.align(filtered_reads_dir, index, aligner="bwa", sample_list=sample_list,
+        self.align(filtered_reads_dir, index, aligner=aligner, sample_list=sample_list,
                    outdir=alignment_dir, quality_score_type=base_quality, read_suffix=filtered_reads_suffix,
                    read_extension="fastq", alignment_format="bam",
                    threads=threads, mark_duplicates=False, platform="Illumina",
