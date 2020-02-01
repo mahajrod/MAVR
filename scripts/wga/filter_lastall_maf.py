@@ -7,7 +7,7 @@ from RouToolPa.Tools.WGA import LAST
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", "--input", action="store", dest="input", required=True,
+parser.add_argument("-i", "--input", action="store", dest="input", required=sys.stdin,
                     help="Input MAF file")
 parser.add_argument("-o", "--output", action="store", dest="output", default=sys.stdout,
                     help="Output MAF file")
