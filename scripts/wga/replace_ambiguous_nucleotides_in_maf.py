@@ -14,4 +14,4 @@ parser.add_argument("-o", "--output", action="store", dest="output", required=Tr
 
 args = parser.parse_args()
 
-WGARoutines.replace_ambiguous_nucleotides(args.input, args.output)
+WGARoutines.replace_ambigious_nucleotides_in_maf(args.input, args.output)
