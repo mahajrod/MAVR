@@ -3,8 +3,8 @@ __author__ = 'Sergei F. Kliver'
 import os
 import argparse
 from RouToolPa.Tools.Alignment import STAR
+from RouToolPa.Collections.General import IdList
 from RouToolPa.Routines.File import check_path
-
 
 
 parser = argparse.ArgumentParser()
@@ -25,6 +25,8 @@ parser.add_argument("-f", "--genome_fasta", action="store", dest="genome_fasta",
 parser.add_argument("-s", "--samples", action="store", dest="samples", type=lambda s: s.split(","),
                     help="Comma-separated list of subdirectories(one per sample) to handle. "
                          "If not set all subdirectories will be considered as containing samples")
+parser.add_argument("-w", "--sample_file", action="store", dest="sample_file",
+                    help="File with ids of samples to use. Ignored if option -s/--sample_file is used")
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=1, type=int,
                     help="Number of threads to use in Trimmomatic. Default - 1.")
 parser.add_argument("-a", "--annotation_gtf", action="store", dest="annotation_gtf", type=os.path.abspath,
@@ -81,7 +83,7 @@ STAR.path = args.star_dir
 
 STAR.align_samples(args.samples_dir, args.output_dir, args.genome_dir,
                    genome_fasta=args.genome_fasta,
-                   samples=args.samples,
+                   samples=args.samples if args.samles else IdList(filename=args.sample_file) if args.sample_file else None,
                    annotation_gtf=args.annotation_gtf,
                    sjdboverhang=None,
                    genomeSAindexNbases=None,
