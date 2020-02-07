@@ -2,6 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 import os
 import argparse
+from RouToolPa.Collections.General import IdList
 from Pipelines import FilteringPipeline
 from RouToolPa.Routines.File import check_path
 
@@ -16,6 +17,8 @@ parser.add_argument("-x", "--general_stat_file", action="store", dest="general_s
 parser.add_argument("-s", "--samples", action="store", dest="samples", type=lambda s: s.split(","),
                     help="Comma-separated list of subdirectories(one per sample) to handle. "
                          "If not set all subdirectories will be considered as containing samples")
+parser.add_argument("-f", "--sample_file", action="store", dest="sample_file",
+                    help="File with sample ids to handle. No effect if -s/--samples option is set")
 parser.add_argument("-o", "--output_dir", action="store", dest="output_dir",
                     type=lambda s: check_path(os.path.abspath(s)),
                     default="./", help="Directory to write output. Default: current directory")
@@ -60,7 +63,8 @@ args = parser.parse_args()
 
 FilteringPipeline.stirka_trimmomatic(args.samples_dir, args.output_dir, args.adapter_kmers, args.adapters,
                                      args.general_stat_file,
-                                     samples_to_handle=args.samples, threads=args.threads, trimmomatic_dir=args.trimmomatic_dir,
+                                     samples_to_handle=args.samples if args.samples else IdList(filename=args.sample_file) if args.sample_file else None,
+                                     threads=args.threads, trimmomatic_dir=args.trimmomatic_dir,
                                      trimmer_dir=args.trimmer_dir,
                                      mismatch_number=args.mismatch_number, pe_reads_score=args.pe_score,
                                      se_read_score=args.se_score, min_adapter_len=args.min_adapter_len,
