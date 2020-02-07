@@ -292,7 +292,8 @@ class FilteringPipeline(Pipeline):
                            average_quality_threshold=15, base_quality="phred33",
                            leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
                            crop_length=None, head_crop_length=None, min_len=50,
-                           remove_intermediate_files=False,):
+                           remove_intermediate_files=False,
+                           stat_off=False):
 
         sample_list = samples_to_handle if samples_to_handle else self.get_sample_list(samples_directory)
         tmp_dir = "%s/tmp_dir/" % output_directory
@@ -333,10 +334,11 @@ class FilteringPipeline(Pipeline):
 
             print("\t%s\tTrimming by stirka..." % str(datetime.datetime.now()))
             Trimmer.trim_adapters("%s/%s" % (merged_raw_sample_dir, sample), adapter_fragment_file, "%s/%s" % (stirka_trimmed_sample_dir, sample))
-            trimmer_report = read_csv(dir_dict["tmp_dir"]["stirka"][sample]["stats"], sep="\t",
-                                      index_col=0,
-                                      header=None,
-                                      names=["counts", ])
+            if not stat_off:
+                trimmer_report = read_csv(dir_dict["tmp_dir"]["stirka"][sample]["stats"], sep="\t",
+                                          index_col=0,
+                                          header=None,
+                                          names=["counts", ])
 
             print("\t%s\tFiltering by Trimmomatic..." % str(datetime.datetime.now()))
 
@@ -358,7 +360,8 @@ class FilteringPipeline(Pipeline):
                                logfile=dir_dict["tmp_dir"]["trimmomatic"][sample]["stats"],
                                base_quality=base_quality)
             #"""
-            trimmomatic_report = TrimmomaticReport(dir_dict["tmp_dir"]["trimmomatic"][sample]["stats"], input_is_se=False)
+            if not stat_off:
+                trimmomatic_report = TrimmomaticReport(dir_dict["tmp_dir"]["trimmomatic"][sample]["stats"], input_is_se=False)
         for sample in sample_list:
             final_sample_dir = "%s/%s" % (output_directory, sample)
             self.safe_mkdir(final_sample_dir)
@@ -369,8 +372,8 @@ class FilteringPipeline(Pipeline):
 
         if remove_intermediate_files:
             shutil.rmtree(tmp_dir)
-
-        filtering_statistics.write(general_stat_file, sort=False)
+        if not stat_off:
+            filtering_statistics.write(general_stat_file, sort=False)
 
     def prepare_mirna_filtering_directories(self, output_directory, sample_list):
         out_dir = os.path.abspath(output_directory)
