@@ -83,7 +83,7 @@ STAR.path = args.star_dir
 
 STAR.align_samples(args.samples_dir, args.output_dir, args.genome_dir,
                    genome_fasta=args.genome_fasta,
-                   samples=args.samples if args.samles else IdList(filename=args.sample_file) if args.sample_file else None,
+                   samples=args.samples if args.samples else IdList(filename=args.sample_file) if args.sample_file else None,
                    annotation_gtf=args.annotation_gtf,
                    sjdboverhang=None,
                    genomeSAindexNbases=None,
