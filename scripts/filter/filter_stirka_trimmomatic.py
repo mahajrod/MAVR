@@ -57,6 +57,9 @@ parser.add_argument("-c", "--trimmer_dir", action="store", dest="trimmer_dir", d
 parser.add_argument("-r", "--remove_intermediate_files", action="store_true",
                     dest="remove_intermediate_files", default=False,
                     help="Remove intermediate files")
+parser.add_argument("--stat_off", action="store_true",
+                    dest="stat_off", default=False,
+                    help="Turn off calculation of statistics. Default: False")
 
 args = parser.parse_args()
 
@@ -72,7 +75,8 @@ FilteringPipeline.stirka_trimmomatic(args.samples_dir, args.output_dir, args.ada
                                      leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
                                      crop_length=None, head_crop_length=None, min_len=args.min_len,
                                      base_quality=args.base_quality,
-                                     remove_intermediate_files=args.remove_intermediate_files,)
+                                     remove_intermediate_files=args.remove_intermediate_files,
+                                     stat_off=args.stat_off)
 
 
 
