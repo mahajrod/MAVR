@@ -60,7 +60,6 @@ parser.add_argument("-r", "--remove_intermediate_files", action="store_true",
 
 args = parser.parse_args()
 
-
 FilteringPipeline.stirka_trimmomatic(args.samples_dir, args.output_dir, args.adapter_kmers, args.adapters,
                                      args.general_stat_file,
                                      samples_to_handle=args.samples if args.samples else IdList(filename=args.sample_file) if args.sample_file else None,
