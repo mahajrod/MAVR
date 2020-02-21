@@ -115,7 +115,7 @@ class AlignmentPipeline(Pipeline):
                                                        RGID=sample, RGLB=sample, RGPL=platform,
                                                        RGSM=sample, RGPU=sample)
 
-            if alignment_format == "bam":
+            if (alignment_format == "bam") and (mark_duplicates != "samtools"):
                 SamtoolsV1.index(sorted_alignment_picard_groups if sorted_alignment_picard_groups else raw_alignment)
 
             if mark_duplicates:
