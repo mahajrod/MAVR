@@ -115,8 +115,9 @@ class AlignmentPipeline(Pipeline):
                                                        RGID=sample, RGLB=sample, RGPL=platform,
                                                        RGSM=sample, RGPU=sample)
 
-            if (alignment_format == "bam") and (mark_duplicates != "samtools"):
-                SamtoolsV1.index(sorted_alignment_picard_groups if sorted_alignment_picard_groups else raw_alignment)
+            if alignment_format == "bam":
+                if (not mark_duplicates) or (mark_duplicates_tool != "samtools"):
+                    SamtoolsV1.index(sorted_alignment_picard_groups if sorted_alignment_picard_groups else raw_alignment)
 
             if mark_duplicates:
                 if mark_duplicates_tool == "picard":
@@ -127,7 +128,8 @@ class AlignmentPipeline(Pipeline):
                     Sambamba.mkdup(sorted_alignment_picard_groups if sorted_alignment_picard_groups else raw_alignment,
                                    final_alignment)
 
-                if (not keep_inremediate_files) and (mark_duplicates != "samtools"):
+                if (not keep_inremediate_files) and (mark_duplicates_tool != "samtools"):
+
                     if os.stat(raw_alignment).st_size < os.stat(final_alignment).st_size:
                         os.remove(raw_alignment)
                         os.remove(raw_alignment + ".bai")
