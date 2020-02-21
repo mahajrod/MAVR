@@ -127,13 +127,13 @@ class AlignmentPipeline(Pipeline):
                     Sambamba.mkdup(sorted_alignment_picard_groups if sorted_alignment_picard_groups else raw_alignment,
                                    final_alignment)
 
-                if not keep_inremediate_files and mark_duplicates != "samtools":
+                if (not keep_inremediate_files) and (mark_duplicates != "samtools"):
                     if os.stat(raw_alignment).st_size < os.stat(final_alignment).st_size:
                         os.remove(raw_alignment)
                         os.remove(raw_alignment + ".bai")
                     else:
                         raise ValueError("ERROR!!! Bam with duplicates marked is smaller that with unmarked! "
-                                         "Something have gone wrong. Oeiginal bam was kept.")
+                                         "Something have gone wrong. Original bam was kept.")
                 if alignment_format == "bam":
                     SamtoolsV1.index(final_alignment)
 
