@@ -33,7 +33,10 @@ parser.add_argument("-f", "--target_gff", action="store", dest="target_gff", req
                     help="Target GFF")
 parser.add_argument("-o", "--out_dir", action="store", dest="out_dir", required=True,
                     help="Output directory")
+parser.add_argument("-e", "--transcript_feature", action="store", dest="transcript_feature", default="mRNA",
+                    help="Transcript feature. Default: mRNA")
 args = parser.parse_args()
+
 
 gene_ids = IdList(filename=args.genes)
 print gene_ids
@@ -312,18 +315,18 @@ def transfer_coordinates(coordinates_tuple, verbose=False):
 # gene_name-> gene_id -> mRNA id list
 ids_dict = OrderedDict()
 
-
+args.transcript_feature
 # genes_indel_ids = IdList(filename="/home/mahajrod/tmp/annotation/deletiom.insertion.indel.ids")
 #all_ids = IdList(filename="/home/skliver/sp_spermatogenesis/all.ids")
 for gene_name in gene_ids:
     ids_dict[gene_name] = OrderedDict()
     for gene_id in gff_coll.records["gene"][gff_coll.records["gene"]["Name"] == gene_name]["ID"]:
         ids_dict[gene_name][gene_id] = OrderedDict()
-        for mrna_id in gff_coll.records["mRNA"][gff_coll.records["mRNA"]["Parent"] == gene_id]["ID"]:
+        for mrna_id in gff_coll.records[args.transcript_feature][gff_coll.records[args.transcript_feature]["Parent"] == gene_id]["ID"]:
             ids_dict[gene_name][gene_id][mrna_id] = OrderedDict({"CDS": [], "exon": []})
 
 # gene_indel_gff_gene_ids = gff_coll.records["gene"][gff_coll.records["gene"]["Name"].isin(genes_indel_ids)]["ID"]
-# gff_coll.records["mRNA"][gff_coll.records["mRNA"]["Parent"].isin(gene_indel_gff_ids)]["ID"]
+# gff_coll.records[args.transcript_feature][gff_coll.records[args.transcript_feature]["Parent"].isin(gene_indel_gff_ids)]["ID"]
 
 
 SequenceRoutines.safe_mkdir(output_dir)
