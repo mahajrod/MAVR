@@ -36,10 +36,8 @@ parser.add_argument("--ignore_softclipped_bases", action="store", dest="ignore_s
 
 parser.add_argument("-d", "--handling_mode", action="store", dest="handling_mode", default="local",
                     help="Handling mode. Allowed: local(default), slurm")
-
 parser.add_argument("-j", "--slurm_job_name", action="store", dest="slurm_job_name", default="JOB",
                     help="Slurm job name. Default: JOB")
-
 parser.add_argument("-y", "--slurm_log_prefix", action="store", dest="slurm_log_prefix",
                     help="Slurm log prefix. ")
 parser.add_argument("-e", "--slurm_error_log_prefix", action="store", dest="slurm_error_log_prefix",
@@ -50,7 +48,6 @@ parser.add_argument("-z", "--slurm_max_running_jobs", action="store", dest="slur
 parser.add_argument("-a", "--slurm_max_running_time", action="store", dest="slurm_max_running_time",
                     default="100:00:00",
                     help="Slurm max running time in hh:mm:ss format. Default: 100:00:00")
-
 parser.add_argument("-u", "--slurm_max_memmory_per_cpu", action="store", dest="slurm_max_memmory_per_cpu",
                     default=4000,  type=int,
                     help="Slurm maximum memmory per cpu in megabytes. Default: 4000")
