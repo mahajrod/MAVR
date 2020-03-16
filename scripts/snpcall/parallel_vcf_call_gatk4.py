@@ -74,4 +74,4 @@ HaplotypeCaller4.parallel_call(args.reference, args.alignment, args.output_dir, 
                                modules_list=args.slurm_modules_list,
                                black_list_scaffold_id_file=args.black_list_scaffold_id_file,
                                gvcf_mode=False,
-                               ignore_softclipped_bases=False)
+                               ignore_softclipped_bases=args.ignore_softclipped_bases)
