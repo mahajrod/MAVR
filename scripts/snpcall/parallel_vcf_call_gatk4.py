@@ -31,6 +31,8 @@ parser.add_argument("-l", "--max_region_len", action="store", dest="max_region_l
                     help="Maximum region length. Default: 2000000")
 parser.add_argument("-k", "--black_list_scaffold_id_file", action="store", dest="black_list_scaffold_id_file",
                     help="Id file with scaffolds from black list")
+parser.add_argument("--ignore_softclipped_bases", action="store", dest="ignore_softclipped_bases", default=False,
+                    help="Ignore softclipped bases. Default: False")
 
 parser.add_argument("-d", "--handling_mode", action="store", dest="handling_mode", default="local",
                     help="Handling mode. Allowed: local(default), slurm")
@@ -74,4 +76,5 @@ HaplotypeCaller4.parallel_call(args.reference, args.alignment, args.output_dir, 
                                max_memmory_per_cpu=args.slurm_max_memmory_per_cpu,
                                modules_list=args.slurm_modules_list,
                                black_list_scaffold_id_file=args.black_list_scaffold_id_file,
-                               gvcf_mode=False)
+                               gvcf_mode=False,
+                               ignore_softclipped_bases=False)
