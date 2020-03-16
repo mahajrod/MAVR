@@ -31,7 +31,7 @@ parser.add_argument("-l", "--max_region_len", action="store", dest="max_region_l
                     help="Maximum region length. Default: 2000000")
 parser.add_argument("-k", "--black_list_scaffold_id_file", action="store", dest="black_list_scaffold_id_file",
                     help="Id file with scaffolds from black list")
-parser.add_argument("--ignore_softclipped_bases", action="store", dest="ignore_softclipped_bases", default=False,
+parser.add_argument("--ignore_softclipped_bases", action="store_true", dest="ignore_softclipped_bases", default=False,
                     help="Ignore softclipped bases. Default: False")
 
 parser.add_argument("-d", "--handling_mode", action="store", dest="handling_mode", default="local",
