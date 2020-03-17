@@ -35,6 +35,9 @@ parser.add_argument("-b", "--sambamba_dir", action="store", dest="sambamba_dir",
                     help="Path to sambamba directory. Required to add mark duplicates")
 parser.add_argument("-l", "--aligner_dir", action="store", dest="aligner_dir", default="",
                     help="Path to aligner directory")
+parser.add_argument("--local_aln", action="store_true", dest="local_aln", default=False,
+                    help="Perform local alignment. Affects only Bowtie2 as default mode for Bowtie2 is end-to-end."
+                         "Default: False")
 parser.add_argument("-u", "--read_file_suffix", action="store", dest="read_file_suffix", default="",
                     help="Suffix of read files, i.e forward read file have folling name"
                          " <sample><read_suffix>_1.<extension> Default: ''")
@@ -88,4 +91,5 @@ AlignmentPipeline.align(args.sample_dir, args.index, aligner=args.aligner, sampl
                         add_read_groups_by_picard=args.add_read_groups_by_picard, gzipped_reads=args.gzipped_reads,
                         keep_inremediate_files=args.retain_intermediate_files,
                         mark_duplicates_tool=args.mkdup_tool,
-                        calculate_coverage=args.calculate_coverage, softclipping_penalty=args.softclipping_penalty)
+                        calculate_coverage=args.calculate_coverage, softclipping_penalty=args.softclipping_penalty,
+                        local_alignment=args.local_aln)
