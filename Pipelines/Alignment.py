@@ -63,7 +63,7 @@ class AlignmentPipeline(Pipeline):
               add_read_groups_by_picard=False, gzipped_reads=False, keep_inremediate_files=False,
               calculate_coverage=False,
               draw_coverage=False, softclipping_penalty=None,
-              max_insert_size=None):
+              max_insert_size=None, local_alignment=False):
 
         self.init_tools(threads=threads)
 
@@ -107,7 +107,8 @@ class AlignmentPipeline(Pipeline):
                                sort_by_name=False,
                                max_per_sorting_thread_memory=str(max(int(self.max_memory/self.threads), 1)) + "G",
                                softclipping_penalty=softclipping_penalty,
-                               max_insert_size=max_insert_size)
+                               max_insert_size=max_insert_size,
+                               local_alignment=local_alignment)
 
             if add_read_groups_by_picard:
                 sorted_alignment_picard_groups = "%s.picard_groups.%s" % (output_prefix, alignment_format)
