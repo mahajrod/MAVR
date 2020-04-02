@@ -6,7 +6,6 @@ cd /home/mahajrod/Dropbox/andronov/Sinorhizobium_meliloti/
 ~/Dropbox/MAVR/scripts/annotation/gff/add_alias_to_feature_in_gff.py  -i GCF_000006965.1_ASM696v1_genomic.only_genes.only_geneids.cells.gff -s S.meliloti.cells.genes.uniprot_geneid.tsv -o GCF_000006965.1_ASM696v1_genomic.only_genes.only_geneids.cells.with_aliases.gff -n GeneID -k 1 -v 0 -a Name
 
 
-
 cd linear
 
 ~/Dropbox/MAVR/scripts/draw/draw_chromosomes_with_features_simple.py -c chromosomes_and_plasmids.gff  -g ../GCF_000006965.1_ASM696v1_genomic.only_genes.only_geneids.bacteroids.with_aliases.gff -o bacteroids -e png,svg -n Name -r Name
