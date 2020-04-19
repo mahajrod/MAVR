@@ -19,4 +19,5 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
 
 args = parser.parse_args()
 
-Supernova.generate_fasta(args.assembly_dir, args.out_prefix, min_length=args.min_length, header_style=args.header_style)
+Supernova.generate_fasta(args.assembly_dir, args.output_prefix,
+                         min_length=args.min_length, header_style=args.header_style)
