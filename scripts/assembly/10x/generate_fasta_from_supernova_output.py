@@ -9,7 +9,7 @@ from RouToolPa.Tools.Assemblers import Supernova
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-a", "--assembly_dir", action="store", dest="assembly_dir", required=True,
-                    help="Directory with Supernova output")
+                    help="Directory with Supernova output, i.e /path/to/outs/assembly")
 parser.add_argument("-m", "--min_length", action="store", dest="min_length", default=1000, type=int,
                     help="Minimum length of scaffold to output. Default: 1000")
 parser.add_argument("-e", "--header_style", action="store", dest="header_style", default="full",
