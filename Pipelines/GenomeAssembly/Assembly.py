@@ -6,6 +6,6 @@ from Pipelines.GenomeAssembly.Scaffolding import ScaffoldingPipeline
 from Pipelines.GenomeAssembly.ContigAssembly import ContigAssemblyPipeline
 
 
-class AssemblyPipeline(Pipeline, GapClosingPipeline, ScaffoldingPipeline, ContigAssemblyPipeline):
+class AssemblyPipeline(GapClosingPipeline, ScaffoldingPipeline, ContigAssemblyPipeline):
     def __init__(self):
         Pipeline.__init__(self)
