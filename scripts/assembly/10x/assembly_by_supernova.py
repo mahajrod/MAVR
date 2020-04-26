@@ -21,4 +21,6 @@ parser.add_argument("-p", "--output_prefix", action="store", dest="output_prefix
 
 args = parser.parse_args()
 
+Supernova.max_memory = args.max_memory
+Supernova.threads = args.threads
 Supernova.assembly(args.fastq_dir, args.output_dir, args.output_prefix, max_reads="all", disable_ui=True)
