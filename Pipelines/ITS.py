@@ -91,9 +91,6 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
 
             clipped_bam_list.append(clipped_bam)
 
-            #BamUtil.clipoverlap(raw_bam, clipped_bam, poolsize=1000000)
-            #SamtoolsV1.index(clipped_bam)
-
             DrawingRoutines.draw_plot(raw_bam_coverage, sample_prefix,
                                       x_column_index=1, y_column_index=2, separator="\t",
                                       min_x=0, max_x=None, min_y=1, max_y=None, extensions=["png", ],
