@@ -47,7 +47,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
         tab_file = "%s.tab" % vcf_prefix
 
         general_stat_file = "%s/%s.filtering.stats" % (output_directory, output_prefix)
-
+        """
         if filtered_reads:
             filtered_reads_dir = samples_directory
         else:
@@ -75,19 +75,19 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                    mark_duplicates_tool=False,
                    calculate_coverage=True,
                    max_insert_size=max_insert_size)
-
+        """
         clipped_bam_list = []
 
-        BamUtil.parallel_clipoverlap(alignment_dir, alignment_dir, sample_list, bam_suffix="", poolsize=10000000)
+        #BamUtil.parallel_clipoverlap(alignment_dir, alignment_dir, sample_list, bam_suffix="", poolsize=10000000)
 
         for sample in sample_list:
             sample_dir = "%s/alignment/%s/" % (output_directory, sample)
             sample_prefix = "%s/%s" % (sample_dir, sample)
             raw_bam = "%s.bam" % sample_prefix
-            raw_bam_coverage = "%s.tab" % sample_prefix
+            raw_bam_coverage = "%s.tab.gz" % sample_prefix
             clipped_prefix = "%s.clipped" % sample_prefix
             clipped_bam = "%s.bam" % clipped_prefix
-            clipped_bam_coverage = "%s.tab" % clipped_prefix
+            clipped_bam_coverage = "%s.tab.gz" % clipped_prefix
 
             clipped_bam_list.append(clipped_bam)
 
