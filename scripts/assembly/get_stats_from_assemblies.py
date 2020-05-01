@@ -3,15 +3,11 @@ __author__ = 'Sergei F. Kliver'
 import os
 import argparse
 from collections import OrderedDict
-import matplotlib
-
-
-matplotlib.use('Agg')
-os.environ['MPLCONFIGDIR'] = '/tmp/'
 
 import matplotlib.pyplot as plt
-plt.ioff()
+
 from RouToolPa.Routines import SequenceRoutines
+from RouToolPa.Parsers.Sequence import CollectionSequence
 from RouToolPa.Collections.General import TwoLvlDict
 
 parser = argparse.ArgumentParser()
@@ -44,10 +40,11 @@ assemblies_dict = OrderedDict()
 for i in range(0, len(args.input_file_list)):
     assembly_label = args.labels_list[i] if args.labels_list else "A%i" % (i + 1)
     tmp_index = "%s.tmp.idx" % assembly_label
-    assemblies_dict[assembly_label] = SequenceRoutines.parse_seq_file(args.input_file_list[i],
-                                                                      args.parsing_mode,
-                                                                      format=args.format,
-                                                                      index_file=tmp_index)
+    assemblies_dict[assembly_label] = CollectionSequence(in_file=args.input_file_list[i], parsing_mode="parse").records
+    #SequenceRoutines.parse_seq_file(args.input_file_list[i],
+    #                                                                  args.parsing_mode,
+    #                                                                  format=args.format,
+    #                                                                  index_file=tmp_index)
     #SeqIO.index_db(tmp_index, args.input_file_list[i],format=args.format)
 
 assembly_N50_dict = TwoLvlDict()
