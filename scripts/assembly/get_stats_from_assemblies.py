@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
+import multiprocessing as mp
 from collections import OrderedDict
 
 import pandas as pd
@@ -17,7 +18,7 @@ parser.add_argument("-l", "--labels_list", action="store", dest="labels_list",
                     type=lambda s: s.split(","),
                     help="Comma-separated list of assembly labels. Should have same length as list of "
                          "input files with assemblies. Default - not set, assemblies will be named like A1, A2, ../ ")
-parser.add_argument("-t", "--thresholds", action="store", dest="thresholds", default=[0, 100, 250, 500, 1000],
+parser.add_argument("-e", "--thresholds", action="store", dest="thresholds", default=[0, 100, 250, 500, 1000],
                     type=lambda s: map(int, s.split(",")),
                     help="Comma-separated list of thresholds for N50 calculations. "
                          "Default: 0,100,250,500,1000")
