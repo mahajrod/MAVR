@@ -25,8 +25,6 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
                     help="Prefix of output files")
 parser.add_argument("-f", "--format", action="store", dest="format", default="fasta",
                     help="Format of input files")
-parser.add_argument("-p", "--parsing_mode", action="store", dest="parsing_mode", default="parse",
-                    help="Parsing mode for assembly files. Allowed: parse(default), index, index_db")
 
 args = parser.parse_args()
 
