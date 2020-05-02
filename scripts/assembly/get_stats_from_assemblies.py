@@ -1,14 +1,12 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import os
 import argparse
 from collections import OrderedDict
 
-import matplotlib.pyplot as plt
+import pandas as pd
 
-from RouToolPa.Routines import SequenceRoutines
 from RouToolPa.Parsers.Sequence import CollectionSequence
-from RouToolPa.Collections.General import TwoLvlDict
+
 
 parser = argparse.ArgumentParser()
 
@@ -37,6 +35,33 @@ if args.labels_list is not None:
         raise ValueError("Length of labels list is not equal to number of files with assemblies")
 
 assemblies_dict = OrderedDict()
+stats_dict = OrderedDict({"N50": pd.DataFrame(),
+                          "L50": pd.DataFrame(),
+                          "Ns": pd.DataFrame(),
+                          "Total length": pd.DataFrame(),
+                          "Total scaffolds": pd.DataFrame()})
+thresholds_stats = OrderedDict([(threshold, pd.DataFrame()) for threshold in args.thresholds])
+
+for i in range(0, len(args.input_file_list)):
+    assembly_label = args.labels_list[i] if args.labels_list else "A%i" % (i + 1)
+    assembly_output_prefix = "%s.%s" % (args.output_prefix, assembly_label)
+    assemblies_dict[assembly_label] = CollectionSequence(in_file=args.input_file_list[i], parsing_mode="parse").get_stats_and_features(thresholds_list=args.thresholds, count_gaps=True)
+    assemblies_dict[assembly_label].to_csv("%s.tsv" % assembly_output_prefix, sep="\t")
+    for stat_entry in stats_dict:
+        stats_dict[stat_entry][assembly_label] = assemblies_dict[assembly_label].loc[stat_entry]
+
+    for threshold in thresholds_stats:
+        thresholds_stats[threshold][assembly_label] = assemblies_dict[assembly_label][threshold]
+
+for stat_entry in stats_dict:
+    stats_dict[stat_entry].to_csv("%s.%s.tsv" % (args.output_prefix, stat_entry.replace(" ", "_")), sep="\t")
+
+for threshold in thresholds_stats:
+    thresholds_stats[threshold].to_csv("%s.%i.tsv" % (args.output_prefix, threshold), sep="\t")
+
+
+
+"""
 for i in range(0, len(args.input_file_list)):
     assembly_label = args.labels_list[i] if args.labels_list else "A%i" % (i + 1)
     tmp_index = "%s.tmp.idx" % assembly_label
@@ -125,4 +150,6 @@ for ext in ".png", ".svg":
 
 if args.parsing_mode == "index_db":
     for assembly_label in assemblies_dict:
-        os.remove("%s.tmp.idx" % assembly_label)
+        os.remove("%s.tmp.idx" % assembly_label) 
+        
+        """
