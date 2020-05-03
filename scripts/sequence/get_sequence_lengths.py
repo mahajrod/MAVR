@@ -3,7 +3,7 @@ __author__ = 'mahajrod'
 import os
 import sys
 import argparse
-from RouToolPa.Routines.Sequence import SequenceRoutines
+from RouToolPa.Parsers.Sequence import CollectionSequence
 
 
 parser = argparse.ArgumentParser()
@@ -21,12 +21,15 @@ args = parser.parse_args()
 
 out_fd = sys.stdout if args.output == "stdout" else open(args.output, "w")
 
-record_dict = SequenceRoutines.parse_seq_file(args.input, args.mode, format=args.format, index_file="temp_index.idx")
-lengths_dict = SequenceRoutines.get_lengths(record_dict, out_file=out_fd)
+coll_seq = CollectionSequence(in_file=args.input, parsing_mode="generator", get_stats=True)
+coll_seq.seq_lengths.to_csv(args.output, header=False)
 
-print("Longest sequence: %i" % max(lengths_dict.values()))
-print("Shortest sequence: %i" % min(lengths_dict.values()))
-print("Total length: %i" % sum(lengths_dict.values()))
+#record_dict = SequenceRoutines.parse_seq_file(args.input, args.mode, format=args.format, index_file="temp_index.idx")
+#lengths_dict = SequenceRoutines.get_lengths(record_dict, out_file=out_fd)
 
-if args.mode == "index_db":
-    os.remove("temp_index.idx")
+print("Longest sequence: %i" % max(coll_seq.seq_lengths["length"]))
+print("Shortest sequence: %i" % min(coll_seq.seq_lengths["length"]))
+print("Total length: %i" % sum(coll_seq.seq_lengths["length"]))
+
+#if args.mode == "index_db":
+#    os.remove("temp_index.idx")
