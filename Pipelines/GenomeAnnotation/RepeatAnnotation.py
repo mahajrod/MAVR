@@ -2,6 +2,7 @@
 import os
 from RouToolPa.Tools.BLAST import Windowmasker
 from RouToolPa.Tools.RepeatMasking import TRF, RepeatMasker
+from RouToolPa.Tools.Bedtools import MaskFasta
 from Pipelines.Filtering import FilteringPipeline
 
 
@@ -105,3 +106,19 @@ class RepeatAnnotation(FilteringPipeline):
                                                                            merged_output)
 
         os.system(merge_cmd)
+
+        masked_fasta = "%s/%s.repeatmasker.trf.windowmasker.fasta" % (output_directory, output_prefix)
+
+        for directory in repeatmasker_dir, windowmasker_dir, trf_dir:
+            files = os.listdir(directory)
+            for filename in files:
+                if (len(filename) >= 3) and (filename[-3:] != ".gz"):
+                    os.system("pigz -p %i %s/%s" % (threads, directory, filename))
+
+        MaskFasta.mask(input_fasta,
+                       masked_fasta,
+                       merged_output,
+                       softmasking=True)
+
+        for filename in merged_output, masked_fasta:
+            os.system("pigz -p %i %s" % (threads, filename))
