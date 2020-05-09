@@ -8,8 +8,8 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--seq_file", action="store", dest="seq_file", required=True,
                     help="Input file with sequences")
-parser.add_argument("-s", "--haplotype_file", action="store", dest="haplotype_file", required=True,
-                    help="File with haplotype synonyms to sequence ids")
+parser.add_argument("-s", "--haplotype_file", action="store", dest="haplotype_file",
+                    help="File with haplotype synonyms to sequence ids. If not set sequence ids will be used.")
 parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", required=True,
                     help="Prefix of output files")
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=1, type=int,
