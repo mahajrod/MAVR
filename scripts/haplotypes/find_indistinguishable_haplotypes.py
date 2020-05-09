@@ -20,5 +20,5 @@ parser.add_argument("-c", "--cdhit_dir", action="store", dest="cdhit_dir", defau
 
 args = parser.parse_args()
 
-HaplotypeRoutines.find_indistinguishable_haplotypes(args.seq_file, args.haplotype_file, args.output_prefix,
+HaplotypeRoutines.find_indistinguishable_haplotypes(args.seq_file, args.output_prefix, args.haplotype_file,
                                                     threads=args.threads, cdhit_dir=args.cdhit_dir)
