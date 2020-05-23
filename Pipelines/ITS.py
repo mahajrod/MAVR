@@ -29,7 +29,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                  remove_intermediate_files=True,
                  filtered_reads=False, aligned_reads=False, aligned_and_clipped_reads=False,
                  max_insert_size=None, max_coverage_for_variant_call=10000000, min_coverage_for_filtering=100,
-                 chunk_length=100):
+                 chunk_length=100, adjust_mapping_quality=None):
 
         BamUtil.path = bam_util_dir
         BamUtil.threads = threads
@@ -126,7 +126,8 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
         VariantCall.call_variants(reference, vcf_prefix, clipped_bam_list, chunk_length=chunk_length,
                                   split_dir="%s/split/" % output_directory,
                                   max_coverage=max_coverage_for_variant_call,
-                                  min_base_quality=30, min_mapping_quality=30)
+                                  min_base_quality=30, min_mapping_quality=30,
+                                  adjust_mapping_quality=adjust_mapping_quality)
 
         vcf_coll = CollectionVCF(in_file=vcf_file, parsing_mode="complete")
 
