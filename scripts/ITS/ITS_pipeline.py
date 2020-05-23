@@ -86,7 +86,7 @@ parser.add_argument("-r", "--keep_intermediate_files", action="store_true",
                     dest="keep_intermediate_files", default=False,
                     help="Keep intermediate files.Default: False")
 parser.add_argument("--keep_mpileup_files", action="store_true",
-                    dest="keep_mpileup_filess", default=False,
+                    dest="keep_mpileup_files", default=False,
                     help="Keep mpileup files.Default: False")
 
 args = parser.parse_args()
