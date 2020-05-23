@@ -36,8 +36,15 @@ parser.add_argument("--max_coverage_for_variant_call", action="store", dest="max
 parser.add_argument("--min_coverage_for_filtering", action="store", dest="min_coverage_for_filtering", default=100,
                     type=int,
                     help="Minimum coverage to retain variant during filtering. Default: 100")
-
-parser.add_argument("--index", action="store", dest="index", required=True,  help="Aligner index")
+parser.add_argument("--adjust_mapping_quality", action="store", dest="adjust_mapping_quality", default=None,
+                    type=int,
+                    help="Adjust mapping quality of reads. Coefficient for downgrading mapping quality for "
+                         "reads containing excessive mismatches. Given a read with a phred-scaled probability q of "
+                         "being generated from the mapped position, "
+                         "the new mapping quality is about sqrt((INT-q)/INT)*INT. "
+                         "A zero value disables this functionality; if enabled, the recommended value for BWA is 50. "
+                         "Default: not set")
+parser.add_argument("--index", action="store", dest="index", help="Aligner index")
 parser.add_argument("--aligner", action="store", dest="aligner", default="bwa",
                     help="Aligner to use. Allowed: bwa(default), bowtie2")
 parser.add_argument("-x", "--max_insert_size", action="store", dest="max_insert_size", type=int,
