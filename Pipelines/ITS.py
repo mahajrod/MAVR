@@ -27,7 +27,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                  leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
                  crop_length=None, head_crop_length=None, min_len=50,
                  remove_intermediate_files=True, filtered_reads=False,
-                 max_insert_size=None):
+                 max_insert_size=None, max_coverage_for_variant_call=10000000, min_coverage_for_filtering=100):
 
         BamUtil.path = bam_util_dir
         BamUtil.threads = threads
@@ -120,7 +120,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
         VariantCall.threads = threads
         VariantCall.call_variants(reference, vcf_prefix, clipped_bam_list, chunk_length=100,
                                   split_dir="%s/split/" % output_directory,
-                                  max_coverage=10000000,
+                                  max_coverage=max_coverage_for_variant_call,
                                   min_base_quality=30, min_mapping_quality=30)
 
         vcf_coll = CollectionVCF(in_file=vcf_file, parsing_mode="complete")
@@ -129,7 +129,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
             vcf_coll.records[(sample, "ALT_FREQ", 0)] = vcf_coll.records[sample]["AD"][1] / (
                     vcf_coll.records[sample]["AD"][1] + vcf_coll.records[sample]["AD"][0])
         idx = pd.IndexSlice
-        short_coll = vcf_coll.records[vcf_coll.records[("INFO", "DP", 0)] > 100].loc[:, idx[:, ["POS", "REF", "ALT", "ALT_FREQ"], :]]
+        short_coll = vcf_coll.records[vcf_coll.records[("INFO", "DP", 0)] > min_coverage_for_filtering].loc[:, idx[:, ["POS", "REF", "ALT", "ALT_FREQ"], :]]
         short_coll.columns = short_coll.columns.droplevel([1, 2])
         short_coll.index = short_coll.index.droplevel(1)
         short_coll["POS"] += 1
