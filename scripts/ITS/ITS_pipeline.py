@@ -136,6 +136,7 @@ ITSPipeline.pipeline(args.samples_dir, args.output_dir, args.adapter_kmers, args
                      aligned_reads=args.aligned, aligned_and_clipped_reads=args.aligned_and_clipped,
                      max_insert_size=args.max_insert_size,
                      min_coverage_for_filtering=args.min_coverage_for_filtering,
-                     max_coverage_for_variant_call=args.max_coverage_for_variant_call)
+                     max_coverage_for_variant_call=args.max_coverage_for_variant_call,
+                     adjust_mapping_quality=args.adjust_mapping_quality)
 
 
