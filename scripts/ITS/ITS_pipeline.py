@@ -20,6 +20,13 @@ parser.add_argument("-f", "--filtered", action="store_true", dest="filtered", de
                          "Default: False")
 parser.add_argument("--reference", action="store", dest="reference", required=True,
                     help="Reference fasta file")
+parser.add_argument("--max_coverage_for_variant_call", action="store", dest="max_coverage_for_variant_call", default=0,
+                    type=int,
+                    help="Maximum reads to use for each position. Default: 0, i.e not limited")
+parser.add_argument("--min_coverage_for_filtering", action="store", dest="min_coverage_for_filtering", default=100,
+                    type=int,
+                    help="Minimum coverage to retain variant during filtering. Default: 100")
+
 parser.add_argument("--index", action="store", dest="index", required=True,  help="BWA index")
 parser.add_argument("--aligner", action="store", dest="aligner", default="bwa",
                     help="Aligner to use. Allowed: bwa(default), bowtie2")
@@ -115,6 +122,8 @@ ITSPipeline.pipeline(args.samples_dir, args.output_dir, args.adapter_kmers, args
                      crop_length=None, head_crop_length=None, min_len=args.min_len,
                      base_quality=args.base_quality,
                      remove_intermediate_files=not args.keep_intermediate_files, filtered_reads=args.filtered,
-                     max_insert_size=args.max_insert_size)
+                     max_insert_size=args.max_insert_size,
+                     min_coverage_for_filtering=args.min_coverage_for_filtering,
+                     max_coverage_for_variant_call=args.max_coverage_for_variant_call)
 
 
