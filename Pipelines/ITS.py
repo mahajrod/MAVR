@@ -83,42 +83,42 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
         if not aligned_and_clipped_reads:
             BamUtil.parallel_clipoverlap(alignment_dir, alignment_dir, sample_list, bam_suffix="", poolsize=10000000)
 
-        for sample in sample_list:
-            sample_dir = "%s/alignment/%s/" % (output_directory, sample)
-            sample_prefix = "%s/%s" % (sample_dir, sample)
-            raw_bam = "%s.bam" % sample_prefix
-            raw_bam_coverage = "%s.tab.gz" % sample_prefix
-            clipped_prefix = "%s.clipped" % sample_prefix
-            clipped_bam = "%s.bam" % clipped_prefix
-            clipped_bam_coverage = "%s.tab.gz" % clipped_prefix
+            for sample in sample_list:
+                sample_dir = "%s/alignment/%s/" % (output_directory, sample)
+                sample_prefix = "%s/%s" % (sample_dir, sample)
+                raw_bam = "%s.bam" % sample_prefix
+                raw_bam_coverage = "%s.tab.gz" % sample_prefix
+                clipped_prefix = "%s.clipped" % sample_prefix
+                clipped_bam = "%s.bam" % clipped_prefix
+                clipped_bam_coverage = "%s.tab.gz" % clipped_prefix
 
-            clipped_bam_list.append(clipped_bam)
+                clipped_bam_list.append(clipped_bam)
 
-            DrawingRoutines.draw_plot(raw_bam_coverage, sample_prefix,
-                                      x_column_index=1, y_column_index=2, separator="\t",
-                                      min_x=0, max_x=None, min_y=1, max_y=None, extensions=["png", ],
-                                      xlabel="coverage", ylabel="position",
-                                      title="Coverage of ribosomal cluster monomer by ITS lib %s" % sample,
-                                      width=12, height=6,
-                                      markersize=8, ylogbase=10, type="plot", grid=True,
-                                      correlation=False, close_plot=True)
+                DrawingRoutines.draw_plot(raw_bam_coverage, sample_prefix,
+                                          x_column_index=1, y_column_index=2, separator="\t",
+                                          min_x=0, max_x=None, min_y=1, max_y=None, extensions=["png", ],
+                                          xlabel="coverage", ylabel="position",
+                                          title="Coverage of ribosomal cluster monomer by ITS lib %s" % sample,
+                                          width=12, height=6,
+                                          markersize=8, ylogbase=10, type="plot", grid=True,
+                                          correlation=False, close_plot=True)
 
-            GenomeCov.get_bam_coverage_stats(clipped_bam, clipped_prefix, genome_bed=None,
-                                             verbose=True, calc_stats=False)
-            GenomeCov.get_stats_from_coverage_file_stream_version(clipped_bam_coverage, clipped_prefix, verbose=False,
-                                                                  scaffold_column=0,
-                                                                  coverage_column=2,
-                                                                  separator="\t",
-                                                                  buffering=10000000)
+                GenomeCov.get_bam_coverage_stats(clipped_bam, clipped_prefix, genome_bed=None,
+                                                 verbose=True, calc_stats=False)
+                GenomeCov.get_stats_from_coverage_file_stream_version(clipped_bam_coverage, clipped_prefix, verbose=False,
+                                                                      scaffold_column=0,
+                                                                      coverage_column=2,
+                                                                      separator="\t",
+                                                                      buffering=10000000)
 
-            DrawingRoutines.draw_plot(clipped_bam_coverage, clipped_prefix, x_column_index=1, y_column_index=2,
-                                      separator="\t",
-                                      min_x=0, max_x=None, min_y=1, max_y=None, extensions=["png", ],
-                                      xlabel="coverage", ylabel="position",
-                                      title="Coverage of ribosomal cluster monomer by ITS lib %s" % sample, width=12,
-                                      height=6,
-                                      markersize=8, ylogbase=10, type="plot", grid=True,
-                                      correlation=False, close_plot=True)
+                DrawingRoutines.draw_plot(clipped_bam_coverage, clipped_prefix, x_column_index=1, y_column_index=2,
+                                          separator="\t",
+                                          min_x=0, max_x=None, min_y=1, max_y=None, extensions=["png", ],
+                                          xlabel="coverage", ylabel="position",
+                                          title="Coverage of ribosomal cluster monomer by ITS lib %s" % sample, width=12,
+                                          height=6,
+                                          markersize=8, ylogbase=10, type="plot", grid=True,
+                                          correlation=False, close_plot=True)
 
         VariantCall.threads = threads
         VariantCall.call_variants(reference, vcf_prefix, clipped_bam_list, chunk_length=100,
