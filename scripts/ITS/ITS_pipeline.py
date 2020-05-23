@@ -20,11 +20,13 @@ parser.add_argument("-f", "--filtered", action="store_true", dest="filtered", de
                          "Default: False")
 parser.add_argument("--aligned", action="store_true", dest="aligned", default=False,
                     help="Input reads were already aligned and filenames follow convention."
-                         "Use this option if you have previously ran pipeline and wish to try new variant calling options"
+                         "Use this option if you have previously ran pipeline "
+                         "and wish to try new variant calling options"
                          "Default: False")
 parser.add_argument("--aligned_and_clipped", action="store_true", dest="aligned_and_clipped", default=False,
                     help="Input reads were already aligned, clipped and filenames follow convention."
-                         "Use this option if you have previously ran pipeline and wish to try new variant calling options"
+                         "Use this option if you have previously ran pipeline "
+                         "and wish to try new variant calling options"
                          "Default: False")
 parser.add_argument("--reference", action="store", dest="reference", required=True,
                     help="Reference fasta file")
