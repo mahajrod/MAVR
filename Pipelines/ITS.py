@@ -84,7 +84,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
             BamUtil.parallel_clipoverlap(alignment_dir, alignment_dir, sample_list, bam_suffix="", poolsize=10000000)
 
         for sample in sample_list:
-            sample_dir = "%s/alignment/%s/" % (output_directory, sample)
+            sample_dir = "%s/%s/" % (alignment_dir, sample)
             sample_prefix = "%s/%s" % (sample_dir, sample)
             raw_bam = "%s.bam" % sample_prefix
             raw_bam_coverage = "%s.tab.gz" % sample_prefix
