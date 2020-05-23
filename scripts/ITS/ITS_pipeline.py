@@ -18,6 +18,14 @@ parser.add_argument("-f", "--filtered", action="store_true", dest="filtered", de
                     help="Input reads were already filtered and filenames follow convention."
                          "Use this option if you have previously ran pipeline and wish to try new reference"
                          "Default: False")
+parser.add_argument("--aligned", action="store_true", dest="aligned", default=False,
+                    help="Input reads were already aligned and filenames follow convention."
+                         "Use this option if you have previously ran pipeline and wish to try new variant calling options"
+                         "Default: False")
+parser.add_argument("--aligned_and_clipped", action="store_true", dest="aligned_and_clipped", default=False,
+                    help="Input reads were already aligned, clipped and filenames follow convention."
+                         "Use this option if you have previously ran pipeline and wish to try new variant calling options"
+                         "Default: False")
 parser.add_argument("--reference", action="store", dest="reference", required=True,
                     help="Reference fasta file")
 parser.add_argument("--max_coverage_for_variant_call", action="store", dest="max_coverage_for_variant_call", default=0,
@@ -27,7 +35,7 @@ parser.add_argument("--min_coverage_for_filtering", action="store", dest="min_co
                     type=int,
                     help="Minimum coverage to retain variant during filtering. Default: 100")
 
-parser.add_argument("--index", action="store", dest="index", required=True,  help="BWA index")
+parser.add_argument("--index", action="store", dest="index", required=True,  help="Aligner index")
 parser.add_argument("--aligner", action="store", dest="aligner", default="bwa",
                     help="Aligner to use. Allowed: bwa(default), bowtie2")
 parser.add_argument("-x", "--max_insert_size", action="store", dest="max_insert_size", type=int,
@@ -121,7 +129,9 @@ ITSPipeline.pipeline(args.samples_dir, args.output_dir, args.adapter_kmers, args
                      leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
                      crop_length=None, head_crop_length=None, min_len=args.min_len,
                      base_quality=args.base_quality,
-                     remove_intermediate_files=not args.keep_intermediate_files, filtered_reads=args.filtered,
+                     remove_intermediate_files=not args.keep_intermediate_files,
+                     filtered_reads=args.filtered,
+                     aligned_reads=args.aligned, aligned_and_clipped_reads=args.aligned_and_clipped,
                      max_insert_size=args.max_insert_size,
                      min_coverage_for_filtering=args.min_coverage_for_filtering,
                      max_coverage_for_variant_call=args.max_coverage_for_variant_call)
