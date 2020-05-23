@@ -48,7 +48,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
 
         general_stat_file = "%s/%s.filtering.stats" % (output_directory, output_prefix)
 
-        if aligned_reads:
+        if aligned_reads or aligned_and_clipped_reads:
             alignment_dir = samples_directory
         else:
             if filtered_reads:
