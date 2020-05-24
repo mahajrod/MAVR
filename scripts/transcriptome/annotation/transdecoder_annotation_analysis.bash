@@ -36,7 +36,7 @@ for DATA in ${DATA_PREFIX}.complete ${DATA_PREFIX}.100+ ${DATA_PREFIX}.complete.
     ${MAVR_DIR}/scripts/hmmer3/extract_hits_by_query_ids.py -i ${PFAM_HMMSCAN_DOM_TBLOUT_FILE} -f domtblout \
                                                             -d ${DATA}.pep.ids \
                                                             -o ${DATA}.pfam.domtblout
-    ${MAVR_DIR}/scripts/blast/filter_blast_output_by_ids.py -m query -f blast-tab \
+    ${MAVR_DIR}/scripts/alignment/blast/filter_blast_output_by_ids.py -m query -f blast-tab \
                                                             -w ${DATA}.pep.ids  \
                                                             -i ${SWISSPROT_BLAST_TAB_HIT_FILE} \
                                                             -o ${DATA}.swissprot.hits
