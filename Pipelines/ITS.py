@@ -6,7 +6,7 @@ from RouToolPa.Tools.Alignment import BamUtil
 from RouToolPa.Tools.Samtools import SamtoolsV1, VariantCall
 from RouToolPa.Tools.Bedtools import GenomeCov
 from RouToolPa.Parsers.VCF import CollectionVCF
-from RouToolPa.Routines import DrawingRoutines
+from RouToolPa.Routines import DrawingRoutines, VCFRoutines
 
 from Pipelines.Filtering import FilteringPipeline
 from Pipelines.Alignment import AlignmentPipeline
@@ -29,7 +29,8 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                  remove_intermediate_files=True,
                  filtered_reads=False, aligned_reads=False, aligned_and_clipped_reads=False,
                  max_insert_size=None, max_coverage_for_variant_call=10000000, min_coverage_for_filtering=100,
-                 chunk_length=100, adjust_mapping_quality=None):
+                 chunk_length=100, adjust_mapping_quality=None,
+                 max_alt_allel_freq_minimum=0.1, min_total_coverage=10):
 
         BamUtil.path = bam_util_dir
         BamUtil.threads = threads
@@ -45,9 +46,11 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
 
         filtered_reads_suffix = ".final"
         vcf_prefix = "%s/%s" % (output_directory, output_prefix)
+        gvcf_file = "%s.mpileup.vcf.gz" % vcf_prefix
         vcf_file = "%s.vcf.gz" % vcf_prefix
         tab_file = "%s.tab" % vcf_prefix
-
+        allel_freq_all_file = "%s.mpileup.freq.all.xlsx" % vcf_prefix
+        allel_freq_filtered_file = "%s.mpileup.freq.filtered.min_allel_freq_%f.min_total_cov_%i.xlsx" % (vcf_prefix, max_alt_allel_freq_minimum, min_total_coverage)
         general_stat_file = "%s/%s.filtering.stats" % (output_directory, output_prefix)
 
         if aligned_reads or aligned_and_clipped_reads:
@@ -129,7 +132,13 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                                   min_base_quality=30, min_mapping_quality=30,
                                   adjust_mapping_quality=adjust_mapping_quality)
 
+        gvcf_coll = CollectionVCF(in_file=gvcf_file, parsing_mode="complete")
         vcf_coll = CollectionVCF(in_file=vcf_file, parsing_mode="complete")
+
+        freq_df = VCFRoutines.extract_per_sample_freq_df(gvcf_coll)
+        VCFRoutines.save_freq_df_to_xlsx(freq_df, "all", allel_freq_all_file)
+        filtered_freq_df = VCFRoutines.filter_freq_df(freq_df, max_alt_allel_freq_minimum, min_total_coverage)
+        VCFRoutines.save_freq_df_to_xlsx(filtered_freq_df, "filtered", allel_freq_filtered_file)
 
         for sample in vcf_coll.samples:
             vcf_coll.records[(sample, "ALT_FREQ", 0)] = vcf_coll.records[sample]["AD"][1] / (
