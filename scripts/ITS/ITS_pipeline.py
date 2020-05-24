@@ -8,6 +8,7 @@ from RouToolPa.Routines.File import check_path
 
 parser = argparse.ArgumentParser()
 
+# input options
 parser.add_argument("-d", "--sample_directory", action="store", dest="samples_dir", required=True,
                     type=lambda s: check_path(os.path.abspath(s)),
                     help="Directory with samples")
@@ -30,40 +31,21 @@ parser.add_argument("--aligned_and_clipped", action="store_true", dest="aligned_
                          "Default: False")
 parser.add_argument("--reference", action="store", dest="reference", required=True,
                     help="Reference fasta file")
-parser.add_argument("--max_coverage_for_variant_call", action="store", dest="max_coverage_for_variant_call", default=0,
-                    type=int,
-                    help="Maximum reads to use for each position. Default: 0, i.e not limited")
-parser.add_argument("--min_coverage_for_filtering", action="store", dest="min_coverage_for_filtering", default=100,
-                    type=int,
-                    help="Minimum coverage to retain variant during filtering. Default: 100")
-parser.add_argument("--adjust_mapping_quality", action="store", dest="adjust_mapping_quality", default=None,
-                    type=int,
-                    help="Adjust mapping quality of reads. Coefficient for downgrading mapping quality for "
-                         "reads containing excessive mismatches. Given a read with a phred-scaled probability q of "
-                         "being generated from the mapped position, "
-                         "the new mapping quality is about sqrt((INT-q)/INT)*INT. "
-                         "A zero value disables this functionality; if enabled, the recommended value for BWA is 50. "
-                         "Default: not set")
-parser.add_argument("--index", action="store", dest="index", help="Aligner index")
-parser.add_argument("--aligner", action="store", dest="aligner", default="bwa",
-                    help="Aligner to use. Allowed: bwa(default), bowtie2")
-parser.add_argument("-x", "--max_insert_size", action="store", dest="max_insert_size", type=int,
-                    help="Maximum insert size to treat read pair as concordant. Affects bowtie2 only.")
+parser.add_argument("-t", "--threads", action="store", dest="threads", default=1, type=int,
+                    help="Number of threads to use in Trimmomatic. Default - 1.")
 
+# output options
 parser.add_argument("-o", "--output_dir", action="store", dest="output_dir",
                     type=lambda s: check_path(os.path.abspath(s)),
                     default="./", help="Directory to write output. Default: current directory")
 parser.add_argument("--output_prefix", action="store", dest="output_prefix", required=True,
                     default="./", help="Prefix for output vcf file")
 
-parser.add_argument("-t", "--threads", action="store", dest="threads", default=1, type=int,
-                    help="Number of threads to use in Trimmomatic. Default - 1.")
-
+# read filtering options
 parser.add_argument("-a", "--adapters", action="store", dest="adapters", type=os.path.abspath,
                     help="File with adapters to trim by Trimmomatic")
 parser.add_argument("-k", "--adapter_kmers", action="store", dest="adapter_kmers", type=os.path.abspath,
                     help="File with adapter k-mers ")
-
 parser.add_argument("-m", "--mismatch_number", action="store", dest="mismatch_number", type=int, default=2,
                     help="Number of mismatches in adapter seed. Works only if -a/--adapters option is set. Default - 2.")
 parser.add_argument("-p", "--pe_score", action="store", dest="pe_score", type=int, default=30,
@@ -83,6 +65,40 @@ parser.add_argument("-b", "--base_quality", action="store", dest="base_quality",
                     help="Type of base quality. Possible variants: phred33, phred64. Default - phred33 ")
 parser.add_argument("-l", "--min_length", action="store", dest="min_len", type=int, default=50,
                     help="Minimum length of read to retain. Default - 50")
+
+# alignment options
+parser.add_argument("--index", action="store", dest="index", help="Aligner index")
+parser.add_argument("--aligner", action="store", dest="aligner", default="bwa",
+                    help="Aligner to use. Allowed: bwa(default), bowtie2")
+parser.add_argument("-x", "--max_insert_size", action="store", dest="max_insert_size", type=int,
+                    help="Maximum insert size to treat read pair as concordant. Affects bowtie2 only.")
+
+# variant calling options
+parser.add_argument("--max_coverage_for_variant_call", action="store", dest="max_coverage_for_variant_call", default=0,
+                    type=int,
+                    help="Maximum reads to use for each position. Default: 0, i.e not limited")
+parser.add_argument("--min_coverage_for_filtering", action="store", dest="min_coverage_for_filtering", default=100,
+                    type=int,
+                    help="Minimum coverage to retain variant during filtering. Default: 100")
+parser.add_argument("--adjust_mapping_quality", action="store", dest="adjust_mapping_quality", default=None,
+                    type=int,
+                    help="Adjust mapping quality of reads. Coefficient for downgrading mapping quality for "
+                         "reads containing excessive mismatches. Given a read with a phred-scaled probability q of "
+                         "being generated from the mapped position, "
+                         "the new mapping quality is about sqrt((INT-q)/INT)*INT. "
+                         "A zero value disables this functionality; if enabled, the recommended value for BWA is 50. "
+                         "Default: not set")
+parser.add_argument("--max_alt_allel_freq_minimum", action="store", dest="max_alt_allel_freq_minimum", default=0.1,
+                    type=float,
+                    help="Minimum threshold for most frequent alternative allel in samples to keep position. "
+                         "Default: 0.1")
+parser.add_argument("--min_total_coverage", action="store", dest="min_total_coverage", default=100,
+                    type=int,
+                    help="Minimum total(in all samples) coverage of position to keep it. "
+                         "Default: 100")
+
+# paths to tools
+
 parser.add_argument("-j", "--trimmomatic_dir", action="store", dest="trimmomatic_dir", default="",
                     help="Path to Trimmomatic directory")
 parser.add_argument("-c", "--trimmer_dir", action="store", dest="trimmer_dir", default="",
@@ -144,6 +160,8 @@ ITSPipeline.pipeline(args.samples_dir, args.output_dir, args.adapter_kmers, args
                      max_insert_size=args.max_insert_size,
                      min_coverage_for_filtering=args.min_coverage_for_filtering,
                      max_coverage_for_variant_call=args.max_coverage_for_variant_call,
-                     adjust_mapping_quality=args.adjust_mapping_quality)
+                     adjust_mapping_quality=args.adjust_mapping_quality,
+                     max_alt_allel_freq_minimum=args.max_alt_allel_freq_minimum,
+                     min_total_coverage=args.min_total_coverage)
 
 
