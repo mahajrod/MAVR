@@ -15,6 +15,12 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
 
 args = parser.parse_args()
 
+"""
+
+Usage:
+ ~/Soft/MAVR/scripts/alignment/bowtie2/gather_stats_from_bowtie2_stat.py -i `ls ../assembly/*/*/*.fasta.stats | tr "\n" "," | sed s/,$//` -s `ls ../assembly  | tr "\n" "," | sed s/,$//` -o bowtie2.stats
+
+"""
 bowtie2_table = Bowtie2Table(args.input, samples=args.samples)
 bowtie2_table.write("%s.tab" % args.output_prefix)
 bowtie2_table.write_xlsx("%s.xlsx" % args.output_prefix)
