@@ -17,4 +17,4 @@ args = parser.parse_args()
 
 bowtie2_table = Bowtie2Table(args.input, samples=args.samples)
 bowtie2_table.write("%s.tab" % args.output_prefix)
-bowtie2_table.write_xlsx("%s.tab" % args.output_prefix)
+bowtie2_table.write_xlsx("%s.xlsx" % args.output_prefix)
