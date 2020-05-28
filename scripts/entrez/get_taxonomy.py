@@ -14,10 +14,14 @@ parser.add_argument("-a", "--email", action="store", dest="email", required=True
                     help="Email used in Entrez queues")
 parser.add_argument("-t", "--input_type", action="store", dest="input_type", default="latin",
                     help="Type of input. Allowed: latin(default), id")
-
+parser.add_argument("-c", "--column", action="store", dest="column", default=0, type=int,
+                    help="0-based index of column with ids. Default: 0 ")
+parser.add_argument("-s", "--separator", action="store", dest="separator", default="\t",
+                    help="Column separator. Default:'\t' ")
 args = parser.parse_args()
 
-NCBIRoutines.get_taxonomy_from_id_file(args.input, args.output, args.email, input_type=args.input_type)
+NCBIRoutines.get_taxonomy_from_id_file(args.input, args.output, args.email, input_type=args.input_type,
+                                       column=0, separator=args.separator)
 
 """
 Entrez.email = args.email
