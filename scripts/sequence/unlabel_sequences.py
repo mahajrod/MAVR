@@ -19,6 +19,9 @@ args = parser.parse_args()
 
 out_file = "" if args.output == "stdout" else " > %s" % args.output
 
-sed_string = "sed 's/^>.*%s/>/' %s %s" % (args.separator, args.input, out_file)
+if args.input[-3:] == ".gz":
+    sed_string = "zcat %s | sed 's/^>.*%s/>/'  %s" % (args.input, args.separator, out_file)
+else:
+    sed_string = "sed 's/^>.*%s/>/' %s %s" % (args.separator, args.input, out_file)
 
 os.system(sed_string)
