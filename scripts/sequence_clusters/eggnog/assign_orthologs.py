@@ -37,11 +37,13 @@ HMMER3.threads = 1
 HMMER3.path = args.path
 HMMER3.timelog = "%s/%s.timelog" % (args.output_dir, args.output_prefix)
 
+"""
 HMMER3.parallel_hmmscan(args.input, args.input_seq, args.output_prefix, args.output_dir,  num_of_seqs_per_scan=None,
                         threads=args.threads,
                         combine_output_to_single_file=True, dont_output_alignments=args.no_alignment,
                         biopython_165_compartibility=True
                         )
+"""
 
 HMMER3.extract_top_hits(hits_file, args.output_prefix, parsing_mode=args.parsing_mode)
 HMMER3.get_families_from_top_hits(top_hits_file, fam_file)
