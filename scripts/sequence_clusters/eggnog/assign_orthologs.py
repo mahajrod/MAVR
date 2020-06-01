@@ -45,7 +45,7 @@ HMMER3.parallel_hmmscan(args.input, args.input_seq, args.output_prefix, args.out
                         )
 """
 
-HMMER3.extract_top_hits(hits_file, args.output_prefix, parsing_mode=args.parsing_mode)
+HMMER3.extract_top_hits(hits_file, "%s/%s" % (args.output_dir, args.output_prefix), parsing_mode=args.parsing_mode)
 HMMER3.get_families_from_top_hits(top_hits_file, fam_file)
 
 EggNOGRoutines.edit_profile_names_in_fam_file(fam_file, ortholog_file)
