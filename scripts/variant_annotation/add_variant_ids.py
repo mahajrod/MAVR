@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-i", "--input", action="store", dest="input", required=True,
                     help="Input vcf")
 parser.add_argument("-o", "--output", action="store", dest="output", default=sys.stdout,
-                    help="Output vf. Default: stdout")
+                    help="Output vcf. Default: stdout")
 
 parser.add_argument("-d", "--id_prefix", action="store", dest="id_prefix", required=True,
                     help="Prefix for variant ids")
