@@ -17,7 +17,7 @@ parser.add_argument("-k", "--chunk_length", action="store", dest="chunk_length",
                     help="Chunk length. Default: 1 000 000 bp")
 parser.add_argument("-d", "--max_per_sample_coverage", action="store", dest="max_per_sample_coverage", type=int,
                     help="Maximum per sample coverage to use")
-parser.add_argument("-b", "--min_base_quality", action="store", dest="min_base_quality", default=30, type=int,
+parser.add_argument("-q", "--min_base_quality", action="store", dest="min_base_quality", default=30, type=int,
                     help="Minimum base quality. Default: 30")
 parser.add_argument("-m", "--min_mapping_quality", action="store", dest="min_mapping_quality", default=30, type=int,
                     help="Minimum mapping quality. Default: 30 ")
