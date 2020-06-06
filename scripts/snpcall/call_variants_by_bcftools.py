@@ -32,7 +32,7 @@ args = parser.parse_args()
 
 
 VariantCall.threads = args.threads
-VariantCall.call_variants(args.reference_fasta, args.output_prefix, args.bam_list, chunk_length=args.chunk_length,
+VariantCall.call_variants(args.reference, args.output_prefix, args.bam_list, chunk_length=args.chunk_length,
                           split_dir="split/", max_coverage=args.max_per_sample_coverage,
                           min_base_quality=args.min_base_quality, min_mapping_quality=args.min_mapping_quality,
                           adjust_mapping_quality=args.mapping_quality_penalty,
