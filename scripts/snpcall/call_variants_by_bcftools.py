@@ -27,13 +27,17 @@ parser.add_argument("-a", "--mapping_quality_penalty", action="store", dest="map
                          "Use 50 for BWA. Default: not set")
 parser.add_argument("-c", "--consensus_caller_model", action="store_true", dest="consensus_caller_model",
                     help="Use consensus caller model(old one implemented in samtools). Default: false")
-
+parser.add_argument("-e", "--report_all_positions", action="store_true", dest="report_all_positions", default=False,
+                    help="Report all positions in resulting vcf file. Default: false")
 args = parser.parse_args()
 
 
 VariantCall.threads = args.threads
-VariantCall.call_variants(args.reference, args.output_prefix, args.bam_list, chunk_length=args.chunk_length,
+VariantCall.call_variants(args.reference, args.output_prefix, args.bam_list,
+                          chunk_length=args.chunk_length,
                           split_dir="split/", max_coverage=args.max_per_sample_coverage,
-                          min_base_quality=args.min_base_quality, min_mapping_quality=args.min_mapping_quality,
+                          min_base_quality=args.min_base_quality,
+                          min_mapping_quality=args.min_mapping_quality,
                           adjust_mapping_quality=args.mapping_quality_penalty,
-                          consensus_caller_model=args.consensus_caller_model)
+                          consensus_caller_model=args.consensus_caller_model,
+                          report_all_positions=args.report_all_positions)
