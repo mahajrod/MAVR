@@ -26,7 +26,7 @@ parser.add_argument("-a", "--mapping_quality_penalty", action="store", dest="map
                     type=int,
                     help="Penalty for mapping quality of reads having long mismatches. "
                          "Use 50 for BWA. Default: not set")
-parser.add_argument("-r", "--min_rms_mapq", action="store", dest="min_rms_mapq", default=30, type=int,
+parser.add_argument("-s", "--min_rms_mapq", action="store", dest="min_rms_mapq", default=30, type=int,
                     help="Minimum RMS mapping quality. Default: 30 ")
 args = parser.parse_args()
 
