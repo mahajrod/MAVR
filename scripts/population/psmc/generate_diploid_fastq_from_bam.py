@@ -31,7 +31,7 @@ parser.add_argument("-s", "--min_rms_mapq", action="store", dest="min_rms_mapq",
 args = parser.parse_args()
 
 PSMC.threads = args.threads
-PSMC.generate_diploid_fastq_from_bam(args.reference_fasta, args.bam, args.output_prefix,
+PSMC.generate_diploid_fastq_from_bam(args.reference, args.bam, args.output_prefix,
                                      args.min_coverage, args.max_coverage, split_dir="split/",
                                      min_base_quality=args.min_base_quality,
                                      min_mapping_quality=args.min_mapping_quality,
