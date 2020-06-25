@@ -109,7 +109,7 @@ else:
     black_list = IdList()
 
 syn_dict = SynDict(filename=args.syn_file,
-                   key_index=args.qsyn_file_key_column,
+                   key_index=args.syn_file_key_column,
                    value_index=args.syn_file_value_column)
 
 last_collection = CollectionLast(args.input_last_tab,
