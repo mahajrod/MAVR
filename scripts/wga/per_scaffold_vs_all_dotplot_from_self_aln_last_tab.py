@@ -31,6 +31,10 @@ parser.add_argument("--syn_file_value_column", action="store", dest="syn_file_va
                     default=1, type=int,
                     help="Column(0-based) with value(synonym id) for scaffolds in synonym file synonym")
 
+parser.add_argument("-u", "--order_file", action="store", dest="order_file",
+                    help="File with order of scaffolds on the plot or corresponding comma-separated list."
+                         "NOTE: ordering is done AFTER renaming by synonyms!")
+
 parser.add_argument("-l", "--label", action="store", dest="label",
                     help="Label for genome(both X and Y axis)")
 
@@ -108,6 +112,11 @@ if args.black_id_file:
 else:
     black_list = IdList()
 
+if args.order_file:
+    order_list = IdList(filename=args.order_file) if os.path.isfile(args.order_file) else IdList(args.order_file.split(","))
+else:
+    order_list = IdList()
+
 syn_dict = SynDict(filename=args.syn_file,
                    key_index=args.syn_file_key_column,
                    value_index=args.syn_file_value_column)
@@ -131,31 +140,32 @@ last_collection = CollectionLast(args.input_last_tab,
 
 last_collection.write("%s.syn.tab" % args.output_prefix)
 
-DrawingRoutines.draw_dot_plot_per_scaffold_from_last_self_alignment(last_collection,
-                                                                    output_prefix=args.output_prefix,
-                                                                    extension_list=args.extensions,
-                                                                    scaffold_black_list=(),
-                                                                    scaffold_white_list=syn_white_list,
-                                                                    scaffold_reverse_list=(),
-                                                                    figsize=args.figsize, dpi=args.dpi,
-                                                                    grid_color=args.grid_color,
-                                                                    bar_color=args.bar_color,
-                                                                    same_strand_color=args.same_strand_color,
-                                                                    diff_strand_color=args.diff_strand_color,
-                                                                    title=args.title,
-                                                                    label=args.label,
-                                                                    linewidth=args.linewidth,
-                                                                    gridwidth=args.gridwidth,
-                                                                    antialiased_lines=args.antialiasing,
-                                                                    scaffold_label_fontsize=args.scaffold_label_fontsize,
-                                                                    target_scaffold_labels_angle=args.target_scaffold_labels_angle,
-                                                                    query_scaffold_labels_angle=args.query_scaffold_labels_angle,
-                                                                    show_grid=not args.hide_grid,
-                                                                    show_labels=not args.hide_labels,
-                                                                    top_offset=args.top_offset,
-                                                                    bottom_offset=args.bottom_offset,
-                                                                    left_offset=args.left_offset,
-                                                                    right_offset=args.right_offset,
-                                                                    x_axis_visible=args.x_axis_visible,
-                                                                    y_axis_visible=args.y_axis_visible
-                                                                    )
+DrawingRoutines.draw_dot_plot_per_scaffold_vs_all_from_last_self_alignment(last_collection,
+                                                                           output_prefix=args.output_prefix,
+                                                                           extension_list=args.extensions,
+                                                                           scaffold_black_list=(),
+                                                                           scaffold_white_list=syn_white_list,
+                                                                           scaffold_reverse_list=(),
+                                                                           ordered_list=order_list,
+                                                                           figsize=args.figsize, dpi=args.dpi,
+                                                                           grid_color=args.grid_color,
+                                                                           bar_color=args.bar_color,
+                                                                           same_strand_color=args.same_strand_color,
+                                                                           diff_strand_color=args.diff_strand_color,
+                                                                           title=args.title,
+                                                                           label=args.label,
+                                                                           linewidth=args.linewidth,
+                                                                           gridwidth=args.gridwidth,
+                                                                           antialiased_lines=args.antialiasing,
+                                                                           scaffold_label_fontsize=args.scaffold_label_fontsize,
+                                                                           target_scaffold_labels_angle=args.target_scaffold_labels_angle,
+                                                                           query_scaffold_labels_angle=args.query_scaffold_labels_angle,
+                                                                           show_grid=not args.hide_grid,
+                                                                           show_labels=not args.hide_labels,
+                                                                           top_offset=args.top_offset,
+                                                                           bottom_offset=args.bottom_offset,
+                                                                           left_offset=args.left_offset,
+                                                                           right_offset=args.right_offset,
+                                                                           x_axis_visible=args.x_axis_visible,
+                                                                           y_axis_visible=args.y_axis_visible
+                                                                           )
