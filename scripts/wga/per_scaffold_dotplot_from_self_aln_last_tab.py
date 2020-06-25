@@ -128,6 +128,10 @@ last_collection = CollectionLast(args.input_last_tab,
                                  target_syn_dict=syn_dict,
                                  format=args.format
                                  )
+print(white_list)
+print(black_list)
+
+print(last_collection)
 
 last_collection.write("%s.syn.tab" % args.output_prefix)
 
