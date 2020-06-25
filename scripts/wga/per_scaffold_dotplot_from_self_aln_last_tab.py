@@ -129,9 +129,9 @@ last_collection = CollectionLast(args.input_last_tab,
                                  format=args.format
                                  )
 print(white_list)
-print(black_list)
 
-print(last_collection)
+
+print(last_collection.records)
 
 last_collection.write("%s.syn.tab" % args.output_prefix)
 
