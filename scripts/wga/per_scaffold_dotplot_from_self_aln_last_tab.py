@@ -112,6 +112,13 @@ syn_dict = SynDict(filename=args.syn_file,
                    key_index=args.syn_file_key_column,
                    value_index=args.syn_file_value_column)
 
+if white_list and syn_dict:
+    syn_white_list = IdList([syn_dict[entry] for entry in white_list])
+elif white_list:
+    syn_white_list = white_list
+else:
+    syn_white_list = IdList()
+
 last_collection = CollectionLast(args.input_last_tab,
                                  target_white_list=white_list,
                                  target_black_list=black_list,
@@ -128,7 +135,7 @@ DrawingRoutines.draw_dot_plot_per_scaffold_from_last_self_alignment(last_collect
                                                                     output_prefix=args.output_prefix,
                                                                     extension_list=args.extensions,
                                                                     scaffold_black_list=(),
-                                                                    scaffold_white_list=white_list,
+                                                                    scaffold_white_list=syn_white_list,
                                                                     scaffold_reverse_list=(),
                                                                     figsize=args.figsize, dpi=args.dpi,
                                                                     grid_color=args.grid_color,
