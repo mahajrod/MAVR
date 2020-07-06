@@ -12,7 +12,6 @@ parser.add_argument("-m", "--mask_file", action="store", dest="mask_file", requi
 parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", required=True,
                     help="Prefix of output files with collapsed(from bases to regions) mask."
                          "Output is written in three formats: bed(0-based), tab, gff")
-
 parser.add_argument("--scaf_col", action="store", dest="scaf_col", type=int,
                     default=0,
                     help="Index of scaffold column in coverage file (0-based). Default: 0")
