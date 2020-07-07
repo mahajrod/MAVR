@@ -326,7 +326,7 @@ class FilteringPipeline(Pipeline):
                                                                                        sample,
                                                                                        merged_raw_sample_dir,
                                                                                        use_links_if_merge_not_necessary=True,
-                                                                                       output_fastq_ext="fastq", threads=threads)
+                                                                                       output_fastq_ext="fastq",)
 
             dir_dict["tmp_dir"]["stirka"][sample]["forward"] = "%s/%s.trim_1.fastq" % (stirka_trimmed_sample_dir, sample)
             dir_dict["tmp_dir"]["stirka"][sample]["reverse"] = "%s/%s.trim_2.fastq" % (stirka_trimmed_sample_dir, sample)
