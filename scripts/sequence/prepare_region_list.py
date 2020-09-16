@@ -4,14 +4,12 @@ import argparse
 from RouToolPa.Collections.General import IdList
 from RouToolPa.Routines import SequenceRoutines
 
-
-
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-r", "--reference", action="store", dest="reference", required=True,
                     help="Fasta file with reference")
-parser.add_argument("-o", "--output_dir", action="store", dest="output_dir", required=True,
-                    help="Output directory")
+parser.add_argument("-o", "--output_dir", action="store", dest="output_dir",
+                    help="Output directory. If not set output will be written to stdout")
 parser.add_argument("-s", "--split_scaffolds", action="store_true", dest="split_scaffolds", default=False,
                     help="Split scaffolds. Default: False")
 parser.add_argument("-m", "--max_length", action="store", dest="max_length", type=int,
@@ -24,7 +22,8 @@ parser.add_argument("-b", "--scaffold_black_list_file", action="store", dest="sc
 parser.add_argument("-x", "--min_scaffold_len", action="store", dest="min_scaffold_len", type=int, default=None,
                     help="Minimum length of scaffold to be included in regions. Default: not set")
 parser.add_argument("-g", "--region_file_format", action="store", dest="region_file_format", default='simple',
-                    help="Output region file format. Allowed: 'simple' (default), 'GATK'")
+                    help="Output region file format. "
+                         "Allowed: 'simple' (default, not appliable for stdout), 'GATK', 'samtools'")
 args = parser.parse_args()
 
 
