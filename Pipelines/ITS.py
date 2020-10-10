@@ -56,7 +56,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
         allel_freq_filtered_tab = "%s.mpileup.freq.filtered.min_allel_freq_%f.min_total_cov_%i.tab" % (vcf_prefix,
                                                                                                          max_alt_allel_freq_minimum, min_total_coverage)
         general_stat_file = "%s/%s.filtering.stats" % (output_directory, output_prefix)
-        """
+
         if aligned_reads or aligned_and_clipped_reads:
             alignment_dir = samples_directory
         else:
@@ -135,7 +135,7 @@ class ITSPipeline(FilteringPipeline, AlignmentPipeline):
                                   max_coverage=max_coverage_for_variant_call,
                                   min_base_quality=30, min_mapping_quality=30,
                                   adjust_mapping_quality=adjust_mapping_quality)
-        """
+
         gvcf_coll = CollectionVCF(in_file=gvcf_file, parsing_mode="complete")
         vcf_coll = CollectionVCF(in_file=vcf_file, parsing_mode="complete")
 
