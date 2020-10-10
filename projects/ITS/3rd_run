@@ -1,0 +1,2 @@
+~/Soft/MAVR/scripts/ITS/ITS_pipeline.py -d ../../reads/raw/ --reference ../../../2nd_run/reference/acipenser_ruthenus.ITS.fasta -t 8  -o ./ --output_prefix acipenser_ruthenus -a ~/Soft/Trimmomatic-0.36/adapters/TruSeq2-PE.fa  -k ~/service_seq/illumina_adapters_with_rev_com_23_mer.kmer -g 8 --index ../../../2nd_run/reference/acipenser_ruthenus.ITS.fasta -x 700 --adjust_mapping_quality 50 --aligner bwa -j ~/Soft/Trimmomatic-0.36/ -c ~/Soft/stirka/ -w ~/Soft/bamUtil/bin/
+

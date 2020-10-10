@@ -16,3 +16,26 @@ for SP in *; do ~/Soft/MAVR/scripts/draw/draw_plot.py -i ${SP}/${SP}.tab -o ${SP
 
 bcftools mpileup --annotate FORMAT/AD,FORMAT/ADF,FORMAT/ADR,FORMAT/DP,FORMAT/SP --max-depth 1000000 --max-idepth 1000000 --threads 10 -O u -f ../reference/cluster.fa ../alignment/G1/G1.bam ../alignment/G2/G2.bam ../alignment/G3/G3.bam ../alignment/G4/G4.bam ../alignment/G5/G5.bam ../alignment/G6/G6.bam ../alignment/G7/G7.bam ../alignment/G8/G8.bam | bcftools call -mv -O v -o ITS_variants.vcf
 
+
+
+
+~/Soft/MAVR/scripts/alignment/alignment_pipeline.py  -o ./ -d ../../fastq/filtered/ -s A01,B01,C01,D01,E01,F01,G01,H01,A02,G02,H02,A03,B03,C03,B04,C04,D04,E04,F04,G04,H04,A05,B05 -i ../../reference/acipenser_baerii.ITS.fasta -t 10 -k -w   -u .trim
+for SP in A01 B01 C01 D01 E01 F01 G01 H01 A02 G02 H02 A03 B03 C03 B04 C04 D04 E04 F04 G04 H04 A05 B05 ; do ~/Soft/MAVR/scripts/draw/draw_plot.py -i ${SP}/${SP}.tab -o ${SP}/${SP} -a 1 -b 2 -y Coverage -l position -t "Coverage of ribosomal cluster monomer by ITS lib ${SP}" -e png --width 12 -n 0 -q 1 --markersize 8 --type plot --grid &  done
+
+
+
+
+
+
+for SP in A01 A03 B01 B04 C01 C04 D04 E04 F01 G01 G04 H02 A02 A05 B03 B05 C03 D01 E01 F04 G02 H01 H04; do ~/Soft/bamUtil/bin/bam clipOverlap --in ${SP}/${SP}.bam --out ${SP}/${SP}.clipped.bam --poolSize 10000000; ~/Soft/MAVR/scripts/alignment/get_bam_coverage_stats.py  -i ${SP}/${SP}.clipped.bam -o ${SP}/${SP}.clipped --no_stats;~/Soft/MAVR/scripts/draw/draw_plot.py -i ${SP}/${SP}.clipped.tab -o ${SP}/${SP}.clipped -a 1 -b 2 -y Coverage -l position -t "Coverage of ribosomal cluster monomer by ITS lib ${SP}" -e png --width 12 -n 0 -q 1 --markersize 8 --type plot --grid & done
+ls */*.clipped.bam | xargs -P 10 -I FF samtools index FF
+
+SPECIES="acipenser_baerii"
+SAMPLES=`ls */*.clipped.bam | tr "\n" " "`; echo ${SAMPLES} | tr " " "\n" | sed s/\\/.*// > samples.ids
+samtools mpileup -d 1000000 -f ../../reference/${SPECIES}.ITS.fasta -q 20 -o ${SPECIES}.mpileup ${SAMPLES}
+java -Xmx100g -jar ~/Soft/VarScan.v2.3.9.jar mpileup2cns ${SPECIES}.mpileup --variants --vcf-sample-list samples.ids --output-vcf 1 --min-freq-for-hom 0.99 --min-reads2 10 --min-var-freq 0.0001 > ${SPECIES}.min_freq0.0001.vcf &
+java -Xmx100g -jar ~/Soft/VarScan.v2.3.9.jar mpileup2cns ${SPECIES}.mpileup --variants --vcf-sample-list samples.ids --output-vcf 1 --min-freq-for-hom 0.99 --min-reads2 10 --min-var-freq 0.001 > ${SPECIES}.min_freq0.001.vcf &
+java -Xmx100g -jar ~/Soft/VarScan.v2.3.9.jar mpileup2cns ${SPECIES}.mpileup --variants --vcf-sample-list samples.ids --output-vcf 1 --min-freq-for-hom 0.99 --min-reads2 10 --min-var-freq 0.01 > ${SPECIES}.min_freq0.01.vcf &
+java -Xmx100g -jar ~/Soft/VarScan.v2.3.9.jar mpileup2cns ${SPECIES}.mpileup --variants --vcf-sample-list samples.ids --output-vcf 1 --min-freq-for-hom 0.99 --min-reads2 10 --min-var-freq 0.1 > ${SPECIES}.min_freq0.1.vcf &
+
+SPECIES="acipenser_ruthenus"
