@@ -138,6 +138,7 @@ class AlignmentPipeline(Pipeline):
                         raise ValueError("ERROR!!! Bam with duplicates marked is smaller that with unmarked! "
                                          "Something have gone wrong. Original bam was kept.")
                 if alignment_format == "bam":
+
                     print(SamtoolsV1.threads)
                     SamtoolsV1.index(final_alignment)
 
