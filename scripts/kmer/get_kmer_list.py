@@ -21,7 +21,7 @@ parser.add_argument("-i", "--input_file", action="store", dest="input", type=lam
                     help="Comma-separated list of fasta or fastq files or directories containing them.")
 parser.add_argument("-m", "--kmer_length", action="store", dest="kmer_length", type=int, default=23,
                     help="Length of kmers")
-parser.add_argument("-s", "--hash_size", action="store", dest="hash_size", type=int, default=1000000,
+parser.add_argument("-s", "--hash_size", action="store", dest="hash_size", type=str, default="10G",
                     help="Size of hash. Estimation of hash size: for short reads S=(G + k*n)/0.8, "
                     "G - genome size, k - kmer length, n - number of reads, for assembled sequences "
                     "S=Sum(L)")
