@@ -14,12 +14,14 @@ parser.add_argument("-i", "--input", action="store", dest="input", required=True
 parser.add_argument("-o", "--output", action="store", dest="output", default=sys.stdout,
                     type=lambda s: FileRoutines.metaopen(s, "w"),
                     help="Output file - default: stdout")
-
+parser.add_argument("-v", "--verbose", action="store_true", dest="verbose",
+                    help="Write some stats to stderr. Default: False")
 args = parser.parse_args()
 
 coll_seq = CollectionSequence(in_file=args.input, parsing_mode="generator", get_stats=True)
 coll_seq.seq_lengths.to_csv(args.output, header=False, sep="\t")
 
-sys.stderr.write("Longest sequence: %i\n" % max(coll_seq.seq_lengths["length"]))
-sys.stderr.write("Shortest sequence: %i\n" % min(coll_seq.seq_lengths["length"]))
-sys.stderr.write("Total length: %i\n" % sum(coll_seq.seq_lengths["length"]))
+if args.verbose:
+    sys.stderr.write("Longest sequence: %i\n" % max(coll_seq.seq_lengths["length"]))
+    sys.stderr.write("Shortest sequence: %i\n" % min(coll_seq.seq_lengths["length"]))
+    sys.stderr.write("Total length: %i\n" % sum(coll_seq.seq_lengths["length"]))
