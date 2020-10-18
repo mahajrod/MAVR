@@ -45,6 +45,10 @@ parser.add_argument("-q", "--average_quality_threshold", action="store", dest="a
                     type=int,
                     help="Quality threshold for sliding window or whole read."
                          "Depends on -q/--average_quality_threshold option.Default - 20.")
+
+parser.add_argument("--head_crop_length", action="store", dest="head_crop_length", type=int, default=None,
+                    help="Head crop length. Use if you wish to trim beginning or reads. Default - not set")
+
 parser.add_argument("-b", "--base_quality", action="store", dest="base_quality", default="phred33",
                     help="Type of base quality. Possible variants: phred33, phred64. Default - phred33 ")
 parser.add_argument("-l", "--min_length", action="store", dest="min_len", type=int, default=50,
@@ -73,7 +77,7 @@ FilteringPipeline.stirka_trimmomatic(args.samples_dir, args.output_dir, args.ada
                                      sliding_window_size=args.sliding_window_size,
                                      average_quality_threshold=args.average_quality_threshold,
                                      leading_base_quality_threshold=None, trailing_base_quality_threshold=None,
-                                     crop_length=None, head_crop_length=None, min_len=args.min_len,
+                                     crop_length=None, head_crop_length=args.head_crop_length, min_len=args.min_len,
                                      base_quality=args.base_quality,
                                      remove_intermediate_files=args.remove_intermediate_files,
                                      stat_off=args.stat_off)
