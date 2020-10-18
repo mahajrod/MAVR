@@ -34,5 +34,5 @@ args = parser.parse_args()
 SequenceRoutines.extract_sequence_by_ids(args.input, args.id_file, args.output, format=args.format, verbose=True,
                                          id_column_number=args.id_column, coincidence_mode=args.coincidence_mode,
                                          allow_multiple_coincidence_report=args.allow_multiple_coincidence_report,
-                                         syn_file=args.syn_file, parsing_mode="parse", index_file="tmp.idx",
+                                         syn_file=args.syn_file, parsing_mode="generator",
                                          invert_match=args.invert_match)
