@@ -33,7 +33,7 @@ parser.add_argument("-r", "--label_last", action="store_false", dest="label_firs
                     help="Place label at the end of id")
 
 args = parser.parse_args()
-
+# TODO: TEST IT BEFORE USAGE. SequenceClusterRoutines.extract_sequences_by_clusters WAS SIGNIFICANTLY CHANGED WITHOUT TESTING
 FileRoutines.safe_mkdir(args.output_dir)
 SequenceClusterRoutines.extract_sequences_by_clusters(args.input_cluster_dir, args.input_seq_dir, args.output_dir,
                                                       file_with_white_list_cluster_ids=args.white_list_ids,
