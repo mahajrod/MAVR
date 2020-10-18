@@ -3,7 +3,7 @@ __author__ = 'Sergei F. Kliver'
 import os
 import shutil
 import argparse
-from RouToolPa.Routines import FileRoutines
+from RouToolPa.GeneralRoutines import FileRoutines
 from RouToolPa.Collections.General import SynDict
 
 

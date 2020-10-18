@@ -1,12 +1,7 @@
 #/usr/bin/env python
 import os
 import collections
-from RouToolPa.Routines import FileRoutines
-
-
-
-
-
+from RouToolPa.GeneralRoutines import FileRoutines
 from collections import OrderedDict
 
 from Bio import SeqIO

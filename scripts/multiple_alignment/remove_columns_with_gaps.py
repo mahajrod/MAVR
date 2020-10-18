@@ -2,7 +2,8 @@
 __author__ = 'Sergei F. Kliver'
 import argparse
 from Bio import AlignIO
-from RouToolPa.Routines import MultipleAlignmentRoutines, FileRoutines
+from RouToolPa.GeneralRoutines import FileRoutines
+from RouToolPa.Routines import MultipleAlignmentRoutines
 
 parser = argparse.ArgumentParser()
 

@@ -3,10 +3,7 @@ __author__ = 'Sergei F. Kliver'
 import os
 import argparse
 from multiprocessing import Pool
-from RouToolPa.Routines import FileRoutines
-
-
-
+from RouToolPa.GeneralRoutines import FileRoutines
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-d", "--sample_directory", action="store", dest="sample_dir",

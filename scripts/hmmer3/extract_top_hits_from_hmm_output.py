@@ -7,9 +7,7 @@ import argparse
 from multiprocessing import Pool
 from Bio import SearchIO
 from RouToolPa.Collections.General import IdList
-from RouToolPa.Routines import FileRoutines  #make_list_of_path_to_files, split_filename, check_path, save_mkdir
-
-
+from RouToolPa.GeneralRoutines import FileRoutines
 
 
 def make_list_of_path_to_files_from_comma_sep_string(string):

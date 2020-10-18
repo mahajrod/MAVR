@@ -3,7 +3,8 @@ __author__ = 'Sergei F. Kliver'
 
 import argparse
 from collections import OrderedDict
-from RouToolPa.Routines import MultipleAlignmentRoutines, FileRoutines, MatplotlibRoutines
+from RouToolPa.GeneralRoutines import FileRoutines
+from RouToolPa.Routines import MultipleAlignmentRoutines, MatplotlibRoutines
 from RouToolPa.Collections.General import TwoLvlDict
 
 

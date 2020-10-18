@@ -3,11 +3,7 @@ __author__ = 'Sergei F. Kliver'
 
 import argparse
 from RouToolPa.Collections.General import IdList
-from RouToolPa.Routines import FileRoutines
-
-
-
-
+from RouToolPa.GeneralRoutines import FileRoutines
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_file", action="store", dest="input_file",

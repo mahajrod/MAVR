@@ -2,8 +2,8 @@
 __author__ = 'Sergei F. Kliver'
 
 import argparse
-from RouToolPa.Routines import FileRoutines, SequenceClusterRoutines
-
+from RouToolPa.GeneralRoutines import FileRoutines
+from RouToolPa.Routines import SequenceClusterRoutines
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--cluster_id_file", action="store", dest="cluster_id_file",

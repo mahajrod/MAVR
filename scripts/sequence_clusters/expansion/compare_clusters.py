@@ -2,8 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 import argparse
 from collections import OrderedDict
-from RouToolPa.Routines import FileRoutines
-
+from RouToolPa.GeneralRoutines import FileRoutines
 def read_cluster_file(filename, with_counts=False):
     cluster_dict = OrderedDict()
     noname_family_index = 1

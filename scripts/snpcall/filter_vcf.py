@@ -3,9 +3,7 @@ __author__ = 'Sergei F. Kliver'
 import argparse
 from RouToolPa.Tools.GATK import VariantFiltration
 from RouToolPa.Tools.GATK4 import VariantFiltration4
-from RouToolPa.Routines import FileRoutines
-
-
+from RouToolPa.GeneralRoutines import FileRoutines
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_vcf", action="store", dest="input_vcf", required=True,

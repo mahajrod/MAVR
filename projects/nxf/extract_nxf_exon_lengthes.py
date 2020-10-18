@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 import os
 from Bio import SeqIO
-from RouToolPa.Routines import FileRoutines
-
-
+from RouToolPa.GeneralRoutines import FileRoutines
 workdir = "/home/mahajrod/Genetics/Projects/nxf/nxf_arthropoda/"
 data_dir = "/home/mahajrod/Genetics/Projects/nxf/nxf_arthropoda/data/"
 

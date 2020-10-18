@@ -4,9 +4,7 @@ import argparse
 from RouToolPa.Tools.BLAST import BLASTp
 from RouToolPa.Tools.HMMER import HMMER3
 from RouToolPa.Tools.Annotation import TransDecoder
-from RouToolPa.Routines import FileRoutines
-
-
+from RouToolPa.GeneralRoutines import FileRoutines
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_file", action="store", dest="input", required=True,

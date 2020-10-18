@@ -6,7 +6,7 @@ This scripts assumes that genes are named in following manner: species_geneid
 
 import argparse
 from collections import OrderedDict
-from RouToolPa.Routines import FileRoutines
+from RouToolPa.GeneralRoutines import FileRoutines
 from RouToolPa.Collections.General import SynDict, TwoLvlDict, IdList
 
 

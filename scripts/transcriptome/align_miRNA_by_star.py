@@ -5,7 +5,7 @@ import argparse
 from RouToolPa.Tools.Alignment import STAR
 from RouToolPa.Tools.Samtools import SamtoolsV1
 from Pipelines import Pipeline
-from RouToolPa.Routines import FileRoutines
+from RouToolPa.GeneralRoutines import FileRoutines
 from RouToolPa.Routines.File import check_path
 
 
