@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-
+import os
+from RouToolPa.Collections.General import IdList
 import argparse
 from RouToolPa.Routines import NCBIRoutines
 
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-t", "--taxa", action="store", dest="taxa", required=True,
-                    type=lambda s: s.split(","),
+                    type=lambda s: IdList(filename=s) if os.path.exists(s) else s.split(","),
                     help="Comma-separated list of taxon names for query")
 parser.add_argument("-e", "--email", action="store", dest="email", required=True,
                     help="Email used in Entrez queues")

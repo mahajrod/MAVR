@@ -23,7 +23,8 @@ gene_ids = args.genes
 
 parser.add_argument("-g", "--genes", action="store", dest="genes",  required=True,
                     help="File with names of genes to transfer.")
-
+parser.add_argument("-g", "--genes", action="store", dest="genes",  required=True,
+                    help="File with names of genes to transfer.")
 args = parser.parse_args()
 
 gene_ids = IdList(filename=args.genes)

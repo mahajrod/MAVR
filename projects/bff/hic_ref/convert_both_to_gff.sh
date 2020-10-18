@@ -1,0 +1,1 @@
+awk -F'\t' 'NR > 1 {printf "%s\tmanual\tCDS\t%i\t%i\t.\t%s\t.\tID=%s;Parent=%s\n", $5, $20+1, $21, $22, $7,$8}' rna-NM_001287148.1.CDS.both  > rna-NM_001287148.1.CDS.transferred.gff
