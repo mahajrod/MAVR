@@ -7,7 +7,7 @@ from RouToolPa.Routines import SequenceRoutines
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", "--input_file_list", action="store", dest="input", required=True,
+parser.add_argument("-i", "--input_file", action="store", dest="input", required=True,
                     type=lambda s: make_list_of_path_to_files(s.split(",")),
                     help="Comma-separated list of input files/directories with sequences")
 parser.add_argument("-o", "--output_file", action="store", dest="output", default="stdout",
