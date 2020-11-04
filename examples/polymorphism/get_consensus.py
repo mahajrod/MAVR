@@ -2,7 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 import os
 from RouToolPa.Tools.GATK import FastaAlternateReferenceMaker
-from RouToolPa.Routines.File import read_ids
+from RouToolPa.GeneralRoutines.File import read_ids
 
 
 

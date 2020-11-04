@@ -9,7 +9,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.ticker as tck
 
-from RouToolPa.Routines.File import read_tsv_as_columns_dict
+from RouToolPa.GeneralRoutines.File import read_tsv_as_columns_dict
 
 
 def check_location_intersection(location1, location2):

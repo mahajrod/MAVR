@@ -4,7 +4,7 @@ __author__ = 'Sergei F. Kliver'
 import os
 import sys
 from collections import OrderedDict
-from RouToolPa.Routines.File import read_ids
+from RouToolPa.GeneralRoutines.File import read_ids
 
 
 species_list = ["cat",
