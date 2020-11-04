@@ -91,7 +91,7 @@ for chrom in annotations_dict:
             three_prime_utr_location_list = []
             exon_location_list = []
             cds_location_list = []
-            print feature.qualifiers["ID"][0]
+            print(feature.qualifiers["ID"][0])
             #print feature.sub_features
             for sub_feature in feature.sub_features:
                 if sub_feature.type == five_prime_utr_type:
@@ -185,7 +185,7 @@ for chrom in annotations_dict:
             three_prime_utr_location_list = []
             exon_location_list = []
             cds_location_list = []
-            print feature.qualifiers["ID"][0]
+            print(feature.qualifiers["ID"][0])
             #print feature.sub_features
             for sub_feature in feature.sub_features:
                 if sub_feature.type == five_prime_utr_type:
