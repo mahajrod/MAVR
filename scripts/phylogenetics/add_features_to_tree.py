@@ -3,7 +3,7 @@ __author__ = 'Sergei F. Kliver'
 
 import argparse
 from collections import OrderedDict
-from ete2 import Tree
+from ete3 import Tree
 from RouToolPa.Collections.General import SynDict
 
 parser = argparse.ArgumentParser()

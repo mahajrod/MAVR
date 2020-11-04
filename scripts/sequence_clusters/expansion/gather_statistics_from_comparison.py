@@ -4,7 +4,7 @@ import sys
 import argparse
 from collections import OrderedDict
 from RouToolPa.Collections.General import TwoLvlDict
-from RouToolPa.Routines.File import check_path
+from RouToolPa.GeneralRoutines.File import check_path
 
 
 

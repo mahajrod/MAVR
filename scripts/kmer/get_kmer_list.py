@@ -11,7 +11,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 plt.ioff()
 
-from RouToolPa.Routines.File import make_list_of_path_to_files
+from RouToolPa.GeneralRoutines.File import make_list_of_path_to_files
 from RouToolPa.Tools.Kmers import Jellyfish
 from RouToolPa.Routines.Sequence import rev_com_generator
 

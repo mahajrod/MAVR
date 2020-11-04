@@ -3,8 +3,8 @@ __author__ = 'Sergei F. Kliver'
 import os
 import sys
 import argparse
-from ete2 import Tree
-from RouToolPa.Routines.File import check_path, split_filename
+from ete3 import Tree
+from RouToolPa.GeneralRoutines.File import check_path, split_filename
 from RouToolPa.Collections.General import SynDict
 
 

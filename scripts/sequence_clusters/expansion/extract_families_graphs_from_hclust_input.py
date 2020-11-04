@@ -5,7 +5,7 @@ import os
 import argparse
 from multiprocessing import Pool
 from RouToolPa.Collections.General import SynDict
-from RouToolPa.Routines.File import check_path
+from RouToolPa.GeneralRoutines.File import check_path
 
 
 """

@@ -5,7 +5,7 @@ import argparse
 from Bio import SeqIO
 from RouToolPa.Collections.General import SynDict, IdSet
 from RouToolPa.GeneralRoutines import FileRoutines
-#from RouToolPa.Routines.File import read_ids, make_list_of_path_to_files, check_path, save_mkdir
+#from RouToolPa.GeneralRoutines.File import read_ids, make_list_of_path_to_files, check_path, save_mkdir
 from RouToolPa.Routines import SequenceRoutines
 
 

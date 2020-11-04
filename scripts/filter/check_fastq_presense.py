@@ -3,7 +3,7 @@ __author__ = 'Sergei F. Kliver'
 
 import os
 import argparse
-from RouToolPa.Routines.File import check_path
+from RouToolPa.GeneralRoutines.File import check_path
 
 
 def check_if_files_form_pair(first_filename, second_filename, name_type):

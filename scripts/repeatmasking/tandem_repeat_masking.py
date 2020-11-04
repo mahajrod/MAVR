@@ -3,7 +3,7 @@ __author__ = 'Sergei F. Kliver'
 
 import argparse
 from RouToolPa.Tools.RepeatMasking import TRF
-from RouToolPa.Routines.File import split_filename
+from RouToolPa.GeneralRoutines.File import split_filename
 
 
 parser = argparse.ArgumentParser()

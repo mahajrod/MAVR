@@ -4,7 +4,7 @@ __author__ = 'Sergei F. Kliver'
 import os
 import sys
 import argparse
-from RouToolPa.Routines.File import check_path, split_filename
+from RouToolPa.GeneralRoutines.File import check_path, split_filename
 from RouToolPa.Collections.General import SynDict
 
 

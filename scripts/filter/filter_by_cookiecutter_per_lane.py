@@ -5,7 +5,7 @@ __author__ = 'Sergei F. Kliver'
 import os
 import argparse
 from RouToolPa.Tools.Filter import CookiecutterOld
-from RouToolPa.Routines.File import check_path, safe_mkdir
+from RouToolPa.GeneralRoutines.File import check_path, safe_mkdir
 
 
 

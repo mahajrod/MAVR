@@ -6,7 +6,7 @@ import argparse
 from Bio import SeqIO
 from RouToolPa.Tools.Filter import Cookiecutter
 from RouToolPa.Routines.Sequence import rev_com_generator
-from RouToolPa.Routines.File import check_path, split_filename
+from RouToolPa.GeneralRoutines.File import check_path, split_filename
 from RouToolPa.Tools.Kmers import Jellyfish
 from RouToolPa.Tools.Assemblers import MaSuRCA
 

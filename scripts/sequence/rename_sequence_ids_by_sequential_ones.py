@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import argparse
-from RouToolPa.Routines.File import make_list_of_path_to_files
+from RouToolPa.GeneralRoutines.File import make_list_of_path_to_files
 from RouToolPa.Routines import SequenceRoutines
 
 

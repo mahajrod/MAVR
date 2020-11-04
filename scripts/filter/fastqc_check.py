@@ -8,7 +8,7 @@ from RouToolPa.Tools.Filter import Trimmomatic
 
 #from RouToolPa.Tools.Filter import FastQC
 
-from RouToolPa.Routines.File import check_path, safe_mkdir
+from RouToolPa.GeneralRoutines.File import check_path, safe_mkdir
 
 parser = argparse.ArgumentParser()
 

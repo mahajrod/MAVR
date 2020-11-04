@@ -3,7 +3,7 @@ __author__ = 'Sergei F. Kliver'
 
 import argparse
 
-from ete2 import Tree
+from ete3 import Tree
 
 parser = argparse.ArgumentParser()
 

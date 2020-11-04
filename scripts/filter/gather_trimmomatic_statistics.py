@@ -4,7 +4,7 @@ import os
 import argparse
 from RouToolPa.Tools.Filter import Trimmomatic
 from RouToolPa.Collections.General import TwoLvlDict
-from RouToolPa.Routines.File import check_path
+from RouToolPa.GeneralRoutines.File import check_path
 
 
 

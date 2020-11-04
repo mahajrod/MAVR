@@ -2,7 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 import argparse
 from RouToolPa.Tools.HMMER import HMMER3
-from RouToolPa.Routines.File import check_path
+from RouToolPa.GeneralRoutines.File import check_path
 
 
 parser = argparse.ArgumentParser()

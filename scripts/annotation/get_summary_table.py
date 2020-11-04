@@ -4,7 +4,7 @@ import sys
 import argparse
 from collections import OrderedDict
 from Bio.SeqUtils import seq1
-from RouToolPa.Routines.File import make_list_of_path_to_files, split_filename
+from RouToolPa.GeneralRoutines.File import make_list_of_path_to_files, split_filename
 from RouToolPa.Collections.General import TwoLvlDict, SynDict
 
 

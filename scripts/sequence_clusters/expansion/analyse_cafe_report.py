@@ -16,7 +16,7 @@ from numpy import linspace, arange
 from collections import OrderedDict
 from RouToolPa.Collections.General import TwoLvlDict
 from RouToolPa.Parsers.CAFE import ReportCAFE
-from RouToolPa.Routines.File import read_synonyms_dict
+from RouToolPa.GeneralRoutines.File import read_synonyms_dict
 
 parser = argparse.ArgumentParser()
 

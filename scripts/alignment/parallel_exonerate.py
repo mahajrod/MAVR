@@ -3,7 +3,7 @@ __author__ = 'mahajrod'
 
 import argparse
 from RouToolPa.Tools.Annotation import Exonerate
-from RouToolPa.Routines.File import split_filename
+from RouToolPa.GeneralRoutines.File import split_filename
 
 
 parser = argparse.ArgumentParser()

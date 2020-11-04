@@ -3,7 +3,7 @@ __author__ = 'Sergei F. Kliver'
 import os
 import argparse
 from Bio import SeqIO
-from RouToolPa.Routines.File import make_list_of_path_to_files
+from RouToolPa.GeneralRoutines.File import make_list_of_path_to_files
 from RouToolPa.Routines.Sequence import record_by_expression_generator
 
 

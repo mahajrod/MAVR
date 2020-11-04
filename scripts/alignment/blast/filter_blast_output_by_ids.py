@@ -4,7 +4,7 @@ import sys
 import argparse
 from Bio import SearchIO
 from Bio.SearchIO import QueryResult
-from RouToolPa.Routines.File import read_ids
+from RouToolPa.GeneralRoutines.File import read_ids
 
 
 parser = argparse.ArgumentParser()

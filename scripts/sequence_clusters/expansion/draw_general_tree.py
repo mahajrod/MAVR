@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import argparse
-from ete2 import Tree, TreeStyle, AttrFace, faces
+from ete3 import Tree, TreeStyle, AttrFace, faces
 
 
 def layout(node):

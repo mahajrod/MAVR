@@ -4,7 +4,7 @@ import os
 import argparse
 from RouToolPa.Tools.Alignment import STAR
 from RouToolPa.Collections.General import IdList
-from RouToolPa.Routines.File import check_path
+from RouToolPa.GeneralRoutines.File import check_path
 
 
 parser = argparse.ArgumentParser()

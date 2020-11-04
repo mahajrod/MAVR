@@ -6,7 +6,7 @@ import argparse
 from collections import OrderedDict
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
-from RouToolPa.Routines.File import make_list_of_path_to_files
+from RouToolPa.GeneralRoutines.File import make_list_of_path_to_files
 from RouToolPa.Routines.Sequence import record_by_expression_generator
 
 
