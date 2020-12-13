@@ -5,6 +5,7 @@ import argparse
 from RouToolPa.Collections.General import IdList
 from RouToolPa.Routines import SequenceRoutines
 
+
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-r", "--reference", action="store", dest="reference", required=True,
