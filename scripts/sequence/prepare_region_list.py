@@ -20,10 +20,10 @@ parser.add_argument("-n", "--max_seq_number", action="store", dest="max_seq_numb
                     help="Maximum number of sequences per region. Default: 1")
 parser.add_argument("-b", "--scaffold_black_list_file", action="store", dest="scaffold_black_list_file",
                     type=lambda s: IdList(filename=s) if os.path.isfile(s) else IdList(s.split(",")),
-                    help="File with scaffolds from black list")
+                    help="File or comma-separated list with scaffolds from black list")
 parser.add_argument("-w", "--scaffold_white_list_file", action="store", dest="scaffold_white_list_file",
                     type=lambda s: IdList(filename=s) if os.path.isfile(s) else IdList(s.split(",")),
-                    help="File with scaffolds from white list")
+                    help="File or comma-separated list with scaffolds from white list")
 parser.add_argument("-x", "--min_scaffold_len", action="store", dest="min_scaffold_len", type=int, default=None,
                     help="Minimum length of scaffold to be included in regions. Default: not set")
 parser.add_argument("-g", "--region_file_format", action="store", dest="region_file_format", default='simple',
