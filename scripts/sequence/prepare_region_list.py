@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
+import os
 import argparse
 from RouToolPa.Collections.General import IdList
 from RouToolPa.Routines import SequenceRoutines
@@ -17,8 +18,11 @@ parser.add_argument("-m", "--max_length", action="store", dest="max_length", typ
 parser.add_argument("-n", "--max_seq_number", action="store", dest="max_seq_number", type=int, default=1,
                     help="Maximum number of sequences per region. Default: 1")
 parser.add_argument("-b", "--scaffold_black_list_file", action="store", dest="scaffold_black_list_file",
-                    type=lambda s: IdList(filename=s),
+                    type=lambda s: IdList(filename=s) if os.path.isfile(s) else IdList(s.split(",")),
                     help="File with scaffolds from black list")
+parser.add_argument("-w", "--scaffold_white_list_file", action="store", dest="scaffold_white_list_file",
+                    type=lambda s: IdList(filename=s) if os.path.isfile(s) else IdList(s.split(",")),
+                    help="File with scaffolds from white list")
 parser.add_argument("-x", "--min_scaffold_len", action="store", dest="min_scaffold_len", type=int, default=None,
                     help="Minimum length of scaffold to be included in regions. Default: not set")
 parser.add_argument("-g", "--region_file_format", action="store", dest="region_file_format", default='simple',
@@ -35,7 +39,8 @@ SequenceRoutines.prepare_region_list_by_length(max_length=args.max_length,
                                                output_dir=args.output_dir,
                                                split_scaffolds=args.split_scaffolds,
                                                min_scaffold_length=args.min_scaffold_len,
-                                               black_list_scaffolds=None,
+                                               black_list_scaffolds=args.scaffold_black_list_file,
+                                               white_list_scaffolds=args.scaffold_white_list_file,
                                                region_file_format=args.region_file_format)
 
 
