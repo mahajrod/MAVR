@@ -2,6 +2,7 @@
 __author__ = 'Sergei F. Kliver'
 import os
 import argparse
+from RouToolPa.Parsers.PSL import CollectionPSL
 from RouToolPa.Parsers.LAST import CollectionLast
 from RouToolPa.Collections.General import IdList, SynDict
 from RouToolPa.Routines import DrawingRoutines
@@ -14,7 +15,7 @@ parser.add_argument("-i", "--input_last_tab", action="store", dest="input_last_t
 parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", required=True,
                     help="Prefix of output files")
 parser.add_argument("--format", action="store", dest="format", default="tab",
-                    help="Format of LAST alignments. Allowed: tab(default), tab_mismap")
+                    help="Format of alignments. Allowed: tab(default), tab_mismap, psl")
 parser.add_argument("-w", "--white_target_id_file", action="store", dest="white_target_id_file",
                     help="File with target scaffold ids from white list or corresponding comma-separated list."
                          "NOTE: filtering is done BEFORE renaming by synonyms!")
@@ -66,7 +67,7 @@ parser.add_argument("-e", "--extensions", action="store", dest="extensions", typ
 
 parser.add_argument("-d", "--dpi", action="store", dest="dpi", type=int, default=400,
                     help="DPI of figure. Default: 400")
-parser.add_argument("-f", "--figsize", action="store", dest="figsize", type=lambda s: map(int, s.split(",")),
+parser.add_argument("-f", "--figsize", action="store", dest="figsize", type=lambda s: list(map(int, s.split(","))),
                     default=(12, 12),
                     help="Size of figure in inches(two comma-separated ints). Default: 12,12")
 parser.add_argument("-a", "--antialiasing", action="store_true", dest="antialiasing", default=False,
@@ -160,18 +161,29 @@ if args.query_order_file:
     query_order_list = IdList(filename=args.query_order_file) if os.path.isfile(args.query_order_file) else IdList(args.query_order_file.split(","))
 else:
     query_order_list = IdList()
+if args.format in ("tab", "tab_mismap"):
+    last_collection = CollectionLast(args.input_last_tab,
+                                     target_white_list=target_white_list,
+                                     target_black_list=target_black_list,
+                                     query_white_list=query_white_list,
+                                     query_black_list=query_black_list,
+                                     query_syn_dict=query_syn_dict,
+                                     target_syn_dict=target_syn_dict,
+                                     format=args.format
+                                     )
+    last_collection.write("%s.syn.tab" % args.output_prefix)
 
-last_collection = CollectionLast(args.input_last_tab,
-                                 target_white_list=target_white_list,
-                                 target_black_list=target_black_list,
-                                 query_white_list=query_white_list,
-                                 query_black_list=query_black_list,
-                                 query_syn_dict=query_syn_dict,
-                                 target_syn_dict=target_syn_dict,
-                                 format=args.format
-                                 )
+elif args.format == "psl":
+    last_collection = CollectionPSL(args.input_last_tab,
+                                     target_white_list=target_white_list,
+                                     target_black_list=target_black_list,
+                                     query_white_list=query_white_list,
+                                     query_black_list=query_black_list,
+                                     query_syn_dict=query_syn_dict,
+                                     target_syn_dict=target_syn_dict,
+                                     format=args.format
+                                     )
 
-last_collection.write("%s.syn.tab" % args.output_prefix)
 
 DrawingRoutines.draw_dot_plot_from_last_alignment(last_collection,
                                                   output_prefix=args.output_prefix,
