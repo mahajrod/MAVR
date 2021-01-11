@@ -8,7 +8,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input", action="store", dest="input", required=True,
                     help="Input .gff file with RepeatMasker output")
-parser.add_argument("-p", "--output", action="store", dest="output", required=True,
+parser.add_argument("-o", "--output", action="store", dest="output", required=True,
                     help="Output gff with selected repeats")
 parser.add_argument("-e", "--expanded_set", action="store_true", dest="expanded_set", default=False,
                     help="Use expanded set of repeats. Includes 'Unknown', 'Other' and 'ARTEFACT' classes."
