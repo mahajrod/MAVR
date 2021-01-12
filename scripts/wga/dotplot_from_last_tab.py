@@ -121,6 +121,9 @@ parser.add_argument("--x_axis_visible", action="store_true", dest="x_axis_visibl
 parser.add_argument("--y_axis_visible", action="store_true", dest="y_axis_visible",
                     default=False,
                     help="Make Y axis visible. Default: False")
+parser.add_argument("--axes_label_distancet", action="store", dest="axes_label_distance",
+                    default=12, type=float,
+                    help="Distance between axes and its labels. Default: 12")
 
 args = parser.parse_args()
 
@@ -218,5 +221,5 @@ DrawingRoutines.draw_dot_plot_from_last_alignment(last_collection,
                                                   left_offset=args.left_offset,
                                                   right_offset=args.right_offset,
                                                   x_axis_visible=args.x_axis_visible,
-                                                  y_axis_visible=args.y_axis_visible
-                                                  )
+                                                  y_axis_visible=args.y_axis_visible,
+                                                  axes_label_distance=args.axes_label_distance)
