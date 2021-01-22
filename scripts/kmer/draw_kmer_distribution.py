@@ -59,7 +59,7 @@ bins = []
 
 with open(histo_file, "r") as histo_fd:
     if args.skip_ends:
-        histo_fd.next()
+        histo_fd.readline()
     for line in histo_fd:
         entry = line.strip().split()
         counts.append(entry[1])

@@ -85,7 +85,7 @@ for sample in samples:
 
         with open(stat_files_from_sample_dir[stat_file_index], "r") as stat_fd:
             try:
-                line = stat_fd.next()
+                line = stat_fd.readline()
 
                 while line[:13] != "instrument_id":
                     if line[:15] == "Paires retained" or line[:14] == "Pairs retained":
@@ -96,8 +96,8 @@ for sample in samples:
                         reverse_only_retained = float(line.strip().split("\t")[-1])
                     elif line[:15] == "Pairs discarded":
                         pairs_discarded = float(line.strip().split("\t")[-1])
-                    line = stat_fd.next()
-                line = stat_fd.next()
+                    line = stat_fd.readline()
+                line = stat_fd.readline()
                 total_stats_list = np.array([pairs_retained, forward_only_retained, reverse_only_retained, pairs_discarded])
                 for line in stat_fd:
                     line_list = line.strip().split("\t")

@@ -87,14 +87,14 @@ with open(args.temp_file, "r") as input_fd:
         for line in input_fd:
             fl_first, fl_second, fl_weight, fl_alignment_len = line.strip().split("\t")
             fl_alignment_len = float(fl_alignment_len)
-            try:  # check for last string in file (Stop Iteration is raised if end of file was reached on .next() method)
-                sl_first, sl_second, sl_weight, sl_alignment_len = input_fd.next().strip().split("\t")
+            try:  # check for last string in file (Stop Iteration is raised if end of file was reached on .readline() method)
+                sl_first, sl_second, sl_weight, sl_alignment_len = input_fd.readline().strip().split("\t")
             except StopIteration:
                 break
             sl_alignment_len = float(sl_alignment_len)
             while (fl_first != sl_first) or (fl_second != sl_second):
                 fl_first, fl_second, fl_weight, fl_alignment_len = sl_first, sl_second, sl_weight, sl_alignment_len
-                sl_first, sl_second, sl_weight, sl_alignment_len = input_fd.next().strip().split("\t")
+                sl_first, sl_second, sl_weight, sl_alignment_len = input_fd.readline().strip().split("\t")
                 sl_alignment_len = float(sl_alignment_len)
             if (fl_first not in length_dict) or (fl_second not in length_dict):
                 continue

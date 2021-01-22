@@ -32,7 +32,7 @@ with open(args.input, "r") as in_fd:
                 continue
             out_fd.write(line)
             while True:
-                description_list = in_fd.next().split("\t")[9].split(";")
+                description_list = in_fd.readline().split("\t")[9].split(";")
 
 
 
