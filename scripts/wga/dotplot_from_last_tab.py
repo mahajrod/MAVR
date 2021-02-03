@@ -76,10 +76,10 @@ parser.add_argument("--auto_scale_figure", action="store_true", dest="auto_scale
                          ". Depends on --mbp_per_inch/--figure_height/--figure_width options. Default: False")
 parser.add_argument("--mbp_per_inch", action="store", dest="mbp_per_inch", type=float, default=None,
                     help="Megabasepairs per inch. This option is used for autoscaling of figure size. Default: not set")
-parser.add_argument("--figure_width", action="store", dest="figure_width", type=intt, default=None,
+parser.add_argument("--figure_width", action="store", dest="figure_width", type=int, default=None,
                     help="Figure width. This option is used for autoscaling of figure size."
                          " Ignored if --mbp_per_inch is set. Default: not set")
-parser.add_argument("--figure_height", action="store", dest="figure_height", type=intt, default=None,
+parser.add_argument("--figure_height", action="store", dest="figure_height", type=int, default=None,
                     help="Figure height. This option is used for autoscaling of figure size."
                          " Ignored if --mbp_per_inch or --figure_width is set.  Default: not set")
 parser.add_argument("-a", "--antialiasing", action="store_true", dest="antialiasing", default=False,
