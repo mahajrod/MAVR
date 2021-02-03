@@ -69,7 +69,13 @@ parser.add_argument("-d", "--dpi", action="store", dest="dpi", type=int, default
                     help="DPI of figure. Default: 400")
 parser.add_argument("-f", "--figsize", action="store", dest="figsize", type=lambda s: list(map(int, s.split(","))),
                     default=(12, 12),
-                    help="Size of figure in inches(two comma-separated ints). Default: 12,12")
+                    help="Size of figure in inches(two comma-separated ints). "
+                         "Ignored if --auto_scale_figure is set. Default: 12,12")
+parser.add_argument("--auto_scale_figure", action="store_true", dest="auto_scale_figure", default=False,
+                    help="Autoscale figure size based on total length of scaffolds (independently for query and target)"
+                         ". Depends on --mbp_per_inch option. Default: False")
+parser.add_argument("--mbp_per_inch", action="store", dest="mbp_per_inch", type=float, default=150.0,
+                    help="Megabasepairs per inch. This option is used for autoscaling of figure size. Default: 150.0")
 parser.add_argument("-a", "--antialiasing", action="store_true", dest="antialiasing", default=False,
                     help="Enable antialiasing. Use this option only for small sequences, i.e segments of chromosomes ")
 
@@ -250,5 +256,7 @@ DrawingRoutines.draw_dot_plot_from_last_alignment(last_collection,
                                                   show_length_ticks=args.show_length_ticks,
                                                   show_tick_grid=args.show_tick_grid,
                                                   tick_step=args.tick_step,
-                                                  tick_unit=args.tick_unit
+                                                  tick_unit=args.tick_unit,
+                                                  auto_scale_figure=args.auto_scale_figure,
+                                                  mbp_per_inch=args.mbp_per_inch,
                                                   )
