@@ -121,9 +121,17 @@ parser.add_argument("--x_axis_visible", action="store_true", dest="x_axis_visibl
 parser.add_argument("--y_axis_visible", action="store_true", dest="y_axis_visible",
                     default=False,
                     help="Make Y axis visible. Default: False")
-parser.add_argument("--axes_label_distancet", action="store", dest="axes_label_distance",
+parser.add_argument("--axes_label_distance", action="store", dest="axes_label_distance",
                     default=12, type=float,
                     help="Distance between axes and its labels. Default: 12")
+parser.add_argument("--remove_scaffolds_absent_in_target_ordered_list", action="store_true",
+                    dest="remove_scaffolds_absent_in_target_ordered_list",
+                    default=False,
+                    help="Remove scaffolds that are absent in target orderlist. Default: False")
+parser.add_argument("--remove_scaffolds_absent_in_query_ordered_list", action="store_true",
+                    dest="remove_scaffolds_absent_in_query_ordered_list",
+                    default=False,
+                    help="Remove scaffolds that are absent in scaffold orderlist. Default: False")
 
 args = parser.parse_args()
 
@@ -198,6 +206,8 @@ DrawingRoutines.draw_dot_plot_from_last_alignment(last_collection,
                                                   query_black_list=(),
                                                   query_white_list=(),
                                                   query_ordered_list=query_order_list,
+                                                  remove_scaffolds_absent_in_target_ordered_list=args.remove_scaffolds_absent_in_target_ordered_list,
+                                                  remove_scaffolds_absent_in_query_ordered_list=args.remove_scaffolds_absent_in_query_ordered_list,
                                                   #query_reverse_list=(),
                                                   figsize=args.figsize, dpi=args.dpi,
                                                   grid_color=args.grid_color,
