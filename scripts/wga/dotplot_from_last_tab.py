@@ -132,6 +132,16 @@ parser.add_argument("--remove_scaffolds_absent_in_query_ordered_list", action="s
                     dest="remove_scaffolds_absent_in_query_ordered_list",
                     default=False,
                     help="Remove scaffolds that are absent in scaffold orderlist. Default: False")
+parser.add_argument("--show_length_ticks", action="store_true",
+                    dest="show_length_ticks",
+                    default=False,
+                    help="Show scaffold length ticks. Default: False")
+parser.add_argument("--tick_step", action="store", dest="tick_step",
+                    default=10000000, type=int,
+                    help="Scaffold length tick step. Default: 10 000 000, i.e 10 Mbp")
+parser.add_argument("--tick_unit", action="store", dest="tick_unit",
+                    default=1000000, type=int,
+                    help="Scaffold length tick unit. Default: 1 000 000, i.e. Mbp")
 
 args = parser.parse_args()
 
@@ -232,4 +242,8 @@ DrawingRoutines.draw_dot_plot_from_last_alignment(last_collection,
                                                   right_offset=args.right_offset,
                                                   x_axis_visible=args.x_axis_visible,
                                                   y_axis_visible=args.y_axis_visible,
-                                                  axes_label_distance=args.axes_label_distance)
+                                                  axes_label_distance=args.axes_label_distance,
+                                                  show_length_ticks=args.show_length_ticks,
+                                                  tick_step=args.tick_step,
+                                                  tick_unit=args.tick_unit
+                                                  )
