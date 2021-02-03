@@ -136,6 +136,10 @@ parser.add_argument("--show_length_ticks", action="store_true",
                     dest="show_length_ticks",
                     default=False,
                     help="Show scaffold length ticks. Default: False")
+parser.add_argument("--show_tick_grid", action="store_true",
+                    dest="show_tick_grid",
+                    default=False,
+                    help="Show tick grid. Default: False")
 parser.add_argument("--tick_step", action="store", dest="tick_step",
                     default=10000000, type=int,
                     help="Scaffold length tick step. Default: 10 000 000, i.e 10 Mbp")
@@ -244,6 +248,7 @@ DrawingRoutines.draw_dot_plot_from_last_alignment(last_collection,
                                                   y_axis_visible=args.y_axis_visible,
                                                   axes_label_distance=args.axes_label_distance,
                                                   show_length_ticks=args.show_length_ticks,
+                                                  show_tick_grid=args.show_tick_grid,
                                                   tick_step=args.tick_step,
                                                   tick_unit=args.tick_unit
                                                   )
