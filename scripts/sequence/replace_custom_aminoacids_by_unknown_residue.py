@@ -8,7 +8,6 @@ from Bio.Seq import Seq
 from RouToolPa.Routines import SequenceRoutines
 
 
-
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_file", action="store", dest="input_file",

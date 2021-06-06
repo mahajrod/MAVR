@@ -14,7 +14,6 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
                     help="Prefix of output files")
 parser.add_argument("-t", "--threads", action="store", dest="threads", default=1, type=int,
                     help="Thread number to use for clustering. Default: 1")
-
 parser.add_argument("-c", "--cdhit_dir", action="store", dest="cdhit_dir", default=None,
                     help="Path to CDHIT directory")
 
