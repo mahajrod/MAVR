@@ -1,13 +1,13 @@
 package:
   name: "mavr"
-  version: "0.91"
+  version: "0.96"
 about:
   summary: "Scripts and pipelines"
 source:
   path: ../
 requirements:
   build:
-    - python>=3.7
+    - python {{ python }}
     - pip
     - setuptools
     - ete3
@@ -24,6 +24,7 @@ requirements:
     - xlsxwriter
     - routoolpa
   run:
+    - python
     - scipy
     - numpy
     - pandas
