@@ -1,0 +1,39 @@
+package:
+  name: "mavr"
+  version: "0.91"
+about:
+  summary: "Scripts and pipelines"
+source:
+  path: ../
+requirements:
+  build:
+    - python>=3.7
+    - pip
+    - setuptools
+    - ete3
+    - scipy
+    - numpy
+    - pandas
+    - matplotlib
+    - statsmodels
+    - biopython
+    - pyparsing
+    - xmltodict
+    - venn
+    - bcbio-gff
+    - xlsxwriter
+  run:
+    - scipy
+    - numpy
+    - pandas
+    - matplotlib
+    - ete3
+    - statsmodels
+    - pyparsing
+    - xmltodict
+    - biopython
+    - venn
+    - bcbio-gff
+    - xlsxwriter
+build:
+  script: python setup.py install
