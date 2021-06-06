@@ -2,7 +2,11 @@
 
 from collections import OrderedDict
 from Bio import SeqIO
-from BCBio import GFF
+try:
+    from BCBio import GFF
+except:
+    print("Please install bcbio-gff package to run this script. Exiting...")
+    exit(0)
 import matplotlib
 
 matplotlib.use('Agg')

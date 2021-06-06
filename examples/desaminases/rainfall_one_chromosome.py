@@ -15,7 +15,11 @@ import numpy as np
 from Parsers.VCF import ReferenceGenome, CollectionVCF, ref_alt_variants
 
 from Parsers.GFF import CollectionGFF
-from BCBio import GFF
+try:
+    from BCBio import GFF
+except:
+    print("Please install bcbio-gff package to run this script. Exiting...")
+    exit(0)
 
 def connect_bbox(bbox1, bbox2,
                  loc1a, loc2a, loc1b, loc2b,

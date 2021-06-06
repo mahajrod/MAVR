@@ -2,7 +2,11 @@
 
 from collections import OrderedDict
 from Bio import SeqIO
-from BCBio import GFF
+try:
+    from BCBio import GFF
+except:
+    print("Please install bcbio-gff package to run this script. Exiting...")
+    exit(0)
 
 import matplotlib
 matplotlib.use('Agg')
@@ -125,7 +129,7 @@ for subplot_index, limits in zip([9, 10], borders):
             three_prime_utr_location_list = []
             exon_location_list = []
             cds_location_list = []
-            print feature.qualifiers["ID"][0]
+            print(feature.qualifiers["ID"][0])
             #print feature.sub_features
             for sub_feature in feature.sub_features:
                 if sub_feature.type == five_prime_utr_type:

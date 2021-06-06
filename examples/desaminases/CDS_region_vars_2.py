@@ -9,10 +9,11 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-import pprint
-from BCBio.GFF import GFFExaminer
-from BCBio import GFF
-
+try:
+    from BCBio import GFF
+except:
+    print("Please install bcbio-gff package to run this script. Exiting...")
+    exit(0)
 if __name__ == "__main__":
     workdir = "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/combined_vcf/clusters/all/all/"
 

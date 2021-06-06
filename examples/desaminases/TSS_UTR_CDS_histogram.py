@@ -9,9 +9,11 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-import pprint
-from BCBio.GFF import GFFExaminer
-from BCBio import GFF
+try:
+    from BCBio import GFF
+except:
+    print("Please install bcbio-gff package to run this script. Exiting...")
+    exit(0)
 
 
 def variants_start_end(collection, left, right, record_dict, min_five_utr_len=10, skip_nonintergenic_variants=False):
