@@ -14,12 +14,9 @@ import matplotlib.pyplot as plt
 plt.ioff()
 import numpy as np
 
-try:
-    from BCBio import GFF
-    from BCBio.GFF import GFFExaminer
-except:
-    print("Please install bcbio-gff package to run this script. Exiting...")
-    exit(0)
+from BCBio import GFF
+from BCBio.GFF import GFFExaminer
+
 from RouToolPa.Collections.General import TwoLvlDict
 from RouToolPa.Routines.Sequence import get_feature_lengths, get_total_feature_lengths, feature_lengths_collapse_records
 

@@ -3,11 +3,8 @@ __author__ = 'mahajrod'
 import os
 import argparse
 
-try:
-    from BCBio import GFF
-except:
-    print("Please install bcbio-gff package to run this script. Exiting...")
-    exit(0)
+from BCBio import GFF
+
 
 import matplotlib
 matplotlib.use('Agg')

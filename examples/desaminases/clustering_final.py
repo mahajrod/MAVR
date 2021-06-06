@@ -1,11 +1,9 @@
 #!/usr/bin/env python2
 import os
 from collections import OrderedDict
-try:
-    from BCBio import GFF
-except:
-    print("Please install bcbio-gff package to run this script. Exiting...")
-    exit(0)
+
+from BCBio import GFF
+
 from RouToolPa.Collections.General import TwoLvlDict
 from Parsers.VCF import ReferenceGenome, CollectionVCF, ref_alt_variants
 from Parsers.GFF import CollectionGFF

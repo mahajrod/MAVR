@@ -10,11 +10,9 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
-try:
-    from BCBio import GFF
-except:
-    print("Please install bcbio-gff package to run this script. Exiting...")
-    exit(0)
+
+from BCBio import GFF
+
 
 
 def location_pie(self, annotation_colors=[],

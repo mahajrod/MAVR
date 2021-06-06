@@ -4,11 +4,8 @@ __author__ = 'mahajrod'
 import os
 from collections import OrderedDict
 
-try:
-    from BCBio import GFF
-except:
-    print("Please install bcbio-gff package to run this script. Exiting...")
-    exit(0)
+from BCBio import GFF
+
 
 from Bio import SeqIO, Seq
 import numpy as np

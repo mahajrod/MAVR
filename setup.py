@@ -29,11 +29,11 @@ def get_list_of_files(list_of_dirs_and_files, expression=None, recursive=True):
     return file_list
 
 
-dependencies = ['scipy', 'numpy', 'pandas', 'matplotlib', 'matplotlib-venn',
+dependencies = ['scipy', 'numpy', 'pandas', 'matplotlib', 'venn',
                 'biopython', 'xmltodict', 'bcbio-gff', 'statsmodels', 'xlsxwriter', 'ete3']
 
 setup(name='MAVR',
-      version='0.94',
+      version='0.95',
       packages=find_packages(),
       author='Sergei F. Kliver',
       author_email='mahajrod@gmail.com',

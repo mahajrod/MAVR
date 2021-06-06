@@ -3,11 +3,7 @@
 import os
 from Parsers.VCF import CollectionVCF, ReferenceGenome
 from Parsers.GFF import CollectionGFF
-try:
-    from BCBio import GFF
-except:
-    print("Please install bcbio-gff package to run this script. Exiting...")
-    exit(0)
+from BCBio import GFF
 
 
 workdir = "/media/mahajrod/d9e6e5ee-1bf7-4dba-934e-3f898d9611c8/Data/LAN2xx/combined_vcf/filtered/"
