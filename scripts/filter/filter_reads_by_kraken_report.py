@@ -25,5 +25,5 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
 args = parser.parse_args()
 
 FilteringRoutines.extract_reads_by_kraken_report(args.forward_fastq, args.kraken_output, args.taxon_id_list,
-                                                 args.output_prefix, reverse_fastq=args.forward_fastq, gzip=True,
+                                                 args.output_prefix, reverse_fastq=args.reverse_fastq, gzip=True,
                                                  check_read_id=args.check_read_id)
