@@ -313,6 +313,9 @@ class FilteringPipeline(Pipeline):
 
         for sample in sample_list:
             print ("%s\tHandling sample %s" % (str(datetime.datetime.now()), sample))
+            final_sample_dir = "%s/%s" % (output_directory, sample)
+            self.safe_mkdir(final_sample_dir)
+
             filtering_statistics[sample] = OrderedDict()
             merged_raw_sample_dir = "%s/tmp_dir/merged/%s/" % (output_directory, sample)
             stirka_trimmed_sample_dir = "%s/tmp_dir/stirka/%s/" % (output_directory, sample)
@@ -362,14 +365,16 @@ class FilteringPipeline(Pipeline):
             #"""
             if not stat_off:
                 trimmomatic_report = TrimmomaticReport(dir_dict["tmp_dir"]["trimmomatic"][sample]["stats"], input_is_se=False)
-        for sample in sample_list:
-            final_sample_dir = "%s/%s" % (output_directory, sample)
-            self.safe_mkdir(final_sample_dir)
+
             shutil.move(dir_dict["tmp_dir"]["trimmomatic"][sample]["forward"], "%s/%s.final_1.fastq" % (final_sample_dir, sample))
             shutil.move(dir_dict["tmp_dir"]["trimmomatic"][sample]["reverse"], "%s/%s.final_2.fastq" % (final_sample_dir, sample))
             shutil.move(dir_dict["tmp_dir"]["trimmomatic"][sample]["stats"], "%s/%s.trimmomatic.log" % (final_sample_dir, sample))
             shutil.move(dir_dict["tmp_dir"]["stirka"][sample]["stats"], "%s/%s.stirka.stats" % (final_sample_dir, sample))
 
+            if remove_intermediate_files:
+                shutil.rmtree(merged_raw_sample_dir)
+                shutil.rmtree(stirka_trimmed_sample_dir)
+                shutil.rmtree(trimmomatic_trimmed_sample_dir)
         if remove_intermediate_files:
             shutil.rmtree(tmp_dir)
         if not stat_off:
