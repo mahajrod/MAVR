@@ -5,6 +5,7 @@ import sys
 import argparse
 from RouToolPa.Parsers.Sequence import CollectionSequence
 from RouToolPa.GeneralRoutines import FileRoutines
+
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-f", "--format", action="store", dest="format",
