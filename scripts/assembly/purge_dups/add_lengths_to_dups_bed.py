@@ -14,4 +14,5 @@ parser.add_argument("-o", "--output", action="store", dest="output", required=Tr
                     help="Output file")
 args = parser.parse_args()
 
+
 PurgeDups.add_lengths_to_dups_bed(args.input, args.length_file, args.output)

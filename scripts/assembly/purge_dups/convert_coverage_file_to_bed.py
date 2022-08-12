@@ -12,5 +12,6 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
                     help="Prefix of output files")
 args = parser.parse_args()
 
+
 PurgeDups.convert_coverage_file_to_bed(args.input_file, args.output_prefix)
 
