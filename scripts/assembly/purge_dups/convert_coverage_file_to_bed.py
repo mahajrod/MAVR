@@ -13,5 +13,5 @@ parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix
 args = parser.parse_args()
 
 
-PurgeDups.convert_coverage_file_to_bed(args.input_file, args.output_prefix)
+PurgeDups.convert_coverage_file_to_bed(args.input, args.output_prefix)
 
