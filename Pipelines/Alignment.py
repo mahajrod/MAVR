@@ -83,7 +83,7 @@ class AlignmentPipeline(Pipeline):
             unpaired_read_prefix = "%s/%s/%s%s" % (sample_dir, sample, sample, unpaired_read_suffix) if unpaired_read_suffix else None
             forward_reads = "%s_1.%s%s" % (read_prefix, read_extension, ".gz" if gzipped_reads else "")
             reverse_reads = "%s_2.%s%s" % (read_prefix, read_extension, ".gz" if gzipped_reads else "")
-            unpaired_reads = "%s.%s%s" % (unpaired_read_prefix, read_extension, ".gz" if gzipped_reads else "") if unpaired_read_prefix else None
+            unpaired_reads = "%s%s" % (unpaired_read_prefix, ".gz" if gzipped_reads else "") if unpaired_read_prefix else None
             output_prefix = "%s/%s/%s" % (outdir, sample, sample)
 
             raw_alignment = "%s.%s" % (output_prefix, alignment_format)

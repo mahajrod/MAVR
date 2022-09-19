@@ -43,7 +43,7 @@ parser.add_argument("-u", "--read_file_suffix", action="store", dest="read_file_
                          " <sample><read_suffix>_1.<extension> Default: ''")
 parser.add_argument("--unpaired_read_file_suffix", action="store", dest="unpaired_read_file_suffix", default=None,
                     help="Suffix of unpaired read files, i.e forward unpaired file have folling name"
-                         " <sample><read_suffix>.<extension> Default: None")
+                         " <sample><read_suffix> Default: None")
 parser.add_argument("-x", "--read_file_extension", action="store", dest="read_file_extension", default="fastq",
                     help="Extension of read files, i.e forward read file have folling name"
                          " <sample><read_suffix>_1.<extension> Default: 'fastq'")
