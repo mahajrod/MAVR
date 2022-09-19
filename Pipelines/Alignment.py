@@ -57,7 +57,7 @@ class AlignmentPipeline(Pipeline):
             Bowtie2.cmd = self.bowtie2_binary
 
     def align(self, sample_dir, reference_index, aligner="bwa", sample_list=None, outdir="./",
-              quality_score_type="phred33", read_suffix="", read_extension="fastq",
+              quality_score_type="phred33", read_suffix="", read_extension="fastq", unpaired_read_suffix=None,
               alignment_format="bam", threads=None, mark_duplicates=True, mark_duplicates_tool="samtools",
               platform="Illumina",
               add_read_groups_by_picard=False, gzipped_reads=False, keep_inremediate_files=False,
@@ -80,9 +80,10 @@ class AlignmentPipeline(Pipeline):
 
         for sample in samples:
             read_prefix = "%s/%s/%s%s" % (sample_dir, sample, sample, read_suffix)
+            unpaired_read_prefix = "%s/%s/%s%s" % (sample_dir, sample, sample, unpaired_read_suffix) if unpaired_read_suffix else None
             forward_reads = "%s_1.%s%s" % (read_prefix, read_extension, ".gz" if gzipped_reads else "")
             reverse_reads = "%s_2.%s%s" % (read_prefix, read_extension, ".gz" if gzipped_reads else "")
-
+            unpaired_reads = "%s.%s%s" % (unpaired_read_prefix, read_extension, ".gz" if gzipped_reads else "") if unpaired_read_prefix else None
             output_prefix = "%s/%s/%s" % (outdir, sample, sample)
 
             raw_alignment = "%s.%s" % (output_prefix, alignment_format)
@@ -94,7 +95,7 @@ class AlignmentPipeline(Pipeline):
             sorted_alignment_picard_groups = None
 
             aligner_tool.align(reference_index, forward_reads_list=forward_reads, reverse_reads_list=reverse_reads,
-                               unpaired_reads_list=None, quality_score=quality_score_type,
+                               unpaired_reads_list=unpaired_reads, quality_score=quality_score_type,
                                output_prefix=output_prefix if (mark_duplicates_tool != "samtools") or (not mark_duplicates) else "%s.mkdup" % output_prefix,
                                output_format=alignment_format,
                                read_group_name=sample,

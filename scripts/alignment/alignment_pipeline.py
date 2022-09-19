@@ -41,6 +41,9 @@ parser.add_argument("--local_aln", action="store_true", dest="local_aln", defaul
 parser.add_argument("-u", "--read_file_suffix", action="store", dest="read_file_suffix", default="",
                     help="Suffix of read files, i.e forward read file have folling name"
                          " <sample><read_suffix>_1.<extension> Default: ''")
+parser.add_argument("--unpaired_read_file_suffix", action="store", dest="unpaired_read_file_suffix", default=None,
+                    help="Suffix of unpaired read files, i.e forward unpaired file have folling name"
+                         " <sample><read_suffix>.<extension> Default: None")
 parser.add_argument("-x", "--read_file_extension", action="store", dest="read_file_extension", default="fastq",
                     help="Extension of read files, i.e forward read file have folling name"
                          " <sample><read_suffix>_1.<extension> Default: 'fastq'")
@@ -87,6 +90,7 @@ AlignmentPipeline.tmp_dir = args.tmp_dir
 AlignmentPipeline.align(args.sample_dir, args.index, aligner=args.aligner, sample_list=args.sample_list,
                         outdir=args.outdir, quality_score_type=args.quality, read_suffix=args.read_file_suffix,
                         read_extension=args.read_file_extension, alignment_format=args.alignment_format,
+                        unpaired_read_suffix=args.unpaired_read_file_suffix,
                         threads=None, mark_duplicates=not args.skip_duplicates, platform="Illumina",
                         add_read_groups_by_picard=args.add_read_groups_by_picard, gzipped_reads=args.gzipped_reads,
                         keep_inremediate_files=args.retain_intermediate_files,
