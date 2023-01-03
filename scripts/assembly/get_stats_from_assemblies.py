@@ -46,6 +46,7 @@ for i in range(0, len(args.input_file_list)):
     assembly_output_prefix = "%s.%s" % (args.output_prefix, assembly_label)
     assemblies_dict[assembly_label] = CollectionSequence(in_file=args.input_file_list[i], parsing_mode="parse").get_stats_and_features(thresholds_list=args.thresholds, count_gaps=True)
     assemblies_dict[assembly_label].to_csv("%s.tsv" % assembly_output_prefix, sep="\t")
+    print(assemblies_dict[assembly_label])
     for stat_entry in stats_dict:
         stats_dict[stat_entry][assembly_label] = assemblies_dict[assembly_label].loc[stat_entry]
 
