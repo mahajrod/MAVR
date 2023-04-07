@@ -7,6 +7,7 @@ import pandas as pd
 
 from RouToolPa.Parsers.BED import CollectionBED
 
+
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input", action="store", dest="input", default=sys.stdin,
@@ -25,12 +26,13 @@ parser.add_argument("-o", "--output", action="store", dest="output", default=sys
                     help="Output bed file with flanks. Default: stdout")
 
 args = parser.parse_args()
+
 length_df = pd.read_csv(args.length_file, sep='\t', header=None, index_col=args.scaffold_column,
                         usecols=(args.scaffold_column, args.length_column)) if args.length_file else None
 if length_df:
     length_df.columns = pd.Index(["length", ])
 bed_col = CollectionBED(in_file=args.input, parsing_mode="all")
-
+print(bed_col.records)
 bed_col.add_flanks(left_flank=args.left_flank, right_flank=args.right_flank, length_df=None,
                    length_df_column="length", inplace=True)
 bed_col.write(args.output)
