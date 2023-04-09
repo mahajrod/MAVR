@@ -32,7 +32,6 @@ length_df = pd.read_csv(args.length_file, sep='\t', header=None, index_col=args.
 if length_df:
     length_df.columns = pd.Index(["length", ])
 bed_col = CollectionBED(in_file=args.input, parsing_mode="all")
-print(bed_col.records)
 bed_col.add_flanks(left_flank=args.left_flank, right_flank=args.right_flank, length_df=None,
                    length_df_column="length", inplace=True)
 bed_col.write(args.output)
