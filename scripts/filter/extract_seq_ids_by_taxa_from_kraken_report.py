@@ -17,7 +17,8 @@ parser.add_argument("-t", "--taxon_id_list", action="store", dest="taxon_id_list
                     help="Comma-separated list of taxon ids")
 parser.add_argument("-o", "--output", action="store", dest="output", default=sys.stdout,
                     help="Output file to write extracted sequences. Default: stdout")
-
+parser.add_argument("-r", "--invert_match", action="store_true", dest="invert_match",
+                    help="Invert match, i. e. remove sequences. Default - not set")
 
 args = parser.parse_args()
 FilteringRoutines.extract_seq_ids_by_taxa_from_kraken_report(args.kraken_output, args.taxon_id_list, args.output)
