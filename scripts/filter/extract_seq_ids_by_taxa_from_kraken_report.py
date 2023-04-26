@@ -21,4 +21,5 @@ parser.add_argument("-r", "--invert_match", action="store_true", dest="invert_ma
                     help="Invert match, i. e. remove sequences. Default - not set")
 
 args = parser.parse_args()
-FilteringRoutines.extract_seq_ids_by_taxa_from_kraken_report(args.kraken_output, args.taxon_id_list, args.output)
+FilteringRoutines.extract_seq_ids_by_taxa_from_kraken_report(args.kraken_output, args.taxon_id_list, args.output,
+                                                             invert_match=args.invert_match)
