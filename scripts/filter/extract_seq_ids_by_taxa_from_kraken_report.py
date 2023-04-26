@@ -21,4 +21,5 @@ parser.add_argument("-o", "--output", action="store", dest="output", default=sys
 
 args = parser.parse_args()
 print(args.taxon_id_list)
+print(type(args.taxon_id_list[0]))
 FilteringRoutines.extract_seq_ids_by_taxa_from_kraken_report(args.kraken_output, args.taxon_id_list, args.output)
