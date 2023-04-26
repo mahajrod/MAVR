@@ -15,7 +15,7 @@ parser.add_argument("-r", "--reverse_fastq", action="store", dest="reverse_fastq
 parser.add_argument("-k", "--kraken_output", action="store", dest="kraken_output", required=True,
                     help="File with kraken output. Might be gzipped")
 parser.add_argument("-t", "--taxon_id_list", action="store", dest="taxon_id_list", required=True,
-                    type=lambda s: pd.read_csv(s, header=None).squeeze("columns") if os.path.exists(s) else pd.Series(s.split(",")),
+                    type=lambda s: pd.read_csv(s, header=None, dtype=str).squeeze("columns") if os.path.exists(s) else pd.Series(s.split(",")),
                     help="Comma-separated list of taxon ids")
 parser.add_argument("-c", "--check_read_id", action="store_true", dest="check_read_id", default=False,
                     help="Check correspondence of read ids in read files and KRAKEN output")
