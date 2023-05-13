@@ -29,7 +29,7 @@ def get_list_of_files(list_of_dirs_and_files, expression=None, recursive=True):
 
 
 dependencies = ['scipy', 'numpy', 'pandas', 'matplotlib', 'venn',
-                'biopython', 'xmltodict', 'bcbio-gff', 'statsmodels', 'xlsxwriter', 'ete3']
+                'biopython', 'xmltodict', 'bcbio-gff', 'statsmodels', 'xlsxwriter', 'ete3', "RouToolPa"]
 
 setup(name='MAVR',
       version='0.96',
