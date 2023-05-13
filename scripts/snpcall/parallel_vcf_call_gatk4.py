@@ -33,7 +33,6 @@ parser.add_argument("-k", "--black_list_scaffold_id_file", action="store", dest=
                     help="Id file with scaffolds from black list")
 parser.add_argument("--ignore_softclipped_bases", action="store_true", dest="ignore_softclipped_bases", default=False,
                     help="Ignore softclipped bases. Default: False")
-
 parser.add_argument("-d", "--handling_mode", action="store", dest="handling_mode", default="local",
                     help="Handling mode. Allowed: local(default), slurm")
 parser.add_argument("-j", "--slurm_job_name", action="store", dest="slurm_job_name", default="JOB",
