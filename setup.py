@@ -31,7 +31,7 @@ def get_list_of_files(list_of_dirs_and_files, expression=None, recursive=True):
 dependencies = ['scipy', 'numpy', 'pandas', 'matplotlib', 'venn',
                 'biopython', 'xmltodict', 'bcbio-gff', 'statsmodels', 'xlsxwriter', 'ete3', "RouToolPa"]
 
-setup(name='MAVR',
+setup(name='mavr',
       version='0.97',
       packages=find_packages(),
       author='Sergei F. Kliver',
