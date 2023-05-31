@@ -28,7 +28,7 @@ read_id_set = set(read_id_set)
 sys.stderr.write(str(len(read_id_set)) + "\n\n")
 
 if args.excluded is None:
-    with FileRoutines.metaopen(args.input, "r", buffer=10000000) as in_fd, FileRoutines.metaopen(args.output, "w") as out_fd:
+    with FileRoutines.metaopen(args.input, "r") as in_fd, FileRoutines.metaopen(args.output, "w") as out_fd:
         for line in in_fd:
             if line.split()[0][1:] in read_id_set:
                 out_fd.write(line)
