@@ -10,17 +10,16 @@ from RouToolPa.GeneralRoutines import FileRoutines
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", "--input", action="store", dest="input", default=sys.stdout,
+parser.add_argument("-i", "--input", action="store", dest="input", default=sys.stdin,
                     help="Input fastq file")
-parser.add_argument("-o", "--output", action="store", dest="output", default="stdout",
+parser.add_argument("-o", "--output", action="store", dest="output", default=sys.stdout,
                     help="Output fastq file")
 parser.add_argument("-d", "--id_file", action="store", dest="id_file",
                     help="File with ids of reads to extract")
 parser.add_argument("-e", "--excluded", action="store", dest="excluded", default=None,
                     help="File to write excluded reads. If not set corresponding reads will be dropped."
                          " Default: not set ")
-#parser.add_argument("-v", "--invert_match", action="store", dest="invert_match", default=False,
-#                    help="Invert match, i.e. exclude reads instead of storing. Default: False")
+
 args = parser.parse_args()
 
 read_id_set = set(pd.read_csv(args.input, sep="\t", header=None))
