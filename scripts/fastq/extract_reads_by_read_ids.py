@@ -11,10 +11,10 @@ from RouToolPa.GeneralRoutines import FileRoutines
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input", action="store", dest="input", default=sys.stdin,
-                    help="Input fastq file")
+                    help="Input fastq file. Default: stdin")
 parser.add_argument("-o", "--output", action="store", dest="output", default=sys.stdout,
-                    help="Output fastq file")
-parser.add_argument("-d", "--id_file", action="store", dest="id_file",
+                    help="Output fastq file. Default: stdout")
+parser.add_argument("-d", "--id_file", action="store", dest="id_file", required=True,
                     help="File with ids of reads to extract")
 parser.add_argument("-e", "--excluded", action="store", dest="excluded", default=None,
                     help="File to write excluded reads. If not set corresponding reads will be dropped."
