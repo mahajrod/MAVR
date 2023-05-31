@@ -10,7 +10,7 @@ from RouToolPa.GeneralRoutines import FileRoutines
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", "--input", action="store", dest="input", default=sys.stdin,
+parser.add_argument("-i", "--input", action="store", dest="input", required=True,
                     help="Input fastq file. Default: stdin")
 parser.add_argument("-o", "--output", action="store", dest="output", default=sys.stdout,
                     help="Output fastq file. Default: stdout")
