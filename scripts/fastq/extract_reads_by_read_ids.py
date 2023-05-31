@@ -22,7 +22,7 @@ parser.add_argument("-e", "--excluded", action="store", dest="excluded", default
 
 args = parser.parse_args()
 
-read_id_set = pd.read_csv(args.id_file, sep="\t", header=None)
+read_id_set = pd.read_csv(args.id_file, sep="\t", header=None, squeeze=True)
 sys.stderr.write(str(read_id_set))
 read_id_set = set(read_id_set)
 sys.stderr.write(str(len(read_id_set)) + "\n\n")
