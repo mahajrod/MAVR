@@ -24,7 +24,7 @@ parser.add_argument("-e", "--excluded", action="store", dest="excluded", default
 args = parser.parse_args()
 
 read_id_set = set(pd.read_csv(args.input, sep="\t", header=None))
-print(len(read_id_set))
+sys.stderr.write(str(len(read_id_set)) + "\n")
 
 if args.excluded is None:
     with FileRoutines.metaopen(args.input, "r") as in_fd, FileRoutines.metaopen(args.output, "w") as out_fd:
