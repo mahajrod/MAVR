@@ -22,7 +22,7 @@ parser.add_argument("-o", "--output", action="store", dest="output", default=sys
 
 args = parser.parse_args()
 
-id_series = pd.to_csv(args.id_list, header=None).squeeze("columns") if Path(args.id_list).exists() else pd.Series(args.id_list.split(","))
+id_series = pd.read_csv(args.id_list, header=None).squeeze("columns") if Path(args.id_list).exists() else pd.Series(args.id_list.split(","))
 
 seq_col = CollectionSequence(in_file=args.input)
 
