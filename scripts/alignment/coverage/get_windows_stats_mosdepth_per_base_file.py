@@ -16,7 +16,9 @@ parser.add_argument("-s", "--window_step", action="store", dest="window_step", d
                     help="Step of windows. Default: window size")
 parser.add_argument("-b", "--buffer_size", action="store", dest="buffer_size", default=10000000, type=int,
                     help="Buffer size in bytes for reading file. Default: 10 000 000")
+parser.add_argument("-c", "--coordinate_format", action="store", dest="coordinate_format", default='window',
+                    help="Format of coordinates in the main output file. Allowed: 'window'(default), 'bed'")
 args = parser.parse_args()
 
 Mosdepth.get_coverage_stats_in_windows(args.input, args.window_size, args.output_prefix, window_step=args.window_step,
-                                       buffering=args.buffer_size)
+                                       buffering=args.buffer_size, coord_format=args.coordinate_format)
