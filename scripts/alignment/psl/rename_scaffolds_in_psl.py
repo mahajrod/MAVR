@@ -40,15 +40,20 @@ TARGET_SCAFFOLD_ID_COLUMN = 13
 if args.query_syn_file:
     query_syn_df = pd.read_csv(args.query_syn_file, sep="\t", usecols=(args.query_syn_file_key_column,
                                                                        args.query_syn_file_value_column),
-                               index_col=args.query_syn_file_key_column, names=("key", "syn"), header=None)
+                               index_col=args.query_syn_file_key_column,  header=None)
+    query_syn_df.columns = ["syn"]
+    query_syn_df.index.name = "key"
 
-if args.targtet_syn_file:
-    target_syn_df = pd.read_csv(args.targtet_syn_file, sep="\t", usecols=(args.target_syn_file_key_column,
-                                                                          args.target_syn_file_value_column),
-                                index_col=args.target_syn_file_key_column, names=("key", "syn"), header=None)
+if args.target_syn_file:
+    target_syn_df = pd.read_csv(args.target_syn_file, sep="\t", usecols=(args.target_syn_file_key_column,
+                                                                         args.target_syn_file_value_column),
+                                index_col=args.target_syn_file_key_column, header=None)
+    target_syn_df.columns = ["syn"]
+    target_syn_df.index.name = "key"
 
+#print(query_syn_df)
 
-if args.query_syn_file and args.targtet_syn_file:
+if args.query_syn_file and args.target_syn_file:
     def rename_fuction(line_list):
         if line_list[9] in query_syn_df.index:
             line_list[9] = query_syn_df.loc[line_list[9], "syn"]
@@ -58,7 +63,7 @@ elif args.query_syn_file:
     def rename_fuction(line_list):
         if line_list[9] in query_syn_df.index:
             line_list[9] = query_syn_df.loc[line_list[9], "syn"]
-elif args.targtet_syn_file:
+elif args.target_syn_file:
     def rename_fuction(line_list):
         if line_list[13] in target_syn_df.index:
             line_list[13] = target_syn_df.loc[line_list[13], "syn"]
@@ -71,6 +76,6 @@ with FileRoutines.metaopen(args.psl, "r") as in_fd, FileRoutines.metaopen(args.o
         if line[0] == "#":
             out_fd.write(line)
             continue
-    line_list = line.split("\t")
-    rename_fuction(line_list)
-    out_fd.write("\t".join(line_list))
+        line_list = line.split("\t")
+        rename_fuction(line_list)
+        out_fd.write("\t".join(line_list))
