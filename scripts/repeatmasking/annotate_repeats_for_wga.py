@@ -29,6 +29,6 @@ RepeatAnnotation.annotate_repeats(args.input, args.output_dir, args.output_prefi
                                   repeatmasker=True, trf=True, windowmasker=True, threads=args.threads,
                                   trf_binary_path=args.path_to_trf,
                                   repeatmasker_soft_masking=True,
-                                  repeatmasker_no_low_complexity=True,
+                                  repeatmasker_no_low_complexity=False,
                                   repeatmasker_custom_library=args.library,
                                   repeatmasker_species=args.species)
