@@ -32,7 +32,7 @@ dependencies = ['scipy', 'numpy', 'pandas', 'matplotlib', 'venn',
                 'biopython', 'xmltodict', 'bcbio-gff', 'statsmodels', 'xlsxwriter', 'ete3', "routoolpa"]
 
 setup(name='mavr',
-      version='0.98',
+      version='0.99',
       packages=find_packages(),
       author='Sergei F. Kliver',
       author_email='mahajrod@gmail.com',
