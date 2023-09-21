@@ -8,7 +8,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input_fasta", action="store", dest="input_fasta", default=sys.stdin,
                     help="Input fasta file with sequences. Default: stdin")
-parser.add_argument("-o", "--output", action="store", dest="input_fasta", default=None,
+parser.add_argument("-o", "--output", action="store", dest="output", default=None,
                     help="Output file with softmasked position counts per input sequence."
                          " If output file is not stdout, a total count will be printed. "
                          " Default: stdout")
