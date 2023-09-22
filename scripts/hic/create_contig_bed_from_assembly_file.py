@@ -3,7 +3,7 @@ __author__ = 'Sergei F. Kliver'
 import sys
 import argparse
 import pandas as pd
-
+from RouToolPa.GeneralRoutines import FileRoutines
 
 parser = argparse.ArgumentParser()
 
@@ -16,7 +16,7 @@ parser.add_argument("-o", "--output", action="store", dest="output", default=sys
 
 args = parser.parse_args()
 
-with open(args.input, "r") as in_fd, open(args.output, "w") as out_fd:
+with FileRoutines.metaopen(args.input, "r") as in_fd, FileRoutines.metaopen(args.output, "w") as out_fd:
     contig_df = []
     scaffold_list = []
     for line in in_fd:
