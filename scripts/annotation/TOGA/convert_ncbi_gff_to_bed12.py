@@ -46,10 +46,10 @@ annotation_df = pd.read_csv(preprocessed_annotations, sep="\t", header=0, na_val
 annotation_df[annotation_df["type"] == "mRNA"][["parent_id", "id"]].to_csv("{0}.isoforms.tab".format(args.output_prefix),
                                                                            sep="\t", header=False, index=False)
 print("Extraction finished.")
+
 parent_start_df = annotation_df[["id", "start"]]
 parent_start_df.columns = pd.Index(["id", "parent_start"])
-#annotation_df.set_index("parent_id", inplace=True)
-#annotation_df["parent_start"] = pd.NA
+
 annotation_df = annotation_df.merge(parent_start_df, how='left', left_on="parent_id",
                                     right_on="id", suffixes=(None, "_parent"))
 annotation_df["parent_start"] = annotation_df["parent_start"].astype("Int64")
@@ -57,7 +57,7 @@ annotation_df["parent_shift"] = annotation_df["start"] - annotation_df["parent_s
 
 #[annotation_df.loc[parent_id, "start"] if parent_id != "." else 0 for parent_id in annotation_df["parent_id"]]
 #annotation_df["parent_end"] = [annotation_df.loc[parent_id, "end"] if parent_id != "." else 0 for parent_id in annotation_df["parent_id"]]
-print(annotation_df)
+#print(annotation_df)
 annotation_df.to_csv("{0}.annotation_df.tab".format(args.output_prefix), sep="\t", header=True, index=True)
 
 
@@ -83,11 +83,9 @@ def cds_processing(df):
                                        data_df["end"].iloc[-1],
                                        ]],
                                      columns=["cds_start", "cds_end"])
-    #df["cds_start"] = df["cds_start"].astype("Int64")
-    #df["cds_end"] = df["cds_end"].astype("Int64")
 
-    #return df
 
+print("Converting exon and CDS info...")
 
 cds_df = annotation_df[annotation_df["type"] == "CDS"].groupby(["parent_id"]).apply(cds_processing)
 exon_df = annotation_df[annotation_df["type"] == "exon"].groupby(["parent_id"]).apply(exon_processing)
@@ -96,10 +94,12 @@ cds_df["cds_end"] = cds_df["cds_end"].astype("Int64")
 exon_df["exon_number"] = exon_df["exon_number"].astype("Int64")
 
 elements_df = pd.concat([cds_df, exon_df], axis=1)
-
 elements_df.to_csv("{0}.exon.tab".format(args.output_prefix), sep="\t", header=True, index=True)
+
+print("Conversion finished.")
 #print(elements_df)
 
+print("Preparing final files...")
 merged_df = annotation_df.merge(elements_df, left_on="id", right_on="parent_id", how="right")
 merged_df["score"] = 0
 merged_df["score2"] = 0
@@ -119,3 +119,4 @@ merged_df.columns = pd.Index(bed12_columns)
 
 merged_df.to_csv("{0}.final.bed".format(args.output_prefix), sep="\t", index=False, header=False)
 merged_df[mRNA_index].to_csv("{0}.final.mRNA.bed".format(args.output_prefix), sep="\t", index=False, header=False)
+print("Finished...")
