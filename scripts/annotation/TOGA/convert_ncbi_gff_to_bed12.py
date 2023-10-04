@@ -97,6 +97,11 @@ exon_df["exon_number"] = exon_df["exon_number"].astype("Int64")
 elements_df = pd.concat([cds_df, exon_df], axis=1)
 
 elements_df.to_csv("{0}.exon.tab".format(args.output_prefix), sep="\t", header=True, index=True)
-print(elements_df)
+#print(elements_df)
 
-bed12_columns = ["scaffold", "start", "end", "transcript_id", "score", "strand", "cds_start", "cds_end",]
+merged_df = annotation_df.merge(elements_df, left_on="id", right_on="parent_id", how="right")
+print(merged_df)
+bed12_columns = ["scaffold", "start", "end",
+                 "transcript_id", "score", "strand",
+                 "cds_start", "cds_end", "score2",
+                 "exon_number", "exon_len_list", "exon_start_list"]
