@@ -68,8 +68,8 @@ def exon_processing(df):
 
 
 def cds_processing(df):
-    return pd.DataFrame.from_records([[df["start"][0],
-                                       df["end"][0],
+    return pd.DataFrame.from_records([[df["start"].iloc[0],
+                                       df["end"].iloc[0],
                                        ]],
                                      columns=["cds_start", "cds_end",])
 
