@@ -20,7 +20,7 @@ parser.add_argument("-a", "--allowed_types", action="store", dest="allowed_types
 args = parser.parse_args()
 
 preprocessed_annotations = "{0}.preprocessed.bed".format(args.output_prefix)
-
+print("Preprocessing started...")
 with FileRoutines.metaopen(args.input, "r") as in_fd, FileRoutines.metaopen(preprocessed_annotations, "w") as out_fd:
     out_fd.write("#scaffold\tstart\tend\tstrand\ttype\tid\tparent_id\tname\n")
     for line in in_fd:
@@ -40,16 +40,24 @@ with FileRoutines.metaopen(args.input, "r") as in_fd, FileRoutines.metaopen(prep
                                                                        description_dict["Parent"] if "Parent" in description_dict else ".",
                                                                        description_dict["Name"] if "Name" in description_dict else "."))
 
-
+print("Preprocessing finished.")
+print("Extracting isoforms...")
 annotation_df = pd.read_csv(preprocessed_annotations, sep="\t", header=0)
 annotation_df[annotation_df["type"] == "mRNA"][["parent_id", "id"]].to_csv("{0}.isoforms.tab".format(args.output_prefix),
                                                                            sep="\t", header=False, index=False)
-annotation_df.set_index("id", inplace=True)
-annotation_df["parent_start"] = [annotation_df.loc[parent_id, "start"] if parent_id != "." else 0 for parent_id in annotation_df["parent_id"]]
-annotation_df["parent_end"] = [annotation_df.loc[parent_id, "end"] if parent_id != "." else 0 for parent_id in annotation_df["parent_id"]]
+print("Extraction finished.")
+parent_start_series = annotation_df[["id", "start"]][annotation_df["parent_id"] != "."].set_index("id")["start"]
+annotation_df.set_index("parent_id", inplace=True)
+annotation_df["parent_start"] = pd.NA
+annotation_df["parent_start"] = parent_start_series
+annotation_df["parent_start"] = annotation_df["parent_start"].astype("Int")
+
+
+#[annotation_df.loc[parent_id, "start"] if parent_id != "." else 0 for parent_id in annotation_df["parent_id"]]
+#annotation_df["parent_end"] = [annotation_df.loc[parent_id, "end"] if parent_id != "." else 0 for parent_id in annotation_df["parent_id"]]
 print(annotation_df)
 
-
+"""
 def exon_processing(df):
     return pd.DataFrame.from_records([[len(df),
                                        ",".join(map(str, df["end"] - df["start"])) + ",",
@@ -71,4 +79,4 @@ exon_df = annotation_df[annotation_df["type"] == "exon"].groupby(["parent_id"]).
 print(cds_df)
 print(exon_df)
 
-
+"""
