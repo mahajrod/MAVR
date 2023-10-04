@@ -57,16 +57,16 @@ annotation_df["parent_shift"] = annotation_df["start"] - annotation_df["parent_s
 #[annotation_df.loc[parent_id, "start"] if parent_id != "." else 0 for parent_id in annotation_df["parent_id"]]
 #annotation_df["parent_end"] = [annotation_df.loc[parent_id, "end"] if parent_id != "." else 0 for parent_id in annotation_df["parent_id"]]
 print(annotation_df)
-
+annotation_df.to_csv("{0}.annotation_df.tab".format(args.output_prefix), sep="\t", header=True, index=True)
 
 def exon_processing(df):
-    print("AAAAAA")
-    print(df["parent_shift"])
-    print(list(df["parent_shift"]))
-    print(",".join(map(str, list(df["parent_shift"]))) + ",")
+    #print("AAAAAA")
+    #print(df["parent_shift"])
+    #print(list(df["parent_shift"]))
+    #print(",".join(map(str, list(df["parent_shift"]))) + ",")
     return pd.DataFrame.from_records([[len(df),
                                        ",".join(map(str, df["end"] - df["start"])) + ",",
-                                       ",".join(map(str, list(df["parent_shift"]))) + ","
+                                       ",".join(map(str, df["parent_shift"])) + ","
                                        ]],
                                      columns=["exon_number", "exon_len_list", "exon_start_list"])
 
