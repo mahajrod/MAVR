@@ -49,7 +49,7 @@ print("Extraction finished.")
 parent_start_df = annotation_df[["id", "start"]][annotation_df["parent_id"] != "."].set_index("id")
 annotation_df.set_index("parent_id", inplace=True)
 #annotation_df["parent_start"] = pd.NA
-annotation_df = pd.merge((annotation_df, parent_start_df), how='left')
+annotation_df = annotation_df.merge(parent_start_df, how='left')
 annotation_df["parent_start"] = annotation_df["parent_start"].astype("Int")
 
 
