@@ -62,7 +62,7 @@ print(annotation_df)
 def exon_processing(df):
     return pd.DataFrame.from_records([[len(df),
                                        ",".join(map(str, df["end"] - df["start"])) + ",",
-                                       ",".join(map(str, df["parent_shift"])) + ","
+                                       ",".join(map(str, list(df["parent_shift"]))) + ","
                                        ]],
                                      columns=["exon_number", "exon_len_list", "exon_start_list"])
 
