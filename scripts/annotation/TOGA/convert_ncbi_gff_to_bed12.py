@@ -51,7 +51,7 @@ parent_start_df.columns = pd.Index(["parent_start"])
 annotation_df.set_index("parent_id", inplace=True)
 #annotation_df["parent_start"] = pd.NA
 annotation_df = annotation_df.merge(parent_start_df, how='left', left_on="parent_id", right_on="id")
-annotation_df["parent_start"] = annotation_df["parent_start"].astype("Int")
+annotation_df["parent_start"] = annotation_df["parent_start"].astype("Int64")
 
 
 #[annotation_df.loc[parent_id, "start"] if parent_id != "." else 0 for parent_id in annotation_df["parent_id"]]
