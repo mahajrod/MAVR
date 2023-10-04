@@ -101,8 +101,18 @@ elements_df.to_csv("{0}.exon.tab".format(args.output_prefix), sep="\t", header=T
 #print(elements_df)
 
 merged_df = annotation_df.merge(elements_df, left_on="id", right_on="parent_id", how="right")
-print(merged_df)
+merged_df["score"] = 0
+merged_df["score2"] = 0
+
 bed12_columns = ["scaffold", "start", "end",
                  "transcript_id", "score", "strand",
                  "cds_start", "cds_end", "score2",
                  "exon_number", "exon_len_list", "exon_start_list"]
+
+merged_df = merged_df[["#scaffold", "start", "end",
+                       "id", "score", "strand",
+                       "cds_start", "cds_end", "score2",
+                       "exon_number", "exon_len_list", "exon_start_list"]]
+merged_df.columns = pd.Index(bed12_columns)
+merged_df.to_csv("{0}.final.bed".format(args.output_prefix), sep="\t", index=False, header=False)
+
