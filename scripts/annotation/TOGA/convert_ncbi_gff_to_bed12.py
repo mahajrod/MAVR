@@ -74,6 +74,8 @@ def cds_processing(df):
                                      columns=["cds_start", "cds_end",])
 
 
+print(annotation_df["start"] - annotation_df["parent_start"])
+
 cds_df = annotation_df[annotation_df["type"] == "CDS"].groupby(["parent_id"]).apply(cds_processing)
 exon_df = annotation_df[annotation_df["type"] == "exon"].groupby(["parent_id"]).apply(exon_processing)
 exon_df.to_csv("{0}.exon.tab".format(args.output_prefix), sep="\t", header=True, index=True)
