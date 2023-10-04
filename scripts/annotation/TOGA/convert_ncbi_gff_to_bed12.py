@@ -1,11 +1,32 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
 import sys
+import bz2
+import gzip
 import argparse
 
 import pandas as pd
 
-from RouToolPa.GeneralRoutines import FileRoutines
+if sys.version_info[0] == 3:
+    from io import TextIOWrapper as file
+
+
+def metaopen(filename, flags, buffering=None, compresslevel=5):
+        if not isinstance(filename, str): # or isinstance(filename, gzip.GzipFile) or isinstance(filename, bz2.BZ2File):
+            if isinstance(filename, file):
+                return filename
+            else:
+                raise ValueError("ERROR!!! Not file object or str: {}".format(str(filename)))
+        elif filename[-3:] == ".gz":
+            return gzip.open(filename, flags + ("t" if "b" not in flags else ""), compresslevel=compresslevel)
+        elif filename[-4:] == ".bz2":
+            return bz2.open(filename, flags + ("t" if "b" not in flags else ""), compresslevel=compresslevel)
+        else:
+            if buffering is not None:
+                return open(filename, flags, buffering=buffering)
+            else:
+                return open(filename, flags)
+
 
 parser = argparse.ArgumentParser()
 
@@ -21,7 +42,7 @@ args = parser.parse_args()
 
 preprocessed_annotations = "{0}.preprocessed.bed".format(args.output_prefix)
 print("Preprocessing started...")
-with FileRoutines.metaopen(args.input, "r") as in_fd, FileRoutines.metaopen(preprocessed_annotations, "w") as out_fd:
+with metaopen(args.input, "r") as in_fd, metaopen(preprocessed_annotations, "w") as out_fd:
     out_fd.write("#scaffold\tstart\tend\tstrand\ttype\tid\tparent_id\tname\n")
     for line in in_fd:
         if line[0] == "#":
