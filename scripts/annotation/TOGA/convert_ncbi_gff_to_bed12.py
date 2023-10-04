@@ -28,8 +28,8 @@ with FileRoutines.metaopen(args.input, "r") as in_fd, FileRoutines.metaopen(prep
             continue
 
         line_list = line.strip().split("\t")
-        if line_list[2] not in args.allowed_types:
-            continue
+        #if line_list[2] not in args.allowed_types:
+        #    continue
         description_dict = {key: value for key, value in map(lambda s: s.split("="), line_list[8].split(";"))}
         out_fd.write("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\n".format(line_list[0],
                                                                        int(line_list[3]) - 1,
