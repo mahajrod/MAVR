@@ -69,14 +69,14 @@ def exon_processing(df):
 
 def cds_processing(df):
     return pd.DataFrame.from_records([[df["start"].iloc[0],
-                                       df["end"].iloc[0],
+                                       df["end"].iloc[-1],
                                        ]],
                                      columns=["cds_start", "cds_end",])
 
 
 cds_df = annotation_df[annotation_df["type"] == "CDS"].groupby(["parent_id"]).apply(cds_processing)
 exon_df = annotation_df[annotation_df["type"] == "exon"].groupby(["parent_id"]).apply(exon_processing)
-
+exon_df.to_csv("{0}.exon.tab".format(args.output_prefix), sep="\t", header=True, index=True)
 print(cds_df)
 print(exon_df)
 
