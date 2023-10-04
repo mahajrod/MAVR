@@ -58,7 +58,7 @@ annotation_df["parent_start"] = annotation_df["parent_start"].astype("Int64")
 #annotation_df["parent_end"] = [annotation_df.loc[parent_id, "end"] if parent_id != "." else 0 for parent_id in annotation_df["parent_id"]]
 print(annotation_df)
 
-"""
+
 def exon_processing(df):
     return pd.DataFrame.from_records([[len(df),
                                        ",".join(map(str, df["end"] - df["start"])) + ",",
@@ -80,4 +80,3 @@ exon_df = annotation_df[annotation_df["type"] == "exon"].groupby(["parent_id"]).
 print(cds_df)
 print(exon_df)
 
-"""
