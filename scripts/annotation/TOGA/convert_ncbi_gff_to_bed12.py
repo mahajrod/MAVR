@@ -11,7 +11,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input", action="store", dest="input", required=True,
                     help="Input gff file")
-parser.add_argument("-o", "--output_prefix", action="store", dest="output", required=True,
+parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", required=True,
                     help="Output table with common name")
 parser.add_argument("-a", "--allowed_types", action="store", dest="allowed_types", type=lambda s: s.split(","),
                     default=["gene", "pseudogene", "mRNA", "exon", "CDS"],
