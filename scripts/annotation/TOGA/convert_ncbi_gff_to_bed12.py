@@ -94,8 +94,6 @@ exon_df["exon_number"] = exon_df["exon_number"].astype("Int64")
 
 elements_df = pd.concat([cds_df, exon_df], axis=1)
 
-elements_df["cds_start"] = elements_df["cds_start"].astype("Int64")
-elements_df["cds_end"] = elements_df["cds_end"].astype("Int64")
 elements_df.to_csv("{0}.exon.tab".format(args.output_prefix), sep="\t", header=True, index=True)
 print(elements_df)
 
