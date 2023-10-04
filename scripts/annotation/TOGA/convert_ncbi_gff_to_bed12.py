@@ -60,6 +60,9 @@ print(annotation_df)
 
 
 def exon_processing(df):
+    print("AAAAAA")
+    print(df["parent_shift"])
+    print(list(df["parent_shift"]))
     return pd.DataFrame.from_records([[len(df),
                                        ",".join(map(str, df["end"] - df["start"])) + ",",
                                        ",".join(map(str, list(df["parent_shift"]))) + ","
