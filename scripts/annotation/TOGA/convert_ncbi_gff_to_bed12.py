@@ -108,11 +108,14 @@ bed12_columns = ["scaffold", "start", "end",
                  "transcript_id", "score", "strand",
                  "cds_start", "cds_end", "score2",
                  "exon_number", "exon_len_list", "exon_start_list"]
+mRNA_index = merged_df["type"] == "mRNA"
 
 merged_df = merged_df[["#scaffold", "start", "end",
                        "id", "score", "strand",
                        "cds_start", "cds_end", "score2",
                        "exon_number", "exon_len_list", "exon_start_list"]]
-merged_df.columns = pd.Index(bed12_columns)
-merged_df.to_csv("{0}.final.bed".format(args.output_prefix), sep="\t", index=False, header=False)
 
+merged_df.columns = pd.Index(bed12_columns)
+
+merged_df.to_csv("{0}.final.bed".format(args.output_prefix), sep="\t", index=False, header=False)
+merged_df[mRNA_index].to_csv("{0}.final.mRNA.bed".format(args.output_prefix), sep="\t", index=False, header=False)
