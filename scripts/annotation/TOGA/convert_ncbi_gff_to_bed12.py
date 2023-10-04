@@ -48,7 +48,7 @@ annotation_df[annotation_df["type"] == "mRNA"][["parent_id", "id"]].to_csv("{0}.
 print("Extraction finished.")
 parent_start_df = annotation_df[["id", "start"]][annotation_df["parent_id"] != "."].set_index("id")
 parent_start_df.columns = pd.Index(["parent_start"])
-annotation_df.set_index("parent_id", inplace=True)
+#annotation_df.set_index("parent_id", inplace=True)
 #annotation_df["parent_start"] = pd.NA
 annotation_df = annotation_df.merge(parent_start_df, how='left', left_on="parent_id", right_on="id")
 annotation_df["parent_start"] = annotation_df["parent_start"].astype("Int64")
