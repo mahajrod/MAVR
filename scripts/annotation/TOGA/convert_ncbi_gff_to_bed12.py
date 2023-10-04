@@ -52,7 +52,7 @@ parent_start_df.columns = pd.Index(["id", "parent_start"])
 #annotation_df["parent_start"] = pd.NA
 annotation_df = annotation_df.merge(parent_start_df, how='left', left_on="parent_id", right_on="id")
 annotation_df["parent_start"] = annotation_df["parent_start"].astype("Int64")
-
+annotation_df["parent_shift"] = annotation_df["start"] - annotation_df["parent_start"]
 
 #[annotation_df.loc[parent_id, "start"] if parent_id != "." else 0 for parent_id in annotation_df["parent_id"]]
 #annotation_df["parent_end"] = [annotation_df.loc[parent_id, "end"] if parent_id != "." else 0 for parent_id in annotation_df["parent_id"]]
@@ -62,7 +62,7 @@ print(annotation_df)
 def exon_processing(df):
     return pd.DataFrame.from_records([[len(df),
                                        ",".join(map(str, df["end"] - df["start"])) + ",",
-                                       ",".join(map(str, df["start"] - df["parent_start"])) + ","
+                                       ",".join(map(str, df["parent_shift"])) + ","
                                        ]],
                                      columns=["exon_number", "exon_len_list", "exon_start_list"])
 
