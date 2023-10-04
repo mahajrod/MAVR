@@ -65,9 +65,10 @@ def exon_processing(df):
     #print(df["parent_shift"])
     #print(list(df["parent_shift"]))
     #print(",".join(map(str, list(df["parent_shift"]))) + ",")
-    return pd.DataFrame.from_records([[len(df),
-                                       ",".join(map(str, df["end"] - df["start"])) + ",",
-                                       ",".join(map(str, df["parent_shift"])) + ","
+    data_df = df.sort_values(by=["start", "end"])
+    return pd.DataFrame.from_records([[len(data_df),
+                                       ",".join(map(str, data_df["end"] - data_df["start"])) + ",",
+                                       ",".join(map(str, data_df["parent_shift"])) + ","
                                        ]],
                                      columns=["exon_number", "exon_len_list", "exon_start_list"])
     #df["exon_number"] = df["exon_number"].astype("Int64")
@@ -76,8 +77,9 @@ def exon_processing(df):
 
 
 def cds_processing(df):
-    return pd.DataFrame.from_records([[df["start"].iloc[0],
-                                       df["end"].iloc[-1],
+    data_df = df.sort_values(by=["start", "end"])
+    return pd.DataFrame.from_records([[data_df["start"].iloc[0],
+                                       data_df["end"].iloc[-1],
                                        ]],
                                      columns=["cds_start", "cds_end"])
     #df["cds_start"] = df["cds_start"].astype("Int64")
@@ -97,3 +99,4 @@ elements_df = pd.concat([cds_df, exon_df], axis=1)
 elements_df.to_csv("{0}.exon.tab".format(args.output_prefix), sep="\t", header=True, index=True)
 print(elements_df)
 
+bed12_columns = ["scaffold", "start", "end", "transcript_id", "score", "strand", "cds_start", "cds_end",]
