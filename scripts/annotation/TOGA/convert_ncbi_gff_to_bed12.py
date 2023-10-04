@@ -80,9 +80,9 @@ def cds_processing(df):
 
 print(annotation_df["start"] - annotation_df["parent_start"])
 
-cds_df = annotation_df[annotation_df["type"] == "CDS"].groupby(["parent_id"]).apply(cds_processing)
-exon_df = annotation_df[annotation_df["type"] == "exon"].groupby(["parent_id"]).apply(exon_processing)
-exon_df.to_csv("{0}.exon.tab".format(args.output_prefix), sep="\t", header=True, index=True)
-print(cds_df)
-print(exon_df)
+elements_df = pd.concat([annotation_df[annotation_df["type"] == "CDS"].groupby(["parent_id"]).apply(cds_processing),
+                        annotation_df[annotation_df["type"] == "exon"].groupby(["parent_id"]).apply(exon_processing)],
+                        axis=1)
+elements_df.to_csv("{0}.exon.tab".format(args.output_prefix), sep="\t", header=True, index=True)
+print(elements_df)
 
