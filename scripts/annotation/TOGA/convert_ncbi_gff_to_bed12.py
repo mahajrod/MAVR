@@ -59,6 +59,7 @@ annotation_df["parent_shift"] = annotation_df["start"] - annotation_df["parent_s
 print(annotation_df)
 annotation_df.to_csv("{0}.annotation_df.tab".format(args.output_prefix), sep="\t", header=True, index=True)
 
+
 def exon_processing(df):
     #print("AAAAAA")
     #print(df["parent_shift"])
@@ -69,20 +70,32 @@ def exon_processing(df):
                                        ",".join(map(str, df["parent_shift"])) + ","
                                        ]],
                                      columns=["exon_number", "exon_len_list", "exon_start_list"])
+    #df["exon_number"] = df["exon_number"].astype("Int64")
+
+    #return df
 
 
 def cds_processing(df):
     return pd.DataFrame.from_records([[df["start"].iloc[0],
                                        df["end"].iloc[-1],
                                        ]],
-                                     columns=["cds_start", "cds_end",])
+                                     columns=["cds_start", "cds_end"])
+    #df["cds_start"] = df["cds_start"].astype("Int64")
+    #df["cds_end"] = df["cds_end"].astype("Int64")
+
+    #return df
 
 
-print(annotation_df["start"] - annotation_df["parent_start"])
+cds_df = annotation_df[annotation_df["type"] == "CDS"].groupby(["parent_id"]).apply(cds_processing)
+exon_df = annotation_df[annotation_df["type"] == "exon"].groupby(["parent_id"]).apply(exon_processing)
+cds_df["cds_start"] = cds_df["cds_start"].astype("Int64")
+cds_df["cds_end"] = cds_df["cds_end"].astype("Int64")
+exon_df["exon_number"] = exon_df["exon_number"].astype("Int64")
 
-elements_df = pd.concat([annotation_df[annotation_df["type"] == "CDS"].groupby(["parent_id"]).apply(cds_processing),
-                        annotation_df[annotation_df["type"] == "exon"].groupby(["parent_id"]).apply(exon_processing)],
-                        axis=1)
+elements_df = pd.concat([cds_df, exon_df], axis=1)
+
+elements_df["cds_start"] = elements_df["cds_start"].astype("Int64")
+elements_df["cds_end"] = elements_df["cds_end"].astype("Int64")
 elements_df.to_csv("{0}.exon.tab".format(args.output_prefix), sep="\t", header=True, index=True)
 print(elements_df)
 
