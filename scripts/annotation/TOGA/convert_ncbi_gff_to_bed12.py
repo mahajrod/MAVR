@@ -46,7 +46,7 @@ annotation_df = pd.read_csv(preprocessed_annotations, sep="\t", header=0, na_val
 annotation_df[annotation_df["type"] == "mRNA"][["parent_id", "id"]].to_csv("{0}.isoforms.tab".format(args.output_prefix),
                                                                            sep="\t", header=False, index=False)
 print("Extraction finished.")
-parent_start_df = annotation_df[["id", "start"]][~annotation_df["parent_id"].isna()]
+parent_start_df = annotation_df[["id", "start"]]
 parent_start_df.columns = pd.Index(["id", "parent_start"])
 #annotation_df.set_index("parent_id", inplace=True)
 #annotation_df["parent_start"] = pd.NA
