@@ -54,8 +54,8 @@ with metaopen(args.input, "r") as in_fd, metaopen(preprocessed_annotations, "w")
 
         line_list = line.strip().split("\t")
         if args.cut_scaffold_version:
-            print(line[0])
-            line[0] = args.version_separator.join(line[0].split(args.version_separator)[:-1])
+            #print(line[0])
+            line_list[0] = args.version_separator.join(line_list[0].split(args.version_separator)[:-1])
         #if line_list[2] not in args.allowed_types:
         #    continue
         description_dict = {key: value for key, value in map(lambda s: s.split("="), line_list[8].split(";"))}
