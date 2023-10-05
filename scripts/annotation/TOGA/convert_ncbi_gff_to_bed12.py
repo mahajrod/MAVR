@@ -66,7 +66,6 @@ print("Extracting isoforms...")
 annotation_df = pd.read_csv(preprocessed_annotations, sep="\t", header=0, na_values=["."])
 annotation_df[annotation_df["type"] == "mRNA"][["parent_id", "id"]].to_csv("{0}.mRNA.isoforms.tab".format(args.output_prefix),
                                                                            sep="\t", header=False, index=False)
-mRNA_ids = annotation_df[annotation_df["type"] == "mRNA"][["id"]]
 print("Extraction finished.")
 
 parent_start_df = annotation_df[["id", "start"]]
@@ -130,8 +129,7 @@ bed12_columns = ["scaffold", "start", "end",
                  "transcript_id", "score", "strand",
                  "cds_start", "cds_end", "score2",
                  "exon_number", "exon_len_list", "exon_start_list"]
-
-mRNA_index = merged_df["id"] == "mRNA"
+mRNA_index = merged_df["type"] == "mRNA"
 
 merged_df = merged_df[["#scaffold", "start", "end",
                        "id", "score", "strand",
