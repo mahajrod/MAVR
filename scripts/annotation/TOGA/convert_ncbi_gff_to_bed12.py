@@ -38,6 +38,10 @@ parser.add_argument("-a", "--allowed_types", action="store", dest="allowed_types
                     default=["gene", "pseudogene", "mRNA", "exon", "CDS"],
                     help="Comma-separated list of allowed annotations. Other types will be ignored. "
                          "Default: gene,pseudogene,mRNA,exon,CDS .")
+parser.add_argument("-c", "--cut_scaffold_version", action="store_true", dest="cut_scaffold_version",
+                    help="Cut scaffold version. Default: False")
+parser.add_argument("-s", "--version_separator", action="store", dest="version_separator", default=".",
+                    help="Separator between scaffold id and version. Default: '.'")
 args = parser.parse_args()
 
 preprocessed_annotations = "{0}.preprocessed.bed".format(args.output_prefix)
@@ -49,6 +53,8 @@ with metaopen(args.input, "r") as in_fd, metaopen(preprocessed_annotations, "w")
             continue
 
         line_list = line.strip().split("\t")
+        if args.cut_scaffold_version:
+            line[0] = args.version_separator.join(line[0].split(args.version_separator)[:-1])
         #if line_list[2] not in args.allowed_types:
         #    continue
         description_dict = {key: value for key, value in map(lambda s: s.split("="), line_list[8].split(";"))}
