@@ -140,4 +140,6 @@ merged_df.columns = pd.Index(bed12_columns)
 
 merged_df.to_csv("{0}.final.bed".format(args.output_prefix), sep="\t", index=False, header=False)
 merged_df[mRNA_index].to_csv("{0}.final.mRNA.bed".format(args.output_prefix), sep="\t", index=False, header=False)
+merged_df[merged_df["cds_start"].notna()].to_csv("{0}.final.mRNA.withCDS.bed".format(args.output_prefix),
+                                                 sep="\t", index=False, header=False)
 print("Finished...")
