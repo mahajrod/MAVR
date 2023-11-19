@@ -67,14 +67,18 @@ parser.add_argument("-m", "--max_difference", action="store", dest="max_differen
                     type=float, default=0.1,
                     help="Maximal threshold for difference between sequences "
                          "(fraction of sequence uncovered by blast hits). Default: 0.1")
+parser.add_argument("-e", "--evalue", action="store", dest="evalue",
+                    type=float, default=0.001,
+                    help="Maximal threshold for e-value (blast). Default: 0.001")
 args = parser.parse_args()
 
 MakeBLASTDb.make_nucleotide_db(args.input_fasta, args.output_prefix, None,
                                output_file=args.output_prefix)
 
-blast_hit_file = '%s.blastn.hists' % args.output_prefix
+blast_hit_file = '%s.blastn.hits' % args.output_prefix
 
 blast_cmd = 'blastn -outfmt "6 qaccver saccver qlen slen pident length mismatch gapopen qstart qend sstart send sstrand evalue bitscore" '
+blast_cmd += ' -evalue %f' % args.evalue
 blast_cmd += ' -query %s ' % args.input_fasta
 blast_cmd += ' -strand both '
 blast_cmd += ' -db %s ' % args.output_prefix
