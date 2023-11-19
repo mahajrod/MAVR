@@ -2,9 +2,13 @@
 __author__ = 'Sergei F. Kliver'
 import os
 import argparse
-import pandas as pd
-import matplotlib as mpl
+from copy import deepcopy
 from functools import partial
+
+import numpy as np
+import pandas as pd
+from scipy.cluster import hierarchy
+import matplotlib.pyplot as plt
 
 from RouToolPa.Parsers.Sequence import CollectionSequence
 from RouToolPa.Routines import SequenceRoutines
@@ -12,26 +16,40 @@ from RouToolPa.Tools.BLAST import MakeBLASTDb
 
 
 def count_coverage_by_hits(df, start_column_name, end_column_name, final_col_prefix):
+    #print("OOOO")
     #print(df)
-    if len(df) <= 1:
+    #print(type(df))
+    tmp_df = df[[start_column_name, end_column_name]].reset_index(drop=True)
+    #print(tmp_df)
+    if len(tmp_df) <= 1:
+        #print("AAAAAAAA")
+        #print(df)
         #return df[[start_column_name,end_column_name]]
         #print((df[end_column_name] - df[start_column_name]).iloc[0])
-        return pd.DataFrame([(df[end_column_name] - df[start_column_name]).iloc[0]],
+        return pd.DataFrame([(tmp_df[end_column_name] - tmp_df[start_column_name]).iloc[0]],
                             columns=[final_col_prefix + "_total_hit_len"])
+    #print("BBBBBBBB")
+
     #print(df)
-    start_col_idx = 5
-    end_col_idx = 6
-    row_list = [list(row) for row in df.iloc[0:1, :].itertuples(index=False)]
+    start_col_idx = 0 #5
+    end_col_idx = 1 #6
+    row_list = [list(row) for row in tmp_df.iloc[0:1, :].itertuples(index=False)]
     #print(row_list)
-    for row in df.iloc[1:, :].itertuples(index=False):
-        if row[start_col_idx] > row_list[-1][end_col_idx]:
-            row_list.append(row)
+    #print(row_list)
+    for row in tmp_df.iloc[1:, :].itertuples(index=False):
+        tmp_row = list(row)
+        if tmp_row[start_col_idx] > row_list[-1][end_col_idx]:
+            row_list.append(tmp_row)
         else:
-            if row[end_col_idx] > row_list[-1][end_col_idx]:
-                row_list[-1][end_col_idx ] = row[end_col_idx]
+            if tmp_row [end_col_idx] > row_list[-1][end_col_idx]:
+                #print("CCCCCC")
+                #print(tmp_row )
+                #print(row_list)
+                row_list[-1][end_col_idx] = tmp_row[end_col_idx]
 
     #return pd.DataFrame.from_records(row_list, columns=["query","target","target_strand", "query_len", start_column_name, end_column_name],)[[start_column_name,end_column_name]]
-    tmp = pd.DataFrame.from_records(row_list, columns=["query","target", "query_len", "target_len", "target_strand",  start_column_name, end_column_name],)
+    #tmp = pd.DataFrame.from_records(row_list, columns=["query","target", "query_len", "target_len", "target_strand",  start_column_name, end_column_name],)
+    tmp = pd.DataFrame.from_records(row_list, columns=[start_column_name, end_column_name],)
     #print((tmp[end_column_name] - tmp[start_column_name]).sum())
     #return (tmp[end_column_name] - tmp[start_column_name]).sum()
     return pd.DataFrame([(tmp[end_column_name] - tmp[start_column_name]).sum()],
@@ -45,12 +63,10 @@ parser.add_argument("-i", "--input_fasta", action="store", dest="input_fasta", r
 parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", required=True,
                     help="Prefix of output files")
 
-parser.add_argument("-n", "--min_total_hit_len", action="store", dest="min_total_hit_len",
-                    type=float, default=0.9,
-                    help="Minimal threshold for total length of hits")
-parser.add_argument("-m", "--max_total_hit_len", action="store", dest="max_total_hit_len",
-                    type=float, default=1.1,
-                    help="Maximal threshold for total length of hits")
+parser.add_argument("-m", "--max_difference", action="store", dest="max_difference",
+                    type=float, default=0.1,
+                    help="Maximal threshold for difference between sequences "
+                         "(fraction of sequence uncovered by blast hits). Default: 0.1")
 args = parser.parse_args()
 
 MakeBLASTDb.make_nucleotide_db(args.input_fasta, args.output_prefix, None,
@@ -70,18 +86,29 @@ blast_fmt6_header_list = ['query', 'target', "query_len", "target_len", 'pident'
                           'query_start', 'query_end', 'target_start', 'target_end', "target_strand", 'evalue', 'bitscore']
 
 blast_df = pd.read_csv(blast_hit_file, sep="\t", names=blast_fmt6_header_list)
+fasta_col = CollectionSequence(args.input_fasta, format="fasta", parsing_mode="parse")
 
-blast_df.loc[blast_df["target_strand"] == "minus", "target_start" ], blast_df.loc[blast_df["target_strand"] == "minus", "target_end"] = blast_df.loc[blast_df["target_strand"] == "minus", "target_end" ], blast_df.loc[blast_df["target_strand"] == "minus", "target_start" ]
+blast_df.loc[blast_df["target_strand"] == "minus", "target_start"], blast_df.loc[blast_df["target_strand"] == "minus", "target_end"] = blast_df.loc[blast_df["target_strand"] == "minus", "target_end"], blast_df.loc[blast_df["target_strand"] == "minus", "target_start"]
 blast_df["target_start"] = blast_df["target_start"] - 1
 blast_df["query_start"] = blast_df["query_start"] - 1
 
 blast_df["query_fraction"] = (blast_df["query_end"] - blast_df["query_start"]) / blast_df["query_len"]
 blast_df["target_fraction"] = (blast_df["target_end"] - blast_df["target_start"]) / blast_df["target_len"]
 
-query_sorted_blast_df = blast_df.sort_values(by=["query","target", "query_start"]) #[blast_df["query"] != blast_df["target"]]
+query_sorted_blast_df = blast_df.sort_values(by=["query", "target", "query_start"]) #[blast_df["query"] != blast_df["target"]]
 target_sorted_blast_df = blast_df.sort_values(by=["query", "target", "target_start"]) #[blast_df["query"] != blast_df["target"]]
 
-query_hit_len_df = query_sorted_blast_df[["query","target", "query_len","target_len","target_strand", "query_start", "query_end"]].groupby(by=["query", "target", "query_len","target_len",
+#
+#def test (df):
+#    print(df)
+#    return 0
+#
+
+query_sorted_blast_df[["query","target", "query_len","target_len","target_strand", "query_start", "query_end"]].to_csv("aaaa", sep="\t", index=True, header=True)
+#query_sorted_blast_df[["query","target", "query_len","target_len","target_strand", "query_start", "query_end"]].groupby(by=["query", "target", "query_len","target_len",
+#                                                                                                           "target_strand"]).apply(test)
+
+query_hit_len_df = query_sorted_blast_df[["query", "target", "query_len", "target_len", "target_strand", "query_start", "query_end"]].groupby(by=["query", "target", "query_len", "target_len",
                                                                                                            "target_strand"]).apply(partial(count_coverage_by_hits,
                                                                                                                                               start_column_name="query_start",
                                                                                                                                               end_column_name="query_end",
@@ -89,11 +116,15 @@ query_hit_len_df = query_sorted_blast_df[["query","target", "query_len","target_
 
 query_hit_len_df.index = query_hit_len_df.index.droplevel(level=5)
 #print(query_hit_len_df)
-target_hit_len_df = target_sorted_blast_df[["query","target", "query_len","target_len","target_strand", "target_start", "target_end"]].groupby(by=["query", "target", "query_len","target_len",
-                                                                                                              "target_strand"]).apply(partial(count_coverage_by_hits,
-                                                                                                                                              start_column_name="target_start",
-                                                                                                                                              end_column_name="target_end",
-                                                                                                                                              final_col_prefix="target"))
+target_hit_len_df = target_sorted_blast_df[["query", "target",
+                                            "query_len", "target_len",
+                                            "target_strand", "target_start",
+                                            "target_end"]].groupby(by=["query", "target",
+                                                                       "query_len", "target_len",
+                                                                       "target_strand"]).apply(partial(count_coverage_by_hits,
+                                                                       start_column_name="target_start",
+                                                                       end_column_name="target_end",
+                                                                       final_col_prefix="target"))
 target_hit_len_df.index = target_hit_len_df.index.droplevel(level=5)
 
 hit_len_df = pd.concat([query_hit_len_df, target_hit_len_df], axis=1).reset_index(level=[2, 3], drop=False)
@@ -102,69 +133,136 @@ hit_len_df["query_fraction"] = hit_len_df["query_total_hit_len"] / hit_len_df["q
 
 hit_len_df["target_fraction"] = hit_len_df["target_total_hit_len"] / hit_len_df["target_len"]
 
+print("Selecting main strand for each pair of target and query...")
 
-hit_len_filtered_df = hit_len_df[(args.max_total_hit_len > hit_len_df["query_fraction"]) &
-                                 (hit_len_df["query_fraction"] > args.min_total_hit_len) &
-                                 (hit_len_df["query_fraction"] < args.max_total_hit_len) &
-                                 (hit_len_df["target_fraction"] > args.min_total_hit_len)]
-hit_len_filtered_df.to_csv('%s.hit_len.filtered.tab' % args.output_prefix, header=True, index=True, sep="\t")
-
-singleton_set = set()
-cluster_set = set()
-for query_id in hit_len_filtered_df.index.get_level_values(level=0).unique():
-    target_id_list = list(hit_len_filtered_df.loc[query_id].index.get_level_values(level=0))
-    target_id_unique_list = list(hit_len_filtered_df.loc[query_id].index.get_level_values(level=0).unique())
-    if len(target_id_list) != len(target_id_unique_list):
-        raise ValueError("Some sequences have hits to both plus and minus strands of target. Check it.")
-    if len(target_id_list) == 1:
-        singleton_set.add(tuple(target_id_list))
+row_list = [list(row) for row in hit_len_df.reset_index(drop=False).iloc[0:1, :].itertuples(index=False)]
+#print(hit_len_df)
+for row in hit_len_df.iloc[1:, :].reset_index(drop=False).itertuples(index=False):
+    if (row[0] == row_list[-1][0]) and (row[1] == row_list[-1][1]):
+        if (row[-1] - row_list[-1][-1] + row[-2] - row_list[-1][-2]) > 0:
+            row_list[-1] = deepcopy(row)
     else:
-        cluster_set.add(tuple(target_id_list))
+        row_list.append(row)
 
-print(singleton_set)
-print(cluster_set)
+hit_len_df = pd.DataFrame.from_records(row_list, columns=["query", "target", "target_strand",
+                                                          "query_len", "target_len",
+                                                          "query_total_hit_len", "target_total_hit_len",
+                                                          "query_fraction", "target_fraction"],
+                                       index=["query", "target", "target_strand"])
+hit_len_df.to_csv('%s.hit_len.strand_filtered.tab' % args.output_prefix, header=True, index=True, sep="\t")
+
+seq_number = len(fasta_col.records)
+seq_list = sorted(fasta_col.records.keys())
+seq_index_dict = {seq_list[i]: i for i in range(0, seq_number)}
+
+#distance_matrix = np.ones((seq_number, seq_number))
+#hit_len_df_index = hit_len_df.index.droplevel([2, 3, 4])
+#for query_id in fasta_col.records:
+#    for target_id in fasta_col.records:
+#        if (query_id, target_id) in hit_len_df_index:
+#            distance_matrix[seq_index_dict[query_id]][seq_index_dict[target_id]] = max(np.abs(1 - hit_len_df.loc[query_id].loc[target_id]["query_total_hit_len"]),
+#                                                                                       np.abs(1 - hit_len_df.loc[query_id].loc[target_id]["target_total_hit_len"]))
+print("Clustering...")
+distance_matrix = np.ones(seq_number * (seq_number - 1) // 2, dtype=float)
+distance_table = np.ones((seq_number, seq_number), dtype=np.float64)
+#print(distance_table.shape)
+#print(type(distance_table))
+for i in range(0, seq_number):
+    distance_table[i][i] = 0
+#print(hit_len_df.index)
+hit_len_df_index = hit_len_df.index.droplevel(2)
+
+for target_index in range(0, seq_number):  # j
+    target_id = seq_list[target_index]
+    for query_index in range(0, target_index):  # i
+        query_id = seq_list[query_index]
+        distance_matrix_index = seq_number * query_index + target_index - ((query_index + 2) * (query_index + 1)) // 2
+        if ((query_id, target_id) in hit_len_df_index) and ((target_id, query_id) in hit_len_df_index):
+            distance_table[query_index][target_index] = max(np.abs(1 - hit_len_df.loc[query_id].loc[target_id]["query_fraction"][0]),
+                                                            np.abs(1 - hit_len_df.loc[query_id].loc[target_id]["target_fraction"][0]))
+            distance_table[target_index][query_index] = max(np.abs(1 - hit_len_df.loc[target_id].loc[query_id]["query_fraction"][0]),
+                                                            np.abs(1 - hit_len_df.loc[target_id].loc[query_id]["target_fraction"][0]))
+            distance_matrix[distance_matrix_index] = max(distance_table[query_index][target_index],
+                                                         distance_table[target_index][query_index])
+#print(distance_table)
+distance_df = pd.DataFrame(distance_table, index=seq_list, columns=seq_list)
+distance_df.index.name = "seq_id"
+distance_df.to_csv("%s.distance.tab" % args.output_prefix, sep="\t", index=True, header=True)
+np.savetxt("%s.distance" % args.output_prefix, distance_matrix, fmt='%2.5f', delimiter="\t")
+linkage = hierarchy.linkage(distance_matrix, method="complete")
+fig = plt.figure(figsize=(25, 10))
+dn = hierarchy.dendrogram(linkage, labels=seq_list)
+plt.axhline(0.1, color="green", linestyle="dotted")
+plt.axhline(0.2, color="blue", linestyle="dotted")
+plt.axhline(0.3, color="orange", linestyle="dotted")
+plt.axhline(0.5, color="red", linestyle="dotted")
+plt.xlabel("Sequence")
+plt.ylabel("Distance")
+
+for ext in "png", "svg":
+    plt.savefig("{0}.clustering.{1}".format(args.output_prefix, ext))
+cluster_array = hierarchy.fcluster(linkage, args.max_difference, criterion='distance')
+
+print(cluster_array)
+cluster_dict = {}
+for seq_index in range(0, len(cluster_array)):
+    cluster_index = cluster_array[seq_index]
+    cluster_label = "cluster_%i" % cluster_index
+    if cluster_label not in cluster_dict:
+        cluster_dict[cluster_label] = [seq_list[seq_index]]
+    else:
+        cluster_dict[cluster_label].append(seq_list[seq_index])
+
+print("Sequence indexes:")
+for seq_id in seq_index_dict:
+    print("\t{0}: {1}".format(seq_id, seq_index_dict[seq_id]))
+
+print("Clusters:")
+for cluster_label in cluster_dict:
+    print("\t{0}\t{1}".format(cluster_label, ",".join(cluster_dict[cluster_label])))
+
 with open("%s.clusters" % args.output_prefix, "w") as out_fd:
-    for cluster_settttttt in (singleton_set, cluster_set):
-        for cluster in cluster_settttttt:
-            out_fd.write(",".join(cluster) + "\n")
+    for cluster_label in cluster_dict:
+        out_fd.write("{0}\t{1}".format(cluster_label, ",".join(cluster_dict[cluster_label])))
+
+
+hit_len_df.reset_index("target_strand", inplace=True)
 
 indexed_query_sorted_blast_df = query_sorted_blast_df.set_index(["query", "target"])
 
-hit_len_filtered_df.reset_index("target_strand", inplace=True)
 modification_df = []
-for cluster in singleton_set:
-
-    # no modifications for singletons
-    # seq_id, shift, revcomp
-    modification_df.append([cluster[0], 0, False])
-
-#print(modification_df)
-for cluster in cluster_set:
+for cluster_label in cluster_dict:
+    if len(cluster_dict[cluster_label]) == 1:
+        modification_df.append([cluster_dict[cluster_label][0], 0, False])
+        continue
     #detect most frequent strand
-    first_seq_id = cluster[0]
-    print(cluster)
-    plus_strand_count = sum(hit_len_filtered_df.loc[first_seq_id ,"target_strand"] == "plus")
-    minus_strand_count = sum(hit_len_filtered_df.loc[first_seq_id ,"target_strand"] == "minus")
-
+    first_seq_id = cluster_dict[cluster_label][0]
+    print("Cluster:\n\t%s" % str(cluster_label))
+    plus_strand_count = sum(hit_len_df.loc[first_seq_id, "target_strand"] == "plus")
+    minus_strand_count = sum(hit_len_df.loc[first_seq_id, "target_strand"] == "minus")
+    print("Initial reference seq id:\t%s" % first_seq_id)
     if minus_strand_count >= plus_strand_count:
         # change first seq if there more sequences in opposite strand
-        first_seq_id = hit_len_filtered_df.loc[first_seq_id][hit_len_filtered_df.loc[first_seq_id]["target_strand"] == "minus"].index[0]
+        first_seq_id = hit_len_df.loc[first_seq_id][hit_len_df.loc[first_seq_id]["target_strand"] == "minus"].index[0]
         #print(plus_strand_count, minus_strand_count)
-    print(first_seq_id)
-    for seq_id in cluster:
+    print("New reference seq id:\t%s" % first_seq_id)
+    for seq_id in cluster_dict[cluster_label]:
         if seq_id == first_seq_id:
             # no modifications for first(reference) seq in cluster
             # seq_id, shift, revcomp
             modification_df.append([first_seq_id, 0, False])
             continue
-        if hit_len_filtered_df.loc[first_seq_id].loc[seq_id, "target_strand"] == "plus":
+        #print(hit_len_df.loc[first_seq_id])
+        print(indexed_query_sorted_blast_df.loc[first_seq_id].loc[seq_id])
+        print(indexed_query_sorted_blast_df.loc[first_seq_id].loc[seq_id]["target_end"])
+        print(indexed_query_sorted_blast_df.loc[first_seq_id].loc[seq_id]["query_start"])
+        if hit_len_df.loc[first_seq_id].loc[seq_id, "target_strand"] == "plus":
             modification_df.append([seq_id,
-                                    indexed_query_sorted_blast_df.loc[first_seq_id].loc[seq_id]["target_start"][0] - indexed_query_sorted_blast_df.loc[first_seq_id].loc[seq_id]["query_start"][0],
+                                    indexed_query_sorted_blast_df.loc[first_seq_id]["target_start"].loc[[seq_id]].iloc[0] - indexed_query_sorted_blast_df.loc[first_seq_id]["query_start"].loc[[seq_id]].iloc[0],
                                     False])
         else:
-            pass
             modification_df.append([seq_id,
-                                    indexed_query_sorted_blast_df.loc[first_seq_id].loc[seq_id]["target_end"][0] + indexed_query_sorted_blast_df.loc[first_seq_id].loc[seq_id]["query_start"][0],
+                                    indexed_query_sorted_blast_df.loc[first_seq_id]["target_end"].loc[[seq_id]].iloc[0] + indexed_query_sorted_blast_df.loc[first_seq_id]["query_start"].loc[[seq_id]].iloc[0],
                                     True])
 
         print("\t" + str(modification_df[-1]))
@@ -185,7 +283,13 @@ for seq_id in modification_df.index:
         fasta_col.records[seq_id] = SequenceRoutines.reverse_complement(fasta_col.records[seq_id])
 
 fasta_col.write("%s.rotated.fasta" % args.output_prefix)
+for cluster_label in cluster_dict:
+    seq_file = "{0}.rotated.{1}.fasta".format(args.output_prefix, cluster_label)
+    aln_file = "{0}.rotated.{1}.aln.fasta".format(args.output_prefix, cluster_label)
+    fasta_col.write(seq_file,
+                    whitelist=cluster_dict[cluster_label])
 
-
+    mafft_cmd = "mafft  --thread 4 --maxiterate 1000 --auto --anysymbol {0} > {1}".format(seq_file, aln_file)
+    os.system(mafft_cmd)
 
 
