@@ -203,7 +203,7 @@ for ext in "png", "svg":
     plt.savefig("{0}.clustering.{1}".format(args.output_prefix, ext))
 cluster_array = hierarchy.fcluster(linkage, args.max_difference, criterion='distance')
 
-print(cluster_array)
+#print(cluster_array)
 cluster_dict = {}
 for seq_index in range(0, len(cluster_array)):
     cluster_index = cluster_array[seq_index]
@@ -237,15 +237,15 @@ for cluster_label in cluster_dict:
         continue
     #detect most frequent strand
     first_seq_id = cluster_dict[cluster_label][0]
-    print("Cluster:\n\t%s" % str(cluster_label))
+    #print("Cluster:\n\t%s" % str(cluster_label))
     plus_strand_count = sum(hit_len_df.loc[first_seq_id, "target_strand"] == "plus")
     minus_strand_count = sum(hit_len_df.loc[first_seq_id, "target_strand"] == "minus")
-    print("Initial reference seq id:\t%s" % first_seq_id)
+    #print("Initial reference seq id:\t%s" % first_seq_id)
     if minus_strand_count >= plus_strand_count:
         # change first seq if there more sequences in opposite strand
         first_seq_id = hit_len_df.loc[first_seq_id][hit_len_df.loc[first_seq_id]["target_strand"] == "minus"].index[0]
         #print(plus_strand_count, minus_strand_count)
-    print("New reference seq id:\t%s" % first_seq_id)
+    #print("New reference seq id:\t%s" % first_seq_id)
     for seq_id in cluster_dict[cluster_label]:
         if seq_id == first_seq_id:
             # no modifications for first(reference) seq in cluster
@@ -253,9 +253,9 @@ for cluster_label in cluster_dict:
             modification_df.append([first_seq_id, 0, False])
             continue
         #print(hit_len_df.loc[first_seq_id])
-        print(indexed_query_sorted_blast_df.loc[first_seq_id].loc[seq_id])
-        print(indexed_query_sorted_blast_df.loc[first_seq_id].loc[seq_id]["target_end"])
-        print(indexed_query_sorted_blast_df.loc[first_seq_id].loc[seq_id]["query_start"])
+        #print(indexed_query_sorted_blast_df.loc[first_seq_id].loc[seq_id])
+        #print(indexed_query_sorted_blast_df.loc[first_seq_id].loc[seq_id]["target_end"])
+        #print(indexed_query_sorted_blast_df.loc[first_seq_id].loc[seq_id]["query_start"])
         if hit_len_df.loc[first_seq_id].loc[seq_id, "target_strand"] == "plus":
             modification_df.append([seq_id,
                                     indexed_query_sorted_blast_df.loc[first_seq_id]["target_start"].loc[[seq_id]].iloc[0] - indexed_query_sorted_blast_df.loc[first_seq_id]["query_start"].loc[[seq_id]].iloc[0],
@@ -265,7 +265,7 @@ for cluster_label in cluster_dict:
                                     indexed_query_sorted_blast_df.loc[first_seq_id]["target_end"].loc[[seq_id]].iloc[0] + indexed_query_sorted_blast_df.loc[first_seq_id]["query_start"].loc[[seq_id]].iloc[0],
                                     True])
 
-        print("\t" + str(modification_df[-1]))
+        #print("\t" + str(modification_df[-1]))
 
 
 modification_df = pd.DataFrame.from_records(modification_df, columns=["seq_id", "shift", "rev_com"], index="seq_id")
@@ -289,7 +289,7 @@ for cluster_label in cluster_dict:
     fasta_col.write(seq_file,
                     whitelist=cluster_dict[cluster_label])
 
-    mafft_cmd = "mafft  --thread 4 --maxiterate 1000 --auto --anysymbol {0} > {1}".format(seq_file, aln_file)
+    mafft_cmd = "mafft --quiet --thread 4 --maxiterate 1000 --auto --anysymbol {0} > {1}".format(seq_file, aln_file)
     os.system(mafft_cmd)
 
 
