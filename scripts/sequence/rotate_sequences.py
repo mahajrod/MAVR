@@ -4,7 +4,7 @@ import os
 import argparse
 from copy import deepcopy
 from functools import partial
-
+from collections.abc import Iterable
 import numpy as np
 import pandas as pd
 from scipy.cluster import hierarchy
@@ -221,7 +221,7 @@ print("Sequence indexes:")
 for seq_id in seq_index_dict:
     print("\t{0}: {1}".format(seq_id, seq_index_dict[seq_id]))
 
-print(cluster_dict)
+#print(cluster_dict)
 
 print("Clusters:")
 for cluster_label in cluster_dict:
@@ -244,36 +244,60 @@ for cluster_label in cluster_dict:
         continue
     #detect most frequent strand
     first_seq_id = cluster_dict[cluster_label][0]
-    #print("Cluster:\n\t%s" % str(cluster_label))
-    plus_strand_count = sum(hit_len_df.loc[first_seq_id, "target_strand"] == "plus")
-    minus_strand_count = sum(hit_len_df.loc[first_seq_id, "target_strand"] == "minus")
-    #print("Initial reference seq id:\t%s" % first_seq_id)
+    print("Cluster:\n\tid:\t%s" % str(cluster_label))
+    print("\telements:\t%s" % str(",".join(cluster_dict[cluster_label])))
+    plus_strand_count = sum(hit_len_df.loc[first_seq_id].loc[cluster_dict[cluster_label]]["target_strand"] == "plus")
+    minus_strand_count = sum(hit_len_df.loc[first_seq_id].loc[cluster_dict[cluster_label]]["target_strand"] == "minus")
+    print("\tplus strand: %i" % plus_strand_count)
+    print("\tminus strand: %i" % minus_strand_count)
+    print("\tInitial reference seq id:\t%s" % first_seq_id)
     if minus_strand_count >= plus_strand_count:
         # change first seq if there more sequences in opposite strand
-        first_seq_id = hit_len_df.loc[first_seq_id][hit_len_df.loc[first_seq_id]["target_strand"] == "minus"].index[0]
+        first_seq_id = hit_len_df.loc[first_seq_id].loc[cluster_dict[cluster_label]][hit_len_df.loc[first_seq_id].loc[cluster_dict[cluster_label]]["target_strand"] == "minus"].index[0]
         #print(plus_strand_count, minus_strand_count)
-    #print("New reference seq id:\t%s" % first_seq_id)
+    print("\tNew reference seq id:\t%s" % first_seq_id)
     for seq_id in cluster_dict[cluster_label]:
+        #print(seq_id)
         if seq_id == first_seq_id:
             # no modifications for first(reference) seq in cluster
             # seq_id, shift, revcomp
-            modification_df.append([first_seq_id, 0, False])
-            continue
-        #print(hit_len_df.loc[first_seq_id])
-        #print(indexed_query_sorted_blast_df.loc[first_seq_id].loc[seq_id])
-        #print(indexed_query_sorted_blast_df.loc[first_seq_id].loc[seq_id]["target_end"])
-        #print(indexed_query_sorted_blast_df.loc[first_seq_id].loc[seq_id]["query_start"])
-        if hit_len_df.loc[first_seq_id].loc[seq_id, "target_strand"] == "plus":
-            modification_df.append([seq_id,
-                                    indexed_query_sorted_blast_df.loc[first_seq_id]["target_start"].loc[[seq_id]].iloc[0] - indexed_query_sorted_blast_df.loc[first_seq_id]["query_start"].loc[[seq_id]].iloc[0],
-                                    False])
+            shift = 0
+            rev_com = False
+            #modification_df.append([first_seq_id, shift, rev_com])
         else:
-            modification_df.append([seq_id,
-                                    indexed_query_sorted_blast_df.loc[first_seq_id]["target_end"].loc[[seq_id]].iloc[0] + indexed_query_sorted_blast_df.loc[first_seq_id]["query_start"].loc[[seq_id]].iloc[0],
-                                    True])
+            #print(hit_len_df.loc[first_seq_id])
+            #print(indexed_query_sorted_blast_df.loc[first_seq_id].loc[seq_id])
+            #print(indexed_query_sorted_blast_df.loc[first_seq_id].loc[seq_id]["target_end"])
+            #print(indexed_query_sorted_blast_df.loc[first_seq_id].loc[seq_id]["query_start"])
+            if hit_len_df.loc[first_seq_id].loc[seq_id, "target_strand"] == "plus":
+                shift = indexed_query_sorted_blast_df.loc[first_seq_id]["target_start"].loc[[seq_id]][0] - indexed_query_sorted_blast_df.loc[first_seq_id]["query_start"].loc[[seq_id]][0]
+                if isinstance(shift, Iterable):
+                    if (len(shift)) > 1:
+                        raise ValueError("ERROR! strange issue with %s" % seq_id)
+                    elif isinstance(shift, Iterable):
+                        shift = shift[0]
+                #print(indexed_query_sorted_blast_df.loc[first_seq_id]["target_start"].loc[[seq_id]])
+                #print(indexed_query_sorted_blast_df.loc[first_seq_id]["query_start"].loc[[seq_id]])
+                #print(shift)
+                rev_com = False
+            else:
+                #print(indexed_query_sorted_blast_df.loc[first_seq_id]["target_end"].loc[[seq_id]])
+                #print(indexed_query_sorted_blast_df.loc[first_seq_id]["query_start"].loc[[seq_id]])
+                shift = indexed_query_sorted_blast_df.loc[first_seq_id]["target_end"].loc[[seq_id]][0] + indexed_query_sorted_blast_df.loc[first_seq_id]["query_start"].loc[[seq_id]][0],
+                if isinstance(shift, Iterable):
+                    if (len(shift)) > 1:
+                        raise ValueError("ERROR! Strange issue with %s happened while calculating modifications" % seq_id)
+                    elif isinstance(shift, Iterable):
+                        shift = shift[0]
+                #print(shift)
+                rev_com = True
+        modification_df.append([seq_id, shift, rev_com])
+        #print(modification_df[-1])
+
+        #print("\t%s\t%i\t%s" % (seq_id, shift, str(rev_com)))
 
         #print("\t" + str(modification_df[-1]))
-
+    print("\n")
 
 modification_df = pd.DataFrame.from_records(modification_df, columns=["seq_id", "shift", "rev_com"], index="seq_id")
 modification_df.to_csv('%s.modifications.tab' % args.output_prefix, header=True, index=True, sep="\t")
