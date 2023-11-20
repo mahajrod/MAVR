@@ -221,13 +221,16 @@ print("Sequence indexes:")
 for seq_id in seq_index_dict:
     print("\t{0}: {1}".format(seq_id, seq_index_dict[seq_id]))
 
+print(cluster_dict)
+
 print("Clusters:")
 for cluster_label in cluster_dict:
     print("\t{0}\t{1}".format(cluster_label, ",".join(cluster_dict[cluster_label])))
 
+
 with open("%s.clusters" % args.output_prefix, "w") as out_fd:
     for cluster_label in cluster_dict:
-        out_fd.write("{0}\t{1}".format(cluster_label, ",".join(cluster_dict[cluster_label])))
+        out_fd.write("{0}\t{1}\n".format(cluster_label, ",".join(cluster_dict[cluster_label])))
 
 
 hit_len_df.reset_index("target_strand", inplace=True)
