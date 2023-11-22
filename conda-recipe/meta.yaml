@@ -1,6 +1,6 @@
 package:
   name: "mavr"
-  version: "0.104"
+  version: "0.105"
 about:
   summary: "Scripts and pipelines"
 source:

@@ -70,6 +70,17 @@ parser.add_argument("-m", "--max_difference", action="store", dest="max_differen
 parser.add_argument("-e", "--evalue", action="store", dest="evalue",
                     type=float, default=0.001,
                     help="Maximal threshold for e-value (blast). Default: 0.001")
+parser.add_argument("--subplots_adjust_left", action="store", dest="subplots_adjust_left", type=float, default=0.05,
+                    help="Adjust left border of subplots on the figure. Default: matplotlib defaults")
+
+parser.add_argument("--subplots_adjust_right", action="store", dest="subplots_adjust_right", type=float, default=0.98,
+                    help="Adjust right border of subplots on the figure. Default: matplotlib defaults")
+
+parser.add_argument("--subplots_adjust_top", action="store", dest="subplots_adjust_top", type=float, default=0.90,
+                    help="Adjust top border of subplots on the figure. Default: matplotlib defaults")
+parser.add_argument("--subplots_adjust_bottom", action="store", dest="subplots_adjust_bottom", type=float, default=0.05,
+                    help="Adjust bottom border of subplots on the figure. Default: matplotlib defaults")
+
 args = parser.parse_args()
 
 MakeBLASTDb.make_nucleotide_db(args.input_fasta, args.output_prefix, None,
@@ -202,6 +213,8 @@ plt.axhline(0.3, color="orange", linestyle="dotted")
 plt.axhline(0.5, color="red", linestyle="dotted")
 plt.xlabel("Sequence")
 plt.ylabel("Distance")
+plt.subplots_adjust(left=args.subplots_adjust_left, right=args.subplots_adjust_right, bottom=args.subplots_adjust_bottom,
+                    top=args.subplots_adjust_top)
 
 for ext in "png", "svg":
     plt.savefig("{0}.clustering.{1}".format(args.output_prefix, ext))
