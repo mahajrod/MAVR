@@ -20,5 +20,5 @@ with FileRoutines.metaopen(args.input, "r") as in_fd, FileRoutines.metaopen(args
             continue
         line_list = line.split("\t")
         line_list[0] = ".".join(line_list[0].split(".")[:-1])
-        out_fd.write(line)
+        out_fd.write("\t".join(line_list))
 
