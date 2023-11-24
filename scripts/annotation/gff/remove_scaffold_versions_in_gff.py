@@ -19,9 +19,6 @@ with FileRoutines.metaopen(args.input, "r") as in_fd, FileRoutines.metaopen(args
             out_fd.write(line)
             continue
         line_list = line.split("\t")
-        if len(line_list) == 1:
-            out_fd.write(line)
-            continue
         line_list[0] = ".".join(line_list[0].split(".")[:-1])
         out_fd.write(line)
 
