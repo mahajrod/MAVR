@@ -13,7 +13,7 @@ parser.add_argument("-o", "--output", action="store", dest="output", default=sys
 
 args = parser.parse_args()
 
-with FileRoutines.metaopen(args.input, "r") as in_fd, FileRoutines.metaopen(args.output, "r") as out_fd:
+with FileRoutines.metaopen(args.input, "r") as in_fd, FileRoutines.metaopen(args.output, "w") as out_fd:
     for line in in_fd:
         if line[0] == "#":
             out_fd.write(line)
