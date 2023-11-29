@@ -200,7 +200,7 @@ class STRPrimerPipeline(PrimerPipeline):
                                    max_melting_temperature=None, black_list_of_seqs_fasta=None,
                                    trf_matching_weight=2, trf_mismatching_penalty=7,
                                    trf_indel_penalty=7, trf_matching_probability=80, trf_indel_probability=10,
-                                   trf_min_score=50, trf_max_period_size=500, threads=None, min_gap_len=5):
+                                   trf_min_score=50, trf_max_period_size=2000, threads=None, min_gap_len=5):
 
         TRF.path = self.trf_dir
         TRF.threads = threads if threads else self.threads

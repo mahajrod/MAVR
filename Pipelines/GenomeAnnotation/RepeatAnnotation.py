@@ -27,7 +27,7 @@ class RepeatAnnotation(FilteringPipeline):
                          repeatmasker=True, trf=True, windowmasker=True, threads=1,
                          trf_matching_weight=2, trf_mismatching_penalty=7, trf_indel_penalty=7,
                          trf_matching_probability=80, trf_indel_probability=10, trf_min_score=50,
-                         trf_max_period_size=500, trf_max_seq_len=100000, trf_store_intermediate_files=False,
+                         trf_max_period_size=2000, trf_max_seq_len=100000, trf_store_intermediate_files=False,
                          trf_binary_path="",
                          repeatmasker_soft_masking=True, repeatmasker_engine=None, repeatmasker_search_speed=None,
                          repeatmasker_no_low_complexity=None, repeatmasker_only_low_complexity=None,

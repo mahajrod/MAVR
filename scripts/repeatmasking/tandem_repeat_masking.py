@@ -27,8 +27,8 @@ parser.add_argument("-d", "--indel_probability", action="store", dest="indel_pro
                     help="Indel probability. Default: 10")
 parser.add_argument("-c", "--min_score", action="store", dest="min_score", default=50, type=int,
                     help="Minimum alignment score to report. Default: 50")
-parser.add_argument("-e", "--max_period_size", action="store", dest="max_period_size", default=500, type=int,
-                    help="Maximum period size to report. Default: 500")
+parser.add_argument("-e", "--max_period_size", action="store", dest="max_period_size", default=2000, type=int,
+                    help="Maximum period size to report. Default: 2000")
 parser.add_argument("-f", "--report_flanking_sequence", action="store_true", dest="report_flanking_sequences",
                     help="Report flanking sequence. Default: False")
 parser.add_argument("-u", "--enable_html_output", action="store_false", dest="enable_html_output",
