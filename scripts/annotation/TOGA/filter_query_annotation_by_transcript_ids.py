@@ -34,6 +34,8 @@ parser.add_argument("-i", "--input", action="store", dest="input", default=sys.s
                     help="Input bed12 file with query_annotations (query_annotations.bed). Default: stdin")
 parser.add_argument("-d", "--transcript_ids", action="store", dest="transcript_ids", required=True,
                     help="File with transcript ids extracted from query_isoforms.tsv")
+parser.add_argument("-f", "--field_idx", action="store", dest="field_idx", default=3, type=int,
+                    help="Index (0-based) of field to use for filtering. Default: 3")
 parser.add_argument("-o", "--output", action="store", dest="output", default=sys.stdout,
                     help="Output filtered bed12 file. Default: stdout")
 
@@ -44,6 +46,6 @@ print(pd.read_csv(args.transcript_ids, sep="\t", header=None))
 print(transcript_set)
 with metaopen(args.input, "r") as in_fd, metaopen(args.output, "w") as out_fd:
     for line in in_fd:
-        if line.split("\t")[3] in transcript_set:
+        if line.split("\t")[args.field_idx] in transcript_set:
             out_fd.write(line)
 

@@ -40,7 +40,7 @@ parser.add_argument("-o", "--output", action="store", dest="output", required=Tr
 args = parser.parse_args()
 
 isoforms = pd.read_csv(args.input, sep="\t", header=None, names=["transcript"])
-print(isoforms)
+#print(isoforms)
 isoforms["reference_transcript"] = isoforms["transcript"].apply(lambda entry: entry.rsplit(".", maxsplit=1)[0])
 
 
