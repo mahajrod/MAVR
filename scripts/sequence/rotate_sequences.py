@@ -119,7 +119,7 @@ target_sorted_blast_df = blast_df.sort_values(by=["query", "target", "target_sta
 #    return 0
 #
 
-query_sorted_blast_df[["query","target", "query_len","target_len","target_strand", "query_start", "query_end"]].to_csv("aaaa", sep="\t", index=True, header=True)
+#query_sorted_blast_df[["query","target", "query_len","target_len","target_strand", "query_start", "query_end"]].to_csv("aaaa", sep="\t", index=True, header=True)
 #query_sorted_blast_df[["query","target", "query_len","target_len","target_strand", "query_start", "query_end"]].groupby(by=["query", "target", "query_len","target_len",
 #                                                                                                           "target_strand"]).apply(test)
 
@@ -193,10 +193,10 @@ for target_index in range(0, seq_number):  # j
         query_id = seq_list[query_index]
         distance_matrix_index = seq_number * query_index + target_index - ((query_index + 2) * (query_index + 1)) // 2
         if ((query_id, target_id) in hit_len_df_index) and ((target_id, query_id) in hit_len_df_index):
-            distance_table[query_index][target_index] = max(np.abs(1 - hit_len_df.loc[query_id].loc[target_id]["query_fraction"][0]),
-                                                            np.abs(1 - hit_len_df.loc[query_id].loc[target_id]["target_fraction"][0]))
-            distance_table[target_index][query_index] = max(np.abs(1 - hit_len_df.loc[target_id].loc[query_id]["query_fraction"][0]),
-                                                            np.abs(1 - hit_len_df.loc[target_id].loc[query_id]["target_fraction"][0]))
+            distance_table[query_index][target_index] = max(np.abs(1 - hit_len_df.loc[query_id].loc[target_id]["query_fraction"].iloc[0]),
+                                                            np.abs(1 - hit_len_df.loc[query_id].loc[target_id]["target_fraction"].iloc[0]))
+            distance_table[target_index][query_index] = max(np.abs(1 - hit_len_df.loc[target_id].loc[query_id]["query_fraction"].iloc[0]),
+                                                            np.abs(1 - hit_len_df.loc[target_id].loc[query_id]["target_fraction"].iloc[0]))
             distance_matrix[distance_matrix_index] = max(distance_table[query_index][target_index],
                                                          distance_table[target_index][query_index])
 #print(distance_table)
@@ -283,7 +283,7 @@ for cluster_label in cluster_dict:
             #print(indexed_query_sorted_blast_df.loc[first_seq_id].loc[seq_id]["target_end"])
             #print(indexed_query_sorted_blast_df.loc[first_seq_id].loc[seq_id]["query_start"])
             if hit_len_df.loc[first_seq_id].loc[seq_id, "target_strand"] == "plus":
-                shift = indexed_query_sorted_blast_df.loc[first_seq_id]["target_start"].loc[[seq_id]][0] - indexed_query_sorted_blast_df.loc[first_seq_id]["query_start"].loc[[seq_id]][0]
+                shift = indexed_query_sorted_blast_df.loc[first_seq_id]["target_start"].loc[[seq_id]].iloc[0] - indexed_query_sorted_blast_df.loc[first_seq_id]["query_start"].loc[[seq_id]].iloc[0]
                 if isinstance(shift, Iterable):
                     if (len(shift)) > 1:
                         raise ValueError("ERROR! strange issue with %s" % seq_id)
@@ -296,7 +296,15 @@ for cluster_label in cluster_dict:
             else:
                 #print(indexed_query_sorted_blast_df.loc[first_seq_id]["target_end"].loc[[seq_id]])
                 #print(indexed_query_sorted_blast_df.loc[first_seq_id]["query_start"].loc[[seq_id]])
-                shift = indexed_query_sorted_blast_df.loc[first_seq_id]["target_end"].loc[[seq_id]][0] + indexed_query_sorted_blast_df.loc[first_seq_id]["query_start"].loc[[seq_id]][0],
+                #print(seq_id,
+                #      indexed_query_sorted_blast_df.loc[first_seq_id]["target_end"].loc[[seq_id]].iloc[0],
+                #      indexed_query_sorted_blast_df.loc[first_seq_id]["query_start"].loc[[seq_id]].iloc[0],
+                #      indexed_query_sorted_blast_df.loc[first_seq_id]["target_start"].loc[[seq_id]].iloc[0])
+                shift = indexed_query_sorted_blast_df.loc[first_seq_id]["target_end"].loc[[seq_id]].iloc[0] + indexed_query_sorted_blast_df.loc[first_seq_id]["query_start"].loc[[seq_id]].iloc[0] # - indexed_query_sorted_blast_df.loc[first_seq_id]["target_start"].loc[[seq_id]].iloc[0])
+                #print(shift)
+                if shift > indexed_query_sorted_blast_df.loc[first_seq_id]["query_len"].loc[[seq_id]].iloc[0]:
+                    shift -=indexed_query_sorted_blast_df.loc[first_seq_id]["target_len"].loc[[seq_id]].iloc[0]
+                    #print(shift)
                 if isinstance(shift, Iterable):
                     if (len(shift)) > 1:
                         raise ValueError("ERROR! Strange issue with %s happened while calculating modifications" % seq_id)
