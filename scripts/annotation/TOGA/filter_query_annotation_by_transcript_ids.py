@@ -42,8 +42,8 @@ parser.add_argument("-o", "--output", action="store", dest="output", default=sys
 args = parser.parse_args()
 
 transcript_set = set(pd.read_csv(args.transcript_ids, sep="\t", header=None).squeeze("columns"))
-print(pd.read_csv(args.transcript_ids, sep="\t", header=None))
-print(transcript_set)
+#print(pd.read_csv(args.transcript_ids, sep="\t", header=None))
+#print(transcript_set)
 with metaopen(args.input, "r") as in_fd, metaopen(args.output, "w") as out_fd:
     for line in in_fd:
         if line.split("\t")[args.field_idx] in transcript_set:

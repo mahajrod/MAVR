@@ -16,7 +16,7 @@ parser.add_argument("-v", "--values", action="store", dest="values",
 parser.add_argument("-f", "--values_file", action="store", dest="values_file",
                     help="File with values. Ignored if -v/--values is set")
 parser.add_argument("-s", "--separator", action="store", dest="separator", default="\t",
-                    help="Separator used in input file. Default: '\t'")
+                    help="Separator used in input file. Default: TAB")
 parser.add_argument("-o", "--output", action="store", dest="output", default=sys.stdout,
                     help="Output file. Default: stdout")
 parser.add_argument("-e", "--header", action="store_true", dest="header", default=False,
