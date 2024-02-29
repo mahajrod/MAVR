@@ -390,7 +390,7 @@ parser.add_argument("-n", "--read_number", action="store", dest="read_number", d
                     help="Number of reads to analyze. Default: 100000")
 parser.add_argument("-i", "--interleaved", action="store_true", dest="interleaved", default=False,
                     help="Input fastq is interleaved, i.e contains both forward and reverse reads. Default: not set")
-parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", required=True,
+parser.add_argument("-p", "--output_prefix", action="store", dest="output_prefix", required=True,
                     help="Prefix of output files.")
 parser.add_argument("-x", "--figure_format_list", action="store", dest="figure_format_list", default=["png", "svg"],
                     type=lambda s: s.split(","),
