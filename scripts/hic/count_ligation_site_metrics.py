@@ -405,9 +405,9 @@ des, ligep, percent_digested_sites = quality_plot(args.input_fastq, r_enz=args.r
 with open(args.output_prefix + ".stats", "w") as out_fd:
     out_fd.write("#type\trestrictase(s)\tpercentage\n")
     for restrictase in percent_digested_sites:
-        out_fd.write("{0}\t{1}\t{2:3.2}\n".format("digested sites", restrictase, percent_digested_sites[restrictase]))
+        out_fd.write("{0}\t{1}\t{2:3.2f}\n".format("digested sites", restrictase, percent_digested_sites[restrictase]))
     for restrictase in des:
-        out_fd.write("{0}\t{1}\t{2:3.2}\n".format("dangling ends", restrictase, des[restrictase]))
+        out_fd.write("{0}\t{1}\t{2:3.2f}\n".format("dangling ends", restrictase, des[restrictase]))
     for restrictase_couple in ligep:
-        out_fd.write("{0}\t{1}-{2}\t{3:3.2}\n".format("ligation_sites", restrictase_couple[0],
+        out_fd.write("{0}\t{1}-{2}\t{3:3.2f}\n".format("ligation_sites", restrictase_couple[0],
                                                   restrictase_couple[1], ligep[restrictase_couple]))
