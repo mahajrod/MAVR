@@ -5,11 +5,11 @@ TADbit based code
 __author__ = 'Sergei F. Kliver'
 import argparse
 
-from __future__ import print_function
+#from __future__ import print_function
 
 from warnings                             import warn, catch_warnings, simplefilter
-from os                                   import SEEK_END
-from subprocess                           import Popen, PIPE
+#from os                                   import SEEK_END
+#from subprocess                           import Popen, PIPE
 from itertools                            import zip_longest
 import re
 
