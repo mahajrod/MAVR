@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 """
-TADbit based code
+TADbit based code. It contains slightly modified quality_plot function from TADbit.
+It was modified to produce machine-readable file with stats including percentage of diggested sites.
+Also, a generation of a figure in multiple formats was added as option.
 """
-__author__ = 'Sergei F. Kliver'
+
 import argparse
 
 #from __future__ import print_function
