@@ -390,6 +390,10 @@ parser.add_argument("-e", "--restriction_enzyme_list", action="store", dest="res
                     help="Comma-separated list of the restriction enzymes.")
 parser.add_argument("-n", "--read_number", action="store", dest="read_number", default=100000, type=int,
                     help="Number of reads to analyze. Default: 100000")
+parser.add_argument("-s", "--percentage_header_prefix", action="store", dest="percentage_header_prefix", default="",
+                    help="Prefix of percentage column in the header. "
+                         "Useful if you with to analyze multiple files and combine stats in a single table later. "
+                         "Default: '', i.e not set")
 parser.add_argument("-i", "--interleaved", action="store_true", dest="interleaved", default=False,
                     help="Input fastq is interleaved, i.e contains both forward and reverse reads. Default: not set")
 parser.add_argument("-p", "--output_prefix", action="store", dest="output_prefix", required=True,
@@ -405,7 +409,7 @@ des, ligep, percent_digested_sites = quality_plot(args.input_fastq, r_enz=args.r
                                                   extension_list=args.figure_format_list, paired=args.interleaved)
 
 with open(args.output_prefix + ".stats", "w") as out_fd:
-    out_fd.write("#type\trestrictase(s)\tpercentage\n")
+    out_fd.write("#type\trestrictase(s)\t{0}percentage\n".format(args.percentage_header_prefix))
     for restrictase in percent_digested_sites:
         out_fd.write("{0}\t{1}\t{2:3.2f}\n".format("digested sites", restrictase, percent_digested_sites[restrictase]))
     for restrictase in des:
