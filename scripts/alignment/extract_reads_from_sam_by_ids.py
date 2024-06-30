@@ -45,10 +45,10 @@ with metaopen(args.input, "r") as in_fd, metaopen(args.output, "w") as out_fd:
         for line in in_fd:
             out_fd.write(line)
     else:
-        read_series = pd.read_csv(args.read_id_file, sep="\t", header=None).squeeze("columns")
+        read_set = set(pd.read_csv(args.read_id_file, sep="\t", header=None).squeeze("columns"))
         for line in in_fd:
             if line[0] == "@":
                 out_fd.write(line)
                 continue
-            if line.split("\t")[0] in read_series:
+            if line.split("\t")[0] in read_set:
                 out_fd.write(line)
