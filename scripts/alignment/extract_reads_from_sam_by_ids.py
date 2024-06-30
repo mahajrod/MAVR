@@ -28,13 +28,14 @@ def metaopen(filename, flags, buffering=None, compresslevel=5):
         else:
             return open(filename, flags)
 
+
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-i", "--input", action="store", dest="input", default=sys.stdin,
                     help="Input sam file. Default: stdin")
 parser.add_argument("-o", "--output", action="store", dest="output", default=sys.stdout,
                     help="Output file. Default: stdout")
-parser.add_argument("-d", "--read_id_file", action="store", dest="output", default=None,
+parser.add_argument("-d", "--read_id_file", action="store", dest="read_id_file", default=None,
                     help="File with read ids to extract. Default: not set, i.e all the reads will be included ")
 
 args = parser.parse_args()
