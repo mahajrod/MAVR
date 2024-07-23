@@ -7,11 +7,7 @@ Also, a generation of a figure in multiple formats was added as option.
 
 import argparse
 
-#from __future__ import print_function
-
-from warnings                             import warn, catch_warnings, simplefilter
-#from os                                   import SEEK_END
-#from subprocess                           import Popen, PIPE
+from warnings                             import catch_warnings, simplefilter
 from itertools                            import zip_longest
 import re
 
@@ -21,7 +17,6 @@ from numpy                                import nanstd, nanmean, linspace, nans
 import matplotlib.pyplot as plt
 
 from pytadbit.utils.file_handling         import magic_open
-#from pytadbit.utils.extraviews            import tadbit_savefig
 from pytadbit.mapping.restriction_enzymes import RESTRICTION_ENZYMES, iupac2regex
 from pytadbit.mapping.restriction_enzymes import religateds, repaired
 

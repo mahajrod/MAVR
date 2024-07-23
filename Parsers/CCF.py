@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-from collections import Iterable, OrderedDict
+from collections.abc import Iterable
+from collections import OrderedDict
 import numpy as np
 import matplotlib
 

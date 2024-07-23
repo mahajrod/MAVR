@@ -1,6 +1,6 @@
 __author__ = 'mahajrod'
 
-from collections import Iterable, OrderedDict
+from collections.abc import Iterable
 
 
 def recursive_generator(iterable):

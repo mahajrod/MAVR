@@ -87,7 +87,7 @@ MakeBLASTDb.make_nucleotide_db(args.input_fasta, args.output_prefix, None,
                                output_file=args.output_prefix)
 
 blast_hit_file = '%s.blastn.hits' % args.output_prefix
-
+# use cut -f 1,2,5-12,14,15 ${FILE} > ${FILE}.tab6 to convert output of blast to usual tab6 format.
 blast_cmd = 'blastn -outfmt "6 qaccver saccver qlen slen pident length mismatch gapopen qstart qend sstart send sstrand evalue bitscore" '
 blast_cmd += ' -evalue %f' % args.evalue
 blast_cmd += ' -query %s ' % args.input_fasta
