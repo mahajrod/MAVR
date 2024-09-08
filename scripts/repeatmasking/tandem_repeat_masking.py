@@ -41,7 +41,8 @@ parser.add_argument("-r", "--store_intermediate_file", action="store_true", dest
                     help="Dont remove intermediate files")
 parser.add_argument("-g", "--max_repeat_length", action="store", dest="max_repeat_length", type=int,
                     help="Maximum repeat length in Mbp(int). Default: TRF default(2)")
-
+parser.add_argument("--sleep", action="store", dest="sleep", type=int, default=1,
+                    help="Sleep N seconds after parallel step. Default: 1")
 args = parser.parse_args()
 
 TRF.threads = args.threads
@@ -72,7 +73,7 @@ else:
                                       max_period=args.max_period_size,
                                       report_flanking_sequences=args.report_flanking_sequences,
                                       max_len_per_file=args.max_seq_len, store_intermediate_files=args.store,
-                                      max_repeat_length=args.max_repeat_length)
+                                      max_repeat_length=args.max_repeat_length, sleep_sec=args.sleep)
 
 
 
