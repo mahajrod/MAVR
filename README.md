@@ -14,4 +14,4 @@ For installation just run command below. It should pull all the dependencies nec
 mamba install -c mahajrod routoolpa mavr
 ```
 
-or clone this and RouToolPa's repositories, add them to the PYTHONPATH environment variable and install all the dependencies   
+or clone this and RouToolPa's repositories, add them to the PYTHONPATH environment variable and install all the dependencies manually.
