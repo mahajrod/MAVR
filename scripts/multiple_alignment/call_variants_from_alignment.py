@@ -11,6 +11,8 @@ parser.add_argument("-i", "--input", action="store", dest="input", required=True
                     help="Input file with alignment")
 parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", required=True,
                     help="Output prefix")
+parser.add_argument("--output_format", action="store", dest="output_format", default="hgvs",
+                    help="Output format. Allowed: hgvs (default), vcf (works for SNPs only on haploid sequences)")
 parser.add_argument("-r", "--reference_sequence_id", action="store", dest="reference_sequence_id",
                     required=True,
                     help="Reference sequence id")
@@ -32,7 +34,7 @@ MultipleAlignmentRoutines.call_variants_from_multiple_alignment_from_file(args.i
                                                                           verbose=True,
                                                                           format="fasta",
                                                                           align_variants=args.align_variants,
-                                                                          output_type="hgvs",
+                                                                          output_type=args.output_format,
                                                                           variant_separator=",",
                                                                           target_sequence_id=args.target_sequence_id,
                                                                           absent_symbol="")

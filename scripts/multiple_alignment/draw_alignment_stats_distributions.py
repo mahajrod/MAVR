@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
+
 import argparse
 from RouToolPa.Parsers.MultipleAlignment import MultipleAlignmentStatCollection
 
