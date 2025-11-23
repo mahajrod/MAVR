@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
-import sys
 import argparse
-from RouToolPa.Routines import AlignmentRoutines
 
+from RouToolPa.Routines import AlignmentRoutines
 
 parser = argparse.ArgumentParser()
 
@@ -21,11 +20,24 @@ parser.add_argument("-n", "--min_coverage_threshold", action="store", dest="min_
 parser.add_argument("--cov_col", action="store", dest="cov_col", type=int,
                     default=3,
                     help="Index of coverage column in coverage file (0-based). Default: 3")
+parser.add_argument("-a", "--absolute", action="store_true", dest="absolute_thresholds",
+                    help="Treat thresholds as absolute coverage values instead of fractions of mean.")
 
 args = parser.parse_args()
 
-AlignmentRoutines.calculate_masking_from_coverage_bed(args.coverage_bed, args.mean_coverage, args.output,
-                                                      max_threshold=args.max_coverage_threshold,
-                                                      min_threshold=args.min_coverage_threshold,
-                                                      coverage_column=args.cov_col,
-                                                      buffering=100000000)
+if args.absolute_thresholds:
+    effective_mean = 1
+else:
+    if args.mean_coverage is None:
+        parser.error("argument -m/--mean_coverage is required unless -a/--absolute is specified.")
+    effective_mean = args.mean_coverage
+
+AlignmentRoutines.calculate_masking_from_coverage_bed(
+    args.coverage_bed,
+    effective_mean,
+    args.output,
+    max_threshold=args.max_coverage_threshold,
+    min_threshold=args.min_coverage_threshold,
+    coverage_column=args.cov_col,
+    buffering=100000000
+)
