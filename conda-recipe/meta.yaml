@@ -37,6 +37,6 @@ requirements:
     - venn
     - bcbio-gff
     - xlsxwriter
-    - routoolpa
+    - routoolpa>=0.121
 build:
   script: python setup.py install
