@@ -29,7 +29,7 @@ args = parser.parse_args()
 
 length_df = pd.read_csv(args.length_file, sep='\t', header=None, index_col=args.scaffold_column,
                         usecols=(args.scaffold_column, args.length_column)) if args.length_file else None
-if length_df:
+if length_df is not None:
     length_df.columns = pd.Index(["length", ])
 bed_col = CollectionBED(in_file=args.input, parsing_mode="all")
 bed_col.add_flanks(left_flank=args.left_flank, right_flank=args.right_flank, length_df=None,

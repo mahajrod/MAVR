@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 __author__ = 'Sergei F. Kliver'
+import sys
 import argparse
 from RouToolPa.GeneralRoutines.File import make_list_of_path_to_files
 from RouToolPa.Routines import SequenceRoutines
@@ -10,7 +11,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-i", "--input_file_list", action="store", dest="input", required=True,
                     type=lambda s: make_list_of_path_to_files(s.split(",")),
                     help="Comma-separated list of input files/directories with sequences")
-parser.add_argument("-o", "--output_file", action="store", dest="output", default="stdout",
+parser.add_argument("-o", "--output_file", action="store", dest="output", default=sys.stdout,
                     help="Output file with renamed sequences")
 parser.add_argument("-f", "--format", action="store", dest="format", default="fasta",
                     help="Format of input and output files. Allowed formats genbank, fasta(default)")
