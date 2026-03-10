@@ -2,7 +2,7 @@
 __author__ = 'mahajrod'
 
 import argparse
-from RouToolPa.Parsers.AGP import CollectionAGP
+
 
 parser = argparse.ArgumentParser()
 
