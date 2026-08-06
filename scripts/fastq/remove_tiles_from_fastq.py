@@ -16,7 +16,7 @@ parser.add_argument("-a", "--forward_tiles_to_remove", action="store", dest="for
 parser.add_argument("-b", "--reverse_tiles_to_remove", action="store", dest="reverse_tiles_to_remove",
                     type=lambda s: s.split(","),
                     help="Comma-separated list of tiles to remove from reverse reads")
-parser.add_argument("-o", "--output-prefix", action="store", dest="output_prefix", required=True,
+parser.add_argument("-o", "--output_prefix", action="store", dest="output_prefix", required=True,
                     help="Prefix of output files")
 
 args = parser.parse_args()
